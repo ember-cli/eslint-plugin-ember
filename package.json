@@ -1,5 +1,5 @@
 {
-  "name": "eslint-netguru-ember",
+  "name": "eslint-plugin-netguru-ember",
   "version": "1.0.0",
   "description": "Eslint plugin for Netguru Ember Style Guide",
   "main": "index.js",
@@ -26,5 +26,11 @@
   "bugs": {
     "url": "https://github.com/netguru/eslint-netguru-ember/issues"
   },
-  "homepage": "https://github.com/netguru/eslint-netguru-ember#readme"
+  "homepage": "https://github.com/netguru/eslint-netguru-ember#readme",
+  "devDependencies": {
+    "eslint": "^2.5.3"
+  },
+  "peerDependencies": {
+    "eslint": "^2.5.3"
+  }
 }
