@@ -1,0 +1,10 @@
+# Logs
+logs
+*.log
+
+# Dependencies
+node_modules
+
+# Misc
+npm-debug.log
+*.swp
