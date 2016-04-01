@@ -6,14 +6,23 @@
 
 module.exports = function(context) {
 
+  const allowedEmberProperties = ['$', 'Object'];
+  const allowedDSProperties = [];
+
+  const isExpressionForbidden = function (objectName, node, allowedProperties) {
+    return node.object.name === objectName &&
+      node.property.name.length &&
+      allowedProperties.indexOf(node.property.name) === -1;
+  };
+
   return {
     MemberExpression: function(node) {
-      if (node.object.name === 'Ember' && node.property.name.length) {
-        context.report(node, 'Create local version of Ember.*');
+      if (isExpressionForbidden('Ember', node, allowedEmberProperties)) {
+        context.report(node, 'Create local version of Ember.' + node.property.name);
       }
 
-      if (node.object.name === 'DS' && node.property.name.length) {
-        context.report(node, 'Create local version of DS.*');
+      if (isExpressionForbidden('DS', node, allowedDSProperties)) {
+        context.report(node, 'Create local version of DS.' + node.property.name);
       }
     }
   };
