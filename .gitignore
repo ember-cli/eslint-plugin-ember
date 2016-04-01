@@ -6,5 +6,6 @@ logs
 node_modules
 
 # Misc
+coverage
 npm-debug.log
 *.swp

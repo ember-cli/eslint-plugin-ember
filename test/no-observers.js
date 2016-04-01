@@ -12,11 +12,20 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var eslintTester = new RuleTester();
-// eslintTester.run('no-observers', rule, {
-//     valid: [
-//       '',
-//     ],
-//     invalid: [
-//         {code: '', errors: [{message: ''}]},
-//     ]
-// });
+eslintTester.run('no-observers', rule, {
+  valid: [
+    {
+      code: 'export default Controller.extend({actions: {},});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    }
+  ],
+  invalid: [
+    {
+      code: 'Ember.observer("text", function() {});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      errors: [{
+        message: 'Don\'t use observers if possible',
+      }],
+    }
+  ]
+});
