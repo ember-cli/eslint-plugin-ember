@@ -6,10 +6,10 @@
 
 module.exports = function(context) {
 
-  const allowedEmberProperties = ['$', 'Object'];
-  const allowedDSProperties = [];
+  var allowedEmberProperties = ['$', 'Object'];
+  var allowedDSProperties = [];
 
-  const isExpressionForbidden = function (objectName, node, allowedProperties) {
+  var isExpressionForbidden = function (objectName, node, allowedProperties) {
     return node.object.name === objectName &&
       node.property.name.length &&
       allowedProperties.indexOf(node.property.name) === -1;
