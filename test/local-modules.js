@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../rules/simple-rule');
+var rule = require('../rules/local-modules');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
@@ -12,7 +12,7 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var eslintTester = new RuleTester();
-// eslintTester.run('simple-rule', rule, {
+// eslintTester.run('local-modules', rule, {
 //     valid: [
 //       '',
 //     ],
