@@ -24,11 +24,15 @@ eslintTester.run('local-modules', rule, {
     },
     {
       code: 'title: attr("string")',
-      parserOptions: { ecmaVersion: 6, sourceType: "module" },
+      parserOptions: { ecmaVersion: 6 },
     },
     {
       code: 'title: computed.alias("test")',
-      parserOptions: { ecmaVersion: 6, sourceType: "module" },
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: 'Ember.MODEL_FACTORY_INJECTIONS = true;',
+      parserOptions: { ecmaVersion: 6 },
     }
   ],
   invalid: [
