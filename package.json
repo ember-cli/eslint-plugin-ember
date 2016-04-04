@@ -34,5 +34,8 @@
   },
   "peerDependencies": {
     "eslint": "^2.5.3"
+  },
+  "scripts": {
+    "test": "gulp test"
   }
 }
