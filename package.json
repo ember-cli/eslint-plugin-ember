@@ -28,9 +28,7 @@
   },
   "homepage": "https://github.com/netguru/eslint-netguru-ember#readme",
   "devDependencies": {
-    "eslint": "^2.5.3",
     "gulp": "^3.9.1",
-    "gulp-eslint": "^2.0.0",
     "gulp-istanbul": "^0.10.3",
     "gulp-mocha": "^2.2.0"
   },
