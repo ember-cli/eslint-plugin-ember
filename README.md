@@ -93,6 +93,8 @@ This is WIP, but we have already some rules written.
   * **named-functions-in-promises** - Use named functions defined on objects to handle promises [(more)](https://github.com/netguru/ember-styleguide#use-named-functions-defined-on-objects-to-handle-promises)
 
 * Organizing
+  * **order-in-objects** - Organize your components [(more)](https://github.com/netguru/ember-styleguide#organize-your-components)
+
 
 ## Contribution guide
 
