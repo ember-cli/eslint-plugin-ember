@@ -15,7 +15,7 @@ module.exports = function(context) {
     context.report(node, msg);
   };
 
-  var allowedEmberProperties = ['$', 'Object'];
+  var allowedEmberProperties = ['$', 'Object', 'Router'];
   var allowedDSProperties = [];
 
   var isExpressionForbidden = function (objectName, node, allowedProperties) {

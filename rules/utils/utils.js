@@ -1,8 +1,11 @@
 module.exports = {
   findNodes: findNodes,
+  isIdentifier: isIdentifier,
+  isLiteral: isLiteral,
   isMemberExpression: isMemberExpression,
   isCallExpression: isCallExpression,
-  isIdentifier: isIdentifier,
+  isObjectExpression: isObjectExpression,
+  getSize: getSize,
 };
 
 /**
@@ -22,6 +25,26 @@ function findNodes(body, nodeName) {
     }
 
     return nodesArray;
+}
+
+/**
+ * Check whether or not a node is an Identifier.
+ *
+ * @param {Object} node The node to check.
+ * @returns {boolean} Whether or not the node is an Identifier.
+ */
+function isIdentifier(node) {
+    return node !== undefined && node.type === 'Identifier';
+}
+
+/**
+ * Check whether or not a node is an Literal.
+ *
+ * @param {Object} node The node to check.
+ * @returns {boolean} Whether or not the node is an Literal.
+ */
+function isLiteral(node) {
+    return node !== undefined && node.type === 'Literal';
 }
 
 /**
@@ -45,12 +68,21 @@ function isCallExpression(node) {
 }
 
 /**
- * Check whether or not a node is an Identifier.
+ * Check whether or not a node is an ObjectExpression.
  *
  * @param {Object} node The node to check.
- * @returns {boolean} Whether or not the node is an Identifier.
+ * @returns {boolean} Whether or not the node is an ObjectExpression.
  */
-function isIdentifier(node) {
-    return node !== undefined && node.type === 'Identifier';
+function isObjectExpression(node) {
+    return node !== undefined && node.type === 'ObjectExpression';
 }
 
+/**
+ * Get size of expression in lines
+ *
+ * @param  {Object} node The node to check.
+ * @return {Integer} Number of lines
+ */
+function getSize(node) {
+  return node.loc.end.line - node.loc.start.line + 1;
+}
