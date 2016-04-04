@@ -85,10 +85,14 @@ All rules from our plugin have to be prefixed with `netguru-ember/`
 
 This is WIP, but we have already some rules written.
 
-* **local-modules** - Create local version of Ember.* and DS.* [(more)](https://github.com/netguru/ember-styleguide#create-local-version-of-ember-and-ds)
-* **no-observers** - Don't use observers [(more)](https://github.com/netguru/ember-styleguide#dont-use-observers)
-* **no-side-effect** - Don't introduce side-effects in computed properties [(more)](https://github.com/netguru/ember-styleguide#dont-introduce-side-effects-in-computed-properties)
-* **jquery-ember-run** - Don’t use jQuery without Ember Run Loop [(more)](https://github.com/netguru/ember-styleguide#dont-use-jquery-without-ember-run-loop)
+* General
+  * **local-modules** - Create local version of Ember.* and DS.* [(more)](https://github.com/netguru/ember-styleguide#create-local-version-of-ember-and-ds)
+  * **no-observers** - Don't use observers [(more)](https://github.com/netguru/ember-styleguide#dont-use-observers)
+  * **no-side-effect** - Don't introduce side-effects in computed properties [(more)](https://github.com/netguru/ember-styleguide#dont-introduce-side-effects-in-computed-properties)
+  * **jquery-ember-run** - Don’t use jQuery without Ember Run Loop [(more)](https://github.com/netguru/ember-styleguide#dont-use-jquery-without-ember-run-loop)
+  * **named-functions-in-promises** - Use named functions defined on objects to handle promises [(more)](https://github.com/netguru/ember-styleguide#use-named-functions-defined-on-objects-to-handle-promises)
+
+* Organizing
 
 ## Contribution guide
 
