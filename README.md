@@ -94,6 +94,7 @@ This is WIP, but we have already some rules written.
 
 * Organizing
   * **order-in-objects** - Organize your components [(more)](https://github.com/netguru/ember-styleguide#organize-your-components)
+  * **order-in-models** - Organize your models [(more)](https://github.com/netguru/ember-styleguide#organize-your-models)
 
 
 ## Contribution guide
