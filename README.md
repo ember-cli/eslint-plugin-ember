@@ -96,6 +96,8 @@ This is WIP, but we have already some rules written.
   * **order-in-components** - Organize your components [(more)](https://github.com/netguru/ember-styleguide#organize-your-components)
   * **order-in-models** - Organize your models [(more)](https://github.com/netguru/ember-styleguide#organize-your-models)
 
+* Controllers
+  * **alias-model-in-controller** - Alias your model [(more)](https://github.com/netguru/ember-styleguide#alias-your-model)
 
 ## Contribution guide
 

@@ -5,7 +5,9 @@ module.exports = {
   isMemberExpression: isMemberExpression,
   isCallExpression: isCallExpression,
   isObjectExpression: isObjectExpression,
-  getSize: getSize
+  getSize: getSize,
+  parseCallee: parseCallee,
+  parseArgs: parseArgs,
 };
 
 /**
@@ -85,4 +87,40 @@ function isObjectExpression(node) {
  */
 function getSize(node) {
   return node.loc.end.line - node.loc.start.line + 1;
+}
+
+function parseCallee(node) {
+  var parsedCallee = [];
+  var callee;
+
+  if (isCallExpression(node)) {
+    callee = node.callee;
+
+    while (isMemberExpression(callee)) {
+      if (isIdentifier(callee.property)) {
+        parsedCallee.push(callee.property.name);
+      }
+      callee = callee.object;
+    }
+
+    if (isIdentifier(callee)) {
+      parsedCallee.push(callee.name);
+    }
+  }
+
+  return parsedCallee.reverse();
+}
+
+function parseArgs(node) {
+  var parsedArgs = [];
+
+  if (isCallExpression(node)) {
+    parsedArgs = node.arguments.filter(function(argument) {
+      return isLiteral(argument) ? argument.value : false;
+    }).map(function(argument) {
+      return argument.value;
+    });
+  }
+
+  return parsedArgs;
 }

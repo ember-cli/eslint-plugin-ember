@@ -4,7 +4,7 @@ module.exports = {
   isDSModel: isDSModel,
   isModule: isModule,
   isEmberComponent: isEmberComponent,
-  // isEmberController: isEmberController,
+  isEmberController: isEmberController,
   // isEmberRoute: isEmberRoute,
 };
 
@@ -40,9 +40,9 @@ function isEmberComponent(node) {
   return isModule(node, 'Component');
 }
 
-// function isEmberController(node) {
-//   return isModule(node, 'Controller');
-// }
+function isEmberController(node) {
+  return isModule(node, 'Controller');
+}
 
 // function isEmberRoute(node) {
 //   return isModule(node, 'Route');
