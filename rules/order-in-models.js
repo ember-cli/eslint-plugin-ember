@@ -4,7 +4,8 @@ var utils = require('./utils/utils');
 var ember = require('./utils/ember');
 
 //------------------------------------------------------------------------------
-// General rule - Organize your components and keep order in objects
+// General rule - Organize your models
+// Attributes -> Relations -> Computed Properties
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
@@ -15,32 +16,41 @@ module.exports = function(context) {
     context.report(node, message);
   };
 
-  var isDefaultProp = function(property) {
-    return utils.isLiteral(property.value);
+  var isAttr = function(property) {
+    return ember.isModule(property.value, 'attr', 'DS');
   };
 
-  var isSingleLineFn = function(property) {
+  var isRelation = function(property) {
+    var relationAttrs = ['hasMany', 'belongsTo'];
+    var result = false;
+
+    relationAttrs.forEach(function(relation) {
+      if (ember.isModule(property.value, relation, 'DS')) {
+        result = true;
+      }
+    });
+
+    return result;
+  };
+
+  var isSingleLine = function(property) {
     return utils.isCallExpression(property.value) && utils.getSize(property.value) === 1;
   };
 
-  var isMultiLineFn = function(property) {
+  var isMultiLine = function(property) {
     return utils.isCallExpression(property.value) && utils.getSize(property.value) > 1;
-  };
-
-  var isActionsProp = function(property) {
-    return property.key.name === 'actions' && utils.isObjectExpression(property.value);
   };
 
   var getOrderValue = function(property) {
     var val = null;
 
-    if (isDefaultProp(property)) {
+    if (isAttr(property)) {
       val = 10;
-    } else if (isSingleLineFn(property)) {
+    } else if (isRelation(property)) {
       val = 20;
-    } else if (isMultiLineFn(property)) {
+    } else if (isSingleLine(property)) {
       val = 30;
-    } else if (isActionsProp(property)) {
+    } else if (isMultiLine(property)) {
       val = 40;
     }
 
@@ -49,17 +59,21 @@ module.exports = function(context) {
 
   var findUnorderedProperty = function(arr) {
     var len = arr.length - 1;
+
     for(var i = 0; i < len; ++i) {
       if(arr[i].order > arr[i+1].order) {
         return arr[i];
       }
     }
+
     return null;
   };
 
   return {
-    ObjectExpression: function(node) {
-      var properties = node.properties;
+    CallExpression: function(node) {
+      if (!ember.isDSModel(node)) return;
+
+      var properties = node.arguments[0].properties;
       var mappedProperties = properties.map(function(property) {
         return {
           node: property,

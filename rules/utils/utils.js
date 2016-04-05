@@ -5,7 +5,7 @@ module.exports = {
   isMemberExpression: isMemberExpression,
   isCallExpression: isCallExpression,
   isObjectExpression: isObjectExpression,
-  getSize: getSize,
+  getSize: getSize
 };
 
 /**
