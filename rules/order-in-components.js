@@ -58,8 +58,10 @@ module.exports = function(context) {
   };
 
   return {
-    ObjectExpression: function(node) {
-      var properties = node.properties;
+    CallExpression: function(node) {
+      if (!ember.isEmberComponent(node)) return;
+
+      var properties = node.arguments[0].properties;
       var mappedProperties = properties.map(function(property) {
         return {
           node: property,

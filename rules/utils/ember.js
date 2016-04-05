@@ -3,7 +3,7 @@ var utils = require('./utils');
 module.exports = {
   isDSModel: isDSModel,
   isModule: isModule,
-  // isEmberComponent: isEmberComponent,
+  isEmberComponent: isEmberComponent,
   // isEmberController: isEmberController,
   // isEmberRoute: isEmberRoute,
 };
@@ -36,12 +36,12 @@ function isDSModel(node) {
   return isModule(node, 'Model', 'DS');
 }
 
+function isEmberComponent(node) {
+  return isModule(node, 'Component');
+}
+
 // function isEmberController(node) {
 //   return isModule(node, 'Controller');
-// }
-
-// function isEmberComponent(node) {
-//   return isModule(node, 'Component');
 // }
 
 // function isEmberRoute(node) {

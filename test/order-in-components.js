@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../rules/order-in-objects');
+var rule = require('../rules/order-in-components');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
@@ -12,7 +12,7 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var eslintTester = new RuleTester();
-eslintTester.run('order-in-objects', rule, {
+eslintTester.run('order-in-components', rule, {
   valid: [
     {
       code: 'export default Component.extend({role: "sloth", vehicle: alias("car"), levelOfHappiness: computed("attitude", "health", () => {\n}), actions: {}});',
