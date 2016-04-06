@@ -27,11 +27,7 @@ module.exports = function(context) {
   return {
     CallExpression: function(node) {
       var callee = node.callee;
-      var obj;
-
-      if (!utils.isMemberExpression(callee)) return;
-
-      obj = utils.isMemberExpression(callee.object) ? callee.object : callee;
+      var obj = utils.isMemberExpression(callee.object) ? callee.object : callee;
 
       if (
         utils.isIdentifier(obj.object) &&
