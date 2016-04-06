@@ -74,6 +74,10 @@ This is WIP, but we have already some rules written.
 * Components
   * **closure-actions** - Always use closure actions [(more)](https://github.com/netguru/ember-styleguide#closure-actions)
 
+* Routing
+  * **routes-segments-snake-case** - Route's dynamic segments should use snake case [(more)](https://github.com/netguru/ember-styleguide#route-naming)
+
+
 ## Contribution guide
 
 TBD. For now feel free to add any suggestions in [issues](https://github.com/netguru/eslint-plugin-netguru-ember/issues). Any involvement highly appreciated.

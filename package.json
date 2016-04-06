@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -33,13 +33,11 @@
     "gulp-mocha": "^2.2.0"
   },
   "dependencies": {
-    "babel-eslint": "^6.0.0"
+    "babel-eslint": "^6.0.0",
+    "snake-case": "^1.1.2"
   },
   "peerDependencies": {
     "eslint": "^2.5.3",
     "ember-cli-eslint": "1.2.1"
-  },
-  "scripts": {
-    "test": "gulp test"
   }
 }
