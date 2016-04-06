@@ -100,6 +100,9 @@ This is WIP, but we have already some rules written.
   * **alias-model-in-controller** - Alias your model [(more)](https://github.com/netguru/ember-styleguide#alias-your-model)
   * **query-params-on-top** - Query params should always be on top [(more)](https://github.com/netguru/ember-styleguide#query-params-should-always-be-on-top)
 
+* Ember Data
+  * **no-empty-attrs** - Be explicit with Ember data attribute types [(more)](https://github.com/netguru/ember-styleguide#be-explicit-with-ember-data-attribute-types)
+
 ## Contribution guide
 
 TBD. For now feel free to add any suggestions in [issues](https://github.com/netguru/eslint-plugin-netguru-ember/issues). Any involvement highly appreciated.
