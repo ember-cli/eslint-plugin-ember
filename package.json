@@ -32,8 +32,12 @@
     "gulp-istanbul": "^0.10.3",
     "gulp-mocha": "^2.2.0"
   },
+  "dependencies": {
+    "babel-eslint": "^6.0.0"
+  },
   "peerDependencies": {
-    "eslint": "^2.5.3"
+    "eslint": "^2.5.3",
+    "ember-cli-eslint": "1.2.1"
   },
   "scripts": {
     "test": "gulp test"

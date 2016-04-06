@@ -14,45 +14,11 @@ It's made to help you keep good practices mentioned in our [Ember Styleguide](ht
 
 The easiest way to use this plugin is through our [shareable config](https://github.com/netguru/eslint-config-netguru-ember). More about shareable configs [here](http://eslint.org/docs/developer-guide/shareable-configs.html).
 
-In order to get it working follow these steps:
-
 ##### 1. Install all necessary dependencies:
 
   ```shell
-    npm install --save-dev eslint ember-cli-eslint babel-eslint eslint-config-airbnb eslint-config-netguru-ember eslint-plugin-netguru-ember
+    npm install --save-dev eslint-config-netguru-ember eslint
   ```
-
-##### Description
-
-* ESlint core package
-  ```shell
-    npm install --save-dev eslint
-  ```
-
-* Ember Cli ESlint integration
-  ```shell
-    npm install --save-dev ember-cli-eslint
-  ```
-
-* Babel parser for ESlint
-  ```shell
-    npm install --save-dev babel-eslint
-  ```
-
-* Great config made by airbnb to keep their [JavaScript Styleguide](https://github.com/airbnb/javascript). We're extending it.
-  ```shell
-    npm install --save-dev eslint-config-airbnb
-  ```
-
-* Our config && plugin
-  ```shell
-    npm install --save-dev eslint-config-netguru-ember
-  ```
-
-  ```shell
-    npm install --save-dev eslint-plugin-netguru-ember
-  ```
-
 
 ##### 2. Change your `.eslintrc`, so it looks like this:
 
@@ -64,7 +30,9 @@ In order to get it working follow these steps:
 
 ##### 1. Install all necessary dependencies:
 
-> npm install --save-dev eslint ember-cli-eslint babel-eslint eslint-plugin-netguru-ember
+  ```shell
+    npm install --save-dev eslint-plugin-netguru-ember eslint
+  ```
 
 ##### 2. Add plugin to your `.eslintrc`:
 
