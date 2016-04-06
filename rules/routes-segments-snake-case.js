@@ -39,8 +39,7 @@ module.exports = function(context) {
     CallExpression: function(node) {
       if (!isRoute(node)) return;
 
-      var hasOptions = node.arguments.length > 1 && utils.isObjectExpression(node.arguments[1]);
-      var routeOptions = hasOptions ? node.arguments[1] : false;
+      var routeOptions = utils.isObjectExpression(node.arguments[1]) ? node.arguments[1] : false;
 
       if (routeOptions) {
         routeOptions.properties.forEach(function(property) {

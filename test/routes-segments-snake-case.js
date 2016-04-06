@@ -20,6 +20,7 @@ eslintTester.run('routes-segments-snake-case', rule, {
     'this.route("facebook-messages", { path: "fb-messages" });',
     'this.route("summary", { path: "/" });',
     'this.route("reset-password", function() {this.route("update");});',
+    'this.test()'
   ],
   invalid: [
     {
