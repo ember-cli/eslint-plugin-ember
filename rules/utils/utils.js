@@ -5,6 +5,7 @@ module.exports = {
   isMemberExpression: isMemberExpression,
   isCallExpression: isCallExpression,
   isObjectExpression: isObjectExpression,
+  isThisExpression: isThisExpression,
   getSize: getSize,
   parseCallee: parseCallee,
   parseArgs: parseArgs,
@@ -80,6 +81,16 @@ function isObjectExpression(node) {
 }
 
 /**
+ * Check whether or not a node is an ThisExpression.
+ *
+ * @param {Object} node The node to check.
+ * @returns {boolean} Whether or not the node is an ThisExpression.
+ */
+function isThisExpression(node) {
+    return node !== undefined && node.type === 'ThisExpression';
+}
+
+/**
  * Get size of expression in lines
  *
  * @param  {Object} node The node to check.
@@ -89,6 +100,12 @@ function getSize(node) {
   return node.loc.end.line - node.loc.start.line + 1;
 }
 
+/**
+ * Parse CallExpression to get array of properties and object name
+ *
+ * @param  {Object} node The node to parse
+ * @return {Array} eg. ['Ember', 'computed', 'alias']
+ */
 function parseCallee(node) {
   var parsedCallee = [];
   var callee;
@@ -111,6 +128,12 @@ function parseCallee(node) {
   return parsedCallee.reverse();
 }
 
+/**
+ * Parse CallExpression to get array of arguments
+ *
+ * @param  {Object} node Node to parse
+ * @return {Array} Literal function's arguments
+ */
 function parseArgs(node) {
   var parsedArgs = [];
 
