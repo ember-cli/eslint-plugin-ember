@@ -8,6 +8,12 @@ var utils = require('./utils/utils');
 
 module.exports = function(context) {
 
+  var message = 'Use named functions defined on objects to handle promises';
+
+  var report = function(node) {
+    context.report(node, message);
+  };
+
   var promisesMethods = ['then', 'catch', 'success'];
 
   return {
@@ -21,7 +27,7 @@ module.exports = function(context) {
       ) {
         node.arguments.forEach(function(argument) {
           if (!utils.isCallExpression(argument)) {
-            context.report(node, 'Use named functions defined on objects to handle promises');
+            report(node);
           }
         });
       }

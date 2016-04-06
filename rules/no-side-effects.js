@@ -10,6 +10,10 @@ module.exports = function(context) {
 
   var message = 'Don\'t introduce side-effects in computed properties';
 
+  var report = function(node) {
+    context.report(node, message);
+  };
+
   return {
     CallExpression: function(node) {
       var callee = node.callee;
@@ -24,12 +28,12 @@ module.exports = function(context) {
             var fnCallee = fnExpression.expression.callee;
 
             if (
-              fnCallee.object &&
-              fnCallee.object.type === 'ThisExpression' &&
-              fnCallee.property &&
+              utils.isMemberExpression(fnCallee) &&
+              utils.isThisExpression(fnCallee.object) &&
+              utils.isIdentifier(fnCallee.property) &&
               fnCallee.property.name === 'set'
             ) {
-              context.report(fnExpression, message);
+              report(fnExpression);
             }
           });
         });

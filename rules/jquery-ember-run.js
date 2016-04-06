@@ -1,6 +1,7 @@
 'use strict';
 
 var utils = require('./utils/utils');
+var ember = require('./utils/ember');
 
 //------------------------------------------------------------------------------
 // General rule - Don’t use jQuery without Ember Run Loop
@@ -17,28 +18,11 @@ module.exports = function(context) {
   var isJqueryUsed = function(node) {
     return utils.isMemberExpression(node) &&
       utils.isCallExpression(node.object) &&
-      utils.isMemberExpression(node.object.callee) &&
-      utils.isIdentifier(node.object.callee.object) &&
-      utils.isIdentifier(node.object.callee.property) &&
-      node.object.callee.object.name === 'Ember' &&
-      node.object.callee.property.name === '$';
-  };
-
-  var isEmberRunUsed = function(node) {
-    return utils.isMemberExpression(node.object) &&
-      utils.isIdentifier(node.object.object) &&
-      utils.isIdentifier(node.object.property) &&
-      utils.isIdentifier(node.property) &&
-      node.object.object.name === 'Ember' &&
-      node.object.property.name === 'run' &&
-      node.property.name === 'bind';
+      ember.isModule(node.object, '$');
   };
 
   var isRunUsed = function(node) {
-    return utils.isIdentifier(node.object) &&
-      utils.isIdentifier(node.property) &&
-      node.object.name === 'run' &&
-      node.property.name === 'bind';
+    return ember.isModule(node, 'run');
   };
 
   return {
@@ -57,8 +41,7 @@ module.exports = function(context) {
             if (
               utils.isCallExpression(fnExpression) &&
               utils.isMemberExpression(fnExpression.callee) &&
-              !isEmberRunUsed(fnExpression.callee) &&
-              !isRunUsed(fnExpression.callee)
+              !isRunUsed(fnExpression)
             ) {
               report(fnExpression.callee);
             }
