@@ -3,7 +3,7 @@
 var ember = require('./utils/ember');
 
 //------------------------------------------------------------------------------
-// General rule - Query params should always be on top
+// Controllers - Query params should always be on top
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {

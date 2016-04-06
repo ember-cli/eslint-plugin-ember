@@ -4,7 +4,7 @@ var utils = require('./utils/utils');
 var ember = require('./utils/ember');
 
 //------------------------------------------------------------------------------
-// General rule - Organize your components and keep order in objects
+// Organizing - Organize your components and keep order in objects
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {

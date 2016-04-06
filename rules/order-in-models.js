@@ -4,7 +4,7 @@ var utils = require('./utils/utils');
 var ember = require('./utils/ember');
 
 //------------------------------------------------------------------------------
-// General rule - Organize your models
+// Organizing - Organize your models
 // Attributes -> Relations -> Computed Properties
 //------------------------------------------------------------------------------
 

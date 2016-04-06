@@ -4,7 +4,7 @@ var utils = require('./utils/utils');
 var ember = require('./utils/ember');
 
 //------------------------------------------------------------------------------
-// General rule - Alias your model
+// Controllers - Alias your model
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
