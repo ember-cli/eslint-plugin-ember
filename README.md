@@ -98,6 +98,7 @@ This is WIP, but we have already some rules written.
 
 * Controllers
   * **alias-model-in-controller** - Alias your model [(more)](https://github.com/netguru/ember-styleguide#alias-your-model)
+  * **query-params-on-top** - Query params should always be on top [(more)](https://github.com/netguru/ember-styleguide#query-params-should-always-be-on-top)
 
 ## Contribution guide
 
