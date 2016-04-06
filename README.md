@@ -71,6 +71,9 @@ This is WIP, but we have already some rules written.
 * Ember Data
   * **no-empty-attrs** - Be explicit with Ember data attribute types [(more)](https://github.com/netguru/ember-styleguide#be-explicit-with-ember-data-attribute-types)
 
+* Components
+  * **closure-actions** - Always use closure actions [(more)](https://github.com/netguru/ember-styleguide#closure-actions)
+
 ## Contribution guide
 
 TBD. For now feel free to add any suggestions in [issues](https://github.com/netguru/eslint-plugin-netguru-ember/issues). Any involvement highly appreciated.
