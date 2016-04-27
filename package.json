@@ -1,10 +1,10 @@
 {
   "name": "eslint-plugin-netguru-ember",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Eslint plugin for Netguru Ember Style Guide",
   "main": "index.js",
   "directories": {
-    "example": "examples",
+    "rules": "rules",
     "test": "test"
   },
   "scripts": {
