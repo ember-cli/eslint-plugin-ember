@@ -2,11 +2,15 @@
 
 [![Circle CI](https://circleci.com/gh/netguru/eslint-plugin-netguru-ember.svg?style=svg&circle-token=58c1b942a91ecd67eed15502a5df51b3d1504f35)](https://circleci.com/gh/netguru/eslint-plugin-netguru-ember)
 
-> ESlint plugin that provides set of rules for Ember Applications, that cover Netguru's Ember Styleguide
+> ESlint plugin that provides set of rules for Ember Applications based on Netguru's Ember Styleguide.
 
 ## Summary
 
-It's made to help you keep good practices mentioned in our [Ember Styleguide](https://github.com/netguru/ember-styleguide)
+It's made to help you keep good practices mentioned in our [Ember Styleguide](https://github.com/netguru/ember-styleguide).
+
+## Requirements
+
+You need to have `ember-cli-eslint` installed in your app. [More info here](https://github.com/ember-cli/ember-cli-eslint).
 
 ## Usage
 
@@ -14,10 +18,10 @@ It's made to help you keep good practices mentioned in our [Ember Styleguide](ht
 
 The easiest way to use this plugin is through our [shareable config](https://github.com/netguru/eslint-config-netguru-ember). More about shareable configs [here](http://eslint.org/docs/developer-guide/shareable-configs.html).
 
-##### 1. Install all necessary dependencies:
+##### 1. Install config:
 
   ```shell
-    npm install --save-dev eslint-config-netguru-ember eslint
+    npm install --save-dev eslint-config-netguru-ember
   ```
 
 ##### 2. Change your `.eslintrc`, so it looks like this:
@@ -26,12 +30,12 @@ The easiest way to use this plugin is through our [shareable config](https://git
       extends: netguru-ember
   ```
 
-### Without shareable config
+### Without shareable config (only plugin)
 
-##### 1. Install all necessary dependencies:
+##### 1. Install plugin:
 
   ```shell
-    npm install --save-dev eslint-plugin-netguru-ember eslint
+    npm install --save-dev eslint-plugin-netguru-ember
   ```
 
 ##### 2. Add plugin to your `.eslintrc`:
@@ -50,8 +54,6 @@ The easiest way to use this plugin is through our [shareable config](https://git
 All rules from our plugin have to be prefixed with `netguru-ember/`
 
 ## Rules
-
-This is WIP, but we have already some rules written.
 
 * General
   * **local-modules** - Create local version of Ember.* and DS.* [(more)](https://github.com/netguru/ember-styleguide#create-local-version-of-ember-and-ds)
