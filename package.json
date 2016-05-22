@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-netguru-ember",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Eslint plugin for Netguru Ember Style Guide",
   "main": "index.js",
   "directories": {
@@ -33,7 +33,6 @@
     "gulp-mocha": "^2.2.0"
   },
   "dependencies": {
-    "babel-eslint": "^6.0.0",
     "snake-case": "^1.1.2"
   }
 }
