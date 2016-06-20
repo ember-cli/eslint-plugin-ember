@@ -9,7 +9,6 @@ module.exports = {
   // isEmberRoute: isEmberRoute,
 };
 
-
 // Private
 
 function isLocalModule(callee, element) {
