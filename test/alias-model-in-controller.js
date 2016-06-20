@@ -34,7 +34,6 @@ eslintTester.run('alias-model-in-controller', rule, {
       code: 'export default Ember.Controller.extend(TestMixin, TestMixin2, {nail: Ember.computed.alias("model")});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     }
-
   ],
   invalid: [
     {
@@ -79,6 +78,5 @@ eslintTester.run('alias-model-in-controller', rule, {
         message: 'Alias your model',
       }],
     }
-
   ]
 });
