@@ -46,10 +46,6 @@ eslintTester.run('query-params-on-top', rule, {
       code: 'export default Controller.extend(TestMixin, TestMixin2, {status: [], actions: {}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
-    {
-      code: 'export default Controller.extend({status: [], queryParams: ["status"]});',
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
-    },
   ],
   invalid: [
     {
