@@ -9,6 +9,7 @@ module.exports = {
   // isEmberRoute: isEmberRoute,
 };
 
+
 // Private
 
 function isLocalModule(callee, element) {
@@ -46,7 +47,7 @@ function isEmberController(node) {
 }
 
 function getModuleProperties(module) {
-  return utils.findNodes(module.arguments, 'ObjectExpression')[0];
+  return utils.findNodes(module.arguments, 'ObjectExpression')[0].properties;
 }
 
 // function isEmberRoute(node) {
