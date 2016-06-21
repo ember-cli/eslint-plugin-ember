@@ -5,6 +5,7 @@ module.exports = {
   isModule: isModule,
   isEmberComponent: isEmberComponent,
   isEmberController: isEmberController,
+  getModuleProperties: getModuleProperties,
   // isEmberRoute: isEmberRoute,
 };
 
@@ -42,6 +43,10 @@ function isEmberComponent(node) {
 
 function isEmberController(node) {
   return isModule(node, 'Controller');
+}
+
+function getModuleProperties(module) {
+  return utils.findNodes(module.arguments, 'ObjectExpression')[0].properties;
 }
 
 // function isEmberRoute(node) {

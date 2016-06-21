@@ -25,6 +25,14 @@ eslintTester.run('order-in-components', rule, {
     {
       code: 'export default Component.extend({levelOfHappiness: computed("attitude", "health", () => {\n}), actions: {}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
+      code: 'export default Component.extend(TestMixin, {levelOfHappiness: computed("attitude", "health", () => {\n}), actions: {}});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
+      code: 'export default Component.extend(TestMixin, TestMixin2, {levelOfHappiness: computed("attitude", "health", () => {\n}), actions: {}});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
     }
   ],
   invalid: [
@@ -44,6 +52,20 @@ eslintTester.run('order-in-components', rule, {
     },
     {
       code: 'export default Component.extend({levelOfHappiness: computed("attitude", "health", () => {\n}), vehicle: alias("car"), role: "sloth", actions: {}});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      errors: [{
+        message: 'Check order of properties',
+      }],
+    },
+    {
+      code: 'export default Component.extend(TestMixin, {levelOfHappiness: computed("attitude", "health", () => {\n}), vehicle: alias("car"), role: "sloth", actions: {}});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      errors: [{
+        message: 'Check order of properties',
+      }],
+    },
+    {
+      code: 'export default Component.extend(TestMixin, TestMixin2, {levelOfHappiness: computed("attitude", "health", () => {\n}), vehicle: alias("car"), role: "sloth", actions: {}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',

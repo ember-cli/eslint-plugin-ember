@@ -37,7 +37,15 @@ eslintTester.run('query-params-on-top', rule, {
     {
       code: 'export default Component.extend({status: attr("string"), queryParams: attr("string")});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
-    }
+    },
+    {
+      code: 'export default Controller.extend(TestMixin, {status: [], actions: {}});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
+      code: 'export default Controller.extend(TestMixin, TestMixin2, {status: [], actions: {}});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
   ],
   invalid: [
     {
@@ -56,6 +64,20 @@ eslintTester.run('query-params-on-top', rule, {
     },
     {
       code: 'export default Controller.extend({status: [], queryParams: ["status"], actions: {}});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      errors: [{
+        message: 'Query params should always be on top',
+      }],
+    },
+    {
+      code: 'export default Controller.extend(TestMixin, {status: [], queryParams: ["status"], actions: {}});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      errors: [{
+        message: 'Query params should always be on top',
+      }],
+    },
+    {
+      code: 'export default Controller.extend(TestMixin, TestMixin2, {status: [], queryParams: ["status"], actions: {}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Query params should always be on top',

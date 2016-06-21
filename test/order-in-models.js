@@ -37,6 +37,14 @@ eslintTester.run('order-in-models', rule, {
     {
       code: 'export default DS.Model.extend({mood: computed("health", "hunger", function() {\n})});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
+      code: 'export default DS.Model.extend(TestMixin, {mood: computed("health", "hunger", function() {\n})});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
+      code: 'export default DS.Model.extend(TestMixin, TestMixin2, {mood: computed("health", "hunger", function() {\n})});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
     }
   ],
   invalid: [
@@ -84,6 +92,20 @@ eslintTester.run('order-in-models', rule, {
     },
     {
       code: 'export default DS.Model.extend({mood: computed("health", "hunger", function() {\n}), test: computed.alias("qwerty")});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      errors: [{
+        message: 'Check order of properties',
+      }],
+    },
+    {
+      code: 'export default DS.Model.extend(TestMixin, {mood: computed("health", "hunger", function() {\n}), test: computed.alias("qwerty")});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      errors: [{
+        message: 'Check order of properties',
+      }],
+    },
+    {
+      code: 'export default DS.Model.extend(TestMixin, TestMixin2, {mood: computed("health", "hunger", function() {\n}), test: computed.alias("qwerty")});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',

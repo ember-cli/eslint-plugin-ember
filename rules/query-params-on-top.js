@@ -18,7 +18,7 @@ module.exports = function(context) {
     CallExpression: function(node) {
       if (!ember.isEmberController(node)) return;
 
-      var properties = node.arguments[0].properties;
+      var properties = ember.getModuleProperties(node);
 
       var propKeys = properties.map(function(property) {
         return property.key.name;
