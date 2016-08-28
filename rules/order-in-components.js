@@ -19,8 +19,12 @@ module.exports = function(context) {
     var value = property.value;
 
     return utils.isLiteral(value) ||
-      utils.isObjectExpression(value) ||
-      utils.isArrayExpression(value);
+      utils.isArrayExpression(value) ||
+      isDefaultObjectProp(property);
+  };
+
+  var isInjectedServiceProp = function(property) {
+    return ember.isInjectedServiceProp(property.value);
   };
 
   var isSingleLineFn = function(property) {
@@ -35,6 +39,10 @@ module.exports = function(context) {
     return property.key.name === 'actions' && utils.isObjectExpression(property.value);
   };
 
+  var isDefaultObjectProp = function(property) {
+    return property.key.name !== 'actions' && utils.isObjectExpression(property.value);
+  };
+
   var isCustomFunction = function(property) {
     return utils.isFunctionExpression(property.value);
   };
@@ -44,14 +52,16 @@ module.exports = function(context) {
 
     if (isDefaultProp(property)) {
       val = 10;
-    } else if (isSingleLineFn(property)) {
+    } else if (isInjectedServiceProp(property)) {
       val = 20;
-    } else if (isMultiLineFn(property)) {
+    } else if (isSingleLineFn(property)) {
       val = 30;
-    } else if (isActionsProp(property)) {
+    } else if (isMultiLineFn(property)) {
       val = 40;
-    } else if (isCustomFunction(property)) {
+    } else if (isActionsProp(property)) {
       val = 50;
+    } else if (isCustomFunction(property)) {
+      val = 60
     }
 
     return val;
