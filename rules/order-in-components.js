@@ -32,7 +32,13 @@ module.exports = function(context) {
   };
 
   var isMultiLineFn = function(property) {
-    return utils.isCallExpression(property.value) && utils.getSize(property.value) > 1;
+    return utils.isCallExpression(property.value) &&
+      utils.getSize(property.value) > 1 &&
+      ember.isObserverProp(property.value) === false;
+  };
+
+  var isObserverProp = function(property) {
+    return ember.isObserverProp(property.value);
   };
 
   var isActionsProp = function(property) {
@@ -44,7 +50,12 @@ module.exports = function(context) {
   };
 
   var isCustomFunction = function(property) {
-    return utils.isFunctionExpression(property.value);
+    return utils.isFunctionExpression(property.value) &&
+      ember.isComponentLifecycleHookName(property.key.name) === false;
+  };
+
+  var isLifecycleHook = function(property) {
+    return utils.isFunctionExpression(property.value) && ember.isComponentLifecycleHookName(property.key.name);
   };
 
   var getOrderValue = function(property) {
@@ -58,10 +69,14 @@ module.exports = function(context) {
       val = 30;
     } else if (isMultiLineFn(property)) {
       val = 40;
-    } else if (isActionsProp(property)) {
+    } else if (isObserverProp(property)) {
       val = 50;
+    } else if (isLifecycleHook(property)) {
+      val = 60;
+    } else if (isActionsProp(property)) {
+      val = 70;
     } else if (isCustomFunction(property)) {
-      val = 60
+      val = 80;
     }
 
     return val;
