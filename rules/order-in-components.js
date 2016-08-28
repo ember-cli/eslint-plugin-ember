@@ -16,7 +16,11 @@ module.exports = function(context) {
   };
 
   var isDefaultProp = function(property) {
-    return utils.isLiteral(property.value);
+    var value = property.value;
+
+    return utils.isLiteral(value) ||
+      utils.isObjectExpression(value) ||
+      utils.isArrayExpression(value);
   };
 
   var isSingleLineFn = function(property) {
