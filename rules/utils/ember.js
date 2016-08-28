@@ -5,6 +5,7 @@ module.exports = {
   isModule: isModule,
   isEmberComponent: isEmberComponent,
   isEmberController: isEmberController,
+  isInjectedServiceProp: isInjectedServiceProp,
   // isEmberRoute: isEmberRoute,
 };
 
@@ -42,6 +43,22 @@ function isEmberComponent(node) {
 
 function isEmberController(node) {
   return isModule(node, 'Controller');
+}
+
+function isInjectedServiceProp(node) {
+  var name = 'service';
+  var calleeNode = node.callee;
+
+  return utils.isCallExpression(node) &&
+    (
+      utils.isIdentifier(calleeNode) &&
+      calleeNode.name === name
+    ) ||
+    (
+      utils.isMemberExpression(calleeNode) &&
+      utils.isIdentifier(calleeNode.property) &&
+      calleeNode.property.name === name
+    );
 }
 
 // function isEmberRoute(node) {
