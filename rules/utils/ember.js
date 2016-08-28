@@ -8,6 +8,7 @@ module.exports = {
   isInjectedServiceProp: isInjectedServiceProp,
   isObserverProp: isObserverProp,
   isComponentLifecycleHookName: isComponentLifecycleHookName,
+  getModuleProperties: getModuleProperties,
   // isEmberRoute: isEmberRoute,
 };
 
@@ -75,6 +76,10 @@ function isComponentLifecycleHookName(name) {
     'willUpdate', 'didUpdate', 'willDestroyElement', 'willClearRender', 'didDestroyElement'];
 
   return hooks.indexOf(name) !== -1;
+}
+
+function getModuleProperties(module) {
+  return utils.findNodes(module.arguments, 'ObjectExpression')[0].properties;
 }
 
 // function isEmberRoute(node) {

@@ -20,7 +20,7 @@ module.exports = function(context) {
       if (!ember.isEmberController(node)) return;
 
       var callee = node.callee;
-      var properties = node.arguments[0].properties;
+      var properties = ember.getModuleProperties(node);
       var aliasPresent = false;
 
       properties.forEach(function(property) {
