@@ -35,6 +35,10 @@ module.exports = function(context) {
     return property.key.name === 'actions' && utils.isObjectExpression(property.value);
   };
 
+  var isCustomFunction = function(property) {
+    return utils.isFunctionExpression(property.value);
+  };
+
   var getOrderValue = function(property) {
     var val = null;
 
@@ -46,10 +50,12 @@ module.exports = function(context) {
       val = 30;
     } else if (isActionsProp(property)) {
       val = 40;
+    } else if (isCustomFunction(property)) {
+      val = 50;
     }
 
     return val;
-  }
+  };
 
   var findUnorderedProperty = function(arr) {
     var len = arr.length - 1;
