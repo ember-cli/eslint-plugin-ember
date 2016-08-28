@@ -27,6 +27,14 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
     {
+      code: 'export default Component.extend(TestMixin, {levelOfHappiness: computed("attitude", "health", () => {\n}), actions: {}});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
+      code: 'export default Component.extend(TestMixin, TestMixin2, {levelOfHappiness: computed("attitude", "health", () => {\n}), actions: {}});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
       code: 'export default Component.extend({role: "sloth", abc: Ember.inject.service(), def: inject.service(), ghi: service(), levelOfHappiness: computed("attitude", "health", () => {\n})});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
@@ -35,25 +43,22 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
     {
-      code: 'export default Component.extend({levelOfHappiness: computed("attitude", "health", () => {\n}), abc: Ember.observer("aaaa", function () {\n}), def: observer("aaaa", function () {\n}), actions: {}});',
+      code: 'export default Component.extend({levelOfHappiness: computed("attitude", "health", () => {\n}), abc: Ember.observer("aaaa", () => {\n}), def: observer("aaaa", () => {\n}), actions: {}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
     {
-      code: 'export default Component.extend({abc: observer("aaaa", () => {\n}), init: function () {\n}, actions: {}, customFunction() {\n}});',
+      code: 'export default Component.extend({abc: observer("aaaa", () => {\n}), init() {\n}, actions: {}, customFunction() {\n}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
     {
-      code: 'export default Component.extend({abc: [], def: true, igh: service(), singleComp: alias("abc"), multiComp: computed(() => {\n}), obs: observer("aaa", function () {\n}), init: function () {\n}, actions: {}, customFunc: function() {\n}});',
+      code: 'export default Component.extend({abc: [], def: true, igh: service(), singleComp: alias("abc"), multiComp: computed(() => {\n}), obs: observer("aaa", () => {\n}), init() {\n}, actions: {}, customFunc() {\n}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
     {
-      code: 'export default Component.extend(TestMixin, {levelOfHappiness: computed("attitude", "health", () => {\n}), actions: {}});',
+      code: 'export default Component.extend({init() {\n}, didReceiveAttrs() {\n}, willRender() {\n}, didInsertElement() {\n}, didRender() {\n}, didUpdateAttrs() {\n}, willUpdate() {\n}, didUpdate() {\n}, willDestroyElement() {\n}, willClearRender() {\n}, didDestroyElement() {\n}, actions: {}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
-    {
-      code: 'export default Component.extend(TestMixin, TestMixin2, {levelOfHappiness: computed("attitude", "health", () => {\n}), actions: {}});',
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
-    }
+
   ],
   invalid: [
     {
