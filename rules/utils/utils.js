@@ -5,6 +5,8 @@ module.exports = {
   isMemberExpression: isMemberExpression,
   isCallExpression: isCallExpression,
   isObjectExpression: isObjectExpression,
+  isArrayExpression: isArrayExpression,
+  isFunctionExpression: isFunctionExpression,
   isThisExpression: isThisExpression,
   getSize: getSize,
   parseCallee: parseCallee,
@@ -78,6 +80,26 @@ function isCallExpression(node) {
  */
 function isObjectExpression(node) {
     return node !== undefined && node.type === 'ObjectExpression';
+}
+
+/**
+ * Check whether or not a node is an ArrayExpression.
+ *
+ * @param {Object} node The node to check.
+ * @returns {boolean} Whether or not the node is an ArrayExpression.
+ */
+function isArrayExpression(node) {
+  return node !== undefined && node.type === 'ArrayExpression';
+}
+
+/**
+ * Check whether or not a node is an FunctionExpression.
+ *
+ * @param {Object} node The node to check.
+ * @returns {boolean} Whether or not the node is an FunctionExpression.
+ */
+function isFunctionExpression(node) {
+  return node !== undefined && node.type === 'FunctionExpression';
 }
 
 /**

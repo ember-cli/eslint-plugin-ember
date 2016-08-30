@@ -5,6 +5,9 @@ module.exports = {
   isModule: isModule,
   isEmberComponent: isEmberComponent,
   isEmberController: isEmberController,
+  isInjectedServiceProp: isInjectedServiceProp,
+  isObserverProp: isObserverProp,
+  isComponentLifecycleHookName: isComponentLifecycleHookName,
   getModuleProperties: getModuleProperties,
   // isEmberRoute: isEmberRoute,
 };
@@ -22,6 +25,21 @@ function isEmberModule(callee, element, module) {
   return isLocalModule(memberExp, module) &&
     utils.isIdentifier(memberExp.property) &&
     memberExp.property.name === element;
+}
+
+function isPropOfType(node, type) {
+  var calleeNode = node.callee;
+
+  return utils.isCallExpression(node) &&
+    (
+      utils.isIdentifier(calleeNode) &&
+      calleeNode.name === type
+    ) ||
+    (
+      utils.isMemberExpression(calleeNode) &&
+      utils.isIdentifier(calleeNode.property) &&
+      calleeNode.property.name === type
+    );
 }
 
 // Public
@@ -43,6 +61,21 @@ function isEmberComponent(node) {
 
 function isEmberController(node) {
   return isModule(node, 'Controller');
+}
+
+function isInjectedServiceProp(node) {
+  return isPropOfType(node, 'service');
+}
+
+function isObserverProp(node) {
+  return isPropOfType(node, 'observer');
+}
+
+function isComponentLifecycleHookName(name) {
+  var hooks = ['init', 'didReceiveAttrs', 'willRender', 'didInsertElement', 'didRender', 'didUpdateAttrs',
+    'willUpdate', 'didUpdate', 'willDestroyElement', 'willClearRender', 'didDestroyElement'];
+
+  return hooks.indexOf(name) !== -1;
 }
 
 function getModuleProperties(module) {
