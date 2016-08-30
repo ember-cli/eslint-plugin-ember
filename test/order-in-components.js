@@ -58,7 +58,14 @@ eslintTester.run('order-in-components', rule, {
       code: 'export default Component.extend({init() {\n}, didReceiveAttrs() {\n}, willRender() {\n}, didInsertElement() {\n}, didRender() {\n}, didUpdateAttrs() {\n}, willUpdate() {\n}, didUpdate() {\n}, willDestroyElement() {\n}, willClearRender() {\n}, didDestroyElement() {\n}, actions: {}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
-
+    {
+      code: 'export default Component.extend({test: service(), didReceiveAttrs() {\n}, tSomeAction: task(function* (url) {\n})});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
+      code: 'export default Component.extend({test: service(), didReceiveAttrs() {\n}, tSomeAction: task(function* (url) {\n}), _anotherPrivateFnc() {\n}});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    }
   ],
   invalid: [
     {
@@ -140,6 +147,13 @@ eslintTester.run('order-in-components', rule, {
     },
     {
       code: 'export default Component.extend({customFunc() {\n}, actions: {}});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      errors: [{
+        message: 'Check order of properties',
+      }],
+    },
+    {
+      code: 'export default Component.extend({tAction: test(function() {\n}), actions: {}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
