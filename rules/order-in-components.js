@@ -61,9 +61,9 @@ module.exports = function(context) {
   var getOrderValue = function(property) {
     var val = null;
 
-    if (isDefaultProp(property)) {
+    if (isInjectedServiceProp(property)) {
       val = 10;
-    } else if (isInjectedServiceProp(property)) {
+    } else if (isDefaultProp(property)) {
       val = 20;
     } else if (isSingleLineFn(property)) {
       val = 30;

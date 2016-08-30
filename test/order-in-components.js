@@ -35,11 +35,11 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
     {
-      code: 'export default Component.extend({role: "sloth", abc: Ember.inject.service(), def: inject.service(), ghi: service(), levelOfHappiness: computed("attitude", "health", () => {\n})});',
+      code: 'export default Component.extend({abc: Ember.inject.service(), def: inject.service(), ghi: service(), role: "sloth", levelOfHappiness: computed("attitude", "health", () => {\n})});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
     {
-      code: 'export default Component.extend({role: "sloth", abc: [], def: {}, ghi: service()});',
+      code: 'export default Component.extend({role: "sloth", abc: [], def: {}, ghi: alias("def")});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
     {
@@ -51,7 +51,7 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
     {
-      code: 'export default Component.extend({abc: [], def: true, igh: service(), singleComp: alias("abc"), multiComp: computed(() => {\n}), obs: observer("aaa", () => {\n}), init() {\n}, actions: {}, customFunc() {\n}});',
+      code: 'export default Component.extend({igh: service(), abc: [], def: true, singleComp: alias("abc"), multiComp: computed(() => {\n}), obs: observer("aaa", () => {\n}), init() {\n}, actions: {}, customFunc() {\n}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
     {
@@ -97,7 +97,7 @@ eslintTester.run('order-in-components', rule, {
       }],
     },
     {
-      code: 'export default Component.extend({i18n: service(), abc: true});',
+      code: 'export default Component.extend({abc: true, i18n: service()});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
