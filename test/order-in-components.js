@@ -63,6 +63,10 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
     {
+      code: 'export default Component.extend({test: service(), test2: computed.equal("asd", "qwe"), didReceiveAttrs() {\n}, tSomeAction: task(function* (url) {\n}).restartable()});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
       code: 'export default Component.extend({test: service(), didReceiveAttrs() {\n}, tSomeAction: task(function* (url) {\n}), _anotherPrivateFnc() {\n}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     }

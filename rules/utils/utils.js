@@ -112,8 +112,9 @@ function isFunctionExpression(node) {
  * @return {Boolean}      [description]
  */
 function isCallWithFunctionExpression(node) {
-  var firstArg = node.arguments ? node.arguments[0] : null;
-  return node !== undefined && isCallExpression(node) &&
+  var callObj = isMemberExpression(node.callee) ? node.callee.object : node;
+  var firstArg = callObj.arguments ? callObj.arguments[0] : null;
+  return callObj !== undefined && isCallExpression(callObj) &&
     firstArg && isFunctionExpression(firstArg);
 }
 
