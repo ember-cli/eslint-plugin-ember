@@ -104,7 +104,7 @@ function isFunctionExpression(node) {
 }
 
 /**
- * Check wheter or not a node is a CallExpression that has a FunctionExpression
+ * Check whether or not a node is a CallExpression that has a FunctionExpression
  * as first argument, eg.:
  * tSomeAction: mysteriousFnc(function(){})
  *
