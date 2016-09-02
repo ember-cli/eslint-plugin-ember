@@ -7,6 +7,7 @@ module.exports = {
   isObjectExpression: isObjectExpression,
   isArrayExpression: isArrayExpression,
   isFunctionExpression: isFunctionExpression,
+  isCallWithFunctionExpression: isCallWithFunctionExpression,
   isThisExpression: isThisExpression,
   getSize: getSize,
   parseCallee: parseCallee,
@@ -100,6 +101,20 @@ function isArrayExpression(node) {
  */
 function isFunctionExpression(node) {
   return node !== undefined && node.type === 'FunctionExpression';
+}
+
+/**
+ * Check whether or not a node is a CallExpression that has a FunctionExpression
+ * as first argument, eg.:
+ * tSomeAction: mysteriousFnc(function(){})
+ *
+ * @param  {[type]}  node [description]
+ * @return {Boolean}      [description]
+ */
+function isCallWithFunctionExpression(node) {
+  var firstArg = node.arguments ? node.arguments[0] : null;
+  return node !== undefined && isCallExpression(node) &&
+    firstArg && isFunctionExpression(firstArg);
 }
 
 /**
