@@ -19,6 +19,7 @@ module.exports = function(context) {
     var value = property.value;
 
     return utils.isLiteral(value) ||
+      utils.isIdentifier(value) ||
       utils.isArrayExpression(value) ||
       isDefaultObjectProp(property);
   };

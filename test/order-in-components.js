@@ -69,6 +69,10 @@ eslintTester.run('order-in-components', rule, {
     {
       code: 'export default Component.extend({test: service(), didReceiveAttrs() {\n}, tSomeAction: task(function* (url) {\n}), _anotherPrivateFnc() {\n}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
+      code: 'export default Component.extend({classNameBindings: ["filterDateSelectClass"], content: [], currentMonthEndDate: null, currentMonthStartDate: null, optionValuePath: "value", optionLabelPath: "label", typeOfDate: null, action: K});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
     }
   ],
   invalid: [
