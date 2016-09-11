@@ -26,13 +26,23 @@ module.exports = function(context) {
     return property.key.name === 'path' && property.value.value.indexOf(':') > -1;
   };
 
-  var getSegmentName = function(property) {
+  var getSegmentNames = function(property) {
     if (!isSegment(property)) return;
-    return property.value.value.split(':')[1];
+
+    var path = property.value.value;
+    var pattern = /:([a-zA-Z0-9-_]+)/g;
+    var segmentNames = [];
+    var execResult;
+
+    while (execResult = pattern.exec(path)) {
+      segmentNames.push(execResult[1]);
+    }
+
+    return segmentNames;
   };
 
-  var isSnakeCase = function(name) {
-    return snakeCase(name) === name;
+  var isNotSnakeCase = function(name) {
+    return snakeCase(name) !== name;
   };
 
   return {
@@ -43,8 +53,9 @@ module.exports = function(context) {
 
       if (routeOptions) {
         routeOptions.properties.forEach(function(property) {
-          var segmentName = getSegmentName(property);
-          if (segmentName && !isSnakeCase(segmentName)) {
+          var segmentNames = getSegmentNames(property);
+
+          if (segmentNames && segmentNames.filter(isNotSnakeCase).length) {
             report(property.value);
           }
         });
