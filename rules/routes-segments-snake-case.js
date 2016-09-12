@@ -29,16 +29,11 @@ module.exports = function(context) {
   var getSegmentNames = function(property) {
     if (!isSegment(property)) return;
 
-    var path = property.value.value;
-    var pattern = /:([a-zA-Z0-9-_]+)/g;
-    var segmentNames = [];
-    var execResult;
-
-    while (execResult = pattern.exec(path)) {
-      segmentNames.push(execResult[1]);
-    }
-
-    return segmentNames;
+    return property.value.value
+      .match(/:([a-zA-Z0-9-_]+)/g)
+      .map(function (segment) {
+        return segment.slice(1);
+      });
   };
 
   var isNotSnakeCase = function(name) {
