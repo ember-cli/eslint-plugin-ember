@@ -18,17 +18,20 @@ You need to have `ember-cli-eslint` installed in your app. [More info here](http
 
 The easiest way to use this plugin is through our [shareable config](https://github.com/netguru/eslint-config-netguru-ember). More about shareable configs [here](http://eslint.org/docs/developer-guide/shareable-configs.html).
 
-##### 1. Install `eslint-config-airbnb-base` and it's dependencies. [Read more](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base)
+#### 1. Install all dependencies by simply pasting code below in your terminal
 
-  ```shell
-    npm install --save-dev eslint-config-airbnb-base eslint-plugin-import
-  ```
+```shell
+(
+  export PKG=eslint-config-netguru-ember;
+  npm info "$PKG" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install --save-dev "$PKG"
+)
+```
 
-##### 2. Install our config and plugin
+This command will basically produce and call something like this:
 
-  ```shell
-    npm install --save-dev eslint-config-netguru-ember eslint-plugin-netguru-ember
-  ```
+```
+npm install --save-dev eslint-config-netguru-ember eslint-plugin-netguru-ember@1.x eslint-config-airbnb-base@^7.1.0 eslint-plugin-import@^1.15.0
+```
 
 ##### 2. Change your `.eslintrc`, so it looks like this:
 
@@ -89,5 +92,3 @@ All rules from our plugin have to be prefixed with `netguru-ember/`
 ## Contribution guide
 
 TBD. For now feel free to add any suggestions in [issues](https://github.com/netguru/eslint-plugin-netguru-ember/issues). Any involvement highly appreciated.
-
-
