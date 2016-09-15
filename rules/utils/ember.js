@@ -7,6 +7,8 @@ module.exports = {
   isEmberController: isEmberController,
   isInjectedServiceProp: isInjectedServiceProp,
   isObserverProp: isObserverProp,
+  isEmptyObjectProp: isEmptyObjectProp,
+  isEmptyArrayProp: isEmptyArrayProp,
   isComponentLifecycleHookName: isComponentLifecycleHookName,
   getModuleProperties: getModuleProperties,
   // isEmberRoute: isEmberRoute,
@@ -69,6 +71,14 @@ function isInjectedServiceProp(node) {
 
 function isObserverProp(node) {
   return isPropOfType(node, 'observer');
+}
+
+function isEmptyArrayProp(node) {
+  return utils.isArrayExpression(node.value) && !node.value.elements.length;
+}
+
+function isEmptyObjectProp(node) {
+  return utils.isObjectExpression(node.value) && !node.value.properties.length;
 }
 
 function isComponentLifecycleHookName(name) {
