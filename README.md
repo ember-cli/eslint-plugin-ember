@@ -84,6 +84,8 @@ All rules from our plugin have to be prefixed with `netguru-ember/`
 
 * Components
   * **closure-actions** - Always use closure actions [(more)](https://github.com/netguru/ember-styleguide#closure-actions)
+  * **no-on-calls-in-components** - Don't use .on() in components
+
 
 * Routing
   * **routes-segments-snake-case** - Route's dynamic segments should use snake case [(more)](https://github.com/netguru/ember-styleguide#route-naming)
