@@ -30,7 +30,7 @@ module.exports = function(context) {
 
       var propertiesWithOnCalls = ember.getModuleProperties(node).filter(isOnCall);
 
-      if(propertiesWithOnCalls.length) {
+      if (propertiesWithOnCalls.length) {
         report(node);
       }
     }
