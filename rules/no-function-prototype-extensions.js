@@ -1,6 +1,5 @@
 'use strict';
 
-var ember = require('./utils/ember');
 var utils = require('./utils/utils');
 
 //----------------------------------------------------------------------------------------------
