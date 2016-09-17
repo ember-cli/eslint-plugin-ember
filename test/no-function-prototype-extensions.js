@@ -66,6 +66,10 @@ eslintTester.run('no-function-prototype-extensions', rule, {
       code: 'export default Controller.extend({test() {$("body").on("click", abc);}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
+    {
+      code: 'export default Controller.extend({test() {$("body").on("click", abc).on("click", function () {});}});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
   ],
   invalid: [
     {
