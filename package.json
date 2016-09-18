@@ -22,6 +22,9 @@
     "styleguide"
   ],
   "author": "Michał Sajnóg (michal.sajnog@netguru.co)",
+  "contributors": [
+    "Rafał Leszczyński (raf.leszcz@gmail.com)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/netguru/eslint-netguru-ember/issues"
