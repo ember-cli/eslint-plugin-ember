@@ -16,8 +16,12 @@ module.exports = function(context) {
     var callee = value.callee;
 
     return utils.isCallExpression(value) &&
-      utils.isIdentifier(callee) &&
-      callee.name === 'on';
+      (utils.isIdentifier(callee) && callee.name === 'on') ||
+      (
+        utils.isMemberExpression(callee) &&
+        utils.isIdentifier(callee.object) && callee.object.name === 'Ember' &&
+        utils.isIdentifier(callee.property) && callee.property.name === 'on'
+      );
   };
 
   var report = function(node) {
