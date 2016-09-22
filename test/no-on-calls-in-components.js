@@ -75,5 +75,12 @@ eslintTester.run('no-on-calls-in-components', rule, {
         message: 'Don\'t use .on() in components',
       }],
     },
+    {
+      code: 'export default Component.extend({test: Ember.on("didInsertElement", function () {})});',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      errors: [{
+        message: 'Don\'t use .on() in components',
+      }],
+    },
   ]
 });
