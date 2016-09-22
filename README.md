@@ -84,7 +84,7 @@ All rules from our plugin have to be prefixed with `netguru-ember/`
 
 * Components
   * **closure-actions** - Always use closure actions [(more)](https://github.com/netguru/ember-styleguide#closure-actions)
-  * **no-on-calls-in-components** - Don't use .on() in components
+  * **no-on-calls-in-components** - Don't use .on() in components [(more)](https://github.com/netguru/ember-styleguide#dont-use-on-calls-as-components-values)
 
 
 * Routing
