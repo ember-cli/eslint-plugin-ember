@@ -14,7 +14,7 @@ module.exports = function(context) {
     context.report(node, message);
   };
 
-  var promisesMethods = ['then', 'catch', 'success'];
+  var promisesMethods = ['then', 'catch'];
 
   return {
     CallExpression: function(node) {
