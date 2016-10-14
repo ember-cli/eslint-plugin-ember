@@ -14,7 +14,7 @@ module.exports = function(context) {
     context.report(node, message);
   };
 
-  var asd = [
+  var avoidedProperties = [
     'get',
     'set',
     'getProperties',
@@ -26,7 +26,7 @@ module.exports = function(context) {
     MemberExpression: function(node) {
       if (
         utils.isIdentifier(node.property) &&
-        asd.indexOf(node.property.name) > -1
+        avoidedProperties.indexOf(node.property.name) > -1
       ) {
         report(node.property);
       }
