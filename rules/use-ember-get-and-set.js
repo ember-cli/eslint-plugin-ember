@@ -3,7 +3,7 @@
 var utils = require('./utils/utils');
 
 //------------------------------------------------------------------------------
-// Common - use get and set
+// General - use get and set
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
