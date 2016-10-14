@@ -22,8 +22,6 @@ eslintTester.run('use-ember-get-and-set', rule, {
     'getProperties(controller, name, email, password)',
     'setProperties(this, {name: "Jon", email: "jon@snow.com"})',
     'setProperties(controller, {name: "Jon", email: "jon@snow.com"})',
-    'toggleProperty(this, "test")',
-    'toggleProperty(controller, "test")',
   ],
   invalid: [
     {
@@ -94,24 +92,6 @@ eslintTester.run('use-ember-get-and-set', rule, {
     },
     {
       code: 'model.setProperties({test: "value"})',
-      errors: [{
-        message: 'Use get/set',
-      }],
-    },
-    {
-      code: 'this.toggleProperty("test")',
-      errors: [{
-        message: 'Use get/set',
-      }],
-    },
-    {
-      code: 'controller.toggleProperty("test")',
-      errors: [{
-        message: 'Use get/set',
-      }],
-    },
-    {
-      code: 'model.toggleProperty("test")',
       errors: [{
         message: 'Use get/set',
       }],

@@ -19,7 +19,6 @@ module.exports = function(context) {
     'set',
     'getProperties',
     'setProperties',
-    'toggleProperty',
   ];
 
   return {
