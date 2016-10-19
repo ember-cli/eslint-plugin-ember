@@ -16,7 +16,14 @@ fs.readdirSync(ruleDir).forEach(function(name) {
   }
 });
 
+var ember = require(path.join(ruleDir, 'utils/ember'));
+var utils = require(path.join(ruleDir, 'utils/utils'));
+
 module.exports = {
   rules: rules,
-  environments: environments
+  environments: environments,
+  utils: {
+    ember: ember,
+    utils: utils
+  }
 };
