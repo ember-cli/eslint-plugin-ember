@@ -22,6 +22,8 @@ eslintTester.run('use-ember-get-and-set', rule, {
     'getProperties(controller, name, email, password)',
     'setProperties(this, {name: "Jon", email: "jon@snow.com"})',
     'setProperties(controller, {name: "Jon", email: "jon@snow.com"})',
+    'getWithDefault(this, "test", "default")',
+    'getWithDefault(controller, "test", "default")',
   ],
   invalid: [
     {
@@ -38,6 +40,18 @@ eslintTester.run('use-ember-get-and-set', rule, {
     },
     {
       code: 'model.get("test")',
+      errors: [{
+        message: 'Use get/set',
+      }],
+    },
+    {
+      code: 'this.getWithDefault("test", "default")',
+      errors: [{
+        message: 'Use get/set',
+      }],
+    },
+    {
+      code: 'controller.getWithDefault("test", "default")',
       errors: [{
         message: 'Use get/set',
       }],

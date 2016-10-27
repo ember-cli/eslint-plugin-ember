@@ -19,6 +19,7 @@ module.exports = function(context) {
     'set',
     'getProperties',
     'setProperties',
+    'getWithDefault',
   ];
 
   return {
