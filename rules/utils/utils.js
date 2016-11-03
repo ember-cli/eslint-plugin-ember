@@ -7,6 +7,7 @@ module.exports = {
   isObjectExpression: isObjectExpression,
   isArrayExpression: isArrayExpression,
   isFunctionExpression: isFunctionExpression,
+  isNewExpression: isNewExpression,
   isCallWithFunctionExpression: isCallWithFunctionExpression,
   isThisExpression: isThisExpression,
   getSize: getSize,
@@ -104,6 +105,16 @@ function isFunctionExpression(node) {
 }
 
 /**
+ * Check whether or not a node is an NewExpression.
+ *
+ * @param {Object} node The node to check.
+ * @returns {boolean} Whether or not the node is an NewExpression.
+ */
+function isNewExpression(node) {
+  return node !== undefined && node.type === 'NewExpression';
+}
+
+/**
  * Check whether or not a node is a CallExpression that has a FunctionExpression
  * as first argument, eg.:
  * tSomeAction: mysteriousFnc(function(){})
@@ -139,7 +150,7 @@ function getSize(node) {
 }
 
 /**
- * Parse CallExpression to get array of properties and object name
+ * Parse CallExpression or NewExpression to get array of properties and object name
  *
  * @param  {Object} node The node to parse
  * @return {Array} eg. ['Ember', 'computed', 'alias']
@@ -148,7 +159,7 @@ function parseCallee(node) {
   var parsedCallee = [];
   var callee;
 
-  if (isCallExpression(node)) {
+  if (isCallExpression(node) || isNewExpression(node)) {
     callee = node.callee;
 
     while (isMemberExpression(callee)) {

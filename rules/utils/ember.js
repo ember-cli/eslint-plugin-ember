@@ -74,10 +74,20 @@ function isObserverProp(node) {
 }
 
 function isEmptyArrayProp(node) {
+  if (utils.isNewExpression(node.value)) {
+    var parsedCallee = utils.parseCallee(node.value);
+    return parsedCallee.pop() === 'A' && !node.value.arguments.length;
+  }
+
   return utils.isArrayExpression(node.value) && !node.value.elements.length;
 }
 
 function isEmptyObjectProp(node) {
+  if (utils.isNewExpression(node.value)) {
+    var parsedCallee = utils.parseCallee(node.value);
+    return parsedCallee.pop() === 'Object' && !node.value.arguments.length;
+  }
+
   return utils.isObjectExpression(node.value) && !node.value.properties.length;
 }
 
