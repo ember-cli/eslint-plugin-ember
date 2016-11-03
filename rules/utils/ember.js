@@ -7,11 +7,10 @@ module.exports = {
   isEmberController: isEmberController,
   isInjectedServiceProp: isInjectedServiceProp,
   isObserverProp: isObserverProp,
-  isEmptyObjectProp: isEmptyObjectProp,
-  isEmptyArrayProp: isEmptyArrayProp,
+  isObjectProp: isObjectProp,
+  isArrayProp: isArrayProp,
   isComponentLifecycleHookName: isComponentLifecycleHookName,
   getModuleProperties: getModuleProperties,
-  // isEmberRoute: isEmberRoute,
 };
 
 // Private
@@ -73,22 +72,22 @@ function isObserverProp(node) {
   return isPropOfType(node, 'observer');
 }
 
-function isEmptyArrayProp(node) {
+function isArrayProp(node) {
   if (utils.isNewExpression(node.value)) {
     var parsedCallee = utils.parseCallee(node.value);
-    return parsedCallee.pop() === 'A' && !node.value.arguments.length;
+    return parsedCallee.pop() === 'A';
   }
 
-  return utils.isArrayExpression(node.value) && !node.value.elements.length;
+  return utils.isArrayExpression(node.value);
 }
 
-function isEmptyObjectProp(node) {
+function isObjectProp(node) {
   if (utils.isNewExpression(node.value)) {
     var parsedCallee = utils.parseCallee(node.value);
-    return parsedCallee.pop() === 'Object' && !node.value.arguments.length;
+    return parsedCallee.pop() === 'Object';
   }
 
-  return utils.isObjectExpression(node.value) && !node.value.properties.length;
+  return utils.isObjectExpression(node.value);
 }
 
 function isComponentLifecycleHookName(name) {
@@ -101,7 +100,3 @@ function isComponentLifecycleHookName(name) {
 function getModuleProperties(module) {
   return utils.findNodes(module.arguments, 'ObjectExpression')[0].properties;
 }
-
-// function isEmberRoute(node) {
-//   return isModule(node, 'Route');
-// }
