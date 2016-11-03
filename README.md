@@ -70,6 +70,8 @@ All rules from our plugin have to be prefixed with `netguru-ember/`
   * **no-side-effect** - Don't introduce side-effects in computed properties [(more)](https://github.com/netguru/ember-styleguide#dont-introduce-side-effects-in-computed-properties)
   * **jquery-ember-run** - Don’t use jQuery without Ember Run Loop [(more)](https://github.com/netguru/ember-styleguide#dont-use-jquery-without-ember-run-loop)
   * **named-functions-in-promises** - Use named functions defined on objects to handle promises [(more)](https://github.com/netguru/ember-styleguide#use-named-functions-defined-on-objects-to-handle-promises)
+  * **no-function-prototype-extensions** - Don't use Ember's function prototype extensions [(more)](https://github.com/netguru/ember-styleguide#do-not-use-embers-function-prototype-extensions)
+  * **use-ember-get-and-set** - Use Ember get/set [(more)](https://github.com/netguru/ember-styleguide#use-emberget-and-emberset)
 
 * Organizing
   * **order-in-components** - Organize your components [(more)](https://github.com/netguru/ember-styleguide#organize-your-components)
@@ -84,6 +86,8 @@ All rules from our plugin have to be prefixed with `netguru-ember/`
 
 * Components
   * **closure-actions** - Always use closure actions [(more)](https://github.com/netguru/ember-styleguide#closure-actions)
+  * **no-on-calls-in-components** - Don't use .on() in components [(more)](https://github.com/netguru/ember-styleguide#dont-use-on-calls-as-components-values)
+
 
 * Routing
   * **routes-segments-snake-case** - Route's dynamic segments should use snake case [(more)](https://github.com/netguru/ember-styleguide#route-naming)
