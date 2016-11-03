@@ -10,22 +10,15 @@ var ember = require('./utils/ember');
 
 module.exports = {
   meta: {
-    schema: [
-      {
-        type: "object",
-        properties: {
-          exceptions: {
-              type: "array",
-              items: {type: "string"},
-              uniqueItems: true,
-          }
-        },
-        additionalProperties: false,
-      },
-    ],
+    schema: [{
+      type: "array",
+      items: { type: "string" },
+    }],
   },
 
   create: function(context) {
+    var ignoredProperties = context.options[0] || [];
+
     var message = {
       array: 'Avoid using arrays as default properties',
       object: 'Avoid using objects as default properties',
@@ -35,14 +28,14 @@ module.exports = {
       context.report(node, message[messageType]);
     };
 
-    var ignoredProperties = [
+    ignoredProperties = ignoredProperties.concat([
       'classNames',
       'classNameBindings',
       'actions',
       'concatenatedProperties',
       'mergedProperties',
       'positionalParams',
-    ];
+    ]);
 
     return {
       CallExpression: function(node) {
