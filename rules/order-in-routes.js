@@ -77,16 +77,7 @@ function isDefaultProp(property) {
 }
 
 function isCustomProp(property) {
-  var value = property.value;
-
-  return utils.isLiteral(value) ||
-    utils.isIdentifier(value) ||
-    utils.isArrayExpression(value) ||
-    isCustomObjectProp(property);
-}
-
-function isCustomObjectProp(property) {
-  return property.key.name !== 'actions' && utils.isObjectExpression(property.value);
+  return ember.isCustomProp(property);
 }
 
 function isActionsProp(property) {

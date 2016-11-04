@@ -10,6 +10,7 @@ module.exports = {
   isObserverProp: isObserverProp,
   isObjectProp: isObjectProp,
   isArrayProp: isArrayProp,
+  isCustomProp: isCustomProp,
   isComponentLifecycleHookName: isComponentLifecycleHookName,
   isRouteMethod: isRouteMethod,
   isRouteProperty: isRouteProperty,
@@ -95,6 +96,16 @@ function isObjectProp(node) {
   }
 
   return utils.isObjectExpression(node.value);
+}
+
+function isCustomProp(property) {
+  var value = property.value;
+  var isCustomObjectProp = utils.isObjectExpression(property.value) && property.key.name !== 'actions';
+
+  return utils.isLiteral(value) ||
+      utils.isIdentifier(value) ||
+      utils.isArrayExpression(value) ||
+      isCustomObjectProp;
 }
 
 function isComponentLifecycleHookName(name) {

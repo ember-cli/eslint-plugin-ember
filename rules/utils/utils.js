@@ -7,6 +7,7 @@ module.exports = {
   isObjectExpression: isObjectExpression,
   isArrayExpression: isArrayExpression,
   isFunctionExpression: isFunctionExpression,
+  isArrowFunctionExpression: isArrowFunctionExpression,
   isNewExpression: isNewExpression,
   isCallWithFunctionExpression: isCallWithFunctionExpression,
   isThisExpression: isThisExpression,
@@ -102,6 +103,16 @@ function isArrayExpression(node) {
  */
 function isFunctionExpression(node) {
   return node !== undefined && node.type === 'FunctionExpression';
+}
+
+/**
+ * Check whether or not a node is an ArrowFunctionExpressiony.
+ *
+ * @param {Object} node The node to check.
+ * @returns {boolean} Whether or not the node is an ArrowFunctionExpressiony.
+ */
+function isArrowFunctionExpression(node) {
+  return node !== undefined && node.type === 'ArrowFunctionExpression';
 }
 
 /**
