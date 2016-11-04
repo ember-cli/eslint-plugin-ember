@@ -12,7 +12,7 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var eslintTester = new RuleTester();
-eslintTester.run('order-in-components', rule, {
+eslintTester.run('order-in-routes', rule, {
   valid: [
     {
       code: 'export default Route.extend({currentUser: service(), queryParams: {}, customProp: "test", model() {}, beforeModel() {}, actions: {}, _customAction() {}, _customAction2: function() {}, tSomeTask: task(function* () {}) });',

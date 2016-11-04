@@ -4,7 +4,7 @@ var utils = require('./utils/utils');
 var ember = require('./utils/ember');
 
 //------------------------------------------------------------------------------
-// Organizing - Organize your components and keep order in objects
+// Organizing - Organize your routes and keep order in objects
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
@@ -13,11 +13,11 @@ module.exports = function(context) {
 
   function report(node) {
     context.report(node, message);
-  };
+  }
 
   return {
     CallExpression: function(node) {
-      if (!ember.isEmberComponent(node)) return;
+      if (!ember.isEmberController(node)) return;
 
       var properties = ember.getModuleProperties(node);
       var mappedProperties = properties.map(function(property) {
@@ -41,15 +41,15 @@ function getOrderValue(property) {
 
   if (isInjectedServiceProp(property)) {
     val = 10;
-  } else if (isAnyProp(property)) {
+  } else if (isDefaultProp(property)) {
     val = 20;
-  } else if (isSingleLineFn(property)) {
+  } else if (isCustomProp(property)) {
     val = 30;
-  } else if (isMultiLineFn(property)) {
+  } else if (isSingleLineFn(property)) {
     val = 40;
-  } else if (isObserverProp(property)) {
+  } else if (isMultiLineFn(property)) {
     val = 50;
-  } else if (isLifecycleHook(property)) {
+  } else if (isObserverProp(property)) {
     val = 60;
   } else if (isActionsProp(property)) {
     val = 70;
@@ -58,7 +58,7 @@ function getOrderValue(property) {
   }
 
   return val;
-};
+}
 
 function findUnorderedProperty(arr) {
   var len = arr.length - 1;
@@ -67,17 +67,21 @@ function findUnorderedProperty(arr) {
       return arr[i];
     }
   }
-
   return null;
-};
-
-function isAnyProp(property) {
-  return ember.isCustomProp(property);
-};
+}
 
 function isInjectedServiceProp(property) {
   return ember.isInjectedServiceProp(property.value);
-};
+}
+
+function isDefaultProp(property) {
+  return ember.isControllerProperty(property.key.name) &&
+    property.key.name !== 'actions';
+}
+
+function isCustomProp(property) {
+  return ember.isCustomProp(property);
+}
 
 function isSingleLineFn(property) {
   return utils.isCallExpression(property.value) &&
@@ -99,15 +103,11 @@ function isObserverProp(property) {
 
 function isActionsProp(property) {
   return property.key.name === 'actions' && utils.isObjectExpression(property.value);
-};
+}
 
 function isCustomFunction(property) {
   return (
-    utils.isFunctionExpression(property.value) || utils.isCallWithFunctionExpression(property.value)
-  ) && !ember.isComponentLifecycleHookName(property.key.name);
-};
-
-function isLifecycleHook(property) {
-  return utils.isFunctionExpression(property.value) &&
-    ember.isComponentLifecycleHookName(property.key.name);
-};
+    utils.isFunctionExpression(property.value) ||
+    utils.isCallWithFunctionExpression(property.value)
+  );
+}

@@ -14,6 +14,7 @@ module.exports = {
   isComponentLifecycleHookName: isComponentLifecycleHookName,
   isRouteMethod: isRouteMethod,
   isRouteProperty: isRouteProperty,
+  isControllerProperty: isControllerProperty,
   getModuleProperties: getModuleProperties,
 };
 
@@ -176,6 +177,7 @@ function isRouteMethod(name) {
 
 function isRouteProperty(name) {
   return [
+    'actions',
     'concatenatedProperties',
     'controller',
     'controllerName',
@@ -185,6 +187,19 @@ function isRouteProperty(name) {
     'queryParams',
     'routeName',
     'templateName',
+  ].indexOf(name) > -1;
+}
+
+function isControllerProperty(name) {
+  return [
+    'actions',
+    'concatenatedProperties',
+    'isDestroyed',
+    'isDestroying',
+    'mergedProperties',
+    'model',
+    'queryParams',
+    'target',
   ].indexOf(name) > -1;
 }
 

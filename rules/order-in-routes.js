@@ -73,7 +73,8 @@ function isInjectedServiceProp(property) {
 }
 
 function isDefaultProp(property) {
-  return ember.isRouteProperty(property.key.name);
+  return ember.isRouteProperty(property.key.name) &&
+    property.key.name !== 'actions';
 }
 
 function isCustomProp(property) {
