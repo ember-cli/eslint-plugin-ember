@@ -7,9 +7,10 @@ module.exports = {
   isEmberController: isEmberController,
   isInjectedServiceProp: isInjectedServiceProp,
   isObserverProp: isObserverProp,
+  isObjectProp: isObjectProp,
+  isArrayProp: isArrayProp,
   isComponentLifecycleHookName: isComponentLifecycleHookName,
   getModuleProperties: getModuleProperties,
-  // isEmberRoute: isEmberRoute,
 };
 
 // Private
@@ -71,6 +72,24 @@ function isObserverProp(node) {
   return isPropOfType(node, 'observer');
 }
 
+function isArrayProp(node) {
+  if (utils.isNewExpression(node.value)) {
+    var parsedCallee = utils.parseCallee(node.value);
+    return parsedCallee.pop() === 'A';
+  }
+
+  return utils.isArrayExpression(node.value);
+}
+
+function isObjectProp(node) {
+  if (utils.isNewExpression(node.value)) {
+    var parsedCallee = utils.parseCallee(node.value);
+    return parsedCallee.pop() === 'Object';
+  }
+
+  return utils.isObjectExpression(node.value);
+}
+
 function isComponentLifecycleHookName(name) {
   var hooks = ['init', 'didReceiveAttrs', 'willRender', 'didInsertElement', 'didRender', 'didUpdateAttrs',
     'willUpdate', 'didUpdate', 'willDestroyElement', 'willClearRender', 'didDestroyElement'];
@@ -81,7 +100,3 @@ function isComponentLifecycleHookName(name) {
 function getModuleProperties(module) {
   return utils.findNodes(module.arguments, 'ObjectExpression')[0].properties;
 }
-
-// function isEmberRoute(node) {
-//   return isModule(node, 'Route');
-// }
