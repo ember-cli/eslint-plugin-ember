@@ -22,6 +22,18 @@ eslintTester.run('order-in-components', rule, {
       code: 'export default Route.extend({model() {}, actions: { test() { return this._customAction() } }, _customAction() {} });',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
+    {
+      code: 'export default Route.extend({model() {}, render() {}, init() {} });',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
+      code: 'export default Route.extend({mergedProperties: {}, model() {}, actions: {} });',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
+      code: 'export default Route.extend({mergedProperties: {}, test: "asd", model() {} });',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
   ],
   invalid: [
     {
@@ -54,6 +66,20 @@ eslintTester.run('order-in-components', rule, {
     },
     {
       code: 'export default Route.extend({model() {}, customProp: "test", actions: {} });',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      errors: [{
+        message: 'Check order of properties',
+      }],
+    },
+    {
+      code: 'export default Route.extend({test: "asd", mergedProperties: {}, model() {} });',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      errors: [{
+        message: 'Check order of properties',
+      }],
+    },
+    {
+      code: 'export default Route.extend({test: "asd", _test2() {}, model() {} });',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
