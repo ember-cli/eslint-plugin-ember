@@ -5,11 +5,14 @@ module.exports = {
   isModule: isModule,
   isEmberComponent: isEmberComponent,
   isEmberController: isEmberController,
+  isEmberRoute: isEmberRoute,
   isInjectedServiceProp: isInjectedServiceProp,
   isObserverProp: isObserverProp,
   isObjectProp: isObjectProp,
   isArrayProp: isArrayProp,
   isComponentLifecycleHookName: isComponentLifecycleHookName,
+  isRouteMethod: isRouteMethod,
+  isRouteProperty: isRouteProperty,
   getModuleProperties: getModuleProperties,
 };
 
@@ -64,6 +67,10 @@ function isEmberController(node) {
   return isModule(node, 'Controller');
 }
 
+function isEmberRoute(node) {
+  return isModule(node, 'Route');
+}
+
 function isInjectedServiceProp(node) {
   return isPropOfType(node, 'service');
 }
@@ -91,10 +98,83 @@ function isObjectProp(node) {
 }
 
 function isComponentLifecycleHookName(name) {
-  var hooks = ['init', 'didReceiveAttrs', 'willRender', 'didInsertElement', 'didRender', 'didUpdateAttrs',
-    'willUpdate', 'didUpdate', 'willDestroyElement', 'willClearRender', 'didDestroyElement'];
+  return [
+    'init',
+    'didReceiveAttrs',
+    'willRender',
+    'didInsertElement',
+    'didRender',
+    'didUpdateAttrs',
+    'willUpdate',
+    'didUpdate',
+    'willDestroyElement',
+    'willClearRender',
+    'didDestroyElement',
+  ].indexOf(name) > -1;
+}
 
-  return hooks.indexOf(name) !== -1;
+function isRouteMethod(name) {
+    return [
+      'activate',
+      'addObserver',
+      'afterModel',
+      'beforeModel',
+      'cacheFor',
+      'controllerFor',
+      'create',
+      'deactivate',
+      'decrementProperty',
+      'destroy',
+      'disconnectOutlet',
+      'extend',
+      'get',
+      'getProperties',
+      'getWithDefault',
+      'has',
+      'incrementProperty',
+      'init',
+      'intermediateTransitionTo',
+      'model',
+      'modelFor',
+      'notifyPropertyChange',
+      'off',
+      'on',
+      'one',
+      'paramsFor',
+      'redirect',
+      'refresh',
+      'removeObserver',
+      'render',
+      'renderTemplate',
+      'reopen',
+      'reopenClass',
+      'replaceWith',
+      'resetController',
+      'send',
+      'serialize',
+      'set',
+      'setProperties',
+      'setupController',
+      'toString',
+      'toggleProperty',
+      'transitionTo',
+      'trigger',
+      'willDestroy',
+    ].indexOf(name) > -1;
+}
+
+function isRouteProperty(name) {
+  return [
+    'concatenatedProperties',
+    'controller',
+    'controllerName',
+    'isDestroyed',
+    'isDestroying',
+    'mergedProperties',
+    'queryParams',
+    'routeName',
+    'templateName',
+  ].indexOf(name) > -1;
 }
 
 function getModuleProperties(module) {
