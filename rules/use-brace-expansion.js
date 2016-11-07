@@ -19,7 +19,7 @@ module.exports = function(context) {
     CallExpression: function(node) {
       var callee = node.callee;
 
-      if (ember.isModule(node, 'computed')) {
+      if (ember.isComputedProp(node)) {
         var properties = node.arguments
           .filter(arg => utils.isLiteral(arg))
           .map(e => e.value.split('.'))

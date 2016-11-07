@@ -9,6 +9,7 @@ module.exports = {
   isObserverProp: isObserverProp,
   isObjectProp: isObjectProp,
   isArrayProp: isArrayProp,
+  isComputedProp: isComputedProp,
   isComponentLifecycleHookName: isComponentLifecycleHookName,
   getModuleProperties: getModuleProperties,
 };
@@ -88,6 +89,10 @@ function isObjectProp(node) {
   }
 
   return utils.isObjectExpression(node.value);
+}
+
+function isComputedProp(node) {
+  return isModule(node, 'computed');
 }
 
 function isComponentLifecycleHookName(name) {
