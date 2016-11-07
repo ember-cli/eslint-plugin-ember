@@ -11,11 +11,15 @@ module.exports = {
   isObjectProp: isObjectProp,
   isArrayProp: isArrayProp,
   isCustomProp: isCustomProp,
+  isActionsProp: isActionsProp,
   isComponentLifecycleHookName: isComponentLifecycleHookName,
   isRouteMethod: isRouteMethod,
   isRouteProperty: isRouteProperty,
   isControllerProperty: isControllerProperty,
   getModuleProperties: getModuleProperties,
+  isSingleLineFn: isSingleLineFn,
+  isMultiLineFn: isMultiLineFn,
+  isFunctionExpression: isFunctionExpression,
 };
 
 // Private
@@ -107,6 +111,10 @@ function isCustomProp(property) {
       utils.isIdentifier(value) ||
       utils.isArrayExpression(value) ||
       isCustomObjectProp;
+}
+
+function isActionsProp(property) {
+  return property.key.name === 'actions' && utils.isObjectExpression(property.value);
 }
 
 function isComponentLifecycleHookName(name) {
@@ -205,4 +213,23 @@ function isControllerProperty(name) {
 
 function getModuleProperties(module) {
   return utils.findNodes(module.arguments, 'ObjectExpression')[0].properties;
+}
+
+function isSingleLineFn(property) {
+  return utils.isCallExpression(property.value) &&
+    utils.getSize(property.value) === 1 &&
+    !isObserverProp(property.value) &&
+    !utils.isCallWithFunctionExpression(property.value);
+}
+
+function isMultiLineFn(property) {
+  return utils.isCallExpression(property.value) &&
+    utils.getSize(property.value) > 1 &&
+    !isObserverProp(property.value) &&
+    !utils.isCallWithFunctionExpression(property.value);
+}
+
+function isFunctionExpression(property) {
+  return utils.isFunctionExpression(property) ||
+    utils.isCallWithFunctionExpression(property);
 }

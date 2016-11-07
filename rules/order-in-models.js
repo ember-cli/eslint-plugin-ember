@@ -55,7 +55,7 @@ function getOrderValue(property) {
 
 function isAttr(property) {
   return ember.isModule(property.value, 'attr', 'DS');
-};
+}
 
 function isRelation(property) {
   var relationAttrs = ['hasMany', 'belongsTo'];
@@ -68,12 +68,12 @@ function isRelation(property) {
   });
 
   return result;
-};
+}
 
 function isSingleLine(property) {
-  return utils.isCallExpression(property.value) && utils.getSize(property.value) === 1;
-};
+  return ember.isSingleLineFn(property);
+}
 
 function isMultiLine(property) {
-  return utils.isCallExpression(property.value) && utils.getSize(property.value) > 1;
-};
+  return ember.isMultiLineFn(property);
+}

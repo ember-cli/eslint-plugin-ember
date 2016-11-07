@@ -72,7 +72,7 @@ function isCustomProp(property) {
 }
 
 function isActionsProp(property) {
-  return property.key.name === 'actions' && utils.isObjectExpression(property.value);
+  return ember.isActionsProp(property);
 }
 
 function isModelProp(property) {
@@ -80,13 +80,11 @@ function isModelProp(property) {
 }
 
 function isCustomFunction(property) {
-  return (
-    utils.isFunctionExpression(property.value) ||
-    utils.isCallWithFunctionExpression(property.value)
-  ) && !ember.isRouteMethod(property.key.name);
+  return ember.isFunctionExpression(property.value) &&
+    !ember.isRouteMethod(property.key.name);
 }
 
 function isDefaultMethod(property) {
-  return utils.isFunctionExpression(property.value) &&
+  return ember.isFunctionExpression(property.value) &&
     ember.isRouteMethod(property.key.name);
 }

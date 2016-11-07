@@ -74,30 +74,21 @@ function isCustomProp(property) {
 }
 
 function isSingleLineFn(property) {
-  return utils.isCallExpression(property.value) &&
-    utils.getSize(property.value) === 1 &&
-    !ember.isObserverProp(property.value) &&
-    !utils.isCallWithFunctionExpression(property.value);
-};
+  return ember.isSingleLineFn(property);
+}
 
 function isMultiLineFn(property) {
-  return utils.isCallExpression(property.value) &&
-    utils.getSize(property.value) > 1 &&
-    !ember.isObserverProp(property.value) &&
-    !utils.isCallWithFunctionExpression(property.value);
-};
+  return ember.isMultiLineFn(property);
+}
 
 function isObserverProp(property) {
   return ember.isObserverProp(property.value);
-};
+}
 
 function isActionsProp(property) {
-  return property.key.name === 'actions' && utils.isObjectExpression(property.value);
+  return ember.isActionsProp(property);
 }
 
 function isCustomFunction(property) {
-  return (
-    utils.isFunctionExpression(property.value) ||
-    utils.isCallWithFunctionExpression(property.value)
-  );
+  return ember.isFunctionExpression(property.value);
 }
