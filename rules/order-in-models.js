@@ -9,7 +9,6 @@ var ember = require('./utils/ember');
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
-
   var message = 'Check order of properties';
 
   function report(node) {
