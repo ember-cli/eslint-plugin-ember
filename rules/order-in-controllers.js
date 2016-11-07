@@ -27,7 +27,7 @@ module.exports = function(context) {
         };
       });
 
-      var unorderedProperty = findUnorderedProperty(mappedProperties);
+      var unorderedProperty = utils.findUnorderedProperty(mappedProperties);
 
       if (unorderedProperty) {
         report(unorderedProperty.node);
@@ -58,16 +58,6 @@ function getOrderValue(property) {
   }
 
   return val;
-}
-
-function findUnorderedProperty(arr) {
-  var len = arr.length - 1;
-  for(var i = 0; i < len; ++i) {
-    if(arr[i].order > arr[i+1].order) {
-      return arr[i];
-    }
-  }
-  return null;
 }
 
 function isInjectedServiceProp(property) {
