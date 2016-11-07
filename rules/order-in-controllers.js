@@ -38,56 +38,23 @@ module.exports = function(context) {
 function getOrderValue(property) {
   var val = null;
 
-  if (isInjectedServiceProp(property)) {
+  if (ember.isInjectedServiceProp(property.value)) {
     val = 10;
-  } else if (isDefaultProp(property)) {
+  } else if (ember.isControllerDefaultProp(property)) {
     val = 20;
-  } else if (isCustomProp(property)) {
+  } else if (ember.isCustomProp(property)) {
     val = 30;
-  } else if (isSingleLineFn(property)) {
+  } else if (ember.isSingleLineFn(property)) {
     val = 40;
-  } else if (isMultiLineFn(property)) {
+  } else if (ember.isMultiLineFn(property)) {
     val = 50;
-  } else if (isObserverProp(property)) {
+  } else if (ember.isObserverProp(property.value)) {
     val = 60;
-  } else if (isActionsProp(property)) {
+  } else if (ember.isActionsProp(property)) {
     val = 70;
-  } else if (isCustomFunction(property)) {
+  } else if (ember.isFunctionExpression(property.value)) {
     val = 80;
   }
 
   return val;
-}
-
-function isInjectedServiceProp(property) {
-  return ember.isInjectedServiceProp(property.value);
-}
-
-function isDefaultProp(property) {
-  return ember.isControllerProperty(property.key.name) &&
-    property.key.name !== 'actions';
-}
-
-function isCustomProp(property) {
-  return ember.isCustomProp(property);
-}
-
-function isSingleLineFn(property) {
-  return ember.isSingleLineFn(property);
-}
-
-function isMultiLineFn(property) {
-  return ember.isMultiLineFn(property);
-}
-
-function isObserverProp(property) {
-  return ember.isObserverProp(property.value);
-}
-
-function isActionsProp(property) {
-  return ember.isActionsProp(property);
-}
-
-function isCustomFunction(property) {
-  return ember.isFunctionExpression(property.value);
 }

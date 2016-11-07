@@ -3,23 +3,39 @@ var utils = require('./utils');
 module.exports = {
   isDSModel: isDSModel,
   isModule: isModule,
+
   isEmberComponent: isEmberComponent,
   isEmberController: isEmberController,
   isEmberRoute: isEmberRoute,
+
+  isSingleLineFn: isSingleLineFn,
+  isMultiLineFn: isMultiLineFn,
+  isFunctionExpression: isFunctionExpression,
+
+  getModuleProperties: getModuleProperties,
+
   isInjectedServiceProp: isInjectedServiceProp,
   isObserverProp: isObserverProp,
   isObjectProp: isObjectProp,
   isArrayProp: isArrayProp,
   isCustomProp: isCustomProp,
   isActionsProp: isActionsProp,
+  isModelProp: isModelProp,
+
+  isRelation: isRelation,
+
   isComponentLifecycleHookName: isComponentLifecycleHookName,
+  isComponentLifecycleHook: isComponentLifecycleHook,
+  isComponentCustomFunction: isComponentCustomFunction,
+
   isRouteMethod: isRouteMethod,
+  isRouteDefaultMethod: isRouteDefaultMethod,
+  isRouteCustomFunction: isRouteCustomFunction,
   isRouteProperty: isRouteProperty,
+  isRouteDefaultProp: isRouteDefaultProp,
+
   isControllerProperty: isControllerProperty,
-  getModuleProperties: getModuleProperties,
-  isSingleLineFn: isSingleLineFn,
-  isMultiLineFn: isMultiLineFn,
-  isFunctionExpression: isFunctionExpression,
+  isControllerDefaultProp: isControllerDefaultProp,
 };
 
 // Private
@@ -113,6 +129,10 @@ function isCustomProp(property) {
       isCustomObjectProp;
 }
 
+function isModelProp(property) {
+  return property.key.name === 'model' && utils.isFunctionExpression(property.value);
+}
+
 function isActionsProp(property) {
   return property.key.name === 'actions' && utils.isObjectExpression(property.value);
 }
@@ -131,6 +151,16 @@ function isComponentLifecycleHookName(name) {
     'willClearRender',
     'didDestroyElement',
   ].indexOf(name) > -1;
+}
+
+function isComponentLifecycleHook(property) {
+  return isFunctionExpression(property.value) &&
+    isComponentLifecycleHookName(property.key.name);
+}
+
+function isComponentCustomFunction(property) {
+  return isFunctionExpression(property.value) &&
+    !isComponentLifecycleHookName(property.key.name);
 }
 
 function isRouteMethod(name) {
@@ -183,6 +213,16 @@ function isRouteMethod(name) {
     ].indexOf(name) > -1;
 }
 
+function isRouteDefaultMethod(property) {
+  return isFunctionExpression(property.value) &&
+    isRouteMethod(property.key.name);
+}
+
+function isRouteCustomFunction(property) {
+  return isFunctionExpression(property.value) &&
+    !isRouteMethod(property.key.name);
+}
+
 function isRouteProperty(name) {
   return [
     'actions',
@@ -198,6 +238,11 @@ function isRouteProperty(name) {
   ].indexOf(name) > -1;
 }
 
+function isRouteDefaultProp(property) {
+  return isRouteProperty(property.key.name) &&
+    property.key.name !== 'actions';
+}
+
 function isControllerProperty(name) {
   return [
     'actions',
@@ -209,6 +254,11 @@ function isControllerProperty(name) {
     'queryParams',
     'target',
   ].indexOf(name) > -1;
+}
+
+function isControllerDefaultProp(property) {
+  return isControllerProperty(property.key.name) &&
+    property.key.name !== 'actions';
 }
 
 function getModuleProperties(module) {
@@ -232,4 +282,17 @@ function isMultiLineFn(property) {
 function isFunctionExpression(property) {
   return utils.isFunctionExpression(property) ||
     utils.isCallWithFunctionExpression(property);
+}
+
+function isRelation(property) {
+  var relationAttrs = ['hasMany', 'belongsTo'];
+  var result = false;
+
+  relationAttrs.forEach(function(relation) {
+    if (isModule(property.value, relation, 'DS')) {
+      result = true;
+    }
+  });
+
+  return result;
 }

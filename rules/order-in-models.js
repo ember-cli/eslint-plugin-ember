@@ -39,40 +39,15 @@ module.exports = function(context) {
 function getOrderValue(property) {
   var val = null;
 
-  if (isAttr(property)) {
+  if (ember.isModule(property.value, 'attr', 'DS')) {
     val = 10;
-  } else if (isRelation(property)) {
+  } else if (ember.isRelation(property)) {
     val = 20;
-  } else if (isSingleLine(property)) {
+  } else if (ember.isSingleLineFn(property)) {
     val = 30;
-  } else if (isMultiLine(property)) {
+  } else if (ember.isMultiLineFn(property)) {
     val = 40;
   }
 
   return val;
-}
-
-function isAttr(property) {
-  return ember.isModule(property.value, 'attr', 'DS');
-}
-
-function isRelation(property) {
-  var relationAttrs = ['hasMany', 'belongsTo'];
-  var result = false;
-
-  relationAttrs.forEach(function(relation) {
-    if (ember.isModule(property.value, relation, 'DS')) {
-      result = true;
-    }
-  });
-
-  return result;
-}
-
-function isSingleLine(property) {
-  return ember.isSingleLineFn(property);
-}
-
-function isMultiLine(property) {
-  return ember.isMultiLineFn(property);
 }

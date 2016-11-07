@@ -38,52 +38,21 @@ module.exports = function(context) {
 function getOrderValue(property) {
   var val = null;
 
-  if (isInjectedServiceProp(property)) {
+  if (ember.isInjectedServiceProp(property.value)) {
     val = 10;
-  } else if (isDefaultProp(property)) {
+  } else if (ember.isRouteDefaultProp(property)) {
     val = 20;
-  } else if (isCustomProp(property)) {
+  } else if (ember.isCustomProp(property)) {
     val = 30;
-  } else if (isModelProp(property)) {
+  } else if (ember.isModelProp(property)) {
     val = 40;
-  } else if (isDefaultMethod(property)) {
+  } else if (ember.isRouteDefaultMethod(property)) {
     val = 50;
-  } else if (isActionsProp(property)) {
+  } else if (ember.isActionsProp(property)) {
     val = 60;
-  } else if (isCustomFunction(property)) {
+  } else if (ember.isRouteCustomFunction(property)) {
     val = 70;
   }
 
   return val;
-}
-
-function isInjectedServiceProp(property) {
-  return ember.isInjectedServiceProp(property.value);
-}
-
-function isDefaultProp(property) {
-  return ember.isRouteProperty(property.key.name) &&
-    property.key.name !== 'actions';
-}
-
-function isCustomProp(property) {
-  return ember.isCustomProp(property);
-}
-
-function isActionsProp(property) {
-  return ember.isActionsProp(property);
-}
-
-function isModelProp(property) {
-  return property.key.name === 'model' && utils.isFunctionExpression(property.value);
-}
-
-function isCustomFunction(property) {
-  return ember.isFunctionExpression(property.value) &&
-    !ember.isRouteMethod(property.key.name);
-}
-
-function isDefaultMethod(property) {
-  return ember.isFunctionExpression(property.value) &&
-    ember.isRouteMethod(property.key.name);
 }

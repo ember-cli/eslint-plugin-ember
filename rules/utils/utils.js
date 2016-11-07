@@ -205,9 +205,9 @@ function parseArgs(node) {
  * @return {Object}    Unordered property or null
  */
 function findUnorderedProperty(arr) {
-  for(var i = 1; i < arr.length; i++) {
-    if(arr[i-1].order > arr[i].order) {
-      return arr[i-1];
+  for (var i = 0; i < arr.length - 1; i++) {
+    if (arr[i].order > arr[i+1].order) {
+      return arr[i];
     }
   }
 
