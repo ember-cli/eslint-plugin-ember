@@ -9,64 +9,10 @@ var ember = require('./utils/ember');
 //------------------------------------------------------------------------------
 
 module.exports = function(context) {
-
   var message = 'Check order of properties';
 
-  var report = function(node) {
+  function report(node) {
     context.report(node, message);
-  };
-
-  var isAttr = function(property) {
-    return ember.isModule(property.value, 'attr', 'DS');
-  };
-
-  var isRelation = function(property) {
-    var relationAttrs = ['hasMany', 'belongsTo'];
-    var result = false;
-
-    relationAttrs.forEach(function(relation) {
-      if (ember.isModule(property.value, relation, 'DS')) {
-        result = true;
-      }
-    });
-
-    return result;
-  };
-
-  var isSingleLine = function(property) {
-    return utils.isCallExpression(property.value) && utils.getSize(property.value) === 1;
-  };
-
-  var isMultiLine = function(property) {
-    return utils.isCallExpression(property.value) && utils.getSize(property.value) > 1;
-  };
-
-  var getOrderValue = function(property) {
-    var val = null;
-
-    if (isAttr(property)) {
-      val = 10;
-    } else if (isRelation(property)) {
-      val = 20;
-    } else if (isSingleLine(property)) {
-      val = 30;
-    } else if (isMultiLine(property)) {
-      val = 40;
-    }
-
-    return val;
-  }
-
-  var findUnorderedProperty = function(arr) {
-    var len = arr.length - 1;
-
-    for(var i = 0; i < len; ++i) {
-      if(arr[i].order > arr[i+1].order) {
-        return arr[i];
-      }
-    }
-
-    return null;
   };
 
   return {
@@ -81,12 +27,27 @@ module.exports = function(context) {
         };
       });
 
-      var unorderedProperty = findUnorderedProperty(mappedProperties);
+      var unorderedProperty = utils.findUnorderedProperty(mappedProperties);
 
       if (unorderedProperty) {
         report(unorderedProperty.node);
       }
     }
   };
-
 };
+
+function getOrderValue(property) {
+  var val = null;
+
+  if (ember.isModule(property.value, 'attr', 'DS')) {
+    val = 10;
+  } else if (ember.isRelation(property)) {
+    val = 20;
+  } else if (ember.isSingleLineFn(property)) {
+    val = 30;
+  } else if (ember.isMultiLineFn(property)) {
+    val = 40;
+  }
+
+  return val;
+}

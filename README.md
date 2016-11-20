@@ -77,6 +77,8 @@ All rules from our plugin have to be prefixed with `netguru-ember/`
 * Organizing
   * **order-in-components** - Organize your components [(more)](https://github.com/netguru/ember-styleguide#organize-your-components)
   * **order-in-models** - Organize your models [(more)](https://github.com/netguru/ember-styleguide#organize-your-models)
+  * **order-in-routes** - Organize your routes [(more)](https://github.com/netguru/ember-styleguide#organize-your-routes)
+  * **order-in-controllers** - Organize your controllers [(more)](https://github.com/netguru/ember-styleguide#organize-your-controllers)
 
 * Controllers
   * **alias-model-in-controller** - Alias your model [(more)](https://github.com/netguru/ember-styleguide#alias-your-model)

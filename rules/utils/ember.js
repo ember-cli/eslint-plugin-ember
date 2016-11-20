@@ -3,15 +3,40 @@ var utils = require('./utils');
 module.exports = {
   isDSModel: isDSModel,
   isModule: isModule,
+
   isEmberComponent: isEmberComponent,
   isEmberController: isEmberController,
+  isEmberRoute: isEmberRoute,
+
+  isSingleLineFn: isSingleLineFn,
+  isMultiLineFn: isMultiLineFn,
+  isFunctionExpression: isFunctionExpression,
+
+  getModuleProperties: getModuleProperties,
+
   isInjectedServiceProp: isInjectedServiceProp,
   isObserverProp: isObserverProp,
   isObjectProp: isObjectProp,
   isArrayProp: isArrayProp,
   isComputedProp: isComputedProp,
+  isCustomProp: isCustomProp,
+  isActionsProp: isActionsProp,
+  isModelProp: isModelProp,
+
+  isRelation: isRelation,
+
   isComponentLifecycleHookName: isComponentLifecycleHookName,
-  getModuleProperties: getModuleProperties,
+  isComponentLifecycleHook: isComponentLifecycleHook,
+  isComponentCustomFunction: isComponentCustomFunction,
+
+  isRouteMethod: isRouteMethod,
+  isRouteDefaultMethod: isRouteDefaultMethod,
+  isRouteCustomFunction: isRouteCustomFunction,
+  isRouteProperty: isRouteProperty,
+  isRouteDefaultProp: isRouteDefaultProp,
+
+  isControllerProperty: isControllerProperty,
+  isControllerDefaultProp: isControllerDefaultProp,
 };
 
 // Private
@@ -65,6 +90,10 @@ function isEmberController(node) {
   return isModule(node, 'Controller');
 }
 
+function isEmberRoute(node) {
+  return isModule(node, 'Route');
+}
+
 function isInjectedServiceProp(node) {
   return isPropOfType(node, 'service');
 }
@@ -95,13 +124,180 @@ function isComputedProp(node) {
   return isModule(node, 'computed');
 }
 
-function isComponentLifecycleHookName(name) {
-  var hooks = ['init', 'didReceiveAttrs', 'willRender', 'didInsertElement', 'didRender', 'didUpdateAttrs',
-    'willUpdate', 'didUpdate', 'willDestroyElement', 'willClearRender', 'didDestroyElement'];
+function isCustomProp(property) {
+  var value = property.value;
+  var isCustomObjectProp = utils.isObjectExpression(property.value) && property.key.name !== 'actions';
 
-  return hooks.indexOf(name) !== -1;
+  return utils.isLiteral(value) ||
+      utils.isIdentifier(value) ||
+      utils.isArrayExpression(value) ||
+      isCustomObjectProp;
+}
+
+function isModelProp(property) {
+  return property.key.name === 'model' && utils.isFunctionExpression(property.value);
+}
+
+function isActionsProp(property) {
+  return property.key.name === 'actions' && utils.isObjectExpression(property.value);
+}
+
+function isComponentLifecycleHookName(name) {
+  return [
+    'init',
+    'didReceiveAttrs',
+    'willRender',
+    'didInsertElement',
+    'didRender',
+    'didUpdateAttrs',
+    'willUpdate',
+    'didUpdate',
+    'willDestroyElement',
+    'willClearRender',
+    'didDestroyElement',
+  ].indexOf(name) > -1;
+}
+
+function isComponentLifecycleHook(property) {
+  return isFunctionExpression(property.value) &&
+    isComponentLifecycleHookName(property.key.name);
+}
+
+function isComponentCustomFunction(property) {
+  return isFunctionExpression(property.value) &&
+    !isComponentLifecycleHookName(property.key.name);
+}
+
+function isRouteMethod(name) {
+    return [
+      'activate',
+      'addObserver',
+      'afterModel',
+      'beforeModel',
+      'cacheFor',
+      'controllerFor',
+      'create',
+      'deactivate',
+      'decrementProperty',
+      'destroy',
+      'disconnectOutlet',
+      'extend',
+      'get',
+      'getProperties',
+      'getWithDefault',
+      'has',
+      'incrementProperty',
+      'init',
+      'intermediateTransitionTo',
+      'model',
+      'modelFor',
+      'notifyPropertyChange',
+      'off',
+      'on',
+      'one',
+      'paramsFor',
+      'redirect',
+      'refresh',
+      'removeObserver',
+      'render',
+      'renderTemplate',
+      'reopen',
+      'reopenClass',
+      'replaceWith',
+      'resetController',
+      'send',
+      'serialize',
+      'set',
+      'setProperties',
+      'setupController',
+      'toString',
+      'toggleProperty',
+      'transitionTo',
+      'trigger',
+      'willDestroy',
+    ].indexOf(name) > -1;
+}
+
+function isRouteDefaultMethod(property) {
+  return isFunctionExpression(property.value) &&
+    isRouteMethod(property.key.name);
+}
+
+function isRouteCustomFunction(property) {
+  return isFunctionExpression(property.value) &&
+    !isRouteMethod(property.key.name);
+}
+
+function isRouteProperty(name) {
+  return [
+    'actions',
+    'concatenatedProperties',
+    'controller',
+    'controllerName',
+    'isDestroyed',
+    'isDestroying',
+    'mergedProperties',
+    'queryParams',
+    'routeName',
+    'templateName',
+  ].indexOf(name) > -1;
+}
+
+function isRouteDefaultProp(property) {
+  return isRouteProperty(property.key.name) &&
+    property.key.name !== 'actions';
+}
+
+function isControllerProperty(name) {
+  return [
+    'actions',
+    'concatenatedProperties',
+    'isDestroyed',
+    'isDestroying',
+    'mergedProperties',
+    'model',
+    'queryParams',
+    'target',
+  ].indexOf(name) > -1;
+}
+
+function isControllerDefaultProp(property) {
+  return isControllerProperty(property.key.name) &&
+    property.key.name !== 'actions';
 }
 
 function getModuleProperties(module) {
   return utils.findNodes(module.arguments, 'ObjectExpression')[0].properties;
+}
+
+function isSingleLineFn(property) {
+  return utils.isCallExpression(property.value) &&
+    utils.getSize(property.value) === 1 &&
+    !isObserverProp(property.value) &&
+    !utils.isCallWithFunctionExpression(property.value);
+}
+
+function isMultiLineFn(property) {
+  return utils.isCallExpression(property.value) &&
+    utils.getSize(property.value) > 1 &&
+    !isObserverProp(property.value) &&
+    !utils.isCallWithFunctionExpression(property.value);
+}
+
+function isFunctionExpression(property) {
+  return utils.isFunctionExpression(property) ||
+    utils.isCallWithFunctionExpression(property);
+}
+
+function isRelation(property) {
+  var relationAttrs = ['hasMany', 'belongsTo'];
+  var result = false;
+
+  relationAttrs.forEach(function(relation) {
+    if (isModule(property.value, relation, 'DS')) {
+      result = true;
+    }
+  });
+
+  return result;
 }
