@@ -72,6 +72,7 @@ All rules from our plugin have to be prefixed with `netguru-ember/`
   * **named-functions-in-promises** - Use named functions defined on objects to handle promises [(more)](https://github.com/netguru/ember-styleguide#use-named-functions-defined-on-objects-to-handle-promises)
   * **no-function-prototype-extensions** - Don't use Ember's function prototype extensions [(more)](https://github.com/netguru/ember-styleguide#do-not-use-embers-function-prototype-extensions)
   * **use-ember-get-and-set** - Use Ember get/set [(more)](https://github.com/netguru/ember-styleguide#use-emberget-and-emberset)
+  * **use-brace-expansion** - Use brace expansion [(more)](https://github.com/netguru/ember-styleguide#use-brace-expansion)
 
 * Organizing
   * **order-in-components** - Organize your components [(more)](https://github.com/netguru/ember-styleguide#organize-your-components)

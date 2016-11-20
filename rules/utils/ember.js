@@ -18,6 +18,7 @@ module.exports = {
   isObserverProp: isObserverProp,
   isObjectProp: isObjectProp,
   isArrayProp: isArrayProp,
+  isComputedProp: isComputedProp,
   isCustomProp: isCustomProp,
   isActionsProp: isActionsProp,
   isModelProp: isModelProp,
@@ -117,6 +118,10 @@ function isObjectProp(node) {
   }
 
   return utils.isObjectExpression(node.value);
+}
+
+function isComputedProp(node) {
+  return isModule(node, 'computed');
 }
 
 function isCustomProp(property) {
