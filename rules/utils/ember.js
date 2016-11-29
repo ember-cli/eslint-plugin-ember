@@ -267,7 +267,8 @@ function isControllerDefaultProp(property) {
 }
 
 function getModuleProperties(module) {
-  return utils.findNodes(module.arguments, 'ObjectExpression')[0].properties;
+  var firstObjectExpressionNode = utils.findNodes(module.arguments, 'ObjectExpression')[0];
+  return firstObjectExpressionNode ? firstObjectExpressionNode.properties : [];
 }
 
 function isSingleLineFn(property) {

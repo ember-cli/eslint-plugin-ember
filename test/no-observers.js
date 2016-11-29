@@ -15,6 +15,10 @@ var eslintTester = new RuleTester();
 eslintTester.run('no-observers', rule, {
   valid: [
     {
+      code: 'export default Controller.extend();',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
       code: 'export default Controller.extend({actions: {},});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     }

@@ -15,6 +15,10 @@ var eslintTester = new RuleTester();
 eslintTester.run('order-in-controllers', rule, {
   valid: [
     {
+      code: 'export default Controller.extend();',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
       code: 'export default Controller.extend({currentUser: service(), queryParams: [], customProp: "test", actions: {}, _customAction() {}, _customAction2: function() {}, tSomeTask: task(function* () {}) });',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },

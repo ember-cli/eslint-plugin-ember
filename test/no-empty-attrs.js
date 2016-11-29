@@ -15,6 +15,10 @@ var eslintTester = new RuleTester();
 eslintTester.run('no-empty-attrs', rule, {
   valid: [
     {
+      code: 'export default Model.extend();',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
       code: 'export default Model.extend({name: attr("string"), points: attr("number"), dob: attr("date")});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },

@@ -15,6 +15,10 @@ var eslintTester = new RuleTester();
 eslintTester.run('order-in-components', rule, {
   valid: [
     {
+      code: 'export default Component.extend();',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
       code: 'export default Component.extend({role: "sloth", vehicle: alias("car"), levelOfHappiness: computed("attitude", "health", () => {\n}), actions: {}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },

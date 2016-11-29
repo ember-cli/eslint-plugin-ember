@@ -15,6 +15,10 @@ var eslintTester = new RuleTester();
 eslintTester.run('local-modules', rule, {
   valid: [
     {
+      code: 'export default Model.extend()',
+      parserOptions: { ecmaVersion: 6, sourceType: "module" },
+    },
+    {
       code: 'export default Model.extend({})',
       parserOptions: { ecmaVersion: 6, sourceType: "module" },
     },

@@ -15,6 +15,10 @@ var eslintTester = new RuleTester();
 eslintTester.run('no-on-calls-in-components', rule, {
   valid: [
     {
+      code: 'export default Component.extend();',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
       code: 'export default Component.extend({actions: {}});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },

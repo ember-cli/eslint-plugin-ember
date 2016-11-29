@@ -15,6 +15,10 @@ var eslintTester = new RuleTester();
 eslintTester.run('order-in-models', rule, {
   valid: [
     {
+      code: 'export default Model.extend();',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
       code: 'export default Model.extend({shape: attr("string"), behaviors: hasMany("behaviour"), test: computed.alias("qwerty"), mood: computed("health", "hunger", function() {\n})});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },

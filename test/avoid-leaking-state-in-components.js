@@ -15,6 +15,10 @@ var eslintTester = new RuleTester();
 eslintTester.run('avoid-leaking-state-in-components', rule, {
   valid: [
     {
+      code: 'export default Component.extend();',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
       code: 'export default Component.extend({ someProp: "example", init() { this.set("anotherProp", []) } });',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
