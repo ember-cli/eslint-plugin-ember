@@ -103,6 +103,30 @@ All rules from our plugin have to be prefixed with `netguru-ember/`
 
 \* Rule with optional settings
 
+### All Rules in JSON
+
+```
+    "netguru-ember/alias-model-in-controller": 0,
+    "netguru-ember/avoid-leaking-state-in-components": 0,
+    "netguru-ember/closure-actions": 0,
+    "netguru-ember/jquery-ember-run": 0,
+    "netguru-ember/local-modules": 0,
+    "netguru-ember/named-functions-in-promises": 0,
+    "netguru-ember/no-empty-attrs": 0,
+    "netguru-ember/no-function-prototype-extensions": 0,
+    "netguru-ember/no-observers": 0,
+    "netguru-ember/no-on-calls-in-components": 0,
+    "netguru-ember/no-side-effects": 0,
+    "netguru-ember/order-in-components": 0,
+    "netguru-ember/order-in-controllers": 0,
+    "netguru-ember/order-in-models": 0,
+    "netguru-ember/order-in-routes": 0,
+    "netguru-ember/query-params-on-top": 0,
+    "netguru-ember/routes-segments-snake-case": 0,
+    "netguru-ember/use-brace-expansion": 0,
+    "netguru-ember/use-ember-get-and-set": 0,
+```
+
 ## Contribution guide
 
 TBD. For now feel free to add any suggestions in [issues](https://github.com/netguru/eslint-plugin-netguru-ember/issues). Any involvement highly appreciated.
