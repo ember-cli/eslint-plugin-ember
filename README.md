@@ -16,51 +16,49 @@ You need to have `ember-cli-eslint` installed in your app. [More info here](http
 
 ## Usage
 
-### With shareable config
-
-The easiest way to use this plugin is through our [shareable config](https://github.com/netguru/eslint-config-netguru-ember). More about shareable configs [here](http://eslint.org/docs/developer-guide/shareable-configs.html).
-
-#### 1. Install all dependencies by simply pasting code below in your terminal
+### 1. Install plugin
 
 ```shell
-(
-  export PKG=eslint-config-netguru-ember;
-  npm info "$PKG" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install --save-dev "$PKG"
-)
+  npm install --save-dev eslint-plugin-netguru-ember
 ```
 
-This command will basically produce and call something like this:
+### 2. Modify `.eslintrc.js`:
+
+#### Use with predefined settings:
 
 ```
-npm install --save-dev eslint-config-netguru-ember eslint-plugin-netguru-ember@1.x eslint-config-airbnb-base@^7.1.0 eslint-plugin-import@^1.15.0
+// .eslintrc.js
+module.exports = {
+  extends: [
+    'eslint:recommended',
+    'plugin:netguru-ember/recommended'
+  ],
+  rules: {
+    // override rules' settings here
+  }
+}
 ```
 
-##### 2. Change your `.eslintrc`, so it looks like this:
+You can also use base configuration: `plugin:netguru-ember/base` which contains only settings for custom rules defined in this plugin.
 
-  ```shell
-      extends: netguru-ember
-  ```
+#### Use plain plugin:
 
-### Without shareable config (only plugin)
+If you don't want to use predefined settings, you can use it as a plain plugin and choose which rules you'd like to you by yourself like this:
 
-##### 1. Install plugin:
-
-  ```shell
-    npm install --save-dev eslint-plugin-netguru-ember
-  ```
-
-##### 2. Add plugin to your `.eslintrc`:
-
-  ```shell
-    plugins:
-      - netguru-ember
-  ```
-##### 3. Configure rules in your `.eslintrc`:
-
-  ```shell
-    rules:
-    - netguru-ember/local-modules: 1
-  ```
+```
+module.exports = {
+  extends: [
+    'eslint:recommended'
+  ],
+  plugins: [
+    'netguru-ember'
+  ],
+  rules: {
+    // add rules' settings here, eg.:
+    'netguru-ember/local-modules': 2
+  }
+}
+```
 
 All rules from our plugin have to be prefixed with `netguru-ember/`
 

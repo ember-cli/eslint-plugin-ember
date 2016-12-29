@@ -39,6 +39,7 @@
     "gulp-mocha": "^3.0.1"
   },
   "dependencies": {
+    "requireindex": "^1.1.0",
     "snake-case": "^2.1.0"
   }
 }
