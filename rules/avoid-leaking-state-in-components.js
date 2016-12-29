@@ -35,6 +35,7 @@ module.exports = {
       'concatenatedProperties',
       'mergedProperties',
       'positionalParams',
+      'attributeBindings',
     ]);
 
     return {
