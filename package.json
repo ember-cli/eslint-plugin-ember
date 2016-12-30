@@ -1,38 +1,44 @@
 {
-  "name": "eslint-plugin-netguru-ember",
-  "version": "1.6.5",
-  "description": "Eslint plugin for Netguru Ember Style Guide",
+  "name": "eslint-plugin-ember",
+  "version": "2.0.0",
+  "description": "Eslint plugin for Ember.js apps",
   "main": "index.js",
   "directories": {
     "rules": "rules",
     "test": "test"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "start": "gulp watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/netguru/eslint-netguru-ember.git"
+    "url": "git+https://github.com/netguru/eslint-plugin-ember.git"
   },
   "keywords": [
     "eslint",
     "ember",
-    "netguru",
+    "ember.js",
     "plugin",
-    "styleguide"
+    "styleguide",
+    "rules"
   ],
-  "author": "Michał Sajnóg (michal.sajnog@netguru.co)",
+  "author": "Michał Sajnóg <michal.sajnog@hotmail.com> (http://github.com/michalsnik)",
   "contributors": [
-    "Rafał Leszczyński (raf.leszcz@gmail.com)"
+    "Rafał Leszczyński <raf.leszcz@gmail.com> (http://github.com/rafleszczynski)",
+    "Adrian Zalewski (http://github.com/bardzusny)",
+    "Kamil Ejsymont (http://github.com/netes)",
+    "Casey Watts (http://github.com/caseywatts)",
+    "Steve Gargan (http://github.com/sgargan)"
   ],
   "engines": {
     "node": ">=6.3"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/netguru/eslint-netguru-ember/issues"
+    "url": "https://github.com/netguru/eslint-plugin-ember/issues"
   },
-  "homepage": "https://github.com/netguru/eslint-netguru-ember#readme",
+  "homepage": "https://github.com/netguru/eslint-plugin-ember#readme",
   "devDependencies": {
     "babel-eslint": "^7.1.0",
     "chai": "^3.5.0",
@@ -42,6 +48,7 @@
     "gulp-mocha": "^3.0.1"
   },
   "dependencies": {
+    "requireindex": "^1.1.0",
     "snake-case": "^2.1.0"
   }
 }
