@@ -2,7 +2,6 @@
 
 [![NPM version](https://img.shields.io/npm/v/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)
 [![NPM downloads](https://img.shields.io/npm/dm/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)
-[![Circle CI](https://circleci.com/gh/netguru/eslint-plugin-ember.svg?style=svg&circle-token=58c1b942a91ecd67eed15502a5df51b3d1504f35)](https://circleci.com/gh/netguru/eslint-plugin-ember)
 
 > An ESlint plugin that provides set of rules for Ember Applications based on commonly known good practices.
 
