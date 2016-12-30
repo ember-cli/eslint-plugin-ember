@@ -41,7 +41,7 @@ Possible configurations:
 
 #### Use plain plugin:
 
-If you don't want to use predefined settings, you can use it as a plain plugin and choose which rules you'd like to you by yourself like this:
+If you don't want to use predefined settings, you can use it as a plain plugin and choose which rules you'd like to use by yourself like this:
 
 ```
 module.exports = {
