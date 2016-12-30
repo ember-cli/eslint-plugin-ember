@@ -77,7 +77,19 @@ eslintTester.run('order-in-components', rule, {
     {
       code: 'export default Component.extend({classNameBindings: ["filterDateSelectClass"], content: [], currentMonthEndDate: null, currentMonthStartDate: null, optionValuePath: "value", optionLabelPath: "label", typeOfDate: null, action: K});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
-    }
+    },
+    {
+      code: 'export default Component.extend({ role: "sloth", levelOfHappiness: computed.or("asd", "qwe"), actions: {} });',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
+      code: 'export default Component.extend({ role: "sloth", levelOfHappiness: computed(function() {}), actions: {} });',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
+      code: 'export default Component.extend({ role: "sloth", levelOfHappiness: computed(function() {\n}), actions: {} });',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
   ],
   invalid: [
     {

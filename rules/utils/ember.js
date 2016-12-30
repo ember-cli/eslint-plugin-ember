@@ -102,6 +102,10 @@ function isObserverProp(node) {
   return isPropOfType(node, 'observer');
 }
 
+function isComputedProp(node) {
+  return isModule(node, 'computed');
+}
+
 function isArrayProp(node) {
   if (utils.isNewExpression(node.value)) {
     var parsedCallee = utils.parseCallee(node.value);
@@ -118,10 +122,6 @@ function isObjectProp(node) {
   }
 
   return utils.isObjectExpression(node.value);
-}
-
-function isComputedProp(node) {
-  return isModule(node, 'computed');
 }
 
 function isCustomProp(property) {
@@ -275,18 +275,25 @@ function isSingleLineFn(property) {
   return utils.isCallExpression(property.value) &&
     utils.getSize(property.value) === 1 &&
     !isObserverProp(property.value) &&
-    !utils.isCallWithFunctionExpression(property.value);
+    (
+      isComputedProp(property.value) ||
+      !utils.isCallWithFunctionExpression(property.value)
+    );
 }
 
 function isMultiLineFn(property) {
   return utils.isCallExpression(property.value) &&
     utils.getSize(property.value) > 1 &&
     !isObserverProp(property.value) &&
-    !utils.isCallWithFunctionExpression(property.value);
+    (
+      isComputedProp(property.value) ||
+      !utils.isCallWithFunctionExpression(property.value)
+    );
 }
 
 function isFunctionExpression(property) {
   return utils.isFunctionExpression(property) ||
+    utils.isArrowFunctionExpression(property) ||
     utils.isCallWithFunctionExpression(property);
 }
 

@@ -47,6 +47,8 @@ function getOrderValue(property) {
     val = 30;
   } else if (ember.isMultiLineFn(property)) {
     val = 40;
+  } else {
+    val = 50;
   }
 
   return val;

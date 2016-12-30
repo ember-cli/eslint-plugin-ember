@@ -317,7 +317,9 @@ You should write code grouped and ordered in this way:
 
 1. Attributes
 2. Relations
-3. Computed Properties
+3. Single line computed properties
+4. Multiline computed properties
+5. Other structures (custom methods etc.)
 
 ```javascript
 // GOOD

@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-netguru-ember",
-  "version": "1.6.2",
+  "version": "1.6.5",
   "description": "Eslint plugin for Netguru Ember Style Guide",
   "main": "index.js",
   "directories": {
@@ -25,6 +25,9 @@
   "contributors": [
     "Rafał Leszczyński (raf.leszcz@gmail.com)"
   ],
+  "engines": {
+    "node": ">=6.3"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/netguru/eslint-netguru-ember/issues"
