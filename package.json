@@ -25,7 +25,11 @@
   ],
   "author": "Michał Sajnóg (michal.sajnog@netguru.co)",
   "contributors": [
-    "Rafał Leszczyński (raf.leszcz@gmail.com)"
+    "Rafał Leszczyński (raf.leszcz@gmail.com)",
+    "Adrian Zalewski",
+    "Kamil Ejsymont",
+    "Casey Watts",
+    "Steve Gargan"
   ],
   "engines": {
     "node": ">=6.3"

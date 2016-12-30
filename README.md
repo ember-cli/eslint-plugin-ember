@@ -6,11 +6,11 @@
 
 > ESlint plugin that provides set of rules for Ember Applications based on commonly known good practices.
 
-## Requirements
+## ❗️ Requirements
 
 You need to have `ember-cli-eslint` installed in your app. [More info here](https://github.com/ember-cli/ember-cli-eslint).
 
-## Usage
+## 🚀 Usage
 
 ### 1. Install plugin
 
@@ -60,7 +60,7 @@ module.exports = {
 
 All rules from this plugin have to be prefixed with `ember/`
 
-## Rules
+## 🍟 Rules
 
 * General
   * **local-modules** - Create local version of Ember.* and DS.* [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#create-local-version-of-ember-and-ds)
@@ -125,7 +125,7 @@ All rules from this plugin have to be prefixed with `ember/`
     "ember/use-ember-get-and-set": 0,
 ```
 
-## Contribution guide
+## 🍻 Contribution guide
 
 In order to add new rule, you should:
 - create `rules/rule-name.js` file
@@ -137,20 +137,25 @@ Recommended way of creating new rule:
 - Create issue on GH with description of proposed rule
 - Write sufficient test scenarios
 - Run `gulp watch`
-- Implement logic for new rule
-- Make sure all tests passes
+- Implement logic for the new rule
+- Make sure all tests are passing
 - Add documentation and update README
 - Create PR and link created issue in description
 
 If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/netguru/eslint-plugin-ember/issues, but first please make sure your question does not repeat previous ones.
 
-## Author
+## ⭐️ Contributors
 - [Michał Sajnóg](http://github.com/michalsnik)
+- [Rafał Leszczyński](http://github.com/rafleszczynski)
+- [Adrian Zalewski](http://github.com/bardzusny)
+- [Kamil Ejsymont](http://github.com/netes)
+- [Casey Watts](http://github.com/caseywatts)
+- [Steve Gargan](http://github.com/sgargan)
 
-## Credits
+##  🙌 Credits
 - [Dockyard team](http://github.com/dockyard) - for great inspiration with their [styleguide](https://github.com/DockYard/styleguides/blob/master/engineering/ember.md)
 - [Rob Hilgefort](https://github.com/rjhilgefort) - for making it possible to redeploy new plugin under existing `eslint-plugin-ember` package name
 
-## License
+## 🔓 License
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
