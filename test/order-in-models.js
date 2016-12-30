@@ -49,6 +49,10 @@ eslintTester.run('order-in-models', rule, {
     {
       code: 'export default DS.Model.extend(TestMixin, TestMixin2, {mood: computed("health", "hunger", function() {\n})});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
+    {
+      code: 'export default DS.Model.extend({ a: attr("string"), b: belongsTo("c", { async: false }), convertA(paramA) { \n } });',
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
     }
   ],
   invalid: [
