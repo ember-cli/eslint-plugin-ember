@@ -4,7 +4,7 @@
 [![NPM downloads](https://img.shields.io/npm/dm/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)
 [![Circle CI](https://circleci.com/gh/netguru/eslint-plugin-ember.svg?style=svg&circle-token=58c1b942a91ecd67eed15502a5df51b3d1504f35)](https://circleci.com/gh/netguru/eslint-plugin-ember)
 
-> ESlint plugin that provides set of rules for Ember Applications based on commonly known good practices.
+> An ESlint plugin that provides set of rules for Ember Applications based on commonly known good practices.
 
 ## ❗️ Requirements
 
@@ -127,13 +127,13 @@ All rules from this plugin have to be prefixed with `ember/`
 
 ## 🍻 Contribution guide
 
-In order to add new rule, you should:
+In order to add a new rule, you should:
 - create `rules/rule-name.js` file
 - create `test/rule-name.js` file
-- describe new rule in [docs/RULES.md](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md) (remember about setting proper anchor)
-- add new rule in [README.md](https://github.com/netguru/eslint-plugin-ember/blob/master/README.md#rules)
+- describe the rule in [docs/RULES.md](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md) (remember about setting proper anchor)
+- add the rule in [README.md](https://github.com/netguru/eslint-plugin-ember/blob/master/README.md#rules)
 
-Recommended way of creating new rule:
+Recommended way of creating new rules:
 - Create issue on GH with description of proposed rule
 - Write sufficient test scenarios
 - Run `gulp watch`
