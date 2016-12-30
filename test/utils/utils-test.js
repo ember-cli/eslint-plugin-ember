@@ -84,6 +84,14 @@ describe('isFunctionExpression', function() {
   });
 });
 
+describe('isArrowFunctionExpression', function() {
+  const node = parse('test = () => {}').right;
+
+  it('should check if node is arrow function expression', function() {
+    assert.ok(utils.isArrowFunctionExpression(node));
+  });
+});
+
 describe('isNewExpression', function() {
   const node = parse('new Date()');
 

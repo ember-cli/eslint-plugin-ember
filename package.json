@@ -25,6 +25,9 @@
   "contributors": [
     "Rafał Leszczyński (raf.leszcz@gmail.com)"
   ],
+  "engines" : {
+    "node" : ">=6.3"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/netguru/eslint-netguru-ember/issues"
