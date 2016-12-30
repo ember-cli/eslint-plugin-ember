@@ -23,13 +23,13 @@
     "styleguide",
     "rules"
   ],
-  "author": "Michał Sajnóg (michal.sajnog@netguru.co)",
+  "author": "Michał Sajnóg <michal.sajnog@netguru.co> (http://github.com/michalsnik)",
   "contributors": [
-    "Rafał Leszczyński (raf.leszcz@gmail.com)",
-    "Adrian Zalewski",
-    "Kamil Ejsymont",
-    "Casey Watts",
-    "Steve Gargan"
+    "Rafał Leszczyński <raf.leszcz@gmail.com> (http://github.com/rafleszczynski)",
+    "Adrian Zalewski <> (http://github.com/bardzusny)",
+    "Kamil Ejsymont <> (http://github.com/netes)",
+    "Casey Watts <> (http://github.com/caseywatts)",
+    "Steve Gargan <> (http://github.com/sgargan)"
   ],
   "engines": {
     "node": ">=6.3"
