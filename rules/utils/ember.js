@@ -275,14 +275,20 @@ function isSingleLineFn(property) {
   return utils.isCallExpression(property.value) &&
     utils.getSize(property.value) === 1 &&
     !isObserverProp(property.value) &&
-    !utils.isCallWithFunctionExpression(property.value);
+    (
+      isComputedProp(property.value) ||
+      !utils.isCallWithFunctionExpression(property.value)
+    );
 }
 
 function isMultiLineFn(property) {
   return utils.isCallExpression(property.value) &&
     utils.getSize(property.value) > 1 &&
     !isObserverProp(property.value) &&
-    !utils.isCallWithFunctionExpression(property.value);
+    (
+      isComputedProp(property.value) ||
+      !utils.isCallWithFunctionExpression(property.value)
+    );
 }
 
 function isFunctionExpression(property) {
