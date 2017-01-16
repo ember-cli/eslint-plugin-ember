@@ -1,7 +1,0 @@
-machine:
-  node:
-    version: 6.3.0
-
-checkout:
-  post:
-    - npm install -g gulp
