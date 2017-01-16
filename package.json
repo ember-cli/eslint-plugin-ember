@@ -8,8 +8,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "gulp test",
-    "start": "gulp watch"
+    "test": "./node_modules/.bin/mocha test/*",
+    "start": "./node_modules/.bin/mocha test/* --reporter nyan --watch"
   },
   "repository": {
     "type": "git",
@@ -43,9 +43,7 @@
     "babel-eslint": "^7.1.0",
     "chai": "^3.5.0",
     "eslint": "^3.4.0",
-    "gulp": "^3.9.1",
-    "gulp-istanbul": "^1.1.1",
-    "gulp-mocha": "^3.0.1"
+    "mocha": "^3.2.0"
   },
   "dependencies": {
     "requireindex": "^1.1.0",
