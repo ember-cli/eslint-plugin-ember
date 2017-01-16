@@ -18,6 +18,7 @@ eslintTester.run('use-brace-expansion', rule, {
     { code: '{ test: computed(function() {}) }' },
     { code: '{ test: computed("a.test", "b.test", function() {}) }' },
     { code: '{ test: computed("a.{test,test2}", "b", function() {}) }' },
+    { code: "{ test: Ember.computed.filterBy('a', 'b', false) }"},
   ],
   invalid: [
     {

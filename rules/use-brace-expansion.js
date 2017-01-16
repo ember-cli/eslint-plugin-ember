@@ -21,7 +21,7 @@ module.exports = function(context) {
 
       if (ember.isComputedProp(node)) {
         var properties = node.arguments
-          .filter(arg => utils.isLiteral(arg))
+          .filter(arg => utils.isLiteral(arg) && typeof arg.value === 'string')
           .map(e => e.value.split('.'))
           .filter(e => e.length > 1)
           .map(e => e[0])
