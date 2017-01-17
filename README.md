@@ -142,6 +142,8 @@ Recommended way of creating new rules:
 - Add documentation and update README
 - Create PR and link created issue in description
 
+Please be aware that we're using `yarn` in this repository, so if you plan to add some dependencies - make sure you commit `yarn.lock` file too.
+
 If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/netguru/eslint-plugin-ember/issues, but first please make sure your question does not repeat previous ones.
 
 ## ⭐️ Contributors

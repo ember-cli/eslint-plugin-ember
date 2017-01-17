@@ -8,8 +8,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha test/*",
-    "start": "./node_modules/.bin/mocha test/* --reporter nyan --watch"
+    "test": "mocha test/* --reporter nyan",
+    "start": "mocha test/* --reporter nyan --watch"
   },
   "repository": {
     "type": "git",
