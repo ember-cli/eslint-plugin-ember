@@ -2,6 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)
 [![NPM downloads](https://img.shields.io/npm/dm/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)
+[![Build Status](https://travis-ci.org/netguru/eslint-plugin-ember.svg?branch=master)](https://travis-ci.org/netguru/eslint-plugin-ember)
 
 > An ESlint plugin that provides set of rules for Ember Applications based on commonly known good practices.
 
@@ -140,6 +141,8 @@ Recommended way of creating new rules:
 - Make sure all tests are passing
 - Add documentation and update README
 - Create PR and link created issue in description
+
+Please be aware that we're using `yarn` in this repository, so if you plan to add some dependencies - make sure you commit `yarn.lock` file too.
 
 If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/netguru/eslint-plugin-ember/issues, but first please make sure your question does not repeat previous ones.
 
