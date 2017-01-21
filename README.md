@@ -6,10 +6,6 @@
 
 > An ESlint plugin that provides set of rules for Ember Applications based on commonly known good practices.
 
-## ❗️ Requirements
-
-You need to have `ember-cli-eslint` installed in your app. [More info here](https://github.com/ember-cli/ember-cli-eslint).
-
 ## 🚀 Usage
 
 ### 1. Install plugin
