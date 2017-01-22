@@ -104,33 +104,32 @@ All rules from this plugin have to be prefixed with `ember/`
 ### All Rules in JSON
 
 ```
-    "ember/alias-model-in-controller": 0,
-    "ember/avoid-leaking-state-in-components": 0,
-    "ember/closure-actions": 0,
-    "ember/jquery-ember-run": 0,
-    "ember/local-modules": 0,
-    "ember/named-functions-in-promises": 0,
-    "ember/no-empty-attrs": 0,
-    "ember/no-function-prototype-extensions": 0,
-    "ember/no-observers": 0,
-    "ember/no-on-calls-in-components": 0,
-    "ember/no-side-effects": 0,
-    "ember/order-in-components": 0,
-    "ember/order-in-controllers": 0,
-    "ember/order-in-models": 0,
-    "ember/order-in-routes": 0,
-    "ember/query-params-on-top": 0,
-    "ember/routes-segments-snake-case": 0,
-    "ember/use-brace-expansion": 0,
-    "ember/use-ember-get-and-set": 0,
+"ember/alias-model-in-controller": 0,
+"ember/avoid-leaking-state-in-components": 0,
+"ember/closure-actions": 0,
+"ember/jquery-ember-run": 0,
+"ember/local-modules": 0,
+"ember/named-functions-in-promises": 0,
+"ember/no-empty-attrs": 0,
+"ember/no-function-prototype-extensions": 0,
+"ember/no-observers": 0,
+"ember/no-on-calls-in-components": 0,
+"ember/no-side-effects": 0,
+"ember/order-in-components": 0,
+"ember/order-in-controllers": 0,
+"ember/order-in-models": 0,
+"ember/order-in-routes": 0,
+"ember/query-params-on-top": 0,
+"ember/routes-segments-snake-case": 0,
+"ember/use-brace-expansion": 0,
+"ember/use-ember-get-and-set": 0,
 ```
 
 ## 🍻 Contribution guide
 
 In order to add a new rule, you should:
-- create `rules/rule-name.js` file
-- create `test/rule-name.js` file
-- describe the rule in [docs/RULES.md](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md) (remember about setting proper anchor)
+- generate a new rule using the [official yeoman generator](https://github.com/eslint/generator-eslint)
+- describe the rule in the generated `docs` file
 - add the rule in [README.md](https://github.com/netguru/eslint-plugin-ember/blob/master/README.md#rules)
 
 Recommended way of creating new rules:
@@ -153,6 +152,7 @@ If you have any suggestions, ideas or problems feel free to add new [issue](http
 - [Kamil Ejsymont](http://github.com/netes)
 - [Casey Watts](http://github.com/caseywatts)
 - [Steve Gargan](http://github.com/sgargan)
+- [Alex LaFroscia](http://github.com/alexlafroscia)
 
 ##  🙌 Credits
 - [Dockyard team](http://github.com/dockyard) - for great inspiration with their [styleguide](https://github.com/DockYard/styleguides/blob/master/engineering/ember.md)
