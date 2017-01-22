@@ -130,6 +130,7 @@ All rules from this plugin have to be prefixed with `ember/`
 In order to add a new rule, you should:
 - generate a new rule using the [official yeoman generator](https://github.com/eslint/generator-eslint)
 - describe the rule in the generated `docs` file
+- link to the new `docs` file in `docs/RULES.md`
 - add the rule in [README.md](https://github.com/netguru/eslint-plugin-ember/blob/master/README.md#rules)
 
 Recommended way of creating new rules:
