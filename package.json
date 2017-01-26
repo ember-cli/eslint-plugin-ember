@@ -8,8 +8,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test/* --reporter nyan",
-    "start": "mocha test/* --reporter nyan --watch"
+    "test": "mocha tests --recursive --reporter nyan",
+    "start": "mocha tests --recursive --reporter nyan --watch"
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,8 @@
     "Adrian Zalewski (http://github.com/bardzusny)",
     "Kamil Ejsymont (http://github.com/netes)",
     "Casey Watts (http://github.com/caseywatts)",
-    "Steve Gargan (http://github.com/sgargan)"
+    "Steve Gargan (http://github.com/sgargan)",
+    "Alex LaFroscia (http://github.com/alexlafroscia)"
   ],
   "engines": {
     "node": ">=6.3"

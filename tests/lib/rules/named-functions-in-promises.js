@@ -1,0 +1,49 @@
+'use strict';
+
+// ------------------------------------------------------------------------------
+// Requirements
+// ------------------------------------------------------------------------------
+
+var rule = require('../../../lib/rules/named-functions-in-promises');
+var RuleTester = require('eslint').RuleTester;
+
+// ------------------------------------------------------------------------------
+// Tests
+// ------------------------------------------------------------------------------
+
+var eslintTester = new RuleTester();
+eslintTester.run('named-functions-in-promises', rule, {
+  valid: [
+    {
+      code: 'user.save().then(this._reloadUser.bind(this));',
+      parserOptions: {ecmaVersion: 6},
+    }, {
+      code: 'user.save().catch(this._handleError.bind(this));',
+      parserOptions: {ecmaVersion: 6},
+    }, {
+      code: 'user.save().finally(this._finallyDo.bind(this));',
+      parserOptions: {ecmaVersion: 6},
+    }
+  ],
+  invalid: [
+    {
+      code: 'user.save().then(() => {return user.reload();});',
+      parserOptions: {ecmaVersion: 6},
+      errors: [{
+        message: 'Use named functions defined on objects to handle promises',
+      }],
+    }, {
+      code: 'user.save().catch(() => {return error.handle();});',
+      parserOptions: {ecmaVersion: 6},
+      errors: [{
+        message: 'Use named functions defined on objects to handle promises',
+      }],
+    }, {
+      code: 'user.save().finally(() => {return finallyDo();});',
+      parserOptions: {ecmaVersion: 6},
+      errors: [{
+        message: 'Use named functions defined on objects to handle promises',
+      }],
+    }
+  ]
+});
