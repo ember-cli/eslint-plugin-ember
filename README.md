@@ -8,7 +8,7 @@
 
 ## ❗️ Requirements
 
-You need to have `ember-cli-eslint` installed in your app. [More info here](https://github.com/ember-cli/ember-cli-eslint).
+[ESLint](http://eslint.org/) is required to use this plugin.
 
 ## 🚀 Usage
 
