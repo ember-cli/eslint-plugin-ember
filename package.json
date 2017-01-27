@@ -8,8 +8,9 @@
     "test": "test"
   },
   "scripts": {
+    "start": "mocha tests --recursive --reporter nyan --watch",
     "test": "mocha tests --recursive --reporter nyan",
-    "start": "mocha tests --recursive --reporter nyan --watch"
+    "test:ci": "mocha tests --recursive"
   },
   "repository": {
     "type": "git",
