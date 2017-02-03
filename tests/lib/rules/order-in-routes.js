@@ -80,7 +80,8 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The service injection should be above the default property on line 2',
+        line: 3,
       }],
     },
     {
@@ -94,7 +95,8 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The default property should be above the property on line 2',
+        line: 3,
       }],
     },
     {
@@ -108,7 +110,11 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The default property should be above the property on line 2',
+        line: 3,
+      }, {
+        message: 'The model hook should be above the lifecycle hook on line 4',
+        line: 5,
       }],
     },
     {
@@ -121,7 +127,8 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The actions hash should be above the custom method on line 5',
+        line: 6,
       }],
     },
     {
@@ -132,7 +139,8 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The property should be above the model hook on line 2',
+        line: 3,
       }],
     },
     {
@@ -143,7 +151,8 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The default property should be above the property on line 2',
+        line: 3,
       }],
     },
     {
@@ -154,7 +163,8 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The model hook should be above the custom method on line 3',
+        line: 4,
       }],
     },
   ]
