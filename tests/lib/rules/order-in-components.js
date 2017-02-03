@@ -275,13 +275,13 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The property should be above the actions hash on line 2',
         line: 4,
       }, {
-        message: 'Check order of properties',
+        message: 'The single-line function should be above the actions hash on line 2',
         line: 6,
       }, {
-        message: 'Check order of properties',
+        message: 'The multi-line function should be above the actions hash on line 2',
         line: 8,
       }],
     },
@@ -298,7 +298,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The property should be above the single-line function on line 2',
         line: 4,
       }],
     },
@@ -315,10 +315,10 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The single-line function should be above the multi-line function on line 2',
         line: 5,
       }, {
-        message: 'Check order of properties',
+        message: 'The property should be above the multi-line function on line 2',
         line: 7,
       }],
     },
@@ -335,10 +335,10 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The single-line function should be above the multi-line function on line 2',
         line: 5,
       }, {
-        message: 'Check order of properties',
+        message: 'The property should be above the multi-line function on line 2',
         line: 7,
       }],
     },
@@ -355,10 +355,10 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The single-line function should be above the multi-line function on line 2',
         line: 5,
       }, {
-        message: 'Check order of properties',
+        message: 'The property should be above the multi-line function on line 2',
         line: 7,
       }],
     },
@@ -369,7 +369,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The service injection should be above the property on line 2',
         line: 3,
       }],
     },
@@ -380,7 +380,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The service injection should be above the single-line function on line 2',
         line: 3,
       }],
     },
@@ -392,7 +392,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The single-line function should be above the observer on line 2',
         line: 4,
       }],
     },
@@ -405,7 +405,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The multi-line function should be above the observer on line 2',
         line: 4,
       }],
     },
@@ -418,7 +418,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The observer should be above the lifecycle hook on line 2',
         line: 4,
       }],
     },
@@ -430,7 +430,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The lifecycle hook should be above the actions hash on line 2',
         line: 3,
       }],
     },
@@ -442,7 +442,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The actions hash should be above the custom method on line 2',
         line: 4,
       }],
     },
@@ -454,8 +454,30 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The actions hash should be above the custom method on line 2',
         line: 4,
+      }],
+    },
+    {
+      code: `export default Component.extend(TestMixin, TestMixin2, {
+        foo: alias("car"),
+
+        levelOfHappiness: computed("attitude", "health", () => {  
+        }),
+
+        vehicle: alias("car"),
+
+        role: "sloth",
+
+        actions: {}
+      });`,
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      errors: [{
+        message: 'The single-line function should be above the multi-line function on line 4',
+        line: 7,
+      }, {
+        message: 'The property should be above the single-line function on line 2',
+        line: 9,
       }],
     },
   ]
