@@ -60,7 +60,8 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The service injection should be above the default property on line 2',
+        line: 3
       }],
     },
     {
@@ -71,7 +72,8 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The default property should be above the property on line 3',
+        line: 4
       }],
     },
     {
@@ -82,7 +84,8 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The property should be above the actions hash on line 3',
+        line: 4
       }],
     },
     {
@@ -93,7 +96,8 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The actions hash should be above the custom method on line 3',
+        line: 4
       }],
     },
     {
@@ -104,7 +108,8 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The default property should be above the property on line 2',
+        line: 3
       }],
     },
     {
@@ -116,7 +121,8 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The single-line function should be above the observer on line 3',
+        line: 4
       }],
     },
   ]
