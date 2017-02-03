@@ -276,7 +276,13 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
-        line: 2,
+        line: 4,
+      }, {
+        message: 'Check order of properties',
+        line: 6,
+      }, {
+        message: 'Check order of properties',
+        line: 8,
       }],
     },
     {
@@ -293,7 +299,7 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
-        line: 2,
+        line: 4,
       }],
     },
     {
@@ -310,7 +316,10 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
-        line: 2,
+        line: 5,
+      }, {
+        message: 'Check order of properties',
+        line: 7,
       }],
     },
     {
@@ -327,7 +336,10 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
-        line: 2,
+        line: 5,
+      }, {
+        message: 'Check order of properties',
+        line: 7,
       }],
     },
     {
@@ -344,7 +356,10 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
-        line: 2,
+        line: 5,
+      }, {
+        message: 'Check order of properties',
+        line: 7,
       }],
     },
     {
@@ -355,7 +370,7 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
-        line: 2,
+        line: 3,
       }],
     },
     {
@@ -366,7 +381,7 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
-        line: 2,
+        line: 3,
       }],
     },
     {
@@ -378,7 +393,7 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
-        line: 2,
+        line: 4,
       }],
     },
     {
@@ -391,7 +406,7 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
-        line: 2,
+        line: 4,
       }],
     },
     {
@@ -404,7 +419,7 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
-        line: 2,
+        line: 4,
       }],
     },
     {
@@ -416,7 +431,7 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
-        line: 2,
+        line: 3,
       }],
     },
     {
@@ -428,7 +443,7 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
-        line: 2,
+        line: 4,
       }],
     },
     {
@@ -440,7 +455,7 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
         message: 'Check order of properties',
-        line: 2,
+        line: 4,
       }],
     },
   ]
