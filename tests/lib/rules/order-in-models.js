@@ -101,7 +101,8 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The attribute should be above the relationship on line 2',
+        line: 3,
       }],
     },
     {
@@ -113,7 +114,8 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The relationship should be above the multi-line function on line 3',
+        line: 5,
       }],
     },
     {
@@ -124,7 +126,8 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The attribute should be above the multi-line function on line 2',
+        line: 4,
       }],
     },
     {
@@ -136,7 +139,8 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The attribute should be above the relationship on line 2',
+        line: 3,
       }],
     },
     {
@@ -148,7 +152,8 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The relationship should be above the multi-line function on line 3',
+        line: 5,
       }],
     },
     {
@@ -159,7 +164,8 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The attribute should be above the multi-line function on line 2',
+        line: 4,
       }],
     },
     {
@@ -170,7 +176,8 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The single-line function should be above the multi-line function on line 2',
+        line: 4,
       }],
     },
     {
@@ -181,7 +188,8 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The single-line function should be above the multi-line function on line 2',
+        line: 4,
       }],
     },
     {
@@ -192,7 +200,8 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'Check order of properties',
+        message: 'The single-line function should be above the multi-line function on line 2',
+        line: 4,
       }],
     }
   ]
