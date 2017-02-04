@@ -4,3 +4,5 @@ node_js:
 - '6.3'
 
 cache: yarn
+
+script: yarn test:ci
