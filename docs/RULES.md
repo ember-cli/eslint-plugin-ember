@@ -4,7 +4,7 @@
 	* [`local-modules`](./rules/local-modules.md)
 	* [`jquery-ember-run`](./rules/jquery-ember-run.md)
 	* [`no-observers`](./rules/no-observers.md)
-	* [`no-side-effect`](./rules/no-side-effect.md)
+	* [`no-side-effects`](./rules/no-side-effects.md)
 	* [`named-functions-in-promises`](./rules/named-functions-in-promises.md)
 	* [`no-function-prototype-extensions`](./rules/no-function-prototype-extensions.md)
 	* [`use-ember-get-and-set`](./rules/use-ember-get-and-set.md)
