@@ -23,11 +23,35 @@ eslintTester.run('named-functions-in-promises', rule, {
     }, {
       code: 'user.save().finally(this._finallyDo.bind(this));',
       parserOptions: {ecmaVersion: 6},
+    }, {
+      code: 'user.save().then(this._reloadUser);',
+      parserOptions: {ecmaVersion: 6},
+    }, {
+      code: 'user.save().catch(this._handleError);',
+      parserOptions: {ecmaVersion: 6},
+    }, {
+      code: 'user.save().finally(this._finallyDo);',
+      parserOptions: {ecmaVersion: 6},
+    }, {
+      code: 'user.save().then(_reloadUser);',
+      parserOptions: {ecmaVersion: 6},
+    }, {
+      code: 'user.save().catch(_handleError);',
+      parserOptions: {ecmaVersion: 6},
+    }, {
+      code: 'user.save().finally(_finallyDo);',
+      parserOptions: {ecmaVersion: 6},
     }
   ],
   invalid: [
     {
       code: 'user.save().then(() => {return user.reload();});',
+      parserOptions: {ecmaVersion: 6},
+      errors: [{
+        message: 'Use named functions defined on objects to handle promises',
+      }],
+    }, {
+      code: 'user.save().then(() => user.reload());',
       parserOptions: {ecmaVersion: 6},
       errors: [{
         message: 'Use named functions defined on objects to handle promises',
