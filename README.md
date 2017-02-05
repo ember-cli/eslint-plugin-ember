@@ -8,9 +8,8 @@
 
 ## ❗️ Requirements
 
-[ESLint](http://eslint.org/) is required to use this plugin.
-
-Rules provided by this plugin should be runnable under latest stable, v4 LTS and v6 LTS Node.js versions.
+- [ESLint](http://eslint.org/) is required to use this plugin.
+- Rules provided by this plugin should be runnable under latest stable, v4 LTS and v6 LTS Node.js versions.
 
 ## 🚀 Usage
 
@@ -138,7 +137,7 @@ In order to add a new rule, you should:
 Recommended way of creating new rules:
 - Create issue on GH with description of proposed rule
 - Write sufficient test scenarios
-- Run `gulp watch`
+- Run `yarn start`
 - Implement logic for the new rule
 - Make sure all tests are passing
 - Add documentation and update README
@@ -146,7 +145,7 @@ Recommended way of creating new rules:
 
 Please be aware that we're using `yarn` in this repository, so if you plan to add some dependencies - make sure you commit `yarn.lock` file too.
 
-If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/netguru/eslint-plugin-ember/issues, but first please make sure your question does not repeat previous ones.
+If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/netguru/eslint-plugin-ember/issues), but first please make sure your question does not repeat previous ones.
 
 ## ⭐️ Contributors
 - [Michał Sajnóg](http://github.com/michalsnik)
@@ -156,6 +155,7 @@ If you have any suggestions, ideas or problems feel free to add new [issue](http
 - [Casey Watts](http://github.com/caseywatts)
 - [Steve Gargan](http://github.com/sgargan)
 - [Alex LaFroscia](http://github.com/alexlafroscia)
+- [Tobias Bieniek](http://github.com/Turbo87)
 
 ##  🙌 Credits
 - [Dockyard team](http://github.com/dockyard) - for great inspiration with their [styleguide](https://github.com/DockYard/styleguides/blob/master/engineering/ember.md)

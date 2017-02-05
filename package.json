@@ -31,7 +31,8 @@
     "Kamil Ejsymont (http://github.com/netes)",
     "Casey Watts (http://github.com/caseywatts)",
     "Steve Gargan (http://github.com/sgargan)",
-    "Alex LaFroscia (http://github.com/alexlafroscia)"
+    "Alex LaFroscia (http://github.com/alexlafroscia)",
+    "Tobias Bieniek (http://github.com/Turbo87)"
   ],
   "engines": {
     "node": ">=4.0"
