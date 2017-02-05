@@ -10,6 +10,8 @@
 
 [ESLint](http://eslint.org/) is required to use this plugin.
 
+Rules provided by this plugin should be runnable under latest stable, v4 LTS and v6 LTS Node.js versions.
+
 ## 🚀 Usage
 
 ### 1. Install plugin

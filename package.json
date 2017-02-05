@@ -34,7 +34,7 @@
     "Alex LaFroscia (http://github.com/alexlafroscia)"
   ],
   "engines": {
-    "node": ">=6.3"
+    "node": ">=4.0"
   },
   "license": "MIT",
   "bugs": {
