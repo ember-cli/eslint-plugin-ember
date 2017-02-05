@@ -1,3 +1,5 @@
+'use strict';
+
 const assert = require('chai').assert;
 const babelEslint = require('babel-eslint');
 const emberUtils = require('../../../lib/utils/ember');
