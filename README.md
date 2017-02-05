@@ -10,6 +10,8 @@
 
 [ESLint](http://eslint.org/) is required to use this plugin.
 
+Rules provided by this plugin should be runnable under latest stable, v4 LTS and v6 LTS Node.js versions.
+
 ## 🚀 Usage
 
 ### 1. Install plugin
@@ -124,10 +126,6 @@ All rules from this plugin have to be prefixed with `ember/`
 "ember/use-brace-expansion": 0,
 "ember/use-ember-get-and-set": 0,
 ```
-
-## Node.js version support
-
-Rules provided by this plugin should be runnable under latest stable, v4 LTS and v6 LTS Node.JS versions.
 
 ## 🍻 Contribution guide
 
