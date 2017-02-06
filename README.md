@@ -158,7 +158,7 @@ If you have any suggestions, ideas or problems feel free to add new [issue](http
 - [Tobias Bieniek](http://github.com/Turbo87)
 
 ##  🙌 Credits
-- [Dockyard team](http://github.com/dockyard) - for great inspiration with their [styleguide](https://github.com/DockYard/styleguides/blob/master/engineering/ember.md)
+- [DockYard team](http://github.com/DockYard) - for great inspiration with their [styleguide](https://github.com/DockYard/styleguides/blob/master/engineering/ember.md)
 - [Rob Hilgefort](https://github.com/rjhilgefort) - for making it possible to redeploy new plugin under existing `eslint-plugin-ember` package name
 
 ## 🔓 License
