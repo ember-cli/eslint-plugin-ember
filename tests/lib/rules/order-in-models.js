@@ -115,7 +115,7 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The attribute should be above the relationship on line 2',
+        message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
         line: 3,
       }],
     },
@@ -128,7 +128,7 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The relationship should be above the multi-line function on line 3',
+        message: 'The "behaviors" relationship should be above the "mood" multi-line function on line 3',
         line: 5,
       }],
     },
@@ -140,7 +140,7 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The attribute should be above the multi-line function on line 2',
+        message: 'The "shape" attribute should be above the "mood" multi-line function on line 2',
         line: 4,
       }],
     },
@@ -153,7 +153,7 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The attribute should be above the relationship on line 2',
+        message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
         line: 3,
       }],
     },
@@ -166,7 +166,7 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The relationship should be above the multi-line function on line 3',
+        message: 'The "behaviors" relationship should be above the "mood" multi-line function on line 3',
         line: 5,
       }],
     },
@@ -178,7 +178,7 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The attribute should be above the multi-line function on line 2',
+        message: 'The "shape" attribute should be above the "mood" multi-line function on line 2',
         line: 4,
       }],
     },
@@ -190,7 +190,7 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The single-line function should be above the multi-line function on line 2',
+        message: 'The "test" single-line function should be above the "mood" multi-line function on line 2',
         line: 4,
       }],
     },
@@ -202,7 +202,7 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The single-line function should be above the multi-line function on line 2',
+        message: 'The "test" single-line function should be above the "mood" multi-line function on line 2',
         line: 4,
       }],
     },
@@ -214,7 +214,7 @@ eslintTester.run('order-in-models', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The single-line function should be above the multi-line function on line 2',
+        message: 'The "test" single-line function should be above the "mood" multi-line function on line 2',
         line: 4,
       }],
     }
