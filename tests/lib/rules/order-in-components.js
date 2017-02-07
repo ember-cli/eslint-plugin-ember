@@ -282,6 +282,28 @@ eslintTester.run('order-in-components', rule, {
         ],
       }],
     },
+    {
+      code: `export default Component.extend({
+        role: "sloth",
+
+        computed1: alias('computed2'),
+        computed2: computed(function() {
+        }),
+        computed3: alias('computed1'),
+
+        actions: {},
+
+        foobar: Ember.inject.service(),
+      });`,
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      options: [{
+        order: [
+          'property',
+          ['single-line-function', 'multi-line-function'],
+          'actions',
+        ],
+      }],
+    },
   ],
   invalid: [
     {
