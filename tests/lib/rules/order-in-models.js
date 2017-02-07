@@ -89,7 +89,21 @@ eslintTester.run('order-in-models', rule, {
         }
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
-    }
+    },
+    {
+      code: `export default DS.Model.extend({
+        convertA(paramA) { 
+        },
+        a: attr("string"),
+        b: belongsTo("c", { async: false }),
+      });`,
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      options: [{
+        order: [
+          'method',
+        ],
+      }],
+    },
   ],
   invalid: [
     {

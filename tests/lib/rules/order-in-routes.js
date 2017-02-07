@@ -66,6 +66,21 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
+    {
+      code: `export default Route.extend({
+        beforeModel() {},
+        model() {},
+        currentUser: service(),
+      });`,
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      options: [{
+        order: [
+          'lifecycle-hook',
+          'model',
+          'service',
+        ],
+      }],
+    },
   ],
   invalid: [
     {

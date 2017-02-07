@@ -51,6 +51,23 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
+    {
+      code: `export default Controller.extend({
+        actions: {},
+        comp: computed("test", function() {}),
+        customProp: "test",
+        comp2: computed("test", function() {
+        }),
+        _customAction() {}
+      });`,
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      options: [{
+        order: [
+          'actions',
+          'single-line-function',
+        ],
+      }],
+    },
   ],
   invalid: [
     {
