@@ -66,6 +66,21 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
+    {
+      code: `export default Route.extend({
+        beforeModel() {},
+        model() {},
+        currentUser: service(),
+      });`,
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      options: [{
+        order: [
+          'lifecycle-hook',
+          'model',
+          'service',
+        ],
+      }],
+    },
   ],
   invalid: [
     {
@@ -80,7 +95,7 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The service injection should be above the default property on line 2',
+        message: 'The "currentUser" service injection should be above the inherited "queryParams" property on line 2',
         line: 3,
       }],
     },
@@ -95,7 +110,7 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The default property should be above the property on line 2',
+        message: 'The inherited "queryParams" property should be above the "customProp" property on line 2',
         line: 3,
       }],
     },
@@ -110,10 +125,10 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The default property should be above the property on line 2',
+        message: 'The inherited "queryParams" property should be above the "customProp" property on line 2',
         line: 3,
       }, {
-        message: 'The model hook should be above the lifecycle hook on line 4',
+        message: 'The "model" hook should be above the "beforeModel" lifecycle hook on line 4',
         line: 5,
       }],
     },
@@ -127,7 +142,7 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The actions hash should be above the custom method on line 5',
+        message: 'The actions hash should be above the "_customAction" method on line 5',
         line: 6,
       }],
     },
@@ -139,7 +154,7 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The property should be above the model hook on line 2',
+        message: 'The "customProp" property should be above the "model" hook on line 2',
         line: 3,
       }],
     },
@@ -151,7 +166,7 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The default property should be above the property on line 2',
+        message: 'The inherited "mergedProperties" property should be above the "test" property on line 2',
         line: 3,
       }],
     },
@@ -163,7 +178,7 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The model hook should be above the custom method on line 3',
+        message: 'The "model" hook should be above the "_test2" method on line 3',
         line: 4,
       }],
     },

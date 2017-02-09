@@ -51,6 +51,23 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
+    {
+      code: `export default Controller.extend({
+        actions: {},
+        comp: computed("test", function() {}),
+        customProp: "test",
+        comp2: computed("test", function() {
+        }),
+        _customAction() {}
+      });`,
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      options: [{
+        order: [
+          'actions',
+          'single-line-function',
+        ],
+      }],
+    },
   ],
   invalid: [
     {
@@ -60,7 +77,7 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The service injection should be above the default property on line 2',
+        message: 'The "currentUser" service injection should be above the inherited "queryParams" property on line 2',
         line: 3
       }],
     },
@@ -72,7 +89,7 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The default property should be above the property on line 3',
+        message: 'The inherited "queryParams" property should be above the "customProp" property on line 3',
         line: 4
       }],
     },
@@ -84,7 +101,7 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The property should be above the actions hash on line 3',
+        message: 'The "customProp" property should be above the actions hash on line 3',
         line: 4
       }],
     },
@@ -96,7 +113,7 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The actions hash should be above the custom method on line 3',
+        message: 'The actions hash should be above the "_customAction" method on line 3',
         line: 4
       }],
     },
@@ -108,7 +125,7 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The default property should be above the property on line 2',
+        message: 'The inherited "queryParams" property should be above the "test" property on line 2',
         line: 3
       }],
     },
@@ -121,7 +138,7 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The single-line function should be above the observer on line 3',
+        message: 'The "comp" single-line function should be above the "obs" observer on line 3',
         line: 4
       }],
     },

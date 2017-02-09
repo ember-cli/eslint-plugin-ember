@@ -260,6 +260,50 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
     },
+    {
+      code: `export default Component.extend({
+        role: "sloth",
+
+        computed1: computed(function() {
+        }),
+        computed2: alias('computed1'),
+
+        actions: {},
+
+        foobar: Ember.inject.service(),
+      });`,
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      options: [{
+        order: [
+          'property',
+          'multi-line-function',
+          'single-line-function',
+          'actions',
+        ],
+      }],
+    },
+    {
+      code: `export default Component.extend({
+        role: "sloth",
+
+        computed1: alias('computed2'),
+        computed2: computed(function() {
+        }),
+        computed3: alias('computed1'),
+
+        actions: {},
+
+        foobar: Ember.inject.service(),
+      });`,
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      options: [{
+        order: [
+          'property',
+          ['single-line-function', 'multi-line-function'],
+          'actions',
+        ],
+      }],
+    },
   ],
   invalid: [
     {
@@ -275,13 +319,13 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The property should be above the actions hash on line 2',
+        message: 'The "role" property should be above the actions hash on line 2',
         line: 4,
       }, {
-        message: 'The single-line function should be above the actions hash on line 2',
+        message: 'The "vehicle" single-line function should be above the actions hash on line 2',
         line: 6,
       }, {
-        message: 'The multi-line function should be above the actions hash on line 2',
+        message: 'The "levelOfHappiness" multi-line function should be above the actions hash on line 2',
         line: 8,
       }],
     },
@@ -298,7 +342,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The property should be above the single-line function on line 2',
+        message: 'The "role" property should be above the "vehicle" single-line function on line 2',
         line: 4,
       }],
     },
@@ -315,10 +359,10 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The single-line function should be above the multi-line function on line 2',
+        message: 'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 2',
         line: 5,
       }, {
-        message: 'The property should be above the multi-line function on line 2',
+        message: 'The "role" property should be above the "levelOfHappiness" multi-line function on line 2',
         line: 7,
       }],
     },
@@ -335,10 +379,10 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The single-line function should be above the multi-line function on line 2',
+        message: 'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 2',
         line: 5,
       }, {
-        message: 'The property should be above the multi-line function on line 2',
+        message: 'The "role" property should be above the "levelOfHappiness" multi-line function on line 2',
         line: 7,
       }],
     },
@@ -355,10 +399,10 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The single-line function should be above the multi-line function on line 2',
+        message: 'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 2',
         line: 5,
       }, {
-        message: 'The property should be above the multi-line function on line 2',
+        message: 'The "role" property should be above the "levelOfHappiness" multi-line function on line 2',
         line: 7,
       }],
     },
@@ -369,7 +413,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The service injection should be above the property on line 2',
+        message: 'The "i18n" service injection should be above the "abc" property on line 2',
         line: 3,
       }],
     },
@@ -380,7 +424,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The service injection should be above the single-line function on line 2',
+        message: 'The "i18n" service injection should be above the "vehicle" single-line function on line 2',
         line: 3,
       }],
     },
@@ -392,7 +436,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The single-line function should be above the observer on line 2',
+        message: 'The "vehicle" single-line function should be above the "levelOfHappiness" observer on line 2',
         line: 4,
       }],
     },
@@ -405,7 +449,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The multi-line function should be above the observer on line 2',
+        message: 'The "aaa" multi-line function should be above the "levelOfHappiness" observer on line 2',
         line: 4,
       }],
     },
@@ -418,7 +462,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The observer should be above the lifecycle hook on line 2',
+        message: 'The "levelOfHappiness" observer should be above the "init" lifecycle hook on line 2',
         line: 4,
       }],
     },
@@ -430,7 +474,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The lifecycle hook should be above the actions hash on line 2',
+        message: 'The "init" lifecycle hook should be above the actions hash on line 2',
         line: 3,
       }],
     },
@@ -442,7 +486,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The actions hash should be above the custom method on line 2',
+        message: 'The actions hash should be above the "customFunc" method on line 2',
         line: 4,
       }],
     },
@@ -454,7 +498,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The actions hash should be above the custom method on line 2',
+        message: 'The actions hash should be above the "tAction" method on line 2',
         line: 4,
       }],
     },
@@ -473,11 +517,24 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
       errors: [{
-        message: 'The single-line function should be above the multi-line function on line 4',
+        message: 'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 4',
         line: 7,
       }, {
-        message: 'The property should be above the single-line function on line 2',
+        message: 'The "role" property should be above the "foo" single-line function on line 2',
         line: 9,
+      }],
+    },
+    {
+      code: `let foo = 'foo';
+
+      export default Component.extend(TestMixin, TestMixin2, {
+        actions: {},
+        [foo]: 'foo',
+      });`,
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      errors: [{
+        message: 'The property should be above the actions hash on line 4',
+        line: 5,
       }],
     },
   ]
