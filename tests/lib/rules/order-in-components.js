@@ -304,6 +304,17 @@ eslintTester.run('order-in-components', rule, {
         ],
       }],
     },
+    {
+      code: `export default Component.extend({
+        role: "sloth",
+        qwe: foo ? 'bar' : null,
+        abc: [],
+        def: {},
+
+        ghi: alias("def")
+      });`,
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
   ],
   invalid: [
     {

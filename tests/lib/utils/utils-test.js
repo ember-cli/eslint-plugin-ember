@@ -116,6 +116,14 @@ describe('isThisExpression', function() {
   });
 });
 
+describe('isConditionalExpression', function() {
+  const node = parse(`test = true ? 'asd' : 'qwe'`).right;
+
+  it('should check if node is a conditional expression', function() {
+    assert.ok(utils.isConditionalExpression(node));
+  });
+});
+
 describe('getSize', function() {
   const node = parse('some = {\nfew: "line",\nheight: "statement",\nthat: "should",\nhave: "6 lines",\n};');
 
