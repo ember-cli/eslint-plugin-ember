@@ -25,7 +25,21 @@ eslintTester.run('no-empty-attrs', rule, {
     {
       code: 'export default Model.extend({name: attr("string")});',
       parserOptions: {ecmaVersion: 6, sourceType: "module"},
-    }
+    },
+    {
+      code: `someArrayOfStrings.filter(function(attr) {
+        return attr.underscore();
+      });`,
+      parserOptions: {ecmaVersion: 6},
+    },
+    {
+      code: `export default Model.extend({
+        someArray: someArrayOfStrings.filter(function(attr) {
+          return attr.underscore();
+        }),
+      });`,
+      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+    },
   ],
   invalid: [
     {
