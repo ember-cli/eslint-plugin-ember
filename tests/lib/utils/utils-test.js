@@ -1,3 +1,5 @@
+'use strict';
+
 const assert = require('chai').assert;
 const babelEslint = require('babel-eslint');
 const utils = require('../../../lib/utils/utils');

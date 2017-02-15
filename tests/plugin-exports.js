@@ -1,3 +1,5 @@
+'use strict';
+
 const assert = require('assert');
 const plugin = require('../index.js');
 const ember = require('../lib/utils/ember');

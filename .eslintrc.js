@@ -15,5 +15,6 @@ module.exports = {
     'func-names': 0,
     'no-use-before-define': 0,
     'no-plusplus': 0,
+    'strict': 0,
   },
 }
