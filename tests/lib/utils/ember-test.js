@@ -155,7 +155,7 @@ describe('isCustomProp', function() {
 describe('isModelProp', function() {
   let node;
 
-  if('should be a model prop', function() {
+  it('should be a model prop', function() {
     node = getProperty(`test = { model() {} }`);
     assert.ok(emberUtils.isModelProp(node));
 
@@ -167,7 +167,7 @@ describe('isModelProp', function() {
 describe('isActionsProp', function() {
   const node = getProperty(`test = { actions: {} }`);
 
-  if('should be actions prop', function() {
+  it('should be actions prop', function() {
     assert.ok(emberUtils.isActionsProp(node));
   });
 });
