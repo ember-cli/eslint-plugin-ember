@@ -1,19 +1,18 @@
-'use strict';
+const { resolve } = require('path');
+const requireIndex = require('requireindex');
 
-var resolve = require('path').resolve;
-var requireIndex = require('requireindex');
+const rules = requireIndex(resolve(__dirname, 'lib/rules'));
+const configs = requireIndex(resolve(__dirname, 'config'));
 
-var rules = requireIndex(resolve(__dirname, 'lib/rules'));
-var configs = requireIndex(resolve(__dirname, 'config'));
-
-var ember = require(resolve(__dirname, 'lib/utils/ember'));
-var utils = require(resolve(__dirname, 'lib/utils/utils'));
+/* eslint-disable import/no-dynamic-require */
+const ember = require(resolve(__dirname, 'lib/utils/ember'));
+const utils = require(resolve(__dirname, 'lib/utils/utils'));
 
 module.exports = {
-  rules: rules,
-  configs: configs,
+  rules,
+  configs,
   utils: {
-    ember: ember,
-    utils: utils
-  }
+    ember,
+    utils,
+  },
 };

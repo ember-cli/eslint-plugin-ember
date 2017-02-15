@@ -1,17 +1,17 @@
-'use strict';
+
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/use-ember-get-and-set');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/use-ember-get-and-set');
+const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var eslintTester = new RuleTester();
+const eslintTester = new RuleTester();
 eslintTester.run('use-ember-get-and-set', rule, {
   valid: [
     'get(this, "test")',
@@ -110,5 +110,5 @@ eslintTester.run('use-ember-get-and-set', rule, {
         message: 'Use get/set',
       }],
     },
-  ]
+  ],
 });

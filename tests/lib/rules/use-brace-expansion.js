@@ -1,24 +1,24 @@
-'use strict';
+
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/use-brace-expansion');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/use-brace-expansion');
+const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var eslintTester = new RuleTester();
+const eslintTester = new RuleTester();
 eslintTester.run('use-brace-expansion', rule, {
   valid: [
     { code: '{ test: computed("a", "b", function() {}) }' },
     { code: '{ test: computed(function() {}) }' },
     { code: '{ test: computed("a.test", "b.test", function() {}) }' },
     { code: '{ test: computed("a.{test,test2}", "b", function() {}) }' },
-    { code: "{ test: Ember.computed.filterBy('a', 'b', false) }"},
+    { code: "{ test: Ember.computed.filterBy('a', 'b', false) }" },
   ],
   invalid: [
     {
@@ -32,6 +32,6 @@ eslintTester.run('use-brace-expansion', rule, {
       errors: [{
         message: 'Use brace expansion',
       }],
-    }
-  ]
+    },
+  ],
 });
