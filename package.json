@@ -8,9 +8,10 @@
     "test": "test"
   },
   "scripts": {
-    "start": "mocha tests --recursive --reporter nyan --watch",
-    "test": "mocha tests --recursive --reporter nyan",
-    "test:ci": "mocha tests --recursive"
+    "lint": "eslint .",
+    "start": "npm run test -- --watch",
+    "test": "npm run test:ci -- --reporter nyan",
+    "test:ci": "npm run lint && mocha tests --recursive"
   },
   "repository": {
     "type": "git",
@@ -45,7 +46,9 @@
   "devDependencies": {
     "babel-eslint": "^7.1.0",
     "chai": "^3.5.0",
-    "eslint": "^3.4.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-plugin-import": "^2.2.0",
     "mocha": "^3.2.0"
   },
   "dependencies": {

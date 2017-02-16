@@ -12,6 +12,6 @@ module.exports = {
     'prefer-arrow-callback': 0,
     'prefer-rest-params': 0,
     'consistent-return': 0,
-    'generator-star-spacing': [2, "after"],
-  }
+    'generator-star-spacing': [2, 'after'],
+  },
 };

@@ -1,22 +1,20 @@
-'use strict';
-
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/order-in-components');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/order-in-components');
+const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var eslintTester = new RuleTester();
+const eslintTester = new RuleTester();
 eslintTester.run('order-in-components', rule, {
   valid: [
     {
-      code: `export default Component.extend();`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      code: 'export default Component.extend();',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -29,7 +27,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -40,7 +38,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -49,7 +47,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend(TestMixin, {
@@ -58,7 +56,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend(TestMixin, TestMixin2, {
@@ -67,7 +65,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -80,7 +78,7 @@ eslintTester.run('order-in-components', rule, {
         levelOfHappiness: computed("attitude", "health", () => {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -90,7 +88,7 @@ eslintTester.run('order-in-components', rule, {
 
         ghi: alias("def")
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -105,7 +103,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -120,7 +118,7 @@ eslintTester.run('order-in-components', rule, {
         customFunction() {
         }
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -144,7 +142,7 @@ eslintTester.run('order-in-components', rule, {
 
         customFunc() {
         }});`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -173,7 +171,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -185,7 +183,7 @@ eslintTester.run('order-in-components', rule, {
         tSomeAction: task(function* (url) {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -199,7 +197,7 @@ eslintTester.run('order-in-components', rule, {
         tSomeAction: task(function* (url) {
         }).restartable()
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -214,7 +212,7 @@ eslintTester.run('order-in-components', rule, {
         _anotherPrivateFnc() {
         }
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -227,7 +225,7 @@ eslintTester.run('order-in-components', rule, {
         typeOfDate: null,
         action: K
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -237,7 +235,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {} 
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({ 
@@ -247,7 +245,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {} 
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -258,7 +256,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {} 
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -272,7 +270,7 @@ eslintTester.run('order-in-components', rule, {
 
         foobar: Ember.inject.service(),
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [{
         order: [
           'property',
@@ -295,7 +293,7 @@ eslintTester.run('order-in-components', rule, {
 
         foobar: Ember.inject.service(),
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [{
         order: [
           'property',
@@ -313,7 +311,7 @@ eslintTester.run('order-in-components', rule, {
 
         ghi: alias("def")
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
   ],
   invalid: [
@@ -328,7 +326,7 @@ eslintTester.run('order-in-components', rule, {
         levelOfHappiness: computed("attitude", "health", () => {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "role" property should be above the actions hash on line 2',
         line: 4,
@@ -351,7 +349,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "role" property should be above the "vehicle" single-line function on line 2',
         line: 4,
@@ -368,7 +366,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 2',
         line: 5,
@@ -388,7 +386,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 2',
         line: 5,
@@ -408,7 +406,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 2',
         line: 5,
@@ -422,7 +420,7 @@ eslintTester.run('order-in-components', rule, {
         abc: true,
         i18n: service()
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "i18n" service injection should be above the "abc" property on line 2',
         line: 3,
@@ -433,7 +431,7 @@ eslintTester.run('order-in-components', rule, {
         vehicle: alias("car"),
         i18n: service()
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "i18n" service injection should be above the "vehicle" single-line function on line 2',
         line: 3,
@@ -445,7 +443,7 @@ eslintTester.run('order-in-components', rule, {
         }),
         vehicle: alias("car")
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "vehicle" single-line function should be above the "levelOfHappiness" observer on line 2',
         line: 4,
@@ -458,7 +456,7 @@ eslintTester.run('order-in-components', rule, {
         aaa: computed("attitude", "health", () => {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "aaa" multi-line function should be above the "levelOfHappiness" observer on line 2',
         line: 4,
@@ -471,7 +469,7 @@ eslintTester.run('order-in-components', rule, {
         levelOfHappiness: observer("attitude", "health", () => {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "levelOfHappiness" observer should be above the "init" lifecycle hook on line 2',
         line: 4,
@@ -483,7 +481,7 @@ eslintTester.run('order-in-components', rule, {
         init() {
         }
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "init" lifecycle hook should be above the actions hash on line 2',
         line: 3,
@@ -495,7 +493,7 @@ eslintTester.run('order-in-components', rule, {
         },
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The actions hash should be above the "customFunc" method on line 2',
         line: 4,
@@ -507,7 +505,7 @@ eslintTester.run('order-in-components', rule, {
         }),
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The actions hash should be above the "tAction" method on line 2',
         line: 4,
@@ -526,7 +524,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 4',
         line: 7,
@@ -542,11 +540,11 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
         [foo]: 'foo',
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The property should be above the actions hash on line 4',
         line: 5,
       }],
     },
-  ]
+  ],
 });

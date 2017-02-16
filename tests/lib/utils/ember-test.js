@@ -12,167 +12,167 @@ function getProperty(code) {
   return parse(code).right.properties[0];
 }
 
-describe('isModule', function() {
+describe('isModule', () => {
   let node;
 
-  it('should check if it\'s a proper module', function() {
-    node = parse(`Ember.test()`);
+  it('should check if it\'s a proper module', () => {
+    node = parse('Ember.test()');
     assert.ok(emberUtils.isModule(node, 'test'));
 
-    node = parse(`Ember.Component()`);
+    node = parse('Ember.Component()');
     assert.ok(emberUtils.isModule(node, 'Component'));
 
-    node = parse(`DS.test()`);
+    node = parse('DS.test()');
     assert.ok(emberUtils.isModule(node, 'test', 'DS'));
 
-    node = parse(`DS.Model()`);
+    node = parse('DS.Model()');
     assert.ok(emberUtils.isModule(node, 'Model', 'DS'));
   });
 });
 
-describe('isDSModel', function() {
-  const node = parse(`DS.Model()`);
+describe('isDSModel', () => {
+  const node = parse('DS.Model()');
 
-  it('should check if it\'s a DS Model', function() {
+  it('should check if it\'s a DS Model', () => {
     assert.ok(emberUtils.isDSModel(node));
   });
 });
 
-describe('isEmberComponent', function() {
-  const node = parse(`Ember.Component()`);
+describe('isEmberComponent', () => {
+  const node = parse('Ember.Component()');
 
-  it('should check if it\'s an Ember Component', function() {
+  it('should check if it\'s an Ember Component', () => {
     assert.ok(emberUtils.isEmberComponent(node));
   });
 });
 
-describe('isEmberController', function() {
-  const node = parse(`Ember.Controller()`);
+describe('isEmberController', () => {
+  const node = parse('Ember.Controller()');
 
-  it('should check if it\'s an Ember Controller', function() {
+  it('should check if it\'s an Ember Controller', () => {
     assert.ok(emberUtils.isEmberController(node));
   });
 });
 
-describe('isEmberRoute', function() {
-  const node = parse(`Ember.Route()`);
+describe('isEmberRoute', () => {
+  const node = parse('Ember.Route()');
 
-  it('should check if it\'s an Ember Route', function() {
+  it('should check if it\'s an Ember Route', () => {
     assert.ok(emberUtils.isEmberRoute(node));
   });
 });
 
-describe('isInjectedServiceProp', function() {
+describe('isInjectedServiceProp', () => {
   let node;
 
-  it('should check if it\'s an injected service prop', function() {
-    node = parse(`service()`);
+  it('should check if it\'s an injected service prop', () => {
+    node = parse('service()');
     assert.ok(emberUtils.isInjectedServiceProp(node));
 
-    node = parse(`Ember.service()`);
+    node = parse('Ember.service()');
     assert.ok(emberUtils.isInjectedServiceProp(node));
   });
 });
 
-describe('isComputedProp', function() {
+describe('isComputedProp', () => {
   let node;
 
-  it('should check if it\'s an computed prop', function() {
-    node = parse(`computed()`);
+  it('should check if it\'s an computed prop', () => {
+    node = parse('computed()');
     assert.ok(emberUtils.isComputedProp(node));
 
-    node = parse(`Ember.computed()`);
+    node = parse('Ember.computed()');
     assert.ok(emberUtils.isComputedProp(node));
   });
 });
 
-describe('isObserverProp', function() {
+describe('isObserverProp', () => {
   let node;
 
-  it('should check if it\'s an observer prop', function() {
-    node = parse(`observer()`);
+  it('should check if it\'s an observer prop', () => {
+    node = parse('observer()');
     assert.ok(emberUtils.isObserverProp(node));
 
-    node = parse(`Ember.observer()`);
+    node = parse('Ember.observer()');
     assert.ok(emberUtils.isObserverProp(node));
   });
 });
 
-describe('isArrayProp', function() {
+describe('isArrayProp', () => {
   let node;
 
-  it('should be an array', function() {
-    node = getProperty(`test = { test: new Ember.A() }`);
+  it('should be an array', () => {
+    node = getProperty('test = { test: new Ember.A() }');
     assert.ok(emberUtils.isArrayProp(node));
 
-    node = getProperty(`test = { test: new A() }`);
+    node = getProperty('test = { test: new A() }');
     assert.ok(emberUtils.isArrayProp(node));
 
-    node = getProperty(`test = { test: [] }`);
+    node = getProperty('test = { test: [] }');
     assert.ok(emberUtils.isArrayProp(node));
   });
 });
 
-describe('isObjectProp', function() {
+describe('isObjectProp', () => {
   let node;
 
-  it('should be an object', function() {
-    node = getProperty(`test = { test: new Ember.Object() }`);
+  it('should be an object', () => {
+    node = getProperty('test = { test: new Ember.Object() }');
     assert.ok(emberUtils.isObjectProp(node));
 
-    node = getProperty(`test = { test: new Object() }`);
+    node = getProperty('test = { test: new Object() }');
     assert.ok(emberUtils.isObjectProp(node));
 
-    node = getProperty(`test = { test: {} }`);
+    node = getProperty('test = { test: {} }');
     assert.ok(emberUtils.isObjectProp(node));
   });
 });
 
-describe('isCustomProp', function() {
+describe('isCustomProp', () => {
   let node;
 
-  it('should be custom property', function() {
-    node = getProperty(`test = { test: 'someLiteral' }`);
+  it('should be custom property', () => {
+    node = getProperty('test = { test: \'someLiteral\' }');
     assert.ok(emberUtils.isCustomProp(node));
 
-    node = getProperty(`test = { test: someIdentifier }`);
+    node = getProperty('test = { test: someIdentifier }');
     assert.ok(emberUtils.isCustomProp(node));
 
-    node = getProperty(`test = { test: [] }`);
+    node = getProperty('test = { test: [] }');
     assert.ok(emberUtils.isCustomProp(node));
 
-    node = getProperty(`test = { test: {} }`);
+    node = getProperty('test = { test: {} }');
     assert.ok(emberUtils.isCustomProp(node));
 
-    node = getProperty(`test = { test: foo ? 'bar': 'baz' }`);
+    node = getProperty('test = { test: foo ? \'bar\': \'baz\' }');
     assert.ok(emberUtils.isCustomProp(node));
 
-    node = getProperty(`test = { actions: {} }`);
+    node = getProperty('test = { actions: {} }');
     assert.notOk(emberUtils.isCustomProp(node));
   });
 });
 
-describe('isModelProp', function() {
+describe('isModelProp', () => {
   let node;
 
-  if('should be a model prop', function() {
-    node = getProperty(`test = { model() {} }`);
+  it('should be a model prop', () => {
+    node = getProperty('test = { model() {} }');
     assert.ok(emberUtils.isModelProp(node));
 
-    node = getProperty(`test = { model: function() {} }`);
+    node = getProperty('test = { model: function() {} }');
     assert.ok(emberUtils.isModelProp(node));
   });
 });
 
-describe('isActionsProp', function() {
-  const node = getProperty(`test = { actions: {} }`);
+describe('isActionsProp', () => {
+  const node = getProperty('test = { actions: {} }');
 
-  if('should be actions prop', function() {
+  it('should be actions prop', () => {
     assert.ok(emberUtils.isActionsProp(node));
   });
 });
 
-describe('getModuleProperties', function() {
+describe('getModuleProperties', () => {
   const module = parse(`
     Ember.Component.extend(SomeMixin, {
       asd: 'qwe',
@@ -181,38 +181,38 @@ describe('getModuleProperties', function() {
     })
   `);
 
-    it('returns module\'s properties', function() {
-      const properties = emberUtils.getModuleProperties(module);
-      assert.equal(properties.length, 3);
-    });
+  it('returns module\'s properties', () => {
+    const properties = emberUtils.getModuleProperties(module);
+    assert.equal(properties.length, 3);
+  });
 });
 
-describe('isSingleLineFn', function() {
+describe('isSingleLineFn', () => {
   const property = getProperty(`test = {
     test: computed.or('asd', 'qwe')
   }`);
 
-  it('should check if given function has one line', function() {
+  it('should check if given function has one line', () => {
     assert.ok(emberUtils.isSingleLineFn(property));
   });
 });
 
-describe('isMultiLineFn', function() {
+describe('isMultiLineFn', () => {
   const property = getProperty(`test = {
     test: computed('asd', function() {
       return get(this, 'asd') + 'test';
     })
   }`);
 
-  it('should check if given function has more than one line', function() {
+  it('should check if given function has more than one line', () => {
     assert.ok(emberUtils.isMultiLineFn(property));
   });
 });
 
-describe('isFunctionExpression', function() {
+describe('isFunctionExpression', () => {
   let property;
 
-  it('should check if given property is a function expression', function() {
+  it('should check if given property is a function expression', () => {
     property = getProperty(`test = {
       test: someFn(function() {})
     }`);
@@ -235,10 +235,10 @@ describe('isFunctionExpression', function() {
   });
 });
 
-describe('isRelation', function() {
+describe('isRelation', () => {
   let property;
 
-  it('should detect hasMany relation', function() {
+  it('should detect hasMany relation', () => {
     property = getProperty(`test = {
       test: hasMany()
     }`);
@@ -250,7 +250,7 @@ describe('isRelation', function() {
     assert.ok(emberUtils.isRelation(property));
   });
 
-  it('should detect belongsTo relation', function() {
+  it('should detect belongsTo relation', () => {
     property = getProperty(`test = {
       test: belongsTo()
     }`);

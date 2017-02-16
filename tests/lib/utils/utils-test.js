@@ -1,3 +1,5 @@
+'use strict';
+
 const assert = require('chai').assert;
 const babelEslint = require('babel-eslint');
 const utils = require('../../../lib/utils/utils');
@@ -6,12 +8,12 @@ function parse(code) {
   return babelEslint.parse(code).body[0].expression;
 }
 
-describe('findNodes', function() {
+describe('findNodes', () => {
   const node = parse(`test = [
     {test: "a"}, b, "c", [d, e], "f", "g", h, {test: "i"}, function() {}, [], new Date()
   ]`).right.elements;
 
-  it('should find nodes based on their name', function() {
+  it('should find nodes based on their name', () => {
     const literals = utils.findNodes(node, 'Literal');
     const identifiers = utils.findNodes(node, 'Identifier');
     const objects = utils.findNodes(node, 'ObjectExpression');
@@ -28,119 +30,119 @@ describe('findNodes', function() {
   });
 });
 
-describe('isIdentifier', function() {
+describe('isIdentifier', () => {
   const node = parse('test');
 
-  it('should check if node is identifier', function() {
+  it('should check if node is identifier', () => {
     assert.ok(utils.isIdentifier(node));
   });
 });
 
-describe('isLiteral', function() {
+describe('isLiteral', () => {
   const node = parse('"test"');
 
-  it('should check if node is identifier', function() {
+  it('should check if node is identifier', () => {
     assert.ok(utils.isLiteral(node));
   });
 });
 
-describe('isMemberExpression', function() {
+describe('isMemberExpression', () => {
   const node = parse('test.value');
 
-  it('should check if node is member expression', function() {
+  it('should check if node is member expression', () => {
     assert.ok(utils.isMemberExpression(node));
   });
 });
 
-describe('isCallExpression', function() {
+describe('isCallExpression', () => {
   const node = parse('test()');
 
-  it('should check if node is call expression', function() {
+  it('should check if node is call expression', () => {
     assert.ok(utils.isCallExpression(node));
   });
 });
 
-describe('isObjectExpression', function() {
+describe('isObjectExpression', () => {
   const node = parse('test = {}').right;
 
-  it('should check if node is identifier', function() {
+  it('should check if node is identifier', () => {
     assert.ok(utils.isObjectExpression(node));
   });
 });
 
-describe('isArrayExpression', function() {
+describe('isArrayExpression', () => {
   const node = parse('test = []').right;
 
-  it('should check if node is array expression', function() {
+  it('should check if node is array expression', () => {
     assert.ok(utils.isArrayExpression(node));
   });
 });
 
-describe('isFunctionExpression', function() {
+describe('isFunctionExpression', () => {
   const node = parse('test = function () {}').right;
 
-  it('should check if node is function expression', function() {
+  it('should check if node is function expression', () => {
     assert.ok(utils.isFunctionExpression(node));
   });
 });
 
-describe('isArrowFunctionExpression', function() {
+describe('isArrowFunctionExpression', () => {
   const node = parse('test = () => {}').right;
 
-  it('should check if node is arrow function expression', function() {
+  it('should check if node is arrow function expression', () => {
     assert.ok(utils.isArrowFunctionExpression(node));
   });
 });
 
-describe('isNewExpression', function() {
+describe('isNewExpression', () => {
   const node = parse('new Date()');
 
-  it('should check if node is new expression', function() {
+  it('should check if node is new expression', () => {
     assert.ok(utils.isNewExpression(node));
   });
 });
 
-describe('isCallWithFunctionExpression', function() {
+describe('isCallWithFunctionExpression', () => {
   const node = parse('mysteriousFnc(function(){})');
 
-  it('should check if node is call with function expression', function() {
+  it('should check if node is call with function expression', () => {
     assert.ok(utils.isCallWithFunctionExpression(node));
   });
 });
 
-describe('isThisExpression', function() {
+describe('isThisExpression', () => {
   const node = parse('this');
 
-  it('should check if node is "this" expression', function() {
+  it('should check if node is "this" expression', () => {
     assert.ok(utils.isThisExpression(node));
   });
 });
 
-describe('isConditionalExpression', function() {
-  const node = parse(`test = true ? 'asd' : 'qwe'`).right;
+describe('isConditionalExpression', () => {
+  const node = parse('test = true ? \'asd\' : \'qwe\'').right;
 
-  it('should check if node is a conditional expression', function() {
+  it('should check if node is a conditional expression', () => {
     assert.ok(utils.isConditionalExpression(node));
   });
 });
 
-describe('getSize', function() {
+describe('getSize', () => {
   const node = parse('some = {\nfew: "line",\nheight: "statement",\nthat: "should",\nhave: "6 lines",\n};');
 
-  it('should check size of given expression', function() {
+  it('should check size of given expression', () => {
     assert.equal(utils.getSize(node), 6);
   });
 });
 
-describe('parseCallee', function() {
-  it('should parse calleeExpression', function() {
+describe('parseCallee', () => {
+  it('should parse calleeExpression', () => {
     const node = parse('Ember.computed.or("asd", "qwe")');
     const parsedCallee = utils.parseCallee(node);
     assert.equal(parsedCallee.length, 3, 'it has 3 elements in array');
     assert.deepEqual(parsedCallee, ['Ember', 'computed', 'or']);
   });
 
-  it('should parse newExpression', function() {
+  it('should parse newExpression', () => {
     const node = parse('new Ember.A()');
     const parsedCallee = utils.parseCallee(node);
     assert.equal(parsedCallee.length, 2, 'it has 2 elements in array');
@@ -148,11 +150,11 @@ describe('parseCallee', function() {
   });
 });
 
-describe('parseArgs', function() {
-  it('should parse arguments', function() {
-      const node = parse('Ember.computed("asd", "qwe", "zxc", function() {})');
-      const parsedArgs = utils.parseArgs(node);
-      assert.equal(parsedArgs.length, 3);
-      assert.deepEqual(parsedArgs, ['asd', 'qwe', 'zxc']);
+describe('parseArgs', () => {
+  it('should parse arguments', () => {
+    const node = parse('Ember.computed("asd", "qwe", "zxc", function() {})');
+    const parsedArgs = utils.parseArgs(node);
+    assert.equal(parsedArgs.length, 3);
+    assert.deepEqual(parsedArgs, ['asd', 'qwe', 'zxc']);
   });
 });

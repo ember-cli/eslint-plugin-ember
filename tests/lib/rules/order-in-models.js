@@ -1,22 +1,20 @@
-'use strict';
-
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/order-in-models');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/order-in-models');
+const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var eslintTester = new RuleTester();
+const eslintTester = new RuleTester();
 eslintTester.run('order-in-models', rule, {
   valid: [
     {
-      code: `export default Model.extend();`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      code: 'export default Model.extend();',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Model.extend({
@@ -26,7 +24,7 @@ eslintTester.run('order-in-models', rule, {
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Model.extend({
@@ -34,14 +32,14 @@ eslintTester.run('order-in-models', rule, {
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Model.extend({
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default DS.Model.extend({
@@ -50,7 +48,7 @@ eslintTester.run('order-in-models', rule, {
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default DS.Model.extend({
@@ -58,28 +56,28 @@ eslintTester.run('order-in-models', rule, {
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default DS.Model.extend({
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default DS.Model.extend(TestMixin, {
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default DS.Model.extend(TestMixin, TestMixin2, {
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default DS.Model.extend({
@@ -88,7 +86,7 @@ eslintTester.run('order-in-models', rule, {
         convertA(paramA) { 
         }
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default DS.Model.extend({
@@ -97,7 +95,7 @@ eslintTester.run('order-in-models', rule, {
         a: attr("string"),
         b: belongsTo("c", { async: false }),
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [{
         order: [
           'method',
@@ -113,7 +111,7 @@ eslintTester.run('order-in-models', rule, {
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
         line: 3,
@@ -126,7 +124,7 @@ eslintTester.run('order-in-models', rule, {
         }),
         behaviors: hasMany("behaviour")
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "behaviors" relationship should be above the "mood" multi-line function on line 3',
         line: 5,
@@ -138,7 +136,7 @@ eslintTester.run('order-in-models', rule, {
         }),
         shape: attr("string")
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "shape" attribute should be above the "mood" multi-line function on line 2',
         line: 4,
@@ -151,7 +149,7 @@ eslintTester.run('order-in-models', rule, {
         mood: Ember.computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
         line: 3,
@@ -164,7 +162,7 @@ eslintTester.run('order-in-models', rule, {
         }),
         behaviors: hasMany("behaviour")
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "behaviors" relationship should be above the "mood" multi-line function on line 3',
         line: 5,
@@ -176,7 +174,7 @@ eslintTester.run('order-in-models', rule, {
         }),
         shape: attr("string")
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "shape" attribute should be above the "mood" multi-line function on line 2',
         line: 4,
@@ -188,7 +186,7 @@ eslintTester.run('order-in-models', rule, {
         }),
         test: computed.alias("qwerty")
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "test" single-line function should be above the "mood" multi-line function on line 2',
         line: 4,
@@ -200,7 +198,7 @@ eslintTester.run('order-in-models', rule, {
         }),
         test: computed.alias("qwerty")
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "test" single-line function should be above the "mood" multi-line function on line 2',
         line: 4,
@@ -212,11 +210,11 @@ eslintTester.run('order-in-models', rule, {
         }),
         test: computed.alias("qwerty")
       });`,
-      parserOptions: {ecmaVersion: 6, sourceType: "module"},
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "test" single-line function should be above the "mood" multi-line function on line 2',
         line: 4,
       }],
-    }
-  ]
+    },
+  ],
 });
