@@ -1,8 +1,9 @@
-### Be explicit with Ember data attribute types
+## Be explicit with Ember data attribute types
 
-#### `no-empty-attrs`
+### Rule name: `no-empty-attrs`
 
 Ember Data could handle lack of specified types in model description. Nonetheless this could lead to ambiguity. Therefore always supply proper attribute type to ensure the right data transform is used.
+
 ```javascript
 const { Model, attr } = DS;
 

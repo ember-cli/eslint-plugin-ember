@@ -1,6 +1,31 @@
-### Organize your models
+## Organize your models
 
-#### `order-in-models`
+### Rule name: `order-in-models`
+
+#### Configuration
+
+```
+ember/order-in-controllers: [2, {
+  order: [
+    'attribute',
+    'relationship',
+    'single-line-function',
+    'multi-line-function',
+  ]
+}]
+```
+
+If you want some of properties to be treated equally in order you can group them into arrays, like so:
+
+```
+order: [
+  'attribute',
+  'relationship',
+  ['single-line-function', 'multi-line-function'],
+]
+```
+
+#### Description
 
 You should write code grouped and ordered in this way:
 

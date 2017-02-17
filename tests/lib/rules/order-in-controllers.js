@@ -66,6 +66,19 @@ eslintTester.run('order-in-controllers', rule, {
         ],
       }],
     },
+    {
+      code: `export default Controller.extend({
+        queryParams: [],
+        currentUser: service(),
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'query-params',
+          'service',
+        ],
+      }],
+    },
   ],
   invalid: [
     {
@@ -75,7 +88,7 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'The "currentUser" service injection should be above the inherited "queryParams" property on line 2',
+        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
         line: 3,
       }],
     },
@@ -87,7 +100,7 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'The inherited "queryParams" property should be above the "customProp" property on line 3',
+        message: 'The "queryParams" property should be above the "customProp" property on line 3',
         line: 4,
       }],
     },
@@ -123,7 +136,18 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'The inherited "queryParams" property should be above the "test" property on line 2',
+        message: 'The "queryParams" property should be above the "test" property on line 2',
+        line: 3,
+      }],
+    },
+    {
+      code: `export default Controller.extend({
+        queryParams: [],
+        currentUser: service()
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
         line: 3,
       }],
     },

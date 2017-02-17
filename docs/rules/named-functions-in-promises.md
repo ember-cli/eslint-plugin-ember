@@ -1,10 +1,10 @@
-### Use named functions defined on objects to handle promises
+## Use named functions defined on objects to handle promises
 
-#### `named-functions-in-promises`
+### Rule name: `named-functions-in-promises`
 
 When you use promises and its handlers, use named functions defined on parent object. Thus, you will be able to test them in isolation using unit tests without any additional mocking.
 
-```js
+```javascript
 export default Component.extend({
   actions: {
     // BAD
@@ -38,7 +38,8 @@ export default Component.extend({
 ```
 
 And then you can make simple unit tests for handlers:
-```
+
+```javascript
 test('it reloads user in promise handler', function(assert) {
   const component = this.subject();
   // assuming that you have `user` defined with kind of sinon spy on its reload method

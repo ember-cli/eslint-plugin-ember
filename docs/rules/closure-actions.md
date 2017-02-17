@@ -1,5 +1,6 @@
-### Closure Actions
-#### `closure-actions`
+## Closure Actions
+### Rule name: `closure-actions`
+
 Always use closure actions (according to DDAU convention). Exception: only when you need bubbling.
 
 ```javascript

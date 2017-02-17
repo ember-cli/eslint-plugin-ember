@@ -1,6 +1,37 @@
-### Organize your routes
+## Organize your routes
 
-#### `order-in-routes`
+### Rule name: `order-in-routes`
+
+#### Configuration
+
+```
+ember/order-in-routes: [2, {
+  order: [
+    'service',
+    'inherited-property',
+    'property',
+    'model',
+    'lifecycle-hook',
+    'actions',
+    'method',
+  ]
+}]
+```
+
+If you want some of properties to be treated equally in order you can group them into arrays, like so:
+
+```
+order: [
+  'service',
+  ['inherited-property', 'property'],
+  'model',
+  'lifecycle-hook',
+  'actions',
+  'method',
+]
+```
+
+#### Description
 
 You should write code grouped and ordered in this way:
 
