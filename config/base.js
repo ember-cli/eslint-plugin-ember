@@ -26,7 +26,6 @@ module.exports = {
     'ember/order-in-controllers': 2,
     'ember/order-in-components': 2,
     'ember/alias-model-in-controller': 2,
-    'ember/query-params-on-top': 2,
     'ember/no-empty-attrs': 2,
     'ember/closure-actions': 1,
     'ember/routes-segments-snake-case': 2,
