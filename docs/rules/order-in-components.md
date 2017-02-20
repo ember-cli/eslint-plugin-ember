@@ -1,6 +1,39 @@
-### Organize your components
+## Organize your components
 
-#### `order-in-components`
+### Rule name: `order-in-components`
+
+#### Configuration
+
+```
+ember/order-in-components: [2, {
+  order: [
+    'service',
+    'property',
+    'single-line-function',
+    'multi-line-function',
+    'observer',
+    'lifecycle-hook',
+    'actions',
+    'method',
+  ]
+}]
+```
+
+If you want some of properties to be treated equally in order you can group them into arrays, like so:
+
+```
+order: [
+  'service',
+  'property',
+  ['single-line-function', 'multi-line-function'],
+  'observer',
+  'lifecycle-hook',
+  'actions',
+  'method',
+]
+```
+
+#### Description
 
 You should write code grouped and ordered in this way:
 

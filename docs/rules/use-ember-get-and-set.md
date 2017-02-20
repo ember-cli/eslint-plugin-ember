@@ -1,6 +1,6 @@
-### Use `Ember.get` and `Ember.set`
+## Use `Ember.get` and `Ember.set`
 
-#### `use-ember-get-and-set`
+### Rule name: `use-ember-get-and-set`
 
 This way you don't have to worry whether the object that you're trying to access is an `Ember.Object` or not. It also solves the problem of trying to wrap every object in `Ember.Object` in order to be able to use things like `getWithDefault`.
 

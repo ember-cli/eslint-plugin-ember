@@ -1,9 +1,10 @@
-### Do not use Ember's `function` prototype extensions
+## Do not use Ember's `function` prototype extensions
 
-#### `no-function-prototype-extensions`
+### Rule name: `no-function-prototype-extensions`
 
 Use computed property syntax, observer syntax or module hooks instead of `.property()`, `.observe()` or `.on()` in Ember modules.
-```js
+
+```javascript
 export default Component.extend({
     // BAD
     abc: function() { /* custom logic */ }.property('xyz'),
@@ -15,3 +16,4 @@ export default Component.extend({
     def: observer('xyz', function() { /* custom logic */ }),
     didInsertElement() { /* custom logic */ }
 });
+```

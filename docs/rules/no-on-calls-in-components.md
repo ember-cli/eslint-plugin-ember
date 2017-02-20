@@ -1,10 +1,10 @@
-### Don't use `.on()` calls as components values
+## Don't use `.on()` calls as components values
 
-#### `no-on-calls-in-components`
+### Rule name: `no-on-calls-in-components`
 
 Prevents using `.on()` in favour of component's lifecycle hooks.
 
-```js
+```javascript
 export default Component.extend({
   // BAD
   abc: on('didInsertElement', function () { /* custom logic */ }),

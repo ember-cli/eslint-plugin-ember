@@ -1,8 +1,9 @@
-### Create local version of Ember.* and DS.*
+## Create local version of Ember.* and DS.*
 
-#### `local-modules`
+### Rule name: `local-modules`
 
 Ember can use new functionality of ES6 - `modules`. In the near future, Ember will use this convention and eventually we will have to import `computed` instead of `Ember.computed`. To make code more clear and ready for the future, we should create local versions of these modules.
+
 ```javascript
 import Ember from 'ember';
 import DS from 'ember-data';

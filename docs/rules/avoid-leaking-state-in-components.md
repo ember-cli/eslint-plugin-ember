@@ -1,14 +1,25 @@
-### Avoid leaking state
+## Avoid leaking state
 
-#### `avoid-leaking-state-in-components`
+### Rule name: `avoid-leaking-state-in-components`
 
-*Example config:*
-```netguru-ember/avoid-leaking-state-in-components: [1, ['array', 'of', 'ignored', 'properties']]```
+#### Configuration
+
+Example configuration:
+
+```
+ember/avoid-leaking-state-in-components: [1, [
+  'array',
+  'of',
+  'ignored',
+  'properties',
+]]
+```
+
+#### Description
 
 Don't use arrays and objects as default properties. More info here: https://dockyard.com/blog/2015/09/18/ember-best-practices-avoid-leaking-state-into-factories
 
-
-```
+```javascript
 // BAD
 export default Ember.Component.extend({
   items: [],
@@ -21,7 +32,7 @@ export default Ember.Component.extend({
 });
 ```
 
-```
+```javascript
 // Good
 export default Ember.Component.extend({
   init() {

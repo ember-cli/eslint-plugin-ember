@@ -1,10 +1,10 @@
-### Don't introduce side-effects in computed properties
+## Don't introduce side-effects in computed properties
 
-#### `no-side-effect`
+### Rule name: `no-side-effect`
 
 When using computed properties do not introduce side effects. It will make reasoning about the origin of the change much harder.
 
-```js
+```javascript
 import Ember from 'ember';
 
 const {

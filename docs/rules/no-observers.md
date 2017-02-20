@@ -1,8 +1,9 @@
-### Don't use observers
+## Don't use observers
 
-#### `no-observers`
+### Rule name: `no-observers`
 
 Usage of observers is very easy **BUT** it leads to hard to reason about consequences. Unless observers are necessary, it's better to avoid them.
+
 ```hbs
 {{input value=text key-up="change"}}
 ```

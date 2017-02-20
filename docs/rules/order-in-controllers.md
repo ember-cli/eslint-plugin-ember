@@ -1,17 +1,49 @@
-### Organize your controllers
+## Organize your controllers
 
-#### `order-in-controllers`
+### Rule name: `order-in-controllers`
+
+#### Configuration
+
+```
+ember/order-in-controllers: [2, {
+  order: [
+    'service',
+    'query-params',
+    'inherited-property',
+    'property',
+    'single-line-function',
+    'multi-line-function',
+    'observer',
+    'actions',
+    'method',
+  ]
+}]
+```
+
+If you want some of properties to be treated equally in order you can group them into arrays, like so:
+
+```
+order: [
+  ['service', 'query-params'],
+  'inherited-property',
+  'property',
+  ['single-line-function', 'multi-line-function']
+]
+```
+
+#### Description
 
 You should write code grouped and ordered in this way:
 
 1. Services
-2. Default controller's properties
-3. Custom properties
-4. Single line computed properties
-5. Multi line computed properties
-6. Observers
-7. Actions
-8. Custom / private methods
+2. Query params
+3. Default controller's properties
+4. Custom properties
+5. Single line computed properties
+6. Multi line computed properties
+7. Observers
+8. Actions
+9. Custom / private methods
 
 
 ```javascript
