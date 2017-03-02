@@ -16,7 +16,6 @@
 	* [`order-in-controllers`](./rules/order-in-controllers.md)
 * Controllers
 	* [`alias-model-in-controller`](./rules/alias-model-in-controller.md)
-	* [`query-params-on-top`](./rules/query-params-on-top.md)
 * Components
 	* [`closure-actions`](./rules/closure-actions.md)
 	* [`no-on-calls-in-components`](./rules/no-on-calls-in-components.md)
