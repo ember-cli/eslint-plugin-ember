@@ -81,7 +81,6 @@ All rules from this plugin have to be prefixed with `ember/`
 
 * Controllers
   * **alias-model-in-controller** - Alias your model [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#alias-your-model)
-  * **query-params-on-top** - Query params should always be on top [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#query-params-should-always-be-on-top)
 
 * Ember Data
   * **no-empty-attrs** - Be explicit with Ember data attribute types [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#be-explicit-with-ember-data-attribute-types)
@@ -120,7 +119,6 @@ All rules from this plugin have to be prefixed with `ember/`
 "ember/order-in-controllers": 0,
 "ember/order-in-models": 0,
 "ember/order-in-routes": 0,
-"ember/query-params-on-top": 0,
 "ember/routes-segments-snake-case": 0,
 "ember/use-brace-expansion": 0,
 "ember/use-ember-get-and-set": 0,
