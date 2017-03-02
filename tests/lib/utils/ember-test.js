@@ -38,27 +38,134 @@ describe('isDSModel', () => {
   });
 });
 
-describe('isEmberComponent', () => {
-  const node = parse('Ember.Component()');
+describe('isModuleByFilePath', () => {
+  it('should check if current file is a component', () => {
+    const filePath = 'example-app/components/path/to/some-component.js';
+    assert.ok(emberUtils.isModuleByFilePath(filePath, 'component'));
+  });
 
+  it('should check if current file is a component in PODs structure', () => {
+    const filePath = 'example-app/components/path/to/some-component/component.js';
+    assert.ok(emberUtils.isModuleByFilePath(filePath, 'component'));
+  });
+
+  it('should check if current file is a controller', () => {
+    const filePath = 'example-app/controllers/path/to/some-feature.js';
+    assert.ok(emberUtils.isModuleByFilePath(filePath, 'controller'));
+  });
+
+  it('should check if current file is a controller in PODs structure', () => {
+    const filePath = 'example-app/path/to/some-feature/controller.js';
+    assert.ok(emberUtils.isModuleByFilePath(filePath, 'controller'));
+  });
+
+  it('should check if current file is a route', () => {
+    const filePath = 'example-app/routes/path/to/some-feature.js';
+    assert.ok(emberUtils.isModuleByFilePath(filePath, 'route'));
+  });
+
+  it('should check if current file is a route - PODs structure', () => {
+    const filePath = 'example-app/routes/path/to/some-feature/route.js';
+    assert.ok(emberUtils.isModuleByFilePath(filePath, 'route'));
+  });
+});
+
+describe('isEmberComponent', () => {
   it('should check if it\'s an Ember Component', () => {
-    assert.ok(emberUtils.isEmberComponent(node));
+    let node;
+
+    node = parse('Ember.Component.extend()');
+    assert.ok(
+      emberUtils.isEmberComponent(node),
+      'it should detect Component when using Ember.Component'
+    );
+
+    node = parse('Component.extend()');
+    assert.ok(
+      emberUtils.isEmberComponent(node),
+      'it should detect Component when using local module Component'
+    );
+  });
+
+  it('should check if it\'s an Ember Component even if it uses custom name', () => {
+    const node = parse('CustomComponent.extend()');
+    const filePath = 'example-app/components/path/to/some-component.js';
+
+    assert.notOk(
+      emberUtils.isEmberComponent(node),
+      'it shouldn\'t detect Component when no file path is provided'
+    );
+
+    assert.ok(
+      emberUtils.isEmberComponent(node, filePath),
+      'it should detect Component when file path is provided'
+    );
   });
 });
 
 describe('isEmberController', () => {
-  const node = parse('Ember.Controller()');
-
   it('should check if it\'s an Ember Controller', () => {
-    assert.ok(emberUtils.isEmberController(node));
+    let node;
+
+    node = parse('Ember.Controller.extend()');
+    assert.ok(
+      emberUtils.isEmberController(node),
+      'it should detect Controller when using Ember.Controller'
+    );
+
+    node = parse('Controller.extend()');
+    assert.ok(
+      emberUtils.isEmberController(node),
+      'it should detect Controller when using local module Controller'
+    );
+  });
+
+  it('should check if it\'s an Ember Controller even if it uses custom name', () => {
+    const node = parse('CustomController.extend()');
+    const filePath = 'example-app/controllers/path/to/some-feature.js';
+
+    assert.notOk(
+      emberUtils.isEmberController(node),
+      'it shouldn\'t detect Controller when no file path is provided'
+    );
+
+    assert.ok(
+      emberUtils.isEmberController(node, filePath),
+      'it should detect Controller when file path is provided'
+    );
   });
 });
 
 describe('isEmberRoute', () => {
-  const node = parse('Ember.Route()');
-
   it('should check if it\'s an Ember Route', () => {
-    assert.ok(emberUtils.isEmberRoute(node));
+    let node;
+
+    node = parse('Ember.Route.extend()');
+    assert.ok(
+      emberUtils.isEmberRoute(node),
+      'it should detect Route when using Ember.Route'
+    );
+
+    node = parse('Route.extend()');
+    assert.ok(
+      emberUtils.isEmberRoute(node),
+      'it should detect Route when using local module Route'
+    );
+  });
+
+  it('should check if it\'s an Ember Route even if it uses custom name', () => {
+    const node = parse('CustomRoute.extend()');
+    const filePath = 'example-app/routes/path/to/some-feature.js';
+
+    assert.notOk(
+      emberUtils.isEmberRoute(node),
+      'it shouldn\'t detect Route when no file path is provided'
+    );
+
+    assert.ok(
+      emberUtils.isEmberRoute(node, filePath),
+      'it should detect Route when file path is provided'
+    );
   });
 });
 
