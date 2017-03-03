@@ -164,5 +164,41 @@ eslintTester.run('order-in-controllers', rule, {
         line: 4,
       }],
     },
+    {
+      filename: 'example-app/controllers/some-controller.js',
+      code: `export default CustomController.extend({
+        queryParams: [],
+        currentUser: service()
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
+        line: 3,
+      }],
+    },
+    {
+      filename: 'example-app/some-feature/controller.js',
+      code: `export default CustomController.extend({
+        queryParams: [],
+        currentUser: service()
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
+        line: 3,
+      }],
+    },
+    {
+      filename: 'example-app/twised-path/some-controller.js',
+      code: `export default Controller.extend({
+        queryParams: [],
+        currentUser: service()
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
+        line: 3,
+      }],
+    },
   ],
 });

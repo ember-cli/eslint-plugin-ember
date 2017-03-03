@@ -180,5 +180,41 @@ eslintTester.run('order-in-routes', rule, {
         line: 4,
       }],
     },
+    {
+      filename: 'example-app/routes/some-route.js',
+      code: `export default CustomRoute.extend({
+        model() {},
+        test: "asd",
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "test" property should be above the "model" hook on line 2',
+        line: 3,
+      }],
+    },
+    {
+      filename: 'example-app/some-feature/route.js',
+      code: `export default CustomRoute.extend({
+        model() {},
+        test: "asd",
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "test" property should be above the "model" hook on line 2',
+        line: 3,
+      }],
+    },
+    {
+      filename: 'example-app/twisted-path/some-file.js',
+      code: `export default Route.extend({
+        model() {},
+        test: "asd",
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "test" property should be above the "model" hook on line 2',
+        line: 3,
+      }],
+    },
   ],
 });

@@ -32,6 +32,11 @@ eslintTester.run('alias-model-in-controller', rule, {
       code: 'export default Ember.Controller.extend(TestMixin, TestMixin2, {nail: Ember.computed.alias("model")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    {
+      filename: 'example-app/controllers/path/to/some-feature.js',
+      code: 'export default CustomController.extend({nail: alias("model")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
   ],
   invalid: [
     {
@@ -71,6 +76,30 @@ eslintTester.run('alias-model-in-controller', rule, {
     },
     {
       code: 'export default Ember.Controller.extend(TestMixin, TestMixin2, {});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Alias your model',
+      }],
+    },
+    {
+      filename: 'example-app/controllers/path/to/some-feature.js',
+      code: 'export default CustomController.extend({});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Alias your model',
+      }],
+    },
+    {
+      filename: 'example-app/some-feature/controller.js',
+      code: 'export default CustomController.extend({});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Alias your model',
+      }],
+    },
+    {
+      filename: 'example-app/twisted-path/some-file.js',
+      code: 'export default Controller.extend({});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'Alias your model',

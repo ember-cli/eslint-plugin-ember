@@ -70,6 +70,44 @@ describe('isModuleByFilePath', () => {
   });
 });
 
+describe('isEmberCoreModule', () => {
+  it('should check if current file is a component', () => {
+    const node = parse('CustomComponent.extend()');
+    const filePath = 'example-app/components/path/to/some-component.js';
+    assert.ok(emberUtils.isEmberCoreModule(node, 'component', filePath));
+  });
+
+  it('should check if current file is a component', () => {
+    const node = parse('Component.extend()');
+    const filePath = 'example-app/some-twisted-path/some-component.js';
+    assert.ok(emberUtils.isEmberCoreModule(node, 'component', filePath));
+  });
+
+  it('should check if current file is a controller', () => {
+    const node = parse('CustomController.extend()');
+    const filePath = 'example-app/controllers/path/to/some-controller.js';
+    assert.ok(emberUtils.isEmberCoreModule(node, 'controller', filePath));
+  });
+
+  it('should check if current file is a controller', () => {
+    const node = parse('Controller.extend()');
+    const filePath = 'example-app/some-twisted-path/some-controller.js';
+    assert.ok(emberUtils.isEmberCoreModule(node, 'controller', filePath));
+  });
+
+  it('should check if current file is a route', () => {
+    const node = parse('CustomRoute.extend()');
+    const filePath = 'example-app/routes/path/to/some-route.js';
+    assert.ok(emberUtils.isEmberCoreModule(node, 'route', filePath));
+  });
+
+  it('should check if current file is a route', () => {
+    const node = parse('Route.extend()');
+    const filePath = 'example-app/some-twisted-path/some-route.js';
+    assert.ok(emberUtils.isEmberCoreModule(node, 'route', filePath));
+  });
+});
+
 describe('isEmberComponent', () => {
   it('should check if it\'s an Ember Component', () => {
     let node;
