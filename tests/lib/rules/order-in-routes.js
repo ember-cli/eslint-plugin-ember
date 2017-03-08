@@ -21,6 +21,9 @@ eslintTester.run('order-in-routes', rule, {
         currentUser: service(),
         queryParams: {},
         customProp: "test",
+        vehicle: alias("car"),
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
         model() {},
         beforeModel() {},
         actions: {},
@@ -32,8 +35,10 @@ eslintTester.run('order-in-routes', rule, {
     },
     {
       code: `export default Route.extend({
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
         model() {},
-        actions: { 
+        actions: {
           test() { return this._customAction() }
         },
         _customAction() {}
@@ -51,6 +56,9 @@ eslintTester.run('order-in-routes', rule, {
     {
       code: `export default Route.extend({
         mergedProperties: {},
+        vehicle: alias("car"),
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
         model() {},
         actions: {}
       });`,
@@ -60,6 +68,7 @@ eslintTester.run('order-in-routes', rule, {
       code: `export default Route.extend({
         mergedProperties: {},
         test: "asd",
+        vehicle: alias("car"),
         model() {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
@@ -88,6 +97,7 @@ eslintTester.run('order-in-routes', rule, {
         customProp: "test",
         model() {},
         beforeModel() {},
+        vehicle: alias("car"),
         actions: {},
         _customAction() {}
       });`,
@@ -95,6 +105,9 @@ eslintTester.run('order-in-routes', rule, {
       errors: [{
         message: 'The "currentUser" service injection should be above the inherited "queryParams" property on line 2',
         line: 3,
+      }, {
+        message: 'The "vehicle" single-line function should be above the "model" hook on line 5',
+        line: 7,
       }],
     },
     {
@@ -104,12 +117,17 @@ eslintTester.run('order-in-routes', rule, {
         model() {},
         beforeModel() {},
         actions: {},
-        _customAction() {}
+        _customAction() {},
+        levelOfHappiness: computed("attitude", "health", () => {
+        })
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The inherited "queryParams" property should be above the "customProp" property on line 2',
         line: 3,
+      }, {
+        message: 'The "levelOfHappiness" multi-line function should be above the "model" hook on line 4',
+        line: 8,
       }],
     },
     {
@@ -133,6 +151,7 @@ eslintTester.run('order-in-routes', rule, {
     {
       code: `export default Route.extend({
         queryParams: {},
+        vehicle: alias("car"),
         customProp: "test",
         model() {},
         _customAction() {},
@@ -140,8 +159,11 @@ eslintTester.run('order-in-routes', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'The actions hash should be above the "_customAction" method on line 5',
-        line: 6,
+        message: 'The "customProp" property should be above the "vehicle" single-line function on line 3',
+        line: 4,
+      }, {
+        message: 'The actions hash should be above the "_customAction" method on line 6',
+        line: 7,
       }],
     },
     {
