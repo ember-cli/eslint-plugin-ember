@@ -84,5 +84,29 @@ eslintTester.run('no-on-calls-in-components', rule, {
         message: 'Don\'t use .on() in components',
       }],
     },
+    {
+      filename: 'example-app/components/some-component/component.js',
+      code: 'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Don\'t use .on() in components',
+      }],
+    },
+    {
+      filename: 'example-app/components/some-component.js',
+      code: 'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Don\'t use .on() in components',
+      }],
+    },
+    {
+      filename: 'example-app/twised-path/some-file.js',
+      code: 'export default Component.extend({test: on("didInsertElement", function () {})});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Don\'t use .on() in components',
+      }],
+    },
   ],
 });

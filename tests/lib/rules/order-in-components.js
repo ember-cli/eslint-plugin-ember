@@ -546,5 +546,41 @@ eslintTester.run('order-in-components', rule, {
         line: 5,
       }],
     },
+    {
+      filename: 'example-app/components/some-component/component.js',
+      code: `export default CustomComponent.extend({
+        actions: {},
+        role: "sloth",
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "role" property should be above the actions hash on line 2',
+        line: 3,
+      }],
+    },
+    {
+      filename: 'example-app/components/some-component.js',
+      code: `export default CustomComponent.extend({
+        actions: {},
+        role: "sloth",
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "role" property should be above the actions hash on line 2',
+        line: 3,
+      }],
+    },
+    {
+      filename: 'example-app/twisted-path/some-component.js',
+      code: `export default Component.extend({
+        actions: {},
+        role: "sloth",
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "role" property should be above the actions hash on line 2',
+        line: 3,
+      }],
+    },
   ],
 });

@@ -88,5 +88,29 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
         message: 'Avoid using objects as default properties',
       }],
     },
+    {
+      filename: 'example-app/components/some-component.js',
+      code: 'export default CustomComponent.extend({someProp: []});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Avoid using arrays as default properties',
+      }],
+    },
+    {
+      filename: 'example-app/components/some-component/component.js',
+      code: 'export default CustomComponent.extend({someProp: new A()});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Avoid using arrays as default properties',
+      }],
+    },
+    {
+      filename: 'example-app/twisted-path/some-file.js',
+      code: 'export default Component.extend({someProp: {}});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Avoid using objects as default properties',
+      }],
+    },
   ],
 });
