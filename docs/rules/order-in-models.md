@@ -5,7 +5,7 @@
 #### Configuration
 
 ```
-ember/order-in-controllers: [2, {
+ember/order-in-models: [2, {
   order: [
     'attribute',
     'relationship',
