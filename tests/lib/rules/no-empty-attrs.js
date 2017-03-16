@@ -10,6 +10,8 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester();
+const message = 'Supply proper attribute type';
+
 eslintTester.run('no-empty-attrs', rule, {
   valid: [
     {
@@ -41,18 +43,50 @@ eslintTester.run('no-empty-attrs', rule, {
   ],
   invalid: [
     {
-      code: 'export default Model.extend({name: attr(), points: attr("number"), dob: attr("date")});',
+      code: `export default Model.extend({
+        name: attr(),
+        points: attr("number"),
+        dob: attr("date")
+      });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Supply proper attribute type',
-      }],
+      errors: [{ message, line: 2 }],
     },
     {
-      code: 'export default Model.extend({name: attr("string"), points: attr("number"), dob: attr()});',
+      code: `export default Model.extend({
+        name: attr("string"),
+        points: attr("number"),
+        dob: attr()
+      });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Supply proper attribute type',
-      }],
+      errors: [{ message, line: 4 }],
+    },
+    {
+      code: `export default Model.extend({
+        name: attr("string"),
+        points: attr(),
+        dob: attr("date")
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{ message, line: 3 }],
+    },
+    {
+      code: `export default Model.extend({
+        name: attr("string"),
+        points: attr(),
+        dob: attr(),
+        someComputedProperty: computed.bool(true)
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{ message, line: 3 }, { message, line: 4 }],
+    },
+    {
+      code: `export default Model.extend({
+        name: attr(),
+        points: attr(),
+        dob: attr()
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{ message, line: 2 }, { message, line: 3 }, { message, line: 4 }],
     },
   ],
 });
