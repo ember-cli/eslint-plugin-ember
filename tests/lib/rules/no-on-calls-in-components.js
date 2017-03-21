@@ -10,6 +10,8 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester();
+const message = 'Don\'t use .on() in components';
+
 eslintTester.run('no-on-calls-in-components', rule, {
   valid: [
     {
@@ -71,18 +73,30 @@ eslintTester.run('no-on-calls-in-components', rule, {
   ],
   invalid: [
     {
-      code: 'export default Component.extend({test: on("didInsertElement", function () {})});',
+      code: `export default Component.extend({
+        test: on("didInsertElement", function () {})
+      });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Don\'t use .on() in components',
-      }],
+      errors: [{ message, line: 2 }],
     },
     {
-      code: 'export default Component.extend({test: Ember.on("didInsertElement", function () {})});',
+      code: `export default Component.extend({
+        test: on("init", observer("someProperty", function () {
+          return true;
+        })),
+        someComputedProperty: computed.bool(true)
+      });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Don\'t use .on() in components',
-      }],
+      errors: [{ message, line: 2 }],
+    },
+    {
+      code: `export default Component.extend({
+        test: Ember.on("didInsertElement", function () {}),
+        someComputedProperty: Ember.computed.readOnly('Hello World!'),
+        anotherTest: Ember.on("willDestroyElement", function () {})
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{ message, line: 2 }, { message, line: 4 }],
     },
   ],
 });
