@@ -66,7 +66,7 @@ All rules from this plugin have to be prefixed with `ember/`
 * General
   * **local-modules** - Create local version of Ember.* and DS.* [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#create-local-version-of-ember-and-ds)
   * **no-observers** - Don't use observers [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#dont-use-observers)
-  * **no-side-effect** - Don't introduce side-effects in computed properties [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#dont-introduce-side-effects-in-computed-properties)
+  * **no-side-effects** - Don't introduce side-effects in computed properties [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#dont-introduce-side-effects-in-computed-properties)
   * **jquery-ember-run** - Don’t use jQuery without Ember Run Loop [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#dont-use-jquery-without-ember-run-loop)
   * **named-functions-in-promises** - Use named functions defined on objects to handle promises [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#use-named-functions-defined-on-objects-to-handle-promises)
   * **no-function-prototype-extensions** - Don't use Ember's function prototype extensions [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#do-not-use-embers-function-prototype-extensions)
