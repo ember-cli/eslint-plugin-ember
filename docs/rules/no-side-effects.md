@@ -1,6 +1,6 @@
 ## Don't introduce side-effects in computed properties
 
-### Rule name: `no-side-effect`
+### Rule name: `no-side-effects`
 
 When using computed properties do not introduce side effects. It will make reasoning about the origin of the change much harder.
 
