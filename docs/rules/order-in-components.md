@@ -33,7 +33,7 @@ order: [
 ]
 ```
 
-You can find full list of properties that you can use to configure this rule [here](lib/utils/property-order.js#L10).
+You can find full list of properties that you can use to configure this rule [here](/lib/utils/property-order.js#L10).
 
 #### Description
 
