@@ -23,7 +23,7 @@
 
 #### Use with predefined settings:
 
-```
+```javascript
 // .eslintrc.js
 module.exports = {
   extends: [
@@ -44,7 +44,7 @@ Possible configurations:
 
 If you don't want to use predefined settings, you can use it as a plain plugin and choose which rules you'd like to use by yourself like this:
 
-```
+```javascript
 module.exports = {
   extends: [
     'eslint:recommended'
@@ -91,8 +91,8 @@ All rules from this plugin have to be prefixed with `ember/`
   * \* **avoid-leaking-state-in-components** - Don't use objects and arrays as default properties [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#avoid-leaking-state)
 
     Example config:
-    ```
-    ember/avoid-leaking-state-in-components: [1, ['array', 'of', 'ignored', 'properties']]
+    ```javascript
+    'ember/avoid-leaking-state-in-components': [1, ['array', 'of', 'ignored', 'properties']]
     ```
 
 
@@ -103,7 +103,7 @@ All rules from this plugin have to be prefixed with `ember/`
 
 ### All Rules in JSON
 
-```
+```javascript
 "ember/alias-model-in-controller": 0,
 "ember/avoid-leaking-state-in-components": 0,
 "ember/closure-actions": 0,
