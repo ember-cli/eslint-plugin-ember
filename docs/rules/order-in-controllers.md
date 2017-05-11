@@ -59,10 +59,10 @@ export default Controller.extend({
   queryParams: ['view'],
 
   // 3. Default controller's properties
-  attitude: 10,
+  concatenatedProperties: ['concatenatedProperty'],
   
   // 4. Custom properties
-  ???
+  attitude: 10,
 
   // 5. Single line Computed Property
   health: alias('model.health'),
