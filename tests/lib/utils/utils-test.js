@@ -97,7 +97,7 @@ describe('isArrowFunctionExpression', () => {
 describe('isConciseArrowFunctionExpressionWithCall', () => {
   const node = parse('test = () => foo()').right;
 
-  it('should check if node is arrow function expression', () => {
+  it('should check if node is concise arrow function expression with call expression body', () => {
     assert.ok(utils.isConciseArrowFunctionWithCallExpression(node));
   });
 });
