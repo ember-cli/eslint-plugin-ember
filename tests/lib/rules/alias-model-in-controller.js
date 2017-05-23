@@ -25,6 +25,30 @@ eslintTester.run('alias-model-in-controller', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
+      code: 'export default Ember.Controller.extend({nail: readOnly("model")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend({nail: computed.readOnly("model")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend({nail: Ember.computed.readOnly("model")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend({nail: reads("model")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend({nail: computed.reads("model")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend({nail: Ember.computed.reads("model")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
       code: 'export default Ember.Controller.extend(TestMixin, {nail: Ember.computed.alias("model")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
