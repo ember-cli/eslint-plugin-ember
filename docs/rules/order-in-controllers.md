@@ -55,33 +55,36 @@ export default Controller.extend({
   // 1. Services
   currentUser: service(),
 
-  // 2. Default route's properties
+  // 2. Query params
   queryParams: ['view'],
 
-  // 3. Custom properties
+  // 3. Default controller's properties
+  concatenatedProperties: ['concatenatedProperty'],
+  
+  // 4. Custom properties
   attitude: 10,
 
-  // 4. Single line Computed Property
+  // 5. Single line Computed Property
   health: alias('model.health'),
 
-  // 5. Multiline Computed Property
+  // 6. Multiline Computed Property
   levelOfHappiness: computed('attitude', 'health', function() {
     return get(this, 'attitude') * get(this, 'health') * Math.random();
   }),
 
-  // 6. Observers
+  // 7. Observers
   onVahicleChange: observer('vehicle', function() {
     // observer logic
   }),
 
-  // 7. All actions
+  // 8. All actions
   actions: {
     sneakyAction() {
       return this._secretMethod();
     },
   },
 
-  // 8. Custom / private methods
+  // 9. Custom / private methods
   _secretMethod() {
     // custom secret method logic
   },
