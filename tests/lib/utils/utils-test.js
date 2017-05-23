@@ -126,6 +126,14 @@ describe('isConditionalExpression', () => {
   });
 });
 
+describe('isTaggedTemplateExpression', () => {
+  const node = parse('test = hbs`lorem ipsum`;').right;
+
+  it('should check if node is a tagged template expression', () => {
+    assert.ok(utils.isTaggedTemplateExpression(node));
+  });
+});
+
 describe('getSize', () => {
   const node = parse('some = {\nfew: "line",\nheight: "statement",\nthat: "should",\nhave: "6 lines",\n};');
 
