@@ -6,11 +6,12 @@
 
 ```
 ember/named-functions-in-promises: [2, {
-  allowConciseArrow: false,
+  allowSimpleArrowFunction: false,
 }]
 ```
 
-Setting `allowConciseArrow` to `true` allows arrow function expressions that do not have block bodies.
+Setting `allowSimpleArrowFunction` to `true` allows arrow function expressions that do not have block bodies.
+These simple arrow functions must also only contain a single function call.
 For example: `.then(user => this._reloadUser(user))`.
 
 #### Description

@@ -94,6 +94,14 @@ describe('isArrowFunctionExpression', () => {
   });
 });
 
+describe('isConciseArrowFunctionExpressionWithCall', () => {
+  const node = parse('test = () => foo()').right;
+
+  it('should check if node is arrow function expression', () => {
+    assert.ok(utils.isConciseArrowFunctionWithCallExpression(node));
+  });
+});
+
 describe('isNewExpression', () => {
   const node = parse('new Date()');
 
