@@ -306,6 +306,9 @@ describe('isCustomProp', () => {
     node = getProperty('test = { test: foo ? \'bar\': \'baz\' }');
     assert.ok(emberUtils.isCustomProp(node));
 
+    node = getProperty('test = { test: hbs`lorem ipsum` }');
+    assert.ok(emberUtils.isCustomProp(node));
+
     node = getProperty('test = { actions: {} }');
     assert.notOk(emberUtils.isCustomProp(node));
   });
