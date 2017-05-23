@@ -2,6 +2,20 @@
 
 ### Rule name: `named-functions-in-promises`
 
+#### Configuration
+
+```
+ember/named-functions-in-promises: [2, {
+  allowSimpleArrowFunction: false,
+}]
+```
+
+Setting `allowSimpleArrowFunction` to `true` allows arrow function expressions that do not have block bodies.
+These simple arrow functions must also only contain a single function call.
+For example: `.then(user => this._reloadUser(user))`.
+
+#### Description
+
 When you use promises and its handlers, use named functions defined on parent object. Thus, you will be able to test them in isolation using unit tests without any additional mocking.
 
 ```javascript
