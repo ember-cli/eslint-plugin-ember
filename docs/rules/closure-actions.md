@@ -22,7 +22,7 @@ export default Controller.extend({
 export default Component.extend({
   actions: {
     pushLever() {
-      this.attrs.boom();
+      get(this, 'boom')();
     }
   }
 })
