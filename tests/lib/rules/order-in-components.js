@@ -233,17 +233,17 @@ eslintTester.run('order-in-components', rule, {
 
         levelOfHappiness: computed.or("asd", "qwe"),
 
-        actions: {} 
+        actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: `export default Component.extend({ 
+      code: `export default Component.extend({
         role: "sloth",
 
         levelOfHappiness: computed(function() {}),
 
-        actions: {} 
+        actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
@@ -254,7 +254,7 @@ eslintTester.run('order-in-components', rule, {
         levelOfHappiness: computed(function() {
         }),
 
-        actions: {} 
+        actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
@@ -515,7 +515,7 @@ eslintTester.run('order-in-components', rule, {
       code: `export default Component.extend(TestMixin, TestMixin2, {
         foo: alias("car"),
 
-        levelOfHappiness: computed("attitude", "health", () => {  
+        levelOfHappiness: computed("attitude", "health", () => {
         }),
 
         vehicle: alias("car"),
@@ -572,6 +572,18 @@ eslintTester.run('order-in-components', rule, {
     },
     {
       filename: 'example-app/twisted-path/some-component.js',
+      code: `export default Component.extend({
+        actions: {},
+        role: "sloth",
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "role" property should be above the actions hash on line 2',
+        line: 3,
+      }],
+    },
+    {
+      filename: 'example-app/components/g-map-route.js',
       code: `export default Component.extend({
         actions: {},
         role: "sloth",

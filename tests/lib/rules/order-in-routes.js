@@ -88,6 +88,23 @@ eslintTester.run('order-in-routes', rule, {
         ],
       }],
     },
+    {
+      filename: 'example-app/components/g-map-route.js',
+      code: `export default Component.extend({
+        actions: {},
+        role: "sloth",
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      filename: 'example-app/models/route.js',
+      code: `export default Model.extend({
+          mood: computed("health", "hunger", function() {
+          }),
+          behaviors: hasMany("behaviour"),
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
   ],
   invalid: [
     {
