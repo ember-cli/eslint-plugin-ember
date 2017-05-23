@@ -233,17 +233,17 @@ eslintTester.run('order-in-components', rule, {
 
         levelOfHappiness: computed.or("asd", "qwe"),
 
-        actions: {} 
+        actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: `export default Component.extend({ 
+      code: `export default Component.extend({
         role: "sloth",
 
         levelOfHappiness: computed(function() {}),
 
-        actions: {} 
+        actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
@@ -254,7 +254,7 @@ eslintTester.run('order-in-components', rule, {
         levelOfHappiness: computed(function() {
         }),
 
-        actions: {} 
+        actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
@@ -310,6 +310,14 @@ eslintTester.run('order-in-components', rule, {
         def: {},
 
         ghi: alias("def")
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: `export default Component.extend({
+        template: hbs\`Hello world {{name}}\`,
+        name: "Jon Snow",
+        actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
@@ -515,7 +523,7 @@ eslintTester.run('order-in-components', rule, {
       code: `export default Component.extend(TestMixin, TestMixin2, {
         foo: alias("car"),
 
-        levelOfHappiness: computed("attitude", "health", () => {  
+        levelOfHappiness: computed("attitude", "health", () => {
         }),
 
         vehicle: alias("car"),
@@ -580,6 +588,18 @@ eslintTester.run('order-in-components', rule, {
       errors: [{
         message: 'The "role" property should be above the actions hash on line 2',
         line: 3,
+      }],
+    },
+    {
+      code: `export default Component.extend({
+        name: "Jon Snow",
+        actions: {},
+        template: hbs\`Hello world {{name}}\`,
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "template" property should be above the actions hash on line 3',
+        line: 4,
       }],
     },
   ],
