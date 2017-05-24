@@ -98,6 +98,7 @@ All rules from this plugin have to be prefixed with `ember/`
 
 * Routing
   * **routes-segments-snake-case** - Route's dynamic segments should use snake case [(more)](https://github.com/netguru/eslint-plugin-ember/#route-naming)
+  * **no-capital-letters-in-routes** - Don't use capital letters in routes' names. It results in an app crash and sometimes it's not easy to spot.
 
 \* Rule with optional settings
 
@@ -120,6 +121,7 @@ All rules from this plugin have to be prefixed with `ember/`
 "ember/order-in-models": 0,
 "ember/order-in-routes": 0,
 "ember/routes-segments-snake-case": 0,
+"ember/no-capital-letters-in-routes": 0,
 "ember/use-brace-expansion": 0,
 "ember/use-ember-get-and-set": 0,
 ```

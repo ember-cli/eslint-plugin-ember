@@ -24,3 +24,4 @@
 	* [`no-empty-attrs`](./rules/no-empty-attrs.md)
 * Routing
 	* [`routes-segments-snake-case`](./rules/routes-segments-snake-case.md)
+	* [`no-capital-letters-in-routes`](./rules/no-capital-letters-in-routes.md)
