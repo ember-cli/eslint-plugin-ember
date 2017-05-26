@@ -45,8 +45,7 @@ describe('isModuleByFilePath', () => {
   });
 
   it('should check if current file is a component in PODs structure', () => {
-    const filePath =
-      'example-app/components/path/to/some-component/component.js';
+    const filePath = 'example-app/components/path/to/some-component/component.js';
     assert.ok(emberUtils.isModuleByFilePath(filePath, 'component'));
   });
 
@@ -86,8 +85,7 @@ describe('isEmberCoreModule', () => {
 
   it('should check if current file is a controller', () => {
     const node = parse('CustomController.extend()');
-    const filePath =
-      'example-app/controllers/path/to/some-controller.js';
+    const filePath = 'example-app/controllers/path/to/some-controller.js';
     assert.ok(emberUtils.isEmberCoreModule(node, 'controller', filePath));
   });
 
@@ -324,15 +322,13 @@ describe('isActionsProp', () => {
 });
 
 describe('getModuleProperties', () => {
-  const module = parse(
-    `
+  const module = parse(`
     Ember.Component.extend(SomeMixin, {
       asd: 'qwe',
       actions: {},
       someMethod() {}
     })
-  `
-  );
+  `);
 
   it('returns module\'s properties', () => {
     const properties = emberUtils.getModuleProperties(module);
@@ -341,8 +337,7 @@ describe('getModuleProperties', () => {
 });
 
 describe('isSingleLineFn', () => {
-  const property = getProperty(
-    `test = {
+  const property = getProperty(`test = {
     test: computed.or('asd', 'qwe')
   }`);
 
@@ -352,13 +347,11 @@ describe('isSingleLineFn', () => {
 });
 
 describe('isMultiLineFn', () => {
-  const property = getProperty(
-    `test = {
+  const property = getProperty(`test = {
     test: computed('asd', function() {
       return get(this, 'asd') + 'test';
     })
-  }`
-  );
+  }`);
 
   it('should check if given function has more than one line', () => {
     assert.ok(emberUtils.isMultiLineFn(property));
@@ -369,8 +362,7 @@ describe('isFunctionExpression', () => {
   let property;
 
   it('should check if given property is a function expression', () => {
-    property = getProperty(
-      `test = {
+    property = getProperty(`test = {
       test: someFn(function() {})
     }`);
     assert.ok(emberUtils.isFunctionExpression(property.value));
