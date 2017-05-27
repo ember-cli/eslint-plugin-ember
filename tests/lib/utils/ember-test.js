@@ -158,20 +158,21 @@ describe('isEmberController', () => {
     );
   });
 
-  it('should check if it\'s an Ember Controller even if it uses custom name', () => {
-    const node = parse('CustomController.extend()');
-    const filePath = 'example-app/controllers/path/to/some-feature.js';
+  it(
+    'should check if it\'s an Ember Controller even if it uses custom name', () => {
+      const node = parse('CustomController.extend()');
+      const filePath = 'example-app/controllers/path/to/some-feature.js';
 
-    assert.notOk(
-      emberUtils.isEmberController(node),
-      'it shouldn\'t detect Controller when no file path is provided'
-    );
+      assert.notOk(
+        emberUtils.isEmberController(node),
+        'it shouldn\'t detect Controller when no file path is provided'
+      );
 
-    assert.ok(
-      emberUtils.isEmberController(node, filePath),
-      'it should detect Controller when file path is provided'
-    );
-  });
+      assert.ok(
+        emberUtils.isEmberController(node, filePath),
+        'it should detect Controller when file path is provided'
+      );
+    });
 });
 
 describe('isEmberRoute', () => {
@@ -408,5 +409,10 @@ describe('isRelation', () => {
       test: DS.belongsTo()
     }`);
     assert.ok(emberUtils.isRelation(property));
+  });
+
+  it('should detect if given node is a route', () => {
+    const node = parse('this.route("lorem-ipsum")');
+    assert.ok(emberUtils.isRoute(node));
   });
 });
