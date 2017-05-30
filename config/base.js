@@ -34,5 +34,6 @@ module.exports = {
     'ember/use-ember-get-and-set': 1,
     'ember/avoid-leaking-state-in-components': 2,
     'ember/use-brace-expansion': 1,
+    'ember/no-capital-letters-in-routes': 2,
   },
 };
