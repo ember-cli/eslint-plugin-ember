@@ -41,7 +41,15 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: 'export default Component.extend({ classNames: [], classNameBindings: [], actions: {}, concatenatedProperties: [], mergedProperties: [], positionalParams: [] });',
+      code: `export default Component.extend({
+        classNames: [],
+        classNameBindings: [],
+        actions: {},
+        concatenatedProperties: [],
+        mergedProperties: [],
+        positionalParams: [],
+        queryParams: {}
+      });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
   ],
@@ -106,11 +114,16 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
     },
     {
       filename: 'example-app/twisted-path/some-file.js',
-      code: 'export default Component.extend({someProp: {}});',
+      code: `export default Component.extend({
+        someProp: {},
+        queryParams: {},
+        someArray: []
+      });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Avoid using objects as default properties',
-      }],
+      errors: [
+        { message: 'Avoid using objects as default properties', line: 2 },
+        { message: 'Avoid using arrays as default properties', line: 4 },
+      ],
     },
   ],
 });
