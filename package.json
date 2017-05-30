@@ -23,8 +23,7 @@
     "ember.js",
     "plugin",
     "styleguide",
-    "rules",
-    "ember-addon"
+    "rules"
   ],
   "author": "Michał Sajnóg <michal.sajnog@hotmail.com> (http://github.com/michalsnik)",
   "contributors": [
@@ -55,8 +54,5 @@
   "dependencies": {
     "requireindex": "^1.1.0",
     "snake-case": "^2.1.0"
-  },
-  "ember-addon": {
-    "main": "index.js"
   }
 }
