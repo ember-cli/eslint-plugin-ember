@@ -11,6 +11,7 @@ const ember = require(resolve(__dirname, 'lib/utils/ember'));
 const utils = require(resolve(__dirname, 'lib/utils/utils'));
 
 module.exports = {
+  name: 'eslint-plugin-ember',
   rules,
   configs,
   utils: {
