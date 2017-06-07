@@ -12,6 +12,9 @@ const RuleTester = require('eslint').RuleTester;
 const eslintTester = new RuleTester();
 eslintTester.run('alias-model-in-controller', rule, {
   valid: [
+
+    // direct alias
+
     {
       code: 'export default Ember.Controller.extend({nail: alias("model")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
@@ -59,6 +62,58 @@ eslintTester.run('alias-model-in-controller', rule, {
     {
       filename: 'example-app/controllers/path/to/some-feature.js',
       code: 'export default CustomController.extend({nail: alias("model")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+
+    // nested alias
+
+    {
+      code: 'export default Ember.Controller.extend({nail: alias("model.nail")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend({nail: computed.alias("model.nail")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend({nail: Ember.computed.alias("model.nail")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend({nail: readOnly("model.nail")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend({nail: computed.readOnly("model.nail")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend({nail: Ember.computed.readOnly("model.nail")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend({nail: reads("model.nail")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend({nail: computed.reads("model.nail")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend({nail: Ember.computed.reads("model.nail")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend(TestMixin, {nail: Ember.computed.alias("model.nail")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Ember.Controller.extend(TestMixin, TestMixin2, {nail: Ember.computed.alias("model.nail")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      filename: 'example-app/controllers/path/to/some-feature.js',
+      code: 'export default CustomController.extend({nail: alias("model.nail")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
   ],

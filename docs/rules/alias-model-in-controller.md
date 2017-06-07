@@ -19,3 +19,17 @@ export default Ember.Route.extend({
     controller.set('nail', model);
   },
 });
+```
+
+If you're passing
+[multiple models](https://guides.emberjs.com/v2.13.0/routing/specifying-a-routes-model/#toc_multiple-models) as an
+[`RSVP.hash`](https://emberjs.com/api/classes/RSVP.html#method_hash),
+you can also alias nested properties:
+
+```javascript
+const { reads } = Ember.computed;
+export default Ember.Controller.extend({
+  people: reads('model.people'),
+  pets:   reads('model.pets')
+});
+```
