@@ -52,6 +52,7 @@
     "jest": "^20.0.4"
   },
   "dependencies": {
+    "ember-rfc176-data": "^0.2.2",
     "requireindex": "^1.1.0",
     "snake-case": "^2.1.0"
   },
