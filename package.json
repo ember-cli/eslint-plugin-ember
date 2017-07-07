@@ -9,9 +9,10 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "jest --watchAll",
+    "start": "yarn run test:watch",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watchAll"
   },
   "repository": {
     "type": "git",
