@@ -1,6 +1,5 @@
 'use strict';
 
-const assert = require('chai').assert;
 const babelEslint = require('babel-eslint');
 const utils = require('../../../lib/utils/utils');
 
@@ -21,12 +20,12 @@ describe('findNodes', () => {
     const news = utils.findNodes(node, 'NewExpression');
     const arrays = utils.findNodes(node, 'ArrayExpression');
 
-    assert.equal(literals.length, 3);
-    assert.equal(identifiers.length, 2);
-    assert.equal(objects.length, 2);
-    assert.equal(functions.length, 1);
-    assert.equal(news.length, 1);
-    assert.equal(arrays.length, 2);
+    expect(literals).toHaveLength(3);
+    expect(identifiers).toHaveLength(2);
+    expect(objects).toHaveLength(2);
+    expect(functions).toHaveLength(1);
+    expect(news).toHaveLength(1);
+    expect(arrays).toHaveLength(2);
   });
 });
 
@@ -34,7 +33,7 @@ describe('isIdentifier', () => {
   const node = parse('test');
 
   it('should check if node is identifier', () => {
-    assert.ok(utils.isIdentifier(node));
+    expect(utils.isIdentifier(node)).toBeTruthy();
   });
 });
 
@@ -42,7 +41,7 @@ describe('isLiteral', () => {
   const node = parse('"test"');
 
   it('should check if node is identifier', () => {
-    assert.ok(utils.isLiteral(node));
+    expect(utils.isLiteral(node)).toBeTruthy();
   });
 });
 
@@ -50,7 +49,7 @@ describe('isMemberExpression', () => {
   const node = parse('test.value');
 
   it('should check if node is member expression', () => {
-    assert.ok(utils.isMemberExpression(node));
+    expect(utils.isMemberExpression(node)).toBeTruthy();
   });
 });
 
@@ -58,7 +57,7 @@ describe('isCallExpression', () => {
   const node = parse('test()');
 
   it('should check if node is call expression', () => {
-    assert.ok(utils.isCallExpression(node));
+    expect(utils.isCallExpression(node)).toBeTruthy();
   });
 });
 
@@ -66,7 +65,7 @@ describe('isObjectExpression', () => {
   const node = parse('test = {}').right;
 
   it('should check if node is identifier', () => {
-    assert.ok(utils.isObjectExpression(node));
+    expect(utils.isObjectExpression(node)).toBeTruthy();
   });
 });
 
@@ -74,7 +73,7 @@ describe('isArrayExpression', () => {
   const node = parse('test = []').right;
 
   it('should check if node is array expression', () => {
-    assert.ok(utils.isArrayExpression(node));
+    expect(utils.isArrayExpression(node)).toBeTruthy();
   });
 });
 
@@ -82,7 +81,7 @@ describe('isFunctionExpression', () => {
   const node = parse('test = function () {}').right;
 
   it('should check if node is function expression', () => {
-    assert.ok(utils.isFunctionExpression(node));
+    expect(utils.isFunctionExpression(node)).toBeTruthy();
   });
 });
 
@@ -90,7 +89,7 @@ describe('isArrowFunctionExpression', () => {
   const node = parse('test = () => {}').right;
 
   it('should check if node is arrow function expression', () => {
-    assert.ok(utils.isArrowFunctionExpression(node));
+    expect(utils.isArrowFunctionExpression(node)).toBeTruthy();
   });
 });
 
@@ -99,11 +98,11 @@ describe('isConciseArrowFunctionExpressionWithCall', () => {
   const blockNode = parse('test = () => { foo() }').right;
 
   it('should check if node is concise arrow function expression with call expression body', () => {
-    assert.ok(utils.isConciseArrowFunctionWithCallExpression(node));
+    expect(utils.isConciseArrowFunctionWithCallExpression(node)).toBeTruthy();
   });
 
   it('should check if node does not have block body', () => {
-    assert.ok(!utils.isConciseArrowFunctionWithCallExpression(blockNode));
+    expect(!utils.isConciseArrowFunctionWithCallExpression(blockNode)).toBeTruthy();
   });
 });
 
@@ -111,7 +110,7 @@ describe('isNewExpression', () => {
   const node = parse('new Date()');
 
   it('should check if node is new expression', () => {
-    assert.ok(utils.isNewExpression(node));
+    expect(utils.isNewExpression(node)).toBeTruthy();
   });
 });
 
@@ -119,7 +118,7 @@ describe('isCallWithFunctionExpression', () => {
   const node = parse('mysteriousFnc(function(){})');
 
   it('should check if node is call with function expression', () => {
-    assert.ok(utils.isCallWithFunctionExpression(node));
+    expect(utils.isCallWithFunctionExpression(node)).toBeTruthy();
   });
 });
 
@@ -127,7 +126,7 @@ describe('isThisExpression', () => {
   const node = parse('this');
 
   it('should check if node is "this" expression', () => {
-    assert.ok(utils.isThisExpression(node));
+    expect(utils.isThisExpression(node)).toBeTruthy();
   });
 });
 
@@ -135,7 +134,7 @@ describe('isConditionalExpression', () => {
   const node = parse('test = true ? \'asd\' : \'qwe\'').right;
 
   it('should check if node is a conditional expression', () => {
-    assert.ok(utils.isConditionalExpression(node));
+    expect(utils.isConditionalExpression(node)).toBeTruthy();
   });
 });
 
@@ -143,7 +142,7 @@ describe('isTaggedTemplateExpression', () => {
   const node = parse('test = hbs`lorem ipsum`;').right;
 
   it('should check if node is a tagged template expression', () => {
-    assert.ok(utils.isTaggedTemplateExpression(node));
+    expect(utils.isTaggedTemplateExpression(node)).toBeTruthy();
   });
 });
 
@@ -151,7 +150,7 @@ describe('getSize', () => {
   const node = parse('some = {\nfew: "line",\nheight: "statement",\nthat: "should",\nhave: "6 lines",\n};');
 
   it('should check size of given expression', () => {
-    assert.equal(utils.getSize(node), 6);
+    expect(utils.getSize(node)).toEqual(6);
   });
 });
 
@@ -159,15 +158,15 @@ describe('parseCallee', () => {
   it('should parse calleeExpression', () => {
     const node = parse('Ember.computed.or("asd", "qwe")');
     const parsedCallee = utils.parseCallee(node);
-    assert.equal(parsedCallee.length, 3, 'it has 3 elements in array');
-    assert.deepEqual(parsedCallee, ['Ember', 'computed', 'or']);
+    expect(parsedCallee).toHaveLength(3, 'it has 3 elements in array');
+    expect(parsedCallee).toEqual(['Ember', 'computed', 'or']);
   });
 
   it('should parse newExpression', () => {
     const node = parse('new Ember.A()');
     const parsedCallee = utils.parseCallee(node);
-    assert.equal(parsedCallee.length, 2, 'it has 2 elements in array');
-    assert.deepEqual(parsedCallee, ['Ember', 'A']);
+    expect(parsedCallee).toHaveLength(2, 'it has 2 elements in array');
+    expect(parsedCallee).toEqual(['Ember', 'A']);
   });
 });
 
@@ -175,7 +174,7 @@ describe('parseArgs', () => {
   it('should parse arguments', () => {
     const node = parse('Ember.computed("asd", "qwe", "zxc", function() {})');
     const parsedArgs = utils.parseArgs(node);
-    assert.equal(parsedArgs.length, 3);
-    assert.deepEqual(parsedArgs, ['asd', 'qwe', 'zxc']);
+    expect(parsedArgs).toHaveLength(3);
+    expect(parsedArgs).toEqual(['asd', 'qwe', 'zxc']);
   });
 });
