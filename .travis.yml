@@ -9,4 +9,4 @@ cache: yarn
 
 script:
   - yarn run lint
-  - yarn test
+  - yarn run test:coverage
