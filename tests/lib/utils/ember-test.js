@@ -22,6 +22,9 @@ describe('isModule', () => {
     node = parse('Ember.Component()');
     assert.ok(emberUtils.isModule(node, 'Component'));
 
+    node = parse('Ember.Component.extend()');
+    assert.ok(emberUtils.isModule(node, 'Component'));
+
     node = parse('DS.test()');
     assert.ok(emberUtils.isModule(node, 'test', 'DS'));
 
@@ -39,33 +42,44 @@ describe('isDSModel', () => {
 });
 
 describe('isModuleByFilePath', () => {
+  let filePath;
+
   it('should check if current file is a component', () => {
-    const filePath = 'example-app/components/path/to/some-component.js';
+    filePath = 'example-app/components/path/to/some-component.js';
+    assert.ok(emberUtils.isModuleByFilePath(filePath, 'component'));
+
+    filePath = 'example-app/components/path/to/g-map-route.js';
     assert.ok(emberUtils.isModuleByFilePath(filePath, 'component'));
   });
 
   it('should check if current file is a component in PODs structure', () => {
-    const filePath = 'example-app/components/path/to/some-component/component.js';
+    filePath = 'example-app/components/path/to/some-component/component.js';
+    assert.ok(emberUtils.isModuleByFilePath(filePath, 'component'));
+
+    filePath = 'example-app/components/path/to/g-map-route/component.js';
     assert.ok(emberUtils.isModuleByFilePath(filePath, 'component'));
   });
 
   it('should check if current file is a controller', () => {
-    const filePath = 'example-app/controllers/path/to/some-feature.js';
+    filePath = 'example-app/controllers/path/to/some-feature.js';
     assert.ok(emberUtils.isModuleByFilePath(filePath, 'controller'));
   });
 
   it('should check if current file is a controller in PODs structure', () => {
-    const filePath = 'example-app/path/to/some-feature/controller.js';
+    filePath = 'example-app/path/to/some-feature/controller.js';
     assert.ok(emberUtils.isModuleByFilePath(filePath, 'controller'));
   });
 
   it('should check if current file is a route', () => {
-    const filePath = 'example-app/routes/path/to/some-feature.js';
+    filePath = 'example-app/routes/path/to/some-feature.js';
     assert.ok(emberUtils.isModuleByFilePath(filePath, 'route'));
+
+    filePath = 'example-app/models/route.js';
+    assert.notOk(emberUtils.isModuleByFilePath(filePath, 'route'));
   });
 
   it('should check if current file is a route - PODs structure', () => {
-    const filePath = 'example-app/routes/path/to/some-feature/route.js';
+    filePath = 'example-app/path/to/some-feature/route.js';
     assert.ok(emberUtils.isModuleByFilePath(filePath, 'route'));
   });
 });
@@ -74,37 +88,37 @@ describe('isEmberCoreModule', () => {
   it('should check if current file is a component', () => {
     const node = parse('CustomComponent.extend()');
     const filePath = 'example-app/components/path/to/some-component.js';
-    assert.ok(emberUtils.isEmberCoreModule(node, 'component', filePath));
+    assert.ok(emberUtils.isEmberCoreModule(node, 'Component', filePath));
   });
 
   it('should check if current file is a component', () => {
     const node = parse('Component.extend()');
     const filePath = 'example-app/some-twisted-path/some-component.js';
-    assert.ok(emberUtils.isEmberCoreModule(node, 'component', filePath));
+    assert.ok(emberUtils.isEmberCoreModule(node, 'Component', filePath));
   });
 
   it('should check if current file is a controller', () => {
     const node = parse('CustomController.extend()');
     const filePath = 'example-app/controllers/path/to/some-controller.js';
-    assert.ok(emberUtils.isEmberCoreModule(node, 'controller', filePath));
+    assert.ok(emberUtils.isEmberCoreModule(node, 'Controller', filePath));
   });
 
   it('should check if current file is a controller', () => {
     const node = parse('Controller.extend()');
     const filePath = 'example-app/some-twisted-path/some-controller.js';
-    assert.ok(emberUtils.isEmberCoreModule(node, 'controller', filePath));
+    assert.ok(emberUtils.isEmberCoreModule(node, 'Controller', filePath));
   });
 
   it('should check if current file is a route', () => {
     const node = parse('CustomRoute.extend()');
     const filePath = 'example-app/routes/path/to/some-route.js';
-    assert.ok(emberUtils.isEmberCoreModule(node, 'route', filePath));
+    assert.ok(emberUtils.isEmberCoreModule(node, 'Route', filePath));
   });
 
   it('should check if current file is a route', () => {
     const node = parse('Route.extend()');
     const filePath = 'example-app/some-twisted-path/some-route.js';
-    assert.ok(emberUtils.isEmberCoreModule(node, 'route', filePath));
+    assert.ok(emberUtils.isEmberCoreModule(node, 'Route', filePath));
   });
 });
 

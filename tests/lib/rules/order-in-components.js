@@ -591,6 +591,18 @@ eslintTester.run('order-in-components', rule, {
       }],
     },
     {
+      filename: 'example-app/components/g-map-route.js',
+      code: `export default Component.extend({
+        actions: {},
+        role: "sloth",
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "role" property should be above the actions hash on line 2',
+        line: 3,
+      }],
+    },
+    {
       code: `export default Component.extend({
         name: "Jon Snow",
         actions: {},
