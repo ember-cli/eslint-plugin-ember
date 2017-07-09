@@ -7,4 +7,6 @@ node_js:
 
 cache: yarn
 
-script: yarn test:ci
+script:
+  - yarn run lint
+  - yarn run test:coverage
