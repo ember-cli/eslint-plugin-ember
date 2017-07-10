@@ -2,7 +2,7 @@
   "name": "eslint-plugin-ember",
   "version": "3.6.0",
   "description": "Eslint plugin for Ember.js apps",
-  "main": "index.js",
+  "main": "lib/index.js",
   "directories": {
     "rules": "rules",
     "test": "test"
@@ -12,7 +12,8 @@
     "start": "yarn run test:watch",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "update": "node ./scripts/update-rules.js"
   },
   "repository": {
     "type": "git",

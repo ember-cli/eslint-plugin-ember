@@ -63,86 +63,83 @@ All rules from this plugin have to be prefixed with `ember/`
 
 ## 🍟 Rules
 
-* General
-  * **local-modules** - Create local version of Ember.* and DS.* [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#create-local-version-of-ember-and-ds)
-  * **no-observers** - Don't use observers [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#dont-use-observers)
-  * **no-old-shims** - Don't use import paths from `ember-cli-shims` [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/rules/no-old-shims.md)
-  * **no-side-effects** - Don't introduce side-effects in computed properties [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#dont-introduce-side-effects-in-computed-properties)
-  * **jquery-ember-run** - Don’t use jQuery without Ember Run Loop [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#dont-use-jquery-without-ember-run-loop)
-  * **named-functions-in-promises** - Use named functions defined on objects to handle promises [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#use-named-functions-defined-on-objects-to-handle-promises)
-  * **no-function-prototype-extensions** - Don't use Ember's function prototype extensions [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#do-not-use-embers-function-prototype-extensions)
-  * **use-ember-get-and-set** - Use Ember get/set [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#use-emberget-and-emberset)
-  * **use-brace-expansion** - Use brace expansion [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#use-brace-expansion)
+Rules are grouped by category to help you understand their purpose.
 
-* Organizing
-  * **order-in-components** - Organize your components [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#organize-your-components)
-  * **order-in-models** - Organize your models [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#organize-your-models)
-  * **order-in-routes** - Organize your routes [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#organize-your-routes)
-  * **order-in-controllers** - Organize your controllers [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#organize-your-controllers)
+All rules below with a check mark :white_check_mark: are enabled by default while using `plugn:ember/base` or `plugin:ember/recommended` configs.
 
-* Controllers
-  * **alias-model-in-controller** - Alias your model [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#alias-your-model)
+The `--fix` option on the command line automatically fixes problems reported by rules which have a wrench :wrench: below.
 
-* Ember Data
-  * **no-empty-attrs** - Be explicit with Ember data attribute types [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#be-explicit-with-ember-data-attribute-types)
+<!--RULES_TABLE_START-->
 
-* Components
-  * **closure-actions** - Always use closure actions [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#closure-actions)
-  * **no-on-calls-in-components** - Don't use .on() in components [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#dont-use-on-calls-as-components-values)
-  * \* **avoid-leaking-state-in-components** - Don't use objects and arrays as default properties [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#avoid-leaking-state)
+### Controllers
 
-    Example config:
-    ```javascript
-    'ember/avoid-leaking-state-in-components': [1, ['array', 'of', 'ignored', 'properties']]
-    ```
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :white_check_mark: | [alias-model-in-controller](./docs/rules/alias-model-in-controller.md) | Enforces aliasing model in controller |
 
 
-* Routing
-  * **routes-segments-snake-case** - Route's dynamic segments should use snake case [(more)](https://github.com/netguru/eslint-plugin-ember/#route-naming)
-  * **no-capital-letters-in-routes** - Don't use capital letters in routes' names. It results in an app crash and sometimes it's not easy to spot.
+### Components
 
-\* Rule with optional settings
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :white_check_mark: | [avoid-leaking-state-in-components](./docs/rules/avoid-leaking-state-in-components.md) | Avoids state leakage |
+| :white_check_mark: | [closure-actions](./docs/rules/closure-actions.md) | Enforces usage of closure actions |
+| :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | Prevents usage of `on` calls in components |
 
-### All Rules in JSON
 
-```javascript
-"ember/alias-model-in-controller": 0,
-"ember/avoid-leaking-state-in-components": 0,
-"ember/closure-actions": 0,
-"ember/jquery-ember-run": 0,
-"ember/local-modules": 0,
-"ember/named-functions-in-promises": 0,
-"ember/no-empty-attrs": 0,
-"ember/no-function-prototype-extensions": 0,
-"ember/no-observers": 0,
-"ember/no-old-shims": 0,
-"ember/no-on-calls-in-components": 0,
-"ember/no-side-effects": 0,
-"ember/order-in-components": 0,
-"ember/order-in-controllers": 0,
-"ember/order-in-models": 0,
-"ember/order-in-routes": 0,
-"ember/routes-segments-snake-case": 0,
-"ember/no-capital-letters-in-routes": 0,
-"ember/use-brace-expansion": 0,
-"ember/use-ember-get-and-set": 0,
-```
+### General
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :white_check_mark: | [jquery-ember-run](./docs/rules/jquery-ember-run.md) | Prevents usage of jQuery without Ember Run Loop |
+|  | [local-modules](./docs/rules/local-modules.md) | Enforces usage of local modules |
+| :white_check_mark: | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
+| :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
+| :white_check_mark: | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
+| :wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | Prevents usage of old shims for modules |
+| :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | Warns about unexpected side effects in computed properties |
+| :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | Enforces usage of brace expansion |
+| :white_check_mark: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
+
+
+### Routing
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :white_check_mark: | [no-capital-letters-in-routes](./docs/rules/no-capital-letters-in-routes.md) | Raise an error when there is a route with uppercased letters in router.js |
+| :white_check_mark: | [routes-segments-snake-case](./docs/rules/routes-segments-snake-case.md) | Enforces usage of snake_cased dynamic segments in routes |
+
+
+### Ember Data
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :white_check_mark: | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
+
+
+### Organizing
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :white_check_mark: | [order-in-components](./docs/rules/order-in-components.md) | Enforces proper order of properties in components |
+| :white_check_mark: | [order-in-controllers](./docs/rules/order-in-controllers.md) | Enforces proper order of properties in controllers |
+| :white_check_mark: | [order-in-models](./docs/rules/order-in-models.md) | Enforces proper order of properties in models |
+| :white_check_mark: | [order-in-routes](./docs/rules/order-in-routes.md) | Enforces proper order of properties in routes |
+
+<!--RULES_TABLE_END-->
+
+For the simplified list of rules, [go here](./lib/recommended-rules.js).
 
 ## 🍻 Contribution guide
 
 In order to add a new rule, you should:
-- generate a new rule using the [official yeoman generator](https://github.com/eslint/generator-eslint)
-- describe the rule in the generated `docs` file
-- link to the new `docs` file in `docs/RULES.md`
-- add the rule in [README.md](https://github.com/netguru/eslint-plugin-ember/blob/master/README.md#rules)
-
-Recommended way of creating new rules:
 - Create issue on GH with description of proposed rule
-- Write sufficient test scenarios
+- Generate a new rule using the [official yeoman generator](https://github.com/eslint/generator-eslint)
 - Run `yarn start`
-- Implement logic for the new rule
+- Write test scenarios & implement logic
+- Describe the rule in the generated `docs` file
 - Make sure all tests are passing
-- Add documentation and update README
+- Run `yarn run update` in order to update readme and recommended configuration
 - Create PR and link created issue in description
 
 Please be aware that we're using `yarn` in this repository, so if you plan to add some dependencies - make sure you commit `yarn.lock` file too.
