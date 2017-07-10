@@ -66,6 +66,7 @@ All rules from this plugin have to be prefixed with `ember/`
 * General
   * **local-modules** - Create local version of Ember.* and DS.* [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#create-local-version-of-ember-and-ds)
   * **no-observers** - Don't use observers [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#dont-use-observers)
+  * **no-old-shims** - Don't use import paths from `ember-cli-shims` [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/rules/no-old-shims.md)
   * **no-side-effects** - Don't introduce side-effects in computed properties [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#dont-introduce-side-effects-in-computed-properties)
   * **jquery-ember-run** - Don’t use jQuery without Ember Run Loop [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#dont-use-jquery-without-ember-run-loop)
   * **named-functions-in-promises** - Use named functions defined on objects to handle promises [(more)](https://github.com/netguru/eslint-plugin-ember/blob/master/docs/RULES.md#use-named-functions-defined-on-objects-to-handle-promises)
@@ -114,6 +115,7 @@ All rules from this plugin have to be prefixed with `ember/`
 "ember/no-empty-attrs": 0,
 "ember/no-function-prototype-extensions": 0,
 "ember/no-observers": 0,
+"ember/no-old-shims": 0,
 "ember/no-on-calls-in-components": 0,
 "ember/no-side-effects": 0,
 "ember/order-in-components": 0,
