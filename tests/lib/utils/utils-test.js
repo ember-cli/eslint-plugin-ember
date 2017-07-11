@@ -45,6 +45,14 @@ describe('isLiteral', () => {
   });
 });
 
+describe('isUnaryExpression', () => {
+  const node = parse('-1');
+
+  it('should check if node is identifier', () => {
+    expect(utils.isUnaryExpression(node)).toBeTruthy();
+  });
+});
+
 describe('isMemberExpression', () => {
   const node = parse('test.value');
 
