@@ -25,6 +25,7 @@ eslintTester.run('routes-segments-snake-case', rule, {
     'this.route("tree", { path: "/test/:tree_id/test_test/:tree_child_id"});',
     'this.route("tree", { path: "/test/:tree_id/test-test/:tree_child_id"});',
     'this.route("tree", { path: "/test/:tree_id/testTest/:tree_child_id"});',
+    'this.route("tree", { path: "*:"});',
   ],
   invalid: [
     {
