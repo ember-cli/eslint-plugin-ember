@@ -321,6 +321,15 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    {
+      code: `export default Component.extend({
+        layout,
+        tabindex: -1,
+
+        someComputedValue: computed.reads('count'),
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
   ],
   invalid: [
     {
