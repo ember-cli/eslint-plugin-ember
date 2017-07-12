@@ -611,5 +611,18 @@ eslintTester.run('order-in-components', rule, {
         line: 4,
       }],
     },
+    {
+      code: `export default Component.extend({
+        layout,
+        someComputedValue: computed.reads('count'),
+
+        tabindex: -1,
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "tabindex" property should be above the "someComputedValue" single-line function on line 3',
+        line: 5,
+      }],
+    },
   ],
 });
