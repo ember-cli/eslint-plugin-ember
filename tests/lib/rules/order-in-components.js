@@ -321,6 +321,15 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    {
+      code: `export default Component.extend({
+        layout,
+        tabindex: -1,
+
+        someComputedValue: computed.reads('count'),
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
   ],
   invalid: [
     {
@@ -600,6 +609,19 @@ eslintTester.run('order-in-components', rule, {
       errors: [{
         message: 'The "template" property should be above the actions hash on line 3',
         line: 4,
+      }],
+    },
+    {
+      code: `export default Component.extend({
+        layout,
+        someComputedValue: computed.reads('count'),
+
+        tabindex: -1,
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "tabindex" property should be above the "someComputedValue" single-line function on line 3',
+        line: 5,
       }],
     },
   ],

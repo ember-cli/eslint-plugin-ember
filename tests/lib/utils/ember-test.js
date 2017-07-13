@@ -297,6 +297,9 @@ describe('isCustomProp', () => {
 
     node = getProperty('test = { actions: {} }');
     expect(emberUtils.isCustomProp(node)).toBeFalsy();
+
+    node = getProperty('test = { test: -1 }');
+    expect(emberUtils.isCustomProp(node)).toBeTruthy();
   });
 });
 
