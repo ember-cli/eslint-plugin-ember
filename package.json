@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/netguru/eslint-plugin-ember.git"
+    "url": "git+https://github.com/ember-cli/eslint-plugin-ember.git"
   },
   "keywords": [
     "eslint",
@@ -41,9 +41,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/netguru/eslint-plugin-ember/issues"
+    "url": "https://github.com/ember-cli/eslint-plugin-ember/issues"
   },
-  "homepage": "https://github.com/netguru/eslint-plugin-ember#readme",
+  "homepage": "https://github.com/ember-cli/eslint-plugin-ember#readme",
   "devDependencies": {
     "babel-eslint": "^7.1.0",
     "eslint": "^3.15.0",
