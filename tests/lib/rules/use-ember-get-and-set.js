@@ -26,87 +26,78 @@ eslintTester.run('use-ember-get-and-set', rule, {
   invalid: [
     {
       code: 'this.get("test")',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'get(this, "test")',
+      errors: [{ message: 'Use get/set' }],
     },
     {
       code: 'controller.get("test")',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'get(controller, "test")',
+      errors: [{ message: 'Use get/set' }],
     },
     {
       code: 'model.get("test")',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'get(model, "test")',
+      errors: [{ message: 'Use get/set' }],
+    },
+    {
+      code: 'this.foo.get("test")',
+      output: 'get(this.foo, "test")',
+      errors: [{ message: 'Use get/set' }],
     },
     {
       code: 'this.getWithDefault("test", "default")',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'getWithDefault(this, "test", "default")',
+      errors: [{ message: 'Use get/set' }],
     },
     {
       code: 'controller.getWithDefault("test", "default")',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'getWithDefault(controller, "test", "default")',
+      errors: [{ message: 'Use get/set' }],
     },
     {
       code: 'this.set("test", "value")',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'set(this, "test", "value")',
+      errors: [{ message: 'Use get/set' }],
     },
     {
       code: 'controller.set("test", "value")',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'set(controller, "test", "value")',
+      errors: [{ message: 'Use get/set' }],
     },
     {
       code: 'model.set("test", "value")',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'set(model, "test", "value")',
+      errors: [{ message: 'Use get/set' }],
     },
     {
       code: 'this.getProperties("test", "test2")',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'getProperties(this, "test", "test2")',
+      errors: [{ message: 'Use get/set' }],
     },
     {
       code: 'controller.getProperties("test", "test2")',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'getProperties(controller, "test", "test2")',
+      errors: [{ message: 'Use get/set' }],
     },
     {
       code: 'model.getProperties("test", "test2")',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'getProperties(model, "test", "test2")',
+      errors: [{ message: 'Use get/set' }],
     },
     {
       code: 'this.setProperties({test: "value"})',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'setProperties(this, {test: "value"})',
+      errors: [{ message: 'Use get/set' }],
     },
     {
       code: 'controller.setProperties({test: "value"})',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'setProperties(controller, {test: "value"})',
+      errors: [{ message: 'Use get/set' }],
     },
     {
       code: 'model.setProperties({test: "value"})',
-      errors: [{
-        message: 'Use get/set',
-      }],
+      output: 'setProperties(model, {test: "value"})',
+      errors: [{ message: 'Use get/set' }],
     },
   ],
 });
