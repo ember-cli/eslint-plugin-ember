@@ -229,6 +229,14 @@ describe('isComputedProp', () => {
     node = parse('Ember.computed()');
     expect(emberUtils.isComputedProp(node)).toBeTruthy();
   });
+
+  it('should detect computed props with MemberExpressions', () => {
+    node = parse('computed().volatile()');
+    expect(emberUtils.isComputedProp(node)).toBeTruthy();
+
+    node = parse('Ember.computed().volatile()');
+    expect(emberUtils.isComputedProp(node)).toBeTruthy();
+  });
 });
 
 describe('isObserverProp', () => {
