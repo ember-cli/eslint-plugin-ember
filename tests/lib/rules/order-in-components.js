@@ -633,5 +633,17 @@ eslintTester.run('order-in-components', rule, {
         line: 5,
       }],
     },
+    {
+      code: `export default Component.extend({
+        foo: computed(function() {
+        }).volatile(),
+        name: "Jon Snow",
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "name" property should be above the "foo" multi-line function on line 2',
+        line: 4,
+      }],
+    },
   ],
 });

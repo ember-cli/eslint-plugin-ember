@@ -230,12 +230,25 @@ describe('isComputedProp', () => {
     expect(emberUtils.isComputedProp(node)).toBeTruthy();
   });
 
-  it('should detect computed props with MemberExpressions', () => {
-    node = parse('computed().volatile()');
-    expect(emberUtils.isComputedProp(node)).toBeTruthy();
+  it(
+    'should detect whitelisted computed props with MemberExpressions',
+    () => {
+      ['volatile', 'meta', 'readOnly', 'property'].forEach((prop) => {
+        node = parse(`computed().${prop}()`);
+        expect(emberUtils.isComputedProp(node)).toBeTruthy();
 
-    node = parse('Ember.computed().volatile()');
-    expect(emberUtils.isComputedProp(node)).toBeTruthy();
+        node = parse(`Ember.computed().${prop}()`);
+        expect(emberUtils.isComputedProp(node)).toBeTruthy();
+      })
+    }
+  );
+
+  it('shouldn\'t allow other MemberExpressions', () => {
+    node = parse(`computed().foo()`);
+    expect(emberUtils.isComputedProp(node)).not.toBeTruthy();
+
+    node = parse(`Ember.computed().foo()`);
+    expect(emberUtils.isComputedProp(node)).not.toBeTruthy();
   });
 });
 
