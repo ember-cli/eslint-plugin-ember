@@ -154,7 +154,7 @@ describe('isTaggedTemplateExpression', () => {
   });
 });
 
-describe('isAttrs', () => {
+describe('isThisAttrsExpression', () => {
   it('should check if given ThisExpression has attrs', () => {
     expect(utils.isThisAttrsExpression(
       parse('this.attrs')
