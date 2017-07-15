@@ -1,8 +1,3 @@
-/**
- * @fileoverview Disallow usage of this.attrs in components
- * @author Jacek Bandura
- */
-
 "use strict";
 
 //------------------------------------------------------------------------------
