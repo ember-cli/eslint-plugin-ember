@@ -239,15 +239,15 @@ describe('isComputedProp', () => {
 
         node = parse(`Ember.computed().${prop}()`);
         expect(emberUtils.isComputedProp(node)).toBeTruthy();
-      })
+      });
     }
   );
 
   it('shouldn\'t allow other MemberExpressions', () => {
-    node = parse(`computed().foo()`);
+    node = parse('computed().foo()');
     expect(emberUtils.isComputedProp(node)).not.toBeTruthy();
 
-    node = parse(`Ember.computed().foo()`);
+    node = parse('Ember.computed().foo()');
     expect(emberUtils.isComputedProp(node)).not.toBeTruthy();
   });
 });
