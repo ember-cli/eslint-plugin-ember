@@ -330,6 +330,15 @@ eslintTester.run('order-in-components', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    {
+      code: `export default Component.extend({
+        foo: computed(function() {
+        }).volatile(),
+        bar: computed(function() {
+        })
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    }
   ],
   invalid: [
     {
@@ -622,6 +631,18 @@ eslintTester.run('order-in-components', rule, {
       errors: [{
         message: 'The "tabindex" property should be above the "someComputedValue" single-line function on line 3',
         line: 5,
+      }],
+    },
+    {
+      code: `export default Component.extend({
+        foo: computed(function() {
+        }).volatile(),
+        name: "Jon Snow",
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "name" property should be above the "foo" multi-line function on line 2',
+        line: 4,
       }],
     },
   ],
