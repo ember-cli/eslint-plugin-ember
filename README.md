@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)
 [![NPM downloads](https://img.shields.io/npm/dm/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)
-[![Build Status](https://travis-ci.org/netguru/eslint-plugin-ember.svg?branch=master)](https://travis-ci.org/netguru/eslint-plugin-ember)
+[![Build Status](https://travis-ci.org/ember-cli/eslint-plugin-ember.svg?branch=master)](https://travis-ci.org/ember-cli/eslint-plugin-ember)
 
 > An ESlint plugin that provides set of rules for Ember Applications based on commonly known good practices.
 
@@ -37,8 +37,8 @@ module.exports = {
 ```
 
 Possible configurations:
-- [plugin:ember/base](https://github.com/netguru/eslint-plugin-ember/blob/master/config/base.js) - contains only recommended settings for custom rules defined in this plugin.
-- [plugin:ember/recommended](https://github.com/netguru/eslint-plugin-ember/blob/master/config/recommended.js) - extends base configuration with extra rules' settings provided by eslint
+- [plugin:ember/base](https://github.com/ember-cli/eslint-plugin-ember/blob/master/config/base.js) - contains only recommended settings for custom rules defined in this plugin.
+- [plugin:ember/recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/config/recommended.js) - extends base configuration with extra rules' settings provided by eslint
 
 #### Use plain plugin:
 
@@ -144,7 +144,7 @@ In order to add a new rule, you should:
 
 Please be aware that we're using `yarn` in this repository, so if you plan to add some dependencies - make sure you commit `yarn.lock` file too.
 
-If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/netguru/eslint-plugin-ember/issues), but first please make sure your question does not repeat previous ones.
+If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/ember-cli/eslint-plugin-ember/issues), but first please make sure your question does not repeat previous ones.
 
 ## ⭐️ Contributors
 - [Michał Sajnóg](http://github.com/michalsnik)
