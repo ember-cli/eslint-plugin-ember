@@ -208,7 +208,7 @@ describe('getPropertyValue', () => {
 
   it('should return null when property value not found', () => {
     const value = utils.getPropertyValue(node, 'blah');
-    expect(value).toEqual(undefined);``
+    expect(value).toEqual(undefined);
   });
 
   it('should return value when using a simple property path', () => {
