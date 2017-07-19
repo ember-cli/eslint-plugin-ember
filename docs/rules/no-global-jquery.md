@@ -1,36 +1,32 @@
 # No global jQuery (no-global-jquery)
-
-Please describe the origin of the rule here.
-
+Do not use global `$` or `jQuery`.
 
 ## Rule Details
 
-This rule aims to...
+In general, we want application code to reference the version of jQuery that's been directly pinned to the version of Ember used. This helps avoid version conflicts, and ensures that code inside modules isn't reliant on global variables.
 
 Examples of **incorrect** code for this rule:
 
 ```js
-
-// fill me in
-
+export default Component.extend({
+  init() {
+    $('.foo').addClass('bar'); //global usage
+  }
+});
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
+import Ember from 'ember';
 
-// fill me in
+const { $ } = Ember;
+export default Component.extend({
+  init() {
+    Ember.$('.foo').addClass('bar') //usage from Ember object
+    // or even better
+    $('.foo').addClass('bar'); // deconstruction from Ember object
+  }
+});
 
 ```
-
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
-
-## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
