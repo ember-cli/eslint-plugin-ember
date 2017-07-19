@@ -439,3 +439,10 @@ describe('isRelation', () => {
     expect(emberUtils.isRoute(node)).toBeTruthy();
   });
 });
+
+describe('getEmberImportAliasName', () => {
+  it('should get the proper name of default import', () => {
+    const node = babelEslint.parse("import foo from 'ember'").body[0];
+    expect(emberUtils.getEmberImportAliasName(node)).toEqual('foo');
+  });
+});

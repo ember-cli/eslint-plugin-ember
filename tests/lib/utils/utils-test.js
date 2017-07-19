@@ -7,6 +7,10 @@ function parse(code) {
   return babelEslint.parse(code).body[0].expression;
 }
 
+function parseVariableDeclarator(code) {
+  return babelEslint.parse(code).body[0].declarations[0];
+}
+
 describe('findNodes', () => {
   const node = parse(`test = [
     {test: "a"}, b, "c", [d, e], "f", "g", h, {test: "i"}, function() {}, [], new Date()
@@ -244,5 +248,64 @@ describe('getPropertyValue', () => {
   it('should return value when using a full property path for node', () => {
     const name = utils.getPropertyValue(node, 'callee.object.name');
     expect(name).toEqual('Ember');
+  });
+});
+
+describe('collectObjectPatternBindings', () => {
+  it('collects bindings correctly', () => {
+    const node = parseVariableDeclarator('const { $ } = Ember');
+    const collectedBindings = utils.collectObjectPatternBindings(node, {
+      Ember: ['$'],
+    });
+
+    expect(collectedBindings).toEqual(['$']);
+  });
+
+  it('collects aliased bindings correctly', () => {
+    const node = parseVariableDeclarator('const { $:foo } = Ember');
+    const collectedBindings = utils.collectObjectPatternBindings(node, {
+      Ember: ['$'],
+    });
+
+    expect(collectedBindings).toEqual(['foo']);
+  });
+
+  it('collects only relevant bindings correctly for multiple destructurings', () => {
+    const node = parseVariableDeclarator('const { $, computed } = Ember');
+    const collectedBindings = utils.collectObjectPatternBindings(node, {
+      Ember: ['$'],
+    });
+
+    expect(collectedBindings).toEqual(['$']);
+  });
+
+  it('collects only relevant bindings correctly for multiple destructurings and aliases', () => {
+    const node = parseVariableDeclarator('const { $: foo, computed } = Ember');
+    const collectedBindings = utils.collectObjectPatternBindings(node, {
+      Ember: ['$'],
+    });
+
+    expect(collectedBindings).toEqual(['foo']);
+  });
+
+  it('collects multiple relevant bindings', () => {
+    const node = parseVariableDeclarator('const { $: foo, computed } = Ember');
+    const collectedBindings = utils.collectObjectPatternBindings(node, {
+      Ember: ['$', 'computed'],
+    });
+
+    expect(collectedBindings).toEqual(['foo', 'computed']);
+  });
+});
+
+describe('isGlobalCallExpression', () => {
+  it('recognizes when call is not global', () => {
+    const node = parse("$('foo')");
+    expect(utils.isGlobalCallExpression(node, '$', ['$', 'jQuery'])).not.toBeTruthy();
+  });
+
+  it('recognizes when global call', () => {
+    const node = parse("$('foo')");
+    expect(utils.isGlobalCallExpression(node, 'jQuery', ['$', 'jQuery'])).toBeTruthy();
   });
 });
