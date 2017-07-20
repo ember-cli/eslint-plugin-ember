@@ -15,7 +15,6 @@ const RuleTester = require('eslint').RuleTester;
 const ruleTester = new RuleTester();
 const parserOptions = { ecmaVersion: 6, sourceType: 'module' };
 ruleTester.run('no-duplicate-dependent-keys', rule, {
-
   valid: [
     {
       code: `
@@ -28,7 +27,16 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
     {
       code: `
       {
-        foo: computed('model.{foo,bar}', 'model.bar', function() {})
+        foo: computed('model.{foo,bar}', 'model.qux', function() {})
+      }
+      `,
+      parserOptions,
+    },
+    {
+      code: `
+      {
+        foo: Ember.computed('model.{foo,bar}', 'model.qux', function() {
+        }).volatile()
       }
       `,
       parserOptions,
@@ -44,7 +52,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       `,
       parserOptions,
       errors: [{
-        message: 'Fill me in.',
+        message: rule.meta.message,
       }]
     },
     {
@@ -55,7 +63,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       `,
       parserOptions,
       errors: [{
-        message: 'Fill me in.',
+        message: rule.meta.message,
       }]
     }
   ]
