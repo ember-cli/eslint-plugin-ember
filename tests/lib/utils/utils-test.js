@@ -154,20 +154,6 @@ describe('isTaggedTemplateExpression', () => {
   });
 });
 
-describe('isThisAttrsExpression', () => {
-  it('should check if given ThisExpression has attrs', () => {
-    expect(utils.isThisAttrsExpression(
-      parse('this.attrs')
-    )).toBeTruthy();
-  });
-
-  it('shouldnt return true if attrs not present', () => {
-    expect(utils.isThisAttrsExpression(
-      parse('this.foo.name')
-    )).not.toBeTruthy();
-  });
-});
-
 describe('getSize', () => {
   const node = parse('some = {\nfew: "line",\nheight: "statement",\nthat: "should",\nhave: "6 lines",\n};');
 
