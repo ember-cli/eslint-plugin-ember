@@ -186,3 +186,63 @@ describe('parseArgs', () => {
     expect(parsedArgs).toEqual(['asd', 'qwe', 'zxc']);
   });
 });
+
+describe('getPropertyValue', () => {
+  const simpleObject = {
+    foo: true,
+    bar: {
+      baz: 1,
+      fizz: {
+        buzz: 'buzz'
+      }
+    }
+  };
+
+  const node = babelEslint.parse(`
+    export default Ember.Component({
+      init() {
+        this._super(...arguments);
+        this._valueCache = this.value;
+        this.updated = false;
+      },
+      didReceiveAttrs() {
+        if (this._valueCache !== this.value) {
+          this._valueCache = this.value;
+          this.set('updated', true);
+        } else {
+          this.set('updated', false);
+        }
+      }
+    });
+  `).body[0].declaration;
+
+  it('should return null when property value not found for simpleObject', () => {
+    const value = utils.getPropertyValue(simpleObject, 'blah');
+    expect(value).toEqual(undefined);
+  });
+
+  it('should return value when using a simple property path for simpleObject', () => {
+    const value = utils.getPropertyValue(simpleObject, 'foo');
+    expect(value).toEqual(true);
+  });
+
+  it('should return value when using a full property path for simpleObject', () => {
+    const buzz = utils.getPropertyValue(simpleObject, 'bar.fizz.buzz');
+    expect(buzz).toEqual('buzz');
+  });
+
+  it('should return null when property value not found for node', () => {
+    const value = utils.getPropertyValue(node, 'blah');
+    expect(value).toEqual(undefined);
+  });
+
+  it('should return value when using a simple property path for node', () => {
+    const type = utils.getPropertyValue(node, 'type');
+    expect(type).toEqual('CallExpression');
+  });
+
+  it('should return value when using a full property path for node', () => {
+    const name = utils.getPropertyValue(node, 'callee.object.name');
+    expect(name).toEqual('Ember');
+  });
+});
