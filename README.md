@@ -84,6 +84,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |:---|:--------|:------------|
 | :white_check_mark: | [avoid-leaking-state-in-components](./docs/rules/avoid-leaking-state-in-components.md) | Avoids state leakage |
 | :white_check_mark: | [closure-actions](./docs/rules/closure-actions.md) | Enforces usage of closure actions |
+| :white_check_mark: | [no-attrs-snapshot](./docs/rules/no-attrs-snapshot.md) | Disallow use of attrs snapshot in `didReceiveAttrs` and `didUpdateAttrs` |
 | :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | Prevents usage of `on` calls in components |
 
 
