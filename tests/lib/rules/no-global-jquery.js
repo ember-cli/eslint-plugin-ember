@@ -73,9 +73,6 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
-      errors: [{
-        message: MESSAGE
-      }]
     },
     {
       code: `
@@ -91,9 +88,6 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
-      errors: [{
-        message: MESSAGE
-      }]
     },
     {
       code: `
@@ -107,9 +101,6 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
-      errors: [{
-        message: MESSAGE
-      }]
     },
     {
       code: `
@@ -125,9 +116,6 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
-      errors: [{
-        message: MESSAGE
-      }]
     }
   ],
 
