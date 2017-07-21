@@ -1,4 +1,4 @@
-# Disallow repeating dependent keys (no-duplicate-dependent-keys)
+# Disallow repeating dependent keys (`no-duplicate-dependent-keys`)
 
 ## Rule Details
 
@@ -11,7 +11,7 @@ computed('foo.bar', 'foo.baz', 'foo.qux', 'foo.bar', function() {
   //...
 })
 // or using brace expansions
-computed('foo.{bar,baz,qux}', foo.bar', function() {
+computed('foo.{bar,baz,qux}', 'foo.bar', function() {
   //...
 })
 ```
@@ -23,7 +23,7 @@ computed('foo.bar', 'foo.baz', 'foo.qux', function() {
   //...
 })
 // or using brace expansions
-computed('foo.{bar,baz,qux}', bar.foo', function() {
+computed('foo.{bar,baz,qux}', 'bar.foo', function() {
   //...
 })
 ```
