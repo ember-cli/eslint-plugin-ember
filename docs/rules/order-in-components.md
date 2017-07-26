@@ -14,7 +14,7 @@ ember/order-in-components: [2, {
     'observer',
     'lifecycle-hook',
     'actions',
-    'method',
+    ['method', 'empty-function'],
   ]
 }]
 ```
@@ -29,7 +29,7 @@ order: [
   'observer',
   'lifecycle-hook',
   'actions',
-  'method',
+  ['method', 'empty-function'],
 ]
 ```
 

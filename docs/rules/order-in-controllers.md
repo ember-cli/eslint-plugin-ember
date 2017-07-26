@@ -15,7 +15,7 @@ ember/order-in-controllers: [2, {
     'multi-line-function',
     'observer',
     'actions',
-    'method',
+    ['method', 'empty-function'],
   ]
 }]
 ```
