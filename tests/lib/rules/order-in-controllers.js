@@ -22,8 +22,8 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         customProp: "test",
         actions: {},
-        _customAction() {},
-        _customAction2: function() {},
+        _customAction() { const foo = 'bar'; },
+        _customAction2: function() { const foo = 'bar'; },
         tSomeTask: task(function* () {})
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
@@ -57,7 +57,7 @@ eslintTester.run('order-in-controllers', rule, {
         comp2: computed("test", function() {
         }),
         actions: {},
-        _customAction() {}
+        _customAction() { const foo = 'bar'; }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
@@ -68,7 +68,7 @@ eslintTester.run('order-in-controllers', rule, {
         customProp: "test",
         comp2: computed("test", function() {
         }),
-        _customAction() {}
+        _customAction() { const foo = 'bar'; }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [{
@@ -142,7 +142,7 @@ eslintTester.run('order-in-controllers', rule, {
     {
       code: `export default Controller.extend({
         queryParams: [],
-        _customAction() {},
+        _customAction() { const foo = 'bar'; },
         actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },

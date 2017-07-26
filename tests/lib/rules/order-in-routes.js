@@ -27,8 +27,8 @@ eslintTester.run('order-in-routes', rule, {
         model() {},
         beforeModel() {},
         actions: {},
-        _customAction() {},
-        _customAction2: function() {},
+        _customAction() { const foo = 'bar'; },
+        _customAction2: function() { const foo = 'bar'; },
         tSomeTask: task(function* () {})
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
@@ -58,7 +58,7 @@ eslintTester.run('order-in-routes', rule, {
         actions: {
           test() { return this._customAction() }
         },
-        _customAction() {}
+        _customAction() { const foo = 'bar'; }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
@@ -191,7 +191,7 @@ eslintTester.run('order-in-routes', rule, {
         vehicle: alias("car"),
         customProp: "test",
         model() {},
-        _customAction() {},
+        _customAction() { const foo = 'bar'; },
         actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
@@ -230,7 +230,7 @@ eslintTester.run('order-in-routes', rule, {
     {
       code: `export default Route.extend({
         test: "asd",
-        _test2() {},
+        _test2() { const foo = 'bar'; },
         model() {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
