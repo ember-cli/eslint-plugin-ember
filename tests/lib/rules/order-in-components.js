@@ -81,6 +81,22 @@ eslintTester.run('order-in-components', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
+      code: `
+        import { inject } from '@ember/service';
+        export default Component.extend({
+          abc: inject(),
+          def: inject.service(),
+          ghi: service(),
+
+          role: "sloth",
+
+          levelOfHappiness: computed("attitude", "health", () => {
+          })
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
       code: `export default Component.extend({
         role: "sloth",
         abc: [],
@@ -461,6 +477,20 @@ eslintTester.run('order-in-components', rule, {
       errors: [{
         message: 'The "i18n" service injection should be above the "vehicle" single-line function on line 2',
         line: 3,
+      }],
+    },
+    {
+      code: `
+        import { inject } from '@ember/service';
+        export default Component.extend({
+          vehicle: alias("car"),
+          i18n: inject()
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "i18n" service injection should be above the "vehicle" single-line function on line 4',
+        line: 5,
       }],
     },
     {

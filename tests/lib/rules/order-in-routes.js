@@ -35,6 +35,23 @@ eslintTester.run('order-in-routes', rule, {
     },
     {
       code: `export default Route.extend({
+        currentUser: inject(),
+        queryParams: {},
+        customProp: "test",
+        vehicle: alias("car"),
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
+        model() {},
+        beforeModel() {},
+        actions: {},
+        _customAction() {},
+        _customAction2: function() {},
+        tSomeTask: task(function* () {})
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: `export default Route.extend({
         levelOfHappiness: computed("attitude", "health", () => {
         }),
         model() {},
@@ -94,6 +111,26 @@ eslintTester.run('order-in-routes', rule, {
       code: `export default Route.extend({
         queryParams: {},
         currentUser: service(),
+        customProp: "test",
+        model() {},
+        beforeModel() {},
+        vehicle: alias("car"),
+        actions: {},
+        _customAction() {}
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "currentUser" service injection should be above the inherited "queryParams" property on line 2',
+        line: 3,
+      }, {
+        message: 'The "vehicle" single-line function should be above the "model" hook on line 5',
+        line: 7,
+      }],
+    },
+    {
+      code: `export default Route.extend({
+        queryParams: {},
+        currentUser: inject(),
         customProp: "test",
         model() {},
         beforeModel() {},

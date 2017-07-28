@@ -30,6 +30,18 @@ eslintTester.run('order-in-controllers', rule, {
     },
     {
       code: `export default Controller.extend({
+        currentUser: inject(),
+        queryParams: [],
+        customProp: "test",
+        actions: {},
+        _customAction() {},
+        _customAction2: function() {},
+        tSomeTask: task(function* () {})
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: `export default Controller.extend({
         queryParams: [],
         customProp: "test",
         comp: computed("test", function() {}),
@@ -85,6 +97,17 @@ eslintTester.run('order-in-controllers', rule, {
       code: `export default Controller.extend({
         queryParams: [],
         currentUser: service()
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
+        line: 3,
+      }],
+    },
+    {
+      code: `export default Controller.extend({
+        queryParams: [],
+        currentUser: inject()
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{

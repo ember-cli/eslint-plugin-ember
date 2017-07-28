@@ -216,6 +216,9 @@ describe('isInjectedServiceProp', () => {
 
     node = parse('Ember.service()');
     expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+
+    node = parse('inject()');
+    expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
   });
 });
 
