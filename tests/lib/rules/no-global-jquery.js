@@ -116,7 +116,37 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
-    }
+    },
+    {
+      code: `
+        import Ember from 'ember';
+
+        const $ = Ember.$;
+
+        export default Ember.Component({
+          actions: {
+            valid() {
+              this.valid = $('.valid');
+            }
+          }
+        });`,
+      parserOptions,
+    },
+    {
+      code: `
+        import Ember from 'ember';
+
+        const foo = Ember.$;
+
+        export default Ember.Component({
+          actions: {
+            valid() {
+              this.valid = foo('.valid');
+            }
+          }
+        });`,
+      parserOptions,
+    },
   ],
 
   invalid: [
@@ -160,6 +190,42 @@ ruleTester.run('no-global-jquery', rule, {
     },
     {
       code: `
+        export default Ember.Component({
+          actions: {
+            invalid1() {
+              this.inv1 = jQuery('.invalid1');
+            }
+          }
+        });`,
+      parserOptions,
+      errors: [{
+        message: MESSAGE
+      }]
+    },
+    {
+      code: `
+        import Ember from 'ember';
+
+        const foo = Ember.$;
+
+        export default Ember.Component({
+          actions: {
+            invalid1() {
+              this.inv1 = $('.invalid1');
+            }
+          }
+        });`,
+      parserOptions,
+      errors: [{
+        message: MESSAGE
+      }]
+    },
+    {
+      code: `
+        import Ember from 'ember';
+
+        const foo = Ember.$;
+
         export default Ember.Component({
           actions: {
             invalid1() {
