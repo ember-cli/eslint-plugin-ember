@@ -23,6 +23,36 @@ ruleTester.run('no-global-jquery', rule, {
   valid: [
     {
       code: `
+        import Ember from 'ember';
+
+        let something;
+
+        export default Ember.Component({
+          actions: {
+            valid() {
+              something = Ember.$('.invalid1');
+            }
+          }
+        });`,
+      parserOptions,
+    },
+    {
+      code: `
+        import Ember from 'ember';
+
+        const Em = Ember;
+
+        export default Ember.Component({
+          actions: {
+            valid() {
+              this.inv1 = Em.$('.invalid1');
+            }
+          }
+        });`,
+      parserOptions,
+    },
+    {
+      code: `
         export default Ember.Component({
           valid1() {
             this.v1 = Ember.$('.v1');
