@@ -22,6 +22,18 @@ eslintTester.run('use-ember-get-and-set', rule, {
     'setProperties(controller, {name: "Jon", email: "jon@snow.com"})',
     'getWithDefault(this, "test", "default")',
     'getWithDefault(controller, "test", "default")',
+    {
+      code: 'this.get("myProperty")',
+      filename: 'app/tests/unit/components/component-test.js',
+    },
+    {
+      code: 'this.set("myProperty", "value")',
+      filename: 'app/tests/unit/components/component-test.js',
+    },
+    {
+      code: 'this.get("/resources")',
+      filename: 'app/mirage/config.js',
+    },
   ],
   invalid: [
     {
@@ -97,6 +109,24 @@ eslintTester.run('use-ember-get-and-set', rule, {
     {
       code: 'model.setProperties({test: "value"})',
       output: 'setProperties(model, {test: "value"})',
+      errors: [{ message: 'Use get/set' }],
+    },
+    {
+      code: 'controller.getProperties("test", "test2")',
+      filename: 'app/tests/unit/controllers/controller-test.js',
+      output: 'getProperties(controller, "test", "test2")',
+      errors: [{ message: 'Use get/set' }],
+    },
+    {
+      code: 'controller.setProperties({test: "value"})',
+      filename: 'app/tests/unit/controllers/controller-test.js',
+      output: 'setProperties(controller, {test: "value"})',
+      errors: [{ message: 'Use get/set' }],
+    },
+    {
+      code: 'controller.getWithDefault("test", "default")',
+      filename: 'app/tests/unit/controllers/controller-test.js',
+      output: 'getWithDefault(controller, "test", "default")',
       errors: [{ message: 'Use get/set' }],
     },
   ],
