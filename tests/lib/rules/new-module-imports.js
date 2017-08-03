@@ -42,7 +42,7 @@ eslintTester.run('new-module-imports', rule, {
     },
     {
       code: 'var Router = Ember.Router.extend({});',
-      errors: [{ message: 'Use  import Router from \'@ember/routing/router\';  instead of using  Ember.Router' }],
+      errors: [{ message: 'Use  import EmberRouter from \'@ember/routing/router\';  instead of using  Ember.Router' }],
     },
     {
       code: 'Ember.$(\'.foo\')',
@@ -50,7 +50,7 @@ eslintTester.run('new-module-imports', rule, {
     },
     {
       code: 'new Ember.RSVP.Promise();',
-      errors: [{ message: 'Use  import RSVP from \'rsvp\';  instead of using  Ember.RSVP' }],
+      errors: [{ message: 'Use  import { Promise } from \'rsvp\';  instead of using  Ember.RSVP.Promise' }],
     },
   ],
 });
