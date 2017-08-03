@@ -7,6 +7,10 @@ function parse(code) {
   return babelEslint.parse(code).body[0].expression;
 }
 
+function parseVariableDeclarator(code) {
+  return babelEslint.parse(code).body[0].declarations[0];
+}
+
 describe('findNodes', () => {
   const node = parse(`test = [
     {test: "a"}, b, "c", [d, e], "f", "g", h, {test: "i"}, function() {}, [], new Date()
@@ -184,5 +188,124 @@ describe('parseArgs', () => {
     const parsedArgs = utils.parseArgs(node);
     expect(parsedArgs).toHaveLength(3);
     expect(parsedArgs).toEqual(['asd', 'qwe', 'zxc']);
+  });
+});
+
+describe('getPropertyValue', () => {
+  const simpleObject = {
+    foo: true,
+    bar: {
+      baz: 1,
+      fizz: {
+        buzz: 'buzz'
+      }
+    }
+  };
+
+  const node = babelEslint.parse(`
+    export default Ember.Component({
+      init() {
+        this._super(...arguments);
+        this._valueCache = this.value;
+        this.updated = false;
+      },
+      didReceiveAttrs() {
+        if (this._valueCache !== this.value) {
+          this._valueCache = this.value;
+          this.set('updated', true);
+        } else {
+          this.set('updated', false);
+        }
+      }
+    });
+  `).body[0].declaration;
+
+  it('should return null when property value not found for simpleObject', () => {
+    const value = utils.getPropertyValue(simpleObject, 'blah');
+    expect(value).toEqual(undefined);
+  });
+
+  it('should return value when using a simple property path for simpleObject', () => {
+    const value = utils.getPropertyValue(simpleObject, 'foo');
+    expect(value).toEqual(true);
+  });
+
+  it('should return value when using a full property path for simpleObject', () => {
+    const buzz = utils.getPropertyValue(simpleObject, 'bar.fizz.buzz');
+    expect(buzz).toEqual('buzz');
+  });
+
+  it('should return null when property value not found for node', () => {
+    const value = utils.getPropertyValue(node, 'blah');
+    expect(value).toEqual(undefined);
+  });
+
+  it('should return value when using a simple property path for node', () => {
+    const type = utils.getPropertyValue(node, 'type');
+    expect(type).toEqual('CallExpression');
+  });
+
+  it('should return value when using a full property path for node', () => {
+    const name = utils.getPropertyValue(node, 'callee.object.name');
+    expect(name).toEqual('Ember');
+  });
+});
+
+describe('collectObjectPatternBindings', () => {
+  it('collects bindings correctly', () => {
+    const node = parseVariableDeclarator('const { $ } = Ember');
+    const collectedBindings = utils.collectObjectPatternBindings(node, {
+      Ember: ['$'],
+    });
+
+    expect(collectedBindings).toEqual(['$']);
+  });
+
+  it('collects aliased bindings correctly', () => {
+    const node = parseVariableDeclarator('const { $:foo } = Ember');
+    const collectedBindings = utils.collectObjectPatternBindings(node, {
+      Ember: ['$'],
+    });
+
+    expect(collectedBindings).toEqual(['foo']);
+  });
+
+  it('collects only relevant bindings correctly for multiple destructurings', () => {
+    const node = parseVariableDeclarator('const { $, computed } = Ember');
+    const collectedBindings = utils.collectObjectPatternBindings(node, {
+      Ember: ['$'],
+    });
+
+    expect(collectedBindings).toEqual(['$']);
+  });
+
+  it('collects only relevant bindings correctly for multiple destructurings and aliases', () => {
+    const node = parseVariableDeclarator('const { $: foo, computed } = Ember');
+    const collectedBindings = utils.collectObjectPatternBindings(node, {
+      Ember: ['$'],
+    });
+
+    expect(collectedBindings).toEqual(['foo']);
+  });
+
+  it('collects multiple relevant bindings', () => {
+    const node = parseVariableDeclarator('const { $: foo, computed } = Ember');
+    const collectedBindings = utils.collectObjectPatternBindings(node, {
+      Ember: ['$', 'computed'],
+    });
+
+    expect(collectedBindings).toEqual(['foo', 'computed']);
+  });
+});
+
+describe('isGlobalCallExpression', () => {
+  it('recognizes when call is not global', () => {
+    const node = parse("$('foo')");
+    expect(utils.isGlobalCallExpression(node, '$', ['$', 'jQuery'])).not.toBeTruthy();
+  });
+
+  it('recognizes when global call', () => {
+    const node = parse("$('foo')");
+    expect(utils.isGlobalCallExpression(node, 'jQuery', ['$', 'jQuery'])).toBeTruthy();
   });
 });

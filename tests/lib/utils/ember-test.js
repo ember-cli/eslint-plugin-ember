@@ -216,6 +216,9 @@ describe('isInjectedServiceProp', () => {
 
     node = parse('Ember.service()');
     expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+
+    node = parse('inject()');
+    expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
   });
 });
 
@@ -552,5 +555,12 @@ describe('hasDuplicateDependentKeys', () => {
     expect(emberUtils.hasDuplicateDependentKeys(node)).toBeTruthy();
     node = parse("computed('model.{foo,bar}', 'model.bar').volatile()");
     expect(emberUtils.hasDuplicateDependentKeys(node)).toBeTruthy();
+  });
+});
+
+describe('getEmberImportAliasName', () => {
+  it('should get the proper name of default import', () => {
+    const node = babelEslint.parse("import foo from 'ember'").body[0];
+    expect(emberUtils.getEmberImportAliasName(node)).toEqual('foo');
   });
 });
