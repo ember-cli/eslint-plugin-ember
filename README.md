@@ -37,8 +37,8 @@ module.exports = {
 ```
 
 Possible configurations:
-- [plugin:ember/base](https://github.com/ember-cli/eslint-plugin-ember/blob/master/config/base.js) - contains only recommended settings for custom rules defined in this plugin.
-- [plugin:ember/recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/config/recommended.js) - extends base configuration with extra rules' settings provided by eslint
+- [plugin:ember/base](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/base.js) - contains only recommended settings for custom rules defined in this plugin.
+- [plugin:ember/recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/recommended.js) - extends base configuration with extra rules' settings provided by eslint
 
 #### Use plain plugin:
 
