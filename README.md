@@ -103,7 +103,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | Prevents usage of old shims for modules |
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | Warns about unexpected side effects in computed properties |
 | :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | Enforces usage of brace expansion |
-| :white_check_mark: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
+| :white_check_mark: :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
 
 
 ### Routing
