@@ -443,6 +443,121 @@ describe('isRelation', () => {
   });
 });
 
+describe('parseDependentKeys', () => {
+  it('should parse dependent keys from callexpression', () => {
+    const node = parse("computed('model.{foo,bar}', 'model.bar')");
+    expect(emberUtils.parseDependentKeys(node)).toEqual([
+      'model.foo', 'model.bar', 'model.bar',
+    ]);
+  });
+
+  it('should work when no dependent keys present', () => {
+    const node = parse('computed(function() {})');
+    expect(emberUtils.parseDependentKeys(node)).toEqual([]);
+  });
+
+  it('should handle dependent keys and function arguments', () => {
+    const node = parse("computed('model.{foo,bar}', 'model.bar', function() {})");
+    expect(emberUtils.parseDependentKeys(node)).toEqual([
+      'model.foo', 'model.bar', 'model.bar',
+    ]);
+  });
+
+  it('should handle dependent keys and function arguments in MemberExpression', () => {
+    const node = parse(`
+      computed('model.{foo,bar}', 'model.bar', function() {
+      }).volatile();
+    `);
+    expect(emberUtils.parseDependentKeys(node)).toEqual([
+      'model.foo', 'model.bar', 'model.bar',
+    ]);
+  });
+});
+
+describe('unwrapBraceExpressions', () => {
+  it('should unwrap simple dependent keys', () => {
+    expect(emberUtils.unwrapBraceExpressions([
+      'model.foo', 'model.bar'
+    ])).toEqual(['model.foo', 'model.bar']);
+  });
+
+  it('should unwrap dependent keys with braces', () => {
+    expect(emberUtils.unwrapBraceExpressions([
+      'model.{foo,bar}', 'model.bar'
+    ])).toEqual(['model.foo', 'model.bar', 'model.bar']);
+  });
+
+  it('should unwrap more complex dependent keys', () => {
+    expect(emberUtils.unwrapBraceExpressions([
+      'model.{foo,bar}', 'model.bar', 'data.{foo,baz,qux}'
+    ])).toEqual([
+      'model.foo', 'model.bar', 'model.bar', 'data.foo', 'data.baz', 'data.qux',
+    ]);
+  });
+
+  it('should unwrap multi-level keys', () => {
+    expect(emberUtils.unwrapBraceExpressions([
+      'model.bar.{foo,qux}', 'model.bar.baz'
+    ])).toEqual([
+      'model.bar.foo', 'model.bar.qux', 'model.bar.baz'
+    ]);
+  });
+
+  it('should unwrap @each with extensions', () => {
+    expect(emberUtils.unwrapBraceExpressions([
+      'collection.@each.{foo,bar}', 'collection.@each.qux'
+    ])).toEqual([
+      'collection.@each.foo', 'collection.@each.bar', 'collection.@each.qux'
+    ]);
+  });
+
+  it('should unwrap complicated mixed dependent keys', () => {
+    expect(emberUtils.unwrapBraceExpressions([
+      'a.b.c.{d.@each.qwe.zxc,f,g.[]}'
+    ])).toEqual([
+      'a.b.c.d.@each.qwe.zxc', 'a.b.c.f', 'a.b.c.g.[]',
+    ]);
+  });
+
+  it('should unwrap complicated mixed repeated dependent keys', () => {
+    expect(emberUtils.unwrapBraceExpressions([
+      'a.b.{d.@each.qux,f,d.@each.foo}'
+    ])).toEqual([
+      'a.b.d.@each.qux', 'a.b.f', 'a.b.d.@each.foo',
+    ]);
+  });
+});
+
+describe('hasDuplicateDependentKeys', () => {
+  it('reports duplicate dependent keys in computed calls', () => {
+    let node = parse("computed('model.{foo,bar}', 'model.bar')");
+    expect(emberUtils.hasDuplicateDependentKeys(node)).toBeTruthy();
+    node = parse("Ember.computed('model.{foo,bar}', 'model.bar')");
+    expect(emberUtils.hasDuplicateDependentKeys(node)).toBeTruthy();
+  });
+
+  it('ignores not repeated dependentKeys', () => {
+    let node = parse("computed('model.{foo,bar}', 'model.qux')");
+    expect(emberUtils.hasDuplicateDependentKeys(node)).not.toBeTruthy();
+    node = parse("Ember.computed('model.{foo,bar}', 'model.qux')");
+    expect(emberUtils.hasDuplicateDependentKeys(node)).not.toBeTruthy();
+    node = parse("computed('model.{foo,bar}', 'model.qux').volatile()");
+    expect(emberUtils.hasDuplicateDependentKeys(node)).not.toBeTruthy();
+  });
+
+  it('ignores non-computed calls', () => {
+    const node = parse("foo('model.{foo,bar}', 'model.bar')");
+    expect(emberUtils.hasDuplicateDependentKeys(node)).not.toBeTruthy();
+  });
+
+  it('reports duplicate dependent keys in computed calls with MemberExp', () => {
+    let node = parse("Ember.computed('model.{foo,bar}', 'model.bar').volatile()");
+    expect(emberUtils.hasDuplicateDependentKeys(node)).toBeTruthy();
+    node = parse("computed('model.{foo,bar}', 'model.bar').volatile()");
+    expect(emberUtils.hasDuplicateDependentKeys(node)).toBeTruthy();
+  });
+});
+
 describe('getEmberImportAliasName', () => {
   it('should get the proper name of default import', () => {
     const node = babelEslint.parse("import foo from 'ember'").body[0];
