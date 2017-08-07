@@ -104,7 +104,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | Warns about unexpected side effects in computed properties |
 |  | [require-super-in-init](./docs/rules/require-super-in-init.md) | Enforces super calls in init hooks |
 | :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | Enforces usage of brace expansion |
-| :white_check_mark: :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
+| :white_check_mark::wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
 
 
 ### Routing
@@ -120,6 +120,84 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
+
+
+### Components & tests
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+|  | [no-this-jquery](./docs/rules/no-this-jquery.md) | Disallow use of `this.# eslint-plugin-ember
+
+[![NPM version](https://img.shields.io/npm/v/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)
+[![NPM downloads](https://img.shields.io/npm/dm/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)
+[![Build Status](https://travis-ci.org/ember-cli/eslint-plugin-ember.svg?branch=master)](https://travis-ci.org/ember-cli/eslint-plugin-ember)
+
+> An ESlint plugin that provides set of rules for Ember Applications based on commonly known good practices.
+
+## ❗️ Requirements
+
+- [ESLint](http://eslint.org/) is required to use this plugin.
+- Rules provided by this plugin should be runnable under latest stable, v4 LTS and v6 LTS Node.js versions.
+
+## 🚀 Usage
+
+### 1. Install plugin
+
+```shell
+  npm install --save-dev eslint-plugin-ember
+```
+
+### 2. Modify your `.eslintrc.js`:
+
+#### Use with predefined settings:
+
+```javascript
+// .eslintrc.js
+module.exports = {
+  extends: [
+    'eslint:recommended',
+    'plugin:ember/recommended'
+  ],
+  rules: {
+    // override rules' settings here
+  }
+}
+```
+
+Possible configurations:
+- [plugin:ember/base](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/base.js) - contains only recommended settings for custom rules defined in this plugin.
+- [plugin:ember/recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/recommended.js) - extends base configuration with extra rules' settings provided by eslint
+
+#### Use plain plugin:
+
+If you don't want to use predefined settings, you can use it as a plain plugin and choose which rules you'd like to use by yourself like this:
+
+```javascript
+module.exports = {
+  extends: [
+    'eslint:recommended'
+  ],
+  plugins: [
+    'ember'
+  ],
+  rules: {
+    // add rules' settings here, eg.:
+    'ember/local-modules': 2
+  }
+}
+```
+
+All rules from this plugin have to be prefixed with `ember/`
+
+## 🍟 Rules
+
+Rules are grouped by category to help you understand their purpose.
+
+All rules below with a check mark :white_check_mark: are enabled by default while using `plugn:ember/base` or `plugin:ember/recommended` configs.
+
+The `--fix` option on the command line automatically fixes problems reported by rules which have a wrench :wrench: below.
+
+ on components or tests |
 
 
 ### Organizing
