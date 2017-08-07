@@ -1,6 +1,6 @@
 ## Call _super in init lifecycle hooks
 
-### Rule name: `call-super-in-init`
+### Rule name: `require-super-in-init`
 
 When overriding the `init` lifecycle hook inside Ember Components, Controllers, Routes or Mixins, it is necessary to include a call to `_super`.
 

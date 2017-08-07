@@ -2,7 +2,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/call-super-in-init');
+const rule = require('../../../lib/rules/require-super-in-init');
 const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
@@ -12,7 +12,7 @@ const RuleTester = require('eslint').RuleTester;
 const eslintTester = new RuleTester();
 const message = 'Call this._super(...arguments) in init hook';
 
-eslintTester.run('call-super-in-init', rule, {
+eslintTester.run('require-super-in-init', rule, {
   valid: [
     {
       code: 'export default Component.extend();',
