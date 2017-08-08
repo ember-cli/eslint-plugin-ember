@@ -126,7 +126,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [no-this-jquery](./docs/rules/no-this-jquery.md) | Disallow use of `this.# eslint-plugin-ember
+|  | [no-jquery](./docs/rules/no-jquery.md) | Disallow use of `this.# eslint-plugin-ember
 
 [![NPM version](https://img.shields.io/npm/v/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)
 [![NPM downloads](https://img.shields.io/npm/dm/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)

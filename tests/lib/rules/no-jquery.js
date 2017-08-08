@@ -71,6 +71,33 @@ eslintTester.run('no-jquery', rule, {
         message
       }]
     },
+    // Em.$
+    {
+      code: `
+        export default Ember.Component({
+          didInsertElement() {
+            Em.$(body).addClass('active')
+          }
+        });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message
+      }]
+    },
+    // AliasedEmber.$
+    {
+      code: `
+        import E from 'ember';
+        export default Ember.Component({
+          didInsertElement() {
+            E.$(body).addClass('active')
+          }
+        });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message
+      }]
+    },
     // const jq = Ember.$
     {
       code: `
@@ -92,19 +119,6 @@ eslintTester.run('no-jquery', rule, {
         export default Ember.Component({
           didInsertElement() {
             $(body).addClass('active')
-          }
-        });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message
-      }]
-    },
-    {
-      code: `
-        const { $: jq } = Ember;
-        export default Ember.Component({
-          didInsertElement() {
-            jq(body).addClass('active')
           }
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
