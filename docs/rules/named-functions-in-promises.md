@@ -38,6 +38,13 @@ export default Component.extend({
         .then(this._notifyAboutSuccess.bind(this))
         .catch(this._notifyAboutFailure.bind(this));
     },
+    // GOOD if allowSimpleArrowFunction: true
+    updateUser(user) {
+      user.save()
+        .then(() => this._reloadUser())
+        .then(() => this._notifyAboutSuccess())
+        .catch(() => this._notifyAboutFailure());
+    },
   },
   _reloadUser(user) {
     return user.reload();
