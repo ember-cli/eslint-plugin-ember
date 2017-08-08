@@ -327,6 +327,18 @@ describe('isCustomProp', () => {
   });
 });
 
+describe('isBeforeModelProp', () => {
+  let node;
+
+  it('should be a beforeModel prop', () => {
+    node = getProperty('test = { beforeModel() {} }');
+    expect(emberUtils.isBeforeModelProp(node)).toBeTruthy();
+
+    node = getProperty('test = { beforeModel: function() {} }');
+    expect(emberUtils.isBeforeModelProp(node)).toBeTruthy();
+  });
+});
+
 describe('isModelProp', () => {
   let node;
 
@@ -336,6 +348,18 @@ describe('isModelProp', () => {
 
     node = getProperty('test = { model: function() {} }');
     expect(emberUtils.isModelProp(node)).toBeTruthy();
+  });
+});
+
+describe('isAfterModelProp', () => {
+  let node;
+
+  it('should be an afterModel prop', () => {
+    node = getProperty('test = { afterModel() {} }');
+    expect(emberUtils.isAfterModelProp(node)).toBeTruthy();
+
+    node = getProperty('test = { afterModel: function() {} }');
+    expect(emberUtils.isAfterModelProp(node)).toBeTruthy();
   });
 });
 
