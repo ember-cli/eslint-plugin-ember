@@ -76,8 +76,9 @@ const recommendedRules = rules.reduce((obj, entry) => {
 
 const recommendedRulesContent = `/*
  * IMPORTANT!
- * This file has been automatically generated,
- * in order to update it's content execute "npm run update"
+ * This file has been automatically generated from ,
+ * in order to update its content based on the rule definition
+ * files, execute "npm run update"
  */
 module.exports = ${JSON.stringify(recommendedRules, null, 2)}`;
 
