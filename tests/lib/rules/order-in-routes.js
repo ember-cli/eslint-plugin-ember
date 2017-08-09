@@ -27,6 +27,13 @@ eslintTester.run('order-in-routes', rule, {
         beforeModel() {},
         model() {},
         afterModel() {},
+        serialize() {},
+        redirect() {},
+        activate() {},
+        setupController() {},
+        renderTemplate() {},
+        resetController() {},
+        deactivate() {},
         actions: {},
         _customAction() {},
         _customAction2: function() {},
@@ -228,6 +235,47 @@ eslintTester.run('order-in-routes', rule, {
       errors: [{
         message: 'The inherited "mergedProperties" property should be above the "test" property on line 2',
         line: 3,
+      }],
+    },
+    {
+      code: `export default Route.extend({
+        currentUser: service(),
+        queryParams: {},
+        customProp: "test",
+        vehicle: alias("car"),
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
+        beforeModel() {},
+        model() {},
+        afterModel() {},
+        setupController() {},
+        redirect() {},
+        serialize() {},
+        activate() {},
+        deactivate() {},
+        renderTemplate() {},
+        resetController() {},
+        actions: {},
+        _customAction() {},
+        _customAction2: function() {},
+        tSomeTask: task(function* () {})
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "redirect" lifecycle hook should be above the "setupController" lifecycle hook on line 11',
+        line: 12,
+      }, {
+        message: 'The "serialize" lifecycle hook should be above the "setupController" lifecycle hook on line 11',
+        line: 13
+      }, {
+        message: 'The "activate" lifecycle hook should be above the "setupController" lifecycle hook on line 11',
+        line: 14
+      }, {
+        message: 'The "renderTemplate" lifecycle hook should be above the "deactivate" lifecycle hook on line 15',
+        line: 16
+      }, {
+        message: 'The "resetController" lifecycle hook should be above the "deactivate" lifecycle hook on line 15',
+        line: 17
       }],
     },
     {
