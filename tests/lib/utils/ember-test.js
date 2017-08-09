@@ -327,39 +327,39 @@ describe('isCustomProp', () => {
   });
 });
 
-describe('isBeforeModelProp', () => {
+describe('isRouteLifecycleHook', () => {
   let node;
 
-  it('should be a beforeModel prop', () => {
+  it('should be a route lifecycle hook', () => {
     node = getProperty('test = { beforeModel() {} }');
-    expect(emberUtils.isBeforeModelProp(node)).toBeTruthy();
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
 
-    node = getProperty('test = { beforeModel: function() {} }');
-    expect(emberUtils.isBeforeModelProp(node)).toBeTruthy();
-  });
-});
-
-describe('isModelProp', () => {
-  let node;
-
-  it('should be a model prop', () => {
     node = getProperty('test = { model() {} }');
-    expect(emberUtils.isModelProp(node)).toBeTruthy();
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
 
-    node = getProperty('test = { model: function() {} }');
-    expect(emberUtils.isModelProp(node)).toBeTruthy();
-  });
-});
-
-describe('isAfterModelProp', () => {
-  let node;
-
-  it('should be an afterModel prop', () => {
     node = getProperty('test = { afterModel() {} }');
-    expect(emberUtils.isAfterModelProp(node)).toBeTruthy();
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
 
-    node = getProperty('test = { afterModel: function() {} }');
-    expect(emberUtils.isAfterModelProp(node)).toBeTruthy();
+    node = getProperty('test = { serialize() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { redirect() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { activate() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { setupController() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { renderTemplate() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { resetController() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { deactivate() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
   });
 });
 
