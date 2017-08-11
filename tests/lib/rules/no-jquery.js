@@ -16,6 +16,7 @@ eslintTester.run('no-jquery', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
+      filename: 'example-app/tests/integration/component/some-component-test.js',
       code: `
         import { moduleForComponent, test } from 'ember-qunit';
         import hbs from 'htmlbars-inline-precompile';
@@ -140,6 +141,7 @@ eslintTester.run('no-jquery', rule, {
       }]
     },
     {
+      filename: 'example-app/tests/integration/component/some-component-test.js',
       code: `
         import { moduleForComponent, test } from 'ember-qunit';
         import hbs from 'htmlbars-inline-precompile';
