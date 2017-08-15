@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-ember",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "description": "Eslint plugin for Ember.js apps",
   "main": "lib/index.js",
   "directories": {
