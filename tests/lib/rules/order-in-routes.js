@@ -108,9 +108,8 @@ eslintTester.run('order-in-routes', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [{
         order: [
-          'lifecycle-hook',
           'model',
-          'beforeModel',
+          'lifecycle-hook',
           'service',
         ],
       }],
