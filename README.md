@@ -97,6 +97,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
 |  | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
 |  | [no-attrs-in-components](./docs/rules/no-attrs-in-components.md) | Disallow usage of this.attrs in components |
+|  | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | Disallow repeating dependent keys |
 | :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
 |  | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
 | :white_check_mark: | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
@@ -126,78 +127,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [no-jquery](./docs/rules/no-jquery.md) | Disallow use of `this.# eslint-plugin-ember
-
-[![NPM version](https://img.shields.io/npm/v/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)
-[![NPM downloads](https://img.shields.io/npm/dm/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)
-[![Build Status](https://travis-ci.org/ember-cli/eslint-plugin-ember.svg?branch=master)](https://travis-ci.org/ember-cli/eslint-plugin-ember)
-
-> An ESlint plugin that provides set of rules for Ember Applications based on commonly known good practices.
-
-## ❗️ Requirements
-
-- [ESLint](http://eslint.org/) is required to use this plugin.
-- Rules provided by this plugin should be runnable under latest stable, v4 LTS and v6 LTS Node.js versions.
-
-## 🚀 Usage
-
-### 1. Install plugin
-
-```shell
-  npm install --save-dev eslint-plugin-ember
-```
-
-### 2. Modify your `.eslintrc.js`:
-
-#### Use with predefined settings:
-
-```javascript
-// .eslintrc.js
-module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:ember/recommended'
-  ],
-  rules: {
-    // override rules' settings here
-  }
-}
-```
-
-Possible configurations:
-- [plugin:ember/base](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/base.js) - contains only recommended settings for custom rules defined in this plugin.
-- [plugin:ember/recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/recommended.js) - extends base configuration with extra rules' settings provided by eslint
-
-#### Use plain plugin:
-
-If you don't want to use predefined settings, you can use it as a plain plugin and choose which rules you'd like to use by yourself like this:
-
-```javascript
-module.exports = {
-  extends: [
-    'eslint:recommended'
-  ],
-  plugins: [
-    'ember'
-  ],
-  rules: {
-    // add rules' settings here, eg.:
-    'ember/local-modules': 2
-  }
-}
-```
-
-All rules from this plugin have to be prefixed with `ember/`
-
-## 🍟 Rules
-
-Rules are grouped by category to help you understand their purpose.
-
-All rules below with a check mark :white_check_mark: are enabled by default while using `plugn:ember/base` or `plugin:ember/recommended` configs.
-
-The `--fix` option on the command line automatically fixes problems reported by rules which have a wrench :wrench: below.
-
- on components or tests |
+|  | [no-jquery](./docs/rules/no-jquery.md) | Disallow any usage of jQuery |
 
 
 ### Organizing
