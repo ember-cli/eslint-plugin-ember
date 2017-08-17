@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recommended rules 1`] = `
+Array [
+  "alias-model-in-controller",
+  "avoid-leaking-state-in-components",
+  "closure-actions",
+  "jquery-ember-run",
+  "named-functions-in-promises",
+  "no-attrs-snapshot",
+  "no-capital-letters-in-routes",
+  "no-empty-attrs",
+  "no-function-prototype-extensions",
+  "no-observers",
+  "no-on-calls-in-components",
+  "no-side-effects",
+  "order-in-components",
+  "order-in-controllers",
+  "order-in-models",
+  "order-in-routes",
+  "routes-segments-snake-case",
+  "use-brace-expansion",
+  "use-ember-get-and-set",
+]
+`;
