@@ -10,10 +10,20 @@ ember/order-in-routes: [2, {
     'service',
     'inherited-property',
     'property',
+    'single-line-function',
+    'multi-line-function',
+    'beforeModel',
     'model',
-    'lifecycle-hook',
+    'afterModel',
+    'serialize',
+    'redirect',
+    'activate',
+    'setupController',
+    'renderTemplate',
+    'resetController',
+    'deactivate',
     'actions',
-    'method',
+    'method'
   ]
 }]
 ```
@@ -25,7 +35,18 @@ order: [
   'service',
   ['inherited-property', 'property'],
   'model',
-  'lifecycle-hook',
+  [
+    'beforeModel',
+    'model',
+    'afterModel',
+    'serialize',
+    'redirect',
+    'activate',
+    'setupController',
+    'renderTemplate',
+    'resetController',
+    'deactivate'
+  ],
   'actions',
   'method',
 ]
@@ -40,10 +61,12 @@ You should write code grouped and ordered in this way:
 1. Services
 2. Default route's properties
 3. Custom properties
-4. model() hook
-5. Other route's methods (beforeModel etc.)
-6. Actions
-7. Custom / private methods
+4. beforeModel() hook
+5. model() hook
+6. afterModel() hook
+7. Other lifecycle hooks in execution order (serialize, redirect, etc)
+8. Actions
+9. Custom / private methods
 
 ```javascript
 const { Route, inject: { service }, get } = Ember;
@@ -60,26 +83,38 @@ export default Route.extend({
   // 3. Custom properties
   customProp: 'test',
 
-  // 4. Model hook
-  model() {
-    return this.store.findAll('article');
-  },
-
-  // 5. Other route's methods
+  // 4. beforeModel hook
   beforeModel() {
     if (!get(this, 'currentUser.isAdmin')) {
       this.transitionTo('index');
     }
   },
+  
+  // 5. model hook
+  model() {
+    return this.store.findAll('article');
+  },
+  
+  // 6. afterModel hook
+  afterModel(articles) {
+    articles.forEach((article) => {
+      article.set('foo', 'bar');
+    });
+  },
 
-  // 6. All actions
+  // 7. Other route's methods
+  setupController(controller) {
+    controller.set('foo', 'bar');
+  },
+
+  // 8. All actions
   actions: {
     sneakyAction() {
       return this._secretMethod();
     },
   },
 
-  // 7. Custom / private methods
+  // 9. Custom / private methods
   _secretMethod() {
     // custom secret method logic
   },
