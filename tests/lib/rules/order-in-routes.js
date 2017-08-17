@@ -14,7 +14,7 @@ eslintTester.run('order-in-routes', rule, {
   valid: [
     {
       code: 'export default Route.extend();',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       code: `export default Route.extend({
@@ -39,7 +39,7 @@ eslintTester.run('order-in-routes', rule, {
         _customAction2: function() {},
         tSomeTask: task(function* () {})
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       code: `export default Route.extend({
@@ -57,7 +57,7 @@ eslintTester.run('order-in-routes', rule, {
         _customAction2: function() {},
         tSomeTask: task(function* () {})
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       code: `export default Route.extend({
@@ -69,7 +69,7 @@ eslintTester.run('order-in-routes', rule, {
         },
         _customAction() {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       code: `export default Route.extend({
@@ -77,7 +77,7 @@ eslintTester.run('order-in-routes', rule, {
         render() {},
         init() {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       code: `export default Route.extend({
@@ -88,7 +88,7 @@ eslintTester.run('order-in-routes', rule, {
         model() {},
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       code: `export default Route.extend({
@@ -97,7 +97,7 @@ eslintTester.run('order-in-routes', rule, {
         vehicle: alias("car"),
         model() {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       code: `export default Route.extend({
@@ -110,10 +110,47 @@ eslintTester.run('order-in-routes', rule, {
         order: [
           'model',
           'lifecycle-hook',
-          'service',
-        ],
-      }],
+          'service'
+        ]
+      }]
     },
+    {
+      code: `export default Route.extend({
+        deactivate() {},
+        beforeModel() {},
+        currentUser: service(),
+        model() {}
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'lifecycle-hook',
+          'service',
+          'model'
+        ]
+      }]
+    },
+    {
+      code: `export default Route.extend({
+        deactivate() {},
+        setupController() {},
+        beforeModel() {},
+        currentUser: service(),
+        model() {}
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          [
+            'deactivate',
+            'setupController',
+            'beforeModel'
+          ],
+          'service',
+          'model'
+        ]
+      }]
+    }
   ],
   invalid: [
     {
@@ -130,11 +167,11 @@ eslintTester.run('order-in-routes', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "currentUser" service injection should be above the inherited "queryParams" property on line 2',
-        line: 3,
+        line: 3
       }, {
         message: 'The "vehicle" single-line function should be above the "beforeModel" lifecycle hook on line 5',
-        line: 7,
-      }],
+        line: 7
+      }]
     },
     {
       code: `export default Route.extend({
@@ -150,11 +187,11 @@ eslintTester.run('order-in-routes', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "currentUser" service injection should be above the inherited "queryParams" property on line 2',
-        line: 3,
+        line: 3
       }, {
         message: 'The "vehicle" single-line function should be above the "beforeModel" lifecycle hook on line 5',
-        line: 7,
-      }],
+        line: 7
+      }]
     },
     {
       code: `export default Route.extend({
@@ -170,11 +207,11 @@ eslintTester.run('order-in-routes', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The inherited "queryParams" property should be above the "customProp" property on line 2',
-        line: 3,
+        line: 3
       }, {
         message: 'The "levelOfHappiness" multi-line function should be above the "beforeModel" lifecycle hook on line 4',
-        line: 8,
-      }],
+        line: 8
+      }]
     },
     {
       code: `export default Route.extend({
@@ -188,11 +225,11 @@ eslintTester.run('order-in-routes', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The inherited "queryParams" property should be above the "customProp" property on line 2',
-        line: 3,
+        line: 3
       }, {
         message: 'The "beforeModel" lifecycle hook should be above the "model" hook on line 4',
-        line: 5,
-      }],
+        line: 5
+      }]
     },
     {
       code: `export default Route.extend({
@@ -206,11 +243,11 @@ eslintTester.run('order-in-routes', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "customProp" property should be above the "vehicle" single-line function on line 3',
-        line: 4,
+        line: 4
       }, {
         message: 'The actions hash should be above the "_customAction" method on line 6',
-        line: 7,
-      }],
+        line: 7
+      }]
     },
     {
       code: `export default Route.extend({
@@ -221,8 +258,8 @@ eslintTester.run('order-in-routes', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "customProp" property should be above the "model" hook on line 2',
-        line: 3,
-      }],
+        line: 3
+      }]
     },
     {
       code: `export default Route.extend({
@@ -233,8 +270,8 @@ eslintTester.run('order-in-routes', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The inherited "mergedProperties" property should be above the "test" property on line 2',
-        line: 3,
-      }],
+        line: 3
+      }]
     },
     {
       code: `export default Route.extend({
@@ -262,7 +299,7 @@ eslintTester.run('order-in-routes', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "redirect" lifecycle hook should be above the "setupController" lifecycle hook on line 11',
-        line: 12,
+        line: 12
       }, {
         message: 'The "serialize" lifecycle hook should be above the "setupController" lifecycle hook on line 11',
         line: 13
@@ -275,7 +312,7 @@ eslintTester.run('order-in-routes', rule, {
       }, {
         message: 'The "resetController" lifecycle hook should be above the "deactivate" lifecycle hook on line 15',
         line: 17
-      }],
+      }]
     },
     {
       code: `export default Route.extend({
@@ -286,8 +323,8 @@ eslintTester.run('order-in-routes', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "model" hook should be above the "_test2" method on line 3',
-        line: 4,
-      }],
+        line: 4
+      }]
     },
     {
       filename: 'example-app/routes/some-route.js',
@@ -298,8 +335,8 @@ eslintTester.run('order-in-routes', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "test" property should be above the "model" hook on line 2',
-        line: 3,
-      }],
+        line: 3
+      }]
     },
     {
       filename: 'example-app/some-feature/route.js',
@@ -310,8 +347,8 @@ eslintTester.run('order-in-routes', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "test" property should be above the "model" hook on line 2',
-        line: 3,
-      }],
+        line: 3
+      }]
     },
     {
       filename: 'example-app/twisted-path/some-file.js',
@@ -322,8 +359,8 @@ eslintTester.run('order-in-routes', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The "test" property should be above the "model" hook on line 2',
-        line: 3,
-      }],
-    },
-  ],
+        line: 3
+      }]
+    }
+  ]
 });
