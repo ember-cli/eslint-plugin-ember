@@ -13,7 +13,7 @@ ember/order-in-routes: [2, {
     'model',
     'lifecycle-hook',
     'actions',
-    'method',
+    ['method', 'empty-method'],
   ]
 }]
 ```
@@ -27,7 +27,7 @@ order: [
   'model',
   'lifecycle-hook',
   'actions',
-  'method',
+  ['method', 'empty-method'],
 ]
 ```
 
