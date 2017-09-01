@@ -354,6 +354,35 @@ eslintTester.run('order-in-components', rule, {
         })
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: `export default Component.extend({
+        foo: computed(function() {
+        }).volatile(),
+        onFoo() {},
+        bar() { const foo = 'bar'},
+        onFoo: () => {}
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      code: `export default Component.extend({
+        onFoo() {},
+        onFoo: () => {},
+        foo: computed(function() {
+        }).volatile(),
+        bar() { const foo = 'bar'}
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'property',
+          'empty-method',
+          'single-line-function',
+          'multi-line-function',
+          'method',
+        ],
+      }],
     }
   ],
   invalid: [
@@ -546,13 +575,14 @@ eslintTester.run('order-in-components', rule, {
     {
       code: `export default Component.extend({
         customFunc() {
+          const foo = 'bar';
         },
         actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'The actions hash should be above the "customFunc" method on line 2',
-        line: 4,
+        line: 5,
       }],
     },
     {

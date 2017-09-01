@@ -23,7 +23,7 @@ ember/order-in-routes: [2, {
     'resetController',
     'deactivate',
     'actions',
-    'method'
+    ['method', 'empty-method'],
   ]
 }]
 ```
@@ -48,7 +48,7 @@ order: [
     'deactivate'
   ],
   'actions',
-  'method',
+  ['method', 'empty-method'],
 ]
 ```
 

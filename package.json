@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-ember",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "description": "Eslint plugin for Ember.js apps",
   "main": "lib/index.js",
   "directories": {
@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "ember-rfc176-data": "^0.2.7",
-    "requireindex": "^1.1.0",
+    "require-folder-tree": "^1.4.5",
     "snake-case": "^2.1.0"
   },
   "jest": {

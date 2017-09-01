@@ -14,8 +14,8 @@ eslintTester.run('use-ember-get-and-set', rule, {
   valid: [
     'get(this, "test")',
     'get(controller, "test")',
-    'set(this, "test")',
-    'set(controller, "test")',
+    'set(this, "test", someValue)',
+    'set(controller, "test", someValue)',
     'getProperties(this, name, email, password)',
     'getProperties(controller, name, email, password)',
     'setProperties(this, {name: "Jon", email: "jon@snow.com"})',
@@ -33,6 +33,18 @@ eslintTester.run('use-ember-get-and-set', rule, {
     {
       code: 'this.get("/resources")',
       filename: 'app/mirage/config.js',
+    },
+    {
+      code: 'import Ember from "ember"; Ember.get(this, "test")',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'import Ember from "ember"; Ember.set(this, "test", someValue)',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'import EmberAlias from "ember"; EmberAlias.get(this, "test")',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
   ],
   invalid: [
