@@ -97,6 +97,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
 |  | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
 |  | [no-attrs-in-components](./docs/rules/no-attrs-in-components.md) | Disallow usage of this.attrs in components |
+|  | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | Disallow repeating dependent keys |
 | :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
 |  | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
 | :white_check_mark: | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
@@ -104,7 +105,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | Warns about unexpected side effects in computed properties |
 |  | [require-super-in-init](./docs/rules/require-super-in-init.md) | Enforces super calls in init hooks |
 | :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | Enforces usage of brace expansion |
-| :white_check_mark: :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
+| :white_check_mark::wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
 
 
 ### Routing
@@ -120,6 +121,13 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
+
+
+### Components & tests
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+|  | [no-jquery](./docs/rules/no-jquery.md) | Disallow any usage of jQuery |
 
 
 ### Organizing
