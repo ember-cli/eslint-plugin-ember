@@ -327,15 +327,39 @@ describe('isCustomProp', () => {
   });
 });
 
-describe('isModelProp', () => {
+describe('isRouteLifecycleHook', () => {
   let node;
 
-  it('should be a model prop', () => {
-    node = getProperty('test = { model() {} }');
-    expect(emberUtils.isModelProp(node)).toBeTruthy();
+  it('should be a route lifecycle hook', () => {
+    node = getProperty('test = { beforeModel() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
 
-    node = getProperty('test = { model: function() {} }');
-    expect(emberUtils.isModelProp(node)).toBeTruthy();
+    node = getProperty('test = { model() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { afterModel() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { serialize() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { redirect() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { activate() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { setupController() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { renderTemplate() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { resetController() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
+
+    node = getProperty('test = { deactivate() {} }');
+    expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
   });
 });
 
