@@ -12,7 +12,17 @@ ember/order-in-components: [2, {
     'single-line-function',
     'multi-line-function',
     'observer',
-    'lifecycle-hook',
+    'init',
+    'didReceiveAttrs',
+    'willRender',
+    'didInsertElement',
+    'didRender',
+    'didUpdateAttrs',
+    'willUpdate',
+    'didUpdate',
+    'willDestroyElement',
+    'willClearRender',
+    'didDestroyElement',
     'actions',
     ['method', 'empty-method'],
   ]
@@ -27,7 +37,17 @@ order: [
   'property',
   ['single-line-function', 'multi-line-function'],
   'observer',
-  'lifecycle-hook',
+  'init',
+  'didReceiveAttrs',
+  'willRender',
+  'didInsertElement',
+  'didRender',
+  'didUpdateAttrs',
+  'willUpdate',
+  'didUpdate',
+  'willDestroyElement',
+  'willClearRender',
+  'didDestroyElement',
   'actions',
   ['method', 'empty-method'],
 ]
@@ -44,7 +64,7 @@ You should write code grouped and ordered in this way:
 3. Single line computed properties
 4. Multiline computed properties
 5. Observers
-6. Lifecycle Hooks
+6. Lifecycle Hooks (in execution order)
 7. Actions
 8. Custom / private methods
 
@@ -69,7 +89,7 @@ export default Component.extend({
   }),
 
   // 5. Observers
-  onVahicleChange: observer('vehicle', function() {
+  onVehicleChange: observer('vehicle', function() {
     // observer logic
   }),
 
@@ -80,6 +100,10 @@ export default Component.extend({
 
   didInsertElement() {
     // custom didInsertElement logic
+  },
+  
+  willDestroyElement() {
+    // custom willDestroyElement logic
   },
 
   // 7. All actions
