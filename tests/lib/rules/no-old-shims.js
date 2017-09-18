@@ -53,12 +53,6 @@ eslintTester.run('no-old-shims', rule, {
       errors: [{ message: 'Don\'t use import paths from ember-cli-shims' }],
     },
     {
-      code: 'import Sortable from \'ember-controllers/sortable\';',
-      output: 'import Sortable from \'ember-controllers/sortable\';',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{ message: 'Don\'t use import paths from ember-cli-shims' }],
-    },
-    {
       code: 'import Service from \'ember-service\';\nimport inject from \'ember-service/inject\';',
       output: 'import Service from \'@ember/service\';\nimport { inject } from \'@ember/service\';',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
