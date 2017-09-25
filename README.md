@@ -74,66 +74,40 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 <!--RULES_TABLE_START-->
 
-### Controllers
+### Best Practices
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 |  | [alias-model-in-controller](./docs/rules/alias-model-in-controller.md) | Enforces aliasing model in controller |
+| :white_check_mark: | [closure-actions](./docs/rules/closure-actions.md) | Enforces usage of closure actions |
+|  | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
+|  | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
+|  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
+| :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
+|  | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
+|  | [no-jquery](./docs/rules/no-jquery.md) | Disallow any usage of jQuery |
+|  | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
+| :wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | Prevents usage of old shims for modules |
+| :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | Prevents usage of `on` calls in components |
+| :white_check_mark::wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
 
 
-### Components
+### Possible Errors
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [avoid-leaking-state-in-components](./docs/rules/avoid-leaking-state-in-components.md) | Avoids state leakage |
-| :white_check_mark: | [closure-actions](./docs/rules/closure-actions.md) | Enforces usage of closure actions |
-| :white_check_mark: | [no-attrs-snapshot](./docs/rules/no-attrs-snapshot.md) | Disallow use of attrs snapshot in `didReceiveAttrs` and `didUpdateAttrs` |
-| :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | Prevents usage of `on` calls in components |
-
-
-### General
-
-|    | Rule ID | Description |
-|:---|:--------|:------------|
 | :white_check_mark: | [jquery-ember-run](./docs/rules/jquery-ember-run.md) | Prevents usage of jQuery without Ember Run Loop |
-|  | [local-modules](./docs/rules/local-modules.md) | Enforces usage of local modules |
-|  | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
-|  | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
 | :white_check_mark: | [no-attrs-in-components](./docs/rules/no-attrs-in-components.md) | Disallow usage of this.attrs in components |
+| :white_check_mark: | [no-attrs-snapshot](./docs/rules/no-attrs-snapshot.md) | Disallow use of attrs snapshot in `didReceiveAttrs` and `didUpdateAttrs` |
+| :white_check_mark: | [no-capital-letters-in-routes](./docs/rules/no-capital-letters-in-routes.md) | Raise an error when there is a route with uppercased letters in router.js |
 | :white_check_mark: | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | Disallow repeating dependent keys |
-| :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
-|  | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
-|  | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
-| :wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | Prevents usage of old shims for modules |
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | Warns about unexpected side effects in computed properties |
 | :white_check_mark: | [require-super-in-init](./docs/rules/require-super-in-init.md) | Enforces super calls in init hooks |
-| :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | Enforces usage of brace expansion |
-| :white_check_mark::wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
-
-
-### Routing
-
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-| :white_check_mark: | [no-capital-letters-in-routes](./docs/rules/no-capital-letters-in-routes.md) | Raise an error when there is a route with uppercased letters in router.js |
 | :white_check_mark: | [routes-segments-snake-case](./docs/rules/routes-segments-snake-case.md) | Enforces usage of snake_cased dynamic segments in routes |
 
 
-### Ember Data
-
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-|  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
-
-
-### Components & tests
-
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-|  | [no-jquery](./docs/rules/no-jquery.md) | Disallow any usage of jQuery |
-
-
-### Organizing
+### Stylistic Issues
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
@@ -141,6 +115,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [order-in-controllers](./docs/rules/order-in-controllers.md) | Enforces proper order of properties in controllers |
 | :white_check_mark: | [order-in-models](./docs/rules/order-in-models.md) | Enforces proper order of properties in models |
 | :white_check_mark: | [order-in-routes](./docs/rules/order-in-routes.md) | Enforces proper order of properties in routes |
+| :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | Enforces usage of brace expansion |
 
 ### Deprecated
 

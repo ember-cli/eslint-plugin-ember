@@ -52,7 +52,7 @@ let rulesTableContent = categories.map(category => `
 |:---|:--------|:------------|
 ${
   rules
-    .filter(entry => entry[1].meta.docs.category === category)
+    .filter(([, rule]) => rule.meta.docs.category === category && !rule.meta.deprecated)
     .map((entry) => {
       const name = entry[0];
       const meta = entry[1].meta;

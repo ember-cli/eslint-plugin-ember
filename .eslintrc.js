@@ -13,6 +13,6 @@ module.exports = {
     'strict': 0,
     'comma-dangle': [0, {
       'functions': 'never',
-    }]
+    }],
   },
 }
