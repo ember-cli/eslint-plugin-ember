@@ -31,7 +31,7 @@ module.exports = {
   ],
   extends: [
     'eslint:recommended',
-    'plugin:ember/recommended'
+    'plugin:ember/recommended' // or 'plugin:ember/base'
   ],
   rules: {
     // override rules' settings here
@@ -40,12 +40,12 @@ module.exports = {
 ```
 
 Possible configurations:
-- [plugin:ember/base](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/base.js) - contains only recommended settings for custom rules defined in this plugin.
-- [plugin:ember/recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/recommended.js) - extends base configuration with extra rules' settings provided by eslint
+- [plugin:ember/base](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/base.js) - contains no rules settings, but the basic eslint configuration suitable for eny ember project. You can use it to configure rules as you wish.
+- [plugin:ember/recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/recommended.js) - extends base configuration with recommended rules' settings
 
 #### Use plain plugin:
 
-If you don't want to use predefined settings, you can use it as a plain plugin and choose which rules you'd like to use by yourself like this:
+If you don't want to use predefined settings, you can use it as a plain plugin:
 
 ```javascript
 module.exports = {
@@ -78,7 +78,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :white_check_mark: | [alias-model-in-controller](./docs/rules/alias-model-in-controller.md) | Enforces aliasing model in controller |
+|  | [alias-model-in-controller](./docs/rules/alias-model-in-controller.md) | Enforces aliasing model in controller |
 
 
 ### Components
@@ -97,16 +97,16 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |:---|:--------|:------------|
 | :white_check_mark: | [jquery-ember-run](./docs/rules/jquery-ember-run.md) | Prevents usage of jQuery without Ember Run Loop |
 |  | [local-modules](./docs/rules/local-modules.md) | Enforces usage of local modules |
-| :white_check_mark: | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
+|  | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
 |  | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
-|  | [no-attrs-in-components](./docs/rules/no-attrs-in-components.md) | Disallow usage of this.attrs in components |
-|  | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | Disallow repeating dependent keys |
+| :white_check_mark: | [no-attrs-in-components](./docs/rules/no-attrs-in-components.md) | Disallow usage of this.attrs in components |
+| :white_check_mark: | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | Disallow repeating dependent keys |
 | :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
 |  | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
-| :white_check_mark: | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
+|  | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
 | :wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | Prevents usage of old shims for modules |
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | Warns about unexpected side effects in computed properties |
-|  | [require-super-in-init](./docs/rules/require-super-in-init.md) | Enforces super calls in init hooks |
+| :white_check_mark: | [require-super-in-init](./docs/rules/require-super-in-init.md) | Enforces super calls in init hooks |
 | :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | Enforces usage of brace expansion |
 | :white_check_mark::wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
 
@@ -123,7 +123,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :white_check_mark: | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
+|  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
 
 
 ### Components & tests
@@ -141,6 +141,14 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [order-in-controllers](./docs/rules/order-in-controllers.md) | Enforces proper order of properties in controllers |
 | :white_check_mark: | [order-in-models](./docs/rules/order-in-models.md) | Enforces proper order of properties in models |
 | :white_check_mark: | [order-in-routes](./docs/rules/order-in-routes.md) | Enforces proper order of properties in routes |
+
+### Deprecated
+
+> :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
+
+| Rule ID | Replaced by |
+|:--------|:------------|
+| [local-modules](./docs/rules/local-modules.md) | [new-module-imports](./docs/rules/new-module-imports.md) |
 
 <!--RULES_TABLE_END-->
 
