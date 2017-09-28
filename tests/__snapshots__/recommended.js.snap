@@ -6,12 +6,14 @@ Array [
   "avoid-leaking-state-in-ember-objects",
   "closure-actions",
   "jquery-ember-run",
+  "new-module-imports",
   "no-attrs-in-components",
   "no-attrs-snapshot",
   "no-capital-letters-in-routes",
   "no-duplicate-dependent-keys",
-  "no-empty-attrs",
   "no-function-prototype-extensions",
+  "no-global-jquery",
+  "no-old-shims",
   "no-on-calls-in-components",
   "no-side-effects",
   "order-in-components",
@@ -21,6 +23,5 @@ Array [
   "require-super-in-init",
   "routes-segments-snake-case",
   "use-brace-expansion",
-  "use-ember-get-and-set",
 ]
 `;
