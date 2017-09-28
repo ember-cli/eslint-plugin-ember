@@ -68,7 +68,7 @@ All rules from this plugin have to be prefixed with `ember/`
 
 Rules are grouped by category to help you understand their purpose.
 
-All rules below with a check mark :white_check_mark: are enabled by default while using `plugin:ember/base` or `plugin:ember/recommended` configs.
+All rules below with a check mark :white_check_mark: are enabled by default while using `plugin:ember/recommended` config.
 
 The `--fix` option on the command line automatically fixes problems reported by rules which have a wrench :wrench: below.
 
