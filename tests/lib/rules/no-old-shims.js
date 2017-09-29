@@ -23,42 +23,41 @@ eslintTester.run('no-old-shims', rule, {
   ],
   invalid: [
     {
-      code: 'import Component from \'ember-component\';',
-      output: 'import Component from \'@ember/component\';',
+      code: "import SortableMixin from 'ember-controllers/sortable';",
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{ message: 'Don\'t use import paths from ember-cli-shims' }],
+      errors: [{ message: 'Importing default from ember-controllers/sortable is deprecated.' }]
     },
     {
-      code: 'import { capitalize, dasherize, foo } from \'ember-string\';',
-      output: 'import { capitalize, dasherize } from \'@ember/string\';\nimport { foo } from \'ember-string\';',
+      code: "import destroy from 'ember-metal/destroy';",
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{ message: 'Don\'t use import paths from ember-cli-shims' }],
+      errors: [{ message: 'Importing default from ember-metal/destroy is deprecated.' }]
     },
     {
-      code: 'import computed, { not } from \'ember-computed\';',
-      output: 'import { computed } from \'@ember/object\';\nimport { not } from \'@ember/object/computed\';',
+      code: "import OrderedSet from 'ember-set/ordered';",
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{ message: 'Don\'t use import paths from ember-cli-shims' }],
+      errors: [{ message: 'Importing default from ember-set/ordered is deprecated.' }]
     },
     {
-      code: 'import { log } from \'ember-debug\';',
-      output: 'import { debug as log } from \'@ember/debug\';',
+      code: "import EmberTest from 'ember-test';",
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{ message: 'Don\'t use import paths from ember-cli-shims' }],
+      errors: [{ message: 'Importing default from ember-test is deprecated.' }]
     },
     {
-      code: 'import { log as debug } from \'ember-debug\';',
-      output: 'import { debug } from \'@ember/debug\';',
+      code: "import QUnitAdapter from 'ember-test/qunit-adapter';",
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{ message: 'Don\'t use import paths from ember-cli-shims' }],
+      errors: [{ message: 'Importing default from ember-test/qunit-adapter is deprecated.' }]
     },
     {
-      code: 'import Service from \'ember-service\';\nimport inject from \'ember-service/inject\';',
-      output: 'import Service from \'@ember/service\';\nimport { inject } from \'@ember/service\';',
+      code: "import { default as destroy } from 'ember-metal/destroy';",
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{ message: 'Importing default from ember-metal/destroy is deprecated.' }],
+    },
+    {
+      code: "import EmberTest from 'ember-test';\nimport QUnitAdapter from 'ember-test/qunit-adapter';",
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
-        { message: 'Don\'t use import paths from ember-cli-shims' },
-        { message: 'Don\'t use import paths from ember-cli-shims' },
+        { message: 'Importing default from ember-test is deprecated.' },
+        { message: 'Importing default from ember-test/qunit-adapter is deprecated.' }
       ],
     },
   ],

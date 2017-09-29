@@ -898,7 +898,7 @@ ecc-jsbn@~0.1.1:
 
 ember-rfc176-data@Turbo87/ember-rfc176-data#new-structure:
   version "0.2.7"
-  resolved "https://codeload.github.com/Turbo87/ember-rfc176-data/tar.gz/e590c95e6d68145263dc5820637bdd6726407a37"
+  resolved "https://codeload.github.com/Turbo87/ember-rfc176-data/tar.gz/cddf169abc0974c0f5d8433b1bac0cf838f5baac"
 
 encoding@^0.1.11:
   version "0.1.12"
