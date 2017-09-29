@@ -9,6 +9,7 @@ node_js:
 cache: yarn
 
 script:
+  - yarn upgrade ember-rfc176-data
   - yarn run lint
   - yarn run test:coverage
 
