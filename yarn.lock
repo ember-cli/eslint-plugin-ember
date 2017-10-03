@@ -896,9 +896,9 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-ember-rfc176-data@Turbo87/ember-rfc176-data#new-structure:
-  version "0.2.7"
-  resolved "https://codeload.github.com/Turbo87/ember-rfc176-data/tar.gz/cddf169abc0974c0f5d8433b1bac0cf838f5baac"
+ember-rfc176-data@^0.3.0:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.2.tgz#bde5538939529b263c142b53a47402f8127f8dce"
 
 encoding@^0.1.11:
   version "0.1.12"
