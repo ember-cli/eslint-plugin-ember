@@ -229,11 +229,23 @@ describe('isInjectedServiceProp', () => {
     node = parse('service()');
     expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
 
-    node = parse('Ember.service()');
+    node = parse('Ember.inject.service()');
     expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
 
     node = parse('inject()');
     expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+  });
+});
+
+describe('isInjectedControllerProp', () => {
+  let node;
+
+  it('should check if it\'s an injected controller prop', () => {
+    node = parse('controller()');
+    expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+
+    node = parse('Ember.inject.controller()');
+    expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
   });
 });
 
