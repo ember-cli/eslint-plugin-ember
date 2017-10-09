@@ -88,5 +88,11 @@ eslintTester.run('no-empty-attrs', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{ message, line: 2 }, { message, line: 3 }, { message, line: 4 }],
     },
+    {
+      filename: 'example-app/models/some-model.js',
+      code: 'export default CustomModel.extend({name: attr()});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{ message, line: 1 }]
+    },
   ],
 });
