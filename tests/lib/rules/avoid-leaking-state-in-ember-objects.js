@@ -2,7 +2,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/avoid-leaking-state-in-components');
+const rule = require('../../../lib/rules/avoid-leaking-state-in-ember-objects');
 const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester();
-eslintTester.run('avoid-leaking-state-in-components', rule, {
+eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
   valid: [
     {
       code: 'export default Component.extend();',
@@ -44,6 +44,40 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
       code: 'export default Component.extend({ classNames: [], classNameBindings: [], actions: {}, concatenatedProperties: [], mergedProperties: [], positionalParams: [] });',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+
+    {
+      code: 'export default Foo.extend();',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Foo.extend({ someProp: "example", init() { this.set("anotherProp", []) } });',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Foo.extend({ someProp: "example", init() { this.set("anotherProp", {}) } });',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Foo.extend({ someProp: "example", init() { this.set("anotherProp", new Ember.A()) } });',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Foo.extend({ someProp: "example", init() { this.set("anotherProp", new A()) } });',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Foo.extend({ someProp: "example", init() { this.set("anotherProp", new Ember.Object()) } });',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Foo.extend({ someProp: "example", init() { this.set("anotherProp", new Object()) } });',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'export default Foo.extend({ classNames: [], classNameBindings: [], actions: {}, concatenatedProperties: [], mergedProperties: [], positionalParams: [] });',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+
   ],
   invalid: [
     {
@@ -88,25 +122,44 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
         message: 'Avoid using objects as default properties',
       }],
     },
+
     {
-      filename: 'example-app/components/some-component.js',
-      code: 'export default CustomComponent.extend({someProp: []});',
+      code: 'export default Foo.extend({someProp: []});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'Avoid using arrays as default properties',
       }],
     },
     {
-      filename: 'example-app/components/some-component/component.js',
-      code: 'export default CustomComponent.extend({someProp: new A()});',
+      code: 'export default Foo.extend({someProp: new Ember.A()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'Avoid using arrays as default properties',
       }],
     },
     {
-      filename: 'example-app/twisted-path/some-file.js',
-      code: 'export default Component.extend({someProp: {}});',
+      code: 'export default Foo.extend({someProp: new A()});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Avoid using arrays as default properties',
+      }],
+    },
+    {
+      code: 'export default Foo.extend({someProp: {}});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Avoid using objects as default properties',
+      }],
+    },
+    {
+      code: 'export default Foo.extend({someProp: new Ember.Object()});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Avoid using objects as default properties',
+      }],
+    },
+    {
+      code: 'export default Foo.extend({someProp: new Object()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'Avoid using objects as default properties',
