@@ -9,88 +9,147 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module'
+  }
+});
 eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
   valid: [
     {
       code: 'export default Foo.extend();',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: 'export default Foo.extend({ someProp: "example", init() { this.set("anotherProp", []) } });',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: 'export default Foo.extend({ someProp: "example", init() { this.set("anotherProp", {}) } });',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: 'export default Foo.extend({ someProp: "example", init() { this.set("anotherProp", new Ember.A()) } });',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: 'export default Foo.extend({ someProp: "example", init() { this.set("anotherProp", new A()) } });',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: 'export default Foo.extend({ someProp: "example", init() { this.set("anotherProp", new Ember.Object()) } });',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: 'export default Foo.extend({ someProp: "example", init() { this.set("anotherProp", new Object()) } });',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: 'export default Foo.extend({ classNames: [], classNameBindings: [], actions: {}, concatenatedProperties: [], mergedProperties: [], positionalParams: [] });',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: 'export default Foo.extend(someMixin, { classNames: [], classNameBindings: [], actions: {}, concatenatedProperties: [], mergedProperties: [], positionalParams: [] });',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      code: 'export default Foo.extend(someMixin, { classNames: [], classNameBindings: [], actions: {}, concatenatedProperties: [], mergedProperties: [], positionalParams: [] });'
     },
-
+    {
+      code: 'export default Foo.extend({ someProp: "example",});',
+    },
+    {
+      code: 'export default Foo.extend({ someProp: function() {},});',
+    },
+    {
+      code: 'export default Foo.extend({ someProp: 5,});',
+    },
+    {
+      code: 'export default Foo.extend({ someProp: Symbol(),});',
+    },
+    {
+      code: 'export default Foo.extend({ someProp: undefined,});',
+    },
+    {
+      code: 'export default Foo.extend({ someProp: null,});',
+    },
+    {
+      code: 'export default Foo.extend({ doStuff() { }});'
+    },
+    {
+      code: 'export default Foo.extend({ derp: importedThing });'
+    },
+    {
+      code: 'export default Foo.extend({ derp });'
+    },
+    {
+      code: 'export default Foo.extend(SomeMixin, { simple: "string" });'
+    },
+    {
+      code: 'export default Foo.extend(SomeMixin, OtherMixin, { derp: null });'
+    },
+    {
+      code: 'export default Foo.extend({ doStuff: task(function* () {}) });'
+    },
+    {
+      code: 'export default Foo.extend({ fullName: computed(function() {}) });'
+    },
+    {
+      code: 'export default Foo.extend({ fullName: inject.service() });'
+    },
+    {
+      code: "export default Foo.extend({ fullName: 'a' + 'b' });"
+    },
   ],
   invalid: [
     {
       code: 'export default Foo.extend({someProp: []});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Avoid using arrays as default properties',
+        message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
     {
       code: 'export default Foo.extend({someProp: new Ember.A()});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Avoid using arrays as default properties',
+        message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
     {
       code: 'export default Foo.extend({someProp: new A()});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Avoid using arrays as default properties',
+        message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
     {
       code: 'export default Foo.extend({someProp: {}});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Avoid using objects as default properties',
+        message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
     {
       code: 'export default Foo.extend({someProp: new Ember.Object()});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Avoid using objects as default properties',
+        message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
     {
       code: 'export default Foo.extend({someProp: new Object()});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Avoid using objects as default properties',
+        message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+      }],
+    },
+
+    {
+      code: 'export default Foo.extend(SomeMixin, { derp: [] });',
+      errors: [{
+        message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+      }],
+    },
+    {
+      code: 'export default Foo.extend({ badThing: new Set() });',
+      errors: [{
+        message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+      }],
+    },
+    {
+      code: "export default Foo['extend']({ otherThing: {} });",
+      errors: [{
+        message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+      }],
+    },
+    {
+      code: 'export default Foo.reopen({ otherThing: {} });',
+      errors: [{
+        message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
   ],
