@@ -89,6 +89,12 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     {
       code: "export default Foo.extend({ fullName: 'a' + 'b' });"
     },
+    {
+      code: 'export default Foo.extend({ test: hbs`lorem ipsum` });'
+    },
+    {
+      code: 'export default Foo.extend({ test: `lorem ipsum` });'
+    }
   ],
   invalid: [
     {
