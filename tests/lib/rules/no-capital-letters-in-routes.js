@@ -17,6 +17,12 @@ eslintTester.run('no-capital-letters-in-routes', rule, {
   valid: [
     'this.route("sign-in");',
     'this.route("news", { path: "/:news_id" });',
+    {
+      code: `
+        const routeName="about";
+        this.route(routeName);`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    }
   ],
 
   invalid: [{
