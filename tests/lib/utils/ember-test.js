@@ -30,10 +30,25 @@ describe('isModule', () => {
 });
 
 describe('isDSModel', () => {
-  const node = parse('DS.Model()');
-
   it('should check if it\'s a DS Model', () => {
+    const node = parse('DS.Model()');
+
     expect(emberUtils.isDSModel(node)).toBeTruthy();
+  });
+
+  it('should check if it\'s a DS Model even if it uses custom name', () => {
+    const node = parse('CustomModel.extend()');
+    const filePath = 'example-app/models/path/to/some-model.js';
+
+    expect(
+      emberUtils.isDSModel(node),
+      'it shouldn\'t detect Model when no file path is provided'
+    ).toBeFalsy();
+
+    expect(
+      emberUtils.isDSModel(node, filePath),
+      'it should detect Model when file path is provided'
+    ).toBeTruthy();
   });
 });
 
