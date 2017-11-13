@@ -26,6 +26,9 @@
 ```javascript
 // .eslintrc.js
 module.exports = {
+  plugins: [
+    'ember'
+  ],
   extends: [
     'eslint:recommended',
     'plugin:ember/recommended'
@@ -46,11 +49,11 @@ If you don't want to use predefined settings, you can use it as a plain plugin a
 
 ```javascript
 module.exports = {
-  extends: [
-    'eslint:recommended'
-  ],
   plugins: [
     'ember'
+  ],
+  extends: [
+    'eslint:recommended'
   ],
   rules: {
     // add rules' settings here, eg.:
