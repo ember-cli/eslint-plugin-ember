@@ -91,6 +91,22 @@ eslintTester.run('order-in-controllers', rule, {
         ],
       }],
     },
+    {
+      code: `
+        export default Controller.extend({
+          foo: service(),
+
+          init() {
+            this._super(...arguments);
+          },
+
+          actions: {
+            onKeyPress: function (event) {}
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
   ],
   invalid: [
     {
@@ -222,6 +238,24 @@ eslintTester.run('order-in-controllers', rule, {
         message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
         line: 3,
       }],
+    },
+    {
+      code: `
+        export default Controller.extend({
+          foo: service(),
+          actions: {
+            onKeyPress: function (event) {}
+          },
+          init() {
+            this._super(...arguments);
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The inherited "init" property should be above the actions hash on line 4',
+        line: 7
+      }]
     },
   ],
 });
