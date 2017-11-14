@@ -83,14 +83,14 @@ eslintTester.run('order-in-models', rule, {
       code: `export default DS.Model.extend({
         a: attr("string"),
         b: belongsTo("c", { async: false }),
-        convertA(paramA) { 
+        convertA(paramA) {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default DS.Model.extend({
-        convertA(paramA) { 
+        convertA(paramA) {
         },
         a: attr("string"),
         b: belongsTo("c", { async: false }),
@@ -215,6 +215,24 @@ eslintTester.run('order-in-models', rule, {
         message: 'The "test" single-line function should be above the "mood" multi-line function on line 2',
         line: 4,
       }],
-    },
+    }, {
+      code: `export default Model.extend({
+        behaviors: hasMany("behaviour"),
+        shape: attr("string"),
+        mood: computed("health", "hunger", function() {
+        })
+      });`,
+      output: `export default Model.extend({
+        shape: attr("string"),
+        behaviors: hasMany("behaviour"),
+        mood: computed("health", "hunger", function() {
+        })
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
+        line: 3,
+      }],
+    }
   ],
 });

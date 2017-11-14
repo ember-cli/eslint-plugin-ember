@@ -752,6 +752,29 @@ eslintTester.run('order-in-components', rule, {
         message: 'The "onBar" empty method should be above the "foo" multi-line function on line 2',
         line: 6
       }]
+    },
+    {
+      code: `export default Component.extend({
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
+
+        vehicle: alias("car"),
+
+        actions: {}
+      });`,
+      output: `export default Component.extend({
+        vehicle: alias("car"),
+
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
+
+        actions: {}
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 2',
+        line: 5
+      }]
     }
   ]
 });
