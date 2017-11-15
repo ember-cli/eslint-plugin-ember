@@ -16,6 +16,10 @@
 ### 1. Install plugin
 
 ```shell
+  yarn add --dev eslint-plugin-ember
+```
+Or
+```shell
   npm install --save-dev eslint-plugin-ember
 ```
 
