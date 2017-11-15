@@ -16,7 +16,7 @@
 ### 1. Install plugin
 
 ```shell
-  yarn add -D eslint-plugin-ember
+  yarn add --dev eslint-plugin-ember
 ```
 Or
 ```shell
