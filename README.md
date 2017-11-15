@@ -96,7 +96,6 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :white_check_mark: | [avoid-leaking-state-in-components](./docs/rules/avoid-leaking-state-in-components.md) | Avoids state leakage |
 | :white_check_mark: | [jquery-ember-run](./docs/rules/jquery-ember-run.md) | Prevents usage of jQuery without Ember Run Loop |
 | :white_check_mark: | [no-attrs-in-components](./docs/rules/no-attrs-in-components.md) | Disallow usage of this.attrs in components |
 | :white_check_mark: | [no-attrs-snapshot](./docs/rules/no-attrs-snapshot.md) | Disallow use of attrs snapshot in `didReceiveAttrs` and `didUpdateAttrs` |
@@ -130,6 +129,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 | Rule ID | Replaced by |
 |:--------|:------------|
+| [avoid-leaking-state-in-components](./docs/rules/avoid-leaking-state-in-components.md) | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) |
 | [local-modules](./docs/rules/local-modules.md) | [new-module-imports](./docs/rules/new-module-imports.md) |
 
 <!--RULES_TABLE_END-->
