@@ -95,11 +95,9 @@ eslintTester.run('order-in-controllers', rule, {
       code: `
         export default Controller.extend({
           foo: service(),
-
           init() {
             this._super(...arguments);
           },
-
           actions: {
             onKeyPress: function (event) {}
           }
@@ -107,6 +105,29 @@ eslintTester.run('order-in-controllers', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
+    {
+      code: `
+        export default Controller.extend({
+          foo: service(),
+          init() {
+            this._super(...arguments);
+          },
+          customFoo() {}
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      code: `
+        export default Controller.extend({
+          foo: service(),
+          init() {
+            this._super(...arguments);
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    }
   ],
   invalid: [
     {
@@ -257,5 +278,36 @@ eslintTester.run('order-in-controllers', rule, {
         line: 7
       }]
     },
+    {
+      code: `
+        export default Controller.extend({
+          foo: service(),
+          customFoo() {},
+          init() {
+            this._super(...arguments);
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The inherited "init" property should be above the "customFoo" empty method on line 4',
+        line: 5
+      }]
+    },
+    {
+      code: `
+        export default Controller.extend({
+          init() {
+            this._super(...arguments);
+          },
+          foo: service()
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "foo" service injection should be above the inherited "init" property on line 3',
+        line: 6
+      }]
+    }
   ],
 });
