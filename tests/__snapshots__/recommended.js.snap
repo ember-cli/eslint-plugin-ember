@@ -2,7 +2,6 @@
 
 exports[`recommended rules 1`] = `
 Array [
-  "avoid-leaking-state-in-components",
   "avoid-leaking-state-in-ember-objects",
   "closure-actions",
   "jquery-ember-run",
