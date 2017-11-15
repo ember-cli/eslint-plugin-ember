@@ -91,6 +91,13 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | Prevents usage of `on` calls in components |
 
 
+### Ember Object
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+|  | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage |
+
+
 ### General
 
 |    | Rule ID | Description |
@@ -141,6 +148,15 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [order-in-controllers](./docs/rules/order-in-controllers.md) | Enforces proper order of properties in controllers |
 | :white_check_mark: | [order-in-models](./docs/rules/order-in-models.md) | Enforces proper order of properties in models |
 | :white_check_mark: | [order-in-routes](./docs/rules/order-in-routes.md) | Enforces proper order of properties in routes |
+
+### Deprecated
+
+> :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
+
+| Rule ID | Replaced by |
+|:--------|:------------|
+| [avoid-leaking-state-in-components](./docs/rules/avoid-leaking-state-in-components.md) | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) |
+| [local-modules](./docs/rules/local-modules.md) | [new-module-imports](./docs/rules/new-module-imports.md) |
 
 <!--RULES_TABLE_END-->
 

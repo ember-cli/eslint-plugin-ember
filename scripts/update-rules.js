@@ -45,7 +45,7 @@ const categories = rules
     return arr;
   }, []);
 
-const rulesTableContent = categories.map(category => `
+let rulesTableContent = categories.map(category => `
 ### ${category}
 
 |    | Rule ID | Description |
@@ -64,6 +64,27 @@ ${
     .join('\n')
 }
 `).join('\n');
+
+rulesTableContent += `
+### Deprecated
+
+> :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
+
+| Rule ID | Replaced by |
+|:--------|:------------|
+${
+  rules
+    .filter(entry => entry[1].meta.deprecated)
+    .map((entry) => {
+      const name = entry[0];
+      const meta = entry[1].meta;
+      const link = `[${name}](./docs/rules/${name}.md)`;
+      const replacedBy = (meta.docs.replacedBy || []).map(id => `[${id}](./docs/rules/${id}.md)`).join(', ') || '(no replacement)';
+      return `| ${link} | ${replacedBy} |`;
+    })
+    .join('\n')
+}
+`;
 
 const recommendedRules = rules.reduce((obj, entry) => {
   const name = `ember/${entry[0]}`;

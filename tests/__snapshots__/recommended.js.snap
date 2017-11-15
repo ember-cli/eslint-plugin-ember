@@ -4,7 +4,6 @@ exports[`recommended rules 1`] = `
 Array [
   "alias-model-in-controller",
   "avoid-leaking-state-in-components",
-  "avoid-leaking-state-in-ember-objects",
   "closure-actions",
   "jquery-ember-run",
   "named-functions-in-promises",
