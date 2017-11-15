@@ -107,6 +107,13 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [routes-segments-snake-case](./docs/rules/routes-segments-snake-case.md) | Enforces usage of snake_cased dynamic segments in routes |
 
 
+### Ember Object
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage |
+
+
 ### Stylistic Issues
 
 |    | Rule ID | Description |
