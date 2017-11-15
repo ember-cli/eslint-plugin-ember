@@ -73,9 +73,9 @@ eslintTester.run('order-in-routes', rule, {
     },
     {
       code: `export default Route.extend({
+        init() {},
         model() {},
         render() {},
-        init() {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
@@ -150,7 +150,31 @@ eslintTester.run('order-in-routes', rule, {
           'model'
         ]
       }]
-    }
+    },
+    {
+      code: `
+        export default Route.extend({
+          foo: service(),
+          init() {
+            this._super(...arguments);
+          },
+          actions: {}
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      code: `
+        export default Route.extend({
+          foo: service(),
+          init() {
+            this._super(...arguments);
+          },
+          customFoo() {}
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
   ],
   invalid: [
     {
@@ -361,6 +385,53 @@ eslintTester.run('order-in-routes', rule, {
         message: 'The "test" property should be above the "model" hook on line 2',
         line: 3
       }]
-    }
+    },
+    {
+      code: `
+        export default Route.extend({
+          foo: service(),
+          actions: {},
+          init() {
+            this._super(...arguments);
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The inherited "init" property should be above the actions hash on line 4',
+        line: 5
+      }]
+    },
+    {
+      code: `
+        export default Route.extend({
+          foo: service(),
+          customFoo() {},
+          init() {
+            this._super(...arguments);
+          },
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The inherited "init" property should be above the "customFoo" empty method on line 4',
+        line: 5
+      }]
+    },
+    {
+      code: `
+        export default Route.extend({
+          init() {
+            this._super(...arguments);
+          },
+          foo: service()
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "foo" service injection should be above the inherited "init" property on line 3',
+        line: 6
+      }]
+    },
   ]
 });
