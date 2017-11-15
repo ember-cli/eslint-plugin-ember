@@ -188,6 +188,7 @@ If you have any suggestions, ideas or problems feel free to add new [issue](http
 - [Alex LaFroscia](https://github.com/alexlafroscia)
 - [Tobias Bieniek](https://github.com/Turbo87)
 - [Robert Wagner](https://github.com/rwwagner90)
+- [Jacek Bandura](https://github.com/jbandura)
 
 ##  🙌 Credits
 - [DockYard team](http://github.com/DockYard) - for great inspiration with their [styleguide](https://github.com/DockYard/styleguides/blob/master/engineering/ember.md)
