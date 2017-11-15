@@ -91,6 +91,13 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | Prevents usage of `on` calls in components |
 
 
+### Ember Object
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+|  | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage |
+
+
 ### General
 
 |    | Rule ID | Description |
