@@ -7,6 +7,7 @@
 ```
 ember/order-in-controllers: [2, {
   order: [
+    'controller',
     'service',
     'query-params',
     'inherited-property',
@@ -24,7 +25,7 @@ If you want some of properties to be treated equally in order you can group them
 
 ```
 order: [
-  ['service', 'query-params'],
+  ['controller', 'service', 'query-params'],
   'inherited-property',
   'property',
   ['single-line-function', 'multi-line-function']
@@ -37,54 +38,58 @@ You can find full list of properties that you can use to configure this rule [he
 
 You should write code grouped and ordered in this way:
 
-1. Services
-2. Query params
-3. Default controller's properties
-4. Custom properties
-5. Single line computed properties
-6. Multi line computed properties
-7. Observers
-8. Actions
-9. Custom / private methods
+1. Controller injections
+2. Service injections
+3. Query params
+4. Default controller's properties
+5. Custom properties
+6. Single line computed properties
+7. Multi line computed properties
+8. Observers
+9. Actions
+10. Custom / private methods
 
 
 ```javascript
-const { Controller, computed, inject: { service }, get } = Ember;
+const { Controller, computed, inject: { controller, service }, get } = Ember;
 
 export default Controller.extend({
-  // 1. Services
+  // 1. Controller injections
+  application: controller(),
+
+  // 2. Service injections
   currentUser: service(),
 
-  // 2. Query params
+  // 3. Query params
   queryParams: ['view'],
 
-  // 3. Default controller's properties
+  // 4. Default controller's properties
   concatenatedProperties: ['concatenatedProperty'],
-  
-  // 4. Custom properties
+
+  // 5. Custom properties
   attitude: 10,
 
-  // 5. Single line Computed Property
+  // 6. Single line Computed Property
   health: alias('model.health'),
 
-  // 6. Multiline Computed Property
+  // 7. Multiline Computed Property
   levelOfHappiness: computed('attitude', 'health', function() {
     return get(this, 'attitude') * get(this, 'health') * Math.random();
   }),
 
-  // 7. Observers
+  // 8. Observers
   onVahicleChange: observer('vehicle', function() {
     // observer logic
   }),
 
-  // 8. All actions
+  // 9. All actions
   actions: {
     sneakyAction() {
       return this._secretMethod();
     },
   },
 
-  // 9. Custom / private methods
+  // 10. Custom / private methods
   _secretMethod() {
     // custom secret method logic
   },
