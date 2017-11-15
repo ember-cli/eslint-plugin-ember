@@ -155,6 +155,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 | Rule ID | Replaced by |
 |:--------|:------------|
+| [avoid-leaking-state-in-components](./docs/rules/avoid-leaking-state-in-components.md) | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) |
 | [local-modules](./docs/rules/local-modules.md) | [new-module-imports](./docs/rules/new-module-imports.md) |
 
 <!--RULES_TABLE_END-->
