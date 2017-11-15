@@ -1,3 +1,5 @@
+const path = require('path');
+
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
@@ -24,15 +26,15 @@ eslintTester.run('use-ember-get-and-set', rule, {
     'getWithDefault(controller, "test", "default")',
     {
       code: 'this.get("myProperty")',
-      filename: 'app/tests/unit/components/component-test.js',
+      filename: path.join('app', 'tests', 'unit', 'components', 'component-test.js'),
     },
     {
       code: 'this.set("myProperty", "value")',
-      filename: 'app/tests/unit/components/component-test.js',
+      filename: path.join('app', 'tests', 'unit', 'components', 'component-test.js'),
     },
     {
       code: 'this.get("/resources")',
-      filename: 'app/mirage/config.js',
+      filename: path.join('app', 'mirage', 'config.js'),
     },
     {
       code: 'import Ember from "ember"; Ember.get(this, "test")',
