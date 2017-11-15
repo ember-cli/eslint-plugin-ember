@@ -9,6 +9,7 @@ ember/order-in-components: [2, {
   order: [
     'service',
     'property',
+    'empty-method',
     'single-line-function',
     'multi-line-function',
     'observer',
@@ -24,7 +25,7 @@ ember/order-in-components: [2, {
     'willClearRender',
     'didDestroyElement',
     'actions',
-    ['method', 'empty-method'],
+    'method',
   ]
 }]
 ```
@@ -76,24 +77,27 @@ export default Component.extend({
   // 1. Services
   i18n: service(),
 
-  // 2. Defaults
+  // 2. Properties
   role: 'sloth',
 
-  // 3. Single line Computed Property
+  // 3. Empty methods
+  onRoleChange() {},
+
+  // 4. Single line Computed Property
   vehicle: alias('car'),
 
-  // 4. Multiline Computed Property
+  // 5. Multiline Computed Property
   levelOfHappiness: computed('attitude', 'health', function() {
     const result = this.get('attitude') * this.get('health') * Math.random();
     return result;
   }),
 
-  // 5. Observers
+  // 6. Observers
   onVehicleChange: observer('vehicle', function() {
     // observer logic
   }),
 
-  // 6. Lifecycle Hooks
+  // 7. Lifecycle Hooks
   init() {
     // custom init logic
   },
@@ -101,19 +105,19 @@ export default Component.extend({
   didInsertElement() {
     // custom didInsertElement logic
   },
-  
+
   willDestroyElement() {
     // custom willDestroyElement logic
   },
 
-  // 7. All actions
+  // 8. All actions
   actions: {
     sneakyAction() {
       return this._secretMethod();
     }
   },
 
-  // 8. Custom / private methods
+  // 9. Custom / private methods
   _secretMethod() {
     // custom secret method logic
   }

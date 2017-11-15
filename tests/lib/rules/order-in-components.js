@@ -131,7 +131,8 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {},
 
-        customFunction() {
+        customFunc() {
+          return true;
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
@@ -157,7 +158,9 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
 
         customFunc() {
-        }});`,
+          return true;
+        }
+      });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
@@ -219,6 +222,8 @@ eslintTester.run('order-in-components', rule, {
       code: `export default Component.extend({
         test: service(),
 
+        someEmptyMethod() {},
+
         didReceiveAttrs() {
         },
 
@@ -226,6 +231,7 @@ eslintTester.run('order-in-components', rule, {
         }),
 
         _anotherPrivateFnc() {
+          return true;
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
@@ -357,11 +363,11 @@ eslintTester.run('order-in-components', rule, {
     },
     {
       code: `export default Component.extend({
+        onFoo() {},
+        onFoo: () => {},
         foo: computed(function() {
         }).volatile(),
-        onFoo() {},
-        bar() { const foo = 'bar'},
-        onFoo: () => {}
+        bar() { const foo = 'bar'}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
@@ -725,6 +731,23 @@ eslintTester.run('order-in-components', rule, {
         line: 5
       }, {
         message: 'The "init" lifecycle hook should be above the actions hash on line 2',
+        line: 6
+      }]
+    },
+    {
+      code: `export default Component.extend({
+        foo: computed(function() {
+        }).volatile(),
+        onFoo() {},
+        bar() { const foo = 'bar'},
+        onBar: () => {}
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "onFoo" empty method should be above the "foo" multi-line function on line 2',
+        line: 4
+      }, {
+        message: 'The "onBar" empty method should be above the "foo" multi-line function on line 2',
         line: 6
       }]
     }
