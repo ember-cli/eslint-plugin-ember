@@ -540,6 +540,35 @@ eslintTester.run('order-in-routes', rule, {
         line: 7
       }]
     },
+    {
+      code: `export default Route.extend({
+        customProp: "test",
+        /**
+         * actions block comment
+         */
+        actions: {},
+        /**
+         * beforeModel block comment
+         */
+        beforeModel() {}
+      });`,
+      output: `export default Route.extend({
+        customProp: "test",
+        /**
+         * beforeModel block comment
+         */
+        beforeModel() {},
+      /**
+         * actions block comment
+         */
+        actions: {},
+        });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "beforeModel" lifecycle hook should be above the actions hash on line 6',
+        line: 10
+      }]
+    },
     // the indendation and coma position is messed up here, but it's fixed by other rules
     // [indent], [comma-dangle], [comma-style]
     {
@@ -548,8 +577,8 @@ eslintTester.run('order-in-routes', rule, {
         test: "asd"
       });`,
       output: `export default Route.extend({
-        test: "asd"
-      ,model() {},
+        test: "asd",
+      model() {},
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
