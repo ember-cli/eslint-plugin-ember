@@ -121,10 +121,10 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [order-in-components](./docs/rules/order-in-components.md) | Enforces proper order of properties in components |
-|  | [order-in-controllers](./docs/rules/order-in-controllers.md) | Enforces proper order of properties in controllers |
-|  | [order-in-models](./docs/rules/order-in-models.md) | Enforces proper order of properties in models |
-|  | [order-in-routes](./docs/rules/order-in-routes.md) | Enforces proper order of properties in routes |
+| :wrench: | [order-in-components](./docs/rules/order-in-components.md) | Enforces proper order of properties in components |
+| :wrench: | [order-in-controllers](./docs/rules/order-in-controllers.md) | Enforces proper order of properties in controllers |
+| :wrench: | [order-in-models](./docs/rules/order-in-models.md) | Enforces proper order of properties in models |
+| :wrench: | [order-in-routes](./docs/rules/order-in-routes.md) | Enforces proper order of properties in routes |
 | :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | Enforces usage of brace expansion |
 
 ### Deprecated
