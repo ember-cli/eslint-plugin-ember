@@ -17,8 +17,7 @@ eslintTester.run('new-module-imports', rule, {
     { code: 'console.log(Ember.VERSION);' },
     { code: 'if (Ember.testing) {}' },
     {
-      code: `
-        import Component from '@ember/component';
+      code: `import Component from '@ember/component';
 
         export default Component.extend({});
       `,
@@ -38,8 +37,7 @@ eslintTester.run('new-module-imports', rule, {
   ],
   invalid: [
     {
-      code: `
-        import Ember from 'ember';
+      code: `import Ember from 'ember';
 
         const { Object: EmberObject } = Ember;
 
@@ -47,38 +45,24 @@ eslintTester.run('new-module-imports', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
-        {
-          message: 'Use import EmberObject from \'@ember/object\'; instead of using Ember destructuring',
-          line: 4
-        }
+        { message: 'Use import EmberObject from \'@ember/object\'; instead of using Ember destructuring', line: 3 }
       ]
     },
     {
-      code: `
-        import Ember from 'ember';
+      code: `import Ember from 'ember';
 
-        const {
-          $,
-          Controller
-        } = Ember;
+        const { $, Controller } = Ember;
 
         export default Controller.extend({});
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
-        {
-          message: 'Use import $ from \'jquery\'; instead of using Ember destructuring',
-          line: 5
-        },
-        {
-          message: 'Use import Controller from \'@ember/controller\'; instead of using Ember destructuring',
-          line: 6
-        }
+        { message: 'Use import $ from \'jquery\'; instead of using Ember destructuring', line: 3 },
+        { message: 'Use import Controller from \'@ember/controller\'; instead of using Ember destructuring', line: 3 }
       ]
     },
     {
-      code: `
-        import Ember from 'ember';
+      code: `import Ember from 'ember';
 
         const { Component, String: { htmlSafe } } = Ember;
         const TEST = 'MY TEST';
@@ -87,23 +71,14 @@ eslintTester.run('new-module-imports', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
-        {
-          message: 'Use import Component from \'@ember/component\'; instead of using Ember destructuring',
-          line: 4
-        },
-        {
-          message: 'Use import { htmlSafe } from \'@ember/string\'; instead of using Ember destructuring',
-          line: 4
-        }
+        { message: 'Use import Component from \'@ember/component\'; instead of using Ember destructuring', line: 3 },
+        { message: 'Use import { htmlSafe } from \'@ember/string\'; instead of using Ember destructuring', line: 3 }
       ]
     },
     {
-      code: `
-        import Ember from 'ember';
+      code: `import Ember from 'ember';
 
-        const {
-          inject: { controller, service }
-        } = Ember;
+        const { inject: { controller, service } } = Ember;
 
         export default Ember.Component.extend({
           myService: service('my-service')
@@ -111,18 +86,24 @@ eslintTester.run('new-module-imports', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
-        {
-          message: 'Use import { inject as controller } from \'@ember/controller\'; instead of using Ember destructuring',
-          line: 5
-        },
-        {
-          message: 'Use import { inject as service } from \'@ember/service\'; instead of using Ember destructuring',
-          line: 5
-        },
-        {
-          message: 'Use import Component from \'@ember/component\'; instead of using Ember.Component',
-          line: 8
-        }
+        { message: 'Use import { inject as controller } from \'@ember/controller\'; instead of using Ember destructuring', line: 3 },
+        { message: 'Use import { inject as service } from \'@ember/service\'; instead of using Ember destructuring', line: 3 },
+        { message: 'Use import Component from \'@ember/component\'; instead of using Ember.Component', line: 5 }
+      ]
+    },
+    {
+      code: `
+        import Ember from 'ember';
+        import Component from '@ember/component';
+
+        const { computed: { alias, uniq } } = Ember;
+
+        export default Component.extend({});
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [
+        { message: 'Use import { alias } from \'@ember/object/computed\'; instead of using Ember destructuring', line: 5 },
+        { message: 'Use import { uniq } from \'@ember/object/computed\'; instead of using Ember destructuring', line: 5 }
       ]
     },
     {
