@@ -1,3 +1,26 @@
+## v5.0.1 (2017-11-20)
+
+#### :rocket: Enhancement
+* [#144](https://github.com/ember-cli/eslint-plugin-ember/pull/144) Add destructuring support to `new-modules-import` rule. ([@clcuevas](https://github.com/clcuevas))
+* [#151](https://github.com/ember-cli/eslint-plugin-ember/pull/151) Allow recognition of controller injection. ([@rmachielse](https://github.com/rmachielse))
+
+#### :bug: Bug Fix
+* [#184](https://github.com/ember-cli/eslint-plugin-ember/pull/184) Prevent error when destructured path is not in known globals.. ([@rwjblue](https://github.com/rwjblue))
+
+#### :memo: Documentation
+* [#178](https://github.com/ember-cli/eslint-plugin-ember/pull/178) Add Release instructions. ([@Turbo87](https://github.com/Turbo87))
+* [#167](https://github.com/ember-cli/eslint-plugin-ember/pull/167) Added Yarn Install. ([@Alonski](https://github.com/Alonski))
+* [#177](https://github.com/ember-cli/eslint-plugin-ember/pull/177) Add CHANGELOG. ([@Turbo87](https://github.com/Turbo87))
+* [#176](https://github.com/ember-cli/eslint-plugin-ember/pull/176) Add myself to contributors. ([@jbandura](https://github.com/jbandura))
+
+#### Committers: 6
+- Alon Bukai ([Alonski](https://github.com/Alonski))
+- Claudia Cuevas ([clcuevas](https://github.com/clcuevas))
+- Jacek Bandura ([jbandura](https://github.com/jbandura))
+- Richard Machielse ([rmachielse](https://github.com/rmachielse))
+- Robert Jackson ([rwjblue](https://github.com/rwjblue))
+- Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
+-
 ## v5.0.0 (2017-11-20)
 
 * 📦 - Change `recommended` rule set to match `eslint` pattern of only including rules that prevent errors (and specifically excluding stylistic rules).
