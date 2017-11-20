@@ -12,6 +12,14 @@ const RuleTester = require('eslint').RuleTester;
 const eslintTester = new RuleTester();
 eslintTester.run('new-module-imports', rule, {
   valid: [
+    {
+      code: `import Ember from 'ember';
+
+        const { Handlebars: { Utils: { escapeExpression } } } = Ember
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    { code: 'Ember.Handlebars.Utils.escapeExpression("foo");' },
     { code: 'Ember.onerror = function() {};' },
     { code: 'Ember.MODEL_FACTORY_INJECTIONS = true;' },
     { code: 'console.log(Ember.VERSION);' },
