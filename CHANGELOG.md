@@ -4,7 +4,6 @@
   * ❌  - Remove `alias-model-in-controller` from `ember/recommended` rule set.
   * ❌  - Remove `avoid-leaking-state-in-components` from `ember/recommended` rule set.
   * ❌  - Remove `named-functions-in-promises` from `ember/recommended` rule set.
-  * ❌  - Remove `no-attrs-in-components` from `ember/recommended` rule set.
   * ❌  - Remove `no-empty-attrs` from `ember/recommended` rule set.
   * ❌  - Remove `no-observers` from `ember/recommended` rule set.
   * ❌  - Remove `use-ember-get-and-set` from `ember/recommended` rule set.
