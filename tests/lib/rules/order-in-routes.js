@@ -175,6 +175,23 @@ eslintTester.run('order-in-routes', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
+    {
+      code: `export default Route.extend({
+        prop: null,
+        actions: {
+          action: () => {}
+        },
+        customProp: { a: 1 }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'property',
+          'actions',
+          'custom:customProp'
+        ]
+      }]
+    }
   ],
   invalid: [
     {
@@ -433,5 +450,24 @@ eslintTester.run('order-in-routes', rule, {
         line: 6
       }]
     },
+    {
+      code: `export default Route.extend({
+        customProp: { a: 1 },
+        aMethod() {
+          console.log('not empty');
+        }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'method',
+          'custom:customProp'
+        ]
+      }],
+      errors: [{
+        message: 'The "aMethod" method should be above the "customProp" custom property on line 2',
+        line: 3
+      }]
+    }
   ]
 });

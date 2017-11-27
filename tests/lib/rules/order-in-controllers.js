@@ -141,6 +141,23 @@ eslintTester.run('order-in-controllers', rule, {
         });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      code: `export default Controller.extend({
+        prop: null,
+        actions: {
+          action: () => {}
+        },
+        customProp: { a: 1 }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'property',
+          'actions',
+          'custom:customProp'
+        ]
+      }]
     }
   ],
   invalid: [
@@ -332,6 +349,25 @@ eslintTester.run('order-in-controllers', rule, {
       errors: [{
         message: 'The "foo" service injection should be above the inherited "init" property on line 3',
         line: 6
+      }]
+    },
+    {
+      code: `export default Controller.extend({
+        customProp: { a: 1 },
+        aMethod() {
+          console.log('not empty');
+        }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'method',
+          'custom:customProp'
+        ]
+      }],
+      errors: [{
+        message: 'The "aMethod" method should be above the "customProp" custom property on line 2',
+        line: 3
       }]
     }
   ],

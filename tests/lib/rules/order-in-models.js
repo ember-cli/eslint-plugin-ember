@@ -102,6 +102,22 @@ eslintTester.run('order-in-models', rule, {
         ],
       }],
     },
+    {
+      code: `export default DS.Model.extend({
+        a: attr('string'),
+        convertA(paramA) {
+        },
+        customProp: { a: 1 }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'attribute',
+          'method',
+          'custom:customProp'
+        ]
+      }]
+    }
   ],
   invalid: [
     {
@@ -215,6 +231,25 @@ eslintTester.run('order-in-models', rule, {
         message: 'The "test" single-line function should be above the "mood" multi-line function on line 2',
         line: 4,
       }],
+    },
+    {
+      code: `export default DS.Model.extend({
+        customProp: { a: 1 },
+        aMethod() {
+          console.log('not empty');
+        }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'method',
+          'custom:customProp'
+        ]
+      }],
+      errors: [{
+        message: 'The "aMethod" method should be above the "customProp" custom property on line 2',
+        line: 3
+      }]
     },
   ],
 });

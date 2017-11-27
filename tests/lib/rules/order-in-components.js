@@ -389,6 +389,24 @@ eslintTester.run('order-in-components', rule, {
           'method'
         ]
       }]
+    },
+    {
+      code: `export default Component.extend({
+        prop: null,
+        actions: {
+          action: () => {}
+        },
+        customProp: { a: 1 }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'property',
+          'actions',
+          'custom:customProp',
+          'method'
+        ]
+      }]
     }
   ],
   invalid: [
@@ -749,6 +767,45 @@ eslintTester.run('order-in-components', rule, {
       }, {
         message: 'The "onBar" empty method should be above the "foo" multi-line function on line 2',
         line: 6
+      }]
+    },
+    {
+      code: `export default Component.extend({
+        prop: null,
+        actions: {},
+        customProp: { a: 1 }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'property',
+          'custom:customProp',
+          'actions',
+          'method'
+        ]
+      }],
+      errors: [{
+        message: 'The "customProp" custom property should be above the actions hash on line 3',
+        line: 4
+      }]
+    },
+    {
+      code: `export default Component.extend({
+        customProp: { a: 1 },
+        aMethod() {
+          console.log('not empty');
+        }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'method',
+          'custom:customProp'
+        ]
+      }],
+      errors: [{
+        message: 'The "aMethod" method should be above the "customProp" custom property on line 2',
+        line: 3
       }]
     }
   ]
