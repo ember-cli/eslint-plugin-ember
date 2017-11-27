@@ -304,18 +304,35 @@ eslintTester.run('order-in-components', rule, {
         }).volatile(),
         bar() { const foo = 'bar'}
       });`,
-      options: [
-        {
-          order: [
-            'property',
-            'empty-method',
-            'single-line-function',
-            'multi-line-function',
-            'method',
-          ],
-        },
-      ],
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'property',
+          'empty-method',
+          'single-line-function',
+          'multi-line-function',
+          'method'
+        ]
+      }]
     },
+    {
+      code: `export default Component.extend({
+        prop: null,
+        actions: {
+          action: () => {}
+        },
+        customProp: { a: 1 }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'property',
+          'actions',
+          'custom:customProp',
+          'method'
+        ]
+      }]
+    }
   ],
   invalid: [
     {
@@ -718,43 +735,53 @@ eslintTester.run('order-in-components', rule, {
         bar() { const foo = 'bar'},
         onBar: () => {}
       });`,
-      errors: [
-        {
-          message:
-            'The "onFoo" empty method should be above the "foo" multi-line function on line 2',
-          line: 4,
-        },
-        {
-          message:
-            'The "onBar" empty method should be above the "foo" multi-line function on line 2',
-          line: 6,
-        },
-      ],
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "onFoo" empty method should be above the "foo" multi-line function on line 2',
+        line: 4
+      }, {
+        message: 'The "onBar" empty method should be above the "foo" multi-line function on line 2',
+        line: 6
+      }]
     },
     {
       code: `export default Component.extend({
-        levelOfHappiness: computed("attitude", "health", () => {
-        }),
-
-        vehicle: alias("car"),
-
-        actions: {}
+        prop: null,
+        actions: {},
+        customProp: { a: 1 }
       });`,
-      output: `export default Component.extend({
-        vehicle: alias("car"),
-
-        levelOfHappiness: computed("attitude", "health", () => {
-        }),
-
-        actions: {}
-      });`,
-      errors: [
-        {
-          message:
-            'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 2',
-          line: 5,
-        },
-      ],
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'property',
+          'custom:customProp',
+          'actions',
+          'method'
+        ]
+      }],
+      errors: [{
+        message: 'The "customProp" custom property should be above the actions hash on line 3',
+        line: 4
+      }]
     },
-  ],
+    {
+      code: `export default Component.extend({
+        customProp: { a: 1 },
+        aMethod() {
+          console.log('not empty');
+        }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'method',
+          'custom:customProp'
+        ]
+      }],
+      errors: [{
+        message: 'The "aMethod" method should be above the "customProp" custom property on line 2',
+        line: 3
+      }]
+    }
+  ]
 });

@@ -139,7 +139,24 @@ eslintTester.run('order-in-routes', rule, {
           },
           customFoo() {}
         });
-      `,
+    `,
+    {
+      code: `export default Route.extend({
+        prop: null,
+        actions: {
+          action: () => {}
+        },
+        customProp: { a: 1 }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'property',
+          'actions',
+          'custom:customProp'
+        ]
+      }]
+    }
   ],
   invalid: [
     {
@@ -554,80 +571,23 @@ eslintTester.run('order-in-routes', rule, {
       ],
     },
     {
-      code:
-        // whitespace is preserved inside `` and it's breaking the test
-        `export default Route.extend({
-  customProp: "test",
-  /**
-   * actions block comment
-   */
-  actions: {},
-  /**
-   * beforeModel block comment
-   */
-  beforeModel() {}
-});`,
-      output: `export default Route.extend({
-  customProp: "test",
-  /**
-   * beforeModel block comment
-   */
-  beforeModel() {},
-  /**
-   * actions block comment
-   */
-  actions: {},
-});`,
-      errors: [
-        {
-          message: 'The "beforeModel" lifecycle hook should be above the actions hash on line 6',
-          line: 10,
-        },
-      ],
-    },
-    {
-      code:
-        // whitespace is preserved inside `` and it's breaking the test
-        `export default Route.extend({
-  model() {},
-  test: "asd"
-});`,
-      output: `export default Route.extend({
-  test: "asd",
-  model() {},
-});`,
-      errors: [
-        {
-          message: 'The "test" property should be above the "model" hook on line 2',
-          line: 3,
-        },
-      ],
-    },
-    {
       code: `export default Route.extend({
-
-        model() {},
-
-        test: "asd",
-
-        actions: {}
-
+        customProp: { a: 1 },
+        aMethod() {
+          console.log('not empty');
+        }
       });`,
-      output: `export default Route.extend({
-
-        test: "asd",
-
-        model() {},
-
-        actions: {}
-
-      });`,
-      errors: [
-        {
-          message: 'The "test" property should be above the "model" hook on line 3',
-          line: 5,
-        },
-      ],
-    },
-  ],
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{
+        order: [
+          'method',
+          'custom:customProp'
+        ]
+      }],
+      errors: [{
+        message: 'The "aMethod" method should be above the "customProp" custom property on line 2',
+        line: 3
+      }]
+    }
+  ]
 });
