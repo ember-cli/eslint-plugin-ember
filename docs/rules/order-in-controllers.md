@@ -95,3 +95,28 @@ export default Controller.extend({
   },
 });
 ```
+
+#### Custom Prop Ordering
+
+If you have certain properties that you like to keep in a particular order, then you can pass the `custom:$PROPERTY_NAME` syntax to the configuration:
+
+```
+ember/order-in-components: [2, {
+  order: [
+    'property',
+    'method',
+    ...
+    'custom:customOrderedPropName'
+  ]
+}]
+```
+
+Now this accepted by the linter:
+
+```
+export default Controller.extend({
+  regularProp: 1,
+  aMethod: function() {},
+  customOrderedPropName: 2
+});
+```
