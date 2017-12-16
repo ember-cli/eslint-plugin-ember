@@ -94,7 +94,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
 | :white_check_mark::wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | Prevents usage of old shims for modules |
 | :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | Prevents usage of `on` calls in components |
-| :white_check_mark: | [no-implicit-injections](./docs/rules/no-implicit-injections.md) | Prevents usage of implicit service and controller injections |
+| :white_check_mark::wrench: | [no-implicit-injections](./docs/rules/no-implicit-injections.md) | Prevents usage of implicit service and controller injections |
 | :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
 
 
