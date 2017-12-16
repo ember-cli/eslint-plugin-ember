@@ -89,7 +89,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
 | :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
 | :white_check_mark: | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
-| :white_check_mark::wrench: | [no-implicit-injections](./docs/rules/no-implicit-injections.md) | Prevents usage of implicit injections |
+| :wrench: | [no-implicit-injections](./docs/rules/no-implicit-injections.md) | Prevents usage of implicit injections |
 |  | [no-jquery](./docs/rules/no-jquery.md) | Disallow any usage of jQuery |
 |  | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
 | :white_check_mark::wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | Prevents usage of old shims for modules |
