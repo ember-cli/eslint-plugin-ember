@@ -23,6 +23,107 @@ ruleTester.run('no-global-jquery', rule, {
   valid: [
     {
       code: `
+        import $ from 'jquery';
+
+        export default Ember.Component.extend({
+          init() {
+            this.el = $('.test');
+          }
+        });
+      `,
+      parserOptions
+    },
+    {
+      code: `
+        import $ from 'jquery';
+
+        const foo = $;
+
+        export default Ember.Component.extend({
+          init() {
+            this.el = foo('.gangnam-style');
+          }
+        });
+      `,
+      parserOptions
+    },
+    {
+      code: `
+        import Ember from 'ember';
+        import Foo from 'bar';
+
+        export default Ember.Component.extend({
+          init() {
+            this.el = Ember.$('.lololol');
+          }
+        });
+      `,
+      parserOptions
+    },
+    {
+      code: `
+        import Ember from 'ember';
+
+        const { $, Component } = Ember;
+        const { eq } = Ember.computed;
+
+        export default Component.extend({
+          init() {
+            this.el = $('.baba-booey');
+          }
+        });
+      `,
+      parserOptions
+    },
+    {
+      code: `
+        import Ember from 'ember';
+        import Foo from 'bar';
+
+        const { $ } = Ember;
+        const { foo } = Foo;
+
+        export default Ember.Component.extend({
+          init() {
+            this.el = $('.to-foo-or-not-to-foo');
+          }
+        });
+      `,
+      parserOptions
+    },
+    {
+      code: `
+        import Ember from 'ember';
+        import Foo from 'bar';
+
+        const { $ } = Ember;
+        const { baz } = Foo.bar;
+
+        export default Ember.Component.extend({
+          init() {
+            this.el = $('.homie-dont-play-that');
+          }
+        });
+      `,
+      parserOptions
+    },
+    {
+      code: `
+        import Ember from 'ember';
+
+        const { $ } = Ember;
+        const wut = 'lolerskates';
+
+        export default Ember.Controller.extend({
+          init() {
+            this.el = $('.whyowhyowhy');
+          }
+        });
+      `,
+      parserOptions
+    },
+    {
+      code: `
         import Ember from 'ember';
 
         let something;
@@ -34,7 +135,7 @@ ruleTester.run('no-global-jquery', rule, {
             }
           }
         });`,
-      parserOptions,
+      parserOptions
     },
     {
       code: `
@@ -49,7 +150,7 @@ ruleTester.run('no-global-jquery', rule, {
             }
           }
         });`,
-      parserOptions,
+      parserOptions
     },
     {
       code: `
@@ -102,7 +203,7 @@ ruleTester.run('no-global-jquery', rule, {
             this.el = $('.test');
           }
         });`,
-      parserOptions,
+      parserOptions
     },
     {
       code: `
@@ -117,7 +218,7 @@ ruleTester.run('no-global-jquery', rule, {
             }
           }
         });`,
-      parserOptions,
+      parserOptions
     },
     {
       code: `
@@ -130,7 +231,7 @@ ruleTester.run('no-global-jquery', rule, {
             this.el = foo('.test');
           }
         });`,
-      parserOptions,
+      parserOptions
     },
     {
       code: `
@@ -145,7 +246,7 @@ ruleTester.run('no-global-jquery', rule, {
             }
           }
         });`,
-      parserOptions,
+      parserOptions
     },
     {
       code: `
@@ -160,7 +261,7 @@ ruleTester.run('no-global-jquery', rule, {
             }
           }
         });`,
-      parserOptions,
+      parserOptions
     },
     {
       code: `
@@ -175,10 +276,9 @@ ruleTester.run('no-global-jquery', rule, {
             }
           }
         });`,
-      parserOptions,
-    },
+      parserOptions
+    }
   ],
-
   invalid: [
     {
       code: `
