@@ -1,3 +1,15 @@
+## v5.0.2 (2017-12-18)
+
+#### :bug: Bug Fix
+* [#186](https://github.com/ember-cli/eslint-plugin-ember/pull/186) Update `no-global-jquery` rule to account for new modules import. ([@clcuevas](https://github.com/clcuevas))
+
+#### :memo: Documentation
+* [#194](https://github.com/ember-cli/eslint-plugin-ember/pull/194) Update README.md. ([@bartocc](https://github.com/bartocc))
+
+#### Committers: 2
+- Claudia Cuevas ([clcuevas](https://github.com/clcuevas))
+- Julien Palmas ([bartocc](https://github.com/bartocc))
+
 ## v5.0.1 (2017-11-20)
 
 #### :rocket: Enhancement
