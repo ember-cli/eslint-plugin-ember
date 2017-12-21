@@ -1,3 +1,11 @@
+## v5.0.3 (2017-12-21)
+
+#### :bug: Bug Fix
+* [#197](https://github.com/ember-cli/eslint-plugin-ember/pull/197) Don't fail 'no-global-jquery' if module has both jquery and ember imports. ([@danwenzel](https://github.com/danwenzel))
+
+#### Committers: 1
+- Dan Wenzel ([danwenzel](https://github.com/danwenzel))
+
 ## v5.0.2 (2017-12-18)
 
 #### :bug: Bug Fix
