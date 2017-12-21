@@ -277,7 +277,21 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions
-    }
+    },
+    {
+      code: `
+        import $ from 'jquery';
+        import Ember from 'ember';
+        
+        export default Ember.Component({
+          actions: {
+            valid() {
+              this.valid = $('.valid');
+            }
+          }
+        });`,
+      parserOptions
+    },
   ],
   invalid: [
     {
