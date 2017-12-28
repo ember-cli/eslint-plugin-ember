@@ -39,10 +39,12 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
       code: 'export default Foo.extend({ someProp: "example", init() { this.set("anotherProp", new Object()) } });',
     },
     {
-      code: 'export default Foo.extend({ classNames: [], classNameBindings: [], actions: {}, concatenatedProperties: [], mergedProperties: [], positionalParams: [] });',
+      code: 'export default Foo.extend({ classNames: [], classNameBindings: [], actions: {}, concatenatedProperties: [], mergedProperties: [], positionalParams: [], foo: [], bar: new Ember.A() });',
+      options: [{ additionalIgnoredProperties: ['foo', 'bar'] }],
     },
     {
-      code: 'export default Foo.extend(someMixin, { classNames: [], classNameBindings: [], actions: {}, concatenatedProperties: [], mergedProperties: [], positionalParams: [] });'
+      code: 'export default Foo.extend(someMixin, { classNames: [], classNameBindings: [], actions: {}, concatenatedProperties: [], mergedProperties: [], positionalParams: [], foo: {} });',
+      options: [{ additionalIgnoredProperties: ['foo'] }],
     },
     {
       code: 'export default Foo.extend({ someProp: "example",});',
@@ -107,7 +109,8 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
   ],
   invalid: [
     {
-      code: 'export default Foo.extend({someProp: []});',
+      code: 'export default Foo.extend({someProp: [], bar: {} });',
+      options: [{ additionalIgnoredProperties: ['foo'] }],
       errors: [{
         message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
