@@ -24,7 +24,7 @@ To be auto-fixed, `Ember` must be imported.
 Ideally, you should also be using [local modules](./local-modules.md); otherwise, the fixed code will look like `Ember.get(this, fooProperty')` instead of `get(this, 'fooProperty')`.
 
 ```javascript
-// Bad
+// Not recommended
 this.get('fooProperty');
 this.set('fooProperty', 'bar');
 this.getWithDefault('fooProperty', 'defaultProp');
@@ -32,16 +32,17 @@ object.get('fooProperty');
 object.getProperties('foo', 'bar');
 object.setProperties({ foo: 'bar', baz: 'qux' });
 
-// Good
-
-const {
+// Recommended
+import {
   get,
   set,
   getWithDefault,
   getProperties,
   setProperties
-} = Ember;
+} from '@ember/object';
+
 // ...
+
 get(this, 'fooProperty');
 set(this, 'fooProperty', 'bar');
 getWithDefault(this, 'fooProperty', 'defaultProp');
