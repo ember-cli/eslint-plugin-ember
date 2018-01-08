@@ -24,7 +24,7 @@ To be auto-fixed, `Ember` must be imported.
 Ideally, you should also be using [local modules](./local-modules.md); otherwise, the fixed code will look like `Ember.get(this, fooProperty')` instead of `get(this, 'fooProperty')`.
 
 ```javascript
-// Unrecommended
+// Not recommended
 this.get('fooProperty');
 this.set('fooProperty', 'bar');
 this.getWithDefault('fooProperty', 'defaultProp');
