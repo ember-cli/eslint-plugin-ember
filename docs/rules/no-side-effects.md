@@ -13,12 +13,16 @@ const {
 } = Ember;
 
 export default Component.extend({
-  users: [
-    { name: 'Foo', age: 15 },
-    { name: 'Bar', age: 16 },
-    { name: 'Baz', age: 15 }
-  ],
-
+  
+  init() {
+    this.users = [
+      { name: 'Foo', age: 15 },
+      { name: 'Bar', age: 16 },
+      { name: 'Baz', age: 15 }
+    ];
+    this._super(...arguments);
+  },
+  
   // GOOD:
   fifteen: filterBy('users', 'age', 15),
   fifteenAmount: alias('fifteen.length'),
