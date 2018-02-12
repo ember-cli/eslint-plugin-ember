@@ -171,6 +171,8 @@ eslintTester.run('order-in-components', rule, {
         },
         willRender() {
         },
+        willInsertElement() {
+        },
         didInsertElement() {
         },
         didRender() {
