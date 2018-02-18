@@ -11,7 +11,9 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 //------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+});
 eslintTester.run('no-capital-letters-in-routes', rule, {
 
   valid: [
@@ -20,9 +22,9 @@ eslintTester.run('no-capital-letters-in-routes', rule, {
     {
       code: `
         const routeName="about";
-        this.route(routeName);`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
-    }
+        this.route(routeName);
+        this.route(DASH_TAB.ACTIVITY);`,
+    },
   ],
 
   invalid: [{
@@ -35,6 +37,10 @@ eslintTester.run('no-capital-letters-in-routes', rule, {
     errors: [{
       message: 'Unexpected capital letter in route\'s name',
     }]
+  }, {
+    code: 'this.route("DASH_TAB.ACTIVITY");',
+    errors: [{
+      message: 'Unexpected capital letter in route\'s name',
+    }]
   }],
-
 });
