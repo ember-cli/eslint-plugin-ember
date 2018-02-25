@@ -18,9 +18,8 @@ export default Component.extend({
 Examples of **correct** code for this rule:
 
 ```js
-import Ember from 'ember';
+import $ from 'jquery';
 
-const { $ } = Ember;
 export default Component.extend({
   init() {
     Ember.$('.foo').addClass('bar') //usage from Ember object
