@@ -433,5 +433,20 @@ eslintTester.run('order-in-routes', rule, {
         line: 6
       }]
     },
+    {
+      code: `
+        export default Route.extend({
+          init() {
+            this._super(...arguments);
+          },
+          someProp: null
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "someProp" property should be above the "init" lifecycle hook on line 3',
+        line: 6
+      }]
+    },
   ]
 });

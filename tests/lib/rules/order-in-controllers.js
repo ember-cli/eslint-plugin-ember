@@ -334,6 +334,21 @@ eslintTester.run('order-in-controllers', rule, {
         message: 'The "foo" service injection should be above the "init" lifecycle hook on line 3',
         line: 6
       }]
-    }
+    },
+    {
+      code: `
+        export default Controller.extend({
+          init() {
+            this._super(...arguments);
+          },
+          someProp: null
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "someProp" property should be above the "init" lifecycle hook on line 3',
+        line: 6
+      }]
+    },
   ],
 });
