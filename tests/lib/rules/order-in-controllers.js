@@ -109,6 +109,7 @@ eslintTester.run('order-in-controllers', rule, {
       code: `
         export default Controller.extend({
           foo: service(),
+          someProp: null,
           init() {
             this._super(...arguments);
           },
