@@ -134,6 +134,14 @@ describe('isCallWithFunctionExpression', () => {
   });
 });
 
+describe('isReturnStatement', () => {
+  const node = babelEslint.parse('return').body[0];
+
+  it('should check if node is a return statement', () => {
+    expect(utils.isReturnStatement(node)).toBeTruthy();
+  });
+});
+
 describe('isThisExpression', () => {
   const node = parse('this');
 

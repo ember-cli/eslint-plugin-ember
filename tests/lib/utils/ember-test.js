@@ -222,6 +222,39 @@ describe('isEmberRoute', () => {
   });
 });
 
+describe('isEmberService', () => {
+  it('should check if it\'s an Ember Service', () => {
+    let node;
+
+    node = parse('Ember.Service.extend()');
+    expect(
+      emberUtils.isEmberService(node),
+      'it should detect Service when using Ember.Service'
+    ).toBeTruthy();
+
+    node = parse('Service.extend()');
+    expect(
+      emberUtils.isEmberService(node),
+      'it should detect Service when using local module Service'
+    ).toBeTruthy();
+  });
+
+  it('should check if it\'s an Ember Service even if it uses custom name', () => {
+    const node = parse('CustomService.extend()');
+    const filePath = 'example-app/services/path/to/some-feature.js';
+
+    expect(
+      emberUtils.isEmberService(node),
+      'it shouldn\'t detect Service when no file path is proviced'
+    ).toBeFalsy();
+
+    expect(
+      emberUtils.isEmberService(node, filePath),
+      'it should detect Service when file path is provided'
+    ).toBeTruthy();
+  });
+});
+
 describe('isInjectedServiceProp', () => {
   let node;
 
