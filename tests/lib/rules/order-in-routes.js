@@ -398,7 +398,7 @@ eslintTester.run('order-in-routes', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'The inherited "init" property should be above the actions hash on line 4',
+        message: 'The "init" lifecycle hook should be above the actions hash on line 4',
         line: 5
       }]
     },
@@ -414,7 +414,7 @@ eslintTester.run('order-in-routes', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'The inherited "init" property should be above the "customFoo" empty method on line 4',
+        message: 'The "init" lifecycle hook should be above the "customFoo" empty method on line 4',
         line: 5
       }]
     },
@@ -429,7 +429,22 @@ eslintTester.run('order-in-routes', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'The "foo" service injection should be above the inherited "init" property on line 3',
+        message: 'The "foo" service injection should be above the "init" lifecycle hook on line 3',
+        line: 6
+      }]
+    },
+    {
+      code: `
+        export default Route.extend({
+          init() {
+            this._super(...arguments);
+          },
+          someProp: null
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "someProp" property should be above the "init" lifecycle hook on line 3',
         line: 6
       }]
     },
