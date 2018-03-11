@@ -350,5 +350,40 @@ eslintTester.run('order-in-controllers', rule, {
         line: 6
       }]
     },
+    {
+      code:
+// whitespace is preserved inside `` and it's breaking the test
+`export default Controller.extend({
+  queryParams: [],
+  currentUser: service(),
+});`,
+      output:
+`export default Controller.extend({
+  currentUser: service(),
+  queryParams: [],
+});`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
+        line: 3,
+      }],
+    },
+    {
+      code: `export default Controller.extend({
+        test: "asd",
+        queryParams: [],
+        actions: {}
+      });`,
+      output: `export default Controller.extend({
+        queryParams: [],
+        test: "asd",
+        actions: {}
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "queryParams" property should be above the "test" property on line 2',
+        line: 3,
+      }],
+    }
   ],
 });

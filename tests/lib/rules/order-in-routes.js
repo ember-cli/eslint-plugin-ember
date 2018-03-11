@@ -448,5 +448,172 @@ eslintTester.run('order-in-routes', rule, {
         line: 6
       }]
     },
+    {
+      code: `export default Route.extend({
+        queryParams: {},
+        currentUser: service(),
+        customProp: "test",
+        beforeModel() {},
+        model() {},
+        vehicle: alias("car"),
+        actions: {},
+        _customAction() {}
+      });`,
+      output: `export default Route.extend({
+        currentUser: service(),
+        queryParams: {},
+        customProp: "test",
+        vehicle: alias("car"),
+        beforeModel() {},
+        model() {},
+        actions: {},
+        _customAction() {}
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "currentUser" service injection should be above the inherited "queryParams" property on line 2',
+        line: 3
+      }, {
+        message: 'The "vehicle" single-line function should be above the "beforeModel" lifecycle hook on line 5',
+        line: 7
+      }]
+    },
+    {
+      code: `export default Route.extend({
+        customProp: "test",
+        // queryParams line comment
+        queryParams: {},
+        model() {},
+        /**
+         * actions block comment
+         */
+        actions: {},
+        _customAction() {}
+      });`,
+      output: `export default Route.extend({
+        // queryParams line comment
+        queryParams: {},
+        customProp: "test",
+        model() {},
+        /**
+         * actions block comment
+         */
+        actions: {},
+        _customAction() {}
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The inherited "queryParams" property should be above the "customProp" property on line 2',
+        line: 4
+      }]
+    },
+    {
+      code: `export default Route.extend({
+        customProp: "test",
+        model() {},
+        /**
+         * beforeModel block comment
+         */
+        beforeModel() {},
+        /**
+         * actions block comment
+         */
+        actions: {},
+        _customAction() {}
+      });`,
+      output: `export default Route.extend({
+        customProp: "test",
+        /**
+         * beforeModel block comment
+         */
+        beforeModel() {},
+        model() {},
+        /**
+         * actions block comment
+         */
+        actions: {},
+        _customAction() {}
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "beforeModel" lifecycle hook should be above the "model" hook on line 3',
+        line: 7
+      }]
+    },
+    {
+      code:
+// whitespace is preserved inside `` and it's breaking the test
+`export default Route.extend({
+  customProp: "test",
+  /**
+   * actions block comment
+   */
+  actions: {},
+  /**
+   * beforeModel block comment
+   */
+  beforeModel() {}
+});`,
+      output:
+`export default Route.extend({
+  customProp: "test",
+  /**
+   * beforeModel block comment
+   */
+  beforeModel() {},
+  /**
+   * actions block comment
+   */
+  actions: {},
+});`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "beforeModel" lifecycle hook should be above the actions hash on line 6',
+        line: 10
+      }]
+    },
+    {
+      code:
+// whitespace is preserved inside `` and it's breaking the test
+`export default Route.extend({
+  model() {},
+  test: "asd"
+});`,
+      output:
+`export default Route.extend({
+  test: "asd",
+  model() {},
+});`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "test" property should be above the "model" hook on line 2',
+        line: 3
+      }]
+    },
+    {
+      code: `export default Route.extend({
+
+        model() {},
+
+        test: "asd",
+
+        actions: {}
+
+      });`,
+      output: `export default Route.extend({
+
+        test: "asd",
+
+        model() {},
+
+        actions: {}
+
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "test" property should be above the "model" hook on line 3',
+        line: 5
+      }]
+    }
   ]
 });
