@@ -1,3 +1,26 @@
+# Changelog
+
+## v5.1.0 (2018-03-11)
+
+#### :rocket: Enhancement
+* [#172](https://github.com/ember-cli/eslint-plugin-ember/pull/172) Add `--fix` support to `order-in-*` rules. ([@PrzemoRevolve](https://github.com/PrzemoRevolve))
+
+#### :bug: Bug Fix
+* [#233](https://github.com/ember-cli/eslint-plugin-ember/pull/233) Fix init order in controllers and routes. ([@ro0gr](https://github.com/ro0gr))
+* [#198](https://github.com/ember-cli/eslint-plugin-ember/pull/198) Add new scenarios for `require-super-in-init` rule. ([@clcuevas](https://github.com/clcuevas))
+* [#205](https://github.com/ember-cli/eslint-plugin-ember/pull/205) add willInsertElement component lifecycle hook. ([@hakubo](https://github.com/hakubo))
+
+#### Committers: 8
+- Claudia Cuevas ([clcuevas](https://github.com/clcuevas))
+- Jakub Olek ([hakubo](https://github.com/hakubo))
+- Jason Williams ([jaswilli](https://github.com/jaswilli))
+- Przemysław Nowak ([PrzemoRevolve](https://github.com/PrzemoRevolve))
+- Ricardo Mendes ([locks](https://github.com/locks))
+- Ruslan Grabovoy ([ro0gr](https://github.com/ro0gr))
+- Sylvain MINA ([sly7-7](https://github.com/sly7-7))
+- [verim1990](https://github.com/verim1990)
+
+
 ## v5.0.3 (2017-12-21)
 
 #### :bug: Bug Fix
