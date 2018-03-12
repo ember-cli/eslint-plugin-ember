@@ -1,36 +1,32 @@
 # Disallow use of anonymous functions when use in scheduleOnce or once (no-anonymous-once)
 
-Please describe the origin of the rule here.
+If `scheduleOnce` is passed an anonymous function, then each invocation of `scheduleOnce` will be passed a different function instance and the function will run multiple times. Passing a named function, will allow `scheduleOnce` to detect if the same function is being scheduled multiple times and work as expected.
 
 
 ## Rule Details
 
-This rule aims to...
-
 Examples of **incorrect** code for this rule:
 
 ```js
-
-// fill me in
-
+function scheduleIt() {
+  scheduleOnce('actions', myContext, function() {
+    console.log('Closure');
+  });
+}
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
+function log() {
+  console.log('Logging only once');
+}
 
-// fill me in
-
+function scheduleIt() {
+  scheduleOnce('actions', myContext, log);
+}
 ```
-
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
 
 ## Further Reading
 
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
+https://emberjs.com/api/ember/3.0/functions/@ember%2Frunloop/scheduleOnce
