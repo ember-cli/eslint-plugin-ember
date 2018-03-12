@@ -1,6 +1,8 @@
 const rule = require('../../../lib/rules/no-anonymous-once');
+
 const MESSAGE = rule.meta.message;
 const RuleTester = require('eslint').RuleTester;
+
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 6,
