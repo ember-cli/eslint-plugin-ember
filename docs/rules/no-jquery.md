@@ -46,8 +46,6 @@ export default Component.extend({
 ```
 
 ```js
-import $ from 'jquery';
-
 export default Component.extend({
   click() {
     document.body.classList.add('expanded');
