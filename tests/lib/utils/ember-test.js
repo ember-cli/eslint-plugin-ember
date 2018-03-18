@@ -36,19 +36,17 @@ describe('isDSModel', () => {
     expect(emberUtils.isDSModel(node)).toBeTruthy();
   });
 
-  it('should check if it\'s a DS Model even if it uses custom name', () => {
-    const node = parse('CustomModel.extend()');
-    const filePath = 'example-app/models/path/to/some-model.js';
+  describe('should check if it\'s a DS Model even if it uses custom name', () => {
+    it('it shouldn\'t detect Model when no file path is provided', () => {
+      const node = parse('CustomModel.extend()');
+      expect(emberUtils.isDSModel(node)).toBeFalsy();
+    });
 
-    expect(
-      emberUtils.isDSModel(node),
-      'it shouldn\'t detect Model when no file path is provided'
-    ).toBeFalsy();
-
-    expect(
-      emberUtils.isDSModel(node, filePath),
-      'it should detect Model when file path is provided'
-    ).toBeTruthy();
+    it('it should detect Model when file path is provided', () => {
+      const node = parse('CustomModel.extend()');
+      const filePath = 'example-app/models/path/to/some-model.js';
+      expect(emberUtils.isDSModel(node, filePath)).toBeTruthy();
+    });
   });
 });
 
@@ -123,135 +121,110 @@ describe('isEmberCoreModule', () => {
 });
 
 describe('isEmberComponent', () => {
-  it('should check if it\'s an Ember Component', () => {
-    let node;
+  describe('should check if it\'s an Ember Component', () => {
+    it('it should detect Component when using Ember.Component', () => {
+      const node = parse('Ember.Component.extend()');
+      expect(emberUtils.isEmberComponent(node)).toBeTruthy();
+    });
 
-    node = parse('Ember.Component.extend()');
-    expect(
-      emberUtils.isEmberComponent(node),
-      'it should detect Component when using Ember.Component'
-    ).toBeTruthy();
-
-    node = parse('Component.extend()');
-    expect(
-      emberUtils.isEmberComponent(node),
-      'it should detect Component when using local module Component'
-    ).toBeTruthy();
+    it('it should detect Component when using local module Component', () => {
+      const node = parse('Component.extend()');
+      expect(emberUtils.isEmberComponent(node)).toBeTruthy();
+    });
   });
 
-  it('should check if it\'s an Ember Component even if it uses custom name', () => {
-    const node = parse('CustomComponent.extend()');
-    const filePath = 'example-app/components/path/to/some-component.js';
+  describe('should check if it\'s an Ember Component even if it uses custom name', () => {
+    it('it shouldn\'t detect Component when no file path is provided', () => {
+      const node = parse('CustomComponent.extend()');
+      expect(emberUtils.isEmberComponent(node)).toBeFalsy();
+    });
 
-    expect(
-      emberUtils.isEmberComponent(node),
-      'it shouldn\'t detect Component when no file path is provided'
-    ).toBeFalsy();
-
-    expect(
-      emberUtils.isEmberComponent(node, filePath),
-      'it should detect Component when file path is provided'
-    ).toBeTruthy();
+    it('it should detect Component when file path is provided', () => {
+      const node = parse('CustomComponent.extend()');
+      const filePath = 'example-app/components/path/to/some-component.js';
+      expect(emberUtils.isEmberComponent(node, filePath)).toBeTruthy();
+    });
   });
 });
 
 describe('isEmberController', () => {
-  it('should check if it\'s an Ember Controller', () => {
-    let node;
+  describe('should check if it\'s an Ember Controller', () => {
+    it('it should detect Controller when using Ember.Controller', () => {
+      const node = parse('Ember.Controller.extend()');
+      expect(emberUtils.isEmberController(node)).toBeTruthy();
+    });
 
-    node = parse('Ember.Controller.extend()');
-    expect(
-      emberUtils.isEmberController(node),
-      'it should detect Controller when using Ember.Controller'
-    ).toBeTruthy();
-
-    node = parse('Controller.extend()');
-    expect(
-      emberUtils.isEmberController(node),
-      'it should detect Controller when using local module Controller'
-    ).toBeTruthy();
+    it('it should detect Controller when using local module Controller', () => {
+      const node = parse('Controller.extend()');
+      expect(emberUtils.isEmberController(node)).toBeTruthy();
+    });
   });
 
-  it(
-    'should check if it\'s an Ember Controller even if it uses custom name', () => {
+  describe('should check if it\'s an Ember Controller even if it uses custom name', () => {
+    it('it shouldn\'t detect Controller when no file path is provided', () => {
+      const node = parse('CustomController.extend()');
+      expect(emberUtils.isEmberController(node)).toBeFalsy();
+    });
+
+    it('it should detect Controller when file path is provided', () => {
       const node = parse('CustomController.extend()');
       const filePath = 'example-app/controllers/path/to/some-feature.js';
-
-      expect(
-        emberUtils.isEmberController(node),
-        'it shouldn\'t detect Controller when no file path is provided'
-      ).toBeFalsy();
-
-      expect(
-        emberUtils.isEmberController(node, filePath),
-        'it should detect Controller when file path is provided'
-      ).toBeTruthy();
+      expect(emberUtils.isEmberController(node, filePath)).toBeTruthy();
     });
+  });
 });
 
 describe('isEmberRoute', () => {
-  it('should check if it\'s an Ember Route', () => {
-    let node;
+  describe('should check if it\'s an Ember Route', () => {
+    it('should detect Route when using Ember.Route', () => {
+      const node = parse('Ember.Route.extend()');
+      expect(emberUtils.isEmberRoute(node)).toBeTruthy();
+    });
 
-    node = parse('Ember.Route.extend()');
-    expect(
-      emberUtils.isEmberRoute(node),
-      'it should detect Route when using Ember.Route'
-    ).toBeTruthy();
-
-    node = parse('Route.extend()');
-    expect(
-      emberUtils.isEmberRoute(node),
-      'it should detect Route when using local module Route'
-    ).toBeTruthy();
+    it('should detect Route when using local module Route', () => {
+      const node = parse('Route.extend()');
+      expect(emberUtils.isEmberRoute(node)).toBeTruthy();
+    });
   });
 
-  it('should check if it\'s an Ember Route even if it uses custom name', () => {
-    const node = parse('CustomRoute.extend()');
-    const filePath = 'example-app/routes/path/to/some-feature.js';
+  describe('should check if it\'s an Ember Route even if it uses custom name', () => {
+    it('it shouldn\'t detect Route when no file path is provided', () => {
+      const node = parse('CustomRoute.extend()');
+      expect(emberUtils.isEmberRoute(node)).toBeFalsy();
+    });
 
-    expect(
-      emberUtils.isEmberRoute(node),
-      'it shouldn\'t detect Route when no file path is provided'
-    ).toBeFalsy();
-
-    expect(
-      emberUtils.isEmberRoute(node, filePath),
-      'it should detect Route when file path is provided'
-    ).toBeTruthy();
+    it('it should detect Route when file path is provided', () => {
+      const node = parse('CustomRoute.extend()');
+      const filePath = 'example-app/routes/path/to/some-feature.js';
+      expect(emberUtils.isEmberRoute(node, filePath)).toBeTruthy();
+    });
   });
 });
 
 describe('isEmberService', () => {
-  it('should check if it\'s an Ember Service', () => {
-    let node;
+  describe('should check if it\'s an Ember Service', () => {
+    it('should detect Service when using Ember.Service', () => {
+      const node = parse('Ember.Service.extend()');
+      expect(emberUtils.isEmberService(node)).toBeTruthy();
+    });
 
-    node = parse('Ember.Service.extend()');
-    expect(
-      emberUtils.isEmberService(node),
-      'it should detect Service when using Ember.Service'
-    ).toBeTruthy();
-
-    node = parse('Service.extend()');
-    expect(
-      emberUtils.isEmberService(node),
-      'it should detect Service when using local module Service'
-    ).toBeTruthy();
+    it('should detect Service when using local module Service', () => {
+      const node = parse('Service.extend()');
+      expect(emberUtils.isEmberService(node)).toBeTruthy();
+    });
   });
 
-  it('should check if it\'s an Ember Service even if it uses custom name', () => {
-    const node = parse('CustomService.extend()');
-    const filePath = 'example-app/services/path/to/some-feature.js';
+  describe('should check if it\'s an Ember Service even if it uses custom name', () => {
+    it('shouldn\'t detect Service when no file path is provided', () => {
+      const node = parse('CustomService.extend()');
+      expect(emberUtils.isEmberService(node)).toBeFalsy();
+    });
 
-    expect(
-      emberUtils.isEmberService(node),
-      'it shouldn\'t detect Service when no file path is proviced'
-    ).toBeFalsy();
-
-    expect(
-      emberUtils.isEmberService(node, filePath),
-      'it should detect Service when file path is provided'
-    ).toBeTruthy();
+    it('it should detect Service when file path is provided', () => {
+      const node = parse('CustomService.extend()');
+      const filePath = 'example-app/services/path/to/some-feature.js';
+      expect(emberUtils.isEmberService(node, filePath)).toBeTruthy();
+    });
   });
 });
 
