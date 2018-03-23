@@ -9,6 +9,22 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
+describe('imports', () => {
+  it('should expose the default ignored properties', () => {
+    expect(rule.DEFAULT_IGNORED_PROPERTIES).toEqual([
+      'classNames',
+      'classNameBindings',
+      'actions',
+      'concatenatedProperties',
+      'mergedProperties',
+      'positionalParams',
+      'attributeBindings',
+      'queryParams',
+      'attrs',
+    ]);
+  });
+});
+
 const eslintTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 6,
