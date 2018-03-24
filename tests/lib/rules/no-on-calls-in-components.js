@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester();
-const message = 'Don\'t use .on() in components';
+const message = 'Don\'t use .on() to call lifecycle hooks in components';
 
 eslintTester.run('no-on-calls-in-components', rule, {
   valid: [
@@ -70,6 +70,10 @@ eslintTester.run('no-on-calls-in-components', rule, {
       code: 'export default Component.extend({actions: {abc() {$("body").on("click", def).on("click", function () {})}}});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    {
+      code: 'export default Component.extend({abc: on("nonLifecycleEvent", function() {})});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
   ],
   invalid: [
     {
@@ -103,7 +107,7 @@ eslintTester.run('no-on-calls-in-components', rule, {
       code: 'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Don\'t use .on() in components',
+        message: 'Don\'t use .on() to call lifecycle hooks in components',
       }],
     },
     {
@@ -111,7 +115,7 @@ eslintTester.run('no-on-calls-in-components', rule, {
       code: 'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Don\'t use .on() in components',
+        message: 'Don\'t use .on() to call lifecycle hooks in components',
       }],
     },
     {
@@ -119,7 +123,7 @@ eslintTester.run('no-on-calls-in-components', rule, {
       code: 'export default Component.extend({test: on("didInsertElement", function () {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Don\'t use .on() in components',
+        message: 'Don\'t use .on() to call lifecycle hooks in components',
       }],
     },
   ],
