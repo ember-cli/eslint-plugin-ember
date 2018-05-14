@@ -39,7 +39,7 @@
     "Tobias Bieniek (http://github.com/Turbo87)"
   ],
   "engines": {
-    "node": ">=4.0"
+    "node": ">=6.0"
   },
   "license": "MIT",
   "bugs": {
