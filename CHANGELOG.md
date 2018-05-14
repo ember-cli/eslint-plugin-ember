@@ -1,5 +1,24 @@
 # Changelog
 
+## v5.1.1 (2018-05-14)
+
+#### :bug: Bug Fix
+* [#229](https://github.com/ember-cli/eslint-plugin-ember/pull/229) Fix no-capital-letters-in-routes so it deals with MemberExpressions. ([@nlfurniss](https://github.com/nlfurniss))
+
+#### :memo: Documentation
+* [#241](https://github.com/ember-cli/eslint-plugin-ember/pull/241) Removes the no-jquery doc typo. ([@thebluejay](https://github.com/thebluejay))
+
+#### :house: Internal
+* [#254](https://github.com/ember-cli/eslint-plugin-ember/pull/254) Drop require-folder-tree dependency. ([@rwjblue](https://github.com/rwjblue))
+* [#242](https://github.com/ember-cli/eslint-plugin-ember/pull/242) Update `jest` to v21.2.1. ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 4
+- Nathaniel Furniss ([nlfurniss](https://github.com/nlfurniss))
+- Robert Jackson ([rwjblue](https://github.com/rwjblue))
+- Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
+- [thebluejay](https://github.com/thebluejay)
+
+
 ## v5.1.0 (2018-03-11)
 
 #### :rocket: Enhancement
