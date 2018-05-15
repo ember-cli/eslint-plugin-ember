@@ -22,7 +22,7 @@ eslintTester.run('new-module-imports', rule, {
     { code: 'Ember.Handlebars.Utils.escapeExpression("foo");' },
     { code: 'Ember.onerror = function() {};' },
     { code: 'Ember.MODEL_FACTORY_INJECTIONS = true;' },
-    { code: 'console.log(Ember.VERSION);' },
+    { code: 'console.log(Ember.SOMETHING_NO_ONE_USES);' },
     { code: 'if (Ember.testing) {}' },
     {
       code: `import Component from '@ember/component';
@@ -80,7 +80,7 @@ eslintTester.run('new-module-imports', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         { message: 'Use import Component from \'@ember/component\'; instead of using Ember destructuring', line: 3 },
-        { message: 'Use import { htmlSafe } from \'@ember/string\'; instead of using Ember destructuring', line: 3 }
+        { message: 'Use import { htmlSafe } from \'@ember/template\'; instead of using Ember destructuring', line: 3 }
       ]
     },
     {
