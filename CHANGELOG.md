@@ -1,5 +1,22 @@
 # Changelog
 
+## v5.2.0 (2018-05-15)
+
+#### :rocket: Enhancement
+* [#142](https://github.com/ember-cli/eslint-plugin-ember/pull/142) Port code to ember-rfc176-data new format. ([@Serabe](https://github.com/Serabe))
+* [#245](https://github.com/ember-cli/eslint-plugin-ember/pull/245) [avoid-leaking-state-in-ember-objects] Expose default ignored properties. ([@Kerrick](https://github.com/Kerrick))
+
+#### :memo: Documentation
+* [#208](https://github.com/ember-cli/eslint-plugin-ember/pull/208) Add URL to rule documentation to the metadata. ([@Arcanemagus](https://github.com/Arcanemagus))
+
+#### :house: Internal
+* [#142](https://github.com/ember-cli/eslint-plugin-ember/pull/142) Port code to ember-rfc176-data new format. ([@Serabe](https://github.com/Serabe))
+
+#### Committers: 3
+- Kerrick Long ([Kerrick](https://github.com/Kerrick))
+- Landon Abney ([Arcanemagus](https://github.com/Arcanemagus))
+- Sergio Arbeo ([Serabe](https://github.com/Serabe))
+
 ## v5.1.1 (2018-05-14)
 
 #### :bug: Bug Fix
