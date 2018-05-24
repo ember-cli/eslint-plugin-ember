@@ -49,6 +49,26 @@ describe('isLiteral', () => {
   });
 });
 
+describe('isStringLiteral', () => {
+  it('should check if node is identifier', () => {
+    const node = parse('"test"');
+    expect(utils.isStringLiteral(node)).toBeTruthy();
+  });
+
+  it('should be falsy if not string literal', () => {
+    const node = parse('1');
+    expect(utils.isStringLiteral(node)).toBeFalsy();
+  });
+});
+
+describe('isProperty', () => {
+  const node = parse('({ a: 1 })');
+
+  it('should check if node is identifier', () => {
+    expect(utils.isProperty(node.properties[0])).toBeTruthy();
+  });
+});
+
 describe('isUnaryExpression', () => {
   const node = parse('-1');
 

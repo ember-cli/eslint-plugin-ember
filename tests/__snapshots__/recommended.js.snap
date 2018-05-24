@@ -10,6 +10,7 @@ Array [
   "no-attrs-snapshot",
   "no-capital-letters-in-routes",
   "no-duplicate-dependent-keys",
+  "no-get-untracked-props-in-computed",
   "no-function-prototype-extensions",
   "no-global-jquery",
   "no-old-shims",

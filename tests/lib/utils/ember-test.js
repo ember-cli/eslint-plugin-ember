@@ -288,6 +288,43 @@ describe('isComputedProp', () => {
   });
 });
 
+describe('isComputedDefinition', () => {
+  let node;
+
+  it('should match computed properties with bodies', () => {
+    node = parse('computed(\'foobar\', function() { })');
+    expect(emberUtils.isComputedDefinition(node)).toBeTruthy();
+
+    node = parse('Ember.computed(\'foobar\', function() { })');
+    expect(emberUtils.isComputedDefinition(node)).toBeTruthy();
+
+    node = parse('Em.computed(\'foobar\', function() { })');
+    expect(emberUtils.isComputedDefinition(node)).toBeTruthy();
+  });
+
+  it('should match computeds without dependent keys or function body', () => {
+    node = parse('Ember.computed()');
+    expect(emberUtils.isComputedDefinition(node)).not.toBeTruthy();
+
+    node = parse('Ember.computed(() => {})');
+    expect(emberUtils.isComputedDefinition(node)).not.toBeTruthy();
+
+    node = parse('Ember.computed(function() { })');
+    expect(emberUtils.isComputedDefinition(node)).not.toBeTruthy();
+
+    node = parse('Ember.computed(\'foobar\')');
+    expect(emberUtils.isComputedDefinition(node)).not.toBeTruthy();
+  });
+
+  it('shouldn\'t allow macros', () => {
+    node = parse('Ember.computed.match()');
+    expect(emberUtils.isComputedDefinition(node)).not.toBeTruthy();
+
+    node = parse('Em.computed.match(\'foo\', /foo/)');
+    expect(emberUtils.isComputedDefinition(node)).not.toBeTruthy();
+  });
+});
+
 describe('isObserverProp', () => {
   let node;
 
