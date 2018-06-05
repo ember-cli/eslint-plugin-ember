@@ -31,5 +31,12 @@ eslintTester.run('no-side-effects', rule, {
         message: 'Don\'t introduce side-effects in computed properties',
       }],
     },
+    {
+      code: 'prop: computed("test", function() {if (get(this, "testAmount")) { set(this, "testAmount", test.length); } return "";})',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Don\'t introduce side-effects in computed properties'
+      }]
+    }
   ],
 });
