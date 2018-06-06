@@ -1,12 +1,13 @@
 const rule = require('../../../lib/rules/no-test-file-importing');
-const MESSAGE = rule.meta.message;
 const RuleTester = require('eslint').RuleTester;
+
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module'
   }
 });
+const MESSAGE = rule.meta.message;
 
 ruleTester.run('no-test-file-importing', rule, {
   valid: [
