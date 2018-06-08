@@ -1,4 +1,4 @@
-const rule = require('../../../lib/rules/no-test-file-importing');
+const rule = require('../../../lib/rules/no-test-import-export');
 const RuleTester = require('eslint').RuleTester;
 
 const ruleTester = new RuleTester({
@@ -7,7 +7,8 @@ const ruleTester = new RuleTester({
     sourceType: 'module'
   }
 });
-const MESSAGE = rule.meta.message;
+const NO_IMPORT_MESSAGE = rule.meta.import_message;
+const NO_EXPORT_MESSAGE = rule.meta.export_message;
 
 ruleTester.run('no-test-file-importing', rule, {
   valid: [
@@ -18,6 +19,12 @@ ruleTester.run('no-test-file-importing', rule, {
 
         module('Acceptance | module', setupModule());
       `
+    },
+    {
+      filename: 'tests/some-test-helper.js',
+      code: `
+        export function beforeEachSetup(){};
+      `,
     }
   ],
   invalid: [
@@ -30,7 +37,7 @@ ruleTester.run('no-test-file-importing', rule, {
       `,
       errors: [
         {
-          message: MESSAGE
+          message: NO_IMPORT_MESSAGE
         }
       ]
     },
@@ -46,7 +53,7 @@ ruleTester.run('no-test-file-importing', rule, {
       `,
       errors: [
         {
-          message: MESSAGE
+          message: NO_IMPORT_MESSAGE
         }
       ]
     },
@@ -59,9 +66,33 @@ ruleTester.run('no-test-file-importing', rule, {
       `,
       errors: [
         {
-          message: MESSAGE
+          message: NO_IMPORT_MESSAGE
         }
       ]
-    }
+    },
+    {
+      filename: 'tests/some-test.js',
+      code: `
+        export function beforeEachSetup(){};
+      `,
+      errors: [
+        {
+          message: NO_EXPORT_MESSAGE
+        }
+      ]
+    },
+    {
+      filename: 'tests/some-test.js',
+      code: `
+        function beforeEachSetup(){};
+
+        export default {beforeEachSetup};
+      `,
+      errors: [
+        {
+          message: NO_EXPORT_MESSAGE
+        }
+      ]
+    },
   ]
 });
