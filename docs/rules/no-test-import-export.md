@@ -1,6 +1,6 @@
 # No importing of test files
 
-**TL;DR** Do not import "-test.js" file in a test file. This will cause the module and tests from the imported file to be executed again. In the same vain, no exports within a test file.
+**TL;DR** Do not import from a test file (a file ending in "-test.js") in another test file. Doing so will cause the module and tests from the imported file to be executed again. Similarly, test files should not have any exports.
 
 Due to how qunit unloads a test module, importing a test file will cause any modules and tests within the file to be executed every time it gets loaded. If you want to import any helper functions or tests to be shared between multiple test files, please make it a test-helper that gets imported by the test file.
 

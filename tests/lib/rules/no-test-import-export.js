@@ -7,8 +7,8 @@ const ruleTester = new RuleTester({
     sourceType: 'module'
   }
 });
-const NO_IMPORT_MESSAGE = rule.meta.import_message;
-const NO_EXPORT_MESSAGE = rule.meta.export_message;
+const NO_IMPORT_MESSAGE = rule.meta.importMessage;
+const NO_EXPORT_MESSAGE = rule.meta.exportMessage;
 
 ruleTester.run('no-test-file-importing', rule, {
   valid: [
