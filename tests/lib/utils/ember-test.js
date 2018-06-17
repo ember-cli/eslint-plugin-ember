@@ -620,4 +620,9 @@ describe('getEmberImportAliasName', () => {
     const node = babelEslint.parse("import foo from 'ember'").body[0];
     expect(emberUtils.getEmberImportAliasName(node)).toEqual('foo');
   });
+
+  it('should return null if no specifier', () => {
+    const node = babelEslint.parse("import 'ember'").body[0];
+    expect(emberUtils.getEmberImportAliasName(node)).toBeNull();
+  });
 });
