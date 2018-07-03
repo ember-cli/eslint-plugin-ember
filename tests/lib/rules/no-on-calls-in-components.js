@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester();
-const message = 'Don\'t use .on() to call lifecycle hooks in components';
+const message = 'Don\'t use .on() for component lifecycle events.';
 
 eslintTester.run('no-on-calls-in-components', rule, {
   valid: [
@@ -107,7 +107,7 @@ eslintTester.run('no-on-calls-in-components', rule, {
       code: 'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Don\'t use .on() to call lifecycle hooks in components',
+        message: 'Don\'t use .on() for component lifecycle events.',
       }],
     },
     {
@@ -115,7 +115,7 @@ eslintTester.run('no-on-calls-in-components', rule, {
       code: 'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Don\'t use .on() to call lifecycle hooks in components',
+        message: 'Don\'t use .on() for component lifecycle events.',
       }],
     },
     {
@@ -123,7 +123,7 @@ eslintTester.run('no-on-calls-in-components', rule, {
       code: 'export default Component.extend({test: on("didInsertElement", function () {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Don\'t use .on() to call lifecycle hooks in components',
+        message: 'Don\'t use .on() for component lifecycle events.',
       }],
     },
   ],
