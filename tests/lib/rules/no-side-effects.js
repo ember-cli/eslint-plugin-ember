@@ -23,6 +23,10 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'let foo = computed("test", function() { someMap.set(this, "testAmount", test.length); return ""; })',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code: 'import Ember from "ember"; import Foo from "some-other-thing"; let foo = computed("test", function() { Foo.set(this, "testAmount", test.length); return ""; });',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     }
   ],
   invalid: [
@@ -69,6 +73,13 @@ eslintTester.run('no-side-effects', rule, {
     },
     {
       code: 'import Foo from "ember"; let foo = computed("test", function() { Foo.set(this, "testAmount", test.length); return ""; })',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Don\'t introduce side-effects in computed properties'
+      }]
+    },
+    {
+      code: 'import EmberFoo from "ember"; import Foo from "some-other-thing"; let foo = computed("test", function() { EmberFoo.set(this, "testAmount", test.length); return ""; });',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties'
