@@ -7,12 +7,14 @@
 Example configuration:
 
 ```
-ember/avoid-leaking-state-in-ember-objects: [1, [
-  'array',
-  'of',
-  'ignored',
-  'properties',
-]]
+ember/avoid-leaking-state-in-ember-objects: [1, {
+  additionalIgnoredProperties: [
+    'array',
+    'of',
+    'ignored',
+    'properties',
+  ]
+}]
 ```
 
 #### Description
