@@ -14,8 +14,37 @@ const ruleTester = new RuleTester({
 ruleTester.run('no-ember-testing-in-module-scope', rule, {
   valid: [
     {
-      code: 'foo.testing = true;'
+      code: `
+        import Ember from 'ember';
+
+        export default Ember.Component.extend({
+          someFunc() {
+            if (Ember.testing) {
+              doSomething();
+            } else {
+              doSomethingElse();
+            }
+          }
+        });
+      `
     },
+    {
+      code: `
+        import Ember from 'ember';
+
+        export default Ember.Component.extend({
+          someFunc() {
+            doSomething(Ember.testing ? 0 : 400);
+          }
+        });
+      `
+    },
+    { code: 'foo.testing = true;' },
+    { code: 'const { testing } = FooBar;' },
+    { code: 'const testing = FooBar.testing' },
+    { code: 'const testing = true;' },
+  ],
+  invalid: [
     {
       code: `
         import Ember from 'ember';
@@ -25,13 +54,9 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
             this.isTesting = Ember.testing;
           }
         });
-      `
+      `,
+      errors: [{ message: messages[1] }]
     },
-    { code: 'const { testing } = FooBar;' },
-    { code: 'const testing = FooBar.testing' },
-    { code: 'const testing = true;' }
-  ],
-  invalid: [
     {
       code: `
         import Ember from 'ember';
@@ -43,12 +68,20 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
       errors: [{ message: messages[0] }]
     },
     {
-      code: 'const IS_TESTING = Ember.testing;',
+      code: `
+        import FooEmber from 'ember';
+
+        const testDelay = FooEmber.testing ? 0 : 400
+      `,
       errors: [{ message: messages[0] }]
     },
     {
+      code: 'const IS_TESTING = Ember.testing;',
+      errors: [{ message: messages[1] }, { message: messages[0] }]
+    },
+    {
       code: 'const { testing } = Ember;',
-      errors: [{ message: messages[1] }]
+      errors: [{ message: messages[2] }]
     }
   ]
 });

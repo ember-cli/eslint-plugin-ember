@@ -1,11 +1,11 @@
-## Ember.testing is not allowed in modules scope
+## `Ember.testing` is not allowed in modules scope
 
 ### Rule name: `no-ember-testing-in-module-scope`
 
-Since ember-cli-qunit@4.1.0 / ember-qunit@3.0.0, Ember.testing is only set to
-true while a test is executing instead of all the time. Also, Ember.testing is a
+Since ember-cli-qunit@4.1.0 / ember-qunit@3.0.0, `Ember.testing` is only set to
+true while a test is executing instead of all the time. Also, `Ember.testing` is a
 getter/setter in Ember and destructuring will only read its value at the time
-the module is evaluated.
+of destructuring.
 https://github.com/emberjs/ember-test-helpers/pull/227
 
 ```javascript
