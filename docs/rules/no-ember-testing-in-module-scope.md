@@ -11,6 +11,24 @@ https://github.com/emberjs/ember-test-helpers/pull/227
 ```javascript
 // Good
 export default Component.extend({
+  someMethod() {
+    if (Ember.testing) {
+      doSomething();
+    } else {
+      doSomethingElse();
+    }
+  }
+})
+
+// Good
+export default Service.extend({
+  foo() {
+    _bar(Ember.testing ? 0 : 400)
+  }
+})
+
+// Bad
+export default Component.extend({
   init() {
     this.isTesting = Ember.testing
   }
