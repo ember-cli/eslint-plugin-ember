@@ -82,6 +82,14 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
     {
       code: 'const { testing } = Ember;',
       errors: [{ message: messages[2] }]
+    },
+    {
+      code: `
+        import FooEmber from 'ember';
+
+        const { testing } = FooEmber;
+      `,
+      errors: [{ message: messages[2] }]
     }
   ]
 });
