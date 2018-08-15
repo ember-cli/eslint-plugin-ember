@@ -22,7 +22,7 @@ moduleFor('service:session', {
 moduleFor('service:session', {
   needs: ['type:thing']
 });
-moduleFor('arg1', 'arg2', [...,] {});
+moduleFor('service:session', 'arg2', [...,] {});
 
 moduleForComponent('display-page');
 moduleForComponent('display-page', {
@@ -31,7 +31,7 @@ moduleForComponent('display-page', {
 moduleForComponent('display-page', {
   needs: ['type:thing']
 });
-moduleForComponent('thing', 'arg2', [...,] {});
+moduleForComponent('display-page', 'arg2', [...,] {});
 
 moduleForModel('post');
 moduleForModel('post', {
@@ -40,11 +40,38 @@ moduleForModel('post', {
 moduleForModel('post', {
   needs: ['type:thing']
 });
-moduleForModel('thing', 'arg2', [...,] {});
+moduleForModel('post', 'arg2', [...,] {});
 ```
 
 ```js
 // ember-mocha
+
+setupTest('service:session');
+setupTest('service:session', {
+  unit: true
+});
+setupTest('service:session', {
+  needs: ['type:thing']
+});
+moduleFor('arg1', 'arg2', [...,] {});
+
+setupComponentTest('display-page');
+setupComponentTest('display-page', {
+  unit: true
+});
+setupComponentTest('display-page', {
+  needs: ['type:thing']
+});
+setupComponentTest('display-page', 'arg2', [...,] {});
+
+setupModelTest('post');
+setupModelTest('post', {
+  unit: true
+});
+setupModelTest('post', {
+  needs: ['type:thing']
+});
+setupModelTest('post', 'arg2', [...,] {});
 ```
 
 Examples of **correct** code for this rule:
@@ -63,6 +90,23 @@ moduleForComponent('display-page', {
 moduleFor('service:session', {
   integration: true
 });
+```
+
+```js
+// ember-mocha
+
+setupTest('service:session', {
+  integration: true
+});
+
+setupComponentTest('display-page', {
+  integration: true
+});
+
+setupModelTest('post', {
+  integration: true
+});
+
 ```
 
 ## Further Reading

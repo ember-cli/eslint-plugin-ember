@@ -39,6 +39,30 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
             `,
       parserOptions,
     },
+    {
+      code: `
+              setupTest('service:session', {
+                integration: true
+              });
+            `,
+      parserOptions,
+    },
+    {
+      code: `
+              setupComponentTest('display-page', {
+                integration: true
+              });
+            `,
+      parserOptions,
+    },
+    {
+      code: `
+              setupModelTest('post', {
+                integration: true
+              });
+            `,
+      parserOptions,
+    },
   ],
   invalid: [
     {
@@ -182,6 +206,150 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       errors: [
         {
           message: messages.getNoPOJOWithoutIntegrationTrueMessage('moduleForModel')
+        },
+      ],
+    },
+    {
+      code: `
+              setupTest('service:session');
+            `,
+      parserOptions,
+      errors: [
+        {
+          message: messages.getSingleStringArgumentMessage('setupTest')
+        },
+      ],
+    },
+    {
+      code: `
+              setupTest('service:session', {
+                unit: true
+              });
+            `,
+      parserOptions,
+      errors: [
+        {
+          message: messages.getNoUnitTrueMessage('setupTest')
+        },
+      ],
+    },
+    {
+      code: `
+              setupTest('service:session', {
+                needs: ['type:thing']
+              });
+            `,
+      parserOptions,
+      errors: [
+        {
+          message: messages.getNoNeedsMessage('setupTest')
+        },
+      ],
+    },
+    {
+      code: `
+              setupTest('service:session', arg2, {});
+            `,
+      parserOptions,
+      errors: [
+        {
+          message: messages.getNoPOJOWithoutIntegrationTrueMessage('setupTest')
+        },
+      ],
+    },
+    {
+      code: `
+              setupComponentTest('display-page');
+            `,
+      parserOptions,
+      errors: [
+        {
+          message: messages.getSingleStringArgumentMessage('setupComponentTest')
+        },
+      ],
+    },
+    {
+      code: `
+              setupComponentTest('display-page', {
+                unit: true
+              });
+            `,
+      parserOptions,
+      errors: [
+        {
+          message: messages.getNoUnitTrueMessage('setupComponentTest')
+        },
+      ],
+    },
+    {
+      code: `
+              setupComponentTest('display-page', {
+                needs: ['type:thing']
+              });
+            `,
+      parserOptions,
+      errors: [
+        {
+          message: messages.getNoNeedsMessage('setupComponentTest')
+        },
+      ],
+    },
+    {
+      code: `
+              setupComponentTest('display-page', arg2, {});
+            `,
+      parserOptions,
+      errors: [
+        {
+          message: messages.getNoPOJOWithoutIntegrationTrueMessage('setupComponentTest')
+        },
+      ],
+    },
+    {
+      code: `
+              setupModelTest('post');
+            `,
+      parserOptions,
+      errors: [
+        {
+          message: messages.getSingleStringArgumentMessage('setupModelTest')
+        },
+      ],
+    },
+    {
+      code: `
+              setupModelTest('post', {
+                unit: true
+              });
+            `,
+      parserOptions,
+      errors: [
+        {
+          message: messages.getNoUnitTrueMessage('setupModelTest')
+        },
+      ],
+    },
+    {
+      code: `
+              setupModelTest('post', {
+                needs: ['type:thing']
+              });
+            `,
+      parserOptions,
+      errors: [
+        {
+          message: messages.getNoNeedsMessage('setupModelTest')
+        },
+      ],
+    },
+    {
+      code: `
+              setupModelTest('post', arg2, {});
+            `,
+      parserOptions,
+      errors: [
+        {
+          message: messages.getNoPOJOWithoutIntegrationTrueMessage('setupModelTest')
         },
       ],
     },
