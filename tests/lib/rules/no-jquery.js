@@ -75,19 +75,19 @@ eslintTester.run('no-jquery', rule, {
     },
     // aliased import $ from jquery
     {
-        code: `
-          import jq from 'jquery';
-          import Service from '@ember/service';
-          export default Service.extend({
-            myFunc(a, b) {
-              return jq.extend({}, a, b);
-            }
-          });`,
-        parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-        errors: [{
-          message
-        }]
-      },
+      code: `
+        import jq from 'jquery';
+        import Service from '@ember/service';
+        export default Service.extend({
+          myFunc(a, b) {
+            return jq.extend({}, a, b);
+          }
+        });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message
+      }]
+    },
     // Ember.$
     {
       code: `
