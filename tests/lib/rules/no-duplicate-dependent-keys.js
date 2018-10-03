@@ -18,6 +18,14 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
   valid: [
     {
       code: `
+      { 
+        test: computed.match("email", /^.+@.+/) 
+      }
+      `,
+      parserOptions,
+    },
+    {
+      code: `
       {
         foo: computed('model.foo', 'model.bar', 'model.baz', function() {})
       }
