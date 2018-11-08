@@ -1,5 +1,40 @@
 # Changelog
 
+## v5.3.0 (2018-11-08)
+
+#### :rocket: Enhancement
+* [#278](https://github.com/ember-cli/eslint-plugin-ember/pull/278) Adding `no-restricted-resolver-tests` general rule. ([@scalvert](https://github.com/scalvert))
+* [#272](https://github.com/ember-cli/eslint-plugin-ember/pull/272) Add new rule `no-ember-testing-in-module-scope`. ([@tmquinn](https://github.com/tmquinn))
+* [#261](https://github.com/ember-cli/eslint-plugin-ember/pull/261) Adding `no-test-file-importing` rule. ([@step2yeung](https://github.com/step2yeung))
+* [#256](https://github.com/ember-cli/eslint-plugin-ember/pull/256) Add `no-new-mixins` rule. ([@nlfurniss](https://github.com/nlfurniss))
+
+#### :bug: Bug Fix
+* [#299](https://github.com/ember-cli/eslint-plugin-ember/pull/299) Fix issue with `no-duplicate-dependent-keys` to avoid errors on non-string dependent keys. ([@initram](https://github.com/initram))
+* [#260](https://github.com/ember-cli/eslint-plugin-ember/pull/260) Updating `no-side-effects` rule to better detect sets inside of blocks. ([@gmurphey](https://github.com/gmurphey))
+* [#246](https://github.com/ember-cli/eslint-plugin-ember/pull/246) Updating `no-on-calls-in-components` to only fail components using on with lifecylcle hooks. ([@patience-tema-baron](https://github.com/patience-tema-baron))
+
+#### :memo: Documentation
+* [#276](https://github.com/ember-cli/eslint-plugin-ember/pull/276) Add reason for rule `no-on-calls-in-components`. ([@cbou](https://github.com/cbou))
+* [#277](https://github.com/ember-cli/eslint-plugin-ember/pull/277) docs: remove `get` from closure action example. ([@knownasilya](https://github.com/knownasilya))
+* [#266](https://github.com/ember-cli/eslint-plugin-ember/pull/266) Update `no-empty-attrs` description. ([@locks](https://github.com/locks))
+
+#### :house: Internal
+* [#280](https://github.com/ember-cli/eslint-plugin-ember/pull/280) Clean up a couple of test definitions to unblock update script. ([@tmquinn](https://github.com/tmquinn))
+
+#### Committers: 12
+- Garrett Murphey ([gmurphey](https://github.com/gmurphey))
+- Ilya Radchenko ([knownasilya](https://github.com/knownasilya))
+- Martin Midtgaard ([initram](https://github.com/initram))
+- Nathaniel Furniss ([nlfurniss](https://github.com/nlfurniss))
+- Patience Tema Baron ([patience-tema-baron](https://github.com/patience-tema-baron))
+- Quinn Hoyer ([tmquinn](https://github.com/tmquinn))
+- Ricardo Mendes ([locks](https://github.com/locks))
+- Stephen Yeung ([step2yeung](https://github.com/step2yeung))
+- Steve Calvert ([scalvert](https://github.com/scalvert))
+- Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
+- [dependabot[bot]](https://github.com/apps/dependabot)
+- charles bourasseau ([cbou](https://github.com/cbou))
+
 ## v5.2.0 (2018-05-15)
 
 #### :rocket: Enhancement
