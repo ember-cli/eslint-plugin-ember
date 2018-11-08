@@ -83,6 +83,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 |  | [alias-model-in-controller](./docs/rules/alias-model-in-controller.md) | Enforces aliasing model in controller |
+| :white_check_mark: | [avoid-using-needs-in-controllers](./docs/rules/avoid-using-needs-in-controllers.md) | Avoids using needs in controllers |
 | :white_check_mark: | [closure-actions](./docs/rules/closure-actions.md) | Enforces usage of closure actions |
 |  | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
 | :white_check_mark: | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
@@ -118,7 +119,6 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage |
-|  | [avoid-using-needs-in-controllers](./docs/rules/avoid-using-needs-in-controllers.md) | Avoids using needs in controllers |
 
 
 ### Testing
