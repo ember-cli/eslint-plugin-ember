@@ -3,7 +3,6 @@
 exports[`recommended rules 1`] = `
 Array [
   "avoid-leaking-state-in-ember-objects",
-  "avoid-using-needs-in-controllers",
   "closure-actions",
   "jquery-ember-run",
   "new-module-imports",
