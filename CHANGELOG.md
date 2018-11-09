@@ -1,5 +1,17 @@
 # Changelog
 
+## v5.4.0 (2018-11-09)
+
+#### :rocket: Enhancement
+* [#253](https://github.com/ember-cli/eslint-plugin-ember/pull/253) Add `avoid-using-needs` rule. ([@twokul](https://github.com/twokul))
+
+#### :bug: Bug Fix
+* [#314](https://github.com/ember-cli/eslint-plugin-ember/pull/314) Adding missing rules to index.js. ([@gmurphey](https://github.com/gmurphey))
+
+#### Committers: 2
+- Alex Navasardyan ([twokul](https://github.com/twokul))
+- Garrett Murphey ([gmurphey](https://github.com/gmurphey))
+
 ## v5.3.0 (2018-11-08)
 
 #### :rocket: Enhancement
