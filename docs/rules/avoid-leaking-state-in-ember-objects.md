@@ -30,6 +30,28 @@ export default Foo.extend({
     },
   },
 });
+
+// BAD
+export default Foo.extend({
+  items: A(),
+
+  actions: {
+    addItem(item) {
+      this.get('items').pushObject(item);
+    },
+  },
+});
+
+// BAD
+export default Foo.extend({
+  someObj: EmberObject.create({ bar: null }),
+
+  actions: {
+    chamgeProp(val) {
+      this.set('someObj.bar', val);
+    },
+  },
+});
 ```
 
 ```javascript
