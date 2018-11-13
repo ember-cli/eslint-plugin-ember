@@ -52,7 +52,7 @@
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-plugin-import": "^2.14.0",
     "jest": "^22.4.3",
-    "lerna-changelog": "^0.7.0"
+    "lerna-changelog": "^0.8.2"
   },
   "dependencies": {
     "ember-rfc176-data": "^0.3.5",
