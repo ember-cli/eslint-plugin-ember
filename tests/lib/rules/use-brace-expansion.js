@@ -19,6 +19,8 @@ eslintTester.run('use-brace-expansion', rule, {
     { code: '{ test: computed("a.{test,test2}", "c", "b", function() {}) }' },
     { code: '{ test: computed("model.a.{test,test2}", "model.b.{test3,test4}", function() {}) }' },
     { code: '{ test: computed("foo.bar.{name,place}", "foo.qux.[]", "foo.baz.{thing,@each.stuff}", function() {}) }' },
+    { code: '{ test: computed.or("foo.bar.name", "foo.bar.place") }' },
+    { code: '{ test: computed.and("foo.bar.name", "foo.bar.place") }' },
     { code: "{ test: Ember.computed.filterBy('a', 'b', false) }" },
   ],
   invalid: [
@@ -56,6 +58,12 @@ eslintTester.run('use-brace-expansion', rule, {
       code: '{ test: computed("a.{test,test2}", "a.test3", function() {}) }',
       errors: [{
         message: 'Use brace expansion',
+      }],
+    },
+    {
+      code: '{ test: computed("a.test", "a.test2", function() {}).volatile() }',
+      errors: [{
+        message: 'Use brace expansion'
       }],
     },
   ],
