@@ -1,5 +1,30 @@
 # Changelog
 
+## v6.0.0 (2018-11-14)
+
+This release includes several changes to the `ember/recommended` configuration,
+and drops support for Node.js 4 and ESLint 3.
+
+#### :boom: Breaking Change
+* [#311](https://github.com/ember-cli/eslint-plugin-ember/pull/311) Add `avoid-using-needs-in-controllers` to recommended set. ([@rwjblue](https://github.com/rwjblue))
+* [#310](https://github.com/ember-cli/eslint-plugin-ember/pull/310) Add `no-restricted-resolver-tests` to recommended. ([@rwjblue](https://github.com/rwjblue))
+* [#309](https://github.com/ember-cli/eslint-plugin-ember/pull/309) Make `no-observers` rule recommended ([@Gaurav0](https://github.com/Gaurav0))
+* [#274](https://github.com/ember-cli/eslint-plugin-ember/pull/274) Add `no-ember-testing-in-module-scope` to recommended ([@tmquinn](https://github.com/tmquinn))
+* [#267](https://github.com/ember-cli/eslint-plugin-ember/pull/267) Remove deprecated `experimentalObjectRestSpread` option ([@scottkidder](https://github.com/scottkidder))
+* [#255](https://github.com/ember-cli/eslint-plugin-ember/pull/255) Drop Node 4 support. ([@rwjblue](https://github.com/rwjblue))
+
+#### :rocket: Enhancement
+* [#311](https://github.com/ember-cli/eslint-plugin-ember/pull/311) Add `avoid-using-needs-in-controllers` to recommended set. ([@rwjblue](https://github.com/rwjblue))
+* [#310](https://github.com/ember-cli/eslint-plugin-ember/pull/310) Add no-restricted-resolver-tests to recommended. ([@rwjblue](https://github.com/rwjblue))
+* [#309](https://github.com/ember-cli/eslint-plugin-ember/pull/309) Make no-observers rule recommended ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Committers: 4
+- Gaurav Munjal ([@Gaurav0](https://github.com/Gaurav0))
+- Quinn Hoyer ([@tmquinn](https://github.com/tmquinn))
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- Scott Kidder ([@scottkidder](https://github.com/scottkidder))
+
+
 ## v5.4.0 (2018-11-09)
 
 #### :rocket: Enhancement
@@ -11,6 +36,7 @@
 #### Committers: 2
 - Alex Navasardyan ([twokul](https://github.com/twokul))
 - Garrett Murphey ([gmurphey](https://github.com/gmurphey))
+
 
 ## v5.3.0 (2018-11-08)
 
@@ -47,6 +73,7 @@
 - [dependabot[bot]](https://github.com/apps/dependabot)
 - charles bourasseau ([cbou](https://github.com/cbou))
 
+
 ## v5.2.0 (2018-05-15)
 
 #### :rocket: Enhancement
@@ -63,6 +90,7 @@
 - Kerrick Long ([Kerrick](https://github.com/Kerrick))
 - Landon Abney ([Arcanemagus](https://github.com/Arcanemagus))
 - Sergio Arbeo ([Serabe](https://github.com/Serabe))
+
 
 ## v5.1.1 (2018-05-14)
 
