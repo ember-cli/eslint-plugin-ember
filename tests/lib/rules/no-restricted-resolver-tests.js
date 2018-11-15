@@ -63,6 +63,14 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
             `,
       parserOptions,
     },
+    {
+      code: `
+              module('foo', function(hooks) {
+                setupTest(hooks);
+              });
+            `,
+      parserOptions,
+    },
   ],
   invalid: [
     {
