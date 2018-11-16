@@ -1,5 +1,23 @@
 # Changelog
 
+## v6.0.1 (2018-11-16)
+
+#### :rocket: Enhancement
+* [#331](https://github.com/ember-cli/eslint-plugin-ember/pull/331) Updating no-side-effects to also report on setProperties. ([@gmurphey](https://github.com/gmurphey))
+
+#### :bug: Bug Fix
+* [#340](https://github.com/ember-cli/eslint-plugin-ember/pull/340) no-restricted-resolver: Fix crashes ([@Turbo87](https://github.com/Turbo87))
+
+#### :house: Internal
+* [#335](https://github.com/ember-cli/eslint-plugin-ember/pull/335) Remove outdated `.nvmrc` file ([@Turbo87](https://github.com/Turbo87))
+* [#334](https://github.com/ember-cli/eslint-plugin-ember/pull/334) package.json: Limit published files to the `lib` folder ([@Turbo87](https://github.com/Turbo87))
+* [#336](https://github.com/ember-cli/eslint-plugin-ember/pull/336) CI: Use `--runInBand` option of Jest to speed up tests ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 2
+- Garrett Murphey ([@gmurphey](https://github.com/gmurphey))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
+
 ## v6.0.0 (2018-11-14)
 
 This release includes several changes to the `ember/recommended` configuration,
