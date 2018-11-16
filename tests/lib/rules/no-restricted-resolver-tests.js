@@ -63,6 +63,18 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
             `,
       parserOptions,
     },
+    {
+      code: `
+              module('foo', function(hooks) {
+                setupTest(hooks);
+              });
+            `,
+      parserOptions,
+    },
+    {
+      code: 'import { setupTest } from \'ember-qunit\';',
+      parserOptions,
+    },
   ],
   invalid: [
     {
