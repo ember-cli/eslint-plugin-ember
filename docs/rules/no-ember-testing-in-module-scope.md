@@ -10,6 +10,7 @@ https://github.com/emberjs/ember-test-helpers/pull/227
 
 ```javascript
 // Good
+import Ember from 'ember';
 export default Component.extend({
   someMethod() {
     if (Ember.testing) {
@@ -21,6 +22,7 @@ export default Component.extend({
 })
 
 // Good
+import Ember from 'ember';
 export default Service.extend({
   foo() {
     _bar(Ember.testing ? 0 : 400)
