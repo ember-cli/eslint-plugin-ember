@@ -75,10 +75,19 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       code: 'import { setupTest } from \'ember-qunit\';',
       parserOptions,
     },
+    {
+      code: `const setupTest = require('ember-fastboot-addon-tests').setupTest;
+
+            describe('Integration tests', function() {
+              setupTest('fastboot-ready-app');
+            });`,
+      parserOptions,
+    },
   ],
   invalid: [
     {
-      code: `
+      code: `import { moduleFor } from 'ember-qunit';
+
               moduleFor('service:session');
             `,
       parserOptions,
@@ -89,7 +98,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { moduleFor } from 'ember-qunit';
+
               moduleFor('service:session', {
                 unit: true
               });
@@ -102,7 +112,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { moduleFor } from 'ember-qunit';
+
               moduleFor('service:session', {
                 needs: ['type:thing']
               });
@@ -115,7 +126,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { moduleFor } from 'ember-qunit';
+
               moduleFor('service:session', arg2, {});
             `,
       parserOptions,
@@ -126,7 +138,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { moduleForComponent } from 'ember-qunit';
+
               moduleForComponent('display-page');
             `,
       parserOptions,
@@ -137,7 +150,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { moduleForComponent } from 'ember-qunit';
+
               moduleForComponent('display-page', {
                 unit: true
               });
@@ -150,7 +164,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { moduleForComponent } from 'ember-qunit';
+
               moduleForComponent('display-page', {
                 needs: ['type:thing']
               });
@@ -163,7 +178,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { moduleForComponent } from 'ember-qunit';
+
               moduleForComponent('display-page', arg2, {});
             `,
       parserOptions,
@@ -174,7 +190,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { moduleForModel } from 'ember-qunit';
+
               moduleForModel('post');
             `,
       parserOptions,
@@ -185,7 +202,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { moduleForModel } from 'ember-qunit';
+
               moduleForModel('post', {
                 unit: true
               });
@@ -198,7 +216,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { moduleForModel } from 'ember-qunit';
+
               moduleForModel('post', {
                 needs: ['type:thing']
               });
@@ -211,7 +230,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { moduleForModel } from 'ember-qunit';
+
               moduleForModel('post', arg2, {});
             `,
       parserOptions,
@@ -222,7 +242,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { setupTest } from 'ember-mocha';
+
               setupTest('service:session');
             `,
       parserOptions,
@@ -233,7 +254,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { setupTest } from 'ember-mocha';
+
               setupTest('service:session', {
                 unit: true
               });
@@ -246,7 +268,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { setupTest } from 'ember-mocha';
+
               setupTest('service:session', {
                 needs: ['type:thing']
               });
@@ -259,7 +282,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { setupTest } from 'ember-mocha';
+
               setupTest('service:session', arg2, {});
             `,
       parserOptions,
@@ -270,7 +294,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { setupComponentTest } from 'ember-mocha';
+
               setupComponentTest('display-page');
             `,
       parserOptions,
@@ -281,7 +306,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { setupComponentTest } from 'ember-mocha';
+
               setupComponentTest('display-page', {
                 unit: true
               });
@@ -294,7 +320,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { setupComponentTest } from 'ember-mocha';
+
               setupComponentTest('display-page', {
                 needs: ['type:thing']
               });
@@ -307,7 +334,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { setupComponentTest } from 'ember-mocha';
+
               setupComponentTest('display-page', arg2, {});
             `,
       parserOptions,
@@ -318,7 +346,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { setupModelTest } from 'ember-mocha';
+
               setupModelTest('post');
             `,
       parserOptions,
@@ -329,7 +358,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { setupModelTest } from 'ember-mocha';
+
               setupModelTest('post', {
                 unit: true
               });
@@ -342,7 +372,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { setupModelTest } from 'ember-mocha';
+
               setupModelTest('post', {
                 needs: ['type:thing']
               });
@@ -355,7 +386,8 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       ],
     },
     {
-      code: `
+      code: `import { setupModelTest } from 'ember-mocha';
+
               setupModelTest('post', arg2, {});
             `,
       parserOptions,
