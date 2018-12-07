@@ -11,7 +11,6 @@ Array [
   "no-attrs-snapshot",
   "no-capital-letters-in-routes",
   "no-duplicate-dependent-keys",
-  "no-ember-super-in-es-classes",
   "no-ember-testing-in-module-scope",
   "no-function-prototype-extensions",
   "no-global-jquery",
