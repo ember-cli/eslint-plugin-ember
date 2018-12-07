@@ -37,9 +37,8 @@ export default Foo.extend({
 export default Foo.extend({
   init() {
     this._super(...arguments);
-    if (!this.items) {
-      this.items = [];
-    }
+    
+    this.items = this.items || [];
   },
 
   actions: {
