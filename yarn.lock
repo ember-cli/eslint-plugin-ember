@@ -1104,8 +1104,8 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
 
 ember-rfc176-data@^0.3.5:
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.5.tgz#f630e550572c81a5e5c7220f864c0f06eee9e977"
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.6.tgz#7138db8dfccec39c9a832adfbd4c49d670028907"
 
 encoding@^0.1.11:
   version "0.1.12"
