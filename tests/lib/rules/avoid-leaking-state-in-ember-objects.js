@@ -27,7 +27,7 @@ describe('imports', () => {
 
 const eslintTester = new RuleTester({
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 2018,
     sourceType: 'module'
   }
 });
@@ -119,6 +119,9 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     },
     {
       code: 'export default Foo.extend({ foo: !true });'
+    },
+    {
+      code: 'export default Foo.extend({ ...props });'
     },
   ],
   invalid: [
