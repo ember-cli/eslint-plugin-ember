@@ -1,5 +1,35 @@
 # Changelog
 
+## v6.1.0 (2018-12-15)
+
+#### :rocket: Enhancement
+* [#350](https://github.com/ember-cli/eslint-plugin-ember/pull/350) Introduce `no-ember-super-in-es-classes` rule ([@dfreeman](https://github.com/dfreeman))
+* [#298](https://github.com/ember-cli/eslint-plugin-ember/pull/298) no-jquery: Check for aliased imports from 'jquery' module ([@initram](https://github.com/initram))
+
+#### :bug: Bug Fix
+* [#353](https://github.com/ember-cli/eslint-plugin-ember/pull/353) Fix error with `avoid-leaking-state-in-ember-objects` and spread ([@nlfurniss](https://github.com/nlfurniss))
+* [#348](https://github.com/ember-cli/eslint-plugin-ember/pull/348) Fix `no-restricted-resolver-tests` to narrow scope of rule ([@scalvert](https://github.com/scalvert))
+* [#332](https://github.com/ember-cli/eslint-plugin-ember/pull/332) use-brace-expansion: Limit lint rule to only trigger for `computed()` but no other macros ([@gmurphey](https://github.com/gmurphey))
+
+#### :memo: Documentation
+* [#349](https://github.com/ember-cli/eslint-plugin-ember/pull/349) Update `avoid-leaking-state-in-ember-objects` documentation. ([@samselikoff](https://github.com/samselikoff))
+* [#345](https://github.com/ember-cli/eslint-plugin-ember/pull/345) Fix typo on `getNoPOJOWithoutIntegrationTrueMessage`. ([@esbanarango](https://github.com/esbanarango))
+* [#341](https://github.com/ember-cli/eslint-plugin-ember/pull/341) Clarify `no-ember-testing-in-module-scope` documentation. ([@cibernox](https://github.com/cibernox))
+
+#### :house: Internal
+* [#347](https://github.com/ember-cli/eslint-plugin-ember/pull/347) TravisCI: Remove deprecated `sudo: false` option ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 9
+- Dan Freeman ([@dfreeman](https://github.com/dfreeman))
+- Esteban Arango Medina ([@esbanarango](https://github.com/esbanarango))
+- Garrett Murphey ([@gmurphey](https://github.com/gmurphey))
+- Martin Midtgaard ([@initram](https://github.com/initram))
+- Miguel Camba ([@cibernox](https://github.com/cibernox))
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+- Sam Selikoff ([@samselikoff](https://github.com/samselikoff))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
 ## v6.0.1 (2018-11-16)
 
 #### :rocket: Enhancement
