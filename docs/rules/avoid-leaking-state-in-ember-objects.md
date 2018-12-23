@@ -7,7 +7,10 @@
 Example configuration:
 
 ```
+const { DEFAULT_IGNORED_PROPERTIES } = require('eslint-plugin-ember/lib/rules/avoid-leaking-state-in-ember-objects');
+
 ember/avoid-leaking-state-in-ember-objects: [1, [
+  ...DEFAULT_IGNORED_PROPERTIES,
   'array',
   'of',
   'ignored',
