@@ -103,6 +103,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+|  | [assert-arg-order](./docs/rules/assert-arg-order.md) | Catch usages of Ember's `assert()` function that have the arguments passed in the wrong order. |
 | :white_check_mark: | [jquery-ember-run](./docs/rules/jquery-ember-run.md) | Prevents usage of jQuery without Ember Run Loop |
 | :white_check_mark: | [no-attrs-in-components](./docs/rules/no-attrs-in-components.md) | Disallow usage of this.attrs in components |
 | :white_check_mark: | [no-attrs-snapshot](./docs/rules/no-attrs-snapshot.md) | Disallow use of attrs snapshot in `didReceiveAttrs` and `didUpdateAttrs` |
