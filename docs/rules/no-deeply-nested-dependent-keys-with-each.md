@@ -1,6 +1,6 @@
 # Disallows usage of deeply-nested computed property dependent keys with `@each`.  (no-deeply-nested-dependent-keys-with-each)
 
-For performance / complexity reasons, Ember does allow deeply-nested computed property dependent keys with `@each`. At runtime, it will show a warning about this:
+For performance / complexity reasons, Ember does not allow deeply-nested computed property dependent keys with `@each`. At runtime, it will show a warning about this:
 
 > WARNING: Dependent keys containing @each only work one level deep. You used the key "foo.@each.bar.baz" which is invalid. Please create an intermediary computed property.
 
