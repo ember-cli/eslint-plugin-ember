@@ -23,10 +23,22 @@ ruleTester.run('assert-arg-order', rule, {
       code: "myFunction(true, 'My string.');"
     },
     {
+      code: "Ember.myFunction(true, 'My string.');"
+    },
+    {
+      code: "OtherClass.assert(true, 'My string.');"
+    },
+    {
       code: "assert('My description.');"
     },
     {
+      code: "Ember.assert('My description.');"
+    },
+    {
       code: "assert('My description.', true);"
+    },
+    {
+      code: "Ember.assert('My description.', true);"
     },
     {
       code: "const CONDITION = true; assert('My description.', CONDITION);"
@@ -41,6 +53,10 @@ ruleTester.run('assert-arg-order', rule, {
   invalid: [
     {
       code: "assert(true, 'My description.');",
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+    },
+    {
+      code: "Ember.assert(true, 'My description.');",
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
     },
     {
