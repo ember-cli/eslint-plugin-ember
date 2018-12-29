@@ -56,6 +56,12 @@ const VALID_USAGES_FOR_EACH_DEBUG_FUNCTION = flatten(DEBUG_FUNCTIONS.map(debugFu
   },
   {
     code: `const DESCRIPTION = 'description'; const CONDITION = true; ${debugFunction}(DESCRIPTION, CONDITION);`
+  },
+  {
+    code: `${debugFunction}.unrelatedFunction(true, 'My description.');`
+  },
+  {
+    code: `Ember.${debugFunction}.unrelatedFunction(true, 'My description.');`
   }
 ]));
 
