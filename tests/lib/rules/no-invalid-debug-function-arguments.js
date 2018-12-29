@@ -5,7 +5,7 @@
 const rule = require('../../../lib/rules/no-invalid-debug-function-arguments');
 const RuleTester = require('eslint').RuleTester;
 
-const { DEBUG_FUNCTIONS, ERROR_MESSAGE } = rule;
+const { DEBUG_FUNCTIONS, getErrorMessage } = rule;
 
 //------------------------------------------------------------------------------
 // Tests
@@ -67,31 +67,31 @@ const VALID_USAGES = [
 const INVALID_USAGES = flatten(DEBUG_FUNCTIONS.map(debugFunction => [
   {
     code: `${debugFunction}(true, 'My description.');`,
-    errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+    errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   },
   {
     code: `Ember.${debugFunction}(true, 'My description.');`,
-    errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+    errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   },
   {
     code: `${debugFunction}(true, 'My description.', { id: 'some-id' });`,
-    errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+    errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   },
   {
     code: `Ember.${debugFunction}(true, 'My description.', { id: 'some-id' });`,
-    errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+    errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   },
   {
     code: `${debugFunction}(true, \`My \${123} description.\`);`,
-    errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+    errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   },
   {
     code: `const CONDITION = true; ${debugFunction}(CONDITION, 'My description.');`,
-    errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+    errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   },
   {
     code: `const CONDITION = true; ${debugFunction}(CONDITION, \`My \${123} description.\`);`,
-    errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+    errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   }
 ]));
 
