@@ -12,7 +12,7 @@ test('behaves correctly', function(assert) {
   andThen(() => {
     assert.ok(this.myAction.calledOnce);
   });
-}
+});
 ```
 
 Examples of **correct** code for this rule:
@@ -21,5 +21,5 @@ Examples of **correct** code for this rule:
 test('behaves correctly', async function(assert) {
   await click('.button');
   assert.ok(this.myAction.calledOnce);
-}
+});
 ```
