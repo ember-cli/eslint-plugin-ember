@@ -16,6 +16,7 @@ ruleTester.run('no-unnecessary-route-path-option', rule, {
   valid: [
     'this.route("blog");',
     'this.route("blog", function() {});',
+    'this.route("blog", { path: "" });',
     'this.route("blog", { path: "/" });',
     'this.route("blog", { path: "blog-posts" });',
     'this.route("blog", { path: "blog-posts" }, function() {});',
