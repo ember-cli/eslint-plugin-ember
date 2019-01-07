@@ -9,9 +9,25 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
+describe('imports', () => {
+  it('should expose the default ignored properties', () => {
+    expect(rule.DEFAULT_IGNORED_PROPERTIES).toEqual([
+      'classNames',
+      'classNameBindings',
+      'actions',
+      'concatenatedProperties',
+      'mergedProperties',
+      'positionalParams',
+      'attributeBindings',
+      'queryParams',
+      'attrs',
+    ]);
+  });
+});
+
 const eslintTester = new RuleTester({
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 2018,
     sourceType: 'module'
   }
 });
@@ -103,6 +119,9 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     },
     {
       code: 'export default Foo.extend({ foo: !true });'
+    },
+    {
+      code: 'export default Foo.extend({ ...props });'
     },
   ],
   invalid: [

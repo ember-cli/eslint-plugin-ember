@@ -1,16 +1,14 @@
 language: node_js
-sudo: false
 node_js:
-  - 'stable'
+  - '10'
   - '8'
   - '6'
-  - '4'
 
 cache: yarn
 
 script:
   - yarn run lint
-  - yarn run test:coverage
+  - yarn run test:coverage --runInBand
 
 before_deploy:
   - yarn global add auto-dist-tag

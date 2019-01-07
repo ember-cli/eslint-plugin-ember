@@ -109,6 +109,7 @@ eslintTester.run('order-in-controllers', rule, {
       code: `
         export default Controller.extend({
           foo: service(),
+          someProp: null,
           init() {
             this._super(...arguments);
           },
@@ -299,7 +300,7 @@ eslintTester.run('order-in-controllers', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'The inherited "init" property should be above the actions hash on line 4',
+        message: 'The "init" lifecycle hook should be above the actions hash on line 4',
         line: 7
       }]
     },
@@ -315,7 +316,7 @@ eslintTester.run('order-in-controllers', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'The inherited "init" property should be above the "customFoo" empty method on line 4',
+        message: 'The "init" lifecycle hook should be above the "customFoo" empty method on line 4',
         line: 5
       }]
     },
@@ -330,9 +331,59 @@ eslintTester.run('order-in-controllers', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'The "foo" service injection should be above the inherited "init" property on line 3',
+        message: 'The "foo" service injection should be above the "init" lifecycle hook on line 3',
         line: 6
       }]
+    },
+    {
+      code: `
+        export default Controller.extend({
+          init() {
+            this._super(...arguments);
+          },
+          someProp: null
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "someProp" property should be above the "init" lifecycle hook on line 3',
+        line: 6
+      }]
+    },
+    {
+      code:
+// whitespace is preserved inside `` and it's breaking the test
+`export default Controller.extend({
+  queryParams: [],
+  currentUser: service(),
+});`,
+      output:
+`export default Controller.extend({
+  currentUser: service(),
+  queryParams: [],
+});`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
+        line: 3,
+      }],
+    },
+    {
+      code: `export default Controller.extend({
+        test: "asd",
+        queryParams: [],
+        actions: {}
+      });`,
+      output: `export default Controller.extend({
+        queryParams: [],
+        test: "asd",
+        actions: {}
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "queryParams" property should be above the "test" property on line 2',
+        line: 3,
+      }],
     }
   ],
 });

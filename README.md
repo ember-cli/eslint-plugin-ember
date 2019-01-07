@@ -83,6 +83,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 |  | [alias-model-in-controller](./docs/rules/alias-model-in-controller.md) | Enforces aliasing model in controller |
+| :white_check_mark: | [avoid-using-needs-in-controllers](./docs/rules/avoid-using-needs-in-controllers.md) | Avoids using needs in controllers |
 | :white_check_mark: | [closure-actions](./docs/rules/closure-actions.md) | Enforces usage of closure actions |
 |  | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
 | :white_check_mark: | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
@@ -90,9 +91,11 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
 | :white_check_mark: | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
 |  | [no-jquery](./docs/rules/no-jquery.md) | Disallow any usage of jQuery |
-|  | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
+|  | [no-new-mixins](./docs/rules/no-new-mixins.md) | Prevents creation of new mixins |
+| :white_check_mark: | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
 | :white_check_mark::wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | Prevents usage of old shims for modules |
-| :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | Prevents usage of `on` calls in components |
+| :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | Prevents usage of `on` to call lifecycle hooks in components |
+| :white_check_mark: | [no-restricted-resolver-tests](./docs/rules/no-restricted-resolver-tests.md) | Prevents the use of patterns that use the restricted resolver in tests. |
 | :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
 
 
@@ -104,7 +107,11 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-attrs-in-components](./docs/rules/no-attrs-in-components.md) | Disallow usage of this.attrs in components |
 | :white_check_mark: | [no-attrs-snapshot](./docs/rules/no-attrs-snapshot.md) | Disallow use of attrs snapshot in `didReceiveAttrs` and `didUpdateAttrs` |
 | :white_check_mark: | [no-capital-letters-in-routes](./docs/rules/no-capital-letters-in-routes.md) | Raise an error when there is a route with uppercased letters in router.js |
+|  | [no-deeply-nested-dependent-keys-with-each](./docs/rules/no-deeply-nested-dependent-keys-with-each.md) | Disallows usage of deeply-nested computed property dependent keys with `@each`. |
 | :white_check_mark: | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | Disallow repeating dependent keys |
+| :wrench: | [no-ember-super-in-es-classes](./docs/rules/no-ember-super-in-es-classes.md) | Prevents use of `this._super` in ES class methods |
+| :white_check_mark: | [no-ember-testing-in-module-scope](./docs/rules/no-ember-testing-in-module-scope.md) | Prevents use of Ember.testing in module scope |
+|  | [no-invalid-debug-function-arguments](./docs/rules/no-invalid-debug-function-arguments.md) | Catch usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. |
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | Warns about unexpected side effects in computed properties |
 | :white_check_mark: | [require-super-in-init](./docs/rules/require-super-in-init.md) | Enforces super calls in init hooks |
 | :white_check_mark: | [routes-segments-snake-case](./docs/rules/routes-segments-snake-case.md) | Enforces usage of snake_cased dynamic segments in routes |
@@ -117,14 +124,22 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage |
 
 
+### Testing
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+|  | [no-test-and-then](./docs/rules/no-test-and-then.md) | Disallow use of `andThen` test wait helper. |
+|  | [no-test-import-export](./docs/rules/no-test-import-export.md) | Disallow importing of "-test.js" in a test file and exporting from a test file. |
+
+
 ### Stylistic Issues
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [order-in-components](./docs/rules/order-in-components.md) | Enforces proper order of properties in components |
-|  | [order-in-controllers](./docs/rules/order-in-controllers.md) | Enforces proper order of properties in controllers |
-|  | [order-in-models](./docs/rules/order-in-models.md) | Enforces proper order of properties in models |
-|  | [order-in-routes](./docs/rules/order-in-routes.md) | Enforces proper order of properties in routes |
+| :wrench: | [order-in-components](./docs/rules/order-in-components.md) | Enforces proper order of properties in components |
+| :wrench: | [order-in-controllers](./docs/rules/order-in-controllers.md) | Enforces proper order of properties in controllers |
+| :wrench: | [order-in-models](./docs/rules/order-in-models.md) | Enforces proper order of properties in models |
+| :wrench: | [order-in-routes](./docs/rules/order-in-routes.md) | Enforces proper order of properties in routes |
 | :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | Enforces usage of brace expansion |
 
 ### Deprecated

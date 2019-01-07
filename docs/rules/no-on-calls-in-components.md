@@ -4,6 +4,8 @@
 
 Prevents using `.on()` in favour of component's lifecycle hooks.
 
+The order of execution for `on()` is not deterministic.
+
 ```javascript
 export default Component.extend({
   // BAD

@@ -2,7 +2,7 @@
 
 ### Rule name: `no-empty-attrs`
 
-Ember Data could handle lack of specified types in model description. Nonetheless this could lead to ambiguity. Therefore always supply proper attribute type to ensure the right data transform is used.
+Ember Data handles not specifying a transform in model description. Nonetheless this could lead to ambiguity. This rule ensures that the right transform is specified for every attribute.
 
 ```javascript
 const { Model, attr } = DS;

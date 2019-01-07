@@ -1,8 +1,11 @@
 {
   "name": "eslint-plugin-ember",
-  "version": "5.0.3",
+  "version": "6.1.0",
   "description": "Eslint plugin for Ember.js apps",
   "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "directories": {
     "rules": "rules",
     "test": "test"
@@ -39,7 +42,7 @@
     "Tobias Bieniek (http://github.com/Turbo87)"
   ],
   "engines": {
-    "node": ">=4.0"
+    "node": ">=6.0"
   },
   "license": "MIT",
   "bugs": {
@@ -47,16 +50,15 @@
   },
   "homepage": "https://github.com/ember-cli/eslint-plugin-ember#readme",
   "devDependencies": {
-    "babel-eslint": "^7.1.0",
-    "eslint": "^3.15.0",
+    "babel-eslint": "^9.0.0",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^11.1.0",
-    "eslint-plugin-import": "^2.2.0",
-    "jest": "^20.0.4",
-    "lerna-changelog": "^0.7.0"
+    "eslint-plugin-import": "^2.14.0",
+    "jest": "^23.6.0",
+    "lerna-changelog": "^0.8.2"
   },
   "dependencies": {
-    "ember-rfc176-data": "^0.2.7",
-    "require-folder-tree": "^1.4.5",
+    "ember-rfc176-data": "^0.3.5",
     "snake-case": "^2.1.0"
   },
   "changelog": {

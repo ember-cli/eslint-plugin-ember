@@ -82,7 +82,7 @@ eslintTester.run('no-function-prototype-extensions', rule, {
       }],
     },
     {
-      code: 'export default Controller.extend({test: function() {}.observe("abc")});',
+      code: 'export default Controller.extend({test: function() {}.observes("abc")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
         message: 'Don\'t use Ember\'s function prototype extensions',

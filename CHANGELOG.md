@@ -1,3 +1,185 @@
+# Changelog
+
+## v6.1.0 (2018-12-15)
+
+#### :rocket: Enhancement
+* [#350](https://github.com/ember-cli/eslint-plugin-ember/pull/350) Introduce `no-ember-super-in-es-classes` rule ([@dfreeman](https://github.com/dfreeman))
+* [#298](https://github.com/ember-cli/eslint-plugin-ember/pull/298) no-jquery: Check for aliased imports from 'jquery' module ([@initram](https://github.com/initram))
+
+#### :bug: Bug Fix
+* [#353](https://github.com/ember-cli/eslint-plugin-ember/pull/353) Fix error with `avoid-leaking-state-in-ember-objects` and spread ([@nlfurniss](https://github.com/nlfurniss))
+* [#348](https://github.com/ember-cli/eslint-plugin-ember/pull/348) Fix `no-restricted-resolver-tests` to narrow scope of rule ([@scalvert](https://github.com/scalvert))
+* [#332](https://github.com/ember-cli/eslint-plugin-ember/pull/332) use-brace-expansion: Limit lint rule to only trigger for `computed()` but no other macros ([@gmurphey](https://github.com/gmurphey))
+
+#### :memo: Documentation
+* [#349](https://github.com/ember-cli/eslint-plugin-ember/pull/349) Update `avoid-leaking-state-in-ember-objects` documentation. ([@samselikoff](https://github.com/samselikoff))
+* [#345](https://github.com/ember-cli/eslint-plugin-ember/pull/345) Fix typo on `getNoPOJOWithoutIntegrationTrueMessage`. ([@esbanarango](https://github.com/esbanarango))
+* [#341](https://github.com/ember-cli/eslint-plugin-ember/pull/341) Clarify `no-ember-testing-in-module-scope` documentation. ([@cibernox](https://github.com/cibernox))
+
+#### :house: Internal
+* [#347](https://github.com/ember-cli/eslint-plugin-ember/pull/347) TravisCI: Remove deprecated `sudo: false` option ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 9
+- Dan Freeman ([@dfreeman](https://github.com/dfreeman))
+- Esteban Arango Medina ([@esbanarango](https://github.com/esbanarango))
+- Garrett Murphey ([@gmurphey](https://github.com/gmurphey))
+- Martin Midtgaard ([@initram](https://github.com/initram))
+- Miguel Camba ([@cibernox](https://github.com/cibernox))
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+- Sam Selikoff ([@samselikoff](https://github.com/samselikoff))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
+## v6.0.1 (2018-11-16)
+
+#### :rocket: Enhancement
+* [#331](https://github.com/ember-cli/eslint-plugin-ember/pull/331) Updating no-side-effects to also report on setProperties. ([@gmurphey](https://github.com/gmurphey))
+
+#### :bug: Bug Fix
+* [#340](https://github.com/ember-cli/eslint-plugin-ember/pull/340) no-restricted-resolver: Fix crashes ([@Turbo87](https://github.com/Turbo87))
+
+#### :house: Internal
+* [#335](https://github.com/ember-cli/eslint-plugin-ember/pull/335) Remove outdated `.nvmrc` file ([@Turbo87](https://github.com/Turbo87))
+* [#334](https://github.com/ember-cli/eslint-plugin-ember/pull/334) package.json: Limit published files to the `lib` folder ([@Turbo87](https://github.com/Turbo87))
+* [#336](https://github.com/ember-cli/eslint-plugin-ember/pull/336) CI: Use `--runInBand` option of Jest to speed up tests ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 2
+- Garrett Murphey ([@gmurphey](https://github.com/gmurphey))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
+
+## v6.0.0 (2018-11-14)
+
+This release includes several changes to the `ember/recommended` configuration,
+and drops support for Node.js 4 and ESLint 3.
+
+#### :boom: Breaking Change
+* [#311](https://github.com/ember-cli/eslint-plugin-ember/pull/311) Add `avoid-using-needs-in-controllers` to recommended set. ([@rwjblue](https://github.com/rwjblue))
+* [#310](https://github.com/ember-cli/eslint-plugin-ember/pull/310) Add `no-restricted-resolver-tests` to recommended. ([@rwjblue](https://github.com/rwjblue))
+* [#309](https://github.com/ember-cli/eslint-plugin-ember/pull/309) Make `no-observers` rule recommended ([@Gaurav0](https://github.com/Gaurav0))
+* [#274](https://github.com/ember-cli/eslint-plugin-ember/pull/274) Add `no-ember-testing-in-module-scope` to recommended ([@tmquinn](https://github.com/tmquinn))
+* [#267](https://github.com/ember-cli/eslint-plugin-ember/pull/267) Remove deprecated `experimentalObjectRestSpread` option ([@scottkidder](https://github.com/scottkidder))
+* [#255](https://github.com/ember-cli/eslint-plugin-ember/pull/255) Drop Node 4 support. ([@rwjblue](https://github.com/rwjblue))
+
+#### :rocket: Enhancement
+* [#311](https://github.com/ember-cli/eslint-plugin-ember/pull/311) Add `avoid-using-needs-in-controllers` to recommended set. ([@rwjblue](https://github.com/rwjblue))
+* [#310](https://github.com/ember-cli/eslint-plugin-ember/pull/310) Add no-restricted-resolver-tests to recommended. ([@rwjblue](https://github.com/rwjblue))
+* [#309](https://github.com/ember-cli/eslint-plugin-ember/pull/309) Make no-observers rule recommended ([@Gaurav0](https://github.com/Gaurav0))
+
+#### Committers: 4
+- Gaurav Munjal ([@Gaurav0](https://github.com/Gaurav0))
+- Quinn Hoyer ([@tmquinn](https://github.com/tmquinn))
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- Scott Kidder ([@scottkidder](https://github.com/scottkidder))
+
+
+## v5.4.0 (2018-11-09)
+
+#### :rocket: Enhancement
+* [#253](https://github.com/ember-cli/eslint-plugin-ember/pull/253) Add `avoid-using-needs` rule. ([@twokul](https://github.com/twokul))
+
+#### :bug: Bug Fix
+* [#314](https://github.com/ember-cli/eslint-plugin-ember/pull/314) Adding missing rules to index.js. ([@gmurphey](https://github.com/gmurphey))
+
+#### Committers: 2
+- Alex Navasardyan ([twokul](https://github.com/twokul))
+- Garrett Murphey ([gmurphey](https://github.com/gmurphey))
+
+
+## v5.3.0 (2018-11-08)
+
+#### :rocket: Enhancement
+* [#278](https://github.com/ember-cli/eslint-plugin-ember/pull/278) Adding `no-restricted-resolver-tests` general rule. ([@scalvert](https://github.com/scalvert))
+* [#272](https://github.com/ember-cli/eslint-plugin-ember/pull/272) Add new rule `no-ember-testing-in-module-scope`. ([@tmquinn](https://github.com/tmquinn))
+* [#261](https://github.com/ember-cli/eslint-plugin-ember/pull/261) Adding `no-test-file-importing` rule. ([@step2yeung](https://github.com/step2yeung))
+* [#256](https://github.com/ember-cli/eslint-plugin-ember/pull/256) Add `no-new-mixins` rule. ([@nlfurniss](https://github.com/nlfurniss))
+
+#### :bug: Bug Fix
+* [#299](https://github.com/ember-cli/eslint-plugin-ember/pull/299) Fix issue with `no-duplicate-dependent-keys` to avoid errors on non-string dependent keys. ([@initram](https://github.com/initram))
+* [#260](https://github.com/ember-cli/eslint-plugin-ember/pull/260) Updating `no-side-effects` rule to better detect sets inside of blocks. ([@gmurphey](https://github.com/gmurphey))
+* [#246](https://github.com/ember-cli/eslint-plugin-ember/pull/246) Updating `no-on-calls-in-components` to only fail components using on with lifecylcle hooks. ([@patience-tema-baron](https://github.com/patience-tema-baron))
+
+#### :memo: Documentation
+* [#276](https://github.com/ember-cli/eslint-plugin-ember/pull/276) Add reason for rule `no-on-calls-in-components`. ([@cbou](https://github.com/cbou))
+* [#277](https://github.com/ember-cli/eslint-plugin-ember/pull/277) docs: remove `get` from closure action example. ([@knownasilya](https://github.com/knownasilya))
+* [#266](https://github.com/ember-cli/eslint-plugin-ember/pull/266) Update `no-empty-attrs` description. ([@locks](https://github.com/locks))
+
+#### :house: Internal
+* [#280](https://github.com/ember-cli/eslint-plugin-ember/pull/280) Clean up a couple of test definitions to unblock update script. ([@tmquinn](https://github.com/tmquinn))
+
+#### Committers: 12
+- Garrett Murphey ([gmurphey](https://github.com/gmurphey))
+- Ilya Radchenko ([knownasilya](https://github.com/knownasilya))
+- Martin Midtgaard ([initram](https://github.com/initram))
+- Nathaniel Furniss ([nlfurniss](https://github.com/nlfurniss))
+- Patience Tema Baron ([patience-tema-baron](https://github.com/patience-tema-baron))
+- Quinn Hoyer ([tmquinn](https://github.com/tmquinn))
+- Ricardo Mendes ([locks](https://github.com/locks))
+- Stephen Yeung ([step2yeung](https://github.com/step2yeung))
+- Steve Calvert ([scalvert](https://github.com/scalvert))
+- Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
+- [dependabot[bot]](https://github.com/apps/dependabot)
+- charles bourasseau ([cbou](https://github.com/cbou))
+
+
+## v5.2.0 (2018-05-15)
+
+#### :rocket: Enhancement
+* [#142](https://github.com/ember-cli/eslint-plugin-ember/pull/142) Port code to ember-rfc176-data new format. ([@Serabe](https://github.com/Serabe))
+* [#245](https://github.com/ember-cli/eslint-plugin-ember/pull/245) [avoid-leaking-state-in-ember-objects] Expose default ignored properties. ([@Kerrick](https://github.com/Kerrick))
+
+#### :memo: Documentation
+* [#208](https://github.com/ember-cli/eslint-plugin-ember/pull/208) Add URL to rule documentation to the metadata. ([@Arcanemagus](https://github.com/Arcanemagus))
+
+#### :house: Internal
+* [#142](https://github.com/ember-cli/eslint-plugin-ember/pull/142) Port code to ember-rfc176-data new format. ([@Serabe](https://github.com/Serabe))
+
+#### Committers: 3
+- Kerrick Long ([Kerrick](https://github.com/Kerrick))
+- Landon Abney ([Arcanemagus](https://github.com/Arcanemagus))
+- Sergio Arbeo ([Serabe](https://github.com/Serabe))
+
+
+## v5.1.1 (2018-05-14)
+
+#### :bug: Bug Fix
+* [#229](https://github.com/ember-cli/eslint-plugin-ember/pull/229) Fix no-capital-letters-in-routes so it deals with MemberExpressions. ([@nlfurniss](https://github.com/nlfurniss))
+
+#### :memo: Documentation
+* [#241](https://github.com/ember-cli/eslint-plugin-ember/pull/241) Removes the no-jquery doc typo. ([@thebluejay](https://github.com/thebluejay))
+
+#### :house: Internal
+* [#254](https://github.com/ember-cli/eslint-plugin-ember/pull/254) Drop require-folder-tree dependency. ([@rwjblue](https://github.com/rwjblue))
+* [#242](https://github.com/ember-cli/eslint-plugin-ember/pull/242) Update `jest` to v21.2.1. ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 4
+- Nathaniel Furniss ([nlfurniss](https://github.com/nlfurniss))
+- Robert Jackson ([rwjblue](https://github.com/rwjblue))
+- Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
+- [thebluejay](https://github.com/thebluejay)
+
+
+## v5.1.0 (2018-03-11)
+
+#### :rocket: Enhancement
+* [#172](https://github.com/ember-cli/eslint-plugin-ember/pull/172) Add `--fix` support to `order-in-*` rules. ([@PrzemoRevolve](https://github.com/PrzemoRevolve))
+
+#### :bug: Bug Fix
+* [#233](https://github.com/ember-cli/eslint-plugin-ember/pull/233) Fix init order in controllers and routes. ([@ro0gr](https://github.com/ro0gr))
+* [#198](https://github.com/ember-cli/eslint-plugin-ember/pull/198) Add new scenarios for `require-super-in-init` rule. ([@clcuevas](https://github.com/clcuevas))
+* [#205](https://github.com/ember-cli/eslint-plugin-ember/pull/205) add willInsertElement component lifecycle hook. ([@hakubo](https://github.com/hakubo))
+
+#### Committers: 8
+- Claudia Cuevas ([clcuevas](https://github.com/clcuevas))
+- Jakub Olek ([hakubo](https://github.com/hakubo))
+- Jason Williams ([jaswilli](https://github.com/jaswilli))
+- Przemysław Nowak ([PrzemoRevolve](https://github.com/PrzemoRevolve))
+- Ricardo Mendes ([locks](https://github.com/locks))
+- Ruslan Grabovoy ([ro0gr](https://github.com/ro0gr))
+- Sylvain MINA ([sly7-7](https://github.com/sly7-7))
+- [verim1990](https://github.com/verim1990)
+
+
 ## v5.0.3 (2017-12-21)
 
 #### :bug: Bug Fix

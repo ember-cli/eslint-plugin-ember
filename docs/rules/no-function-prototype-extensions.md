@@ -2,13 +2,13 @@
 
 ### Rule name: `no-function-prototype-extensions`
 
-Use computed property syntax, observer syntax or module hooks instead of `.property()`, `.observe()` or `.on()` in Ember modules.
+Use computed property syntax, observer syntax or module hooks instead of `.property()`, `.observes()` or `.on()` in Ember modules.
 
 ```javascript
 export default Component.extend({
     // BAD
     abc: function() { /* custom logic */ }.property('xyz'),
-    def: function() { /* custom logic */ }.observe('xyz'),
+    def: function() { /* custom logic */ }.observes('xyz'),
     ghi: function() { /* custom logic */ }.on('didInsertElement'),
 
     // GOOD
