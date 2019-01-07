@@ -121,18 +121,30 @@ describe('isEmberCoreModule', () => {
     expect(emberUtils.isEmberCoreModule(node, 'route', filePath)).toBeTruthy();
   });
 
-  it('should exclude test files in the test directory', () => {
+  it('should exclude test files regardless of the directory', () => {
     const componentNode = parse('Ember.Object.extend()');
     const componentFilePath = 'tests/integration/components/path/to/some-component-test.js';
     expect(emberUtils.isEmberCoreModule(componentNode, 'component', componentFilePath)).toBeFalsy();
+
+    const componentNode2 = parse('Ember.Object.extend()');
+    const componentFilePath2 = '/components/path/to/some-component-test.js';
+    expect(emberUtils.isEmberCoreModule(componentNode2, 'component', componentFilePath2)).toBeFalsy();
 
     const controllerNode = parse('Ember.Object.extend()');
     const controllerFilePath = 'tests/unit/controllers/path/to/some-controller-test.js';
     expect(emberUtils.isEmberCoreModule(controllerNode, 'controller', controllerFilePath)).toBeFalsy();
 
+    const controllerNode2 = parse('Ember.Object.extend()');
+    const controllerFilePath2 = '/controllers/path/to/some-controller-test.js';
+    expect(emberUtils.isEmberCoreModule(controllerNode2, 'controller', controllerFilePath2)).toBeFalsy();
+
     const routeNode = parse('Ember.Object.extend()');
     const routeFilePath = 'tests/unit/routes/path/to/some-route-test.js';
     expect(emberUtils.isEmberCoreModule(routeNode, 'route', routeFilePath)).toBeFalsy();
+
+    const routeNode2 = parse('Ember.Object.extend()');
+    const routeFilePath2 = '/routes/path/to/some-route-test.js';
+    expect(emberUtils.isEmberCoreModule(routeNode2, 'route', routeFilePath2)).toBeFalsy();
   });
 });
 
@@ -142,13 +154,13 @@ describe('isEmberTest', () => {
     expect(emberUtils.isEmberTest(filePath)).toBeTruthy();
   });
 
-  it('should check if the current file is in the test directory', () => {
-    const filePath = 'tests/acceptance/some.js';
+  it('should check if the current file ends in test.js', () => {
+    const filePath = 'example-app/routes/path/to/how-to-test.js';
     expect(emberUtils.isEmberTest(filePath)).toBeTruthy();
   });
 
-  it('should not check if the current file ends in test.js', () => {
-    const filePath = 'example-app/routes/path/to/how-to-test.js';
+  it('should not check if the current file is in the test directory', () => {
+    const filePath = 'tests/acceptance/some.js';
     expect(emberUtils.isEmberTest(filePath)).toBeFalsy();
   });
 });
