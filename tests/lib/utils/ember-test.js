@@ -82,6 +82,20 @@ describe('isModuleByFilePath', () => {
   });
 });
 
+describe('isTestFile', () => {
+  it('detects test files', () => {
+    const fileName = 'some-test.js';
+    expect(emberUtils.isTestFile(fileName)).toBeTruthy();
+  });
+
+  it('does not detect other files', () => {
+    expect(emberUtils.isTestFile('some-component.js')).toBeFalsy();
+    expect(emberUtils.isTestFile('my-testing-component.js')).toBeFalsy();
+    expect(emberUtils.isTestFile('router.js')).toBeFalsy();
+    expect(emberUtils.isTestFile('my-test.html')).toBeFalsy();
+  });
+});
+
 describe('isEmberCoreModule', () => {
   it('should check if current file is a component', () => {
     const node = parse('CustomComponent.extend()');
