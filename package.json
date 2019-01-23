@@ -50,7 +50,7 @@
   },
   "homepage": "https://github.com/ember-cli/eslint-plugin-ember#readme",
   "devDependencies": {
-    "babel-eslint": "^9.0.0",
+    "babel-eslint": "^10.0.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-plugin-import": "^2.15.0",
