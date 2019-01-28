@@ -1,5 +1,40 @@
 # Changelog
 
+## v6.2.0 (2019-01-28)
+
+#### :rocket: Enhancement
+* [#375](https://github.com/ember-cli/eslint-plugin-ember/pull/375) no-test-and-then: slight optimization ([@bmish](https://github.com/bmish))
+* [#373](https://github.com/ember-cli/eslint-plugin-ember/pull/373) no-unnecessary-route-path-option: Add support for `--fix` ([@bmish](https://github.com/bmish))
+* [#370](https://github.com/ember-cli/eslint-plugin-ember/pull/370) Add `no-unnecessary-route-path-option` rule ([@bmish](https://github.com/bmish))
+* [#365](https://github.com/ember-cli/eslint-plugin-ember/pull/365) no-invalid-debug-function-arguments: Use dynamic error message ([@bmish](https://github.com/bmish))
+* [#364](https://github.com/ember-cli/eslint-plugin-ember/pull/364) assert-arg-order: Rename to `no-invalid-debug-function-arguments` and detect invalid usages of `deprecate` and `warn` too ([@bmish](https://github.com/bmish))
+* [#358](https://github.com/ember-cli/eslint-plugin-ember/pull/358) Add `assert-arg-order` rule ([@bmish](https://github.com/bmish))
+* [#359](https://github.com/ember-cli/eslint-plugin-ember/pull/359) Add `no-deeply-nested-dependent-keys-with-each` rule ([@bmish](https://github.com/bmish))
+* [#357](https://github.com/ember-cli/eslint-plugin-ember/pull/357) Add `no-test-and-then` rule ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#371](https://github.com/ember-cli/eslint-plugin-ember/pull/371) no-test-and-then: Run only on test files ([@bmish](https://github.com/bmish))
+* [#367](https://github.com/ember-cli/eslint-plugin-ember/pull/367) no-deeply-nested-dependent-keys-with-each: Fix false positives ([@bmish](https://github.com/bmish))
+* [#366](https://github.com/ember-cli/eslint-plugin-ember/pull/366) no-invalid-debug-function-arguments: Fix false positives ([@bmish](https://github.com/bmish))
+* [#362](https://github.com/ember-cli/eslint-plugin-ember/pull/362) assert-arg-order: Fix rule for `Ember.assert()` case ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#380](https://github.com/ember-cli/eslint-plugin-ember/pull/380) no-test-and-then: Add migration path docs ([@bmish](https://github.com/bmish))
+* [#368](https://github.com/ember-cli/eslint-plugin-ember/pull/368) no-test-and-then: Fix code sample in docs ([@bmish](https://github.com/bmish))
+* [#361](https://github.com/ember-cli/eslint-plugin-ember/pull/361) no-deeply-nested-dependent-keys-with-each: Fix docs typo ([@bmish](https://github.com/bmish))
+* [#360](https://github.com/ember-cli/eslint-plugin-ember/pull/360) Use more specific array types in util jsdoc comments ([@bmish](https://github.com/bmish))
+* [#355](https://github.com/ember-cli/eslint-plugin-ember/pull/355) avoid-leaking-state-in-ember-objects: Show usage example of `DEFAULT_IGNORED_PROPERTIES` ([@yoavfranco](https://github.com/yoavfranco))
+* [#354](https://github.com/ember-cli/eslint-plugin-ember/pull/354) avoid-needs-in-controllers: Add documentation ([@quajo](https://github.com/quajo))
+
+#### :house: Internal
+* [#363](https://github.com/ember-cli/eslint-plugin-ember/pull/363) no-deeply-nested-dependent-keys-with-each: Add more tests ([@bmish](https://github.com/bmish))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Selase Krakani ([@quajo](https://github.com/quajo))
+- Yoav M. Franco ([@yoavfranco](https://github.com/yoavfranco))
+
+
 ## v6.1.0 (2018-12-15)
 
 #### :rocket: Enhancement
