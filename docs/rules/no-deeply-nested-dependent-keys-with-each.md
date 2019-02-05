@@ -22,7 +22,7 @@ displayNames: computed('owners.@each.name', function() {
 }),
 
 owners: computed('todos.@each.owner', function() {
-  return this.todos.mapBy('todo', 'owner');
+  return this.todos.mapBy('owner');
 })
 ```
 
