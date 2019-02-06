@@ -2,7 +2,7 @@
 
 For performance / complexity reasons, Ember does not allow deeply-nested computed property dependent keys with `@each`. At runtime, it will show a warning about this:
 
-> WARNING: Dependent keys containing @each only work one level deep. You used the key "foo.@each.bar.baz" which is invalid. Please create an intermediary computed property.
+> WARNING: Dependent keys containing @each only work one level deep. You used the key `"foo.@each.bar.baz"` which is invalid. Please create an intermediary computed property.
 
 ## Rule Details
 
@@ -18,11 +18,11 @@ Examples of **correct** code for this rule:
 
 ```js
 displayNames: computed('owners.@each.name', function() {
-  return this.owners.mapBy(owners, 'name');
+  return this.owners.mapBy('name');
 }),
 
 owners: computed('todos.@each.owner', function() {
-  return this.todos.mapBy(todo, 'owner');
+  return this.todos.mapBy('owner');
 })
 ```
 
