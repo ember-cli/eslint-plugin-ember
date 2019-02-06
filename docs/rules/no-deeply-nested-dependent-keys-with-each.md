@@ -18,7 +18,7 @@ Examples of **correct** code for this rule:
 
 ```js
 displayNames: computed('owners.@each.name', function() {
-  return this.owners.mapBy('owner', 'name');
+  return this.owners.mapBy('name');
 }),
 
 owners: computed('todos.@each.owner', function() {
