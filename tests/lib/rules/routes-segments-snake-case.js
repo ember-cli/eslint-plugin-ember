@@ -31,6 +31,7 @@ eslintTester.run('routes-segments-snake-case', rule, {
     {
       code: 'this.route("tree", { path: ":treeId"});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Use snake case in dynamic segments of routes',
       }],
@@ -38,6 +39,7 @@ eslintTester.run('routes-segments-snake-case', rule, {
     {
       code: 'this.route("tree", { path: ":tree-id" });',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Use snake case in dynamic segments of routes',
       }],
@@ -45,6 +47,7 @@ eslintTester.run('routes-segments-snake-case', rule, {
     {
       code: 'this.route("tree", { path: "/test/:treeId"});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Use snake case in dynamic segments of routes',
       }],
@@ -52,6 +55,7 @@ eslintTester.run('routes-segments-snake-case', rule, {
     {
       code: 'this.route("tree", { path: "/test/treeId/:treeChildId"});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Use snake case in dynamic segments of routes',
       }],
@@ -59,6 +63,7 @@ eslintTester.run('routes-segments-snake-case', rule, {
     {
       code: 'this.route("tree", { path: "/test/tree-id/:tree-child-id"});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Use snake case in dynamic segments of routes',
       }],

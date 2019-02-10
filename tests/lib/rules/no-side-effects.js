@@ -46,6 +46,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'prop: computed("test", function() {this.set("testAmount", test.length); return "";})',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties',
       }],
@@ -53,6 +54,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'prop: computed("test", function() { this.setProperties("testAmount", test.length); return "";})',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties',
       }],
@@ -60,6 +62,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'prop: computed("test", function() {if (get(this, "testAmount")) { set(this, "testAmount", test.length); } return "";})',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties'
       }]
@@ -67,6 +70,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'prop: computed("test", function() {if (get(this, "testAmount")) { setProperties(this, "testAmount", test.length); } return "";})',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties'
       }]
@@ -74,6 +78,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'testAmount: computed("test.length", { get() { set(this, "testAmount", test.length); }, set() { set(this, "testAmount", test.length); }})',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties'
       }]
@@ -81,6 +86,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'testAmount: computed("test.length", { get() { setProperties(this, "testAmount", test.length); }, set() { setProperties(this, "testAmount", test.length); }})',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties'
       }]
@@ -88,6 +94,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'testAmount: computed("test.length", function() { const setSomething = () => { set(this, "testAmount", test.length); }; setSomething(); })',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties'
       }]
@@ -95,6 +102,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'testAmount: computed("test.length", function() { const setSomething = () => { setProperties(this, "testAmount", test.length); }; setSomething(); })',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties'
       }]
@@ -102,6 +110,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'let foo = computed("test", function() { Ember.set(this, "testAmount", test.length); return ""; })',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties'
       }]
@@ -109,6 +118,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'let foo = computed("test", function() { Ember.setProperties(this, "testAmount", test.length); return ""; })',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties'
       }]
@@ -116,6 +126,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'import Foo from "ember"; let foo = computed("test", function() { Foo.set(this, "testAmount", test.length); return ""; })',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties'
       }]
@@ -123,6 +134,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'import Foo from "ember"; let foo = computed("test", function() { Foo.setProperties(this, "testAmount", test.length); return ""; })',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties'
       }]
@@ -130,6 +142,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'import EmberFoo from "ember"; import Foo from "some-other-thing"; let foo = computed("test", function() { EmberFoo.set(this, "testAmount", test.length); return ""; });',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties'
       }]
@@ -137,6 +150,7 @@ eslintTester.run('no-side-effects', rule, {
     {
       code: 'import EmberFoo from "ember"; import Foo from "some-other-thing"; let foo = computed("test", function() { EmberFoo.setProperties(this, "testAmount", test.length); return ""; });',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t introduce side-effects in computed properties'
       }]

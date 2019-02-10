@@ -121,6 +121,7 @@ eslintTester.run('alias-model-in-controller', rule, {
     {
       code: 'export default Ember.Controller.extend({});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Alias your model',
       }],
@@ -128,6 +129,7 @@ eslintTester.run('alias-model-in-controller', rule, {
     {
       code: 'export default Ember.Controller.extend({resetPassword: service()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Alias your model',
       }],
@@ -135,6 +137,7 @@ eslintTester.run('alias-model-in-controller', rule, {
     {
       code: 'export default Ember.Controller.extend({resetPassword: inject.service()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Alias your model',
       }],
@@ -142,6 +145,7 @@ eslintTester.run('alias-model-in-controller', rule, {
     {
       code: 'export default Ember.Controller.extend({resetPassword: Ember.inject.service()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Alias your model',
       }],
@@ -149,6 +153,7 @@ eslintTester.run('alias-model-in-controller', rule, {
     {
       code: 'export default Ember.Controller.extend(TestMixin, {});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Alias your model',
       }],
@@ -156,6 +161,7 @@ eslintTester.run('alias-model-in-controller', rule, {
     {
       code: 'export default Ember.Controller.extend(TestMixin, TestMixin2, {});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Alias your model',
       }],
@@ -164,6 +170,7 @@ eslintTester.run('alias-model-in-controller', rule, {
       filename: 'example-app/controllers/path/to/some-feature.js',
       code: 'export default CustomController.extend({});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Alias your model',
       }],
@@ -172,6 +179,7 @@ eslintTester.run('alias-model-in-controller', rule, {
       filename: 'example-app/some-feature/controller.js',
       code: 'export default CustomController.extend({});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Alias your model',
       }],
@@ -180,6 +188,7 @@ eslintTester.run('alias-model-in-controller', rule, {
       filename: 'example-app/twisted-path/some-file.js',
       code: 'export default Controller.extend({});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Alias your model',
       }],

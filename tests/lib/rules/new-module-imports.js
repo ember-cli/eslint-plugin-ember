@@ -52,6 +52,7 @@ eslintTester.run('new-module-imports', rule, {
         export default Component.extend({});
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         { message: 'Use import EmberObject from \'@ember/object\'; instead of using Ember destructuring', line: 3 }
       ]
@@ -64,6 +65,7 @@ eslintTester.run('new-module-imports', rule, {
         export default Controller.extend({});
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         { message: 'Use import $ from \'jquery\'; instead of using Ember destructuring', line: 3 },
         { message: 'Use import Controller from \'@ember/controller\'; instead of using Ember destructuring', line: 3 }
@@ -78,6 +80,7 @@ eslintTester.run('new-module-imports', rule, {
         export default Component.extend({});
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         { message: 'Use import Component from \'@ember/component\'; instead of using Ember destructuring', line: 3 },
         { message: 'Use import { htmlSafe } from \'@ember/template\'; instead of using Ember destructuring', line: 3 }
@@ -93,6 +96,7 @@ eslintTester.run('new-module-imports', rule, {
         });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         { message: 'Use import { inject as controller } from \'@ember/controller\'; instead of using Ember destructuring', line: 3 },
         { message: 'Use import { inject as service } from \'@ember/service\'; instead of using Ember destructuring', line: 3 },
@@ -109,6 +113,7 @@ eslintTester.run('new-module-imports', rule, {
         export default Component.extend({});
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         { message: 'Use import { alias } from \'@ember/object/computed\'; instead of using Ember destructuring', line: 5 },
         { message: 'Use import { uniq } from \'@ember/object/computed\'; instead of using Ember destructuring', line: 5 }
@@ -117,6 +122,7 @@ eslintTester.run('new-module-imports', rule, {
     {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       code: 'export default Ember.Service;',
+      output: null,
       errors: [
         { message: 'Use import Service from \'@ember/service\'; instead of using Ember.Service', line: 1 }
       ],
@@ -124,42 +130,49 @@ eslintTester.run('new-module-imports', rule, {
     {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       code: 'export default Ember.Service.extend({});',
+      output: null,
       errors: [
         { message: 'Use import Service from \'@ember/service\'; instead of using Ember.Service', line: 1 }
       ],
     },
     {
       code: 'Ember.computed();',
+      output: null,
       errors: [
         { message: 'Use import { computed } from \'@ember/object\'; instead of using Ember.computed', line: 1 }
       ],
     },
     {
       code: 'Ember.computed.not();',
+      output: null,
       errors: [
         { message: 'Use import { not } from \'@ember/object/computed\'; instead of using Ember.computed.not', line: 1 }
       ],
     },
     {
       code: 'Ember.inject.service(\'foo\');',
+      output: null,
       errors: [
         { message: 'Use import { inject } from \'@ember/service\'; instead of using Ember.inject.service', line: 1 }
       ],
     },
     {
       code: 'var Router = Ember.Router.extend({});',
+      output: null,
       errors: [
         { message: 'Use import EmberRouter from \'@ember/routing/router\'; instead of using Ember.Router', line: 1 }
       ],
     },
     {
       code: 'Ember.$(\'.foo\')',
+      output: null,
       errors: [
         { message: 'Use import $ from \'jquery\'; instead of using Ember.$', line: 1 }
       ],
     },
     {
       code: 'new Ember.RSVP.Promise();',
+      output: null,
       errors: [
         { message: 'Use import { Promise } from \'rsvp\'; instead of using Ember.RSVP.Promise', line: 1 }
       ],

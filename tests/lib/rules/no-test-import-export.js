@@ -35,6 +35,7 @@ ruleTester.run('no-test-file-importing', rule, {
 
         module('Acceptance | module', setupModule());
       `,
+      output: null,
       errors: [
         {
           message: NO_IMPORT_MESSAGE
@@ -51,6 +52,7 @@ ruleTester.run('no-test-file-importing', rule, {
 
         module('Acceptance | module', beforeEachSetup());
       `,
+      output: null,
       errors: [
         {
           message: NO_IMPORT_MESSAGE
@@ -64,6 +66,7 @@ ruleTester.run('no-test-file-importing', rule, {
 
         module('Acceptance | module', testModule());
       `,
+      output: null,
       errors: [
         {
           message: NO_IMPORT_MESSAGE
@@ -75,6 +78,7 @@ ruleTester.run('no-test-file-importing', rule, {
       code: `
         export function beforeEachSetup(){};
       `,
+      output: null,
       errors: [
         {
           message: NO_EXPORT_MESSAGE
@@ -88,6 +92,7 @@ ruleTester.run('no-test-file-importing', rule, {
 
         export default {beforeEachSetup};
       `,
+      output: null,
       errors: [
         {
           message: NO_EXPORT_MESSAGE

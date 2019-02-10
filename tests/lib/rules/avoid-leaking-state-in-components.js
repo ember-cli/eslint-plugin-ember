@@ -49,6 +49,7 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
     {
       code: 'export default Component.extend({someProp: []});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Avoid using arrays as default properties',
       }],
@@ -56,6 +57,7 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
     {
       code: 'export default Component.extend({someProp: new Ember.A()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Avoid using arrays as default properties',
       }],
@@ -63,6 +65,7 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
     {
       code: 'export default Component.extend({someProp: new A()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Avoid using arrays as default properties',
       }],
@@ -70,6 +73,7 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
     {
       code: 'export default Component.extend({someProp: {}});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Avoid using objects as default properties',
       }],
@@ -77,6 +81,7 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
     {
       code: 'export default Component.extend({someProp: new Ember.Object()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Avoid using objects as default properties',
       }],
@@ -84,6 +89,7 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
     {
       code: 'export default Component.extend({someProp: new Object()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Avoid using objects as default properties',
       }],
@@ -92,6 +98,7 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
       filename: 'example-app/components/some-component.js',
       code: 'export default CustomComponent.extend({someProp: []});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Avoid using arrays as default properties',
       }],
@@ -100,6 +107,7 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
       filename: 'example-app/components/some-component/component.js',
       code: 'export default CustomComponent.extend({someProp: new A()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Avoid using arrays as default properties',
       }],
@@ -108,6 +116,7 @@ eslintTester.run('avoid-leaking-state-in-components', rule, {
       filename: 'example-app/twisted-path/some-file.js',
       code: 'export default Component.extend({someProp: {}});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Avoid using objects as default properties',
       }],

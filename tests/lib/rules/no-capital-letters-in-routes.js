@@ -29,16 +29,19 @@ eslintTester.run('no-capital-letters-in-routes', rule, {
 
   invalid: [{
     code: 'this.route("Sign-in");',
+    output: null,
     errors: [{
       message: 'Unexpected capital letter in route\'s name',
     }]
   }, {
     code: 'this.route("hOme");',
+    output: null,
     errors: [{
       message: 'Unexpected capital letter in route\'s name',
     }]
   }, {
     code: 'this.route("DASH_TAB.ACTIVITY");',
+    output: null,
     errors: [{
       message: 'Unexpected capital letter in route\'s name',
     }]

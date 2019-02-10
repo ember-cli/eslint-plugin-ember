@@ -39,24 +39,28 @@ eslintTester.run('avoid-using-needs-in-controllers', rule, {
   invalid: [
     {
       code: 'export default Controller.extend({ needs: [] });',
+      output: null,
       errors: [{
         message: '`needs` API has been deprecated, `Ember.inject.controller` should be used instead',
       }],
     },
     {
       code: 'Controller.reopenClass({ needs: [] });',
+      output: null,
       errors: [{
         message: '`needs` API has been deprecated, `Ember.inject.controller` should be used instead',
       }],
     },
     {
       code: 'Controller.reopen({ needs: [] });',
+      output: null,
       errors: [{
         message: '`needs` API has been deprecated, `Ember.inject.controller` should be used instead',
       }],
     },
     {
       code: "export default Controller['extend']({ needs: [] });",
+      output: null,
       errors: [{
         message: '`needs` API has been deprecated, `Ember.inject.controller` should be used instead',
       }],
@@ -64,6 +68,7 @@ eslintTester.run('avoid-using-needs-in-controllers', rule, {
     {
       filename: 'example-app/controllers/some-controller.js',
       code: 'export default FooController.extend({ needs: [] });',
+      output: null,
       errors: [{
         message: '`needs` API has been deprecated, `Ember.inject.controller` should be used instead',
       }],
@@ -71,6 +76,7 @@ eslintTester.run('avoid-using-needs-in-controllers', rule, {
     {
       filename: 'example-app/controllers/some-controller.js',
       code: 'FooController.reopenClass({ needs: [] });',
+      output: null,
       errors: [{
         message: '`needs` API has been deprecated, `Ember.inject.controller` should be used instead',
       }],
@@ -78,6 +84,7 @@ eslintTester.run('avoid-using-needs-in-controllers', rule, {
     {
       filename: 'example-app/controllers/some-controller.js',
       code: 'FooController.reopen({ needs: [] });',
+      output: null,
       errors: [{
         message: '`needs` API has been deprecated, `Ember.inject.controller` should be used instead',
       }],
@@ -85,6 +92,7 @@ eslintTester.run('avoid-using-needs-in-controllers', rule, {
     {
       filename: 'example-app/controllers/some-controller.js',
       code: "export default FooController['extend']({ needs: [] });",
+      output: null,
       errors: [{
         message: '`needs` API has been deprecated, `Ember.inject.controller` should be used instead',
       }],

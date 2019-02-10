@@ -41,6 +41,7 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message
       }]
@@ -55,6 +56,7 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message
       }]
@@ -69,6 +71,7 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message
       }]
@@ -84,6 +87,7 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message
       }]
@@ -97,6 +101,7 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message
       }]
@@ -110,6 +115,7 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message
       }]
@@ -124,6 +130,7 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message
       }]
@@ -138,6 +145,7 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message
       }]
@@ -152,6 +160,7 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message
       }]
@@ -165,6 +174,7 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message
       }]
@@ -183,6 +193,7 @@ eslintTester.run('no-jquery', rule, {
           assert.equal(this.$('.some-component').text().trim(), 'hello world');
         })`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message
       }]

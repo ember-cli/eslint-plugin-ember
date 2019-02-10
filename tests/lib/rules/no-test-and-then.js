@@ -43,6 +43,7 @@ ruleTester.run('no-test-and-then', rule, {
     {
       filename: TEST_FILE_NAME,
       code: 'andThen(() => { assert.ok(myBool); });',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
     }
   ]

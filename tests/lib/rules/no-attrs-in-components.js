@@ -33,6 +33,7 @@ ruleTester.run('no-attrs-in-components', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Do not use this.attrs',
       }]

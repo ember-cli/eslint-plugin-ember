@@ -201,6 +201,7 @@ eslintTester.run('require-super-in-init', rule, {
         init() {},
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -210,6 +211,7 @@ eslintTester.run('require-super-in-init', rule, {
         },
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -220,6 +222,7 @@ eslintTester.run('require-super-in-init', rule, {
         },
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -227,6 +230,7 @@ eslintTester.run('require-super-in-init', rule, {
         init() {},
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -236,6 +240,7 @@ eslintTester.run('require-super-in-init', rule, {
         },
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -246,6 +251,7 @@ eslintTester.run('require-super-in-init', rule, {
         },
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -253,6 +259,7 @@ eslintTester.run('require-super-in-init', rule, {
         init() {},
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -262,6 +269,7 @@ eslintTester.run('require-super-in-init', rule, {
         },
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -272,6 +280,7 @@ eslintTester.run('require-super-in-init', rule, {
         },
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -279,6 +288,7 @@ eslintTester.run('require-super-in-init', rule, {
         init() {},
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -288,6 +298,7 @@ eslintTester.run('require-super-in-init', rule, {
         },
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -298,6 +309,7 @@ eslintTester.run('require-super-in-init', rule, {
         },
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -305,6 +317,7 @@ eslintTester.run('require-super-in-init', rule, {
         init() {},
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -314,6 +327,7 @@ eslintTester.run('require-super-in-init', rule, {
         },
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -324,6 +338,7 @@ eslintTester.run('require-super-in-init', rule, {
         },
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -333,6 +348,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -342,6 +358,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -360,6 +377,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -369,6 +387,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -378,6 +397,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -387,6 +407,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -396,6 +417,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -405,6 +427,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -414,6 +437,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -423,6 +447,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -432,6 +457,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -441,6 +467,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -450,6 +477,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -459,6 +487,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -468,6 +497,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -477,6 +507,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -486,6 +517,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -495,6 +527,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     },
     {
@@ -504,6 +537,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }]
     }
   ],

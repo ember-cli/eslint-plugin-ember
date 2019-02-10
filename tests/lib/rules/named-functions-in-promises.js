@@ -69,18 +69,21 @@ eslintTester.run('named-functions-in-promises', rule, {
     {
       code: 'user.save().then(() => {return user.reload();});',
       parserOptions: { ecmaVersion: 6 },
+      output: null,
       errors: [{
         message: 'Use named functions defined on objects to handle promises',
       }],
     }, {
       code: 'user.save().catch(() => {return error.handle();});',
       parserOptions: { ecmaVersion: 6 },
+      output: null,
       errors: [{
         message: 'Use named functions defined on objects to handle promises',
       }],
     }, {
       code: 'user.save().finally(() => {return finallyDo();});',
       parserOptions: { ecmaVersion: 6 },
+      output: null,
       errors: [{
         message: 'Use named functions defined on objects to handle promises',
       }],
@@ -90,6 +93,7 @@ eslintTester.run('named-functions-in-promises', rule, {
       options: [{
         allowSimpleArrowFunction: true,
       }],
+      output: null,
       errors: [{
         message: 'Use named functions defined on objects to handle promises',
       }],
@@ -99,6 +103,7 @@ eslintTester.run('named-functions-in-promises', rule, {
       options: [{
         allowSimpleArrowFunction: true,
       }],
+      output: null,
       errors: [{
         message: 'Use named functions defined on objects to handle promises',
       }],
@@ -108,30 +113,35 @@ eslintTester.run('named-functions-in-promises', rule, {
       options: [{
         allowSimpleArrowFunction: true,
       }],
+      output: null,
       errors: [{
         message: 'Use named functions defined on objects to handle promises',
       }],
     }, {
       code: 'user.save().then(() => this._reloadUser(user));',
       parserOptions: { ecmaVersion: 6 },
+      output: null,
       errors: [{
         message: 'Use named functions defined on objects to handle promises',
       }],
     }, {
       code: 'user.save().catch(err => this._handleError(err));',
       parserOptions: { ecmaVersion: 6 },
+      output: null,
       errors: [{
         message: 'Use named functions defined on objects to handle promises',
       }],
     }, {
       code: 'user.save().finally(() => this._finallyDo());',
       parserOptions: { ecmaVersion: 6 },
+      output: null,
       errors: [{
         message: 'Use named functions defined on objects to handle promises',
       }],
     }, {
       code: 'user.save().then(() => user.reload());',
       parserOptions: { ecmaVersion: 6 },
+      output: null,
       errors: [{
         message: 'Use named functions defined on objects to handle promises',
       }],
@@ -141,6 +151,7 @@ eslintTester.run('named-functions-in-promises', rule, {
       options: [{
         allowSimpleArrowFunction: true,
       }],
+      output: null,
       errors: [{
         message: 'Use named functions defined on objects to handle promises',
       }],

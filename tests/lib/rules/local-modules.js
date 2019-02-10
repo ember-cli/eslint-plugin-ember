@@ -41,6 +41,7 @@ eslintTester.run('local-modules', rule, {
     {
       code: 'export default DS.Model.extend({})',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         {
           message: 'Create local version of DS.Model',
@@ -50,6 +51,7 @@ eslintTester.run('local-modules', rule, {
     {
       code: 'export default Ember.Route.extend({});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         {
           message: 'Create local version of Ember.Route',
@@ -59,6 +61,7 @@ eslintTester.run('local-modules', rule, {
     {
       code: 'title: DS.attr("string")',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         {
           message: 'Create local version of DS.attr',
@@ -68,6 +71,7 @@ eslintTester.run('local-modules', rule, {
     {
       code: 'title: Ember.computed.alias("test")',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         {
           message: 'Create local version of Ember.computed',

@@ -32,6 +32,7 @@ eslintTester.run('no-new-mixins', rule, {
 
         export default Ember.Mixin.create({});
       `,
+      output: null,
       errors: [{
         message: MESSAGE,
       }],
@@ -42,6 +43,7 @@ eslintTester.run('no-new-mixins', rule, {
 
         export default Mixin.create({});
       `,
+      output: null,
       errors: [{
         message: MESSAGE,
       }],

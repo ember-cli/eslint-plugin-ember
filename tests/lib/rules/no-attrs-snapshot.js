@@ -63,6 +63,7 @@ eslintTester.run('no-attrs-snapshot', rule, {
           }
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message
       }]
@@ -84,6 +85,7 @@ eslintTester.run('no-attrs-snapshot', rule, {
           }
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message
       }]
