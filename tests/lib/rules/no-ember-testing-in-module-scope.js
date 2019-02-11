@@ -55,6 +55,7 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
           }
         });
       `,
+      output: null,
       errors: [{ message: messages[1] }]
     },
     {
@@ -65,6 +66,7 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
           isTesting: Ember.testing
         });
       `,
+      output: null,
       errors: [{ message: messages[0] }]
     },
     {
@@ -73,10 +75,12 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
 
         const testDelay = FooEmber.testing ? 0 : 400
       `,
+      output: null,
       errors: [{ message: messages[0] }]
     },
     {
       code: 'const IS_TESTING = Ember.testing;',
+      output: null,
       errors: [{ message: messages[1] }, { message: messages[0] }]
     },
     {
@@ -89,6 +93,7 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
 
         const { testing } = FooEmber;
       `,
+      output: null,
       errors: [{ message: messages[2] }]
     }
   ]

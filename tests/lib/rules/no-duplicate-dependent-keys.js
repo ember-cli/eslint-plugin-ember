@@ -18,8 +18,8 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
   valid: [
     {
       code: `
-      { 
-        test: computed.match("email", /^.+@.+/) 
+      {
+        test: computed.match("email", /^.+@.+/)
       }
       `,
       parserOptions,
@@ -112,6 +112,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       }
       `,
       parserOptions,
+      output: null,
       errors: [{
         message: rule.meta.message,
       }]
@@ -123,6 +124,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       }
       `,
       parserOptions,
+      output: null,
       errors: [{
         message: rule.meta.message,
       }]
@@ -134,6 +136,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       }
       `,
       parserOptions,
+      output: null,
       errors: [{
         message: rule.meta.message,
       }]
@@ -145,6 +148,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       }
       `,
       parserOptions,
+      output: null,
       errors: [{
         message: rule.meta.message,
       }]
@@ -156,6 +160,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       }
       `,
       parserOptions,
+      output: null,
       errors: [{
         message: rule.meta.message,
       }]
@@ -167,6 +172,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       }
       `,
       parserOptions,
+      output: null,
       errors: [{
         message: rule.meta.message,
       }]

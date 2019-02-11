@@ -81,6 +81,7 @@ eslintTester.run('no-on-calls-in-components', rule, {
         test: on("didInsertElement", function () {})
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -91,6 +92,7 @@ eslintTester.run('no-on-calls-in-components', rule, {
         someComputedProperty: computed.bool(true)
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }],
     },
     {
@@ -100,12 +102,14 @@ eslintTester.run('no-on-calls-in-components', rule, {
         anotherTest: Ember.on("willDestroyElement", function () {})
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{ message, line: 2 }, { message, line: 4 }],
     },
     {
       filename: 'example-app/components/some-component/component.js',
       code: 'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t use .on() for component lifecycle events.',
       }],
@@ -114,6 +118,7 @@ eslintTester.run('no-on-calls-in-components', rule, {
       filename: 'example-app/components/some-component.js',
       code: 'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t use .on() for component lifecycle events.',
       }],
@@ -122,6 +127,7 @@ eslintTester.run('no-on-calls-in-components', rule, {
       filename: 'example-app/twised-path/some-file.js',
       code: 'export default Component.extend({test: on("didInsertElement", function () {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t use .on() for component lifecycle events.',
       }],

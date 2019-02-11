@@ -21,6 +21,7 @@ eslintTester.run('jquery-ember-run', rule, {
     {
       code: 'Ember.$("#something-rendered-by-jquery-plugin").on("click", () => {this._handlerActionFromController();});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t use jQuery without Ember Run Loop',
       }],

@@ -25,6 +25,7 @@ eslintTester.run('closure-actions', rule, {
     {
       code: 'export default Component.extend({actions: {pushLever() {this.sendAction("detonate");}}});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Use closure actions, unless you need bubbling',
       }],

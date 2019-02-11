@@ -91,6 +91,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               moduleFor('service:session');
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getSingleStringArgumentMessage('moduleFor')
@@ -105,6 +106,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               });
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoUnitTrueMessage('moduleFor')
@@ -119,6 +121,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               });
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoNeedsMessage('moduleFor')
@@ -131,6 +134,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               moduleFor('service:session', arg2, {});
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoPOJOWithoutIntegrationTrueMessage('moduleFor')
@@ -143,6 +147,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               moduleForComponent('display-page');
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getSingleStringArgumentMessage('moduleForComponent')
@@ -157,6 +162,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               });
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoUnitTrueMessage('moduleForComponent')
@@ -171,6 +177,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               });
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoNeedsMessage('moduleForComponent')
@@ -183,6 +190,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               moduleForComponent('display-page', arg2, {});
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoPOJOWithoutIntegrationTrueMessage('moduleForComponent')
@@ -195,6 +203,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               moduleForModel('post');
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getSingleStringArgumentMessage('moduleForModel')
@@ -209,6 +218,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               });
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoUnitTrueMessage('moduleForModel')
@@ -223,6 +233,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               });
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoNeedsMessage('moduleForModel')
@@ -235,6 +246,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               moduleForModel('post', arg2, {});
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoPOJOWithoutIntegrationTrueMessage('moduleForModel')
@@ -247,6 +259,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               setupTest('service:session');
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getSingleStringArgumentMessage('setupTest')
@@ -261,6 +274,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               });
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoUnitTrueMessage('setupTest')
@@ -275,6 +289,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               });
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoNeedsMessage('setupTest')
@@ -287,6 +302,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               setupTest('service:session', arg2, {});
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoPOJOWithoutIntegrationTrueMessage('setupTest')
@@ -299,6 +315,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               setupComponentTest('display-page');
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getSingleStringArgumentMessage('setupComponentTest')
@@ -313,6 +330,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               });
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoUnitTrueMessage('setupComponentTest')
@@ -327,6 +345,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               });
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoNeedsMessage('setupComponentTest')
@@ -339,6 +358,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               setupComponentTest('display-page', arg2, {});
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoPOJOWithoutIntegrationTrueMessage('setupComponentTest')
@@ -351,6 +371,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               setupModelTest('post');
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getSingleStringArgumentMessage('setupModelTest')
@@ -365,6 +386,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               });
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoUnitTrueMessage('setupModelTest')
@@ -379,6 +401,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               });
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoNeedsMessage('setupModelTest')
@@ -391,6 +414,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
               setupModelTest('post', arg2, {});
             `,
       parserOptions,
+      output: null,
       errors: [
         {
           message: messages.getNoPOJOWithoutIntegrationTrueMessage('setupModelTest')

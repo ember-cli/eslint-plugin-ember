@@ -77,6 +77,7 @@ eslintTester.run('no-function-prototype-extensions', rule, {
     {
       code: 'export default Controller.extend({test: function() {}.property("abc")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t use Ember\'s function prototype extensions',
       }],
@@ -84,6 +85,7 @@ eslintTester.run('no-function-prototype-extensions', rule, {
     {
       code: 'export default Controller.extend({test: function() {}.observes("abc")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t use Ember\'s function prototype extensions',
       }],
@@ -91,6 +93,7 @@ eslintTester.run('no-function-prototype-extensions', rule, {
     {
       code: 'export default Controller.extend({test: function() {}.on("init")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [{
         message: 'Don\'t use Ember\'s function prototype extensions',
       }],

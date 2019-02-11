@@ -73,30 +73,37 @@ const VALID_USAGES = [
 const INVALID_USAGES = flatten(DEBUG_FUNCTIONS.map(debugFunction => [
   {
     code: `${debugFunction}(true, 'My description.');`,
+    output: null,
     errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   },
   {
     code: `Ember.${debugFunction}(true, 'My description.');`,
+    output: null,
     errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   },
   {
     code: `${debugFunction}(true, 'My description.', { id: 'some-id' });`,
+    output: null,
     errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   },
   {
     code: `Ember.${debugFunction}(true, 'My description.', { id: 'some-id' });`,
+    output: null,
     errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   },
   {
     code: `${debugFunction}(true, \`My \${123} description.\`);`,
+    output: null,
     errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   },
   {
     code: `const CONDITION = true; ${debugFunction}(CONDITION, 'My description.');`,
+    output: null,
     errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   },
   {
     code: `const CONDITION = true; ${debugFunction}(CONDITION, \`My \${123} description.\`);`,
+    output: null,
     errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }]
   }
 ]));

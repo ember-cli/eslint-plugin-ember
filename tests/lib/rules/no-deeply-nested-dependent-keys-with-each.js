@@ -41,34 +41,42 @@ ruleTester.run('no-deeply-nested-dependent-keys-with-each', rule, {
   invalid: [
     {
       code: "Ember.computed('foo.@each.bar.baz', function() {})",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
     },
     {
       code: "Ember.computed('foo.@each.bar.baz', function() {}).readOnly()",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
     },
     {
       code: "Ember.computed('foo.@each.bar.[]', function() {})",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
     },
     {
       code: "Ember.computed('foo.@each.bar.@each.baz', function() {})",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
     },
     {
       code: "computed('foo.@each.bar.baz', function() {})",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
     },
     {
       code: "computed('foo.@each.bar.baz', function() {}).readOnly()",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
     },
     {
       code: "computed('foo.@each.bar.[]', function() {})",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
     },
     {
       code: "computed('foo.@each.bar.@each.baz', function() {})",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
     }
   ]

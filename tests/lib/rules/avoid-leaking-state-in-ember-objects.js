@@ -127,36 +127,42 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
   invalid: [
     {
       code: 'export default Foo.extend({someProp: []});',
+      output: null,
       errors: [{
         message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
     {
       code: 'export default Foo.extend({someProp: new Ember.A()});',
+      output: null,
       errors: [{
         message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
     {
       code: 'export default Foo.extend({someProp: new A()});',
+      output: null,
       errors: [{
         message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
     {
       code: 'export default Foo.extend({someProp: {}});',
+      output: null,
       errors: [{
         message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
     {
       code: 'export default Foo.extend({someProp: new Ember.Object()});',
+      output: null,
       errors: [{
         message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
     {
       code: 'export default Foo.extend({someProp: new Object()});',
+      output: null,
       errors: [{
         message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
@@ -164,24 +170,28 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
 
     {
       code: 'export default Foo.extend(SomeMixin, { derp: [] });',
+      output: null,
       errors: [{
         message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
     {
       code: 'export default Foo.extend({ badThing: new Set() });',
+      output: null,
       errors: [{
         message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
     {
       code: "export default Foo['extend']({ otherThing: {} });",
+      output: null,
       errors: [{
         message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],
     },
     {
       code: 'export default Foo.reopen({ otherThing: {} });',
+      output: null,
       errors: [{
         message: 'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
       }],

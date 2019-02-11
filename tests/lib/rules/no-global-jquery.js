@@ -282,7 +282,7 @@ ruleTester.run('no-global-jquery', rule, {
       code: `
         import $ from 'jquery';
         import Ember from 'ember';
-        
+
         export default Ember.Component({
           actions: {
             valid() {
@@ -302,6 +302,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      output: null,
       errors: [{
         message: MESSAGE
       }]
@@ -316,6 +317,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      output: null,
       errors: [{
         message: MESSAGE
       }]
@@ -328,6 +330,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      output: null,
       errors: [{
         message: MESSAGE
       }]
@@ -342,6 +345,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      output: null,
       errors: [{
         message: MESSAGE
       }]
@@ -360,6 +364,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      output: null,
       errors: [{
         message: MESSAGE
       }]
@@ -378,6 +383,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      output: null,
       errors: [{
         message: MESSAGE
       }]
