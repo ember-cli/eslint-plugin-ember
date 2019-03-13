@@ -13,12 +13,14 @@ export default Controller.extend({
 });
 ```
 
+### GOOD
 ```hbs
-{{! GOOD }}
+
 {{pretty-component boom=(action 'detonate')}}
 ```
 
 ```javascript
+// pretty-component.js
 export default Component.extend({
   actions: {
     pushLever() {
@@ -28,11 +30,13 @@ export default Component.extend({
 })
 ```
 
+### BAD
 ```hbs
-{{! BAD }}
 {{awful-component detonate='detonate'}}
 ```
+
 ```javascript
+// awful-component.js
 export default Component.extend({
   actions: {
     pushLever() {
