@@ -58,7 +58,7 @@
     "lerna-changelog": "^0.8.2"
   },
   "dependencies": {
-    "ember-rfc176-data": "^0.3.7",
+    "ember-rfc176-data": "^0.3.8",
     "snake-case": "^2.1.0"
   },
   "changelog": {
