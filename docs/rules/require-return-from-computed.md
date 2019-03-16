@@ -1,6 +1,6 @@
 ## Always return a value from a computed property function
 
-### Rule name: `return-from-computed`
+### Rule name: `require-return-from-computed`
 
 When using computed properties always return a value.
 
