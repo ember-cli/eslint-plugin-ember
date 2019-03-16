@@ -254,6 +254,12 @@ describe('isInjectedServiceProp', () => {
 
     node = parse('inject()');
     expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+
+    node = parse('otherFunction()');
+    expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+
+    node = parse('service.otherFunction()');
+    expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
   });
 });
 
