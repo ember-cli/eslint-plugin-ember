@@ -30,4 +30,5 @@ this.route('blog-posts', { path: '/blog' });
 
 * [no-capital-letters-in-routes](no-capital-letters-in-routes.md)
 * [no-unnecessary-index-route](no-unnecessary-index-route.md)
+* [route-path-style](route-path-style.md)
 * [routes-segments-snake-case](routes-segments-snake-case.md)
