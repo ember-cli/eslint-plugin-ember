@@ -1,5 +1,26 @@
 # Changelog
 
+## v6.3.0 (2019-03-19)
+
+#### :rocket: Enhancement
+* [#369](https://github.com/ember-cli/eslint-plugin-ember/pull/369) Add new 'route-path-style' rule ([@bmish](https://github.com/bmish))
+* [#372](https://github.com/ember-cli/eslint-plugin-ember/pull/372) Add new 'no-unnecessary-index-route'  rule ([@bmish](https://github.com/bmish))
+* [#262](https://github.com/ember-cli/eslint-plugin-ember/pull/262) Add new 'require-return-from-computed' rule ([@gmurphey](https://github.com/gmurphey))
+* [#378](https://github.com/ember-cli/eslint-plugin-ember/pull/378) Add new `no-unnecessary-service-injection-argument` rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#395](https://github.com/ember-cli/eslint-plugin-ember/pull/395) docs: improve `closure-action` rule examples ([@Caltor](https://github.com/Caltor))
+* [#383](https://github.com/ember-cli/eslint-plugin-ember/pull/383) no-deeply-nested-dependent-keys-with-each: Fix documentation examples ([@Alonski](https://github.com/Alonski))
+
+#### :house: Internal
+* [#386](https://github.com/ember-cli/eslint-plugin-ember/pull/386) test: add null output assertions for lint rules / test cases with no autofixer. ([@bmish](https://github.com/bmish))
+
+#### Committers: 4
+- Alon Bukai ([@Alonski](https://github.com/Alonski))
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Garrett Murphey ([@gmurphey](https://github.com/gmurphey))
+- [@Caltor](https://github.com/Caltor)
+
 ## v6.2.0 (2019-01-28)
 
 #### :rocket: Enhancement
