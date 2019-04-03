@@ -54,7 +54,7 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "jest": "^24.6.0",
+    "jest": "^24.7.0",
     "lerna-changelog": "^0.8.2"
   },
   "dependencies": {
