@@ -42,3 +42,7 @@ const foo = this.get('some.nested.property'); // Allowed because of nested path.
 * [Ember ES5 Getter RFC](https://github.com/emberjs/rfcs/blob/master/text/0281-es5-getters.md)
 * [es5-getter-ember-codemod](https://github.com/rondale-sc/es5-getter-ember-codemod)
 * [More context](https://github.com/emberjs/ember.js/issues/16148) about the proxy object exception to this rule
+
+## Related Rules
+
+* [no-get-properties](no-get-properties.md)
