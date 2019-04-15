@@ -11,20 +11,15 @@ This rule takes a single string option
 
 String option:
 
-* `"never"` (default) getters are *never allowed* in computed properties
+* `"always-with-setter"` (default) getters are *required* when computed property has a setter
 * `"always"` getters are *required* in computed properties
+* `"never"`  getters are *never allowed* in computed properties
 
-### never
+
+### always-with-setter
 
 ```javascript
-/// GOOD
-Ember.Object.extend({
-    fullName: computed('firstName', 'lastName', function() {
-        //...
-    })
-});
-
-// BAD
+/// BAD
 Ember.Object.extend({
     fullName: computed('firstName', 'lastName', {
         get() {
@@ -32,7 +27,27 @@ Ember.Object.extend({
         }
     })
 });
+
+// GOOD
+Ember.Object.extend({
+    fullName: computed('firstName', 'lastName', function() {
+        //...
+    })
+});
+
+// GOOD
+Ember.Object.extend({
+    fullName: computed('firstName', 'lastName', {
+        set() {
+            //...
+        },
+        get() {
+            //...
+        }
+    })
+});
 ```
+
 
 ### always
 
@@ -54,4 +69,34 @@ Ember.Object.extend({
 });
 ```
 
+### never
 
+```javascript
+/// GOOD
+Ember.Object.extend({
+    fullName: computed('firstName', 'lastName', function() {
+        //...
+    })
+});
+
+// BAD
+Ember.Object.extend({
+    fullName: computed('firstName', 'lastName', {
+        get() {
+            //...
+        }
+    })
+});
+
+// BAD
+Ember.Object.extend({
+    fullName: computed('firstName', 'lastName', {
+        get() {
+            //...
+        },
+        set() {
+            //...
+        }
+    })
+});
+```

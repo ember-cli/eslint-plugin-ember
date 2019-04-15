@@ -70,8 +70,69 @@ const codeWithGetters = [
     }`
 ];
 
+const codeWithSettersAndGetters = [
+  `{
+      foo: computed({
+        get() {
+          return true;
+        },
+        set() {
+          return true;
+        }
+      }).readonly()
+    }`,
+  `{
+      foo: computed({
+        get() {
+          return true;
+        },
+        set() {
+          return true;
+        }
+      })
+    }`,
+  `{
+      foo: computed('model.foo', {
+        get() {
+          return true;
+        },
+        set() {
+          return true;
+        }
+      }).readonly()
+    }`,
+  `{
+      foo: computed('model.foo', {
+        get() {
+          return true;
+        },
+        set() {
+          return true;
+        }
+      })
+    }`,
+  `{
+      foo: computed('model.foo', {
+        get() {},
+        set() {},
+      })
+    }`
+];
 
-const validWithDefaultOptions = codeWithoutGetters.map(code => ({ code, parserOptions }));
+
+const validWithDefaultOptions = [];
+validWithDefaultOptions.push(...codeWithoutGetters.map(code => ({ code, parserOptions })));
+validWithDefaultOptions.push(...codeWithSettersAndGetters.map(code => ({ code, parserOptions })));
+
+const validWithAlwaysWithSetterOptions = [];
+validWithAlwaysWithSetterOptions.push(...codeWithoutGetters.map((code) => {
+  const options = ['always-with-setter'];
+  return { code, parserOptions, options };
+}));
+validWithAlwaysWithSetterOptions.push(...codeWithSettersAndGetters.map((code) => {
+  const options = ['always-with-setter'];
+  return { code, parserOptions, options };
+}));
 
 const validWithNeverOption = codeWithoutGetters.map((code) => {
   const options = ['never'];
@@ -121,6 +182,11 @@ const inValidWithAlwaysOption = codeWithoutGetters.map((code) => {
 });
 
 ruleTester.run('computed-property-getters', rule, {
-  valid: [...validWithDefaultOptions, ...validWithNeverOption, ...validWithAlwaysOption],
+  valid: [
+    ...validWithDefaultOptions,
+    ...validWithAlwaysWithSetterOptions,
+    ...validWithNeverOption,
+    ...validWithAlwaysOption
+  ],
   invalid: [...inValidWithDefaultOptions, ...inValidWithNeverOption, ...inValidWithAlwaysOption],
 });
