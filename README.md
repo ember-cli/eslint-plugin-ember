@@ -181,6 +181,7 @@ If you have any suggestions, ideas or problems feel free to add new [issue](http
 ## ⭐️ Contributors
 - [Adrian Zalewski](https://github.com/bardzusny)
 - [Alex LaFroscia](https://github.com/alexlafroscia)
+- [Bryan Mishkin](https://github.com/bmish)
 - [Casey Watts](https://github.com/caseywatts)
 - [Jacek Bandura](https://github.com/jbandura)
 - [Kamil Ejsymont](https://github.com/netes)
