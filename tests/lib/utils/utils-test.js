@@ -317,3 +317,52 @@ describe('isGlobalCallExpression', () => {
     expect(utils.isGlobalCallExpression(node, 'jQuery', ['$', 'jQuery'])).toBeTruthy();
   });
 });
+
+describe('isString', () => {
+  it('recognizes template literals', () => {
+    const node = parse('`template literal`');
+    expect(utils.isString(node)).toBeTruthy();
+  });
+
+  it('recognizes template literals with interpolation', () => {
+    const node = parse('`template ${123} literal`'); // eslint-disable-line no-template-curly-in-string
+    expect(utils.isString(node)).toBeTruthy();
+  });
+
+  it('recognizes string literals', () => {
+    const node = parse("'string literal'");
+    expect(utils.isString(node)).toBeTruthy();
+  });
+
+  it('ignores identifiers', () => {
+    const node = parse('MY_VARIABLE');
+    expect(utils.isString(node)).not.toBeTruthy();
+  });
+
+  it('ignores number literals', () => {
+    const node = parse('123');
+    expect(utils.isString(node)).not.toBeTruthy();
+  });
+});
+
+describe('isStringLiteral', () => {
+  it('recognizes string literals', () => {
+    const node = parse("'string literal'");
+    expect(utils.isStringLiteral(node)).toBeTruthy();
+  });
+
+  it('ignores template literals', () => {
+    const node = parse('`template literal`');
+    expect(utils.isStringLiteral(node)).not.toBeTruthy();
+  });
+
+  it('ignores identifiers', () => {
+    const node = parse('MY_VARIABLE');
+    expect(utils.isStringLiteral(node)).not.toBeTruthy();
+  });
+
+  it('ignores number literals', () => {
+    const node = parse('123');
+    expect(utils.isStringLiteral(node)).not.toBeTruthy();
+  });
+});

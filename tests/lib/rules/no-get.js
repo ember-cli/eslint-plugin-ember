@@ -11,6 +11,16 @@ ruleTester.run('no-get', rule, {
     "this.get('foo.bar');",
     "get(this, 'foo.bar');",
 
+    // Template literals.
+    {
+      code: 'this.get(`foo`);',
+      parserOptions: { ecmaVersion: 6 }
+    },
+    {
+      code: 'get(this, `foo`);',
+      parserOptions: { ecmaVersion: 6 }
+    },
+
     // Not `this`.
     "foo.get('bar');",
     "get(foo, 'bar');",

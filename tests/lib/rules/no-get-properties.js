@@ -27,6 +27,10 @@ ruleTester.run('no-get-properties', rule, {
     "const { abc, def } = myObject.getProperties('abc', 'def');",
     "const { abc, def } = this.get('something').getProperties('abc', 'def');",
 
+    // Template literals.
+    'const { abc, def } = this.getProperties(`abc`, `def`);',
+    'const { abc, def } = getProperties(this, `abc`, `def`);',
+
     // Destructuring assignment but no `getProperties`.
     'const { abc, def } = this;',
 
