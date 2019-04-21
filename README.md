@@ -179,16 +179,16 @@ Please be aware that we're using `yarn` in this repository, so if you plan to ad
 If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/ember-cli/eslint-plugin-ember/issues), but first please make sure your question does not repeat previous ones.
 
 ## ⭐️ Contributors
+- [Adrian Zalewski](https://github.com/bardzusny)
+- [Alex LaFroscia](https://github.com/alexlafroscia)
+- [Casey Watts](https://github.com/caseywatts)
+- [Jacek Bandura](https://github.com/jbandura)
+- [Kamil Ejsymont](https://github.com/netes)
 - [Michał Sajnóg](https://github.com/michalsnik)
 - [Rafał Leszczyński](https://github.com/rafleszczynski)
-- [Adrian Zalewski](https://github.com/bardzusny)
-- [Kamil Ejsymont](https://github.com/netes)
-- [Casey Watts](https://github.com/caseywatts)
-- [Steve Gargan](https://github.com/sgargan)
-- [Alex LaFroscia](https://github.com/alexlafroscia)
-- [Tobias Bieniek](https://github.com/Turbo87)
 - [Robert Wagner](https://github.com/rwwagner90)
-- [Jacek Bandura](https://github.com/jbandura)
+- [Steve Gargan](https://github.com/sgargan)
+- [Tobias Bieniek](https://github.com/Turbo87)
 
 ##  🙌 Credits
 - [DockYard team](http://github.com/DockYard) - for great inspiration with their [styleguide](https://github.com/DockYard/styleguides/blob/master/engineering/ember.md)
