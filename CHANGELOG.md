@@ -1,5 +1,22 @@
 # Changelog
 
+## v6.4.0 (2019-04-21)
+
+#### :rocket: Enhancement
+* [#403](https://github.com/ember-cli/eslint-plugin-ember/pull/403) Add new `no-get-properties` rule ([@bmish](https://github.com/bmish))
+* [#404](https://github.com/ember-cli/eslint-plugin-ember/pull/404) Add new `no-get` rule ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#398](https://github.com/ember-cli/eslint-plugin-ember/pull/398) `no-unnecessary-route-path-option`: fix error when `path` is undefined ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#411](https://github.com/ember-cli/eslint-plugin-ember/pull/411) Update contributors ([@bmish](https://github.com/bmish))
+* [#409](https://github.com/ember-cli/eslint-plugin-ember/pull/409) Update documentation for `require-return-from-computed` rule ([@esbanarango](https://github.com/esbanarango))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Esteban Arango Medina ([@esbanarango](https://github.com/esbanarango))
+
 ## v6.3.0 (2019-03-19)
 
 #### :rocket: Enhancement
