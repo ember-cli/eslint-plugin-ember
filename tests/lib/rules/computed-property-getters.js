@@ -14,8 +14,12 @@ const RuleTester = require('eslint').RuleTester;
 
 const ruleTester = new RuleTester();
 const parserOptions = { ecmaVersion: 2018, sourceType: 'module' };
+const errors = [{
+  message: rule.meta.message,
+}];
+const output = null;
 
-const codeWithoutGetters = [
+const codeWithoutGettersOrSetters = [
   `
   {
     foo: computed('model', function() {})
@@ -34,7 +38,7 @@ const codeWithoutGetters = [
     }`
 ];
 
-const codeWithGetters = [
+const codeWithOnlyGetters = [
   `{
       foo: computed({
         get() {
@@ -66,6 +70,42 @@ const codeWithGetters = [
   `{
       foo: computed('model.foo', {
         get() {}
+      })
+    }`
+];
+
+const codeWithOnlySetters = [
+  `{
+      foo: computed({
+        set() {
+          return true;
+        }
+      }).readonly()
+    }`,
+  `{
+      foo: computed({
+        set() {
+          return true;
+        }
+      })
+    }`,
+  `{
+      foo: computed('model.foo', {
+        set() {
+          return true;
+        }
+      }).readonly()
+    }`,
+  `{
+      foo: computed('model.foo', {
+        set() {
+          return true;
+        }
+      })
+    }`,
+  `{
+      foo: computed('model.foo', {
+        set() {}
       })
     }`
 ];
@@ -121,11 +161,11 @@ const codeWithSettersAndGetters = [
 
 
 const validWithDefaultOptions = [];
-validWithDefaultOptions.push(...codeWithoutGetters.map(code => ({ code, parserOptions })));
+validWithDefaultOptions.push(...codeWithoutGettersOrSetters.map(code => ({ code, parserOptions })));
 validWithDefaultOptions.push(...codeWithSettersAndGetters.map(code => ({ code, parserOptions })));
 
 const validWithAlwaysWithSetterOptions = [];
-validWithAlwaysWithSetterOptions.push(...codeWithoutGetters.map((code) => {
+validWithAlwaysWithSetterOptions.push(...codeWithoutGettersOrSetters.map((code) => {
   const options = ['always-with-setter'];
   return { code, parserOptions, options };
 }));
@@ -134,52 +174,52 @@ validWithAlwaysWithSetterOptions.push(...codeWithSettersAndGetters.map((code) =>
   return { code, parserOptions, options };
 }));
 
-const validWithNeverOption = codeWithoutGetters.map((code) => {
+const validWithNeverOption = codeWithoutGettersOrSetters.map((code) => {
   const options = ['never'];
   return { code, parserOptions, options };
 });
 
-const validWithAlwaysOption = codeWithGetters.map((code) => {
+const validWithAlwaysOption = [];
+validWithAlwaysOption.push(...codeWithOnlyGetters.map((code) => {
   const options = ['always'];
   return { code, parserOptions, options };
-});
+}));
+validWithAlwaysOption.push(...codeWithSettersAndGetters.map((code) => {
+  const options = ['always'];
+  return { code, parserOptions, options };
+}));
 
-const inValidWithDefaultOptions = codeWithGetters.map(code => (
-  {
-    code,
-    parserOptions,
-    output: null,
-    errors: [{
-      message: rule.meta.message,
-    }]
-  }
+const inValidWithDefaultOptions = [];
+inValidWithDefaultOptions.push(...codeWithOnlyGetters.map(code =>
+  ({ code, parserOptions, output, errors })
+));
+inValidWithDefaultOptions.push(...codeWithOnlySetters.map(code =>
+  ({ code, parserOptions, output, errors })
 ));
 
-const inValidWithNeverOption = codeWithGetters.map((code) => {
+const inValidWithNeverOption = [];
+inValidWithNeverOption.push(...codeWithOnlyGetters.map((code) => {
   const options = ['never'];
-  return {
-    code,
-    parserOptions,
-    options,
-    output: null,
-    errors: [{
-      message: rule.meta.message,
-    }]
-  };
-});
+  return { code, parserOptions, options, output, errors };
+}));
+inValidWithNeverOption.push(...codeWithOnlySetters.map((code) => {
+  const options = ['never'];
+  return { code, parserOptions, options, output, errors };
+}));
+inValidWithNeverOption.push(...codeWithSettersAndGetters.map((code) => {
+  const options = ['never'];
+  return { code, parserOptions, options, output, errors };
+}));
 
-const inValidWithAlwaysOption = codeWithoutGetters.map((code) => {
+const inValidWithAlwaysOption = [];
+inValidWithAlwaysOption.push(...codeWithoutGettersOrSetters.map((code) => {
   const options = ['always'];
-  return {
-    code,
-    parserOptions,
-    options,
-    output: null,
-    errors: [{
-      message: rule.meta.message,
-    }]
-  };
-});
+  return { code, parserOptions, options, output, errors };
+}));
+inValidWithAlwaysOption.push(...codeWithOnlySetters.map((code) => {
+  const options = ['always'];
+  return { code, parserOptions, options, output, errors };
+}));
 
 ruleTester.run('computed-property-getters', rule, {
   valid: [
@@ -188,5 +228,9 @@ ruleTester.run('computed-property-getters', rule, {
     ...validWithNeverOption,
     ...validWithAlwaysOption
   ],
-  invalid: [...inValidWithDefaultOptions, ...inValidWithNeverOption, ...inValidWithAlwaysOption],
+  invalid: [
+    ...inValidWithDefaultOptions,
+    ...inValidWithNeverOption,
+    ...inValidWithAlwaysOption
+  ],
 });
