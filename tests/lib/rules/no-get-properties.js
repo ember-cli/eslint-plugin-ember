@@ -34,12 +34,6 @@ ruleTester.run('no-get-properties', rule, {
     // Destructuring assignment but no `getProperties`.
     'const { abc, def } = this;',
 
-    // No destructuring.
-    "const properties = this.getProperties('abc', 'def');",
-    "const properties = this.getProperties(['abc', 'def']);", // With parameters in array.
-    "const properties = getProperties(this, 'abc', 'def');",
-    "const properties = getProperties(this, ['abc', 'def']);", // With parameters in array.
-
     // Destructuring assignment with nested path.
     "const { foo, barBaz } = this.getProperties('foo', 'bar.baz');",
     "const { foo, barBaz } = this.getProperties(['foo', 'bar.baz']);", // With parameters in array.
@@ -56,6 +50,11 @@ ruleTester.run('no-get-properties', rule, {
     'const { abc } = getProperties(this, [MY_PROP]);'
   ],
   invalid: [
+
+    // -----------------
+    // Destructuring assignment.
+    // -----------------
+
     {
       code: "const { abc, def } = this.getProperties('abc', 'def');",
       output: null,
@@ -80,6 +79,38 @@ ruleTester.run('no-get-properties', rule, {
     // With `let`.
     {
       code: "let { abc, def } = this.getProperties('abc', 'def');",
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+    },
+
+    // -----------------
+    // No destructuring.
+    // -----------------
+
+    {
+      code: "const properties = this.getProperties('abc', 'def');",
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+    },
+    {
+      code: "const properties = this.getProperties(['abc', 'def']);", // With parameters in array.
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+    },
+    {
+      code: "const properties = getProperties(this, 'abc', 'def');",
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+    },
+    {
+      code: "const properties = getProperties(this, ['abc', 'def']);", // With parameters in array.
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+    },
+
+    // With `let`.
+    {
+      code: "let properties = this.getProperties('abc', 'def');",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
     }
