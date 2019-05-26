@@ -89,8 +89,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
 |  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
 | :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
-|  | [no-get-properties](./docs/rules/no-get-properties.md) | Disallow unnecessary usage of Ember's `getProperties` function |
-|  | [no-get](./docs/rules/no-get.md) | Disallow unnecessary usage of Ember's `get` function |
+|  | [no-get](./docs/rules/no-get.md) | Require ES5 getters instead of Ember's `get` / `getProperties` functions |
 | :white_check_mark: | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
 |  | [no-jquery](./docs/rules/no-jquery.md) | Disallow any usage of jQuery |
 |  | [no-new-mixins](./docs/rules/no-new-mixins.md) | Prevents creation of new mixins |
@@ -158,6 +157,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |:--------|:------------|
 | [avoid-leaking-state-in-components](./docs/rules/avoid-leaking-state-in-components.md) | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) |
 | [local-modules](./docs/rules/local-modules.md) | [new-module-imports](./docs/rules/new-module-imports.md) |
+| [no-get-properties](./docs/rules/no-get-properties.md) | [no-get](./docs/rules/no-get.md) |
 
 <!--RULES_TABLE_END-->
 
