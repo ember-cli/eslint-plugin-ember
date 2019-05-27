@@ -7,7 +7,7 @@ Starting in Ember 3.1, native ES5 getters are available, which eliminates much o
 This rule disallows:
 
 * `this.get('someProperty')` when `this.someProperty` can be used
-* `this.getProperties('prop1', 'prop2')` when `{ this.prop1, this.prop2 }` can be used
+* `this.getProperties('prop1', 'prop2')` when `{ prop1: this.prop1, prop2: this.prop2 }` can be used
 
 **WARNING**: there are a number of circumstances where `get` / `getProperties` still need to be used, and you may need to manually disable the rule for these:
 
@@ -52,7 +52,7 @@ const { prop1, prop2 } = this;
 ```
 
 ```js
-const foo = { this.prop1, this.prop2 };
+const foo = { prop1: this.prop1, prop2: this.prop2 };
 ```
 
 ## References
