@@ -1,5 +1,13 @@
 # Changelog
 
+## v6.5.1 (2019-05-27)
+
+#### :bug: Bug Fix
+* [#427](https://github.com/ember-cli/eslint-plugin-ember/pull/427) Fix typo in error message for `no-get` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v6.5.0 (2019-05-26)
 
 #### :rocket: Enhancement
