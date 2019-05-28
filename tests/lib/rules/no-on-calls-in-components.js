@@ -74,6 +74,16 @@ eslintTester.run('no-on-calls-in-components', rule, {
       code: 'export default Component.extend({abc: on("nonLifecycleEvent", function() {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    {
+      code: `
+      let foo = { bar: 'baz' };
+
+      export default Component.extend({
+        ...foo,
+      });
+      `,
+      parserOptions: { ecmaVersion: 9, sourceType: 'module' },
+    },
   ],
   invalid: [
     {
