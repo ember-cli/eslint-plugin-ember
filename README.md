@@ -103,6 +103,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :wrench: | [no-unnecessary-service-injection-argument](./docs/rules/no-unnecessary-service-injection-argument.md) | Disallow unnecessary argument when injecting service |
 |  | [route-path-style](./docs/rules/route-path-style.md) | Enforces usage of kebab-case (instead of snake_case or camelCase) in route paths |
 | :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
+| :white_check_mark: | [no-async-actions](./docs/rules/no-async-actions.md) | Prevents usage of async actions |
 
 
 ### Possible Errors
