@@ -89,6 +89,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
 |  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
 | :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
+|  | [no-get](./docs/rules/no-get.md) | Require ES5 getters instead of Ember's `get` / `getProperties` functions |
 | :white_check_mark: | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
 |  | [no-jquery](./docs/rules/no-jquery.md) | Disallow any usage of jQuery |
 |  | [no-new-mixins](./docs/rules/no-new-mixins.md) | Prevents creation of new mixins |
@@ -127,6 +128,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage |
+|  | [computed-property-getters](./docs/rules/computed-property-getters.md) | Enforce the consistent use of getters in computed properties |
 | :white_check_mark: | [no-callback-leaks-in-ember-objects](./docs/rules/no-callback-leaks-in-ember-objects.md) | Avoids callback memory leaks |
 
 
@@ -156,6 +158,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |:--------|:------------|
 | [avoid-leaking-state-in-components](./docs/rules/avoid-leaking-state-in-components.md) | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) |
 | [local-modules](./docs/rules/local-modules.md) | [new-module-imports](./docs/rules/new-module-imports.md) |
+| [no-get-properties](./docs/rules/no-get-properties.md) | [no-get](./docs/rules/no-get.md) |
 
 <!--RULES_TABLE_END-->
 
@@ -178,16 +181,17 @@ Please be aware that we're using `yarn` in this repository, so if you plan to ad
 If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/ember-cli/eslint-plugin-ember/issues), but first please make sure your question does not repeat previous ones.
 
 ## ⭐️ Contributors
+- [Adrian Zalewski](https://github.com/bardzusny)
+- [Alex LaFroscia](https://github.com/alexlafroscia)
+- [Bryan Mishkin](https://github.com/bmish)
+- [Casey Watts](https://github.com/caseywatts)
+- [Jacek Bandura](https://github.com/jbandura)
+- [Kamil Ejsymont](https://github.com/netes)
 - [Michał Sajnóg](https://github.com/michalsnik)
 - [Rafał Leszczyński](https://github.com/rafleszczynski)
-- [Adrian Zalewski](https://github.com/bardzusny)
-- [Kamil Ejsymont](https://github.com/netes)
-- [Casey Watts](https://github.com/caseywatts)
-- [Steve Gargan](https://github.com/sgargan)
-- [Alex LaFroscia](https://github.com/alexlafroscia)
-- [Tobias Bieniek](https://github.com/Turbo87)
 - [Robert Wagner](https://github.com/rwwagner90)
-- [Jacek Bandura](https://github.com/jbandura)
+- [Steve Gargan](https://github.com/sgargan)
+- [Tobias Bieniek](https://github.com/Turbo87)
 
 ##  🙌 Credits
 - [DockYard team](http://github.com/DockYard) - for great inspiration with their [styleguide](https://github.com/DockYard/styleguides/blob/master/engineering/ember.md)

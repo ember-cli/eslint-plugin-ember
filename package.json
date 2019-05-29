@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-ember",
-  "version": "6.3.0",
+  "version": "6.5.1",
   "description": "Eslint plugin for Ember.js apps",
   "main": "lib/index.js",
   "files": [
@@ -53,12 +53,12 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^11.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "jest": "^24.7.1",
+    "eslint-plugin-import": "^2.17.3",
+    "jest": "^24.8.0",
     "lerna-changelog": "^0.8.2"
   },
   "dependencies": {
-    "ember-rfc176-data": "^0.3.8",
+    "ember-rfc176-data": "^0.3.9",
     "snake-case": "^2.1.0"
   },
   "changelog": {

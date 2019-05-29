@@ -1,5 +1,51 @@
 # Changelog
 
+## v6.5.1 (2019-05-27)
+
+#### :bug: Bug Fix
+* [#427](https://github.com/ember-cli/eslint-plugin-ember/pull/427) Fix typo in error message for `no-get` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+## v6.5.0 (2019-05-26)
+
+#### :rocket: Enhancement
+* [#421](https://github.com/ember-cli/eslint-plugin-ember/pull/421) Update the `no-get` rule to also handle the `getProperties` function, and mark the `no-get-properties` rule as deprecated ([@bmish](https://github.com/bmish))
+* [#397](https://github.com/ember-cli/eslint-plugin-ember/pull/397) Add new `computed-property-getters` rule ([@jrjohnson](https://github.com/jrjohnson))
+
+#### :memo: Documentation
+* [#412](https://github.com/ember-cli/eslint-plugin-ember/pull/412) Update release instructions ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Jonathan Johnson ([@jrjohnson](https://github.com/jrjohnson))
+
+## v6.4.1 (2019-04-21)
+
+#### :bug: Bug Fix
+* [#413](https://github.com/ember-cli/eslint-plugin-ember/pull/413) Ignore template literals in `no-get` and `no-get-properties` rules ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+## v6.4.0 (2019-04-21)
+
+#### :rocket: Enhancement
+* [#403](https://github.com/ember-cli/eslint-plugin-ember/pull/403) Add new `no-get-properties` rule ([@bmish](https://github.com/bmish))
+* [#404](https://github.com/ember-cli/eslint-plugin-ember/pull/404) Add new `no-get` rule ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#398](https://github.com/ember-cli/eslint-plugin-ember/pull/398) `no-unnecessary-route-path-option`: fix error when `path` is undefined ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#411](https://github.com/ember-cli/eslint-plugin-ember/pull/411) Update contributors ([@bmish](https://github.com/bmish))
+* [#409](https://github.com/ember-cli/eslint-plugin-ember/pull/409) Update documentation for `require-return-from-computed` rule ([@esbanarango](https://github.com/esbanarango))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Esteban Arango Medina ([@esbanarango](https://github.com/esbanarango))
+
 ## v6.3.0 (2019-03-19)
 
 #### :rocket: Enhancement

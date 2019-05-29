@@ -5,12 +5,8 @@
 When using computed properties always return a value.
 
 ```javascript
-import Ember from 'ember';
-
-const {
-  Component,
-  computed
-} = Ember;
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   firstName: null,
