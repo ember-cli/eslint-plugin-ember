@@ -1,4 +1,4 @@
-# Do not use async actions.attrs
+# Do not use async actions
 ## Rule `no-async-actions`
 
 
