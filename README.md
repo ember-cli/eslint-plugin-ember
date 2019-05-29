@@ -127,6 +127,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage |
+| :white_check_mark: | [no-callback-leaks-in-ember-objects](./docs/rules/no-callback-leaks-in-ember-objects.md) | Avoids callback memory leaks |
 
 
 ### Testing
