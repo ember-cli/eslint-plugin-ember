@@ -26,11 +26,11 @@ ruleTester.run('no-async-actions', rule, {
     {
       code: `
       Component.extend({
-      actions: {
-      handleClick() {
-      // ...
-      }
-      }
+        actions: {
+          handleClick() {
+          // ...
+          }
+        }
       });`,
     }
 

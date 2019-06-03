@@ -47,4 +47,6 @@ actions: {
 
 ## Further Reading
 
-See http://ember-concurrency.com/docs/tutorial (scroll down to Version 4)
+- Ember Concurrency http://ember-concurrency.com/docs/tutorial (scroll down to Version 4)
+- eslint/no-async-promise-executor https://github.com/eslint/eslint/blob/master/docs/rules/no-async-promise-executor.md
+
