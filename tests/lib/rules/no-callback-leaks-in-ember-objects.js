@@ -5,12 +5,11 @@
 const rule = require('../../../lib/rules/no-callback-leaks-in-ember-objects');
 const RuleTester = require('eslint').RuleTester;
 
+const { ERROR_MESSAGE } = rule;
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-
-const message = "Event listeners and interval timers must be unregistered or ensure that the context they're registered with is destroyed, when no longer needed.";
 
 const eslintTester = new RuleTester({
   parserOptions: {
@@ -90,7 +89,7 @@ export default Ember.Service.extend({
       });`,
       output: null,
       errors: [{
-        message,
+        message: ERROR_MESSAGE,
       }],
     },
     {
@@ -106,7 +105,7 @@ export default Component.extend({
 });`,
       output: null,
       errors: [{
-        message,
+        message: ERROR_MESSAGE,
       }],
     },
     {
@@ -121,7 +120,7 @@ export default Ember.Service.extend({
       `,
       output: null,
       errors: [{
-        message,
+        message: ERROR_MESSAGE,
       }],
     },
     {
@@ -143,7 +142,7 @@ export default Component.extend({
       `,
       output: null,
       errors: [{
-        message,
+        message: ERROR_MESSAGE,
       }],
     },
 
