@@ -1,6 +1,6 @@
 
 # Avoid callback leaks in Ember objects
-## Rule `no-callback-leaks-in-ember-objects`
+## Rule `avoid-leaking-callbacks-in-ember-objects`
 
 Callback leaks are memory leaks that occur due to state being caught in a callback function that is never released from memory.
 
