@@ -2,7 +2,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/no-callback-leaks-in-ember-objects');
+const rule = require('../../../lib/rules/avoid-leaking-callbacks-in-ember-objects');
 const RuleTester = require('eslint').RuleTester;
 
 const { ERROR_MESSAGE } = rule;
@@ -17,7 +17,7 @@ const eslintTester = new RuleTester({
     sourceType: 'module'
   }
 });
-eslintTester.run('no-callback-leaks-in-ember-objects', rule, {
+eslintTester.run('avoid-leaking-callbacks-in-ember-objects', rule, {
   valid: [
     {
       code: `
@@ -80,20 +80,6 @@ export default Ember.Service.extend({
   invalid: [
     {
       code: `
-      export default Ember.Component.extend({ 
-        didInsertElement() { 
-          if (this.get("onScroll")) { 
-            window.addEventListener("scroll", (...args) => this.get("onScroll")(...args)); 
-          } 
-        } 
-      });`,
-      output: null,
-      errors: [{
-        message: ERROR_MESSAGE,
-      }],
-    },
-    {
-      code: `
 import Component from '@ember/component';
 
 export default Component.extend({
@@ -110,16 +96,27 @@ export default Component.extend({
     },
     {
       code: `
-export default Ember.Service.extend({
+import Component from '@ember/component';
+export default Component.extend({
   init() {
     if (this.get('onScroll')) {
       window.addEventListener('scroll', (...args) => this.get('onScroll')(...args));
     }
-  }
+  },
+
+  didInsertElement() { 
+    if (this.get("onResize")) { 
+      window.addEventListener("resize", (...args) => this.get("onResize")(...args)); 
+    } 
+  } 
+
 });
       `,
       output: null,
       errors: [{
+        message: ERROR_MESSAGE,
+      },
+      {
         message: ERROR_MESSAGE,
       }],
     },
@@ -128,13 +125,22 @@ export default Ember.Service.extend({
 import Component from '@ember/component';
 
 export default Component.extend({
-  didInsertElement() {
+  init() {
     if (this.get('onScroll')) {
-      window.addEventListener('scroll', (...args) => this.get('onScroll')(...args));
+      this._onScrollHandler = (...args) => this.get('onScroll')(...args);
+      window.addEventListener('scroll', this._onScrollHandler);
+    }
+  },
+
+
+  didInsertElement() {
+    if (this.get('onResize')) {
+      window.addEventListener('resize', (...args) => this.get('onResize')(...args));
     }
   },
 
   willDestroyElement() {
+    window.removeEventListener("scroll", this._onScrollHandler);
     this._super(...arguments);
   }
 
