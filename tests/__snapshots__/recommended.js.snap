@@ -22,6 +22,5 @@ Array [
   "require-super-in-init",
   "routes-segments-snake-case",
   "use-brace-expansion",
-  "avoid-leaking-callbacks-in-ember-objects",
 ]
 `;
