@@ -127,7 +127,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :white_check_mark: | [avoid-leaking-callbacks-in-ember-objects](./docs/rules/avoid-leaking-callbacks-in-ember-objects.md) | Avoids callback memory leaks |
+|  | [avoid-leaking-callbacks-in-ember-objects](./docs/rules/avoid-leaking-callbacks-in-ember-objects.md) | Avoids callback memory leaks |
 | :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage |
 |  | [computed-property-getters](./docs/rules/computed-property-getters.md) | Enforce the consistent use of getters in computed properties |
 
