@@ -5,6 +5,8 @@
 const rule = require('../../../lib/rules/closure-actions');
 const RuleTester = require('eslint').RuleTester;
 
+const { ERROR_MESSAGE } = rule;
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
@@ -27,7 +29,7 @@ eslintTester.run('closure-actions', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [{
-        message: 'Use closure actions, unless you need bubbling',
+        message: ERROR_MESSAGE,
       }],
     },
   ],
