@@ -1,5 +1,20 @@
 # Changelog
 
+## v6.6.0 (2019-06-16)
+
+#### :rocket: Enhancement
+* [#429](https://github.com/ember-cli/eslint-plugin-ember/pull/429) Add new `require-computed-macros` rule ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#428](https://github.com/ember-cli/eslint-plugin-ember/pull/428) Fix spread operator bug in `no-on-calls-in-components` rule ([@rajasegar](https://github.com/rajasegar))
+
+#### :memo: Documentation
+* [#431](https://github.com/ember-cli/eslint-plugin-ember/pull/431) Add link to `sendAction` deprecation RFC for `closure-actions` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Rajasegar Chandran ([@rajasegar](https://github.com/rajasegar))
+
 ## v6.5.1 (2019-05-27)
 
 #### :bug: Bug Fix
