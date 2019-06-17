@@ -20,7 +20,7 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 
 export default Component.extend({
-  propReadOnly: computed('x', function() {
+  propReads: computed('x', function() {
     return this.x;
   }),
 
@@ -63,10 +63,10 @@ Examples of **correct** code for this rule:
 
 ```js
 import Component from '@ember/component';
-import { readOnly, and, or, gt, gte, lt, lte, not, equal } from '@ember/object/computed';
+import { reads, and, or, gt, gte, lt, lte, not, equal } from '@ember/object/computed';
 
 export default Component.extend({
-  propReadOnly: readOnly('x'),
+  propReads: reads('x'),
 
   propAnd: and('x', 'y'),
 

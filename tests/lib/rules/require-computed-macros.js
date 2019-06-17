@@ -6,7 +6,7 @@ const rule = require('../../../lib/rules/require-computed-macros');
 const RuleTester = require('eslint').RuleTester;
 
 const {
-  ERROR_MESSAGE_READ_ONLY,
+  ERROR_MESSAGE_READS,
   ERROR_MESSAGE_AND,
   ERROR_MESSAGE_OR,
   ERROR_MESSAGE_GT,
@@ -32,8 +32,8 @@ ruleTester.run('require-computed-macros', rule, {
     'computed(function() { return this.x; }, SOME_OTHER_ARG)', // Function isn't last arg.
     'other(function() { return this.x; })',
 
-    // READ_ONLY
-    "readOnly('x')",
+    // READS
+    "reads('x')",
     'computed(function() { return this; })',
     'computed(function() { return SOME_VAR; })',
     'computed(function() { return this.prop[123]; })',
@@ -76,16 +76,16 @@ ruleTester.run('require-computed-macros', rule, {
     'computed(function() { return this.prop === MY_VAR; })',
   ],
   invalid: [
-    // READ_ONLY
+    // READS
     {
       code: 'computed(function() { return this.x; })',
-      output: "computed.readOnly('x')",
-      errors: [{ message: ERROR_MESSAGE_READ_ONLY, type: 'CallExpression' }]
+      output: "computed.reads('x')",
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }]
     },
     {
       code: 'computed(function() { return this.x.y; })', // Nested path.
-      output: "computed.readOnly('x.y')",
-      errors: [{ message: ERROR_MESSAGE_READ_ONLY, type: 'CallExpression' }]
+      output: "computed.reads('x.y')",
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }]
     },
 
     // AND
