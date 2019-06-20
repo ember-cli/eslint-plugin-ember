@@ -1,6 +1,42 @@
 # Changelog
 
-## 6.4.1 (2019-04-21)
+## v6.6.0 (2019-06-16)
+
+#### :rocket: Enhancement
+* [#429](https://github.com/ember-cli/eslint-plugin-ember/pull/429) Add new `require-computed-macros` rule ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#428](https://github.com/ember-cli/eslint-plugin-ember/pull/428) Fix spread operator bug in `no-on-calls-in-components` rule ([@rajasegar](https://github.com/rajasegar))
+
+#### :memo: Documentation
+* [#431](https://github.com/ember-cli/eslint-plugin-ember/pull/431) Add link to `sendAction` deprecation RFC for `closure-actions` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Rajasegar Chandran ([@rajasegar](https://github.com/rajasegar))
+
+## v6.5.1 (2019-05-27)
+
+#### :bug: Bug Fix
+* [#427](https://github.com/ember-cli/eslint-plugin-ember/pull/427) Fix typo in error message for `no-get` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+## v6.5.0 (2019-05-26)
+
+#### :rocket: Enhancement
+* [#421](https://github.com/ember-cli/eslint-plugin-ember/pull/421) Update the `no-get` rule to also handle the `getProperties` function, and mark the `no-get-properties` rule as deprecated ([@bmish](https://github.com/bmish))
+* [#397](https://github.com/ember-cli/eslint-plugin-ember/pull/397) Add new `computed-property-getters` rule ([@jrjohnson](https://github.com/jrjohnson))
+
+#### :memo: Documentation
+* [#412](https://github.com/ember-cli/eslint-plugin-ember/pull/412) Update release instructions ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Jonathan Johnson ([@jrjohnson](https://github.com/jrjohnson))
+
+## v6.4.1 (2019-04-21)
 
 #### :bug: Bug Fix
 * [#413](https://github.com/ember-cli/eslint-plugin-ember/pull/413) Ignore template literals in `no-get` and `no-get-properties` rules ([@bmish](https://github.com/bmish))

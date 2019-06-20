@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-ember",
-  "version": "6.4.1",
+  "version": "6.6.0",
   "description": "Eslint plugin for Ember.js apps",
   "main": "lib/index.js",
   "files": [
@@ -50,10 +50,10 @@
   },
   "homepage": "https://github.com/ember-cli/eslint-plugin-ember#readme",
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
+    "babel-eslint": "^10.0.2",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^11.1.0",
-    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-import": "^2.17.3",
     "jest": "^24.8.0",
     "lerna-changelog": "^0.8.2"
   },

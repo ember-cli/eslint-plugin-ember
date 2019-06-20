@@ -2,6 +2,8 @@
 
 ### Rule name: `no-get-properties`
 
+**NOTE**: this rule is deprecated as it has been consolidated into the [no-get](no-get.md) rule.
+
 Starting in Ember 3.1, native ES5 getters are available, which eliminates much of the need to use `get` and `getProperties` on Ember objects. In particular, `getProperties` no longer needs to be used with destructuring assignments.
 
 ### Rule Details
