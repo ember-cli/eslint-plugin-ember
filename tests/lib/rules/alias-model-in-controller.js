@@ -12,7 +12,6 @@ const RuleTester = require('eslint').RuleTester;
 const eslintTester = new RuleTester();
 eslintTester.run('alias-model-in-controller', rule, {
   valid: [
-
     // direct alias
 
     {
@@ -52,11 +51,13 @@ eslintTester.run('alias-model-in-controller', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: 'export default Ember.Controller.extend(TestMixin, {nail: Ember.computed.alias("model")});',
+      code:
+        'export default Ember.Controller.extend(TestMixin, {nail: Ember.computed.alias("model")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: 'export default Ember.Controller.extend(TestMixin, TestMixin2, {nail: Ember.computed.alias("model")});',
+      code:
+        'export default Ember.Controller.extend(TestMixin, TestMixin2, {nail: Ember.computed.alias("model")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
@@ -88,7 +89,8 @@ eslintTester.run('alias-model-in-controller', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: 'export default Ember.Controller.extend({nail: Ember.computed.readOnly("model.nail")});',
+      code:
+        'export default Ember.Controller.extend({nail: Ember.computed.readOnly("model.nail")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
@@ -104,11 +106,13 @@ eslintTester.run('alias-model-in-controller', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: 'export default Ember.Controller.extend(TestMixin, {nail: Ember.computed.alias("model.nail")});',
+      code:
+        'export default Ember.Controller.extend(TestMixin, {nail: Ember.computed.alias("model.nail")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: 'export default Ember.Controller.extend(TestMixin, TestMixin2, {nail: Ember.computed.alias("model.nail")});',
+      code:
+        'export default Ember.Controller.extend(TestMixin, TestMixin2, {nail: Ember.computed.alias("model.nail")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
@@ -122,76 +126,94 @@ eslintTester.run('alias-model-in-controller', rule, {
       code: 'export default Ember.Controller.extend({});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Alias your model',
-      }],
+      errors: [
+        {
+          message: 'Alias your model',
+        },
+      ],
     },
     {
       code: 'export default Ember.Controller.extend({resetPassword: service()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Alias your model',
-      }],
+      errors: [
+        {
+          message: 'Alias your model',
+        },
+      ],
     },
     {
       code: 'export default Ember.Controller.extend({resetPassword: inject.service()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Alias your model',
-      }],
+      errors: [
+        {
+          message: 'Alias your model',
+        },
+      ],
     },
     {
       code: 'export default Ember.Controller.extend({resetPassword: Ember.inject.service()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Alias your model',
-      }],
+      errors: [
+        {
+          message: 'Alias your model',
+        },
+      ],
     },
     {
       code: 'export default Ember.Controller.extend(TestMixin, {});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Alias your model',
-      }],
+      errors: [
+        {
+          message: 'Alias your model',
+        },
+      ],
     },
     {
       code: 'export default Ember.Controller.extend(TestMixin, TestMixin2, {});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Alias your model',
-      }],
+      errors: [
+        {
+          message: 'Alias your model',
+        },
+      ],
     },
     {
       filename: 'example-app/controllers/path/to/some-feature.js',
       code: 'export default CustomController.extend({});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Alias your model',
-      }],
+      errors: [
+        {
+          message: 'Alias your model',
+        },
+      ],
     },
     {
       filename: 'example-app/some-feature/controller.js',
       code: 'export default CustomController.extend({});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Alias your model',
-      }],
+      errors: [
+        {
+          message: 'Alias your model',
+        },
+      ],
     },
     {
       filename: 'example-app/twisted-path/some-file.js',
       code: 'export default Controller.extend({});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Alias your model',
-      }],
+      errors: [
+        {
+          message: 'Alias your model',
+        },
+      ],
     },
   ],
 });

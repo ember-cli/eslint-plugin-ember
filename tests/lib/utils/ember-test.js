@@ -14,7 +14,7 @@ function getProperty(code) {
 describe('isModule', () => {
   let node;
 
-  it('should check if it\'s a proper module', () => {
+  it("should check if it's a proper module", () => {
     node = parse('Ember.test()');
     expect(emberUtils.isModule(node, 'test')).toBeTruthy();
 
@@ -30,14 +30,14 @@ describe('isModule', () => {
 });
 
 describe('isDSModel', () => {
-  it('should check if it\'s a DS Model', () => {
+  it("should check if it's a DS Model", () => {
     const node = parse('DS.Model()');
 
     expect(emberUtils.isDSModel(node)).toBeTruthy();
   });
 
-  describe('should check if it\'s a DS Model even if it uses custom name', () => {
-    it('it shouldn\'t detect Model when no file path is provided', () => {
+  describe("should check if it's a DS Model even if it uses custom name", () => {
+    it("it shouldn't detect Model when no file path is provided", () => {
       const node = parse('CustomModel.extend()');
       expect(emberUtils.isDSModel(node)).toBeFalsy();
     });
@@ -135,7 +135,7 @@ describe('isEmberCoreModule', () => {
 });
 
 describe('isEmberComponent', () => {
-  describe('should check if it\'s an Ember Component', () => {
+  describe("should check if it's an Ember Component", () => {
     it('it should detect Component when using Ember.Component', () => {
       const node = parse('Ember.Component.extend()');
       expect(emberUtils.isEmberComponent(node)).toBeTruthy();
@@ -147,8 +147,8 @@ describe('isEmberComponent', () => {
     });
   });
 
-  describe('should check if it\'s an Ember Component even if it uses custom name', () => {
-    it('it shouldn\'t detect Component when no file path is provided', () => {
+  describe("should check if it's an Ember Component even if it uses custom name", () => {
+    it("it shouldn't detect Component when no file path is provided", () => {
       const node = parse('CustomComponent.extend()');
       expect(emberUtils.isEmberComponent(node)).toBeFalsy();
     });
@@ -162,7 +162,7 @@ describe('isEmberComponent', () => {
 });
 
 describe('isEmberController', () => {
-  describe('should check if it\'s an Ember Controller', () => {
+  describe("should check if it's an Ember Controller", () => {
     it('it should detect Controller when using Ember.Controller', () => {
       const node = parse('Ember.Controller.extend()');
       expect(emberUtils.isEmberController(node)).toBeTruthy();
@@ -174,8 +174,8 @@ describe('isEmberController', () => {
     });
   });
 
-  describe('should check if it\'s an Ember Controller even if it uses custom name', () => {
-    it('it shouldn\'t detect Controller when no file path is provided', () => {
+  describe("should check if it's an Ember Controller even if it uses custom name", () => {
+    it("it shouldn't detect Controller when no file path is provided", () => {
       const node = parse('CustomController.extend()');
       expect(emberUtils.isEmberController(node)).toBeFalsy();
     });
@@ -189,7 +189,7 @@ describe('isEmberController', () => {
 });
 
 describe('isEmberRoute', () => {
-  describe('should check if it\'s an Ember Route', () => {
+  describe("should check if it's an Ember Route", () => {
     it('should detect Route when using Ember.Route', () => {
       const node = parse('Ember.Route.extend()');
       expect(emberUtils.isEmberRoute(node)).toBeTruthy();
@@ -201,8 +201,8 @@ describe('isEmberRoute', () => {
     });
   });
 
-  describe('should check if it\'s an Ember Route even if it uses custom name', () => {
-    it('it shouldn\'t detect Route when no file path is provided', () => {
+  describe("should check if it's an Ember Route even if it uses custom name", () => {
+    it("it shouldn't detect Route when no file path is provided", () => {
       const node = parse('CustomRoute.extend()');
       expect(emberUtils.isEmberRoute(node)).toBeFalsy();
     });
@@ -216,7 +216,7 @@ describe('isEmberRoute', () => {
 });
 
 describe('isEmberService', () => {
-  describe('should check if it\'s an Ember Service', () => {
+  describe("should check if it's an Ember Service", () => {
     it('should detect Service when using Ember.Service', () => {
       const node = parse('Ember.Service.extend()');
       expect(emberUtils.isEmberService(node)).toBeTruthy();
@@ -228,8 +228,8 @@ describe('isEmberService', () => {
     });
   });
 
-  describe('should check if it\'s an Ember Service even if it uses custom name', () => {
-    it('shouldn\'t detect Service when no file path is provided', () => {
+  describe("should check if it's an Ember Service even if it uses custom name", () => {
+    it("shouldn't detect Service when no file path is provided", () => {
       const node = parse('CustomService.extend()');
       expect(emberUtils.isEmberService(node)).toBeFalsy();
     });
@@ -245,7 +245,7 @@ describe('isEmberService', () => {
 describe('isInjectedServiceProp', () => {
   let node;
 
-  it('should check if it\'s an injected service prop', () => {
+  it("should check if it's an injected service prop", () => {
     node = parse('service()');
     expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
 
@@ -266,7 +266,7 @@ describe('isInjectedServiceProp', () => {
 describe('isInjectedControllerProp', () => {
   let node;
 
-  it('should check if it\'s an injected controller prop', () => {
+  it("should check if it's an injected controller prop", () => {
     node = parse('controller()');
     expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
 
@@ -278,7 +278,7 @@ describe('isInjectedControllerProp', () => {
 describe('isComputedProp', () => {
   let node;
 
-  it('should check if it\'s an computed prop', () => {
+  it("should check if it's an computed prop", () => {
     node = parse('computed()');
     expect(emberUtils.isComputedProp(node)).toBeTruthy();
 
@@ -286,20 +286,17 @@ describe('isComputedProp', () => {
     expect(emberUtils.isComputedProp(node)).toBeTruthy();
   });
 
-  it(
-    'should detect whitelisted computed props with MemberExpressions',
-    () => {
-      ['volatile', 'meta', 'readOnly', 'property'].forEach((prop) => {
-        node = parse(`computed().${prop}()`);
-        expect(emberUtils.isComputedProp(node)).toBeTruthy();
+  it('should detect whitelisted computed props with MemberExpressions', () => {
+    ['volatile', 'meta', 'readOnly', 'property'].forEach(prop => {
+      node = parse(`computed().${prop}()`);
+      expect(emberUtils.isComputedProp(node)).toBeTruthy();
 
-        node = parse(`Ember.computed().${prop}()`);
-        expect(emberUtils.isComputedProp(node)).toBeTruthy();
-      });
-    }
-  );
+      node = parse(`Ember.computed().${prop}()`);
+      expect(emberUtils.isComputedProp(node)).toBeTruthy();
+    });
+  });
 
-  it('shouldn\'t allow other MemberExpressions', () => {
+  it("shouldn't allow other MemberExpressions", () => {
     node = parse('computed().foo()');
     expect(emberUtils.isComputedProp(node)).not.toBeTruthy();
 
@@ -311,7 +308,7 @@ describe('isComputedProp', () => {
 describe('isObserverProp', () => {
   let node;
 
-  it('should check if it\'s an observer prop', () => {
+  it("should check if it's an observer prop", () => {
     node = parse('observer()');
     expect(emberUtils.isObserverProp(node)).toBeTruthy();
 
@@ -354,7 +351,7 @@ describe('isCustomProp', () => {
   let node;
 
   it('should be custom property', () => {
-    node = getProperty('test = { test: \'someLiteral\' }');
+    node = getProperty("test = { test: 'someLiteral' }");
     expect(emberUtils.isCustomProp(node)).toBeTruthy();
 
     node = getProperty('test = { test: someIdentifier }');
@@ -366,7 +363,7 @@ describe('isCustomProp', () => {
     node = getProperty('test = { test: {} }');
     expect(emberUtils.isCustomProp(node)).toBeTruthy();
 
-    node = getProperty('test = { test: foo ? \'bar\': \'baz\' }');
+    node = getProperty("test = { test: foo ? 'bar': 'baz' }");
     expect(emberUtils.isCustomProp(node)).toBeTruthy();
 
     node = getProperty('test = { test: hbs`lorem ipsum` }');
@@ -433,7 +430,7 @@ describe('getModuleProperties', () => {
     })
   `);
 
-  it('returns module\'s properties', () => {
+  it("returns module's properties", () => {
     const properties = emberUtils.getModuleProperties(module);
     expect(properties).toHaveLength(3);
   });
@@ -523,9 +520,7 @@ describe('isRelation', () => {
 describe('parseDependentKeys', () => {
   it('should parse dependent keys from callexpression', () => {
     const node = parse("computed('model.{foo,bar}', 'model.bar')");
-    expect(emberUtils.parseDependentKeys(node)).toEqual([
-      'model.foo', 'model.bar', 'model.bar',
-    ]);
+    expect(emberUtils.parseDependentKeys(node)).toEqual(['model.foo', 'model.bar', 'model.bar']);
   });
 
   it('should work when no dependent keys present', () => {
@@ -535,9 +530,7 @@ describe('parseDependentKeys', () => {
 
   it('should handle dependent keys and function arguments', () => {
     const node = parse("computed('model.{foo,bar}', 'model.bar', function() {})");
-    expect(emberUtils.parseDependentKeys(node)).toEqual([
-      'model.foo', 'model.bar', 'model.bar',
-    ]);
+    expect(emberUtils.parseDependentKeys(node)).toEqual(['model.foo', 'model.bar', 'model.bar']);
   });
 
   it('should handle dependent keys and function arguments in MemberExpression', () => {
@@ -545,62 +538,59 @@ describe('parseDependentKeys', () => {
       computed('model.{foo,bar}', 'model.bar', function() {
       }).volatile();
     `);
-    expect(emberUtils.parseDependentKeys(node)).toEqual([
-      'model.foo', 'model.bar', 'model.bar',
-    ]);
+    expect(emberUtils.parseDependentKeys(node)).toEqual(['model.foo', 'model.bar', 'model.bar']);
   });
 });
 
 describe('unwrapBraceExpressions', () => {
   it('should unwrap simple dependent keys', () => {
-    expect(emberUtils.unwrapBraceExpressions([
-      'model.foo', 'model.bar'
-    ])).toEqual(['model.foo', 'model.bar']);
-  });
-
-  it('should unwrap dependent keys with braces', () => {
-    expect(emberUtils.unwrapBraceExpressions([
-      'model.{foo,bar}', 'model.bar'
-    ])).toEqual(['model.foo', 'model.bar', 'model.bar']);
-  });
-
-  it('should unwrap more complex dependent keys', () => {
-    expect(emberUtils.unwrapBraceExpressions([
-      'model.{foo,bar}', 'model.bar', 'data.{foo,baz,qux}'
-    ])).toEqual([
-      'model.foo', 'model.bar', 'model.bar', 'data.foo', 'data.baz', 'data.qux',
+    expect(emberUtils.unwrapBraceExpressions(['model.foo', 'model.bar'])).toEqual([
+      'model.foo',
+      'model.bar',
     ]);
   });
 
+  it('should unwrap dependent keys with braces', () => {
+    expect(emberUtils.unwrapBraceExpressions(['model.{foo,bar}', 'model.bar'])).toEqual([
+      'model.foo',
+      'model.bar',
+      'model.bar',
+    ]);
+  });
+
+  it('should unwrap more complex dependent keys', () => {
+    expect(
+      emberUtils.unwrapBraceExpressions(['model.{foo,bar}', 'model.bar', 'data.{foo,baz,qux}'])
+    ).toEqual(['model.foo', 'model.bar', 'model.bar', 'data.foo', 'data.baz', 'data.qux']);
+  });
+
   it('should unwrap multi-level keys', () => {
-    expect(emberUtils.unwrapBraceExpressions([
-      'model.bar.{foo,qux}', 'model.bar.baz'
-    ])).toEqual([
-      'model.bar.foo', 'model.bar.qux', 'model.bar.baz'
+    expect(emberUtils.unwrapBraceExpressions(['model.bar.{foo,qux}', 'model.bar.baz'])).toEqual([
+      'model.bar.foo',
+      'model.bar.qux',
+      'model.bar.baz',
     ]);
   });
 
   it('should unwrap @each with extensions', () => {
-    expect(emberUtils.unwrapBraceExpressions([
-      'collection.@each.{foo,bar}', 'collection.@each.qux'
-    ])).toEqual([
-      'collection.@each.foo', 'collection.@each.bar', 'collection.@each.qux'
-    ]);
+    expect(
+      emberUtils.unwrapBraceExpressions(['collection.@each.{foo,bar}', 'collection.@each.qux'])
+    ).toEqual(['collection.@each.foo', 'collection.@each.bar', 'collection.@each.qux']);
   });
 
   it('should unwrap complicated mixed dependent keys', () => {
-    expect(emberUtils.unwrapBraceExpressions([
-      'a.b.c.{d.@each.qwe.zxc,f,g.[]}'
-    ])).toEqual([
-      'a.b.c.d.@each.qwe.zxc', 'a.b.c.f', 'a.b.c.g.[]',
+    expect(emberUtils.unwrapBraceExpressions(['a.b.c.{d.@each.qwe.zxc,f,g.[]}'])).toEqual([
+      'a.b.c.d.@each.qwe.zxc',
+      'a.b.c.f',
+      'a.b.c.g.[]',
     ]);
   });
 
   it('should unwrap complicated mixed repeated dependent keys', () => {
-    expect(emberUtils.unwrapBraceExpressions([
-      'a.b.{d.@each.qux,f,d.@each.foo}'
-    ])).toEqual([
-      'a.b.d.@each.qux', 'a.b.f', 'a.b.d.@each.foo',
+    expect(emberUtils.unwrapBraceExpressions(['a.b.{d.@each.qux,f,d.@each.foo}'])).toEqual([
+      'a.b.d.@each.qux',
+      'a.b.f',
+      'a.b.d.@each.foo',
     ]);
   });
 });

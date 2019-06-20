@@ -96,11 +96,11 @@ eslintTester.run('order-in-models', rule, {
         b: belongsTo("c", { async: false }),
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      options: [{
-        order: [
-          'method',
-        ],
-      }],
+      options: [
+        {
+          order: ['method'],
+        },
+      ],
     },
   ],
   invalid: [
@@ -112,10 +112,12 @@ eslintTester.run('order-in-models', rule, {
         })
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
-        line: 3,
-      }],
+      errors: [
+        {
+          message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
+          line: 3,
+        },
+      ],
     },
     {
       code: `export default Model.extend({
@@ -125,10 +127,13 @@ eslintTester.run('order-in-models', rule, {
         behaviors: hasMany("behaviour")
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "behaviors" relationship should be above the "mood" multi-line function on line 3',
-        line: 5,
-      }],
+      errors: [
+        {
+          message:
+            'The "behaviors" relationship should be above the "mood" multi-line function on line 3',
+          line: 5,
+        },
+      ],
     },
     {
       code: `export default Model.extend({
@@ -137,10 +142,12 @@ eslintTester.run('order-in-models', rule, {
         shape: attr("string")
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "shape" attribute should be above the "mood" multi-line function on line 2',
-        line: 4,
-      }],
+      errors: [
+        {
+          message: 'The "shape" attribute should be above the "mood" multi-line function on line 2',
+          line: 4,
+        },
+      ],
     },
     {
       code: `export default DS.Model.extend({
@@ -150,10 +157,12 @@ eslintTester.run('order-in-models', rule, {
         })
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
-        line: 3,
-      }],
+      errors: [
+        {
+          message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
+          line: 3,
+        },
+      ],
     },
     {
       code: `export default DS.Model.extend({
@@ -163,10 +172,13 @@ eslintTester.run('order-in-models', rule, {
         behaviors: hasMany("behaviour")
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "behaviors" relationship should be above the "mood" multi-line function on line 3',
-        line: 5,
-      }],
+      errors: [
+        {
+          message:
+            'The "behaviors" relationship should be above the "mood" multi-line function on line 3',
+          line: 5,
+        },
+      ],
     },
     {
       code: `export default DS.Model.extend({
@@ -175,10 +187,12 @@ eslintTester.run('order-in-models', rule, {
         shape: attr("string")
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "shape" attribute should be above the "mood" multi-line function on line 2',
-        line: 4,
-      }],
+      errors: [
+        {
+          message: 'The "shape" attribute should be above the "mood" multi-line function on line 2',
+          line: 4,
+        },
+      ],
     },
     {
       code: `export default DS.Model.extend({
@@ -187,10 +201,13 @@ eslintTester.run('order-in-models', rule, {
         test: computed.alias("qwerty")
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "test" single-line function should be above the "mood" multi-line function on line 2',
-        line: 4,
-      }],
+      errors: [
+        {
+          message:
+            'The "test" single-line function should be above the "mood" multi-line function on line 2',
+          line: 4,
+        },
+      ],
     },
     {
       code: `export default DS.Model.extend(TestMixin, {
@@ -199,10 +216,13 @@ eslintTester.run('order-in-models', rule, {
         test: computed.alias("qwerty")
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "test" single-line function should be above the "mood" multi-line function on line 2',
-        line: 4,
-      }],
+      errors: [
+        {
+          message:
+            'The "test" single-line function should be above the "mood" multi-line function on line 2',
+          line: 4,
+        },
+      ],
     },
     {
       code: `export default DS.Model.extend(TestMixin, TestMixin2, {
@@ -211,11 +231,15 @@ eslintTester.run('order-in-models', rule, {
         test: computed.alias("qwerty")
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "test" single-line function should be above the "mood" multi-line function on line 2',
-        line: 4,
-      }],
-    }, {
+      errors: [
+        {
+          message:
+            'The "test" single-line function should be above the "mood" multi-line function on line 2',
+          line: 4,
+        },
+      ],
+    },
+    {
       code: `export default Model.extend({
         behaviors: hasMany("behaviour"),
         shape: attr("string"),
@@ -229,10 +253,12 @@ eslintTester.run('order-in-models', rule, {
         })
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
-        line: 3,
-      }],
-    }
+      errors: [
+        {
+          message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
+          line: 3,
+        },
+      ],
+    },
   ],
 });

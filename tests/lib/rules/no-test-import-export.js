@@ -4,8 +4,8 @@ const RuleTester = require('eslint').RuleTester;
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 6,
-    sourceType: 'module'
-  }
+    sourceType: 'module',
+  },
 });
 const NO_IMPORT_MESSAGE = rule.meta.importMessage;
 const NO_EXPORT_MESSAGE = rule.meta.exportMessage;
@@ -18,14 +18,14 @@ ruleTester.run('no-test-file-importing', rule, {
         import { module, test } from 'qunit';
 
         module('Acceptance | module', setupModule());
-      `
+      `,
     },
     {
       filename: 'tests/some-test-helper.js',
       code: `
         export function beforeEachSetup(){};
       `,
-    }
+    },
   ],
   invalid: [
     {
@@ -38,9 +38,9 @@ ruleTester.run('no-test-file-importing', rule, {
       output: null,
       errors: [
         {
-          message: NO_IMPORT_MESSAGE
-        }
-      ]
+          message: NO_IMPORT_MESSAGE,
+        },
+      ],
     },
     {
       code: `
@@ -55,9 +55,9 @@ ruleTester.run('no-test-file-importing', rule, {
       output: null,
       errors: [
         {
-          message: NO_IMPORT_MESSAGE
-        }
-      ]
+          message: NO_IMPORT_MESSAGE,
+        },
+      ],
     },
     {
       code: `
@@ -69,9 +69,9 @@ ruleTester.run('no-test-file-importing', rule, {
       output: null,
       errors: [
         {
-          message: NO_IMPORT_MESSAGE
-        }
-      ]
+          message: NO_IMPORT_MESSAGE,
+        },
+      ],
     },
     {
       filename: 'tests/some-test.js',
@@ -81,9 +81,9 @@ ruleTester.run('no-test-file-importing', rule, {
       output: null,
       errors: [
         {
-          message: NO_EXPORT_MESSAGE
-        }
-      ]
+          message: NO_EXPORT_MESSAGE,
+        },
+      ],
     },
     {
       filename: 'tests/some-test.js',
@@ -95,9 +95,9 @@ ruleTester.run('no-test-file-importing', rule, {
       output: null,
       errors: [
         {
-          message: NO_EXPORT_MESSAGE
-        }
-      ]
+          message: NO_EXPORT_MESSAGE,
+        },
+      ],
     },
-  ]
+  ],
 });

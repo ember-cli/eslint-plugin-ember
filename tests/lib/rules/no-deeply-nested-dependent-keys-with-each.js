@@ -36,48 +36,48 @@ ruleTester.run('no-deeply-nested-dependent-keys-with-each', rule, {
     "myFunction('foo.@each.bar.baz', function() {})",
     "Ember.myFunction('foo.@each.bar.baz', function() {})",
     "computed.unrelatedFunction('foo.@each.bar.baz', function() {})",
-    "Ember.computed.unrelatedFunction('foo.@each.bar.baz', function() {})"
+    "Ember.computed.unrelatedFunction('foo.@each.bar.baz', function() {})",
   ],
   invalid: [
     {
       code: "Ember.computed('foo.@each.bar.baz', function() {})",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: "Ember.computed('foo.@each.bar.baz', function() {}).readOnly()",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: "Ember.computed('foo.@each.bar.[]', function() {})",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: "Ember.computed('foo.@each.bar.@each.baz', function() {})",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: "computed('foo.@each.bar.baz', function() {})",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: "computed('foo.@each.bar.baz', function() {}).readOnly()",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: "computed('foo.@each.bar.[]', function() {})",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: "computed('foo.@each.bar.@each.baz', function() {})",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
-    }
-  ]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+  ],
 });

@@ -74,44 +74,44 @@ ruleTester.run('route-path-style', rule, {
     "MyClass.route('blogPosts');",
     "MyClass.route('blog-posts', { path: '/blog_posts' });",
     "route.unrelatedFunction('blog_posts');",
-    "this.route.unrelatedFunction('blog_posts');"
+    "this.route.unrelatedFunction('blog_posts');",
   ],
   invalid: [
     {
       code: 'this.route("blog_posts");',
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blogPosts");',
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blogPosts", function() {});',
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blog-posts", { path: "/blog_posts" });',
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blog-posts", { path: "/blogPosts" });',
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blog-posts", { path: "/blogPosts/:blog_id" });',
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blog-posts", { path: "/blog-posts/:blog_id/otherPart" });',
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blog-posts", { path: "/blogPosts/*path" });',
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blog-posts", { path: "/blogPosts" }, function() {});',
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }]
-    }
-  ]
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
+    },
+  ],
 });

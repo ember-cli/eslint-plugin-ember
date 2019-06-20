@@ -72,12 +72,11 @@ eslintTester.run('order-in-controllers', rule, {
         _customAction() { const foo = 'bar'; }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      options: [{
-        order: [
-          'actions',
-          'single-line-function',
-        ],
-      }],
+      options: [
+        {
+          order: ['actions', 'single-line-function'],
+        },
+      ],
     },
     {
       code: `export default Controller.extend({
@@ -85,12 +84,11 @@ eslintTester.run('order-in-controllers', rule, {
         currentUser: service(),
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      options: [{
-        order: [
-          'query-params',
-          'service',
-        ],
-      }],
+      options: [
+        {
+          order: ['query-params', 'service'],
+        },
+      ],
     },
     {
       code: `export default Controller.extend({
@@ -98,12 +96,11 @@ eslintTester.run('order-in-controllers', rule, {
         application: controller(),
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      options: [{
-        order: [
-          'query-params',
-          'controller',
-        ],
-      }],
+      options: [
+        {
+          order: ['query-params', 'controller'],
+        },
+      ],
     },
     {
       code: `
@@ -118,7 +115,7 @@ eslintTester.run('order-in-controllers', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `
@@ -130,7 +127,7 @@ eslintTester.run('order-in-controllers', rule, {
           customFoo() {}
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `
@@ -141,8 +138,8 @@ eslintTester.run('order-in-controllers', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
-    }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
   ],
   invalid: [
     {
@@ -151,10 +148,13 @@ eslintTester.run('order-in-controllers', rule, {
         currentUser: service()
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
-        line: 3,
-      }],
+      errors: [
+        {
+          message:
+            'The "currentUser" service injection should be above the "queryParams" property on line 2',
+          line: 3,
+        },
+      ],
     },
     {
       code: `export default Controller.extend({
@@ -162,10 +162,13 @@ eslintTester.run('order-in-controllers', rule, {
         currentUser: inject()
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
-        line: 3,
-      }],
+      errors: [
+        {
+          message:
+            'The "currentUser" service injection should be above the "queryParams" property on line 2',
+          line: 3,
+        },
+      ],
     },
     {
       code: `export default Controller.extend({
@@ -174,10 +177,12 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: []
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "queryParams" property should be above the "customProp" property on line 3',
-        line: 4,
-      }],
+      errors: [
+        {
+          message: 'The "queryParams" property should be above the "customProp" property on line 3',
+          line: 4,
+        },
+      ],
     },
     {
       code: `export default Controller.extend({
@@ -186,10 +191,12 @@ eslintTester.run('order-in-controllers', rule, {
         customProp: "test"
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "customProp" property should be above the actions hash on line 3',
-        line: 4,
-      }],
+      errors: [
+        {
+          message: 'The "customProp" property should be above the actions hash on line 3',
+          line: 4,
+        },
+      ],
     },
     {
       code: `export default Controller.extend({
@@ -198,10 +205,12 @@ eslintTester.run('order-in-controllers', rule, {
         actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The actions hash should be above the "_customAction" method on line 3',
-        line: 4,
-      }],
+      errors: [
+        {
+          message: 'The actions hash should be above the "_customAction" method on line 3',
+          line: 4,
+        },
+      ],
     },
     {
       code: `export default Controller.extend({
@@ -210,10 +219,12 @@ eslintTester.run('order-in-controllers', rule, {
         actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "queryParams" property should be above the "test" property on line 2',
-        line: 3,
-      }],
+      errors: [
+        {
+          message: 'The "queryParams" property should be above the "test" property on line 2',
+          line: 3,
+        },
+      ],
     },
     {
       code: `export default Controller.extend({
@@ -221,10 +232,13 @@ eslintTester.run('order-in-controllers', rule, {
         currentUser: service()
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
-        line: 3,
-      }],
+      errors: [
+        {
+          message:
+            'The "currentUser" service injection should be above the "queryParams" property on line 2',
+          line: 3,
+        },
+      ],
     },
     {
       code: `export default Controller.extend({
@@ -232,10 +246,13 @@ eslintTester.run('order-in-controllers', rule, {
         application: controller()
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "application" controller injection should be above the "currentUser" service injection on line 2',
-        line: 3,
-      }],
+      errors: [
+        {
+          message:
+            'The "application" controller injection should be above the "currentUser" service injection on line 2',
+          line: 3,
+        },
+      ],
     },
     {
       code: `export default Controller.extend({
@@ -245,10 +262,12 @@ eslintTester.run('order-in-controllers', rule, {
         actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "comp" single-line function should be above the "obs" observer on line 3',
-        line: 4,
-      }],
+      errors: [
+        {
+          message: 'The "comp" single-line function should be above the "obs" observer on line 3',
+          line: 4,
+        },
+      ],
     },
     {
       filename: 'example-app/controllers/some-controller.js',
@@ -257,10 +276,13 @@ eslintTester.run('order-in-controllers', rule, {
         currentUser: service()
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
-        line: 3,
-      }],
+      errors: [
+        {
+          message:
+            'The "currentUser" service injection should be above the "queryParams" property on line 2',
+          line: 3,
+        },
+      ],
     },
     {
       filename: 'example-app/some-feature/controller.js',
@@ -269,10 +291,13 @@ eslintTester.run('order-in-controllers', rule, {
         currentUser: service()
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
-        line: 3,
-      }],
+      errors: [
+        {
+          message:
+            'The "currentUser" service injection should be above the "queryParams" property on line 2',
+          line: 3,
+        },
+      ],
     },
     {
       filename: 'example-app/twised-path/some-controller.js',
@@ -281,10 +306,13 @@ eslintTester.run('order-in-controllers', rule, {
         currentUser: service()
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
-        line: 3,
-      }],
+      errors: [
+        {
+          message:
+            'The "currentUser" service injection should be above the "queryParams" property on line 2',
+          line: 3,
+        },
+      ],
     },
     {
       code: `
@@ -299,10 +327,12 @@ eslintTester.run('order-in-controllers', rule, {
         });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "init" lifecycle hook should be above the actions hash on line 4',
-        line: 7
-      }]
+      errors: [
+        {
+          message: 'The "init" lifecycle hook should be above the actions hash on line 4',
+          line: 7,
+        },
+      ],
     },
     {
       code: `
@@ -315,10 +345,13 @@ eslintTester.run('order-in-controllers', rule, {
         });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "init" lifecycle hook should be above the "customFoo" empty method on line 4',
-        line: 5
-      }]
+      errors: [
+        {
+          message:
+            'The "init" lifecycle hook should be above the "customFoo" empty method on line 4',
+          line: 5,
+        },
+      ],
     },
     {
       code: `
@@ -330,10 +363,13 @@ eslintTester.run('order-in-controllers', rule, {
         });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "foo" service injection should be above the "init" lifecycle hook on line 3',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "foo" service injection should be above the "init" lifecycle hook on line 3',
+          line: 6,
+        },
+      ],
     },
     {
       code: `
@@ -345,28 +381,32 @@ eslintTester.run('order-in-controllers', rule, {
         });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "someProp" property should be above the "init" lifecycle hook on line 3',
-        line: 6
-      }]
+      errors: [
+        {
+          message: 'The "someProp" property should be above the "init" lifecycle hook on line 3',
+          line: 6,
+        },
+      ],
     },
     {
       code:
-// whitespace is preserved inside `` and it's breaking the test
-`export default Controller.extend({
+        // whitespace is preserved inside `` and it's breaking the test
+        `export default Controller.extend({
   queryParams: [],
   currentUser: service(),
 });`,
-      output:
-`export default Controller.extend({
+      output: `export default Controller.extend({
   currentUser: service(),
   queryParams: [],
 });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "currentUser" service injection should be above the "queryParams" property on line 2',
-        line: 3,
-      }],
+      errors: [
+        {
+          message:
+            'The "currentUser" service injection should be above the "queryParams" property on line 2',
+          line: 3,
+        },
+      ],
     },
     {
       code: `export default Controller.extend({
@@ -380,10 +420,12 @@ eslintTester.run('order-in-controllers', rule, {
         actions: {}
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "queryParams" property should be above the "test" property on line 2',
-        line: 3,
-      }],
-    }
+      errors: [
+        {
+          message: 'The "queryParams" property should be above the "test" property on line 2',
+          line: 3,
+        },
+      ],
+    },
   ],
 });

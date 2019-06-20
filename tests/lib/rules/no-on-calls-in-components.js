@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester();
-const message = 'Don\'t use .on() for component lifecycle events.';
+const message = "Don't use .on() for component lifecycle events.";
 
 eslintTester.run('no-on-calls-in-components', rule, {
   valid: [
@@ -47,7 +47,8 @@ eslintTester.run('no-on-calls-in-components', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: 'export default Component.extend({abc: observer("abc", function () {test.on("xyz", def)})});',
+      code:
+        'export default Component.extend({abc: observer("abc", function () {test.on("xyz", def)})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
@@ -59,7 +60,8 @@ eslintTester.run('no-on-calls-in-components', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: 'export default Component.extend({didInsertElement() {$("body").on("click", def).on("click", function () {})}});',
+      code:
+        'export default Component.extend({didInsertElement() {$("body").on("click", def).on("click", function () {})}});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
@@ -67,7 +69,8 @@ eslintTester.run('no-on-calls-in-components', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: 'export default Component.extend({actions: {abc() {$("body").on("click", def).on("click", function () {})}}});',
+      code:
+        'export default Component.extend({actions: {abc() {$("body").on("click", def).on("click", function () {})}}});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
@@ -117,30 +120,38 @@ eslintTester.run('no-on-calls-in-components', rule, {
     },
     {
       filename: 'example-app/components/some-component/component.js',
-      code: 'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
+      code:
+        'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Don\'t use .on() for component lifecycle events.',
-      }],
+      errors: [
+        {
+          message: "Don't use .on() for component lifecycle events.",
+        },
+      ],
     },
     {
       filename: 'example-app/components/some-component.js',
-      code: 'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
+      code:
+        'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Don\'t use .on() for component lifecycle events.',
-      }],
+      errors: [
+        {
+          message: "Don't use .on() for component lifecycle events.",
+        },
+      ],
     },
     {
       filename: 'example-app/twised-path/some-file.js',
       code: 'export default Component.extend({test: on("didInsertElement", function () {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Don\'t use .on() for component lifecycle events.',
-      }],
+      errors: [
+        {
+          message: "Don't use .on() for component lifecycle events.",
+        },
+      ],
     },
   ],
 });

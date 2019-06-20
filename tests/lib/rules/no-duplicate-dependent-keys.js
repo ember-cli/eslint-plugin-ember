@@ -7,7 +7,6 @@
 const rule = require('../../../lib/rules/no-duplicate-dependent-keys');
 const RuleTester = require('eslint').RuleTester;
 
-
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
@@ -102,7 +101,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       }
       `,
       parserOptions,
-    }
+    },
   ],
   invalid: [
     {
@@ -113,9 +112,11 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: rule.meta.message,
-      }]
+      errors: [
+        {
+          message: rule.meta.message,
+        },
+      ],
     },
     {
       code: `
@@ -125,9 +126,11 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: rule.meta.message,
-      }]
+      errors: [
+        {
+          message: rule.meta.message,
+        },
+      ],
     },
     {
       code: `
@@ -137,9 +140,11 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: rule.meta.message,
-      }]
+      errors: [
+        {
+          message: rule.meta.message,
+        },
+      ],
     },
     {
       code: `
@@ -149,9 +154,11 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: rule.meta.message,
-      }]
+      errors: [
+        {
+          message: rule.meta.message,
+        },
+      ],
     },
     {
       code: `
@@ -161,9 +168,11 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: rule.meta.message,
-      }]
+      errors: [
+        {
+          message: rule.meta.message,
+        },
+      ],
     },
     {
       code: `
@@ -173,9 +182,11 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: rule.meta.message,
-      }]
-    }
-  ]
+      errors: [
+        {
+          message: rule.meta.message,
+        },
+      ],
+    },
+  ],
 });
