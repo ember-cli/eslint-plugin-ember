@@ -7,12 +7,11 @@
 const rule = require('../../../lib/rules/no-async-actions.js');
 const RuleTester = require('eslint').RuleTester;
 
-
+const { ERROR_MESSAGE } = rule;
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
-const message = 'Do not use async actions';
 
 const ruleTester = new RuleTester({
   parserOptions: {
@@ -47,7 +46,7 @@ ruleTester.run('no-async-actions', rule, {
       });`,
       output: null,
       errors: [{
-        message,
+        message: ERROR_MESSAGE,
       }]
     },
     {
@@ -62,7 +61,7 @@ ruleTester.run('no-async-actions', rule, {
       });`,
       output: null,
       errors: [{
-        message,
+        message: ERROR_MESSAGE,
       }]
     },
     {
@@ -74,7 +73,7 @@ ruleTester.run('no-async-actions', rule, {
       });`,
       output: null,
       errors: [{
-        message,
+        message: ERROR_MESSAGE,
       }]
     },
     {
@@ -88,7 +87,7 @@ ruleTester.run('no-async-actions', rule, {
       });`,
       output: null,
       errors: [{
-        message,
+        message: ERROR_MESSAGE,
       }]
     },
 

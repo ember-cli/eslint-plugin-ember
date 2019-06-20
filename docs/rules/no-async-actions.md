@@ -1,6 +1,8 @@
 # Do not use async actions
 ## Rule `no-async-actions`
 
+The problem is that it's possible for promise callback to run after the component has been destroyed, 
+and Ember will complain if you try and call `set()` on a destroyed object.
 
 
 Examples of **incorrect** code for this rule:
@@ -48,5 +50,4 @@ actions: {
 ## Further Reading
 
 - Ember Concurrency http://ember-concurrency.com/docs/tutorial (scroll down to Version 4)
-- eslint/no-async-promise-executor https://github.com/eslint/eslint/blob/master/docs/rules/no-async-promise-executor.md
 
