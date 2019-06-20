@@ -100,6 +100,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [no-unnecessary-index-route](./docs/rules/no-unnecessary-index-route.md) | Disallow unnecessary `index` route definition |
 | :wrench: | [no-unnecessary-route-path-option](./docs/rules/no-unnecessary-route-path-option.md) | Disallow unnecessary route `path` option |
 | :wrench: | [no-unnecessary-service-injection-argument](./docs/rules/no-unnecessary-service-injection-argument.md) | Disallow unnecessary argument when injecting service |
+|  | [no-volatile-computed-properties](./docs/rules/no-volatile-computed-properties.md) | Disallows volatile computed properties |
 | :wrench: | [require-computed-macros](./docs/rules/require-computed-macros.md) | Requires using computed property macros when possible |
 |  | [route-path-style](./docs/rules/route-path-style.md) | Enforces usage of kebab-case (instead of snake_case or camelCase) in route paths |
 | :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
