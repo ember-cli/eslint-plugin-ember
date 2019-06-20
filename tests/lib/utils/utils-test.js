@@ -151,7 +151,7 @@ describe('isThisExpression', () => {
 });
 
 describe('isConditionalExpression', () => {
-  const node = parse('test = true ? \'asd\' : \'qwe\'').right;
+  const node = parse("test = true ? 'asd' : 'qwe'").right;
 
   it('should check if node is a conditional expression', () => {
     expect(utils.isConditionalExpression(node)).toBeTruthy();
@@ -167,7 +167,9 @@ describe('isTaggedTemplateExpression', () => {
 });
 
 describe('getSize', () => {
-  const node = parse('some = {\nfew: "line",\nheight: "statement",\nthat: "should",\nhave: "6 lines",\n};');
+  const node = parse(
+    'some = {\nfew: "line",\nheight: "statement",\nthat: "should",\nhave: "6 lines",\n};'
+  );
 
   it('should check size of given expression', () => {
     expect(utils.getSize(node)).toEqual(6);
@@ -205,9 +207,9 @@ describe('getPropertyValue', () => {
     bar: {
       baz: 1,
       fizz: {
-        buzz: 'buzz'
-      }
-    }
+        buzz: 'buzz',
+      },
+    },
   };
 
   const node = babelEslint.parse(`

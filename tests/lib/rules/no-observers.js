@@ -26,9 +26,11 @@ eslintTester.run('no-observers', rule, {
       code: 'Ember.observer("text", function() {});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Don\'t use observers if possible',
-      }],
+      errors: [
+        {
+          message: "Don't use observers if possible",
+        },
+      ],
     },
   ],
 });

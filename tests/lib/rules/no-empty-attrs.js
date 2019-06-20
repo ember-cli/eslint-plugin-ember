@@ -19,7 +19,8 @@ eslintTester.run('no-empty-attrs', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: 'export default Model.extend({name: attr("string"), points: attr("number"), dob: attr("date")});',
+      code:
+        'export default Model.extend({name: attr("string"), points: attr("number"), dob: attr("date")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
@@ -98,7 +99,7 @@ eslintTester.run('no-empty-attrs', rule, {
       code: 'export default CustomModel.extend({name: attr()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 1 }]
+      errors: [{ message, line: 1 }],
     },
   ],
 });

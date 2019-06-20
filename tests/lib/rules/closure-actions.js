@@ -25,12 +25,15 @@ eslintTester.run('closure-actions', rule, {
   ],
   invalid: [
     {
-      code: 'export default Component.extend({actions: {pushLever() {this.sendAction("detonate");}}});',
+      code:
+        'export default Component.extend({actions: {pushLever() {this.sendAction("detonate");}}});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: ERROR_MESSAGE,
-      }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+        },
+      ],
     },
   ],
 });

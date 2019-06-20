@@ -13,7 +13,7 @@ eslintTester.run('no-jquery', rule, {
             this.element.classList.add('active')
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       filename: 'example-app/tests/integration/component/some-component-test.js',
@@ -28,8 +28,8 @@ eslintTester.run('no-jquery', rule, {
         test('assert something', function() {
           assert.equal(find('.some-component').textContent.trim(), 'hello world');
         })`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
-    }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
   ],
   invalid: [
     // Global $
@@ -42,9 +42,11 @@ eslintTester.run('no-jquery', rule, {
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message
-      }]
+      errors: [
+        {
+          message,
+        },
+      ],
     },
     // import $
     {
@@ -57,9 +59,11 @@ eslintTester.run('no-jquery', rule, {
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message
-      }]
+      errors: [
+        {
+          message,
+        },
+      ],
     },
     {
       code: `
@@ -72,9 +76,11 @@ eslintTester.run('no-jquery', rule, {
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message
-      }]
+      errors: [
+        {
+          message,
+        },
+      ],
     },
     // aliased import $ from jquery
     {
@@ -88,9 +94,11 @@ eslintTester.run('no-jquery', rule, {
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message
-      }]
+      errors: [
+        {
+          message,
+        },
+      ],
     },
     // Ember.$
     {
@@ -102,9 +110,11 @@ eslintTester.run('no-jquery', rule, {
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message
-      }]
+      errors: [
+        {
+          message,
+        },
+      ],
     },
     // Em.$
     {
@@ -116,9 +126,11 @@ eslintTester.run('no-jquery', rule, {
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message
-      }]
+      errors: [
+        {
+          message,
+        },
+      ],
     },
     // AliasedEmber.$
     {
@@ -131,9 +143,11 @@ eslintTester.run('no-jquery', rule, {
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message
-      }]
+      errors: [
+        {
+          message,
+        },
+      ],
     },
     // const jq = Ember.$
     {
@@ -146,9 +160,11 @@ eslintTester.run('no-jquery', rule, {
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message
-      }]
+      errors: [
+        {
+          message,
+        },
+      ],
     },
     // const { $ } = Ember;
     {
@@ -161,9 +177,11 @@ eslintTester.run('no-jquery', rule, {
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message
-      }]
+      errors: [
+        {
+          message,
+        },
+      ],
     },
     // this.$
     {
@@ -175,9 +193,11 @@ eslintTester.run('no-jquery', rule, {
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message
-      }]
+      errors: [
+        {
+          message,
+        },
+      ],
     },
     {
       filename: 'example-app/tests/integration/component/some-component-test.js',
@@ -194,9 +214,11 @@ eslintTester.run('no-jquery', rule, {
         })`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message
-      }]
-    }
-  ]
+      errors: [
+        {
+          message,
+        },
+      ],
+    },
+  ],
 });

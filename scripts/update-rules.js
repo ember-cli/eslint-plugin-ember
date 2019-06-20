@@ -28,13 +28,11 @@ const STAR = ':white_check_mark:';
 const PEN = ':wrench:';
 
 /* eslint-disable global-require, import/no-dynamic-require */
-const rules = fs.readdirSync(root)
+const rules = fs
+  .readdirSync(root)
   .filter(file => path.extname(file) === '.js')
   .map(file => path.basename(file, '.js'))
-  .map(fileName => [
-    fileName,
-    require(path.join(root, fileName))
-  ]);
+  .map(fileName => [fileName, require(path.join(root, fileName))]);
 
 const categories = rules
   .map(entry => entry[1].meta.docs.category)
@@ -45,25 +43,27 @@ const categories = rules
     return arr;
   }, []);
 
-let rulesTableContent = categories.map(category => `
+let rulesTableContent = categories
+  .map(
+    category => `
 ### ${category}
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-${
-  rules
-    .filter(([, rule]) => rule.meta.docs.category === category && !rule.meta.deprecated)
-    .map((entry) => {
-      const name = entry[0];
-      const meta = entry[1].meta;
-      const mark = `${meta.docs.recommended ? STAR : ''}${meta.fixable ? PEN : ''}`;
-      const link = `[${name}](./docs/rules/${name}.md)`;
-      const description = meta.docs.description || '(no description)';
-      return `| ${mark} | ${link} | ${description} |`;
-    })
-    .join('\n')
-}
-`).join('\n');
+${rules
+  .filter(([, rule]) => rule.meta.docs.category === category && !rule.meta.deprecated)
+  .map(entry => {
+    const name = entry[0];
+    const meta = entry[1].meta;
+    const mark = `${meta.docs.recommended ? STAR : ''}${meta.fixable ? PEN : ''}`;
+    const link = `[${name}](./docs/rules/${name}.md)`;
+    const description = meta.docs.description || '(no description)';
+    return `| ${mark} | ${link} | ${description} |`;
+  })
+  .join('\n')}
+`
+  )
+  .join('\n');
 
 rulesTableContent += `
 ### Deprecated
@@ -72,18 +72,18 @@ rulesTableContent += `
 
 | Rule ID | Replaced by |
 |:--------|:------------|
-${
-  rules
-    .filter(entry => entry[1].meta.deprecated)
-    .map((entry) => {
-      const name = entry[0];
-      const meta = entry[1].meta;
-      const link = `[${name}](./docs/rules/${name}.md)`;
-      const replacedBy = (meta.docs.replacedBy || []).map(id => `[${id}](./docs/rules/${id}.md)`).join(', ') || '(no replacement)';
-      return `| ${link} | ${replacedBy} |`;
-    })
-    .join('\n')
-}
+${rules
+  .filter(entry => entry[1].meta.deprecated)
+  .map(entry => {
+    const name = entry[0];
+    const meta = entry[1].meta;
+    const link = `[${name}](./docs/rules/${name}.md)`;
+    const replacedBy =
+      (meta.docs.replacedBy || []).map(id => `[${id}](./docs/rules/${id}.md)`).join(', ') ||
+      '(no replacement)';
+    return `| ${link} | ${replacedBy} |`;
+  })
+  .join('\n')}
 `;
 
 const recommendedRules = rules.reduce((obj, entry) => {
@@ -111,7 +111,4 @@ fs.writeFileSync(
   )
 );
 
-fs.writeFileSync(
-  recommendedRulesFile,
-  recommendedRulesContent
-);
+fs.writeFileSync(recommendedRulesFile, recommendedRulesContent);

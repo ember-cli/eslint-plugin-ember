@@ -6,8 +6,8 @@ const { makeErrorMessageForGet, ERROR_MESSAGE_GET_PROPERTIES } = rule;
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 2015,
-    sourceType: 'module'
-  }
+    sourceType: 'module',
+  },
 });
 
 ruleTester.run('no-get', rule, {
@@ -23,11 +23,11 @@ ruleTester.run('no-get', rule, {
     // Template literals.
     {
       code: 'this.get(`foo`);',
-      parserOptions: { ecmaVersion: 6 }
+      parserOptions: { ecmaVersion: 6 },
     },
     {
       code: 'get(this, `foo`);',
-      parserOptions: { ecmaVersion: 6 }
+      parserOptions: { ecmaVersion: 6 },
     },
 
     // Not `this`.
@@ -91,17 +91,17 @@ ruleTester.run('no-get', rule, {
     {
       code: "this.get('foo');",
       output: null,
-      errors: [{ message: makeErrorMessageForGet('foo', false) }]
+      errors: [{ message: makeErrorMessageForGet('foo', false) }],
     },
     {
       code: "get(this, 'foo');",
       output: null,
-      errors: [{ message: makeErrorMessageForGet('foo', true) }]
+      errors: [{ message: makeErrorMessageForGet('foo', true) }],
     },
     {
       code: "this.get('foo').someFunction();",
       output: null,
-      errors: [{ message: makeErrorMessageForGet('foo', false) }]
+      errors: [{ message: makeErrorMessageForGet('foo', false) }],
     },
 
     // **************************
@@ -111,22 +111,22 @@ ruleTester.run('no-get', rule, {
     {
       code: "this.getProperties('prop1', 'prop2');",
       output: null,
-      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
       code: "this.getProperties(['prop1', 'prop2']);", // With parameters in array.
       output: null,
-      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
       code: "getProperties(this, 'prop1', 'prop2');",
       output: null,
-      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
       code: "getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
       output: null,
-      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }]
-    }
-  ]
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+  ],
 });

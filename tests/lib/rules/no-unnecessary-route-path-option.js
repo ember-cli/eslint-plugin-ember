@@ -46,33 +46,33 @@ ruleTester.run('no-unnecessary-route-path-option', rule, {
     "MyClass.route('blog', { path: 'blog' });",
     "MyClass.route('blog', { path: '/blog' });",
     "route.unrelatedFunction('blog', { path: 'blog' });",
-    "this.route.unrelatedFunction('blog', { path: 'blog' });"
+    "this.route.unrelatedFunction('blog', { path: 'blog' });",
   ],
   invalid: [
     {
       code: 'this.route("blog", { path: "blog" });',
       output: 'this.route("blog" );',
-      errors: [{ message: ERROR_MESSAGE, type: 'Property' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
     },
     {
       code: 'this.route("blog", { path: "blog" }, function() {});',
       output: 'this.route("blog",  function() {});',
-      errors: [{ message: ERROR_MESSAGE, type: 'Property' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
     },
     {
       code: 'this.route("blog", { path: "/blog" });',
       output: 'this.route("blog" );',
-      errors: [{ message: ERROR_MESSAGE, type: 'Property' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
     },
     {
       code: 'this.route("blog", { path: "/blog", otherOption: true });',
       output: 'this.route("blog", {  otherOption: true });',
-      errors: [{ message: ERROR_MESSAGE, type: 'Property' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
     },
     {
       code: 'this.route("blog", { otherOption: true, path: "/blog" });',
       output: 'this.route("blog", { otherOption: true  });',
-      errors: [{ message: ERROR_MESSAGE, type: 'Property' }]
-    }
-  ]
+      errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
+    },
+  ],
 });

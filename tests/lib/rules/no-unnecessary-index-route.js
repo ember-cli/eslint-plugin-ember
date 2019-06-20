@@ -34,28 +34,28 @@ ruleTester.run('no-unnecessary-index-route', rule, {
     "route.unrelatedFunction('index');",
     "route.unrelatedFunction('index', { path: '/' });",
     "this.route.unrelatedFunction('index');",
-    "this.route.unrelatedFunction('index', { path: '/' });"
+    "this.route.unrelatedFunction('index', { path: '/' });",
   ],
   invalid: [
     {
       code: 'this.route("index");',
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'this.route("index", { path: "" });',
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'this.route("index", { path: "/" });',
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'this.route("index", { path: "/index" });',
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'this.route("index", { path: "/" }, function() {});',
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
-  ]
+  ],
 });

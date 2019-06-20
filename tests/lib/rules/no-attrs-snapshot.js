@@ -23,7 +23,7 @@ eslintTester.run('no-attrs-snapshot', rule, {
             }
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `
@@ -42,8 +42,8 @@ eslintTester.run('no-attrs-snapshot', rule, {
             }
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
-    }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
   ],
   invalid: [
     {
@@ -64,9 +64,11 @@ eslintTester.run('no-attrs-snapshot', rule, {
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message
-      }]
+      errors: [
+        {
+          message,
+        },
+      ],
     },
     {
       code: `
@@ -86,9 +88,11 @@ eslintTester.run('no-attrs-snapshot', rule, {
         });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message
-      }]
-    }
-  ]
+      errors: [
+        {
+          message,
+        },
+      ],
+    },
+  ],
 });

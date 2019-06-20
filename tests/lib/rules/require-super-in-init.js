@@ -20,7 +20,7 @@ eslintTester.run('require-super-in-init', rule, {
           return this._super(...arguments);
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Route.extend({
@@ -28,7 +28,7 @@ eslintTester.run('require-super-in-init', rule, {
           return this._super(...arguments);
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Controller.extend({
@@ -36,7 +36,7 @@ eslintTester.run('require-super-in-init', rule, {
           return this._super(...arguments);
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Mixin.extend({
@@ -44,7 +44,7 @@ eslintTester.run('require-super-in-init', rule, {
           return this._super(...arguments);
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Service.extend({
@@ -52,7 +52,7 @@ eslintTester.run('require-super-in-init', rule, {
           return this._super(...arguments);
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Component({
@@ -60,7 +60,7 @@ eslintTester.run('require-super-in-init', rule, {
           return this._super(...arguments);
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Route({
@@ -68,7 +68,7 @@ eslintTester.run('require-super-in-init', rule, {
           return this._super(...arguments);
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Controller({
@@ -76,7 +76,7 @@ eslintTester.run('require-super-in-init', rule, {
           return this._super(...arguments);
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Mixin({
@@ -84,7 +84,7 @@ eslintTester.run('require-super-in-init', rule, {
           return this._super(...arguments);
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: `export default Service({
@@ -92,7 +92,7 @@ eslintTester.run('require-super-in-init', rule, {
           return this._super(...arguments);
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
       code: 'export default Component.extend();',
@@ -193,7 +193,7 @@ eslintTester.run('require-super-in-init', rule, {
         },
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    }
+    },
   ],
   invalid: [
     {
@@ -349,7 +349,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Route.extend({
@@ -359,7 +359,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Controller.extend({
@@ -368,7 +368,7 @@ eslintTester.run('require-super-in-init', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Mixin.extend({
@@ -378,7 +378,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Service.extend({
@@ -388,7 +388,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Component({
@@ -398,7 +398,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Route({
@@ -408,7 +408,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Controller({
@@ -418,7 +418,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Mixin({
@@ -428,7 +428,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Service({
@@ -438,7 +438,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Component.extend({
@@ -448,7 +448,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Route.extend({
@@ -458,7 +458,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Controller.extend({
@@ -468,7 +468,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Mixin.extend({
@@ -478,7 +478,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Service.extend({
@@ -488,7 +488,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Component({
@@ -498,7 +498,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Route({
@@ -508,7 +508,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Controller({
@@ -518,7 +518,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Mixin({
@@ -528,7 +528,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
+      errors: [{ message, line: 2 }],
     },
     {
       code: `export default Service({
@@ -538,7 +538,7 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{ message, line: 2 }]
-    }
+      errors: [{ message, line: 2 }],
+    },
   ],
 });

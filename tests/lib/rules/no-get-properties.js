@@ -14,8 +14,8 @@ const { ERROR_MESSAGE } = rule;
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 2015,
-    sourceType: 'module'
-  }
+    sourceType: 'module',
+  },
 });
 
 ruleTester.run('no-get-properties', rule, {
@@ -53,35 +53,35 @@ ruleTester.run('no-get-properties', rule, {
     'const { abc } = this.getProperties(MY_PROP);',
     'const { abc } = this.getProperties([MY_PROP]);',
     'const { abc } = getProperties(this, MY_PROP);',
-    'const { abc } = getProperties(this, [MY_PROP]);'
+    'const { abc } = getProperties(this, [MY_PROP]);',
   ],
   invalid: [
     {
       code: "const { abc, def } = this.getProperties('abc', 'def');",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: "const { abc, def } = this.getProperties(['abc', 'def']);", // With parameters in array.
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: "const { abc, def } = getProperties(this, 'abc', 'def');",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: "const { abc, def } = getProperties(this, ['abc', 'def']);", // With parameters in array.
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
 
     // With `let`.
     {
       code: "let { abc, def } = this.getProperties('abc', 'def');",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }]
-    }
-  ]
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+  ],
 });

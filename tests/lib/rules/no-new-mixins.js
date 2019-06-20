@@ -11,7 +11,7 @@ const RuleTester = require('eslint').RuleTester;
 
 const MESSAGE = rule.meta.message;
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
 });
 eslintTester.run('no-new-mixins', rule, {
   valid: [
@@ -33,9 +33,11 @@ eslintTester.run('no-new-mixins', rule, {
         export default Ember.Mixin.create({});
       `,
       output: null,
-      errors: [{
-        message: MESSAGE,
-      }],
+      errors: [
+        {
+          message: MESSAGE,
+        },
+      ],
     },
     {
       code: `
@@ -44,9 +46,11 @@ eslintTester.run('no-new-mixins', rule, {
         export default Mixin.create({});
       `,
       output: null,
-      errors: [{
-        message: MESSAGE,
-      }],
+      errors: [
+        {
+          message: MESSAGE,
+        },
+      ],
     },
   ],
 });
