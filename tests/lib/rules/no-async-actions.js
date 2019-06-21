@@ -13,12 +13,7 @@ const { ERROR_MESSAGE } = rule;
 //------------------------------------------------------------------------------
 
 
-const ruleTester = new RuleTester({
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
-  }
-});
+const ruleTester = new RuleTester({});
 
 ruleTester.run('no-async-actions', rule, {
   valid: [
@@ -71,6 +66,7 @@ ruleTester.run('no-async-actions', rule, {
             // ...
           }
       });`,
+      parser: 'babel-eslint',
       output: null,
       errors: [{
         message: ERROR_MESSAGE,
@@ -85,6 +81,7 @@ ruleTester.run('no-async-actions', rule, {
             });
           }
       });`,
+      parser: 'babel-eslint',
       output: null,
       errors: [{
         message: ERROR_MESSAGE,

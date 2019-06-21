@@ -1,8 +1,8 @@
 # Do not use async actions
 ## Rule `no-async-actions`
 
-The problem is that it's possible for promise callback to run after the component has been destroyed, 
-and Ember will complain if you try and call `set()` on a destroyed object.
+Using async actions can lead to memory leaks and application errors if you 
+don't check for `isDestroying` and `isDestroyed` after each async step
 
 
 Examples of **incorrect** code for this rule:
