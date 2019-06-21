@@ -14,8 +14,8 @@ const { ERROR_MESSAGE } = rule;
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 2015,
-    sourceType: 'module'
-  }
+    sourceType: 'module',
+  },
 });
 
 ruleTester.run('no-unnecessary-service-injection-argument', rule, {
@@ -43,35 +43,31 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     // Not Ember's `service()` function:
     "export default Component.extend({ serviceName: otherFunction('serviceName') });",
     "export default Component.extend({ serviceName: service.otherFunction('serviceName') });",
-    "export default Component.extend({ serviceName: inject.otherFunction('serviceName') });"
+    "export default Component.extend({ serviceName: inject.otherFunction('serviceName') });",
   ],
   invalid: [
     // `Component` examples:
     {
-      code:
-        "export default Component.extend({ serviceName: service('serviceName') });",
+      code: "export default Component.extend({ serviceName: service('serviceName') });",
       output: 'export default Component.extend({ serviceName: service() });',
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
-      code:
-        "export default Component.extend({ serviceName: inject('serviceName') });",
+      code: "export default Component.extend({ serviceName: inject('serviceName') });",
       output: 'export default Component.extend({ serviceName: inject() });',
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
 
     // `Controller` examples:
     {
-      code:
-        "const controller = Controller.extend({ serviceName: service('serviceName') });",
+      code: "const controller = Controller.extend({ serviceName: service('serviceName') });",
       output: 'const controller = Controller.extend({ serviceName: service() });',
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }]
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
-      code:
-        "const controller = Controller.extend({ serviceName: inject('serviceName') });",
+      code: "const controller = Controller.extend({ serviceName: inject('serviceName') });",
       output: 'const controller = Controller.extend({ serviceName: inject() });',
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }]
-    }
-  ]
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
+    },
+  ],
 });

@@ -72,7 +72,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       parserOptions,
     },
     {
-      code: 'import { setupTest } from \'ember-qunit\';',
+      code: "import { setupTest } from 'ember-qunit';",
       parserOptions,
     },
     {
@@ -94,7 +94,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getSingleStringArgumentMessage('moduleFor')
+          message: messages.getSingleStringArgumentMessage('moduleFor'),
         },
       ],
     },
@@ -109,7 +109,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoUnitTrueMessage('moduleFor')
+          message: messages.getNoUnitTrueMessage('moduleFor'),
         },
       ],
     },
@@ -124,7 +124,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoNeedsMessage('moduleFor')
+          message: messages.getNoNeedsMessage('moduleFor'),
         },
       ],
     },
@@ -137,7 +137,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoPOJOWithoutIntegrationTrueMessage('moduleFor')
+          message: messages.getNoPOJOWithoutIntegrationTrueMessage('moduleFor'),
         },
       ],
     },
@@ -150,7 +150,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getSingleStringArgumentMessage('moduleForComponent')
+          message: messages.getSingleStringArgumentMessage('moduleForComponent'),
         },
       ],
     },
@@ -165,7 +165,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoUnitTrueMessage('moduleForComponent')
+          message: messages.getNoUnitTrueMessage('moduleForComponent'),
         },
       ],
     },
@@ -180,7 +180,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoNeedsMessage('moduleForComponent')
+          message: messages.getNoNeedsMessage('moduleForComponent'),
         },
       ],
     },
@@ -193,7 +193,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoPOJOWithoutIntegrationTrueMessage('moduleForComponent')
+          message: messages.getNoPOJOWithoutIntegrationTrueMessage('moduleForComponent'),
         },
       ],
     },
@@ -206,7 +206,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getSingleStringArgumentMessage('moduleForModel')
+          message: messages.getSingleStringArgumentMessage('moduleForModel'),
         },
       ],
     },
@@ -221,7 +221,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoUnitTrueMessage('moduleForModel')
+          message: messages.getNoUnitTrueMessage('moduleForModel'),
         },
       ],
     },
@@ -236,7 +236,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoNeedsMessage('moduleForModel')
+          message: messages.getNoNeedsMessage('moduleForModel'),
         },
       ],
     },
@@ -249,7 +249,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoPOJOWithoutIntegrationTrueMessage('moduleForModel')
+          message: messages.getNoPOJOWithoutIntegrationTrueMessage('moduleForModel'),
         },
       ],
     },
@@ -262,7 +262,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getSingleStringArgumentMessage('setupTest')
+          message: messages.getSingleStringArgumentMessage('setupTest'),
         },
       ],
     },
@@ -277,7 +277,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoUnitTrueMessage('setupTest')
+          message: messages.getNoUnitTrueMessage('setupTest'),
         },
       ],
     },
@@ -292,7 +292,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoNeedsMessage('setupTest')
+          message: messages.getNoNeedsMessage('setupTest'),
         },
       ],
     },
@@ -305,7 +305,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoPOJOWithoutIntegrationTrueMessage('setupTest')
+          message: messages.getNoPOJOWithoutIntegrationTrueMessage('setupTest'),
         },
       ],
     },
@@ -318,7 +318,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getSingleStringArgumentMessage('setupComponentTest')
+          message: messages.getSingleStringArgumentMessage('setupComponentTest'),
         },
       ],
     },
@@ -333,7 +333,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoUnitTrueMessage('setupComponentTest')
+          message: messages.getNoUnitTrueMessage('setupComponentTest'),
         },
       ],
     },
@@ -348,7 +348,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoNeedsMessage('setupComponentTest')
+          message: messages.getNoNeedsMessage('setupComponentTest'),
         },
       ],
     },
@@ -361,7 +361,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoPOJOWithoutIntegrationTrueMessage('setupComponentTest')
+          message: messages.getNoPOJOWithoutIntegrationTrueMessage('setupComponentTest'),
         },
       ],
     },
@@ -374,7 +374,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getSingleStringArgumentMessage('setupModelTest')
+          message: messages.getSingleStringArgumentMessage('setupModelTest'),
         },
       ],
     },
@@ -389,7 +389,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoUnitTrueMessage('setupModelTest')
+          message: messages.getNoUnitTrueMessage('setupModelTest'),
         },
       ],
     },
@@ -404,7 +404,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoNeedsMessage('setupModelTest')
+          message: messages.getNoNeedsMessage('setupModelTest'),
         },
       ],
     },
@@ -417,7 +417,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
       output: null,
       errors: [
         {
-          message: messages.getNoPOJOWithoutIntegrationTrueMessage('setupModelTest')
+          message: messages.getNoPOJOWithoutIntegrationTrueMessage('setupModelTest'),
         },
       ],
     },

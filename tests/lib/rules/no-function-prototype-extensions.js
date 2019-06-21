@@ -69,7 +69,8 @@ eslintTester.run('no-function-prototype-extensions', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: 'export default Controller.extend({test() {$("body").on("click", abc).on("click", function () {});}});',
+      code:
+        'export default Controller.extend({test() {$("body").on("click", abc).on("click", function () {});}});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
   ],
@@ -78,25 +79,31 @@ eslintTester.run('no-function-prototype-extensions', rule, {
       code: 'export default Controller.extend({test: function() {}.property("abc")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Don\'t use Ember\'s function prototype extensions',
-      }],
+      errors: [
+        {
+          message: "Don't use Ember's function prototype extensions",
+        },
+      ],
     },
     {
       code: 'export default Controller.extend({test: function() {}.observes("abc")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Don\'t use Ember\'s function prototype extensions',
-      }],
+      errors: [
+        {
+          message: "Don't use Ember's function prototype extensions",
+        },
+      ],
     },
     {
       code: 'export default Controller.extend({test: function() {}.on("init")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Don\'t use Ember\'s function prototype extensions',
-      }],
+      errors: [
+        {
+          message: "Don't use Ember's function prototype extensions",
+        },
+      ],
     },
   ],
 });

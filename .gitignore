@@ -6,6 +6,7 @@ logs
 node_modules
 
 # Misc
+.eslintcache
 coverage
 npm-debug.log
 *.swp

@@ -7,7 +7,6 @@
 const rule = require('../../../lib/rules/no-attrs-in-components');
 const RuleTester = require('eslint').RuleTester;
 
-
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
@@ -22,7 +21,7 @@ ruleTester.run('no-attrs-in-components', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    }
+    },
   ],
 
   invalid: [
@@ -34,9 +33,11 @@ ruleTester.run('no-attrs-in-components', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
-      errors: [{
-        message: 'Do not use this.attrs',
-      }]
-    }
-  ]
+      errors: [
+        {
+          message: 'Do not use this.attrs',
+        },
+      ],
+    },
+  ],
 });
