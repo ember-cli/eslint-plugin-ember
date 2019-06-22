@@ -1,4 +1,21 @@
-# Changelog
+## v6.7.0 (2019-06-22)
+
+#### :rocket: Enhancement
+* [#436](https://github.com/ember-cli/eslint-plugin-ember/pull/436) Adds decorator rules to aid migration to Octane ([@pzuraq](https://github.com/pzuraq))
+* [#434](https://github.com/ember-cli/eslint-plugin-ember/pull/434) Add new `no-volatile-computed-properties` rule ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#432](https://github.com/ember-cli/eslint-plugin-ember/pull/432) Update `require-computed-macros` rule to suggest the `reads` macro instead of `readOnly` for computed properties with `return this.x` ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#435](https://github.com/ember-cli/eslint-plugin-ember/pull/435) Update ESLint config incl. Prettier ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 4
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Chris Garrett ([@pzuraq](https://github.com/pzuraq))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 
 ## v6.6.0 (2019-06-16)
 
