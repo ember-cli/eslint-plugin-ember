@@ -1,3 +1,11 @@
+## v6.7.1 (2019-07-02)
+
+#### :bug: Bug Fix
+* [#440](https://github.com/ember-cli/eslint-plugin-ember/pull/440) Add missing rules `classic-decorator-hooks` and `classic-decorator-no-classic-methods` to index.js ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v6.7.0 (2019-06-22)
 
 #### :rocket: Enhancement
