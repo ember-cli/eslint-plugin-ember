@@ -56,7 +56,7 @@ eslintTester.run('new-module-imports', rule, {
       errors: [
         {
           message:
-            "Use import EmberObject from '@ember/object'; instead of using Ember destructuring",
+            "Use `import EmberObject from '@ember/object';` instead of using Ember destructuring",
           line: 3,
         },
       ],
@@ -72,12 +72,12 @@ eslintTester.run('new-module-imports', rule, {
       output: null,
       errors: [
         {
-          message: "Use import $ from 'jquery'; instead of using Ember destructuring",
+          message: "Use `import $ from 'jquery';` instead of using Ember destructuring",
           line: 3,
         },
         {
           message:
-            "Use import Controller from '@ember/controller'; instead of using Ember destructuring",
+            "Use `import Controller from '@ember/controller';` instead of using Ember destructuring",
           line: 3,
         },
       ],
@@ -95,12 +95,12 @@ eslintTester.run('new-module-imports', rule, {
       errors: [
         {
           message:
-            "Use import Component from '@ember/component'; instead of using Ember destructuring",
+            "Use `import Component from '@ember/component';` instead of using Ember destructuring",
           line: 3,
         },
         {
           message:
-            "Use import { htmlSafe } from '@ember/template'; instead of using Ember destructuring",
+            "Use `import { htmlSafe } from '@ember/template';` instead of using Ember destructuring",
           line: 3,
         },
       ],
@@ -119,16 +119,17 @@ eslintTester.run('new-module-imports', rule, {
       errors: [
         {
           message:
-            "Use import { inject as controller } from '@ember/controller'; instead of using Ember destructuring",
+            "Use `import { inject as controller } from '@ember/controller';` instead of using Ember destructuring",
           line: 3,
         },
         {
           message:
-            "Use import { inject as service } from '@ember/service'; instead of using Ember destructuring",
+            "Use `import { inject as service } from '@ember/service';` instead of using Ember destructuring",
           line: 3,
         },
         {
-          message: "Use import Component from '@ember/component'; instead of using Ember.Component",
+          message:
+            "Use `import Component from '@ember/component';` instead of using Ember.Component",
           line: 5,
         },
       ],
@@ -147,12 +148,12 @@ eslintTester.run('new-module-imports', rule, {
       errors: [
         {
           message:
-            "Use import { alias } from '@ember/object/computed'; instead of using Ember destructuring",
+            "Use `import { alias } from '@ember/object/computed';` instead of using Ember destructuring",
           line: 5,
         },
         {
           message:
-            "Use import { uniq } from '@ember/object/computed'; instead of using Ember destructuring",
+            "Use `import { uniq } from '@ember/object/computed';` instead of using Ember destructuring",
           line: 5,
         },
       ],
@@ -163,7 +164,7 @@ eslintTester.run('new-module-imports', rule, {
       output: null,
       errors: [
         {
-          message: "Use import Service from '@ember/service'; instead of using Ember.Service",
+          message: "Use `import Service from '@ember/service';` instead of using Ember.Service",
           line: 1,
         },
       ],
@@ -174,7 +175,7 @@ eslintTester.run('new-module-imports', rule, {
       output: null,
       errors: [
         {
-          message: "Use import Service from '@ember/service'; instead of using Ember.Service",
+          message: "Use `import Service from '@ember/service';` instead of using Ember.Service",
           line: 1,
         },
       ],
@@ -184,7 +185,8 @@ eslintTester.run('new-module-imports', rule, {
       output: null,
       errors: [
         {
-          message: "Use import { computed } from '@ember/object'; instead of using Ember.computed",
+          message:
+            "Use `import { computed } from '@ember/object';` instead of using Ember.computed",
           line: 1,
         },
       ],
@@ -195,7 +197,7 @@ eslintTester.run('new-module-imports', rule, {
       errors: [
         {
           message:
-            "Use import { not } from '@ember/object/computed'; instead of using Ember.computed.not",
+            "Use `import { not } from '@ember/object/computed';` instead of using Ember.computed.not",
           line: 1,
         },
       ],
@@ -206,7 +208,7 @@ eslintTester.run('new-module-imports', rule, {
       errors: [
         {
           message:
-            "Use import { inject } from '@ember/service'; instead of using Ember.inject.service",
+            "Use `import { inject } from '@ember/service';` instead of using Ember.inject.service",
           line: 1,
         },
       ],
@@ -217,7 +219,7 @@ eslintTester.run('new-module-imports', rule, {
       errors: [
         {
           message:
-            "Use import EmberRouter from '@ember/routing/router'; instead of using Ember.Router",
+            "Use `import EmberRouter from '@ember/routing/router';` instead of using Ember.Router",
           line: 1,
         },
       ],
@@ -227,7 +229,7 @@ eslintTester.run('new-module-imports', rule, {
       output: null,
       errors: [
         {
-          message: "Use import $ from 'jquery'; instead of using Ember.$",
+          message: "Use `import $ from 'jquery';` instead of using Ember.$",
           line: 1,
         },
       ],
@@ -237,7 +239,7 @@ eslintTester.run('new-module-imports', rule, {
       output: null,
       errors: [
         {
-          message: "Use import { Promise } from 'rsvp'; instead of using Ember.RSVP.Promise",
+          message: "Use `import { Promise } from 'rsvp';` instead of using Ember.RSVP.Promise",
           line: 1,
         },
       ],
