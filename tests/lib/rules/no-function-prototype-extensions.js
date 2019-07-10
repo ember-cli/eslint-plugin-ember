@@ -37,6 +37,10 @@ eslintTester.run('no-function-prototype-extensions', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
+      code: 'export default Controller.extend({test: beforeObserver("abc", function () {})});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
       code: 'export default Controller.extend({test: service()});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
@@ -58,6 +62,11 @@ eslintTester.run('no-function-prototype-extensions', rule, {
     },
     {
       code: 'export default Controller.extend({test: observer("abc", function () {abc.on();})});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    {
+      code:
+        'export default Controller.extend({test: beforeObserver("abc", function () {abc.on();})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
@@ -87,6 +96,16 @@ eslintTester.run('no-function-prototype-extensions', rule, {
     },
     {
       code: 'export default Controller.extend({test: function() {}.observes("abc")});',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
+      errors: [
+        {
+          message: "Don't use Ember's function prototype extensions",
+        },
+      ],
+    },
+    {
+      code: 'export default Controller.extend({test: function() {}.observesBefore("abc")});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
