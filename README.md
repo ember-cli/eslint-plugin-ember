@@ -133,6 +133,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [classic-decorator-hooks](./docs/rules/classic-decorator-hooks.md) | Ensure correct hooks are used for both classic and non-classic classes |
 |  | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | Prevent usage of classic APIs such as get/set in classes that aren't explicitly decorated with @classic |
 |  | [computed-property-getters](./docs/rules/computed-property-getters.md) | Enforce the consistent use of getters in computed properties |
+|  | [no-proxies](./docs/rules/no-proxies.md) | Disallows using array or object proxies |
 
 
 ### Testing

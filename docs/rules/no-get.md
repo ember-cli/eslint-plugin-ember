@@ -55,6 +55,10 @@ const { prop1, prop2 } = this;
 const foo = { prop1: this.prop1, prop2: this.prop2 };
 ```
 
+## Related Rules
+
+* [no-proxies](no-proxies.md)
+
 ## References
 
 * [Ember 3.1 Release Notes](https://blog.emberjs.com/2018/04/13/ember-3-1-released.html) describing "ES5 Getters for Computed Properties"
