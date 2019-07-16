@@ -87,6 +87,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [closure-actions](./docs/rules/closure-actions.md) | Enforces usage of closure actions |
 |  | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
 | :white_check_mark: | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
+| :wrench: | [no-ember-data-global-imports](./docs/rules/no-ember-data-global-imports.md) | Use "Ember Data Packages" from Ember RFC #395 |
 |  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
 | :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
 |  | [no-get](./docs/rules/no-get.md) | Require ES5 getters instead of Ember's `get` / `getProperties` functions |

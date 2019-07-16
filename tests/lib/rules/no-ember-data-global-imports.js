@@ -4,30 +4,26 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/new-ember-data-packages');
+const rule = require('../../../lib/rules/no-ember-data-global-imports');
 const RuleTester = require('eslint').RuleTester;
 const parserOptions = { ecmaVersion: 6, sourceType: 'module' };
+
+const { ERROR_MESSAGE: message } = rule;
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
-ruleTester.run('new-ember-data-packages', rule, {
+const ruleTester = new RuleTester({ parserOptions });
+ruleTester.run('no-ember-data-global-imports', rule, {
   valid: [
-    {
-      code: `import Model from '@ember-data/model';`,
-      parserOptions,
-    },
-    {
-      code: `import Model, { attr } from '@ember-data';
+    "import Model from '@ember-data/model';",
+    `import Model, { attr } from '@ember-data';
 
-        export default Model.extend({
-          name: attr('string')
-        });
-      `,
-      parserOptions,
-    },
+     export default Model.extend({
+       name: attr('string')
+     });
+    `,
   ],
 
   invalid: [
@@ -37,11 +33,9 @@ ruleTester.run('new-ember-data-packages', rule, {
         export default DS.Model.extend({
         });
       `,
-      parserOptions,
       errors: [
         {
-          message:
-            'Imports from new @ember-data packages should be prefered over imports from ember-data',
+          message,
           type: 'ImportDeclaration',
         },
         {
@@ -57,11 +51,9 @@ ruleTester.run('new-ember-data-packages', rule, {
           name: DS.attr('string')
         });
       `,
-      parserOptions,
       errors: [
         {
-          message:
-            'Imports from new @ember-data packages should be prefered over imports from ember-data',
+          message,
           type: 'ImportDeclaration',
         },
         {
@@ -72,17 +64,15 @@ ruleTester.run('new-ember-data-packages', rule, {
     },
     {
       code: `import DS from 'ember-data';
-        const { Model } = DS;
+        const { Model, attr } = DS;
 
         export default Model.extend({
-          name: DS.attr('string')
+          name: attr('string')
         });
       `,
-      parserOptions,
       errors: [
         {
-          message:
-            'Imports from new @ember-data packages should be prefered over imports from ember-data',
+          message,
           type: 'ImportDeclaration',
         },
         {
@@ -90,8 +80,9 @@ ruleTester.run('new-ember-data-packages', rule, {
           type: 'Property',
         },
         {
-          message: "Use `import { attr } from '@ember-data/model';` instead of using DS.attr",
-          type: 'Identifier',
+          message:
+            "Use `import { attr } from '@ember-data/model';` instead of using DS destructuring",
+          type: 'Property',
         },
       ],
     },
@@ -101,11 +92,9 @@ ruleTester.run('new-ember-data-packages', rule, {
         export default Model.extend({
         });
       `,
-      parserOptions,
       errors: [
         {
-          message:
-            'Imports from new @ember-data packages should be prefered over imports from ember-data',
+          message,
           type: 'ImportDeclaration',
         },
       ],
@@ -118,16 +107,13 @@ ruleTester.run('new-ember-data-packages', rule, {
           name: attr('string')
         });
       `,
-      parserOptions,
       errors: [
         {
-          message:
-            'Imports from new @ember-data packages should be prefered over imports from ember-data',
+          message,
           type: 'ImportDeclaration',
         },
         {
-          message:
-            'Imports from new @ember-data packages should be prefered over imports from ember-data',
+          message,
           type: 'ImportDeclaration',
         },
       ],
@@ -140,11 +126,9 @@ ruleTester.run('new-ember-data-packages', rule, {
           name: attr('string')
         });
       `,
-      parserOptions,
       errors: [
         {
-          message:
-            'Imports from new @ember-data packages should be prefered over imports from ember-data',
+          message,
           type: 'ImportDeclaration',
         },
       ],
@@ -154,14 +138,12 @@ ruleTester.run('new-ember-data-packages', rule, {
         import namedAttr from 'ember-data/attr';
 
         export default Model.extend({
-          name: attr('string')
+          name: namedAttr('string')
         });
       `,
-      parserOptions,
       errors: [
         {
-          message:
-            'Imports from new @ember-data packages should be prefered over imports from ember-data',
+          message,
           type: 'ImportDeclaration',
         },
       ],
@@ -172,11 +154,9 @@ ruleTester.run('new-ember-data-packages', rule, {
         export default Model.extend({
         });
       `,
-      parserOptions,
       errors: [
         {
-          message:
-            'Imports from new @ember-data packages should be prefered over imports from ember-data',
+          message,
           type: 'ImportDeclaration',
         },
       ],

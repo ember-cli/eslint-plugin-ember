@@ -1,10 +1,10 @@
-# Use &#34;Ember Data Packages&#34; from Ember RFC #395 (new-ember-data-packages)
+# Use &#34;Ember Data Packages&#34; from Ember RFC #395 (no-ember-data-global-imports)
 
 The goal of this rule is to ease the migration to the new @ember-data packages.
 
 ## Context
 
-`ember-data has been split in multiple packages. For instance, its store is now released in "@ember-data/store" package. These packages have been released starting from ember-data version 3.11.
+ember-data has been split in multiple packages. For instance, its store is now released in "@ember-data/store" package. These packages have been released starting from ember-data version 3.11.
 
 ## Rule Details
 
@@ -30,7 +30,7 @@ import Model from "@ember-data/model";
 
 This rule implements a fix function (or to be more precise: it leverages the `no-old-shims` fix function). If, as a user, you can get rid of all the `import DS from "ember-data";` imports, you'll be able to use this rule fixer to complete the upgrade. 
 
-Note that a codemod is also available to complete the upgrade.
+Note that [a codemod is also available](https://github.com/ember-codemods/ember-data-codemod) to complete the upgrade.
 
 ## When Not To Use It
 
