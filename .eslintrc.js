@@ -13,9 +13,9 @@ module.exports = {
   },
   rules: {
     // Possible Errors
-    // 'no-async-promise-executor': 'error',  // available in ESLint 5
+    'no-async-promise-executor': 'error',
     'no-template-curly-in-string': 'error',
-    // 'require-atomic-updates': 'error',  // available in ESLint 5
+    'require-atomic-updates': 'error',
 
     // Best Practices
     'array-callback-return': 'error',
@@ -35,7 +35,7 @@ module.exports = {
     'no-throw-literal': 'error',
     'no-unused-expressions': 'error',
     'no-useless-call': 'error',
-    // 'no-useless-catch': 'error',  // available in ESLint 5
+    'no-useless-catch': 'error',
     'no-useless-concat': 'error',
     'no-useless-escape': 'error',
     'no-useless-return': 'error',
