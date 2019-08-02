@@ -1,7 +1,7 @@
 const rule = require('../../../lib/rules/no-attrs-snapshot');
 const RuleTester = require('eslint').RuleTester;
 
-const message = rule.meta.message;
+const { ERROR_MESSAGE } = rule;
 const eslintTester = new RuleTester();
 
 eslintTester.run('no-attrs-snapshot', rule, {
@@ -66,7 +66,7 @@ eslintTester.run('no-attrs-snapshot', rule, {
       output: null,
       errors: [
         {
-          message,
+          ERROR_MESSAGE,
         },
       ],
     },
@@ -90,7 +90,7 @@ eslintTester.run('no-attrs-snapshot', rule, {
       output: null,
       errors: [
         {
-          message,
+          ERROR_MESSAGE,
         },
       ],
     },

@@ -11,11 +11,12 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 //------------------------------------------------------------------------------
 
+const { ERROR_MESSAGE } = rule;
 const ruleTester = new RuleTester();
 const parserOptions = { ecmaVersion: 2018, sourceType: 'module' };
 const errors = [
   {
-    message: rule.meta.message,
+    message: ERROR_MESSAGE,
   },
 ];
 const output = null;
