@@ -9,7 +9,7 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-const MESSAGE = rule.meta.message;
+const { ERROR_MESSAGE } = rule;
 const eslintTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
 });
@@ -35,7 +35,7 @@ eslintTester.run('no-new-mixins', rule, {
       output: null,
       errors: [
         {
-          message: MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -48,7 +48,7 @@ eslintTester.run('no-new-mixins', rule, {
       output: null,
       errors: [
         {
-          message: MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },

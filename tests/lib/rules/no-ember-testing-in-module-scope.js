@@ -3,7 +3,7 @@
 const rule = require('../../../lib/rules/no-ember-testing-in-module-scope');
 const RuleTester = require('eslint').RuleTester;
 
-const messages = rule.meta.messages;
+const { ERROR_MESSAGES } = rule;
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 6,
@@ -56,7 +56,7 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
         });
       `,
       output: null,
-      errors: [{ message: messages[1] }],
+      errors: [{ message: ERROR_MESSAGES[1] }],
     },
     {
       code: `
@@ -67,7 +67,7 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
         });
       `,
       output: null,
-      errors: [{ message: messages[0] }],
+      errors: [{ message: ERROR_MESSAGES[0] }],
     },
     {
       code: `
@@ -76,16 +76,16 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
         const testDelay = FooEmber.testing ? 0 : 400
       `,
       output: null,
-      errors: [{ message: messages[0] }],
+      errors: [{ message: ERROR_MESSAGES[0] }],
     },
     {
       code: 'const IS_TESTING = Ember.testing;',
       output: null,
-      errors: [{ message: messages[1] }, { message: messages[0] }],
+      errors: [{ message: ERROR_MESSAGES[1] }, { message: ERROR_MESSAGES[0] }],
     },
     {
       code: 'const { testing } = Ember;',
-      errors: [{ message: messages[2] }],
+      errors: [{ message: ERROR_MESSAGES[2] }],
     },
     {
       code: `
@@ -94,7 +94,7 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
         const { testing } = FooEmber;
       `,
       output: null,
-      errors: [{ message: messages[2] }],
+      errors: [{ message: ERROR_MESSAGES[2] }],
     },
   ],
 });

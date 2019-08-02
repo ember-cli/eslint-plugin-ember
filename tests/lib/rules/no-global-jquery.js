@@ -16,7 +16,7 @@ const parserOptions = {
   ecmaVersion: 6,
   sourceType: 'module',
 };
-const MESSAGE = rule.meta.message;
+const { ERROR_MESSAGE } = rule;
 
 ruleTester.run('no-global-jquery', rule, {
   valid: [
@@ -304,7 +304,7 @@ ruleTester.run('no-global-jquery', rule, {
       output: null,
       errors: [
         {
-          message: MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -321,7 +321,7 @@ ruleTester.run('no-global-jquery', rule, {
       output: null,
       errors: [
         {
-          message: MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -336,7 +336,7 @@ ruleTester.run('no-global-jquery', rule, {
       output: null,
       errors: [
         {
-          message: MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -353,7 +353,7 @@ ruleTester.run('no-global-jquery', rule, {
       output: null,
       errors: [
         {
-          message: MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -374,7 +374,7 @@ ruleTester.run('no-global-jquery', rule, {
       output: null,
       errors: [
         {
-          message: MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -395,7 +395,7 @@ ruleTester.run('no-global-jquery', rule, {
       output: null,
       errors: [
         {
-          message: MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },

@@ -1,7 +1,7 @@
 const rule = require('../../../lib/rules/no-jquery');
 const RuleTester = require('eslint').RuleTester;
 
-const message = rule.meta.message;
+const { ERROR_MESSAGE } = rule;
 const eslintTester = new RuleTester();
 
 eslintTester.run('no-jquery', rule, {
@@ -44,7 +44,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          message,
+          ERROR_MESSAGE,
         },
       ],
     },
@@ -61,7 +61,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          message,
+          ERROR_MESSAGE,
         },
       ],
     },
@@ -78,7 +78,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          message,
+          ERROR_MESSAGE,
         },
       ],
     },
@@ -96,7 +96,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          message,
+          ERROR_MESSAGE,
         },
       ],
     },
@@ -112,7 +112,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          message,
+          ERROR_MESSAGE,
         },
       ],
     },
@@ -128,7 +128,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          message,
+          ERROR_MESSAGE,
         },
       ],
     },
@@ -145,7 +145,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          message,
+          ERROR_MESSAGE,
         },
       ],
     },
@@ -162,7 +162,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          message,
+          ERROR_MESSAGE,
         },
       ],
     },
@@ -179,7 +179,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          message,
+          ERROR_MESSAGE,
         },
       ],
     },
@@ -195,7 +195,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          message,
+          ERROR_MESSAGE,
         },
       ],
     },
@@ -216,7 +216,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          message,
+          ERROR_MESSAGE,
         },
       ],
     },

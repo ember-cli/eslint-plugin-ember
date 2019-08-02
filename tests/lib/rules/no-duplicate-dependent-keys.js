@@ -11,6 +11,7 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 //------------------------------------------------------------------------------
 
+const { ERROR_MESSAGE } = rule;
 const ruleTester = new RuleTester();
 const parserOptions = { ecmaVersion: 6, sourceType: 'module' };
 ruleTester.run('no-duplicate-dependent-keys', rule, {
@@ -114,7 +115,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       output: null,
       errors: [
         {
-          message: rule.meta.message,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -128,7 +129,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       output: null,
       errors: [
         {
-          message: rule.meta.message,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -142,7 +143,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       output: null,
       errors: [
         {
-          message: rule.meta.message,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -156,7 +157,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       output: null,
       errors: [
         {
-          message: rule.meta.message,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -170,7 +171,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       output: null,
       errors: [
         {
-          message: rule.meta.message,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -184,7 +185,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
       output: null,
       errors: [
         {
-          message: rule.meta.message,
+          message: ERROR_MESSAGE,
         },
       ],
     },
