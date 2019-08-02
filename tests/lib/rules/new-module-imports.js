@@ -42,6 +42,13 @@ eslintTester.run('new-module-imports', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    {
+      code: `import LOL from 'who-knows-but-definitely-not-ember';
+
+        const { Controller } = LOL;
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
   ],
   invalid: [
     {
@@ -57,6 +64,21 @@ eslintTester.run('new-module-imports', rule, {
         {
           message:
             "Use `import EmberObject from '@ember/object';` instead of using Ember destructuring",
+          line: 3,
+        },
+      ],
+    },
+    {
+      code: `import LOL from 'ember';
+
+        const { Controller } = LOL;
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
+      errors: [
+        {
+          message:
+            "Use `import Controller from '@ember/controller';` instead of using Ember destructuring",
           line: 3,
         },
       ],

@@ -24,6 +24,10 @@ ruleTester.run('no-ember-data-global-imports', rule, {
        name: attr('string')
      });
     `,
+    `import LOL from 'who-knows-but-definitely-not-ember-data';
+
+     const { Model } = LOL;
+    `,
   ],
 
   invalid: [
@@ -158,6 +162,22 @@ ruleTester.run('no-ember-data-global-imports', rule, {
         {
           message,
           type: 'ImportDeclaration',
+        },
+      ],
+    },
+    {
+      code: `import ED from 'ember-data';
+
+        const { Model } = ED;
+      `,
+      errors: [
+        {
+          message,
+          type: 'ImportDeclaration',
+        },
+        {
+          message: "Use `import Model from '@ember-data/model';` instead of using DS destructuring",
+          type: 'Property',
         },
       ],
     },
