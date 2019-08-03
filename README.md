@@ -87,8 +87,6 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [closure-actions](./docs/rules/closure-actions.md) | Enforces usage of closure actions |
 |  | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
 | :white_check_mark: | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
-| :wrench: | [no-ember-data-global-imports](./docs/rules/no-ember-data-global-imports.md) | Use "Ember Data Packages" from Ember RFC #395 |
-|  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
 | :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
 |  | [no-get](./docs/rules/no-get.md) | Require ES5 getters instead of Ember's `get` / `getProperties` functions |
 | :white_check_mark: | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
@@ -136,6 +134,14 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | Prevent usage of classic APIs such as get/set in classes that aren't explicitly decorated with @classic |
 |  | [computed-property-getters](./docs/rules/computed-property-getters.md) | Enforce the consistent use of getters in computed properties |
 |  | [no-proxies](./docs/rules/no-proxies.md) | Disallows using array or object proxies |
+
+
+### Ember Data
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :wrench: | [no-ember-data-global-imports](./docs/rules/no-ember-data-global-imports.md) | Use "Ember Data Packages" from Ember RFC #395 |
+|  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
 
 
 ### Testing
