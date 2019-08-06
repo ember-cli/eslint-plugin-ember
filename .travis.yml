@@ -7,8 +7,8 @@ node_js:
 cache: yarn
 
 script:
-  - yarn run lint
-  - yarn run test:coverage --runInBand
+  - yarn lint
+  - yarn test:coverage --runInBand
 
 before_deploy:
   - yarn global add auto-dist-tag
