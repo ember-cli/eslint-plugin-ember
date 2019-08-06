@@ -140,8 +140,8 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [no-ember-data-global-imports](./docs/rules/no-ember-data-global-imports.md) | Use "Ember Data Packages" from Ember RFC #395 |
 |  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
+| :wrench: | [use-ember-data-rfc-395-imports](./docs/rules/use-ember-data-rfc-395-imports.md) | Use "Ember Data Packages" from Ember RFC #395 |
 
 
 ### Testing

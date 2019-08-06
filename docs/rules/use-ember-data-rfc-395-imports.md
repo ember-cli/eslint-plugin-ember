@@ -1,4 +1,4 @@
-# Use &#34;Ember Data Packages&#34; from Ember RFC #395 (no-ember-data-global-imports)
+# Use &#34;Ember Data Packages&#34; from Ember RFC #395 (use-ember-data-rfc-395-imports)
 
 The goal of this rule is to ease the migration to the new @ember-data packages.
 

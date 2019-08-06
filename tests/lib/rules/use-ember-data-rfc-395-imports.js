@@ -4,7 +4,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/no-ember-data-global-imports');
+const rule = require('../../../lib/rules/use-ember-data-rfc-395-imports');
 const RuleTester = require('eslint').RuleTester;
 const parserOptions = { ecmaVersion: 6, sourceType: 'module' };
 
@@ -15,7 +15,7 @@ const { ERROR_MESSAGE: message } = rule;
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({ parserOptions });
-ruleTester.run('no-ember-data-global-imports', rule, {
+ruleTester.run('use-ember-data-rfc-395-imports', rule, {
   valid: [
     "import Model from '@ember-data/model';",
     `import Model, { attr } from '@ember-data';
