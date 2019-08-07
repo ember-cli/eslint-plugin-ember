@@ -37,6 +37,7 @@ ruleTester.run('require-computed-macros', rule, {
     'computed(function() { return this; })',
     'computed(function() { return SOME_VAR; })',
     'computed(function() { return this.prop[123]; })',
+    'computed(function() { return this.prop[i]; })',
     'computed(function() { return this.someFunction(); })',
     'computed(function() { return this.prop.someFunction(); })',
 
