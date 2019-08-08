@@ -60,6 +60,7 @@
     "prettier": "1.18.2"
   },
   "dependencies": {
+    "@ember-data/rfc395-data": "^0.0.4",
     "ember-rfc176-data": "^0.3.9",
     "snake-case": "^2.1.0"
   },
