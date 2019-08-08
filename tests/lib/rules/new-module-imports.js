@@ -49,6 +49,10 @@ eslintTester.run('new-module-imports', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    {
+      code: `export const Ember = 1;`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
   ],
   invalid: [
     {
