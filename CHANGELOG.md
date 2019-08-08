@@ -1,3 +1,11 @@
+## v6.8.1 (2019-08-09)
+
+#### :bug: Bug Fix
+* [#460](https://github.com/ember-cli/eslint-plugin-ember/pull/460) Add null check in `new-module-imports` rule ([@dcyriller](https://github.com/dcyriller))
+
+#### Committers: 1
+- Cyrille David ([@dcyriller](https://github.com/dcyriller))
+
 ## v6.8.0 (2019-08-08)
 
 #### :rocket: Enhancement
@@ -11,7 +19,7 @@
 #### :house: Internal
 * [#456](https://github.com/ember-cli/eslint-plugin-ember/pull/456) Upgrade from eslint 4 to 5 ([@bmish](https://github.com/bmish))
 
-#### Committers: 4
+#### Committers: 3
 - Bryan Mishkin ([@bmish](https://github.com/bmish))
 - Cyrille David ([@dcyriller](https://github.com/dcyriller))
 - Eli Flanagan ([@efx](https://github.com/efx))
