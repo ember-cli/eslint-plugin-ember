@@ -1,3 +1,21 @@
+## v6.8.0 (2019-08-08)
+
+#### :rocket: Enhancement
+* [#450](https://github.com/ember-cli/eslint-plugin-ember/pull/450) Add new `use-ember-data-rfc-395-imports` rule ([@dcyriller](https://github.com/dcyriller))
+* [#457](https://github.com/ember-cli/eslint-plugin-ember/pull/457) Add new `no-arrow-function-computed-properties` rule ([@bmish](https://github.com/bmish))
+* [#445](https://github.com/ember-cli/eslint-plugin-ember/pull/445) Add new `no-proxies` rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#454](https://github.com/ember-cli/eslint-plugin-ember/pull/454) Improve justification for `no-observers` rule ([@efx](https://github.com/efx))
+
+#### :house: Internal
+* [#456](https://github.com/ember-cli/eslint-plugin-ember/pull/456) Upgrade from eslint 4 to 5 ([@bmish](https://github.com/bmish))
+
+#### Committers: 4
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Cyrille David ([@dcyriller](https://github.com/dcyriller))
+- Eli Flanagan ([@efx](https://github.com/efx))
+
 ## v6.7.1 (2019-07-02)
 
 #### :bug: Bug Fix
