@@ -1,4 +1,12 @@
-## v6.8.1 (2019-08-09)
+## v6.8.2 (2019-08-08)
+
+#### :bug: Bug Fix
+* [#461](https://github.com/ember-cli/eslint-plugin-ember/pull/461) Add null check in `new-module-imports` rule (again) ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+## v6.8.1 (2019-08-08)
 
 #### :bug: Bug Fix
 * [#460](https://github.com/ember-cli/eslint-plugin-ember/pull/460) Add null check in `new-module-imports` rule ([@dcyriller](https://github.com/dcyriller))
