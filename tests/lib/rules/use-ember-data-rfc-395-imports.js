@@ -25,6 +25,7 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
      });
     `,
     `import LOL from 'who-knows-but-definitely-not-ember-data';
+     import Fragment from 'ember-data-model-fragments/fragment';
 
      const { Model } = LOL;
     `,
