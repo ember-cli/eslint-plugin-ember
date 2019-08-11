@@ -6,7 +6,7 @@ const RuleTester = require('eslint').RuleTester;
 const { disallowedMethodErrorMessage } = rule;
 
 const ruleTester = new RuleTester({
-  parser: 'babel-eslint',
+  parser: require.resolve('babel-eslint'),
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
 });
 
