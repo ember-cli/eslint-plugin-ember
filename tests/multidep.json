@@ -1,0 +1,6 @@
+{
+  "path": "tests/multidep_modules",
+  "versions": {
+    "eslint": ["4.19.1", "5.16.0"]
+  }
+}

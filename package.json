@@ -13,6 +13,7 @@
   "scripts": {
     "changelog": "lerna-changelog",
     "lint": "eslint . --cache",
+    "pretest": "multidep tests/multidep.json",
     "start": "yarn run test:watch",
     "test": "jest",
     "test:coverage": "jest --coverage",
@@ -57,6 +58,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.8.0",
     "lerna-changelog": "^0.8.2",
+    "multidep": "^2.0.2",
     "prettier": "1.18.2"
   },
   "dependencies": {

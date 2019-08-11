@@ -1,0 +1,10 @@
+{
+  "name": "multidep-dummy",
+  "private": true,
+  "description": "multidep-dummy",
+  "repository": "http://example.com",
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "^5.16.0"
+  }
+}
