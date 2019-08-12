@@ -1,3 +1,19 @@
+## v6.9.0 (2019-08-12)
+
+#### :rocket: Enhancement
+* [#458](https://github.com/ember-cli/eslint-plugin-ember/pull/458) Add new rule `require-computed-property-dependencies` ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#463](https://github.com/ember-cli/eslint-plugin-ember/pull/463) Fix false positives for import statements with `use-ember-data-rfc-395-imports` rule ([@fusion2004](https://github.com/fusion2004))
+
+#### :house: Internal
+* [#465](https://github.com/ember-cli/eslint-plugin-ember/pull/465) Add tests that rules are setup correctly (not missing tests, docs, exports, etc) ([@bmish](https://github.com/bmish))
+* [#466](https://github.com/ember-cli/eslint-plugin-ember/pull/466) Fix eslint 6 rule test parser error ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Mark Oleson ([@fusion2004](https://github.com/fusion2004))
+
 ## v6.8.2 (2019-08-08)
 
 #### :bug: Bug Fix
