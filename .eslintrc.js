@@ -8,6 +8,7 @@ module.exports = {
   plugins: ['import', 'prettier'],
   extends: ['eslint:recommended', 'plugin:import/errors', 'plugin:import/warnings', 'prettier'],
   env: {
+    es6: true,
     node: true,
     jest: true,
   },
