@@ -34,17 +34,6 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         return this.get('name');
       });
     `,
-    `
-      Ember.computed(function() {
-        return this.someArray[i];
-      });
-    `,
-    // TODO: an improvement would be to detect the missing `someArray.[]` dependency key.
-    `
-      Ember.computed(function() {
-        return this.someArray[1];
-      });
-    `,
     // Without `Ember.`:
     `
       computed('name', function() {
@@ -198,6 +187,45 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         },
       ],
     },
+    // ES5 getter usage inside function call:
+    {
+      code: `
+        Ember.computed(function() {
+          return someFunction(this.undeclared) + some.thing(this.undeclared2) + some(this.undeclared3).thing;
+        });
+      `,
+      output: `
+        Ember.computed('undeclared', 'undeclared2', 'undeclared3', function() {
+          return someFunction(this.undeclared) + some.thing(this.undeclared2) + some(this.undeclared3).thing;
+        });
+      `,
+      errors: [
+        {
+          message:
+            'Use of undeclared dependencies in computed property: undeclared, undeclared2, undeclared3',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    // ES5 getter usage inside array index:
+    {
+      code: `
+        Ember.computed(function() {
+          return someArray[this.undeclared];
+        });
+      `,
+      output: `
+        Ember.computed('undeclared', function() {
+          return someArray[this.undeclared];
+        });
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: undeclared',
+          type: 'CallExpression',
+        },
+      ],
+    },
     // ES5 getter usage with nesting:
     {
       code: `
@@ -213,6 +241,64 @@ ruleTester.run('require-computed-property-dependencies', rule, {
       errors: [
         {
           message: 'Use of undeclared dependencies in computed property: a.b.c',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    // ES5 getter usage with array with numeric index:
+    // TODO: an improvement would be to detect the missing `someArray.[]` dependency key.
+    {
+      code: `
+        Ember.computed(function() {
+          return this.someArray[123];
+        });
+      `,
+      output: `
+        Ember.computed('someArray', function() {
+          return this.someArray[123];
+        });
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: someArray',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    // ES5 getter usage with array/object access:
+    {
+      code: `
+        Ember.computed(function() {
+          return this.someArrayOrObject[index];
+        });
+      `,
+      output: `
+        Ember.computed('someArrayOrObject', function() {
+          return this.someArrayOrObject[index];
+        });
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: someArrayOrObject',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    // With function calls on properties.
+    {
+      code: `
+        Ember.computed(function() {
+          return this.get('service1').someFunction() + this.service2.someFunction();
+        });
+      `,
+      output: `
+        Ember.computed('service1', 'service2', function() {
+          return this.get('service1').someFunction() + this.service2.someFunction();
+        });
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: service1, service2',
           type: 'CallExpression',
         },
       ],
@@ -399,20 +485,41 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         },
       ],
     },
+    // Ensure that the fixer removes the redundant `quux.length` dependency.
     {
       code: `
         Ember.computed('foo.bar', 'quux.[]', 'quux.length', function() {
-          return this.get('foo.bar') + this.get('foo.baz');
+          return this.get('foo.bar') + this.get('foo.baz') + this.get('quux.firstObject.test');
         });
       `,
       output: `
-        Ember.computed('foo.{bar,baz}', 'quux.[]', 'quux.length', function() {
-          return this.get('foo.bar') + this.get('foo.baz');
+        Ember.computed('foo.{bar,baz}', 'quux.[]', 'quux.firstObject.test', function() {
+          return this.get('foo.bar') + this.get('foo.baz') + this.get('quux.firstObject.test');
         });
       `,
       errors: [
         {
-          message: 'Use of undeclared dependencies in computed property: foo.baz',
+          message:
+            'Use of undeclared dependencies in computed property: foo.baz, quux.firstObject.test',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    // TODO: this should actually be a valid test case because the property added by the fixer (`quux.firstObject.myProp`) is redundant.
+    {
+      code: `
+        Ember.computed('quux.@each.myProp', function() {
+          return this.get('quux.firstObject.myProp');
+        });
+      `,
+      output: `
+        Ember.computed('quux.@each.myProp', 'quux.firstObject.myProp', function() {
+          return this.get('quux.firstObject.myProp');
+        });
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: quux.firstObject.myProp',
           type: 'CallExpression',
         },
       ],
