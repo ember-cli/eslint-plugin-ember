@@ -77,6 +77,18 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         return this.get('foo').mapBy('bar') + this.get('foo').mapBy('bar');
       });
     `,
+    // Array inside braces:
+    `
+      Ember.computed('article.{comments.[],title}', function() {
+        return this.article.title + someFunction(this.article.comments.mapBy(function(comment) { return comment.author; }));
+      });
+    `,
+    // Nesting inside braces:
+    `
+      Ember.computed('article.{comments.innerProperty,title}', function() {
+        return this.article.title + someFunction(this.article.comments.innerProperty);
+      });
+    `,
     // Computed macro that should be ignored:
     `
       Ember.computed.someMacro(function() {
@@ -520,6 +532,26 @@ ruleTester.run('require-computed-property-dependencies', rule, {
       errors: [
         {
           message: 'Use of undeclared dependencies in computed property: quux.firstObject.myProp',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    // Gracefully handles nesting/array inside braces:
+    {
+      code: `
+        Ember.computed('article.{comments.[],title,first.second}', function() {
+          return this.article.title + this.missingProp + someFunction(this.article.comments) + this.article.first.second;
+        });
+      `,
+      // TODO: an improvement would be to use braces here: 'article.{comments.[],first.second,title}'
+      output: `
+        Ember.computed('article.comments.[]', 'article.first.second', 'article.title', 'missingProp', function() {
+          return this.article.title + this.missingProp + someFunction(this.article.comments) + this.article.first.second;
+        });
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: missingProp',
           type: 'CallExpression',
         },
       ],
