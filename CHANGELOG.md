@@ -1,3 +1,12 @@
+## v6.9.1 (2019-08-14)
+
+#### :bug: Bug Fix
+* [#472](https://github.com/ember-cli/eslint-plugin-ember/pull/472) Improve handling of nested keys inside braces for `require-computed-property-dependencies` rule ([@bmish](https://github.com/bmish))
+* [#471](https://github.com/ember-cli/eslint-plugin-ember/pull/471) Improve detection of missing dependencies in `require-computed-property-dependencies` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v6.9.0 (2019-08-12)
 
 #### :rocket: Enhancement
