@@ -130,6 +130,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+|  | [avoid-leaking-callbacks-in-ember-objects](./docs/rules/avoid-leaking-callbacks-in-ember-objects.md) | Avoids callback memory leaks |
 | :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage |
 |  | [classic-decorator-hooks](./docs/rules/classic-decorator-hooks.md) | Ensure correct hooks are used for both classic and non-classic classes |
 |  | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | Prevent usage of classic APIs such as get/set in classes that aren't explicitly decorated with @classic |
