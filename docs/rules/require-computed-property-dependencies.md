@@ -40,6 +40,12 @@ export default EmberObject.extend({
 });
 ```
 
+## Configuration
+
+This rule takes an optional object containing:
+
+* `boolean` -- `allowDynamicKeys` -- whether the rule should allow or disallow dynamic (variable / non-string) dependency keys in computed properties (default `true`)
+
 ## References
 
 * [Guide](https://guides.emberjs.com/release/object-model/computed-properties/) for computed properties

@@ -98,15 +98,28 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     `
       Ember.computed.someMacro('test')
     `,
+    // Dynamic key:
+    `
+      Ember.computed(dynamic, function() {});
+    `,
+    // Dynamic key:
+    {
+      code: `
+        Ember.computed(...PROPERTIES, function() {});
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
     // Incorrect usage that should be ignored:
     `
       Ember.computed(123)
     `,
   ],
   invalid: [
+    // Dynamic key:
     {
       code: 'Ember.computed(dynamic, function() {});',
       output: null,
+      options: [{ allowDynamicKeys: false }],
       errors: [
         {
           message: ERROR_MESSAGE_NON_STRING_VALUE,
@@ -114,11 +127,51 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         },
       ],
     },
+    // Dynamic keys:
     {
       code: 'Ember.computed(...PROPERTIES, function() {});',
       output: null,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{ allowDynamicKeys: false }],
       errors: [
+        {
+          message: ERROR_MESSAGE_NON_STRING_VALUE,
+          type: 'SpreadElement',
+        },
+      ],
+    },
+    // Dynamic key with missing dependency:
+    {
+      code: 'Ember.computed(dynamic, function() { return this.undeclared; });',
+      output: "Ember.computed(dynamic, 'undeclared', function() { return this.undeclared; });",
+      options: [{ allowDynamicKeys: false }],
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: undeclared',
+          type: 'CallExpression',
+        },
+        {
+          message: ERROR_MESSAGE_NON_STRING_VALUE,
+          type: 'Identifier',
+        },
+      ],
+    },
+    // Multiple dynamic (identifier and spread) keys with missing dependency:
+    {
+      code: 'Ember.computed(dynamic, ...moreDynamic, function() { return this.undeclared; });',
+      output:
+        "Ember.computed(dynamic, ...moreDynamic, 'undeclared', function() { return this.undeclared; });",
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{ allowDynamicKeys: false }],
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: undeclared',
+          type: 'CallExpression',
+        },
+        {
+          message: ERROR_MESSAGE_NON_STRING_VALUE,
+          type: 'Identifier',
+        },
         {
           message: ERROR_MESSAGE_NON_STRING_VALUE,
           type: 'SpreadElement',
