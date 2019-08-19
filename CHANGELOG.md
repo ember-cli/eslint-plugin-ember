@@ -1,3 +1,15 @@
+## v6.10.0 (2019-08-19)
+
+#### :rocket: Enhancement
+* [#473](https://github.com/ember-cli/eslint-plugin-ember/pull/473) Add new `no-incorrect-calls-with-inline-anonymous-functions` rule ([@raycohen](https://github.com/raycohen))
+
+#### :bug: Bug Fix
+* [#476](https://github.com/ember-cli/eslint-plugin-ember/pull/476) Add `allowDynamicKeys` option (default true) to `require-computed-property-dependencies` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Ray Cohen ([@raycohen](https://github.com/raycohen))
+
 ## v6.9.1 (2019-08-14)
 
 #### :bug: Bug Fix
