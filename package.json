@@ -12,7 +12,8 @@
   },
   "scripts": {
     "changelog": "lerna-changelog",
-    "lint": "eslint . --cache",
+    "lint": "yarn lint:js",
+    "lint:js": "eslint . --cache",
     "start": "yarn run test:watch",
     "test": "jest",
     "test:coverage": "jest --coverage",
