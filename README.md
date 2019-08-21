@@ -91,15 +91,15 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [no-get](./docs/rules/no-get.md) | Require ES5 getters instead of Ember's `get` / `getProperties` functions |
 | :white_check_mark: | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
 |  | [no-jquery](./docs/rules/no-jquery.md) | Disallow any usage of jQuery |
-|  | [no-new-mixins](./docs/rules/no-new-mixins.md) | Prevents creation of new mixins |
+| :white_check_mark: | [no-new-mixins](./docs/rules/no-new-mixins.md) | Prevents creation of new mixins |
 | :white_check_mark: | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
 | :white_check_mark::wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | Prevents usage of old shims for modules |
 | :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | Prevents usage of `on` to call lifecycle hooks in components |
 | :white_check_mark: | [no-restricted-resolver-tests](./docs/rules/no-restricted-resolver-tests.md) | Prevents the use of patterns that use the restricted resolver in tests. |
 |  | [no-unnecessary-index-route](./docs/rules/no-unnecessary-index-route.md) | Disallow unnecessary `index` route definition |
-| :wrench: | [no-unnecessary-route-path-option](./docs/rules/no-unnecessary-route-path-option.md) | Disallow unnecessary route `path` option |
+| :white_check_mark::wrench: | [no-unnecessary-route-path-option](./docs/rules/no-unnecessary-route-path-option.md) | Disallow unnecessary route `path` option |
 | :wrench: | [no-unnecessary-service-injection-argument](./docs/rules/no-unnecessary-service-injection-argument.md) | Disallow unnecessary argument when injecting service |
-|  | [no-volatile-computed-properties](./docs/rules/no-volatile-computed-properties.md) | Disallows volatile computed properties |
+| :white_check_mark: | [no-volatile-computed-properties](./docs/rules/no-volatile-computed-properties.md) | Disallows volatile computed properties |
 | :wrench: | [require-computed-macros](./docs/rules/require-computed-macros.md) | Requires using computed property macros when possible |
 |  | [route-path-style](./docs/rules/route-path-style.md) | Enforces usage of kebab-case (instead of snake_case or camelCase) in route paths |
 | :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
@@ -121,19 +121,19 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [jquery-ember-run](./docs/rules/jquery-ember-run.md) | Prevents usage of jQuery without Ember Run Loop |
-|  | [no-arrow-function-computed-properties](./docs/rules/no-arrow-function-computed-properties.md) | Disallows arrow functions in computed properties |
+| :white_check_mark: | [no-arrow-function-computed-properties](./docs/rules/no-arrow-function-computed-properties.md) | Disallows arrow functions in computed properties |
 | :white_check_mark: | [no-attrs-in-components](./docs/rules/no-attrs-in-components.md) | Disallow usage of this.attrs in components |
 | :white_check_mark: | [no-attrs-snapshot](./docs/rules/no-attrs-snapshot.md) | Disallow use of attrs snapshot in `didReceiveAttrs` and `didUpdateAttrs` |
 | :white_check_mark: | [no-capital-letters-in-routes](./docs/rules/no-capital-letters-in-routes.md) | Raise an error when there is a route with uppercased letters in router.js |
-|  | [no-deeply-nested-dependent-keys-with-each](./docs/rules/no-deeply-nested-dependent-keys-with-each.md) | Disallows usage of deeply-nested computed property dependent keys with `@each`. |
+| :white_check_mark: | [no-deeply-nested-dependent-keys-with-each](./docs/rules/no-deeply-nested-dependent-keys-with-each.md) | Disallows usage of deeply-nested computed property dependent keys with `@each`. |
 | :white_check_mark: | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | Disallow repeating dependent keys |
-| :wrench: | [no-ember-super-in-es-classes](./docs/rules/no-ember-super-in-es-classes.md) | Prevents use of `this._super` in ES class methods |
+| :white_check_mark::wrench: | [no-ember-super-in-es-classes](./docs/rules/no-ember-super-in-es-classes.md) | Prevents use of `this._super` in ES class methods |
 | :white_check_mark: | [no-ember-testing-in-module-scope](./docs/rules/no-ember-testing-in-module-scope.md) | Prevents use of Ember.testing in module scope |
-|  | [no-incorrect-calls-with-inline-anonymous-functions](./docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | Disallows inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce` |
-|  | [no-invalid-debug-function-arguments](./docs/rules/no-invalid-debug-function-arguments.md) | Catch usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. |
+| :white_check_mark: | [no-incorrect-calls-with-inline-anonymous-functions](./docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | Disallows inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce` |
+| :white_check_mark: | [no-invalid-debug-function-arguments](./docs/rules/no-invalid-debug-function-arguments.md) | Catch usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. |
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | Warns about unexpected side effects in computed properties |
 | :wrench: | [require-computed-property-dependencies](./docs/rules/require-computed-property-dependencies.md) | Requires dependencies to be declared statically in computed properties |
-|  | [require-return-from-computed](./docs/rules/require-return-from-computed.md) | Warns about missing return statements in computed properties |
+| :white_check_mark: | [require-return-from-computed](./docs/rules/require-return-from-computed.md) | Warns about missing return statements in computed properties |
 | :white_check_mark: | [require-super-in-init](./docs/rules/require-super-in-init.md) | Enforces super calls in init hooks |
 | :white_check_mark: | [routes-segments-snake-case](./docs/rules/routes-segments-snake-case.md) | Enforces usage of snake_cased dynamic segments in routes |
 
