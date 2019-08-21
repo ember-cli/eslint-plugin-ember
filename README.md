@@ -120,6 +120,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-ember-testing-in-module-scope](./docs/rules/no-ember-testing-in-module-scope.md) | Prevents use of Ember.testing in module scope |
 |  | [no-incorrect-calls-with-inline-anonymous-functions](./docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | Disallows inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce` |
 |  | [no-invalid-debug-function-arguments](./docs/rules/no-invalid-debug-function-arguments.md) | Catch usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. |
+|  | [no-leaking-state-in-program-scope](./docs/rules/no-leaking-state-in-program-scope.md) | Do not allow anything else than constants in global module namespace. |
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | Warns about unexpected side effects in computed properties |
 | :wrench: | [require-computed-property-dependencies](./docs/rules/require-computed-property-dependencies.md) | Requires dependencies to be declared statically in computed properties |
 |  | [require-return-from-computed](./docs/rules/require-return-from-computed.md) | Warns about missing return statements in computed properties |
