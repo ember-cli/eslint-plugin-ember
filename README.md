@@ -61,7 +61,7 @@ module.exports = {
   ],
   rules: {
     // add rules' settings here, eg.:
-    'ember/local-modules': 2
+    'ember/no-jquery': 2
   }
 }
 ```
@@ -105,6 +105,17 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
 
 
+### Ember Object
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage |
+|  | [classic-decorator-hooks](./docs/rules/classic-decorator-hooks.md) | Ensure correct hooks are used for both classic and non-classic classes |
+|  | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | Prevent usage of classic APIs such as get/set in classes that aren't explicitly decorated with @classic |
+|  | [computed-property-getters](./docs/rules/computed-property-getters.md) | Enforce the consistent use of getters in computed properties |
+|  | [no-proxies](./docs/rules/no-proxies.md) | Disallows using array or object proxies |
+
+
 ### Possible Errors
 
 |    | Rule ID | Description |
@@ -125,17 +136,6 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [require-return-from-computed](./docs/rules/require-return-from-computed.md) | Warns about missing return statements in computed properties |
 | :white_check_mark: | [require-super-in-init](./docs/rules/require-super-in-init.md) | Enforces super calls in init hooks |
 | :white_check_mark: | [routes-segments-snake-case](./docs/rules/routes-segments-snake-case.md) | Enforces usage of snake_cased dynamic segments in routes |
-
-
-### Ember Object
-
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-| :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage |
-|  | [classic-decorator-hooks](./docs/rules/classic-decorator-hooks.md) | Ensure correct hooks are used for both classic and non-classic classes |
-|  | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | Prevent usage of classic APIs such as get/set in classes that aren't explicitly decorated with @classic |
-|  | [computed-property-getters](./docs/rules/computed-property-getters.md) | Enforce the consistent use of getters in computed properties |
-|  | [no-proxies](./docs/rules/no-proxies.md) | Disallows using array or object proxies |
 
 
 ### Ember Data
@@ -170,9 +170,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 | Rule ID | Replaced by |
 |:--------|:------------|
-| [avoid-leaking-state-in-components](./docs/rules/avoid-leaking-state-in-components.md) | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) |
-| [local-modules](./docs/rules/local-modules.md) | [new-module-imports](./docs/rules/new-module-imports.md) |
-| [no-get-properties](./docs/rules/no-get-properties.md) | [no-get](./docs/rules/no-get.md) |
+
 
 <!--RULES_TABLE_END-->
 
