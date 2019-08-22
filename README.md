@@ -8,8 +8,8 @@
 
 ## ❗️ Requirements
 
-- [ESLint](http://eslint.org/) is required to use this plugin.
-- Rules provided by this plugin should be runnable under Node.js 6+.
+- [ESLint](https://eslint.org/) `>= 4`
+- [Node.js](https://nodejs.org/) `>= 6`
 
 ## 🚀 Usage
 
