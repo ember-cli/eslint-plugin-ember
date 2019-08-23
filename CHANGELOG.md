@@ -1,3 +1,14 @@
+## v7.0.0 (2019-08-23)
+
+#### :boom: Breaking Change
+* [#491](https://github.com/ember-cli/eslint-plugin-ember/pull/491) Drop eslint 4 support ([@bmish](https://github.com/bmish))
+* [#486](https://github.com/ember-cli/eslint-plugin-ember/pull/486) Enable additional recommended rules (`no-arrow-function-computed-properties`, `no-deeply-nested-dependent-keys-with-each`, `no-ember-super-in-es-classes`, `no-incorrect-calls-with-inline-anonymous-functions`, `no-invalid-debug-function-arguments`, `no-new-mixins`, `no-unnecessary-route-path-option`, `no-volatile-computed-properties`, `require-return-from-computed`) ([@bmish](https://github.com/bmish))
+* [#487](https://github.com/ember-cli/eslint-plugin-ember/pull/487) Remove deprecated rules (`avoid-leaking-state-in-components`, `local-modules`, `no-get-properties`) ([@bmish](https://github.com/bmish))
+* [#485](https://github.com/ember-cli/eslint-plugin-ember/pull/485) Drop Node 6 support ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v6.10.1 (2019-08-23)
 
 #### :bug: Bug Fix
