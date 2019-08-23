@@ -1,3 +1,17 @@
+## v6.10.1 (2019-08-23)
+
+#### :bug: Bug Fix
+* [#488](https://github.com/ember-cli/eslint-plugin-ember/pull/488) Update `require-computed-property-dependencies` rule to support eslint 3 and 4 ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#489](https://github.com/ember-cli/eslint-plugin-ember/pull/489) Document eslint 4 as the minimum supported version ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#482](https://github.com/ember-cli/eslint-plugin-ember/pull/482) Start testing plugin under Node 12 ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v6.10.0 (2019-08-19)
 
 #### :rocket: Enhancement
