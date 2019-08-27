@@ -52,3 +52,13 @@ export default Component.extend({
 
 });
 ```
+
+### Migration
+
+To avoid false positives from relying on implicit returns in some code branches, you may want to enforce [consistent-return] alongside this rule.
+
+### Related Rules
+
+* [consistent-return] from eslint
+
+[consistent-return]: https://eslint.org/docs/rules/consistent-return
