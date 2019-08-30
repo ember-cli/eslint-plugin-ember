@@ -192,6 +192,7 @@ const codeWithSettersAndGetters = [
 const validWithDefaultOptions = [];
 validWithDefaultOptions.push(...codeWithoutGettersOrSetters.map(code => ({ code, parserOptions })));
 validWithDefaultOptions.push(...codeWithSettersAndGetters.map(code => ({ code, parserOptions })));
+validWithDefaultOptions.push(...codeWithRawComputed.map(code => ({ code, parserOptions })));
 
 const validWithAlwaysWithSetterOptions = [];
 validWithAlwaysWithSetterOptions.push(
