@@ -29,7 +29,7 @@ export default Component.extend({
     if (this.get('firstName')) {
       return `Dr. ${this.get('firstName')}`
     }
-    return;
+    return '';
   }),
 
   // BAD
