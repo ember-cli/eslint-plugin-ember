@@ -17,6 +17,10 @@ eslintTester.run('jquery-ember-run', rule, {
         'Ember.$("#something-rendered-by-jquery-plugin").on("click", () => {Ember.run.bind(this, this._handlerActionFromController);});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    {
+      code: "$.ajax({ url: `/foo`, type: 'GET', dataType: 'json' }).then(({ access_token }) => { this.set('jwt', access_token); });",
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
   ],
   invalid: [
     {
