@@ -113,6 +113,23 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     `
       Ember.computed(123)
     `,
+    // Should ignore injected service names:
+    {
+      code: `
+      import Component from '@ember/component';
+      import { inject as service } from '@ember/service';
+      Component.extend({
+        intl: service(),
+        myProperty: Ember.computed('name', function() {
+          console.log(this.intl);
+          return this.name + this.intl.t('some.translation.key');
+          console.log(this.otherService);
+        }),
+        otherService: service() // Service injection coming after computed property.
+      });
+    `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
   ],
   invalid: [
     // Dynamic key:
@@ -624,6 +641,69 @@ ruleTester.run('require-computed-property-dependencies', rule, {
       errors: [
         {
           message: 'Use of undeclared dependencies in computed property: quux',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Catch missing injected service name with `requireServiceNames` enabled:
+      code: `
+        import Component from '@ember/component';
+        import { inject as service } from '@ember/service';
+        Component.extend({
+          intl: service(),
+          myProperty: Ember.computed('foo', function() {
+            console.log(this.intl);
+            return this.get('foo') + this.intl.t('some.translation.key');
+          })
+        });
+      `,
+      options: [{ requireServiceNames: true }],
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: `
+        import Component from '@ember/component';
+        import { inject as service } from '@ember/service';
+        Component.extend({
+          intl: service(),
+          myProperty: Ember.computed('foo', 'intl', function() {
+            console.log(this.intl);
+            return this.get('foo') + this.intl.t('some.translation.key');
+          })
+        });
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: intl',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Should not ignore properties inside injected service:
+      code: `
+        import Component from '@ember/component';
+        import { inject as service } from '@ember/service';
+        Component.extend({
+          intl: service(),
+          myProperty: Ember.computed(function() {
+            return this.intl.someProperty;
+          })
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: `
+        import Component from '@ember/component';
+        import { inject as service } from '@ember/service';
+        Component.extend({
+          intl: service(),
+          myProperty: Ember.computed('intl.someProperty', function() {
+            return this.intl.someProperty;
+          })
+        });
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: intl.someProperty',
           type: 'CallExpression',
         },
       ],

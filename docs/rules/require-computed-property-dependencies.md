@@ -45,6 +45,7 @@ export default EmberObject.extend({
 This rule takes an optional object containing:
 
 * `boolean` -- `allowDynamicKeys` -- whether the rule should allow or disallow dynamic (variable / non-string) dependency keys in computed properties (default `true`)
+* `boolean` -- `requireServiceNames` -- whether the rule should require injected service names to be listed as dependency keys in computed properties (default `false`)
 
 ## References
 
