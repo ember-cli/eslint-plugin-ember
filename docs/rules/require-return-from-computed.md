@@ -4,6 +4,10 @@
 
 When using computed properties always return a value.
 
+### Examples
+
+Examples of **correct** code for this rule:
+
 ```javascript
 import Component from '@ember/component';
 import { computed } from '@ember/object';
@@ -12,29 +16,39 @@ export default Component.extend({
   firstName: null,
   lastName: null,
 
-  // GOOD
   fullName: computed('firstName', 'lastName', {
-    get(key) {
+    get() {
       return `${this.get('firstName')} ${this.get('lastName')}`;
     },
     set(key, value) {
       let [firstName, lastName] = value.split(/\s+/);
       this.set('firstName', firstName);
-      this.set('lastName',  lastName);
+      this.set('lastName', lastName);
       return value;
     }
   }),
-  
+
   salutation: computed('firstName', function() {
     if (this.get('firstName')) {
-      return `Dr. ${this.get('firstName')}`
+      return `Dr. ${this.get('firstName')}`;
     }
     return '';
-  }),
+  })
+});
+```
 
-  // BAD
+Examples of **incorrect** code for this rule:
+
+```javascript
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+
+export default Component.extend({
+  firstName: null,
+  lastName: null,
+
   fullName: computed('firstName', 'lastName', {
-    get(key) {
+    get() {
       return `${this.get('firstName')} ${this.get('lastName')}`;
     },
     set(key, value) {
@@ -43,13 +57,12 @@ export default Component.extend({
       this.set('lastName',  lastName);
     }
   }),
-  
+
   salutation: computed('firstName', function() {
     if (this.get('firstName')) {
-      return `Dr. ${this.get('firstName')}`
+      return `Dr. ${this.get('firstName')}`;
     }
-  }),
-
+  })
 });
 ```
 
