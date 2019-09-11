@@ -53,7 +53,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
-    "eslint-config-prettier": "^6.1.0",
+    "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.9.0",
@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "@ember-data/rfc395-data": "^0.0.4",
-    "ember-rfc176-data": "^0.3.11",
+    "ember-rfc176-data": "^0.3.12",
     "snake-case": "^2.1.0"
   },
   "changelog": {

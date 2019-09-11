@@ -24,6 +24,13 @@ export default Component.extend({
       return value;
     }
   }),
+  
+  salutation: computed('firstName', function() {
+    if (this.get('firstName')) {
+      return `Dr. ${this.get('firstName')}`
+    }
+    return '';
+  }),
 
   // BAD
   fullName: computed('firstName', 'lastName', {
@@ -35,6 +42,13 @@ export default Component.extend({
       this.set('firstName', firstName);
       this.set('lastName',  lastName);
     }
-  })
+  }),
+  
+  salutation: computed('firstName', function() {
+    if (this.get('firstName')) {
+      return `Dr. ${this.get('firstName')}`
+    }
+  }),
+
 });
 ```
