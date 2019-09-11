@@ -11,15 +11,43 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 //------------------------------------------------------------------------------
 
-const { ERROR_MESSAGE } = rule;
+const { PREVENT_GETTER_MESSAGE, ALWAYS_GETTER_MESSAGE, ALWAYS_WITH_SETTER_MESSAGE } = rule;
 const ruleTester = new RuleTester();
 const parserOptions = { ecmaVersion: 2018, sourceType: 'module' };
-const errors = [
+const output = null;
+
+const alwaysWithSetterOptionErrors = [
   {
-    message: ERROR_MESSAGE,
+    message: ALWAYS_WITH_SETTER_MESSAGE,
   },
 ];
-const output = null;
+
+const neverOptionErrors = [
+  {
+    message: PREVENT_GETTER_MESSAGE,
+  },
+];
+
+const alwaysOptionErrors = [
+  {
+    message: ALWAYS_GETTER_MESSAGE,
+  },
+];
+
+const codeWithRawComputed = [
+  `
+  {
+    foo: computed('model')
+  }`,
+  `
+  {
+    foo: computed()
+  }`,
+  `
+  {
+    foo: computed
+  }`,
+];
 
 const codeWithoutGettersOrSetters = [
   `
@@ -164,6 +192,7 @@ const codeWithSettersAndGetters = [
 const validWithDefaultOptions = [];
 validWithDefaultOptions.push(...codeWithoutGettersOrSetters.map(code => ({ code, parserOptions })));
 validWithDefaultOptions.push(...codeWithSettersAndGetters.map(code => ({ code, parserOptions })));
+validWithDefaultOptions.push(...codeWithRawComputed.map(code => ({ code, parserOptions })));
 
 const validWithAlwaysWithSetterOptions = [];
 validWithAlwaysWithSetterOptions.push(
@@ -178,11 +207,26 @@ validWithAlwaysWithSetterOptions.push(
     return { code, parserOptions, options };
   })
 );
+validWithAlwaysWithSetterOptions.push(
+  ...codeWithRawComputed.map(code => {
+    const options = ['always-with-setter'];
+    return { code, parserOptions, options };
+  })
+);
 
-const validWithNeverOption = codeWithoutGettersOrSetters.map(code => {
-  const options = ['never'];
-  return { code, parserOptions, options };
-});
+const validWithNeverOption = [];
+validWithNeverOption.push(
+  ...codeWithoutGettersOrSetters.map(code => {
+    const options = ['never'];
+    return { code, parserOptions, options };
+  })
+);
+validWithNeverOption.push(
+  ...codeWithRawComputed.map(code => {
+    const options = ['never'];
+    return { code, parserOptions, options };
+  })
+);
 
 const validWithAlwaysOption = [];
 validWithAlwaysOption.push(
@@ -197,32 +241,48 @@ validWithAlwaysOption.push(
     return { code, parserOptions, options };
   })
 );
+validWithAlwaysOption.push(
+  ...codeWithRawComputed.map(code => {
+    const options = ['always'];
+    return { code, parserOptions, options };
+  })
+);
 
 const inValidWithDefaultOptions = [];
 inValidWithDefaultOptions.push(
-  ...codeWithOnlyGetters.map(code => ({ code, parserOptions, output, errors }))
+  ...codeWithOnlyGetters.map(code => ({
+    code,
+    parserOptions,
+    output,
+    errors: alwaysWithSetterOptionErrors,
+  }))
 );
 inValidWithDefaultOptions.push(
-  ...codeWithOnlySetters.map(code => ({ code, parserOptions, output, errors }))
+  ...codeWithOnlySetters.map(code => ({
+    code,
+    parserOptions,
+    output,
+    errors: alwaysWithSetterOptionErrors,
+  }))
 );
 
 const inValidWithNeverOption = [];
 inValidWithNeverOption.push(
   ...codeWithOnlyGetters.map(code => {
     const options = ['never'];
-    return { code, parserOptions, options, output, errors };
+    return { code, parserOptions, options, output, errors: neverOptionErrors };
   })
 );
 inValidWithNeverOption.push(
   ...codeWithOnlySetters.map(code => {
     const options = ['never'];
-    return { code, parserOptions, options, output, errors };
+    return { code, parserOptions, options, output, errors: neverOptionErrors };
   })
 );
 inValidWithNeverOption.push(
   ...codeWithSettersAndGetters.map(code => {
     const options = ['never'];
-    return { code, parserOptions, options, output, errors };
+    return { code, parserOptions, options, output, errors: neverOptionErrors };
   })
 );
 
@@ -230,13 +290,13 @@ const inValidWithAlwaysOption = [];
 inValidWithAlwaysOption.push(
   ...codeWithoutGettersOrSetters.map(code => {
     const options = ['always'];
-    return { code, parserOptions, options, output, errors };
+    return { code, parserOptions, options, output, errors: alwaysOptionErrors };
   })
 );
 inValidWithAlwaysOption.push(
   ...codeWithOnlySetters.map(code => {
     const options = ['always'];
-    return { code, parserOptions, options, output, errors };
+    return { code, parserOptions, options, output, errors: alwaysOptionErrors };
   })
 );
 
