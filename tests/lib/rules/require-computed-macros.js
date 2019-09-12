@@ -28,6 +28,7 @@ ruleTester.run('require-computed-macros', rule, {
     'computed()',
     'computed(true)',
     'computed(function() {})',
+    'computed(function() { return; })',
     'computed(function() { someCall(); return this.x; })', // Multiple statements in function body.
     'computed(function() { return this.x; }, SOME_OTHER_ARG)', // Function isn't last arg.
     'other(function() { return this.x; })',
