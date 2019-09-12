@@ -78,6 +78,14 @@
   "jest": {
     "testMatch": [
       "**/tests/**/*.js"
-    ]
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 94,
+        "functions": 99,
+        "lines": 98,
+        "statements": 97
+      }
+    }
   }
 }
