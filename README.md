@@ -164,14 +164,6 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :wrench: | [order-in-routes](./docs/rules/order-in-routes.md) | Enforces proper order of properties in routes |
 | :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | Enforces usage of brace expansion |
 
-### Deprecated
-
-> :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
-
-| Rule ID | Replaced by |
-|:--------|:------------|
-
-
 <!--RULES_TABLE_END-->
 
 For the simplified list of rules, [go here](./lib/recommended-rules.js).
