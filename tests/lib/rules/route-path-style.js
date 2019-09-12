@@ -75,6 +75,9 @@ ruleTester.run('route-path-style', rule, {
     "MyClass.route('blog-posts', { path: '/blog_posts' });",
     "route.unrelatedFunction('blog_posts');",
     "this.route.unrelatedFunction('blog_posts');",
+
+    // Incorrect usage:
+    'this.route();',
   ],
   invalid: [
     {
