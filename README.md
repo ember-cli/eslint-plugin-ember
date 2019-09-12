@@ -96,6 +96,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark::wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | Prevents usage of old shims for modules |
 | :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | Prevents usage of `on` to call lifecycle hooks in components |
 | :white_check_mark: | [no-restricted-resolver-tests](./docs/rules/no-restricted-resolver-tests.md) | Prevents the use of patterns that use the restricted resolver in tests. |
+|  | [no-translation-key-interpolation](./docs/rules/no-translation-key-interpolation.md) | Disallow string interpolation in translation keys |
 |  | [no-unnecessary-index-route](./docs/rules/no-unnecessary-index-route.md) | Disallow unnecessary `index` route definition |
 | :white_check_mark::wrench: | [no-unnecessary-route-path-option](./docs/rules/no-unnecessary-route-path-option.md) | Disallow unnecessary route `path` option |
 | :wrench: | [no-unnecessary-service-injection-argument](./docs/rules/no-unnecessary-service-injection-argument.md) | Disallow unnecessary argument when injecting service |
