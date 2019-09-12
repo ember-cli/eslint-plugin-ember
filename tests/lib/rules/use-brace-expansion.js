@@ -12,21 +12,16 @@ const RuleTester = require('eslint').RuleTester;
 const eslintTester = new RuleTester();
 eslintTester.run('use-brace-expansion', rule, {
   valid: [
-    { code: '{ test: computed("a", "b", function() {}) }' },
-    { code: '{ test: computed(function() {}) }' },
-    { code: '{ test: computed("a.test", "b.test", function() {}) }' },
-    { code: '{ test: computed("a.{test,test2}", "b", function() {}) }' },
-    { code: '{ test: computed("a.{test,test2}", "c", "b", function() {}) }' },
-    {
-      code: '{ test: computed("model.a.{test,test2}", "model.b.{test3,test4}", function() {}) }',
-    },
-    {
-      code:
-        '{ test: computed("foo.bar.{name,place}", "foo.qux.[]", "foo.baz.{thing,@each.stuff}", function() {}) }',
-    },
-    { code: '{ test: computed.or("foo.bar.name", "foo.bar.place") }' },
-    { code: '{ test: computed.and("foo.bar.name", "foo.bar.place") }' },
-    { code: "{ test: Ember.computed.filterBy('a', 'b', false) }" },
+    '{ test: computed("a", "b", function() {}) }',
+    '{ test: computed(function() {}) }',
+    '{ test: computed("a.test", "b.test", function() {}) }',
+    '{ test: computed("a.{test,test2}", "b", function() {}) }',
+    '{ test: computed("a.{test,test2}", "c", "b", function() {}) }',
+    '{ test: computed("model.a.{test,test2}", "model.b.{test3,test4}", function() {}) }',
+    '{ test: computed("foo.bar.{name,place}", "foo.qux.[]", "foo.baz.{thing,@each.stuff}", function() {}) }',
+    '{ test: computed.or("foo.bar.name", "foo.bar.place") }',
+    '{ test: computed.and("foo.bar.name", "foo.bar.place") }',
+    "{ test: Ember.computed.filterBy('a', 'b', false) }",
   ],
   invalid: [
     {

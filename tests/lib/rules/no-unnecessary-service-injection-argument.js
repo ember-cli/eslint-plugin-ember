@@ -32,8 +32,6 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     "const controller = Controller.extend({ serviceName: service('service-name') });",
 
     // Property name does not match service name:
-    "export default Component.extend({ specialName: service('service-name') });",
-    "export default Component.extend({ specialName: inject('service-name') });",
     "const controller = Controller.extend({ specialName: service('service-name') });",
 
     // When usage is ignored because of additional arguments:

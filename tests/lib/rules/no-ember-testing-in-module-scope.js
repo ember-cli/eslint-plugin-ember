@@ -13,8 +13,7 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-ember-testing-in-module-scope', rule, {
   valid: [
-    {
-      code: `
+    `
         import Ember from 'ember';
 
         export default Ember.Component.extend({
@@ -27,9 +26,7 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
           }
         });
       `,
-    },
-    {
-      code: `
+    `
         import Ember from 'ember';
 
         export default Ember.Component.extend({
@@ -38,11 +35,10 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
           }
         });
       `,
-    },
-    { code: 'foo.testing = true;' },
-    { code: 'const { testing } = FooBar;' },
-    { code: 'const testing = FooBar.testing' },
-    { code: 'const testing = true;' },
+    'foo.testing = true;',
+    'const { testing } = FooBar;',
+    'const testing = FooBar.testing',
+    'const testing = true;',
   ],
   invalid: [
     {
@@ -85,6 +81,7 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
     },
     {
       code: 'const { testing } = Ember;',
+      output: null,
       errors: [{ message: ERROR_MESSAGES[2] }],
     },
     {

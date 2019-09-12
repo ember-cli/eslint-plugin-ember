@@ -28,7 +28,6 @@ ruleTester.run('no-deeply-nested-dependent-keys-with-each', rule, {
     "computed('foo.bar.@each.baz', function() {})",
     "computed('foo.@each.bar', function() {})",
     "computed('foo.@each.{bar,baz}', function() {})",
-    "computed('foo.@each.{bar,baz}', function() {})",
 
     // Not Ember's `computed` function:
     "otherClass.computed('foo.@each.bar.baz', function() {})",

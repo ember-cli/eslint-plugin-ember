@@ -12,14 +12,12 @@ const NO_EXPORT_MESSAGE = rule.meta.exportMessage;
 
 ruleTester.run('no-test-file-importing', rule, {
   valid: [
-    {
-      code: `
+    `
         import setupModule from './some-test-helper';
         import { module, test } from 'qunit';
 
         module('Acceptance | module', setupModule());
       `,
-    },
     {
       filename: 'tests/some-test-helper.js',
       code: `

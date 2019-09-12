@@ -18,12 +18,10 @@ eslintTester.run('no-capital-letters-in-routes', rule, {
   valid: [
     'this.route("sign-in");',
     'this.route("news", { path: "/:news_id" });',
-    {
-      code: `
+    `
         const routeName="about";
         this.route(routeName);
         this.route(DASH_TAB.ACTIVITY);`,
-    },
   ],
 
   invalid: [
