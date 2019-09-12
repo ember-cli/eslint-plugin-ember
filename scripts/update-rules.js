@@ -65,15 +65,16 @@ ${rules
   )
   .join('\n');
 
-rulesTableContent += `
+const deprecatedRules = rules.filter(entry => entry[1].meta.deprecated);
+if (deprecatedRules.length > 0) {
+  rulesTableContent += `
 ### Deprecated
 
 > :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
 
 | Rule ID | Replaced by |
 |:--------|:------------|
-${rules
-  .filter(entry => entry[1].meta.deprecated)
+${deprecatedRules
   .map(entry => {
     const name = entry[0];
     const meta = entry[1].meta;
@@ -85,6 +86,7 @@ ${rules
   })
   .join('\n')}
 `;
+}
 
 const recommendedRules = rules.reduce((obj, entry) => {
   const name = `ember/${entry[0]}`;
