@@ -19,11 +19,11 @@ eslintTester.run('new-module-imports', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
-    { code: 'Ember.Handlebars.Utils.escapeExpression("foo");' },
-    { code: 'Ember.onerror = function() {};' },
-    { code: 'Ember.MODEL_FACTORY_INJECTIONS = true;' },
-    { code: 'console.log(Ember.SOMETHING_NO_ONE_USES);' },
-    { code: 'if (Ember.testing) {}' },
+    'Ember.Handlebars.Utils.escapeExpression("foo");',
+    'Ember.onerror = function() {};',
+    'Ember.MODEL_FACTORY_INJECTIONS = true;',
+    'console.log(Ember.SOMETHING_NO_ONE_USES);',
+    'if (Ember.testing) {}',
     {
       code: `import Component from '@ember/component';
 

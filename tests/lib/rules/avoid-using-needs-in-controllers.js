@@ -17,24 +17,12 @@ const eslintTester = new RuleTester({
 });
 eslintTester.run('avoid-using-needs-in-controllers', rule, {
   valid: [
-    {
-      code: 'export default Controller.extend();',
-    },
-    {
-      code: 'export default FooController.extend();',
-    },
-    {
-      code: 'Controller.reopen();',
-    },
-    {
-      code: 'FooController.reopen();',
-    },
-    {
-      code: 'Controller.reopenClass();',
-    },
-    {
-      code: 'FooController.reopenClass();',
-    },
+    'export default Controller.extend();',
+    'export default FooController.extend();',
+    'Controller.reopen();',
+    'FooController.reopen();',
+    'Controller.reopenClass();',
+    'FooController.reopenClass();',
   ],
   invalid: [
     {

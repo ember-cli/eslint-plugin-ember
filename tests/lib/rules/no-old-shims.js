@@ -56,7 +56,7 @@ eslintTester.run('no-old-shims', rule, {
     },
     {
       code: "import Sortable from 'ember-controllers/sortable';",
-      output: "import Sortable from 'ember-controllers/sortable';",
+      output: "import Sortable from 'ember-controllers/sortable';", // eslint-disable-line eslint-plugin/prefer-output-null
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{ message: "Don't use import paths from ember-cli-shims" }],
     },

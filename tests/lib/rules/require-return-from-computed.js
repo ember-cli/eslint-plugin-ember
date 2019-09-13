@@ -66,15 +66,6 @@ eslintTester.run('require-return-from-computed', rule, {
       ],
     },
     {
-      code: 'let foo = computed("test", function() { })',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [
-        {
-          message: 'Always return a value from computed properties',
-        },
-      ],
-    },
-    {
       code: 'let foo = computed({ get() { return "foo"; }, set() { }})',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [

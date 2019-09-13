@@ -1,3 +1,5 @@
+/* eslint eslint-plugin/consistent-output: "off" */
+
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
@@ -222,20 +224,6 @@ eslintTester.run('order-in-controllers', rule, {
       errors: [
         {
           message: 'The "queryParams" property should be above the "test" property on line 2',
-          line: 3,
-        },
-      ],
-    },
-    {
-      code: `export default Controller.extend({
-        queryParams: [],
-        currentUser: service()
-      });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [
-        {
-          message:
-            'The "currentUser" service injection should be above the "queryParams" property on line 2',
           line: 3,
         },
       ],

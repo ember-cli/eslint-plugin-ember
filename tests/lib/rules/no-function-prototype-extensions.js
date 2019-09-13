@@ -53,10 +53,6 @@ eslintTester.run('no-function-prototype-extensions', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: 'export default Controller.extend({test: function () {}});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
       code: 'export default Controller.extend({test: on("init", function () {})});',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
