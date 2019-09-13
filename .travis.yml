@@ -9,6 +9,7 @@ cache: yarn
 script:
   - yarn lint
   - yarn test:coverage --runInBand
+  - yarn add --dev eslint@6 && yarn test --runInBand
 
 before_deploy:
   - yarn global add auto-dist-tag
