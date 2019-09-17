@@ -150,6 +150,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+|  | [no-pause-test](./docs/rules/no-pause-test.md) | Disallow use of `pauseTest` helper in tests. |
 |  | [no-test-and-then](./docs/rules/no-test-and-then.md) | Disallow use of `andThen` test wait helper. |
 |  | [no-test-import-export](./docs/rules/no-test-import-export.md) | Disallow importing of "-test.js" in a test file and exporting from a test file. |
 
