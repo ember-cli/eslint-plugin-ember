@@ -1,3 +1,33 @@
+## v7.1.0 (2019-09-18)
+
+#### :rocket: Enhancement
+* [#507](https://github.com/ember-cli/eslint-plugin-ember/pull/507) Add new `no-pause-test` rule ([@scottkidder](https://github.com/scottkidder))
+
+#### :bug: Bug Fix
+* [#511](https://github.com/ember-cli/eslint-plugin-ember/pull/511) Avoid crash from empty return statement in `require-computed-macros` rule ([@bmish](https://github.com/bmish))
+* [#512](https://github.com/ember-cli/eslint-plugin-ember/pull/512) Avoid crash when missing arguments to `this.route()` in `route-path-style` rule ([@bmish](https://github.com/bmish))
+* [#498](https://github.com/ember-cli/eslint-plugin-ember/pull/498) Fix decorator handling and improve error messages for `computed-property-getters` rule ([@Exelord](https://github.com/Exelord))
+* [#504](https://github.com/ember-cli/eslint-plugin-ember/pull/504) Update `require-computed-property-dependencies` rule to ignore injected service names by default ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#514](https://github.com/ember-cli/eslint-plugin-ember/pull/514) Hide the deprecated rules section from the README if empty ([@bmish](https://github.com/bmish))
+* [#510](https://github.com/ember-cli/eslint-plugin-ember/pull/510) Cleanup code samples in some of the new V7 recommended rules ([@bmish](https://github.com/bmish))
+* [#496](https://github.com/ember-cli/eslint-plugin-ember/pull/496) Suggest using the eslint `consistent-return` rule alongside `require-return-from-computed` rule to help avoid false positives ([@bmish](https://github.com/bmish))
+* [#506](https://github.com/ember-cli/eslint-plugin-ember/pull/506) Add example of a getter with an if statement for `require-return-from-computed` rule ([@bradleypriest](https://github.com/bradleypriest))
+
+#### :house: Internal
+* [#519](https://github.com/ember-cli/eslint-plugin-ember/pull/519) Add CI check to ensure yarn.lock is up-to-date ([@bmish](https://github.com/bmish))
+* [#516](https://github.com/ember-cli/eslint-plugin-ember/pull/516) Test plugin under both eslint 5 and eslint 6 ([@bmish](https://github.com/bmish))
+* [#515](https://github.com/ember-cli/eslint-plugin-ember/pull/515) Add eslint-plugin-eslint-plugin and enable/autofix most rules ([@bmish](https://github.com/bmish))
+* [#505](https://github.com/ember-cli/eslint-plugin-ember/pull/505) Enforce minimum test coverage ([@bmish](https://github.com/bmish))
+* [#503](https://github.com/ember-cli/eslint-plugin-ember/pull/503) Refactor utils to move type checking utils to a separate file and alphabetize ([@bmish](https://github.com/bmish))
+
+#### Committers: 4
+- Bradley Priest ([@bradleypriest](https://github.com/bradleypriest))
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Maciej Kwaśniak ([@Exelord](https://github.com/Exelord))
+- Scott Kidder ([@scottkidder](https://github.com/scottkidder))
+
 ## v7.0.0 (2019-08-23)
 
 #### :boom: Breaking Change
