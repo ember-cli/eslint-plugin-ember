@@ -12,6 +12,7 @@ module.exports = {
   ],
   extends: [
     'eslint:recommended',
+    'plugin:eslint-comments/recommended',
     'plugin:eslint-plugin/all',
     'plugin:import/errors',
     'plugin:import/warnings',
@@ -82,6 +83,9 @@ module.exports = {
 
     // Prettier:
     'prettier/prettier': 'error',
+
+    // eslint-comments rules:
+    'eslint-comments/no-unused-disable': 'error',
 
     // eslint-plugin rules:
     'eslint-plugin/no-deprecated-report-api': 'off',

@@ -27,7 +27,6 @@ const readmeContent = fs.readFileSync(readmeFile, 'utf8');
 const STAR = ':white_check_mark:';
 const PEN = ':wrench:';
 
-/* eslint-disable global-require, import/no-dynamic-require */
 const rules = fs
   .readdirSync(root)
   .filter(file => path.extname(file) === '.js')
@@ -92,8 +91,7 @@ const recommendedRules = rules.reduce((obj, entry) => {
   const name = `ember/${entry[0]}`;
   const recommended = entry[1].meta.docs.recommended;
   const status = recommended ? 'error' : 'off';
-  /* eslint-disable no-param-reassign */
-  obj[name] = status;
+  obj[name] = status; // eslint-disable-line no-param-reassign
   return obj;
 }, {});
 
