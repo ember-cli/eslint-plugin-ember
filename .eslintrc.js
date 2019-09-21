@@ -7,6 +7,7 @@ module.exports = {
   },
   plugins: [
     'eslint-plugin',
+    'filenames',
     'import',
     'prettier'
   ],
@@ -92,6 +93,9 @@ module.exports = {
     'eslint-plugin/require-meta-type': 'off',
     'eslint-plugin/require-meta-docs-url': 'off',
     'eslint-plugin/test-case-property-ordering': 'off',
+
+    // Filenames:
+    'filenames/match-regex': ['error', '^[a-z0-9-]+$'], // Kebab-case.
   },
   overrides: [
     // test files
