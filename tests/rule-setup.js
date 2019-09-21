@@ -13,6 +13,7 @@ describe('rules setup is correct', function() {
     const path = join(__dirname, '../lib/rules');
     const files = readdirSync(path);
 
+    // eslint-disable-next-line node/no-deprecated-api
     assert.deepEqual(
       RULE_NAMES,
       files.filter(file => !file.startsWith('.')).map(file => file.replace('.js', ''))
@@ -20,7 +21,7 @@ describe('rules setup is correct', function() {
   });
 
   it('should list all rules in the recommended rules file', function() {
-    assert.deepEqual(
+    assert.deepStrictEqual(
       RULE_NAMES,
       Object.keys(recommendedRules).map(file => file.replace('ember/', ''))
     );
@@ -30,6 +31,7 @@ describe('rules setup is correct', function() {
     const path = join(__dirname, '../tests/lib/rules');
     const files = readdirSync(path);
 
+    // eslint-disable-next-line node/no-deprecated-api
     assert.deepEqual(
       RULE_NAMES,
       files.filter(file => !file.startsWith('.')).map(file => file.replace('.js', ''))
@@ -40,6 +42,7 @@ describe('rules setup is correct', function() {
     const path = join(__dirname, '../docs/rules');
     const files = readdirSync(path);
 
+    // eslint-disable-next-line node/no-deprecated-api
     assert.deepEqual(
       RULE_NAMES,
       files.filter(file => !file.startsWith('.')).map(file => file.replace('.md', ''))

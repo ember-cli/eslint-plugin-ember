@@ -8,11 +8,11 @@ const utils = require('../lib/utils/utils');
 describe('plugin exports library functions', () => {
   it('should export functions from the ember', () => {
     assert.ok(plugin.utils.ember);
-    assert.equal(plugin.utils.ember, ember);
+    assert.strictEqual(plugin.utils.ember, ember);
   });
 
   it('should export functions from utils', () => {
     assert.ok(plugin.utils.utils);
-    assert.equal(plugin.utils.utils, utils);
+    assert.strictEqual(plugin.utils.utils, utils);
   });
 });

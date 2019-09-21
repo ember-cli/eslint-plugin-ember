@@ -9,6 +9,7 @@ module.exports = {
     'eslint-plugin',
     'filenames',
     'import',
+    'node',
     'prettier'
   ],
   extends: [
@@ -17,6 +18,7 @@ module.exports = {
     'plugin:eslint-plugin/all',
     'plugin:import/errors',
     'plugin:import/warnings',
+    'plugin:node/recommended',
     'prettier'
   ],
   env: {
