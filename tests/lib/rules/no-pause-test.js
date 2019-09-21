@@ -15,7 +15,7 @@ const { ERROR_MESSAGE } = rule;
 
 const TEST_FILE_NAME = 'some-test.js';
 
-let ruleTester = new RuleTester({
+const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
