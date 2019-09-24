@@ -31,7 +31,7 @@ const rules = fs
   .readdirSync(root)
   .filter(file => path.extname(file) === '.js')
   .map(file => path.basename(file, '.js'))
-  .map(fileName => [fileName, require(path.join(root, fileName))]);
+  .map(fileName => [fileName, require(path.join(root, fileName))]); // eslint-disable-line import/no-dynamic-require
 
 const categories = rules
   .map(entry => entry[1].meta.docs.category)
