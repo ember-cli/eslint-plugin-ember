@@ -68,6 +68,9 @@
     "ember-rfc176-data": "^0.3.12",
     "snake-case": "^2.1.0"
   },
+  "peerDependencies": {
+    "eslint": ">= 5"
+  },
   "changelog": {
     "repo": "ember-cli/eslint-plugin-ember",
     "labels": {
