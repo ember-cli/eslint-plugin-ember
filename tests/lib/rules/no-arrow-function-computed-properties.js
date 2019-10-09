@@ -26,13 +26,12 @@ ruleTester.run('no-arrow-function-computed-properties', rule, {
     "computed.map('products', function(product) { return someFunction(product); })",
     'other(() => {})',
     'other.computed(() => {})',
+    'computed(() => { return 123; })',
+    'computed(() => { return "string stuff"; })',
+    'computed(() => [])',
+    "computed.map('products', product => { return someFunction(product); })",
   ],
   invalid: [
-    {
-      code: 'computed(() => { return 123; })',
-      errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
-    },
-
     {
       code: "computed('prop', () => { return this.prop; })",
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
@@ -40,11 +39,6 @@ ruleTester.run('no-arrow-function-computed-properties', rule, {
 
     {
       code: "computed('prop', () => { return this.prop; }).volatile()",
-      errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
-    },
-
-    {
-      code: "computed.map('products', product => { return someFunction(product); })",
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
   ],
