@@ -55,6 +55,12 @@ const { prop1, prop2 } = this;
 const foo = { prop1: this.prop1, prop2: this.prop2 };
 ```
 
+## Configuration
+
+This rule takes an optional object containing:
+
+- `boolean` -- `ignoreGetProperties` -- whether the rule should ignore `getProperties` (default `false`)
+
 ## Related Rules
 
 * [no-proxies](no-proxies.md)

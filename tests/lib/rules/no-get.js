@@ -82,6 +82,24 @@ ruleTester.run('no-get', rule, {
 
     // Unknown sub-function call:
     "this.getProperties.foo('prop1', 'prop2');",
+
+    // With ignoreGetProperties: true
+    {
+      code: "this.getProperties('prop1', 'prop2');",
+      options: [{ ignoreGetProperties: true }],
+    },
+    {
+      code: "this.getProperties(['prop1', 'prop2']);", // With parameters in array.
+      options: [{ ignoreGetProperties: true }],
+    },
+    {
+      code: "getProperties(this, 'prop1', 'prop2');",
+      options: [{ ignoreGetProperties: true }],
+    },
+    {
+      code: "getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
+      options: [{ ignoreGetProperties: true }],
+    },
   ],
   invalid: [
     // **************************
