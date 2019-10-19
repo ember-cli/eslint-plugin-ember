@@ -12,6 +12,8 @@ ember/use-ember-get-and-set: [2, {
 
 Setting `ignoreThisExpressions` to `true` allows use of `this.get()` and `this.set()` where you will generally know if `this` is an `Ember.Object`.
 
+Setting `ignoreNonThisExpressions` to `true` allows use of non-Ember objects like `server.get()` and `map.set()`.
+
 #### Description
 
 This way you don't have to worry whether the object that you're trying to access is an `Ember.Object` or not. It also solves the problem of trying to wrap every object in `Ember.Object` in order to be able to use things like `getWithDefault`.
