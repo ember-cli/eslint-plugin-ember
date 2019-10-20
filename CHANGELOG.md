@@ -1,3 +1,23 @@
+## v7.2.0 (2019-10-20)
+
+#### :rocket: Enhancement
+* [#545](https://github.com/ember-cli/eslint-plugin-ember/pull/545) Add `ignoreNonThisExpressions` option to `use-ember-get-and-set` rule ([@nlfurniss](https://github.com/nlfurniss))
+* [#534](https://github.com/ember-cli/eslint-plugin-ember/pull/534) Add `onlyThisContexts` option to `no-arrow-function-computed-properties` rule ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#537](https://github.com/ember-cli/eslint-plugin-ember/pull/537) Add `ignoreGetProperties` option for `no-get` rule ([@EvgenyOrekhov](https://github.com/EvgenyOrekhov))
+
+#### :house: Internal
+* [#462](https://github.com/ember-cli/eslint-plugin-ember/pull/462) Refactor null checks for `new-module-imports` and `use-ember-data-rfc-395-imports` rules ([@dcyriller](https://github.com/dcyriller))
+* [#528](https://github.com/ember-cli/eslint-plugin-ember/pull/528) Add eslint-plugin-node and enable recommended rules internally ([@bmish](https://github.com/bmish))
+* [#524](https://github.com/ember-cli/eslint-plugin-ember/pull/524) Add eslint-plugin-filenames to enforce kebab-case filenames ([@bmish](https://github.com/bmish))
+* [#523](https://github.com/ember-cli/eslint-plugin-ember/pull/523) Add eslint-plugin-eslint-comments and fix violations ([@bmish](https://github.com/bmish))
+
+#### Committers: 5
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Cyrille David ([@dcyriller](https://github.com/dcyriller))
+- Evgeny Orekhov ([@EvgenyOrekhov](https://github.com/EvgenyOrekhov))
+- L. Preston Sego III ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+
 ## v7.1.0 (2019-09-18)
 
 #### :rocket: Enhancement
