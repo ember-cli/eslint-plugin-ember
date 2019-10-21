@@ -104,6 +104,10 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [route-path-style](./docs/rules/route-path-style.md) | Enforces usage of kebab-case (instead of snake_case or camelCase) in route paths |
 | :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
 
+### Ember Octane
+
+|  | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-native-classes.md) | Disallow using computed properties in native classes |
+
 
 ### Ember Object
 
