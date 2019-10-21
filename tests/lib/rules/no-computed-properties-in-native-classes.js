@@ -31,6 +31,12 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
 
       export default class MyComponent extends Component {}
     `,
+    `
+      import { randomThing } from '@ember/object';
+      import Component from '@ember/component';
+
+      export default class MyComponent extends Component {}
+    `,
   ],
   invalid: [
     {
@@ -42,7 +48,7 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
       }
       `,
       output: null,
-      errors: [{ message: ERROR_MESSAGE }],
+      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
     },
     {
       code: `
@@ -53,7 +59,7 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
       }
       `,
       output: null,
-      errors: [{ message: ERROR_MESSAGE }],
+      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
     },
   ],
 });
