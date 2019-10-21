@@ -145,6 +145,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [no-classic-classes](./docs/rules/no-classic-classes.md) | Disallow "classic" classes in favor of native JS classes |
 |  | [no-classic-components](./docs/rules/no-classic-components.md) | Enforces Glimmer components |
 |  | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | Disallows using computed properties in native classes |
+|  | [require-tagless-components](./docs/rules/require-tagless-components.md) | Disallows using the wrapper element of a Component |
 
 
 ### Ember Data
