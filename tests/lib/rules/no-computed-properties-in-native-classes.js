@@ -4,7 +4,6 @@ const rule = require('../../../lib/rules/no-computed-properties-in-native-classe
 const RuleTester = require('eslint').RuleTester;
 
 const { ERROR_MESSAGE } = rule;
-debugger;
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 6,
