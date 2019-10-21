@@ -104,10 +104,6 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [route-path-style](./docs/rules/route-path-style.md) | Enforces usage of kebab-case (instead of snake_case or camelCase) in route paths |
 | :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
 
-### Ember Octane
-
-|  | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-native-classes.md) | Disallow using computed properties in native classes |
-
 
 ### Ember Object
 
@@ -140,6 +136,13 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [require-return-from-computed](./docs/rules/require-return-from-computed.md) | Warns about missing return statements in computed properties |
 | :white_check_mark: | [require-super-in-init](./docs/rules/require-super-in-init.md) | Enforces super calls in init hooks |
 | :white_check_mark: | [routes-segments-snake-case](./docs/rules/routes-segments-snake-case.md) | Enforces usage of snake_cased dynamic segments in routes |
+
+
+### Ember Octane
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :white_check_mark: | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | (no description) |
 
 
 ### Ember Data
