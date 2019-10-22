@@ -21,14 +21,14 @@ const parserOptions = {
 ruleTester.run('no-classic-components', rule, {
   valid: [
     {
-      code: "import Component from '@glimmer/component'",
+      code: "import Component from '@glimmer/component';",
       parserOptions,
     },
   ],
 
   invalid: [
     {
-      code: "import Component from '@ember/component'",
+      code: "import Component from '@ember/component';",
       errors: [
         {
           message: ERROR_MESSAGE,

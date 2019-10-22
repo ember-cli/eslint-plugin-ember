@@ -1,17 +1,17 @@
-# Enforces Glimmer components (no-classic-components)
+# No classic components (no-classic-components)
 
-Please describe the origin of the rule here.
+This rule aims to enforce Glimmer components instead of classic ones.
 
 
 ## Rule Details
 
-This rule aims to...
+If you want to migrate to Glimmer components this rule can help find the classic components that you need to migrate.
 
 Examples of **incorrect** code for this rule:
 
 ```js
 
-// fill me in
+import Component from '@ember/component';
 
 ```
 
@@ -19,18 +19,6 @@ Examples of **correct** code for this rule:
 
 ```js
 
-// fill me in
+import Component from '@glimmer/component';
 
 ```
-
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
-
-## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
