@@ -12,19 +12,14 @@ const RuleTester = require('eslint').RuleTester;
 //------------------------------------------------------------------------------
 
 const { ERROR_MESSAGE } = rule;
-const ruleTester = new RuleTester();
 const parserOptions = {
   ecmaVersion: 6,
   sourceType: 'module',
 };
+const ruleTester = new RuleTester({ parserOptions });
 
 ruleTester.run('no-classic-components', rule, {
-  valid: [
-    {
-      code: "import Component from '@glimmer/component';",
-      parserOptions,
-    },
-  ],
+  valid: ["import Component from '@glimmer/component';"],
 
   invalid: [
     {
@@ -34,7 +29,6 @@ ruleTester.run('no-classic-components', rule, {
           message: ERROR_MESSAGE,
         },
       ],
-      parserOptions,
     },
   ],
 });
