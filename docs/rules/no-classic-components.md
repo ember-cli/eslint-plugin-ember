@@ -1,7 +1,15 @@
 # No classic components (no-classic-components)
 
-This rule aims to enforce Glimmer components instead of classic ones.
+This rule aims to enforce Glimmer components instead of classic ones. We should migrate to Glimmer components because
+they have few adventages:
+- Simpler API
+- No wrapper element
+- Namespaced Arguments
+- Less lifecycle hooks
+- Stateless Template-Only Components
+- Unidirectional Dataflow
 
+With that simpler API we could improve the DX and also lower the entry level for Ember.
 
 ## Rule Details
 
