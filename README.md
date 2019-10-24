@@ -138,6 +138,13 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [routes-segments-snake-case](./docs/rules/routes-segments-snake-case.md) | Enforces usage of snake_cased dynamic segments in routes |
 
 
+### Ember Octane
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+|  | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | Disallows using computed properties in native classes |
+
+
 ### Ember Data
 
 |    | Rule ID | Description |
