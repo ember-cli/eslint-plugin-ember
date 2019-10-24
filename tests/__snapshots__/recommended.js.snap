@@ -11,7 +11,6 @@ Array [
   "no-attrs-in-components",
   "no-attrs-snapshot",
   "no-capital-letters-in-routes",
-  "no-computed-properties-in-native-classes",
   "no-deeply-nested-dependent-keys-with-each",
   "no-duplicate-dependent-keys",
   "no-ember-super-in-es-classes",
