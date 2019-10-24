@@ -22,3 +22,10 @@ Examples of **correct** code for this rule:
 import Component from '@glimmer/component';
 
 ```
+
+## References
+
+* [Ember 3.13 Release Notes](https://blog.emberjs.com/2019/09/25/ember-3-13-released.html)
+* [Ember Glimmer Components RFC](https://github.com/emberjs/rfcs/blob/master/text/0416-glimmer-components.md)
+* [Ember Octane Release Plan](https://blog.emberjs.com/2019/08/15/octane-release-plan.html)
+* [Glimmer Components Explained](https://www.pzuraq.com/coming-soon-in-ember-octane-part-5-glimmer-components/)
