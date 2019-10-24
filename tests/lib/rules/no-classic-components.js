@@ -27,6 +27,7 @@ ruleTester.run('no-classic-components', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
+          type: 'ImportDeclaration',
         },
       ],
     },
