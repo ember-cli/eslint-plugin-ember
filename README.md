@@ -142,7 +142,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | (no description) |
+|  | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | Disallows using computed properties in native classes |
 
 
 ### Ember Data
