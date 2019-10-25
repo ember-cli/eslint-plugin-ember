@@ -194,6 +194,12 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    {
+      code: `export default Service({
+        init
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
   ],
   invalid: [
     {
