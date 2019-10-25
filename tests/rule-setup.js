@@ -45,7 +45,9 @@ describe('rules setup is correct', function() {
     // eslint-disable-next-line node/no-deprecated-api
     assert.deepEqual(
       RULE_NAMES,
-      files.filter(file => !file.startsWith('.')).map(file => file.replace('.md', ''))
+      files
+        .filter(file => !file.startsWith('.') && file !== '_TEMPLATE_.md')
+        .map(file => file.replace('.md', ''))
     );
   });
 
