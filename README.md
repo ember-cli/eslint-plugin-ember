@@ -80,99 +80,99 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 ### Best Practices
 
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-|  | [alias-model-in-controller](./docs/rules/alias-model-in-controller.md) | Enforces aliasing model in controller |
-| :white_check_mark: | [avoid-using-needs-in-controllers](./docs/rules/avoid-using-needs-in-controllers.md) | Avoids using needs in controllers |
-| :white_check_mark: | [closure-actions](./docs/rules/closure-actions.md) | Enforces usage of closure actions |
-|  | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
-| :white_check_mark: | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
-| :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
-|  | [no-get](./docs/rules/no-get.md) | Require ES5 getters instead of Ember's `get` / `getProperties` functions |
-| :white_check_mark: | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
-|  | [no-jquery](./docs/rules/no-jquery.md) | Disallow any usage of jQuery |
-| :white_check_mark: | [no-new-mixins](./docs/rules/no-new-mixins.md) | Prevents creation of new mixins |
-| :white_check_mark: | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
-| :white_check_mark::wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | Prevents usage of old shims for modules |
-| :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | Prevents usage of `on` to call lifecycle hooks in components |
-| :white_check_mark: | [no-restricted-resolver-tests](./docs/rules/no-restricted-resolver-tests.md) | Prevents the use of patterns that use the restricted resolver in tests. |
-|  | [no-unnecessary-index-route](./docs/rules/no-unnecessary-index-route.md) | Disallow unnecessary `index` route definition |
-| :white_check_mark::wrench: | [no-unnecessary-route-path-option](./docs/rules/no-unnecessary-route-path-option.md) | Disallow unnecessary route `path` option |
-| :wrench: | [no-unnecessary-service-injection-argument](./docs/rules/no-unnecessary-service-injection-argument.md) | Disallow unnecessary argument when injecting service |
-| :white_check_mark: | [no-volatile-computed-properties](./docs/rules/no-volatile-computed-properties.md) | Disallows volatile computed properties |
-| :wrench: | [require-computed-macros](./docs/rules/require-computed-macros.md) | Requires using computed property macros when possible |
-|  | [route-path-style](./docs/rules/route-path-style.md) | Enforces usage of kebab-case (instead of snake_case or camelCase) in route paths |
-| :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | Enforces usage of Ember.get and Ember.set |
+|                            | Rule ID                                                                                                | Description                                                                      |
+| :------------------------- | :----------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- |
+|                            | [alias-model-in-controller](./docs/rules/alias-model-in-controller.md)                                 | Enforces aliasing model in controller                                            |
+| :white_check_mark:         | [avoid-using-needs-in-controllers](./docs/rules/avoid-using-needs-in-controllers.md)                   | Avoids using needs in controllers                                                |
+| :white_check_mark:         | [closure-actions](./docs/rules/closure-actions.md)                                                     | Enforces usage of closure actions                                                |
+|                            | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md)                             | Enforces usage of named functions in promises                                    |
+| :white_check_mark:         | [new-module-imports](./docs/rules/new-module-imports.md)                                               | Use "New Module Imports" from Ember RFC #176                                     |
+| :white_check_mark:         | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md)                   | Prevents usage of Ember's `function` prototype extensions                        |
+|                            | [no-get](./docs/rules/no-get.md)                                                                       | Require ES5 getters instead of Ember's `get` / `getProperties` functions         |
+| :white_check_mark:         | [no-global-jquery](./docs/rules/no-global-jquery.md)                                                   | Prevents usage of global jQuery object                                           |
+|                            | [no-jquery](./docs/rules/no-jquery.md)                                                                 | Disallow any usage of jQuery                                                     |
+| :white_check_mark:         | [no-new-mixins](./docs/rules/no-new-mixins.md)                                                         | Prevents creation of new mixins                                                  |
+| :white_check_mark:         | [no-observers](./docs/rules/no-observers.md)                                                           | Prevents usage of observers                                                      |
+| :white_check_mark::wrench: | [no-old-shims](./docs/rules/no-old-shims.md)                                                           | Prevents usage of old shims for modules                                          |
+| :white_check_mark:         | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md)                                 | Prevents usage of `on` to call lifecycle hooks in components                     |
+| :white_check_mark:         | [no-restricted-resolver-tests](./docs/rules/no-restricted-resolver-tests.md)                           | Prevents the use of patterns that use the restricted resolver in tests.          |
+|                            | [no-unnecessary-index-route](./docs/rules/no-unnecessary-index-route.md)                               | Disallow unnecessary `index` route definition                                    |
+| :white_check_mark::wrench: | [no-unnecessary-route-path-option](./docs/rules/no-unnecessary-route-path-option.md)                   | Disallow unnecessary route `path` option                                         |
+| :wrench:                   | [no-unnecessary-service-injection-argument](./docs/rules/no-unnecessary-service-injection-argument.md) | Disallow unnecessary argument when injecting service                             |
+| :white_check_mark:         | [no-volatile-computed-properties](./docs/rules/no-volatile-computed-properties.md)                     | Disallows volatile computed properties                                           |
+| :wrench:                   | [require-computed-macros](./docs/rules/require-computed-macros.md)                                     | Requires using computed property macros when possible                            |
+|                            | [route-path-style](./docs/rules/route-path-style.md)                                                   | Enforces usage of kebab-case (instead of snake_case or camelCase) in route paths |
+| :wrench:                   | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md)                                         | Enforces usage of Ember.get and Ember.set                                        |
 
 
 ### Ember Object
 
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-| :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage |
-|  | [classic-decorator-hooks](./docs/rules/classic-decorator-hooks.md) | Ensure correct hooks are used for both classic and non-classic classes |
-|  | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | Prevent usage of classic APIs such as get/set in classes that aren't explicitly decorated with @classic |
-|  | [computed-property-getters](./docs/rules/computed-property-getters.md) | Enforce the consistent use of getters in computed properties |
-|  | [no-proxies](./docs/rules/no-proxies.md) | Disallows using array or object proxies |
+|                    | Rule ID                                                                                      | Description                                                                                             |
+| :----------------- | :------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ |
+| :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage                                                                                    |
+|                    | [classic-decorator-hooks](./docs/rules/classic-decorator-hooks.md)                           | Ensure correct hooks are used for both classic and non-classic classes                                  |
+|                    | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | Prevent usage of classic APIs such as get/set in classes that aren't explicitly decorated with @classic |
+|                    | [computed-property-getters](./docs/rules/computed-property-getters.md)                       | Enforce the consistent use of getters in computed properties                                            |
+|                    | [no-proxies](./docs/rules/no-proxies.md)                                                     | Disallows using array or object proxies                                                                 |
 
 
 ### Possible Errors
 
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-| :white_check_mark: | [jquery-ember-run](./docs/rules/jquery-ember-run.md) | Prevents usage of jQuery without Ember Run Loop |
-| :white_check_mark: | [no-arrow-function-computed-properties](./docs/rules/no-arrow-function-computed-properties.md) | Disallows arrow functions in computed properties |
-| :white_check_mark: | [no-attrs-in-components](./docs/rules/no-attrs-in-components.md) | Disallow usage of this.attrs in components |
-| :white_check_mark: | [no-attrs-snapshot](./docs/rules/no-attrs-snapshot.md) | Disallow use of attrs snapshot in `didReceiveAttrs` and `didUpdateAttrs` |
-| :white_check_mark: | [no-capital-letters-in-routes](./docs/rules/no-capital-letters-in-routes.md) | Raise an error when there is a route with uppercased letters in router.js |
-| :white_check_mark: | [no-deeply-nested-dependent-keys-with-each](./docs/rules/no-deeply-nested-dependent-keys-with-each.md) | Disallows usage of deeply-nested computed property dependent keys with `@each`. |
-| :white_check_mark: | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | Disallow repeating dependent keys |
-| :white_check_mark::wrench: | [no-ember-super-in-es-classes](./docs/rules/no-ember-super-in-es-classes.md) | Prevents use of `this._super` in ES class methods |
-| :white_check_mark: | [no-ember-testing-in-module-scope](./docs/rules/no-ember-testing-in-module-scope.md) | Prevents use of Ember.testing in module scope |
-| :white_check_mark: | [no-incorrect-calls-with-inline-anonymous-functions](./docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | Disallows inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce` |
-| :white_check_mark: | [no-invalid-debug-function-arguments](./docs/rules/no-invalid-debug-function-arguments.md) | Catch usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. |
-| :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | Warns about unexpected side effects in computed properties |
-| :wrench: | [require-computed-property-dependencies](./docs/rules/require-computed-property-dependencies.md) | Requires dependencies to be declared statically in computed properties |
-| :white_check_mark: | [require-return-from-computed](./docs/rules/require-return-from-computed.md) | Warns about missing return statements in computed properties |
-| :white_check_mark: | [require-super-in-init](./docs/rules/require-super-in-init.md) | Enforces super calls in init hooks |
-| :white_check_mark: | [routes-segments-snake-case](./docs/rules/routes-segments-snake-case.md) | Enforces usage of snake_cased dynamic segments in routes |
+|                            | Rule ID                                                                                                                  | Description                                                                                                                |
+| :------------------------- | :----------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- |
+| :white_check_mark:         | [jquery-ember-run](./docs/rules/jquery-ember-run.md)                                                                     | Prevents usage of jQuery without Ember Run Loop                                                                            |
+| :white_check_mark:         | [no-arrow-function-computed-properties](./docs/rules/no-arrow-function-computed-properties.md)                           | Disallows arrow functions in computed properties                                                                           |
+| :white_check_mark:         | [no-attrs-in-components](./docs/rules/no-attrs-in-components.md)                                                         | Disallow usage of this.attrs in components                                                                                 |
+| :white_check_mark:         | [no-attrs-snapshot](./docs/rules/no-attrs-snapshot.md)                                                                   | Disallow use of attrs snapshot in `didReceiveAttrs` and `didUpdateAttrs`                                                   |
+| :white_check_mark:         | [no-capital-letters-in-routes](./docs/rules/no-capital-letters-in-routes.md)                                             | Raise an error when there is a route with uppercased letters in router.js                                                  |
+| :white_check_mark:         | [no-deeply-nested-dependent-keys-with-each](./docs/rules/no-deeply-nested-dependent-keys-with-each.md)                   | Disallows usage of deeply-nested computed property dependent keys with `@each`.                                            |
+| :white_check_mark:         | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md)                                               | Disallow repeating dependent keys                                                                                          |
+| :white_check_mark::wrench: | [no-ember-super-in-es-classes](./docs/rules/no-ember-super-in-es-classes.md)                                             | Prevents use of `this._super` in ES class methods                                                                          |
+| :white_check_mark:         | [no-ember-testing-in-module-scope](./docs/rules/no-ember-testing-in-module-scope.md)                                     | Prevents use of Ember.testing in module scope                                                                              |
+| :white_check_mark:         | [no-incorrect-calls-with-inline-anonymous-functions](./docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | Disallows inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce`                                |
+| :white_check_mark:         | [no-invalid-debug-function-arguments](./docs/rules/no-invalid-debug-function-arguments.md)                               | Catch usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. |
+| :white_check_mark:         | [no-side-effects](./docs/rules/no-side-effects.md)                                                                       | Warns about unexpected side effects in computed properties                                                                 |
+| :wrench:                   | [require-computed-property-dependencies](./docs/rules/require-computed-property-dependencies.md)                         | Requires dependencies to be declared statically in computed properties                                                     |
+| :white_check_mark:         | [require-return-from-computed](./docs/rules/require-return-from-computed.md)                                             | Warns about missing return statements in computed properties                                                               |
+| :white_check_mark:         | [require-super-in-init](./docs/rules/require-super-in-init.md)                                                           | Enforces super calls in init hooks                                                                                         |
+| :white_check_mark:         | [routes-segments-snake-case](./docs/rules/routes-segments-snake-case.md)                                                 | Enforces usage of snake_cased dynamic segments in routes                                                                   |
 
 
 ### Ember Octane
 
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-|  | [no-classic-classes](./docs/rules/no-classic-classes.md) | Disallow "classic" classes in favor of native JS classes |
-|  | [no-classic-components](./docs/rules/no-classic-components.md) | Enforces Glimmer components |
-|  | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | Disallows using computed properties in native classes |
-
+|      | Rule ID                                                                                              | Description                                                                                                                          |
+| :--- | :--------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
+|      | [no-classic-classes](./docs/rules/no-classic-classes.md)                                             | Disallow "classic" classes in favor of native JS classes                                                                             |
+|      | [no-classic-components](./docs/rules/no-classic-components.md)                                       | Enforces Glimmer components                                                                                                          |
+|      | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | Disallows using computed properties in native classes                                                                                |
+|      | [no-component-lifecycle-hooks](./docs/rules/no-component-lifecycle-hooks.md)                         | Prevents usage of "classic" ember component lifecycle hooks. Render modifiers or custom functional modifiers should be used instead. |
 
 ### Ember Data
 
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-|  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | Prevents usage of empty attributes in ember data models |
-| :wrench: | [use-ember-data-rfc-395-imports](./docs/rules/use-ember-data-rfc-395-imports.md) | Use "Ember Data Packages" from Ember RFC #395 |
+|          | Rule ID                                                                          | Description                                             |
+| :------- | :------------------------------------------------------------------------------- | :------------------------------------------------------ |
+|          | [no-empty-attrs](./docs/rules/no-empty-attrs.md)                                 | Prevents usage of empty attributes in ember data models |
+| :wrench: | [use-ember-data-rfc-395-imports](./docs/rules/use-ember-data-rfc-395-imports.md) | Use "Ember Data Packages" from Ember RFC #395           |
 
 
 ### Testing
 
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-|  | [no-pause-test](./docs/rules/no-pause-test.md) | Disallow use of `pauseTest` helper in tests. |
-|  | [no-test-and-then](./docs/rules/no-test-and-then.md) | Disallow use of `andThen` test wait helper. |
-|  | [no-test-import-export](./docs/rules/no-test-import-export.md) | Disallow importing of "-test.js" in a test file and exporting from a test file. |
+|      | Rule ID                                                        | Description                                                                     |
+| :--- | :------------------------------------------------------------- | :------------------------------------------------------------------------------ |
+|      | [no-pause-test](./docs/rules/no-pause-test.md)                 | Disallow use of `pauseTest` helper in tests.                                    |
+|      | [no-test-and-then](./docs/rules/no-test-and-then.md)           | Disallow use of `andThen` test wait helper.                                     |
+|      | [no-test-import-export](./docs/rules/no-test-import-export.md) | Disallow importing of "-test.js" in a test file and exporting from a test file. |
 
 
 ### Stylistic Issues
 
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-| :wrench: | [order-in-components](./docs/rules/order-in-components.md) | Enforces proper order of properties in components |
-| :wrench: | [order-in-controllers](./docs/rules/order-in-controllers.md) | Enforces proper order of properties in controllers |
-| :wrench: | [order-in-models](./docs/rules/order-in-models.md) | Enforces proper order of properties in models |
-| :wrench: | [order-in-routes](./docs/rules/order-in-routes.md) | Enforces proper order of properties in routes |
-| :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | Enforces usage of brace expansion |
+|                    | Rule ID                                                      | Description                                        |
+| :----------------- | :----------------------------------------------------------- | :------------------------------------------------- |
+| :wrench:           | [order-in-components](./docs/rules/order-in-components.md)   | Enforces proper order of properties in components  |
+| :wrench:           | [order-in-controllers](./docs/rules/order-in-controllers.md) | Enforces proper order of properties in controllers |
+| :wrench:           | [order-in-models](./docs/rules/order-in-models.md)           | Enforces proper order of properties in models      |
+| :wrench:           | [order-in-routes](./docs/rules/order-in-routes.md)           | Enforces proper order of properties in routes      |
+| :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md)   | Enforces usage of brace expansion                  |
 
 <!--RULES_TABLE_END-->
 
