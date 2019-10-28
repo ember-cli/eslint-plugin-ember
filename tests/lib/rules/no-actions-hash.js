@@ -58,6 +58,12 @@ ruleTester.run('no-actions-hash', rule, {
         }
       }
     `,
+    `
+      export default Service.extend({
+        actions: {
+        },
+      });
+    `,
   ],
 
   invalid: [
@@ -68,7 +74,7 @@ ruleTester.run('no-actions-hash', rule, {
           },
         });
       `,
-      errors: [{ message: ERROR_MESSAGE }],
+      errors: [{ type: 'Property', message: ERROR_MESSAGE }],
     },
     {
       code: `
@@ -79,7 +85,7 @@ ruleTester.run('no-actions-hash', rule, {
           }
         }
       `,
-      errors: [{ message: ERROR_MESSAGE }],
+      errors: [{ type: 'ClassProperty', message: ERROR_MESSAGE }],
     },
     {
       code: `
@@ -88,7 +94,7 @@ ruleTester.run('no-actions-hash', rule, {
           },
         });
       `,
-      errors: [{ message: ERROR_MESSAGE }],
+      errors: [{ type: 'Property', message: ERROR_MESSAGE }],
     },
     {
       code: `
@@ -99,7 +105,7 @@ ruleTester.run('no-actions-hash', rule, {
           }
         }
       `,
-      errors: [{ message: ERROR_MESSAGE }],
+      errors: [{ type: 'ClassProperty', message: ERROR_MESSAGE }],
     },
     {
       code: `
@@ -108,7 +114,7 @@ ruleTester.run('no-actions-hash', rule, {
           },
         });
       `,
-      errors: [{ message: ERROR_MESSAGE }],
+      errors: [{ type: 'Property', message: ERROR_MESSAGE }],
     },
     {
       code: `
@@ -119,7 +125,7 @@ ruleTester.run('no-actions-hash', rule, {
           }
         }
       `,
-      errors: [{ message: ERROR_MESSAGE }],
+      errors: [{ type: 'ClassProperty', message: ERROR_MESSAGE }],
     },
   ],
 });
