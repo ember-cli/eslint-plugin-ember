@@ -47,13 +47,13 @@ ruleTester.run('require-tagless-components', rule, {
     `
       import SomeOtherThing from 'some-other-module';
       export default SomeOtherThing.extend({
-        tagName: ''
+        tagName: 'some-non-empty-value'
       });
     `,
     `
       import SomeOtherThing from 'some-other-module';
       export default class MyThing extends SomeOtherThing {
-        tagName = '';
+        tagName = 'some-non-empty-value';
       }
     `,
   ],
