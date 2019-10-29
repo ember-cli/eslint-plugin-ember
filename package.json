@@ -80,6 +80,9 @@
     }
   },
   "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/tests/helpers/"
+    ],
     "testMatch": [
       "**/tests/**/*.js"
     ],
