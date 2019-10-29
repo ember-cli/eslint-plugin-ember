@@ -1,27 +1,5 @@
-'use strict';
-
-const babelEslint = require('babel-eslint');
 const { getSourceModuleNameForIdentifier } = require('../../../../lib/utils/utils');
-
-/**
- * Builds a fake ESLint context object that's enough to satisfy the contract
- * expected by `getSourceModuleNameForIdentifier`
- */
-class FauxContext {
-  constructor(code) {
-    const { ast } = babelEslint.parseForESLint(code);
-
-    this.ast = ast;
-  }
-
-  /**
-   * Does not build the full tree of "parents" for the identifier, but
-   * we only care about the first one; the Program node
-   */
-  getAncestors() {
-    return [this.ast];
-  }
-}
+const { FauxContext } = require('../../../helpers/faux-context');
 
 test('when the identifier is not imported', () => {
   const context = new FauxContext(`
