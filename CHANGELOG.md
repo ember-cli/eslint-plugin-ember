@@ -1,3 +1,29 @@
+## v7.3.0 (2019-10-30)
+
+#### :rocket: Enhancement
+* [#555](https://github.com/ember-cli/eslint-plugin-ember/pull/555) Add new `no-actions-hash` rule ([@laurmurclar](https://github.com/laurmurclar))
+* [#548](https://github.com/ember-cli/eslint-plugin-ember/pull/548) Add new `require-tagless-components` rule ([@alexlafroscia](https://github.com/alexlafroscia))
+* [#552](https://github.com/ember-cli/eslint-plugin-ember/pull/552) Add new `no-classic-classes` rule ([@alexlafroscia](https://github.com/alexlafroscia))
+* [#551](https://github.com/ember-cli/eslint-plugin-ember/pull/551) Add new `no-classic-components` rule ([@mikoscz](https://github.com/mikoscz))
+* [#546](https://github.com/ember-cli/eslint-plugin-ember/pull/546) Add new `no-computed-properties-in-native-classes` rule ([@patocallaghan](https://github.com/patocallaghan))
+
+#### :bug: Bug Fix
+* [#553](https://github.com/ember-cli/eslint-plugin-ember/pull/553) Avoid crash from missing function check in `require-super-in-init` rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#554](https://github.com/ember-cli/eslint-plugin-ember/pull/554) Add rule documentation template ([@bmish](https://github.com/bmish))
+* [#550](https://github.com/ember-cli/eslint-plugin-ember/pull/550) Modernize documentation for `alias-model-in-controller` rule ([@alexlafroscia](https://github.com/alexlafroscia))
+
+#### :house: Internal
+* [#558](https://github.com/ember-cli/eslint-plugin-ember/pull/558) Update `isEmberCoreModule` util function to also handle native classes (in addition to classic classes) ([@laurmurclar](https://github.com/laurmurclar))
+
+#### Committers: 5
+- Alex LaFroscia ([@alexlafroscia](https://github.com/alexlafroscia))
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Laura Murphy-Clarkin ([@laurmurclar](https://github.com/laurmurclar))
+- Michał Staśkiewicz ([@mikoscz](https://github.com/mikoscz))
+- Pat O'Callaghan ([@patocallaghan](https://github.com/patocallaghan))
+
 ## v7.2.0 (2019-10-20)
 
 #### :rocket: Enhancement
