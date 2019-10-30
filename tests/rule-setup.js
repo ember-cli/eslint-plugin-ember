@@ -5,8 +5,10 @@ const { join } = require('path');
 const assert = require('assert');
 const rules = require('../lib/index.js').rules;
 const recommendedRules = require('../lib/recommended-rules.js');
+const octaneRules = require('../lib/octane-rules.js');
 
 const RULE_NAMES = Object.keys(rules);
+const OCTANE_RULE_NAMES = Object.keys(octaneRules);
 
 describe('rules setup is correct', function() {
   it('should have a list of exported rules and rules directory that match', function() {
@@ -24,6 +26,14 @@ describe('rules setup is correct', function() {
     assert.deepStrictEqual(
       RULE_NAMES,
       Object.keys(recommendedRules).map(file => file.replace('ember/', ''))
+    );
+  });
+
+  it('should list all rules in the octane rules file', function() {
+    const octaneRuleNames = Object.keys(rules).filter(key => rules[key].meta.docs.octane);
+    assert.deepStrictEqual(
+      OCTANE_RULE_NAMES.map(file => file.replace('ember/', '')),
+      octaneRuleNames
     );
   });
 
