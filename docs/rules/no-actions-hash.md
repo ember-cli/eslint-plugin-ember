@@ -10,13 +10,18 @@ Use the `@action` decorator or `foo: action(function() {}))` syntax instead of a
 Examples of **incorrect** code for this rule:
 
 ```js
-// Bad
+// Bad, with classic class
+import Component from '@ember/component';
+
 export default Component.extend({
   actions: {
     foo() {
     }
   },
 });
+
+// Bad, with native class
+import Component from '@ember/component';
 
 export class MyComponent extends Component {
   actions = {
@@ -29,11 +34,18 @@ export class MyComponent extends Component {
 Examples of **correct** code for this rule:
 
 ```js
-// Good
+// Good, with classic class
+import Component from '@ember/component';
+import { action } from '@ember/object';
+
 export default Component.extend({
   foo: action(function() {
   })
 });
+
+// Good, with native class
+import Component from '@ember/component';
+import { action } from '@ember/object';
 
 export class MyComponent extends Component {
   @action

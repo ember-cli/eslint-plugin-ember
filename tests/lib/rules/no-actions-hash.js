@@ -78,6 +78,7 @@ ruleTester.run('no-actions-hash', rule, {
     },
     {
       code: `
+        import Component from '@ember/component';
         export default class MyComponent extends Component {
           actions = {
             foo() {
@@ -98,6 +99,7 @@ ruleTester.run('no-actions-hash', rule, {
     },
     {
       code: `
+        import Controller from '@ember/controller';
         export default class MyController extends Controller {
           actions = {
             foo() {
@@ -118,6 +120,7 @@ ruleTester.run('no-actions-hash', rule, {
     },
     {
       code: `
+        import Route from '@ember/routing/route';
         export default class MyRoute extends Route {
           actions = {
             foo() {

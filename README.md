@@ -113,7 +113,6 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [classic-decorator-hooks](./docs/rules/classic-decorator-hooks.md) | Ensure correct hooks are used for both classic and non-classic classes |
 |  | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | Prevent usage of classic APIs such as get/set in classes that aren't explicitly decorated with @classic |
 |  | [computed-property-getters](./docs/rules/computed-property-getters.md) | Enforce the consistent use of getters in computed properties |
-|  | [no-actions-hash](./docs/rules/no-actions-hash.md) | Disallows the actions hash in components, controllers and routes |
 |  | [no-proxies](./docs/rules/no-proxies.md) | Disallows using array or object proxies |
 
 
@@ -143,6 +142,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+|  | [no-actions-hash](./docs/rules/no-actions-hash.md) | Disallows the actions hash in components, controllers and routes |
 |  | [no-classic-classes](./docs/rules/no-classic-classes.md) | Disallow "classic" classes in favor of native JS classes |
 |  | [no-classic-components](./docs/rules/no-classic-components.md) | Enforces Glimmer components |
 |  | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | Disallows using computed properties in native classes |
