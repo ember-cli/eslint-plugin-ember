@@ -1,21 +1,9 @@
-/**
- * @fileoverview Prevents usage of "classic" ember component lifecycle hooks. Render modifiers or custom functional modifiers should be used instead.
- * @author Jacek Bandura
- */
 'use strict';
-
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/no-component-lifecycle-hooks');
 const RuleTester = require('eslint').RuleTester;
 
 const { ERROR_MESSAGE_NO_COMPONENT_LIFECYCLE_HOOKS: ERROR_MESSAGE } = rule;
-
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
@@ -24,10 +12,30 @@ const ruleTester = new RuleTester({
 ruleTester.run('no-component-lifecycle-hooks', rule, {
   valid: [
     `
-      import Component from '@ember/component';
+      import Component from '@glimmer/component';
       export default class MyComponent extends Component {
-        didDestroyElement() {}
+        willDestroy() {}
       }
+    `,
+    `
+      export default class MyClass {
+        didUpdate() {}
+      }
+    `,
+    `
+      export default {
+        didUpdate() {},
+      }
+    `,
+    `
+      export default Component.extend({
+        willDestroy() {},
+      });
+    `,
+    `
+      export default EmberObject.extend({
+        didUpdate() {},
+      });
     `,
   ],
 
@@ -43,6 +51,34 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
         {
           message: ERROR_MESSAGE,
           type: 'MethodDefinition',
+        },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+        export default class MyComponent extends Component {
+          didDestroyElement() {}
+        }
+      `,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'MethodDefinition',
+        },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          didDestroyElement() {}
+        })
+      `,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'FunctionExpression',
         },
       ],
     },
