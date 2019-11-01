@@ -1,36 +1,69 @@
-# Prevents usage of &#34;classic&#34; ember component lifecycle hooks. Render modifiers or custom functional modifiers should be used instead. (no-component-lifecycle-hooks)
-
-Please describe the origin of the rule here.
-
+# Disallow usage of "classic" ember component lifecycle hooks.
+## Rule name: `no-component-lifecycle-hooks`
 
 ## Rule Details
+As most component lifecycle hooks are gone in glimmer components, this rule aims to:
+- remind the developer that those hooks no longer exist in glimmer components
+- encourage migrating away from those hooks in classic ember components
 
-This rule aims to...
+Effectively, this rule disallows following lifecycle hooks in components:
+
+- `didDestroyElement`
+- `didInsertElement`
+- `didReceiveAttrs`
+- `didRender`
+- `didUpdate`
+- `didUpdateAttrs`
+- `willClearRender`
+- `willDestroyElement`
+- `willRender`
+
+Custom functional modifiers or @ember/render-modifiers should be used instead.
+
+---
 
 Examples of **incorrect** code for this rule:
 
 ```js
+export default class MyComponent extends Component {
+  didDestroyElement() {}
+  didInsertElement() {}
+  didReceiveAttrs() {}
+  didRender() {}
+  didUpdate() {}
+  didUpdateAttrs() {}
+  willClearRender() {}
+  willDestroyElement() {}
+  willRender() {}
+}
 
-// fill me in
-
+export default Component.extend({
+  didDestroyElement() {},
+  didInsertElement() {},
+  didReceiveAttrs() {},
+  didRender() {},
+  didUpdate() {},
+  didUpdateAttrs() {},
+  willClearRender() {},
+  willDestroyElement() {},
+  willRender() {},
+});
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
+export default class MyComponent extends Component {
+  init() { ... }
+  willDestroy() { ... }
+}
 
-// fill me in
-
+export default Component.extend({
+  init() { ... }
+  willDestroy() { ... }
+});
 ```
 
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
-
 ## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
+- [`@ember/render-modifiers`](https://github.com/emberjs/ember-render-modifiers)
+- [Blog post about modifiers](https://blog.emberjs.com/2019/03/06/coming-soon-in-ember-octane-part-4.html)

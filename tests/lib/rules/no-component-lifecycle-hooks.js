@@ -18,6 +18,7 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
       }
     `,
     `
+      import Component from '@glimmer/component';
       export default class MyClass {
         didUpdate() {}
       }
@@ -28,6 +29,7 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
       }
     `,
     `
+      import Component from '@ember/component';
       export default Component.extend({
         willDestroy() {},
       });
@@ -78,7 +80,7 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
-          type: 'FunctionExpression',
+          type: 'Identifier',
         },
       ],
     },
