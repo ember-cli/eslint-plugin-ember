@@ -64,7 +64,7 @@ ruleTester.run('no-test-module-for', rule, {
       filename: 'tests/helpers/module-for-acceptance',
       code: 'export default function moduleForAcceptance() {}',
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'FunctionDeclaration' }],
     },
   ],
 });
