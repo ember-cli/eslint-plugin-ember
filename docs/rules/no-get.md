@@ -60,6 +60,7 @@ const foo = { prop1: this.prop1, prop2: this.prop2 };
 This rule takes an optional object containing:
 
 - `boolean` -- `ignoreGetProperties` -- whether the rule should ignore `getProperties` (default `false`)
+- `boolean` -- `ignoreNestedPaths` -- whether the rule should ignore `this.get('some.nested.property')` (default `true`) (this option is enabled by default to make it easier/safer to adopt this rule)
 
 ## Related Rules
 

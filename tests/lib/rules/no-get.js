@@ -146,5 +146,31 @@ ruleTester.run('no-get', rule, {
       output: null,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
+
+    // With ignoreNestedPaths: false
+    {
+      code: "this.get('foo.bar');",
+      output: null,
+      options: [{ ignoreNestedPaths: false }],
+      errors: [{ message: makeErrorMessageForGet('foo.bar', false), type: 'CallExpression' }],
+    },
+    {
+      code: "get(this, 'foo.bar');",
+      output: null,
+      options: [{ ignoreNestedPaths: false }],
+      errors: [{ message: makeErrorMessageForGet('foo.bar', true), type: 'CallExpression' }],
+    },
+    {
+      code: "this.getProperties('foo.bar');",
+      output: null,
+      options: [{ ignoreNestedPaths: false }],
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: "getProperties(this, 'foo.bar');",
+      output: null,
+      options: [{ ignoreNestedPaths: false }],
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
   ],
 });
