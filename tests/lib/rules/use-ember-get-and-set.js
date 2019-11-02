@@ -401,13 +401,13 @@ eslintTester.run('use-ember-get-and-set', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: `this.set('test', 'value')`,
+      code: "this.set('test', 'value')",
       output: null,
       errors: [{ message: 'Use get/set' }],
       options: [{ ignoreNonThisExpressions: true }],
     },
     {
-      code: `this.get('value')`,
+      code: "this.get('value')",
       output: null,
       errors: [{ message: 'Use get/set' }],
       options: [{ ignoreNonThisExpressions: true }],

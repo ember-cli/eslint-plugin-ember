@@ -27,27 +27,27 @@ ruleTester.run('no-arrow-function-computed-properties', rule, {
     'other(() => {})',
     'other.computed(() => {})',
     {
-      code: `computed('prop', function() { return this.prop; });`,
+      code: "computed('prop', function() { return this.prop; });",
       options: [{ onlyThisContexts: true }],
     },
     {
-      code: `computed('prop', function() { return this.prop; }).volatile();`,
+      code: "computed('prop', function() { return this.prop; }).volatile();",
       options: [{ onlyThisContexts: true }],
     },
     {
-      code: `computed(() => { return 123; });`,
+      code: 'computed(() => { return 123; });',
       options: [{ onlyThisContexts: true }],
     },
     {
-      code: `computed(() => { return "string stuff"; });`,
+      code: 'computed(() => { return "string stuff"; });',
       options: [{ onlyThisContexts: true }],
     },
     {
-      code: `computed(() => []);`,
+      code: 'computed(() => []);',
       options: [{ onlyThisContexts: true }],
     },
     {
-      code: `computed.map('products', product => { return someFunction(product); });`,
+      code: "computed.map('products', product => { return someFunction(product); });",
       options: [{ onlyThisContexts: true }],
     },
   ],
