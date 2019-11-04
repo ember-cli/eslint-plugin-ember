@@ -21,3 +21,30 @@ module('Test Name', function(hooks) {
 ## Migration
 
 * [ember-qunit-codemod](https://github.com/ember-codemods/ember-qunit-codemod)
+
+A short reference for how each of the legacy APIs converts to the new APIs.
+
+* `moduleFor`, `moduleForModel`
+
+    ```ts
+    module('...', function(hooks) {
+      setupTest(hooks);
+    });
+    ```
+
+* `moduleForComponent`
+
+    ```ts
+    module('...', function(hooks) {
+      setupRenderingTest(hooks);
+    });
+    ```
+
+* `moduleForAcceptance`
+
+    ```ts
+    module('...', function(hooks) {
+      setupApplicationTest(hooks);
+    });
+    ```
+
