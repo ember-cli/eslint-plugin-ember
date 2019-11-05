@@ -29,11 +29,7 @@ eslintTester.run('no-new-mixins', rule, {
         export default Ember.Mixin.create({});
       `,
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: `
@@ -42,11 +38,15 @@ eslintTester.run('no-new-mixins', rule, {
         export default Mixin.create({});
       `,
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      code: `
+        import Mixin from "@ember/object/mixin";
+        class MyMixin extends Mixin {}
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'ClassDeclaration' }],
     },
   ],
 });
