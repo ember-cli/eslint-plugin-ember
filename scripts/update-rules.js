@@ -27,6 +27,7 @@ const readmeContent = fs.readFileSync(readmeFile, 'utf8');
 
 const STAR = ':white_check_mark:';
 const PEN = ':wrench:';
+const OCTANE = ':car:';
 
 const rules = fs
   .readdirSync(root)
@@ -55,7 +56,9 @@ ${rules
   .map(entry => {
     const name = entry[0];
     const meta = entry[1].meta;
-    const mark = `${meta.docs.recommended ? STAR : ''}${meta.fixable ? PEN : ''}`;
+    const mark = `${meta.docs.recommended ? STAR : ''}${meta.docs.octane ? OCTANE : ''}${
+      meta.fixable ? PEN : ''
+    }`;
     const link = `[${name}](./docs/rules/${name}.md)`;
     const description = meta.docs.description || '(no description)';
     return `| ${mark} | ${link} | ${description} |`;
