@@ -11,85 +11,58 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
+
 eslintTester.run('order-in-models', rule, {
   valid: [
-    {
-      code: 'export default Model.extend();',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Model.extend({
+    'export default Model.extend();',
+    `export default Model.extend({
         shape: attr("string"),
         behaviors: hasMany("behaviour"),
         test: computed.alias("qwerty"),
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Model.extend({
+    `export default Model.extend({
         behaviors: hasMany("behaviour"),
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Model.extend({
+    `export default Model.extend({
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default DS.Model.extend({
+    `export default DS.Model.extend({
         shape: DS.attr("string"),
         behaviors: hasMany("behaviour"),
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default DS.Model.extend({
+    `export default DS.Model.extend({
         behaviors: hasMany("behaviour"),
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default DS.Model.extend({
+    `export default DS.Model.extend({
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default DS.Model.extend(TestMixin, {
+    `export default DS.Model.extend(TestMixin, {
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default DS.Model.extend(TestMixin, TestMixin2, {
+    `export default DS.Model.extend(TestMixin, TestMixin2, {
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default DS.Model.extend({
+    `export default DS.Model.extend({
         a: attr("string"),
         b: belongsTo("c", { async: false }),
         convertA(paramA) {
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
     {
       code: `export default DS.Model.extend({
         convertA(paramA) {
@@ -97,7 +70,6 @@ eslintTester.run('order-in-models', rule, {
         a: attr("string"),
         b: belongsTo("c", { async: false }),
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [
         {
           order: ['method'],
@@ -113,7 +85,6 @@ eslintTester.run('order-in-models', rule, {
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
@@ -128,7 +99,6 @@ eslintTester.run('order-in-models', rule, {
         }),
         behaviors: hasMany("behaviour")
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -143,7 +113,6 @@ eslintTester.run('order-in-models', rule, {
         }),
         shape: attr("string")
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "shape" attribute should be above the "mood" multi-line function on line 2',
@@ -158,7 +127,6 @@ eslintTester.run('order-in-models', rule, {
         mood: Ember.computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
@@ -173,7 +141,6 @@ eslintTester.run('order-in-models', rule, {
         }),
         behaviors: hasMany("behaviour")
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -188,7 +155,6 @@ eslintTester.run('order-in-models', rule, {
         }),
         shape: attr("string")
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "shape" attribute should be above the "mood" multi-line function on line 2',
@@ -202,7 +168,6 @@ eslintTester.run('order-in-models', rule, {
         }),
         test: computed.alias("qwerty")
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -217,7 +182,6 @@ eslintTester.run('order-in-models', rule, {
         }),
         test: computed.alias("qwerty")
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -232,7 +196,6 @@ eslintTester.run('order-in-models', rule, {
         }),
         test: computed.alias("qwerty")
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -254,7 +217,6 @@ eslintTester.run('order-in-models', rule, {
         mood: computed("health", "hunger", function() {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',

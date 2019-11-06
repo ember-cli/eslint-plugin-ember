@@ -9,74 +9,29 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
+
 const message = "Don't use .on() for component lifecycle events.";
 
 eslintTester.run('no-on-calls-in-components', rule, {
   valid: [
-    {
-      code: 'export default Component.extend();',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Component.extend({actions: {}});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Component.extend({abc: service()});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Component.extend({abc: inject.service()});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Component.extend({abc: false});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Component.extend({classNames: ["abc", "def"]});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Component.extend({abc: computed(function () {})});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Component.extend({abc: observer("abc", function () {})});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code:
-        'export default Component.extend({abc: observer("abc", function () {test.on("xyz", def)})});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Component.extend({abc: function () {test.on("xyz", def)}});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Component.extend({abc() {$("body").on("click", def)}});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code:
-        'export default Component.extend({didInsertElement() {$("body").on("click", def).on("click", function () {})}});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Component.extend({actions: {abc() {test.on("xyz", def)}}});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code:
-        'export default Component.extend({actions: {abc() {$("body").on("click", def).on("click", function () {})}}});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Component.extend({abc: on("nonLifecycleEvent", function() {})});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
+    'export default Component.extend();',
+    'export default Component.extend({actions: {}});',
+    'export default Component.extend({abc: service()});',
+    'export default Component.extend({abc: inject.service()});',
+    'export default Component.extend({abc: false});',
+    'export default Component.extend({classNames: ["abc", "def"]});',
+    'export default Component.extend({abc: computed(function () {})});',
+    'export default Component.extend({abc: observer("abc", function () {})});',
+    'export default Component.extend({abc: observer("abc", function () {test.on("xyz", def)})});',
+    'export default Component.extend({abc: function () {test.on("xyz", def)}});',
+    'export default Component.extend({abc() {$("body").on("click", def)}});',
+    'export default Component.extend({didInsertElement() {$("body").on("click", def).on("click", function () {})}});',
+    'export default Component.extend({actions: {abc() {test.on("xyz", def)}}});',
+    'export default Component.extend({actions: {abc() {$("body").on("click", def).on("click", function () {})}}});',
+    'export default Component.extend({abc: on("nonLifecycleEvent", function() {})});',
     {
       code: `
       let foo = { bar: 'baz' };
@@ -93,7 +48,6 @@ eslintTester.run('no-on-calls-in-components', rule, {
       code: `export default Component.extend({
         test: on("didInsertElement", function () {})
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [{ message, line: 2 }],
     },
@@ -104,7 +58,6 @@ eslintTester.run('no-on-calls-in-components', rule, {
         })),
         someComputedProperty: computed.bool(true)
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [{ message, line: 2 }],
     },
@@ -114,7 +67,6 @@ eslintTester.run('no-on-calls-in-components', rule, {
         someComputedProperty: Ember.computed.readOnly('Hello World!'),
         anotherTest: Ember.on("willDestroyElement", function () {})
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [{ message, line: 2 }, { message, line: 4 }],
     },
@@ -122,7 +74,6 @@ eslintTester.run('no-on-calls-in-components', rule, {
       filename: 'example-app/components/some-component/component.js',
       code:
         'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -134,7 +85,6 @@ eslintTester.run('no-on-calls-in-components', rule, {
       filename: 'example-app/components/some-component.js',
       code:
         'export default CustomComponent.extend({test: on("didInsertElement", function () {})});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -145,7 +95,6 @@ eslintTester.run('no-on-calls-in-components', rule, {
     {
       filename: 'example-app/twised-path/some-file.js',
       code: 'export default Component.extend({test: on("didInsertElement", function () {})});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {

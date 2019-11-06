@@ -11,15 +11,14 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
+
 eslintTester.run('order-in-controllers', rule, {
   valid: [
-    {
-      code: 'export default Controller.extend();',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Controller.extend({
+    'export default Controller.extend();',
+    `export default Controller.extend({
         application: controller(),
         currentUser: service(),
         queryParams: [],
@@ -29,10 +28,7 @@ eslintTester.run('order-in-controllers', rule, {
         _customAction2: function() { const foo = 'bar'; },
         tSomeTask: task(function* () {})
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Controller.extend({
+    `export default Controller.extend({
         currentUser: inject(),
         queryParams: [],
         customProp: "test",
@@ -41,20 +37,14 @@ eslintTester.run('order-in-controllers', rule, {
         _customAction2: function() {},
         tSomeTask: task(function* () {})
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Controller.extend({
+    `export default Controller.extend({
         queryParams: [],
         customProp: "test",
         comp: computed("test", function() {}),
         obs: observer("asd", function() {}),
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Controller.extend({
+    `export default Controller.extend({
         customProp: "test",
         comp: computed("test", function() {}),
         comp2: computed("test", function() {
@@ -62,8 +52,6 @@ eslintTester.run('order-in-controllers', rule, {
         actions: {},
         _customAction() { const foo = 'bar'; }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
     {
       code: `export default Controller.extend({
         actions: {},
@@ -73,7 +61,6 @@ eslintTester.run('order-in-controllers', rule, {
         }),
         _customAction() { const foo = 'bar'; }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [
         {
           order: ['actions', 'single-line-function'],
@@ -85,7 +72,6 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         currentUser: service(),
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [
         {
           order: ['query-params', 'service'],
@@ -97,15 +83,13 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         application: controller(),
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [
         {
           order: ['query-params', 'controller'],
         },
       ],
     },
-    {
-      code: `
+    `
         export default Controller.extend({
           foo: service(),
           someProp: null,
@@ -117,10 +101,7 @@ eslintTester.run('order-in-controllers', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `
+    `
         export default Controller.extend({
           foo: service(),
           init() {
@@ -129,10 +110,7 @@ eslintTester.run('order-in-controllers', rule, {
           customFoo() {}
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `
+    `
         export default Controller.extend({
           foo: service(),
           init() {
@@ -140,8 +118,6 @@ eslintTester.run('order-in-controllers', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
   ],
   invalid: [
     {
@@ -149,7 +125,6 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         currentUser: service()
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -163,7 +138,6 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         currentUser: inject()
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -178,7 +152,6 @@ eslintTester.run('order-in-controllers', rule, {
         customProp: "test",
         queryParams: []
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "queryParams" property should be above the "customProp" property on line 3',
@@ -192,7 +165,6 @@ eslintTester.run('order-in-controllers', rule, {
         actions: {},
         customProp: "test"
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "customProp" property should be above the actions hash on line 3',
@@ -206,7 +178,6 @@ eslintTester.run('order-in-controllers', rule, {
         _customAction() { const foo = 'bar'; },
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The actions hash should be above the "_customAction" method on line 3',
@@ -220,7 +191,6 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "queryParams" property should be above the "test" property on line 2',
@@ -233,7 +203,6 @@ eslintTester.run('order-in-controllers', rule, {
         currentUser: service(),
         application: controller()
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -249,7 +218,6 @@ eslintTester.run('order-in-controllers', rule, {
         comp: computed("asd", function() {}),
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "comp" single-line function should be above the "obs" observer on line 3',
@@ -263,7 +231,6 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         currentUser: service()
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -278,7 +245,6 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         currentUser: service()
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -293,7 +259,6 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         currentUser: service()
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -314,7 +279,6 @@ eslintTester.run('order-in-controllers', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "init" lifecycle hook should be above the actions hash on line 4',
@@ -332,7 +296,6 @@ eslintTester.run('order-in-controllers', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -350,7 +313,6 @@ eslintTester.run('order-in-controllers', rule, {
           foo: service()
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -368,7 +330,6 @@ eslintTester.run('order-in-controllers', rule, {
           someProp: null
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "someProp" property should be above the "init" lifecycle hook on line 3',
@@ -387,7 +348,6 @@ eslintTester.run('order-in-controllers', rule, {
   currentUser: service(),
   queryParams: [],
 });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -407,7 +367,6 @@ eslintTester.run('order-in-controllers', rule, {
         test: "asd",
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "queryParams" property should be above the "test" property on line 2',

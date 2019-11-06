@@ -2,19 +2,18 @@ const rule = require('../../../lib/rules/no-jquery');
 const RuleTester = require('eslint').RuleTester;
 
 const { ERROR_MESSAGE } = rule;
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
 
 eslintTester.run('no-jquery', rule, {
   valid: [
-    {
-      code: `
+    `
         export default Ember.Component({
           didInsertElement() {
             this.element.classList.add('active')
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
     {
       filename: 'example-app/tests/integration/component/some-component-test.js',
       code: `
@@ -28,7 +27,6 @@ eslintTester.run('no-jquery', rule, {
         test('assert something', function() {
           assert.equal(find('.some-component').textContent.trim(), 'hello world');
         })`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
   ],
   invalid: [
@@ -40,7 +38,6 @@ eslintTester.run('no-jquery', rule, {
             $(body).addClass('active')
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -57,7 +54,6 @@ eslintTester.run('no-jquery', rule, {
             $(body).addClass('active')
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -74,7 +70,6 @@ eslintTester.run('no-jquery', rule, {
             return $.extend({}, a, b);
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -92,7 +87,6 @@ eslintTester.run('no-jquery', rule, {
             return jq.extend({}, a, b);
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -108,7 +102,6 @@ eslintTester.run('no-jquery', rule, {
             Ember.$(body).addClass('active')
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -124,7 +117,6 @@ eslintTester.run('no-jquery', rule, {
             Em.$(body).addClass('active')
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -141,7 +133,6 @@ eslintTester.run('no-jquery', rule, {
             E.$(body).addClass('active')
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -158,7 +149,6 @@ eslintTester.run('no-jquery', rule, {
             jq(body).addClass('active')
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -175,7 +165,6 @@ eslintTester.run('no-jquery', rule, {
             $(body).addClass('active')
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -191,7 +180,6 @@ eslintTester.run('no-jquery', rule, {
             this.$().addClass('active')
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -212,7 +200,6 @@ eslintTester.run('no-jquery', rule, {
         test('assert something', function() {
           assert.equal(this.$('.some-component').text().trim(), 'hello world');
         })`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {

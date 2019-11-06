@@ -9,38 +9,28 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
+
 const message = 'Supply proper attribute type';
 
 eslintTester.run('no-empty-attrs', rule, {
   valid: [
-    {
-      code: 'export default Model.extend();',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code:
-        'export default Model.extend({name: attr("string"), points: attr("number"), dob: attr("date")});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Model.extend({name: attr("string")});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
+    'export default Model.extend();',
+    'export default Model.extend({name: attr("string"), points: attr("number"), dob: attr("date")});',
+    'export default Model.extend({name: attr("string")});',
     {
       code: `someArrayOfStrings.filter(function(attr) {
         return attr.underscore();
       });`,
       parserOptions: { ecmaVersion: 6 },
     },
-    {
-      code: `export default Model.extend({
+    `export default Model.extend({
         someArray: someArrayOfStrings.filter(function(attr) {
           return attr.underscore();
         }),
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
   ],
   invalid: [
     {
@@ -49,7 +39,6 @@ eslintTester.run('no-empty-attrs', rule, {
         points: attr("number"),
         dob: attr("date")
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [{ message, line: 2 }],
     },
@@ -59,7 +48,6 @@ eslintTester.run('no-empty-attrs', rule, {
         points: attr("number"),
         dob: attr()
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [{ message, line: 4 }],
     },
@@ -69,7 +57,6 @@ eslintTester.run('no-empty-attrs', rule, {
         points: attr(),
         dob: attr("date")
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [{ message, line: 3 }],
     },
@@ -80,7 +67,6 @@ eslintTester.run('no-empty-attrs', rule, {
         dob: attr(),
         someComputedProperty: computed.bool(true)
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [{ message, line: 3 }, { message, line: 4 }],
     },
@@ -90,14 +76,12 @@ eslintTester.run('no-empty-attrs', rule, {
         points: attr(),
         dob: attr()
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [{ message, line: 2 }, { message, line: 3 }, { message, line: 4 }],
     },
     {
       filename: 'example-app/models/some-model.js',
       code: 'export default CustomModel.extend({name: attr()});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [{ message, line: 1 }],
     },
