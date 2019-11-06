@@ -63,6 +63,7 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     'export default Foo.extend({ foo: abc.something() });',
     'export default Foo.extend({ foo: !true });',
     'export default Foo.extend({ ...props });',
+    'export default Foo.extend({ foo: condition ? "foo" : "bar" });',
   ],
   invalid: [
     {
@@ -158,6 +159,26 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     },
     {
       code: 'export default Foo.reopen({ otherThing: {} });',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+    {
+      code: 'export default Foo.extend({ foo: condition ? {} : false });',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+    {
+      code: 'export default Foo.extend({ foo: condition ? false : {} });',
       output: null,
       errors: [
         {
