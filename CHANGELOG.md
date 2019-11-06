@@ -1,3 +1,21 @@
+## v7.4.0 (2019-11-06)
+
+#### :rocket: Enhancement
+* [#561](https://github.com/ember-cli/eslint-plugin-ember/pull/561) Add `octane` configuration (experimental) ([@patocallaghan](https://github.com/patocallaghan))
+* [#562](https://github.com/ember-cli/eslint-plugin-ember/pull/562) Add new rule `no-test-module-for` ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#565](https://github.com/ember-cli/eslint-plugin-ember/pull/565) Add `ignoreNestedPaths` option (default true) to `no-get` rule ([@bmish](https://github.com/bmish))
+* [#564](https://github.com/ember-cli/eslint-plugin-ember/pull/564) Update `no-new-mixins` rule to handle native classes ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#570](https://github.com/ember-cli/eslint-plugin-ember/pull/570) Simplify some tests by setting `parserOptions` globally instead of in each individual test case ([@bmish](https://github.com/bmish))
+* [#568](https://github.com/ember-cli/eslint-plugin-ember/pull/568) Add tests to ensure plugin exports correct configurations ([@bmish](https://github.com/bmish))
+* [#563](https://github.com/ember-cli/eslint-plugin-ember/pull/563) Lint against unnecessary template literals internally ([@bmish](https://github.com/bmish))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- L. Preston Sego III ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+- Pat O'Callaghan ([@patocallaghan](https://github.com/patocallaghan))
+
 ## v7.3.0 (2019-10-30)
 
 #### :rocket: Enhancement
