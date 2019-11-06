@@ -9,20 +9,18 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
+
 eslintTester.run('jquery-ember-run', rule, {
   valid: [
-    {
-      code:
-        'Ember.$("#something-rendered-by-jquery-plugin").on("click", () => {Ember.run.bind(this, this._handlerActionFromController);});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
+    'Ember.$("#something-rendered-by-jquery-plugin").on("click", () => {Ember.run.bind(this, this._handlerActionFromController);});',
   ],
   invalid: [
     {
       code:
         'Ember.$("#something-rendered-by-jquery-plugin").on("click", () => {this._handlerActionFromController();});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {

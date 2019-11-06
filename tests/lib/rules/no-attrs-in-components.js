@@ -11,17 +11,17 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
+
 ruleTester.run('no-attrs-in-components', rule, {
   valid: [
-    {
-      code: `Component.extend({
+    `Component.extend({
         init() {
           const newName = get(this, '_name');
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
   ],
 
   invalid: [
@@ -31,7 +31,6 @@ ruleTester.run('no-attrs-in-components', rule, {
           const newName = this.attrs.name;
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {

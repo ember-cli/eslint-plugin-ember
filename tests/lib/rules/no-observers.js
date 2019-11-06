@@ -9,22 +9,18 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
+
 eslintTester.run('no-observers', rule, {
   valid: [
-    {
-      code: 'export default Controller.extend();',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Controller.extend({actions: {},});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
+    'export default Controller.extend();',
+    'export default Controller.extend({actions: {},});',
   ],
   invalid: [
     {
       code: 'Ember.observer("text", function() {});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {

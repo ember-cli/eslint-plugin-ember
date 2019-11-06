@@ -11,15 +11,14 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
+
 eslintTester.run('order-in-components', rule, {
   valid: [
-    {
-      code: 'export default Component.extend();',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    'export default Component.extend();',
+    `export default Component.extend({
         role: "sloth",
 
         vehicle: alias("car"),
@@ -29,10 +28,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         role: "sloth",
 
         levelOfHappiness: computed("attitude", "health", () => {
@@ -40,37 +36,25 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         levelOfHappiness: computed("attitude", "health", () => {
         }),
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend(TestMixin, {
+    `export default Component.extend(TestMixin, {
         levelOfHappiness: computed("attitude", "health", () => {
         }),
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend(TestMixin, TestMixin2, {
+    `export default Component.extend(TestMixin, TestMixin2, {
         levelOfHappiness: computed("attitude", "health", () => {
         }),
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         abc: Ember.inject.service(),
         def: inject.service(),
         ghi: service(),
@@ -80,10 +64,7 @@ eslintTester.run('order-in-components', rule, {
         levelOfHappiness: computed("attitude", "health", () => {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `
+    `
         import { inject } from '@ember/service';
         export default Component.extend({
           abc: inject(),
@@ -96,20 +77,14 @@ eslintTester.run('order-in-components', rule, {
           })
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         role: "sloth",
         abc: [],
         def: {},
 
         ghi: alias("def")
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         levelOfHappiness: computed("attitude", "health", () => {
         }),
 
@@ -121,10 +96,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         abc: observer("aaaa", () => {
         }),
 
@@ -137,10 +109,7 @@ eslintTester.run('order-in-components', rule, {
           return true;
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         igh: service(),
 
         abc: [],
@@ -163,10 +132,7 @@ eslintTester.run('order-in-components', rule, {
           return true;
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         init() {
         },
         didReceiveAttrs() {
@@ -194,10 +160,7 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         test: service(),
 
         didReceiveAttrs() {
@@ -206,10 +169,7 @@ eslintTester.run('order-in-components', rule, {
         tSomeAction: task(function* (url) {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         test: service(),
 
         test2: computed.equal("asd", "qwe"),
@@ -220,10 +180,7 @@ eslintTester.run('order-in-components', rule, {
         tSomeAction: task(function* (url) {
         }).restartable()
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         test: service(),
 
         someEmptyMethod() {},
@@ -238,10 +195,7 @@ eslintTester.run('order-in-components', rule, {
           return true;
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         classNameBindings: ["filterDateSelectClass"],
         content: [],
         currentMonthEndDate: null,
@@ -251,30 +205,21 @@ eslintTester.run('order-in-components', rule, {
         typeOfDate: null,
         action: K
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         role: "sloth",
 
         levelOfHappiness: computed.or("asd", "qwe"),
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         role: "sloth",
 
         levelOfHappiness: computed(function() {}),
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         role: "sloth",
 
         levelOfHappiness: computed(function() {
@@ -282,8 +227,6 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
     {
       code: `export default Component.extend({
         role: "sloth",
@@ -296,7 +239,6 @@ eslintTester.run('order-in-components', rule, {
 
         foobar: Ember.inject.service(),
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [
         {
           order: ['property', 'multi-line-function', 'single-line-function', 'actions'],
@@ -316,15 +258,13 @@ eslintTester.run('order-in-components', rule, {
 
         foobar: Ember.inject.service(),
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [
         {
           order: ['property', ['single-line-function', 'multi-line-function'], 'actions'],
         },
       ],
     },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         role: "sloth",
         qwe: foo ? 'bar' : null,
         abc: [],
@@ -332,34 +272,30 @@ eslintTester.run('order-in-components', rule, {
 
         ghi: alias("def")
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         template: hbs\`Hello world {{name}}\`,
         name: "Jon Snow",
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         layout,
         tabindex: -1,
 
         someComputedValue: computed.reads('count'),
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
+    `export default Component.extend({
         foo: computed(function() {
         }).volatile(),
         bar: computed(function() {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
+    `export default Component.extend({
+        onFoo() {},
+        onFoo: () => {},
+        foo: computed(function() {
+        }).volatile(),
+        bar() { const foo = 'bar'}
+      });`,
     {
       code: `export default Component.extend({
         onFoo() {},
@@ -368,17 +304,6 @@ eslintTester.run('order-in-components', rule, {
         }).volatile(),
         bar() { const foo = 'bar'}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `export default Component.extend({
-        onFoo() {},
-        onFoo: () => {},
-        foo: computed(function() {
-        }).volatile(),
-        bar() { const foo = 'bar'}
-      });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [
         {
           order: [
@@ -404,7 +329,6 @@ eslintTester.run('order-in-components', rule, {
         levelOfHappiness: computed("attitude", "health", () => {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "role" property should be above the actions hash on line 2',
@@ -432,7 +356,6 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -452,7 +375,6 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -477,7 +399,6 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -502,7 +423,6 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -521,7 +441,6 @@ eslintTester.run('order-in-components', rule, {
         abc: true,
         i18n: service()
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "i18n" service injection should be above the "abc" property on line 2',
@@ -534,7 +453,6 @@ eslintTester.run('order-in-components', rule, {
         vehicle: alias("car"),
         i18n: service()
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -551,7 +469,6 @@ eslintTester.run('order-in-components', rule, {
           i18n: inject()
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -566,7 +483,6 @@ eslintTester.run('order-in-components', rule, {
         }),
         vehicle: alias("car")
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -582,7 +498,6 @@ eslintTester.run('order-in-components', rule, {
         aaa: computed("attitude", "health", () => {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -598,7 +513,6 @@ eslintTester.run('order-in-components', rule, {
         levelOfHappiness: observer("attitude", "health", () => {
         })
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -613,7 +527,6 @@ eslintTester.run('order-in-components', rule, {
         init() {
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "init" lifecycle hook should be above the actions hash on line 2',
@@ -628,7 +541,6 @@ eslintTester.run('order-in-components', rule, {
         },
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The actions hash should be above the "customFunc" method on line 2',
@@ -642,7 +554,6 @@ eslintTester.run('order-in-components', rule, {
         }),
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The actions hash should be above the "tAction" method on line 2',
@@ -663,7 +574,6 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -683,7 +593,6 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
         [foo]: 'foo',
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The property should be above the actions hash on line 4',
@@ -697,7 +606,6 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
         role: "sloth",
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "role" property should be above the actions hash on line 2',
@@ -711,7 +619,6 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
         role: "sloth",
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "role" property should be above the actions hash on line 2',
@@ -725,7 +632,6 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
         role: "sloth",
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "role" property should be above the actions hash on line 2',
@@ -739,7 +645,6 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
         template: hbs\`Hello world {{name}}\`,
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "template" property should be above the actions hash on line 3',
@@ -754,7 +659,6 @@ eslintTester.run('order-in-components', rule, {
 
         tabindex: -1,
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -769,7 +673,6 @@ eslintTester.run('order-in-components', rule, {
         }).volatile(),
         name: "Jon Snow",
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'The "name" property should be above the "foo" multi-line function on line 2',
@@ -785,7 +688,6 @@ eslintTester.run('order-in-components', rule, {
         didInsertElement() {},
         init() {},
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -816,7 +718,6 @@ eslintTester.run('order-in-components', rule, {
         bar() { const foo = 'bar'},
         onBar: () => {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -847,7 +748,6 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:

@@ -9,48 +9,23 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6 },
+});
+
 eslintTester.run('named-functions-in-promises', rule, {
   valid: [
-    {
-      code: 'user.save().then(this._reloadUser.bind(this));',
-      parserOptions: { ecmaVersion: 6 },
-    },
-    {
-      code: 'user.save().catch(this._handleError.bind(this));',
-      parserOptions: { ecmaVersion: 6 },
-    },
-    {
-      code: 'user.save().finally(this._finallyDo.bind(this));',
-      parserOptions: { ecmaVersion: 6 },
-    },
-    {
-      code: 'user.save().then(this._reloadUser);',
-      parserOptions: { ecmaVersion: 6 },
-    },
-    {
-      code: 'user.save().catch(this._handleError);',
-      parserOptions: { ecmaVersion: 6 },
-    },
-    {
-      code: 'user.save().finally(this._finallyDo);',
-      parserOptions: { ecmaVersion: 6 },
-    },
-    {
-      code: 'user.save().then(_reloadUser);',
-      parserOptions: { ecmaVersion: 6 },
-    },
-    {
-      code: 'user.save().catch(_handleError);',
-      parserOptions: { ecmaVersion: 6 },
-    },
-    {
-      code: 'user.save().finally(_finallyDo);',
-      parserOptions: { ecmaVersion: 6 },
-    },
+    'user.save().then(this._reloadUser.bind(this));',
+    'user.save().catch(this._handleError.bind(this));',
+    'user.save().finally(this._finallyDo.bind(this));',
+    'user.save().then(this._reloadUser);',
+    'user.save().catch(this._handleError);',
+    'user.save().finally(this._finallyDo);',
+    'user.save().then(_reloadUser);',
+    'user.save().catch(_handleError);',
+    'user.save().finally(_finallyDo);',
     {
       code: 'user.save().then(() => this._reloadUser(user));',
-      parserOptions: { ecmaVersion: 6 },
       options: [
         {
           allowSimpleArrowFunction: true,
@@ -59,7 +34,6 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().catch(err => this._handleError(err));',
-      parserOptions: { ecmaVersion: 6 },
       options: [
         {
           allowSimpleArrowFunction: true,
@@ -68,7 +42,6 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().finally(() => this._finallyDo());',
-      parserOptions: { ecmaVersion: 6 },
       options: [
         {
           allowSimpleArrowFunction: true,
@@ -77,7 +50,6 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().then(() => user.reload());',
-      parserOptions: { ecmaVersion: 6 },
       options: [
         {
           allowSimpleArrowFunction: true,
@@ -88,7 +60,6 @@ eslintTester.run('named-functions-in-promises', rule, {
   invalid: [
     {
       code: 'user.save().then(() => {return user.reload();});',
-      parserOptions: { ecmaVersion: 6 },
       output: null,
       errors: [
         {
@@ -98,7 +69,6 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().catch(() => {return error.handle();});',
-      parserOptions: { ecmaVersion: 6 },
       output: null,
       errors: [
         {
@@ -108,7 +78,6 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().finally(() => {return finallyDo();});',
-      parserOptions: { ecmaVersion: 6 },
       output: null,
       errors: [
         {
@@ -118,7 +87,6 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().then(() => {return user.reload();});',
-      parserOptions: { ecmaVersion: 6 },
       options: [
         {
           allowSimpleArrowFunction: true,
@@ -133,7 +101,6 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().catch(() => {return error.handle();});',
-      parserOptions: { ecmaVersion: 6 },
       options: [
         {
           allowSimpleArrowFunction: true,
@@ -148,7 +115,6 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().finally(() => {return finallyDo();});',
-      parserOptions: { ecmaVersion: 6 },
       options: [
         {
           allowSimpleArrowFunction: true,
@@ -163,7 +129,6 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().then(() => this._reloadUser(user));',
-      parserOptions: { ecmaVersion: 6 },
       output: null,
       errors: [
         {
@@ -173,7 +138,6 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().catch(err => this._handleError(err));',
-      parserOptions: { ecmaVersion: 6 },
       output: null,
       errors: [
         {
@@ -183,7 +147,6 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().finally(() => this._finallyDo());',
-      parserOptions: { ecmaVersion: 6 },
       output: null,
       errors: [
         {
@@ -193,7 +156,6 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().then(() => user.reload());',
-      parserOptions: { ecmaVersion: 6 },
       output: null,
       errors: [
         {
@@ -203,7 +165,6 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().then(user => user.name);',
-      parserOptions: { ecmaVersion: 6 },
       options: [
         {
           allowSimpleArrowFunction: true,

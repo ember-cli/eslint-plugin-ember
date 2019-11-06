@@ -2,12 +2,13 @@ const rule = require('../../../lib/rules/no-attrs-snapshot');
 const RuleTester = require('eslint').RuleTester;
 
 const { ERROR_MESSAGE } = rule;
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
 
 eslintTester.run('no-attrs-snapshot', rule, {
   valid: [
-    {
-      code: `
+    `
         export default Ember.Component({
           init() {
             this._super(...arguments);
@@ -23,10 +24,7 @@ eslintTester.run('no-attrs-snapshot', rule, {
             }
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: `
+    `
         export default Ember.Component({
           init() {
             this._super(...arguments);
@@ -42,8 +40,6 @@ eslintTester.run('no-attrs-snapshot', rule, {
             }
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
   ],
   invalid: [
     {
@@ -62,7 +58,6 @@ eslintTester.run('no-attrs-snapshot', rule, {
             }
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -86,7 +81,6 @@ eslintTester.run('no-attrs-snapshot', rule, {
             }
           }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {

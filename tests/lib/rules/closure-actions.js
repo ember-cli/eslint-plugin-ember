@@ -11,23 +11,19 @@ const { ERROR_MESSAGE } = rule;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
+
 eslintTester.run('closure-actions', rule, {
   valid: [
-    {
-      code: 'export default Component.extend();',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'export default Component.extend({actions: {pushLever() {this.attr.boom();}}});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
+    'export default Component.extend();',
+    'export default Component.extend({actions: {pushLever() {this.attr.boom();}}});',
   ],
   invalid: [
     {
       code:
         'export default Component.extend({actions: {pushLever() {this.sendAction("detonate");}}});',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: null,
       errors: [
         {
