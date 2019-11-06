@@ -46,7 +46,7 @@ module.exports = {
 Possible configurations:
 - [plugin:ember/base](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/base.js) - contains no rules settings, but the basic eslint configuration suitable for any ember project. You can use it to configure rules as you wish.
 - [plugin:ember/recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/recommended.js) - extends base configuration with recommended rules' settings
-- [plugin:ember/octane](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/octane.js) - extends recommended configuration with octane rules' settings
+- :warning: [plugin:ember/octane](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/octane.js) - extends recommended configuration with octane rules' settings. This ruleset is currently considered **unstable and experiemental** as rules may be added and removed until the final ruleset is settled upon.
 
 #### Use plain plugin:
 
