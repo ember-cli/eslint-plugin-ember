@@ -46,6 +46,7 @@ module.exports = {
 Possible configurations:
 - [plugin:ember/base](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/base.js) - contains no rules settings, but the basic eslint configuration suitable for any ember project. You can use it to configure rules as you wish.
 - [plugin:ember/recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/recommended.js) - extends base configuration with recommended rules' settings
+- :warning: [plugin:ember/octane](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/octane.js) - extends recommended configuration with octane rules' settings. This ruleset is currently considered **unstable and experiemental** as rules may be added and removed until the final ruleset is settled upon.
 
 #### Use plain plugin:
 
@@ -74,6 +75,8 @@ Rules are grouped by category to help you understand their purpose.
 
 All rules below with a check mark :white_check_mark: are enabled by default while using `plugin:ember/recommended` config.
 
+The `plugin:ember/octane` config contains both Octane rules with a red car :car: in addition to the rules in the `plugin:ember/recommended` config.
+
 The `--fix` option on the command line automatically fixes problems reported by rules which have a wrench :wrench: below.
 
 <!--RULES_TABLE_START-->
@@ -88,9 +91,9 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
 | :white_check_mark: | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
 | :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
-|  | [no-get](./docs/rules/no-get.md) | Require ES5 getters instead of Ember's `get` / `getProperties` functions |
+| :car: | [no-get](./docs/rules/no-get.md) | Require ES5 getters instead of Ember's `get` / `getProperties` functions |
 | :white_check_mark: | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
-|  | [no-jquery](./docs/rules/no-jquery.md) | Disallow any usage of jQuery |
+| :car: | [no-jquery](./docs/rules/no-jquery.md) | Disallow any usage of jQuery |
 | :white_check_mark: | [no-new-mixins](./docs/rules/no-new-mixins.md) | Prevents creation of new mixins |
 | :white_check_mark: | [no-observers](./docs/rules/no-observers.md) | Prevents usage of observers |
 | :white_check_mark::wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | Prevents usage of old shims for modules |
@@ -110,8 +113,8 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | Avoids state leakage |
-|  | [classic-decorator-hooks](./docs/rules/classic-decorator-hooks.md) | Ensure correct hooks are used for both classic and non-classic classes |
-|  | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | Prevent usage of classic APIs such as get/set in classes that aren't explicitly decorated with @classic |
+| :car: | [classic-decorator-hooks](./docs/rules/classic-decorator-hooks.md) | Ensure correct hooks are used for both classic and non-classic classes |
+| :car: | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | Prevent usage of classic APIs such as get/set in classes that aren't explicitly decorated with @classic |
 |  | [computed-property-getters](./docs/rules/computed-property-getters.md) | Enforce the consistent use of getters in computed properties |
 |  | [no-proxies](./docs/rules/no-proxies.md) | Disallows using array or object proxies |
 
@@ -142,11 +145,11 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [no-actions-hash](./docs/rules/no-actions-hash.md) | Disallows the actions hash in components, controllers and routes |
-|  | [no-classic-classes](./docs/rules/no-classic-classes.md) | Disallow "classic" classes in favor of native JS classes |
-|  | [no-classic-components](./docs/rules/no-classic-components.md) | Enforces Glimmer components |
-|  | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | Disallows using computed properties in native classes |
-|  | [require-tagless-components](./docs/rules/require-tagless-components.md) | Disallows using the wrapper element of a Component |
+| :car: | [no-actions-hash](./docs/rules/no-actions-hash.md) | Disallows the actions hash in components, controllers and routes |
+| :car: | [no-classic-classes](./docs/rules/no-classic-classes.md) | Disallow "classic" classes in favor of native JS classes |
+| :car: | [no-classic-components](./docs/rules/no-classic-components.md) | Enforces Glimmer components |
+| :car: | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | Disallows using computed properties in native classes |
+| :car: | [require-tagless-components](./docs/rules/require-tagless-components.md) | Disallows using the wrapper element of a Component |
 
 
 ### Ember Data
