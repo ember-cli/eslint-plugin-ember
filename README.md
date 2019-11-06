@@ -75,7 +75,7 @@ Rules are grouped by category to help you understand their purpose.
 
 All rules below with a check mark :white_check_mark: are enabled by default while using `plugin:ember/recommended` config.
 
-All rules below with a red car :car: are enabled by default while using `plugin:ember/octane` config.
+The `plugin:ember/octane` config contains both Octane rules with a red car :car: in addition to the rules in the `plugin:ember/recommended` config.
 
 The `--fix` option on the command line automatically fixes problems reported by rules which have a wrench :wrench: below.
 
