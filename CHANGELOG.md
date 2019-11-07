@@ -1,3 +1,14 @@
+## v7.4.1 (2019-11-07)
+
+#### :bug: Bug Fix
+* [#575](https://github.com/ember-cli/eslint-plugin-ember/pull/575) Update `avoid-leaking-state-in-ember-objects` rule to handle logical expressions ([@alexlafroscia](https://github.com/alexlafroscia))
+* [#571](https://github.com/ember-cli/eslint-plugin-ember/pull/571) Update `avoid-leaking-state-in-ember-objects` rule to handle ternary expressions ([@alexlafroscia](https://github.com/alexlafroscia))
+* [#573](https://github.com/ember-cli/eslint-plugin-ember/pull/573) Update `require-computed-macros` rule to handle `this.get('property')` (in addition to `this.property`) ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Alex LaFroscia ([@alexlafroscia](https://github.com/alexlafroscia))
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v7.4.0 (2019-11-06)
 
 #### :rocket: Enhancement
