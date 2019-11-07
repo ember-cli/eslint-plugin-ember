@@ -157,18 +157,18 @@ ruleTester.run('no-get', rule, {
 
     {
       code: "this.get('foo');",
-      output: null,
-      errors: [{ message: makeErrorMessageForGet('foo', false) }],
+      output: 'this.foo;',
+      errors: [{ message: makeErrorMessageForGet('foo', false), type: 'CallExpression' }],
     },
     {
       code: "get(this, 'foo');",
-      output: null,
-      errors: [{ message: makeErrorMessageForGet('foo', true) }],
+      output: 'this.foo;',
+      errors: [{ message: makeErrorMessageForGet('foo', true), type: 'CallExpression' }],
     },
     {
       code: "this.get('foo').someFunction();",
-      output: null,
-      errors: [{ message: makeErrorMessageForGet('foo', false) }],
+      output: 'this.foo.someFunction();',
+      errors: [{ message: makeErrorMessageForGet('foo', false), type: 'CallExpression' }],
     },
 
     // **************************
@@ -234,7 +234,16 @@ ruleTester.run('no-get', rule, {
       });
       this.get('propertyOutsideClass');
       `,
-      output: null,
+      output: `
+      import ArrayProxy from '@ember/array/proxy';
+      export default ArrayProxy.extend({
+        someFunction() {
+          test();
+          console.log(this.get('propertyInsideProxyObject'));
+        }
+      });
+      this.propertyOutsideClass;
+      `,
       errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
     },
     {
@@ -249,7 +258,16 @@ ruleTester.run('no-get', rule, {
       }
       this.get('propertyOutsideClass');
       `,
-      output: null,
+      output: `
+      import ArrayProxy from '@ember/array/proxy';
+      class MyProxy extends ArrayProxy {
+        someFunction() {
+          test();
+          console.log(this.get('propertyInsideProxyObject'));
+        }
+      }
+      this.propertyOutsideClass;
+      `,
       errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
     },
 
@@ -265,7 +283,16 @@ ruleTester.run('no-get', rule, {
       });
       this.get('propertyOutsideClass');
       `,
-      output: null,
+      output: `
+      import EmberObject from '@ember/object';
+      export default EmberObject.extend({
+        unknownProperty() {},
+        someFunction() {
+          console.log(this.get('propertyInsideClassWithUnknownProperty'));
+        }
+      });
+      this.propertyOutsideClass;
+      `,
       errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
     },
     {
@@ -280,7 +307,16 @@ ruleTester.run('no-get', rule, {
       }
       this.get('propertyOutsideClass');
       `,
-      output: null,
+      output: `
+      import EmberObject from '@ember/object';
+      class MyClass extends EmberObject {
+        unknownProperty() {}
+        someFunction() {
+          console.log(this.get('propertyInsideClassWithUnknownProperty'));
+        }
+      }
+      this.propertyOutsideClass;
+      `,
       errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
     },
   ],
