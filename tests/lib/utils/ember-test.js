@@ -429,34 +429,111 @@ describe('isEmberService', () => {
 
 describe('isInjectedServiceProp', () => {
   let node;
+  let context;
 
   it("should check if it's an injected service prop", () => {
-    node = parse('service()');
+    context = new FauxContext(`
+      export default Controller.extend({
+        currentUser: service()
+      });
+    `);
+    node = context.ast.body[0].declaration.arguments[0].properties[0];
     expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
 
-    node = parse('Ember.inject.service()');
+    context = new FauxContext(`
+      export default Controller.extend({
+        currentUser: Ember.inject.service()
+      });
+    `);
+    node = context.ast.body[0].declaration.arguments[0].properties[0];
     expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
 
-    node = parse('inject()');
+    context = new FauxContext(`
+      export default Controller.extend({
+        currentUser: inject()
+      });
+    `);
+    node = context.ast.body[0].declaration.arguments[0].properties[0];
     expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
 
-    node = parse('otherFunction()');
+    context = new FauxContext(`
+      export default Controller.extend({
+        currentUser: otherFunction()
+      });
+    `);
+    node = context.ast.body[0].declaration.arguments[0].properties[0];
     expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
 
-    node = parse('service.otherFunction()');
+    context = new FauxContext(`
+      export default Controller.extend({
+        currentUser: service.otherFunction()
+      });
+    `);
+    node = context.ast.body[0].declaration.arguments[0].properties[0];
+    expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @service currentUser;
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @inject currentUser;
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @otherDecorator currentUser;
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
     expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
   });
 });
 
 describe('isInjectedControllerProp', () => {
   let node;
+  let context;
 
   it("should check if it's an injected controller prop", () => {
-    node = parse('controller()');
+    context = new FauxContext(`
+      export default Controller.extend({
+        application: controller(),
+      });
+    `);
+    node = context.ast.body[0].declaration.arguments[0].properties[0];
     expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
 
-    node = parse('Ember.inject.controller()');
+    context = new FauxContext(`
+      export default Controller.extend({
+        application: Ember.inject.controller(),
+      });
+    `);
+    node = context.ast.body[0].declaration.arguments[0].properties[0];
     expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @controller application;
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @otherDecorator application;
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isInjectedControllerProp(node)).toBeFalsy();
   });
 });
 
@@ -492,13 +569,58 @@ describe('isComputedProp', () => {
 
 describe('isObserverProp', () => {
   let node;
+  let context;
 
   it("should check if it's an observer prop", () => {
-    node = parse('observer()');
+    context = new FauxContext(`
+      export default Controller.extend({
+        someObserver: observer(),
+      });
+    `);
+    node = context.ast.body[0].declaration.arguments[0].properties[0];
     expect(emberUtils.isObserverProp(node)).toBeTruthy();
 
-    node = parse('Ember.observer()');
+    context = new FauxContext(`
+      export default Controller.extend({
+        someObserver: Ember.observer(),
+      });
+    `);
+    node = context.ast.body[0].declaration.arguments[0].properties[0];
     expect(emberUtils.isObserverProp(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      export default Component.extend({
+        levelOfHappiness: observer("attitude", "health", () => {
+        }),
+        vehicle: alias("car")
+      });
+    `);
+    node = context.ast.body[0].declaration.arguments[0].properties[0];
+    expect(emberUtils.isObserverProp(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @observer someObserver;
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isObserverProp(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @observer("someArg") someObserver() {};
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isObserverProp(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @otherDecorator someObserver;
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isObserverProp(node)).toBeFalsy();
   });
 });
 
@@ -628,6 +750,24 @@ describe('isSingleLineFn', () => {
 
   it('should check if given function has one line', () => {
     expect(emberUtils.isSingleLineFn(property)).toBeTruthy();
+
+    let context = new FauxContext(`
+      class MyController extends Controller {
+        @computed("someProp") someFunction() {}
+      }
+    `);
+    let node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isSingleLineFn(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @computed("someProp") someFunction() {
+          console.log("hello");
+        }
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isSingleLineFn(node)).toBeFalsy();
   });
 });
 
@@ -640,6 +780,24 @@ describe('isMultiLineFn', () => {
 
   it('should check if given function has more than one line', () => {
     expect(emberUtils.isMultiLineFn(property)).toBeTruthy();
+
+    let context = new FauxContext(`
+      class MyController extends Controller {
+        @computed("someProp") someFunction() {
+          console.log("hello");
+        }
+      }
+    `);
+    let node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isMultiLineFn(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @computed("someProp") someFunction() {}
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isMultiLineFn(node)).toBeFalsy();
   });
 });
 
