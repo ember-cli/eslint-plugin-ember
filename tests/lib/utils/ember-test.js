@@ -568,59 +568,70 @@ describe('isComputedProp', () => {
 });
 
 describe('isObserverProp', () => {
-  let node;
-  let context;
+  describe('classic classes', () => {
+    it("should check if it's an observer prop using destructured import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          someObserver: observer(),
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
 
-  it("should check if it's an observer prop", () => {
-    context = new FauxContext(`
-      export default Controller.extend({
-        someObserver: observer(),
-      });
-    `);
-    node = context.ast.body[0].declaration.arguments[0].properties[0];
-    expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    it("should check if it's an observer prop with full import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          someObserver: Ember.observer(),
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
 
-    context = new FauxContext(`
-      export default Controller.extend({
-        someObserver: Ember.observer(),
-      });
-    `);
-    node = context.ast.body[0].declaration.arguments[0].properties[0];
-    expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    it("should check if it's an observer prop with multi-line observer", () => {
+      const context = new FauxContext(`
+        export default Component.extend({
+          levelOfHappiness: observer("attitude", "health", () => {
+          }),
+          vehicle: alias("car")
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
+  });
 
-    context = new FauxContext(`
-      export default Component.extend({
-        levelOfHappiness: observer("attitude", "health", () => {
-        }),
-        vehicle: alias("car")
-      });
-    `);
-    node = context.ast.body[0].declaration.arguments[0].properties[0];
-    expect(emberUtils.isObserverProp(node)).toBeTruthy();
+  describe('native classes', () => {
+    it("should check if it's an observer prop using decorator", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @observer someObserver;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
 
-    context = new FauxContext(`
-      class MyController extends Controller {
-        @observer someObserver;
-      }
-    `);
-    node = context.ast.body[0].body.body[0];
-    expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    it("should check if it's an observer prop using decorator with arg", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @observer("someArg") someObserver() {};
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
 
-    context = new FauxContext(`
-      class MyController extends Controller {
-        @observer("someArg") someObserver() {};
-      }
-    `);
-    node = context.ast.body[0].body.body[0];
-    expect(emberUtils.isObserverProp(node)).toBeTruthy();
-
-    context = new FauxContext(`
-      class MyController extends Controller {
-        @otherDecorator someObserver;
-      }
-    `);
-    node = context.ast.body[0].body.body[0];
-    expect(emberUtils.isObserverProp(node)).toBeFalsy();
+    it("should check that it's not an observer prop", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @otherDecorator someObserver;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isObserverProp(node)).toBeFalsy();
+    });
   });
 });
 
