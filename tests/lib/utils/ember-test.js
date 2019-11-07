@@ -428,35 +428,134 @@ describe('isEmberService', () => {
 });
 
 describe('isInjectedServiceProp', () => {
-  let node;
+  describe('classic classes', () => {
+    it("should check if it's an injected service prop with renamed import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          currentUser: service()
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    });
 
-  it("should check if it's an injected service prop", () => {
-    node = parse('service()');
-    expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    it("should check if it's an injected service prop with full import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          currentUser: Ember.inject.service()
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    });
 
-    node = parse('Ember.inject.service()');
-    expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    it("should check if it's an injected service prop with destructured import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          currentUser: inject()
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    });
 
-    node = parse('inject()');
-    expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    it("should check that it's not an injected service prop", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          currentUser: otherFunction()
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+    });
 
-    node = parse('otherFunction()');
-    expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+    it("should check that it's not an injected service prop when 'service' is not a function", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          currentUser: service.otherFunction()
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+    });
+  });
 
-    node = parse('service.otherFunction()');
-    expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+  describe('native classes', () => {
+    it("should check if it's an injected service prop when using renamed import", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @service currentUser;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    });
+
+    it("should check if it's an injected service prop when using decorator", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @inject currentUser;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    });
+
+    it("should check that it's not an injected service prop when using another decorator", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @otherDecorator currentUser;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+    });
   });
 });
 
 describe('isInjectedControllerProp', () => {
-  let node;
+  describe('classic classes', () => {
+    it("should check if it's an injected controller prop with destructed import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          application: controller(),
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+    });
 
-  it("should check if it's an injected controller prop", () => {
-    node = parse('controller()');
-    expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+    it("should check if it's an injected controller prop with full import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          application: Ember.inject.controller(),
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+    });
+  });
 
-    node = parse('Ember.inject.controller()');
-    expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+  describe('native classes', () => {
+    it("should check if it's an injected controller prop with decorator", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @controller application;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+    });
+
+    it("should check that it's not an injected controller prop", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @otherDecorator application;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isInjectedControllerProp(node)).toBeFalsy();
+    });
   });
 });
 
@@ -491,14 +590,70 @@ describe('isComputedProp', () => {
 });
 
 describe('isObserverProp', () => {
-  let node;
+  describe('classic classes', () => {
+    it("should check if it's an observer prop using destructured import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          someObserver: observer(),
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
 
-  it("should check if it's an observer prop", () => {
-    node = parse('observer()');
-    expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    it("should check if it's an observer prop with full import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          someObserver: Ember.observer(),
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
 
-    node = parse('Ember.observer()');
-    expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    it("should check if it's an observer prop with multi-line observer", () => {
+      const context = new FauxContext(`
+        export default Component.extend({
+          levelOfHappiness: observer("attitude", "health", () => {
+          }),
+          vehicle: alias("car")
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
+  });
+
+  describe('native classes', () => {
+    it("should check if it's an observer prop using decorator", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @observer someObserver;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
+
+    it("should check if it's an observer prop using decorator with arg", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @observer("someArg") someObserver() {};
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
+
+    it("should check that it's not an observer prop", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @otherDecorator someObserver;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isObserverProp(node)).toBeFalsy();
+    });
   });
 });
 
@@ -628,6 +783,24 @@ describe('isSingleLineFn', () => {
 
   it('should check if given function has one line', () => {
     expect(emberUtils.isSingleLineFn(property)).toBeTruthy();
+
+    let context = new FauxContext(`
+      class MyController extends Controller {
+        @computed("someProp") someFunction() {}
+      }
+    `);
+    let node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isSingleLineFn(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @computed("someProp") someFunction() {
+          console.log("hello");
+        }
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isSingleLineFn(node)).toBeFalsy();
   });
 });
 
@@ -640,6 +813,24 @@ describe('isMultiLineFn', () => {
 
   it('should check if given function has more than one line', () => {
     expect(emberUtils.isMultiLineFn(property)).toBeTruthy();
+
+    let context = new FauxContext(`
+      class MyController extends Controller {
+        @computed("someProp") someFunction() {
+          console.log("hello");
+        }
+      }
+    `);
+    let node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isMultiLineFn(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @computed("someProp") someFunction() {}
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isMultiLineFn(node)).toBeFalsy();
   });
 });
 

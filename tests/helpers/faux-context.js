@@ -7,11 +7,12 @@ const babelEslint = require('babel-eslint');
  * expected by `getSourceModuleNameForIdentifier` and `isEmberCoreModule`
  */
 class FauxContext {
-  constructor(code, filename) {
+  constructor(code, filename = '', report = () => {}) {
     const { ast } = babelEslint.parseForESLint(code);
 
     this.ast = ast;
     this.filename = filename;
+    this.report = report;
   }
 
   /**
