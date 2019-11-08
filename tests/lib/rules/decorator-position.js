@@ -52,6 +52,16 @@ export default class extends Component {
 }
 `;
 
+const defaultOptions = {
+  trackedOnSameLine: true,
+  computedWithArgumentsOnSameLine: false,
+  emberDataOnSameLine: true,
+
+  computedWithoutArgumentsOnSameLine: true,
+  actionOnSameLine: true,
+  dependentKeyCompatOnSameLine: false,
+};
+
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 2019,
@@ -62,10 +72,62 @@ const ruleTester = new RuleTester({
 ruleTester.run('decorator-position', rule, {
   valid: [
     {
-      filename: 'app/components/foo.js',
-      code,
+      code: `
+        import { tracked } from '@glimmer/tracking';
+        export default class extends Component {
+          @tracked foo;
+        }
+      `,
+      options: [{ trackedOnSameLine: true }],
+    },
+    {
+      code: `
+        import { tracked } from '@glimmer/tracking';
+        export default class extends Component {
+          @tracked
+          foo;
+        }
+      `,
+      options: [{ trackedOnSameLine: false }],
+    },
+    {
+      code: `
+        import { tracked as t } from '@glimmer/tracking';
+        export default class extends Component {
+          @t foo;
+        }
+      `,
+      options: [{ trackedOnSameLine: true }],
     },
   ],
   invalid: [
+    {
+      code: `
+        import { tracked } from '@glimmer/tracking';
+        export default class extends Component {
+          @tracked foo;
+        }
+      `,
+      options: [{ trackedOnSameLine: false }],
+    },
+    {
+      code: `
+        import { tracked } from '@glimmer/tracking';
+        export default class extends Component {
+          @tracked
+          foo;
+        }
+      `,
+      options: [{ trackedOnSameLine: true }],
+    },
+    {
+      code: `
+        import { tracked as t } from '@glimmer/tracking';
+        export default class extends Component {
+          @t foo;
+        }
+      `,
+      options: [{ trackedOnSameLine: false }],
+    },
   ],
 });
