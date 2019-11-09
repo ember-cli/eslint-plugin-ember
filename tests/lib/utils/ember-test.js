@@ -1134,3 +1134,29 @@ describe('getEmberImportAliasName', () => {
     expect(emberUtils.getEmberImportAliasName(node)).toEqual('foo');
   });
 });
+
+describe('isEmberObjectImplementingUnknownProperty', () => {
+  it('should be true for a classic class EmberObject with `unknownProperty`', () => {
+    const node = babelEslint.parse('EmberObject.extend({ unknownProperty() {} });').body[0]
+      .expression;
+    expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeTruthy();
+  });
+
+  it('should be false for a classic class EmberObject without `unknownProperty`', () => {
+    const node = babelEslint.parse('EmberObject.extend({ somethingElse() {} });').body[0]
+      .expression;
+    expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeFalsy();
+  });
+
+  it('should be true for a native class EmberObject with `unknownProperty`', () => {
+    const node = babelEslint.parse('class MyClass extends EmberObject { unknownProperty() {} }')
+      .body[0];
+    expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeTruthy();
+  });
+
+  it('should be false for a native class EmberObject without `unknownProperty`', () => {
+    const node = babelEslint.parse('class MyClass extends EmberObject { somethingElse() {} }')
+      .body[0];
+    expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeFalsy();
+  });
+});

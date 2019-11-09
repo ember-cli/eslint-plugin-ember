@@ -9,7 +9,7 @@ This rule disallows:
 * `this.get('someProperty')` when `this.someProperty` can be used
 * `this.getProperties('prop1', 'prop2')` when `{ prop1: this.prop1, prop2: this.prop2 }` can be used
 
-**WARNING**: there are a number of circumstances where `get` / `getProperties` still need to be used, and you may need to manually disable the rule for these:
+**WARNING**: there are a number of circumstances where `get` / `getProperties` still need to be used, and you may need to manually disable the rule for these (although the rule will attempt to ignore them):
 
 * Ember proxy objects (`ObjectProxy`, `ArrayProxy`)
 * Objects implementing the `unknownProperty` method
@@ -60,6 +60,16 @@ import ObjectProxy from '@ember/object/proxy';
 export default ObjectProxy.extend({
   someFunction() {
     const foo = this.get('propertyInsideProxyObject'); // Allowed because inside proxy object.
+  }
+});
+```
+
+```js
+import EmberObject from '@ember/object';
+export default EmberObject.extend({
+  unknownProperty(key) {},
+  someFunction() {
+    const foo = this.get('property'); // Allowed because inside object implementing `unknownProperty()`.
   }
 });
 ```
