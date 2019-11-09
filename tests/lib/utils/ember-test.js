@@ -427,6 +427,138 @@ describe('isEmberService', () => {
   });
 });
 
+describe('isEmberArrayProxy', () => {
+  it('should detect using old module style', () => {
+    const context = new FauxContext('Ember.ArrayProxy.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect using old module style with wrong name', () => {
+    const context = new FauxContext('Ember.SomethingElse.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeFalsy();
+  });
+
+  it('should detect when using local module', () => {
+    const context = new FauxContext('ArrayProxy.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect when using local module with wrong name', () => {
+    const context = new FauxContext('SomethingElse.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeFalsy();
+  });
+
+  it('should detect when using native classes', () => {
+    const context = new FauxContext(`
+      import ArrayProxy from '@ember/array/proxy';
+      class MyProxy extends ArrayProxy {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeTruthy();
+  });
+
+  it('should detect when using native classes with other name but correct import path', () => {
+    const context = new FauxContext(`
+      import OtherName from '@ember/array/proxy';
+      class MyProxy extends OtherName {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect when using native classes if the import path is incorrect', () => {
+    const context = new FauxContext(`
+      import ArrayProxy from '@something-else/service';
+      class MyProxy extends ArrayProxy {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeFalsy();
+  });
+});
+
+describe('isEmberObjectProxy', () => {
+  it('should detect using old module style', () => {
+    const context = new FauxContext('Ember.ObjectProxy.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect using old module style with wrong name', () => {
+    const context = new FauxContext('Ember.SomethingElse.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeFalsy();
+  });
+
+  it('should detect when using local module', () => {
+    const context = new FauxContext('ObjectProxy.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect when using local module with wrong name', () => {
+    const context = new FauxContext('SomethingElse.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeFalsy();
+  });
+
+  it('should detect when using native classes', () => {
+    const context = new FauxContext(`
+      import ObjectProxy from '@ember/object/proxy';
+      class MyProxy extends ObjectProxy {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeTruthy();
+  });
+
+  it('should detect when using native classes with other name but correct import path', () => {
+    const context = new FauxContext(`
+      import OtherName from '@ember/object/proxy';
+      class MyProxy extends OtherName {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect when using native classes if the import path is incorrect', () => {
+    const context = new FauxContext(`
+      import ObjectProxy from '@something-else/service';
+      class MyProxy extends ObjectProxy {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeFalsy();
+  });
+});
+
+describe('isEmberProxy', () => {
+  it('should detect ArrayProxy example', () => {
+    const context = new FauxContext(`
+      import ArrayProxy from '@ember/array/proxy';
+      class MyProxy extends ArrayProxy {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberProxy(context, node)).toBeTruthy();
+  });
+
+  it('should detect ObjectProxy example', () => {
+    const context = new FauxContext(`
+      import ObjectProxy from '@ember/object/proxy';
+      class MyProxy extends ObjectProxy {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect random code', () => {
+    const context = new FauxContext('const x = 123;');
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberProxy(context, node)).toBeFalsy();
+  });
+});
+
 describe('isInjectedServiceProp', () => {
   describe('classic classes', () => {
     it("should check if it's an injected service prop with renamed import", () => {
