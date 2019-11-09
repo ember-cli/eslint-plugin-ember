@@ -100,6 +100,35 @@ ruleTester.run('no-get', rule, {
       code: "getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
       options: [{ ignoreGetProperties: true }],
     },
+
+    // Ignores code inside proxy objects (which still require using `get()`):
+    `
+    import ObjectProxy from '@ember/object/proxy';
+    export default ObjectProxy.extend({
+      someFunction() {
+        test();
+        console.log(this.get('propertyInsideProxyObject'));
+      }
+    });
+    `,
+    `
+    import ArrayProxy from '@ember/array/proxy';
+    export default ArrayProxy.extend({
+      someFunction() {
+        test();
+        console.log(this.get('propertyInsideProxyObject'));
+      }
+    });
+    `,
+    `
+    import ArrayProxy from '@ember/array/proxy';
+    class MyProxy extends ArrayProxy {
+      someFunction() {
+        test();
+        console.log(this.get('propertyInsideProxyObject'));
+      }
+    }
+    `,
   ],
   invalid: [
     // **************************
@@ -171,6 +200,37 @@ ruleTester.run('no-get', rule, {
       output: null,
       options: [{ ignoreNestedPaths: false }],
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+
+    {
+      // Reports violation after (classic) proxy class.
+      code: `
+      import ArrayProxy from '@ember/array/proxy';
+      export default ArrayProxy.extend({
+        someFunction() {
+          test();
+          console.log(this.get('propertyInsideProxyObject'));
+        }
+      });
+      this.get('propertyOutsideClass');
+      `,
+      output: null,
+      errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
+    },
+    {
+      // Reports violation after (native) proxy class.
+      code: `
+      import ArrayProxy from '@ember/array/proxy';
+      class MyProxy extends ArrayProxy {
+        someFunction() {
+          test();
+          console.log(this.get('propertyInsideProxyObject'));
+        }
+      }
+      this.get('propertyOutsideClass');
+      `,
+      output: null,
+      errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
     },
   ],
 });
