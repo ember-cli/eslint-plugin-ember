@@ -55,6 +55,15 @@ const { prop1, prop2 } = this;
 const foo = { prop1: this.prop1, prop2: this.prop2 };
 ```
 
+```js
+import ObjectProxy from '@ember/object/proxy';
+export default ObjectProxy.extend({
+  someFunction() {
+    const foo = this.get('propertyInsideProxyObject'); // Allowed because inside proxy object.
+  }
+});
+```
+
 ## Configuration
 
 This rule takes an optional object containing:
