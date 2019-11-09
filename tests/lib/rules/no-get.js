@@ -101,7 +101,7 @@ ruleTester.run('no-get', rule, {
       options: [{ ignoreGetProperties: true }],
     },
 
-    // Ignores code inside proxy objects (which still require using `get()`):
+    // Ignores `get()` inside proxy objects (which still require using `get()`):
     `
     import ObjectProxy from '@ember/object/proxy';
     export default ObjectProxy.extend({
@@ -126,6 +126,26 @@ ruleTester.run('no-get', rule, {
       someFunction() {
         test();
         console.log(this.get('propertyInsideProxyObject'));
+      }
+    }
+    `,
+
+    // Ignores `get()` inside classes with `unknownProperty`:
+    `
+    import EmberObject from '@ember/object';
+    export default EmberObject.extend({
+      unknownProperty() {},
+      someFunction() {
+        console.log(this.get('propertyInsideClassWithUnknownProperty'));
+      }
+    });
+    `,
+    `
+    import EmberObject from '@ember/object';
+    class MyClass extends EmberObject {
+      unknownProperty() {}
+      someFunction() {
+        console.log(this.get('propertyInsideClassWithUnknownProperty'));
       }
     }
     `,
@@ -225,6 +245,37 @@ ruleTester.run('no-get', rule, {
         someFunction() {
           test();
           console.log(this.get('propertyInsideProxyObject'));
+        }
+      }
+      this.get('propertyOutsideClass');
+      `,
+      output: null,
+      errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
+    },
+
+    {
+      // Reports violation after (classic) class with `unknownProperty()`.
+      code: `
+      import EmberObject from '@ember/object';
+      export default EmberObject.extend({
+        unknownProperty() {},
+        someFunction() {
+          console.log(this.get('propertyInsideClassWithUnknownProperty'));
+        }
+      });
+      this.get('propertyOutsideClass');
+      `,
+      output: null,
+      errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
+    },
+    {
+      // Reports violation after (native) class with `unknownProperty()`.
+      code: `
+      import EmberObject from '@ember/object';
+      class MyClass extends EmberObject {
+        unknownProperty() {}
+        someFunction() {
+          console.log(this.get('propertyInsideClassWithUnknownProperty'));
         }
       }
       this.get('propertyOutsideClass');
