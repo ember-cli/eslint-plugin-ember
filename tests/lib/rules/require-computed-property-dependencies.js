@@ -708,5 +708,26 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         },
       ],
     },
+    {
+      code: `
+        Ember.computed(function() {
+          return this.some.very.long.
+            multi.line.property.name;
+        });
+      `,
+      output: `
+        Ember.computed('some.very.long.multi.line.property.name', function() {
+          return this.some.very.long.
+            multi.line.property.name;
+        });
+      `,
+      errors: [
+        {
+          message:
+            'Use of undeclared dependencies in computed property: some.very.long.multi.line.property.name',
+          type: 'CallExpression',
+        },
+      ],
+    },
   ],
 });
