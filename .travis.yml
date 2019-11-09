@@ -12,6 +12,7 @@ install:
 script:
   - yarn lint
   - yarn test:coverage --runInBand
+  - yarn update && git diff --exit-code
   - yarn add --dev eslint@5 && yarn test --runInBand
 
 before_deploy:
