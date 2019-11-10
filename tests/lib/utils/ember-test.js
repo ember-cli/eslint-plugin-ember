@@ -151,6 +151,14 @@ describe('isEmberCoreModule', () => {
     const node = context.ast.body[0].expression;
     expect(emberUtils.isEmberCoreModule(context, node, 'Route')).toBeTruthy();
   });
+
+  it('throws when called on wrong type of node', () => {
+    const context = new FauxContext('const x = 123;');
+    const node = context.ast.body[0];
+    expect(() => emberUtils.isEmberCoreModule(context, node, 'Route')).toThrow(
+      'Function should only be called on a `CallExpression` (classic class) or `ClassDeclaration` (native class)'
+    );
+  });
 });
 
 describe('isEmberComponent', () => {
@@ -553,8 +561,8 @@ describe('isEmberProxy', () => {
   });
 
   it('should not detect random code', () => {
-    const context = new FauxContext('const x = 123;');
-    const node = context.ast.body[1];
+    const context = new FauxContext('someFunctionCall();');
+    const node = context.ast.body[0].expression;
     expect(emberUtils.isEmberProxy(context, node)).toBeFalsy();
   });
 });
@@ -1158,5 +1166,12 @@ describe('isEmberObjectImplementingUnknownProperty', () => {
     const node = babelEslint.parse('class MyClass extends EmberObject { somethingElse() {} }')
       .body[0];
     expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeFalsy();
+  });
+
+  it('throws when called on wrong type of node', () => {
+    const node = babelEslint.parse('const x = 123;').body[0];
+    expect(() => emberUtils.isEmberObjectImplementingUnknownProperty(node)).toThrow(
+      'Function should only be called on a `CallExpression` (classic class) or `ClassDeclaration` (native class)'
+    );
   });
 });
