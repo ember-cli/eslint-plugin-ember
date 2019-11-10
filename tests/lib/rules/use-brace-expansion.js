@@ -5,6 +5,8 @@
 const rule = require('../../../lib/rules/use-brace-expansion');
 const RuleTester = require('eslint').RuleTester;
 
+const { ERROR_MESSAGE } = rule;
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
@@ -30,7 +32,8 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -39,7 +42,8 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -48,7 +52,8 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -57,7 +62,8 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -66,7 +72,8 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -75,7 +82,8 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -84,7 +92,8 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
