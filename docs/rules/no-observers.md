@@ -14,20 +14,36 @@ Observers do have some limited uses. They let you reflect state from your applic
 {{input value=text key-up="change"}}
 ```
 
+## Examples
+
+Examples of **incorrect** code for this rule:
+
+```js
+export default Controller.extend({
+  change: Ember.observer('text', function() {
+    console.log(`change detected: ${this.text}`);
+  },
+});
+```
+
+```js
+import { observes } from '@ember-decorators/object';
+class FooComponent extends Component {
+  @observes('text')
+  change() {
+    console.log(`change detected: ${this.text}`);
+  }
+}
+```
+
+Examples of **correct** code for this rule:
+
 ```javascript
-// GOOD
 export default Controller.extend({
   actions: {
     change() {
       console.log(`change detected: ${this.text}`);
     },
-  },
-});
-
-// BAD
-export default Controller.extend({
-  change: Ember.observer('text', function() {
-    console.log(`change detected: ${this.text}`);
   },
 });
 ```
