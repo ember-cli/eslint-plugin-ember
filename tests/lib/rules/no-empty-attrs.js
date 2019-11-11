@@ -68,7 +68,10 @@ eslintTester.run('no-empty-attrs', rule, {
         someComputedProperty: computed.bool(true)
       });`,
       output: null,
-      errors: [{ message, line: 3 }, { message, line: 4 }],
+      errors: [
+        { message, line: 3 },
+        { message, line: 4 },
+      ],
     },
     {
       code: `export default Model.extend({
@@ -77,7 +80,11 @@ eslintTester.run('no-empty-attrs', rule, {
         dob: attr()
       });`,
       output: null,
-      errors: [{ message, line: 2 }, { message, line: 3 }, { message, line: 4 }],
+      errors: [
+        { message, line: 2 },
+        { message, line: 3 },
+        { message, line: 4 },
+      ],
     },
     {
       filename: 'example-app/models/some-model.js',
