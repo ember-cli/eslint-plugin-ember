@@ -96,7 +96,6 @@ module.exports = {
     'eslint-plugin/require-meta-docs-url': ['error', {
       pattern: 'https://github.com/ember-cli/eslint-plugin-ember/tree/master/docs/rules/{{name}}.md',
     }],
-    'eslint-plugin/require-meta-type': 'off',
     'eslint-plugin/test-case-property-ordering': 'off',
 
     // Filenames:
