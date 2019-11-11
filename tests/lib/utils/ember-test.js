@@ -1175,3 +1175,32 @@ describe('isEmberObjectImplementingUnknownProperty', () => {
     );
   });
 });
+
+describe('isObserverDecorator', () => {
+  it('should be true for an observer decorator', () => {
+    const node = babelEslint.parse(`
+    import { observes } from '@ember-decorators/object';
+    class FooComponent extends Component {
+      @observes('baz')
+      bar() {}
+    }`).body[1].body.body[0].decorators[0];
+    expect(emberUtils.isObserverDecorator(node)).toBeTruthy();
+  });
+
+  it('should be false for another type of decorator', () => {
+    const node = babelEslint.parse(`
+    import { action } from '@ember/object';
+    class FooComponent extends Component {
+      @action
+      clickHandler() {}
+    }`).body[1].body.body[0].decorators[0];
+    expect(emberUtils.isObserverDecorator(node)).toBeFalsy();
+  });
+
+  it('throws when called on a non-decorator', () => {
+    const node = babelEslint.parse('const x = 123;').body[0];
+    expect(() => emberUtils.isObserverDecorator(node)).toThrow(
+      'Should only call this function on a Decorator'
+    );
+  });
+});
