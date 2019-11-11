@@ -68,7 +68,10 @@ eslintTester.run('no-on-calls-in-components', rule, {
         anotherTest: Ember.on("willDestroyElement", function () {})
       });`,
       output: null,
-      errors: [{ message, line: 2 }, { message, line: 4 }],
+      errors: [
+        { message, line: 2 },
+        { message, line: 4 },
+      ],
     },
     {
       filename: 'example-app/components/some-component/component.js',
