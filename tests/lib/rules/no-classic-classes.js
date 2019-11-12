@@ -81,5 +81,19 @@ ruleTester.run('no-classic-classes', rule, {
       `,
       errors: [{ message: ERROR_MESSAGE, line: 4, type: 'CallExpression' }],
     },
+    {
+      code: `
+        import DS from 'ember-data';
+        export default DS.Model.extend({});
+      `,
+      errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
+    },
+    {
+      code: `
+        import Model from '@ember-data/model';
+        export default Model.extend({});
+      `,
+      errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
+    },
   ],
 });
