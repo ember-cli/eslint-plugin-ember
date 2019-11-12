@@ -61,7 +61,7 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-prettier": "^3.1.1",
     "jest": "^24.9.0",
-    "lerna-changelog": "^0.8.2",
+    "lerna-changelog": "^0.8.3",
     "prettier": "1.19.1"
   },
   "dependencies": {
