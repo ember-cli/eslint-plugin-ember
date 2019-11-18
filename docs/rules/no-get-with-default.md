@@ -23,7 +23,7 @@ const test = getWithDefault(this, 'key', []);
 This rule **allows** the following:
 
 ```js
-const test = get(this, 'key') || [];
+const test = this.key === undefined ? [] : this.key;
 ```
 
 ## References
