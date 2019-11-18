@@ -1,5 +1,6 @@
 const rule = require('../../../lib/rules/no-get-with-default');
 const RuleTester = require('eslint').RuleTester;
+
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 2015,
