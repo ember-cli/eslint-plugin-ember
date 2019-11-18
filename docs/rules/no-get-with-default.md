@@ -8,10 +8,7 @@ Even though the behavior for `getWithDefault` is more defined such that it only 
 its inconsistency with the native `||` is confusing to many developers who assume otherwise. This rule encourages developers to use
 the native `||` operator instead.
 
-Violation includes:
-
-- `this.getWithDefault(...);`
-- `getWithDefault(...);`;
+In addition, [Nullish Coalescing Operator `??`](https://github.com/tc39/proposal-nullish-coalescing) will land in the JavaScript language soon so developers can enjoy native support instead of `getWithDefault` while performing safe property access.
 
 This rule **forbids** the following:
 
@@ -26,13 +23,13 @@ const test = getWithDefault(this, 'key', []);
 This rule **allows** the following:
 
 ```js
-const test = this.get('key') || [];
-```
-
-```js
 const test = get(this, 'key') || [];
 ```
 
-### References
+## References
 
 - [RFC](https://github.com/emberjs/rfcs/pull/554/) to deprecate `getWithDefault`
+
+## Related Rules
+
+- [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md)
