@@ -1,4 +1,4 @@
-# No getWithDefault (no-get-with-default)
+# No `getWithDefault` (no-get-with-default)
 
 This rule attempts to catch and prevent the use of `getWithDefault`.
 
@@ -8,7 +8,7 @@ Even though the behavior for `getWithDefault` is more defined such that it only 
 its inconsistency with the native `||` is confusing to many developers who assume otherwise. This rule encourages developers to use
 the native `||` operator instead.
 
-In addition, [Nullish Coalescing Operator `??`](https://github.com/tc39/proposal-nullish-coalescing) will land in the JavaScript language soon so developers can enjoy safe property access using native support instead of `getWithDefault`.
+In addition, [Nullish Coalescing Operator `??`](https://github.com/tc39/proposal-nullish-coalescing) will land in the JavaScript language soon so developers can leverage safe property access with native support instead of using `getWithDefault`.
 
 This rule **forbids** the following:
 
