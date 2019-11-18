@@ -8,7 +8,7 @@ Even though the behavior for `getWithDefault` is more defined such that it only 
 its inconsistency with the native `||` is confusing to many developers who assume otherwise. This rule encourages developers to use
 the native `||` operator instead.
 
-In addition, [Nullish Coalescing Operator `??`](https://github.com/tc39/proposal-nullish-coalescing) will land in the JavaScript language soon so developers can enjoy native support instead of `getWithDefault` while performing safe property access.
+In addition, [Nullish Coalescing Operator `??`](https://github.com/tc39/proposal-nullish-coalescing) will land in the JavaScript language soon so developers can enjoy safe property access using native support instead of `getWithDefault`.
 
 This rule **forbids** the following:
 
