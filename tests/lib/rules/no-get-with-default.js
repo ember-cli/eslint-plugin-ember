@@ -1,8 +1,5 @@
 const rule = require('../../../lib/rules/no-get-with-default');
 const RuleTester = require('eslint').RuleTester;
-
-const EXPECTED_ERROR_MESSAGE =
-  'Use object-method syntax or `get` with `||` instead of `getWithDefault` for property `key`';
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 2015,
@@ -22,7 +19,7 @@ ruleTester.run('no-get-with-default', rule, {
       code: "const test = this.getWithDefault('key', []);",
       errors: [
         {
-          message: EXPECTED_ERROR_MESSAGE,
+          message: "Use `this.key` instead of `this.getWithDefault('key', ...)`",
           type: 'CallExpression',
         },
       ],
@@ -31,7 +28,7 @@ ruleTester.run('no-get-with-default', rule, {
       code: "const test = getWithDefault(this, 'key', []);",
       errors: [
         {
-          message: EXPECTED_ERROR_MESSAGE,
+          message: "Use `this.key` instead of `getWithDefault(this, 'key', ...)`",
           type: 'CallExpression',
         },
       ],
