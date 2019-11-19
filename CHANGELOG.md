@@ -1,3 +1,11 @@
+## v7.6.0 (2019-11-19)
+
+#### :rocket: Enhancement
+* [#594](https://github.com/ember-cli/eslint-plugin-ember/pull/594) Add new rule `no-get-with-default` ([@steventsao](https://github.com/steventsao))
+
+#### Committers: 1
+- Steven Tsao ([@steventsao](https://github.com/steventsao))
+
 ## v7.5.0 (2019-11-11)
 
 #### :rocket: Enhancement
