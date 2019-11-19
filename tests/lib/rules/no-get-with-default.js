@@ -20,7 +20,8 @@ ruleTester.run('no-get-with-default', rule, {
       code: "const test = this.getWithDefault('key', []);",
       errors: [
         {
-          message: "Use `this.property || defaultValue` or the `this.property === undefined ? defaultValue : this.property` instead of `getWithDefault(this.property, defaultValue)`.",
+          message:
+            'Use `this.property || defaultValue` or the `this.property === undefined ? defaultValue : this.property` instead of `getWithDefault(this.property, defaultValue)`.',
           type: 'CallExpression',
         },
       ],
@@ -30,7 +31,7 @@ ruleTester.run('no-get-with-default', rule, {
       code: "const test = getWithDefault(this, 'key', []);",
       errors: [
         {
-          message: "Use \`||\` or the ternary operator instead of \`getWithDefault()\`.",
+          message: 'Use `||` or the ternary operator instead of `getWithDefault()`.',
           type: 'CallExpression',
         },
       ],
