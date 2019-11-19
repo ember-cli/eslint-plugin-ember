@@ -91,6 +91,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | Enforces usage of named functions in promises |
 | :white_check_mark: | [new-module-imports](./docs/rules/new-module-imports.md) |  Use "New Module Imports" from Ember RFC #176 |
 | :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | Prevents usage of Ember's `function` prototype extensions |
+| :car: | [no-get-with-default](./docs/rules/no-get-with-default.md) | Disallows use of the Ember's `getWithDefault` function |
 | :car::wrench: | [no-get](./docs/rules/no-get.md) | Require ES5 getters instead of Ember's `get` / `getProperties` functions |
 | :white_check_mark: | [no-global-jquery](./docs/rules/no-global-jquery.md) | Prevents usage of global jQuery object |
 | :car: | [no-jquery](./docs/rules/no-jquery.md) | Disallow any usage of jQuery |
