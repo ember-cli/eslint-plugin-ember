@@ -1,6 +1,7 @@
 const rule = require('../../../lib/rules/no-get-with-default');
 const RuleTester = require('eslint').RuleTester;
 
+const { ERROR_MESSAGE } = rule;
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 2015,
@@ -20,8 +21,7 @@ ruleTester.run('no-get-with-default', rule, {
       code: "const test = this.getWithDefault('key', []);",
       errors: [
         {
-          message:
-            'Use `this.property || defaultValue` or the `this.property === undefined ? defaultValue : this.property` instead of `getWithDefault(this.property, defaultValue)`.',
+          message: ERROR_MESSAGE,
           type: 'CallExpression',
         },
       ],
@@ -31,7 +31,7 @@ ruleTester.run('no-get-with-default', rule, {
       code: "const test = getWithDefault(this, 'key', []);",
       errors: [
         {
-          message: 'Use `||` or the ternary operator instead of `getWithDefault()`.',
+          message: ERROR_MESSAGE,
           type: 'CallExpression',
         },
       ],
