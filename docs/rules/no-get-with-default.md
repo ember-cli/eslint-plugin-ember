@@ -26,6 +26,11 @@ This rule **allows** the following:
 const test = this.key === undefined ? [] : this.key;
 ```
 
+```js
+ // the behavior of this is different because `test` would be assigned `[]` on any falsy value instead of on only `undefined`.
+const test = this.key || [];
+```
+
 ## References
 
 - [RFC](https://github.com/emberjs/rfcs/pull/554/) to deprecate `getWithDefault`
@@ -33,3 +38,4 @@ const test = this.key === undefined ? [] : this.key;
 ## Related Rules
 
 - [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md)
+- [spec](http://api.emberjs.com/ember/3.13/functions/@ember%2Fobject/getWithDefault)
