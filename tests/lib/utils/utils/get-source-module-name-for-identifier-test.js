@@ -7,7 +7,7 @@ test('when the identifier is not imported', () => {
     Foo;
   `);
 
-  const node = { name: 'Foo' };
+  const node = { name: 'Foo', type: 'Identifier' };
 
   expect(getSourceModuleNameForIdentifier(context, node)).toEqual(undefined);
 });
@@ -20,7 +20,7 @@ describe('when the identifier is imported', () => {
       Foo;
     `);
 
-    const node = { name: 'Foo' };
+    const node = { name: 'Foo', type: 'Identifier' };
 
     expect(getSourceModuleNameForIdentifier(context, node)).toEqual('bar');
   });
@@ -32,7 +32,7 @@ describe('when the identifier is imported', () => {
       Foo;
     `);
 
-    const node = { name: 'Foo' };
+    const node = { name: 'Foo', type: 'Identifier' };
 
     expect(getSourceModuleNameForIdentifier(context, node)).toEqual('bar');
   });
@@ -44,7 +44,7 @@ describe('when the identifier is imported', () => {
       Foo;
     `);
 
-    const node = { name: 'Foo' };
+    const node = { name: 'Foo', type: 'Identifier' };
 
     expect(getSourceModuleNameForIdentifier(context, node)).toEqual('bar');
   });
