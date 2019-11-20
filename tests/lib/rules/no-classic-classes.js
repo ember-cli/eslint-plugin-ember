@@ -19,21 +19,18 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-classic-classes', rule, {
   valid: [
-    `
-      import Component from '@ember/component';
-
-      export default class MyComponent extends Component {}
-    `,
-    `
-      import Component from '@ember/component';
-
-      export default class MyRoute extends Route.extend(SomeMixin) {}
-    `,
-    `
-      import SomeOtherThing from 'some-other-library';
-
-      export default SomeOtherThing.extend({});
-    `,
+    // `
+    //   import Component from '@ember/component';
+    //   export default class MyComponent extends Component {}
+    // `,
+    // `
+    //   import Component from '@ember/component';
+    //   export default class MyRoute extends Route.extend(SomeMixin) {}
+    // `,
+    // `
+    //   import SomeOtherThing from 'some-other-library';
+    //   export default SomeOtherThing.extend({});
+    // `,
   ],
 
   invalid: [

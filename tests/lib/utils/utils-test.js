@@ -192,3 +192,15 @@ describe('parseCallee', () => {
     expect(parsedCallee).toEqual(['Ember', 'A']);
   });
 });
+
+describe('getSourceModuleName', () => {
+  it('gets the correct module name DS', () => {
+    const node = parse('DS.Model.extend()').callee;
+    expect(utils.getSourceModuleName(node)).toEqual('DS');
+  });
+
+  it('gets the correct module name Model', () => {
+    const node = parse('Model.extend()').callee;
+    expect(utils.getSourceModuleName(node)).toEqual('Model');
+  });
+});
