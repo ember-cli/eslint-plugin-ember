@@ -607,12 +607,6 @@ describe('isEmberProxy', () => {
     const node = context.ast.body[1];
     expect(emberUtils.isEmberProxy(context, node)).toBeTruthy();
   });
-
-  it('should not detect random code', () => {
-    const context = new FauxContext('someFunctionCall();');
-    const node = context.ast.body[0].expression;
-    expect(emberUtils.isEmberProxy(context, node)).toBeFalsy();
-  });
 });
 
 describe('isInjectedServiceProp', () => {
