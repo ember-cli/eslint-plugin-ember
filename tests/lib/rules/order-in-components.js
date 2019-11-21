@@ -17,8 +17,13 @@ const eslintTester = new RuleTester({
 
 eslintTester.run('order-in-components', rule, {
   valid: [
-    'export default Component.extend();',
-    `export default Component.extend({
+    `
+      import Component from '@ember/component';
+      export default Component.extend();
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         role: "sloth",
 
         vehicle: alias("car"),
@@ -27,34 +32,49 @@ eslintTester.run('order-in-components', rule, {
         }),
 
         actions: {}
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         role: "sloth",
 
         levelOfHappiness: computed("attitude", "health", () => {
         }),
 
         actions: {}
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         levelOfHappiness: computed("attitude", "health", () => {
         }),
 
         actions: {}
-      });`,
-    `export default Component.extend(TestMixin, {
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend(TestMixin, {
         levelOfHappiness: computed("attitude", "health", () => {
         }),
 
         actions: {}
-      });`,
-    `export default Component.extend(TestMixin, TestMixin2, {
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend(TestMixin, TestMixin2, {
         levelOfHappiness: computed("attitude", "health", () => {
         }),
 
         actions: {}
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         abc: Ember.inject.service(),
         def: inject.service(),
         ghi: service(),
@@ -63,28 +83,35 @@ eslintTester.run('order-in-components', rule, {
 
         levelOfHappiness: computed("attitude", "health", () => {
         })
-      });`,
+      });
+    `,
     `
-        import { inject } from '@ember/service';
-        export default Component.extend({
-          abc: inject(),
-          def: inject.service(),
-          ghi: service(),
+      import Component from '@ember/component';
+      import { inject } from '@ember/service';
+      export default Component.extend({
+        abc: inject(),
+        def: inject.service(),
+        ghi: service(),
 
-          role: "sloth",
+        role: "sloth",
 
-          levelOfHappiness: computed("attitude", "health", () => {
-          })
-        });
-      `,
-    `export default Component.extend({
+        levelOfHappiness: computed("attitude", "health", () => {
+        })
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         role: "sloth",
         abc: [],
         def: {},
 
         ghi: alias("def")
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         levelOfHappiness: computed("attitude", "health", () => {
         }),
 
@@ -95,8 +122,11 @@ eslintTester.run('order-in-components', rule, {
         }),
 
         actions: {}
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         abc: observer("aaaa", () => {
         }),
 
@@ -108,8 +138,11 @@ eslintTester.run('order-in-components', rule, {
         customFunc() {
           return true;
         }
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         igh: service(),
 
         abc: [],
@@ -131,8 +164,11 @@ eslintTester.run('order-in-components', rule, {
         customFunc() {
           return true;
         }
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         init() {
         },
         didReceiveAttrs() {
@@ -159,8 +195,11 @@ eslintTester.run('order-in-components', rule, {
         },
 
         actions: {}
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         test: service(),
 
         didReceiveAttrs() {
@@ -168,8 +207,11 @@ eslintTester.run('order-in-components', rule, {
 
         tSomeAction: task(function* (url) {
         })
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         test: service(),
 
         test2: computed.equal("asd", "qwe"),
@@ -179,8 +221,11 @@ eslintTester.run('order-in-components', rule, {
 
         tSomeAction: task(function* (url) {
         }).restartable()
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         test: service(),
 
         someEmptyMethod() {},
@@ -194,8 +239,11 @@ eslintTester.run('order-in-components', rule, {
         _anotherPrivateFnc() {
           return true;
         }
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         classNameBindings: ["filterDateSelectClass"],
         content: [],
         currentMonthEndDate: null,
@@ -204,41 +252,54 @@ eslintTester.run('order-in-components', rule, {
         optionLabelPath: "label",
         typeOfDate: null,
         action: K
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         role: "sloth",
 
         levelOfHappiness: computed.or("asd", "qwe"),
 
         actions: {}
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         role: "sloth",
 
         levelOfHappiness: computed(function() {}),
 
         actions: {}
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         role: "sloth",
 
         levelOfHappiness: computed(function() {
         }),
 
         actions: {}
-      });`,
+      });
+    `,
     {
-      code: `export default Component.extend({
-        role: "sloth",
+      code: `
+        import Component from '@ember/component';
+          export default Component.extend({
+          role: "sloth",
 
-        computed1: computed(function() {
-        }),
-        computed2: alias('computed1'),
+          computed1: computed(function() {
+          }),
+          computed2: alias('computed1'),
 
-        actions: {},
+          actions: {},
 
-        foobar: Ember.inject.service(),
-      });`,
+          foobar: Ember.inject.service(),
+        });
+      `,
       options: [
         {
           order: ['property', 'multi-line-function', 'single-line-function', 'actions'],
@@ -246,64 +307,85 @@ eslintTester.run('order-in-components', rule, {
       ],
     },
     {
-      code: `export default Component.extend({
-        role: "sloth",
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          role: "sloth",
 
-        computed1: alias('computed2'),
-        computed2: computed(function() {
-        }),
-        computed3: alias('computed1'),
+          computed1: alias('computed2'),
+          computed2: computed(function() {
+          }),
+          computed3: alias('computed1'),
 
-        actions: {},
+          actions: {},
 
-        foobar: Ember.inject.service(),
-      });`,
+          foobar: Ember.inject.service(),
+        });
+      `,
       options: [
         {
           order: ['property', ['single-line-function', 'multi-line-function'], 'actions'],
         },
       ],
     },
-    `export default Component.extend({
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         role: "sloth",
         qwe: foo ? 'bar' : null,
         abc: [],
         def: {},
 
         ghi: alias("def")
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         template: hbs\`Hello world {{name}}\`,
         name: "Jon Snow",
         actions: {}
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         layout,
         tabindex: -1,
 
         someComputedValue: computed.reads('count'),
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         foo: computed(function() {
         }).volatile(),
         bar: computed(function() {
         })
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
         onFoo() {},
         onFoo: () => {},
         foo: computed(function() {
         }).volatile(),
         bar() { const foo = 'bar'}
-      });`,
+      });
+    `,
     {
-      code: `export default Component.extend({
-        onFoo() {},
-        onFoo: () => {},
-        foo: computed(function() {
-        }).volatile(),
-        bar() { const foo = 'bar'}
-      });`,
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          onFoo() {},
+          onFoo: () => {},
+          foo: computed(function() {
+          }).volatile(),
+          bar() { const foo = 'bar'}
+        });
+      `,
       options: [
         {
           order: [
@@ -319,154 +401,159 @@ eslintTester.run('order-in-components', rule, {
   ],
   invalid: [
     {
-      code: `export default Component.extend({
-        actions: {},
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          actions: {},
 
-        role: "sloth",
+          role: "sloth",
 
-        vehicle: alias("car"),
+          vehicle: alias("car"),
 
-        levelOfHappiness: computed("attitude", "health", () => {
-        })
-      });`,
+          levelOfHappiness: computed("attitude", "health", () => {
+          })
+        });
+      `,
       errors: [
         {
-          message: 'The "role" property should be above the actions hash on line 2',
-          line: 4,
-        },
-        {
-          message: 'The "vehicle" single-line function should be above the actions hash on line 2',
+          message: 'The "role" property should be above the actions hash on line 4',
           line: 6,
         },
         {
-          message:
-            'The "levelOfHappiness" multi-line function should be above the actions hash on line 2',
+          message: 'The "vehicle" single-line function should be above the actions hash on line 4',
           line: 8,
         },
-      ],
-    },
-    {
-      code: `export default Component.extend({
-        vehicle: alias("car"),
-
-        role: "sloth",
-
-        levelOfHappiness: computed("attitude", "health", () => {
-        }),
-
-        actions: {}
-      });`,
-      errors: [
         {
           message:
-            'The "role" property should be above the "vehicle" single-line function on line 2',
-          line: 4,
-        },
-      ],
-    },
-    {
-      code: `export default Component.extend({
-        levelOfHappiness: computed("attitude", "health", () => {
-        }),
-
-        vehicle: alias("car"),
-
-        role: "sloth",
-
-        actions: {}
-      });`,
-      errors: [
-        {
-          message:
-            'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 2',
-          line: 5,
-        },
-        {
-          message:
-            'The "role" property should be above the "levelOfHappiness" multi-line function on line 2',
-          line: 7,
-        },
-      ],
-    },
-    {
-      code: `export default Component.extend(TestMixin, {
-        levelOfHappiness: computed("attitude", "health", () => {
-        }),
-
-        vehicle: alias("car"),
-
-        role: "sloth",
-
-        actions: {}
-      });`,
-      errors: [
-        {
-          message:
-            'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 2',
-          line: 5,
-        },
-        {
-          message:
-            'The "role" property should be above the "levelOfHappiness" multi-line function on line 2',
-          line: 7,
-        },
-      ],
-    },
-    {
-      code: `export default Component.extend(TestMixin, TestMixin2, {
-        levelOfHappiness: computed("attitude", "health", () => {
-        }),
-
-        vehicle: alias("car"),
-
-        role: "sloth",
-
-        actions: {}
-      });`,
-      errors: [
-        {
-          message:
-            'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 2',
-          line: 5,
-        },
-        {
-          message:
-            'The "role" property should be above the "levelOfHappiness" multi-line function on line 2',
-          line: 7,
-        },
-      ],
-    },
-    {
-      code: `export default Component.extend({
-        abc: true,
-        i18n: service()
-      });`,
-      errors: [
-        {
-          message: 'The "i18n" service injection should be above the "abc" property on line 2',
-          line: 3,
-        },
-      ],
-    },
-    {
-      code: `export default Component.extend({
-        vehicle: alias("car"),
-        i18n: service()
-      });`,
-      errors: [
-        {
-          message:
-            'The "i18n" service injection should be above the "vehicle" single-line function on line 2',
-          line: 3,
+            'The "levelOfHappiness" multi-line function should be above the actions hash on line 4',
+          line: 10,
         },
       ],
     },
     {
       code: `
-        import { inject } from '@ember/service';
+        import Component from '@ember/component';
         export default Component.extend({
           vehicle: alias("car"),
-          i18n: inject()
+
+          role: "sloth",
+
+          levelOfHappiness: computed("attitude", "health", () => {
+          }),
+
+          actions: {}
+        });
+      `,
+      errors: [
+        {
+          message:
+            'The "role" property should be above the "vehicle" single-line function on line 4',
+          line: 6,
+        },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          levelOfHappiness: computed("attitude", "health", () => {
+          }),
+
+          vehicle: alias("car"),
+
+          role: "sloth",
+
+          actions: {}
+        });
+      `,
+      errors: [
+        {
+          message:
+            'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 4',
+          line: 7,
+        },
+        {
+          message:
+            'The "role" property should be above the "levelOfHappiness" multi-line function on line 4',
+          line: 9,
+        },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend(TestMixin, {
+          levelOfHappiness: computed("attitude", "health", () => {
+          }),
+
+          vehicle: alias("car"),
+
+          role: "sloth",
+
+          actions: {}
+        });
+      `,
+      errors: [
+        {
+          message:
+            'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 4',
+          line: 7,
+        },
+        {
+          message:
+            'The "role" property should be above the "levelOfHappiness" multi-line function on line 4',
+          line: 9,
+        },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend(TestMixin, TestMixin2, {
+          levelOfHappiness: computed("attitude", "health", () => {
+          }),
+
+          vehicle: alias("car"),
+
+          role: "sloth",
+
+          actions: {}
+        });
+      `,
+      errors: [
+        {
+          message:
+            'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 4',
+          line: 7,
+        },
+        {
+          message:
+            'The "role" property should be above the "levelOfHappiness" multi-line function on line 4',
+          line: 9,
+        },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          abc: true,
+          i18n: service()
+        });
+      `,
+      errors: [
+        {
+          message: 'The "i18n" service injection should be above the "abc" property on line 4',
+          line: 5,
+        },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          vehicle: alias("car"),
+          i18n: service()
         });
       `,
       errors: [
@@ -478,281 +565,352 @@ eslintTester.run('order-in-components', rule, {
       ],
     },
     {
-      code: `export default Component.extend({
-        levelOfHappiness: observer("attitude", "health", () => {
-        }),
-        vehicle: alias("car")
-      });`,
+      code: `
+        import Component from '@ember/component';
+        import { inject } from '@ember/service';
+        export default Component.extend({
+          vehicle: alias("car"),
+          i18n: inject()
+        });
+      `,
       errors: [
         {
           message:
-            'The "vehicle" single-line function should be above the "levelOfHappiness" observer on line 2',
-          line: 4,
+            'The "i18n" service injection should be above the "vehicle" single-line function on line 5',
+          line: 6,
         },
       ],
     },
     {
-      code: `export default Component.extend({
-        levelOfHappiness: observer("attitude", "health", () => {
-        }),
-        aaa: computed("attitude", "health", () => {
-        })
-      });`,
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          levelOfHappiness: observer("attitude", "health", () => {
+          }),
+          vehicle: alias("car")
+        });
+      `,
       errors: [
         {
           message:
-            'The "aaa" multi-line function should be above the "levelOfHappiness" observer on line 2',
-          line: 4,
+            'The "vehicle" single-line function should be above the "levelOfHappiness" observer on line 4',
+          line: 6,
         },
       ],
     },
     {
-      code: `export default Component.extend({
-        init() {
-        },
-        levelOfHappiness: observer("attitude", "health", () => {
-        })
-      });`,
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          levelOfHappiness: observer("attitude", "health", () => {
+          }),
+          aaa: computed("attitude", "health", () => {
+          })
+        });
+      `,
       errors: [
         {
           message:
-            'The "levelOfHappiness" observer should be above the "init" lifecycle hook on line 2',
-          line: 4,
+            'The "aaa" multi-line function should be above the "levelOfHappiness" observer on line 4',
+          line: 6,
         },
       ],
     },
     {
-      code: `export default Component.extend({
-        actions: {},
-        init() {
-        }
-      });`,
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          init() {
+          },
+          levelOfHappiness: observer("attitude", "health", () => {
+          })
+        });
+      `,
       errors: [
         {
-          message: 'The "init" lifecycle hook should be above the actions hash on line 2',
-          line: 3,
+          message:
+            'The "levelOfHappiness" observer should be above the "init" lifecycle hook on line 4',
+          line: 6,
         },
       ],
     },
     {
-      code: `export default Component.extend({
-        customFunc() {
-          const foo = 'bar';
-        },
-        actions: {}
-      });`,
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          actions: {},
+          init() {
+          }
+        });
+      `,
       errors: [
         {
-          message: 'The actions hash should be above the "customFunc" method on line 2',
+          message: 'The "init" lifecycle hook should be above the actions hash on line 4',
           line: 5,
         },
       ],
     },
     {
-      code: `export default Component.extend({
-        tAction: test(function() {
-        }),
-        actions: {}
-      });`,
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          customFunc() {
+            const foo = 'bar';
+          },
+          actions: {}
+        });
+      `,
       errors: [
         {
-          message: 'The actions hash should be above the "tAction" method on line 2',
-          line: 4,
-        },
-      ],
-    },
-    {
-      code: `export default Component.extend(TestMixin, TestMixin2, {
-        foo: alias("car"),
-
-        levelOfHappiness: computed("attitude", "health", () => {
-        }),
-
-        vehicle: alias("car"),
-
-        role: "sloth",
-
-        actions: {}
-      });`,
-      errors: [
-        {
-          message:
-            'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 4',
+          message: 'The actions hash should be above the "customFunc" method on line 4',
           line: 7,
         },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          tAction: test(function() {
+          }),
+          actions: {}
+        });
+      `,
+      errors: [
         {
-          message: 'The "role" property should be above the "foo" single-line function on line 2',
-          line: 9,
+          message: 'The actions hash should be above the "tAction" method on line 4',
+          line: 6,
         },
       ],
     },
     {
-      code: `let foo = 'foo';
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend(TestMixin, TestMixin2, {
+          foo: alias("car"),
 
-      export default Component.extend(TestMixin, TestMixin2, {
-        actions: {},
-        [foo]: 'foo',
-      });`,
+          levelOfHappiness: computed("attitude", "health", () => {
+          }),
+
+          vehicle: alias("car"),
+
+          role: "sloth",
+
+          actions: {}
+        });
+      `,
       errors: [
         {
-          message: 'The property should be above the actions hash on line 4',
-          line: 5,
+          message:
+            'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 6',
+          line: 9,
+        },
+        {
+          message: 'The "role" property should be above the "foo" single-line function on line 4',
+          line: 11,
+        },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+        let foo = 'foo';
+
+        export default Component.extend(TestMixin, TestMixin2, {
+          actions: {},
+          [foo]: 'foo',
+        });
+      `,
+      errors: [
+        {
+          message: 'The property should be above the actions hash on line 6',
+          line: 7,
         },
       ],
     },
     {
       filename: 'example-app/components/some-component/component.js',
-      code: `export default CustomComponent.extend({
-        actions: {},
-        role: "sloth",
-      });`,
+      code: `
+        import CustomComponent from '@ember/component';
+        export default CustomComponent.extend({
+          actions: {},
+          role: "sloth",
+        });
+      `,
       errors: [
         {
-          message: 'The "role" property should be above the actions hash on line 2',
-          line: 3,
+          message: 'The "role" property should be above the actions hash on line 4',
+          line: 5,
         },
       ],
     },
     {
       filename: 'example-app/components/some-component.js',
-      code: `export default CustomComponent.extend({
-        actions: {},
-        role: "sloth",
-      });`,
+      code: `
+        import CustomComponent from '@ember/component';
+        export default CustomComponent.extend({
+          actions: {},
+          role: "sloth",
+        });
+      `,
       errors: [
         {
-          message: 'The "role" property should be above the actions hash on line 2',
-          line: 3,
+          message: 'The "role" property should be above the actions hash on line 4',
+          line: 5,
         },
       ],
     },
     {
       filename: 'example-app/twisted-path/some-component.js',
-      code: `export default Component.extend({
-        actions: {},
-        role: "sloth",
-      });`,
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          actions: {},
+          role: "sloth",
+        });
+      `,
       errors: [
         {
-          message: 'The "role" property should be above the actions hash on line 2',
-          line: 3,
-        },
-      ],
-    },
-    {
-      code: `export default Component.extend({
-        name: "Jon Snow",
-        actions: {},
-        template: hbs\`Hello world {{name}}\`,
-      });`,
-      errors: [
-        {
-          message: 'The "template" property should be above the actions hash on line 3',
-          line: 4,
-        },
-      ],
-    },
-    {
-      code: `export default Component.extend({
-        layout,
-        someComputedValue: computed.reads('count'),
-
-        tabindex: -1,
-      });`,
-      errors: [
-        {
-          message:
-            'The "tabindex" property should be above the "someComputedValue" single-line function on line 3',
+          message: 'The "role" property should be above the actions hash on line 4',
           line: 5,
         },
       ],
     },
     {
-      code: `export default Component.extend({
-        foo: computed(function() {
-        }).volatile(),
-        name: "Jon Snow",
-      });`,
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          name: "Jon Snow",
+          actions: {},
+          template: hbs\`Hello world {{name}}\`,
+        });
+      `,
       errors: [
         {
-          message: 'The "name" property should be above the "foo" multi-line function on line 2',
-          line: 4,
-        },
-      ],
-    },
-    {
-      code: `export default Component.extend({
-        actions: {},
-        didReceiveAttrs() {},
-        willDestroyElement() {},
-        didInsertElement() {},
-        init() {},
-      });`,
-      errors: [
-        {
-          message:
-            'The "didReceiveAttrs" lifecycle hook should be above the actions hash on line 2',
-          line: 3,
-        },
-        {
-          message:
-            'The "willDestroyElement" lifecycle hook should be above the actions hash on line 2',
-          line: 4,
-        },
-        {
-          message:
-            'The "didInsertElement" lifecycle hook should be above the actions hash on line 2',
-          line: 5,
-        },
-        {
-          message: 'The "init" lifecycle hook should be above the actions hash on line 2',
+          message: 'The "template" property should be above the actions hash on line 5',
           line: 6,
         },
       ],
     },
     {
-      code: `export default Component.extend({
-        foo: computed(function() {
-        }).volatile(),
-        onFoo() {},
-        bar() { const foo = 'bar'},
-        onBar: () => {}
-      });`,
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          layout,
+          someComputedValue: computed.reads('count'),
+
+          tabindex: -1,
+        });
+      `,
       errors: [
         {
           message:
-            'The "onFoo" empty method should be above the "foo" multi-line function on line 2',
-          line: 4,
+            'The "tabindex" property should be above the "someComputedValue" single-line function on line 5',
+          line: 7,
         },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          foo: computed(function() {
+          }).volatile(),
+          name: "Jon Snow",
+        });
+      `,
+      errors: [
         {
-          message:
-            'The "onBar" empty method should be above the "foo" multi-line function on line 2',
+          message: 'The "name" property should be above the "foo" multi-line function on line 4',
           line: 6,
         },
       ],
     },
     {
-      code: `export default Component.extend({
-        levelOfHappiness: computed("attitude", "health", () => {
-        }),
-
-        vehicle: alias("car"),
-
-        actions: {}
-      });`,
-      output: `export default Component.extend({
-        vehicle: alias("car"),
-
-        levelOfHappiness: computed("attitude", "health", () => {
-        }),
-
-        actions: {}
-      });`,
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          actions: {},
+          didReceiveAttrs() {},
+          willDestroyElement() {},
+          didInsertElement() {},
+          init() {},
+        });
+      `,
       errors: [
         {
           message:
-            'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 2',
+            'The "didReceiveAttrs" lifecycle hook should be above the actions hash on line 4',
           line: 5,
+        },
+        {
+          message:
+            'The "willDestroyElement" lifecycle hook should be above the actions hash on line 4',
+          line: 6,
+        },
+        {
+          message:
+            'The "didInsertElement" lifecycle hook should be above the actions hash on line 4',
+          line: 7,
+        },
+        {
+          message: 'The "init" lifecycle hook should be above the actions hash on line 4',
+          line: 8,
+        },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          foo: computed(function() {
+          }).volatile(),
+          onFoo() {},
+          bar() { const foo = 'bar'},
+          onBar: () => {}
+        });
+      `,
+      errors: [
+        {
+          message:
+            'The "onFoo" empty method should be above the "foo" multi-line function on line 4',
+          line: 6,
+        },
+        {
+          message:
+            'The "onBar" empty method should be above the "foo" multi-line function on line 4',
+          line: 8,
+        },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          levelOfHappiness: computed("attitude", "health", () => {
+          }),
+
+          vehicle: alias("car"),
+
+          actions: {}
+        });
+      `,
+      output: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          vehicle: alias("car"),
+
+          levelOfHappiness: computed("attitude", "health", () => {
+          }),
+
+          actions: {}
+        });
+      `,
+      errors: [
+        {
+          message:
+            'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 4',
+          line: 7,
         },
       ],
     },

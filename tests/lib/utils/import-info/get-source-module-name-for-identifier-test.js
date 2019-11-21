@@ -1,4 +1,4 @@
-const { getSourceModuleNameForIdentifier } = require('../../../../lib/utils/utils');
+const { getSourceModuleNameForIdentifier } = require('../../../../lib/utils/import-info');
 const { FauxContext } = require('../../../helpers/faux-context');
 const babelEslint = require('babel-eslint');
 

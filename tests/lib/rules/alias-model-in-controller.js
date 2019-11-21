@@ -108,7 +108,10 @@ eslintTester.run('alias-model-in-controller', rule, {
     },
     {
       filename: 'example-app/controllers/path/to/some-feature.js',
-      code: 'export default CustomController.extend({});',
+      code: `
+        import CustomController from '@ember/controller';
+        export default CustomController.extend({});
+      `,
       output: null,
       errors: [
         {
@@ -118,7 +121,10 @@ eslintTester.run('alias-model-in-controller', rule, {
     },
     {
       filename: 'example-app/some-feature/controller.js',
-      code: 'export default CustomController.extend({});',
+      code: `
+        import CustomController from '@ember/controller';
+        export default CustomController.extend({});
+      `,
       output: null,
       errors: [
         {
@@ -128,7 +134,10 @@ eslintTester.run('alias-model-in-controller', rule, {
     },
     {
       filename: 'example-app/twisted-path/some-file.js',
-      code: 'export default Controller.extend({});',
+      code: `
+        import Controller from '@ember/controller';
+        export default Controller.extend({});
+      `,
       output: null,
       errors: [
         {

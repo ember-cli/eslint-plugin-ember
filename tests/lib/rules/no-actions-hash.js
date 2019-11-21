@@ -18,33 +18,39 @@ const ruleTester = new RuleTester({
 ruleTester.run('no-actions-hash', rule, {
   valid: [
     `
+      import Component from '@ember/component';
       export default Component.extend({
         foo: action(function() {})
       });
     `,
     `
+      import Component from '@ember/component';
       export default class MyComponent extends Component {
         @action
         foo() {}
       }
     `,
     `
+      import Controller from '@ember/controller';
       export default Controller.extend({
         foo: action(function() {})
       });
     `,
     `
+      import Controller from '@ember/controller';
       export default class MyController extends Controller {
         @action
         foo() {}
       }
     `,
     `
+      import Route from '@ember/routing/route';
       export default Route.extend({
         foo: action(function() {})
       });
     `,
     `
+      import Route from '@ember/routing/route';
       export default class MyRoute extends Route {
         @action
         foo() {}
@@ -59,6 +65,7 @@ ruleTester.run('no-actions-hash', rule, {
       }
     `,
     `
+      import Service from '@ember/service';
       export default Service.extend({
         actions: {
         },
@@ -69,6 +76,7 @@ ruleTester.run('no-actions-hash', rule, {
   invalid: [
     {
       code: `
+        import Component from '@ember/component';
         export default Component.extend({
           actions: {
           },
@@ -90,6 +98,7 @@ ruleTester.run('no-actions-hash', rule, {
     },
     {
       code: `
+        import Controller from '@ember/controller';
         export default Controller.extend({
           actions: {
           },
@@ -111,6 +120,7 @@ ruleTester.run('no-actions-hash', rule, {
     },
     {
       code: `
+        import Route from '@ember/routing/route';
         export default Route.extend({
           actions: {
           },

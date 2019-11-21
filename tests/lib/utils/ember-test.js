@@ -100,55 +100,73 @@ describe('isTestFile', () => {
 describe('isEmberCoreModule', () => {
   it('should check if current file is a component', () => {
     const context = new FauxContext(
-      'CustomComponent.extend()',
+      `
+        import CustomComponent from '@ember/component';
+        CustomComponent.extend()
+      `,
       'example-app/components/path/to/some-component.js'
     );
-    const node = context.ast.body[0].expression;
+    const node = context.ast.body[1].expression;
     expect(emberUtils.isEmberCoreModule(context, node, 'Component')).toBeTruthy();
   });
 
   it('should check if current file is a component', () => {
     const context = new FauxContext(
-      'Component.extend()',
+      `
+        import CustomComponent from '@ember/component';
+        CustomComponent.extend()
+      `,
       'example-app/some-twisted-path/some-component.js'
     );
-    const node = context.ast.body[0].expression;
+    const node = context.ast.body[1].expression;
     expect(emberUtils.isEmberCoreModule(context, node, 'Component')).toBeTruthy();
   });
 
   it('should check if current file is a controller', () => {
     const context = new FauxContext(
-      'CustomController.extend()',
+      `
+        import CustomController from '@ember/controller';
+        CustomController.extend()
+      `,
       'example-app/controllers/path/to/some-controller.js'
     );
-    const node = context.ast.body[0].expression;
+    const node = context.ast.body[1].expression;
     expect(emberUtils.isEmberCoreModule(context, node, 'Controller')).toBeTruthy();
   });
 
   it('should check if current file is a controller', () => {
     const context = new FauxContext(
-      'Controller.extend()',
+      `
+        import CustomController from '@ember/controller';
+        CustomController.extend()
+      `,
       'example-app/some-twisted-path/some-controller.js'
     );
-    const node = context.ast.body[0].expression;
+    const node = context.ast.body[1].expression;
     expect(emberUtils.isEmberCoreModule(context, node, 'Controller')).toBeTruthy();
   });
 
   it('should check if current file is a route', () => {
     const context = new FauxContext(
-      'CustomRoute.extend()',
+      `
+        import CustomRoute from '@ember/routing/route';
+        CustomRoute.extend()
+      `,
       'example-app/routes/path/to/some-route.js'
     );
-    const node = context.ast.body[0].expression;
+    const node = context.ast.body[1].expression;
     expect(emberUtils.isEmberCoreModule(context, node, 'Route')).toBeTruthy();
   });
 
   it('should check if current file is a route', () => {
     const context = new FauxContext(
-      'Route.extend()',
+      `
+        import Route from '@ember/routing/route';
+        Route.extend()
+      `,
       'example-app/some-twisted-path/some-route.js'
     );
-    const node = context.ast.body[0].expression;
+    const node = context.ast.body[1].expression;
     expect(emberUtils.isEmberCoreModule(context, node, 'Route')).toBeTruthy();
   });
 
@@ -170,8 +188,11 @@ describe('isEmberComponent', () => {
     });
 
     it('it should detect Component when using local module Component', () => {
-      const context = new FauxContext('Component.extend()');
-      const node = context.ast.body[0].expression;
+      const context = new FauxContext(`
+        import Component from '@ember/component';
+        Component.extend()
+      `);
+      const node = context.ast.body[1].expression;
       expect(emberUtils.isEmberComponent(context, node)).toBeTruthy();
     });
 
@@ -203,10 +224,13 @@ describe('isEmberComponent', () => {
 
     it('it should detect Component when file path is provided', () => {
       const context = new FauxContext(
-        'CustomComponent.extend()',
+        `
+          import CustomComponent from '@ember/component';
+          CustomComponent.extend()
+        `,
         'example-app/components/path/to/some-component.js'
       );
-      const node = context.ast.body[0].expression;
+      const node = context.ast.body[1].expression;
       expect(emberUtils.isEmberComponent(context, node)).toBeTruthy();
     });
 
@@ -230,8 +254,11 @@ describe('isEmberController', () => {
     });
 
     it('it should detect Controller when using local module Controller', () => {
-      const context = new FauxContext('Controller.extend()');
-      const node = context.ast.body[0].expression;
+      const context = new FauxContext(`
+        import Controller from '@ember/controller';
+        Controller.extend()
+      `);
+      const node = context.ast.body[1].expression;
       expect(emberUtils.isEmberController(context, node)).toBeTruthy();
     });
 
@@ -263,10 +290,13 @@ describe('isEmberController', () => {
 
     it('it should detect Controller when file path is provided', () => {
       const context = new FauxContext(
-        'CustomController.extend()',
+        `
+          import CustomController from '@ember/controller';
+          CustomController.extend()
+        `,
         'example-app/controllers/path/to/some-feature.js'
       );
-      const node = context.ast.body[0].expression;
+      const node = context.ast.body[1].expression;
       expect(emberUtils.isEmberController(context, node)).toBeTruthy();
     });
 
@@ -290,8 +320,11 @@ describe('isEmberRoute', () => {
     });
 
     it('should detect Route when using local module Route', () => {
-      const context = new FauxContext('Route.extend()');
-      const node = context.ast.body[0].expression;
+      const context = new FauxContext(`
+        import Route from '@ember/routing/route';
+        Route.extend()
+      `);
+      const node = context.ast.body[1].expression;
       expect(emberUtils.isEmberRoute(context, node)).toBeTruthy();
     });
 
@@ -323,10 +356,13 @@ describe('isEmberRoute', () => {
 
     it('it should detect Route when file path is provided', () => {
       const context = new FauxContext(
-        'CustomRoute.extend()',
+        `
+          import CustomRoute from '@ember/routing/route';
+          CustomRoute.extend()
+        `,
         'example-app/routes/path/to/some-feature.js'
       );
-      const node = context.ast.body[0].expression;
+      const node = context.ast.body[1].expression;
       expect(emberUtils.isEmberRoute(context, node)).toBeTruthy();
     });
 
@@ -384,8 +420,11 @@ describe('isEmberService', () => {
     });
 
     it('should detect Service when using local module Service', () => {
-      const context = new FauxContext('Service.extend()');
-      const node = context.ast.body[0].expression;
+      const context = new FauxContext(`
+        import Service from '@ember/service';
+        Service.extend()
+      `);
+      const node = context.ast.body[1].expression;
       expect(emberUtils.isEmberService(context, node)).toBeTruthy();
     });
 
@@ -417,10 +456,13 @@ describe('isEmberService', () => {
 
     it('it should detect Service when file path is provided', () => {
       const context = new FauxContext(
-        'CustomService.extend()',
+        `
+          import CustomService from '@ember/service';
+          CustomService.extend()
+        `,
         'example-app/services/path/to/some-feature.js'
       );
-      const node = context.ast.body[0].expression;
+      const node = context.ast.body[1].expression;
       expect(emberUtils.isEmberService(context, node)).toBeTruthy();
     });
 
@@ -449,8 +491,11 @@ describe('isEmberArrayProxy', () => {
   });
 
   it('should detect when using local module', () => {
-    const context = new FauxContext('ArrayProxy.extend()');
-    const node = context.ast.body[0].expression;
+    const context = new FauxContext(`
+      import ArrayProxy from '@ember/array/proxy';
+      ArrayProxy.extend()
+    `);
+    const node = context.ast.body[1].expression;
     expect(emberUtils.isEmberArrayProxy(context, node)).toBeTruthy();
   });
 
@@ -502,8 +547,11 @@ describe('isEmberObjectProxy', () => {
   });
 
   it('should detect when using local module', () => {
-    const context = new FauxContext('ObjectProxy.extend()');
-    const node = context.ast.body[0].expression;
+    const context = new FauxContext(`
+      import ObjectProxy from '@ember/object/proxy';
+      ObjectProxy.extend()
+    `);
+    const node = context.ast.body[1].expression;
     expect(emberUtils.isEmberObjectProxy(context, node)).toBeTruthy();
   });
 
@@ -558,12 +606,6 @@ describe('isEmberProxy', () => {
     `);
     const node = context.ast.body[1];
     expect(emberUtils.isEmberProxy(context, node)).toBeTruthy();
-  });
-
-  it('should not detect random code', () => {
-    const context = new FauxContext('someFunctionCall();');
-    const node = context.ast.body[0].expression;
-    expect(emberUtils.isEmberProxy(context, node)).toBeFalsy();
   });
 });
 
