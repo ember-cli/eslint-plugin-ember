@@ -56,6 +56,14 @@ ruleTester.run('require-tagless-components', rule, {
         tagName = 'some-non-empty-value';
       }
     `,
+    `
+      import Service from '@ember/service';
+      export default Service.extend({});
+    `,
+    `
+      import Service from '@ember/service';
+      export default class MyService extends Service {}
+    `,
   ],
   invalid: [
     {
