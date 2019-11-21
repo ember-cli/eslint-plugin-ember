@@ -16,10 +16,13 @@ const eslintTester = new RuleTester({
 eslintTester.run('no-new-mixins', rule, {
   valid: [
     `
-        import mixin from "some/addon";
-        export default mixin;
-      `,
-    'export default mixin.create({actions: {},});',
+      import mixin from "some/addon";
+      export default mixin;
+    `,
+    `
+      import mixin from 'some/addon';
+      export default mixin.create();
+    `,
   ],
   invalid: [
     {
