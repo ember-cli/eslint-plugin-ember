@@ -72,6 +72,7 @@ eslintTester.run('require-super-in-init', rule, {
     'export default Controller.extend();',
     'export default Mixin.extend();',
     'export default Service.extend();',
+    'export default Service.extend({ ...spread })',
     `export default Component({
         init() {
           this._super(...arguments);
