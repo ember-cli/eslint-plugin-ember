@@ -72,6 +72,10 @@ eslintTester.run('require-super-in-init', rule, {
     'export default Controller.extend();',
     'export default Mixin.extend();',
     'export default Service.extend();',
+    {
+      code: 'export default Service.extend({ ...spread })',
+      parserOptions: { ecmaVersion: 9, sourceType: 'module' },
+    },
     `export default Component({
         init() {
           this._super(...arguments);
