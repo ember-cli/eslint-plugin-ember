@@ -170,6 +170,18 @@ ruleTester.run('no-get', rule, {
       output: 'this.foo.someFunction();',
       errors: [{ message: makeErrorMessageForGet('foo', false), type: 'CallExpression' }],
     },
+    {
+      // With invalid JS variable name:
+      code: "this.get('foo-bar');",
+      output: null,
+      errors: [{ message: makeErrorMessageForGet('foo-bar', false), type: 'CallExpression' }],
+    },
+    {
+      // With invalid JS variable name:
+      code: "get(this, 'foo-bar');",
+      output: null,
+      errors: [{ message: makeErrorMessageForGet('foo-bar', true), type: 'CallExpression' }],
+    },
 
     // **************************
     // getProperties
