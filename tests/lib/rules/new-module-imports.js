@@ -57,6 +57,7 @@ eslintTester.run('new-module-imports', rule, {
       code: 'for (let i = 0; i < 10; i++) { }',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    'SomethingRandom.Ember.Service;',
   ],
   invalid: [
     {

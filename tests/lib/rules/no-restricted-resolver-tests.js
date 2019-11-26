@@ -17,31 +17,37 @@ const ruleTester = new RuleTester({
 ruleTester.run('no-restricted-resolver-tests', rule, {
   valid: [
     `
+    import { moduleFor } from 'ember-qunit';
     moduleFor('service:session', {
       integration: true
     });
     `,
     `
+    import { moduleForComponent } from 'ember-qunit';
     moduleForComponent('display-page', {
       integration: true
     });
     `,
     `
+    import { moduleForModel } from 'ember-qunit';
     moduleForModel('post', {
       integration: true
     });
     `,
     `
+    import { setupTest } from 'ember-qunit';
     setupTest('service:session', {
       integration: true
     });
     `,
     `
+    import { setupComponentTest } from 'ember-mocha';
     setupComponentTest('display-page', {
       integration: true
     });
     `,
     `
+    import { setupModelTest } from 'ember-mocha';
     setupModelTest('post', {
       integration: true
     });

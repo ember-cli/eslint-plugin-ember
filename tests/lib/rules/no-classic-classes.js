@@ -34,6 +34,7 @@ ruleTester.run('no-classic-classes', rule, {
 
       export default SomeOtherThing.extend({});
     `,
+    'export default Component.extend({});', // No import
   ],
 
   invalid: [
