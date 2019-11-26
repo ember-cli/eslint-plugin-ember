@@ -30,6 +30,12 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
 
      const { Model } = LOL;
     `,
+    `import Model from '@ember-data/model';
+
+     export default Model.extend({
+       name: SomethingRandom.DS('string')
+     });
+    `,
   ],
 
   invalid: [

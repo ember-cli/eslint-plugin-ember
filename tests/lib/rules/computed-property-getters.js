@@ -61,6 +61,9 @@ const codeWithoutGettersOrSetters = [
       foo: computed(function() {})
     }`,
   `{
+      foo: computed({ random() {} })
+    }`,
+  `{
       foo: computed(async function() {})
     }`,
   `{

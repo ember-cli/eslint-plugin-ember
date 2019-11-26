@@ -441,5 +441,14 @@ eslintTester.run('require-super-in-init', rule, {
       output: null,
       errors: [{ message, line: 2 }],
     },
+    {
+      code: `export default Service({
+        init() {
+          someRandomIdentifier;
+        },
+      });`,
+      output: null,
+      errors: [{ message, line: 2 }],
+    },
   ],
 });

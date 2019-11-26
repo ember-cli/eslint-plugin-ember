@@ -31,6 +31,7 @@ ruleTester.run('require-computed-macros', rule, {
     'computed(function() { return; })',
     'computed(function() { someCall(); return this.x; })', // Multiple statements in function body.
     'computed(function() { return this.x; }, SOME_OTHER_ARG)', // Function isn't last arg.
+    'computed(function() { notAReturnStatement(); })',
     'other(function() { return this.x; })',
 
     // READS
@@ -47,6 +48,8 @@ ruleTester.run('require-computed-macros', rule, {
     "and('x', 'y')",
     'computed(function() { return SOME_VAR && OTHER_VAR; })',
     'computed(function() { return this.x && this.y || this.z; })', // Mixed operators.
+    'computed(function() { return 123 && this.x; })', // With a Literal.
+    'computed(function() { return this.x && 123; })', // With a Literal.
     'computed(function() { return this.get("x") && this.get("y") || this.get("z"); })', // Mixed operators (and this.get)
 
     // OR

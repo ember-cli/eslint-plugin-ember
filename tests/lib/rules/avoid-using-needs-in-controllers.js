@@ -18,6 +18,7 @@ const eslintTester = new RuleTester({
 eslintTester.run('avoid-using-needs-in-controllers', rule, {
   valid: [
     'export default Controller.extend();',
+    'export default Controller.extend({ random: [] });',
     'export default FooController.extend();',
     'Controller.reopen();',
     'FooController.reopen();',

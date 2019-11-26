@@ -42,6 +42,11 @@ ruleTester.run('classic-decorator-no-classic-methods', rule, {
         }
       }
     `,
+    `
+      class Foo extends Bar {
+        foo = otherClass.get('bar');
+      }
+    `,
   ],
 
   invalid: [

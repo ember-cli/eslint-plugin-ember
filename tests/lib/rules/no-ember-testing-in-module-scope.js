@@ -43,7 +43,9 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
   invalid: [
     {
       code: `
+        import Random1 from 'random1';
         import Ember from 'ember';
+        import Random2 from 'random2';
 
         export default Ember.Component.extend({
           init() {

@@ -34,6 +34,10 @@ ruleTester.run('no-test-module-for', rule, {
       filename: 'tests/helpers/something.js',
       code: 'export default function dosomething() {}',
     },
+    {
+      filename: TEST_FILE_NAME,
+      code: 'somethingRandom.moduleFor()',
+    },
   ],
   invalid: [
     {
