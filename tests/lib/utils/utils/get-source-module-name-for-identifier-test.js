@@ -84,4 +84,17 @@ describe('when the identifier is imported', () => {
 
     expect(getSourceModuleNameForIdentifier(context, node)).toEqual('some-path');
   });
+
+  test('Model.extend(Mixin)', () => {
+    const context = new FauxContext(`
+      import Mixin from './my-mixin';
+      import Model from '@ember-data/model';
+
+      export default class SomeClass extends Model.extend(Mixin) {}
+    `);
+
+    const node = babelEslint.parse('Model.extend(Mixin)').body[0].expression;
+
+    expect(getSourceModuleNameForIdentifier(context, node)).toEqual('@ember-data/model');
+  });
 });
