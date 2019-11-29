@@ -1,3 +1,20 @@
+## v7.7.0 (2019-11-29)
+
+#### :rocket: Enhancement
+* [#592](https://github.com/ember-cli/eslint-plugin-ember/pull/592) Update `no-classic-classes` rule to catch classic Ember Data model classes ([@patocallaghan](https://github.com/patocallaghan))
+
+#### :bug: Bug Fix
+* [#610](https://github.com/ember-cli/eslint-plugin-ember/pull/610) Fix invalid `no-get` rule autofix caused by invalid JS variable name ([@bmish](https://github.com/bmish))
+* [#607](https://github.com/ember-cli/eslint-plugin-ember/pull/607) Fix spread property bug in `require-super-in-init` rule ([@bmish](https://github.com/bmish))
+* [#600](https://github.com/ember-cli/eslint-plugin-ember/pull/600) Add missing schema validation for options on many rules ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#611](https://github.com/ember-cli/eslint-plugin-ember/pull/611) Add many missing tests for lines without test coverage ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Pat O'Callaghan ([@patocallaghan](https://github.com/patocallaghan))
+
 ## v7.6.0 (2019-11-19)
 
 #### :rocket: Enhancement
