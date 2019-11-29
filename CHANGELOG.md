@@ -1,3 +1,11 @@
+## v7.7.1 (2019-11-29)
+
+#### :bug: Bug Fix
+* [#615](https://github.com/ember-cli/eslint-plugin-ember/pull/615) Fix issue causing assert to fire in `getSourceModuleName` util function ([@patocallaghan](https://github.com/patocallaghan))
+
+#### Committers: 1
+- Pat O'Callaghan ([@patocallaghan](https://github.com/patocallaghan))
+
 ## v7.7.0 (2019-11-29)
 
 #### :rocket: Enhancement
