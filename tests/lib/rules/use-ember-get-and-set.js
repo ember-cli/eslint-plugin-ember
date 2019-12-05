@@ -60,6 +60,11 @@ eslintTester.run('use-ember-get-and-set', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [{ ignoreNonThisExpressions: true }],
     },
+    {
+      code: 'this.test("ok")',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{ ignoreNonThisExpressions: true }]
+    },
 
     // ignoreThisExpressions
     {
