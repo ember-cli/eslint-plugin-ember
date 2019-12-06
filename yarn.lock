@@ -1109,6 +1109,13 @@ domexception@^1.0.0:
   dependencies:
     webidl-conversions "^4.0.2"
 
+dot-case@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/dot-case/-/dot-case-3.0.1.tgz#36a881ae1ec223349185c7e65d4516a9044c5a3b"
+  integrity sha512-PZqwKvBN+ybVtYwjDX5BTtw2Dj6/ypwwkQj2V2ZzFHH08LShkLRVD9zr7jvh1A34A8XDVHb7CcRFrLbRTablqw==
+  dependencies:
+    no-case "^3.0.1"
+
 duplexify@^3.1.2, duplexify@^3.4.2:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/duplexify/-/duplexify-3.5.1.tgz#4e1516be68838bc90a49994f0b39a6e5960befcd"
@@ -2878,9 +2885,10 @@ loose-envify@^1.0.0:
   dependencies:
     js-tokens "^3.0.0"
 
-lower-case@^1.1.1:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/lower-case/-/lower-case-1.1.3.tgz#c92393d976793eee5ba4edb583cf8eae35bd9bfb"
+lower-case@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/lower-case/-/lower-case-2.0.0.tgz#8f07128bd5ffd0247d15106e7e8d17d223312faa"
+  integrity sha512-OJifkIqIt8iu216sXZ0Fpo5tK4QhJjOYQIUd09SNkoc71NvU9157VTXsT4aRsx7TTpCtykmbCYal3B7y5L9/wg==
 
 lru-cache@^4.0.1:
   version "4.1.1"
@@ -3147,11 +3155,12 @@ nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
 
-no-case@^2.2.0:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"
+no-case@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/no-case/-/no-case-3.0.1.tgz#f7ea2e4aac2d8128ec305a8d4d114cca0106295c"
+  integrity sha512-Ztcsd1yeHK915kymn/544pEoxL0rrzRL6WBlYexz0/Msikdj98f54DE2JliJcrt8IQdfPqrD3WOfQkU5AC+VOg==
   dependencies:
-    lower-case "^1.1.1"
+    lower-case "^2.0.0"
 
 node-fetch-npm@^2.0.2:
   version "2.0.2"
@@ -3967,11 +3976,12 @@ smart-buffer@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.0.1.tgz#07ea1ca8d4db24eb4cac86537d7d18995221ace3"
 
-snake-case@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/snake-case/-/snake-case-2.1.0.tgz#41bdb1b73f30ec66a04d4e2cad1b76387d4d6d9f"
+snake-case@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/snake-case/-/snake-case-3.0.1.tgz#3ade38f5c84f7ed6eca84653eca5ab27bd7b85d6"
+  integrity sha512-zr0KUnCrvgVExAa93OJejbQ4OY5UKoGcupiGgX99z3aBiTIaQj/L78ykG76weAuDzWJZb2L0eVCRU2HBRwD0mg==
   dependencies:
-    no-case "^2.2.0"
+    dot-case "^3.0.1"
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
