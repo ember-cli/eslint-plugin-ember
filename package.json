@@ -67,7 +67,7 @@
   "dependencies": {
     "@ember-data/rfc395-data": "^0.0.4",
     "ember-rfc176-data": "^0.3.12",
-    "snake-case": "^3.0.1"
+    "snake-case": "^3.0.2"
   },
   "changelog": {
     "repo": "ember-cli/eslint-plugin-ember",
