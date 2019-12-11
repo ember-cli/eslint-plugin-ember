@@ -4,13 +4,15 @@ module.exports = {
   root: true,
   parserOptions: {
     ecmaVersion: 2017,
+    sourceType: 'script'
   },
   plugins: [
     'eslint-plugin',
     'filenames',
     'import',
     'node',
-    'prettier'
+    'prettier',
+    'unicorn'
   ],
   extends: [
     'eslint:recommended',
@@ -19,6 +21,7 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:node/recommended',
+    'plugin:unicorn/recommended',
     'prettier'
   ],
   env: {
@@ -117,6 +120,9 @@ module.exports = {
     'import/no-useless-path-segments': 'error',
     'import/no-webpack-loader-syntax': 'error',
     'import/unambiguous': 'error',
+
+    // Unicorn rules:
+    'unicorn/prevent-abbreviations': 'off'
   },
   overrides: [
     // test files
