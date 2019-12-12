@@ -22,7 +22,7 @@ const root = path.resolve(__dirname, '../lib/rules');
 const readmeFile = path.resolve(__dirname, '../README.md');
 const recommendedRulesFile = path.resolve(__dirname, '../lib/recommended-rules.js');
 const octaneRulesFile = path.resolve(__dirname, '../lib/octane-rules.js');
-const tablePlaceholder = /<!--RULES_TABLE_START-->[\s\S]*<!--RULES_TABLE_END-->/;
+const tablePlaceholder = /<!--RULES_TABLE_START-->[\S\s]*<!--RULES_TABLE_END-->/;
 const readmeContent = fs.readFileSync(readmeFile, 'utf8');
 
 const STAR = ':white_check_mark:';

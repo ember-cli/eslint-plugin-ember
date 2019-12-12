@@ -3,7 +3,7 @@
 const { readdirSync, readFileSync } = require('fs');
 const { join } = require('path');
 const assert = require('assert');
-const rules = require('../lib/index.js').rules;
+const rules = require('../lib').rules;
 const recommendedRules = require('../lib/recommended-rules.js');
 const octaneRules = require('../lib/octane-rules.js');
 

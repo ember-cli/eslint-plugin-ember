@@ -1,6 +1,6 @@
 'use strict';
 
-const rules = require('../lib/index.js').rules;
+const rules = require('../lib').rules;
 
 test('recommended rules', () => {
   const errors = [];
