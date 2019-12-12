@@ -8,16 +8,16 @@ function parse(code) {
 describe('getSourceModuleName', () => {
   it('gets the correct module name with MemberExpression', () => {
     const node = parse('DS.Model.extend()').callee;
-    expect(importUtils.getSourceModuleName(node)).toEqual('DS');
+    expect(importUtils.getSourceModuleName(node)).toStrictEqual('DS');
   });
 
   it('gets the correct module name with Identifier', () => {
     const node = parse('Model.extend()').callee;
-    expect(importUtils.getSourceModuleName(node)).toEqual('Model');
+    expect(importUtils.getSourceModuleName(node)).toStrictEqual('Model');
   });
 
   it('gets the correct module name with CallExpression', () => {
     const node = parse('Model.extend()');
-    expect(importUtils.getSourceModuleName(node)).toEqual('Model');
+    expect(importUtils.getSourceModuleName(node)).toStrictEqual('Model');
   });
 });

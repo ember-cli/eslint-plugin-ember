@@ -2,14 +2,16 @@
 
 const rules = require('../lib').rules;
 
-test('recommended rules', () => {
-  const errors = [];
+describe('recommended rules', () => {
+  it('has the right list', () => {
+    const errors = [];
 
-  Object.keys(rules).forEach(name => {
-    if (rules[name].meta.docs.recommended) {
-      errors.push(name);
-    }
+    Object.keys(rules).forEach(name => {
+      if (rules[name].meta.docs.recommended) {
+        errors.push(name);
+      }
+    });
+
+    expect(errors).toMatchSnapshot();
   });
-
-  expect(errors).toMatchSnapshot();
 });

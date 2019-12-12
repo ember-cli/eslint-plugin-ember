@@ -11,7 +11,7 @@ const RuleTester = require('eslint').RuleTester;
 
 describe('imports', () => {
   it('should expose the default ignored properties', () => {
-    expect(rule.DEFAULT_IGNORED_PROPERTIES).toEqual([
+    expect(rule.DEFAULT_IGNORED_PROPERTIES).toStrictEqual([
       'classNames',
       'classNameBindings',
       'actions',

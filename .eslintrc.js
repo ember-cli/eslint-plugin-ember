@@ -10,6 +10,7 @@ module.exports = {
     'eslint-plugin',
     'filenames',
     'import',
+    'jest',
     'node',
     'prettier',
     'unicorn'
@@ -18,6 +19,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:eslint-comments/recommended',
     'plugin:eslint-plugin/all',
+    'plugin:jest/recommended',
+    'plugin:jest/style',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:node/recommended',
@@ -103,6 +106,24 @@ module.exports = {
 
     // Filenames:
     'filenames/match-regex': ['error', '^[a-z0-9-]+$'], // Kebab-case.
+
+    // Optional jest rules:
+    'jest/consistent-test-it': 'error',
+    'jest/lowercase-name': 'error',
+    'jest/no-duplicate-hooks': 'error',
+    'jest/no-expect-resolves': 'error',
+    'jest/no-hooks': 'error',
+    'jest/no-if': 'error',
+    'jest/no-large-snapshots': 'error',
+    'jest/no-test-return-statement': 'error',
+    'jest/prefer-called-with': 'error',
+    'jest/prefer-hooks-on-top': 'error',
+    'jest/prefer-spy-on': 'error',
+    'jest/prefer-strict-equal': 'error',
+    'jest/prefer-todo': 'error',
+    'jest/require-top-level-describe': 'error',
+    'jest/require-to-throw-message': 'error',
+    'jest/valid-title': 'error',
 
     // Optional import rules:
     'import/extensions': 'error',
