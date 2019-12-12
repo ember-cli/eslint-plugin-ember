@@ -38,12 +38,12 @@ describe('isDSModel', () => {
   });
 
   describe("should check if it's a DS Model even if it uses custom name", () => {
-    it("it shouldn't detect Model when no file path is provided", () => {
+    it("shouldn't detect Model when no file path is provided", () => {
       const node = parse('CustomModel.extend()');
       expect(emberUtils.isDSModel(node)).toBeFalsy();
     });
 
-    it('it should detect Model when file path is provided', () => {
+    it('should detect Model when file path is provided', () => {
       const node = parse('CustomModel.extend()');
       const filePath = 'example-app/models/path/to/some-model.js';
       expect(emberUtils.isDSModel(node, filePath)).toBeTruthy();
@@ -98,7 +98,7 @@ describe('isTestFile', () => {
 });
 
 describe('isEmberCoreModule', () => {
-  it('should check if current file is a component', () => {
+  it('should check if current file is a component (custom)', () => {
     const context = new FauxContext(
       'CustomComponent.extend()',
       'example-app/components/path/to/some-component.js'
@@ -116,7 +116,7 @@ describe('isEmberCoreModule', () => {
     expect(emberUtils.isEmberCoreModule(context, node, 'Component')).toBeTruthy();
   });
 
-  it('should check if current file is a controller', () => {
+  it('should check if current file is a controller (custom)', () => {
     const context = new FauxContext(
       'CustomController.extend()',
       'example-app/controllers/path/to/some-controller.js'
@@ -134,7 +134,7 @@ describe('isEmberCoreModule', () => {
     expect(emberUtils.isEmberCoreModule(context, node, 'Controller')).toBeTruthy();
   });
 
-  it('should check if current file is a route', () => {
+  it('should check if current file is a route (custom)', () => {
     const context = new FauxContext(
       'CustomRoute.extend()',
       'example-app/routes/path/to/some-route.js'
@@ -163,13 +163,13 @@ describe('isEmberCoreModule', () => {
 
 describe('isEmberComponent', () => {
   describe("should check if it's an Ember Component", () => {
-    it('it should detect Component when using Ember.Component', () => {
+    it('should detect Component when using Ember.Component', () => {
       const context = new FauxContext('Ember.Component.extend()');
       const node = context.ast.body[0].expression;
       expect(emberUtils.isEmberComponent(context, node)).toBeTruthy();
     });
 
-    it('it should detect Component when using local module Component', () => {
+    it('should detect Component when using local module Component', () => {
       const context = new FauxContext('Component.extend()');
       const node = context.ast.body[0].expression;
       expect(emberUtils.isEmberComponent(context, node)).toBeTruthy();
@@ -195,13 +195,13 @@ describe('isEmberComponent', () => {
   });
 
   describe("should check if it's an Ember Component even if it uses custom name", () => {
-    it("it shouldn't detect Component when no file path is provided", () => {
+    it("shouldn't detect Component when no file path is provided", () => {
       const context = new FauxContext('CustomComponent.extend()');
       const node = context.ast.body[0].expression;
       expect(emberUtils.isEmberComponent(context, node)).toBeFalsy();
     });
 
-    it('it should detect Component when file path is provided', () => {
+    it('should detect Component when file path is provided', () => {
       const context = new FauxContext(
         'CustomComponent.extend()',
         'example-app/components/path/to/some-component.js'
@@ -223,13 +223,13 @@ describe('isEmberComponent', () => {
 
 describe('isEmberController', () => {
   describe("should check if it's an Ember Controller", () => {
-    it('it should detect Controller when using Ember.Controller', () => {
+    it('should detect Controller when using Ember.Controller', () => {
       const context = new FauxContext('Ember.Controller.extend()');
       const node = context.ast.body[0].expression;
       expect(emberUtils.isEmberController(context, node)).toBeTruthy();
     });
 
-    it('it should detect Controller when using local module Controller', () => {
+    it('should detect Controller when using local module Controller', () => {
       const context = new FauxContext('Controller.extend()');
       const node = context.ast.body[0].expression;
       expect(emberUtils.isEmberController(context, node)).toBeTruthy();
@@ -255,13 +255,13 @@ describe('isEmberController', () => {
   });
 
   describe("should check if it's an Ember Controller even if it uses custom name", () => {
-    it("it shouldn't detect Controller when no file path is provided", () => {
+    it("shouldn't detect Controller when no file path is provided", () => {
       const context = new FauxContext('CustomController.extend()');
       const node = context.ast.body[0].expression;
       expect(emberUtils.isEmberController(context, node)).toBeFalsy();
     });
 
-    it('it should detect Controller when file path is provided', () => {
+    it('should detect Controller when file path is provided', () => {
       const context = new FauxContext(
         'CustomController.extend()',
         'example-app/controllers/path/to/some-feature.js'
@@ -315,13 +315,13 @@ describe('isEmberRoute', () => {
   });
 
   describe("should check if it's an Ember Route even if it uses custom name", () => {
-    it("it shouldn't detect Route when no file path is provided", () => {
+    it("shouldn't detect Route when no file path is provided", () => {
       const context = new FauxContext('CustomRoute.extend()');
       const node = context.ast.body[0].expression;
       expect(emberUtils.isEmberRoute(context, node)).toBeFalsy();
     });
 
-    it('it should detect Route when file path is provided', () => {
+    it('should detect Route when file path is provided', () => {
       const context = new FauxContext(
         'CustomRoute.extend()',
         'example-app/routes/path/to/some-feature.js'
@@ -415,7 +415,7 @@ describe('isEmberService', () => {
       expect(emberUtils.isEmberService(context, node)).toBeFalsy();
     });
 
-    it('it should detect Service when file path is provided', () => {
+    it('should detect Service when file path is provided', () => {
       const context = new FauxContext(
         'CustomService.extend()',
         'example-app/services/path/to/some-feature.js'
@@ -1031,17 +1031,25 @@ describe('isRelation', () => {
 describe('parseDependentKeys', () => {
   it('should parse dependent keys from callexpression', () => {
     const node = parse("computed('model.{foo,bar}', 'model.bar')");
-    expect(emberUtils.parseDependentKeys(node)).toEqual(['model.foo', 'model.bar', 'model.bar']);
+    expect(emberUtils.parseDependentKeys(node)).toStrictEqual([
+      'model.foo',
+      'model.bar',
+      'model.bar',
+    ]);
   });
 
   it('should work when no dependent keys present', () => {
     const node = parse('computed(function() {})');
-    expect(emberUtils.parseDependentKeys(node)).toEqual([]);
+    expect(emberUtils.parseDependentKeys(node)).toStrictEqual([]);
   });
 
   it('should handle dependent keys and function arguments', () => {
     const node = parse("computed('model.{foo,bar}', 'model.bar', function() {})");
-    expect(emberUtils.parseDependentKeys(node)).toEqual(['model.foo', 'model.bar', 'model.bar']);
+    expect(emberUtils.parseDependentKeys(node)).toStrictEqual([
+      'model.foo',
+      'model.bar',
+      'model.bar',
+    ]);
   });
 
   it('should handle dependent keys and function arguments in MemberExpression', () => {
@@ -1049,20 +1057,24 @@ describe('parseDependentKeys', () => {
       computed('model.{foo,bar}', 'model.bar', function() {
       }).volatile();
     `);
-    expect(emberUtils.parseDependentKeys(node)).toEqual(['model.foo', 'model.bar', 'model.bar']);
+    expect(emberUtils.parseDependentKeys(node)).toStrictEqual([
+      'model.foo',
+      'model.bar',
+      'model.bar',
+    ]);
   });
 });
 
 describe('unwrapBraceExpressions', () => {
   it('should unwrap simple dependent keys', () => {
-    expect(emberUtils.unwrapBraceExpressions(['model.foo', 'model.bar'])).toEqual([
+    expect(emberUtils.unwrapBraceExpressions(['model.foo', 'model.bar'])).toStrictEqual([
       'model.foo',
       'model.bar',
     ]);
   });
 
   it('should unwrap dependent keys with braces', () => {
-    expect(emberUtils.unwrapBraceExpressions(['model.{foo,bar}', 'model.bar'])).toEqual([
+    expect(emberUtils.unwrapBraceExpressions(['model.{foo,bar}', 'model.bar'])).toStrictEqual([
       'model.foo',
       'model.bar',
       'model.bar',
@@ -1072,25 +1084,23 @@ describe('unwrapBraceExpressions', () => {
   it('should unwrap more complex dependent keys', () => {
     expect(
       emberUtils.unwrapBraceExpressions(['model.{foo,bar}', 'model.bar', 'data.{foo,baz,qux}'])
-    ).toEqual(['model.foo', 'model.bar', 'model.bar', 'data.foo', 'data.baz', 'data.qux']);
+    ).toStrictEqual(['model.foo', 'model.bar', 'model.bar', 'data.foo', 'data.baz', 'data.qux']);
   });
 
   it('should unwrap multi-level keys', () => {
-    expect(emberUtils.unwrapBraceExpressions(['model.bar.{foo,qux}', 'model.bar.baz'])).toEqual([
-      'model.bar.foo',
-      'model.bar.qux',
-      'model.bar.baz',
-    ]);
+    expect(
+      emberUtils.unwrapBraceExpressions(['model.bar.{foo,qux}', 'model.bar.baz'])
+    ).toStrictEqual(['model.bar.foo', 'model.bar.qux', 'model.bar.baz']);
   });
 
   it('should unwrap @each with extensions', () => {
     expect(
       emberUtils.unwrapBraceExpressions(['collection.@each.{foo,bar}', 'collection.@each.qux'])
-    ).toEqual(['collection.@each.foo', 'collection.@each.bar', 'collection.@each.qux']);
+    ).toStrictEqual(['collection.@each.foo', 'collection.@each.bar', 'collection.@each.qux']);
   });
 
   it('should unwrap complicated mixed dependent keys', () => {
-    expect(emberUtils.unwrapBraceExpressions(['a.b.c.{d.@each.qwe.zxc,f,g.[]}'])).toEqual([
+    expect(emberUtils.unwrapBraceExpressions(['a.b.c.{d.@each.qwe.zxc,f,g.[]}'])).toStrictEqual([
       'a.b.c.d.@each.qwe.zxc',
       'a.b.c.f',
       'a.b.c.g.[]',
@@ -1098,7 +1108,7 @@ describe('unwrapBraceExpressions', () => {
   });
 
   it('should unwrap complicated mixed repeated dependent keys', () => {
-    expect(emberUtils.unwrapBraceExpressions(['a.b.{d.@each.qux,f,d.@each.foo}'])).toEqual([
+    expect(emberUtils.unwrapBraceExpressions(['a.b.{d.@each.qux,f,d.@each.foo}'])).toStrictEqual([
       'a.b.d.@each.qux',
       'a.b.f',
       'a.b.d.@each.foo',
@@ -1139,7 +1149,7 @@ describe('hasDuplicateDependentKeys', () => {
 describe('getEmberImportAliasName', () => {
   it('should get the proper name of default import', () => {
     const node = babelEslint.parse("import foo from 'ember'").body[0];
-    expect(emberUtils.getEmberImportAliasName(node)).toEqual('foo');
+    expect(emberUtils.getEmberImportAliasName(node)).toStrictEqual('foo');
   });
 });
 

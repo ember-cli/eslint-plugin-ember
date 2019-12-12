@@ -7,7 +7,9 @@ function parse(code) {
 
 describe('function sort order', function() {
   it('has exported functions in sorted order', function() {
-    expect(Object.getOwnPropertyNames(types)).toEqual(Object.getOwnPropertyNames(types).sort());
+    expect(Object.getOwnPropertyNames(types)).toStrictEqual(
+      Object.getOwnPropertyNames(types).sort()
+    );
   });
 });
 
