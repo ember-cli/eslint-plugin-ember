@@ -1,3 +1,19 @@
+## v7.7.2 (2019-12-12)
+
+#### :bug: Bug Fix
+* [#621](https://github.com/ember-cli/eslint-plugin-ember/pull/621) Fix false positive with `ignoreNonThisExpressions` option in `use-ember-get-and-set` rule ([@Exelord](https://github.com/Exelord))
+
+#### :memo: Documentation
+* [#620](https://github.com/ember-cli/eslint-plugin-ember/pull/620) Use consistent prefixes for rule descriptions ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#625](https://github.com/ember-cli/eslint-plugin-ember/pull/625) Add eslint-plugin-jest internally and enable rules ([@bmish](https://github.com/bmish))
+* [#624](https://github.com/ember-cli/eslint-plugin-ember/pull/624) Add eslint-plugin-unicorn internally and enable recommended rules ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Maciej Kwaśniak ([@Exelord](https://github.com/Exelord))
+
 ## v7.7.1 (2019-11-29)
 
 #### :bug: Bug Fix
