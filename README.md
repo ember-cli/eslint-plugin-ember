@@ -43,11 +43,6 @@ module.exports = {
 }
 ```
 
-Possible configurations:
-- [plugin:ember/base](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/base.js) - contains no rules settings, but the basic eslint configuration suitable for any ember project. You can use it to configure rules as you wish.
-- [plugin:ember/recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/recommended.js) - extends base configuration with recommended rules' settings
-- :warning: [plugin:ember/octane](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/octane.js) - extends recommended configuration with octane rules' settings. This ruleset is currently considered **unstable and experiemental** as rules may be added and removed until the final ruleset is settled upon.
-
 #### Use plain plugin:
 
 If you don't want to use predefined settings, you can use it as a plain plugin:
@@ -69,15 +64,19 @@ module.exports = {
 
 All rules from this plugin have to be prefixed with `ember/`
 
+## 🧰 Configurations
+
+|    | Name | Description |
+|:---|:-----|:------------|
+| | [base](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/base.js) | contains no rules settings, but the basic eslint configuration suitable for any ember project. You can use it to configure rules as you wish. |
+| :white_check_mark: | [recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/recommended.js) | extends the `base` configuration by enabling the recommended rules. |
+| :car: | [octane](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/octane.js) | extends the `recommended` configuration by enabling octane rules. This ruleset is currently considered **unstable and experimental** :warning: as rules may be added and removed until the final ruleset is settled upon. |
+
 ## 🍟 Rules
 
 Rules are grouped by category to help you understand their purpose.
 
-All rules below with a check mark :white_check_mark: are enabled by default while using `plugin:ember/recommended` config.
-
-The `plugin:ember/octane` config contains both Octane rules with a red car :car: in addition to the rules in the `plugin:ember/recommended` config.
-
-The `--fix` option on the command line automatically fixes problems reported by rules which have a wrench :wrench: below.
+Each rule has emojis denoting what configuration it belongs to and/or a :wrench: if the rule is fixable via the `--fix` command line option.
 
 <!--RULES_TABLE_START-->
 
