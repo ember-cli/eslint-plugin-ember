@@ -165,7 +165,7 @@ For the simplified list of rules, [go here](./lib/recommended-rules.js).
 ## 🍻 Contribution guide
 
 In order to add a new rule, you should:
-- Create issue on GH with description of proposed rule
+- [Create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new) on GitHub with description of proposed rule
 - Generate a new rule using the [official yeoman generator](https://github.com/eslint/generator-eslint)
 - Run `yarn start`
 - Write test scenarios & implement logic
@@ -174,9 +174,7 @@ In order to add a new rule, you should:
 - Run `yarn run update` in order to update readme and recommended configuration
 - Create PR and link created issue in description
 
-Please be aware that we're using `yarn` in this repository, so if you plan to add some dependencies - make sure you commit `yarn.lock` file too.
-
-If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/ember-cli/eslint-plugin-ember/issues), but first please make sure your question does not repeat previous ones.
+If you have any suggestions, ideas, or problems feel free to [create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new), but first please make sure your question does not repeat previous ones.
 
 ## ⭐️ Contributors
 - [Adrian Zalewski](https://github.com/bardzusny)
