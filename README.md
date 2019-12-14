@@ -25,8 +25,6 @@ Or
 
 ### 2. Modify your `.eslintrc.js`:
 
-#### Use with predefined settings:
-
 ```javascript
 // .eslintrc.js
 module.exports = {
@@ -35,34 +33,14 @@ module.exports = {
   ],
   extends: [
     'eslint:recommended',
-    'plugin:ember/recommended' // or 'plugin:ember/base'
+    'plugin:ember/recommended' // or other configuration
   ],
   rules: {
-    // override rules' settings here
+    // override rule settings here
+    'ember/no-jquery': 'error'
   }
 }
 ```
-
-#### Use plain plugin:
-
-If you don't want to use predefined settings, you can use it as a plain plugin:
-
-```javascript
-module.exports = {
-  plugins: [
-    'ember'
-  ],
-  extends: [
-    'eslint:recommended'
-  ],
-  rules: {
-    // add rules' settings here, eg.:
-    'ember/no-jquery': 2
-  }
-}
-```
-
-All rules from this plugin have to be prefixed with `ember/`
 
 ## 🧰 Configurations
 
