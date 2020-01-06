@@ -35,6 +35,104 @@ eslintTester.run('no-observers', rule, {
   ],
   invalid: [
     {
+      code: "import { observer, computed } from '@ember/object';",
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'ImportDeclaration',
+        },
+      ],
+    },
+    {
+      code: "import { observer as foo } from '@ember/object';",
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'ImportDeclaration',
+        },
+      ],
+    },
+    {
+      code: "import { addObserver } from '@ember/object/observers';",
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'ImportDeclaration',
+        },
+      ],
+    },
+    {
+      code: "import { removeObserver } from '@ember/object/observers';",
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'ImportDeclaration',
+        },
+      ],
+    },
+    {
+      code: `
+        export default Component.extend({
+          fooBar() {
+            this.foo.addObserver("bar", this, "rerun");
+          }
+        });
+      `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `
+        export default Component.extend({
+          fooBar() {
+            this.addObserver("bar", this, "rerun");
+          }
+        });
+      `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `
+        export default Component.extend({
+          fooBar(baz) {
+            baz.addObserver("bar", this, "rerun");
+          }
+        });
+      `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: 'Ember.addObserver("foo", this, "rerun");',
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
       code: 'Ember.observer("text", function() {});',
       output: null,
       errors: [

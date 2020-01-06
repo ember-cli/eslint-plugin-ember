@@ -27,11 +27,57 @@ export default Controller.extend({
 ```
 
 ```js
+import { observer } from '@ember/object';
+
+export default Controller.extend({
+  change: observer('text', function() {
+    console.log(`change detected: ${this.text}`);
+  },
+});
+```
+
+```js
 import { observes } from '@ember-decorators/object';
 class FooComponent extends Component {
   @observes('text')
   change() {
     console.log(`change detected: ${this.text}`);
+  }
+}
+``` 
+
+```js
+import { addObserver, removeObserver } from '@ember/object/observers';
+
+class FooComponent extends Component {
+  constructor() {
+    super(...arguments);
+    addObserver(this, 'text', this.change)
+  }
+  
+  change() {
+    console.log(`change detected: ${this.text}`);
+  }
+
+  willDestroy() {
+    removeObserver(this, 'text', this.change);
+    super.willDestroy(...arguments);
+  }
+}
+``` 
+
+```js
+import { inject as service } from '@ember/service'; 
+
+class FooComponent extends Component {
+  time: service(),
+  constructor() {
+    super(...arguments);
+    this.time.addObserver('currentTime.seconds', this.update)
+  }
+  
+  update() {
+    console.log(`The time is ${this.time.currentTime}`);
   }
 }
 ```
