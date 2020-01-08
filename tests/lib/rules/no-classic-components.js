@@ -24,6 +24,7 @@ ruleTester.run('no-classic-components', rule, {
   invalid: [
     {
       code: "import Component from '@ember/component';",
+      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,

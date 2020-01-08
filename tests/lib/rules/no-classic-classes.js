@@ -43,6 +43,7 @@ ruleTester.run('no-classic-classes', rule, {
         import Component from '@ember/component';
         export default Component.extend();
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
     },
     {
@@ -50,6 +51,7 @@ ruleTester.run('no-classic-classes', rule, {
         import Component from '@ember/component';
         export default Component.extend({});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
     },
     {
@@ -58,6 +60,7 @@ ruleTester.run('no-classic-classes', rule, {
         import Evented from '@ember/object/Evented';
         export default Component.extend(Evented, {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, line: 4, type: 'CallExpression' }],
     },
     {
@@ -65,6 +68,7 @@ ruleTester.run('no-classic-classes', rule, {
         import Component from '@ember/component';
         export default class MyComponent extends Component.extend() {};
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
     },
     {
@@ -72,6 +76,7 @@ ruleTester.run('no-classic-classes', rule, {
         import Component from '@ember/component';
         export default class MyComponent extends Component.extend({}) {};
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
     },
     {
@@ -80,6 +85,7 @@ ruleTester.run('no-classic-classes', rule, {
         import Evented from '@ember/object/evented';
         export default class MyComponent extends Component.extend(Evented, {}) {};
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, line: 4, type: 'CallExpression' }],
     },
     {
@@ -87,6 +93,7 @@ ruleTester.run('no-classic-classes', rule, {
         import DS from 'ember-data';
         export default DS.Model.extend({});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
     },
     {
@@ -94,6 +101,7 @@ ruleTester.run('no-classic-classes', rule, {
         import Model from '@ember-data/model';
         export default Model.extend({});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
     },
   ],

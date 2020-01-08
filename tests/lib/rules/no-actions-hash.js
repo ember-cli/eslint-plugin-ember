@@ -74,6 +74,7 @@ ruleTester.run('no-actions-hash', rule, {
           },
         });
       `,
+      output: null,
       errors: [{ type: 'Property', message: ERROR_MESSAGE }],
     },
     {
@@ -86,6 +87,7 @@ ruleTester.run('no-actions-hash', rule, {
           }
         }
       `,
+      output: null,
       errors: [{ type: 'ClassProperty', message: ERROR_MESSAGE }],
     },
     {
@@ -95,6 +97,7 @@ ruleTester.run('no-actions-hash', rule, {
           },
         });
       `,
+      output: null,
       errors: [{ type: 'Property', message: ERROR_MESSAGE }],
     },
     {
@@ -107,6 +110,7 @@ ruleTester.run('no-actions-hash', rule, {
           }
         }
       `,
+      output: null,
       errors: [{ type: 'ClassProperty', message: ERROR_MESSAGE }],
     },
     {
@@ -116,6 +120,7 @@ ruleTester.run('no-actions-hash', rule, {
           },
         });
       `,
+      output: null,
       errors: [{ type: 'Property', message: ERROR_MESSAGE }],
     },
     {
@@ -128,6 +133,7 @@ ruleTester.run('no-actions-hash', rule, {
           }
         }
       `,
+      output: null,
       errors: [{ type: 'ClassProperty', message: ERROR_MESSAGE }],
     },
   ],

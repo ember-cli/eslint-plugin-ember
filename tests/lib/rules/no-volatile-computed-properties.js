@@ -24,11 +24,13 @@ ruleTester.run('no-volatile-computed-properties', rule, {
   invalid: [
     {
       code: 'computed().volatile()',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
     },
 
     {
       code: "computed('prop', function() { return this.prop; }).volatile()",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
     },
   ],
