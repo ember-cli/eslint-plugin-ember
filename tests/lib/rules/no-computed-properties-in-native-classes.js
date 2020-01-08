@@ -52,6 +52,17 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
     },
     {
       code: `
+      import { computed as thinking } from '@ember/object';
+      
+      export default class MyComponent extends Component {
+      
+      }
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
+    },
+    {
+      code: `
       import { and, or, alias } from '@ember/object/computed';
       
       export default class MyComponent extends Component {
