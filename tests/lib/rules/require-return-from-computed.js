@@ -24,6 +24,7 @@ eslintTester.run('require-return-from-computed', rule, {
   invalid: [
     {
       code: 'let foo = computed("test", function() { })',
+      output: null,
       errors: [
         {
           message: 'Always return a value from computed properties',
@@ -32,6 +33,7 @@ eslintTester.run('require-return-from-computed', rule, {
     },
     {
       code: 'let foo = computed("test", function() { if (true) { return ""; } })',
+      output: null,
       errors: [
         {
           message: 'Always return a value from computed properties',
@@ -40,6 +42,7 @@ eslintTester.run('require-return-from-computed', rule, {
     },
     {
       code: 'let foo = computed("test", { get() {}, set() {} })',
+      output: null,
       errors: [
         {
           message: 'Always return a value from computed properties',
@@ -51,6 +54,7 @@ eslintTester.run('require-return-from-computed', rule, {
     },
     {
       code: 'let foo = computed({ get() { return "foo"; }, set() { }})',
+      output: null,
       errors: [
         {
           message: 'Always return a value from computed properties',
@@ -59,6 +63,7 @@ eslintTester.run('require-return-from-computed', rule, {
     },
     {
       code: 'let foo = computed({ get() { }, set() { return "foo"; }})',
+      output: null,
       errors: [
         {
           message: 'Always return a value from computed properties',

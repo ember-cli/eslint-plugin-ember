@@ -54,33 +54,40 @@ ruleTester.run('no-arrow-function-computed-properties', rule, {
   invalid: [
     {
       code: 'computed(() => { return 123; })',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
     {
       code: "computed('prop', () => { return this.prop; })",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
 
     {
       code: "computed('prop', () => { return this.prop; }).volatile()",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
     {
       code: "computed.map('products', product => { return someFunction(product); })",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
     {
       code: 'computed(() => { return 123; })',
+      output: null,
       errors: [],
       options: [{ onlyThisContexts: true }],
     },
     {
       code: "computed('prop', () => { return this.prop; })",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
       options: [{ onlyThisContexts: true }],
     },
     {
       code: "computed('prop', () => { return this.prop; }).volatile()",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
       options: [{ onlyThisContexts: true }],
     },

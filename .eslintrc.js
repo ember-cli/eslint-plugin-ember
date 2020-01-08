@@ -98,6 +98,7 @@ module.exports = {
     'eslint-comments/no-unused-disable': 'error',
 
     // eslint-plugin rules:
+    'eslint-plugin/consistent-output': ['error', 'always'],
     'eslint-plugin/no-deprecated-report-api': 'off',
     'eslint-plugin/require-meta-docs-url': ['error', {
       pattern: 'https://github.com/ember-cli/eslint-plugin-ember/tree/master/docs/rules/{{name}}.md',

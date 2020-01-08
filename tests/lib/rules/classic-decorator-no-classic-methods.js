@@ -58,6 +58,7 @@ ruleTester.run('classic-decorator-no-classic-methods', rule, {
           }
         }
       `,
+      output: null,
       errors: [
         {
           message: disallowedMethodErrorMessage('get'),
@@ -71,6 +72,7 @@ ruleTester.run('classic-decorator-no-classic-methods', rule, {
           foo = this.get('bar');
         }
       `,
+      output: null,
       errors: [
         {
           message: disallowedMethodErrorMessage('get'),

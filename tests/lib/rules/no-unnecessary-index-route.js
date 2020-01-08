@@ -39,22 +39,27 @@ ruleTester.run('no-unnecessary-index-route', rule, {
   invalid: [
     {
       code: 'this.route("index");',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'this.route("index", { path: "" });',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'this.route("index", { path: "/" });',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'this.route("index", { path: "/index" });',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'this.route("index", { path: "/" }, function() {});',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
   ],

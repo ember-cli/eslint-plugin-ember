@@ -50,6 +50,7 @@ ruleTester.run('classic-decorator-hooks', rule, {
           init() {}
         }
       `,
+      output: null,
       errors: [
         {
           message: ERROR_MESSAGE_INIT_IN_NON_CLASSIC,
@@ -62,6 +63,7 @@ ruleTester.run('classic-decorator-hooks', rule, {
           destroy() {}
         }
       `,
+      output: null,
       errors: [
         {
           message: ERROR_MESSAGE_DESTROY_IN_NON_CLASSIC,
@@ -75,6 +77,7 @@ ruleTester.run('classic-decorator-hooks', rule, {
           constructor() {}
         }
       `,
+      output: null,
       errors: [
         {
           message: ERROR_MESSAGE_CONSTRUCTOR_IN_CLASSIC,
