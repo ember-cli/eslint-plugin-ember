@@ -1,7 +1,7 @@
 # No classic components (no-classic-components)
 
 This rule aims to enforce Glimmer components instead of classic ones. We should migrate to Glimmer components because
-they have few adventages:
+they have few advantages:
 - Simpler API
 - No wrapper element
 - Namespaced Arguments
