@@ -1029,7 +1029,7 @@ describe('isRelation', () => {
 });
 
 describe('parseDependentKeys', () => {
-  it('should parse dependent keys from callexpression', () => {
+  it('should parse dependent keys from CallExpression', () => {
     const node = parse("computed('model.{foo,bar}', 'model.bar')");
     expect(emberUtils.parseDependentKeys(node)).toStrictEqual([
       'model.foo',

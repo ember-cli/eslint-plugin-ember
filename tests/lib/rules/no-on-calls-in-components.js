@@ -96,7 +96,7 @@ eslintTester.run('no-on-calls-in-components', rule, {
       ],
     },
     {
-      filename: 'example-app/twised-path/some-file.js',
+      filename: 'example-app/twisted-path/some-file.js',
       code: 'export default Component.extend({test: on("didInsertElement", function () {})});',
       output: null,
       errors: [

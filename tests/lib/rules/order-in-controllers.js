@@ -254,7 +254,7 @@ eslintTester.run('order-in-controllers', rule, {
       ],
     },
     {
-      filename: 'example-app/twised-path/some-controller.js',
+      filename: 'example-app/twisted-path/some-controller.js',
       code: `export default Controller.extend({
         queryParams: [],
         currentUser: service()
