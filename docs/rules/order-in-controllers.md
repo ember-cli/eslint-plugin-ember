@@ -78,7 +78,7 @@ export default Controller.extend({
   }),
 
   // 8. Observers
-  onVahicleChange: observer('vehicle', function() {
+  onVehicleChange: observer('vehicle', function() {
     // observer logic
   }),
 

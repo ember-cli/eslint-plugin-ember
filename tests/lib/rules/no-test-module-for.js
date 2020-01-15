@@ -32,7 +32,7 @@ ruleTester.run('no-test-module-for', rule, {
     },
     {
       filename: 'tests/helpers/something.js',
-      code: 'export default function dosomething() {}',
+      code: 'export default function doSomething() {}',
     },
     {
       filename: TEST_FILE_NAME,
