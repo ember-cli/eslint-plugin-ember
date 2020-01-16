@@ -47,8 +47,8 @@ module.exports = {
 |    | Name | Description |
 |:---|:-----|:------------|
 | | [base](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/base.js) | contains no rules settings, but the basic eslint configuration suitable for any ember project. You can use it to configure rules as you wish. |
-| :white_check_mark: | [recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/recommended.js) | extends the `base` configuration by enabling the recommended rules. |
-| :car: | [octane](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/config/octane.js) | extends the `recommended` configuration by enabling octane rules. This ruleset is currently considered **unstable and experimental** :warning: as rules may be added and removed until the final ruleset is settled upon. |
+| :white_check_mark: | [recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/recommended-rules.js) | extends the `base` configuration by enabling the recommended rules. |
+| :car: | [octane](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/octane-rules.js) | extends the `recommended` configuration by enabling octane rules. This ruleset is currently considered **unstable and experimental** :warning: as rules may be added and removed until the final ruleset is settled upon. |
 
 ## 🍟 Rules
 
@@ -160,7 +160,7 @@ Each rule has emojis denoting what configuration it belongs to and/or a :wrench:
 
 <!--RULES_TABLE_END-->
 
-For the simplified list of rules, [go here](./lib/recommended-rules.js).
+For the simplified list of rules, [go here](./lib/index.js).
 
 ## 🍻 Contribution guide
 
