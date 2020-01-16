@@ -160,7 +160,7 @@ Each rule has emojis denoting what configuration it belongs to and/or a :wrench:
 
 <!--RULES_TABLE_END-->
 
-For the simplified list of rules, [go here](./lib/recommended-rules.js).
+For the simplified list of rules, [go here](./lib/index.js).
 
 ## 🍻 Contribution guide
 
