@@ -38,4 +38,4 @@ const test = this.key || [];
 
 ## Related Rules
 
-- [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md)
+- [no-get](no-get.md)
