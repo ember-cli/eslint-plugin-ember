@@ -26,6 +26,12 @@ eslintTester.run('no-observers', rule, {
   valid: [
     'export default Controller.extend();',
     'export default Controller.extend({actions: {},});',
+
+    // Unrelated import statements:
+    "import EmberObject from '@ember/object';",
+    "import { run } from '@ember/runloop';",
+    "import { run as renamedRun } from '@ember/runloop';",
+
     `
     import { action } from '@ember/object';
     class FooComponent extends Component {
