@@ -1,10 +1,8 @@
-## Organize your models
+# order-in-models
 
-### Rule name: `order-in-models`
+## Configuration
 
-#### Configuration
-
-```
+```js
 ember/order-in-models: [2, {
   order: [
     'attribute',
@@ -17,7 +15,7 @@ ember/order-in-models: [2, {
 
 If you want some of properties to be treated equally in order you can group them into arrays, like so:
 
-```
+```js
 order: [
   'attribute',
   'relationship',
@@ -27,7 +25,7 @@ order: [
 
 You can find full list of properties that you can use to configure this rule [here](/lib/utils/property-order.js#L10).
 
-#### Description
+## Description
 
 You should write code grouped and ordered in this way:
 

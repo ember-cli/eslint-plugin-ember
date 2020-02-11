@@ -60,7 +60,6 @@ export default Component.extend({
 
 Examples of **correct** code for this rule:
 
-
 ```js
 import Component from '@ember/component';
 import { reads, and, or, gt, gte, lt, lte, not, equal } from '@ember/object/computed';

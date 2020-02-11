@@ -29,7 +29,6 @@ export default EmberObject.extend({
 
 Examples of **correct** code for this rule:
 
-
 ```js
 import EmberObject, { computed } from '@ember/object';
 

@@ -1,8 +1,10 @@
-# Use `module` instead of `moduleFor` (no-test-module-for)
+# no-test-module-for
+
+Use `module` instead of `moduleFor`.
 
 `moduleForComponent`, `moduleFor`, `moduleForAcceptance`, etc have been deprecated and there are codemods to help migrate.
 
-## Rule Details
+## Examples
 
 Examples of **incorrect** code for this rule:
 
@@ -60,4 +62,3 @@ A short guide for how each of the legacy APIs converts to the new APIs:
 * [moduleFor* deprecation notice from ember-qunit 4.5.0](https://github.com/emberjs/ember-qunit/blob/master/CHANGELOG.md#rocket-enhancement-1)
 
 * Codemod for automated upgrade of tests: [ember-qunit-codemod](https://github.com/ember-codemods/ember-qunit-codemod)
-

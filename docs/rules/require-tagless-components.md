@@ -1,10 +1,14 @@
-# Disallows using the wrapper element of a Component (require-tagless-components)
+# require-tagless-components
+
+Disallows using the wrapper element of a component.
 
 Ember allows you to disable the wrapper element on a component (turning it into a "tagless" component). This is now the preferred style and the _only_ style allowed with Glimmer components.
 
 ## Rule Details
 
 Instead of having the wrapper element implicitly defined by the component, all DOM elements should be represented in the component's template.
+
+## Examples
 
 Examples of **incorrect** code for this rule:
 
@@ -85,7 +89,7 @@ import Component from '@glimmer/component';
 export default class MyComponent extends Component {}
 ```
 
-### Caveats
+## Caveats
 
 * Rule does not catch cases where a Mixin is included to configure the `tagName` property.
 

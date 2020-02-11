@@ -1,10 +1,8 @@
-## Organize your components
+# order-in-components
 
-### Rule name: `order-in-components`
+## Configuration
 
-#### Configuration
-
-```
+```js
 ember/order-in-components: [2, {
   order: [
     'service',
@@ -33,7 +31,7 @@ ember/order-in-components: [2, {
 
 If you want some of properties to be treated equally in order you can group them into arrays, like so:
 
-```
+```js
 order: [
   'service',
   'property',
@@ -58,7 +56,7 @@ order: [
 
 You can find full list of properties that you can use to configure this rule [here](/lib/utils/property-order.js#L10).
 
-#### Description
+## Description
 
 You should write code grouped and ordered in this way:
 

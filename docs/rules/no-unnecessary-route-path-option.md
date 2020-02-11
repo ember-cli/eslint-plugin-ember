@@ -1,10 +1,10 @@
-## Disallow unnecessary route `path` option
+# no-unnecessary-route-path-option
 
-### Rule name: `no-unnecessary-route-path-option`
+Disallow unnecessary route `path` option.
 
 When defining a route, it's not necessary to specify the `path` option if it matches the route name.
 
-### Rule Details
+## Examples
 
 Examples of **incorrect** code for this rule:
 
@@ -22,11 +22,11 @@ this.route('blog-posts');
 this.route('blog-posts', { path: '/blog' });
 ```
 
-### References
+## References
 
 * [Ember Routing Guide](https://guides.emberjs.com/release/routing/)
 
-### Related Rules
+## Related Rules
 
 * [no-capital-letters-in-routes](no-capital-letters-in-routes.md)
 * [no-unnecessary-index-route](no-unnecessary-index-route.md)

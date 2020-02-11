@@ -1,10 +1,10 @@
-## `this._super` is not allowed in ES class methods
+# no-ember-super-in-es-classes
 
-### Rule name: `no-ember-super-in-es-classes`
+`this._super` is not allowed in ES class methods.
 
 While `this._super()` is the only way to invoke an overridden method in an `EmberObject.extend`-style class, the `_super` method doesn't work properly when using native class syntax. Fortunately, native classes come with their own mechanism for invoking methods from a parent.
 
-### Examples
+## Examples
 
 Examples of **incorrect** code for this rule:
 
@@ -38,4 +38,3 @@ export default Component.extend({
     // Other logic
   }
 });
-

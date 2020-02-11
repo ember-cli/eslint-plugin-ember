@@ -1,10 +1,37 @@
-## Always return a value from a computed property function
+# require-return-from-computed
 
-### Rule name: `require-return-from-computed`
+Always return a value from a computed property function.
 
-When using computed properties always return a value.
+## Examples
 
-### Examples
+Examples of **incorrect** code for this rule:
+
+```javascript
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+
+export default Component.extend({
+  firstName: null,
+  lastName: null,
+
+  fullName: computed('firstName', 'lastName', {
+    get() {
+      return `${this.get('firstName')} ${this.get('lastName')}`;
+    },
+    set(key, value) {
+      let [firstName, lastName] = value.split(/\s+/);
+      this.set('firstName', firstName);
+      this.set('lastName',  lastName);
+    }
+  }),
+
+  salutation: computed('firstName', function() {
+    if (this.get('firstName')) {
+      return `Dr. ${this.get('firstName')}`;
+    }
+  })
+});
+```
 
 Examples of **correct** code for this rule:
 
@@ -37,40 +64,11 @@ export default Component.extend({
 });
 ```
 
-Examples of **incorrect** code for this rule:
-
-```javascript
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-
-export default Component.extend({
-  firstName: null,
-  lastName: null,
-
-  fullName: computed('firstName', 'lastName', {
-    get() {
-      return `${this.get('firstName')} ${this.get('lastName')}`;
-    },
-    set(key, value) {
-      let [firstName, lastName] = value.split(/\s+/);
-      this.set('firstName', firstName);
-      this.set('lastName',  lastName);
-    }
-  }),
-
-  salutation: computed('firstName', function() {
-    if (this.get('firstName')) {
-      return `Dr. ${this.get('firstName')}`;
-    }
-  })
-});
-```
-
-### Migration
+## Migration
 
 To avoid false positives from relying on implicit returns in some code branches, you may want to enforce [consistent-return] alongside this rule.
 
-### Related Rules
+## Related Rules
 
 * [consistent-return] from eslint
 

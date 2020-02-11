@@ -1,9 +1,10 @@
 # no-incorrect-calls-with-inline-anonymous-functions
 
 The following functions keep track of the function references they have been passed:
- - `debounce`
- - `once`
- - `scheduleOnce`
+
+- `debounce`
+- `once`
+- `scheduleOnce`
 
 To use them, make sure you are passing the same function reference each time. When an inline function is passed as an argument, the function reference will be different each time.
 
@@ -52,6 +53,6 @@ export default Component.extend({
 
 ## References
 
-* [Ember debounce API Docs](https://api.emberjs.com/ember/release/functions/@ember%2Frunloop/debounce)
-* [Ember once API Docs](http://api.emberjs.com/ember/release/functions/@ember%2Frunloop/once)
-* [Ember scheduleOnce API Docs](https://api.emberjs.com/ember/release/functions/@ember%2Frunloop/scheduleOnce)
+- [Ember debounce API Docs](https://api.emberjs.com/ember/release/functions/@ember%2Frunloop/debounce)
+- [Ember once API Docs](http://api.emberjs.com/ember/release/functions/@ember%2Frunloop/once)
+- [Ember scheduleOnce API Docs](https://api.emberjs.com/ember/release/functions/@ember%2Frunloop/scheduleOnce)

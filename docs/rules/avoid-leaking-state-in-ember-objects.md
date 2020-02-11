@@ -1,29 +1,12 @@
-## Avoid leaking state
+# avoid-leaking-state-in-ember-objects
 
-### Rule name: `avoid-leaking-state-in-ember-objects`
+Don't use arrays and objects as default properties. More info here: <https://dockyard.com/blog/2015/09/18/ember-best-practices-avoid-leaking-state-into-factories>
 
-#### Configuration
+## Examples
 
-Example configuration:
-
-```
-const { DEFAULT_IGNORED_PROPERTIES } = require('eslint-plugin-ember/lib/rules/avoid-leaking-state-in-ember-objects');
-
-ember/avoid-leaking-state-in-ember-objects: [1, [
-  ...DEFAULT_IGNORED_PROPERTIES,
-  'array',
-  'of',
-  'ignored',
-  'properties',
-]]
-```
-
-#### Description
-
-Don't use arrays and objects as default properties. More info here: https://dockyard.com/blog/2015/09/18/ember-best-practices-avoid-leaking-state-into-factories
+Examples of **incorrect** code for this rule:
 
 ```javascript
-// BAD
 export default Foo.extend({
   items: [],
 
@@ -35,12 +18,13 @@ export default Foo.extend({
 });
 ```
 
+Examples of **correct** code for this rule:
+
 ```javascript
-// Good
 export default Foo.extend({
   init() {
     this._super(...arguments);
-    
+
     this.items = this.items || [];
   },
 
@@ -50,4 +34,20 @@ export default Foo.extend({
     },
   },
 });
+```
+
+## Configuration
+
+Example configuration:
+
+```js
+const { DEFAULT_IGNORED_PROPERTIES } = require('eslint-plugin-ember/lib/rules/avoid-leaking-state-in-ember-objects');
+
+ember/avoid-leaking-state-in-ember-objects: [1, [
+  ...DEFAULT_IGNORED_PROPERTIES,
+  'array',
+  'of',
+  'ignored',
+  'properties',
+]]
 ```

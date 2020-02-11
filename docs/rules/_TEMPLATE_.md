@@ -8,7 +8,7 @@
 
 ## Examples
 
-This rule **forbids** the following:
+Examples of **incorrect** code for this rule:
 
 ```js
 // Example 1
@@ -18,7 +18,7 @@ This rule **forbids** the following:
 // Example 2
 ```
 
-This rule **allows** the following:
+Examples of **correct** code for this rule:
 
 ```js
 // Example 1

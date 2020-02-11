@@ -1,7 +1,8 @@
-## Closure Actions
-### Rule name: `closure-actions`
+# closure-actions
 
 Always use closure actions (according to DDAU convention). Exception: only when you need bubbling.
+
+## Examples
 
 ```javascript
 export default Controller.extend({
@@ -13,24 +14,8 @@ export default Controller.extend({
 });
 ```
 
-### GOOD
-```hbs
+Examples of **incorrect** code for this rule:
 
-{{pretty-component boom=(action 'detonate')}}
-```
-
-```javascript
-// pretty-component.js
-export default Component.extend({
-  actions: {
-    pushLever() {
-      this.boom();
-    }
-  }
-})
-```
-
-### BAD
 ```hbs
 {{awful-component detonate='detonate'}}
 ```
@@ -46,6 +31,23 @@ export default Component.extend({
 })
 ```
 
-### References
+Examples of **correct** code for this rule:
+
+```hbs
+{{pretty-component boom=(action 'detonate')}}
+```
+
+```javascript
+// pretty-component.js
+export default Component.extend({
+  actions: {
+    pushLever() {
+      this.boom();
+    }
+  }
+})
+```
+
+## References
 
 * [RFC](https://github.com/emberjs/rfcs/blob/master/text/0335-deprecate-send-action.md) to deprecate `sendAction`
