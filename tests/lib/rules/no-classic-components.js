@@ -19,7 +19,11 @@ const parserOptions = {
 const ruleTester = new RuleTester({ parserOptions });
 
 ruleTester.run('no-classic-components', rule, {
-  valid: ["import Component from '@glimmer/component';"],
+  valid: [
+    "import Component from '@glimmer/component';",
+    "import { setComponentTemplate } from '@ember/component';",
+    "import { helper } from '@ember/component/helper';",
+  ],
 
   invalid: [
     {
@@ -28,7 +32,7 @@ ruleTester.run('no-classic-components', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
-          type: 'ImportDeclaration',
+          type: 'ImportDefaultSpecifier',
         },
       ],
     },
