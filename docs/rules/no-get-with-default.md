@@ -1,4 +1,4 @@
-# No `getWithDefault` (no-get-with-default)
+# no-get-with-default
 
 This rule attempts to catch and prevent the use of `getWithDefault`.
 
@@ -10,7 +10,9 @@ the native `||` operator instead.
 
 In addition, [Nullish Coalescing Operator `??`](https://github.com/tc39/proposal-nullish-coalescing) will land in the JavaScript language soon so developers can leverage safe property access with native support instead of using `getWithDefault`.
 
-This rule **forbids** the following:
+## Examples
+
+Examples of **incorrect** code for this rule:
 
 ```js
 const test = this.getWithDefault('key', []);
@@ -20,7 +22,7 @@ const test = this.getWithDefault('key', []);
 const test = getWithDefault(this, 'key', []);
 ```
 
-This rule **allows** the following:
+Examples of **correct** code for this rule:
 
 ```js
 const test = this.key === undefined ? [] : this.key;

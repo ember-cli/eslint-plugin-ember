@@ -1,8 +1,10 @@
-# Use `await` instead of `andThen` test wait helper. (no-test-and-then)
+# no-test-and-then
+
+Use `await` instead of `andThen` test wait helper.
 
 It's no longer necessary to use the `andThen` test wait helper now that the cleaner [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) syntax is available.
 
-## Rule Details
+## Examples
 
 Examples of **incorrect** code for this rule:
 

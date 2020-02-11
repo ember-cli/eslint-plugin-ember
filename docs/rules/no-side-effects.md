@@ -1,8 +1,10 @@
-## Don't introduce side-effects in computed properties
+# no-side-effects
 
-### Rule name: `no-side-effects`
+Don't introduce side-effects in computed properties.
 
 When using computed properties do not introduce side effects. It will make reasoning about the origin of the change much harder.
+
+## Examples
 
 ```javascript
 import Ember from 'ember';
@@ -13,7 +15,7 @@ const {
 } = Ember;
 
 export default Component.extend({
-  
+
   init() {
     this.users = [
       { name: 'Foo', age: 15 },
@@ -22,7 +24,7 @@ export default Component.extend({
     ];
     this._super(...arguments);
   },
-  
+
   // GOOD:
   fifteen: filterBy('users', 'age', 15),
   fifteenAmount: alias('fifteen.length'),

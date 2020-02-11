@@ -1,11 +1,10 @@
 # no-computed-properties-in-native-classes
 
- Since the beginning of Ember's existence, Computed Properties (CPs) have been used to accomplish reactivity in the framework. With Ember Octane, new features were introduced including Glimmer components, native JavaScript classes and Tracked Properties. With Ember Octane's new programming model, CPs are no longer needed. If using native JavaScript classes, Tracked Properties should be used instead as they give us the same benefit of CPs but with less boilerplate and more flexibility.
+Since the beginning of Ember's existence, Computed Properties (CPs) have been used to accomplish reactivity in the framework. With Ember Octane, new features were introduced including Glimmer components, native JavaScript classes and Tracked Properties. With Ember Octane's new programming model, CPs are no longer needed. If using native JavaScript classes, Tracked Properties should be used instead as they give us the same benefit of CPs but with less boilerplate and more flexibility.
 
 ## Rule Details
 
 This rule disallows using computed properties with native classes.
-
 
 ## Examples
 

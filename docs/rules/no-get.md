@@ -38,7 +38,6 @@ const foo = getProperties(this, 'prop1', 'prop2');
 
 Examples of **correct** code for this rule:
 
-
 ```js
 const foo = this.someProperty;
 ```
@@ -78,8 +77,8 @@ export default EmberObject.extend({
 
 This rule takes an optional object containing:
 
-- `boolean` -- `ignoreGetProperties` -- whether the rule should ignore `getProperties` (default `false`)
-- `boolean` -- `ignoreNestedPaths` -- whether the rule should ignore `this.get('some.nested.property')` (default `true`) (this option is enabled by default to make it easier/safer to adopt this rule)
+* `boolean` -- `ignoreGetProperties` -- whether the rule should ignore `getProperties` (default `false`)
+* `boolean` -- `ignoreNestedPaths` -- whether the rule should ignore `this.get('some.nested.property')` (default `true`) (this option is enabled by default to make it easier/safer to adopt this rule)
 
 ## Related Rules
 

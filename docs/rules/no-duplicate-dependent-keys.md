@@ -1,8 +1,12 @@
-# Disallow repeating dependent keys (`no-duplicate-dependent-keys`)
+# no-duplicate-dependent-keys
+
+Disallow repeating dependent keys.
 
 ## Rule Details
 
 This rule makes it easy to spot repeating dependent keys in computed properties.
+
+## Examples
 
 Examples of **incorrect** code for this rule:
 

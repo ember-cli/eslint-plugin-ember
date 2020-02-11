@@ -1,10 +1,14 @@
-# Disallow "classic" classes in favor of native JS classes (no-classic-classes)
+# no-classic-classes
+
+Disallow "classic" classes in favor of native JS classes.
 
 Ember now allows you to use native JS classes to extend the built-in classes provided by Ember. This pattern is preferred in favor of using the "classic" style of classes that Ember has provided since before JS classes were available to use.
 
 ## Rule Details
 
 This rule aims to ensure that you do not use a "classic" Ember class where a native class could be used instead. The one instance where `.extend` should still be used is for including a Mixin into your class, which does not have a native JS class alternative available.
+
+## Examples
 
 Examples of **incorrect** code for this rule:
 

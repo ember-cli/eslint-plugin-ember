@@ -1,4 +1,5 @@
-# No jQuery (no-jquery)
+# no-jquery
+
 This rule attempts to catch and prevent any usage of jQuery.
 
 ## Rule Details
@@ -7,6 +8,7 @@ If you want to remove jQuery this rule can help you by warning you of any usage 
 in your app.
 
 That includes:
+
 - `this.$`, either on components or tests.
 - `import $ from 'jquery';`;
 - The global `$`
@@ -14,6 +16,8 @@ That includes:
 
 For replacing `this.$` on components you can use the native DOM counterpart `this.element`
 For replacing `this.$` on tests, check [ember-native-dom-helpers](https://github.com/cibernox/ember-native-dom-helpers)
+
+## Examples
 
 Examples of **incorrect** code for this rule:
 

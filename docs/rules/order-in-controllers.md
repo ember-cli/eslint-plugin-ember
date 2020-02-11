@@ -1,10 +1,8 @@
-## Organize your controllers
+# order-in-controllers
 
-### Rule name: `order-in-controllers`
+## Configuration
 
-#### Configuration
-
-```
+```js
 ember/order-in-controllers: [2, {
   order: [
     'controller',
@@ -23,7 +21,7 @@ ember/order-in-controllers: [2, {
 
 If you want some of properties to be treated equally in order you can group them into arrays, like so:
 
-```
+```js
 order: [
   ['controller', 'service', 'query-params'],
   'inherited-property',
@@ -34,7 +32,7 @@ order: [
 
 You can find full list of properties that you can use to configure this rule [here](/lib/utils/property-order.js#L10).
 
-#### Description
+## Description
 
 You should write code grouped and ordered in this way:
 
@@ -48,7 +46,6 @@ You should write code grouped and ordered in this way:
 8. Observers
 9. Actions
 10. Custom / private methods
-
 
 ```javascript
 const { Controller, computed, inject: { controller, service }, get } = Ember;

@@ -1,8 +1,6 @@
-## Disallow the use of classic API methods
+# classic-decorator-no-classic-methods
 
-### Rule name: `classic-decorator-no-classic-methods`
-
-Disallows the use of the following API methods within a class:
+Disallows the use of the following classic API methods within a class:
 
 - `get`
 - `set`
@@ -22,8 +20,11 @@ These are "classic" API methods, and their usage is discouraged in Octane.
 Non-method versions of them can still be used, e.g. `@ember/object#get` and
 `@ember/object#set` instead of `this.get` and `this.set`.
 
+## Examples
+
+Examples of **incorrect** code for this rule:
+
 ```javascript
-// Bad
 export default class MyService extends Service {
   constructor(...args) {
     super(...args);
@@ -32,8 +33,9 @@ export default class MyService extends Service {
 }
 ```
 
+Examples of **correct** code for this rule:
+
 ```javascript
-// Good
 @classic
 export default class MyService extends Service {
   constructor(...args) {
@@ -50,11 +52,11 @@ export default class MyService extends Service {
 }
 ```
 
-### References
+## References
 
 - [ember-classic-decorator](https://github.com/pzuraq/ember-classic-decorator)
 
-### Related Rules
+## Related Rules
 
 - [no-get](no-get.md)
 - [classic-decorator-hooks](classic-decorator-hooks.md)

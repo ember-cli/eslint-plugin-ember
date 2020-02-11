@@ -1,10 +1,8 @@
-## Organize your routes
+# order-in-routes
 
-### Rule name: `order-in-routes`
+## Configuration
 
-#### Configuration
-
-```
+```js
 ember/order-in-routes: [2, {
   order: [
     'service',
@@ -30,7 +28,7 @@ ember/order-in-routes: [2, {
 
 If you want some of properties to be treated equally in order you can group them into arrays, like so:
 
-```
+```js
 order: [
   'service',
   ['inherited-property', 'property'],
@@ -54,7 +52,7 @@ order: [
 
 You can find full list of properties that you can use to configure this rule [here](/lib/utils/property-order.js#L10).
 
-#### Description
+## Description
 
 You should write code grouped and ordered in this way:
 
@@ -89,12 +87,12 @@ export default Route.extend({
       this.transitionTo('index');
     }
   },
-  
+
   // 5. model hook
   model() {
     return this.store.findAll('article');
   },
-  
+
   // 6. afterModel hook
   afterModel(articles) {
     articles.forEach((article) => {
