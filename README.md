@@ -67,6 +67,7 @@ Each rule has emojis denoting what configuration it belongs to and/or a :wrench:
 | :white_check_mark: | [closure-actions](./docs/rules/closure-actions.md) | enforce usage of closure actions |
 |  | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | enforce usage of named functions in promises |
 | :white_check_mark: | [new-module-imports](./docs/rules/new-module-imports.md) | enforce using "New Module Imports" from Ember RFC #176 |
+|  | [no-controllers](./docs/rules/no-controllers.md) | disallow non-essential controllers |
 | :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | disallow usage of Ember's `function` prototype extensions |
 | :car: | [no-get-with-default](./docs/rules/no-get-with-default.md) | disallow usage of the Ember's `getWithDefault` function |
 | :car::wrench: | [no-get](./docs/rules/no-get.md) | require using ES5 getters instead of Ember's `get` / `getProperties` functions |
