@@ -127,14 +127,12 @@ eslintTester.run('order-in-controllers', rule, {
         customProp: { a: 1 }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      options: [{
-        order: [
-          'property',
-          'actions',
-          'custom:customProp'
-        ]
-      }]
-    }
+      options: [
+        {
+          order: ['property', 'actions', 'custom:customProp'],
+        },
+      ],
+    },
   ],
   invalid: [
     {
@@ -331,10 +329,66 @@ eslintTester.run('order-in-controllers', rule, {
         });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'The "foo" service injection should be above the inherited "init" property on line 3',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "foo" service injection should be above the "init" lifecycle hook on line 3',
+          line: 6,
+        },
+      ],
+    },
+    {
+      code: `
+        export default Controller.extend({
+          init() {
+            this._super(...arguments);
+          },
+          someProp: null
+        });
+      `,
+      errors: [
+        {
+          message: 'The "someProp" property should be above the "init" lifecycle hook on line 3',
+          line: 6,
+        },
+      ],
+    },
+    {
+      code:
+        // whitespace is preserved inside `` and it's breaking the test
+        `export default Controller.extend({
+  queryParams: [],
+  currentUser: service(),
+});`,
+      output: `export default Controller.extend({
+  currentUser: service(),
+  queryParams: [],
+});`,
+      errors: [
+        {
+          message:
+            'The "currentUser" service injection should be above the "queryParams" property on line 2',
+          line: 3,
+        },
+      ],
+    },
+    {
+      code: `export default Controller.extend({
+        test: "asd",
+        queryParams: [],
+        actions: {}
+      });`,
+      output: `export default Controller.extend({
+        queryParams: [],
+        test: "asd",
+        actions: {}
+      });`,
+      errors: [
+        {
+          message: 'The "queryParams" property should be above the "test" property on line 2',
+          line: 3,
+        },
+      ],
     },
     {
       code: `export default Controller.extend({
@@ -344,16 +398,18 @@ eslintTester.run('order-in-controllers', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      options: [{
-        order: [
-          'method',
-          'custom:customProp'
-        ]
-      }],
-      errors: [{
-        message: 'The "aMethod" method should be above the "customProp" custom property on line 2',
-        line: 3
-      }]
-    }
+      options: [
+        {
+          order: ['method', 'custom:customProp'],
+        },
+      ],
+      errors: [
+        {
+          message:
+            'The "aMethod" method should be above the "customProp" custom property on line 2',
+          line: 3,
+        },
+      ],
+    },
   ],
 });

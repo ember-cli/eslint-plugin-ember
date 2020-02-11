@@ -23,7 +23,20 @@ order: [
 ]
 ```
 
-You can find full list of properties that you can use to configure this rule [here](/lib/utils/property-order.js#L10).
+### Custom Properties
+
+If you would like to specify ordering for a property type that is not listed, you can use the custom property syntax
+in the order list to specify where the property should go:
+
+```
+custom:myPropertyName
+```
+
+These must be prefixed with `custom:`
+
+### Additional Properties
+
+You can find the full list of properties [here](/lib/utils/property-order.js#L10).
 
 ## Description
 
@@ -63,30 +76,5 @@ export default Model.extend({
   behaviors: hasMany('behaviour'),
 
   shape: attr('string')
-});
-```
-
-#### Custom Prop Ordering
-
-If you have certain properties that you like to keep in a particular order, then you can pass the `custom:$PROPERTY_NAME` syntax to the configuration:
-
-```
-ember/order-in-components: [2, {
-  order: [
-    'property',
-    'method',
-    ...
-    'custom:customOrderedPropName'
-  ]
-}]
-```
-
-Now this accepted by the linter:
-
-```
-export default DS.Model.extend({
-  regularProp: 1,
-  aMethod: function() {},
-  customOrderedPropName: 2
 });
 ```

@@ -84,14 +84,12 @@ eslintTester.run('order-in-models', rule, {
         customProp: { a: 1 }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      options: [{
-        order: [
-          'attribute',
-          'method',
-          'custom:customProp'
-        ]
-      }]
-    }
+      options: [
+        {
+          order: ['attribute', 'method', 'custom:customProp'],
+        },
+      ],
+    },
   ],
   invalid: [
     {
@@ -248,16 +246,18 @@ eslintTester.run('order-in-models', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      options: [{
-        order: [
-          'method',
-          'custom:customProp'
-        ]
-      }],
-      errors: [{
-        message: 'The "aMethod" method should be above the "customProp" custom property on line 2',
-        line: 3
-      }]
+      options: [
+        {
+          order: ['method', 'custom:customProp'],
+        },
+      ],
+      errors: [
+        {
+          message:
+            'The "aMethod" method should be above the "customProp" custom property on line 2',
+          line: 3,
+        },
+      ],
     },
   ],
 });

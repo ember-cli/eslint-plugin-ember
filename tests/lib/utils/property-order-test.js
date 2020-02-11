@@ -185,7 +185,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'component')).toStrictEqual('property');
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual('property');
     });
 
     it('should determine empty methods', () => {
@@ -195,7 +195,9 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'component')).toStrictEqual('empty-method');
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual(
+        'empty-method'
+      );
     });
 
     it('should determine methods', () => {
@@ -205,7 +207,34 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'component')).toStrictEqual('method');
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual('method');
+    });
+
+    it('should determine custom properties when given order with custom property', () => {
+      const context = new FauxContext(
+        `export default Component.extend({
+          myFooProperty: null
+        });`
+      );
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(
+        propertyOrder.determinePropertyType(node, 'component', [
+          'custom:myBarProperty',
+          'custom:myFooProperty',
+        ])
+      ).toStrictEqual('custom:myFooProperty');
+    });
+
+    it('should determine custom properties as normal properties when given order without custom property', () => {
+      const context = new FauxContext(
+        `export default Component.extend({
+          myFooProperty: null
+        });`
+      );
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(
+        propertyOrder.determinePropertyType(node, 'component', ['custom:myBarProperty'])
+      ).toStrictEqual('property');
     });
   });
 
@@ -301,7 +330,7 @@ describe('determinePropertyType', () => {
         }`
       );
       const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'component')).toStrictEqual(
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual(
         'multi-line-function'
       );
     });
@@ -313,7 +342,7 @@ describe('determinePropertyType', () => {
         }`
       );
       const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'component')).toStrictEqual('property');
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual('property');
     });
   });
 });
