@@ -834,6 +834,9 @@ describe('isCustomProp', () => {
     node = getProperty("test = { test: 'someLiteral' }");
     expect(emberUtils.isCustomProp(node)).toBeTruthy();
 
+    node = getProperty("test = { test: `foo${'bar'}` }");
+    expect(emberUtils.isCustomProp(node)).toBeTruthy();
+
     node = getProperty('test = { test: someIdentifier }');
     expect(emberUtils.isCustomProp(node)).toBeTruthy();
 
