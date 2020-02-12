@@ -1,3 +1,32 @@
+## v7.8.0 (2020-02-12)
+
+#### :rocket: Enhancement
+* [#661](https://github.com/ember-cli/eslint-plugin-ember/pull/661) Add new rule `no-controllers` ([@bmish](https://github.com/bmish))
+* [#665](https://github.com/ember-cli/eslint-plugin-ember/pull/665) Update `order-in-*` rules to support custom ordering of properties ([@cdtinney](https://github.com/cdtinney))
+* [#639](https://github.com/ember-cli/eslint-plugin-ember/pull/639) Update `no-observers` rule to catch `addObserver` and observer imports ([@kategengler](https://github.com/kategengler))
+
+#### :bug: Bug Fix
+* [#670](https://github.com/ember-cli/eslint-plugin-ember/pull/670) Update `order-in-*` rules to consider template literals as properties ([@cdtinney](https://github.com/cdtinney))
+* [#664](https://github.com/ember-cli/eslint-plugin-ember/pull/664) Update `no-classic-components` rule to only disallow the specific component import ([@bmish](https://github.com/bmish))
+* [#640](https://github.com/ember-cli/eslint-plugin-ember/pull/640) Update `no-computed-properties-in-native-classes` rule to catch aliasing of computed import ([@kategengler](https://github.com/kategengler))
+
+#### :memo: Documentation
+* [#663](https://github.com/ember-cli/eslint-plugin-ember/pull/663) Update rule docs to use consistent headers and fix markdownlint violations ([@bmish](https://github.com/bmish))
+* [#655](https://github.com/ember-cli/eslint-plugin-ember/pull/655) Update `no-new-mixins` rule documentation ([@efx](https://github.com/efx))
+* [#648](https://github.com/ember-cli/eslint-plugin-ember/pull/648) Fix various spelling mistakes ([@bmish](https://github.com/bmish))
+* [#647](https://github.com/ember-cli/eslint-plugin-ember/pull/647) Fix typo in `no-classic-components` rule documentation ([@rwwagner90](https://github.com/rwwagner90))
+* [#626](https://github.com/ember-cli/eslint-plugin-ember/pull/626) Simplify and clarify rules and configuration sections in README ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#643](https://github.com/ember-cli/eslint-plugin-ember/pull/643) Add missing test case output assertions ([@bmish](https://github.com/bmish))
+
+#### Committers: 5
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Colin Tinney ([@cdtinney](https://github.com/cdtinney))
+- Eli Flanagan ([@efx](https://github.com/efx))
+- Katie Gengler ([@kategengler](https://github.com/kategengler))
+- Robert Wagner ([@rwwagner90](https://github.com/rwwagner90))
+
 ## v7.7.2 (2019-12-12)
 
 #### :bug: Bug Fix
