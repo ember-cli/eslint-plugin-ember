@@ -19,6 +19,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watchAll",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
     "update": "node ./scripts/update-rules.js"
   },
   "repository": {

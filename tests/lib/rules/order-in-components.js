@@ -12,6 +12,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
+  parser: require.resolve('babel-eslint'),
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
 });
 
@@ -304,6 +305,342 @@ eslintTester.run('order-in-components', rule, {
         }).volatile(),
         bar() { const foo = 'bar'}
       });`,
+      options: [
+        {
+          order: [
+            'property',
+            'empty-method',
+            'single-line-function',
+            'multi-line-function',
+            'method',
+          ],
+        },
+      ],
+    },
+    'export default class Component {};',
+    ` import { alias, or, and } from '@ember/object/computed';
+      import { computed } from '@ember/object';
+      import Component from '@ember/component';
+      export default class Test extends Component {
+        role = "sloth"
+
+        @alias("car")
+        get vehicle(){}
+
+        @computed("attitude", "health")
+        get levelOfHappiness(){}
+
+        @action
+        foo() {}
+      };`,
+    `export default class Component {
+        role = "sloth";
+
+        @computed("attitude", "health")
+        get levelOfHappiness(){}
+
+        @action
+        foo() {}
+      };`,
+    `export default class Component {
+        @computed("attitude", "health")
+        get levelOfHappiness(){}
+
+        @action
+        foo() {}
+      };`,
+    `export default class extends Component.extend(TestMixin) {
+        @computed("attitude", "health")
+        get levelOfHappiness(){}
+      };`,
+    `export default class extends Component.extend(TestMixin, TestMixin2) {
+        @computed("attitude", "health")
+        get levelOfHappiness(){}
+
+        @action
+        foo() {}
+
+      };`,
+    `export default class extends Component {
+        @Ember.inject.service
+        abc;
+
+        @inject.service
+        def;
+
+        @service
+        ghi;
+
+        role = "sloth";
+
+        @computed("attitude", "health")
+        get levelOfHappiness(){}
+      };`,
+    `
+      import { inject } from '@ember/service';
+      export default class extends Component {
+          @inject
+          abc;
+
+          @inject.service
+          def;
+
+          @service
+          ghi;
+
+          role = "sloth";
+
+          @computed("attitude", "health")
+          get levelOfHappiness(){}
+        };
+      `,
+    `export default class extends Component {
+        role = "sloth";
+        abc = [];
+        def = {};
+
+        @alias("def")
+        ghi;
+      };`,
+    `export default class extends Component {
+        @computed("attitude", "health")
+        get levelOfHappiness(){}
+
+        @observer("aaaa")
+        get abc() {}
+
+
+        @observer("aaaa")
+        get def() {}
+
+      };`,
+    `export default class extends Component {
+        @observer("aaaa")
+        get abc() {}
+
+        init() {
+        }
+
+        customFunc() {
+          return true;
+        }
+      };`,
+    `export default class extends Component {
+        @service
+        igh;
+
+        abc = [];
+        def = true;
+
+        @alias("abc")
+        singleComp
+
+        @computed()
+        get multiComp() {}
+
+        @observer("aaa")
+        get obs() {}
+
+        init() {
+        }
+
+        customFunc() {
+          return true;
+        }
+      };`,
+    `export default class extends Component {
+        init() {
+        }
+        didReceiveAttrs() {
+        }
+        willRender() {
+        }
+        willInsertElement() {
+        }
+        didInsertElement() {
+        }
+        didRender() {
+        }
+        didUpdateAttrs() {
+        }
+        willUpdate() {
+        }
+        didUpdate() {
+        }
+        willDestroyElement() {
+        }
+        willClearRender() {
+        }
+        didDestroyElement() {
+        }
+      };`,
+    `export default class extends Component {
+        @service
+        test;
+
+        didReceiveAttrs() {
+        }
+
+        @(task(function* (url) {
+
+        }))
+        tSomeAction;
+      };`,
+    `export default class extends Component {
+        @service
+        test
+
+        @computed.equal("asd", "qwe")
+        get test2() {}
+
+        didReceiveAttrs() {
+        }
+
+        @(task(function* (url) {
+
+        }).restartable())
+        tSomeAction
+      };`,
+    `export default class extends Component {
+        @service
+        test
+
+        someEmptyMethod() {}
+
+        didReceiveAttrs() {
+        }
+
+        @(task(function* (url) {
+
+        }))
+        tSomeAction;
+
+        _anotherPrivateFnc() {
+          return true;
+        }
+      };`,
+    `export default class extends Component {
+        classNameBindings = ["filterDateSelectClass"];
+        content = [];
+        currentMonthEndDate = null;
+        currentMonthStartDate = null;
+        optionValuePath = "value";
+        optionLabelPath = "label";
+        typeOfDate = null;
+        action = K;
+      };`,
+    `export default class extends Component {
+        role = "sloth"
+
+        @computed.or("asd", "qwe")
+        get levelOfHappiness() {}
+
+      };`,
+    `export default class extends Component {
+        role = "sloth"
+
+        @computed()
+        get levelOfHappiness() {
+
+        }
+
+      };`,
+    {
+      code: `export default class extends Component {
+          role = "sloth"
+
+          @computed()
+          get computed1() {
+
+          }
+
+          @alias('computed1')
+          get computed2() {}
+
+          @Ember.inject.service()
+          foobar
+        };`,
+      options: [
+        {
+          order: ['property', 'multi-line-function', 'single-line-function', 'actions'],
+        },
+      ],
+    },
+    {
+      code: `export default class extends Component {
+        role = "sloth";
+
+        @alias('computed2')
+        computed1
+
+        @computed()
+        get computed2() {
+
+        }
+
+        @alias('computed1')
+        get computed3() {}
+
+        @Ember.inject.service()
+        foobar;
+      };`,
+      options: [
+        {
+          order: ['property', ['single-line-function', 'multi-line-function'], 'actions'],
+        },
+      ],
+    },
+    `export default class extends Component {
+      role = "sloth";
+      qwe = foo ? 'bar' : null;
+      abc = [];
+      def = {};
+
+      @alias("def")
+      ghi
+    };`,
+    `export default class extends Component {
+      template = hbs\`Hello world {{name}}\`;
+      name = "Jon Snow";
+
+    };`,
+    `export default class extends Component {
+      layout = layout;
+      tabindex = -1;
+
+      @computed.reads('count')
+      get someComputedValue() {}
+    };`,
+    `export default class extends Component {
+      @(computed.volatile())
+      get foo() {
+      }
+
+      @computed
+      get bar() {
+      }
+    };`,
+    `export default class extends Component {
+      onFoo() {}
+      onFoo = () => {};
+
+      @(computed.volatile())
+      get foo() {
+      }
+
+      bar() { const foo = 'bar'}
+    };`,
+    {
+      code: `export default class extends Component {
+        onFoo() {}
+        onFoo = () => {};
+
+        @(computed.volatile())
+        get foo() {
+        }
+
+        bar() { const foo = 'bar'}
+      };`,
       options: [
         {
           order: [
@@ -756,5 +1093,35 @@ eslintTester.run('order-in-components', rule, {
         },
       ],
     },
+    // {
+    //   code: `export default class extends Component {
+    //     @action()
+    //     foo() {}
+
+    //     role = "sloth";
+
+    //     @alias("car")
+    //     get vehicle() {}
+
+    //     @computed("attitude", "health")
+    //     get levelOfHappiness() {
+    //     }
+    //   };`,
+    //   errors: [
+    //     {
+    //       message: 'The "role" property should be above the actions hash on line 2',
+    //       line: 4,
+    //     },
+    //     {
+    //       message: 'The "vehicle" single-line function should be above the actions hash on line 2',
+    //       line: 6,
+    //     },
+    //     {
+    //       message:
+    //         'The "levelOfHappiness" multi-line function should be above the actions hash on line 2',
+    //       line: 8,
+    //     },
+    //   ],
+    // },
   ],
 });
