@@ -89,3 +89,9 @@ export default Component.extend({
 
 * [Guide](https://guides.emberjs.com/release/object-model/computed-properties/) for computed properties
 * [Spec](http://api.emberjs.com/ember/release/modules/@ember%2Fobject#functions-computed) for computed property macros
+
+## Help Wanted
+
+| Issue | Link |
+| :-- | :-- |
+| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |
