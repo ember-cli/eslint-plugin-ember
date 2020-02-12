@@ -25,14 +25,7 @@ order: [
 
 ### Custom Properties
 
-If you would like to specify ordering for a property type that is not listed, you can use the custom property syntax
-in the order list to specify where the property should go:
-
-```
-custom:myPropertyName
-```
-
-These must be prefixed with `custom:`
+If you would like to specify ordering for a property type that is not listed, you can use the custom property syntax `custom:myPropertyName` in the order list to specify where the property should go.
 
 ### Additional Properties
 
