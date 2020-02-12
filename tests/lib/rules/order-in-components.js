@@ -29,6 +29,16 @@ eslintTester.run('order-in-components', rule, {
         actions: {}
       });`,
     `export default Component.extend({
+        role: ${`${'sloth'}`},
+
+        vehicle: alias("car"),
+
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
+
+        actions: {}
+      });`,
+    `export default Component.extend({
         role: "sloth",
 
         levelOfHappiness: computed("attitude", "health", () => {
@@ -323,6 +333,33 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
 
         role: "sloth",
+
+        vehicle: alias("car"),
+
+        levelOfHappiness: computed("attitude", "health", () => {
+        })
+      });`,
+      errors: [
+        {
+          message: 'The "role" property should be above the actions hash on line 2',
+          line: 4,
+        },
+        {
+          message: 'The "vehicle" single-line function should be above the actions hash on line 2',
+          line: 6,
+        },
+        {
+          message:
+            'The "levelOfHappiness" multi-line function should be above the actions hash on line 2',
+          line: 8,
+        },
+      ],
+    },
+    {
+      code: `export default Component.extend({
+        actions: {},
+
+        role: ${`${'sloth'}`},
 
         vehicle: alias("car"),
 
