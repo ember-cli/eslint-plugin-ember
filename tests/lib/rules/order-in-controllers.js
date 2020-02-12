@@ -117,7 +117,22 @@ eslintTester.run('order-in-controllers', rule, {
             this._super(...arguments);
           }
         });
-      `,
+    `,
+    {
+      code: `export default Controller.extend({
+        prop: null,
+        actions: {
+          action: () => {}
+        },
+        customProp: { a: 1 }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [
+        {
+          order: ['property', 'actions', 'custom:customProp'],
+        },
+      ],
+    },
   ],
   invalid: [
     {
@@ -313,6 +328,7 @@ eslintTester.run('order-in-controllers', rule, {
           foo: service()
         });
       `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -370,6 +386,27 @@ eslintTester.run('order-in-controllers', rule, {
       errors: [
         {
           message: 'The "queryParams" property should be above the "test" property on line 2',
+          line: 3,
+        },
+      ],
+    },
+    {
+      code: `export default Controller.extend({
+        customProp: { a: 1 },
+        aMethod() {
+          console.log('not empty');
+        }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [
+        {
+          order: ['method', 'custom:customProp'],
+        },
+      ],
+      errors: [
+        {
+          message:
+            'The "aMethod" method should be above the "customProp" custom property on line 2',
           line: 3,
         },
       ],

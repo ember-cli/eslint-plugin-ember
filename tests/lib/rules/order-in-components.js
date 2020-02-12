@@ -314,6 +314,7 @@ eslintTester.run('order-in-components', rule, {
         }).volatile(),
         bar() { const foo = 'bar'}
       });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [
         {
           order: [
@@ -323,6 +324,21 @@ eslintTester.run('order-in-components', rule, {
             'multi-line-function',
             'method',
           ],
+        },
+      ],
+    },
+    {
+      code: `export default Component.extend({
+        prop: null,
+        actions: {
+          action: () => {}
+        },
+        customProp: { a: 1 }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [
+        {
+          order: ['property', 'actions', 'custom:customProp', 'method'],
         },
       ],
     },
@@ -755,6 +771,7 @@ eslintTester.run('order-in-components', rule, {
         bar() { const foo = 'bar'},
         onBar: () => {}
       });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message:
@@ -790,6 +807,46 @@ eslintTester.run('order-in-components', rule, {
           message:
             'The "vehicle" single-line function should be above the "levelOfHappiness" multi-line function on line 2',
           line: 5,
+        },
+      ],
+    },
+    {
+      code: `export default Component.extend({
+        prop: null,
+        actions: {},
+        customProp: { a: 1 }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [
+        {
+          order: ['property', 'custom:customProp', 'actions', 'method'],
+        },
+      ],
+      errors: [
+        {
+          message: 'The "customProp" custom property should be above the actions hash on line 3',
+          line: 4,
+        },
+      ],
+    },
+    {
+      code: `export default Component.extend({
+        customProp: { a: 1 },
+        aMethod() {
+          console.log('not empty');
+        }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [
+        {
+          order: ['method', 'custom:customProp'],
+        },
+      ],
+      errors: [
+        {
+          message:
+            'The "aMethod" method should be above the "customProp" custom property on line 2',
+          line: 3,
         },
       ],
     },

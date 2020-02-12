@@ -50,7 +50,20 @@ order: [
 ]
 ```
 
-You can find full list of properties that you can use to configure this rule [here](/lib/utils/property-order.js#L10).
+### Custom Properties
+
+If you would like to specify ordering for a property type that is not listed, you can use the custom property syntax
+in the order list to specify where the property should go:
+
+```
+custom:myPropertyName
+```
+
+These must be prefixed with `custom:`
+
+### Additional Properties
+
+You can find the full list of properties [here](/lib/utils/property-order.js#L10).
 
 ## Description
 
