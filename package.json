@@ -12,7 +12,8 @@
   },
   "scripts": {
     "changelog": "lerna-changelog",
-    "lint": "yarn lint:js",
+    "lint": "yarn lint:js && yarn lint:docs",
+    "lint:docs": "yarn markdownlint docs/**/*.md",
     "lint:js": "eslint . --cache",
     "start": "yarn run test:watch",
     "test": "jest",
@@ -64,6 +65,7 @@
     "eslint-plugin-unicorn": "^15.0.1",
     "jest": "^24.9.0",
     "lerna-changelog": "^0.8.3",
+    "markdownlint-cli": "^0.21.0",
     "prettier": "1.19.1"
   },
   "dependencies": {
