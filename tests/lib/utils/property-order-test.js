@@ -191,11 +191,11 @@ describe('determinePropertyType', () => {
     it('should determine template literals as properties', () => {
       const context = new FauxContext(
         `export default Component.extend({
-          foo: ${`foo${"bar"}`}
+          foo: ${`foo${'bar'}`}
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'component')).toStrictEqual('property');
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual('property');
     });
 
     it('should determine empty methods', () => {

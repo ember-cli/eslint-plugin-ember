@@ -834,7 +834,7 @@ describe('isCustomProp', () => {
     node = getProperty("test = { test: 'someLiteral' }");
     expect(emberUtils.isCustomProp(node)).toBeTruthy();
 
-    node = getProperty("test = { test: `foo${'bar'}` }");
+    node = getProperty("test = { test: `foo${'bar'}` }"); // eslint-disable-line no-template-curly-in-string
     expect(emberUtils.isCustomProp(node)).toBeTruthy();
 
     node = getProperty('test = { test: someIdentifier }');
