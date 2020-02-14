@@ -1,3 +1,14 @@
+## v7.8.1 (2020-02-14)
+
+#### :bug: Bug Fix
+* [#674](https://github.com/ember-cli/eslint-plugin-ember/pull/674) Update `require-computed-property-dependencies` rule to handle basic string concatenation in dependent keys ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#669](https://github.com/ember-cli/eslint-plugin-ember/pull/669) Add "Help Wanted" section to documentation for rules that are missing native JavaScript class support ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v7.8.0 (2020-02-12)
 
 #### :rocket: Enhancement
