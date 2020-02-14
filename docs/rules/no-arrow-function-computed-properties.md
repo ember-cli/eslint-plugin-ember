@@ -42,3 +42,9 @@ This rule takes an optional object containing:
 
 * [Arrow function spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 * [Computed property spec](https://api.emberjs.com/ember/release/classes/ComputedProperty)
+
+## Help Wanted
+
+| Issue | Link |
+| :-- | :-- |
+| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

@@ -31,3 +31,9 @@ computed('foo.{bar,baz,qux}', 'bar.foo', function() {
   //...
 })
 ```
+
+## Help Wanted
+
+| Issue | Link |
+| :-- | :-- |
+| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

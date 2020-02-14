@@ -73,3 +73,9 @@ To avoid false positives from relying on implicit returns in some code branches,
 * [consistent-return] from eslint
 
 [consistent-return]: https://eslint.org/docs/rules/consistent-return
+
+## Help Wanted
+
+| Issue | Link |
+| :-- | :-- |
+| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |
