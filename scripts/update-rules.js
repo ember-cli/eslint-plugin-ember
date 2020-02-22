@@ -46,8 +46,7 @@ const categories = rules
 
 let rulesTableContent = categories
   .map(
-    category => `
-### ${category}
+    category => `### ${category}
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
@@ -111,7 +110,7 @@ fs.writeFileSync(
   readmeFile,
   readmeContent.replace(
     tablePlaceholder,
-    `<!--RULES_TABLE_START-->\n${rulesTableContent}\n<!--RULES_TABLE_END-->`
+    `<!--RULES_TABLE_START-->\n\n${rulesTableContent}\n<!--RULES_TABLE_END-->`
   )
 );
 

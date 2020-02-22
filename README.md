@@ -6,7 +6,7 @@
 
 > An ESlint plugin that provides set of rules for Ember Applications based on commonly known good practices.
 
-## ❗️ Requirements
+## ❗️Requirements
 
 - [ESLint](https://eslint.org/) `>= 5`
 - [Node.js](https://nodejs.org/) `>= 8`
@@ -16,14 +16,16 @@
 ### 1. Install plugin
 
 ```shell
-  yarn add --dev eslint-plugin-ember
-```
-Or
-```shell
-  npm install --save-dev eslint-plugin-ember
+yarn add --dev eslint-plugin-ember
 ```
 
-### 2. Modify your `.eslintrc.js`:
+Or
+
+```shell
+npm install --save-dev eslint-plugin-ember
+```
+
+### 2. Modify your `.eslintrc.js`
 
 ```javascript
 // .eslintrc.js
@@ -86,7 +88,6 @@ Each rule has emojis denoting what configuration it belongs to and/or a :wrench:
 |  | [route-path-style](./docs/rules/route-path-style.md) | enforce usage of kebab-case (instead of snake_case or camelCase) in route paths |
 | :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | enforce usage of `Ember.get` and `Ember.set` |
 
-
 ### Ember Object
 
 |    | Rule ID | Description |
@@ -96,7 +97,6 @@ Each rule has emojis denoting what configuration it belongs to and/or a :wrench:
 | :car: | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | disallow usage of classic APIs such as `get`/`set` in classes that aren't explicitly decorated with `@classic` |
 |  | [computed-property-getters](./docs/rules/computed-property-getters.md) | enforce the consistent use of getters in computed properties |
 |  | [no-proxies](./docs/rules/no-proxies.md) | disallow using array or object proxies |
-
 
 ### Possible Errors
 
@@ -119,7 +119,6 @@ Each rule has emojis denoting what configuration it belongs to and/or a :wrench:
 | :white_check_mark: | [require-super-in-init](./docs/rules/require-super-in-init.md) | require `this._super` to be called in `init` hooks |
 | :white_check_mark: | [routes-segments-snake-case](./docs/rules/routes-segments-snake-case.md) | enforce usage of snake_cased dynamic segments in routes |
 
-
 ### Ember Octane
 
 |    | Rule ID | Description |
@@ -130,14 +129,12 @@ Each rule has emojis denoting what configuration it belongs to and/or a :wrench:
 | :car: | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | disallow using computed properties in native classes |
 | :car: | [require-tagless-components](./docs/rules/require-tagless-components.md) | disallow using the wrapper element of a component |
 
-
 ### Ember Data
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 |  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | disallow usage of empty attributes in Ember Data models |
 | :wrench: | [use-ember-data-rfc-395-imports](./docs/rules/use-ember-data-rfc-395-imports.md) | enforce usage of `@ember-data/` packages instead `ember-data` |
-
 
 ### Testing
 
@@ -147,7 +144,6 @@ Each rule has emojis denoting what configuration it belongs to and/or a :wrench:
 |  | [no-test-and-then](./docs/rules/no-test-and-then.md) | disallow usage of the `andThen` test wait helper |
 |  | [no-test-import-export](./docs/rules/no-test-import-export.md) | disallow importing of "-test.js" in a test file and exporting from a test file |
 |  | [no-test-module-for](./docs/rules/no-test-module-for.md) | disallow usage of `moduleFor`, `moduleForComponent`, etc |
-
 
 ### Stylistic Issues
 
@@ -166,6 +162,7 @@ For the simplified list of rules, [go here](./lib/index.js).
 ## 🍻 Contribution guide
 
 In order to add a new rule, you should:
+
 - [Create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new) on GitHub with description of proposed rule
 - Generate a new rule using the [official yeoman generator](https://github.com/eslint/generator-eslint)
 - Run `yarn start`
@@ -178,6 +175,7 @@ In order to add a new rule, you should:
 If you have any suggestions, ideas, or problems feel free to [create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new), but first please make sure your question does not repeat previous ones.
 
 ## ⭐️ Contributors
+
 - [Adrian Zalewski](https://github.com/bardzusny)
 - [Alex LaFroscia](https://github.com/alexlafroscia)
 - [Bryan Mishkin](https://github.com/bmish)
@@ -190,7 +188,8 @@ If you have any suggestions, ideas, or problems feel free to [create an issue](h
 - [Steve Gargan](https://github.com/sgargan)
 - [Tobias Bieniek](https://github.com/Turbo87)
 
-##  🙌 Credits
+## 🙌 Credits
+
 - [DockYard team](http://github.com/DockYard) - for great inspiration with their [styleguide](https://github.com/DockYard/styleguides/blob/master/engineering/ember.md)
 - [Rob Hilgefort](https://github.com/rjhilgefort) - for making it possible to redeploy new plugin under existing `eslint-plugin-ember` package name
 

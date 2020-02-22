@@ -13,7 +13,7 @@
   "scripts": {
     "changelog": "lerna-changelog",
     "lint": "yarn lint:js && yarn lint:docs",
-    "lint:docs": "yarn markdownlint docs/**/*.md",
+    "lint:docs": "yarn markdownlint *.md docs/**/*.md -i CHANGELOG.md -i LICENSE.md",
     "lint:js": "eslint . --cache",
     "start": "yarn run test:watch",
     "test": "jest",
