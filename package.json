@@ -13,7 +13,7 @@
   "scripts": {
     "changelog": "lerna-changelog",
     "lint": "npm-run-all lint:* --continue-on-error",
-    "lint:docs": "yarn markdownlint *.md docs/**/*.md -i CHANGELOG.md -i LICENSE.md",
+    "lint:docs": "markdownlint '**/*.md' -i CHANGELOG.md -i LICENSE.md -i node_modules",
     "lint:js": "eslint . --cache",
     "start": "yarn run test:watch",
     "test": "jest",
