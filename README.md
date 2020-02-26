@@ -140,6 +140,7 @@ Each rule has emojis denoting what configuration it belongs to and/or a :wrench:
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+|  | [no-legacy-test-waiters](./docs/rules/no-legacy-test-waiters.md) | disallow the use of the legacy test waiter APIs. |
 |  | [no-pause-test](./docs/rules/no-pause-test.md) | disallow usage of the `pauseTest` helper in tests |
 |  | [no-test-and-then](./docs/rules/no-test-and-then.md) | disallow usage of the `andThen` test wait helper |
 |  | [no-test-import-export](./docs/rules/no-test-import-export.md) | disallow importing of "-test.js" in a test file and exporting from a test file |
