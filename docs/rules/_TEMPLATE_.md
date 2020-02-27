@@ -45,8 +45,8 @@ TODO: exclude this section if the rule has no extra configuration
 
 ## Related Rules
 
-* [related-rule-name1](TODO-related-rule-name1.md)
-* [related-rule-name2](TODO-related-rule-name2.md)
+* [TODO-related-rule-name1](related-rule-name1.md)
+* [TODO-related-rule-name2](related-rule-name2.md)
 
 ## References
 
