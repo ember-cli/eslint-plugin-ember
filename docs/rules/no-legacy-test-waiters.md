@@ -1,9 +1,13 @@
-# Prevents the use of the legacy test waiter APIs. (no-legacy-test-waiters)
+# (no-legacy-test-waiters)
 
-The legacy test waiters API has been superseded by the new [ember-test-waiters](https://github.com/rwjblue/ember-test-waiters) addon.
-This new addon provides an enhanced test waiter with robust debugging capabilities. Please use this in favor of the legacy waiter system.
+Prevents the use of the legacy test waiter APIs.
 
 ## Rule Details
+
+The legacy test waiters API has been superseded by the new [ember-test-waiters](https://github.com/emberjs/ember-test-waiters) addon.
+This new addon provides an enhanced test waiter with robust debugging capabilities. Please use this in favor of the legacy waiter system.
+
+## Examples
 
 Examples of **incorrect** code for this rule:
 
@@ -75,6 +79,6 @@ export default Component.extend({
 });
 ```
 
-## Further Reading
+## References
 
-For more infomation on the new test waiters API, please visit [ember-test-waiters](https://github.com/rwjblue/ember-test-waiters).
+For more information on the new test waiters API, please visit [ember-test-waiters](https://github.com/emberjs/ember-test-waiters).
