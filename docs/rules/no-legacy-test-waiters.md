@@ -5,7 +5,7 @@ Prevents the use of the legacy test waiter APIs.
 ## Rule Details
 
 The legacy test waiters API has been superseded by the new [ember-test-waiters](https://github.com/emberjs/ember-test-waiters) addon.
-This new addon provides an enhanced test waiter with robust debugging capabilities. Please use this in favor of the legacy waiter system.
+This new addon provides an enhanced test waiter with robust debugging capabilities. Please use this in favor of the legacy waiter system, as detailed in [RFC 581](https://github.com/emberjs/rfcs/blob/master/text/0581-new-test-waiters.md).
 
 ## Examples
 
