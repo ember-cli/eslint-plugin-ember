@@ -23,32 +23,27 @@ ruleTester.run('no-legacy-test-waiters', rule, {
           let token = waiter.beginAsync();
 
           someAsync()
-            .then(() => console.log('hi'))
             .finally(() => waiter.endAsync(token));
         }
       });`,
+    `
+      import { registerWaiter } from 'table-waiters';
+
+      registerWaiter();
+    `,
+    `
+      import { unregisterWaiter } from 'table-waiters';
+
+      unregisterWaiter();
+    `,
   ],
   invalid: [
     {
       code: `
-        import Component from '@ember/component';
         import { registerWaiter } from '@ember/test';
 
-        let counter = 0;
-
-        if (DEBUG) {
-          registerWaiter(() => {
-            return counter === 0;
-          });
-        }
-
-        export default Component.extend({
-          init() {
-            counter++;
-            someAsync()
-              .then(() => console.log('hi'))
-              .finally(() => counter--);
-          }
+        registerWaiter(() => {
+          return counter === 0;
         });
       `,
       output: null,
@@ -56,30 +51,31 @@ ruleTester.run('no-legacy-test-waiters', rule, {
     },
     {
       code: `
-        import Component from '@ember/component';
+        import { registerWaiter as reg } from '@ember/test';
+
+        reg(() => {
+          return counter === 0;
+        });
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE }, { message: ERROR_MESSAGE }],
+    },
+    {
+      code: `
         import { registerWaiter, unregisterWaiter } from '@ember/test';
 
-        let counter = 0;
-        let waiter = () => {
-          return counter === 0;
-        }
+        registerWaiter(waiter);
+        unregisterWaiter(waiter);
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE }, { message: ERROR_MESSAGE }, { message: ERROR_MESSAGE }],
+    },
+    {
+      code: `
+        import { registerWaiter as reg, unregisterWaiter as unreg } from '@ember/test';
 
-        if (DEBUG) {
-          registerWaiter(waiter);
-        }
-
-        export default Component.extend({
-          init() {
-            counter++;
-            someAsync()
-              .then(() => console.log('hi'))
-              .finally(() => counter--);
-          },
-
-          willDestroy() {
-            unregisterWaiter(waiter);
-          }
-        });
+        reg(waiter);
+        unreg(waiter);
       `,
       output: null,
       errors: [{ message: ERROR_MESSAGE }, { message: ERROR_MESSAGE }, { message: ERROR_MESSAGE }],

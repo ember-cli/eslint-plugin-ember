@@ -21,3 +21,26 @@ describe('getSourceModuleName', () => {
     expect(importUtils.getSourceModuleName(node)).toStrictEqual('Model');
   });
 });
+
+describe('getImportIdentifiers', () => {
+  it('gets an empty array when no import is found', () => {
+    const node = babelEslint.parse("import { later } from '@ember/runloop';").body[0];
+    expect(importUtils.getImportIdentifiers(node, { '@ember/object': ['action'] })).toHaveLength(0);
+  });
+
+  it('gets an array of identifiers when found', () => {
+    const node = babelEslint.parse("import { later } from '@ember/runloop';").body[0];
+    const identifiers = importUtils.getImportIdentifiers(node, { '@ember/runloop': ['later'] });
+
+    expect(identifiers).toHaveLength(1);
+    expect(identifiers).toStrictEqual(['later']);
+  });
+
+  it('gets an array of aliased identifiers when found', () => {
+    const node = babelEslint.parse("import { later as laterz } from '@ember/runloop';").body[0];
+    const identifiers = importUtils.getImportIdentifiers(node, { '@ember/runloop': ['later'] });
+
+    expect(identifiers).toHaveLength(1);
+    expect(identifiers).toStrictEqual(['laterz']);
+  });
+});

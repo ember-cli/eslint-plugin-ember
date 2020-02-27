@@ -1,4 +1,4 @@
-# (no-legacy-test-waiters)
+# no-legacy-test-waiters
 
 Prevents the use of the legacy test waiter APIs.
 
