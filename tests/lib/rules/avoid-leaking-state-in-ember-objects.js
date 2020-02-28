@@ -11,7 +11,7 @@ const RuleTester = require('eslint').RuleTester;
 
 describe('imports', () => {
   it('should expose the default ignored properties', () => {
-    expect(rule.DEFAULT_IGNORED_PROPERTIES).toEqual([
+    expect(rule.DEFAULT_IGNORED_PROPERTIES).toStrictEqual([
       'classNames',
       'classNameBindings',
       'actions',
@@ -63,6 +63,9 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     'export default Foo.extend({ foo: abc.something() });',
     'export default Foo.extend({ foo: !true });',
     'export default Foo.extend({ ...props });',
+    'export default Foo.extend({ foo: condition ? "foo" : "bar" });',
+    'export default Foo.extend({ foo: "foo" && "bar" });',
+    'export default Foo.extend({ foo: "foo" || "bar" });',
   ],
   invalid: [
     {
@@ -158,6 +161,66 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     },
     {
       code: 'export default Foo.reopen({ otherThing: {} });',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+    {
+      code: 'export default Foo.extend({ foo: condition ? {} : false });',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+    {
+      code: 'export default Foo.extend({ foo: condition ? false : {} });',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+    {
+      code: 'export default Foo.extend({ foo: false && {} });',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+    {
+      code: 'export default Foo.extend({ foo: {} && false });',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+    {
+      code: 'export default Foo.extend({ foo: false || {} });',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+    {
+      code: 'export default Foo.extend({ foo: {} || false });',
       output: null,
       errors: [
         {

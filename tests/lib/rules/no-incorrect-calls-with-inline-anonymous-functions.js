@@ -147,6 +147,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { once } from '@ember/runloop';
         once(function() {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
     },
     {
@@ -154,6 +155,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { once } from '@ember/runloop';
         once(this, function() {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
     },
     {
@@ -161,6 +163,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { once, scheduleOnce } from '@ember/runloop';
         once(function() {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
     },
     {
@@ -168,6 +171,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { scheduleOnce } from '@ember/runloop';
         scheduleOnce('afterRender', function() {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
     },
     {
@@ -175,6 +179,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { scheduleOnce } from '@ember/runloop';
         scheduleOnce('afterRender', this, function() {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
     },
     {
@@ -182,6 +187,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { once, scheduleOnce } from '@ember/runloop';
         scheduleOnce('afterRender', this, function() {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
     },
     {
@@ -189,6 +195,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { debounce } from '@ember/runloop';
         debounce(this, function() {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
     },
     {
@@ -196,6 +203,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { run } from '@ember/runloop';
         run.once(function() {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
     },
     {
@@ -203,6 +211,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { run } from '@ember/runloop';
         run.once(this, function() {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
     },
     {
@@ -210,6 +219,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { run } from '@ember/runloop';
         run.scheduleOnce('afterRender', function() {})
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
     },
     {
@@ -217,6 +227,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { run } from '@ember/runloop';
         run.scheduleOnce('afterRender', this, function() {})
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
     },
     {
@@ -224,6 +235,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { once, scheduleOnce, run } from '@ember/runloop';
         run.scheduleOnce('afterRender', this, function() {})
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
     },
     {
@@ -231,6 +243,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { run } from '@ember/runloop';
         run.scheduleOnce('afterRender', this, () => {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
     {
@@ -238,6 +251,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { scheduleOnce } from '@ember/runloop';
         scheduleOnce('afterRender', this, () => {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
     {
@@ -245,6 +259,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { once } from '@ember/runloop';
         once(this, () => {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
     {
@@ -252,6 +267,7 @@ ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
         import { debounce } from '@ember/runloop';
         debounce(this, () => {});
       `,
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
   ],

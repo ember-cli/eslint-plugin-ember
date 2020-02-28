@@ -21,11 +21,13 @@ const path = require('path');
 const root = path.resolve(__dirname, '../lib/rules');
 const readmeFile = path.resolve(__dirname, '../README.md');
 const recommendedRulesFile = path.resolve(__dirname, '../lib/recommended-rules.js');
-const tablePlaceholder = /<!--RULES_TABLE_START-->[\s\S]*<!--RULES_TABLE_END-->/;
+const octaneRulesFile = path.resolve(__dirname, '../lib/octane-rules.js');
+const tablePlaceholder = /<!--RULES_TABLE_START-->[\S\s]*<!--RULES_TABLE_END-->/;
 const readmeContent = fs.readFileSync(readmeFile, 'utf8');
 
 const STAR = ':white_check_mark:';
 const PEN = ':wrench:';
+const OCTANE = ':car:';
 
 const rules = fs
   .readdirSync(root)
@@ -44,8 +46,7 @@ const categories = rules
 
 let rulesTableContent = categories
   .map(
-    category => `
-### ${category}
+    category => `### ${category}
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
@@ -54,7 +55,9 @@ ${rules
   .map(entry => {
     const name = entry[0];
     const meta = entry[1].meta;
-    const mark = `${meta.docs.recommended ? STAR : ''}${meta.fixable ? PEN : ''}`;
+    const mark = `${meta.docs.recommended ? STAR : ''}${meta.docs.octane ? OCTANE : ''}${
+      meta.fixable ? PEN : ''
+    }`;
     const link = `[${name}](./docs/rules/${name}.md)`;
     const description = meta.docs.description || '(no description)';
     return `| ${mark} | ${link} | ${description} |`;
@@ -107,8 +110,27 @@ fs.writeFileSync(
   readmeFile,
   readmeContent.replace(
     tablePlaceholder,
-    `<!--RULES_TABLE_START-->\n${rulesTableContent}\n<!--RULES_TABLE_END-->`
+    `<!--RULES_TABLE_START-->\n\n${rulesTableContent}\n<!--RULES_TABLE_END-->`
   )
 );
 
 fs.writeFileSync(recommendedRulesFile, recommendedRulesContent);
+
+const octaneRules = rules.reduce((obj, entry) => {
+  const name = `ember/${entry[0]}`;
+  const octane = entry[1].meta.docs.octane;
+  if (octane) {
+    obj[name] = 'error'; // eslint-disable-line no-param-reassign
+  }
+  return obj;
+}, {});
+
+const octaneRulesContent = `/*
+ * IMPORTANT!
+ * This file has been automatically generated.
+ * In order to update its content based on rules'
+ * definitions, execute "npm run update"
+ */
+module.exports = ${JSON.stringify(octaneRules, null, 2)}`;
+
+fs.writeFileSync(octaneRulesFile, octaneRulesContent);

@@ -1,10 +1,8 @@
-## Organize your routes
+# order-in-routes
 
-### Rule name: `order-in-routes`
+## Configuration
 
-#### Configuration
-
-```
+```js
 ember/order-in-routes: [2, {
   order: [
     'service',
@@ -30,7 +28,7 @@ ember/order-in-routes: [2, {
 
 If you want some of properties to be treated equally in order you can group them into arrays, like so:
 
-```
+```js
 order: [
   'service',
   ['inherited-property', 'property'],
@@ -52,9 +50,15 @@ order: [
 ]
 ```
 
-You can find full list of properties that you can use to configure this rule [here](/lib/utils/property-order.js#L10).
+### Custom Properties
 
-#### Description
+If you would like to specify ordering for a property type that is not listed, you can use the custom property syntax `custom:myPropertyName` in the order list to specify where the property should go.
+
+### Additional Properties
+
+You can find the full list of properties [here](/lib/utils/property-order.js#L10).
+
+## Description
 
 You should write code grouped and ordered in this way:
 
@@ -89,12 +93,12 @@ export default Route.extend({
       this.transitionTo('index');
     }
   },
-  
+
   // 5. model hook
   model() {
     return this.store.findAll('article');
   },
-  
+
   // 6. afterModel hook
   afterModel(articles) {
     articles.forEach((article) => {
@@ -120,3 +124,9 @@ export default Route.extend({
   },
 });
 ```
+
+## Help Wanted
+
+| Issue | Link |
+| :-- | :-- |
+| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

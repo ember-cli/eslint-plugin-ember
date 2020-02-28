@@ -1,10 +1,8 @@
-## Organize your models
+# order-in-models
 
-### Rule name: `order-in-models`
+## Configuration
 
-#### Configuration
-
-```
+```js
 ember/order-in-models: [2, {
   order: [
     'attribute',
@@ -17,7 +15,7 @@ ember/order-in-models: [2, {
 
 If you want some of properties to be treated equally in order you can group them into arrays, like so:
 
-```
+```js
 order: [
   'attribute',
   'relationship',
@@ -25,9 +23,15 @@ order: [
 ]
 ```
 
-You can find full list of properties that you can use to configure this rule [here](/lib/utils/property-order.js#L10).
+### Custom Properties
 
-#### Description
+If you would like to specify ordering for a property type that is not listed, you can use the custom property syntax `custom:myPropertyName` in the order list to specify where the property should go.
+
+### Additional Properties
+
+You can find the full list of properties [here](/lib/utils/property-order.js#L10).
+
+## Description
 
 You should write code grouped and ordered in this way:
 
@@ -67,3 +71,9 @@ export default Model.extend({
   shape: attr('string')
 });
 ```
+
+## Help Wanted
+
+| Issue | Link |
+| :-- | :-- |
+| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

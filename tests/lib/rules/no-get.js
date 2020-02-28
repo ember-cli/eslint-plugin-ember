@@ -100,6 +100,55 @@ ruleTester.run('no-get', rule, {
       code: "getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
       options: [{ ignoreGetProperties: true }],
     },
+
+    // Ignores `get()` inside proxy objects (which still require using `get()`):
+    `
+    import ObjectProxy from '@ember/object/proxy';
+    export default ObjectProxy.extend({
+      someFunction() {
+        test();
+        console.log(this.get('propertyInsideProxyObject'));
+      }
+    });
+    `,
+    `
+    import ArrayProxy from '@ember/array/proxy';
+    export default ArrayProxy.extend({
+      someFunction() {
+        test();
+        console.log(this.get('propertyInsideProxyObject'));
+      }
+    });
+    `,
+    `
+    import ArrayProxy from '@ember/array/proxy';
+    class MyProxy extends ArrayProxy {
+      someFunction() {
+        test();
+        console.log(this.get('propertyInsideProxyObject'));
+      }
+    }
+    `,
+
+    // Ignores `get()` inside classes with `unknownProperty`:
+    `
+    import EmberObject from '@ember/object';
+    export default EmberObject.extend({
+      unknownProperty() {},
+      someFunction() {
+        console.log(this.get('propertyInsideClassWithUnknownProperty'));
+      }
+    });
+    `,
+    `
+    import EmberObject from '@ember/object';
+    class MyClass extends EmberObject {
+      unknownProperty() {}
+      someFunction() {
+        console.log(this.get('propertyInsideClassWithUnknownProperty'));
+      }
+    }
+    `,
   ],
   invalid: [
     // **************************
@@ -108,18 +157,30 @@ ruleTester.run('no-get', rule, {
 
     {
       code: "this.get('foo');",
-      output: null,
-      errors: [{ message: makeErrorMessageForGet('foo', false) }],
+      output: 'this.foo;',
+      errors: [{ message: makeErrorMessageForGet('foo', false), type: 'CallExpression' }],
     },
     {
       code: "get(this, 'foo');",
-      output: null,
-      errors: [{ message: makeErrorMessageForGet('foo', true) }],
+      output: 'this.foo;',
+      errors: [{ message: makeErrorMessageForGet('foo', true), type: 'CallExpression' }],
     },
     {
       code: "this.get('foo').someFunction();",
+      output: 'this.foo.someFunction();',
+      errors: [{ message: makeErrorMessageForGet('foo', false), type: 'CallExpression' }],
+    },
+    {
+      // With invalid JS variable name:
+      code: "this.get('foo-bar');",
       output: null,
-      errors: [{ message: makeErrorMessageForGet('foo', false) }],
+      errors: [{ message: makeErrorMessageForGet('foo-bar', false), type: 'CallExpression' }],
+    },
+    {
+      // With invalid JS variable name:
+      code: "get(this, 'foo-bar');",
+      output: null,
+      errors: [{ message: makeErrorMessageForGet('foo-bar', true), type: 'CallExpression' }],
     },
 
     // **************************
@@ -145,6 +206,130 @@ ruleTester.run('no-get', rule, {
       code: "getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
       output: null,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+
+    // With ignoreNestedPaths: false
+    {
+      code: "this.get('foo.bar');",
+      output: null,
+      options: [{ ignoreNestedPaths: false }],
+      errors: [{ message: makeErrorMessageForGet('foo.bar', false), type: 'CallExpression' }],
+    },
+    {
+      code: "get(this, 'foo.bar');",
+      output: null,
+      options: [{ ignoreNestedPaths: false }],
+      errors: [{ message: makeErrorMessageForGet('foo.bar', true), type: 'CallExpression' }],
+    },
+    {
+      code: "this.getProperties('foo.bar');",
+      output: null,
+      options: [{ ignoreNestedPaths: false }],
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: "getProperties(this, 'foo.bar');",
+      output: null,
+      options: [{ ignoreNestedPaths: false }],
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+
+    {
+      // Reports violation after (classic) proxy class.
+      code: `
+      import ArrayProxy from '@ember/array/proxy';
+      export default ArrayProxy.extend({
+        someFunction() {
+          test();
+          console.log(this.get('propertyInsideProxyObject'));
+        }
+      });
+      this.get('propertyOutsideClass');
+      `,
+      output: `
+      import ArrayProxy from '@ember/array/proxy';
+      export default ArrayProxy.extend({
+        someFunction() {
+          test();
+          console.log(this.get('propertyInsideProxyObject'));
+        }
+      });
+      this.propertyOutsideClass;
+      `,
+      errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
+    },
+    {
+      // Reports violation after (native) proxy class.
+      code: `
+      import ArrayProxy from '@ember/array/proxy';
+      class MyProxy extends ArrayProxy {
+        someFunction() {
+          test();
+          console.log(this.get('propertyInsideProxyObject'));
+        }
+      }
+      this.get('propertyOutsideClass');
+      `,
+      output: `
+      import ArrayProxy from '@ember/array/proxy';
+      class MyProxy extends ArrayProxy {
+        someFunction() {
+          test();
+          console.log(this.get('propertyInsideProxyObject'));
+        }
+      }
+      this.propertyOutsideClass;
+      `,
+      errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
+    },
+
+    {
+      // Reports violation after (classic) class with `unknownProperty()`.
+      code: `
+      import EmberObject from '@ember/object';
+      export default EmberObject.extend({
+        unknownProperty() {},
+        someFunction() {
+          console.log(this.get('propertyInsideClassWithUnknownProperty'));
+        }
+      });
+      this.get('propertyOutsideClass');
+      `,
+      output: `
+      import EmberObject from '@ember/object';
+      export default EmberObject.extend({
+        unknownProperty() {},
+        someFunction() {
+          console.log(this.get('propertyInsideClassWithUnknownProperty'));
+        }
+      });
+      this.propertyOutsideClass;
+      `,
+      errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
+    },
+    {
+      // Reports violation after (native) class with `unknownProperty()`.
+      code: `
+      import EmberObject from '@ember/object';
+      class MyClass extends EmberObject {
+        unknownProperty() {}
+        someFunction() {
+          console.log(this.get('propertyInsideClassWithUnknownProperty'));
+        }
+      }
+      this.get('propertyOutsideClass');
+      `,
+      output: `
+      import EmberObject from '@ember/object';
+      class MyClass extends EmberObject {
+        unknownProperty() {}
+        someFunction() {
+          console.log(this.get('propertyInsideClassWithUnknownProperty'));
+        }
+      }
+      this.propertyOutsideClass;
+      `,
+      errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
     },
   ],
 });

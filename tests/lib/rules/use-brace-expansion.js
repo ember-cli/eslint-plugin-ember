@@ -5,6 +5,8 @@
 const rule = require('../../../lib/rules/use-brace-expansion');
 const RuleTester = require('eslint').RuleTester;
 
+const { ERROR_MESSAGE } = rule;
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
@@ -30,7 +32,12 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+          line: 1,
+          endLine: 1,
+          column: 18,
+          endColumn: 73,
         },
       ],
     },
@@ -39,7 +46,12 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+          line: 1,
+          endLine: 1,
+          column: 18,
+          endColumn: 37,
         },
       ],
     },
@@ -48,7 +60,12 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+          line: 1,
+          endLine: 1,
+          column: 18,
+          endColumn: 52,
         },
       ],
     },
@@ -57,7 +74,12 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+          line: 1,
+          endLine: 1,
+          column: 18,
+          endColumn: 45,
         },
       ],
     },
@@ -66,7 +88,12 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+          line: 1,
+          endLine: 1,
+          column: 18,
+          endColumn: 56,
         },
       ],
     },
@@ -75,7 +102,12 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+          line: 1,
+          endLine: 1,
+          column: 18,
+          endColumn: 45,
         },
       ],
     },
@@ -84,7 +116,12 @@ eslintTester.run('use-brace-expansion', rule, {
       output: null,
       errors: [
         {
-          message: 'Use brace expansion',
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+          line: 1,
+          endLine: 1,
+          column: 18,
+          endColumn: 37,
         },
       ],
     },

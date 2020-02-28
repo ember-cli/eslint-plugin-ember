@@ -82,38 +82,47 @@ ruleTester.run('route-path-style', rule, {
   invalid: [
     {
       code: 'this.route("blog_posts");',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blogPosts");',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blogPosts", function() {});',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blog-posts", { path: "/blog_posts" });',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blog-posts", { path: "/blogPosts" });',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blog-posts", { path: "/blogPosts/:blog_id" });',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blog-posts", { path: "/blog-posts/:blog_id/otherPart" });',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blog-posts", { path: "/blogPosts/*path" });',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.route("blog-posts", { path: "/blogPosts" }, function() {});',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
   ],

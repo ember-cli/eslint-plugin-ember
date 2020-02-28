@@ -9,35 +9,22 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
+
 eslintTester.run('require-return-from-computed', rule, {
   valid: [
-    {
-      code: 'let foo = computed("test", function() { return ""; })',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'let foo = computed("test", { get() { return true; }, set() { return true; } })',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'let foo = computed("test", function() { if (true) { return ""; } return ""; })',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code:
-        'let foo = computed("test", { get() { data.forEach(function() { }); return true; }, set() { return true; } })',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
-    {
-      code: 'let foo = computed("test", function() { data.forEach(function() { }); return ""; })',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
+    'let foo = computed("test", function() { return ""; })',
+    'let foo = computed("test", { get() { return true; }, set() { return true; } })',
+    'let foo = computed("test", function() { if (true) { return ""; } return ""; })',
+    'let foo = computed("test", { get() { data.forEach(function() { }); return true; }, set() { return true; } })',
+    'let foo = computed("test", function() { data.forEach(function() { }); return ""; })',
   ],
   invalid: [
     {
       code: 'let foo = computed("test", function() { })',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         {
           message: 'Always return a value from computed properties',
@@ -46,7 +33,7 @@ eslintTester.run('require-return-from-computed', rule, {
     },
     {
       code: 'let foo = computed("test", function() { if (true) { return ""; } })',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         {
           message: 'Always return a value from computed properties',
@@ -55,7 +42,7 @@ eslintTester.run('require-return-from-computed', rule, {
     },
     {
       code: 'let foo = computed("test", { get() {}, set() {} })',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         {
           message: 'Always return a value from computed properties',
@@ -67,7 +54,7 @@ eslintTester.run('require-return-from-computed', rule, {
     },
     {
       code: 'let foo = computed({ get() { return "foo"; }, set() { }})',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         {
           message: 'Always return a value from computed properties',
@@ -76,7 +63,7 @@ eslintTester.run('require-return-from-computed', rule, {
     },
     {
       code: 'let foo = computed({ get() { }, set() { return "foo"; }})',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: null,
       errors: [
         {
           message: 'Always return a value from computed properties',

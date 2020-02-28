@@ -1,8 +1,6 @@
-## Alias your model
+# alias-model-in-controller
 
-### Rule name: `alias-model-in-controller`
-
-It makes code more readable if model has the same name as a subject. We can do this in two ways:
+It makes code more readable if the model has the same name as a subject. We can do this in two ways:
 
 - Alias the model to another property name in the Controller:
 
@@ -38,3 +36,9 @@ export default Controller.extend({
   pets: reads('model.pets')
 });
 ```
+
+## Help Wanted
+
+| Issue | Link |
+| :-- | :-- |
+| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

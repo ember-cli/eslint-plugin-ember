@@ -1,49 +1,16 @@
-# Disallow use of attrs snapshot in `didReceiveAttrs` and `didUpdateAttrs` (no-attrs-snapshot)
+# no-attrs-snapshot
 
-Do not use the arguments (attrs) that are passed in `didReceiveAttrs` and `didUpdateAttrs`. Using the arguments (attrs) in these hooks can result in performance degredation in your application.
+Disallow use of attrs snapshot in `didReceiveAttrs` and `didUpdateAttrs`.
 
-```js
-
-// Bad
-export default Ember.Component({
-  init() {
-    this._super(...arguments);
-    this.updated = false;
-  },
-  didReceiveAttrs(attrs) {
-    let { newAttrs, oldAttrs } = attrs;
-    if ((newAttrs && oldAttrs) && newAttrs.value !== oldAttrs.value) {
-      this.set('updated', true);
-    } else {
-      this.set('updated', false);
-    }
-  }
-});
-
-// Good
-export default Ember.Component({
-  init() {
-    this._super(...arguments);
-    this._valueCache = this.value;
-    this.updated = false;
-  },
-  didReceiveAttrs() {
-    if (this._valueCache !== this.value) {
-      this._valueCache = this.value;
-      this.set('updated', true);
-    } else {
-      this.set('updated', false);
-    }
-  }
-});
-
-```
+Do not use the arguments (attrs) that are passed in `didReceiveAttrs` and `didUpdateAttrs`. Using the arguments (attrs) in these hooks can result in performance degradation in your application.
 
 ## Rule Details
 
-In 2.0.0, `didReceiveAttrs` and `didUpdateAttrs` hooks were introduced. These hooks are called whenever the references of arguments to a component change. These hooks receive arguments, however one should not use them as they force those objects to reify, which can be very costly when you have a lot of components on the page. These arguments are also purposely undocumented. 
+In 2.0.0, `didReceiveAttrs` and `didUpdateAttrs` hooks were introduced. These hooks are called whenever the references of arguments to a component change. These hooks receive arguments, however one should not use them as they force those objects to reify, which can be very costly when you have a lot of components on the page. These arguments are also purposely undocumented.
 
 If for some reason you need to do a comparison of arguments we suggest that you simply keep a cache on the component.
+
+## Examples
 
 Examples of **incorrect** code for this rule:
 

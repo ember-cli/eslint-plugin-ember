@@ -1,14 +1,15 @@
-## Don't create new Mixins
+# no-new-mixins
 
-### Rule name: `no-new-mixins`
+Using mixins to share code appears easy at first. But they add significant complexity as a project grows. Furthermore, the [Octane programming model](https://guides.emberjs.com/release/upgrading/current-edition/) eliminates the need to use them in favor of native class semantics and other primitives.
 
-Using mixins makes sharing code simple at first, but add significant complexity as a project developes and grows larger.
+For practical strategies on removing mixins see [this discourse thread](https://discuss.emberjs.com/t/best-way-to-replace-mixins/17395/2).
 
 For more details and examples of how mixins create problems down-the-line, see these excellent blog posts:
+
 * [Mixins Considered Harmful](https://reactjs.org/blog/2016/07/13/mixins-considered-harmful.html)
 * [Why Are Mixins Considered Harmful?](http://raganwald.com/2016/07/16/why-are-mixins-considered-harmful.html)
 
-### Examples
+## Examples
 
 Examples of **incorrect** code for this rule:
 

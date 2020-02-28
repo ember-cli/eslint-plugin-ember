@@ -2,6 +2,7 @@
 
 const babelEslint = require('babel-eslint');
 const emberUtils = require('../../../lib/utils/ember');
+const { FauxContext } = require('../../helpers/faux-context');
 
 function parse(code) {
   return babelEslint.parse(code).body[0].expression;
@@ -37,12 +38,12 @@ describe('isDSModel', () => {
   });
 
   describe("should check if it's a DS Model even if it uses custom name", () => {
-    it("it shouldn't detect Model when no file path is provided", () => {
+    it("shouldn't detect Model when no file path is provided", () => {
       const node = parse('CustomModel.extend()');
       expect(emberUtils.isDSModel(node)).toBeFalsy();
     });
 
-    it('it should detect Model when file path is provided', () => {
+    it('should detect Model when file path is provided', () => {
       const node = parse('CustomModel.extend()');
       const filePath = 'example-app/models/path/to/some-model.js';
       expect(emberUtils.isDSModel(node, filePath)).toBeTruthy();
@@ -97,93 +98,185 @@ describe('isTestFile', () => {
 });
 
 describe('isEmberCoreModule', () => {
-  it('should check if current file is a component', () => {
-    const node = parse('CustomComponent.extend()');
-    const filePath = 'example-app/components/path/to/some-component.js';
-    expect(emberUtils.isEmberCoreModule(node, 'component', filePath)).toBeTruthy();
+  it('should check if current file is a component (custom)', () => {
+    const context = new FauxContext(
+      'CustomComponent.extend()',
+      'example-app/components/path/to/some-component.js'
+    );
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberCoreModule(context, node, 'Component')).toBeTruthy();
   });
 
   it('should check if current file is a component', () => {
-    const node = parse('Component.extend()');
-    const filePath = 'example-app/some-twisted-path/some-component.js';
-    expect(emberUtils.isEmberCoreModule(node, 'component', filePath)).toBeTruthy();
+    const context = new FauxContext(
+      'Component.extend()',
+      'example-app/some-twisted-path/some-component.js'
+    );
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberCoreModule(context, node, 'Component')).toBeTruthy();
+  });
+
+  it('should check if current file is a controller (custom)', () => {
+    const context = new FauxContext(
+      'CustomController.extend()',
+      'example-app/controllers/path/to/some-controller.js'
+    );
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberCoreModule(context, node, 'Controller')).toBeTruthy();
   });
 
   it('should check if current file is a controller', () => {
-    const node = parse('CustomController.extend()');
-    const filePath = 'example-app/controllers/path/to/some-controller.js';
-    expect(emberUtils.isEmberCoreModule(node, 'controller', filePath)).toBeTruthy();
+    const context = new FauxContext(
+      'Controller.extend()',
+      'example-app/some-twisted-path/some-controller.js'
+    );
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberCoreModule(context, node, 'Controller')).toBeTruthy();
   });
 
-  it('should check if current file is a controller', () => {
-    const node = parse('Controller.extend()');
-    const filePath = 'example-app/some-twisted-path/some-controller.js';
-    expect(emberUtils.isEmberCoreModule(node, 'controller', filePath)).toBeTruthy();
+  it('should check if current file is a route (custom)', () => {
+    const context = new FauxContext(
+      'CustomRoute.extend()',
+      'example-app/routes/path/to/some-route.js'
+    );
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberCoreModule(context, node, 'Route')).toBeTruthy();
   });
 
   it('should check if current file is a route', () => {
-    const node = parse('CustomRoute.extend()');
-    const filePath = 'example-app/routes/path/to/some-route.js';
-    expect(emberUtils.isEmberCoreModule(node, 'route', filePath)).toBeTruthy();
+    const context = new FauxContext(
+      'Route.extend()',
+      'example-app/some-twisted-path/some-route.js'
+    );
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberCoreModule(context, node, 'Route')).toBeTruthy();
   });
 
-  it('should check if current file is a route', () => {
-    const node = parse('Route.extend()');
-    const filePath = 'example-app/some-twisted-path/some-route.js';
-    expect(emberUtils.isEmberCoreModule(node, 'route', filePath)).toBeTruthy();
+  it('throws when called on wrong type of node', () => {
+    const context = new FauxContext('const x = 123;');
+    const node = context.ast.body[0];
+    expect(() => emberUtils.isEmberCoreModule(context, node, 'Route')).toThrow(
+      'Function should only be called on a `CallExpression` (classic class) or `ClassDeclaration` (native class)'
+    );
   });
 });
 
 describe('isEmberComponent', () => {
   describe("should check if it's an Ember Component", () => {
-    it('it should detect Component when using Ember.Component', () => {
-      const node = parse('Ember.Component.extend()');
-      expect(emberUtils.isEmberComponent(node)).toBeTruthy();
+    it('should detect Component when using Ember.Component', () => {
+      const context = new FauxContext('Ember.Component.extend()');
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberComponent(context, node)).toBeTruthy();
     });
 
-    it('it should detect Component when using local module Component', () => {
-      const node = parse('Component.extend()');
-      expect(emberUtils.isEmberComponent(node)).toBeTruthy();
+    it('should detect Component when using local module Component', () => {
+      const context = new FauxContext('Component.extend()');
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberComponent(context, node)).toBeTruthy();
+    });
+
+    it('should detect Component when using native classes', () => {
+      const context = new FauxContext(`
+        import Component from '@ember/component';
+        class MyComponent extends Component {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberComponent(context, node)).toBeTruthy();
+    });
+
+    it('shouldnt detect Component when using native classes if the import path is incorrect', () => {
+      const context = new FauxContext(`
+        import Component from '@something-else/component';
+        class MyComponent extends Component {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberComponent(context, node)).toBeFalsy();
     });
   });
 
   describe("should check if it's an Ember Component even if it uses custom name", () => {
-    it("it shouldn't detect Component when no file path is provided", () => {
-      const node = parse('CustomComponent.extend()');
-      expect(emberUtils.isEmberComponent(node)).toBeFalsy();
+    it("shouldn't detect Component when no file path is provided", () => {
+      const context = new FauxContext('CustomComponent.extend()');
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberComponent(context, node)).toBeFalsy();
     });
 
-    it('it should detect Component when file path is provided', () => {
-      const node = parse('CustomComponent.extend()');
-      const filePath = 'example-app/components/path/to/some-component.js';
-      expect(emberUtils.isEmberComponent(node, filePath)).toBeTruthy();
+    it('should detect Component when file path is provided', () => {
+      const context = new FauxContext(
+        'CustomComponent.extend()',
+        'example-app/components/path/to/some-component.js'
+      );
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberComponent(context, node)).toBeTruthy();
+    });
+
+    it('should detect Component when using native classes if the import path is correct', () => {
+      const context = new FauxContext(`
+        import CustomComponent from '@ember/component';
+        class MyComponent extends CustomComponent {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberComponent(context, node)).toBeTruthy();
     });
   });
 });
 
 describe('isEmberController', () => {
   describe("should check if it's an Ember Controller", () => {
-    it('it should detect Controller when using Ember.Controller', () => {
-      const node = parse('Ember.Controller.extend()');
-      expect(emberUtils.isEmberController(node)).toBeTruthy();
+    it('should detect Controller when using Ember.Controller', () => {
+      const context = new FauxContext('Ember.Controller.extend()');
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberController(context, node)).toBeTruthy();
     });
 
-    it('it should detect Controller when using local module Controller', () => {
-      const node = parse('Controller.extend()');
-      expect(emberUtils.isEmberController(node)).toBeTruthy();
+    it('should detect Controller when using local module Controller', () => {
+      const context = new FauxContext('Controller.extend()');
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberController(context, node)).toBeTruthy();
+    });
+
+    it('should detect Controller when using native classes', () => {
+      const context = new FauxContext(`
+        import Controller from '@ember/controller';
+        class MyController extends Controller {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberController(context, node)).toBeTruthy();
+    });
+
+    it('shouldnt detect Controller when using native classes if the import path is incorrect', () => {
+      const context = new FauxContext(`
+        import Controller from '@something-else/controller';
+        class MyController extends Controller {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberController(context, node)).toBeFalsy();
     });
   });
 
   describe("should check if it's an Ember Controller even if it uses custom name", () => {
-    it("it shouldn't detect Controller when no file path is provided", () => {
-      const node = parse('CustomController.extend()');
-      expect(emberUtils.isEmberController(node)).toBeFalsy();
+    it("shouldn't detect Controller when no file path is provided", () => {
+      const context = new FauxContext('CustomController.extend()');
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberController(context, node)).toBeFalsy();
     });
 
-    it('it should detect Controller when file path is provided', () => {
-      const node = parse('CustomController.extend()');
-      const filePath = 'example-app/controllers/path/to/some-feature.js';
-      expect(emberUtils.isEmberController(node, filePath)).toBeTruthy();
+    it('should detect Controller when file path is provided', () => {
+      const context = new FauxContext(
+        'CustomController.extend()',
+        'example-app/controllers/path/to/some-feature.js'
+      );
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberController(context, node)).toBeTruthy();
+    });
+
+    it('should detect Controller when using native classes if the import path is correct', () => {
+      const context = new FauxContext(`
+        import CustomController from '@ember/controller';
+        class MyController extends CustomController {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberController(context, node)).toBeTruthy();
     });
   });
 });
@@ -191,26 +284,93 @@ describe('isEmberController', () => {
 describe('isEmberRoute', () => {
   describe("should check if it's an Ember Route", () => {
     it('should detect Route when using Ember.Route', () => {
-      const node = parse('Ember.Route.extend()');
-      expect(emberUtils.isEmberRoute(node)).toBeTruthy();
+      const context = new FauxContext('Ember.Route.extend()');
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberRoute(context, node)).toBeTruthy();
     });
 
     it('should detect Route when using local module Route', () => {
-      const node = parse('Route.extend()');
-      expect(emberUtils.isEmberRoute(node)).toBeTruthy();
+      const context = new FauxContext('Route.extend()');
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberRoute(context, node)).toBeTruthy();
+    });
+
+    it('should detect Route when using native classes', () => {
+      const context = new FauxContext(`
+        import Route from '@ember/routing/route';
+        class MyRoute extends Route {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberRoute(context, node)).toBeTruthy();
+    });
+
+    it('shouldnt detect Route when using native classes if the import path is incorrect', () => {
+      const context = new FauxContext(`
+        import Route from '@something-else/routing/route';
+        class MyRoute extends Route {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberRoute(context, node)).toBeFalsy();
     });
   });
 
   describe("should check if it's an Ember Route even if it uses custom name", () => {
-    it("it shouldn't detect Route when no file path is provided", () => {
-      const node = parse('CustomRoute.extend()');
-      expect(emberUtils.isEmberRoute(node)).toBeFalsy();
+    it("shouldn't detect Route when no file path is provided", () => {
+      const context = new FauxContext('CustomRoute.extend()');
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberRoute(context, node)).toBeFalsy();
     });
 
-    it('it should detect Route when file path is provided', () => {
-      const node = parse('CustomRoute.extend()');
-      const filePath = 'example-app/routes/path/to/some-feature.js';
-      expect(emberUtils.isEmberRoute(node, filePath)).toBeTruthy();
+    it('should detect Route when file path is provided', () => {
+      const context = new FauxContext(
+        'CustomRoute.extend()',
+        'example-app/routes/path/to/some-feature.js'
+      );
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberRoute(context, node)).toBeTruthy();
+    });
+
+    it('should detect Route when using native classes if the import path is correct', () => {
+      const context = new FauxContext(`
+        import CustomRoute from '@ember/routing/route';
+        class MyRoute extends CustomRoute {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberRoute(context, node)).toBeTruthy();
+    });
+  });
+});
+
+describe('isEmberMixin', () => {
+  describe("should check if it's an Ember Mixin", () => {
+    it('should detect Mixin when using native classes', () => {
+      const context = new FauxContext(`
+        import Mixin from '@ember/object/mixin';
+        class MyMixin extends Mixin {}
+      `);
+
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberMixin(context, node)).toBeTruthy();
+    });
+
+    it('shouldnt detect Mixin when using native classes if the import path is incorrect', () => {
+      const context = new FauxContext(`
+        import Mixin from '@something-else/object/mixin';
+        class MyMixin extends Mixin {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberMixin(context, node)).toBeFalsy();
+    });
+  });
+
+  describe("should check if it's an Ember Mixin even if it uses custom name", () => {
+    it('should detect Mixin when using native classes if the import path is correct', () => {
+      const context = new FauxContext(`
+        import CustomMixin from '@ember/object/mixin';
+        class MyMixin extends CustomMixin {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberMixin(context, node)).toBeTruthy();
     });
   });
 });
@@ -218,60 +378,324 @@ describe('isEmberRoute', () => {
 describe('isEmberService', () => {
   describe("should check if it's an Ember Service", () => {
     it('should detect Service when using Ember.Service', () => {
-      const node = parse('Ember.Service.extend()');
-      expect(emberUtils.isEmberService(node)).toBeTruthy();
+      const context = new FauxContext('Ember.Service.extend()');
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberService(context, node)).toBeTruthy();
     });
 
     it('should detect Service when using local module Service', () => {
-      const node = parse('Service.extend()');
-      expect(emberUtils.isEmberService(node)).toBeTruthy();
+      const context = new FauxContext('Service.extend()');
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberService(context, node)).toBeTruthy();
+    });
+
+    it('should detect Service when using native classes', () => {
+      const context = new FauxContext(`
+        import Service from '@ember/service';
+        class MyService extends Service {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberService(context, node)).toBeTruthy();
+    });
+
+    it('shouldnt detect Service when using native classes if the import path is incorrect', () => {
+      const context = new FauxContext(`
+        import Service from '@something-else/service';
+        class MyService extends Service {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberService(context, node)).toBeFalsy();
     });
   });
 
   describe("should check if it's an Ember Service even if it uses custom name", () => {
     it("shouldn't detect Service when no file path is provided", () => {
-      const node = parse('CustomService.extend()');
-      expect(emberUtils.isEmberService(node)).toBeFalsy();
+      const context = new FauxContext('CustomService.extend()');
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberService(context, node)).toBeFalsy();
     });
 
-    it('it should detect Service when file path is provided', () => {
-      const node = parse('CustomService.extend()');
-      const filePath = 'example-app/services/path/to/some-feature.js';
-      expect(emberUtils.isEmberService(node, filePath)).toBeTruthy();
+    it('should detect Service when file path is provided', () => {
+      const context = new FauxContext(
+        'CustomService.extend()',
+        'example-app/services/path/to/some-feature.js'
+      );
+      const node = context.ast.body[0].expression;
+      expect(emberUtils.isEmberService(context, node)).toBeTruthy();
     });
+
+    it('should detect Service when using native classes if the import path is correct', () => {
+      const context = new FauxContext(`
+        import CustomService from '@ember/service';
+        class MyService extends CustomService {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isEmberService(context, node)).toBeTruthy();
+    });
+  });
+});
+
+describe('isEmberArrayProxy', () => {
+  it('should detect using old module style', () => {
+    const context = new FauxContext('Ember.ArrayProxy.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect using old module style with wrong name', () => {
+    const context = new FauxContext('Ember.SomethingElse.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeFalsy();
+  });
+
+  it('should detect when using local module', () => {
+    const context = new FauxContext('ArrayProxy.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect when using local module with wrong name', () => {
+    const context = new FauxContext('SomethingElse.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeFalsy();
+  });
+
+  it('should detect when using native classes', () => {
+    const context = new FauxContext(`
+      import ArrayProxy from '@ember/array/proxy';
+      class MyProxy extends ArrayProxy {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeTruthy();
+  });
+
+  it('should detect when using native classes with other name but correct import path', () => {
+    const context = new FauxContext(`
+      import OtherName from '@ember/array/proxy';
+      class MyProxy extends OtherName {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect when using native classes if the import path is incorrect', () => {
+    const context = new FauxContext(`
+      import ArrayProxy from '@something-else/service';
+      class MyProxy extends ArrayProxy {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberArrayProxy(context, node)).toBeFalsy();
+  });
+});
+
+describe('isEmberObjectProxy', () => {
+  it('should detect using old module style', () => {
+    const context = new FauxContext('Ember.ObjectProxy.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect using old module style with wrong name', () => {
+    const context = new FauxContext('Ember.SomethingElse.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeFalsy();
+  });
+
+  it('should detect when using local module', () => {
+    const context = new FauxContext('ObjectProxy.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect when using local module with wrong name', () => {
+    const context = new FauxContext('SomethingElse.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeFalsy();
+  });
+
+  it('should detect when using native classes', () => {
+    const context = new FauxContext(`
+      import ObjectProxy from '@ember/object/proxy';
+      class MyProxy extends ObjectProxy {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeTruthy();
+  });
+
+  it('should detect when using native classes with other name but correct import path', () => {
+    const context = new FauxContext(`
+      import OtherName from '@ember/object/proxy';
+      class MyProxy extends OtherName {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect when using native classes if the import path is incorrect', () => {
+    const context = new FauxContext(`
+      import ObjectProxy from '@something-else/service';
+      class MyProxy extends ObjectProxy {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberObjectProxy(context, node)).toBeFalsy();
+  });
+});
+
+describe('isEmberProxy', () => {
+  it('should detect ArrayProxy example', () => {
+    const context = new FauxContext(`
+      import ArrayProxy from '@ember/array/proxy';
+      class MyProxy extends ArrayProxy {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberProxy(context, node)).toBeTruthy();
+  });
+
+  it('should detect ObjectProxy example', () => {
+    const context = new FauxContext(`
+      import ObjectProxy from '@ember/object/proxy';
+      class MyProxy extends ObjectProxy {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberProxy(context, node)).toBeTruthy();
+  });
+
+  it('should not detect random code', () => {
+    const context = new FauxContext('someFunctionCall();');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberProxy(context, node)).toBeFalsy();
   });
 });
 
 describe('isInjectedServiceProp', () => {
-  let node;
+  describe('classic classes', () => {
+    it("should check if it's an injected service prop with renamed import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          currentUser: service()
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    });
 
-  it("should check if it's an injected service prop", () => {
-    node = parse('service()');
-    expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    it("should check if it's an injected service prop with full import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          currentUser: Ember.inject.service()
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    });
 
-    node = parse('Ember.inject.service()');
-    expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    it("should check if it's an injected service prop with destructured import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          currentUser: inject()
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    });
 
-    node = parse('inject()');
-    expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    it("should check that it's not an injected service prop", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          currentUser: otherFunction()
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+    });
 
-    node = parse('otherFunction()');
-    expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+    it("should check that it's not an injected service prop when 'service' is not a function", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          currentUser: service.otherFunction()
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+    });
+  });
 
-    node = parse('service.otherFunction()');
-    expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+  describe('native classes', () => {
+    it("should check if it's an injected service prop when using renamed import", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @service currentUser;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    });
+
+    it("should check if it's an injected service prop when using decorator", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @inject currentUser;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+    });
+
+    it("should check that it's not an injected service prop when using another decorator", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @otherDecorator currentUser;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+    });
   });
 });
 
 describe('isInjectedControllerProp', () => {
-  let node;
+  describe('classic classes', () => {
+    it("should check if it's an injected controller prop with destructed import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          application: controller(),
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+    });
 
-  it("should check if it's an injected controller prop", () => {
-    node = parse('controller()');
-    expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+    it("should check if it's an injected controller prop with full import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          application: Ember.inject.controller(),
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+    });
+  });
 
-    node = parse('Ember.inject.controller()');
-    expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+  describe('native classes', () => {
+    it("should check if it's an injected controller prop with decorator", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @controller application;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+    });
+
+    it("should check that it's not an injected controller prop", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @otherDecorator application;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isInjectedControllerProp(node)).toBeFalsy();
+    });
   });
 });
 
@@ -306,14 +730,70 @@ describe('isComputedProp', () => {
 });
 
 describe('isObserverProp', () => {
-  let node;
+  describe('classic classes', () => {
+    it("should check if it's an observer prop using destructured import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          someObserver: observer(),
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
 
-  it("should check if it's an observer prop", () => {
-    node = parse('observer()');
-    expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    it("should check if it's an observer prop with full import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          someObserver: Ember.observer(),
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
 
-    node = parse('Ember.observer()');
-    expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    it("should check if it's an observer prop with multi-line observer", () => {
+      const context = new FauxContext(`
+        export default Component.extend({
+          levelOfHappiness: observer("attitude", "health", () => {
+          }),
+          vehicle: alias("car")
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
+  });
+
+  describe('native classes', () => {
+    it("should check if it's an observer prop using decorator", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @observer someObserver;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
+
+    it("should check if it's an observer prop using decorator with arg", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @observer("someArg") someObserver() {};
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+    });
+
+    it("should check that it's not an observer prop", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @otherDecorator someObserver;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isObserverProp(node)).toBeFalsy();
+    });
   });
 });
 
@@ -352,6 +832,9 @@ describe('isCustomProp', () => {
 
   it('should be custom property', () => {
     node = getProperty("test = { test: 'someLiteral' }");
+    expect(emberUtils.isCustomProp(node)).toBeTruthy();
+
+    node = getProperty("test = { test: `foo${'bar'}` }"); // eslint-disable-line no-template-curly-in-string
     expect(emberUtils.isCustomProp(node)).toBeTruthy();
 
     node = getProperty('test = { test: someIdentifier }');
@@ -443,6 +926,24 @@ describe('isSingleLineFn', () => {
 
   it('should check if given function has one line', () => {
     expect(emberUtils.isSingleLineFn(property)).toBeTruthy();
+
+    let context = new FauxContext(`
+      class MyController extends Controller {
+        @computed("someProp") someFunction() {}
+      }
+    `);
+    let node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isSingleLineFn(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @computed("someProp") someFunction() {
+          console.log("hello");
+        }
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isSingleLineFn(node)).toBeFalsy();
   });
 });
 
@@ -455,6 +956,24 @@ describe('isMultiLineFn', () => {
 
   it('should check if given function has more than one line', () => {
     expect(emberUtils.isMultiLineFn(property)).toBeTruthy();
+
+    let context = new FauxContext(`
+      class MyController extends Controller {
+        @computed("someProp") someFunction() {
+          console.log("hello");
+        }
+      }
+    `);
+    let node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isMultiLineFn(node)).toBeTruthy();
+
+    context = new FauxContext(`
+      class MyController extends Controller {
+        @computed("someProp") someFunction() {}
+      }
+    `);
+    node = context.ast.body[0].body.body[0];
+    expect(emberUtils.isMultiLineFn(node)).toBeFalsy();
   });
 });
 
@@ -510,27 +1029,30 @@ describe('isRelation', () => {
     }`);
     expect(emberUtils.isRelation(property)).toBeTruthy();
   });
-
-  it('should detect if given node is a route', () => {
-    const node = parse('this.route("lorem-ipsum")');
-    expect(emberUtils.isRoute(node)).toBeTruthy();
-  });
 });
 
 describe('parseDependentKeys', () => {
-  it('should parse dependent keys from callexpression', () => {
+  it('should parse dependent keys from CallExpression', () => {
     const node = parse("computed('model.{foo,bar}', 'model.bar')");
-    expect(emberUtils.parseDependentKeys(node)).toEqual(['model.foo', 'model.bar', 'model.bar']);
+    expect(emberUtils.parseDependentKeys(node)).toStrictEqual([
+      'model.foo',
+      'model.bar',
+      'model.bar',
+    ]);
   });
 
   it('should work when no dependent keys present', () => {
     const node = parse('computed(function() {})');
-    expect(emberUtils.parseDependentKeys(node)).toEqual([]);
+    expect(emberUtils.parseDependentKeys(node)).toStrictEqual([]);
   });
 
   it('should handle dependent keys and function arguments', () => {
     const node = parse("computed('model.{foo,bar}', 'model.bar', function() {})");
-    expect(emberUtils.parseDependentKeys(node)).toEqual(['model.foo', 'model.bar', 'model.bar']);
+    expect(emberUtils.parseDependentKeys(node)).toStrictEqual([
+      'model.foo',
+      'model.bar',
+      'model.bar',
+    ]);
   });
 
   it('should handle dependent keys and function arguments in MemberExpression', () => {
@@ -538,20 +1060,24 @@ describe('parseDependentKeys', () => {
       computed('model.{foo,bar}', 'model.bar', function() {
       }).volatile();
     `);
-    expect(emberUtils.parseDependentKeys(node)).toEqual(['model.foo', 'model.bar', 'model.bar']);
+    expect(emberUtils.parseDependentKeys(node)).toStrictEqual([
+      'model.foo',
+      'model.bar',
+      'model.bar',
+    ]);
   });
 });
 
 describe('unwrapBraceExpressions', () => {
   it('should unwrap simple dependent keys', () => {
-    expect(emberUtils.unwrapBraceExpressions(['model.foo', 'model.bar'])).toEqual([
+    expect(emberUtils.unwrapBraceExpressions(['model.foo', 'model.bar'])).toStrictEqual([
       'model.foo',
       'model.bar',
     ]);
   });
 
   it('should unwrap dependent keys with braces', () => {
-    expect(emberUtils.unwrapBraceExpressions(['model.{foo,bar}', 'model.bar'])).toEqual([
+    expect(emberUtils.unwrapBraceExpressions(['model.{foo,bar}', 'model.bar'])).toStrictEqual([
       'model.foo',
       'model.bar',
       'model.bar',
@@ -561,25 +1087,23 @@ describe('unwrapBraceExpressions', () => {
   it('should unwrap more complex dependent keys', () => {
     expect(
       emberUtils.unwrapBraceExpressions(['model.{foo,bar}', 'model.bar', 'data.{foo,baz,qux}'])
-    ).toEqual(['model.foo', 'model.bar', 'model.bar', 'data.foo', 'data.baz', 'data.qux']);
+    ).toStrictEqual(['model.foo', 'model.bar', 'model.bar', 'data.foo', 'data.baz', 'data.qux']);
   });
 
   it('should unwrap multi-level keys', () => {
-    expect(emberUtils.unwrapBraceExpressions(['model.bar.{foo,qux}', 'model.bar.baz'])).toEqual([
-      'model.bar.foo',
-      'model.bar.qux',
-      'model.bar.baz',
-    ]);
+    expect(
+      emberUtils.unwrapBraceExpressions(['model.bar.{foo,qux}', 'model.bar.baz'])
+    ).toStrictEqual(['model.bar.foo', 'model.bar.qux', 'model.bar.baz']);
   });
 
   it('should unwrap @each with extensions', () => {
     expect(
       emberUtils.unwrapBraceExpressions(['collection.@each.{foo,bar}', 'collection.@each.qux'])
-    ).toEqual(['collection.@each.foo', 'collection.@each.bar', 'collection.@each.qux']);
+    ).toStrictEqual(['collection.@each.foo', 'collection.@each.bar', 'collection.@each.qux']);
   });
 
   it('should unwrap complicated mixed dependent keys', () => {
-    expect(emberUtils.unwrapBraceExpressions(['a.b.c.{d.@each.qwe.zxc,f,g.[]}'])).toEqual([
+    expect(emberUtils.unwrapBraceExpressions(['a.b.c.{d.@each.qwe.zxc,f,g.[]}'])).toStrictEqual([
       'a.b.c.d.@each.qwe.zxc',
       'a.b.c.f',
       'a.b.c.g.[]',
@@ -587,7 +1111,7 @@ describe('unwrapBraceExpressions', () => {
   });
 
   it('should unwrap complicated mixed repeated dependent keys', () => {
-    expect(emberUtils.unwrapBraceExpressions(['a.b.{d.@each.qux,f,d.@each.foo}'])).toEqual([
+    expect(emberUtils.unwrapBraceExpressions(['a.b.{d.@each.qux,f,d.@each.foo}'])).toStrictEqual([
       'a.b.d.@each.qux',
       'a.b.f',
       'a.b.d.@each.foo',
@@ -628,6 +1152,68 @@ describe('hasDuplicateDependentKeys', () => {
 describe('getEmberImportAliasName', () => {
   it('should get the proper name of default import', () => {
     const node = babelEslint.parse("import foo from 'ember'").body[0];
-    expect(emberUtils.getEmberImportAliasName(node)).toEqual('foo');
+    expect(emberUtils.getEmberImportAliasName(node)).toStrictEqual('foo');
+  });
+});
+
+describe('isEmberObjectImplementingUnknownProperty', () => {
+  it('should be true for a classic class EmberObject with `unknownProperty`', () => {
+    const node = babelEslint.parse('EmberObject.extend({ unknownProperty() {} });').body[0]
+      .expression;
+    expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeTruthy();
+  });
+
+  it('should be false for a classic class EmberObject without `unknownProperty`', () => {
+    const node = babelEslint.parse('EmberObject.extend({ somethingElse() {} });').body[0]
+      .expression;
+    expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeFalsy();
+  });
+
+  it('should be true for a native class EmberObject with `unknownProperty`', () => {
+    const node = babelEslint.parse('class MyClass extends EmberObject { unknownProperty() {} }')
+      .body[0];
+    expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeTruthy();
+  });
+
+  it('should be false for a native class EmberObject without `unknownProperty`', () => {
+    const node = babelEslint.parse('class MyClass extends EmberObject { somethingElse() {} }')
+      .body[0];
+    expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeFalsy();
+  });
+
+  it('throws when called on wrong type of node', () => {
+    const node = babelEslint.parse('const x = 123;').body[0];
+    expect(() => emberUtils.isEmberObjectImplementingUnknownProperty(node)).toThrow(
+      'Function should only be called on a `CallExpression` (classic class) or `ClassDeclaration` (native class)'
+    );
+  });
+});
+
+describe('isObserverDecorator', () => {
+  it('should be true for an observer decorator', () => {
+    const node = babelEslint.parse(`
+    import { observes } from '@ember-decorators/object';
+    class FooComponent extends Component {
+      @observes('baz')
+      bar() {}
+    }`).body[1].body.body[0].decorators[0];
+    expect(emberUtils.isObserverDecorator(node)).toBeTruthy();
+  });
+
+  it('should be false for another type of decorator', () => {
+    const node = babelEslint.parse(`
+    import { action } from '@ember/object';
+    class FooComponent extends Component {
+      @action
+      clickHandler() {}
+    }`).body[1].body.body[0].decorators[0];
+    expect(emberUtils.isObserverDecorator(node)).toBeFalsy();
+  });
+
+  it('throws when called on a non-decorator', () => {
+    const node = babelEslint.parse('const x = 123;').body[0];
+    expect(() => emberUtils.isObserverDecorator(node)).toThrow(
+      'Should only call this function on a Decorator'
+    );
   });
 });

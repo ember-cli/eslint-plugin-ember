@@ -1,3 +1,171 @@
+## v7.8.1 (2020-02-14)
+
+#### :bug: Bug Fix
+* [#674](https://github.com/ember-cli/eslint-plugin-ember/pull/674) Update `require-computed-property-dependencies` rule to handle basic string concatenation in dependent keys ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#669](https://github.com/ember-cli/eslint-plugin-ember/pull/669) Add "Help Wanted" section to documentation for rules that are missing native JavaScript class support ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+## v7.8.0 (2020-02-12)
+
+#### :rocket: Enhancement
+* [#661](https://github.com/ember-cli/eslint-plugin-ember/pull/661) Add new rule `no-controllers` ([@bmish](https://github.com/bmish))
+* [#665](https://github.com/ember-cli/eslint-plugin-ember/pull/665) Update `order-in-*` rules to support custom ordering of properties ([@cdtinney](https://github.com/cdtinney))
+* [#639](https://github.com/ember-cli/eslint-plugin-ember/pull/639) Update `no-observers` rule to catch `addObserver` and observer imports ([@kategengler](https://github.com/kategengler))
+
+#### :bug: Bug Fix
+* [#670](https://github.com/ember-cli/eslint-plugin-ember/pull/670) Update `order-in-*` rules to consider template literals as properties ([@cdtinney](https://github.com/cdtinney))
+* [#664](https://github.com/ember-cli/eslint-plugin-ember/pull/664) Update `no-classic-components` rule to only disallow the specific component import ([@bmish](https://github.com/bmish))
+* [#640](https://github.com/ember-cli/eslint-plugin-ember/pull/640) Update `no-computed-properties-in-native-classes` rule to catch aliasing of computed import ([@kategengler](https://github.com/kategengler))
+
+#### :memo: Documentation
+* [#663](https://github.com/ember-cli/eslint-plugin-ember/pull/663) Update rule docs to use consistent headers and fix markdownlint violations ([@bmish](https://github.com/bmish))
+* [#655](https://github.com/ember-cli/eslint-plugin-ember/pull/655) Update `no-new-mixins` rule documentation ([@efx](https://github.com/efx))
+* [#648](https://github.com/ember-cli/eslint-plugin-ember/pull/648) Fix various spelling mistakes ([@bmish](https://github.com/bmish))
+* [#647](https://github.com/ember-cli/eslint-plugin-ember/pull/647) Fix typo in `no-classic-components` rule documentation ([@rwwagner90](https://github.com/rwwagner90))
+* [#626](https://github.com/ember-cli/eslint-plugin-ember/pull/626) Simplify and clarify rules and configuration sections in README ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#643](https://github.com/ember-cli/eslint-plugin-ember/pull/643) Add missing test case output assertions ([@bmish](https://github.com/bmish))
+
+#### Committers: 5
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Colin Tinney ([@cdtinney](https://github.com/cdtinney))
+- Eli Flanagan ([@efx](https://github.com/efx))
+- Katie Gengler ([@kategengler](https://github.com/kategengler))
+- Robert Wagner ([@rwwagner90](https://github.com/rwwagner90))
+
+## v7.7.2 (2019-12-12)
+
+#### :bug: Bug Fix
+* [#621](https://github.com/ember-cli/eslint-plugin-ember/pull/621) Fix false positive with `ignoreNonThisExpressions` option in `use-ember-get-and-set` rule ([@Exelord](https://github.com/Exelord))
+
+#### :memo: Documentation
+* [#620](https://github.com/ember-cli/eslint-plugin-ember/pull/620) Use consistent prefixes for rule descriptions ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#625](https://github.com/ember-cli/eslint-plugin-ember/pull/625) Add eslint-plugin-jest internally and enable rules ([@bmish](https://github.com/bmish))
+* [#624](https://github.com/ember-cli/eslint-plugin-ember/pull/624) Add eslint-plugin-unicorn internally and enable recommended rules ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Maciej Kwaśniak ([@Exelord](https://github.com/Exelord))
+
+## v7.7.1 (2019-11-29)
+
+#### :bug: Bug Fix
+* [#615](https://github.com/ember-cli/eslint-plugin-ember/pull/615) Fix issue causing assert to fire in `getSourceModuleName` util function ([@patocallaghan](https://github.com/patocallaghan))
+
+#### Committers: 1
+- Pat O'Callaghan ([@patocallaghan](https://github.com/patocallaghan))
+
+## v7.7.0 (2019-11-29)
+
+#### :rocket: Enhancement
+* [#592](https://github.com/ember-cli/eslint-plugin-ember/pull/592) Update `no-classic-classes` rule to catch classic Ember Data model classes ([@patocallaghan](https://github.com/patocallaghan))
+
+#### :bug: Bug Fix
+* [#610](https://github.com/ember-cli/eslint-plugin-ember/pull/610) Fix invalid `no-get` rule autofix caused by invalid JS variable name ([@bmish](https://github.com/bmish))
+* [#607](https://github.com/ember-cli/eslint-plugin-ember/pull/607) Fix spread property bug in `require-super-in-init` rule ([@bmish](https://github.com/bmish))
+* [#600](https://github.com/ember-cli/eslint-plugin-ember/pull/600) Add missing schema validation for options on many rules ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#611](https://github.com/ember-cli/eslint-plugin-ember/pull/611) Add many missing tests for lines without test coverage ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Pat O'Callaghan ([@patocallaghan](https://github.com/patocallaghan))
+
+## v7.6.0 (2019-11-19)
+
+#### :rocket: Enhancement
+* [#594](https://github.com/ember-cli/eslint-plugin-ember/pull/594) Add new rule `no-get-with-default` ([@steventsao](https://github.com/steventsao))
+
+#### Committers: 1
+- Steven Tsao ([@steventsao](https://github.com/steventsao))
+
+## v7.5.0 (2019-11-11)
+
+#### :rocket: Enhancement
+* [#583](https://github.com/ember-cli/eslint-plugin-ember/pull/583) Update `no-observers` rule to handle decorators ([@bmish](https://github.com/bmish))
+* [#577](https://github.com/ember-cli/eslint-plugin-ember/pull/577) Add autofixer to `no-get` rule ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#586](https://github.com/ember-cli/eslint-plugin-ember/pull/586) Update `use-brace-expansion` rule to only report the string arguments of a computed property as the violation (and not the entire function body) ([@bmish](https://github.com/bmish))
+* [#581](https://github.com/ember-cli/eslint-plugin-ember/pull/581) Update `no-get` rule to ignore `get()` usages inside objects implementing `unknownProperty()` ([@bmish](https://github.com/bmish))
+* [#580](https://github.com/ember-cli/eslint-plugin-ember/pull/580) Update `no-get` rule to ignore `get()` usages inside proxy objects ([@bmish](https://github.com/bmish))
+* [#579](https://github.com/ember-cli/eslint-plugin-ember/pull/579) Fix handling of multi-line property keys by `require-computed-property-dependencies` rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#588](https://github.com/ember-cli/eslint-plugin-ember/pull/588) Add `type` meta property to each rule ([@bmish](https://github.com/bmish))
+* [#587](https://github.com/ember-cli/eslint-plugin-ember/pull/587) And missing rule documentation URLs ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#582](https://github.com/ember-cli/eslint-plugin-ember/pull/582) Add CI check to ensure `yarn update` is run to update docs/autogenerated files ([@bmish](https://github.com/bmish))
+* [#574](https://github.com/ember-cli/eslint-plugin-ember/pull/574) Update `reportUnorderedProperties` util function to also work with native classes  ([@laurmurclar](https://github.com/laurmurclar))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Laura Murphy-Clarkin ([@laurmurclar](https://github.com/laurmurclar))
+
+## v7.4.1 (2019-11-07)
+
+#### :bug: Bug Fix
+* [#575](https://github.com/ember-cli/eslint-plugin-ember/pull/575) Update `avoid-leaking-state-in-ember-objects` rule to handle logical expressions ([@alexlafroscia](https://github.com/alexlafroscia))
+* [#571](https://github.com/ember-cli/eslint-plugin-ember/pull/571) Update `avoid-leaking-state-in-ember-objects` rule to handle ternary expressions ([@alexlafroscia](https://github.com/alexlafroscia))
+* [#573](https://github.com/ember-cli/eslint-plugin-ember/pull/573) Update `require-computed-macros` rule to handle `this.get('property')` (in addition to `this.property`) ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Alex LaFroscia ([@alexlafroscia](https://github.com/alexlafroscia))
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+## v7.4.0 (2019-11-06)
+
+#### :rocket: Enhancement
+* [#561](https://github.com/ember-cli/eslint-plugin-ember/pull/561) Add `octane` configuration (experimental) ([@patocallaghan](https://github.com/patocallaghan))
+* [#562](https://github.com/ember-cli/eslint-plugin-ember/pull/562) Add new rule `no-test-module-for` ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#565](https://github.com/ember-cli/eslint-plugin-ember/pull/565) Add `ignoreNestedPaths` option (default true) to `no-get` rule ([@bmish](https://github.com/bmish))
+* [#564](https://github.com/ember-cli/eslint-plugin-ember/pull/564) Update `no-new-mixins` rule to handle native classes ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#570](https://github.com/ember-cli/eslint-plugin-ember/pull/570) Simplify some tests by setting `parserOptions` globally instead of in each individual test case ([@bmish](https://github.com/bmish))
+* [#568](https://github.com/ember-cli/eslint-plugin-ember/pull/568) Add tests to ensure plugin exports correct configurations ([@bmish](https://github.com/bmish))
+* [#563](https://github.com/ember-cli/eslint-plugin-ember/pull/563) Lint against unnecessary template literals internally ([@bmish](https://github.com/bmish))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- L. Preston Sego III ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+- Pat O'Callaghan ([@patocallaghan](https://github.com/patocallaghan))
+
+## v7.3.0 (2019-10-30)
+
+#### :rocket: Enhancement
+* [#555](https://github.com/ember-cli/eslint-plugin-ember/pull/555) Add new `no-actions-hash` rule ([@laurmurclar](https://github.com/laurmurclar))
+* [#548](https://github.com/ember-cli/eslint-plugin-ember/pull/548) Add new `require-tagless-components` rule ([@alexlafroscia](https://github.com/alexlafroscia))
+* [#552](https://github.com/ember-cli/eslint-plugin-ember/pull/552) Add new `no-classic-classes` rule ([@alexlafroscia](https://github.com/alexlafroscia))
+* [#551](https://github.com/ember-cli/eslint-plugin-ember/pull/551) Add new `no-classic-components` rule ([@mikoscz](https://github.com/mikoscz))
+* [#546](https://github.com/ember-cli/eslint-plugin-ember/pull/546) Add new `no-computed-properties-in-native-classes` rule ([@patocallaghan](https://github.com/patocallaghan))
+
+#### :bug: Bug Fix
+* [#553](https://github.com/ember-cli/eslint-plugin-ember/pull/553) Avoid crash from missing function check in `require-super-in-init` rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#554](https://github.com/ember-cli/eslint-plugin-ember/pull/554) Add rule documentation template ([@bmish](https://github.com/bmish))
+* [#550](https://github.com/ember-cli/eslint-plugin-ember/pull/550) Modernize documentation for `alias-model-in-controller` rule ([@alexlafroscia](https://github.com/alexlafroscia))
+
+#### :house: Internal
+* [#558](https://github.com/ember-cli/eslint-plugin-ember/pull/558) Update `isEmberCoreModule` util function to also handle native classes (in addition to classic classes) ([@laurmurclar](https://github.com/laurmurclar))
+
+#### Committers: 5
+- Alex LaFroscia ([@alexlafroscia](https://github.com/alexlafroscia))
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Laura Murphy-Clarkin ([@laurmurclar](https://github.com/laurmurclar))
+- Michał Staśkiewicz ([@mikoscz](https://github.com/mikoscz))
+- Pat O'Callaghan ([@patocallaghan](https://github.com/patocallaghan))
+
 ## v7.2.0 (2019-10-20)
 
 #### :rocket: Enhancement

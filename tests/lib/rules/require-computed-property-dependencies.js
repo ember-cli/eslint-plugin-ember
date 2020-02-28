@@ -34,6 +34,12 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         return this.get('name');
       });
     `,
+    // String concatenation in dependent key:
+    `
+      Ember.computed('na' + 'me', function() {
+        return this.get('name');
+      });
+    `,
     // Without `Ember.`:
     `
       computed('name', function() {
@@ -704,6 +710,46 @@ ruleTester.run('require-computed-property-dependencies', rule, {
       errors: [
         {
           message: 'Use of undeclared dependencies in computed property: intl.someProperty',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `
+        Ember.computed(function() {
+          return this.some.very.long.
+            multi.line.property.name;
+        });
+      `,
+      output: `
+        Ember.computed('some.very.long.multi.line.property.name', function() {
+          return this.some.very.long.
+            multi.line.property.name;
+        });
+      `,
+      errors: [
+        {
+          message:
+            'Use of undeclared dependencies in computed property: some.very.long.multi.line.property.name',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // String concatenation in dependent key:
+      code: `
+        Ember.computed('na' + 'me', function() {
+          return this.undeclared + this.name;
+        });
+      `,
+      output: `
+        Ember.computed('name', 'undeclared', function() {
+          return this.undeclared + this.name;
+        });
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: undeclared',
           type: 'CallExpression',
         },
       ],

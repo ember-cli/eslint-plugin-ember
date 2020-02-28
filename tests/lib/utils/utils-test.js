@@ -18,7 +18,7 @@ describe('collectObjectPatternBindings', () => {
       Ember: ['$'],
     });
 
-    expect(collectedBindings).toEqual(['$']);
+    expect(collectedBindings).toStrictEqual(['$']);
   });
 
   it('collects aliased bindings correctly', () => {
@@ -27,7 +27,7 @@ describe('collectObjectPatternBindings', () => {
       Ember: ['$'],
     });
 
-    expect(collectedBindings).toEqual(['foo']);
+    expect(collectedBindings).toStrictEqual(['foo']);
   });
 
   it('collects only relevant bindings correctly for multiple destructurings', () => {
@@ -36,7 +36,7 @@ describe('collectObjectPatternBindings', () => {
       Ember: ['$'],
     });
 
-    expect(collectedBindings).toEqual(['$']);
+    expect(collectedBindings).toStrictEqual(['$']);
   });
 
   it('collects only relevant bindings correctly for multiple destructurings and aliases', () => {
@@ -45,7 +45,7 @@ describe('collectObjectPatternBindings', () => {
       Ember: ['$'],
     });
 
-    expect(collectedBindings).toEqual(['foo']);
+    expect(collectedBindings).toStrictEqual(['foo']);
   });
 
   it('collects multiple relevant bindings', () => {
@@ -54,7 +54,7 @@ describe('collectObjectPatternBindings', () => {
       Ember: ['$', 'computed'],
     });
 
-    expect(collectedBindings).toEqual(['foo', 'computed']);
+    expect(collectedBindings).toStrictEqual(['foo', 'computed']);
   });
 });
 
@@ -82,7 +82,9 @@ describe('findNodes', () => {
 
 describe('function sort order', function() {
   it('has exported functions in sorted order', function() {
-    expect(Object.getOwnPropertyNames(utils)).toEqual(Object.getOwnPropertyNames(utils).sort());
+    expect(Object.getOwnPropertyNames(utils)).toStrictEqual(
+      Object.getOwnPropertyNames(utils).sort()
+    );
   });
 });
 
@@ -117,32 +119,32 @@ describe('getPropertyValue', () => {
 
   it('should return null when property value not found for simpleObject', () => {
     const value = utils.getPropertyValue(simpleObject, 'blah');
-    expect(value).toEqual(undefined);
+    expect(value).toBeUndefined();
   });
 
   it('should return value when using a simple property path for simpleObject', () => {
     const value = utils.getPropertyValue(simpleObject, 'foo');
-    expect(value).toEqual(true);
+    expect(value).toStrictEqual(true);
   });
 
   it('should return value when using a full property path for simpleObject', () => {
     const buzz = utils.getPropertyValue(simpleObject, 'bar.fizz.buzz');
-    expect(buzz).toEqual('buzz');
+    expect(buzz).toStrictEqual('buzz');
   });
 
   it('should return null when property value not found for node', () => {
     const value = utils.getPropertyValue(node, 'blah');
-    expect(value).toEqual(undefined);
+    expect(value).toBeUndefined();
   });
 
   it('should return value when using a simple property path for node', () => {
     const type = utils.getPropertyValue(node, 'type');
-    expect(type).toEqual('CallExpression');
+    expect(type).toStrictEqual('CallExpression');
   });
 
   it('should return value when using a full property path for node', () => {
     const name = utils.getPropertyValue(node, 'callee.object.name');
-    expect(name).toEqual('Ember');
+    expect(name).toStrictEqual('Ember');
   });
 });
 
@@ -152,7 +154,7 @@ describe('getSize', () => {
   );
 
   it('should check size of given expression', () => {
-    expect(utils.getSize(node)).toEqual(6);
+    expect(utils.getSize(node)).toStrictEqual(6);
   });
 });
 
@@ -173,7 +175,7 @@ describe('parseArgs', () => {
     const node = parse('Ember.computed("asd", "qwe", "zxc", function() {})');
     const parsedArgs = utils.parseArgs(node);
     expect(parsedArgs).toHaveLength(3);
-    expect(parsedArgs).toEqual(['asd', 'qwe', 'zxc']);
+    expect(parsedArgs).toStrictEqual(['asd', 'qwe', 'zxc']);
   });
 });
 
@@ -182,13 +184,13 @@ describe('parseCallee', () => {
     const node = parse('Ember.computed.or("asd", "qwe")');
     const parsedCallee = utils.parseCallee(node);
     expect(parsedCallee).toHaveLength(3, 'it has 3 elements in array');
-    expect(parsedCallee).toEqual(['Ember', 'computed', 'or']);
+    expect(parsedCallee).toStrictEqual(['Ember', 'computed', 'or']);
   });
 
   it('should parse newExpression', () => {
     const node = parse('new Ember.A()');
     const parsedCallee = utils.parseCallee(node);
     expect(parsedCallee).toHaveLength(2, 'it has 2 elements in array');
-    expect(parsedCallee).toEqual(['Ember', 'A']);
+    expect(parsedCallee).toStrictEqual(['Ember', 'A']);
   });
 });

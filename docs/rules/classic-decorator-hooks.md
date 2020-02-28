@@ -1,13 +1,14 @@
-## Use the correct hooks in classic/non-classic classes
-
-### Rule name: `classic-decorator-hooks`
+# classic-decorator-hooks
 
 Use the correct lifecycle hooks in classic and non-classic classes. Classic
 classes should use `init`, and non-classic classes should use `constructor`.
 Additionally, non-classic classes may not use `destroy`.
 
+## Examples
+
+Examples of **incorrect** code for this rule:
+
 ```javascript
-// Bad
 export default class MyService extends Service {
   init() {
     // ...
@@ -26,8 +27,9 @@ export default class MyService extends Service {
 }
 ```
 
+Examples of **correct** code for this rule:
+
 ```javascript
-// Good
 @classic
 export default class MyService extends Service {
   init() {
@@ -50,10 +52,10 @@ export default class MyService extends Service {
 }
 ```
 
-### References
+## References
 
 - [ember-classic-decorator](https://github.com/pzuraq/ember-classic-decorator)
 
-### Related Rules
+## Related Rules
 
 - [classic-decorator-no-classic-methods](classic-decorator-no-classic-methods.md)

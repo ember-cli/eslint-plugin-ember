@@ -1,12 +1,12 @@
-# Don't use constructs or configuration that use the restricted resolver in tests. (no-restricted-resolver-tests)
+# no-restricted-resolver-tests
+
+Don't use constructs or configuration that use the restricted resolver in tests.
 
 [RFC-0229](https://github.com/emberjs/rfcs/blob/master/text/0229-deprecate-testing-restricted-resolver.md)
 proposed to remove the concept of artificially restricting the resolver used under testing. This rule helps
 identify anti-patterns in tests that we want to migrate off.
 
-## Rule Details
-
-This rule aims to...
+## Examples
 
 Examples of **incorrect** code for this rule:
 

@@ -1,22 +1,10 @@
-## Use named functions defined on objects to handle promises
+# named-functions-in-promises
 
-### Rule name: `named-functions-in-promises`
-
-#### Configuration
-
-```
-ember/named-functions-in-promises: [2, {
-  allowSimpleArrowFunction: false,
-}]
-```
-
-Setting `allowSimpleArrowFunction` to `true` allows arrow function expressions that do not have block bodies.
-These simple arrow functions must also only contain a single function call.
-For example: `.then(user => this._reloadUser(user))`.
-
-#### Description
+Use named functions defined on objects to handle promises.
 
 When you use promises and its handlers, use named functions defined on parent object. Thus, you will be able to test them in isolation using unit tests without any additional mocking.
+
+## Examples
 
 ```javascript
 export default Component.extend({
@@ -68,3 +56,15 @@ test('it reloads user in promise handler', function(assert) {
   assert.ok(userReloadSpy.calledOnce, 'user#reload should be called once');
 });
 ```
+
+## Configuration
+
+```js
+ember/named-functions-in-promises: [2, {
+  allowSimpleArrowFunction: false,
+}]
+```
+
+Setting `allowSimpleArrowFunction` to `true` allows arrow function expressions that do not have block bodies.
+These simple arrow functions must also only contain a single function call.
+For example: `.then(user => this._reloadUser(user))`.

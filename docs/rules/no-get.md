@@ -9,7 +9,7 @@ This rule disallows:
 * `this.get('someProperty')` when `this.someProperty` can be used
 * `this.getProperties('prop1', 'prop2')` when `{ prop1: this.prop1, prop2: this.prop2 }` can be used
 
-**WARNING**: there are a number of circumstances where `get` / `getProperties` still need to be used, and you may need to manually disable the rule for these:
+**WARNING**: there are a number of circumstances where `get` / `getProperties` still need to be used, and you may need to manually disable the rule for these (although the rule will attempt to ignore them):
 
 * Ember proxy objects (`ObjectProxy`, `ArrayProxy`)
 * Objects implementing the `unknownProperty` method
@@ -38,7 +38,6 @@ const foo = getProperties(this, 'prop1', 'prop2');
 
 Examples of **correct** code for this rule:
 
-
 ```js
 const foo = this.someProperty;
 ```
@@ -55,11 +54,31 @@ const { prop1, prop2 } = this;
 const foo = { prop1: this.prop1, prop2: this.prop2 };
 ```
 
+```js
+import ObjectProxy from '@ember/object/proxy';
+export default ObjectProxy.extend({
+  someFunction() {
+    const foo = this.get('propertyInsideProxyObject'); // Allowed because inside proxy object.
+  }
+});
+```
+
+```js
+import EmberObject from '@ember/object';
+export default EmberObject.extend({
+  unknownProperty(key) {},
+  someFunction() {
+    const foo = this.get('property'); // Allowed because inside object implementing `unknownProperty()`.
+  }
+});
+```
+
 ## Configuration
 
 This rule takes an optional object containing:
 
-- `boolean` -- `ignoreGetProperties` -- whether the rule should ignore `getProperties` (default `false`)
+* `boolean` -- `ignoreGetProperties` -- whether the rule should ignore `getProperties` (default `false`)
+* `boolean` -- `ignoreNestedPaths` -- whether the rule should ignore `this.get('some.nested.property')` (default `true`) (this option is enabled by default to make it easier/safer to adopt this rule)
 
 ## Related Rules
 

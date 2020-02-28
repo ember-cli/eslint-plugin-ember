@@ -29,7 +29,6 @@ export default EmberObject.extend({
 
 Examples of **correct** code for this rule:
 
-
 ```js
 import EmberObject, { computed } from '@ember/object';
 
@@ -50,3 +49,9 @@ This rule takes an optional object containing:
 ## References
 
 * [Guide](https://guides.emberjs.com/release/object-model/computed-properties/) for computed properties
+
+## Help Wanted
+
+| Issue | Link |
+| :-- | :-- |
+| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

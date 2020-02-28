@@ -1,22 +1,26 @@
-## Route naming
-
-### Rule name: `routes-segments-snake-case`
+# routes-segments-snake-case
 
 Dynamic segments in routes should use _snake case_, so Ember doesn't have to do extra serialization in order to resolve promises.
 
-```javascript
-// GOOD
-this.route('tree', { path: ':tree_id'});
+## Examples
 
-// BAD
+Examples of **incorrect** code for this rule:
+
+```js
 this.route('tree', { path: ':treeId'});
 ```
 
-### References
+Examples of **correct** code for this rule:
+
+```javascript
+this.route('tree', { path: ':tree_id'});
+```
+
+## References
 
 * [Ember Routing Guide](https://guides.emberjs.com/release/routing/)
 
-### Related Rules
+## Related Rules
 
 * [no-capital-letters-in-routes](no-capital-letters-in-routes.md)
 * [no-unnecessary-route-path-option](no-unnecessary-route-path-option.md)

@@ -1,11 +1,14 @@
-# Disallow use of `pauseTest` helper in tests (no-pause-test)
+# no-pause-test
+
+Disallow use of `pauseTest` helper in tests.
 
 When `pauseTest()` is committed and run in CI it can cause runners to hang which is undesirable.
-
 
 ## Rule Details
 
 This rule aims to prevent `pauseTest()` from being committed and run in CI.
+
+## Examples
 
 Examples of **incorrect** code for this rule:
 
@@ -25,7 +28,6 @@ module('Acceptance | foo test', function(hooks) {
   });
 });
 ```
-
 
 ## When Not To Use It
 
@@ -49,7 +51,6 @@ module('Acceptance | foo test', function(hooks) {
   });
 });
 ```
-
 
 ## Further Reading
 

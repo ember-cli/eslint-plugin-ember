@@ -30,6 +30,12 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
 
      const { Model } = LOL;
     `,
+    `import Model from '@ember-data/model';
+
+     export default Model.extend({
+       name: SomethingRandom.DS('string')
+     });
+    `,
   ],
 
   invalid: [
@@ -39,6 +45,7 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
         export default DS.Model.extend({
         });
       `,
+      output: null,
       errors: [
         {
           message,
@@ -57,6 +64,7 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
           name: DS.attr('string')
         });
       `,
+      output: null,
       errors: [
         {
           message,
@@ -76,6 +84,7 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
           name: attr('string')
         });
       `,
+      output: null,
       errors: [
         {
           message,
@@ -98,6 +107,11 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
         export default Model.extend({
         });
       `,
+      output: `import Model from '@ember-data/model';
+
+        export default Model.extend({
+        });
+      `,
       errors: [
         {
           message,
@@ -108,6 +122,13 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
     {
       code: `import Model from 'ember-data/model';
         import attr  from 'ember-data/attr';
+
+        export default Model.extend({
+          name: attr('string')
+        });
+      `,
+      output: `import Model from '@ember-data/model';
+        import { attr } from '@ember-data/model';
 
         export default Model.extend({
           name: attr('string')
@@ -132,6 +153,13 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
           name: attr('string')
         });
       `,
+      output: `import Model from '@ember-data/model';
+        import { attr } from '@ember-data/model';
+
+        export default Model.extend({
+          name: attr('string')
+        });
+      `,
       errors: [
         {
           message,
@@ -142,6 +170,13 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
     {
       code: `import Model from '@ember-data/model';
         import namedAttr from 'ember-data/attr';
+
+        export default Model.extend({
+          name: namedAttr('string')
+        });
+      `,
+      output: `import Model from '@ember-data/model';
+        import { attr as namedAttr } from '@ember-data/model';
 
         export default Model.extend({
           name: namedAttr('string')
@@ -160,6 +195,7 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
         export default Model.extend({
         });
       `,
+      output: null,
       errors: [
         {
           message,
@@ -172,6 +208,7 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
 
         const { Model } = ED;
       `,
+      output: null,
       errors: [
         {
           message,

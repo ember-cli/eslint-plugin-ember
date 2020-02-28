@@ -48,6 +48,8 @@ eslintTester.run('use-ember-get-and-set', rule, {
       code: 'import EmberAlias from "ember"; EmberAlias.get(this, "test")',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+
+    // ignoreNonThisExpressions
     {
       code: "let a = new Map(); a.set('name', 'Tomster');",
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
@@ -57,6 +59,17 @@ eslintTester.run('use-ember-get-and-set', rule, {
       code: "let a = new Map(); a.get('myKey')",
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [{ ignoreNonThisExpressions: true }],
+    },
+    {
+      code: 'this.test("ok")',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{ ignoreNonThisExpressions: true }],
+    },
+
+    // ignoreThisExpressions
+    {
+      code: 'this.get("test")',
+      options: [{ ignoreThisExpressions: true }],
     },
   ],
   invalid: [
@@ -400,17 +413,27 @@ eslintTester.run('use-ember-get-and-set', rule, {
       errors: [{ message: 'Use get/set' }],
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+
+    // ignoreNonThisExpressions
     {
-      code: `this.set('test', 'value')`,
+      code: "this.set('test', 'value')",
       output: null,
       errors: [{ message: 'Use get/set' }],
       options: [{ ignoreNonThisExpressions: true }],
     },
     {
-      code: `this.get('value')`,
+      code: "this.get('value')",
       output: null,
       errors: [{ message: 'Use get/set' }],
       options: [{ ignoreNonThisExpressions: true }],
+    },
+
+    // ignoreThisExpressions
+    {
+      code: "someObject.get('value')",
+      output: null,
+      errors: [{ message: 'Use get/set' }],
+      options: [{ ignoreThisExpressions: true }],
     },
   ],
 });

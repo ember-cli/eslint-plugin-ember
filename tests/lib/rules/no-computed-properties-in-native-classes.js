@@ -37,14 +37,30 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
 
       export default class MyComponent extends Component {}
     `,
+
+    // Unrelated import statements:
+    "import EmberObject from '@ember/object';",
+    "import { run } from '@ember/runloop';",
+    "import { run as renamedRun } from '@ember/runloop';",
   ],
   invalid: [
     {
       code: `
       import { computed } from '@ember/object';
-      
+
       export default class MyComponent extends Component {
-      
+
+      }
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
+    },
+    {
+      code: `
+      import { computed as thinking } from '@ember/object';
+
+      export default class MyComponent extends Component {
+
       }
       `,
       output: null,
@@ -53,9 +69,9 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
     {
       code: `
       import { and, or, alias } from '@ember/object/computed';
-      
+
       export default class MyComponent extends Component {
-      
+
       }
       `,
       output: null,

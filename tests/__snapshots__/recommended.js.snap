@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`recommended rules 1`] = `
+exports[`recommended rules has the right list 1`] = `
 Array [
   "avoid-leaking-state-in-ember-objects",
   "avoid-using-needs-in-controllers",

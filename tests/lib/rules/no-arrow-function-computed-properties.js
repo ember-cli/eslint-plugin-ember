@@ -27,60 +27,67 @@ ruleTester.run('no-arrow-function-computed-properties', rule, {
     'other(() => {})',
     'other.computed(() => {})',
     {
-      code: `computed('prop', function() { return this.prop; });`,
+      code: "computed('prop', function() { return this.prop; });",
       options: [{ onlyThisContexts: true }],
     },
     {
-      code: `computed('prop', function() { return this.prop; }).volatile();`,
+      code: "computed('prop', function() { return this.prop; }).volatile();",
       options: [{ onlyThisContexts: true }],
     },
     {
-      code: `computed(() => { return 123; });`,
+      code: 'computed(() => { return 123; });',
       options: [{ onlyThisContexts: true }],
     },
     {
-      code: `computed(() => { return "string stuff"; });`,
+      code: 'computed(() => { return "string stuff"; });',
       options: [{ onlyThisContexts: true }],
     },
     {
-      code: `computed(() => []);`,
+      code: 'computed(() => []);',
       options: [{ onlyThisContexts: true }],
     },
     {
-      code: `computed.map('products', product => { return someFunction(product); });`,
+      code: "computed.map('products', product => { return someFunction(product); });",
       options: [{ onlyThisContexts: true }],
     },
   ],
   invalid: [
     {
       code: 'computed(() => { return 123; })',
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
     {
       code: "computed('prop', () => { return this.prop; })",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
 
     {
       code: "computed('prop', () => { return this.prop; }).volatile()",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
     {
       code: "computed.map('products', product => { return someFunction(product); })",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
     {
       code: 'computed(() => { return 123; })',
+      output: null,
       errors: [],
       options: [{ onlyThisContexts: true }],
     },
     {
       code: "computed('prop', () => { return this.prop; })",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
       options: [{ onlyThisContexts: true }],
     },
     {
       code: "computed('prop', () => { return this.prop; }).volatile()",
+      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
       options: [{ onlyThisContexts: true }],
     },

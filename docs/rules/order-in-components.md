@@ -1,10 +1,8 @@
-## Organize your components
+# order-in-components
 
-### Rule name: `order-in-components`
+## Configuration
 
-#### Configuration
-
-```
+```js
 ember/order-in-components: [2, {
   order: [
     'service',
@@ -33,7 +31,7 @@ ember/order-in-components: [2, {
 
 If you want some of properties to be treated equally in order you can group them into arrays, like so:
 
-```
+```js
 order: [
   'service',
   'property',
@@ -56,9 +54,15 @@ order: [
 ]
 ```
 
-You can find full list of properties that you can use to configure this rule [here](/lib/utils/property-order.js#L10).
+### Custom Properties
 
-#### Description
+If you would like to specify ordering for a property type that is not listed, you can use the custom property syntax `custom:myPropertyName` in the order list to specify where the property should go.
+
+### Additional Properties
+
+You can find the full list of properties [here](/lib/utils/property-order.js#L10).
+
+## Description
 
 You should write code grouped and ordered in this way:
 
@@ -125,3 +129,9 @@ export default Component.extend({
   }
 });
 ```
+
+## Help Wanted
+
+| Issue | Link |
+| :-- | :-- |
+| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

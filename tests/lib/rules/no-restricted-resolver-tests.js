@@ -5,84 +5,66 @@
 const rule = require('../../../lib/rules/no-restricted-resolver-tests');
 const RuleTester = require('eslint').RuleTester;
 
-const parserOptions = { ecmaVersion: 6, sourceType: 'module' };
 const { ERROR_MESSAGES } = rule;
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
 ruleTester.run('no-restricted-resolver-tests', rule, {
   valid: [
-    {
-      code: `
-              moduleFor('service:session', {
-                integration: true
-              });
-            `,
-      parserOptions,
-    },
-    {
-      code: `
-              moduleForComponent('display-page', {
-                integration: true
-              });
-            `,
-      parserOptions,
-    },
-    {
-      code: `
-              moduleForModel('post', {
-                integration: true
-              });
-            `,
-      parserOptions,
-    },
-    {
-      code: `
-              setupTest('service:session', {
-                integration: true
-              });
-            `,
-      parserOptions,
-    },
-    {
-      code: `
-              setupComponentTest('display-page', {
-                integration: true
-              });
-            `,
-      parserOptions,
-    },
-    {
-      code: `
-              setupModelTest('post', {
-                integration: true
-              });
-            `,
-      parserOptions,
-    },
-    {
-      code: `
-              module('foo', function(hooks) {
-                setupTest(hooks);
-              });
-            `,
-      parserOptions,
-    },
-    {
-      code: "import { setupTest } from 'ember-qunit';",
-      parserOptions,
-    },
-    {
-      code: `const setupTest = require('ember-fastboot-addon-tests').setupTest;
+    `
+    import { moduleFor } from 'ember-qunit';
+    moduleFor('service:session', {
+      integration: true
+    });
+    `,
+    `
+    import { moduleForComponent } from 'ember-qunit';
+    moduleForComponent('display-page', {
+      integration: true
+    });
+    `,
+    `
+    import { moduleForModel } from 'ember-qunit';
+    moduleForModel('post', {
+      integration: true
+    });
+    `,
+    `
+    import { setupTest } from 'ember-qunit';
+    setupTest('service:session', {
+      integration: true
+    });
+    `,
+    `
+    import { setupComponentTest } from 'ember-mocha';
+    setupComponentTest('display-page', {
+      integration: true
+    });
+    `,
+    `
+    import { setupModelTest } from 'ember-mocha';
+    setupModelTest('post', {
+      integration: true
+    });
+    `,
+    `
+    module('foo', function(hooks) {
+      setupTest(hooks);
+    });
+    `,
+    "import { setupTest } from 'ember-qunit';",
+    `
+    const setupTest = require('ember-fastboot-addon-tests').setupTest;
 
-            describe('Integration tests', function() {
-              setupTest('fastboot-ready-app');
-            });`,
-      parserOptions,
-    },
+    describe('Integration tests', function() {
+      setupTest('fastboot-ready-app');
+    });
+    `,
   ],
   invalid: [
     {
@@ -90,7 +72,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
 
               moduleFor('service:session');
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -105,7 +86,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
                 unit: true
               });
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -120,7 +100,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
                 needs: ['type:thing']
               });
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -133,7 +112,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
 
               moduleFor('service:session', arg2, {});
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -146,7 +124,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
 
               moduleForComponent('display-page');
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -161,7 +138,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
                 unit: true
               });
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -176,7 +152,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
                 needs: ['type:thing']
               });
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -189,7 +164,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
 
               moduleForComponent('display-page', arg2, {});
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -202,7 +176,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
 
               moduleForModel('post');
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -217,7 +190,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
                 unit: true
               });
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -232,7 +204,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
                 needs: ['type:thing']
               });
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -245,7 +216,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
 
               moduleForModel('post', arg2, {});
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -258,7 +228,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
 
               setupTest('service:session');
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -273,7 +242,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
                 unit: true
               });
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -288,7 +256,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
                 needs: ['type:thing']
               });
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -301,7 +268,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
 
               setupTest('service:session', arg2, {});
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -314,7 +280,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
 
               setupComponentTest('display-page');
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -329,7 +294,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
                 unit: true
               });
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -344,7 +308,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
                 needs: ['type:thing']
               });
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -357,7 +320,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
 
               setupComponentTest('display-page', arg2, {});
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -370,7 +332,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
 
               setupModelTest('post');
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -385,7 +346,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
                 unit: true
               });
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -400,7 +360,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
                 needs: ['type:thing']
               });
             `,
-      parserOptions,
       output: null,
       errors: [
         {
@@ -413,7 +372,6 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
 
               setupModelTest('post', arg2, {});
             `,
-      parserOptions,
       output: null,
       errors: [
         {

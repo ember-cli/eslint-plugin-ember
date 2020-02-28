@@ -50,13 +50,14 @@ eslintTester.run('new-module-imports', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: `export const Ember = 1;`,
+      code: 'export const Ember = 1;',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code: `for (let i = 0; i < 10; i++) { }`,
+      code: 'for (let i = 0; i < 10; i++) { }',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    'SomethingRandom.Ember.Service;',
   ],
   invalid: [
     {
