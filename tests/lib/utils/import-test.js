@@ -44,7 +44,7 @@ describe('getImportIdentifier', () => {
 
   it('gets an identifier when found for default imports', () => {
     const node = babelEslint.parse("import Component from '@ember/component';").body[0];
-    const identifier = importUtils.getImportIdentifier(node, '@ember/component', 'Component');
+    const identifier = importUtils.getImportIdentifier(node, '@ember/component');
 
     expect(identifier).toStrictEqual('Component');
   });
@@ -58,7 +58,7 @@ describe('getImportIdentifier', () => {
 
   it('gets a default identifier when found with mixed imports', () => {
     const node = babelEslint.parse("import Component from '@ember/component';").body[0];
-    const identifier = importUtils.getImportIdentifier(node, '@ember/component', 'Component');
+    const identifier = importUtils.getImportIdentifier(node, '@ember/component');
 
     expect(identifier).toStrictEqual('Component');
   });

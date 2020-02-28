@@ -47,7 +47,7 @@ ruleTester.run('no-legacy-test-waiters', rule, {
         });
       `,
       output: null,
-      errors: [{ message: ERROR_MESSAGE }, { message: ERROR_MESSAGE }],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: `
@@ -58,7 +58,7 @@ ruleTester.run('no-legacy-test-waiters', rule, {
         });
       `,
       output: null,
-      errors: [{ message: ERROR_MESSAGE }, { message: ERROR_MESSAGE }],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: `
@@ -68,7 +68,7 @@ ruleTester.run('no-legacy-test-waiters', rule, {
         unregisterWaiter(waiter);
       `,
       output: null,
-      errors: [{ message: ERROR_MESSAGE }, { message: ERROR_MESSAGE }, { message: ERROR_MESSAGE }],
+      errors: [{ message: ERROR_MESSAGE }, { message: ERROR_MESSAGE }],
     },
     {
       code: `
@@ -78,7 +78,7 @@ ruleTester.run('no-legacy-test-waiters', rule, {
         unreg(waiter);
       `,
       output: null,
-      errors: [{ message: ERROR_MESSAGE }, { message: ERROR_MESSAGE }, { message: ERROR_MESSAGE }],
+      errors: [{ message: ERROR_MESSAGE }, { message: ERROR_MESSAGE }],
     },
   ],
 });
