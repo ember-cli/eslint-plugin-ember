@@ -23,12 +23,12 @@ describe('getSourceModuleName', () => {
 });
 
 describe('getImportIdentifier', () => {
-  it('gets an empty array when no import is found', () => {
+  it('gets an empty string when no import is found', () => {
     const node = babelEslint.parse("import { later } from '@ember/runloop';").body[0];
     expect(importUtils.getImportIdentifier(node, '@ember/object', 'action')).toStrictEqual('');
   });
 
-  it('gets an array of identifiers when found', () => {
+  it('gets an identifier when found', () => {
     const node = babelEslint.parse("import { later } from '@ember/runloop';").body[0];
     const identifier = importUtils.getImportIdentifier(node, '@ember/runloop', 'later');
 
