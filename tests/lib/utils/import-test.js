@@ -22,25 +22,44 @@ describe('getSourceModuleName', () => {
   });
 });
 
-describe('getImportIdentifiers', () => {
+describe('getImportIdentifier', () => {
   it('gets an empty array when no import is found', () => {
     const node = babelEslint.parse("import { later } from '@ember/runloop';").body[0];
-    expect(importUtils.getImportIdentifiers(node, { '@ember/object': ['action'] })).toHaveLength(0);
+    expect(importUtils.getImportIdentifier(node, '@ember/object', 'action')).toStrictEqual('');
   });
 
   it('gets an array of identifiers when found', () => {
     const node = babelEslint.parse("import { later } from '@ember/runloop';").body[0];
-    const identifiers = importUtils.getImportIdentifiers(node, { '@ember/runloop': ['later'] });
+    const identifier = importUtils.getImportIdentifier(node, '@ember/runloop', 'later');
 
-    expect(identifiers).toHaveLength(1);
-    expect(identifiers).toStrictEqual(['later']);
+    expect(identifier).toStrictEqual('later');
   });
 
-  it('gets an array of aliased identifiers when found', () => {
+  it('gets an aliased identifier when found', () => {
     const node = babelEslint.parse("import { later as laterz } from '@ember/runloop';").body[0];
-    const identifiers = importUtils.getImportIdentifiers(node, { '@ember/runloop': ['later'] });
+    const identifier = importUtils.getImportIdentifier(node, '@ember/runloop', 'later');
 
-    expect(identifiers).toHaveLength(1);
-    expect(identifiers).toStrictEqual(['laterz']);
+    expect(identifier).toStrictEqual('laterz');
+  });
+
+  it('gets an identifier when found for default imports', () => {
+    const node = babelEslint.parse("import Component from '@ember/component';").body[0];
+    const identifier = importUtils.getImportIdentifier(node, '@ember/component', 'Component');
+
+    expect(identifier).toStrictEqual('Component');
+  });
+
+  it('gets an named identifier when found with mixed imports', () => {
+    const node = babelEslint.parse("import { later } from '@ember/runloop';").body[0];
+    const identifier = importUtils.getImportIdentifier(node, '@ember/runloop', 'later');
+
+    expect(identifier).toStrictEqual('later');
+  });
+
+  it('gets a default identifier when found with mixed imports', () => {
+    const node = babelEslint.parse("import Component from '@ember/component';").body[0];
+    const identifier = importUtils.getImportIdentifier(node, '@ember/component', 'Component');
+
+    expect(identifier).toStrictEqual('Component');
   });
 });
