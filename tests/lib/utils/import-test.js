@@ -23,9 +23,9 @@ describe('getSourceModuleName', () => {
 });
 
 describe('getImportIdentifier', () => {
-  it('gets an empty string when no import is found', () => {
+  it('gets null when no import is found', () => {
     const node = babelEslint.parse("import { later } from '@ember/runloop';").body[0];
-    expect(importUtils.getImportIdentifier(node, '@ember/object', 'action')).toStrictEqual('');
+    expect(importUtils.getImportIdentifier(node, '@ember/object', 'action')).toBeNull();
   });
 
   it('gets an identifier when found', () => {
