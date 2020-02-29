@@ -42,6 +42,13 @@ describe('getImportIdentifier', () => {
     expect(identifier).toStrictEqual('laterz');
   });
 
+  it('returns undefined when no default import is found', () => {
+    const node = babelEslint.parse("import { later } from '@ember/runloop';").body[0];
+    const identifier = importUtils.getImportIdentifier(node, '@ember/runloop');
+
+    expect(identifier).toBeUndefined();
+  });
+
   it('gets an identifier when found for default imports', () => {
     const node = babelEslint.parse("import Component from '@ember/component';").body[0];
     const identifier = importUtils.getImportIdentifier(node, '@ember/component');
