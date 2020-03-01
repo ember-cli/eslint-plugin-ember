@@ -66,8 +66,8 @@ export default class MyComponent extends Component {
 
 ```js
 export default Component.extend({
-  init() {}
-  willDestroy() {}
+  init() {},
+  willDestroy() {},
 });
 ```
 
