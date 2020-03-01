@@ -221,6 +221,48 @@ describe('isEmberComponent', () => {
   });
 });
 
+describe('isGlimerComponent', () => {
+  describe("should check if it's a Glimmer Component", () => {
+    it('should detect Component when using native classes', () => {
+      const context = new FauxContext(`
+        import Component from '@glimmer/component';
+        class MyComponent extends Component {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isGlimmerComponent(context, node)).toBeTruthy();
+    });
+
+    it('shouldnt detect Component when using native classes if the import path is incorrect', () => {
+      const context = new FauxContext(`
+        import Component from '@something-else/component';
+        class MyComponent extends Component {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isGlimmerComponent(context, node)).toBeFalsy();
+    });
+
+    it('shouldnt confuse Glimmer Components with Ember Components', () => {
+      const context = new FauxContext(`
+        import Component from '@ember/component';
+        class MyComponent extends Component {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isGlimmerComponent(context, node)).toBeFalsy();
+    });
+  });
+
+  describe("should check if it's a Glimmer Component even if it uses a custom name", () => {
+    it('should detect Component when using native classes if the import path is correct', () => {
+      const context = new FauxContext(`
+        import CustomComponent from '@glimmer/component';
+        class MyComponent extends CustomComponent {}
+      `);
+      const node = context.ast.body[1];
+      expect(emberUtils.isGlimmerComponent(context, node)).toBeTruthy();
+    });
+  });
+});
+
 describe('isEmberController', () => {
   describe("should check if it's an Ember Controller", () => {
     it('should detect Controller when using Ember.Controller', () => {
