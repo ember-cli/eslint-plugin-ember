@@ -25,9 +25,15 @@ export default Component.extend({
     this.doWork();
   },
   doWork() {
-    debounce(() => { /* this will run twice */ }, 300);
-    once(() => { /* this will run twice */ });
-    scheduleOnce('afterRender', function() { /* this will run twice */ });
+    debounce(() => {
+      /* this will run twice */
+    }, 300);
+    once(() => {
+      /* this will run twice */
+    });
+    scheduleOnce('afterRender', function() {
+      /* this will run twice */
+    });
   }
 });
 ```

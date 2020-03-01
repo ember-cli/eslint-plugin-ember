@@ -147,10 +147,40 @@ module.exports = {
     'unicorn/prevent-abbreviations': 'off'
   },
   overrides: [
-    // test files
     {
+      // Test files:
       files: ['tests/**/*.js',],
       env: { jest: true },
     },
+    {
+      // Markdown code samples in documentation:
+      files: ['**/*.md'],
+      plugins: ['markdown'],
+      parser: 'babel-eslint',
+      parserOptions: {
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true }
+      },
+      rules: {
+        // Ignore violations that generally don't matter inside code samples.
+        'filenames/match-regex': 'off',
+        'import/no-unresolved': 'off',
+        'import/unambiguous': 'off',
+        'jest/expect-expect': 'off',
+        'jest/no-test-callback': 'off',
+        'jest/require-top-level-describe': 'off',
+        'no-console': 'off',
+        'no-undef': 'off',
+        'no-unused-expressions': 'off',
+        'no-unused-labels': 'off',
+        'no-unused-vars': 'off',
+        'no-useless-constructor': 'off',
+        'node/no-missing-import': 'off',
+        'node/no-missing-require': 'off',
+        'node/no-unsupported-features/es-syntax': 'off',
+        'prettier/prettier': ['error', { trailingComma: 'none' }],
+        'unicorn/filename-case': 'off'
+      }
+    }
   ],
 };

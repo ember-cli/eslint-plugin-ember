@@ -30,9 +30,7 @@ npm install --save-dev eslint-plugin-ember
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: [
-    'ember'
-  ],
+  plugins: ['ember'],
   extends: [
     'eslint:recommended',
     'plugin:ember/recommended' // or other configuration
@@ -41,7 +39,7 @@ module.exports = {
     // override rule settings here
     'ember/no-jquery': 'error'
   }
-}
+};
 ```
 
 ## 🧰 Configurations

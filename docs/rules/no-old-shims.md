@@ -23,7 +23,7 @@ import inject from 'ember-service/inject';
 Examples of **correct** code for this rule:
 
 ```javascript
-import Component from '@ember/component'
-import EmberObject, { computed } from '@ember/object'
-import Service, { inject } from '@ember/service'
+import Component from '@ember/component';
+import EmberObject, { computed } from '@ember/object';
+import Service, { inject } from '@ember/service';
 ```

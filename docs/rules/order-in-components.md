@@ -3,30 +3,35 @@
 ## Configuration
 
 ```js
-ember/order-in-components: [2, {
-  order: [
-    'service',
-    'property',
-    'empty-method',
-    'single-line-function',
-    'multi-line-function',
-    'observer',
-    'init',
-    'didReceiveAttrs',
-    'willRender',
-    'willInsertElement',
-    'didInsertElement',
-    'didRender',
-    'didUpdateAttrs',
-    'willUpdate',
-    'didUpdate',
-    'willDestroyElement',
-    'willClearRender',
-    'didDestroyElement',
-    'actions',
-    'method',
+const rules = {
+  'ember/order-in-components': [
+    2,
+    {
+      order: [
+        'service',
+        'property',
+        'empty-method',
+        'single-line-function',
+        'multi-line-function',
+        'observer',
+        'init',
+        'didReceiveAttrs',
+        'willRender',
+        'willInsertElement',
+        'didInsertElement',
+        'didRender',
+        'didUpdateAttrs',
+        'willUpdate',
+        'didUpdate',
+        'willDestroyElement',
+        'willClearRender',
+        'didDestroyElement',
+        'actions',
+        'method'
+      ]
+    }
   ]
-}]
+};
 ```
 
 If you want some of properties to be treated equally in order you can group them into arrays, like so:
@@ -50,8 +55,8 @@ order: [
   'willClearRender',
   'didDestroyElement',
   'actions',
-  ['method', 'empty-method'],
-]
+  ['method', 'empty-method']
+];
 ```
 
 ### Custom Properties
@@ -76,7 +81,11 @@ You should write code grouped and ordered in this way:
 8. Custom / private methods
 
 ```javascript
-const { Component, computed, inject: { service } } = Ember;
+const {
+  Component,
+  computed,
+  inject: { service }
+} = Ember;
 const { alias } = computed;
 
 export default Component.extend({

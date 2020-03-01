@@ -10,9 +10,10 @@ Examples of **incorrect** code for this rule:
 
 ```javascript
 import Component from '@ember/component';
+
 export default class MyComponent extends Component {
-  init() {
-    this._super(...arguments);
+  init(...args) {
+    this._super(...args);
     // Other logic
   }
 }
@@ -22,9 +23,10 @@ Examples of **correct** code for this rule:
 
 ```javascript
 import Component from '@ember/component';
+
 export default class MyComponent extends Component {
-  init() {
-    super.init(...arguments);
+  init(...args) {
+    super.init(...args);
     // Other logic
   }
 }
@@ -32,9 +34,10 @@ export default class MyComponent extends Component {
 
 ```javascript
 import Component from '@ember/component';
+
 export default Component.extend({
-  init() {
-    this._super(...arguments);
+  init(...args) {
+    this._super(...args);
     // Other logic
   }
 });

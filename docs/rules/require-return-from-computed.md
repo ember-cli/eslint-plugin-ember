@@ -7,6 +7,7 @@ Always return a value from a computed property function.
 Examples of **incorrect** code for this rule:
 
 ```javascript
+/* eslint "consistent-return": "off" */
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 
@@ -19,9 +20,9 @@ export default Component.extend({
       return `${this.get('firstName')} ${this.get('lastName')}`;
     },
     set(key, value) {
-      let [firstName, lastName] = value.split(/\s+/);
+      const [firstName, lastName] = value.split(/\s+/);
       this.set('firstName', firstName);
-      this.set('lastName',  lastName);
+      this.set('lastName', lastName);
     }
   }),
 
@@ -48,7 +49,7 @@ export default Component.extend({
       return `${this.get('firstName')} ${this.get('lastName')}`;
     },
     set(key, value) {
-      let [firstName, lastName] = value.split(/\s+/);
+      const [firstName, lastName] = value.split(/\s+/);
       this.set('firstName', firstName);
       this.set('lastName', lastName);
       return value;

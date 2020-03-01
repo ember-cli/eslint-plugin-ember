@@ -18,7 +18,7 @@ Examples of **incorrect** code for this rule:
 import { assert, warn } from '@ember/debug';
 import { deprecate } from '@ember/application/deprecations';
 
-...
+// ...
 
 assert(label, 'Label must be present.');
 warn(label, 'Label must be present.', { id: 'missing-label' });
@@ -31,7 +31,7 @@ Examples of **correct** code for this rule:
 import { assert, warn } from '@ember/debug';
 import { deprecate } from '@ember/application/deprecations';
 
-...
+// ...
 
 assert('Label must be present.', label);
 warn('Label must be present.', label, { id: 'missing-label' });

@@ -18,19 +18,19 @@ import Component from '@ember/component';
 
 export default Component.extend({
   actions: {
-    foo() {
-    }
-  },
+    foo() {}
+  }
 });
+```
 
+```js
 // Bad, with native class
 import Component from '@ember/component';
 
 export class MyComponent extends Component {
   actions = {
-    foo() {
-    }
-  }
+    foo() {}
+  };
 }
 ```
 
@@ -42,18 +42,18 @@ import Component from '@ember/component';
 import { action } from '@ember/object';
 
 export default Component.extend({
-  foo: action(function() {
-  })
+  foo: action(function() {})
 });
+```
 
+```js
 // Good, with native class
 import Component from '@ember/component';
 import { action } from '@ember/object';
 
 export class MyComponent extends Component {
   @action
-  foo() {
-  }
+  foo() {}
 }
 ```
 

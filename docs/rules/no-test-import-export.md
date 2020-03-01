@@ -18,10 +18,7 @@ module('Acceptance | module', setupModule());
 ```
 
 ```javascript
-import {
-  beforeEachSetup,
-  testMethod,
-} from './some-other-test';
+import { beforeEachSetup, testMethod } from './some-other-test';
 import { module, test } from 'qunit';
 
 module('Acceptance | module', beforeEachSetup());
@@ -36,14 +33,14 @@ module('Acceptance | module', testModule());
 
 ```javascript
 // some-test.js
-export function beforeEachSetup(){};
+export function beforeEachSetup() {}
 ```
 
 ```javascript
 // some-test.js
-function beforeEachSetup(){};
+function beforeEachSetup() {}
 
-export default {beforeEachSetup};
+export default { beforeEachSetup };
 ```
 
 Examples of **correct** code for this rule:
@@ -57,12 +54,14 @@ module('Acceptance | module', setupModule());
 
 ```javascript
 // some-test-helper.js
-export function beforeEachSetup(){ ... };
+export function beforeEachSetup() {
+  // ...
+}
 ```
 
 ```javascript
 // some-test-helper.js
-function beforeEachSetup(){};
+function beforeEachSetup() {}
 
-export default {beforeEachSetup};
+export default { beforeEachSetup };
 ```

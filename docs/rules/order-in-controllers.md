@@ -3,20 +3,25 @@
 ## Configuration
 
 ```js
-ember/order-in-controllers: [2, {
-  order: [
-    'controller',
-    'service',
-    'query-params',
-    'inherited-property',
-    'property',
-    'single-line-function',
-    'multi-line-function',
-    'observer',
-    'actions',
-    ['method', 'empty-method'],
+const rules = {
+  'ember/order-in-controllers': [
+    2,
+    {
+      order: [
+        'controller',
+        'service',
+        'query-params',
+        'inherited-property',
+        'property',
+        'single-line-function',
+        'multi-line-function',
+        'observer',
+        'actions',
+        ['method', 'empty-method']
+      ]
+    }
   ]
-}]
+};
 ```
 
 If you want some of properties to be treated equally in order you can group them into arrays, like so:
@@ -27,7 +32,7 @@ order: [
   'inherited-property',
   'property',
   ['single-line-function', 'multi-line-function']
-]
+];
 ```
 
 ### Custom Properties
@@ -54,7 +59,12 @@ You should write code grouped and ordered in this way:
 10. Custom / private methods
 
 ```javascript
-const { Controller, computed, inject: { controller, service }, get } = Ember;
+const {
+  Controller,
+  computed,
+  inject: { controller, service },
+  get
+} = Ember;
 
 export default Controller.extend({
   // 1. Controller injections
@@ -89,13 +99,13 @@ export default Controller.extend({
   actions: {
     sneakyAction() {
       return this._secretMethod();
-    },
+    }
   },
 
   // 10. Custom / private methods
   _secretMethod() {
     // custom secret method logic
-  },
+  }
 });
 ```
 

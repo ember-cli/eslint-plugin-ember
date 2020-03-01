@@ -17,21 +17,23 @@ Examples of **incorrect** code for this rule:
 // my-mixin.js
 export default Mixin.create({
   isValidClassName(classname) {
-    return !!className.match('-class');
+    return Boolean(className.match('-class'));
   },
 
   hideModal(value) {
     this.set('isHidden', value);
   }
 });
+```
 
+```javascript
 // my-component.js
 import myMixin from 'my-mixin';
 
 export default Component.extend(myMixin, {
   aComputedProperty: computed('obj', function() {
     return this.isValidClassName(get(obj, 'className'));
-  }),
+  })
 });
 ```
 
@@ -40,19 +42,21 @@ Examples of **correct** code for this rule:
 ```javascript
 // my-utils.js
 export function isValidClassName(classname) {
-  return !!className.match('-class');
+  return Boolean(className.match('-class'));
 }
 
 export function hideModal(obj, value) {
   set(obj, 'isHidden', value);
 }
+```
 
+```javascript
 // my-component.js
 import { isValidClassName } from 'my-utils';
 
 export default Component.extend({
   aComputedProperty: computed('obj', function() {
     return isValidClassName(get(obj, 'className'));
-  }),
+  })
 });
 ```

@@ -20,84 +20,84 @@ String option:
 ### always-with-setter
 
 ```javascript
-/// BAD
+// BAD
 Ember.Object.extend({
-    fullName: computed('firstName', 'lastName', {
-        get() {
-            //...
-        }
-    })
+  fullName: computed('firstName', 'lastName', {
+    get() {
+      // ...
+    }
+  })
 });
 
 // GOOD
 Ember.Object.extend({
-    fullName: computed('firstName', 'lastName', function() {
-        //...
-    })
+  fullName: computed('firstName', 'lastName', function() {
+    // ...
+  })
 });
 
 // GOOD
 Ember.Object.extend({
-    fullName: computed('firstName', 'lastName', {
-        set() {
-            //...
-        },
-        get() {
-            //...
-        }
-    })
+  fullName: computed('firstName', 'lastName', {
+    set() {
+      // ...
+    },
+    get() {
+      // ...
+    }
+  })
 });
 ```
 
 ### always
 
 ```javascript
-/// GOOD
+// GOOD
 Ember.Object.extend({
-    fullName: computed('firstName', 'lastName', {
-        get() {
-            //...
-        }
-    })
+  fullName: computed('firstName', 'lastName', {
+    get() {
+      // ...
+    }
+  })
 });
 
 // BAD
 Ember.Object.extend({
-    fullName: computed('firstName', 'lastName', function() {
-        //...
-    })
+  fullName: computed('firstName', 'lastName', function() {
+    // ...
+  })
 });
 ```
 
 ### never
 
 ```javascript
-/// GOOD
+// GOOD
 Ember.Object.extend({
-    fullName: computed('firstName', 'lastName', function() {
-        //...
-    })
+  fullName: computed('firstName', 'lastName', function() {
+    // ...
+  })
 });
 
 // BAD
 Ember.Object.extend({
-    fullName: computed('firstName', 'lastName', {
-        get() {
-            //...
-        }
-    })
+  fullName: computed('firstName', 'lastName', {
+    get() {
+      // ...
+    }
+  })
 });
 
 // BAD
 Ember.Object.extend({
-    fullName: computed('firstName', 'lastName', {
-        get() {
-            //...
-        },
-        set() {
-            //...
-        }
-    })
+  fullName: computed('firstName', 'lastName', {
+    get() {
+      // ...
+    },
+    set() {
+      // ...
+    }
+  })
 });
 ```
 

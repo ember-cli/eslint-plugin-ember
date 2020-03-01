@@ -3,27 +3,32 @@
 ## Configuration
 
 ```js
-ember/order-in-routes: [2, {
-  order: [
-    'service',
-    'inherited-property',
-    'property',
-    'single-line-function',
-    'multi-line-function',
-    'beforeModel',
-    'model',
-    'afterModel',
-    'serialize',
-    'redirect',
-    'activate',
-    'setupController',
-    'renderTemplate',
-    'resetController',
-    'deactivate',
-    'actions',
-    ['method', 'empty-method'],
+const rules = {
+  'ember/order-in-routes': [
+    2,
+    {
+      order: [
+        'service',
+        'inherited-property',
+        'property',
+        'single-line-function',
+        'multi-line-function',
+        'beforeModel',
+        'model',
+        'afterModel',
+        'serialize',
+        'redirect',
+        'activate',
+        'setupController',
+        'renderTemplate',
+        'resetController',
+        'deactivate',
+        'actions',
+        ['method', 'empty-method']
+      ]
+    }
   ]
-}]
+};
 ```
 
 If you want some of properties to be treated equally in order you can group them into arrays, like so:
@@ -46,8 +51,8 @@ order: [
     'deactivate'
   ],
   'actions',
-  ['method', 'empty-method'],
-]
+  ['method', 'empty-method']
+];
 ```
 
 ### Custom Properties
@@ -73,7 +78,11 @@ You should write code grouped and ordered in this way:
 9. Custom / private methods
 
 ```javascript
-const { Route, inject: { service }, get } = Ember;
+const {
+  Route,
+  inject: { service },
+  get
+} = Ember;
 
 export default Route.extend({
   // 1. Services
@@ -81,7 +90,7 @@ export default Route.extend({
 
   // 2. Default route's properties
   queryParams: {
-    sortBy: { refreshModel: true },
+    sortBy: { refreshModel: true }
   },
 
   // 3. Custom properties
@@ -101,7 +110,7 @@ export default Route.extend({
 
   // 6. afterModel hook
   afterModel(articles) {
-    articles.forEach((article) => {
+    articles.forEach(article => {
       article.set('foo', 'bar');
     });
   },
@@ -115,13 +124,13 @@ export default Route.extend({
   actions: {
     sneakyAction() {
       return this._secretMethod();
-    },
+    }
   },
 
   // 9. Custom / private methods
   _secretMethod() {
     // custom secret method logic
-  },
+  }
 });
 ```
 

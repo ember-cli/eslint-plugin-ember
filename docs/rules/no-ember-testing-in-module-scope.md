@@ -16,9 +16,9 @@ Examples of **incorrect** code for this rule:
 ```js
 export default Component.extend({
   init() {
-    this.isTesting = Ember.testing
+    this.isTesting = Ember.testing;
   }
-})
+});
 ```
 
 ```js
@@ -26,7 +26,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   isTesting: Ember.testing
-})
+});
 ```
 
 ```js
@@ -45,6 +45,7 @@ Examples of **correct** code for this rule:
 
 ```javascript
 import Ember from 'ember';
+
 export default Component.extend({
   someMethod() {
     if (Ember.testing) {
@@ -53,14 +54,15 @@ export default Component.extend({
       doSomethingElse();
     }
   }
-})
+});
 ```
 
 ```js
 import Ember from 'ember';
+
 export default Service.extend({
   foo() {
-    _bar(Ember.testing ? 0 : 400)
+    _bar(Ember.testing ? 0 : 400);
   }
-})
+});
 ```

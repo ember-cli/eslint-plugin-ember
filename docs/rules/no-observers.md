@@ -21,7 +21,7 @@ Examples of **incorrect** code for this rule:
 export default Controller.extend({
   change: Ember.observer('text', function() {
     console.log(`change detected: ${this.text}`);
-  },
+  })
 });
 ```
 
@@ -31,12 +31,13 @@ import { observer } from '@ember/object';
 export default Controller.extend({
   change: observer('text', function() {
     console.log(`change detected: ${this.text}`);
-  },
+  })
 });
 ```
 
 ```js
 import { observes } from '@ember-decorators/object';
+
 class FooComponent extends Component {
   @observes('text')
   change() {
@@ -49,18 +50,18 @@ class FooComponent extends Component {
 import { addObserver, removeObserver } from '@ember/object/observers';
 
 class FooComponent extends Component {
-  constructor() {
-    super(...arguments);
-    addObserver(this, 'text', this.change)
+  constructor(...args) {
+    super(...args);
+    addObserver(this, 'text', this.change);
   }
 
   change() {
     console.log(`change detected: ${this.text}`);
   }
 
-  willDestroy() {
+  willDestroy(...args) {
     removeObserver(this, 'text', this.change);
-    super.willDestroy(...arguments);
+    super.willDestroy(...args);
   }
 }
 ```
@@ -69,10 +70,11 @@ class FooComponent extends Component {
 import { inject as service } from '@ember/service';
 
 class FooComponent extends Component {
-  time: service(),
-  constructor() {
-    super(...arguments);
-    this.time.addObserver('currentTime.seconds', this.update)
+  @service time;
+
+  constructor(...args) {
+    super(...args);
+    this.time.addObserver('currentTime.seconds', this.update);
   }
 
   update() {
@@ -88,7 +90,7 @@ export default Controller.extend({
   actions: {
     change() {
       console.log(`change detected: ${this.text}`);
-    },
-  },
+    }
+  }
 });
 ```

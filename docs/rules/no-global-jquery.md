@@ -13,7 +13,7 @@ Examples of **incorrect** code for this rule:
 ```js
 export default Component.extend({
   init() {
-    $('.foo').addClass('bar'); //global usage
+    $('.foo').addClass('bar'); // global usage
   }
 });
 ```
@@ -26,7 +26,7 @@ import Ember from 'ember';
 const { $ } = Ember;
 export default Component.extend({
   init() {
-    Ember.$('.foo').addClass('bar') //usage from Ember object
+    Ember.$('.foo').addClass('bar'); // usage from Ember object
     // or even better
     $('.foo').addClass('bar'); // deconstruction from Ember object
   }

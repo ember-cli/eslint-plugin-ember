@@ -22,7 +22,7 @@ moduleFor('service:session', {
 moduleFor('service:session', {
   needs: ['type:thing']
 });
-moduleFor('service:session', 'arg2', [...,] {});
+moduleFor('service:session', 'arg2', ['etc'], {});
 
 moduleForComponent('display-page');
 moduleForComponent('display-page', {
@@ -31,7 +31,7 @@ moduleForComponent('display-page', {
 moduleForComponent('display-page', {
   needs: ['type:thing']
 });
-moduleForComponent('display-page', 'arg2', [...,] {});
+moduleForComponent('display-page', 'arg2', ['etc'], {});
 
 moduleForModel('post');
 moduleForModel('post', {
@@ -40,7 +40,7 @@ moduleForModel('post', {
 moduleForModel('post', {
   needs: ['type:thing']
 });
-moduleForModel('post', 'arg2', [...,] {});
+moduleForModel('post', 'arg2', ['etc'], {});
 ```
 
 ```js
@@ -53,7 +53,7 @@ setupTest('service:session', {
 setupTest('service:session', {
   needs: ['type:thing']
 });
-moduleFor('arg1', 'arg2', [...,] {});
+moduleFor('arg1', 'arg2', ['etc'], {});
 
 setupComponentTest('display-page');
 setupComponentTest('display-page', {
@@ -62,7 +62,7 @@ setupComponentTest('display-page', {
 setupComponentTest('display-page', {
   needs: ['type:thing']
 });
-setupComponentTest('display-page', 'arg2', [...,] {});
+setupComponentTest('display-page', 'arg2', ['etc'], {});
 
 setupModelTest('post');
 setupModelTest('post', {
@@ -71,7 +71,7 @@ setupModelTest('post', {
 setupModelTest('post', {
   needs: ['type:thing']
 });
-setupModelTest('post', 'arg2', [...,] {});
+setupModelTest('post', 'arg2', ['etc'], {});
 ```
 
 Examples of **correct** code for this rule:

@@ -7,13 +7,13 @@ Dynamic segments in routes should use _snake case_, so Ember doesn't have to do 
 Examples of **incorrect** code for this rule:
 
 ```js
-this.route('tree', { path: ':treeId'});
+this.route('tree', { path: ':treeId' });
 ```
 
 Examples of **correct** code for this rule:
 
 ```javascript
-this.route('tree', { path: ':tree_id'});
+this.route('tree', { path: ':tree_id' });
 ```
 
 ## References

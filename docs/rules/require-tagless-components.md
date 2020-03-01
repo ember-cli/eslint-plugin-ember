@@ -40,7 +40,7 @@ export default class MyComponent extends Component {}
 import Component from '@ember/component';
 
 export default class MyComponent extends Component {
-  tagName = 'span'
+  tagName = 'span';
 }
 ```
 
@@ -69,7 +69,7 @@ export default Component.extend({
 import Component from '@ember/component';
 
 export default class MyComponent extends Component {
-  tagName = ''
+  tagName = '';
 }
 ```
 
