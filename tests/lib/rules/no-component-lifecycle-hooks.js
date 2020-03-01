@@ -39,6 +39,27 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
         didUpdate() {},
       });
     `,
+    `
+      import Component from '@ember/component';
+      export const Component1 = Component.extend({
+        willDestroy() {},
+      });
+      export const Component2 = Component.extend({
+        willDestroy() {},
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default class MyComponent extends Component {}
+
+      const someRandomClassOrObject = { didDestroyElement() { } };
+    `,
+    `
+      import Component from '@ember/component';
+      export default Component.extend({});
+
+      const someRandomClassOrObject = { didDestroyElement() { } };
+    `,
   ],
 
   invalid: [
@@ -76,6 +97,25 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
         export default Component.extend({
           didDestroyElement() {}
         })
+      `,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Identifier',
+        },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+
+        export const Component2 = Component.extend({
+          didDestroyElement() {},
+        });
+
+        export const Component1 = Component.extend({
+          willDestroy() {},
+        });
       `,
       errors: [
         {

@@ -126,6 +126,7 @@ Each rule has emojis denoting what configuration it belongs to and/or a :wrench:
 | :car: | [no-actions-hash](./docs/rules/no-actions-hash.md) | disallow the actions hash in components, controllers, and routes |
 | :car: | [no-classic-classes](./docs/rules/no-classic-classes.md) | disallow "classic" classes in favor of native JS classes |
 | :car: | [no-classic-components](./docs/rules/no-classic-components.md) | enforce using Glimmer components |
+| :car: | [no-component-lifecycle-hooks](./docs/rules/no-component-lifecycle-hooks.md) | Prevents usage of "classic" ember component lifecycle hooks. Render modifiers or custom functional modifiers should be used instead. |
 | :car: | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | disallow using computed properties in native classes |
 | :car: | [require-tagless-components](./docs/rules/require-tagless-components.md) | disallow using the wrapper element of a component |
 
