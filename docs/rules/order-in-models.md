@@ -3,24 +3,31 @@
 ## Configuration
 
 ```js
-ember/order-in-models: [2, {
-  order: [
-    'attribute',
-    'relationship',
-    'single-line-function',
-    'multi-line-function',
+const rules = {
+  'ember/order-in-models': [
+    2,
+    {
+      // eslint-disable-next-line prettier/prettier
+      order: [
+        'attribute',
+        'relationship',
+        'single-line-function',
+        'multi-line-function'
+      ]
+    }
   ]
-}]
+};
 ```
 
 If you want some of properties to be treated equally in order you can group them into arrays, like so:
 
 ```js
+// eslint-disable-next-line prettier/prettier
 order: [
   'attribute',
   'relationship',
-  ['single-line-function', 'multi-line-function'],
-]
+  ['single-line-function', 'multi-line-function']
+];
 ```
 
 ### Custom Properties
@@ -56,7 +63,9 @@ export default Model.extend({
     return result;
   })
 });
+```
 
+```javascript
 // BAD
 export default Model.extend({
   mood: computed('health', 'hunger', function() {

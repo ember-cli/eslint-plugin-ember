@@ -9,7 +9,7 @@ It makes code more readable if the model has the same name as a subject. We can 
   import { alias } from '@ember/object/computed';
 
   export default Controller.extend({
-    nail: alias('model'),
+    nail: alias('model')
   });
   ```
 
@@ -21,7 +21,7 @@ It makes code more readable if the model has the same name as a subject. We can 
   export default Route.extend({
     setupController(controller, model) {
       controller.set('nail', model);
-    },
+    }
   });
   ```
 

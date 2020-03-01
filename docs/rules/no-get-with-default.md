@@ -19,6 +19,8 @@ const test = this.getWithDefault('key', []);
 ```
 
 ```js
+import { getWithDefault } from '@ember/object';
+
 const test = getWithDefault(this, 'key', []);
 ```
 

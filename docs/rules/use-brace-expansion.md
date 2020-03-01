@@ -9,17 +9,21 @@ Note that **the dependent keys must be together (without space)** for the brace 
 Examples of **incorrect** code for this rule:
 
 ```js
-fullName: computed('user.firstName', 'user.lastName', {
-  // Code
-})
+export default Component.extend({
+  fullName: computed('user.firstName', 'user.lastName', {
+    // Code
+  })
+});
 ```
 
 Examples of **correct** code for this rule:
 
 ```javascript
-fullName: computed('user.{firstName,lastName}', {
-  // Code
-})
+export default Component.extend({
+  fullName: computed('user.{firstName,lastName}', {
+    // Code
+  })
+});
 ```
 
 ## Help Wanted

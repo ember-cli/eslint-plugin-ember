@@ -29,7 +29,7 @@ export default Component.extend({
     someAsync()
       .then(() => console.log('hi'))
       .finally(() => counter--);
-  },
+  }
 });
 ```
 
@@ -38,7 +38,7 @@ import Component from '@ember/component';
 import { registerWaiter, unregisterWaiter } from '@ember/test';
 
 let counter = 0;
-let waiter = () => {
+const waiter = () => {
   return counter === 0;
 };
 
@@ -56,7 +56,7 @@ export default Component.extend({
 
   willDestroy() {
     unregisterWaiter(waiter);
-  },
+  }
 });
 ```
 
@@ -66,16 +66,16 @@ Examples of **correct** code for this rule:
 import Component from '@ember/component';
 import { buildWaiter } from 'ember-test-waiters';
 
-let waiter = buildWaiter('my-waiter');
+const waiter = buildWaiter('my-waiter');
 
 export default Component.extend({
   init() {
-    let token = waiter.beginAsync();
+    const token = waiter.beginAsync();
 
     someAsync()
       .then(() => console.log('hi'))
       .finally(() => waiter.endAsync(token));
-  },
+  }
 });
 ```
 

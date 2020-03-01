@@ -54,7 +54,7 @@ export default Component.extend({
 
   propEqual: computed('x', function() {
     return this.x === 123;
-  }),
+  })
 });
 ```
 

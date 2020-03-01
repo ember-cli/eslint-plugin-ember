@@ -17,13 +17,13 @@ Examples of **incorrect** code for this rule:
 ```js
 
 export default Ember.Component({
-  init() {
-    this._super(...arguments);
+  init(...args) {
+    this._super(...args);
     this.updated = false;
   },
   didReceiveAttrs(attrs) {
-    let { newAttrs, oldAttrs } = attrs;
-    if ((newAttrs && oldAttrs) && newAttrs.value !== oldAttrs.value) {
+    const { newAttrs, oldAttrs } = attrs;
+    if (newAttrs && oldAttrs && newAttrs.value !== oldAttrs.value) {
       this.set('updated', true);
     } else {
       this.set('updated', false);
@@ -38,8 +38,8 @@ Examples of **correct** code for this rule:
 ```js
 
 export default Ember.Component({
-  init() {
-    this._super(...arguments);
+  init(...args) {
+    this._super(...args);
     this._valueCache = this.value;
     this.updated = false;
   },

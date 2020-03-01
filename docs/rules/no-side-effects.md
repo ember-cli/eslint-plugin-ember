@@ -11,27 +11,26 @@ import Ember from 'ember';
 
 const {
   Component,
-  computed: { filterBy, alias },
+  computed: { filterBy, alias }
 } = Ember;
 
 export default Component.extend({
-
-  init() {
+  init(...args) {
     this.users = [
       { name: 'Foo', age: 15 },
       { name: 'Bar', age: 16 },
       { name: 'Baz', age: 15 }
     ];
-    this._super(...arguments);
+    this._super(...args);
   },
 
   // GOOD:
-  fifteen: filterBy('users', 'age', 15),
-  fifteenAmount: alias('fifteen.length'),
+  fifteenGood: filterBy('users', 'age', 15),
+  fifteenAmountGood: alias('fifteen.length'),
 
   // BAD:
-  fifteenAmount: 0,
-  fifteen: computed('users', function() {
+  fifteenAmountBad: 0,
+  fifteenBad: computed('users', function() {
     const fifteen = this.get('users').filterBy('items', 'age', 15);
     this.set('fifteenAmount', fifteen.length); // SIDE EFFECT!
     return fifteen;

@@ -16,7 +16,7 @@ Examples of **correct** code for this rule:
 
 ```js
 module('Test Name', function(hooks) {
-
+  // ...
 });
 ```
 
@@ -26,7 +26,7 @@ A short guide for how each of the legacy APIs converts to the new APIs:
 
 * `moduleFor`, `moduleForModel`
 
-    ```ts
+    ```js
     import { module, test } from 'qunit';
     import { setupTest } from 'ember-qunit';
 
@@ -37,7 +37,7 @@ A short guide for how each of the legacy APIs converts to the new APIs:
 
 * `moduleForComponent`
 
-    ```ts
+    ```js
     import { module, test } from 'qunit';
     import { setupRenderingTest } from 'ember-qunit';
 
@@ -48,7 +48,7 @@ A short guide for how each of the legacy APIs converts to the new APIs:
 
 * `moduleForAcceptance`
 
-    ```ts
+    ```js
     import { module, test } from 'qunit';
     import { setupApplicationTest } from 'ember-qunit';
 

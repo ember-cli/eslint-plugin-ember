@@ -14,7 +14,7 @@ const { Model, attr } = DS;
 export default Model.extend({
   name: attr(),
   points: attr(),
-  dob: attr(),
+  dob: attr()
 });
 ```
 
@@ -26,7 +26,7 @@ const { Model, attr } = DS;
 export default Model.extend({
   name: attr('string'),
   points: attr('number'),
-  dob: attr('date'),
+  dob: attr('date')
 });
 ```
 

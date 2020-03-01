@@ -25,7 +25,7 @@ Examples of **correct** code for this rule:
 // Extending using a native JS class is OK
 import Component from '@ember/component';
 
-export default class MyComponent extends Component {};
+export default class MyComponent extends Component {}
 ```
 
 ```javascript
@@ -33,7 +33,7 @@ export default class MyComponent extends Component {};
 import Component from '@ember/component';
 import Evented from '@ember/object/evented';
 
-export default class MyComponent extends Component.extend(Evented) {};
+export default class MyComponent extends Component.extend(Evented) {}
 ```
 
 ## When Not To Use It

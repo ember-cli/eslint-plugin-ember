@@ -10,9 +10,10 @@ Examples of **incorrect** code for this rule:
 
 ```js
 import Controller from '@ember/controller';
+
 export default class ArticlesController extends Controller {
   // Controller disallowed since it doesn't use `queryParams`.
-  ...
+  // ...
 }
 ```
 
@@ -20,10 +21,11 @@ Examples of **correct** code for this rule:
 
 ```js
 import Controller from '@ember/controller';
+
 export default class ArticlesController extends Controller {
   queryParams = ['category']; // Controller allowed for defining `queryParams`.
   @tracked category = null;
-  ...
+  // ...
 }
 ```
 

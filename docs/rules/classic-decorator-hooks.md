@@ -18,10 +18,13 @@ export default class MyService extends Service {
     // ...
   }
 }
+```
 
+```javascript
 @classic
 export default class MyService extends Service {
   constructor() {
+    super();
     // ...
   }
 }
@@ -40,14 +43,17 @@ export default class MyService extends Service {
     // ...
   }
 }
+```
 
+```javascript
 export default class MyService extends Service {
   constructor() {
+    super();
     // ...
   }
 
   willDestroy() {
-
+    // ...
   }
 }
 ```

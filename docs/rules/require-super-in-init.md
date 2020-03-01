@@ -12,7 +12,7 @@ Examples of **incorrect** code for this rule:
 export default Ember.Component.extend({
   init() {
     this.set('items', []);
-  },
+  }
 });
 ```
 
@@ -20,9 +20,9 @@ Examples of **correct** code for this rule:
 
 ```javascript
 export default Ember.Component.extend({
-  init() {
-    this._super(...arguments);
+  init(...args) {
+    this._super(...args);
     this.set('items', []);
-  },
+  }
 });
 ```

@@ -24,6 +24,7 @@ const foo = this.get('someProperty');
 
 ```js
 import { get } from '@ember/object';
+
 const foo = get(this, 'someProperty');
 ```
 
@@ -33,6 +34,7 @@ const { prop1, prop2 } = this.getProperties('prop1', 'prop2');
 
 ```js
 import { getProperties } from '@ember/object';
+
 const foo = getProperties(this, 'prop1', 'prop2');
 ```
 
@@ -56,6 +58,7 @@ const foo = { prop1: this.prop1, prop2: this.prop2 };
 
 ```js
 import ObjectProxy from '@ember/object/proxy';
+
 export default ObjectProxy.extend({
   someFunction() {
     const foo = this.get('propertyInsideProxyObject'); // Allowed because inside proxy object.
@@ -65,6 +68,7 @@ export default ObjectProxy.extend({
 
 ```js
 import EmberObject from '@ember/object';
+
 export default EmberObject.extend({
   unknownProperty(key) {},
   someFunction() {

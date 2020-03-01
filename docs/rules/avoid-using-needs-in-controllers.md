@@ -16,9 +16,7 @@ export default Controller.extend({
 Examples of **correct** code for this rule:
 
 ```javascript
-import Controller, {
-  inject as controller
-} from '@ember/controller';
+import Controller, { inject as controller } from '@ember/controller';
 
 export default Component.extend({
   comments: controller(),

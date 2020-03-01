@@ -13,8 +13,8 @@ export default Foo.extend({
   actions: {
     addItem(item) {
       this.get('items').pushObject(item);
-    },
-  },
+    }
+  }
 });
 ```
 
@@ -22,8 +22,8 @@ Examples of **correct** code for this rule:
 
 ```javascript
 export default Foo.extend({
-  init() {
-    this._super(...arguments);
+  init(...args) {
+    this._super(...args);
 
     this.items = this.items || [];
   },
@@ -31,8 +31,8 @@ export default Foo.extend({
   actions: {
     addItem(item) {
       this.get('items').pushObject(item);
-    },
-  },
+    }
+  }
 });
 ```
 
@@ -41,13 +41,16 @@ export default Foo.extend({
 Example configuration:
 
 ```js
-const { DEFAULT_IGNORED_PROPERTIES } = require('eslint-plugin-ember/lib/rules/avoid-leaking-state-in-ember-objects');
+const {
+  DEFAULT_IGNORED_PROPERTIES
+} = require('eslint-plugin-ember/lib/rules/avoid-leaking-state-in-ember-objects');
 
-ember/avoid-leaking-state-in-ember-objects: [1, [
-  ...DEFAULT_IGNORED_PROPERTIES,
-  'array',
-  'of',
-  'ignored',
-  'properties',
-]]
+module.exports = {
+  rules: {
+    'ember/avoid-leaking-state-in-ember-objects': [
+      1,
+      [...DEFAULT_IGNORED_PROPERTIES, 'array', 'of', 'ignored', 'properties']
+    ]
+  }
+};
 ```

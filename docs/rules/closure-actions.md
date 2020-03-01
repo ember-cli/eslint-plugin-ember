@@ -28,7 +28,7 @@ export default Component.extend({
       this.sendAction('detonate');
     }
   }
-})
+});
 ```
 
 Examples of **correct** code for this rule:
@@ -45,7 +45,7 @@ export default Component.extend({
       this.boom();
     }
   }
-})
+});
 ```
 
 ## References

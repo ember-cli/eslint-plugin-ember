@@ -21,15 +21,11 @@ this.getWithDefault('fooProperty', 'defaultProp');
 object.get('fooProperty');
 object.getProperties('foo', 'bar');
 object.setProperties({ foo: 'bar', baz: 'qux' });
+```
 
+```javascript
 // Recommended
-import {
-  get,
-  set,
-  getWithDefault,
-  getProperties,
-  setProperties
-} from '@ember/object';
+import { get, set, getWithDefault, getProperties, setProperties } from '@ember/object';
 
 // ...
 
@@ -43,12 +39,7 @@ setProperties(object, { foo: 'bar', baz: 'qux' });
 
 ## Configuration
 
-```js
-ember/use-ember-get-and-set: [2, {
-  ignoreThisExpressions: false,
-}]
-```
+This rule takes an optional object containing:
 
-Setting `ignoreThisExpressions` to `true` allows use of `this.get()` and `this.set()` where you will generally know if `this` is an `Ember.Object`.
-
-Setting `ignoreNonThisExpressions` to `true` allows use of non-Ember objects like `server.get()` and `map.set()`.
+* `boolean` -- `ignoreThisExpressions` -- setting to `true` allows use of `this.get()` and `this.set()` where you will generally know if `this` is an `Ember.Object`.
+* `boolean` -- `ignoreNonThisExpressions` -- setting to  `true` allows use of non-Ember objects like `server.get()` and `map.set()`.

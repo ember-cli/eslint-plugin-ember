@@ -11,21 +11,25 @@ For performance / complexity reasons, Ember does not allow deeply-nested compute
 Examples of **incorrect** code for this rule:
 
 ```js
-displayNames: computed('todos.@each.owner.name', function() {
-  return this.todos.map(todo => todo.owner.name);
-})
+export default Component.extend({
+  displayNames: computed('todos.@each.owner.name', function() {
+    return this.todos.map(todo => todo.owner.name);
+  })
+});
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
-displayNames: computed('owners.@each.name', function() {
-  return this.owners.mapBy('name');
-}),
+export default Component.extend({
+  displayNames: computed('owners.@each.name', function() {
+    return this.owners.mapBy('name');
+  }),
 
-owners: computed('todos.@each.owner', function() {
-  return this.todos.mapBy('owner');
-})
+  owners: computed('todos.@each.owner', function() {
+    return this.todos.mapBy('owner');
+  })
+});
 ```
 
 ## Further Reading

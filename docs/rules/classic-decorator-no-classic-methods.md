@@ -43,7 +43,9 @@ export default class MyService extends Service {
     this.set('foo', 'bar');
   }
 }
+```
 
+```javascript
 export default class MyService extends Service {
   constructor(...args) {
     super(...args);

@@ -14,7 +14,7 @@ Examples of **incorrect** code for this rule:
 import { and, or, alias } from '@ember/object/computed';
 
 export default class MyComponent extends Component {
-
+  // ...
 }
 ```
 
@@ -22,7 +22,7 @@ export default class MyComponent extends Component {
 import { computed } from '@ember/object';
 
 export default class MyComponent extends Component {
-
+  // ...
 }
 ```
 

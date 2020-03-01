@@ -42,7 +42,7 @@ import { pauseTest, resumeTest } from '@ember/test-helpers';
 module('Acceptance | foo test', function(hooks) {
   setupApplicationTest(hooks);
 
-  test('it runs', async function() {
+  test('it runs', function() {
     const promise = pauseTest();
 
     // Do some stuff

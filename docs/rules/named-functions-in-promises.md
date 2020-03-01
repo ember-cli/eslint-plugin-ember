@@ -10,29 +10,35 @@ When you use promises and its handlers, use named functions defined on parent ob
 export default Component.extend({
   actions: {
     // BAD
-    updateUser(user) {
-      user.save().then(() => {
-        return user.reload();
-      }).then(() => {
-        this.notifyAboutSuccess();
-      }).catch(() => {
-        this.notifyAboutFailure();
-      });
+    updateUserBad(user) {
+      user
+        .save()
+        .then(() => {
+          return user.reload();
+        })
+        .then(() => {
+          this.notifyAboutSuccess();
+        })
+        .catch(() => {
+          this.notifyAboutFailure();
+        });
     },
     // GOOD
-    updateUser(user) {
-      user.save()
+    updateUserGood1(user) {
+      user
+        .save()
         .then(this._reloadUser.bind(this))
         .then(this._notifyAboutSuccess.bind(this))
         .catch(this._notifyAboutFailure.bind(this));
     },
     // GOOD if allowSimpleArrowFunction: true
-    updateUser(user) {
-      user.save()
+    updateUserGood2(user) {
+      user
+        .save()
         .then(() => this._reloadUser())
         .then(() => this._notifyAboutSuccess())
         .catch(() => this._notifyAboutFailure());
-    },
+    }
   },
   _reloadUser(user) {
     return user.reload();
@@ -42,7 +48,7 @@ export default Component.extend({
   },
   _notifyAboutFailure() {
     // ...
-  },
+  }
 });
 ```
 
@@ -59,12 +65,6 @@ test('it reloads user in promise handler', function(assert) {
 
 ## Configuration
 
-```js
-ember/named-functions-in-promises: [2, {
-  allowSimpleArrowFunction: false,
-}]
-```
+This rule takes an optional object containing:
 
-Setting `allowSimpleArrowFunction` to `true` allows arrow function expressions that do not have block bodies.
-These simple arrow functions must also only contain a single function call.
-For example: `.then(user => this._reloadUser(user))`.
+* `boolean` -- `allowSimpleArrowFunction` -- (default false) setting to `true` allows arrow function expressions that do not have block bodies. These simple arrow functions must also only contain a single function call. For example: `.then(user => this._reloadUser(user))`.

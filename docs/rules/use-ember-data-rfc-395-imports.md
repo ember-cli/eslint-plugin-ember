@@ -13,19 +13,20 @@ ember-data has been split in multiple packages. For instance, its store is now r
 Examples of **incorrect** code for this rule:
 
 ```js
-import Model from "ember-data/model";
-import attr from "ember-data/attr";
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+```
 
-import DS from "ember-data";
-const { Model } = "ember-data";
+```js
+import DS from 'ember-data';
+
+const { Model } = 'ember-data';
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
-import Model, { attr } from "@ember-data/model";
-
-import Model from "@ember-data/model";
+import Model, { attr } from '@ember-data/model';
 ```
 
 ## How to fix
