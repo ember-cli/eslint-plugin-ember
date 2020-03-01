@@ -128,5 +128,22 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
         },
       ],
     },
+    {
+      code: `
+        import Component from "@glimmer/component";
+
+        export const Component1 = Component.extend({
+          test: computed('', function () {}),
+          didDestroyElement() {},
+        });
+      `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Identifier',
+        },
+      ],
+    },
   ],
 });
