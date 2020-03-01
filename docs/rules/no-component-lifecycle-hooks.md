@@ -1,8 +1,11 @@
-# Disallow usage of "classic" ember component lifecycle hooks.
+# Disallow usage of "classic" ember component lifecycle hooks
+
 ## Rule name: `no-component-lifecycle-hooks`
 
 ## Rule Details
+
 As most component lifecycle hooks are gone in glimmer components, this rule aims to:
+
 - remind the developer that those hooks no longer exist in glimmer components
 - encourage migrating away from those hooks in classic ember components
 
@@ -65,5 +68,6 @@ export default Component.extend({
 ```
 
 ## Further Reading
+
 - [`@ember/render-modifiers`](https://github.com/emberjs/ember-render-modifiers)
 - [Blog post about modifiers](https://blog.emberjs.com/2019/03/06/coming-soon-in-ember-octane-part-4.html)

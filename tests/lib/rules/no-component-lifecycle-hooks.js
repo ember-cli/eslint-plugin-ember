@@ -70,6 +70,7 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
           didDestroyElement() {}
         }
       `,
+      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -84,6 +85,7 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
           didDestroyElement() {}
         }
       `,
+      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -98,6 +100,7 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
           didDestroyElement() {}
         })
       `,
+      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -117,6 +120,7 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
           willDestroy() {},
         });
       `,
+      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,
