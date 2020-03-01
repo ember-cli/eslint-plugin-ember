@@ -39,7 +39,9 @@ export default class MyComponent extends Component {
   willDestroyElement() {}
   willRender() {}
 }
+```
 
+```js
 export default Component.extend({
   didDestroyElement() {},
   didInsertElement() {},
@@ -60,7 +62,9 @@ export default class MyComponent extends Component {
   init() { ... }
   willDestroy() { ... }
 }
+```
 
+```js
 export default Component.extend({
   init() { ... }
   willDestroy() { ... }
