@@ -59,15 +59,15 @@ Examples of **correct** code for this rule:
 
 ```js
 export default class MyComponent extends Component {
-  init() { ... }
-  willDestroy() { ... }
+  init() {}
+  willDestroy() {}
 }
 ```
 
 ```js
 export default Component.extend({
-  init() { ... }
-  willDestroy() { ... }
+  init() {}
+  willDestroy() {}
 });
 ```
 
