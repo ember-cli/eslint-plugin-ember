@@ -51,7 +51,7 @@ export default Component.extend({
   didUpdateAttrs() {},
   willClearRender() {},
   willDestroyElement() {},
-  willRender() {},
+  willRender() {}
 });
 ```
 
@@ -67,7 +67,7 @@ export default class MyComponent extends Component {
 ```js
 export default Component.extend({
   init() {},
-  willDestroy() {},
+  willDestroy() {}
 });
 ```
 
