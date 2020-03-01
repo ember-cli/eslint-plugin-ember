@@ -1,6 +1,6 @@
-# Disallow usage of "classic" ember component lifecycle hooks
+# no-component-lifecycle-hooks
 
-## Rule name: `no-component-lifecycle-hooks`
+Disallow usage of "classic" ember component lifecycle hooks.
 
 ## Rule Details
 
@@ -23,7 +23,7 @@ Effectively, this rule disallows following lifecycle hooks in components:
 
 Custom functional modifiers or @ember/render-modifiers should be used instead.
 
----
+## Examples
 
 Examples of **incorrect** code for this rule:
 
