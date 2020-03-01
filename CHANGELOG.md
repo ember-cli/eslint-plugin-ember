@@ -1,3 +1,17 @@
+## v7.9.0 (2020-03-01)
+
+#### :rocket: Enhancement
+* [#595](https://github.com/ember-cli/eslint-plugin-ember/pull/595) Add new rule `no-component-lifecycle-hooks` (included in `octane` config) ([@jbandura](https://github.com/jbandura))
+* [#681](https://github.com/ember-cli/eslint-plugin-ember/pull/681) Add new rule `no-legacy-test-waiters` ([@scalvert](https://github.com/scalvert))
+
+#### :memo: Documentation
+* [#688](https://github.com/ember-cli/eslint-plugin-ember/pull/688) Lint code samples with eslint-plugin-markdown ([@bmish](https://github.com/bmish))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Jacek Bandura ([@jbandura](https://github.com/jbandura))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
 ## v7.8.1 (2020-02-14)
 
 #### :bug: Bug Fix
