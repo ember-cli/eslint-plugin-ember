@@ -92,6 +92,10 @@ export default Component.extend({
 * [Guide](https://guides.emberjs.com/release/object-model/computed-properties/) for computed properties
 * [Spec](http://api.emberjs.com/ember/release/modules/@ember%2Fobject#functions-computed) for computed property macros
 
+## Related Rules
+
+* [no-incorrect-computed-macros](no-incorrect-computed-macros.md)
+
 ## Help Wanted
 
 | Issue | Link |

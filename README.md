@@ -113,6 +113,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark::wrench: | [no-ember-super-in-es-classes](./docs/rules/no-ember-super-in-es-classes.md) | disallow use of `this._super` in ES class methods |
 | :white_check_mark: | [no-ember-testing-in-module-scope](./docs/rules/no-ember-testing-in-module-scope.md) | disallow use of `Ember.testing` in module scope |
 | :white_check_mark: | [no-incorrect-calls-with-inline-anonymous-functions](./docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | disallow inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce` |
+| :wrench: | [no-incorrect-computed-macros](./docs/rules/no-incorrect-computed-macros.md) | disallow incorrect usage of computed property macros |
 | :white_check_mark: | [no-invalid-debug-function-arguments](./docs/rules/no-invalid-debug-function-arguments.md) | disallow usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. |
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | disallow unexpected side effects in computed properties |
 | :wrench: | [require-computed-property-dependencies](./docs/rules/require-computed-property-dependencies.md) | require dependencies to be declared statically in computed properties |
