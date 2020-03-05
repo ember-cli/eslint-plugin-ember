@@ -73,6 +73,7 @@ Each rule has emojis denoting what configuration it belongs to and/or a :wrench:
 | :car::wrench: | [no-get](./docs/rules/no-get.md) | require using ES5 getters instead of Ember's `get` / `getProperties` functions |
 | :white_check_mark: | [no-global-jquery](./docs/rules/no-global-jquery.md) | disallow usage of global jQuery object |
 | :car: | [no-jquery](./docs/rules/no-jquery.md) | disallow any usage of jQuery |
+|  | [no-mixins](./docs/rules/no-mixins.md) | disallow the usage of mixins |
 | :white_check_mark: | [no-new-mixins](./docs/rules/no-new-mixins.md) | disallow the creation of new mixins |
 | :white_check_mark: | [no-observers](./docs/rules/no-observers.md) | disallow usage of observers |
 | :white_check_mark::wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | disallow usage of old shims for modules |
