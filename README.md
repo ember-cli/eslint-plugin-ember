@@ -77,6 +77,7 @@ Each rule has emojis denoting what configuration it belongs to and/or a :wrench:
 | :white_check_mark: | [no-observers](./docs/rules/no-observers.md) | disallow usage of observers |
 | :white_check_mark::wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | disallow usage of old shims for modules |
 | :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | disallow usage of `on` to call lifecycle hooks in components |
+|  | [no-private-routing-service](./docs/rules/no-private-routing-service.md) | disallow injecting the private routing service |
 | :white_check_mark: | [no-restricted-resolver-tests](./docs/rules/no-restricted-resolver-tests.md) | disallow the use of patterns that use the restricted resolver in tests |
 |  | [no-unnecessary-index-route](./docs/rules/no-unnecessary-index-route.md) | disallow unnecessary `index` route definition |
 | :white_check_mark::wrench: | [no-unnecessary-route-path-option](./docs/rules/no-unnecessary-route-path-option.md) | disallow unnecessary usage of the route `path` option |
