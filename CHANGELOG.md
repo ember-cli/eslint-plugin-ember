@@ -1,3 +1,12 @@
+## v7.10.0 (2020-03-06)
+
+#### :rocket: Enhancement
+* [#694](https://github.com/ember-cli/eslint-plugin-ember/pull/694) Add new rule `no-private-routing-service` ([@nlfurniss](https://github.com/nlfurniss))
+* [#691](https://github.com/ember-cli/eslint-plugin-ember/pull/691) Add new rule `no-mixins` ([@nlfurniss](https://github.com/nlfurniss))
+
+#### Committers: 1
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+
 ## v7.9.0 (2020-03-01)
 
 #### :rocket: Enhancement
