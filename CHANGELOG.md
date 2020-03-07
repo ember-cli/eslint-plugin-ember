@@ -1,3 +1,11 @@
+## v7.10.1 (2020-03-07)
+
+#### :bug: Bug Fix
+* [#697](https://github.com/ember-cli/eslint-plugin-ember/pull/697) Handle service injections with no arguments in `no-private-routing-service` rule ([@nlfurniss](https://github.com/nlfurniss))
+
+#### Committers: 1
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+
 ## v7.10.0 (2020-03-06)
 
 #### :rocket: Enhancement
