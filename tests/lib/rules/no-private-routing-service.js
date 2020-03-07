@@ -21,11 +21,17 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-private-routing-service', rule, {
   valid: [
+    // Classic
     "export default Component.extend({ someService: service('routing') });",
     "export default Component.extend({ someService: service('-router') });",
     "export default Component.extend({ '-routing': service('routing') });",
     "export default Component.extend({ '-routing': service('-router') });",
     "Component.extend({ routing: someOtherFunction('-routing') });",
+    'export default Component.extend({ someService: service() });',
+    'export default Component.extend({ notAService: "a value" });',
+    'export default Component.extend({ anInt: 25 });',
+
+    // Octane
     'export default class MyComponent extends Component { @service router; }',
     "export default class MyComponent extends Component { @service('router') routing; }",
     'export default class MyComponent extends Component { @service routing; }',
@@ -38,6 +44,12 @@ ruleTester.run('no-private-routing-service', rule, {
       }
     }
     `,
+    'class MyComponent extends Component { @service() routing; }',
+    'class MyComponent extends Component { @service() notRouting; }',
+    'class MyComponent extends Component { aProp="routing"; }',
+    'class MyComponent extends Component { aProp="-routing"; }',
+    'class MyComponent extends Component { aProp="another value"; }',
+    'class MyComponent extends Component { anIntProp=25; }',
   ],
   invalid: [
     // Classic
