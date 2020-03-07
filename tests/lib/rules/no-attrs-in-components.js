@@ -7,6 +7,8 @@
 const rule = require('../../../lib/rules/no-attrs-in-components');
 const RuleTester = require('eslint').RuleTester;
 
+const { ERROR_MESSAGE } = rule;
+
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
@@ -34,7 +36,7 @@ ruleTester.run('no-attrs-in-components', rule, {
       output: null,
       errors: [
         {
-          message: 'Do not use this.attrs',
+          message: ERROR_MESSAGE,
         },
       ],
     },
