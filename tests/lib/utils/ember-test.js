@@ -90,8 +90,8 @@ describe('isModuleByFilePath', () => {
 
 describe('isTestFile', () => {
   it('detects test files', () => {
-    const fileName = 'some-test.js';
-    expect(emberUtils.isTestFile(fileName)).toBeTruthy();
+    expect(emberUtils.isTestFile('some-test.js')).toBeTruthy();
+    expect(emberUtils.isTestFile('some-test.ts')).toBeTruthy();
   });
 
   it('does not detect other files', () => {
