@@ -81,12 +81,17 @@ describe('isModuleByFilePath', () => {
     const filePath = 'example-app/routes/path/to/some-feature/route.js';
     expect(emberUtils.isModuleByFilePath(filePath, 'route')).toBeTruthy();
   });
+
+  it('should handle TypeScript files', () => {
+    const filePath = 'example-app/components/path/to/some-component.ts';
+    expect(emberUtils.isModuleByFilePath(filePath, 'component')).toBeTruthy();
+  });
 });
 
 describe('isTestFile', () => {
   it('detects test files', () => {
-    const fileName = 'some-test.js';
-    expect(emberUtils.isTestFile(fileName)).toBeTruthy();
+    expect(emberUtils.isTestFile('some-test.js')).toBeTruthy();
+    expect(emberUtils.isTestFile('some-test.ts')).toBeTruthy();
   });
 
   it('does not detect other files', () => {
