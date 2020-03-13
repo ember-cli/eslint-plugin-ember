@@ -1,8 +1,8 @@
 'use strict';
 
-const rule = require('../../../lib/rules/use-waiters-in-module-scope');
+const rule = require('../../../lib/rules/no-invalid-test-waiters');
 
-const { ERROR_MESSAGE } = rule;
+const { MODULE_SCOPE_ERROR_MESSAGE, DIRECT_ASSIGNMENT_ERROR_MESSAGE } = rule;
 const RuleTester = require('eslint').RuleTester;
 
 const ruleTester = new RuleTester({
@@ -12,7 +12,7 @@ const ruleTester = new RuleTester({
   },
 });
 
-ruleTester.run('use-waiters-in-module-scope', rule, {
+ruleTester.run('no-invalid-test-waiters', rule, {
   valid: [
     `
     import { buildWaiter } from 'ember-test-waiters';
@@ -24,6 +24,20 @@ ruleTester.run('use-waiters-in-module-scope', rule, {
 
     function useWaiter() {
       let myOtherWaiter = buildWaiter('the second');
+    }
+  `,
+    `
+    import { buildWaiter } from 'ember-test-waiters';
+
+    function useWaiter() {
+      let myWaiter = somethingElse.buildWaiter('waiterName');
+    }
+  `,
+    `
+    import { buildWaiter } from 'ember-test-waiters';
+
+    function useWaiter() {
+      let myWaiter = buildWaiter.somethingElse('waiterName');
     }
   `,
   ],
@@ -38,7 +52,7 @@ ruleTester.run('use-waiters-in-module-scope', rule, {
       }
       `,
       output: null,
-      errors: [{ message: ERROR_MESSAGE }],
+      errors: [{ message: MODULE_SCOPE_ERROR_MESSAGE }],
     },
     {
       code: `
@@ -49,7 +63,16 @@ ruleTester.run('use-waiters-in-module-scope', rule, {
       }
       `,
       output: null,
-      errors: [{ message: ERROR_MESSAGE }],
+      errors: [{ message: MODULE_SCOPE_ERROR_MESSAGE }],
+    },
+    {
+      code: `
+      import { buildWaiter } from 'ember-test-waiters';
+
+      const someFunction = () => { buildWaiter('waiterName'); };
+      `,
+      output: null,
+      errors: [{ message: DIRECT_ASSIGNMENT_ERROR_MESSAGE }],
     },
   ],
 });
