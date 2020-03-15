@@ -34,16 +34,6 @@
     "styleguide",
     "rules"
   ],
-  "author": "Michał Sajnóg <michal.sajnog@hotmail.com> (http://github.com/michalsnik)",
-  "contributors": [
-    "Rafał Leszczyński <raf.leszcz@gmail.com> (http://github.com/rafleszczynski)",
-    "Adrian Zalewski (http://github.com/bardzusny)",
-    "Kamil Ejsymont (http://github.com/netes)",
-    "Casey Watts (http://github.com/caseywatts)",
-    "Steve Gargan (http://github.com/sgargan)",
-    "Alex LaFroscia (http://github.com/alexlafroscia)",
-    "Tobias Bieniek (http://github.com/Turbo87)"
-  ],
   "engines": {
     "node": ">=8.0"
   },
