@@ -113,6 +113,7 @@ Each rule has emojis denoting what configuration it belongs to and/or a :wrench:
 | :white_check_mark: | [no-ember-testing-in-module-scope](./docs/rules/no-ember-testing-in-module-scope.md) | disallow use of `Ember.testing` in module scope |
 | :white_check_mark: | [no-incorrect-calls-with-inline-anonymous-functions](./docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | disallow inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce` |
 | :white_check_mark: | [no-invalid-debug-function-arguments](./docs/rules/no-invalid-debug-function-arguments.md) | disallow usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. |
+|  | [no-invalid-dependent-keys](./docs/rules/no-invalid-dependent-keys.md) | require that dependent keys used for computed properties to be valid. |
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | disallow unexpected side effects in computed properties |
 | :wrench: | [require-computed-property-dependencies](./docs/rules/require-computed-property-dependencies.md) | require dependencies to be declared statically in computed properties |
 | :white_check_mark: | [require-return-from-computed](./docs/rules/require-return-from-computed.md) | disallow missing return statements in computed properties |
