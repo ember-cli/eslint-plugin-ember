@@ -77,6 +77,8 @@ You should write code grouped and ordered in this way:
 8. Actions
 9. Custom / private methods
 
+## Examples
+
 ```javascript
 const {
   Route,

@@ -58,6 +58,8 @@ You should write code grouped and ordered in this way:
 9. Actions
 10. Custom / private methods
 
+## Examples
+
 ```javascript
 const {
   Controller,
