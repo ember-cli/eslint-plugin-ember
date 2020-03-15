@@ -55,6 +55,16 @@ describe('rules setup is correct', function() {
     );
   });
 
+  it('should have the right title and an "Examples" section for each rule documentation file', function() {
+    RULE_NAMES.forEach(ruleName => {
+      const path = join(__dirname, '..', 'docs', 'rules', `${ruleName}.md`);
+      const file = readFileSync(path, 'utf8');
+
+      expect(file).toContain(`# ${ruleName}`); // Title header.
+      expect(file).toContain('## Examples'); // Examples section header.
+    });
+  });
+
   it('should mention all rules in the README', function() {
     const path = join(__dirname, '..', 'README.md');
     const file = readFileSync(path, 'utf8');

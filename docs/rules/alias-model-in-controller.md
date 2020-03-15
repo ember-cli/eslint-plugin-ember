@@ -1,6 +1,10 @@
 # alias-model-in-controller
 
-It makes code more readable if the model has the same name as a subject. We can do this in two ways:
+It makes code more readable if the model has the same name as a subject.
+
+## Examples
+
+We can do this in two ways:
 
 - Alias the model to another property name in the Controller:
 

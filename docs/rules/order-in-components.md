@@ -80,6 +80,8 @@ You should write code grouped and ordered in this way:
 7. Actions
 8. Custom / private methods
 
+## Examples
+
 ```javascript
 const {
   Component,

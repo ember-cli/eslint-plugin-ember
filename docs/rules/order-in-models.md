@@ -48,6 +48,8 @@ You should write code grouped and ordered in this way:
 4. Multiline computed properties
 5. Other structures (custom methods etc.)
 
+## Examples
+
 ```javascript
 // GOOD
 export default Model.extend({
