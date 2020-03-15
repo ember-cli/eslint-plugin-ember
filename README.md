@@ -162,23 +162,24 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 
 For the simplified list of rules, [go here](./lib/index.js).
 
-## 🍻 Contribution guide
+## 🍻 Contribution Guide
 
-In order to add a new rule, you should:
+If you have any suggestions, ideas, or problems, feel free to [create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new), but first please make sure your question does not repeat [previous ones](https://github.com/ember-cli/eslint-plugin-ember/issues).
 
-- [Create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new) on GitHub with description of proposed rule
-- Generate a new rule using the [official yeoman generator](https://github.com/eslint/generator-eslint)
-- Run `yarn start`
-- Write test scenarios & implement logic
-- Describe the rule in the generated `docs` file
-- Make sure all tests are passing: `yarn test`
-- Run `yarn run update` in order to update readme and recommended configuration
-- Make sure there are no linting errors by running `yarn lint`.
-- Use can use `yarn lint:js --fix` to fix most errors
-- Ultimately, you can check the build's steps in `.travis.yml`
-- Create PR and link created issue in description
+### Creating a New Rule
 
-If you have any suggestions, ideas, or problems feel free to [create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new), but first please make sure your question does not repeat previous ones.
+- [Create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new) with a description of the proposed rule
+- Create files for the new rule:
+  - `lib/rules/new-rule.js` (implementation, see [no-proxies](lib/rules/no-proxies.js) for an example)
+  - `docs/rules/new-rule.md` (documentation, start from the template ([raw](https://raw.githubusercontent.com/ember-cli/eslint-plugin-ember/master/docs/rules/_TEMPLATE_.md), [rendered](docs/rules/_TEMPLATE_.md))
+  - `tests/lib/rules/new-rule.js` (tests, see [no-proxies](tests/lib/rules/no-proxies.js) for an example)
+- Run `yarn update` to automatically update the README and other files (and re-run this if you change the rule name or description)
+- Make sure your changes will pass [CI](.travis.yml) by running:
+  - `yarn test`
+  - `yarn lint` (`yarn lint:js --fix` can fix many errors)
+- Create a PR and link the created issue in the description
+
+Note that new rules should not immediately be added to the [recommended](./lib/recommended-rules.js) configuration, as we only consider such breaking changes during major version updates.
 
 ## 🔓 License
 
