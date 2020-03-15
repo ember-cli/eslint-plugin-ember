@@ -179,25 +179,6 @@ In order to add a new rule, you should:
 
 If you have any suggestions, ideas, or problems feel free to [create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new), but first please make sure your question does not repeat previous ones.
 
-## ⭐️ Contributors
-
-- [Adrian Zalewski](https://github.com/bardzusny)
-- [Alex LaFroscia](https://github.com/alexlafroscia)
-- [Bryan Mishkin](https://github.com/bmish)
-- [Casey Watts](https://github.com/caseywatts)
-- [Jacek Bandura](https://github.com/jbandura)
-- [Kamil Ejsymont](https://github.com/netes)
-- [Michał Sajnóg](https://github.com/michalsnik)
-- [Rafał Leszczyński](https://github.com/rafleszczynski)
-- [Robert Wagner](https://github.com/rwwagner90)
-- [Steve Gargan](https://github.com/sgargan)
-- [Tobias Bieniek](https://github.com/Turbo87)
-
-## 🙌 Credits
-
-- [DockYard team](http://github.com/DockYard) - for great inspiration with their [styleguide](https://github.com/DockYard/styleguides/blob/master/engineering/ember.md)
-- [Rob Hilgefort](https://github.com/rjhilgefort) - for making it possible to redeploy new plugin under existing `eslint-plugin-ember` package name
-
 ## 🔓 License
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
