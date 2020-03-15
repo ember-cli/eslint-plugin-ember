@@ -1,5 +1,7 @@
 # no-ember-super-in-es-classes
 
+:wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 `this._super` is not allowed in ES class methods.
 
 While `this._super()` is the only way to invoke an overridden method in an `EmberObject.extend`-style class, the `_super` method doesn't work properly when using native class syntax. Fortunately, native classes come with their own mechanism for invoking methods from a parent.

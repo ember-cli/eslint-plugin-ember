@@ -1,5 +1,7 @@
 # no-unnecessary-route-path-option
 
+:wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 Disallow unnecessary route `path` option.
 
 When defining a route, it's not necessary to specify the `path` option if it matches the route name.

@@ -1,5 +1,7 @@
 # require-computed-property-dependencies
 
+:wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 Computed properties should have their property dependencies listed out so that they can recompute upon changes.
 
 ## Rule Details

@@ -1,5 +1,7 @@
 # require-computed-macros
 
+:wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 It is preferred to use Ember's computed property macros as opposed to manually writing out logic in a computed property function. Reasons include:
 
 * Conciseness
