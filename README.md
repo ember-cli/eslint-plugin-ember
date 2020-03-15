@@ -170,8 +170,11 @@ In order to add a new rule, you should:
 - Run `yarn start`
 - Write test scenarios & implement logic
 - Describe the rule in the generated `docs` file
-- Make sure all tests are passing
+- Make sure all tests are passing: `yarn test`
 - Run `yarn run update` in order to update readme and recommended configuration
+- Make sure there are no linting errors by running `yarn lint`.
+- Use can use `yarn lint:js --fix` to fix most errors
+- Ultimately, you can check the build's steps in `.travis.yml`
 - Create PR and link created issue in description
 
 If you have any suggestions, ideas, or problems feel free to [create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new), but first please make sure your question does not repeat previous ones.
