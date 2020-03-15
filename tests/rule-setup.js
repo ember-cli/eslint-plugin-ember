@@ -55,13 +55,23 @@ describe('rules setup is correct', function() {
     );
   });
 
-  it('should have the right title and an "Examples" section for each rule documentation file', function() {
+  it('should have the right contents (title, examples, fixable notice) for each rule documentation file', function() {
+    const FIXABLE_MSG =
+      ':wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.';
+
     RULE_NAMES.forEach(ruleName => {
+      const rule = rules[ruleName];
       const path = join(__dirname, '..', 'docs', 'rules', `${ruleName}.md`);
       const file = readFileSync(path, 'utf8');
 
       expect(file).toContain(`# ${ruleName}`); // Title header.
       expect(file).toContain('## Examples'); // Examples section header.
+
+      if (rule.meta.fixable === 'code') {
+        expect(file).toContain(FIXABLE_MSG);
+      } else {
+        expect(file).not.toContain(FIXABLE_MSG);
+      }
     });
   });
 

@@ -1,5 +1,7 @@
 # no-unnecessary-service-injection-argument
 
+:wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 Disallow unnecessary argument when injecting service.
 
 It's not necessary to specify an injected service's name as an argument when the property name matches the service name.

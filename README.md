@@ -52,9 +52,10 @@ module.exports = {
 
 ## 🍟 Rules
 
-Rules are grouped by category to help you understand their purpose.
+Rules are grouped by category to help you understand their purpose. Each rule has emojis denoting:
 
-Each rule has emojis denoting what configuration it belongs to and/or a :wrench: if the rule is fixable via the `--fix` command line option.
+- What configuration it belongs to
+- :wrench: if some problems reported by the rule are automatically fixable by the `--fix` [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) option
 
 <!--RULES_TABLE_START-->
 
