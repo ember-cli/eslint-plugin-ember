@@ -171,7 +171,7 @@ If you have any suggestions, ideas, or problems, feel free to [create an issue](
 - [Create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new) with a description of the proposed rule
 - Create files for the new rule:
   - `lib/rules/new-rule.js` (implementation, see [no-proxies](lib/rules/no-proxies.js) for an example)
-  - `docs/rules/new-rule.md` (documentation, start from the template ([raw](https://raw.githubusercontent.com/ember-cli/eslint-plugin-ember/master/docs/rules/_TEMPLATE_.md), [rendered](docs/rules/_TEMPLATE_.md))
+  - `docs/rules/new-rule.md` (documentation, start from the template -- [raw](https://raw.githubusercontent.com/ember-cli/eslint-plugin-ember/master/docs/rules/_TEMPLATE_.md), [rendered](docs/rules/_TEMPLATE_.md))
   - `tests/lib/rules/new-rule.js` (tests, see [no-proxies](tests/lib/rules/no-proxies.js) for an example)
 - Run `yarn update` to automatically update the README and other files (and re-run this if you change the rule name or description)
 - Make sure your changes will pass [CI](.travis.yml) by running:
