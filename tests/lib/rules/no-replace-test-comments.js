@@ -21,7 +21,6 @@ ruleTester.run('no-replace-test-comments', rule, {
     {
       filename: 'app/some-app-file.js',
       code: '// Replace this with your real tests',
-      output: null,
     },
   ],
 
