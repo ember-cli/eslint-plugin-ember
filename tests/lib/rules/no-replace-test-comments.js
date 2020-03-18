@@ -15,10 +15,19 @@ const { ERROR_MESSAGE } = rule;
 
 const ruleTester = new RuleTester();
 ruleTester.run('no-replace-test-comments', rule, {
-  valid: ['// some harmless comment', 'myCodeWithoutAComment = "fooBar"'],
+  valid: [
+    '// some harmless comment',
+    'myCodeWithoutAComment = "fooBar"',
+    {
+      filename: 'app/some-app-file.js',
+      code: '// Replace this with your real tests',
+      output: null,
+    },
+  ],
 
   invalid: [
     {
+      filename: 'test/some-app-file-test.js',
       code: '// Replace this with your real tests',
       output: null,
       errors: [

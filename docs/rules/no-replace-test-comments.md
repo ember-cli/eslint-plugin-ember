@@ -10,6 +10,8 @@ This rule aims to nudge developers into writing more/better tests.
 
 It aims to do this by complaining at them early about a default test file.
 
+This rule only fires for test files (ending in '-test.js' or '-test.ts')
+
 This will especially push TDD (test-driven development) on repos with githooks that enforce lint early.
 
 ## Examples
