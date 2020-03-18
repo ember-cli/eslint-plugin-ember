@@ -18,8 +18,8 @@ Examples of **incorrect** code for this rule:
 
 ```js
 // Replace this with your real tests.
-test('it exists', function (assert) {
-  let service = this.owner.lookup('service:company');
+test('it exists', function(assert) {
+  const service = this.owner.lookup('service:company');
   assert.ok(service);
 });
 ```
@@ -27,8 +27,8 @@ test('it exists', function (assert) {
 Examples of **correct** code for this rule:
 
 ```js
-test('it has a purpose beyond mere existence', function (assert) {
-  let service = this.owner.lookup('service:company');
+test('it has a purpose beyond mere existence', function(assert) {
+  const service = this.owner.lookup('service:company');
   set(service, 'company', myCompanyMock);
   assert.equal(service.isOnboardingComplete, true, 'the computed property works as expected');
 });

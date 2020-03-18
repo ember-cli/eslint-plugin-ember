@@ -11,8 +11,8 @@
 
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../../lib/rules/no-replace-test-comments');
-const { ERROR_MESSAGE } = rule;
 
+const { ERROR_MESSAGE } = rule;
 
 //------------------------------------------------------------------------------
 // Tests
@@ -20,19 +20,18 @@ const { ERROR_MESSAGE } = rule;
 
 const ruleTester = new RuleTester();
 ruleTester.run('no-replace-test-comments', rule, {
-  valid: [
-    '// some harmless comment',
-    'const myCodeWithoutAComment = "fooBar"',
-  ],
+  valid: ['// some harmless comment', 'const myCodeWithoutAComment = "fooBar"'],
 
   invalid: [
     {
       code: '// Replace this with your real tests',
       output: null,
-      errors: [{
-        message: ERROR_MESSAGE,
-        type: 'Line',
-      }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Line',
+        },
+      ],
     },
   ],
 });
