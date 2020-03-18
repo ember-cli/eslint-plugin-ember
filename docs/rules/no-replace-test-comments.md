@@ -41,4 +41,4 @@ test('it has a purpose beyond mere existence', function(assert) {
 
 ## References
 
-- TODO: link to relevant documentation goes here)
+- [Learn Test Driven Development in Ember](https://learntdd.in/ember/)
