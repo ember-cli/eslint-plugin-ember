@@ -20,7 +20,7 @@ const { ERROR_MESSAGE } = rule;
 
 const ruleTester = new RuleTester();
 ruleTester.run('no-replace-test-comments', rule, {
-  valid: ['// some harmless comment', 'const myCodeWithoutAComment = "fooBar"'],
+  valid: ['// some harmless comment', 'myCodeWithoutAComment = "fooBar"'],
 
   invalid: [
     {
