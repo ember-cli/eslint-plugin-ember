@@ -1,8 +1,3 @@
-/**
- * @fileoverview No &#39;Replace this with your real tests&#39; comments
- * @author Jay Gruber
- */
-
 'use strict';
 
 //------------------------------------------------------------------------------
