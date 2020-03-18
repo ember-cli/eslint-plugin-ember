@@ -10,7 +10,7 @@ This rule aims to nudge developers into writing more/better tests.
 
 It aims to do this by complaining at them early about a default test file.
 
-This will especially push TDD on repos with githooks that enforce lint early.
+This will especially push TDD (test-driven development) on repos with githooks that enforce lint early.
 
 ## Examples
 
@@ -38,3 +38,7 @@ test('it has a purpose beyond mere existence', function(assert) {
 
 - The [testing guides](https://guides.emberjs.com/release/testing/testing-components/) shall be your guide
 - Consider a code coverage tool like [ember-cli-code-coverage](https://github.com/kategengler/ember-cli-code-coverage) as well
+
+## References
+
+- TODO: link to relevant documentation goes here)
