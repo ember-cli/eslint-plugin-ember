@@ -144,6 +144,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |:---|:--------|:------------|
 |  | [no-legacy-test-waiters](./docs/rules/no-legacy-test-waiters.md) | disallow the use of the legacy test waiter APIs. |
 |  | [no-pause-test](./docs/rules/no-pause-test.md) | disallow usage of the `pauseTest` helper in tests |
+|  | [no-replace-test-comments](./docs/rules/no-replace-test-comments.md) | No 'Replace this with your real tests' comments |
 |  | [no-test-and-then](./docs/rules/no-test-and-then.md) | disallow usage of the `andThen` test wait helper |
 |  | [no-test-import-export](./docs/rules/no-test-import-export.md) | disallow importing of "-test.js" in a test file and exporting from a test file |
 |  | [no-test-module-for](./docs/rules/no-test-module-for.md) | disallow usage of `moduleFor`, `moduleForComponent`, etc |
