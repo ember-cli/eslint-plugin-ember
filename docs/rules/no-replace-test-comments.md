@@ -1,6 +1,6 @@
 # no-replace-test-comments
 
-Ember devlopers using blueprints to generate classes should write real tests.
+Ember developers using blueprints to generate classes should write real tests.
 
 Leaving the default test comment in place is a sign of a rushed class.
 
