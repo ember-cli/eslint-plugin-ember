@@ -1,3 +1,28 @@
+## v7.11.0 (2020-03-20)
+
+#### :rocket: Enhancement
+* [#695](https://github.com/ember-cli/eslint-plugin-ember/pull/695) Add new rule `no-incorrect-computed-macros` ([@bmish](https://github.com/bmish))
+* [#709](https://github.com/ember-cli/eslint-plugin-ember/pull/709) Add new rule `no-invalid-dependent-keys` ([@TheMBTH](https://github.com/TheMBTH))
+* [#718](https://github.com/ember-cli/eslint-plugin-ember/pull/718) Add new rule `no-replace-test-comments` ([@jaydgruber](https://github.com/jaydgruber))
+* [#705](https://github.com/ember-cli/eslint-plugin-ember/pull/705) Support TypeScript files when checking if rules are running on Ember module or test files ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#719](https://github.com/ember-cli/eslint-plugin-ember/pull/719) Validate imports before reporting violations in `no-invalid-debug-function-arguments` rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#716](https://github.com/ember-cli/eslint-plugin-ember/pull/716) Revamp the guide for contributing a new rule ([@bmish](https://github.com/bmish))
+* [#715](https://github.com/ember-cli/eslint-plugin-ember/pull/715) Mention if a rule is auto-fixable in its documentation ([@bmish](https://github.com/bmish))
+* [#713](https://github.com/ember-cli/eslint-plugin-ember/pull/713) Add tests to ensure each rule documentation file has the right title and an examples section ([@bmish](https://github.com/bmish))
+* [#711](https://github.com/ember-cli/eslint-plugin-ember/pull/711) Improve contribution guide for adding new rules ([@TheMBTH](https://github.com/TheMBTH))
+
+#### :house: Internal
+* [#720](https://github.com/ember-cli/eslint-plugin-ember/pull/720) Add tests to ensure some computed property rules handle the @computed decorator ([@bmish](https://github.com/bmish))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- L@elaps ([@TheMBTH](https://github.com/TheMBTH))
+- [@jaydgruber](https://github.com/jaydgruber)
+
 ## v7.10.1 (2020-03-07)
 
 #### :bug: Bug Fix
