@@ -4,7 +4,7 @@ Dependent keys used for computed properties have to be valid
 
 ## Rule Details
 
-This rule aims to avoid invalid dependent keys in computed properies.
+This rule aims to avoid invalid dependent keys in computed properties.
 
 Currently implemented:
 
@@ -26,7 +26,6 @@ export default Component.extend({
     // Code
   })
 });
-
 ```
 
 Examples of **correct** code for this rule:
@@ -38,5 +37,4 @@ export default Component.extend({
     // Code
   })
 });
-
 ```
