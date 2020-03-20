@@ -11,7 +11,14 @@ const { ERROR_MESSAGE } = rule;
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+  parser: require.resolve('babel-eslint'),
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+    ecmaFeatures: { legacyDecorators: true },
+  },
+});
 ruleTester.run('no-deeply-nested-dependent-keys-with-each', rule, {
   valid: [
     'Ember.computed(function() {})',
@@ -75,6 +82,11 @@ ruleTester.run('no-deeply-nested-dependent-keys-with-each', rule, {
     },
     {
       code: "computed('foo.@each.bar.@each.baz', function() {})",
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      code: "class Test { @computed('foo.@each.bar.baz') get someProp() { return true; } }",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
