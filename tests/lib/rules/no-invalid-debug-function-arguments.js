@@ -5,7 +5,7 @@
 const rule = require('../../../lib/rules/no-invalid-debug-function-arguments');
 const RuleTester = require('eslint').RuleTester;
 
-const { DEBUG_FUNCTIONS, getErrorMessage } = rule;
+const { DEBUG_FUNCTIONS, ERROR_MESSAGE } = rule;
 
 //------------------------------------------------------------------------------
 // Tests
@@ -23,43 +23,51 @@ const VALID_USAGES_BASIC = [
 const VALID_USAGES_FOR_EACH_DEBUG_FUNCTION = flatten(
   DEBUG_FUNCTIONS.map(debugFunction => [
     {
-      code: `OtherClass.${debugFunction}(true, 'My string.');`,
+      code: `import { ${debugFunction} } from '@ember/debug'; OtherClass.${debugFunction}(true, 'My string.');`,
     },
     {
-      code: `${debugFunction}();`,
+      code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}();`,
     },
     {
       code: `Ember.${debugFunction}();`,
     },
     {
-      code: `${debugFunction}('My description.');`,
+      // Missing import:
+      code: `${debugFunction}(true, 'My string.');`,
+    },
+    {
+      // Wrong import:
+      code: `import { ${debugFunction} } from 'something-else'; ${debugFunction}(true, 'My string.');`,
+    },
+    {
+      code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}('My description.');`,
     },
     {
       code: `Ember.${debugFunction}('My description.');`,
     },
     {
-      code: `${debugFunction}('My description.', true);`,
+      code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}('My description.', true);`,
     },
     {
       code: `Ember.${debugFunction}('My description.', true);`,
     },
     {
-      code: `${debugFunction}('My description.', true, { id: 'some-id' });`,
+      code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}('My description.', true, { id: 'some-id' });`,
     },
     {
       code: `Ember.${debugFunction}('My description.', true, { id: 'some-id' });`,
     },
     {
-      code: `const CONDITION = true; ${debugFunction}('My description.', CONDITION);`,
+      code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}('My description.', CONDITION);`,
     },
     {
-      code: `const DESCRIPTION = 'description'; ${debugFunction}(DESCRIPTION, true);`,
+      code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}(DESCRIPTION, true);`,
     },
     {
-      code: `const DESCRIPTION = 'description'; const CONDITION = true; ${debugFunction}(DESCRIPTION, CONDITION);`,
+      code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}(DESCRIPTION, CONDITION);`,
     },
     {
-      code: `${debugFunction}.unrelatedFunction(true, 'My description.');`,
+      code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}.unrelatedFunction(true, 'My description.');`,
     },
     {
       code: `Ember.${debugFunction}.unrelatedFunction(true, 'My description.');`,
@@ -72,39 +80,39 @@ const VALID_USAGES = [...VALID_USAGES_BASIC, ...VALID_USAGES_FOR_EACH_DEBUG_FUNC
 const INVALID_USAGES = flatten(
   DEBUG_FUNCTIONS.map(debugFunction => [
     {
-      code: `${debugFunction}(true, 'My description.');`,
+      code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}(true, 'My description.');`,
       output: null,
-      errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: `Ember.${debugFunction}(true, 'My description.');`,
       output: null,
-      errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code: `${debugFunction}(true, 'My description.', { id: 'some-id' });`,
+      code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}(true, 'My description.', { id: 'some-id' });`,
       output: null,
-      errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: `Ember.${debugFunction}(true, 'My description.', { id: 'some-id' });`,
       output: null,
-      errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code: `${debugFunction}(true, \`My \${123} description.\`);`,
+      code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}(true, \`My \${123} description.\`);`,
       output: null,
-      errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code: `const CONDITION = true; ${debugFunction}(CONDITION, 'My description.');`,
+      code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}(CONDITION, 'My description.');`,
       output: null,
-      errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code: `const CONDITION = true; ${debugFunction}(CONDITION, \`My \${123} description.\`);`,
+      code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}(CONDITION, \`My \${123} description.\`);`,
       output: null,
-      errors: [{ message: getErrorMessage(debugFunction), type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
   ])
 );
