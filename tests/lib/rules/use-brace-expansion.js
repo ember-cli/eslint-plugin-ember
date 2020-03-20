@@ -11,7 +11,15 @@ const { ERROR_MESSAGE } = rule;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parser: require.resolve('babel-eslint'),
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+    ecmaFeatures: { legacyDecorators: true },
+  },
+});
+
 eslintTester.run('use-brace-expansion', rule, {
   valid: [
     '{ test: computed("a", "b", function() {}) }',
@@ -122,6 +130,20 @@ eslintTester.run('use-brace-expansion', rule, {
           endLine: 1,
           column: 18,
           endColumn: 37,
+        },
+      ],
+    },
+    {
+      code: "class Test { @computed('a.test1', 'a.test2') get someProp() { return true; } }",
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+          line: 1,
+          endLine: 1,
+          column: 24,
+          endColumn: 33,
         },
       ],
     },

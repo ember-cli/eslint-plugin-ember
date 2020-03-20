@@ -7,7 +7,15 @@ const { ERROR_MESSAGE } = rule;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester({ parserOptions: { ecmaVersion: 6, sourceType: 'module' } });
+const eslintTester = new RuleTester({
+  parser: require.resolve('babel-eslint'),
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+    ecmaFeatures: { legacyDecorators: true },
+  },
+});
+
 eslintTester.run('no-invalid-dependent-keys', rule, {
   valid: [
     '{ test: computed("a", "b", function() {}) }',
@@ -105,6 +113,11 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
           endColumn: 142,
         },
       ],
+    },
+    {
+      code: "class Test { @computed('foo.{name,place') get someProp() { return true; } }",
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
   ],
 });
