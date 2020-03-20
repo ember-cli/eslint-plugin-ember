@@ -7,11 +7,14 @@ const { ERROR_MESSAGE } = rule;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({ parserOptions: { ecmaVersion: 6, sourceType: 'module' } });
 eslintTester.run('no-invalid-dependent-keys', rule, {
   valid: [
     '{ test: computed("a", "b", function() {}) }',
     '{ test: computed(function() {}) }',
+    '{ test: computed() }',
+    '{ test: computed(SOME_VAR, function() {}) }',
+    '{ test: computed(...SOME_ARRAY, function() {}) }',
     '{ test: computed("a.test", "b.test", function() {}) }',
     '{ test: computed("a.{test,test2}", "b", function() {}) }',
     '{ test: computed("a.{test,test2}", "c", "b", function() {}) }',
