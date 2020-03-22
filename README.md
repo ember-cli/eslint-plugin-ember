@@ -106,7 +106,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [jquery-ember-run](./docs/rules/jquery-ember-run.md) | disallow usage of jQuery without an Ember run loop |
 | :white_check_mark: | [no-arrow-function-computed-properties](./docs/rules/no-arrow-function-computed-properties.md) | disallow arrow functions in computed properties |
 | :white_check_mark: | [no-attrs-in-components](./docs/rules/no-attrs-in-components.md) | disallow usage of `this.attrs` in components |
-| :white_check_mark: | [no-attrs-snapshot](./docs/rules/no-attrs-snapshot.md) | disallow use of attrs snapshot in the `didReceiveAttrs` and `didUpdateAttrs` hooks |
+| :white_check_mark: | [no-attrs-snapshot](./docs/rules/no-attrs-snapshot.md) | disallow use of attrs snapshot in the `didReceiveAttrs` and `didUpdateAttrs` component hooks |
 | :white_check_mark: | [no-capital-letters-in-routes](./docs/rules/no-capital-letters-in-routes.md) | disallow routes with uppercased letters in router.js |
 | :white_check_mark: | [no-deeply-nested-dependent-keys-with-each](./docs/rules/no-deeply-nested-dependent-keys-with-each.md) | disallow usage of deeply-nested computed property dependent keys with `@each` |
 | :white_check_mark: | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | disallow repeating computed property dependent keys |
@@ -115,7 +115,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [no-incorrect-calls-with-inline-anonymous-functions](./docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | disallow inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce` |
 | :wrench: | [no-incorrect-computed-macros](./docs/rules/no-incorrect-computed-macros.md) | disallow incorrect usage of computed property macros |
 | :white_check_mark: | [no-invalid-debug-function-arguments](./docs/rules/no-invalid-debug-function-arguments.md) | disallow usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. |
-|  | [no-invalid-dependent-keys](./docs/rules/no-invalid-dependent-keys.md) | require that dependent keys used for computed properties to be valid. |
+|  | [no-invalid-dependent-keys](./docs/rules/no-invalid-dependent-keys.md) | disallow invalid dependent keys in computed properties |
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | disallow unexpected side effects in computed properties |
 | :wrench: | [require-computed-property-dependencies](./docs/rules/require-computed-property-dependencies.md) | require dependencies to be declared statically in computed properties |
 | :white_check_mark: | [require-return-from-computed](./docs/rules/require-return-from-computed.md) | disallow missing return statements in computed properties |
@@ -138,13 +138,13 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 |  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | disallow usage of empty attributes in Ember Data models |
-| :wrench: | [use-ember-data-rfc-395-imports](./docs/rules/use-ember-data-rfc-395-imports.md) | enforce usage of `@ember-data/` packages instead `ember-data` |
+| :wrench: | [use-ember-data-rfc-395-imports](./docs/rules/use-ember-data-rfc-395-imports.md) | enforce usage of `@ember-data/` package imports instead `ember-data` |
 
 ### Testing
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [no-legacy-test-waiters](./docs/rules/no-legacy-test-waiters.md) | disallow the use of the legacy test waiter APIs. |
+|  | [no-legacy-test-waiters](./docs/rules/no-legacy-test-waiters.md) | disallow the use of the legacy test waiter APIs |
 |  | [no-pause-test](./docs/rules/no-pause-test.md) | disallow usage of the `pauseTest` helper in tests |
 |  | [no-replace-test-comments](./docs/rules/no-replace-test-comments.md) | disallow 'Replace this with your real tests' comments in test files |
 |  | [no-test-and-then](./docs/rules/no-test-and-then.md) | disallow usage of the `andThen` test wait helper |
