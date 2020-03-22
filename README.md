@@ -89,6 +89,13 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |  | [route-path-style](./docs/rules/route-path-style.md) | enforce usage of kebab-case (instead of snake_case or camelCase) in route paths |
 | :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | enforce usage of `Ember.get` and `Ember.set` |
 
+### Ember Data
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+|  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | disallow usage of empty attributes in Ember Data models |
+| :wrench: | [use-ember-data-rfc-395-imports](./docs/rules/use-ember-data-rfc-395-imports.md) | enforce usage of `@ember-data/` package imports instead `ember-data` |
+
 ### Ember Object
 
 |    | Rule ID | Description |
@@ -98,6 +105,17 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :car: | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | disallow usage of classic APIs such as `get`/`set` in classes that aren't explicitly decorated with `@classic` |
 |  | [computed-property-getters](./docs/rules/computed-property-getters.md) | enforce the consistent use of getters in computed properties |
 |  | [no-proxies](./docs/rules/no-proxies.md) | disallow using array or object proxies |
+
+### Ember Octane
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :car: | [no-actions-hash](./docs/rules/no-actions-hash.md) | disallow the actions hash in components, controllers, and routes |
+| :car: | [no-classic-classes](./docs/rules/no-classic-classes.md) | disallow "classic" classes in favor of native JS classes |
+| :car: | [no-classic-components](./docs/rules/no-classic-components.md) | enforce using Glimmer components |
+| :car: | [no-component-lifecycle-hooks](./docs/rules/no-component-lifecycle-hooks.md) | disallow usage of "classic" ember component lifecycle hooks. Render modifiers or custom functional modifiers should be used instead. |
+| :car: | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | disallow using computed properties in native classes |
+| :car: | [require-tagless-components](./docs/rules/require-tagless-components.md) | disallow using the wrapper element of a component |
 
 ### Possible Errors
 
@@ -122,23 +140,15 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [require-super-in-init](./docs/rules/require-super-in-init.md) | require `this._super` to be called in `init` hooks |
 | :white_check_mark: | [routes-segments-snake-case](./docs/rules/routes-segments-snake-case.md) | enforce usage of snake_cased dynamic segments in routes |
 
-### Ember Octane
+### Stylistic Issues
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :car: | [no-actions-hash](./docs/rules/no-actions-hash.md) | disallow the actions hash in components, controllers, and routes |
-| :car: | [no-classic-classes](./docs/rules/no-classic-classes.md) | disallow "classic" classes in favor of native JS classes |
-| :car: | [no-classic-components](./docs/rules/no-classic-components.md) | enforce using Glimmer components |
-| :car: | [no-component-lifecycle-hooks](./docs/rules/no-component-lifecycle-hooks.md) | disallow usage of "classic" ember component lifecycle hooks. Render modifiers or custom functional modifiers should be used instead. |
-| :car: | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | disallow using computed properties in native classes |
-| :car: | [require-tagless-components](./docs/rules/require-tagless-components.md) | disallow using the wrapper element of a component |
-
-### Ember Data
-
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-|  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | disallow usage of empty attributes in Ember Data models |
-| :wrench: | [use-ember-data-rfc-395-imports](./docs/rules/use-ember-data-rfc-395-imports.md) | enforce usage of `@ember-data/` package imports instead `ember-data` |
+| :wrench: | [order-in-components](./docs/rules/order-in-components.md) | enforce proper order of properties in components |
+| :wrench: | [order-in-controllers](./docs/rules/order-in-controllers.md) | enforce proper order of properties in controllers |
+| :wrench: | [order-in-models](./docs/rules/order-in-models.md) | enforce proper order of properties in models |
+| :wrench: | [order-in-routes](./docs/rules/order-in-routes.md) | enforce proper order of properties in routes |
+| :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | enforce usage of brace expansion in computed property dependent keys |
 
 ### Testing
 
@@ -150,16 +160,6 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |  | [no-test-and-then](./docs/rules/no-test-and-then.md) | disallow usage of the `andThen` test wait helper |
 |  | [no-test-import-export](./docs/rules/no-test-import-export.md) | disallow importing of "-test.js" in a test file and exporting from a test file |
 |  | [no-test-module-for](./docs/rules/no-test-module-for.md) | disallow usage of `moduleFor`, `moduleForComponent`, etc |
-
-### Stylistic Issues
-
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-| :wrench: | [order-in-components](./docs/rules/order-in-components.md) | enforce proper order of properties in components |
-| :wrench: | [order-in-controllers](./docs/rules/order-in-controllers.md) | enforce proper order of properties in controllers |
-| :wrench: | [order-in-models](./docs/rules/order-in-models.md) | enforce proper order of properties in models |
-| :wrench: | [order-in-routes](./docs/rules/order-in-routes.md) | enforce proper order of properties in routes |
-| :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | enforce usage of brace expansion in computed property dependent keys |
 
 <!--RULES_TABLE_END-->
 
