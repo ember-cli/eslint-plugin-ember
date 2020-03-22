@@ -43,7 +43,9 @@ const categories = rules
     }
     return arr;
   }, [])
-  .sort();
+  .sort(function(a, b) {
+    return a.toLowerCase().localeCompare(b.toLowerCase()); // Case-insensitive sort function.
+  });
 
 let rulesTableContent = categories
   .map(
