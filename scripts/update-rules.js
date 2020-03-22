@@ -42,7 +42,8 @@ const categories = rules
       arr.push(category);
     }
     return arr;
-  }, []);
+  }, [])
+  .sort();
 
 let rulesTableContent = categories
   .map(
