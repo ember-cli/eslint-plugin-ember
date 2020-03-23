@@ -18,10 +18,10 @@ import { setupApplicationTest } from 'ember-qunit';
 
 import { pauseTest } from '@ember/test-helpers';
 
-module('Acceptance | foo test', function(hooks) {
+module('Acceptance | foo test', function (hooks) {
   setupApplicationTest(hooks);
 
-  test('it hangs', async function() {
+  test('it hangs', async function () {
     await this.pauseTest();
     // or
     await pauseTest();
@@ -39,10 +39,10 @@ import { setupApplicationTest } from 'ember-qunit';
 
 import { pauseTest, resumeTest } from '@ember/test-helpers';
 
-module('Acceptance | foo test', function(hooks) {
+module('Acceptance | foo test', function (hooks) {
   setupApplicationTest(hooks);
 
-  test('it runs', function() {
+  test('it runs', function () {
     const promise = pauseTest();
 
     // Do some stuff

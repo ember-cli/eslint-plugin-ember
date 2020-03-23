@@ -22,39 +22,39 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 
 export default Component.extend({
-  propReads: computed('x', function() {
+  propReads: computed('x', function () {
     return this.x;
   }),
 
-  propAnd: computed('x', 'y', function() {
+  propAnd: computed('x', 'y', function () {
     return this.x && this.y;
   }),
 
-  propOr: computed('x', 'y', function() {
+  propOr: computed('x', 'y', function () {
     return this.x || this.y;
   }),
 
-  propGt: computed('x', function() {
+  propGt: computed('x', function () {
     return this.x > 123;
   }),
 
-  propGte: computed('x', function() {
+  propGte: computed('x', function () {
     return this.x >= 123;
   }),
 
-  propLt: computed('x', function() {
+  propLt: computed('x', function () {
     return this.x < 123;
   }),
 
-  propLte: computed('x', function() {
+  propLte: computed('x', function () {
     return this.x <= 123;
   }),
 
-  propNot: computed('x', function() {
+  propNot: computed('x', function () {
     return !this.x;
   }),
 
-  propEqual: computed('x', function() {
+  propEqual: computed('x', function () {
     return this.x === 123;
   })
 });

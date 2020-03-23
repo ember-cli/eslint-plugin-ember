@@ -21,7 +21,7 @@ const VALID_USAGES_BASIC = [
 ];
 
 const VALID_USAGES_FOR_EACH_DEBUG_FUNCTION = flatten(
-  DEBUG_FUNCTIONS.map(debugFunction => [
+  DEBUG_FUNCTIONS.map((debugFunction) => [
     {
       code: `import { ${debugFunction} } from '@ember/debug'; OtherClass.${debugFunction}(true, 'My string.');`,
     },
@@ -78,7 +78,7 @@ const VALID_USAGES_FOR_EACH_DEBUG_FUNCTION = flatten(
 const VALID_USAGES = [...VALID_USAGES_BASIC, ...VALID_USAGES_FOR_EACH_DEBUG_FUNCTION];
 
 const INVALID_USAGES = flatten(
-  DEBUG_FUNCTIONS.map(debugFunction => [
+  DEBUG_FUNCTIONS.map((debugFunction) => [
     {
       code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}(true, 'My description.');`,
       output: null,

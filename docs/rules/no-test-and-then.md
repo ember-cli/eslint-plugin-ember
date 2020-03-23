@@ -9,7 +9,7 @@ It's no longer necessary to use the `andThen` test wait helper now that the clea
 Examples of **incorrect** code for this rule:
 
 ```js
-test('behaves correctly', function(assert) {
+test('behaves correctly', function (assert) {
   click('.button');
   andThen(() => {
     assert.ok(this.myAction.calledOnce);
@@ -20,7 +20,7 @@ test('behaves correctly', function(assert) {
 Examples of **correct** code for this rule:
 
 ```js
-test('behaves correctly', async function(assert) {
+test('behaves correctly', async function (assert) {
   await click('.button');
   assert.ok(this.myAction.calledOnce);
 });

@@ -23,7 +23,7 @@ Examples of **incorrect** code for this rule:
 import EmberObject, { computed } from '@ember/object';
 
 export default EmberObject.extend({
-  name: computed(function() {
+  name: computed(function () {
     return `${this.firstName} ${this.lastName}`;
   })
 });
@@ -35,7 +35,7 @@ Examples of **correct** code for this rule:
 import EmberObject, { computed } from '@ember/object';
 
 export default EmberObject.extend({
-  name: computed('firstName', 'lastName', function() {
+  name: computed('firstName', 'lastName', function () {
     return `${this.firstName} ${this.lastName}`;
   })
 });

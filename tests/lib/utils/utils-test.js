@@ -80,8 +80,8 @@ describe('findNodes', () => {
   });
 });
 
-describe('function sort order', function() {
-  it('has exported functions in sorted order', function() {
+describe('function sort order', function () {
+  it('has exported functions in sorted order', function () {
     expect(Object.getOwnPropertyNames(utils)).toStrictEqual(
       Object.getOwnPropertyNames(utils).sort()
     );

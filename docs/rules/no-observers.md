@@ -19,7 +19,7 @@ Examples of **incorrect** code for this rule:
 
 ```js
 export default Controller.extend({
-  change: Ember.observer('text', function() {
+  change: Ember.observer('text', function () {
     console.log(`change detected: ${this.text}`);
   })
 });
@@ -29,7 +29,7 @@ export default Controller.extend({
 import { observer } from '@ember/object';
 
 export default Controller.extend({
-  change: observer('text', function() {
+  change: observer('text', function () {
     console.log(`change detected: ${this.text}`);
   })
 });
