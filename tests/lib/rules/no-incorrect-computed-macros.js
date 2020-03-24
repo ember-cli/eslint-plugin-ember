@@ -32,6 +32,14 @@ ruleTester.run('no-incorrect-computed-macros', rule, {
     // Spread element:
     `import { and } from '@ember/object/computed';
      and(...deps)`,
+    `import { or } from '@ember/object/computed';
+     or(...deps)`,
+
+    // Brace expansion:
+    `import { and } from '@ember/object/computed';
+    and('user.{name,token}')`,
+    `import { or } from '@ember/object/computed';
+    or('user.{name,token}')`,
 
     // Wrong function:
     `import { and } from '@ember/object/computed';
