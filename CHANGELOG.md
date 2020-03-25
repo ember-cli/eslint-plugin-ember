@@ -1,3 +1,15 @@
+## v7.11.1 (2020-03-25)
+
+#### :bug: Bug Fix
+* [#728](https://github.com/ember-cli/eslint-plugin-ember/pull/728) Allow brace expansion with `and`, `or` macros in `no-incorrect-computed-macros` rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#724](https://github.com/ember-cli/eslint-plugin-ember/pull/724) Recategorize rules in README ([@bmish](https://github.com/bmish))
+* [#723](https://github.com/ember-cli/eslint-plugin-ember/pull/723) Sort rule categories alphabetically in README ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v7.11.0 (2020-03-20)
 
 #### :rocket: Enhancement
