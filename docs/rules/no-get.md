@@ -47,7 +47,7 @@ const foo = this.someProperty;
 ```
 
 ```js
-const foo = this.get('some.nested.property'); // Allowed because of nested path.
+const foo = this.get('some.nested.property'); // Allowed if `ignoreNestedPaths` option is enabled.
 ```
 
 ```js
@@ -84,7 +84,7 @@ export default EmberObject.extend({
 This rule takes an optional object containing:
 
 * `boolean` -- `ignoreGetProperties` -- whether the rule should ignore `getProperties` (default `false`)
-* `boolean` -- `ignoreNestedPaths` -- whether the rule should ignore `this.get('some.nested.property')` (default `true`) (this option is enabled by default to make it easier/safer to adopt this rule)
+* `boolean` -- `ignoreNestedPaths` -- whether the rule should ignore `this.get('some.nested.property')` (default `false`)
 
 ## Related Rules
 
