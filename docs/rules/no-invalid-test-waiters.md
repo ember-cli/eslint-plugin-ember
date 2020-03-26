@@ -1,55 +1,71 @@
 # no-invalid-test-waiters
 
-ensure waiters are created in module scope
+Prevents invalid usage of test waiters.
 
 ## Rule Details
 
-TODO: what the rule does goes here
+The new test waiters APIs, found in the [ember-test-waiters](https://github.com/emberjs/ember-test-waiters) addon, have recommended best practices that ensure you are successful with their usage. This rule ensures that all usages are adhering to recommended best practices.
 
 ## Examples
 
 Examples of **incorrect** code for this rule:
 
 ```js
-// TODO: Example 1
+import { buildWaiter } from 'ember-test-waiters';
+
+function useWaiter() {
+  const myOtherWaiter = buildWaiter('the second');
+}
 ```
 
 ```js
-// TODO: Example 2
+import { buildWaiter as b } from 'ember-test-waiters';
+
+function useWaiter() {
+  const myOtherWaiter = b('the second');
+}
+```
+
+```js
+import { buildWaiter } from 'ember-test-waiters';
+
+const someFunction = () => {
+  buildWaiter('waiterName');
+};
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
-// TODO: Example 1
+import { buildWaiter } from 'ember-test-waiters';
+
+const myWaiter = buildWaiter('waiterName');
 ```
 
 ```js
-// TODO: Example 2
+import { buildWaiter } from 'table-waiters';
+
+function useWaiter() {
+  const myOtherWaiter = buildWaiter('the second');
+}
 ```
 
-## Migration
+```js
+import { buildWaiter } from 'ember-test-waiters';
 
-TODO: suggest any fast/automated techniques for fixing violations in a large codebase
+function useWaiter() {
+  const myWaiter = somethingElse.buildWaiter('waiterName');
+}
+```
 
-- TODO: suggestion on how to fix violations using find-and-replace / regexp
-- TODO: suggestion on how to fix violations using a codemod
+```js
+import { buildWaiter } from 'ember-test-waiters';
 
-## Configuration
-
-TODO: exclude this section if the rule has no extra configuration
-
-- object -- containing the following properties:
-  - string -- `parameterName1` -- TODO: description of parameter including the possible values and default value
-  - boolean -- `parameterName2` -- TODO: description of parameter including the possible values and default value
-
-## Related Rules
-
-- [TODO-related-rule-name1](related-rule-name1.md)
-- [TODO-related-rule-name2](related-rule-name2.md)
+function useWaiter() {
+  const myWaiter = buildWaiter.somethingElse('waiterName');
+}
+```
 
 ## References
 
-- TODO: link to relevant documentation goes here)
-- TODO: link to relevant function spec goes here
-- TODO: link to relevant guide goes here
+For more information on the new test waiters API, please visit [ember-test-waiters](https://github.com/emberjs/ember-test-waiters).

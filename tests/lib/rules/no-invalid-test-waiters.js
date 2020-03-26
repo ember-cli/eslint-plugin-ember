@@ -69,7 +69,9 @@ ruleTester.run('no-invalid-test-waiters', rule, {
       code: `
       import { buildWaiter } from 'ember-test-waiters';
 
-      const someFunction = () => { buildWaiter('waiterName'); };
+      const someFunction = () => {
+        buildWaiter('waiterName');
+      };
       `,
       output: null,
       errors: [{ message: DIRECT_ASSIGNMENT_ERROR_MESSAGE }],
