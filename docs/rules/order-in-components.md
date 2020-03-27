@@ -106,13 +106,13 @@ export default Component.extend({
   vehicle: alias('car'),
 
   // 5. Multiline Computed Property
-  levelOfHappiness: computed('attitude', 'health', function() {
+  levelOfHappiness: computed('attitude', 'health', function () {
     const result = this.get('attitude') * this.get('health') * Math.random();
     return result;
   }),
 
   // 6. Observers
-  onVehicleChange: observer('vehicle', function() {
+  onVehicleChange: observer('vehicle', function () {
     // observer logic
   }),
 

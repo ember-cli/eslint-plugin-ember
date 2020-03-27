@@ -31,7 +31,7 @@ export default Component.extend({
     once(() => {
       /* this will run twice */
     });
-    scheduleOnce('afterRender', function() {
+    scheduleOnce('afterRender', function () {
       /* this will run twice */
     });
   }

@@ -31,31 +31,31 @@ const OCTANE = ':car:';
 
 const rules = fs
   .readdirSync(root)
-  .filter(file => path.extname(file) === '.js')
-  .map(file => path.basename(file, '.js'))
-  .map(fileName => [fileName, require(path.join(root, fileName))]); // eslint-disable-line import/no-dynamic-require
+  .filter((file) => path.extname(file) === '.js')
+  .map((file) => path.basename(file, '.js'))
+  .map((fileName) => [fileName, require(path.join(root, fileName))]); // eslint-disable-line import/no-dynamic-require
 
 const categories = rules
-  .map(entry => entry[1].meta.docs.category)
+  .map((entry) => entry[1].meta.docs.category)
   .reduce((arr, category) => {
     if (!arr.includes(category)) {
       arr.push(category);
     }
     return arr;
   }, [])
-  .sort(function(a, b) {
+  .sort(function (a, b) {
     return a.toLowerCase().localeCompare(b.toLowerCase()); // Case-insensitive sort function.
   });
 
 let rulesTableContent = categories
   .map(
-    category => `### ${category}
+    (category) => `### ${category}
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 ${rules
   .filter(([, rule]) => rule.meta.docs.category === category && !rule.meta.deprecated)
-  .map(entry => {
+  .map((entry) => {
     const name = entry[0];
     const meta = entry[1].meta;
     const mark = `${meta.docs.recommended ? STAR : ''}${meta.docs.octane ? OCTANE : ''}${
@@ -70,7 +70,7 @@ ${rules
   )
   .join('\n');
 
-const deprecatedRules = rules.filter(entry => entry[1].meta.deprecated);
+const deprecatedRules = rules.filter((entry) => entry[1].meta.deprecated);
 if (deprecatedRules.length > 0) {
   rulesTableContent += `
 ### Deprecated
@@ -80,12 +80,12 @@ if (deprecatedRules.length > 0) {
 | Rule ID | Replaced by |
 |:--------|:------------|
 ${deprecatedRules
-  .map(entry => {
+  .map((entry) => {
     const name = entry[0];
     const meta = entry[1].meta;
     const link = `[${name}](./docs/rules/${name}.md)`;
     const replacedBy =
-      (meta.docs.replacedBy || []).map(id => `[${id}](./docs/rules/${id}.md)`).join(', ') ||
+      (meta.docs.replacedBy || []).map((id) => `[${id}](./docs/rules/${id}.md)`).join(', ') ||
       '(no replacement)';
     return `| ${link} | ${replacedBy} |`;
   })

@@ -12,7 +12,7 @@ Examples of **incorrect** code for this rule:
 
 ```js
 const Person = EmberObject.extend({
-  fullName: computed(function() {
+  fullName: computed(function () {
     return `${this.firstName} ${this.lastName}`;
   }).volatile()
 });

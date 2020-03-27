@@ -26,7 +26,7 @@ Examples of **correct** code for this rule:
 import EmberObject, { computed } from '@ember/object';
 
 const Person = EmberObject.extend({
-  fullName: computed('firstName', 'lastName', function() {
+  fullName: computed('firstName', 'lastName', function () {
     return `${this.firstName} ${this.lastName}`;
   })
 });

@@ -114,7 +114,7 @@ export default Route.extend({
 
   // 6. afterModel hook
   afterModel(articles) {
-    articles.forEach(article => {
+    articles.forEach((article) => {
       article.set('foo', 'bar');
     });
   },

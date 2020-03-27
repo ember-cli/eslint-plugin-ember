@@ -31,7 +31,7 @@ Ember.Object.extend({
 
 // GOOD
 Ember.Object.extend({
-  fullName: computed('firstName', 'lastName', function() {
+  fullName: computed('firstName', 'lastName', function () {
     // ...
   })
 });
@@ -63,7 +63,7 @@ Ember.Object.extend({
 
 // BAD
 Ember.Object.extend({
-  fullName: computed('firstName', 'lastName', function() {
+  fullName: computed('firstName', 'lastName', function () {
     // ...
   })
 });
@@ -74,7 +74,7 @@ Ember.Object.extend({
 ```javascript
 // GOOD
 Ember.Object.extend({
-  fullName: computed('firstName', 'lastName', function() {
+  fullName: computed('firstName', 'lastName', function () {
     // ...
   })
 });

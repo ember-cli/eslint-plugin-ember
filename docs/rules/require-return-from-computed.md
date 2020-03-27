@@ -26,7 +26,7 @@ export default Component.extend({
     }
   }),
 
-  salutation: computed('firstName', function() {
+  salutation: computed('firstName', function () {
     if (this.get('firstName')) {
       return `Dr. ${this.get('firstName')}`;
     }
@@ -56,7 +56,7 @@ export default Component.extend({
     }
   }),
 
-  salutation: computed('firstName', function() {
+  salutation: computed('firstName', function () {
     if (this.get('firstName')) {
       return `Dr. ${this.get('firstName')}`;
     }
