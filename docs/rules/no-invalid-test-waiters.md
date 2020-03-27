@@ -4,7 +4,10 @@ Prevents invalid usage of test waiters.
 
 ## Rule Details
 
-The new test waiters APIs, found in the [ember-test-waiters](https://github.com/emberjs/ember-test-waiters) addon, have recommended best practices that ensure you are successful with their usage. This rule ensures that all usages are adhering to recommended best practices.
+The new test waiters APIs, found in the [ember-test-waiters](https://github.com/emberjs/ember-test-waiters) addon, have recommended best practices that ensure you are successful with their usage. This rule ensures that all usages are adhering to recommended best practices:
+
+* Used in module scope
+* Assigned to a variable
 
 ## Examples
 
@@ -14,24 +17,14 @@ Examples of **incorrect** code for this rule:
 import { buildWaiter } from 'ember-test-waiters';
 
 function useWaiter() {
-  const myOtherWaiter = buildWaiter('the second');
-}
-```
-
-```js
-import { buildWaiter as b } from 'ember-test-waiters';
-
-function useWaiter() {
-  const myOtherWaiter = b('the second');
+  const myOtherWaiter = buildWaiter('the second'); // inside function
 }
 ```
 
 ```js
 import { buildWaiter } from 'ember-test-waiters';
 
-const someFunction = () => {
-  buildWaiter('waiterName');
-};
+buildWaiter('the second'); // not stored in variable
 ```
 
 Examples of **correct** code for this rule:
@@ -40,30 +33,6 @@ Examples of **correct** code for this rule:
 import { buildWaiter } from 'ember-test-waiters';
 
 const myWaiter = buildWaiter('waiterName');
-```
-
-```js
-import { buildWaiter } from 'table-waiters';
-
-function useWaiter() {
-  const myOtherWaiter = buildWaiter('the second');
-}
-```
-
-```js
-import { buildWaiter } from 'ember-test-waiters';
-
-function useWaiter() {
-  const myWaiter = somethingElse.buildWaiter('waiterName');
-}
-```
-
-```js
-import { buildWaiter } from 'ember-test-waiters';
-
-function useWaiter() {
-  const myWaiter = buildWaiter.somethingElse('waiterName');
-}
 ```
 
 ## References
