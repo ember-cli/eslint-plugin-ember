@@ -1,3 +1,19 @@
+## v7.12.0 (2020-03-27)
+
+#### :rocket: Enhancement
+* [#738](https://github.com/ember-cli/eslint-plugin-ember/pull/738) Use sets instead of arrays for better performance ([@bmish](https://github.com/bmish))
+* [#702](https://github.com/ember-cli/eslint-plugin-ember/pull/702) Add new rule `no-invalid-test-waiters` ([@scalvert](https://github.com/scalvert))
+
+#### :memo: Documentation
+* [#737](https://github.com/ember-cli/eslint-plugin-ember/pull/737) Mention tracked properties as a fix for `classic-decorator-no-classic-methods` ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#732](https://github.com/ember-cli/eslint-plugin-ember/pull/732) Begin testing under Node 13 ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
 ## v7.11.1 (2020-03-25)
 
 #### :bug: Bug Fix
