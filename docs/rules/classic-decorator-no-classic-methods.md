@@ -46,10 +46,25 @@ export default class MyService extends Service {
 ```
 
 ```javascript
+import { set } from '@ember/object';
+
 export default class MyService extends Service {
   constructor(...args) {
     super(...args);
     set(this, 'foo', 'bar');
+  }
+}
+```
+
+```javascript
+import { tracked } from '@glimmer/tracking';
+
+export default class MyService extends Service {
+  @tracked foo;
+
+  constructor(...args) {
+    super(...args);
+    this.foo = 'bar';
   }
 }
 ```
@@ -62,3 +77,4 @@ export default class MyService extends Service {
 
 - [no-get](no-get.md)
 - [classic-decorator-hooks](classic-decorator-hooks.md)
+- [Tracked properties](https://guides.emberjs.com/release/upgrading/current-edition/tracked-properties/)
