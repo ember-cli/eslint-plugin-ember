@@ -60,12 +60,7 @@ export default class MyService extends Service {
 import { tracked } from '@glimmer/tracking';
 
 export default class MyService extends Service {
-  @tracked foo;
-
-  constructor(...args) {
-    super(...args);
-    this.foo = 'bar';
-  }
+  @tracked foo = 'bar';
 }
 ```
 
