@@ -40,6 +40,12 @@ ruleTester.run('no-invalid-test-waiters', rule, {
       let myWaiter = buildWaiter.somethingElse('waiterName');
     }
   `,
+    `
+    import { buildWaiter } from 'ember-test-waiters';
+
+    buildWaiter.somethingElse('waiterName');
+    somethingElse.buildWaiter('waiterName');
+  `,
   ],
 
   invalid: [
@@ -72,6 +78,15 @@ ruleTester.run('no-invalid-test-waiters', rule, {
       const someFunction = () => {
         buildWaiter('waiterName');
       };
+      `,
+      output: null,
+      errors: [{ message: DIRECT_ASSIGNMENT_ERROR_MESSAGE }],
+    },
+    {
+      code: `
+      import { buildWaiter } from 'ember-test-waiters';
+
+      buildWaiter('waiterName');
       `,
       output: null,
       errors: [{ message: DIRECT_ASSIGNMENT_ERROR_MESSAGE }],
