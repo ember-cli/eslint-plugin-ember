@@ -55,7 +55,7 @@ export default Component.extend({
 And then you can make simple unit tests for handlers:
 
 ```javascript
-test('it reloads user in promise handler', function(assert) {
+test('it reloads user in promise handler', function (assert) {
   const component = this.subject();
   // assuming that you have `user` defined with kind of sinon spy on its reload method
   component._reloadUser(user);

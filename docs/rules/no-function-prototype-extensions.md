@@ -10,13 +10,13 @@ Examples of **incorrect** code for this rule:
 
 ```javascript
 export default Component.extend({
-  abc: function() {
+  abc: function () {
     /* custom logic */
   }.property('xyz'),
-  def: function() {
+  def: function () {
     /* custom logic */
   }.observes('xyz'),
-  ghi: function() {
+  ghi: function () {
     /* custom logic */
   }.on('didInsertElement')
 });
@@ -26,10 +26,10 @@ Examples of **correct** code for this rule:
 
 ```js
 export default Component.extend({
-  abc: computed('xyz', function() {
+  abc: computed('xyz', function () {
     /* custom logic */
   }),
-  def: observer('xyz', function() {
+  def: observer('xyz', function () {
     /* custom logic */
   }),
   didInsertElement() {

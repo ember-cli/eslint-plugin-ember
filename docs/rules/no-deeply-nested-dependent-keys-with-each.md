@@ -12,8 +12,8 @@ Examples of **incorrect** code for this rule:
 
 ```js
 export default Component.extend({
-  displayNames: computed('todos.@each.owner.name', function() {
-    return this.todos.map(todo => todo.owner.name);
+  displayNames: computed('todos.@each.owner.name', function () {
+    return this.todos.map((todo) => todo.owner.name);
   })
 });
 ```
@@ -22,11 +22,11 @@ Examples of **correct** code for this rule:
 
 ```js
 export default Component.extend({
-  displayNames: computed('owners.@each.name', function() {
+  displayNames: computed('owners.@each.name', function () {
     return this.owners.mapBy('name');
   }),
 
-  owners: computed('todos.@each.owner', function() {
+  owners: computed('todos.@each.owner', function () {
     return this.todos.mapBy('owner');
   })
 });

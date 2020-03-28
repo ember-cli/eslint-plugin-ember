@@ -15,7 +15,7 @@ moduleFor('Test Name');
 Examples of **correct** code for this rule:
 
 ```js
-module('Test Name', function(hooks) {
+module('Test Name', function (hooks) {
   // ...
 });
 ```
@@ -30,7 +30,7 @@ A short guide for how each of the legacy APIs converts to the new APIs:
     import { module, test } from 'qunit';
     import { setupTest } from 'ember-qunit';
 
-    module('...', function(hooks) {
+    module('...', function (hooks) {
       setupTest(hooks);
     });
     ```
@@ -41,7 +41,7 @@ A short guide for how each of the legacy APIs converts to the new APIs:
     import { module, test } from 'qunit';
     import { setupRenderingTest } from 'ember-qunit';
 
-    module('...', function(hooks) {
+    module('...', function (hooks) {
       setupRenderingTest(hooks);
     });
     ```
@@ -52,7 +52,7 @@ A short guide for how each of the legacy APIs converts to the new APIs:
     import { module, test } from 'qunit';
     import { setupApplicationTest } from 'ember-qunit';
 
-    module('...', function(hooks) {
+    module('...', function (hooks) {
       setupApplicationTest(hooks);
     });
     ```

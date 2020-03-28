@@ -90,12 +90,12 @@ export default Controller.extend({
   health: alias('model.health'),
 
   // 7. Multiline Computed Property
-  levelOfHappiness: computed('attitude', 'health', function() {
+  levelOfHappiness: computed('attitude', 'health', function () {
     return get(this, 'attitude') * get(this, 'health') * Math.random();
   }),
 
   // 8. Observers
-  onVehicleChange: observer('vehicle', function() {
+  onVehicleChange: observer('vehicle', function () {
     // observer logic
   }),
 

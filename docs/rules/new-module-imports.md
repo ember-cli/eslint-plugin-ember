@@ -18,7 +18,7 @@ Examples of **incorrect** code for this rule:
 ```js
 Ember.Component.extend({});
 Ember.Object.extend({});
-Ember.computed(function() {});
+Ember.computed(function () {});
 Ember.inject.service('foo');
 ```
 

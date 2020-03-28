@@ -5,8 +5,8 @@ function parse(code) {
   return babelEslint.parse(code).body[0].expression;
 }
 
-describe('function sort order', function() {
-  it('has exported functions in sorted order', function() {
+describe('function sort order', function () {
+  it('has exported functions in sorted order', function () {
     expect(Object.getOwnPropertyNames(types)).toStrictEqual(
       Object.getOwnPropertyNames(types).sort()
     );

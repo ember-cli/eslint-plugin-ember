@@ -758,7 +758,7 @@ describe('isComputedProp', () => {
   });
 
   it('should detect whitelisted computed props with MemberExpressions', () => {
-    ['volatile', 'meta', 'readOnly', 'property'].forEach(prop => {
+    ['volatile', 'meta', 'readOnly', 'property'].forEach((prop) => {
       node = parse(`computed().${prop}()`);
       expect(emberUtils.isComputedProp(node)).toBeTruthy();
 
