@@ -1,3 +1,29 @@
+## v8.0.0 (2020-03-28)
+
+#### :boom: Breaking Change
+* [#730](https://github.com/ember-cli/eslint-plugin-ember/pull/730) Drop Node 8, 9, and 11 support ([@bmish](https://github.com/bmish))
+* [#729](https://github.com/ember-cli/eslint-plugin-ember/pull/729) Update `ignoreNestedPaths` option default to `false` for [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md) rule ([@bmish](https://github.com/bmish))
+* [#731](https://github.com/ember-cli/eslint-plugin-ember/pull/731) Enable additional `recommended` rules ([@bmish](https://github.com/bmish))
+  * [no-empty-attrs](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-empty-attrs.md)
+  * [no-get-with-default](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get-with-default.md) (formerly in the `octane` config)
+  * [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md) (formerly in the `octane` config)
+  * [no-incorrect-computed-macros](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-incorrect-computed-macros.md)
+  * [no-invalid-dependent-keys](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-invalid-dependent-keys.md)
+  * [no-jquery](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-jquery.md) (formerly in the `octane` config)
+  * [no-legacy-test-waiters](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-legacy-test-waiters.md)
+  * [no-mixins](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-mixins.md)
+  * [no-pause-test](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-pause-test.md)
+  * [no-private-routing-service](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-private-routing-service.md)
+  * [no-test-and-then](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-and-then.md)
+  * [no-test-import-export](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-import-export.md)
+  * [no-test-module-for](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-module-for.md)
+  * [require-computed-macros](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-macros.md)
+  * [require-computed-property-dependencies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-property-dependencies.md)
+  * [use-ember-data-rfc-395-imports](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/use-ember-data-rfc-395-imports.md)
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v7.13.0 (2020-03-28)
 
 #### :rocket: Enhancement
