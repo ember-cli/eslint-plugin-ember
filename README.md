@@ -80,7 +80,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [no-deeply-nested-dependent-keys-with-each](./docs/rules/no-deeply-nested-dependent-keys-with-each.md) | disallow usage of deeply-nested computed property dependent keys with `@each` |
 | :white_check_mark: | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | disallow repeating computed property dependent keys |
 | :wrench: | [no-incorrect-computed-macros](./docs/rules/no-incorrect-computed-macros.md) | disallow incorrect usage of computed property macros |
-|  | [no-invalid-dependent-keys](./docs/rules/no-invalid-dependent-keys.md) | disallow invalid dependent keys in computed properties |
+| :wrench: | [no-invalid-dependent-keys](./docs/rules/no-invalid-dependent-keys.md) | disallow invalid dependent keys in computed properties |
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | disallow unexpected side effects in computed properties |
 | :white_check_mark: | [no-volatile-computed-properties](./docs/rules/no-volatile-computed-properties.md) | disallow volatile computed properties |
 | :wrench: | [require-computed-macros](./docs/rules/require-computed-macros.md) | require using computed property macros when possible |
