@@ -41,7 +41,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          ERROR_MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -57,7 +57,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          ERROR_MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -73,7 +73,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          ERROR_MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -90,7 +90,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          ERROR_MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -105,7 +105,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          ERROR_MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -120,7 +120,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          ERROR_MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -136,7 +136,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          ERROR_MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -152,7 +152,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          ERROR_MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -168,7 +168,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          ERROR_MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -183,7 +183,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          ERROR_MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -203,7 +203,7 @@ eslintTester.run('no-jquery', rule, {
       output: null,
       errors: [
         {
-          ERROR_MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },

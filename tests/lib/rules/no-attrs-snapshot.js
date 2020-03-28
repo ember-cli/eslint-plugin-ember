@@ -61,7 +61,7 @@ eslintTester.run('no-attrs-snapshot', rule, {
       output: null,
       errors: [
         {
-          ERROR_MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },
@@ -84,7 +84,7 @@ eslintTester.run('no-attrs-snapshot', rule, {
       output: null,
       errors: [
         {
-          ERROR_MESSAGE,
+          message: ERROR_MESSAGE,
         },
       ],
     },

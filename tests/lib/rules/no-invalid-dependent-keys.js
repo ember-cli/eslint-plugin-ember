@@ -58,8 +58,6 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
       output: null,
       errors: [
         {
-          ruleId: 'no-invalid-dependent-keys',
-          severity: 1,
           message: ERROR_MESSAGE_UNBALANCED_BRACES,
           line: 1,
           column: 18,
@@ -68,8 +66,6 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
           endColumn: 35,
         },
         {
-          ruleId: 'no-invalid-dependent-keys',
-          severity: 1,
           message: ERROR_MESSAGE_UNBALANCED_BRACES,
           line: 1,
           column: 37,
@@ -84,8 +80,6 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
       output: null,
       errors: [
         {
-          ruleId: 'no-invalid-dependent-keys',
-          severity: 1,
           message: ERROR_MESSAGE_UNBALANCED_BRACES,
           line: 1,
           column: 18,
@@ -101,8 +95,6 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
       output: null,
       errors: [
         {
-          ruleId: 'no-invalid-dependent-keys',
-          severity: 1,
           message: ERROR_MESSAGE_UNBALANCED_BRACES,
           line: 1,
           column: 19,
@@ -118,8 +110,6 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
       output: null,
       errors: [
         {
-          ruleId: 'no-invalid-dependent-keys',
-          severity: 1,
           message: ERROR_MESSAGE_UNBALANCED_BRACES,
           line: 1,
           column: 19,
