@@ -1,3 +1,14 @@
+## v7.13.0 (2020-03-28)
+
+#### :rocket: Enhancement
+* [#742](https://github.com/ember-cli/eslint-plugin-ember/pull/742) Detect invalid position of `@each` or `[]` in `no-invalid-dependent-keys` rule ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#741](https://github.com/ember-cli/eslint-plugin-ember/pull/741) Switch from Travis to GitHub Actions for CI ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v7.12.0 (2020-03-27)
 
 #### :rocket: Enhancement
