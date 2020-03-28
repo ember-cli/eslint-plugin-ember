@@ -79,12 +79,12 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :car: | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | disallow using computed properties in native classes |
 | :white_check_mark: | [no-deeply-nested-dependent-keys-with-each](./docs/rules/no-deeply-nested-dependent-keys-with-each.md) | disallow usage of deeply-nested computed property dependent keys with `@each` |
 | :white_check_mark: | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | disallow repeating computed property dependent keys |
-| :wrench: | [no-incorrect-computed-macros](./docs/rules/no-incorrect-computed-macros.md) | disallow incorrect usage of computed property macros |
-| :wrench: | [no-invalid-dependent-keys](./docs/rules/no-invalid-dependent-keys.md) | disallow invalid dependent keys in computed properties |
+| :white_check_mark::wrench: | [no-incorrect-computed-macros](./docs/rules/no-incorrect-computed-macros.md) | disallow incorrect usage of computed property macros |
+| :white_check_mark::wrench: | [no-invalid-dependent-keys](./docs/rules/no-invalid-dependent-keys.md) | disallow invalid dependent keys in computed properties |
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | disallow unexpected side effects in computed properties |
 | :white_check_mark: | [no-volatile-computed-properties](./docs/rules/no-volatile-computed-properties.md) | disallow volatile computed properties |
-| :wrench: | [require-computed-macros](./docs/rules/require-computed-macros.md) | require using computed property macros when possible |
-| :wrench: | [require-computed-property-dependencies](./docs/rules/require-computed-property-dependencies.md) | require dependencies to be declared statically in computed properties |
+| :white_check_mark::wrench: | [require-computed-macros](./docs/rules/require-computed-macros.md) | require using computed property macros when possible |
+| :white_check_mark::wrench: | [require-computed-property-dependencies](./docs/rules/require-computed-property-dependencies.md) | require dependencies to be declared statically in computed properties |
 | :white_check_mark: | [require-return-from-computed](./docs/rules/require-return-from-computed.md) | disallow missing return statements in computed properties |
 | :white_check_mark: | [use-brace-expansion](./docs/rules/use-brace-expansion.md) | enforce usage of brace expansion in computed property dependent keys |
 
@@ -103,7 +103,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [closure-actions](./docs/rules/closure-actions.md) | enforce usage of closure actions |
 | :white_check_mark: | [new-module-imports](./docs/rules/new-module-imports.md) | enforce using "New Module Imports" from Ember RFC #176 |
 | :white_check_mark: | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | disallow usage of Ember's `function` prototype extensions |
-|  | [no-mixins](./docs/rules/no-mixins.md) | disallow the usage of mixins |
+| :white_check_mark: | [no-mixins](./docs/rules/no-mixins.md) | disallow the usage of mixins |
 | :white_check_mark: | [no-new-mixins](./docs/rules/no-new-mixins.md) | disallow the creation of new mixins |
 | :white_check_mark: | [no-observers](./docs/rules/no-observers.md) | disallow usage of observers |
 | :white_check_mark::wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | disallow usage of old shims for modules |
@@ -112,16 +112,16 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | disallow usage of empty attributes in Ember Data models |
-| :wrench: | [use-ember-data-rfc-395-imports](./docs/rules/use-ember-data-rfc-395-imports.md) | enforce usage of `@ember-data/` package imports instead `ember-data` |
+| :white_check_mark: | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | disallow usage of empty attributes in Ember Data models |
+| :white_check_mark::wrench: | [use-ember-data-rfc-395-imports](./docs/rules/use-ember-data-rfc-395-imports.md) | enforce usage of `@ember-data/` package imports instead `ember-data` |
 
 ### Ember Object
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | disallow state leakage |
-| :car: | [no-get-with-default](./docs/rules/no-get-with-default.md) | disallow usage of the Ember's `getWithDefault` function |
-| :car::wrench: | [no-get](./docs/rules/no-get.md) | require using ES5 getters instead of Ember's `get` / `getProperties` functions |
+| :white_check_mark: | [no-get-with-default](./docs/rules/no-get-with-default.md) | disallow usage of the Ember's `getWithDefault` function |
+| :white_check_mark::wrench: | [no-get](./docs/rules/no-get.md) | require using ES5 getters instead of Ember's `get` / `getProperties` functions |
 |  | [no-proxies](./docs/rules/no-proxies.md) | disallow using array or object proxies |
 | :white_check_mark: | [require-super-in-init](./docs/rules/require-super-in-init.md) | require `this._super` to be called in `init` hooks |
 | :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | enforce usage of `Ember.get` and `Ember.set` |
@@ -142,7 +142,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |:---|:--------|:------------|
 | :white_check_mark: | [jquery-ember-run](./docs/rules/jquery-ember-run.md) | disallow usage of jQuery without an Ember run loop |
 | :white_check_mark: | [no-global-jquery](./docs/rules/no-global-jquery.md) | disallow usage of global jQuery object |
-| :car: | [no-jquery](./docs/rules/no-jquery.md) | disallow any usage of jQuery |
+| :white_check_mark: | [no-jquery](./docs/rules/no-jquery.md) | disallow any usage of jQuery |
 
 ### Miscellaneous
 
@@ -157,7 +157,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [no-capital-letters-in-routes](./docs/rules/no-capital-letters-in-routes.md) | disallow routes with uppercased letters in router.js |
-|  | [no-private-routing-service](./docs/rules/no-private-routing-service.md) | disallow injecting the private routing service |
+| :white_check_mark: | [no-private-routing-service](./docs/rules/no-private-routing-service.md) | disallow injecting the private routing service |
 |  | [no-unnecessary-index-route](./docs/rules/no-unnecessary-index-route.md) | disallow unnecessary `index` route definition |
 | :white_check_mark::wrench: | [no-unnecessary-route-path-option](./docs/rules/no-unnecessary-route-path-option.md) | disallow unnecessary usage of the route `path` option |
 |  | [route-path-style](./docs/rules/route-path-style.md) | enforce usage of kebab-case (instead of snake_case or camelCase) in route paths |
@@ -179,13 +179,13 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |:---|:--------|:------------|
 | :white_check_mark: | [no-ember-testing-in-module-scope](./docs/rules/no-ember-testing-in-module-scope.md) | disallow use of `Ember.testing` in module scope |
 |  | [no-invalid-test-waiters](./docs/rules/no-invalid-test-waiters.md) | disallow incorrect usage of test waiter APIs |
-|  | [no-legacy-test-waiters](./docs/rules/no-legacy-test-waiters.md) | disallow the use of the legacy test waiter APIs |
-|  | [no-pause-test](./docs/rules/no-pause-test.md) | disallow usage of the `pauseTest` helper in tests |
+| :white_check_mark: | [no-legacy-test-waiters](./docs/rules/no-legacy-test-waiters.md) | disallow the use of the legacy test waiter APIs |
+| :white_check_mark: | [no-pause-test](./docs/rules/no-pause-test.md) | disallow usage of the `pauseTest` helper in tests |
 |  | [no-replace-test-comments](./docs/rules/no-replace-test-comments.md) | disallow 'Replace this with your real tests' comments in test files |
 | :white_check_mark: | [no-restricted-resolver-tests](./docs/rules/no-restricted-resolver-tests.md) | disallow the use of patterns that use the restricted resolver in tests |
-|  | [no-test-and-then](./docs/rules/no-test-and-then.md) | disallow usage of the `andThen` test wait helper |
-|  | [no-test-import-export](./docs/rules/no-test-import-export.md) | disallow importing of "-test.js" in a test file and exporting from a test file |
-|  | [no-test-module-for](./docs/rules/no-test-module-for.md) | disallow usage of `moduleFor`, `moduleForComponent`, etc |
+| :white_check_mark: | [no-test-and-then](./docs/rules/no-test-and-then.md) | disallow usage of the `andThen` test wait helper |
+| :white_check_mark: | [no-test-import-export](./docs/rules/no-test-import-export.md) | disallow importing of "-test.js" in a test file and exporting from a test file |
+| :white_check_mark: | [no-test-module-for](./docs/rules/no-test-module-for.md) | disallow usage of `moduleFor`, `moduleForComponent`, etc |
 
 <!--RULES_TABLE_END-->
 
