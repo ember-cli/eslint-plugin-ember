@@ -17,8 +17,8 @@ ruleTester.run('no-get', rule, {
     // **************************
 
     // Nested property path.
-    "this.get('foo.bar');",
-    "get(this, 'foo.bar');",
+    { code: "this.get('foo.bar');", options: [{ ignoreNestedPaths: true }] },
+    { code: "get(this, 'foo.bar');", options: [{ ignoreNestedPaths: true }] },
 
     // Template literals.
     {
@@ -57,10 +57,10 @@ ruleTester.run('no-get', rule, {
     // **************************
 
     // Nested property path.
-    "this.getProperties('foo', 'bar.baz');",
-    "this.getProperties(['foo', 'bar.baz']);", // With parameters in array.
-    "getProperties(this, 'foo', 'bar.baz');",
-    "getProperties(this, ['foo', 'bar.baz']);", // With parameters in array.
+    { code: "this.getProperties('foo', 'bar.baz');", options: [{ ignoreNestedPaths: true }] },
+    { code: "this.getProperties(['foo', 'bar.baz']);", options: [{ ignoreNestedPaths: true }] }, // With parameters in array.
+    { code: "getProperties(this, 'foo', 'bar.baz');", options: [{ ignoreNestedPaths: true }] },
+    { code: "getProperties(this, ['foo', 'bar.baz']);", options: [{ ignoreNestedPaths: true }] }, // With parameters in array.
 
     // Template literals.
     'this.getProperties(`prop1`, `prop2`);',
@@ -208,29 +208,25 @@ ruleTester.run('no-get', rule, {
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
 
-    // With ignoreNestedPaths: false
+    // Nested paths:
     {
       code: "this.get('foo.bar');",
       output: null,
-      options: [{ ignoreNestedPaths: false }],
       errors: [{ message: makeErrorMessageForGet('foo.bar', false), type: 'CallExpression' }],
     },
     {
       code: "get(this, 'foo.bar');",
       output: null,
-      options: [{ ignoreNestedPaths: false }],
       errors: [{ message: makeErrorMessageForGet('foo.bar', true), type: 'CallExpression' }],
     },
     {
       code: "this.getProperties('foo.bar');",
       output: null,
-      options: [{ ignoreNestedPaths: false }],
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
       code: "getProperties(this, 'foo.bar');",
       output: null,
-      options: [{ ignoreNestedPaths: false }],
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
 
