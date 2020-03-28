@@ -9,7 +9,7 @@
 ## ❗️Requirements
 
 - [ESLint](https://eslint.org/) `>= 5`
-- [Node.js](https://nodejs.org/) `>= 8`
+- [Node.js](https://nodejs.org/) `10.* || >= 12`
 
 ## 🚀 Usage
 
