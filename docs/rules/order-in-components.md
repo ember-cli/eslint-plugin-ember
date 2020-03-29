@@ -107,7 +107,7 @@ export default Component.extend({
 
   // 5. Multiline Computed Property
   levelOfHappiness: computed('attitude', 'health', function () {
-    const result = this.get('attitude') * this.get('health') * Math.random();
+    const result = this.attitude * this.health * Math.random();
     return result;
   }),
 

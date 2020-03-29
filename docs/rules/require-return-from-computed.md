@@ -17,7 +17,7 @@ export default Component.extend({
 
   fullName: computed('firstName', 'lastName', {
     get() {
-      return `${this.get('firstName')} ${this.get('lastName')}`;
+      return `${this.firstName} ${this.lastName}`;
     },
     set(key, value) {
       const [firstName, lastName] = value.split(/\s+/);
@@ -27,8 +27,8 @@ export default Component.extend({
   }),
 
   salutation: computed('firstName', function () {
-    if (this.get('firstName')) {
-      return `Dr. ${this.get('firstName')}`;
+    if (this.firstName) {
+      return `Dr. ${this.firstName}`;
     }
   })
 });
@@ -46,7 +46,7 @@ export default Component.extend({
 
   fullName: computed('firstName', 'lastName', {
     get() {
-      return `${this.get('firstName')} ${this.get('lastName')}`;
+      return `${this.firstName} ${this.lastName}`;
     },
     set(key, value) {
       const [firstName, lastName] = value.split(/\s+/);
@@ -57,8 +57,8 @@ export default Component.extend({
   }),
 
   salutation: computed('firstName', function () {
-    if (this.get('firstName')) {
-      return `Dr. ${this.get('firstName')}`;
+    if (this.firstName) {
+      return `Dr. ${this.firstName}`;
     }
     return '';
   })

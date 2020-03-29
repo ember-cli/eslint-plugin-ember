@@ -12,7 +12,7 @@ export default Foo.extend({
 
   actions: {
     addItem(item) {
-      this.get('items').pushObject(item);
+      this.items.pushObject(item);
     }
   }
 });
@@ -30,7 +30,7 @@ export default Foo.extend({
 
   actions: {
     addItem(item) {
-      this.get('items').pushObject(item);
+      this.items.pushObject(item);
     }
   }
 });

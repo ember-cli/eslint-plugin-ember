@@ -31,7 +31,7 @@ export default Component.extend({
   // BAD:
   fifteenAmountBad: 0,
   fifteenBad: computed('users', function () {
-    const fifteen = this.get('users').filterBy('items', 'age', 15);
+    const fifteen = this.users.filterBy('items', 'age', 15);
     this.set('fifteenAmount', fifteen.length); // SIDE EFFECT!
     return fifteen;
   })

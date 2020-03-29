@@ -63,7 +63,7 @@ export default Model.extend({
 
   // 3. Computed Properties
   mood: computed('health', 'hunger', function () {
-    const result = this.get('health') * this.get('hunger');
+    const result = this.health * this.hunger;
     return result;
   })
 });
@@ -73,7 +73,7 @@ export default Model.extend({
 // BAD
 export default Model.extend({
   mood: computed('health', 'hunger', function () {
-    const result = this.get('health') * this.get('hunger');
+    const result = this.health * this.hunger;
     return result;
   }),
 

@@ -84,8 +84,7 @@ You should write code grouped and ordered in this way:
 ```javascript
 const {
   Route,
-  inject: { service },
-  get
+  inject: { service }
 } = Ember;
 
 export default Route.extend({
@@ -102,7 +101,7 @@ export default Route.extend({
 
   // 4. beforeModel hook
   beforeModel() {
-    if (!get(this, 'currentUser.isAdmin')) {
+    if (!this.currentUser.isAdmin) {
       this.transitionTo('index');
     }
   },
