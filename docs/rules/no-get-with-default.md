@@ -1,12 +1,15 @@
 # no-get-with-default
 
+:wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 This rule attempts to catch and prevent the use of `getWithDefault`.
 
 ## Rule Details
 
-Even though the behavior for `getWithDefault` is more defined such that it only falls back to the default value on `undefined`,
-its inconsistency with the native `||` is confusing to many developers who assume otherwise. This rule encourages developers to use
-the native `||` operator instead.
+Even though the behavior for `getWithDefault` is more defined such that it only falls back to the default value on `undefined`, its inconsistency with the native `||` is confusing to many developers who assume otherwise. Instead, this rule encourages developers to use:
+
+- `||` operator
+- ternary operator
 
 In addition, [Nullish Coalescing Operator `??`](https://github.com/tc39/proposal-nullish-coalescing) will land in the JavaScript language soon so developers can leverage safe property access with native support instead of using `getWithDefault`.
 

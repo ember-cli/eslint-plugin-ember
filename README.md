@@ -120,7 +120,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [avoid-leaking-state-in-ember-objects](./docs/rules/avoid-leaking-state-in-ember-objects.md) | disallow state leakage |
-| :white_check_mark: | [no-get-with-default](./docs/rules/no-get-with-default.md) | disallow usage of the Ember's `getWithDefault` function |
+| :white_check_mark::wrench: | [no-get-with-default](./docs/rules/no-get-with-default.md) | disallow usage of the Ember's `getWithDefault` function |
 | :white_check_mark::wrench: | [no-get](./docs/rules/no-get.md) | require using ES5 getters instead of Ember's `get` / `getProperties` functions |
 |  | [no-proxies](./docs/rules/no-proxies.md) | disallow using array or object proxies |
 | :white_check_mark: | [require-super-in-init](./docs/rules/require-super-in-init.md) | require `this._super` to be called in `init` hooks |
