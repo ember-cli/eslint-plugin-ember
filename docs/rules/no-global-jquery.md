@@ -12,7 +12,8 @@ Examples of **incorrect** code for this rule:
 
 ```js
 export default Component.extend({
-  init() {
+  init(...args) {
+    this._super(...args);
     $('.foo').addClass('bar'); // global usage
   }
 });
@@ -25,7 +26,8 @@ import Ember from 'ember';
 
 const { $ } = Ember;
 export default Component.extend({
-  init() {
+  init(...args) {
+    this._super(...args);
     Ember.$('.foo').addClass('bar'); // usage from Ember object
     // or even better
     $('.foo').addClass('bar'); // deconstruction from Ember object

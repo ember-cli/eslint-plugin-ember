@@ -15,7 +15,8 @@ Examples of **incorrect** code for this rule:
 
 ```js
 export default Component.extend({
-  init() {
+  init(...args) {
+    this._super(...args);
     this.isTesting = Ember.testing;
   }
 });

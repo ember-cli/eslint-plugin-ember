@@ -24,7 +24,8 @@ if (DEBUG) {
 }
 
 export default Component.extend({
-  init() {
+  init(...args) {
+    this._super(...args);
     counter++;
     someAsync()
       .then(() => console.log('hi'))
@@ -47,7 +48,8 @@ if (DEBUG) {
 }
 
 export default Component.extend({
-  init() {
+  init(...args) {
+    this._super(...args);
     counter++;
     someAsync()
       .then(() => console.log('hi'))
@@ -69,9 +71,9 @@ import { buildWaiter } from 'ember-test-waiters';
 const waiter = buildWaiter('my-waiter');
 
 export default Component.extend({
-  init() {
+  init(...args) {
+    this._super(...args);
     const token = waiter.beginAsync();
-
     someAsync()
       .then(() => console.log('hi'))
       .finally(() => waiter.endAsync(token));
