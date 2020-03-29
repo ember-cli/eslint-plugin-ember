@@ -52,7 +52,7 @@ import { isValidClassName } from 'my-utils';
 
 export default Component.extend({
   aComputedProperty: computed('obj', function () {
-    return isValidClassName(get(obj, 'className'));
+    return isValidClassName(obj.className);
   })
 });
 ```

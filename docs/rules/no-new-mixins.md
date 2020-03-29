@@ -32,7 +32,7 @@ import myMixin from 'my-mixin';
 
 export default Component.extend(myMixin, {
   aComputedProperty: computed('obj', function () {
-    return this.isValidClassName(get(obj, 'className'));
+    return this.isValidClassName(obj.className);
   })
 });
 ```
@@ -56,7 +56,7 @@ import { isValidClassName } from 'my-utils';
 
 export default Component.extend({
   aComputedProperty: computed('obj', function () {
-    return isValidClassName(get(obj, 'className'));
+    return isValidClassName(obj.className);
   })
 });
 ```

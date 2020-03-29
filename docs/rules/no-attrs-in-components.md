@@ -17,10 +17,8 @@ const name = this.attrs.name;
 Examples of **correct** code for this rule:
 
 ```js
-import { get } from '@ember/object';
-
 // Prefix private properties with _
-const name = get(this, '_name');
+const name = this._name;
 ```
 
 ## Further Reading

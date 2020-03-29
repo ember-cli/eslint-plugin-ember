@@ -66,8 +66,7 @@ You should write code grouped and ordered in this way:
 const {
   Controller,
   computed,
-  inject: { controller, service },
-  get
+  inject: { controller, service }
 } = Ember;
 
 export default Controller.extend({
@@ -91,7 +90,7 @@ export default Controller.extend({
 
   // 7. Multiline Computed Property
   levelOfHappiness: computed('attitude', 'health', function () {
-    return get(this, 'attitude') * get(this, 'health') * Math.random();
+    return this.attitude * this.health * Math.random();
   }),
 
   // 8. Observers
