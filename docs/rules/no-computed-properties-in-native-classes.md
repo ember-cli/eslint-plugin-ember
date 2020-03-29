@@ -11,6 +11,7 @@ This rule disallows using computed properties with native classes.
 Examples of **incorrect** code for this rule:
 
 ```js
+import Component from '@ember/component';
 import { and, or, alias } from '@ember/object/computed';
 
 export default class MyComponent extends Component {
@@ -19,6 +20,7 @@ export default class MyComponent extends Component {
 ```
 
 ```js
+import Component from '@ember/component';
 import { computed } from '@ember/object';
 
 export default class MyComponent extends Component {
@@ -32,14 +34,14 @@ Examples of **correct** code for this rule:
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 
-export default Ember.Component.extend({});
+export default Component.extend({});
 ```
 
 ```js
 import { alias, or, and } from '@ember/object/computed';
 import Component from '@ember/component';
 
-export default Ember.Component.extend({});
+export default Component.extend({});
 ```
 
 ```js

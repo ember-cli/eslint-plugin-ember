@@ -9,7 +9,9 @@ When overriding the `init` lifecycle hook inside Ember Components, Controllers, 
 Examples of **incorrect** code for this rule:
 
 ```javascript
-export default Ember.Component.extend({
+import Component from '@ember/component';
+
+export default Component.extend({
   init() {
     this.set('items', []);
   }
@@ -19,7 +21,9 @@ export default Ember.Component.extend({
 Examples of **correct** code for this rule:
 
 ```javascript
-export default Ember.Component.extend({
+import Component from '@ember/component';
+
+export default Component.extend({
   init(...args) {
     this._super(...args);
     this.set('items', []);

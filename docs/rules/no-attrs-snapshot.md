@@ -15,8 +15,9 @@ If for some reason you need to do a comparison of arguments we suggest that you 
 Examples of **incorrect** code for this rule:
 
 ```js
+import Component from '@ember/component';
 
-export default Ember.Component({
+export default Component({
   init(...args) {
     this._super(...args);
     this.updated = false;
@@ -36,8 +37,9 @@ export default Ember.Component({
 Examples of **correct** code for this rule:
 
 ```js
+import Component from '@ember/component';
 
-export default Ember.Component({
+export default Component({
   init(...args) {
     this._super(...args);
     this._valueCache = this.value;
