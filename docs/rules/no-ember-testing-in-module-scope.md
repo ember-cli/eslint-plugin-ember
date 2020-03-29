@@ -14,6 +14,8 @@ of destructuring.
 Examples of **incorrect** code for this rule:
 
 ```js
+import Component from '@ember/component';
+
 export default Component.extend({
   init() {
     this.isTesting = Ember.testing;
@@ -23,8 +25,9 @@ export default Component.extend({
 
 ```js
 import Ember from 'ember';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   isTesting: Ember.testing
 });
 ```
@@ -45,6 +48,7 @@ Examples of **correct** code for this rule:
 
 ```javascript
 import Ember from 'ember';
+import Component from '@ember/component';
 
 export default Component.extend({
   someMethod() {
@@ -59,6 +63,7 @@ export default Component.extend({
 
 ```js
 import Ember from 'ember';
+import Service from '@ember/service';
 
 export default Service.extend({
   foo() {

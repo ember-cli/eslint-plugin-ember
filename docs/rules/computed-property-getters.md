@@ -20,8 +20,10 @@ String option:
 ### always-with-setter
 
 ```javascript
+import EmberObject, { computed } from '@ember/object';
+
 // BAD
-Ember.Object.extend({
+EmberObject.extend({
   fullName: computed('firstName', 'lastName', {
     get() {
       // ...
@@ -30,14 +32,14 @@ Ember.Object.extend({
 });
 
 // GOOD
-Ember.Object.extend({
+EmberObject.extend({
   fullName: computed('firstName', 'lastName', function () {
     // ...
   })
 });
 
 // GOOD
-Ember.Object.extend({
+EmberObject.extend({
   fullName: computed('firstName', 'lastName', {
     set() {
       // ...
@@ -52,8 +54,10 @@ Ember.Object.extend({
 ### always
 
 ```javascript
+import EmberObject, { computed } from '@ember/object';
+
 // GOOD
-Ember.Object.extend({
+EmberObject.extend({
   fullName: computed('firstName', 'lastName', {
     get() {
       // ...
@@ -62,7 +66,7 @@ Ember.Object.extend({
 });
 
 // BAD
-Ember.Object.extend({
+EmberObject.extend({
   fullName: computed('firstName', 'lastName', function () {
     // ...
   })
@@ -72,15 +76,17 @@ Ember.Object.extend({
 ### never
 
 ```javascript
+import EmberObject, { computed } from '@ember/object';
+
 // GOOD
-Ember.Object.extend({
+EmberObject.extend({
   fullName: computed('firstName', 'lastName', function () {
     // ...
   })
 });
 
 // BAD
-Ember.Object.extend({
+EmberObject.extend({
   fullName: computed('firstName', 'lastName', {
     get() {
       // ...
@@ -89,7 +95,7 @@ Ember.Object.extend({
 });
 
 // BAD
-Ember.Object.extend({
+EmberObject.extend({
   fullName: computed('firstName', 'lastName', {
     get() {
       // ...

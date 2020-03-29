@@ -9,7 +9,9 @@ Using plain jQuery invokes actions out of the Ember Run Loop. In order to have a
 Examples of **incorrect** code for this rule:
 
 ```js
-Ember.$('#something-rendered-by-jquery-plugin').on('click', () => {
+import $ from 'jquery';
+
+$('#something-rendered-by-jquery-plugin').on('click', () => {
   this._handlerActionFromController();
 });
 ```
@@ -17,8 +19,11 @@ Ember.$('#something-rendered-by-jquery-plugin').on('click', () => {
 Examples of **correct** code for this rule:
 
 ```javascript
-Ember.$('#something-rendered-by-jquery-plugin').on(
+import $ from 'jquery';
+import { bind } from '@ember/runloop';
+
+$('#something-rendered-by-jquery-plugin').on(
   'click',
-  Ember.run.bind(this, this._handlerActionFromController)
+  bind(this, this._handlerActionFromController)
 );
 ```

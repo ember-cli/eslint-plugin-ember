@@ -7,12 +7,8 @@ When using computed properties do not introduce side effects. It will make reaso
 ## Examples
 
 ```javascript
-import Ember from 'ember';
-
-const {
-  Component,
-  computed: { filterBy, alias }
-} = Ember;
+import Component from '@ember/component';
+import { alias, filterBy } from '@ember/object/computed';
 
 export default Component.extend({
   init(...args) {
