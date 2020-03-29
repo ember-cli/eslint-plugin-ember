@@ -96,8 +96,9 @@ ${deprecatedRules
 const recommendedRules = rules.reduce((obj, entry) => {
   const name = `ember/${entry[0]}`;
   const recommended = entry[1].meta.docs.recommended;
-  const status = recommended ? 'error' : 'off';
-  obj[name] = status; // eslint-disable-line no-param-reassign
+  if (recommended) {
+    obj[name] = 'error'; // eslint-disable-line no-param-reassign
+  }
   return obj;
 }, {});
 
