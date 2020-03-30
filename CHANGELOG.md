@@ -1,3 +1,19 @@
+## v8.1.0 (2020-03-29)
+
+#### :rocket: Enhancement
+* [#747](https://github.com/ember-cli/eslint-plugin-ember/pull/747) Add autofixer to `no-get-with-default` rule ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#746](https://github.com/ember-cli/eslint-plugin-ember/pull/746) Do not disable non-recommended rules in the `recommended` config ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#749](https://github.com/ember-cli/eslint-plugin-ember/pull/749) Add missing init hook super calls in rule examples ([@bmish](https://github.com/bmish))
+* [#748](https://github.com/ember-cli/eslint-plugin-ember/pull/748) Switch to new module imports in rule examples ([@bmish](https://github.com/bmish))
+* [#745](https://github.com/ember-cli/eslint-plugin-ember/pull/745) Replace `this.get('property')` with `this.property` in rule examples ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v8.0.0 (2020-03-28)
 
 #### :boom: Breaking Change
