@@ -1,7 +1,7 @@
 ## v8.1.0 (2020-03-29)
 
 #### :rocket: Enhancement
-* [#747](https://github.com/ember-cli/eslint-plugin-ember/pull/747) Add autofixer to `no-get-with-default` rule ([@bmish](https://github.com/bmish))
+* [#747](https://github.com/ember-cli/eslint-plugin-ember/pull/747) Add autofixer to [no-get-with-default](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get-with-default.md) rule ([@bmish](https://github.com/bmish))
 
 #### :bug: Bug Fix
 * [#746](https://github.com/ember-cli/eslint-plugin-ember/pull/746) Do not disable non-recommended rules in the `recommended` config ([@bmish](https://github.com/bmish))
@@ -43,7 +43,7 @@
 ## v7.13.0 (2020-03-28)
 
 #### :rocket: Enhancement
-* [#742](https://github.com/ember-cli/eslint-plugin-ember/pull/742) Detect invalid position of `@each` or `[]` in `no-invalid-dependent-keys` rule ([@bmish](https://github.com/bmish))
+* [#742](https://github.com/ember-cli/eslint-plugin-ember/pull/742) Detect invalid position of `@each` or `[]` in [no-invalid-dependent-keys](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-invalid-dependent-keys.md) rule ([@bmish](https://github.com/bmish))
 
 #### :house: Internal
 * [#741](https://github.com/ember-cli/eslint-plugin-ember/pull/741) Switch from Travis to GitHub Actions for CI ([@bmish](https://github.com/bmish))
@@ -55,10 +55,10 @@
 
 #### :rocket: Enhancement
 * [#738](https://github.com/ember-cli/eslint-plugin-ember/pull/738) Use sets instead of arrays for better performance ([@bmish](https://github.com/bmish))
-* [#702](https://github.com/ember-cli/eslint-plugin-ember/pull/702) Add new rule `no-invalid-test-waiters` ([@scalvert](https://github.com/scalvert))
+* [#702](https://github.com/ember-cli/eslint-plugin-ember/pull/702) Add new rule [no-invalid-test-waiters](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-invalid-test-waiters.md) ([@scalvert](https://github.com/scalvert))
 
 #### :memo: Documentation
-* [#737](https://github.com/ember-cli/eslint-plugin-ember/pull/737) Mention tracked properties as a fix for `classic-decorator-no-classic-methods` ([@bmish](https://github.com/bmish))
+* [#737](https://github.com/ember-cli/eslint-plugin-ember/pull/737) Mention tracked properties as a fix for [classic-decorator-no-classic-methods](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/classic-decorator-no-classic-methods.md) ([@bmish](https://github.com/bmish))
 
 #### :house: Internal
 * [#732](https://github.com/ember-cli/eslint-plugin-ember/pull/732) Begin testing under Node 13 ([@bmish](https://github.com/bmish))
@@ -70,7 +70,7 @@
 ## v7.11.1 (2020-03-25)
 
 #### :bug: Bug Fix
-* [#728](https://github.com/ember-cli/eslint-plugin-ember/pull/728) Allow brace expansion with `and`, `or` macros in `no-incorrect-computed-macros` rule ([@bmish](https://github.com/bmish))
+* [#728](https://github.com/ember-cli/eslint-plugin-ember/pull/728) Allow brace expansion with `and`, `or` macros in [no-incorrect-computed-macros](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-incorrect-computed-macros.md) rule ([@bmish](https://github.com/bmish))
 
 #### :memo: Documentation
 * [#724](https://github.com/ember-cli/eslint-plugin-ember/pull/724) Recategorize rules in README ([@bmish](https://github.com/bmish))
@@ -82,13 +82,13 @@
 ## v7.11.0 (2020-03-20)
 
 #### :rocket: Enhancement
-* [#695](https://github.com/ember-cli/eslint-plugin-ember/pull/695) Add new rule `no-incorrect-computed-macros` ([@bmish](https://github.com/bmish))
-* [#709](https://github.com/ember-cli/eslint-plugin-ember/pull/709) Add new rule `no-invalid-dependent-keys` ([@TheMBTH](https://github.com/TheMBTH))
-* [#718](https://github.com/ember-cli/eslint-plugin-ember/pull/718) Add new rule `no-replace-test-comments` ([@jaydgruber](https://github.com/jaydgruber))
+* [#695](https://github.com/ember-cli/eslint-plugin-ember/pull/695) Add new rule [no-incorrect-computed-macros](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-incorrect-computed-macros.md) ([@bmish](https://github.com/bmish))
+* [#709](https://github.com/ember-cli/eslint-plugin-ember/pull/709) Add new rule [no-invalid-dependent-keys](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-invalid-dependent-keys.md) ([@TheMBTH](https://github.com/TheMBTH))
+* [#718](https://github.com/ember-cli/eslint-plugin-ember/pull/718) Add new rule [no-replace-test-comments](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-replace-test-comments.md) ([@jaydgruber](https://github.com/jaydgruber))
 * [#705](https://github.com/ember-cli/eslint-plugin-ember/pull/705) Support TypeScript files when checking if rules are running on Ember module or test files ([@bmish](https://github.com/bmish))
 
 #### :bug: Bug Fix
-* [#719](https://github.com/ember-cli/eslint-plugin-ember/pull/719) Validate imports before reporting violations in `no-invalid-debug-function-arguments` rule ([@bmish](https://github.com/bmish))
+* [#719](https://github.com/ember-cli/eslint-plugin-ember/pull/719) Validate imports before reporting violations in [no-invalid-debug-function-arguments](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-invalid-debug-function-arguments.md) rule ([@bmish](https://github.com/bmish))
 
 #### :memo: Documentation
 * [#716](https://github.com/ember-cli/eslint-plugin-ember/pull/716) Revamp the guide for contributing a new rule ([@bmish](https://github.com/bmish))
