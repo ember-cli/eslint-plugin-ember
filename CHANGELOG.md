@@ -1,3 +1,14 @@
+## v8.1.1 (2020-04-01)
+
+#### :bug: Bug Fix
+* [#752](https://github.com/ember-cli/eslint-plugin-ember/pull/752) Remove [no-empty-attrs](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-empty-attrs.md) from `recommended` config ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#755](https://github.com/ember-cli/eslint-plugin-ember/pull/755) Add note about nullish coalescing operator in [no-get-with-default](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get-with-default.md) rule doc ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v8.1.0 (2020-03-29)
 
 #### :rocket: Enhancement
