@@ -11,7 +11,7 @@ Even though the behavior for `getWithDefault` is more defined such that it only 
 - `||` operator
 - ternary operator
 
-In addition, [Nullish Coalescing Operator `??`](https://github.com/tc39/proposal-nullish-coalescing) will land in the JavaScript language soon so developers can leverage safe property access with native support instead of using `getWithDefault`.
+In addition, [Nullish Coalescing Operator `??`](https://github.com/tc39/proposal-nullish-coalescing) will land in the JavaScript language soon so developers can leverage safe property access with native support instead of using `getWithDefault`. But note that `??` checks for either `undefined` or `null` whereas `getWithDefault` only checks for `undefined`.
 
 ## Examples
 
