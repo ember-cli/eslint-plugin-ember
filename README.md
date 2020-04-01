@@ -112,7 +112,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :white_check_mark: | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | disallow usage of empty attributes in Ember Data models |
+|  | [no-empty-attrs](./docs/rules/no-empty-attrs.md) | disallow usage of empty attributes in Ember Data models |
 | :white_check_mark::wrench: | [use-ember-data-rfc-395-imports](./docs/rules/use-ember-data-rfc-395-imports.md) | enforce usage of `@ember-data/` package imports instead `ember-data` |
 
 ### Ember Object
