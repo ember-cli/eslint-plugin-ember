@@ -28,7 +28,7 @@ export default Component.extend({
   fifteenAmountBad: 0,
   fifteenBad: computed('users', function () {
     const fifteen = this.users.filterBy('items', 'age', 15);
-    this.set('fifteenAmount', fifteen.length); // SIDE EFFECT!
+    this.set('fifteenAmountBad', fifteen.length); // SIDE EFFECT!
     return fifteen;
   })
 });
