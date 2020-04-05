@@ -1,5 +1,7 @@
 # no-side-effects
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Don't introduce side-effects in computed properties.
 
 When using computed properties do not introduce side effects. It will make reasoning about the origin of the change much harder.

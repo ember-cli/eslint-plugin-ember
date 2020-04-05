@@ -1,5 +1,7 @@
 # no-classic-classes
 
+:car: The `"extends": "plugin:ember/octane"` property in a configuration file enables this rule.
+
 Disallow "classic" classes in favor of native JS classes.
 
 Ember now allows you to use native JS classes to extend the built-in classes provided by Ember. This pattern is preferred in favor of using the "classic" style of classes that Ember has provided since before JS classes were available to use.

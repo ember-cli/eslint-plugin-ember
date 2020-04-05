@@ -1,5 +1,7 @@
 # no-test-import-export
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 No importing of test files.
 
 **TL;DR** Do not import from a test file (a file ending in "-test.js") in another test file. Doing so will cause the module and tests from the imported file to be executed again. Similarly, test files should not have any exports.

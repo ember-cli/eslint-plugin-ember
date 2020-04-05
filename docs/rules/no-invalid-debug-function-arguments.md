@@ -1,5 +1,7 @@
 # no-invalid-debug-function-arguments
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Catch usages of Ember&#39;s `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order.
 
 This rule aims to catch a common mistake when using Ember's debug functions:

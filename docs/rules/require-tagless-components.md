@@ -1,5 +1,7 @@
 # require-tagless-components
 
+:car: The `"extends": "plugin:ember/octane"` property in a configuration file enables this rule.
+
 Disallows using the wrapper element of a component.
 
 Ember allows you to disable the wrapper element on a component (turning it into a "tagless" component). This is now the preferred style and the _only_ style allowed with Glimmer components.

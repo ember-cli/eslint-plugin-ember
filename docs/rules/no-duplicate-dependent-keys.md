@@ -1,5 +1,7 @@
 # no-duplicate-dependent-keys
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Disallow repeating dependent keys.
 
 ## Rule Details

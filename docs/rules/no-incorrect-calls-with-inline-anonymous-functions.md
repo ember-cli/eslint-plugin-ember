@@ -1,5 +1,7 @@
 # no-incorrect-calls-with-inline-anonymous-functions
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 The following functions keep track of the function references they have been passed:
 
 - `debounce`

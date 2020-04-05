@@ -1,5 +1,7 @@
 # no-attrs-snapshot
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Disallow use of attrs snapshot in `didReceiveAttrs` and `didUpdateAttrs`.
 
 Do not use the arguments (attrs) that are passed in `didReceiveAttrs` and `didUpdateAttrs`. Using the arguments (attrs) in these hooks can result in performance degradation in your application.

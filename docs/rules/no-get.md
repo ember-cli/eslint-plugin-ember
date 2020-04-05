@@ -1,5 +1,7 @@
 # no-get
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Starting in Ember 3.1, native ES5 getters are available, which eliminates much of the need to use `get` / `getProperties` on Ember objects.

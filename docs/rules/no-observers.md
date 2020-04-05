@@ -1,5 +1,7 @@
 # no-observers
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 You should avoid observers for the following reasons:
 
 * Observers deal with data changes contrary to Ember's Data Down, Actions Up (DDAU) convention.
