@@ -1,5 +1,7 @@
 # no-restricted-resolver-tests
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Don't use constructs or configuration that use the restricted resolver in tests.
 
 [RFC-0229](https://github.com/emberjs/rfcs/blob/master/text/0229-deprecate-testing-restricted-resolver.md)

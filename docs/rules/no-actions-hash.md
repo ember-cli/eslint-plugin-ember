@@ -1,5 +1,7 @@
 # no-actions-hash
 
+:car: The `"extends": "plugin:ember/octane"` property in a configuration file enables this rule.
+
 Disallows the actions hash in components and controllers.
 
 Ember Octane includes a rethink of event handling in Ember. The `actions` hash and `{{action}}` modifier and helper are no longer needed. To provide the correct context to functions (binding), you should now use the `@action` decorator. In templates, the `{{on}}` modifier can be used to set up event handlers and the `{{fn}}` helper can be used for partial application.

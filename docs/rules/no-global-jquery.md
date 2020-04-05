@@ -1,5 +1,7 @@
 # no-global-jquery
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Do not use global `$` or `jQuery`.
 
 ## Rule Details

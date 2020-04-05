@@ -1,5 +1,7 @@
 # no-legacy-test-waiters
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Prevents the use of the legacy test waiter APIs.
 
 ## Rule Details

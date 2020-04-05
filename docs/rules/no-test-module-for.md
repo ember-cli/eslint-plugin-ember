@@ -1,5 +1,7 @@
 # no-test-module-for
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Use `module` instead of `moduleFor`.
 
 `moduleForComponent`, `moduleFor`, `moduleForAcceptance`, etc have been deprecated and there are codemods to help migrate.

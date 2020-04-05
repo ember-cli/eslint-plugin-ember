@@ -1,5 +1,7 @@
 # no-attrs-in-components
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Do not use `this.attrs`.
 
 In the run-up to Ember 2.0, several blog articles were written about using `this.attrs` but this feature has never been documented as a public API. Typically people use `attrs` to denote properties and methods as having been "passed" in to a component and bare names as properties local to the component. This is useful and some iteration of Ember will have this built into the programming model, but for now we should not use `attrs`.

@@ -1,5 +1,7 @@
 # classic-decorator-hooks
 
+:car: The `"extends": "plugin:ember/octane"` property in a configuration file enables this rule.
+
 Use the correct lifecycle hooks in classic and non-classic classes. Classic
 classes should use `init`, and non-classic classes should use `constructor`.
 Additionally, non-classic classes may not use `destroy`.

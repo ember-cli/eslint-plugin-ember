@@ -1,5 +1,7 @@
 # no-test-and-then
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Use `await` instead of `andThen` test wait helper.
 
 It's no longer necessary to use the `andThen` test wait helper now that the cleaner [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) syntax is available.

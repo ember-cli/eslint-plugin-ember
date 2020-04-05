@@ -1,5 +1,7 @@
 # avoid-leaking-state-in-ember-objects
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Don't use arrays and objects as default properties. More info here: <https://dockyard.com/blog/2015/09/18/ember-best-practices-avoid-leaking-state-into-factories>
 
 ## Examples

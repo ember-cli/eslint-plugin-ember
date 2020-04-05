@@ -1,5 +1,7 @@
 # no-ember-testing-in-module-scope
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 `Ember.testing` is not allowed in modules scope.
 
 Since ember-cli-qunit@4.1.0 / ember-qunit@3.0.0, `Ember.testing` is only set to

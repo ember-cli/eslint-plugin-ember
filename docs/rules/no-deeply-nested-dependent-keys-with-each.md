@@ -1,5 +1,7 @@
 # no-deeply-nested-dependent-keys-with-each
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Disallows usage of deeply-nested computed property dependent keys with `@each`.
 
 For performance / complexity reasons, Ember does not allow deeply-nested computed property dependent keys with `@each`. At runtime, it will show a warning about this:

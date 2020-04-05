@@ -57,7 +57,12 @@ describe('rules setup is correct', function () {
     );
   });
 
-  it('should have the right contents (title, examples, fixable notice) for each rule documentation file', function () {
+  it('should have the right contents (title, examples, notices) for each rule documentation file', function () {
+    const CONFIG_MSG_RECOMMENDED =
+      ':white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.';
+    const CONFIG_MSG_OCTANE =
+      ':car: The `"extends": "plugin:ember/octane"` property in a configuration file enables this rule.';
+
     const FIXABLE_MSG =
       ':wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.';
 
@@ -73,6 +78,18 @@ describe('rules setup is correct', function () {
         expect(file).toContain(FIXABLE_MSG);
       } else {
         expect(file).not.toContain(FIXABLE_MSG);
+      }
+
+      if (rule.meta.docs.recommended) {
+        expect(file).toContain(CONFIG_MSG_RECOMMENDED);
+      } else {
+        expect(file).not.toContain(CONFIG_MSG_RECOMMENDED);
+      }
+
+      if (rule.meta.docs.octane) {
+        expect(file).toContain(CONFIG_MSG_OCTANE);
+      } else {
+        expect(file).not.toContain(CONFIG_MSG_OCTANE);
       }
     });
   });

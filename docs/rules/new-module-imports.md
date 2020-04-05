@@ -1,5 +1,7 @@
 # new-module-imports
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Use "New Module Imports" from Ember RFC #176.
 
 [RFC #176](https://github.com/emberjs/rfcs/pull/176) introduced as new public

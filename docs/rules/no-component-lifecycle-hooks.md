@@ -1,5 +1,7 @@
 # no-component-lifecycle-hooks
 
+:car: The `"extends": "plugin:ember/octane"` property in a configuration file enables this rule.
+
 Disallow usage of "classic" ember component lifecycle hooks.
 
 ## Rule Details

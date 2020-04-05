@@ -1,5 +1,7 @@
 # no-private-routing-service
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Disallow the use of the private `-routing` service.
 
 There has been a public `router` service since Ember 2.16 and using the private routing service should be unnecessary.

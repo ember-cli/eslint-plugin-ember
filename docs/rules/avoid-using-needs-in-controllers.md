@@ -1,5 +1,7 @@
 # avoid-using-needs-in-controllers
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Avoid using `needs` to load other controllers. Inject the required controller instead. `needs` was deprecated in ember 1.x and removed in 2.0.
 
 ## Examples
