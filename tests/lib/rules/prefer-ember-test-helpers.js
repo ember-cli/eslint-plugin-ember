@@ -1,7 +1,3 @@
-/**
- * @fileoverview help users writing tests in Ember using @ember/test-helpers check their imports to ensure they are using the correct method rather than the native method on window
- * @author Connie C Chang
- */
 'use strict';
 
 //------------------------------------------------------------------------------
