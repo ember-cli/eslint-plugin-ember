@@ -39,6 +39,7 @@ Array [
   "no-test-module-for",
   "no-unnecessary-route-path-option",
   "no-volatile-computed-properties",
+  "prefer-ember-test-helpers",
   "require-computed-macros",
   "require-computed-property-dependencies",
   "require-return-from-computed",

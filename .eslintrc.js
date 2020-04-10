@@ -7,6 +7,7 @@ module.exports = {
     sourceType: 'script'
   },
   plugins: [
+    'ember',
     'eslint-plugin',
     'filenames',
     'import',
@@ -17,6 +18,7 @@ module.exports = {
   ],
   extends: [
     'eslint:recommended',
+    'plugin:ember/recommended',
     'plugin:eslint-comments/recommended',
     'plugin:eslint-plugin/all',
     'plugin:jest/recommended',
@@ -77,6 +79,7 @@ module.exports = {
     'no-void': 'error',
     'no-with': 'error',
     'object-shorthand': 'error',
+    'prefer-ember-test-helpers': 'error',
     'prefer-const': 'error',
     'prefer-numeric-literals': 'error',
     'prefer-promise-reject-errors': 'error',
