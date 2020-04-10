@@ -36,5 +36,16 @@ ruleTester.run('no-replace-test-comments', rule, {
         },
       ],
     },
+    {
+      filename: 'test/some-app-file-test.js',
+      code: '// TODO: Replace this with your real tests',
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Line',
+        },
+      ],
+    },
   ],
 });
