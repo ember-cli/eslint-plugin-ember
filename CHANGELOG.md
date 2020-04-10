@@ -1,3 +1,20 @@
+## v8.2.0 (2020-04-10)
+
+#### :rocket: Enhancement
+* [#764](https://github.com/ember-cli/eslint-plugin-ember/pull/764) Catch unnecessary braces in [no-invalid-dependent-keys](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-invalid-dependent-keys.md) rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#759](https://github.com/ember-cli/eslint-plugin-ember/pull/759) Update each rule doc to mention what config enables the rule ([@bmish](https://github.com/bmish))
+* [#758](https://github.com/ember-cli/eslint-plugin-ember/pull/758) Fix typo in example in [no-side-effects](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-side-effects.md) rule doc ([@mehrdadrafiee](https://github.com/mehrdadrafiee))
+
+#### :house: Internal
+* [#766](https://github.com/ember-cli/eslint-plugin-ember/pull/766) Add test for [no-replace-test-comments](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-replace-test-comments.md) rule with TODO-prefixed comment ([@bmish](https://github.com/bmish))
+* [#757](https://github.com/ember-cli/eslint-plugin-ember/pull/757) Add tests that configs are exported and mentioned in the README ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Mehrdad Rafiee ([@mehrdadrafiee](https://github.com/mehrdadrafiee))
+
 ## v8.1.1 (2020-04-01)
 
 #### :bug: Bug Fix
