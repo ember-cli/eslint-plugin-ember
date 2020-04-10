@@ -3,6 +3,7 @@ const RuleTester = require('eslint').RuleTester;
 
 const {
   ERROR_MESSAGE_UNBALANCED_BRACES,
+  ERROR_MESSAGE_UNNECESSARY_BRACES,
   ERROR_MESSAGE_TERMINAL_AT_EACH,
   ERROR_MESSAGE_MIDDLE_BRACKETS,
 } = rule;
@@ -116,6 +117,28 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
           type: 'Literal',
           endLine: 1,
           endColumn: 142,
+        },
+      ],
+    },
+
+    // Unnecessary braces
+    {
+      code: '{ test: computed("foo.{bar}", function() {}) }',
+      output: '{ test: computed("foo.bar", function() {}) }',
+      errors: [
+        {
+          message: ERROR_MESSAGE_UNNECESSARY_BRACES,
+          type: 'Literal',
+        },
+      ],
+    },
+    {
+      code: '{ test: computed("foo.{bar}.{abc}", function() {}) }',
+      output: '{ test: computed("foo.bar.abc", function() {}) }',
+      errors: [
+        {
+          message: ERROR_MESSAGE_UNNECESSARY_BRACES,
+          type: 'Literal',
         },
       ],
     },

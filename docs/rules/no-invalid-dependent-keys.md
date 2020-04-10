@@ -12,8 +12,8 @@ This rule aims to avoid invalid dependent keys in computed properties.
 
 Currently implemented:
 
-- Unbalanced open and closed braces. These can be hard to track for complex computed properties
-and are usually unchecked since the expressions are passed as Strings.
+- Unbalanced open and closed braces. These can be hard to track for complex computed properties and are usually unchecked since the expressions are passed as Strings.
+- Unnecessary braces
 - Invalid position of `@each` or `[]`
 
 Not yet implemented:
@@ -28,6 +28,15 @@ Examples of **incorrect** code for this rule:
 export default Component.extend({
   // Unbalanced braces:
   fullName: computed('user.{firstName,lastName', {
+    // Code
+  })
+});
+```
+
+```js
+export default Component.extend({
+  // Unnecessary braces:
+  userId: computed('user.{id}', {
     // Code
   })
 });
@@ -56,6 +65,14 @@ Examples of **correct** code for this rule:
 ```js
 export default Component.extend({
   fullName: computed('user.{firstName,lastName}', {
+    // Code
+  })
+});
+```
+
+```js
+export default Component.extend({
+  userId: computed('user.id', {
     // Code
   })
 });
