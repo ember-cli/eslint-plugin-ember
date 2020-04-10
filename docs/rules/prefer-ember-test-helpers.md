@@ -1,6 +1,6 @@
 # prefer-ember-test-helpers
 
-This rule ensures the correct Ember test helper is imported when using methods with `await` that have a native window counterpart.
+This rule ensures the correct Ember test helper is imported when using methods that have a native window counterpart.
 
 There are currently 3 Ember test helper methods that have a native window counterpart:
 
@@ -25,13 +25,13 @@ test('foo', async function(assert) {
 ```js
 test('foo', async function(assert) {
   await find();
-});`
+});
 ```
 
 ```js
 test('foo', async function(assert) {
   await focus();
-});`
+});
 ```
 
 Examples of **correct** code for this rule:
@@ -49,7 +49,7 @@ import { find } from '@ember/test-helpers';
 
 test('foo', async function(assert) {
   await find();
-});`
+});
 ```
 
 ```js
@@ -57,7 +57,7 @@ import { focus } from '@ember/test-helpers';
 
 test('foo', async function(assert) {
   await focus();
-});`
+});
 ```
 
 ## References

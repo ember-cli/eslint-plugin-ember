@@ -186,7 +186,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [no-test-and-then](./docs/rules/no-test-and-then.md) | disallow usage of the `andThen` test wait helper |
 | :white_check_mark: | [no-test-import-export](./docs/rules/no-test-import-export.md) | disallow importing of "-test.js" in a test file and exporting from a test file |
 | :white_check_mark: | [no-test-module-for](./docs/rules/no-test-module-for.md) | disallow usage of `moduleFor`, `moduleForComponent`, etc |
-| :white_check_mark: | [prefer-ember-test-helpers](./docs/rules/prefer-ember-test-helpers.md) | prefer import of Ember test helper methods |
+|  | [prefer-ember-test-helpers](./docs/rules/prefer-ember-test-helpers.md) | enforce import of @ember/test-helpers method to ensure native method on `window` is not incorrectly used |
 
 <!--RULES_TABLE_END-->
 

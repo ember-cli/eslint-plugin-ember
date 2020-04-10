@@ -47,7 +47,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
       output: null,
       errors: [
         {
-          message: 'Import the `blur()` method from Ember test-helpers',
+          message: 'Import the `blur()` method from @ember/test-helpers',
         },
       ],
     },
@@ -58,7 +58,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
       output: null,
       errors: [
         {
-          message: 'Import the `find()` method from Ember test-helpers',
+          message: 'Import the `find()` method from @ember/test-helpers',
         },
       ],
     },
@@ -69,7 +69,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
       output: null,
       errors: [
         {
-          message: 'Import the `focus()` method from Ember test-helpers',
+          message: 'Import the `focus()` method from @ember/test-helpers',
         },
       ],
     },
