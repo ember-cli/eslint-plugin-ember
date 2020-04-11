@@ -18,29 +18,41 @@ const ruleTester = new RuleTester({
 // Tests
 //------------------------------------------------------------------------------
 
+const TEST_FILE_NAME = 'some-test.js';
+
 ruleTester.run('prefer-ember-test-helpers', rule, {
   valid: [
-    `import { blur } from '@ember/test-helpers';
+    {
+      filename: TEST_FILE_NAME,
+      code: `import { blur } from '@ember/test-helpers';
 
-    test('foo', async function(assert) {
-      await blur();
-    });`,
+      test('foo', async function(assert) {
+        await blur();
+      });`,
+    },
 
-    `import { find } from '@ember/test-helpers';
+    {
+      filename: TEST_FILE_NAME,
+      code: `import { find } from '@ember/test-helpers';
 
-    test('foo', async function(assert) {
-      await find();
-    });`,
+      test('foo', async function(assert) {
+        await find();
+      });`,
+    },
 
-    `import { focus } from '@ember/test-helpers';
+    {
+      filename: TEST_FILE_NAME,
+      code: `import { focus } from '@ember/test-helpers';
 
-    test('foo', async function(assert) {
-      await focus();
-    });`,
+      test('foo', async function(assert) {
+        await focus();
+      });`,
+    },
   ],
 
   invalid: [
     {
+      filename: TEST_FILE_NAME,
       code: `test('foo', async function(assert) {
         await blur();
       });`,
@@ -52,6 +64,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
       ],
     },
     {
+      filename: TEST_FILE_NAME,
       code: `test('foo', async function(assert) {
         await find();
       });`,
@@ -63,6 +76,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
       ],
     },
     {
+      filename: TEST_FILE_NAME,
       code: `test('foo', async function(assert) {
         await focus();
       });`,
