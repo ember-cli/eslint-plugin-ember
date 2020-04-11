@@ -17,19 +17,19 @@ See the origin and background of the rule proposal: [eslint-plugin-ember issue 6
 Examples of **incorrect** code for this rule:
 
 ```js
-test('foo', async function(assert) {
+test('foo', async (assert) => {
   await blur();
 });
 ```
 
 ```js
-test('foo', async function(assert) {
+test('foo', async (assert) => {
   await find();
 });
 ```
 
 ```js
-test('foo', async function(assert) {
+test('foo', async (assert) => {
   await focus();
 });
 ```
@@ -39,7 +39,7 @@ Examples of **correct** code for this rule:
 ```js
 import { blur } from '@ember/test-helpers';
 
-test('foo', async function(assert) {
+test('foo', async (assert) => {
   await blur();
 });
 ```
@@ -47,7 +47,7 @@ test('foo', async function(assert) {
 ```js
 import { find } from '@ember/test-helpers';
 
-test('foo', async function(assert) {
+test('foo', async (assert) => {
   await find();
 });
 ```
@@ -55,12 +55,12 @@ test('foo', async function(assert) {
 ```js
 import { focus } from '@ember/test-helpers';
 
-test('foo', async function(assert) {
+test('foo', async (assert) => {
   await focus();
 });
 ```
 
 ## References
 
-* (Web API Window Methods)[https://developer.mozilla.org/en-US/docs/Web/API/Window#Methods]
-* (Ember Test Helpers API Methods)[https://github.com/emberjs/ember-test-helpers/blob/master/API.md]
+* [Web API Window Methods](https://developer.mozilla.org/en-US/docs/Web/API/Window#Methods)
+* [Ember Test Helpers API Methods](https://github.com/emberjs/ember-test-helpers/blob/master/API.md)

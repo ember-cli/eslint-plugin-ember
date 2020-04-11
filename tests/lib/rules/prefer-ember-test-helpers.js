@@ -26,7 +26,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
       filename: TEST_FILE_NAME,
       code: `import { blur } from '@ember/test-helpers';
 
-      test('foo', async function(assert) {
+      test('foo', async (assert) => {
         await blur();
       });`,
     },
@@ -35,7 +35,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
       filename: TEST_FILE_NAME,
       code: `import { find } from '@ember/test-helpers';
 
-      test('foo', async function(assert) {
+      test('foo', async (assert) => {
         await find();
       });`,
     },
@@ -44,7 +44,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
       filename: TEST_FILE_NAME,
       code: `import { focus } from '@ember/test-helpers';
 
-      test('foo', async function(assert) {
+      test('foo', async (assert) => {
         await focus();
       });`,
     },
@@ -53,7 +53,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
   invalid: [
     {
       filename: TEST_FILE_NAME,
-      code: `test('foo', async function(assert) {
+      code: `test('foo', async (assert) => {
         await blur();
       });`,
       output: null,
@@ -65,7 +65,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
     },
     {
       filename: TEST_FILE_NAME,
-      code: `test('foo', async function(assert) {
+      code: `test('foo', async (assert) => {
         await find();
       });`,
       output: null,
@@ -77,7 +77,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
     },
     {
       filename: TEST_FILE_NAME,
-      code: `test('foo', async function(assert) {
+      code: `test('foo', async (assert) => {
         await focus();
       });`,
       output: null,
