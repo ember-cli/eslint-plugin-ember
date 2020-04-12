@@ -36,6 +36,27 @@ ruleTester.run('no-legacy-test-waiters', rule, {
 
       unregisterWaiter();
     `,
+    `
+      import { registerHelper } from '@ember/test';
+      registerHelper();
+
+      // Other calls:
+      registerWaiter();
+      unregisterWaiter();
+      otherCall();
+      SomeObject.otherCall();
+    `,
+    `
+      import { registerWaiter, unregisterWaiter } from '@ember/test';
+
+      // Wrong function calls but look similar.
+
+      SomeObject.registerWaiter();
+      registerWaiter.otherFunction();
+
+      SomeObject.unregisterWaiter();
+      unregisterWaiter.otherFunction();
+    `,
   ],
   invalid: [
     {
