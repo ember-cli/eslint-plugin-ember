@@ -36,6 +36,16 @@ ruleTester.run('no-legacy-test-waiters', rule, {
 
       unregisterWaiter();
     `,
+    `
+      import { registerHelper } from '@ember/test';
+
+      export default registerHelper('findAllContaining', function (app, selector, text) {
+        return [...document.querySelectorAll(selector)]
+          .filter((element) => {
+            return RegExp(text).test(element.textContent);
+          });
+      });
+    `,
   ],
   invalid: [
     {
