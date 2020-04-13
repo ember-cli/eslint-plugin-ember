@@ -10,15 +10,16 @@ Dependent keys used for computed properties have to be valid.
 
 This rule aims to avoid invalid dependent keys in computed properties.
 
-Currently implemented:
+Currently implemented checks:
 
 - Unbalanced open and closed braces. These can be hard to track for complex computed properties and are usually unchecked since the expressions are passed as Strings.
 - Unnecessary braces
 - Invalid position of `@each` or `[]`
+- Leading or trailing periods
 
-Not yet implemented:
+Not yet implemented checks:
 
-- Check for invalid characters
+- Invalid characters
 
 ## Examples
 
@@ -55,6 +56,15 @@ export default Component.extend({
 export default Component.extend({
   // `[]` in the middle:
   items: computed('arr.[].id', {
+    // Code
+  })
+});
+```
+
+```js
+export default Component.extend({
+  // Leading period:
+  userId: computed('.user.id', {
     // Code
   })
 });
