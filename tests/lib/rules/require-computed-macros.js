@@ -82,6 +82,20 @@ ruleTester.run('require-computed-macros', rule, {
     'computed(function() { return SOME_VAR === "Hello"; })',
     'computed(function() { return this.prop === MY_VAR; })',
     "computed(function() { return this.get('prop') === MY_VAR; })",
+
+    // Decorator:
+    {
+      // TODO: this should be an invalid test case.
+      // Still missing native class and decorator support: https://github.com/ember-cli/eslint-plugin-ember/issues/560
+      code: 'class Test { @computed() get someProp() { return this.x; } }',
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
   ],
   invalid: [
     // READS

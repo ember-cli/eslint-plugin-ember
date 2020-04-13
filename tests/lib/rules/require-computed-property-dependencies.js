@@ -136,6 +136,24 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+
+    // Decorator:
+    {
+      // TODO: this should be an invalid test case.
+      // Still missing native class and decorator support: https://github.com/ember-cli/eslint-plugin-ember/issues/560
+      code: `
+        class Test {
+          @computed()
+          get someProp() { return this.undeclared; }
+        }
+      `,
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
   ],
   invalid: [
     // Dynamic key:
