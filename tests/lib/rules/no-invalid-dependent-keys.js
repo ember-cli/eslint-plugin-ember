@@ -7,6 +7,7 @@ const {
   ERROR_MESSAGE_TERMINAL_AT_EACH,
   ERROR_MESSAGE_MIDDLE_BRACKETS,
   ERROR_MESSAGE_LEADING_TRAILING_PERIOD,
+  ERROR_MESSAGE_INVALID_CHARACTER,
 } = rule;
 
 // ------------------------------------------------------------------------------
@@ -185,6 +186,18 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
       errors: [
         {
           message: ERROR_MESSAGE_LEADING_TRAILING_PERIOD,
+          type: 'Literal',
+        },
+      ],
+    },
+
+    // Spaces
+    {
+      code: 'computed(" foo . bar", function() {})',
+      output: 'computed("foo.bar", function() {})',
+      errors: [
+        {
+          message: ERROR_MESSAGE_INVALID_CHARACTER,
           type: 'Literal',
         },
       ],

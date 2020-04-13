@@ -17,10 +17,6 @@ Currently implemented checks:
 - Invalid position of `@each` or `[]`
 - Leading or trailing periods
 
-Not yet implemented checks:
-
-- Invalid characters
-
 ## Examples
 
 Examples of **incorrect** code for this rule:
@@ -65,6 +61,15 @@ export default Component.extend({
 export default Component.extend({
   // Leading period:
   userId: computed('.user.id', {
+    // Code
+  })
+});
+```
+
+```js
+export default Component.extend({
+  // Space:
+  userId: computed('user .id', {
     // Code
   })
 });
