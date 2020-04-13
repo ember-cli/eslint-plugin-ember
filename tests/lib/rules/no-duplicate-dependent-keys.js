@@ -169,5 +169,18 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
         },
       ],
     },
+
+    // Decorator:
+    {
+      code: "class Test { @computed('a', 'a') get someProp() { return true; } }",
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
   ],
 });

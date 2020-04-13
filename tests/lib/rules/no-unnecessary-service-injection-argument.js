@@ -42,6 +42,20 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     "export default Component.extend({ serviceName: otherFunction('serviceName') });",
     "export default Component.extend({ serviceName: service.otherFunction('serviceName') });",
     "export default Component.extend({ serviceName: inject.otherFunction('serviceName') });",
+
+    // Decorator:
+    {
+      // TODO: this should be an invalid test case.
+      // Still missing native class and decorator support: https://github.com/ember-cli/eslint-plugin-ember/issues/560
+      code: "class Test { @service('serviceName') serviceName }",
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
   ],
   invalid: [
     // `Component` examples:
