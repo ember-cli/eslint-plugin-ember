@@ -95,6 +95,12 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         return this.article.title + someFunction(this.article.comments.innerProperty);
       });
     `,
+    // Nesting after braces:
+    `
+      Ember.computed('article.{comments,title}.innerProperty', function() {
+        return this.article.title.innerProperty + someFunction(this.article.comments.innerProperty);
+      });
+    `,
     // Computed macro that should be ignored:
     `
       Ember.computed.someMacro(function() {
