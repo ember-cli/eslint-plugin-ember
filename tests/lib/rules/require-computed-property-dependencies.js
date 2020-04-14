@@ -150,12 +150,26 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     },
     // Decorator:
     {
-      // TODO: this should be an invalid test case.
-      // Still missing native class and decorator support: https://github.com/ember-cli/eslint-plugin-ember/issues/560
       code: `
         class Test {
-          @computed()
-          get someProp() { return this.undeclared; }
+          @computed('first', 'last')
+          get fullName() { return this.first + ' ' + this.last; }
+        }
+      `,
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
+    // Decorator:
+    {
+      code: `
+        class Test {
+          @service i18n; // Service names not required as dependent keys by default.
+          @computed('first', 'last')
+          get fullName() { return this.i18n.t(this.first + ' ' + this.last); }
         }
       `,
       parser: require.resolve('babel-eslint'),
@@ -836,6 +850,87 @@ ruleTester.run('require-computed-property-dependencies', rule, {
       errors: [
         {
           message: 'Use of undeclared dependencies in computed property: lastName',
+          type: 'CallExpression',
+        },
+      ],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
+    // Decorator with no args:
+    {
+      code: `
+        class Test {
+          @computed()
+          get someProp() { return this.undeclared; }
+        }
+      `,
+      output: `
+        class Test {
+          @computed('undeclared')
+          get someProp() { return this.undeclared; }
+        }
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: undeclared',
+          type: 'CallExpression',
+        },
+      ],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
+    // Decorator with arg:
+    {
+      code: `
+        class Test {
+          @computed('first')
+          get fullName() { return this.first + ' ' + this.last; }
+        }
+      `,
+      output: `
+        class Test {
+          @computed('first', 'last')
+          get fullName() { return this.first + ' ' + this.last; }
+        }
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: last',
+          type: 'CallExpression',
+        },
+      ],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
+    // Decorator with two arg:
+    {
+      code: `
+        class Test {
+          @computed('first', 'last')
+          get fullName() { return this.first + ' ' + this.last + ' ' + this.undeclared; }
+        }
+      `,
+      output: `
+        class Test {
+          @computed('first', 'last', 'undeclared')
+          get fullName() { return this.first + ' ' + this.last + ' ' + this.undeclared; }
+        }
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: undeclared',
           type: 'CallExpression',
         },
       ],
