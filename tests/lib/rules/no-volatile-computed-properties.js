@@ -20,6 +20,17 @@ ruleTester.run('no-volatile-computed-properties', rule, {
     'volatile()',
     'other().volatile()',
     'volatile().computed()',
+
+    {
+      // Decorator:
+      code: "class Test { @computed('prop') get someProp() {} }",
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
   ],
   invalid: [
     {
@@ -32,6 +43,19 @@ ruleTester.run('no-volatile-computed-properties', rule, {
       code: "computed('prop', function() { return this.prop; }).volatile()",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
+    },
+
+    {
+      // Decorator:
+      code: "class Test { @computed('prop').volatile() get someProp() {} }",
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
     },
   ],
 });
