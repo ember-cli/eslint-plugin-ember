@@ -11,7 +11,7 @@ The rule invites users to call `@ember/test-helpers`' `render` method instead of
 Examples of **incorrect** code for this rule:
 
 ```js
-test('baz', function(assert) {
+test('baz', function (assert) {
   this.render();
 });
 ```
@@ -19,13 +19,13 @@ test('baz', function(assert) {
 Examples of **correct** code for this rule:
 
 ```js
-test('baz', function(assert) {
+test('baz', function (assert) {
   render();
 });
 ```
 
 ```js
-test('baz', function(assert) {
+test('baz', function (assert) {
   something.render();
 });
 ```
