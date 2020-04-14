@@ -136,7 +136,18 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
-
+    // Explicit getter function:
+    {
+      code: `
+        computed('firstName', 'lastName', {
+          get() {
+            return this.firstName + ' ' + this.lastName;
+          },
+          set(key, value) {}
+        })
+    `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
     // Decorator:
     {
       // TODO: this should be an invalid test case.
@@ -771,6 +782,69 @@ ruleTester.run('require-computed-property-dependencies', rule, {
           type: 'CallExpression',
         },
       ],
+    },
+    {
+      // Explicit getter function:
+      code: `
+        computed('firstName', {
+          get() {
+            return this.firstName + ' ' + this.lastName;
+          },
+          set(key, value) {}
+        })
+      `,
+      output: `
+        computed('firstName', 'lastName', {
+          get() {
+            return this.firstName + ' ' + this.lastName;
+          },
+          set(key, value) {}
+        })
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: lastName',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    // Decorator with getter inside object parameter:
+    {
+      code: `
+        class Test {
+          @computed('firstName', {
+            get() {
+              return this.firstName + ' ' + this.lastName;
+            },
+            set(key, value) {}
+          })
+          fullName
+        }
+      `,
+      output: `
+        class Test {
+          @computed('firstName', 'lastName', {
+            get() {
+              return this.firstName + ' ' + this.lastName;
+            },
+            set(key, value) {}
+          })
+          fullName
+        }
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: lastName',
+          type: 'CallExpression',
+        },
+      ],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
     },
   ],
 });
