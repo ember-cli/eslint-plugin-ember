@@ -1,3 +1,19 @@
+## v8.3.0 (2020-04-14)
+
+#### :rocket: Enhancement
+* [#775](https://github.com/ember-cli/eslint-plugin-ember/pull/775) Add support for explicit getter functions in [require-computed-property-dependencies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-property-dependencies.md) rule ([@bmish](https://github.com/bmish))
+* [#779](https://github.com/ember-cli/eslint-plugin-ember/pull/779) Add decorator support to [require-computed-property-dependencies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-property-dependencies.md) rule ([@bmish](https://github.com/bmish))
+* [#781](https://github.com/ember-cli/eslint-plugin-ember/pull/781) Add decorator support to [no-unnecessary-service-injection-argument](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-unnecessary-service-injection-argument.md) rule ([@bmish](https://github.com/bmish))
+* [#773](https://github.com/ember-cli/eslint-plugin-ember/pull/773) Add autofixer to [no-duplicate-dependent-keys](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-duplicate-dependent-keys.md) rule ([@bmish](https://github.com/bmish))
+* [#774](https://github.com/ember-cli/eslint-plugin-ember/pull/774) Catch spaces in [no-invalid-dependent-keys](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-invalid-dependent-keys.md) rule ([@bmish](https://github.com/bmish))
+* [#768](https://github.com/ember-cli/eslint-plugin-ember/pull/768) Catch leading or trailing periods in [no-invalid-dependent-keys](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-invalid-dependent-keys.md) ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#771](https://github.com/ember-cli/eslint-plugin-ember/pull/771) Fix false positives in [no-legacy-test-waiters](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-legacy-test-waiters.md) rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v8.2.0 (2020-04-10)
 
 #### :rocket: Enhancement
