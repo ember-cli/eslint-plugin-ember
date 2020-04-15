@@ -5,6 +5,8 @@
 const rule = require('../../../lib/rules/require-return-from-computed');
 const RuleTester = require('eslint').RuleTester;
 
+const { ERROR_MESSAGE } = rule;
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
@@ -40,7 +42,8 @@ eslintTester.run('require-return-from-computed', rule, {
       output: null,
       errors: [
         {
-          message: 'Always return a value from computed properties',
+          message: ERROR_MESSAGE,
+          type: 'FunctionExpression',
         },
       ],
     },
@@ -49,7 +52,8 @@ eslintTester.run('require-return-from-computed', rule, {
       output: null,
       errors: [
         {
-          message: 'Always return a value from computed properties',
+          message: ERROR_MESSAGE,
+          type: 'FunctionExpression',
         },
       ],
     },
@@ -58,10 +62,12 @@ eslintTester.run('require-return-from-computed', rule, {
       output: null,
       errors: [
         {
-          message: 'Always return a value from computed properties',
+          message: ERROR_MESSAGE,
+          type: 'FunctionExpression',
         },
         {
-          message: 'Always return a value from computed properties',
+          message: ERROR_MESSAGE,
+          type: 'FunctionExpression',
         },
       ],
     },
@@ -70,7 +76,8 @@ eslintTester.run('require-return-from-computed', rule, {
       output: null,
       errors: [
         {
-          message: 'Always return a value from computed properties',
+          message: ERROR_MESSAGE,
+          type: 'FunctionExpression',
         },
       ],
     },
@@ -79,7 +86,8 @@ eslintTester.run('require-return-from-computed', rule, {
       output: null,
       errors: [
         {
-          message: 'Always return a value from computed properties',
+          message: ERROR_MESSAGE,
+          type: 'FunctionExpression',
         },
       ],
     },
