@@ -226,6 +226,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
       errors: [
         {
           message: 'Import the `blur()` method from @ember/test-helpers',
+          type: 'CallExpression',
         },
       ],
     },
@@ -238,6 +239,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
       errors: [
         {
           message: 'Import the `find()` method from @ember/test-helpers',
+          type: 'CallExpression',
         },
       ],
     },
@@ -250,6 +252,7 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
       errors: [
         {
           message: 'Import the `focus()` method from @ember/test-helpers',
+          type: 'CallExpression',
         },
       ],
     },
