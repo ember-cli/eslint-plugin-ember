@@ -25,6 +25,32 @@ eslintTester.run('no-side-effects', rule, {
     'import Ember from "ember"; import Foo from "some-other-thing"; let foo = computed("test", function() { Foo.set(this, "testAmount", test.length); return ""; });',
 
     'import Ember from "ember"; import Foo from "some-other-thing"; let foo = computed("test", function() { Foo.setProperties(); return ""; });',
+
+    // Decorators:
+    {
+      code: `
+        class Test {
+          @computed('first', 'last')
+          get fullName() { return this.first + ' ' + this.last; }
+        }
+      `,
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
+
+    // No computed property function body;
+    'computed()',
+    'computed("test")',
+    'computed("test", function() {})',
+
+    // Not in a computed property:
+    "this.set('x', 123);",
+    'this.setProperties({ x: 123 });',
+    'this.x = 123;',
   ],
   invalid: [
     {
@@ -179,6 +205,56 @@ eslintTester.run('no-side-effects', rule, {
           type: 'CallExpression',
         },
       ],
+    },
+
+    // Decorator with getter inside object parameter:
+    {
+      code: `
+        class Test {
+          @computed('key', {
+            get() {
+              this.set('x', 123);
+            },
+            set(key, value) {}
+          })
+          someProp
+        }
+      `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
+    // Decorator with getter function:
+    {
+      code: `
+        class Test {
+          @computed()
+          get someProp() { this.set('x', 123); }
+        }
+      `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
     },
   ],
 });

@@ -2,9 +2,14 @@
 
 :white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
-Don't introduce side-effects in computed properties.
+When using computed properties, do not introduce side effects. Side effects make it much more difficult to reason about the origin of changes.
 
-When using computed properties do not introduce side effects. It will make reasoning about the origin of the change much harder.
+This rule currently disallows the following side-effect-causing statements inside computed properties:
+
+* `this.set('x', 123);`
+* `this.setProperties({ x: 123 });`
+
+Note that other side effects like network requests should be avoided as well.
 
 ## Examples
 
@@ -35,9 +40,3 @@ export default Component.extend({
   })
 });
 ```
-
-## Help Wanted
-
-| Issue | Link |
-| :-- | :-- |
-| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |
