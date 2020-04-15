@@ -10,27 +10,25 @@ There are currently 3 Ember test helper methods that have a native window counte
 
 If these methods are not properly imported from Ember's test-helpers suite, the native window method version is used instead, and any intended asynchronous functions won't work as intended, which causes tests to fail silently.
 
-See the origin and background of the rule proposal: [eslint-plugin-ember issue 676](https://github.com/ember-cli/eslint-plugin-ember/issues/676)
-
 ## Examples
 
 Examples of **incorrect** code for this rule:
 
 ```js
 test('foo', async (assert) => {
-  await blur();
+  await blur('.some-element');
 });
 ```
 
 ```js
 test('foo', async (assert) => {
-  await find();
+  await find('.some-element');
 });
 ```
 
 ```js
 test('foo', async (assert) => {
-  await focus();
+  await focus('.some-element');
 });
 ```
 
@@ -40,7 +38,7 @@ Examples of **correct** code for this rule:
 import { blur } from '@ember/test-helpers';
 
 test('foo', async (assert) => {
-  await blur();
+  await blur('.some-element');
 });
 ```
 
@@ -48,7 +46,7 @@ test('foo', async (assert) => {
 import { find } from '@ember/test-helpers';
 
 test('foo', async (assert) => {
-  await find();
+  await find('.some-element');
 });
 ```
 
@@ -56,7 +54,7 @@ test('foo', async (assert) => {
 import { focus } from '@ember/test-helpers';
 
 test('foo', async (assert) => {
-  await focus();
+  await focus('.some-element');
 });
 ```
 
