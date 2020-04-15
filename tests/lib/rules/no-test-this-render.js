@@ -7,7 +7,7 @@
 const rule = require('../../../lib/rules/no-test-this-render');
 const RuleTester = require('eslint').RuleTester;
 
-const { ERROR_MESSAGE } = rule;
+const { makeErrorMessage } = rule;
 
 //------------------------------------------------------------------------------
 // Tests
@@ -62,13 +62,13 @@ ruleTester.run('no-test-this-render', rule, {
       filename: TEST_FILE_NAME,
       code: 'async () => { await this.render(); }',
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+      errors: [{ message: makeErrorMessage('render'), type: 'CallExpression' }],
     },
     {
       filename: TEST_FILE_NAME,
       code: 'async () => { await this.clearRender(); }',
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+      errors: [{ message: makeErrorMessage('clearRender'), type: 'CallExpression' }],
     },
   ],
 });
