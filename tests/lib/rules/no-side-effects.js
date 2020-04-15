@@ -5,6 +5,8 @@
 const rule = require('../../../lib/rules/no-side-effects');
 const RuleTester = require('eslint').RuleTester;
 
+const { ERROR_MESSAGE } = rule;
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
@@ -30,7 +32,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -40,7 +43,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -50,7 +54,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -60,7 +65,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -70,7 +76,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -80,7 +87,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -90,7 +98,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -100,7 +109,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -110,7 +120,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -120,7 +131,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -130,7 +142,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -140,7 +153,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -150,7 +164,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -160,7 +175,8 @@ eslintTester.run('no-side-effects', rule, {
       output: null,
       errors: [
         {
-          message: "Don't introduce side-effects in computed properties",
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
