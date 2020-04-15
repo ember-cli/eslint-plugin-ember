@@ -8,7 +8,7 @@ There are currently 3 Ember test helper methods that have a native window counte
 * find
 * focus
 
-If these methods are not properly imported from Ember's test-helpers suite, the native window method version is used instead, and any intended asynchronous functions won't work as intended, which causes tests to fail silently.
+If these methods are not properly imported from Ember's test-helpers suite, and the native window method version is used instead, any intended asynchronous functions won't work as intended, which can cause tests to fail silently.
 
 ## Examples
 
