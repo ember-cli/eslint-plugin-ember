@@ -8,6 +8,7 @@ This rule currently disallows the following side-effect-causing statements insid
 
 * `this.set('x', 123);`
 * `this.setProperties({ x: 123 });`
+* `this.x = 123;`
 
 Note that other side effects like network requests should be avoided as well.
 

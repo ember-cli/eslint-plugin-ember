@@ -23,8 +23,10 @@ eslintTester.run('no-side-effects', rule, {
     'testAmount: computed("test.length", { get() { return ""; }, set() { setProperties(); }})',
     'let foo = computed("test", function() { someMap.setProperties(); return ""; })',
     'import Ember from "ember"; import Foo from "some-other-thing"; let foo = computed("test", function() { Foo.set(this, "testAmount", test.length); return ""; });',
-
     'import Ember from "ember"; import Foo from "some-other-thing"; let foo = computed("test", function() { Foo.setProperties(); return ""; });',
+    'computed("test", function() { this.test; })',
+    'computed("test", function() { this.myFunction(); })',
+    'computed("test", function() { let x = 123; x = 456; someObject.x = 123; })',
 
     // Decorators:
     {
@@ -255,6 +257,17 @@ eslintTester.run('no-side-effects', rule, {
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
       },
+    },
+
+    {
+      code: 'computed("test", function() { this.x = 123; })',
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'AssignmentExpression',
+        },
+      ],
     },
   ],
 });
