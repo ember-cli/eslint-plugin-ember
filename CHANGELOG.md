@@ -1,3 +1,19 @@
+## v8.4.0 (2020-04-15)
+
+#### :rocket: Enhancement
+* [#767](https://github.com/ember-cli/eslint-plugin-ember/pull/767) Add new rule [prefer-ember-test-helpers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/prefer-ember-test-helpers.md) ([@fierysunset](https://github.com/fierysunset))
+* [#778](https://github.com/ember-cli/eslint-plugin-ember/pull/778) Add new rule [no-test-this-render](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-this-render.md) ([@ventuno](https://github.com/ventuno))
+* [#789](https://github.com/ember-cli/eslint-plugin-ember/pull/789) Add decorator support to [no-side-effects](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-side-effects.md) rule ([@bmish](https://github.com/bmish))
+* [#790](https://github.com/ember-cli/eslint-plugin-ember/pull/790) Catch assignment in [no-side-effects](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-side-effects.md) rule ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#786](https://github.com/ember-cli/eslint-plugin-ember/pull/786) Ignore the left side of an assignment in [require-computed-property-dependencies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-property-dependencies.md) rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Connie C Chang ([@fierysunset](https://github.com/fierysunset))
+- [@ventuno](https://github.com/ventuno)
+
 ## v8.3.0 (2020-04-14)
 
 #### :rocket: Enhancement
