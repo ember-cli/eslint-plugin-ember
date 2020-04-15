@@ -136,6 +136,12 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    // Should ignore the left side of an assignment.
+    `
+      Ember.computed('right', function() {
+        this.left = this.right;
+      })
+    `,
     // Explicit getter function:
     {
       code: `
@@ -723,6 +729,25 @@ ruleTester.run('require-computed-property-dependencies', rule, {
       errors: [
         {
           message: 'Use of undeclared dependencies in computed property: intl',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Should ignore the left side of an assignment but not the right side.
+      code: `
+        Ember.computed(function() {
+          this.left = this.right;
+        })
+      `,
+      output: `
+        Ember.computed('right', function() {
+          this.left = this.right;
+        })
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: right',
           type: 'CallExpression',
         },
       ],
