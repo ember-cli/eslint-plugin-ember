@@ -49,6 +49,10 @@ ruleTester.run('no-this-render', rule, {
       code: 'async () => { await this.render(); }',
     },
     {
+      filename: TEST_FILE_NAME,
+      code: 'this.render.otherFunction()',
+    },
+    {
       filename: 'not-a-test-file.js',
       code: 'async () => { await this.clearRender(); }',
     },
