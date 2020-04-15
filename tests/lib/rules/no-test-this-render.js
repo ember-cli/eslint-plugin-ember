@@ -22,7 +22,7 @@ const ruleTester = new RuleTester({
   },
 });
 
-ruleTester.run('no-this-render', rule, {
+ruleTester.run('no-test-this-render', rule, {
   valid: [
     {
       filename: TEST_FILE_NAME,
@@ -66,27 +66,7 @@ ruleTester.run('no-this-render', rule, {
     },
     {
       filename: TEST_FILE_NAME,
-      code: `
-        test('foo', async function(assert) {
-          await this.render();
-        });
-      `,
-      output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
-    },
-    {
-      filename: TEST_FILE_NAME,
       code: 'async () => { await this.clearRender(); }',
-      output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
-    },
-    {
-      filename: TEST_FILE_NAME,
-      code: `
-        test('foo', async function(assert) {
-          await this.clearRender();
-        });
-      `,
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
