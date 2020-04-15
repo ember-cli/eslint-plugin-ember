@@ -32,6 +32,9 @@ eslintTester.run('use-brace-expansion', rule, {
     '{ test: computed.or("foo.bar.name", "foo.bar.place") }',
     '{ test: computed.and("foo.bar.name", "foo.bar.place") }',
     "{ test: Ember.computed.filterBy('a', 'b', false) }",
+
+    // Decorator:
+    "class Test { @computed('a.{test1,test2}') get someProp() { return true; } }",
   ],
   invalid: [
     {

@@ -78,7 +78,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [no-arrow-function-computed-properties](./docs/rules/no-arrow-function-computed-properties.md) | disallow arrow functions in computed properties |
 | :car: | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | disallow using computed properties in native classes |
 | :white_check_mark: | [no-deeply-nested-dependent-keys-with-each](./docs/rules/no-deeply-nested-dependent-keys-with-each.md) | disallow usage of deeply-nested computed property dependent keys with `@each` |
-| :white_check_mark: | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | disallow repeating computed property dependent keys |
+| :white_check_mark::wrench: | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | disallow repeating computed property dependent keys |
 | :white_check_mark::wrench: | [no-incorrect-computed-macros](./docs/rules/no-incorrect-computed-macros.md) | disallow incorrect usage of computed property macros |
 | :white_check_mark::wrench: | [no-invalid-dependent-keys](./docs/rules/no-invalid-dependent-keys.md) | disallow invalid dependent keys in computed properties |
 | :white_check_mark: | [no-side-effects](./docs/rules/no-side-effects.md) | disallow unexpected side effects in computed properties |
@@ -186,6 +186,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [no-test-and-then](./docs/rules/no-test-and-then.md) | disallow usage of the `andThen` test wait helper |
 | :white_check_mark: | [no-test-import-export](./docs/rules/no-test-import-export.md) | disallow importing of "-test.js" in a test file and exporting from a test file |
 | :white_check_mark: | [no-test-module-for](./docs/rules/no-test-module-for.md) | disallow usage of `moduleFor`, `moduleForComponent`, etc |
+|  | [no-test-this-render](./docs/rules/no-test-this-render.md) | disallow usage of the `this.render` in tests, recommending to use @ember/test-helpers' `render` instead. |
 |  | [prefer-ember-test-helpers](./docs/rules/prefer-ember-test-helpers.md) | enforce usage of `@ember/test-helpers` methods over native window methods |
 
 <!--RULES_TABLE_END-->

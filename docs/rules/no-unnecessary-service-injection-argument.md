@@ -43,9 +43,3 @@ export default Component.extend({
 
 * Ember [Services](https://guides.emberjs.com/release/applications/services/) guide
 * Ember [inject](https://emberjs.com/api/ember/release/functions/@ember%2Fservice/inject) function spec
-
-## Help Wanted
-
-| Issue | Link |
-| :-- | :-- |
-| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

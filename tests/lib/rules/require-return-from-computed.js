@@ -20,6 +20,19 @@ eslintTester.run('require-return-from-computed', rule, {
     'let foo = computed("test", function() { if (true) { return ""; } return ""; })',
     'let foo = computed("test", { get() { data.forEach(function() { }); return true; }, set() { return true; } })',
     'let foo = computed("test", function() { data.forEach(function() { }); return ""; })',
+
+    // Decorator:
+    {
+      // TODO: this should be an invalid test case.
+      // Still missing native class and decorator support: https://github.com/ember-cli/eslint-plugin-ember/issues/560
+      code: 'class Test { @computed() get someProp() {} }',
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
   ],
   invalid: [
     {

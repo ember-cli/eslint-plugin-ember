@@ -80,6 +80,23 @@ describe('findNodes', () => {
   });
 });
 
+describe('flatten', function () {
+  it('correctly flattens arrays', function () {
+    expect(utils.flatten([])).toStrictEqual([]);
+    expect(utils.flatten(null)).toBeNull();
+    expect(utils.flatten([[1], [2]])).toStrictEqual([1, 2]);
+    expect(
+      utils.flatten([
+        [1, 2],
+        [3, 4],
+      ])
+    ).toStrictEqual([1, 2, 3, 4]);
+    expect(utils.flatten([[1], [2, 3], [4, 5, 6]])).toStrictEqual([1, 2, 3, 4, 5, 6]); // different lengths forward
+    expect(utils.flatten([[6, 5, 4], [3, 2], [1]])).toStrictEqual([6, 5, 4, 3, 2, 1]); // different lengths reverse
+    expect(utils.flatten([[1], null, [2]])).toStrictEqual([1, null, 2]); // with null array
+  });
+});
+
 describe('function sort order', function () {
   it('has exported functions in sorted order', function () {
     expect(Object.getOwnPropertyNames(utils)).toStrictEqual(

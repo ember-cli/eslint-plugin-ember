@@ -2,6 +2,8 @@
 
 :white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
+:wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 Disallow repeating dependent keys.
 
 ## Rule Details
@@ -33,9 +35,3 @@ computed('foo.{bar,baz,qux}', 'bar.foo', function () {
   // ...
 });
 ```
-
-## Help Wanted
-
-| Issue | Link |
-| :-- | :-- |
-| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

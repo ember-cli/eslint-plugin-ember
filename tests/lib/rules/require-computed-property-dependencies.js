@@ -136,6 +136,55 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
+    // Should ignore the left side of an assignment.
+    `
+      Ember.computed('right', function() {
+        this.left = this.right;
+      })
+    `,
+    // Explicit getter function:
+    {
+      code: `
+        computed('firstName', 'lastName', {
+          get() {
+            return this.firstName + ' ' + this.lastName;
+          },
+          set(key, value) {}
+        })
+    `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+    },
+    // Decorator:
+    {
+      code: `
+        class Test {
+          @computed('first', 'last')
+          get fullName() { return this.first + ' ' + this.last; }
+        }
+      `,
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
+    // Decorator:
+    {
+      code: `
+        class Test {
+          @service i18n; // Service names not required as dependent keys by default.
+          @computed('first', 'last')
+          get fullName() { return this.i18n.t(this.first + ' ' + this.last); }
+        }
+      `,
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
   ],
   invalid: [
     // Dynamic key:
@@ -685,6 +734,25 @@ ruleTester.run('require-computed-property-dependencies', rule, {
       ],
     },
     {
+      // Should ignore the left side of an assignment but not the right side.
+      code: `
+        Ember.computed(function() {
+          this.left = this.right;
+        })
+      `,
+      output: `
+        Ember.computed('right', function() {
+          this.left = this.right;
+        })
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: right',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
       // Should not ignore properties inside injected service:
       code: `
         import Component from '@ember/component';
@@ -753,6 +821,150 @@ ruleTester.run('require-computed-property-dependencies', rule, {
           type: 'CallExpression',
         },
       ],
+    },
+    {
+      // Explicit getter function:
+      code: `
+        computed('firstName', {
+          get() {
+            return this.firstName + ' ' + this.lastName;
+          },
+          set(key, value) {}
+        })
+      `,
+      output: `
+        computed('firstName', 'lastName', {
+          get() {
+            return this.firstName + ' ' + this.lastName;
+          },
+          set(key, value) {}
+        })
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: lastName',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    // Decorator with getter inside object parameter:
+    {
+      code: `
+        class Test {
+          @computed('firstName', {
+            get() {
+              return this.firstName + ' ' + this.lastName;
+            },
+            set(key, value) {}
+          })
+          fullName
+        }
+      `,
+      output: `
+        class Test {
+          @computed('firstName', 'lastName', {
+            get() {
+              return this.firstName + ' ' + this.lastName;
+            },
+            set(key, value) {}
+          })
+          fullName
+        }
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: lastName',
+          type: 'CallExpression',
+        },
+      ],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
+    // Decorator with no args:
+    {
+      code: `
+        class Test {
+          @computed()
+          get someProp() { return this.undeclared; }
+        }
+      `,
+      output: `
+        class Test {
+          @computed('undeclared')
+          get someProp() { return this.undeclared; }
+        }
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: undeclared',
+          type: 'CallExpression',
+        },
+      ],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
+    // Decorator with arg:
+    {
+      code: `
+        class Test {
+          @computed('first')
+          get fullName() { return this.first + ' ' + this.last; }
+        }
+      `,
+      output: `
+        class Test {
+          @computed('first', 'last')
+          get fullName() { return this.first + ' ' + this.last; }
+        }
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: last',
+          type: 'CallExpression',
+        },
+      ],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
+    // Decorator with two arg:
+    {
+      code: `
+        class Test {
+          @computed('first', 'last')
+          get fullName() { return this.first + ' ' + this.last + ' ' + this.undeclared; }
+        }
+      `,
+      output: `
+        class Test {
+          @computed('first', 'last', 'undeclared')
+          get fullName() { return this.first + ' ' + this.last + ' ' + this.undeclared; }
+        }
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: undeclared',
+          type: 'CallExpression',
+        },
+      ],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
     },
   ],
 });

@@ -87,7 +87,11 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
         foo: computed('model.foo', 'model.bar', 'model.baz', 'model.foo', function() {})
       }
       `,
-      output: null,
+      output: `
+      {
+        foo: computed('model.foo', 'model.bar', 'model.baz',  function() {})
+      }
+      `,
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -126,7 +130,11 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
         foo: computed('collection.@each.foo', 'model.bar', 'collection.@each.foo', function() {})
       }
       `,
-      output: null,
+      output: `
+      {
+        foo: computed('collection.@each.foo', 'model.bar',  function() {})
+      }
+      `,
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -161,7 +169,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
     },
     {
       code: "class Test { @computed('a', 'a') get someProp() { return true; } }",
-      output: null,
+      output: "class Test { @computed('a' ) get someProp() { return true; } }",
       errors: [
         {
           message: ERROR_MESSAGE,
