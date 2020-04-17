@@ -32,5 +32,6 @@ describe('expandKey', () => {
       'foo.@each.bar1',
       'foo.@each.bar2',
     ]);
+    expect(cpdkUtils.expandKey('{foo,bar}')).toStrictEqual(['foo', 'bar']);
   });
 });
