@@ -4,7 +4,7 @@
 
 const rule = require('../../../lib/rules/no-invalid-debug-function-arguments');
 const RuleTester = require('eslint').RuleTester;
-const utils = require('../../../lib/utils/utils');
+const javascriptUtils = require('../../../lib/utils/javascript');
 
 const { DEBUG_FUNCTIONS, ERROR_MESSAGE } = rule;
 
@@ -21,7 +21,7 @@ const VALID_USAGES_BASIC = [
   },
 ];
 
-const VALID_USAGES_FOR_EACH_DEBUG_FUNCTION = utils.flatten(
+const VALID_USAGES_FOR_EACH_DEBUG_FUNCTION = javascriptUtils.flatten(
   DEBUG_FUNCTIONS.map((debugFunction) => [
     {
       code: `import { ${debugFunction} } from '@ember/debug'; OtherClass.${debugFunction}(true, 'My string.');`,
@@ -78,7 +78,7 @@ const VALID_USAGES_FOR_EACH_DEBUG_FUNCTION = utils.flatten(
 
 const VALID_USAGES = [...VALID_USAGES_BASIC, ...VALID_USAGES_FOR_EACH_DEBUG_FUNCTION];
 
-const INVALID_USAGES = utils.flatten(
+const INVALID_USAGES = javascriptUtils.flatten(
   DEBUG_FUNCTIONS.map((debugFunction) => [
     {
       code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}(true, 'My description.');`,
