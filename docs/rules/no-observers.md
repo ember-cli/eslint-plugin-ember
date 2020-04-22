@@ -30,16 +30,6 @@ export default Controller.extend({
 ```
 
 ```js
-import { observer } from '@ember/object';
-
-export default Controller.extend({
-  change: observer('text', function () {
-    console.log(`change detected: ${this.text}`);
-  })
-});
-```
-
-```js
 import { observes } from '@ember-decorators/object';
 
 class FooComponent extends Component {
