@@ -774,6 +774,18 @@ describe('isComputedProp', () => {
     node = parse('Ember.computed().foo()');
     expect(emberUtils.isComputedProp(node)).not.toBeTruthy();
   });
+
+  it('should detect the computed annotation', () => {
+    const program = babelEslint.parse('class Object { @computed() get foo() {} }');
+    node = program.body[0].body.body[0].decorators[0].expression;
+    expect(emberUtils.isComputedProp(node)).toBeTruthy();
+  });
+
+  it('should detect the computed annotation without parentheses', () => {
+    const program = babelEslint.parse('class Object { @computed get foo() {} }');
+    node = program.body[0].body.body[0].decorators[0].expression;
+    expect(emberUtils.isComputedProp(node)).toBeTruthy();
+  });
 });
 
 describe('isObserverProp', () => {

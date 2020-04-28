@@ -43,11 +43,26 @@ eslintTester.run('no-side-effects', rule, {
         ecmaFeatures: { legacyDecorators: true },
       },
     },
+    {
+      code: `
+        class Test {
+          @computed
+          get fullName() { return 'foo'; }
+        }
+      `,
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
 
     // No computed property function body;
     'computed()',
     'computed("test")',
     'computed("test", function() {})',
+    'computed',
 
     // Not in a computed property:
     "this.set('x', 123);",
@@ -241,6 +256,28 @@ eslintTester.run('no-side-effects', rule, {
       code: `
         class Test {
           @computed()
+          get someProp() { this.set('x', 123); }
+        }
+      `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
+    // Decorator without parentheses:
+    {
+      code: `
+        class Test {
+          @computed
           get someProp() { this.set('x', 123); }
         }
       `,

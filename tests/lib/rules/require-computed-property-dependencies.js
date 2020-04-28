@@ -891,6 +891,33 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         ecmaFeatures: { legacyDecorators: true },
       },
     },
+    // Decorator with no parens:
+    {
+      code: `
+        class Test {
+          @computed
+          get someProp() { return this.undeclared; }
+        }
+      `,
+      output: `
+        class Test {
+          @computed('undeclared')
+          get someProp() { return this.undeclared; }
+        }
+      `,
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: undeclared',
+          type: 'Identifier',
+        },
+      ],
+      parser: require.resolve('babel-eslint'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { legacyDecorators: true },
+      },
+    },
     // Decorator with no args:
     {
       code: `
