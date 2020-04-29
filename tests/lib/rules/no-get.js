@@ -1,3 +1,4 @@
+const path = require('path');
 const rule = require('../../../lib/rules/no-get');
 const RuleTester = require('eslint').RuleTester;
 
@@ -51,6 +52,12 @@ ruleTester.run('no-get', rule, {
     // Unknown sub-function call:
     "this.get.foo('bar');",
     "get.foo(this, 'bar');",
+
+    // In mirage directory
+    {
+      code: 'this.get("/resources")',
+      filename: path.join('app', 'mirage', 'config.js'),
+    },
 
     // **************************
     // getProperties
