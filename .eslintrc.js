@@ -144,6 +144,8 @@ module.exports = {
     'import/unambiguous': 'error',
 
     // Unicorn rules:
+    'unicorn/no-fn-reference-in-iterator': 'off',
+    'unicorn/no-null': 'off',
     'unicorn/prevent-abbreviations': 'off'
   },
   overrides: [
