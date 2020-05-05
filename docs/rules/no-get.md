@@ -18,6 +18,8 @@ This rule disallows:
 * Ember proxy objects (`ObjectProxy`, `ArrayProxy`)
 * Objects implementing the `unknownProperty` method
 
+In addition, `mirage/config.js` will be excluded from this rule.
+
 ## Examples
 
 Examples of **incorrect** code for this rule:
