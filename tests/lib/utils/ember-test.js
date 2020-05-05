@@ -101,6 +101,19 @@ describe('isMirageDirectory', () => {
   });
 });
 
+describe('isMirageConfig', () => {
+  it('detects the mirage config file', () => {
+    expect(emberUtils.isMirageConfig('example-app/mirage/config.js')).toBeTruthy();
+  });
+
+  it('does not detect other directories', () => {
+    expect(emberUtils.isMirageConfig('example-app/app/app.js')).toBeFalsy();
+    expect(emberUtils.isMirageConfig('example-app/tests/test.js')).toBeFalsy();
+    expect(emberUtils.isMirageConfig('example-addon/addon/addon.js')).toBeFalsy();
+    expect(emberUtils.isMirageConfig('example-app/mirage/scenarios/foo.js')).toBeFalsy();
+  });
+});
+
 describe('isTestFile', () => {
   it('detects test files', () => {
     expect(emberUtils.isTestFile('some-test.js')).toBeTruthy();
