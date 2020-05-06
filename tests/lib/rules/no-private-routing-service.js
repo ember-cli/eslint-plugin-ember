@@ -5,7 +5,7 @@
 const rule = require('../../../lib/rules/no-private-routing-service');
 const RuleTester = require('eslint').RuleTester;
 
-const { ERROR_MESSAGE } = rule;
+const { PRIVATE_ROUTING_SERVICE_ERROR_MESSAGE, ROUTER_MICROLIB_ERROR_MESSAGE } = rule;
 
 //------------------------------------------------------------------------------
 // Tests
@@ -56,14 +56,36 @@ ruleTester.run('no-private-routing-service', rule, {
     {
       code: "export default Component.extend({ routing: service('-routing') });",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
+      errors: [{ message: PRIVATE_ROUTING_SERVICE_ERROR_MESSAGE, type: 'Property' }],
     },
 
     // Octane
     {
       code: "export default class MyComponent extends Component { @service('-routing') routing; }",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'ClassProperty' }],
+      errors: [{ message: PRIVATE_ROUTING_SERVICE_ERROR_MESSAGE, type: 'ClassProperty' }],
+    },
+
+    // _routerMicrolib
+    {
+      code: "get(this, 'router._routerMicrolib');",
+      output: null,
+      errors: [{ message: ROUTER_MICROLIB_ERROR_MESSAGE, type: 'Literal' }],
+    },
+    {
+      code: "get(this, 'router._router._routerMicrolib');",
+      output: null,
+      errors: [{ message: ROUTER_MICROLIB_ERROR_MESSAGE, type: 'Literal' }],
+    },
+    {
+      code: 'this.router._routerMicrolib;',
+      output: null,
+      errors: [{ message: ROUTER_MICROLIB_ERROR_MESSAGE, type: 'Identifier' }],
+    },
+    {
+      code: 'this.router._router._routerMicrolib;',
+      output: null,
+      errors: [{ message: ROUTER_MICROLIB_ERROR_MESSAGE, type: 'Identifier' }],
     },
   ],
 });

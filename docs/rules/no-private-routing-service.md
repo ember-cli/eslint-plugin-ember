@@ -2,7 +2,7 @@
 
 :white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
-Disallow the use of the private `-routing` service.
+Disallow the use of the private `-routing` service and accessing `_routerMicrolib`.
 
 There has been a public `router` service since Ember 2.16 and using the private routing service should be unnecessary.
 
@@ -24,6 +24,18 @@ import Component from '@ember/component';
 
 export default class MyComponent extends Component {
   @service('-routing') routing;
+}
+```
+
+```javascript
+import Component from '@ember/component';
+
+export default class MyComponent extends Component {
+  @service('router') router;
+
+  get someMethod() {
+    return this.router._routerMicrolib.activeTransition;
+  }
 }
 ```
 
