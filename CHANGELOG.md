@@ -1,3 +1,26 @@
+## v8.5.0 (2020-05-06)
+
+#### :rocket: Enhancement
+* [#795](https://github.com/ember-cli/eslint-plugin-ember/pull/795) Add `catchRouterMicrolib` option (default false) to [no-private-routing-service](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-private-routing-service.md) rule ([@nlfurniss](https://github.com/nlfurniss))
+
+#### :bug: Bug Fix
+* [#802](https://github.com/ember-cli/eslint-plugin-ember/pull/802) Ignore `mirage/config.js` file in [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md) rule ([@BarryThePenguin](https://github.com/BarryThePenguin))
+* [#800](https://github.com/ember-cli/eslint-plugin-ember/pull/800) Handle `@computed` decorator without parentheses in [no-side-effects](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-side-effects.md) and [require-computed-property-dependencies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-property-dependencies.md) rules ([@mongoose700](https://github.com/mongoose700))
+* [#794](https://github.com/ember-cli/eslint-plugin-ember/pull/794) Handle braces without nesting in [require-computed-property-dependencies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-property-dependencies.md) rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#797](https://github.com/ember-cli/eslint-plugin-ember/pull/797) Remove duplicate example from [no-observers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-observers.md) rule doc ([@mehrdadrafiee](https://github.com/mehrdadrafiee))
+
+#### :house: Internal
+* [#801](https://github.com/ember-cli/eslint-plugin-ember/pull/801) Begin testing under Node 14 ([@bmish](https://github.com/bmish))
+
+#### Committers: 5
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Jonathan Haines ([@BarryThePenguin](https://github.com/BarryThePenguin))
+- Mehrdad Rafiee ([@mehrdadrafiee](https://github.com/mehrdadrafiee))
+- Michael Peirce ([@mongoose700](https://github.com/mongoose700))
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+
 ## v8.4.0 (2020-04-15)
 
 #### :rocket: Enhancement
