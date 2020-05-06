@@ -50,6 +50,10 @@ ruleTester.run('no-private-routing-service', rule, {
     'class MyComponent extends Component { aProp="-routing"; }',
     'class MyComponent extends Component { aProp="another value"; }',
     'class MyComponent extends Component { anIntProp=25; }',
+
+    // _routerMicrolib (`catchRouterMicrolib` option off)
+    "get(this, 'router._routerMicrolib');",
+    'this.router._routerMicrolib;',
   ],
   invalid: [
     // Classic
@@ -66,25 +70,29 @@ ruleTester.run('no-private-routing-service', rule, {
       errors: [{ message: PRIVATE_ROUTING_SERVICE_ERROR_MESSAGE, type: 'ClassProperty' }],
     },
 
-    // _routerMicrolib
+    // _routerMicrolib (`catchRouterMicrolib` option on)
     {
       code: "get(this, 'router._routerMicrolib');",
       output: null,
+      options: [{ catchRouterMicrolib: true }],
       errors: [{ message: ROUTER_MICROLIB_ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: "get(this, 'router._router._routerMicrolib');",
       output: null,
+      options: [{ catchRouterMicrolib: true }],
       errors: [{ message: ROUTER_MICROLIB_ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.router._routerMicrolib;',
       output: null,
+      options: [{ catchRouterMicrolib: true }],
       errors: [{ message: ROUTER_MICROLIB_ERROR_MESSAGE, type: 'Identifier' }],
     },
     {
       code: 'this.router._router._routerMicrolib;',
       output: null,
+      options: [{ catchRouterMicrolib: true }],
       errors: [{ message: ROUTER_MICROLIB_ERROR_MESSAGE, type: 'Identifier' }],
     },
   ],
