@@ -40,7 +40,9 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
     // Ember test helper method properly imported
     {
       filename: TEST_FILE_NAME,
-      code: `import { blur } from '@ember/test-helpers';
+      code: `
+      import { blur } from '@ember/test-helpers';
+      import foo1, { foo2 } from 'bar';
 
       test('foo', async (assert) => {
         await blur('.some-element');
@@ -48,7 +50,9 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
     },
     {
       filename: TEST_FILE_NAME,
-      code: `import { find } from '@ember/test-helpers';
+      code: `
+      import { find } from '@ember/test-helpers';
+      import foo1, { foo2 } from 'bar';
 
       test('foo', async (assert) => {
         await find('.some-element');
@@ -56,7 +60,9 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
     },
     {
       filename: TEST_FILE_NAME,
-      code: `import { focus } from '@ember/test-helpers';
+      code: `
+      import { focus } from '@ember/test-helpers';
+      import foo1, { foo2 } from 'bar';
 
       test('foo', async (assert) => {
         await focus('.some-element');
@@ -138,20 +144,47 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
     // Method imported from any source
     {
       filename: TEST_FILE_NAME,
-      code: `import { blur } from 'irrelevant-import-path';
-
+      code: `import blur from 'irrelevant-import-path';
       blur('.some-element');`,
     },
     {
       filename: TEST_FILE_NAME,
-      code: `import { find } from 'irrelevant-import-path';
-
+      code: `import { blur } from 'irrelevant-import-path';
+      blur('.some-element');`,
+    },
+    {
+      filename: TEST_FILE_NAME,
+      code: `import { something as blur } from 'irrelevant-import-path';
+      blur('.some-element');`,
+    },
+    {
+      filename: TEST_FILE_NAME,
+      code: `import find from 'irrelevant-import-path';
       find('.some-element');`,
     },
     {
       filename: TEST_FILE_NAME,
+      code: `import { find } from 'irrelevant-import-path';
+      find('.some-element');`,
+    },
+    {
+      filename: TEST_FILE_NAME,
+      code: `import { something as find } from 'irrelevant-import-path';
+      find('.some-element');`,
+    },
+    {
+      filename: TEST_FILE_NAME,
+      code: `import focus from 'irrelevant-import-path';
+      focus('.some-element');`,
+    },
+    {
+      filename: TEST_FILE_NAME,
       code: `import { focus } from 'irrelevant-import-path';
-
+      focus('.some-element');`,
+    },
+    {
+      filename: TEST_FILE_NAME,
+      code: `import { something as focus } from 'irrelevant-import-path';
       focus('.some-element');`,
     },
 
