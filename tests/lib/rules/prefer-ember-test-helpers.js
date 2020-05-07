@@ -256,5 +256,54 @@ ruleTester.run('prefer-ember-test-helpers', rule, {
         },
       ],
     },
+
+    {
+      // Aliased relevant import but didn't use it.
+      filename: TEST_FILE_NAME,
+      code: `
+      import { blur as myBlurName } from '@ember/test-helpers';
+      test('foo', async (assert) => {
+        await blur('.some-element');
+      });`,
+      output: null,
+      errors: [
+        {
+          message: 'Import the `blur()` method from @ember/test-helpers',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Aliased relevant import but didn't use it.
+      filename: TEST_FILE_NAME,
+      code: `
+      import { find as myFindName } from '@ember/test-helpers';
+      test('foo', async (assert) => {
+        await find('.some-element');
+      });`,
+      output: null,
+      errors: [
+        {
+          message: 'Import the `find()` method from @ember/test-helpers',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Aliased relevant import but didn't use it.
+      filename: TEST_FILE_NAME,
+      code: `
+      import { focus as myFocusName } from '@ember/test-helpers';
+      test('foo', async (assert) => {
+        await focus('.some-element');
+      });`,
+      output: null,
+      errors: [
+        {
+          message: 'Import the `focus()` method from @ember/test-helpers',
+          type: 'CallExpression',
+        },
+      ],
+    },
   ],
 });
