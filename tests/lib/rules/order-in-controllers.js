@@ -1,5 +1,3 @@
-/* eslint eslint-plugin/consistent-output: "off" */
-
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
@@ -140,6 +138,10 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         currentUser: service()
       });`,
+      output: `export default Controller.extend({
+        currentUser: service(),
+              queryParams: [],
+});`,
       errors: [
         {
           message:
@@ -153,6 +155,10 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         currentUser: inject()
       });`,
+      output: `export default Controller.extend({
+        currentUser: inject(),
+              queryParams: [],
+});`,
       errors: [
         {
           message:
@@ -167,6 +173,11 @@ eslintTester.run('order-in-controllers', rule, {
         customProp: "test",
         queryParams: []
       });`,
+      output: `export default Controller.extend({
+        currentUser: service(),
+        queryParams: [],
+              customProp: "test",
+});`,
       errors: [
         {
           message: 'The "queryParams" property should be above the "customProp" property on line 3',
@@ -180,6 +191,11 @@ eslintTester.run('order-in-controllers', rule, {
         actions: {},
         customProp: "test"
       });`,
+      output: `export default Controller.extend({
+        queryParams: [],
+        customProp: "test",
+              actions: {},
+});`,
       errors: [
         {
           message: 'The "customProp" property should be above the actions hash on line 3',
@@ -193,6 +209,11 @@ eslintTester.run('order-in-controllers', rule, {
         _customAction() { const foo = 'bar'; },
         actions: {}
       });`,
+      output: `export default Controller.extend({
+        queryParams: [],
+        actions: {},
+              _customAction() { const foo = 'bar'; },
+});`,
       errors: [
         {
           message: 'The actions hash should be above the "_customAction" method on line 3',
@@ -204,6 +225,11 @@ eslintTester.run('order-in-controllers', rule, {
       code: `export default Controller.extend({
         test: "asd",
         queryParams: [],
+        actions: {}
+      });`,
+      output: `export default Controller.extend({
+        queryParams: [],
+        test: "asd",
         actions: {}
       });`,
       errors: [
@@ -218,6 +244,10 @@ eslintTester.run('order-in-controllers', rule, {
         currentUser: service(),
         application: controller()
       });`,
+      output: `export default Controller.extend({
+        application: controller(),
+              currentUser: service(),
+});`,
       errors: [
         {
           message:
@@ -233,6 +263,12 @@ eslintTester.run('order-in-controllers', rule, {
         comp: computed("asd", function() {}),
         actions: {}
       });`,
+      output: `export default Controller.extend({
+        test: "asd",
+        comp: computed("asd", function() {}),
+        obs: observer("asd", function() {}),
+        actions: {}
+      });`,
       errors: [
         {
           message: 'The "comp" single-line function should be above the "obs" observer on line 3',
@@ -246,6 +282,10 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         currentUser: service()
       });`,
+      output: `export default CustomController.extend({
+        currentUser: service(),
+              queryParams: [],
+});`,
       errors: [
         {
           message:
@@ -260,6 +300,10 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         currentUser: service()
       });`,
+      output: `export default CustomController.extend({
+        currentUser: service(),
+              queryParams: [],
+});`,
       errors: [
         {
           message:
@@ -274,6 +318,10 @@ eslintTester.run('order-in-controllers', rule, {
         queryParams: [],
         currentUser: service()
       });`,
+      output: `export default Controller.extend({
+        currentUser: service(),
+              queryParams: [],
+});`,
       errors: [
         {
           message:
@@ -294,6 +342,17 @@ eslintTester.run('order-in-controllers', rule, {
           }
         });
       `,
+      output: `
+        export default Controller.extend({
+          foo: service(),
+          init() {
+            this._super(...arguments);
+          },
+                  actions: {
+            onKeyPress: function (event) {}
+          },
+});
+      `,
       errors: [
         {
           message: 'The "init" lifecycle hook should be above the actions hash on line 4',
@@ -310,6 +369,15 @@ eslintTester.run('order-in-controllers', rule, {
             this._super(...arguments);
           }
         });
+      `,
+      output: `
+        export default Controller.extend({
+          foo: service(),
+          init() {
+            this._super(...arguments);
+          },
+                  customFoo() {},
+});
       `,
       errors: [
         {
@@ -328,6 +396,14 @@ eslintTester.run('order-in-controllers', rule, {
           foo: service()
         });
       `,
+      output: `
+        export default Controller.extend({
+          foo: service(),
+                  init() {
+            this._super(...arguments);
+          },
+});
+      `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
@@ -345,6 +421,14 @@ eslintTester.run('order-in-controllers', rule, {
           },
           someProp: null
         });
+      `,
+      output: `
+        export default Controller.extend({
+          someProp: null,
+                  init() {
+            this._super(...arguments);
+          },
+});
       `,
       errors: [
         {
@@ -374,29 +458,17 @@ eslintTester.run('order-in-controllers', rule, {
     },
     {
       code: `export default Controller.extend({
-        test: "asd",
-        queryParams: [],
-        actions: {}
-      });`,
-      output: `export default Controller.extend({
-        queryParams: [],
-        test: "asd",
-        actions: {}
-      });`,
-      errors: [
-        {
-          message: 'The "queryParams" property should be above the "test" property on line 2',
-          line: 3,
-        },
-      ],
-    },
-    {
-      code: `export default Controller.extend({
         customProp: { a: 1 },
         aMethod() {
           console.log('not empty');
         }
       });`,
+      output: `export default Controller.extend({
+        aMethod() {
+          console.log('not empty');
+        },
+              customProp: { a: 1 },
+});`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [
         {
