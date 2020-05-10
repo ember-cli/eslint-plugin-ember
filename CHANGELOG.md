@@ -1,3 +1,15 @@
+## v8.5.1 (2020-05-10)
+
+#### :bug: Bug Fix
+* [#813](https://github.com/ember-cli/eslint-plugin-ember/pull/813) Fix false positive with multiple imports in [prefer-ember-test-helpers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/prefer-ember-test-helpers.md) rule ([@bmish](https://github.com/bmish))
+* [#812](https://github.com/ember-cli/eslint-plugin-ember/pull/812) Fix false negative when aliasing import in [prefer-ember-test-helpers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/prefer-ember-test-helpers.md) rule ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#814](https://github.com/ember-cli/eslint-plugin-ember/pull/814) Upgrade to eslint 7 internally ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v8.5.0 (2020-05-06)
 
 #### :rocket: Enhancement
