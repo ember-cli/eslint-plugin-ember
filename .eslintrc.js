@@ -4,17 +4,9 @@ module.exports = {
   root: true,
   parserOptions: {
     ecmaVersion: 2017,
-    sourceType: 'script'
+    sourceType: 'script',
   },
-  plugins: [
-    'eslint-plugin',
-    'filenames',
-    'import',
-    'jest',
-    'node',
-    'prettier',
-    'unicorn'
-  ],
+  plugins: ['eslint-plugin', 'filenames', 'import', 'jest', 'node', 'prettier', 'unicorn'],
   extends: [
     'eslint:recommended',
     'plugin:eslint-comments/recommended',
@@ -25,7 +17,7 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:node/recommended',
     'plugin:unicorn/recommended',
-    'prettier'
+    'prettier',
   ],
   env: {
     es6: true,
@@ -40,6 +32,7 @@ module.exports = {
     'consistent-return': 'error',
     curly: 'error',
     'default-case': 'error',
+    'default-case-last': 'error',
     eqeqeq: 'error',
     'new-parens': 'error',
     'no-async-promise-executor': 'error',
@@ -65,6 +58,7 @@ module.exports = {
     'no-throw-literal': 'error',
     'no-unused-expressions': 'error',
     'no-use-before-define': ['error', 'nofunc'],
+    'no-useless-backreference': 'error',
     'no-useless-call': 'error',
     'no-useless-catch': 'error',
     'no-useless-computed-key': 'error',
@@ -83,7 +77,7 @@ module.exports = {
     'prefer-rest-params': 'error',
     'prefer-spread': 'error',
     'prefer-template': 'error',
-    'quotes': ['error', 'single', { avoidEscape: true, allowTemplateLiterals: false }], // Disallow unnecessary template literals.
+    quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: false }], // Disallow unnecessary template literals.
     radix: 'error',
     'require-atomic-updates': 'error',
     'require-await': 'error',
@@ -100,13 +94,17 @@ module.exports = {
     // eslint-plugin rules:
     'eslint-plugin/consistent-output': ['error', 'always'],
     'eslint-plugin/no-deprecated-report-api': 'off',
-    'eslint-plugin/require-meta-docs-url': ['error', {
-      pattern: 'https://github.com/ember-cli/eslint-plugin-ember/tree/master/docs/rules/{{name}}.md',
-    }],
+    'eslint-plugin/require-meta-docs-url': [
+      'error',
+      {
+        pattern:
+          'https://github.com/ember-cli/eslint-plugin-ember/tree/master/docs/rules/{{name}}.md',
+      },
+    ],
     'eslint-plugin/test-case-property-ordering': 'off',
 
     // Filenames:
-    'filenames/match-regex': ['error', '^[a-z0-9-]+$'], // Kebab-case.
+    'filenames/match-regex': ['error', '^.?[a-z0-9-]+$'], // Kebab-case.
 
     // Optional jest rules:
     'jest/consistent-test-it': 'error',
@@ -127,31 +125,31 @@ module.exports = {
     'jest/valid-title': 'error',
 
     // Optional import rules:
-    'import/extensions': 'error',
-    'import/first': 'error',
-    'import/newline-after-import': 'error',
-    'import/no-absolute-path': 'error',
-    'import/no-cycle': 'error',
-    'import/no-deprecated': 'error',
-    'import/no-dynamic-require': 'error',
-    'import/no-mutable-exports': 'error',
-    'import/no-named-default': 'error',
-    'import/no-self-import': 'error',
-    'import/no-unassigned-import': 'error',
-    'import/no-unused-modules': 'error',
-    'import/no-useless-path-segments': 'error',
-    'import/no-webpack-loader-syntax': 'error',
+    'import/extensions': 'error',
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-absolute-path': 'error',
+    'import/no-cycle': 'error',
+    'import/no-deprecated': 'error',
+    'import/no-dynamic-require': 'error',
+    'import/no-mutable-exports': 'error',
+    'import/no-named-default': 'error',
+    'import/no-self-import': 'error',
+    'import/no-unassigned-import': 'error',
+    'import/no-unused-modules': 'error',
+    'import/no-useless-path-segments': 'error',
+    'import/no-webpack-loader-syntax': 'error',
     'import/unambiguous': 'error',
 
     // Unicorn rules:
     'unicorn/no-fn-reference-in-iterator': 'off',
     'unicorn/no-null': 'off',
-    'unicorn/prevent-abbreviations': 'off'
+    'unicorn/prevent-abbreviations': 'off',
   },
   overrides: [
     {
       // Test files:
-      files: ['tests/**/*.js',],
+      files: ['tests/**/*.js'],
       env: { jest: true },
     },
     {
@@ -161,7 +159,7 @@ module.exports = {
       parser: 'babel-eslint',
       parserOptions: {
         sourceType: 'module',
-        ecmaFeatures: { legacyDecorators: true }
+        ecmaFeatures: { legacyDecorators: true },
       },
       rules: {
         // Ignore violations that generally don't matter inside code samples.
@@ -181,8 +179,8 @@ module.exports = {
         'node/no-missing-require': 'off',
         'node/no-unsupported-features/es-syntax': 'off',
         'prettier/prettier': ['error', { trailingComma: 'none' }],
-        'unicorn/filename-case': 'off'
-      }
-    }
+        'unicorn/filename-case': 'off',
+      },
+    },
   ],
 };

@@ -1,5 +1,3 @@
-/* eslint eslint-plugin/consistent-output: "off" */
-
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
@@ -99,6 +97,12 @@ eslintTester.run('order-in-models', rule, {
         mood: computed("health", "hunger", function() {
         })
       });`,
+      output: `export default Model.extend({
+        shape: attr("string"),
+        behaviors: hasMany("behaviour"),
+        mood: computed("health", "hunger", function() {
+        })
+      });`,
       errors: [
         {
           message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
@@ -113,6 +117,12 @@ eslintTester.run('order-in-models', rule, {
         }),
         behaviors: hasMany("behaviour")
       });`,
+      output: `export default Model.extend({
+        shape: attr("string"),
+        behaviors: hasMany("behaviour"),
+              mood: computed("health", "hunger", function() {
+        }),
+});`,
       errors: [
         {
           message:
@@ -127,6 +137,11 @@ eslintTester.run('order-in-models', rule, {
         }),
         shape: attr("string")
       });`,
+      output: `export default Model.extend({
+        shape: attr("string"),
+              mood: computed("health", "hunger", function() {
+        }),
+});`,
       errors: [
         {
           message: 'The "shape" attribute should be above the "mood" multi-line function on line 2',
@@ -138,6 +153,12 @@ eslintTester.run('order-in-models', rule, {
       code: `export default DS.Model.extend({
         behaviors: hasMany("behaviour"),
         shape: DS.attr("string"),
+        mood: Ember.computed("health", "hunger", function() {
+        })
+      });`,
+      output: `export default DS.Model.extend({
+        shape: DS.attr("string"),
+        behaviors: hasMany("behaviour"),
         mood: Ember.computed("health", "hunger", function() {
         })
       });`,
@@ -155,6 +176,12 @@ eslintTester.run('order-in-models', rule, {
         }),
         behaviors: hasMany("behaviour")
       });`,
+      output: `export default DS.Model.extend({
+        shape: attr("string"),
+        behaviors: hasMany("behaviour"),
+              mood: computed("health", "hunger", function() {
+        }),
+});`,
       errors: [
         {
           message:
@@ -169,6 +196,11 @@ eslintTester.run('order-in-models', rule, {
         }),
         shape: attr("string")
       });`,
+      output: `export default DS.Model.extend({
+        shape: attr("string"),
+              mood: computed("health", "hunger", function() {
+        }),
+});`,
       errors: [
         {
           message: 'The "shape" attribute should be above the "mood" multi-line function on line 2',
@@ -182,6 +214,11 @@ eslintTester.run('order-in-models', rule, {
         }),
         test: computed.alias("qwerty")
       });`,
+      output: `export default DS.Model.extend({
+        test: computed.alias("qwerty"),
+              mood: computed("health", "hunger", function() {
+        }),
+});`,
       errors: [
         {
           message:
@@ -196,6 +233,11 @@ eslintTester.run('order-in-models', rule, {
         }),
         test: computed.alias("qwerty")
       });`,
+      output: `export default DS.Model.extend(TestMixin, {
+        test: computed.alias("qwerty"),
+              mood: computed("health", "hunger", function() {
+        }),
+});`,
       errors: [
         {
           message:
@@ -210,31 +252,16 @@ eslintTester.run('order-in-models', rule, {
         }),
         test: computed.alias("qwerty")
       });`,
+      output: `export default DS.Model.extend(TestMixin, TestMixin2, {
+        test: computed.alias("qwerty"),
+              mood: computed("health", "hunger", function() {
+        }),
+});`,
       errors: [
         {
           message:
             'The "test" single-line function should be above the "mood" multi-line function on line 2',
           line: 4,
-        },
-      ],
-    },
-    {
-      code: `export default Model.extend({
-        behaviors: hasMany("behaviour"),
-        shape: attr("string"),
-        mood: computed("health", "hunger", function() {
-        })
-      });`,
-      output: `export default Model.extend({
-        shape: attr("string"),
-        behaviors: hasMany("behaviour"),
-        mood: computed("health", "hunger", function() {
-        })
-      });`,
-      errors: [
-        {
-          message: 'The "shape" attribute should be above the "behaviors" relationship on line 2',
-          line: 3,
         },
       ],
     },
@@ -245,6 +272,12 @@ eslintTester.run('order-in-models', rule, {
           console.log('not empty');
         }
       });`,
+      output: `export default DS.Model.extend({
+        aMethod() {
+          console.log('not empty');
+        },
+              customProp: { a: 1 },
+});`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [
         {

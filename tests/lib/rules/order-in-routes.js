@@ -1,5 +1,3 @@
-/* eslint eslint-plugin/consistent-output: "off" */
-
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
@@ -168,6 +166,16 @@ eslintTester.run('order-in-routes', rule, {
         actions: {},
         _customAction() {}
       });`,
+      output: `export default Route.extend({
+        currentUser: service(),
+        queryParams: {},
+        customProp: "test",
+        vehicle: alias("car"),
+        beforeModel() {},
+        model() {},
+        actions: {},
+        _customAction() {}
+      });`,
       errors: [
         {
           message:
@@ -192,6 +200,16 @@ eslintTester.run('order-in-routes', rule, {
         actions: {},
         _customAction() {}
       });`,
+      output: `export default Route.extend({
+        currentUser: inject(),
+        queryParams: {},
+        customProp: "test",
+        vehicle: alias("car"),
+        beforeModel() {},
+        model() {},
+        actions: {},
+        _customAction() {}
+      });`,
       errors: [
         {
           message:
@@ -209,6 +227,16 @@ eslintTester.run('order-in-routes', rule, {
       code: `export default Route.extend({
         customProp: "test",
         queryParams: {},
+        beforeModel() {},
+        model() {},
+        actions: {},
+        _customAction() {},
+        levelOfHappiness: computed("attitude", "health", () => {
+        })
+      });`,
+      output: `export default Route.extend({
+        queryParams: {},
+        customProp: "test",
         beforeModel() {},
         model() {},
         actions: {},
@@ -238,6 +266,14 @@ eslintTester.run('order-in-routes', rule, {
         actions: {},
         _customAction() {}
       });`,
+      output: `export default Route.extend({
+        queryParams: {},
+        customProp: "test",
+        model() {},
+        beforeModel() {},
+        actions: {},
+        _customAction() {}
+      });`,
       errors: [
         {
           message:
@@ -259,6 +295,14 @@ eslintTester.run('order-in-routes', rule, {
         _customAction() { const foo = 'bar'; },
         actions: {}
       });`,
+      output: `export default Route.extend({
+        queryParams: {},
+        customProp: "test",
+        vehicle: alias("car"),
+        model() {},
+        actions: {},
+              _customAction() { const foo = 'bar'; },
+});`,
       errors: [
         {
           message:
@@ -277,6 +321,11 @@ eslintTester.run('order-in-routes', rule, {
         customProp: "test",
         actions: {}
       });`,
+      output: `export default Route.extend({
+        customProp: "test",
+        model() {},
+        actions: {}
+      });`,
       errors: [
         {
           message: 'The "customProp" property should be above the "model" hook on line 2',
@@ -288,6 +337,11 @@ eslintTester.run('order-in-routes', rule, {
       code: `export default Route.extend({
         test: "asd",
         mergedProperties: {},
+        model() {}
+      });`,
+      output: `export default Route.extend({
+        mergedProperties: {},
+        test: "asd",
         model() {}
       });`,
       errors: [
@@ -315,6 +369,28 @@ eslintTester.run('order-in-routes', rule, {
         activate() {},
         deactivate() {},
         renderTemplate() {},
+        resetController() {},
+        actions: {},
+        _customAction() {},
+        _customAction2: function() {},
+        tSomeTask: task(function* () {})
+      });`,
+      output: `export default Route.extend({
+        currentUser: service(),
+        queryParams: {},
+        customProp: "test",
+        vehicle: alias("car"),
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
+        beforeModel() {},
+        model() {},
+        afterModel() {},
+        redirect() {},
+        setupController() {},
+        serialize() {},
+        activate() {},
+        renderTemplate() {},
+        deactivate() {},
         resetController() {},
         actions: {},
         _customAction() {},
@@ -355,6 +431,11 @@ eslintTester.run('order-in-routes', rule, {
         _test2() { const foo = 'bar'; },
         model() {}
       });`,
+      output: `export default Route.extend({
+        test: "asd",
+        model() {},
+              _test2() { const foo = 'bar'; },
+});`,
       errors: [
         {
           message: 'The "model" hook should be above the "_test2" method on line 3',
@@ -368,6 +449,10 @@ eslintTester.run('order-in-routes', rule, {
         model() {},
         test: "asd",
       });`,
+      output: `export default CustomRoute.extend({
+        test: "asd",
+              model() {},
+});`,
       errors: [
         {
           message: 'The "test" property should be above the "model" hook on line 2',
@@ -381,6 +466,10 @@ eslintTester.run('order-in-routes', rule, {
         model() {},
         test: "asd",
       });`,
+      output: `export default CustomRoute.extend({
+        test: "asd",
+              model() {},
+});`,
       errors: [
         {
           message: 'The "test" property should be above the "model" hook on line 2',
@@ -394,6 +483,10 @@ eslintTester.run('order-in-routes', rule, {
         model() {},
         test: "asd",
       });`,
+      output: `export default Route.extend({
+        test: "asd",
+              model() {},
+});`,
       errors: [
         {
           message: 'The "test" property should be above the "model" hook on line 2',
@@ -410,6 +503,15 @@ eslintTester.run('order-in-routes', rule, {
             this._super(...arguments);
           }
         });
+      `,
+      output: `
+        export default Route.extend({
+          foo: service(),
+          init() {
+            this._super(...arguments);
+          },
+                  actions: {},
+});
       `,
       errors: [
         {
@@ -428,6 +530,15 @@ eslintTester.run('order-in-routes', rule, {
           },
         });
       `,
+      output: `
+        export default Route.extend({
+          foo: service(),
+          init() {
+            this._super(...arguments);
+          },
+                  customFoo() {},
+});
+      `,
       errors: [
         {
           message:
@@ -444,6 +555,14 @@ eslintTester.run('order-in-routes', rule, {
           },
           foo: service()
         });
+      `,
+      output: `
+        export default Route.extend({
+          foo: service(),
+                  init() {
+            this._super(...arguments);
+          },
+});
       `,
       errors: [
         {
@@ -462,44 +581,18 @@ eslintTester.run('order-in-routes', rule, {
           someProp: null
         });
       `,
+      output: `
+        export default Route.extend({
+          someProp: null,
+                  init() {
+            this._super(...arguments);
+          },
+});
+      `,
       errors: [
         {
           message: 'The "someProp" property should be above the "init" lifecycle hook on line 3',
           line: 6,
-        },
-      ],
-    },
-    {
-      code: `export default Route.extend({
-        queryParams: {},
-        currentUser: service(),
-        customProp: "test",
-        beforeModel() {},
-        model() {},
-        vehicle: alias("car"),
-        actions: {},
-        _customAction() {}
-      });`,
-      output: `export default Route.extend({
-        currentUser: service(),
-        queryParams: {},
-        customProp: "test",
-        vehicle: alias("car"),
-        beforeModel() {},
-        model() {},
-        actions: {},
-        _customAction() {}
-      });`,
-      errors: [
-        {
-          message:
-            'The "currentUser" service injection should be above the inherited "queryParams" property on line 2',
-          line: 3,
-        },
-        {
-          message:
-            'The "vehicle" single-line function should be above the "beforeModel" lifecycle hook on line 5',
-          line: 7,
         },
       ],
     },
@@ -651,6 +744,12 @@ eslintTester.run('order-in-routes', rule, {
           console.log('not empty');
         }
       });`,
+      output: `export default Route.extend({
+        aMethod() {
+          console.log('not empty');
+        },
+              customProp: { a: 1 },
+});`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [
         {

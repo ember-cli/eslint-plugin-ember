@@ -1,5 +1,3 @@
-/* eslint eslint-plugin/consistent-output: "off" */
-
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
@@ -355,6 +353,16 @@ eslintTester.run('order-in-components', rule, {
         levelOfHappiness: computed("attitude", "health", () => {
         })
       });`,
+      output: `export default Component.extend({
+        role: "sloth",
+
+        actions: {},
+
+        vehicle: alias("car"),
+
+        levelOfHappiness: computed("attitude", "health", () => {
+        })
+      });`,
       errors: [
         {
           message: 'The "role" property should be above the actions hash on line 2',
@@ -376,6 +384,16 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
 
         role: ${`${'sloth'}`},
+
+        vehicle: alias("car"),
+
+        levelOfHappiness: computed("attitude", "health", () => {
+        })
+      });`,
+      output: `export default Component.extend({
+        role: ${`${'sloth'}`},
+
+        actions: {},
 
         vehicle: alias("car"),
 
@@ -409,6 +427,16 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
+      output: `export default Component.extend({
+        role: "sloth",
+
+        vehicle: alias("car"),
+
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
+
+        actions: {}
+      });`,
       errors: [
         {
           message:
@@ -423,6 +451,16 @@ eslintTester.run('order-in-components', rule, {
         }),
 
         vehicle: alias("car"),
+
+        role: "sloth",
+
+        actions: {}
+      });`,
+      output: `export default Component.extend({
+        vehicle: alias("car"),
+
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
 
         role: "sloth",
 
@@ -452,6 +490,16 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
+      output: `export default Component.extend(TestMixin, {
+        vehicle: alias("car"),
+
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
+
+        role: "sloth",
+
+        actions: {}
+      });`,
       errors: [
         {
           message:
@@ -471,6 +519,16 @@ eslintTester.run('order-in-components', rule, {
         }),
 
         vehicle: alias("car"),
+
+        role: "sloth",
+
+        actions: {}
+      });`,
+      output: `export default Component.extend(TestMixin, TestMixin2, {
+        vehicle: alias("car"),
+
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
 
         role: "sloth",
 
@@ -494,6 +552,10 @@ eslintTester.run('order-in-components', rule, {
         abc: true,
         i18n: service()
       });`,
+      output: `export default Component.extend({
+        i18n: service(),
+              abc: true,
+});`,
       errors: [
         {
           message: 'The "i18n" service injection should be above the "abc" property on line 2',
@@ -506,6 +568,10 @@ eslintTester.run('order-in-components', rule, {
         vehicle: alias("car"),
         i18n: service()
       });`,
+      output: `export default Component.extend({
+        i18n: service(),
+              vehicle: alias("car"),
+});`,
       errors: [
         {
           message:
@@ -522,6 +588,13 @@ eslintTester.run('order-in-components', rule, {
           i18n: inject()
         });
       `,
+      output: `
+        import { inject } from '@ember/service';
+        export default Component.extend({
+          i18n: inject(),
+                  vehicle: alias("car"),
+});
+      `,
       errors: [
         {
           message:
@@ -536,6 +609,11 @@ eslintTester.run('order-in-components', rule, {
         }),
         vehicle: alias("car")
       });`,
+      output: `export default Component.extend({
+        vehicle: alias("car"),
+              levelOfHappiness: observer("attitude", "health", () => {
+        }),
+});`,
       errors: [
         {
           message:
@@ -551,6 +629,12 @@ eslintTester.run('order-in-components', rule, {
         aaa: computed("attitude", "health", () => {
         })
       });`,
+      output: `export default Component.extend({
+        aaa: computed("attitude", "health", () => {
+        }),
+              levelOfHappiness: observer("attitude", "health", () => {
+        }),
+});`,
       errors: [
         {
           message:
@@ -566,6 +650,12 @@ eslintTester.run('order-in-components', rule, {
         levelOfHappiness: observer("attitude", "health", () => {
         })
       });`,
+      output: `export default Component.extend({
+        levelOfHappiness: observer("attitude", "health", () => {
+        }),
+              init() {
+        },
+});`,
       errors: [
         {
           message:
@@ -580,6 +670,11 @@ eslintTester.run('order-in-components', rule, {
         init() {
         }
       });`,
+      output: `export default Component.extend({
+        init() {
+        },
+              actions: {},
+});`,
       errors: [
         {
           message: 'The "init" lifecycle hook should be above the actions hash on line 2',
@@ -594,6 +689,12 @@ eslintTester.run('order-in-components', rule, {
         },
         actions: {}
       });`,
+      output: `export default Component.extend({
+        actions: {},
+              customFunc() {
+          const foo = 'bar';
+        },
+});`,
       errors: [
         {
           message: 'The actions hash should be above the "customFunc" method on line 2',
@@ -607,6 +708,11 @@ eslintTester.run('order-in-components', rule, {
         }),
         actions: {}
       });`,
+      output: `export default Component.extend({
+        actions: {},
+              tAction: test(function() {
+        }),
+});`,
       errors: [
         {
           message: 'The actions hash should be above the "tAction" method on line 2',
@@ -624,6 +730,18 @@ eslintTester.run('order-in-components', rule, {
         vehicle: alias("car"),
 
         role: "sloth",
+
+        actions: {}
+      });`,
+      output: `export default Component.extend(TestMixin, TestMixin2, {
+        role: "sloth",
+
+        foo: alias("car"),
+
+        levelOfHappiness: computed("attitude", "health", () => {
+        }),
+
+        vehicle: alias("car"),
 
         actions: {}
       });`,
@@ -646,6 +764,12 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
         [foo]: 'foo',
       });`,
+      output: `let foo = 'foo';
+
+      export default Component.extend(TestMixin, TestMixin2, {
+        [foo]: 'foo',
+              actions: {},
+});`,
       errors: [
         {
           message: 'The property should be above the actions hash on line 4',
@@ -659,6 +783,10 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
         role: "sloth",
       });`,
+      output: `export default CustomComponent.extend({
+        role: "sloth",
+              actions: {},
+});`,
       errors: [
         {
           message: 'The "role" property should be above the actions hash on line 2',
@@ -672,6 +800,10 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
         role: "sloth",
       });`,
+      output: `export default CustomComponent.extend({
+        role: "sloth",
+              actions: {},
+});`,
       errors: [
         {
           message: 'The "role" property should be above the actions hash on line 2',
@@ -685,6 +817,10 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
         role: "sloth",
       });`,
+      output: `export default Component.extend({
+        role: "sloth",
+              actions: {},
+});`,
       errors: [
         {
           message: 'The "role" property should be above the actions hash on line 2',
@@ -698,6 +834,11 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
         template: hbs\`Hello world {{name}}\`,
       });`,
+      output: `export default Component.extend({
+        name: "Jon Snow",
+        template: hbs\`Hello world {{name}}\`,
+              actions: {},
+});`,
       errors: [
         {
           message: 'The "template" property should be above the actions hash on line 3',
@@ -712,6 +853,12 @@ eslintTester.run('order-in-components', rule, {
 
         tabindex: -1,
       });`,
+      output: `export default Component.extend({
+        layout,
+        tabindex: -1,
+              someComputedValue: computed.reads('count'),
+
+});`,
       errors: [
         {
           message:
@@ -726,6 +873,11 @@ eslintTester.run('order-in-components', rule, {
         }).volatile(),
         name: "Jon Snow",
       });`,
+      output: `export default Component.extend({
+        name: "Jon Snow",
+              foo: computed(function() {
+        }).volatile(),
+});`,
       errors: [
         {
           message: 'The "name" property should be above the "foo" multi-line function on line 2',
@@ -737,6 +889,13 @@ eslintTester.run('order-in-components', rule, {
       code: `export default Component.extend({
         actions: {},
         didReceiveAttrs() {},
+        willDestroyElement() {},
+        didInsertElement() {},
+        init() {},
+      });`,
+      output: `export default Component.extend({
+        didReceiveAttrs() {},
+        actions: {},
         willDestroyElement() {},
         didInsertElement() {},
         init() {},
@@ -768,6 +927,13 @@ eslintTester.run('order-in-components', rule, {
         foo: computed(function() {
         }).volatile(),
         onFoo() {},
+        bar() { const foo = 'bar'},
+        onBar: () => {}
+      });`,
+      output: `export default Component.extend({
+        onFoo() {},
+        foo: computed(function() {
+        }).volatile(),
         bar() { const foo = 'bar'},
         onBar: () => {}
       });`,
@@ -816,6 +982,11 @@ eslintTester.run('order-in-components', rule, {
         actions: {},
         customProp: { a: 1 }
       });`,
+      output: `export default Component.extend({
+        prop: null,
+        customProp: { a: 1 },
+              actions: {},
+});`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [
         {
@@ -836,6 +1007,12 @@ eslintTester.run('order-in-components', rule, {
           console.log('not empty');
         }
       });`,
+      output: `export default Component.extend({
+        aMethod() {
+          console.log('not empty');
+        },
+              customProp: { a: 1 },
+});`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [
         {
