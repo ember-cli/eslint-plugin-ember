@@ -63,7 +63,7 @@
   },
   "dependencies": {
     "@ember-data/rfc395-data": "^0.0.4",
-    "ember-rfc176-data": "^0.3.12",
+    "ember-rfc176-data": "^0.3.13",
     "snake-case": "^3.0.3"
   },
   "changelog": {
