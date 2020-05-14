@@ -2,6 +2,7 @@
 
 module.exports = {
   root: true,
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2017,
     sourceType: 'script',
@@ -144,6 +145,8 @@ module.exports = {
     // Unicorn rules:
     'unicorn/no-fn-reference-in-iterator': 'off',
     'unicorn/no-null': 'off',
+    'unicorn/no-reduce': 'off',
+    'unicorn/no-useless-undefined': 'off',
     'unicorn/prevent-abbreviations': 'off',
   },
   overrides: [
@@ -156,7 +159,6 @@ module.exports = {
       // Markdown code samples in documentation:
       files: ['**/*.md'],
       plugins: ['markdown'],
-      parser: 'babel-eslint',
       parserOptions: {
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
