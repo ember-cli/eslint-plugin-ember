@@ -86,6 +86,27 @@ describe('isModuleByFilePath', () => {
     const filePath = 'example-app/components/path/to/some-component.ts';
     expect(emberUtils.isModuleByFilePath(filePath, 'component')).toBeTruthy();
   });
+
+  // Avoid false positives:
+  it('should not detect a component in a folder named `fake-components`', () => {
+    const filePath = 'example-app/fake-components/path/to/file.js';
+    expect(emberUtils.isModuleByFilePath(filePath, 'component')).toBeFalsy();
+  });
+
+  it('should not detect a component with a file named `components`', () => {
+    const filePath = 'example-app/some-folder/path/to/components';
+    expect(emberUtils.isModuleByFilePath(filePath, 'component')).toBeFalsy();
+  });
+
+  it('should not detect a component with a directory named `component.js`', () => {
+    const filePath = 'example-app/component.js/path/to/file.js';
+    expect(emberUtils.isModuleByFilePath(filePath, 'component')).toBeFalsy();
+  });
+
+  it('should not detect a component with a directory named `component.ts`', () => {
+    const filePath = 'example-app/component.ts/path/to/file.js';
+    expect(emberUtils.isModuleByFilePath(filePath, 'component')).toBeFalsy();
+  });
 });
 
 describe('isMirageDirectory', () => {
