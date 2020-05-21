@@ -1,3 +1,15 @@
+## v8.5.2 (2020-05-21)
+
+#### :bug: Bug Fix
+* [#821](https://github.com/ember-cli/eslint-plugin-ember/pull/821) Avoid some false positives when detecting if a file is an Ember component, controller, etc ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#823](https://github.com/ember-cli/eslint-plugin-ember/pull/823) Include recommended fix in [no-ember-super-in-es-classes](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-ember-super-in-es-classes.md) rule error message ([@GoygovRustam](https://github.com/GoygovRustam))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Rustam Goygov ([@GoygovRustam](https://github.com/GoygovRustam))
+
 ## v8.5.1 (2020-05-10)
 
 #### :bug: Bug Fix
