@@ -194,3 +194,42 @@ describe('isUnaryExpression', () => {
     expect(types.isUnaryExpression(node)).toBeTruthy();
   });
 });
+
+describe('hasDecorator', () => {
+  const expressionlessParse = (code) => babelEslint.parse(code).body[0];
+  const withDecorator = '@classic class Rectangle {}';
+  const withoutDecorator = 'class Rectangle {}';
+  const testCases = [
+    {
+      code: withoutDecorator,
+      decoratorName: undefined,
+      expected: false,
+    },
+    {
+      code: withoutDecorator,
+      decoratorName: 'classic',
+      expected: false,
+    },
+    {
+      code: withDecorator,
+      decoratorName: undefined,
+      expected: true,
+    },
+    {
+      code: withDecorator,
+      decoratorName: 'classic',
+      expected: true,
+    },
+    {
+      code: withDecorator,
+      decoratorName: 'someOtherDecoratorName',
+      expected: false,
+    },
+  ];
+  testCases.forEach(({ code, decoratorName, expected }) => {
+    it(`('${code}', '${decoratorName}') => ${expected}`, () => {
+      const node = expressionlessParse(code);
+      expect(types.hasDecorator(node, decoratorName)).toStrictEqual(expected);
+    });
+  });
+});

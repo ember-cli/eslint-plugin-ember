@@ -47,13 +47,32 @@ export default Component.extend({});
 ```
 
 ```js
+// Allowed if `ignoreClassic` option is enabled.
+import { computed } from '@ember/object';
+import { alias, or, and } from '@ember/object/computed';
+import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+
+@classic
+export default class MyComponent extends Component {}
+```
+
+```js
 import { tracked } from '@glimmer/tracking';
 import Component from '@ember/component';
 
 export default class MyComponent extends Component {}
 ```
 
+## Configuration
+
+This rule takes an optional object containing:
+
+* `boolean` -- `ignoreClassic` -- whether the rule should ignore usage inside of native classes labeled with `@classic` (default `true`)
+
 ## References
 
 * [Ember Guides: Tracked Properties](https://octane-guides-preview.emberjs.com/release/state-management/tracked-properties/)
 * [Tracked Properties Deep Dive](https://www.pzuraq.com/coming-soon-in-ember-octane-part-3-tracked-properties/)
+* [ember-native-class-codemod](https://github.com/ember-codemods/ember-native-class-codemod)
+* [ember-classic-decorator](https://github.com/emberjs/ember-classic-decorator)
