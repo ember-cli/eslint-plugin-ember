@@ -5,7 +5,7 @@ Enforce the consistent use of getters in computed properties.
 Computed properties may be created with or without a `get` method. This rule ensures that the choice
 is consistent.
 
-## Options
+## Configuration
 
 This rule takes a single string option.
 

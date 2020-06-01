@@ -5,12 +5,33 @@ const { join } = require('path');
 const rules = require('../lib').rules;
 const recommendedRules = require('../lib/recommended-rules.js');
 const octaneRules = require('../lib/octane-rules.js');
+const { flatten } = require('../lib/utils/javascript');
 
 const RULE_NAMES = Object.keys(rules);
 const RECOMMENDED_RULE_NAMES = Object.keys(recommendedRules).map((name) =>
   name.replace('ember/', '')
 );
 const OCTANE_RULE_NAMES = Object.keys(octaneRules).map((name) => name.replace('ember/', ''));
+
+function getAllNamedOptions(jsonSchema) {
+  if (!jsonSchema) {
+    return [];
+  }
+
+  if (Array.isArray(jsonSchema)) {
+    return flatten(jsonSchema.map(getAllNamedOptions));
+  }
+
+  if (jsonSchema.items) {
+    return getAllNamedOptions(jsonSchema.items);
+  }
+
+  if (jsonSchema.properties) {
+    return Object.keys(jsonSchema.properties);
+  }
+
+  return [];
+}
 
 describe('rules setup is correct', function () {
   it('should have a list of exported rules and rules directory that match', function () {
@@ -73,6 +94,22 @@ describe('rules setup is correct', function () {
 
       expect(file).toContain(`# ${ruleName}`); // Title header.
       expect(file).toContain('## Examples'); // Examples section header.
+
+      // Check if the rule has configuration options.
+      if (
+        (Array.isArray(rule.meta.schema) && rule.meta.schema.length > 0) ||
+        (typeof rule.meta.schema === 'object' && Object.keys(rule.meta.schema).length > 0)
+      ) {
+        // Should have a configuration section header:
+        expect(file).toContain('## Configuration');
+
+        // Ensure all configuration options are mentioned.
+        getAllNamedOptions(rule.meta.schema).forEach((namedOption) =>
+          expect(file).toContain(namedOption)
+        );
+      } else {
+        expect(file).not.toContain('## Configuration');
+      }
 
       if (rule.meta.fixable === 'code') {
         expect(file).toContain(FIXABLE_MSG);
