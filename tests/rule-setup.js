@@ -78,7 +78,7 @@ describe('rules setup is correct', function () {
     );
   });
 
-  it('should have the right contents (title, examples, notices) for each rule documentation file', function () {
+  describe('rule documentation files', function () {
     const CONFIG_MSG_RECOMMENDED =
       ':white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.';
     const CONFIG_MSG_OCTANE =
@@ -92,42 +92,47 @@ describe('rules setup is correct', function () {
       const path = join(__dirname, '..', 'docs', 'rules', `${ruleName}.md`);
       const file = readFileSync(path, 'utf8');
 
-      expect(file).toContain(`# ${ruleName}`); // Title header.
-      expect(file).toContain('## Examples'); // Examples section header.
+      // eslint-disable-next-line jest/valid-title
+      describe(ruleName, function () {
+        it('should have the right contents (title, examples, notices)', function () {
+          expect(file).toContain(`# ${ruleName}`); // Title header.
+          expect(file).toContain('## Examples'); // Examples section header.
 
-      // Check if the rule has configuration options.
-      if (
-        (Array.isArray(rule.meta.schema) && rule.meta.schema.length > 0) ||
-        (typeof rule.meta.schema === 'object' && Object.keys(rule.meta.schema).length > 0)
-      ) {
-        // Should have a configuration section header:
-        expect(file).toContain('## Configuration');
+          // Check if the rule has configuration options.
+          if (
+            (Array.isArray(rule.meta.schema) && rule.meta.schema.length > 0) ||
+            (typeof rule.meta.schema === 'object' && Object.keys(rule.meta.schema).length > 0)
+          ) {
+            // Should have a configuration section header:
+            expect(file).toContain('## Configuration');
 
-        // Ensure all configuration options are mentioned.
-        getAllNamedOptions(rule.meta.schema).forEach((namedOption) =>
-          expect(file).toContain(namedOption)
-        );
-      } else {
-        expect(file).not.toContain('## Configuration');
-      }
+            // Ensure all configuration options are mentioned.
+            getAllNamedOptions(rule.meta.schema).forEach((namedOption) =>
+              expect(file).toContain(namedOption)
+            );
+          } else {
+            expect(file).not.toContain('## Configuration');
+          }
 
-      if (rule.meta.fixable === 'code') {
-        expect(file).toContain(FIXABLE_MSG);
-      } else {
-        expect(file).not.toContain(FIXABLE_MSG);
-      }
+          if (rule.meta.fixable === 'code') {
+            expect(file).toContain(FIXABLE_MSG);
+          } else {
+            expect(file).not.toContain(FIXABLE_MSG);
+          }
 
-      if (rule.meta.docs.recommended) {
-        expect(file).toContain(CONFIG_MSG_RECOMMENDED);
-      } else {
-        expect(file).not.toContain(CONFIG_MSG_RECOMMENDED);
-      }
+          if (rule.meta.docs.recommended) {
+            expect(file).toContain(CONFIG_MSG_RECOMMENDED);
+          } else {
+            expect(file).not.toContain(CONFIG_MSG_RECOMMENDED);
+          }
 
-      if (rule.meta.docs.octane) {
-        expect(file).toContain(CONFIG_MSG_OCTANE);
-      } else {
-        expect(file).not.toContain(CONFIG_MSG_OCTANE);
-      }
+          if (rule.meta.docs.octane) {
+            expect(file).toContain(CONFIG_MSG_OCTANE);
+          } else {
+            expect(file).not.toContain(CONFIG_MSG_OCTANE);
+          }
+        });
+      });
     });
   });
 
