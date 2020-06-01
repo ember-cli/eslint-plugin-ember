@@ -57,3 +57,9 @@ export default Component.extend({
     document.body.classList.add('expanded');
   }
 });
+```
+
+## RFCs
+
+- [Make jQuery optional](https://github.com/emberjs/rfcs/blob/master/text/0294-optional-jquery.md)
+- [Remove jQuery by default](https://github.com/emberjs/rfcs/blob/master/text/0386-remove-jquery.md)
