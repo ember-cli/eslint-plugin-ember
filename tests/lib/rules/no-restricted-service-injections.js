@@ -136,7 +136,7 @@ ruleTester.run('no-restricted-service-injections', rule, {
         {
           paths: ['app/components'],
           services: ['my-service'],
-          error: 'my-service is deprecated, please do not use it.',
+          message: 'my-service is deprecated, please do not use it.',
         },
       ],
       output: null,
@@ -147,8 +147,8 @@ ruleTester.run('no-restricted-service-injections', rule, {
       // With multiple violations:
       code: 'Component.extend({ myService: service() })',
       options: [
-        { paths: ['app/components'], services: ['my-service'], error: 'Error 1' },
-        { paths: ['app/components'], services: ['my-service'], error: 'Error 2' },
+        { paths: ['app/components'], services: ['my-service'], message: 'Error 1' },
+        { paths: ['app/components'], services: ['my-service'], message: 'Error 2' },
       ],
       output: null,
       filename: 'app/components/path.js',
