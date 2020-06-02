@@ -1,3 +1,19 @@
+## v8.6.0 (2020-06-02)
+
+#### :rocket: Enhancement
+* [#827](https://github.com/ember-cli/eslint-plugin-ember/pull/827) Add new rule [no-restricted-service-injections](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-restricted-service-injections.md) ([@bmish](https://github.com/bmish))
+* [#826](https://github.com/ember-cli/eslint-plugin-ember/pull/826) Update [no-computed-properties-in-native-classes](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-computed-properties-in-native-classes.md) rule to ignore classes marked `@classic` ([@jaydgruber](https://github.com/jaydgruber))
+
+#### :memo: Documentation
+* [#834](https://github.com/ember-cli/eslint-plugin-ember/pull/834) Add link to jQuery RFCs in [no-jquery](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-jquery.md) rule doc ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#828](https://github.com/ember-cli/eslint-plugin-ember/pull/828) Ensure rule docs mention all rule configuration options ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- [@jaydgruber](https://github.com/jaydgruber)
+
 ## v8.5.2 (2020-05-21)
 
 #### :bug: Bug Fix
