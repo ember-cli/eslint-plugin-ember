@@ -151,6 +151,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |  | [named-functions-in-promises](./docs/rules/named-functions-in-promises.md) | enforce usage of named functions in promises |
 | :white_check_mark: | [no-incorrect-calls-with-inline-anonymous-functions](./docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | disallow inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce` |
 | :white_check_mark: | [no-invalid-debug-function-arguments](./docs/rules/no-invalid-debug-function-arguments.md) | disallow usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. |
+|  | [no-restricted-service-injections](./docs/rules/no-restricted-service-injections.md) | disallow injecting certain services under certain paths |
 
 ### Routes
 
