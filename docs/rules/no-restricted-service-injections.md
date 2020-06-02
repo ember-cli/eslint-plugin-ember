@@ -19,7 +19,7 @@ With this example configuration:
     {
         "paths": ["folder1", "folder2", "folder3"],
         "services": ["deprecated-service"],
-        "error": "Please stop using this service as it is in the process of being deprecated",
+        "message": "Please stop using this service as it is in the process of being deprecated",
     },
     {
         "paths": ["isolated-folder"],
@@ -46,7 +46,7 @@ class MyComponent extends Component {
 * object[] -- containing the following properties:
   * string[] -- `services` -- list of (kebab-case) service names that should be disallowed from being injected under the specified paths
   * string[] -- `paths` -- optional list of regexp file paths that injecting the specified services should be disallowed under (omit this field to match any path)
-  * string -- `error` -- optional custom error message to display for violations
+  * string -- `message` -- optional custom error message to display for violations
 
 ## Related Rules
 
