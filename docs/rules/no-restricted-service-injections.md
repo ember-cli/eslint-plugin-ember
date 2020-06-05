@@ -51,3 +51,4 @@ class MyComponent extends Component {
 ## Related Rules
 
 * The [no-restricted-imports](https://eslint.org/docs/rules/no-restricted-imports) or [import/no-restricted-paths](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-restricted-paths.md) rules are the JavaScript import statement equivalent of this rule.
+* ember-template-lint has an [invocable-blacklist](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/invocable-blacklist.md) rule for disallowing component usages.
