@@ -58,6 +58,14 @@ export default Component.extend({
 
   propEqual: computed('x', function () {
     return this.x === 123;
+  }),
+
+  propFilterBy: computed('chores.@each.done', function () {
+    return this.chores.filterBy('done', true);
+  }),
+
+  propMapBy: computed('children.@each.age', function () {
+    return this.children.mapBy('age');
   })
 });
 ```
@@ -66,7 +74,19 @@ Examples of **correct** code for this rule:
 
 ```js
 import Component from '@ember/component';
-import { reads, and, or, gt, gte, lt, lte, not, equal } from '@ember/object/computed';
+import {
+  reads,
+  and,
+  or,
+  gt,
+  gte,
+  lt,
+  lte,
+  not,
+  equal,
+  filterBy,
+  mapBy
+} from '@ember/object/computed';
 
 export default Component.extend({
   propReads: reads('x'),
@@ -85,7 +105,11 @@ export default Component.extend({
 
   propNot: not('x'),
 
-  propEqual: equal('x', 123)
+  propEqual: equal('x', 123),
+
+  propFilterBy: filterBy('chores', 'done', true),
+
+  propMapBy: mapBy('children', 'age')
 });
 ```
 
