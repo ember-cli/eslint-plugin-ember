@@ -15,6 +15,8 @@ const {
   ERROR_MESSAGE_LTE,
   ERROR_MESSAGE_NOT,
   ERROR_MESSAGE_EQUAL,
+  ERROR_MESSAGE_FILTER_BY,
+  ERROR_MESSAGE_MAP_BY,
 } = rule;
 
 //------------------------------------------------------------------------------
@@ -82,6 +84,12 @@ ruleTester.run('require-computed-macros', rule, {
     'computed(function() { return SOME_VAR === "Hello"; })',
     'computed(function() { return this.prop === MY_VAR; })',
     "computed(function() { return this.get('prop') === MY_VAR; })",
+
+    // FILTERBY
+    "filterBy('chores', 'done', true)",
+
+    // MAPBY
+    "mapBy('children', 'age')",
 
     // Decorator:
     {
@@ -189,6 +197,25 @@ ruleTester.run('require-computed-macros', rule, {
       code: "computed(function() { return this.get('x') === 123; })", // this.get()
       output: "computed.equal('x', 123)",
       errors: [{ message: ERROR_MESSAGE_EQUAL, type: 'CallExpression' }],
+    },
+
+    // FILTERBY
+    {
+      code: "computed(function() { return this.chores.filterBy('done', true); })",
+      output: "computed.filterBy('chores', 'done', true)",
+      errors: [{ message: ERROR_MESSAGE_FILTER_BY, type: 'CallExpression' }],
+    },
+
+    // MAPBY
+    {
+      code: "computed(function() { return this.children.mapBy('age'); })",
+      output: "computed.mapBy('children', 'age')",
+      errors: [{ message: ERROR_MESSAGE_MAP_BY, type: 'CallExpression' }],
+    },
+    {
+      code: "computed(function() { return this.nested.children.mapBy('age'); })",
+      output: "computed.mapBy('nested.children', 'age')",
+      errors: [{ message: ERROR_MESSAGE_MAP_BY, type: 'CallExpression' }],
     },
   ],
 });
