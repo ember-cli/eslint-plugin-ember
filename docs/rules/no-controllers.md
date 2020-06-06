@@ -29,8 +29,6 @@ export default class ArticlesController extends Controller {
 }
 ```
 
-Note that this rule supports both classic and native class syntax.
-
 ## Further Reading
 
 - [Guide on controllers](https://guides.emberjs.com/release/routing/controllers/)
