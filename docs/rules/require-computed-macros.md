@@ -11,6 +11,8 @@ It is preferred to use Ember's computed property macros as opposed to manually w
 * Reduced chance of typos
 * Reduced chance of missing dependencies
 
+Note that by default, this rule only applies in classic classes (i.e. `Component.extend({})`) and not in native JavaScript classes with decorators (read more about the `includeNativeGetters` option in the configuration section of this doc).
+
 ## Rule Details
 
 This rule requires using Ember's computed property macros when possible.
@@ -113,6 +115,12 @@ export default Component.extend({
 });
 ```
 
+## Configuration
+
+This rule takes an optional object containing:
+
+* `boolean` -- `includeNativeGetters` -- whether the rule should check and autofix computed properties with native getters (i.e. `@computed() get someProp() {}`) to use computed property macros (default `false`). This is off by default because in the Ember Octane world, the better improvement would be to keep the native getter and use tracked properties instead of computed properties.
+
 ## References
 
 * [Guide](https://guides.emberjs.com/release/object-model/computed-properties/) for computed properties
@@ -121,9 +129,3 @@ export default Component.extend({
 ## Related Rules
 
 * [no-incorrect-computed-macros](no-incorrect-computed-macros.md)
-
-## Help Wanted
-
-| Issue | Link |
-| :-- | :-- |
-| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |
