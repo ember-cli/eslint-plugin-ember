@@ -25,6 +25,7 @@ export default Component.extend({
       const [firstName, lastName] = value.split(/\s+/);
       this.set('firstName', firstName);
       this.set('lastName', lastName);
+      // Missing return here.
     }
   }),
 
@@ -32,6 +33,7 @@ export default Component.extend({
     if (this.firstName) {
       return `Dr. ${this.firstName}`;
     }
+    // Missing return here.
   })
 });
 ```
@@ -74,11 +76,7 @@ To avoid false positives from relying on implicit returns in some code branches,
 ## Related Rules
 
 * [consistent-return] from eslint
+* [getter-return] from eslint
 
 [consistent-return]: https://eslint.org/docs/rules/consistent-return
-
-## Help Wanted
-
-| Issue | Link |
-| :-- | :-- |
-| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |
+[getter-return]: https://eslint.org/docs/rules/getter-return

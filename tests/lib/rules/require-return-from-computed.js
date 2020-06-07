@@ -12,7 +12,12 @@ const { ERROR_MESSAGE } = rule;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+  parser: require.resolve('babel-eslint'),
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+    ecmaFeatures: { legacyDecorators: true },
+  },
 });
 
 eslintTester.run('require-return-from-computed', rule, {
@@ -22,30 +27,10 @@ eslintTester.run('require-return-from-computed', rule, {
     'let foo = computed("test", function() { if (true) { return ""; } return ""; })',
     'let foo = computed("test", { get() { data.forEach(function() { }); return true; }, set() { return true; } })',
     'let foo = computed("test", function() { data.forEach(function() { }); return ""; })',
-
-    // Decorator:
-    {
-      // TODO: this should be an invalid test case.
-      // Still missing native class and decorator support: https://github.com/ember-cli/eslint-plugin-ember/issues/560
-      code: 'class Test { @computed() get someProp() {} }',
-      parser: require.resolve('babel-eslint'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: { legacyDecorators: true },
-      },
-    },
-    {
-      // TODO: this should be an invalid test case.
-      // Still missing native class and decorator support: https://github.com/ember-cli/eslint-plugin-ember/issues/560
-      code: 'class Test { @computed get someProp() {} }',
-      parser: require.resolve('babel-eslint'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: { legacyDecorators: true },
-      },
-    },
+    'class Test { @computed() get someProp() { return 123; } }', // Decorator (with parenthesis).
+    'class Test { @computed get someProp() { return 123; } }', // Decorator (without parenthesis).
+    'class Test { @computed set someProp(val) { return true; } get someProp() { return 123; } }', // Decorator with getter and setter.
+    'class Test { @computed get someProp() { return 123; } get otherProp() {} set otherProp(val) {} }', // Decorator plus other unrelated getter/setter properties.
   ],
   invalid: [
     {
@@ -100,6 +85,27 @@ eslintTester.run('require-return-from-computed', rule, {
           message: ERROR_MESSAGE,
           type: 'FunctionExpression',
         },
+      ],
+    },
+    {
+      // Decorator (with parenthesis):
+      code: 'class Test { @computed() get someProp() {} }',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
+    },
+    {
+      // Decorator (without parenthesis):
+      code: 'class Test { @computed get someProp() {} }',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'FunctionExpression' }],
+    },
+    {
+      // Decorator with getter and setter:
+      code: 'class Test { @computed set someProp(val) {} get someProp() {} }',
+      output: null,
+      errors: [
+        { message: ERROR_MESSAGE, type: 'FunctionExpression' },
+        { message: ERROR_MESSAGE, type: 'FunctionExpression' },
       ],
     },
   ],

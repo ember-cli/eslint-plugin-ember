@@ -196,40 +196,51 @@ describe('isUnaryExpression', () => {
 });
 
 describe('hasDecorator', () => {
-  const expressionlessParse = (code) => babelEslint.parse(code).body[0];
-  const withDecorator = '@classic class Rectangle {}';
-  const withoutDecorator = 'class Rectangle {}';
-  const testCases = [
-    {
-      code: withoutDecorator,
-      decoratorName: undefined,
-      expected: false,
-    },
-    {
-      code: withoutDecorator,
-      decoratorName: 'classic',
-      expected: false,
-    },
-    {
-      code: withDecorator,
-      decoratorName: undefined,
-      expected: true,
-    },
-    {
-      code: withDecorator,
-      decoratorName: 'classic',
-      expected: true,
-    },
-    {
-      code: withDecorator,
-      decoratorName: 'someOtherDecoratorName',
-      expected: false,
-    },
-  ];
-  testCases.forEach(({ code, decoratorName, expected }) => {
-    it(`('${code}', '${decoratorName}') => ${expected}`, () => {
-      const node = expressionlessParse(code);
-      expect(types.hasDecorator(node, decoratorName)).toStrictEqual(expected);
+  describe('with ClassDeclaration', () => {
+    const expressionlessParse = (code) => babelEslint.parse(code).body[0];
+    const withDecorator = '@classic class Rectangle {}';
+    const withoutDecorator = 'class Rectangle {}';
+    const testCases = [
+      {
+        code: withoutDecorator,
+        decoratorName: undefined,
+        expected: false,
+      },
+      {
+        code: withoutDecorator,
+        decoratorName: 'classic',
+        expected: false,
+      },
+      {
+        code: withDecorator,
+        decoratorName: undefined,
+        expected: true,
+      },
+      {
+        code: withDecorator,
+        decoratorName: 'classic',
+        expected: true,
+      },
+      {
+        code: withDecorator,
+        decoratorName: 'someOtherDecoratorName',
+        expected: false,
+      },
+    ];
+    testCases.forEach(({ code, decoratorName, expected }) => {
+      it(`('${code}', '${decoratorName}') => ${expected}`, () => {
+        const node = expressionlessParse(code);
+        expect(types.hasDecorator(node, decoratorName)).toStrictEqual(expected);
+      });
+    });
+  });
+
+  describe('with MethodDefinition', () => {
+    it('works with one MethodDefinition with a decorator', () => {
+      const node = babelEslint.parse('class Test { @computed get someProp() {} }').body[0].body
+        .body[0];
+      expect(types.hasDecorator(node)).toBeTruthy();
+      expect(types.hasDecorator(node, 'computed')).toBeTruthy();
     });
   });
 });
