@@ -23,22 +23,13 @@ eslintTester.run('require-return-from-computed', rule, {
     'let foo = computed("test", { get() { data.forEach(function() { }); return true; }, set() { return true; } })',
     'let foo = computed("test", function() { data.forEach(function() { }); return ""; })',
 
-    // Decorator:
     {
-      // TODO: this should be an invalid test case.
-      // Still missing native class and decorator support: https://github.com/ember-cli/eslint-plugin-ember/issues/560
-      code: 'class Test { @computed() get someProp() {} }',
-      parser: require.resolve('babel-eslint'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: { legacyDecorators: true },
-      },
-    },
-    {
-      // TODO: this should be an invalid test case.
-      // Still missing native class and decorator support: https://github.com/ember-cli/eslint-plugin-ember/issues/560
-      code: 'class Test { @computed get someProp() {} }',
+      // This rule intentionally does not apply to native classes / decorator usage.
+      // ESLint already has its own recommended rules `getter-return` and `no-setter-return` for this.
+      code: `
+        import { computed } from '@ember/object';
+        class Test { @computed() get someProp() {} set someProp(val) {} }
+      `,
       parser: require.resolve('babel-eslint'),
       parserOptions: {
         ecmaVersion: 6,
