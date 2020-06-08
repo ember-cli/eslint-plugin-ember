@@ -23,7 +23,14 @@ const {
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+  parser: require.resolve('babel-eslint'),
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+    ecmaFeatures: { legacyDecorators: true },
+  },
+});
 
 ruleTester.run('require-computed-macros', rule, {
   valid: [
@@ -91,19 +98,11 @@ ruleTester.run('require-computed-macros', rule, {
     // MAPBY
     "mapBy('children', 'age')",
 
-    // Decorator:
-    {
-      // TODO: this should be an invalid test case.
-      // Still missing native class and decorator support: https://github.com/ember-cli/eslint-plugin-ember/issues/560
-      code: 'class Test { @computed() get someProp() { return this.x; } }',
-      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
-      parser: require.resolve('babel-eslint'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: { legacyDecorators: true },
-      },
-    },
+    // Decorator (these are ignored when the `includeNativeGetters` option is off):
+    "class Test { @computed('x') get someProp() { return this.x; } }",
+    'class Test { @computed() get someProp() { return this.x && this.y; } }',
+    'class Test { @computed() get someProp() { return this.x > 123; } }',
+    "class Test { @computed() get someProp() { return this.children.mapBy('age'); } }",
   ],
   invalid: [
     // READS
@@ -121,6 +120,18 @@ ruleTester.run('require-computed-macros', rule, {
       code: "computed(function() { return this.get('x.y'); })", // this.get()
       output: "computed.reads('x.y')",
       errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
+    },
+    {
+      code: "computed('x', function() { return this.x; })", // With dependent key.
+      output: "computed.reads('x')",
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
+    },
+    {
+      // Decorator:
+      code: "class Test { @computed('x') get someProp() { return this.x; } }",
+      options: [{ includeNativeGetters: true }],
+      output: "class Test { @computed.reads('x') someProp }",
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'MethodDefinition' }],
     },
 
     // AND
@@ -144,6 +155,13 @@ ruleTester.run('require-computed-macros', rule, {
       output: "computed.and('x', 'y.z', 'w')",
       errors: [{ message: ERROR_MESSAGE_AND, type: 'CallExpression' }],
     },
+    {
+      // Decorator:
+      code: 'class Test { @computed() get someProp() { return this.x && this.y; } }',
+      options: [{ includeNativeGetters: true }],
+      output: "class Test { @computed.and('x', 'y') someProp }",
+      errors: [{ message: ERROR_MESSAGE_AND, type: 'MethodDefinition' }],
+    },
 
     // OR
     {
@@ -157,6 +175,13 @@ ruleTester.run('require-computed-macros', rule, {
       code: 'computed(function() { return this.x > 123; })',
       output: "computed.gt('x', 123)",
       errors: [{ message: ERROR_MESSAGE_GT, type: 'CallExpression' }],
+    },
+    {
+      // Decorator:
+      code: 'class Test { @computed() get someProp() { return this.x > 123; } }',
+      options: [{ includeNativeGetters: true }],
+      output: "class Test { @computed.gt('x', 123) someProp }",
+      errors: [{ message: ERROR_MESSAGE_GT, type: 'MethodDefinition' }],
     },
 
     // GTE
@@ -216,6 +241,13 @@ ruleTester.run('require-computed-macros', rule, {
       code: "computed(function() { return this.nested.children.mapBy('age'); })",
       output: "computed.mapBy('nested.children', 'age')",
       errors: [{ message: ERROR_MESSAGE_MAP_BY, type: 'CallExpression' }],
+    },
+    {
+      // Decorator:
+      code: "class Test { @computed() get someProp() { return this.children.mapBy('age'); } }",
+      options: [{ includeNativeGetters: true }],
+      output: "class Test { @computed.mapBy('children', 'age') someProp }",
+      errors: [{ message: ERROR_MESSAGE_MAP_BY, type: 'MethodDefinition' }],
     },
   ],
 });
