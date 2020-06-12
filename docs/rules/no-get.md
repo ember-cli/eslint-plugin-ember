@@ -51,6 +51,10 @@ const foo = this.someProperty;
 ```
 
 ```js
+const foo = this.nested?.path; // Optional chaining can be useful if the nested path can have null or undefined properties in it.
+```
+
+```js
 const foo = this.get('some.nested.property'); // Allowed if `ignoreNestedPaths` option is enabled.
 ```
 
@@ -89,6 +93,7 @@ This rule takes an optional object containing:
 
 * `boolean` -- `ignoreGetProperties` -- whether the rule should ignore `getProperties` (default `false`)
 * `boolean` -- `ignoreNestedPaths` -- whether the rule should ignore `this.get('some.nested.property')` (default `false`)
+* `boolean` -- `useOptionalChaining` -- whether the rule should use the [optional chaining operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) `?.` to autofix nested paths such as `this.get('some.nested.property')` to `this.some?.nested?.property` (when this option is off, these nested paths won't be autofixed at all) (default `false`)
 
 ## Related Rules
 
