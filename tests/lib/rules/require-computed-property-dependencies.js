@@ -5,47 +5,28 @@ const RuleTester = require('eslint').RuleTester;
 
 const { ERROR_MESSAGE_NON_STRING_VALUE } = rule;
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+  parser: require.resolve('babel-eslint'),
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+    ecmaFeatures: { legacyDecorators: true },
+  },
+});
 ruleTester.run('require-computed-property-dependencies', rule, {
   valid: [
-    `
-      Ember.computed();
-    `,
-    `
-      Ember.computed(function() {});
-    `,
-    `
-      Ember.computed('unused', function() {});
-    `,
+    'Ember.computed();',
+    'Ember.computed(function() {});',
+    "Ember.computed('unused', function() {});",
     // Volatile:
-    `
-      Ember.computed('name', function() {
-        return this.get('name');
-      }).volatile()
-    `,
+    "Ember.computed('name', function() { return this.get('name'); }).volatile()",
     // ES5 getter usage:
-    `
-      Ember.computed('name', function() {
-        return this.name;
-      });
-    `,
-    `
-      Ember.computed('name', function() {
-        return this.get('name');
-      });
-    `,
+    "Ember.computed('name', function() { return this.name; });",
+    "Ember.computed('name', function() { return this.get('name'); });",
     // String concatenation in dependent key:
-    `
-      Ember.computed('na' + 'me', function() {
-        return this.get('name');
-      });
-    `,
+    " Ember.computed('na' + 'me', function() { return this.get('name'); });",
     // Without `Ember.`:
-    `
-      computed('name', function() {
-        return this.get('name');
-      });
-    `,
+    "computed('name', function() {return this.get('name');});",
     `
       Ember.computed('list.@each.foo', function() {
         return this.get('list').map(function(item) {
@@ -53,36 +34,12 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         });
       });
     `,
-    `
-      Ember.computed('list.[]', function() {
-        return this.get('list.length');
-      });
-    `,
-    `
-      Ember.computed('deeper.than.needed.but.okay', function() {
-        return this.get('deeper');
-      });
-    `,
-    `
-      Ember.computed('array.[]', function() {
-        return this.get('array.firstObject');
-      });
-    `,
-    `
-      Ember.computed('array.[]', function() {
-        return this.get('array.lastObject');
-      });
-    `,
-    `
-      Ember.computed('foo.{bar,baz}', function() {
-        return this.get('foo.bar') + this.get('foo.baz');
-      });
-    `,
-    `
-      Ember.computed('foo.@each.{bar,baz}', function() {
-        return this.get('foo').mapBy('bar') + this.get('foo').mapBy('bar');
-      });
-    `,
+    "Ember.computed('list.[]', function() { return this.get('list.length');});",
+    "Ember.computed('deeper.than.needed.but.okay', function() { return this.get('deeper'); });",
+    "Ember.computed('array.[]', function() { return this.get('array.firstObject'); });",
+    "Ember.computed('array.[]', function() { return this.get('array.lastObject'); });",
+    "Ember.computed('foo.{bar,baz}', function() { return this.get('foo.bar') + this.get('foo.baz'); });",
+    "Ember.computed('foo.@each.{bar,baz}', function() { return this.get('foo').mapBy('bar') + this.get('foo').mapBy('bar'); });",
     // Array inside braces:
     `
       Ember.computed('article.{comments.[],title}', function() {
@@ -102,32 +59,16 @@ ruleTester.run('require-computed-property-dependencies', rule, {
       });
     `,
     // Computed macro that should be ignored:
-    `
-      Ember.computed.someMacro(function() {
-        return this.x;
-      })
-    `,
-    `
-      Ember.computed.someMacro('test')
-    `,
+    'Ember.computed.someMacro(function() { return this.x; })',
+    "Ember.computed.someMacro('test')",
     // Dynamic key:
-    `
-      Ember.computed(dynamic, function() {});
-    `,
+    'Ember.computed(dynamic, function() {});',
     // Dynamic key:
-    {
-      code: `
-        Ember.computed(...PROPERTIES, function() {});
-      `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
+    'Ember.computed(...PROPERTIES, function() {});',
     // Incorrect usage that should be ignored:
-    `
-      Ember.computed(123)
-    `,
+    'Ember.computed(123)',
     // Should ignore injected service names:
-    {
-      code: `
+    `
       import Component from '@ember/component';
       import { inject as service } from '@ember/service';
       Component.extend({
@@ -140,57 +81,32 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         otherService: service() // Service injection coming after computed property.
       });
     `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
     // Should ignore the left side of an assignment.
+    "Ember.computed('right', function() { this.left = this.right; })",
+    // Explicit getter function:
     `
-      Ember.computed('right', function() {
-        this.left = this.right;
+      computed('firstName', 'lastName', {
+        get() {
+          return this.firstName + ' ' + this.lastName;
+        },
+        set(key, value) {}
       })
     `,
-    // Explicit getter function:
-    {
-      code: `
-        computed('firstName', 'lastName', {
-          get() {
-            return this.firstName + ' ' + this.lastName;
-          },
-          set(key, value) {}
-        })
+    // Decorator:
+    `
+      class Test {
+        @computed('first', 'last')
+        get fullName() { return this.first + ' ' + this.last; }
+      }
     `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-    },
     // Decorator:
-    {
-      code: `
-        class Test {
-          @computed('first', 'last')
-          get fullName() { return this.first + ' ' + this.last; }
-        }
-      `,
-      parser: require.resolve('babel-eslint'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: { legacyDecorators: true },
-      },
-    },
-    // Decorator:
-    {
-      code: `
-        class Test {
-          @service i18n; // Service names not required as dependent keys by default.
-          @computed('first', 'last')
-          get fullName() { return this.i18n.t(this.first + ' ' + this.last); }
-        }
-      `,
-      parser: require.resolve('babel-eslint'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: { legacyDecorators: true },
-      },
-    },
+    `
+      class Test {
+        @service i18n; // Service names not required as dependent keys by default.
+        @computed('first', 'last')
+        get fullName() { return this.i18n.t(this.first + ' ' + this.last); }
+      }
+    `,
   ],
   invalid: [
     // Dynamic key:
@@ -209,7 +125,6 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     {
       code: 'Ember.computed(...PROPERTIES, function() {});',
       output: null,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [{ allowDynamicKeys: false }],
       errors: [
         {
@@ -239,7 +154,6 @@ ruleTester.run('require-computed-property-dependencies', rule, {
       code: 'Ember.computed(dynamic, ...moreDynamic, function() { return this.undeclared; });',
       output:
         "Ember.computed(dynamic, ...moreDynamic, 'undeclared', function() { return this.undeclared; });",
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       options: [{ allowDynamicKeys: false }],
       errors: [
         {
@@ -720,7 +634,6 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         });
       `,
       options: [{ requireServiceNames: true }],
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: `
         import Component from '@ember/component';
         import { inject as service } from '@ember/service';
@@ -770,7 +683,6 @@ ruleTester.run('require-computed-property-dependencies', rule, {
           })
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       output: `
         import Component from '@ember/component';
         import { inject as service } from '@ember/service';
@@ -846,7 +758,6 @@ ruleTester.run('require-computed-property-dependencies', rule, {
           set(key, value) {}
         })
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'Use of undeclared dependencies in computed property: lastName',
@@ -884,12 +795,6 @@ ruleTester.run('require-computed-property-dependencies', rule, {
           type: 'CallExpression',
         },
       ],
-      parser: require.resolve('babel-eslint'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: { legacyDecorators: true },
-      },
     },
     // Decorator with no parens:
     {
@@ -911,12 +816,6 @@ ruleTester.run('require-computed-property-dependencies', rule, {
           type: 'Identifier',
         },
       ],
-      parser: require.resolve('babel-eslint'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: { legacyDecorators: true },
-      },
     },
     // Decorator with no args:
     {
@@ -938,12 +837,6 @@ ruleTester.run('require-computed-property-dependencies', rule, {
           type: 'CallExpression',
         },
       ],
-      parser: require.resolve('babel-eslint'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: { legacyDecorators: true },
-      },
     },
     // Decorator with arg:
     {
@@ -965,12 +858,6 @@ ruleTester.run('require-computed-property-dependencies', rule, {
           type: 'CallExpression',
         },
       ],
-      parser: require.resolve('babel-eslint'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: { legacyDecorators: true },
-      },
     },
     // Decorator with two arg:
     {
@@ -992,12 +879,6 @@ ruleTester.run('require-computed-property-dependencies', rule, {
           type: 'CallExpression',
         },
       ],
-      parser: require.resolve('babel-eslint'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: { legacyDecorators: true },
-      },
     },
   ],
 });
