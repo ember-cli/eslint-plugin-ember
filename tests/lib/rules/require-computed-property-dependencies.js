@@ -25,6 +25,9 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     "Ember.computed('name', function() { return this.get('name'); });",
     // String concatenation in dependent key:
     " Ember.computed('na' + 'me', function() { return this.get('name'); });",
+    // Optional chaining:
+    'Ember.computed(function() { return this?.someFunction(); });',
+    "Ember.computed('x.y', function() { return this?.x?.y });",
     // Without `Ember.`:
     "computed('name', function() {return this.get('name');});",
     `
@@ -876,6 +879,52 @@ ruleTester.run('require-computed-property-dependencies', rule, {
       errors: [
         {
           message: 'Use of undeclared dependencies in computed property: undeclared',
+          type: 'CallExpression',
+        },
+      ],
+    },
+
+    {
+      // Optional chaining:
+      code: 'computed(function() { return this.x?.y?.z; })',
+      output: "computed('x.y.z', function() { return this.x?.y?.z; })",
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: x.y.z',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Optional chaining plus overlap with non-optional-chaining:
+      code: 'computed(function() { return this.x?.y?.z + this.x.y.foo; })',
+      output: "computed('x.y.{foo,z}', function() { return this.x?.y?.z + this.x.y.foo; })",
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: x.y.foo, x.y.z',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Optional chaining with function call:
+      code: 'computed(function() { return this.x?.y?.someFunction(); })',
+      output: "computed('x.y', function() { return this.x?.y?.someFunction(); })",
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: x.y',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Optional chaining with array/object access:
+      code: 'computed(function() { return this.x?.someArrayOrObject[index]; })',
+      output:
+        "computed('x.someArrayOrObject', function() { return this.x?.someArrayOrObject[index]; })",
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: x.someArrayOrObject',
           type: 'CallExpression',
         },
       ],
