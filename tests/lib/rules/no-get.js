@@ -5,6 +5,7 @@ const RuleTester = require('eslint').RuleTester;
 const { makeErrorMessageForGet, ERROR_MESSAGE_GET_PROPERTIES } = rule;
 
 const ruleTester = new RuleTester({
+  parser: require.resolve('babel-eslint'),
   parserOptions: {
     ecmaVersion: 2015,
     sourceType: 'module',
@@ -156,6 +157,9 @@ ruleTester.run('no-get', rule, {
       }
     }
     `,
+
+    // Optional chaining:
+    'this.foo?.bar',
   ],
   invalid: [
     // **************************
@@ -165,29 +169,46 @@ ruleTester.run('no-get', rule, {
     {
       code: "this.get('foo');",
       output: 'this.foo;',
-      errors: [{ message: makeErrorMessageForGet('foo', false), type: 'CallExpression' }],
+      // Error message intentionally written out to ensure it looks right.
+      errors: [{ message: "Use `this.foo` instead of `this.get('foo')`", type: 'CallExpression' }],
     },
     {
       code: "get(this, 'foo');",
       output: 'this.foo;',
-      errors: [{ message: makeErrorMessageForGet('foo', true), type: 'CallExpression' }],
+      // Error message intentionally written out to ensure it looks right.
+      errors: [{ message: "Use `this.foo` instead of `get(this, 'foo')`", type: 'CallExpression' }],
     },
     {
       code: "this.get('foo').someFunction();",
       output: 'this.foo.someFunction();',
-      errors: [{ message: makeErrorMessageForGet('foo', false), type: 'CallExpression' }],
+      errors: [
+        {
+          message: makeErrorMessageForGet('foo', { isImportedGet: false }),
+          type: 'CallExpression',
+        },
+      ],
     },
     {
       // With invalid JS variable name:
       code: "this.get('foo-bar');",
       output: null,
-      errors: [{ message: makeErrorMessageForGet('foo-bar', false), type: 'CallExpression' }],
+      errors: [
+        {
+          message: makeErrorMessageForGet('foo-bar', { isImportedGet: false }),
+          type: 'CallExpression',
+        },
+      ],
     },
     {
       // With invalid JS variable name:
       code: "get(this, 'foo-bar');",
       output: null,
-      errors: [{ message: makeErrorMessageForGet('foo-bar', true), type: 'CallExpression' }],
+      errors: [
+        {
+          message: makeErrorMessageForGet('foo-bar', { isImportedGet: true }),
+          type: 'CallExpression',
+        },
+      ],
     },
 
     // **************************
@@ -219,12 +240,22 @@ ruleTester.run('no-get', rule, {
     {
       code: "this.get('foo.bar');",
       output: null,
-      errors: [{ message: makeErrorMessageForGet('foo.bar', false), type: 'CallExpression' }],
+      errors: [
+        {
+          message: makeErrorMessageForGet('foo.bar', { isImportedGet: false }),
+          type: 'CallExpression',
+        },
+      ],
     },
     {
       code: "get(this, 'foo.bar');",
       output: null,
-      errors: [{ message: makeErrorMessageForGet('foo.bar', true), type: 'CallExpression' }],
+      errors: [
+        {
+          message: makeErrorMessageForGet('foo.bar', { isImportedGet: true }),
+          type: 'CallExpression',
+        },
+      ],
     },
     {
       code: "this.getProperties('foo.bar');",
@@ -235,6 +266,76 @@ ruleTester.run('no-get', rule, {
       code: "getProperties(this, 'foo.bar');",
       output: null,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+
+    // Nested paths with optional chaining:
+    {
+      code: "this.get('foo.bar');",
+      options: [{ useOptionalChaining: true }],
+      output: 'this.foo?.bar;',
+      errors: [
+        {
+          // Error message intentionally written out to ensure it looks right.
+          message: "Use `this.foo.bar` or `this.foo?.bar` instead of `this.get('foo.bar')`",
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: "this.get('very.long.path');",
+      options: [{ useOptionalChaining: true }],
+      output: 'this.very?.long?.path;',
+      errors: [
+        {
+          message: makeErrorMessageForGet('very.long.path', {
+            isImportedGet: false,
+            useOptionalChaining: true,
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: "get(this, 'foo.bar');",
+      options: [{ useOptionalChaining: true }],
+      output: 'this.foo?.bar;',
+      errors: [
+        {
+          message: makeErrorMessageForGet('foo.bar', {
+            isImportedGet: true,
+            useOptionalChaining: true,
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: "get(this, 'very.long.path');",
+      options: [{ useOptionalChaining: true }],
+      output: 'this.very?.long?.path;',
+      errors: [
+        {
+          message: makeErrorMessageForGet('very.long.path', {
+            isImportedGet: true,
+            useOptionalChaining: true,
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: "this.get('foo');", // No nested path.
+      options: [{ useOptionalChaining: true }],
+      output: 'this.foo;',
+      errors: [
+        {
+          message: makeErrorMessageForGet('foo', {
+            isImportedGet: false,
+            useOptionalChaining: true,
+          }),
+          type: 'CallExpression',
+        },
+      ],
     },
 
     {
