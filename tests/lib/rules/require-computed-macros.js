@@ -97,6 +97,8 @@ ruleTester.run('require-computed-macros', rule, {
 
     // MAPBY
     "mapBy('children', 'age')",
+    "computed(function() { return this.children?.mapBy('age'); })", // Ignored because function might not exist.
+    "computed(function() { return this.nested?.children.mapBy('age'); })", // Ignored because function might not exist.
 
     // Decorator (these are ignored when the `includeNativeGetters` option is off):
     "class Test { @computed('x') get someProp() { return this.x; } }",
@@ -124,6 +126,12 @@ ruleTester.run('require-computed-macros', rule, {
     {
       code: "computed('x', function() { return this.x; })", // With dependent key.
       output: "computed.reads('x')",
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
+    },
+    {
+      // Optional chaining.
+      code: 'computed(function() { return this.x?.y?.z; })',
+      output: "computed.reads('x.y.z')",
       errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
     },
     {
@@ -156,6 +164,12 @@ ruleTester.run('require-computed-macros', rule, {
       errors: [{ message: ERROR_MESSAGE_AND, type: 'CallExpression' }],
     },
     {
+      // Optional chaining.
+      code: 'computed(function() { return this.x?.y && this.z; })',
+      output: "computed.and('x.y', 'z')",
+      errors: [{ message: ERROR_MESSAGE_AND, type: 'CallExpression' }],
+    },
+    {
       // Decorator:
       code: 'class Test { @computed() get someProp() { return this.x && this.y; } }',
       options: [{ includeNativeGetters: true }],
@@ -174,6 +188,12 @@ ruleTester.run('require-computed-macros', rule, {
     {
       code: 'computed(function() { return this.x > 123; })',
       output: "computed.gt('x', 123)",
+      errors: [{ message: ERROR_MESSAGE_GT, type: 'CallExpression' }],
+    },
+    {
+      // Optional chaining:
+      code: 'computed(function() { return this.x?.y > 123; })',
+      output: "computed.gt('x.y', 123)",
       errors: [{ message: ERROR_MESSAGE_GT, type: 'CallExpression' }],
     },
     {

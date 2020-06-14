@@ -16,10 +16,13 @@ describe('isSimpleThisExpression', () => {
     expect(propertyGetterUtils.isSimpleThisExpression(parse('this.x[1]'))).toBeFalsy();
     expect(propertyGetterUtils.isSimpleThisExpression(parse('this.x[i]'))).toBeFalsy();
     expect(propertyGetterUtils.isSimpleThisExpression(parse('this.x.y[i]'))).toBeFalsy();
+    expect(propertyGetterUtils.isSimpleThisExpression(parse('this?.get()'))).toBeFalsy();
 
     // True:
     expect(propertyGetterUtils.isSimpleThisExpression(parse('this.x'))).toBeTruthy();
     expect(propertyGetterUtils.isSimpleThisExpression(parse('this.x.y'))).toBeTruthy();
+    expect(propertyGetterUtils.isSimpleThisExpression(parse('this.x?.y'))).toBeTruthy();
+    expect(propertyGetterUtils.isSimpleThisExpression(parse('this.x?.y?.z'))).toBeTruthy();
     expect(propertyGetterUtils.isSimpleThisExpression(parse('this.get("property")'))).toBeTruthy();
     expect(propertyGetterUtils.isSimpleThisExpression(parse('this.get("x.y")'))).toBeTruthy();
   });
@@ -40,6 +43,7 @@ describe('isThisGetCall', () => {
     expect(
       propertyGetterUtils.isThisGetCall(parse('this.get("unexpected", "argument").something'))
     ).toBeFalsy();
+    expect(propertyGetterUtils.isThisGetCall(parse('this?.get("property")'))).toBeFalsy();
 
     // True:
     expect(propertyGetterUtils.isThisGetCall(parse('this.get("property")'))).toBeTruthy();
