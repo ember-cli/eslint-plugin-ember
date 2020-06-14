@@ -135,6 +135,12 @@ ruleTester.run('require-computed-macros', rule, {
       errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
     },
     {
+      // Optional chaining unnecessarily used on `this`.
+      code: 'computed(function() { return this?.x?.y?.z; })',
+      output: "computed.reads('x.y.z')",
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
+    },
+    {
       // Decorator:
       code: "class Test { @computed('x') get someProp() { return this.x; } }",
       options: [{ includeNativeGetters: true }],
