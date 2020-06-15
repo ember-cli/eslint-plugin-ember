@@ -1,3 +1,18 @@
+## v8.7.0 (2020-06-15)
+
+#### :rocket: Enhancement
+* [#845](https://github.com/ember-cli/eslint-plugin-ember/pull/845) Add `useOptionalChaining` option (default false) to [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md) rule ([@bmish](https://github.com/bmish)
+* [#840](https://github.com/ember-cli/eslint-plugin-ember/pull/840) Add `includeNativeGetters` option (default false) to [require-computed-macros](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-macros.md) rule ([@bmish](https://github.com/bmish))
+* [#848](https://github.com/ember-cli/eslint-plugin-ember/pull/848) Support optional chaining in [require-computed-property-dependencies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-property-dependencies.md) rule ([@bmish](https://github.com/bmish))
+* [#846](https://github.com/ember-cli/eslint-plugin-ember/pull/846) Support optional chaining in [require-computed-macros](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-macros.md) rule ([@bmish](https://github.com/bmish))
+* [#839](https://github.com/ember-cli/eslint-plugin-ember/pull/839) Support `filterBy` and `mapBy` macros in [require-computed-macros](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-macros.md) rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#842](https://github.com/ember-cli/eslint-plugin-ember/pull/842) Explain why [require-return-from-computed](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-return-from-computed.md) rule does not apply to native classes ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v8.6.0 (2020-06-02)
 
 #### :rocket: Enhancement
