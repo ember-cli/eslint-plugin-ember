@@ -635,6 +635,72 @@ describe('isEmberObjectProxy', () => {
   });
 });
 
+describe('isEmberObject', () => {
+  it('should detect when using local module', () => {
+    const context = new FauxContext('EmberObject.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberObject(context, node)).toBeTruthy();
+  });
+
+  it('should not detect when using local module with wrong name', () => {
+    const context = new FauxContext('SomethingElse.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberObject(context, node)).toBeFalsy();
+  });
+
+  it('should detect when using native classes', () => {
+    const context = new FauxContext(`
+      import EmberObject from '@ember/object';
+      class MyObject extends EmberObject {}
+    `);
+
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberObject(context, node)).toBeTruthy();
+  });
+
+  it('should not detect when using native classes if the import path is incorrect', () => {
+    const context = new FauxContext(`
+      import EmberObject from '@something-else/object';
+      class MyObject extends EmberObject {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberObject(context, node)).toBeFalsy();
+  });
+});
+
+describe('isEmberHelper', () => {
+  it('should detect when using local module', () => {
+    const context = new FauxContext('Helper.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberHelper(context, node)).toBeTruthy();
+  });
+
+  it('should not detect when using local module with wrong name', () => {
+    const context = new FauxContext('SomethingElse.extend()');
+    const node = context.ast.body[0].expression;
+    expect(emberUtils.isEmberHelper(context, node)).toBeFalsy();
+  });
+
+  it('should detect when using native classes', () => {
+    const context = new FauxContext(`
+      import Helper from '@ember/component/helper';
+      class MyHelper extends Helper {}
+    `);
+
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberHelper(context, node)).toBeTruthy();
+  });
+
+  it('should not detect when using native classes if the import path is incorrect', () => {
+    const context = new FauxContext(`
+      import Helper from '@something-else/component/helper';
+      class MyHelper extends Helper {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberHelper(context, node)).toBeFalsy();
+  });
+});
+
 describe('isEmberProxy', () => {
   it('should detect ArrayProxy example', () => {
     const context = new FauxContext(`
