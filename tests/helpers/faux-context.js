@@ -16,7 +16,7 @@ class FauxContext {
   }
 
   /**
-   * Does not build the full tree of "parents" for the identifier, but
+   * Does not build the full tree of "ancestors" for the identifier, but
    * we only care about the first one; the Program node
    */
   getAncestors() {
