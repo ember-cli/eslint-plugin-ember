@@ -68,6 +68,7 @@ eslintTester.run('no-side-effects', rule, {
     "this.set('x', 123);",
     'this.setProperties({ x: 123 });',
     'this.x = 123;',
+    'this.x.y = 123;',
   ],
   invalid: [
     {
@@ -297,7 +298,20 @@ eslintTester.run('no-side-effects', rule, {
     },
 
     {
+      // ES5 setter:
       code: 'computed("test", function() { this.x = 123; })',
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'AssignmentExpression',
+        },
+      ],
+    },
+
+    {
+      // ES5 setter with nested path:
+      code: 'computed("test", function() { this.x.y = 123; })',
       output: null,
       errors: [
         {
