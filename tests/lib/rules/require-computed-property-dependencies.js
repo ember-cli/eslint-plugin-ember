@@ -86,6 +86,8 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     `,
     // Should ignore the left side of an assignment.
     "Ember.computed('right', function() { this.left = this.right; })",
+    // Should ignore the left side of an assignment with nested path.
+    "Ember.computed('right', function() { this.left1.left2 = this.right; })",
     // Explicit getter function:
     `
       computed('firstName', 'lastName', {
