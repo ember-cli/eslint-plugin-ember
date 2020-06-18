@@ -35,3 +35,36 @@ describe('expandKey', () => {
     expect(cpdkUtils.expandKey('{foo,bar}')).toStrictEqual(['foo', 'bar']);
   });
 });
+
+describe('computedPropertyDependencyMatchesKeyPath', () => {
+  it('returns the right result', () => {
+    // False:
+    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo', 'bar')).toStrictEqual(false);
+    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.bar', 'bar')).toStrictEqual(
+      false
+    );
+
+    // True:
+    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.bar', 'foo')).toStrictEqual(
+      true
+    );
+    expect(
+      cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.@each.bar', 'foo')
+    ).toStrictEqual(true);
+    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.[]', 'foo')).toStrictEqual(true);
+    expect(
+      cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.bar.xyz', 'foo.bar')
+    ).toStrictEqual(true);
+  });
+});
+
+describe('keyExistsAsPrefixInList', () => {
+  it('returns the right result', () => {
+    // False:
+    expect(cpdkUtils.keyExistsAsPrefixInList(['a', 'b.c'], 'x')).toStrictEqual(false);
+    expect(cpdkUtils.keyExistsAsPrefixInList(['a', 'b.c'], 'c')).toStrictEqual(false);
+
+    // True:
+    expect(cpdkUtils.keyExistsAsPrefixInList(['a', 'b.c'], 'b')).toStrictEqual(true);
+  });
+});
