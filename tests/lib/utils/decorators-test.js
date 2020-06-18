@@ -41,7 +41,7 @@ describe('hasDecorator', () => {
     {
       code: withDecorator,
       decoratorName: undefined,
-      expected: true,
+      expected: false,
     },
     {
       code: withDecorator,
