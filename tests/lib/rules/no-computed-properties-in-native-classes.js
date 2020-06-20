@@ -107,6 +107,17 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
         },
       ],
     },
+    {
+      code: `
+        import { computed } from '@ember/object';
+        import Component from '@ember/component';
+        import classic from 'ember-classic-decorator';
+
+        @classic
+        export default class MyComponent extends Component {}
+      `,
+      options: [], // default options should be: [{ ignoreClassic: true }]
+    },
 
     // Unrelated import statements:
     "import EmberObject from '@ember/object';",
