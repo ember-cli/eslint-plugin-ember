@@ -92,7 +92,8 @@ ruleTester.run('no-incorrect-computed-macros', rule, {
       import { and } from '@ember/object/computed';
       and('someProperty')`,
       output: `
-      import { and } from '@ember/object/computed';
+      import { readOnly } from '@ember/object/computed';
+import { and } from '@ember/object/computed';
       readOnly('someProperty')`,
       errors: [
         {
@@ -106,7 +107,8 @@ ruleTester.run('no-incorrect-computed-macros', rule, {
       import { or } from '@ember/object/computed';
       or('someProperty')`,
       output: `
-      import { or } from '@ember/object/computed';
+      import { readOnly } from '@ember/object/computed';
+import { or } from '@ember/object/computed';
       readOnly('someProperty')`,
       errors: [
         {
@@ -121,7 +123,8 @@ ruleTester.run('no-incorrect-computed-macros', rule, {
       import { and } from '@ember/object/computed';
       class Test { @and('someProperty') prop }`,
       output: `
-      import { and } from '@ember/object/computed';
+      import { readOnly } from '@ember/object/computed';
+import { and } from '@ember/object/computed';
       class Test { @readOnly('someProperty') prop }`,
       errors: [
         {
