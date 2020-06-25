@@ -76,6 +76,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |:---|:--------|:------------|
 |  | [computed-property-getters](./docs/rules/computed-property-getters.md) | enforce the consistent use of getters in computed properties |
 | :white_check_mark: | [no-arrow-function-computed-properties](./docs/rules/no-arrow-function-computed-properties.md) | disallow arrow functions in computed properties |
+| :wrench: | [no-assignment-of-untracked-properties-used-in-tracking-contexts](./docs/rules/no-assignment-of-untracked-properties-used-in-tracking-contexts.md) | disallow assignment of untracked properties that are used as computed property dependencies |
 | :car: | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | disallow using computed properties in native classes |
 | :white_check_mark: | [no-deeply-nested-dependent-keys-with-each](./docs/rules/no-deeply-nested-dependent-keys-with-each.md) | disallow usage of deeply-nested computed property dependent keys with `@each` |
 | :white_check_mark::wrench: | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | disallow repeating computed property dependent keys |
