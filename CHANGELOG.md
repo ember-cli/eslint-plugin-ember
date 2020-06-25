@@ -1,3 +1,18 @@
+## v8.8.0 (2020-06-24)
+
+#### :rocket: Enhancement
+* [#855](https://github.com/ember-cli/eslint-plugin-ember/pull/855) Add new rule [no-assignment-of-untracked-properties-used-in-tracking-contexts](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-assignment-of-untracked-properties-used-in-tracking-contexts.md) ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#866](https://github.com/ember-cli/eslint-plugin-ember/pull/866) Fix missing import statement in autofix for [no-incorrect-computed-macros](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-incorrect-computed-macros.md) rule ([@bmish](https://github.com/bmish))
+* [#864](https://github.com/ember-cli/eslint-plugin-ember/pull/864) Fix default value of `ignoreClassic` option to be true for [no-computed-properties-in-native-classes](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-computed-properties-in-native-classes.md) rule ([@jaydgruber](https://github.com/jaydgruber))
+* [#857](https://github.com/ember-cli/eslint-plugin-ember/pull/857) Ignore the left side of an assignment (nested path case) in [require-computed-property-dependencies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-property-dependencies.md) rule ([@bmish](https://github.com/bmish))
+* [#856](https://github.com/ember-cli/eslint-plugin-ember/pull/856) Handle nested paths with ES5 setters in [no-side-effects](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-side-effects.md) rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- [@jaydgruber](https://github.com/jaydgruber)
+
 ## v8.7.0 (2020-06-15)
 
 #### :rocket: Enhancement
