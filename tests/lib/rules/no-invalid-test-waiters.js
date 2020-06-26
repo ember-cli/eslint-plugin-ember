@@ -16,6 +16,8 @@ ruleTester.run('no-invalid-test-waiters', rule, {
   valid: [
     `
     import { buildWaiter } from 'ember-test-waiters';
+    import { random } from 'random';
+    import { somethingElse } from 'ember-test-waiters';
 
     let myWaiter = buildWaiter('waiterName');
   `,
@@ -52,6 +54,8 @@ ruleTester.run('no-invalid-test-waiters', rule, {
     {
       code: `
       import { buildWaiter } from 'ember-test-waiters';
+      import { random } from 'random';
+      import { somethingElse } from 'ember-test-waiters';
 
       function useWaiter() {
           let myOtherWaiter = buildWaiter('the second');
