@@ -68,6 +68,7 @@ ruleTester.run('require-computed-macros', rule, {
     // GT
     "gt('x', 123)",
     'computed(function() { return SOME_VAR > OTHER_VAR; })',
+    'computed(function() { return this.x > this.y; })',
 
     // GTE
     "gte('x', 123)",
@@ -91,14 +92,19 @@ ruleTester.run('require-computed-macros', rule, {
     'computed(function() { return SOME_VAR === "Hello"; })',
     'computed(function() { return this.prop === MY_VAR; })',
     "computed(function() { return this.get('prop') === MY_VAR; })",
+    'computed(function() { return this.prop === this.otherProp; })',
 
     // FILTERBY
     "filterBy('chores', 'done', true)",
+    'computed(function() { return this.chores.filterBy(this.otherProp, true); })', // Ignored because value depends on function's `this`.
+    "computed(function() { return this.chores.filterBy('done', this.otherProp); })", // Ignored because value depends on function's `this`.
 
     // MAPBY
     "mapBy('children', 'age')",
     "computed(function() { return this.children?.mapBy('age'); })", // Ignored because function might not exist.
     "computed(function() { return this.nested?.children.mapBy('age'); })", // Ignored because function might not exist.
+    'computed(function() { return this.children.mapBy(this.otherProp); })', // Ignored because value depends on function's `this`.
+    'computed(function() { return this.children.mapBy(someFunction(this.otherProp)); })', // Ignored because value depends on function's `this`.
 
     // Decorator (these are ignored when the `includeNativeGetters` option is off):
     "class Test { @computed('x') get someProp() { return this.x; } }",
