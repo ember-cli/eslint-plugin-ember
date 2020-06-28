@@ -5,7 +5,7 @@ const { join } = require('path');
 const rules = require('../lib').rules;
 const recommendedRules = require('../lib/recommended-rules.js');
 const octaneRules = require('../lib/octane-rules.js');
-const { flatten } = require('../lib/utils/javascript');
+const { flat } = require('../lib/utils/javascript');
 
 const RULE_NAMES = Object.keys(rules);
 const RECOMMENDED_RULE_NAMES = Object.keys(recommendedRules).map((name) =>
@@ -19,7 +19,7 @@ function getAllNamedOptions(jsonSchema) {
   }
 
   if (Array.isArray(jsonSchema)) {
-    return flatten(jsonSchema.map(getAllNamedOptions));
+    return flat(jsonSchema.map(getAllNamedOptions));
   }
 
   if (jsonSchema.items) {
