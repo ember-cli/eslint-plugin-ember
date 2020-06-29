@@ -1,3 +1,15 @@
+## v8.9.0 (2020-06-28)
+
+#### :rocket: Enhancement
+* [#871](https://github.com/ember-cli/eslint-plugin-ember/pull/871) Add `catchRouterMain` option (default false) to [no-private-routing-service](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-private-routing-service.md) rule ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#870](https://github.com/ember-cli/eslint-plugin-ember/pull/870) Fix false positive involving `this` keyword with `filterBy` / `mapBy` in [require-computed-macros](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-macros.md) rule ([@bmish](https://github.com/bmish))
+* [#868](https://github.com/ember-cli/eslint-plugin-ember/pull/868) Fix false negatives in [no-invalid-test-waiters](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-invalid-test-waiters.md) rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v8.8.0 (2020-06-24)
 
 #### :rocket: Enhancement
