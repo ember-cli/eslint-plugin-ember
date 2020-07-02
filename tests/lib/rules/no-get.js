@@ -337,6 +337,38 @@ ruleTester.run('no-get', rule, {
         },
       ],
     },
+    {
+      // Optional chaining is not valid in the left side of an assignment,
+      // and we can safely autofix nested paths without it anyway.
+      code: "this.get('foo.bar')[123] = 'hello world';",
+      options: [{ useOptionalChaining: true }],
+      output: "this.foo.bar[123] = 'hello world';",
+      errors: [
+        {
+          message: makeErrorMessageForGet('foo.bar', {
+            isImportedGet: false,
+            useOptionalChaining: false,
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // We can safely autofix nested paths in the left side of an assignment,
+      // even when the `useOptionalChaining` option is off.
+      code: "this.get('foo.bar')[123] = 'hello world';",
+      options: [{ useOptionalChaining: false }],
+      output: "this.foo.bar[123] = 'hello world';",
+      errors: [
+        {
+          message: makeErrorMessageForGet('foo.bar', {
+            isImportedGet: false,
+            useOptionalChaining: false,
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
 
     {
       // Reports violation after (classic) proxy class.
