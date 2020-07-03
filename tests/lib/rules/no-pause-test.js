@@ -34,7 +34,12 @@ ruleTester.run('no-pause-test', rule, {
     },
     {
       filename: TEST_FILE_NAME,
-      code: 'pauseTest.otherFunction(myFunction);',
+      code: "import { pauseTest } from '@ember/test-helpers'; pauseTest.otherFunction(myFunction);",
+    },
+    {
+      // Missing import:
+      filename: TEST_FILE_NAME,
+      code: 'pauseTest();',
     },
     {
       filename: 'not-a-test-file.js',
@@ -50,7 +55,14 @@ ruleTester.run('no-pause-test', rule, {
     },
     {
       filename: TEST_FILE_NAME,
-      code: 'async () => { await pauseTest(); }',
+      code: "import { pauseTest } from '@ember/test-helpers'; pauseTest();",
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      // Renamed import:
+      filename: TEST_FILE_NAME,
+      code: "import { pauseTest as pt } from '@ember/test-helpers'; pt();",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
@@ -67,6 +79,7 @@ ruleTester.run('no-pause-test', rule, {
     {
       filename: TEST_FILE_NAME,
       code: `
+        import { pauseTest } from '@ember/test-helpers';
         test('bar', async function(assert) {
           await pauseTest();
         });
