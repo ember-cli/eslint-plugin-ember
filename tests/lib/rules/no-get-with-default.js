@@ -11,10 +11,14 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-get-with-default', rule, {
   valid: [
-    "const test = this.get('key') || [];",
-    "const test = get(this, 'target') || [];",
+    // get
+    "this.get('key') || [];",
+    "import { get } from '@ember/object'; get(this, 'target') || [];",
+
+    // getWithDefault
     "testClass.getWithDefault('key', [])",
-    "getWithDefault.testMethod(testClass, 'key', [])",
+    "import { getWithDefault } from '@ember/object'; getWithDefault.testMethod(testClass, 'key', [])",
+    "getWithDefault(this, 'key', []);", // Missing import
   ],
   invalid: [
     // this.getWithDefault
@@ -40,8 +44,9 @@ ruleTester.run('no-get-with-default', rule, {
       ],
     },
     {
+      // Having parenthesis around the autofix matters in this example.
       code: "this.getWithDefault('name', '').trim()",
-      output: "(this.get('name') === undefined ? '' : this.get('name')).trim()", // Parenthesis matter here.
+      output: "(this.get('name') === undefined ? '' : this.get('name')).trim()",
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -52,8 +57,9 @@ ruleTester.run('no-get-with-default', rule, {
 
     // getWithDefault (imported)
     {
-      code: "const test = getWithDefault(this, 'key', []);", // With a string property.
-      output: "const test = (get(this, 'key') === undefined ? [] : get(this, 'key'));",
+      code: "import { getWithDefault } from '@ember/object'; getWithDefault(this, 'key', []);", // With a string property.
+      output: `import { get } from '@ember/object';
+import { getWithDefault } from '@ember/object'; (get(this, 'key') === undefined ? [] : get(this, 'key'));`,
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -62,9 +68,23 @@ ruleTester.run('no-get-with-default', rule, {
       ],
     },
     {
-      code: 'const test = getWithDefault(this, SOME_VARIABLE, []);', // With a variable property.
+      // With renamed `getWithDefault` import:
+      code: "import { getWithDefault as gwd } from '@ember/object'; gwd(this, 'key', []);",
+      output: `import { get } from '@ember/object';
+import { getWithDefault as gwd } from '@ember/object'; (get(this, 'key') === undefined ? [] : get(this, 'key'));`,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // With existing and renamed `get` import:
+      code:
+        "import { getWithDefault, get as g } from '@ember/object'; getWithDefault(this, 'key', []);",
       output:
-        'const test = (get(this, SOME_VARIABLE) === undefined ? [] : get(this, SOME_VARIABLE));',
+        "import { getWithDefault, get as g } from '@ember/object'; (g(this, 'key') === undefined ? [] : g(this, 'key'));",
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -73,8 +93,23 @@ ruleTester.run('no-get-with-default', rule, {
       ],
     },
     {
-      code: "getWithDefault(this, 'name', '').trim()",
-      output: "(get(this, 'name') === undefined ? '' : get(this, 'name')).trim()", // Parenthesis matter here.
+      code:
+        "import { getWithDefault } from '@ember/object'; getWithDefault(this, SOME_VARIABLE, []);", // With a variable property.
+      output: `import { get } from '@ember/object';
+import { getWithDefault } from '@ember/object'; (get(this, SOME_VARIABLE) === undefined ? [] : get(this, SOME_VARIABLE));`,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Having parenthesis around the autofix matters in this example.
+      code:
+        "import { getWithDefault } from '@ember/object'; getWithDefault(this, 'name', '').trim()",
+      output: `import { get } from '@ember/object';
+import { getWithDefault } from '@ember/object'; (get(this, 'name') === undefined ? '' : get(this, 'name')).trim()`,
       errors: [
         {
           message: ERROR_MESSAGE,
