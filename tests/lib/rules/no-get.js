@@ -20,7 +20,10 @@ ruleTester.run('no-get', rule, {
 
     // Nested property path.
     { code: "this.get('foo.bar');", options: [{ ignoreNestedPaths: true }] },
-    { code: "get(this, 'foo.bar');", options: [{ ignoreNestedPaths: true }] },
+    {
+      code: "import { get } from '@ember/object'; get(this, 'foo.bar');",
+      options: [{ ignoreNestedPaths: true }],
+    },
 
     // Template literals.
     {
@@ -28,13 +31,13 @@ ruleTester.run('no-get', rule, {
       parserOptions: { ecmaVersion: 6 },
     },
     {
-      code: 'get(this, `foo`);',
+      code: "import { get } from '@ember/object'; get(this, `foo`);",
       parserOptions: { ecmaVersion: 6 },
     },
 
     // Not `this`.
     "foo.get('bar');",
-    "get(foo, 'bar');",
+    "import { get } from '@ember/object'; get(foo, 'bar');",
 
     // Not `get`.
     "this.foo('bar');",
@@ -42,23 +45,26 @@ ruleTester.run('no-get', rule, {
 
     // Unknown extra argument.
     "this.get('foo', 'bar');",
-    "get(this, 'foo', 'bar');",
+    "import { get } from '@ember/object'; get(this, 'foo', 'bar');",
 
     // Non-string parameter.
     'this.get(5);',
     'this.get(MY_PROP);',
-    'get(this, 5);',
-    'get(this, MY_PROP);',
+    "import { get } from '@ember/object'; get(this, 5);",
+    "import { get } from '@ember/object'; get(this, MY_PROP);",
 
     // Unknown sub-function call:
     "this.get.foo('bar');",
-    "get.foo(this, 'bar');",
+    "import { get } from '@ember/object'; get.foo(this, 'bar');",
 
     // In mirage directory
     {
       code: 'this.get("/resources")',
       filename: path.join('app', 'mirage', 'config.js'),
     },
+
+    // Missing import:
+    "get(this, 'foo');",
 
     // **************************
     // getProperties
@@ -67,12 +73,19 @@ ruleTester.run('no-get', rule, {
     // Nested property path.
     { code: "this.getProperties('foo', 'bar.baz');", options: [{ ignoreNestedPaths: true }] },
     { code: "this.getProperties(['foo', 'bar.baz']);", options: [{ ignoreNestedPaths: true }] }, // With parameters in array.
-    { code: "getProperties(this, 'foo', 'bar.baz');", options: [{ ignoreNestedPaths: true }] },
-    { code: "getProperties(this, ['foo', 'bar.baz']);", options: [{ ignoreNestedPaths: true }] }, // With parameters in array.
+    {
+      code: "import { getProperties } from '@ember/object'; getProperties(this, 'foo', 'bar.baz');",
+      options: [{ ignoreNestedPaths: true }],
+    },
+    {
+      code:
+        "import { getProperties } from '@ember/object'; getProperties(this, ['foo', 'bar.baz']);",
+      options: [{ ignoreNestedPaths: true }],
+    }, // With parameters in array.
 
     // Template literals.
     'this.getProperties(`prop1`, `prop2`);',
-    'getProperties(this, `prop1`, `prop2`);',
+    "import { getProperties } from '@ember/object'; getProperties(this, `prop1`, `prop2`);",
 
     // Not `this`.
     "myObject.getProperties('prop1', 'prop2');",
@@ -84,12 +97,15 @@ ruleTester.run('no-get', rule, {
     'this.getProperties(MY_PROP);',
     'this.getProperties(...MY_PROPS);',
     'this.getProperties([MY_PROP]);',
-    'getProperties(this, MY_PROP);',
-    'getProperties(this, ...MY_PROPS);',
-    'getProperties(this, [MY_PROP]);',
+    "import { getProperties } from '@ember/object'; getProperties(this, MY_PROP);",
+    "import { getProperties } from '@ember/object'; getProperties(this, ...MY_PROPS);",
+    "import { getProperties } from '@ember/object'; getProperties(this, [MY_PROP]);",
 
     // Unknown sub-function call:
     "this.getProperties.foo('prop1', 'prop2');",
+
+    // Missing import:
+    "getProperties(this, 'prop1', 'prop2');",
 
     // With ignoreGetProperties: true
     {
@@ -101,11 +117,12 @@ ruleTester.run('no-get', rule, {
       options: [{ ignoreGetProperties: true }],
     },
     {
-      code: "getProperties(this, 'prop1', 'prop2');",
+      code: "import { getProperties } from '@ember/object'; getProperties(this, 'prop1', 'prop2');",
       options: [{ ignoreGetProperties: true }],
     },
     {
-      code: "getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
+      code:
+        "import { getProperties } from '@ember/object'; getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
       options: [{ ignoreGetProperties: true }],
     },
 
@@ -173,10 +190,31 @@ ruleTester.run('no-get', rule, {
       errors: [{ message: "Use `this.foo` instead of `this.get('foo')`", type: 'CallExpression' }],
     },
     {
-      code: "get(this, 'foo');",
-      output: 'this.foo;',
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      get(this, 'foo');
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      this.foo;
+      `,
       // Error message intentionally written out to ensure it looks right.
       errors: [{ message: "Use `this.foo` instead of `get(this, 'foo')`", type: 'CallExpression' }],
+    },
+    {
+      // With renamed import:
+      code: "import { get as g } from '@ember/object'; g(this, 'foo');",
+      output: "import { get as g } from '@ember/object'; this.foo;",
+      errors: [
+        {
+          message: makeErrorMessageForGet('foo', { isImportedGet: true }),
+          type: 'CallExpression',
+        },
+      ],
     },
     {
       code: "this.get('foo').someFunction();",
@@ -201,7 +239,7 @@ ruleTester.run('no-get', rule, {
     },
     {
       // With invalid JS variable name:
-      code: "get(this, 'foo-bar');",
+      code: "import { get } from '@ember/object'; get(this, 'foo-bar');",
       output: null,
       errors: [
         {
@@ -226,12 +264,24 @@ ruleTester.run('no-get', rule, {
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
-      code: "getProperties(this, 'prop1', 'prop2');",
+      code: `
+      import { getProperties } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      getProperties(this, 'prop1', 'prop2');
+      `,
       output: null,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
-      code: "getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
+      // With renamed import:
+      code: "import { getProperties as gp } from '@ember/object'; gp(this, 'prop1', 'prop2');",
+      output: null,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code:
+        "import { getProperties } from '@ember/object'; getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
       output: null,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
@@ -248,7 +298,7 @@ ruleTester.run('no-get', rule, {
       ],
     },
     {
-      code: "get(this, 'foo.bar');",
+      code: "import { get } from '@ember/object'; get(this, 'foo.bar');",
       output: null,
       errors: [
         {
@@ -263,7 +313,7 @@ ruleTester.run('no-get', rule, {
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
-      code: "getProperties(this, 'foo.bar');",
+      code: "import { getProperties } from '@ember/object'; getProperties(this, 'foo.bar');",
       output: null,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
@@ -296,9 +346,9 @@ ruleTester.run('no-get', rule, {
       ],
     },
     {
-      code: "get(this, 'foo.bar');",
+      code: "import { get } from '@ember/object'; get(this, 'foo.bar');",
       options: [{ useOptionalChaining: true }],
-      output: 'this.foo?.bar;',
+      output: "import { get } from '@ember/object'; this.foo?.bar;",
       errors: [
         {
           message: makeErrorMessageForGet('foo.bar', {
@@ -310,9 +360,9 @@ ruleTester.run('no-get', rule, {
       ],
     },
     {
-      code: "get(this, 'very.long.path');",
+      code: "import { get } from '@ember/object'; get(this, 'very.long.path');",
       options: [{ useOptionalChaining: true }],
-      output: 'this.very?.long?.path;',
+      output: "import { get } from '@ember/object'; this.very?.long?.path;",
       errors: [
         {
           message: makeErrorMessageForGet('very.long.path', {
