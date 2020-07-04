@@ -21,6 +21,9 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-assignment-of-untracked-properties-used-in-tracking-contexts', rule, {
   valid: [
+    // **********************
+    // Native class
+    // **********************
     {
       // Assignment of property which is not used as a dependent key.
       code: `
@@ -129,7 +132,21 @@ ruleTester.run('no-assignment-of-untracked-properties-used-in-tracking-contexts'
       filename: '/components/foo.js',
     },
     {
-      // Classic class.
+      // Without computed imports.
+      code: `
+      import Component from '@ember/component';
+      class MyClass extends Component {
+        @computed('x') get prop1() {}
+        @readOnly('y') get prop2() {}
+        myFunction() { this.x = 123; this.y = 456; }
+      }`,
+      filename: '/components/foo.js',
+    },
+
+    // **********************
+    // Classic class
+    // **********************
+    {
       code: `
       import { computed } from '@ember/object';
       import Component from '@ember/component';
@@ -145,8 +162,23 @@ ruleTester.run('no-assignment-of-untracked-properties-used-in-tracking-contexts'
       })`,
       filename: '/components/foo.js',
     },
+    {
+      // Imports present but no computed properties.
+      code: `
+      import { readOnly, equal, gt } from '@ember/object/computed';
+      import { computed } from '@ember/object';
+      import Component from '@ember/component';
+      Component.extends({
+        actions: {},
+      });`,
+      filename: '/components/foo.js',
+    },
   ],
   invalid: [
+    // **********************
+    // Native class
+    // **********************
+
     {
       // Assignment of dependent key property.
       code: `
@@ -312,8 +344,84 @@ import { computed } from '@ember/object';
       filename: '/components/foo.js',
       errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
     },
+
+    // **********************
+    // Macros (native class)
+    // **********************
+
     {
-      // Assignment of dependent key property (classic class).
+      // Simple macro (`readOnly`), renamed
+      code: `
+      import { computed } from '@ember/object';
+      import { readOnly as ro } from '@ember/object/computed';
+      import Component from '@ember/component';
+      class MyClass extends Component {
+        @ro('x') get myProp() {}
+        myFunctionX() { this.x = 123; }
+      }`,
+      filename: '/components/foo.js',
+      output: `
+      import { set } from '@ember/object';
+import { computed } from '@ember/object';
+      import { readOnly as ro } from '@ember/object/computed';
+      import Component from '@ember/component';
+      class MyClass extends Component {
+        @ro('x') get myProp() {}
+        myFunctionX() { set(this, 'x', 123); }
+      }`,
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
+    {
+      // Simple macro (`computed.readOnly`), with `computed` rename
+      code: `
+      import { computed as c } from '@ember/object';
+      import Component from '@ember/component';
+      class MyClass extends Component {
+        @c.readOnly('x') get myProp() {}
+        myFunctionX() { this.x = 123; }
+      }`,
+      filename: '/components/foo.js',
+      output: `
+      import { set } from '@ember/object';
+import { computed as c } from '@ember/object';
+      import Component from '@ember/component';
+      class MyClass extends Component {
+        @c.readOnly('x') get myProp() {}
+        myFunctionX() { set(this, 'x', 123); }
+      }`,
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
+    {
+      // Macro with non-tracked arguments (`mapBy`)
+      code: `
+      import { computed } from '@ember/object';
+      import { mapBy } from '@ember/object/computed';
+      import Component from '@ember/component';
+      class MyClass extends Component {
+        @mapBy('chores', 'done', true) get myProp() {}
+        myFunction1() { this.chores = 123; }
+        myFunction2() { this.done = 123; } // Allowed since this isn't a dependent key.
+      }`,
+      filename: '/components/foo.js',
+      output: `
+      import { set } from '@ember/object';
+import { computed } from '@ember/object';
+      import { mapBy } from '@ember/object/computed';
+      import Component from '@ember/component';
+      class MyClass extends Component {
+        @mapBy('chores', 'done', true) get myProp() {}
+        myFunction1() { set(this, 'chores', 123); }
+        myFunction2() { this.done = 123; } // Allowed since this isn't a dependent key.
+      }`,
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
+
+    // **********************
+    // Classic class
+    // **********************
+
+    {
+      // Assignment of dependent key property
       code: `
       import { computed } from '@ember/object';
       import Component from '@ember/component';
@@ -336,6 +444,74 @@ import { computed } from '@ember/object';
       Component.extends({
         myProp: computed('x', function() {}),
         myFunction() { set(this, 'x', 123); }
+      })`,
+      filename: '/components/foo.js',
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
+
+    // **********************
+    // Macros (classic class)
+    // **********************
+
+    {
+      // Simple macro (`readOnly`), renamed
+      code: `
+      import { readOnly as ro } from '@ember/object/computed';
+      import Component from '@ember/component';
+      Component.extends({
+        myProp: ro('x'),
+        myFunction() { this.x = 123; }
+      })`,
+      output: `
+      import { set } from '@ember/object';
+import { readOnly as ro } from '@ember/object/computed';
+      import Component from '@ember/component';
+      Component.extends({
+        myProp: ro('x'),
+        myFunction() { set(this, 'x', 123); }
+      })`,
+      filename: '/components/foo.js',
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
+    {
+      // Simple macro (`computed.readOnly`), with `computed` rename
+      code: `
+      import { computed as c } from '@ember/object';
+      import Component from '@ember/component';
+      Component.extends({
+        myProp: c.readOnly('x'),
+        myFunction() { this.x = 123; }
+      })`,
+      output: `
+      import { set } from '@ember/object';
+import { computed as c } from '@ember/object';
+      import Component from '@ember/component';
+      Component.extends({
+        myProp: c.readOnly('x'),
+        myFunction() { set(this, 'x', 123); }
+      })`,
+      filename: '/components/foo.js',
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
+
+    {
+      // Macro with non-tracked arguments (`mapBy`)
+      code: `
+      import { mapBy } from '@ember/object/computed';
+      import Component from '@ember/component';
+      Component.extends({
+        myProp: mapBy('chores', 'done', true),
+        myFunction1() { this.chores = 123; },
+        myFunction2() { this.done = 123; } // Allowed since this isn't a dependent key.
+      })`,
+      output: `
+      import { set } from '@ember/object';
+import { mapBy } from '@ember/object/computed';
+      import Component from '@ember/component';
+      Component.extends({
+        myProp: mapBy('chores', 'done', true),
+        myFunction1() { set(this, 'chores', 123); },
+        myFunction2() { this.done = 123; } // Allowed since this isn't a dependent key.
       })`,
       filename: '/components/foo.js',
       errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
