@@ -1,3 +1,15 @@
+## v8.9.1 (2020-07-05)
+
+#### :bug: Bug Fix
+* [#883](https://github.com/ember-cli/eslint-plugin-ember/pull/883) Gather dependent keys from computed property macros in [no-assignment-of-untracked-properties-used-in-tracking-contexts](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-assignment-of-untracked-properties-used-in-tracking-contexts.md) rule ([@bmish](https://github.com/bmish))
+* [#880](https://github.com/ember-cli/eslint-plugin-ember/pull/880) Check imports in [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md) rule ([@bmish](https://github.com/bmish))
+* [#881](https://github.com/ember-cli/eslint-plugin-ember/pull/881) Check imports in [no-get-with-default](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get-with-default.md) rule ([@bmish](https://github.com/bmish))
+* [#882](https://github.com/ember-cli/eslint-plugin-ember/pull/882) Check imports in [no-pause-test](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-pause-test.md) rule ([@bmish](https://github.com/bmish))
+* [#879](https://github.com/ember-cli/eslint-plugin-ember/pull/879) Autofix nested paths in the left side of an assignment without using optional chaining in the [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md) rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v8.9.0 (2020-06-28)
 
 #### :rocket: Enhancement
