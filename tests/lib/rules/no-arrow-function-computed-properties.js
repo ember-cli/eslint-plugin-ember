@@ -74,12 +74,6 @@ ruleTester.run('no-arrow-function-computed-properties', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
     {
-      code: 'computed(() => { return 123; })',
-      output: null,
-      errors: [],
-      options: [{ onlyThisContexts: true }],
-    },
-    {
       code: "computed('prop', () => { return this.prop; })",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
