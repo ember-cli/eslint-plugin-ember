@@ -88,6 +88,18 @@ describe('function sort order', function () {
   });
 });
 
+describe('getName', () => {
+  it('should behave correctly', () => {
+    expect(utils.getName(parse('x'))).toStrictEqual('x');
+    expect(utils.getName(parse('x()'))).toStrictEqual('x');
+    expect(utils.getName(parse('x?.()'))).toStrictEqual('x');
+    expect(utils.getName(parse('x.y'))).toStrictEqual('x.y');
+    expect(utils.getName(parse('x?.y'))).toStrictEqual('x.y');
+    expect(utils.getName(parse('x.y()'))).toStrictEqual('x.y');
+    expect(utils.getName(parse('x?.y?.()'))).toStrictEqual('x.y');
+  });
+});
+
 describe('getPropertyValue', () => {
   const simpleObject = {
     foo: true,
