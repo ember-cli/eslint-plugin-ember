@@ -1,6 +1,6 @@
 const {
   getMacros,
-  getMacrosFromImportNames,
+  getMacrosFromImports,
   getTrackedArgumentCount,
   macroToCanonicalName,
 } = require('../../../lib/utils/computed-property-macros');
@@ -11,13 +11,31 @@ describe('getMacros', () => {
   });
 });
 
-describe('getMacrosFromImportNames', () => {
+describe('getMacrosFromImports', () => {
   it('returns some of the correct macros', () => {
-    const result = [
-      ...getMacrosFromImportNames('computedRenamed', new Map([['readOnly', 'readOnlyRenamed']])),
-    ];
+    const macrosByImport = new Map([
+      ['readOnlyRenamed', 'read-only-config'],
+      ['aliasRenamed', 'alias-config'],
+    ]);
+    const macrosByIndexImport = new Map([
+      [
+        'computed',
+        new Map([
+          ['readOnly', 'read-only-config'],
+          ['alias', 'alias-config'],
+        ]),
+      ],
+      ['customComputed', new Map([['rejectBy', 'reject-by-config']])],
+    ]);
+    const result = [...getMacrosFromImports(macrosByImport, macrosByIndexImport)];
     expect(result).toStrictEqual(
-      expect.arrayContaining(['computedRenamed.readOnly', 'readOnlyRenamed'])
+      expect.arrayContaining([
+        ['readOnlyRenamed', 'read-only-config'],
+        ['aliasRenamed', 'alias-config'],
+        ['computed.readOnly', 'read-only-config'],
+        ['computed.alias', 'alias-config'],
+        ['customComputed.rejectBy', 'reject-by-config'],
+      ])
     );
   });
 });

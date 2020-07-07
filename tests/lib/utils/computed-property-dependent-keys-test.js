@@ -73,65 +73,209 @@ describe('keyExistsAsPrefixInList', () => {
 describe('findComputedPropertyDependentKeys', () => {
   it('returns the right result with native class', () => {
     const computedImportName = 'c';
-    const macroImportNames = new Map([
-      ['readOnly', 'readOnlyRenamed'],
-      ['mapBy', 'mapBy'],
+    const macrosByImport = new Map([
+      [
+        'rejectBy',
+        {
+          argumentFormat: [
+            {
+              strings: {
+                startIndex: 0,
+                count: 1,
+              },
+            },
+          ],
+        },
+      ],
+      [
+        't',
+        {
+          argumentFormat: [
+            {
+              objects: { index: 1, keys: ['foo', 'bar', 'baz'] },
+            },
+          ],
+        },
+      ],
     ]);
+
+    const macrosByIndexImport = new Map([
+      [
+        'c',
+        new Map([
+          [
+            'readOnly',
+            {
+              argumentFormat: [
+                {
+                  strings: {
+                    startIndex: 0,
+                    count: 1,
+                  },
+                },
+              ],
+            },
+          ],
+        ]),
+      ],
+      [
+        'somethingElse',
+        new Map([
+          [
+            'strange',
+            {
+              argumentFormat: [
+                {
+                  strings: {
+                    startIndex: 1,
+                    count: 2,
+                  },
+                },
+                {
+                  objects: {
+                    index: 3,
+                  },
+                },
+              ],
+            },
+          ],
+        ]),
+      ],
+    ]);
+
     const classNode = babelEslint.parse(`
-    import { computed as c } from '@ember/object';
-    import { readOnly as readOnlyRenamed, mapBy } from '@ember/object/computed';
-    import Component from '@ember/component';
-    class MyClass extends Component {
-      @c('x') get myProp() {}
-      @c('x', 'x') get myProp() {} // Intentional duplicate dependent key.
-      @c() get myProp() {}
-      @readOnlyRenamed('y') get myProp() {}
-      @c.readOnly('z') get myProp() {}
-      @mapBy('chores', 'done', true) get myProp() {}
-      @random() get myProp() {}
-      @random('') get myProp() {}
-      @random('z') get myProp() {}
-      @computed('bad') get myProp() {} // Wrong name.
-      @readOnly('bad') get myProp() {} // Wrong name.
-    }`).body[3];
+      import { computed as c } from '@ember/object';
+      import { rejectBy, t } from 'custom-macros/macros';
+      import { somethingElse } from 'custom-macros';
+      import Component from '@ember/component';
+
+      class MyClass extends Component {
+        @c('x') get myProp() {}
+        @c('x', 'x') get myProp() {} // Intentional duplicate dependent key.
+        @c() get myProp() {}
+        @c.readOnly('y') get myProp() {}
+        @c.notSpecified('z') get myProp() {}
+        @rejectBy('chores', 'done', true) get myProp() {}
+        @random() get myProp() {}
+        @random('') get myProp() {}
+        @random('z') get myProp() {}
+        @computed('bad') get myProp() {} // Wrong name.
+        @readOnly('bad') get myProp() {} // Wrong name.
+        @t('ignored', { foo: 'kept', "bar": 'also-kept', unknown: 'not-kept' }) stringProp;
+        @somethingElse.strange('ignored', 'yes', 'also-yes', { arbitrary: 'indeed' }) otherProp;
+      }
+    `).body[4];
     expect([
       ...cpdkUtils.findComputedPropertyDependentKeys(
         classNode,
         computedImportName,
-        macroImportNames
+        macrosByImport,
+        macrosByIndexImport
       ),
-    ]).toStrictEqual(['x', 'y', 'z', 'chores']);
+    ]).toStrictEqual(['x', 'y', 'chores', 'kept', 'also-kept', 'yes', 'also-yes', 'indeed']);
   });
 
   it('returns the right result with classic class', () => {
     const computedImportName = 'c';
-    const macroImportNames = new Map([
-      ['readOnly', 'readOnlyRenamed'],
-      ['mapBy', 'mapBy'],
+    const macrosByImport = new Map([
+      [
+        'rejectBy',
+        {
+          argumentFormat: [
+            {
+              strings: {
+                startIndex: 0,
+                count: 1,
+              },
+            },
+          ],
+        },
+      ],
+      [
+        't',
+        {
+          argumentFormat: [
+            {
+              objects: { index: 1, keys: ['foo', 'bar', 'baz'] },
+            },
+          ],
+        },
+      ],
     ]);
+
+    const macrosByIndexImport = new Map([
+      [
+        'c',
+        new Map([
+          [
+            'readOnly',
+            {
+              argumentFormat: [
+                {
+                  strings: {
+                    startIndex: 0,
+                    count: 1,
+                  },
+                },
+              ],
+            },
+          ],
+        ]),
+      ],
+      [
+        'somethingElse',
+        new Map([
+          [
+            'strange',
+            {
+              argumentFormat: [
+                {
+                  strings: {
+                    startIndex: 1,
+                    count: 2,
+                  },
+                },
+                {
+                  objects: {
+                    index: 3,
+                  },
+                },
+              ],
+            },
+          ],
+        ]),
+      ],
+    ]);
+
     const classNode = babelEslint.parse(`
-    import { computed as c } from '@ember/object';
-    import { readOnly as readOnlyRenamed, mapBy } from '@ember/object/computed';
-    import Component from '@ember/component';
-    Component.extend({
-      prop1: c('x'),
-      prop2: c('x', 'x'), // Intentional duplicate dependent key.
-      prop3: c(),
-      prop4: readOnlyRenamed('y'),
-      prop5: c?.readOnly('z'), // Macro plus optional expression.
-      prop6: mapBy('chores', 'done', true),
-      prop7: random(),
-      prop8: random(''),
-      prop9: random('z'),
-      prop10: computed('bad'), // Wrong name.
-      prop11: readOnly('bad'), // Wrong name.
-    });`).body[3].expression;
+      import { computed as c } from '@ember/object';
+      import { rejectBy, t } from 'custom-macros/macros';
+      import { somethingElse } from 'custom-macros';
+      import Component from '@ember/component';
+
+      Component.extend({
+        prop1: c('x'),
+        prop2: c('x', 'x'), // Intentional duplicate dependent key.
+        prop3: c(),
+        prop5: c?.readOnly('y'), // Macro plus optional expression.
+        prop4: c.notSpecified('z'),
+        prop6: rejectBy('chores', 'done', true),
+        prop7: random(),
+        prop8: random(''),
+        prop9: random('z'),
+        prop10: computed('bad'), // Wrong name.
+        prop11: readOnly('bad'), // Wrong name.
+        prop12: t('ignored', { foo: 'kept', "bar": 'also-kept', unknown: 'not-kept' }),
+        prop13: somethingElse.strange('ignored', 'yes', 'also-yes', { arbitrary: 'indeed' }),
+      });
+    `).body[4].expression;
     expect([
       ...cpdkUtils.findComputedPropertyDependentKeys(
         classNode,
         computedImportName,
-        macroImportNames
+        macrosByImport,
+        macrosByIndexImport
       ),
-    ]).toStrictEqual(['x', 'y', 'z', 'chores']);
+    ]).toStrictEqual(['x', 'y', 'chores', 'kept', 'also-kept', 'yes', 'also-yes', 'indeed']);
   });
 });

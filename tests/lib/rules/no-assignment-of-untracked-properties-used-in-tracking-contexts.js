@@ -178,7 +178,6 @@ ruleTester.run('no-assignment-of-untracked-properties-used-in-tracking-contexts'
     // **********************
     // Native class
     // **********************
-
     {
       // Assignment of dependent key property.
       code: `
@@ -512,6 +511,88 @@ import { mapBy } from '@ember/object/computed';
         myProp: mapBy('chores', 'done', true),
         myFunction1() { set(this, 'chores', 123); },
         myFunction2() { this.done = 123; } // Allowed since this isn't a dependent key.
+      })`,
+      filename: '/components/foo.js',
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
+    {
+      // Custom macro for direct strings
+      options: [
+        {
+          extraMacros: [
+            {
+              path: 'custom-macros/custom',
+              name: 'rejectBy',
+              argumentFormat: [
+                {
+                  strings: {
+                    count: 1,
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      code: `
+      import { rejectBy } from 'custom-macros/custom';
+      import Component from '@ember/component';
+      Component.extends({
+        myProp: rejectBy('chores', 'done', true),
+        myFunction1() { this.chores = 123; },
+        myFunction2() { this.done = 123; }, // Allowed since this isn't a dependent key.
+      })`,
+      output: `
+      import { set } from '@ember/object';
+import { rejectBy } from 'custom-macros/custom';
+      import Component from '@ember/component';
+      Component.extends({
+        myProp: rejectBy('chores', 'done', true),
+        myFunction1() { set(this, 'chores', 123); },
+        myFunction2() { this.done = 123; }, // Allowed since this isn't a dependent key.
+      })`,
+      filename: '/components/foo.js',
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
+    {
+      // Custom macro for object values
+      options: [
+        {
+          extraMacros: [
+            {
+              path: 'custom-macros/custom',
+              name: 't',
+              indexPath: 'custom-macros/ind',
+              indexName: 'customComputed',
+              argumentFormat: [
+                {
+                  objects: {
+                    index: 1,
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      code: `
+      import { customComputed } from 'custom-macros/ind';
+      import Component from '@ember/component';
+      Component.extends({
+        myProp: customComputed.t('unused', { tKey: 'dependency.key' }),
+        myFunction1() { this.dependency = 123; },
+        myFunction2() { this.unused = 123; }, // Allowed since this isn't a dependent key.
+        myFunction3() { this.tKey = 123; }, // Allowed since this is a key, not a value.
+      })`,
+      output: `
+      import { set } from '@ember/object';
+import { customComputed } from 'custom-macros/ind';
+      import Component from '@ember/component';
+      Component.extends({
+        myProp: customComputed.t('unused', { tKey: 'dependency.key' }),
+        myFunction1() { set(this, 'dependency', 123); },
+        myFunction2() { this.unused = 123; }, // Allowed since this isn't a dependent key.
+        myFunction3() { this.tKey = 123; }, // Allowed since this is a key, not a value.
       })`,
       filename: '/components/foo.js',
       errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
