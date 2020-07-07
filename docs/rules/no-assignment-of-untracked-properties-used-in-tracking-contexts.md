@@ -86,6 +86,7 @@ The autofixer for this rule will update assignments to use `set`. Alternatively,
         * array -- `keys` -- Array of strings for which keys values should be checked for. If not provided, all values will be checked.
 
 Example configuration:
+
 ```js
 module.exports = {
   rules: {
@@ -121,7 +122,7 @@ module.exports = {
     }
   }
 };
-```        
+```
 
 ## References
 
