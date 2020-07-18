@@ -24,6 +24,7 @@ ruleTester.run('no-assignment-of-untracked-properties-used-in-tracking-contexts'
     // **********************
     // Native class
     // **********************
+
     {
       // Assignment of property which is not used as a dependent key.
       code: `
@@ -178,6 +179,7 @@ ruleTester.run('no-assignment-of-untracked-properties-used-in-tracking-contexts'
     // **********************
     // Native class
     // **********************
+
     {
       // Assignment of dependent key property.
       code: `
