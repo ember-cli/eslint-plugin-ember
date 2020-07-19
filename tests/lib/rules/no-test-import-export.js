@@ -24,6 +24,26 @@ ruleTester.run('no-test-file-importing', rule, {
         export function beforeEachSetup(){};
       `,
     },
+
+    // Exporting from files in tests/helpers is allowed.
+    {
+      filename: 'tests/helpers/setup-application-test.js',
+      code: 'export default function setupApplicationTest(){};',
+    },
+    {
+      filename: 'tests/helpers/index.js',
+      code: 'export function setupApplicationTest(){};',
+    },
+    {
+      filename: 'my-app-name/tests/helpers/setup-application-test.js',
+      code: 'export default function setupApplicationTest(){};',
+    },
+
+    // Importing anything from tests/helpers is allowed.
+    "import setupApplicationTest from 'tests/helpers/setup-application-test.js';",
+    "import { setupApplicationTest } from 'tests/helpers';",
+    "import setupApplicationTest from 'my-app-name/tests/helpers/setup-application-test.js';",
+    "import { setupApplicationTest } from 'my-app-name/tests/helpers';",
   ],
   invalid: [
     {
