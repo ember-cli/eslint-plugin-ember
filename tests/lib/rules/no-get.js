@@ -177,6 +177,7 @@ ruleTester.run('no-get', rule, {
 
     // Optional chaining:
     'this.foo?.bar',
+    'this.foo?.[0]?.bar',
   ],
   invalid: [
     // **************************
@@ -399,6 +400,29 @@ ruleTester.run('no-get', rule, {
             isImportedGet: false,
             useOptionalChaining: false,
           }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Handle array element access with optional chaining.
+      code: "this.get('foo1.0.bar1bar.1')",
+      options: [{ useOptionalChaining: true }],
+      output: 'this.foo1?.[0]?.bar1bar?.[1]',
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Handle array element access (left side of an assignment).
+      code: "this.get('foo.0.bar')[123] = 'hello world';",
+      output: "this.foo[0].bar[123] = 'hello world';",
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
