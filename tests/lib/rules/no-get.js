@@ -2,7 +2,7 @@ const path = require('path');
 const rule = require('../../../lib/rules/no-get');
 const RuleTester = require('eslint').RuleTester;
 
-const { makeErrorMessageForGet, ERROR_MESSAGE_GET_PROPERTIES } = rule;
+const { ERROR_MESSAGE_GET, ERROR_MESSAGE_GET_PROPERTIES } = rule;
 
 const ruleTester = new RuleTester({
   parser: require.resolve('babel-eslint'),
@@ -186,8 +186,7 @@ ruleTester.run('no-get', rule, {
     {
       code: "this.get('foo');",
       output: 'this.foo;',
-      // Error message intentionally written out to ensure it looks right.
-      errors: [{ message: "Use `this.foo` instead of `this.get('foo')`", type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
     {
       code: `
@@ -202,8 +201,7 @@ ruleTester.run('no-get', rule, {
       import { random } from 'random';
       this.foo;
       `,
-      // Error message intentionally written out to ensure it looks right.
-      errors: [{ message: "Use `this.foo` instead of `get(this, 'foo')`", type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
     {
       // With renamed import:
@@ -211,7 +209,7 @@ ruleTester.run('no-get', rule, {
       output: "import { get as g } from '@ember/object'; this.foo;",
       errors: [
         {
-          message: makeErrorMessageForGet('foo', { isImportedGet: true }),
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
@@ -221,7 +219,7 @@ ruleTester.run('no-get', rule, {
       output: 'this.foo.someFunction();',
       errors: [
         {
-          message: makeErrorMessageForGet('foo', { isImportedGet: false }),
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
@@ -232,7 +230,7 @@ ruleTester.run('no-get', rule, {
       output: null,
       errors: [
         {
-          message: makeErrorMessageForGet('foo-bar', { isImportedGet: false }),
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
@@ -243,7 +241,7 @@ ruleTester.run('no-get', rule, {
       output: null,
       errors: [
         {
-          message: makeErrorMessageForGet('foo-bar', { isImportedGet: true }),
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
@@ -292,7 +290,7 @@ ruleTester.run('no-get', rule, {
       output: null,
       errors: [
         {
-          message: makeErrorMessageForGet('foo.bar', { isImportedGet: false }),
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
@@ -302,7 +300,7 @@ ruleTester.run('no-get', rule, {
       output: null,
       errors: [
         {
-          message: makeErrorMessageForGet('foo.bar', { isImportedGet: true }),
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
@@ -325,8 +323,7 @@ ruleTester.run('no-get', rule, {
       output: 'this.foo?.bar;',
       errors: [
         {
-          // Error message intentionally written out to ensure it looks right.
-          message: "Use `this.foo.bar` or `this.foo?.bar` instead of `this.get('foo.bar')`",
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
@@ -337,10 +334,7 @@ ruleTester.run('no-get', rule, {
       output: 'this.very?.long?.path;',
       errors: [
         {
-          message: makeErrorMessageForGet('very.long.path', {
-            isImportedGet: false,
-            useOptionalChaining: true,
-          }),
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
@@ -351,10 +345,7 @@ ruleTester.run('no-get', rule, {
       output: "import { get } from '@ember/object'; this.foo?.bar;",
       errors: [
         {
-          message: makeErrorMessageForGet('foo.bar', {
-            isImportedGet: true,
-            useOptionalChaining: true,
-          }),
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
@@ -365,10 +356,7 @@ ruleTester.run('no-get', rule, {
       output: "import { get } from '@ember/object'; this.very?.long?.path;",
       errors: [
         {
-          message: makeErrorMessageForGet('very.long.path', {
-            isImportedGet: true,
-            useOptionalChaining: true,
-          }),
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
@@ -379,10 +367,7 @@ ruleTester.run('no-get', rule, {
       output: 'this.foo;',
       errors: [
         {
-          message: makeErrorMessageForGet('foo', {
-            isImportedGet: false,
-            useOptionalChaining: true,
-          }),
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
@@ -395,10 +380,7 @@ ruleTester.run('no-get', rule, {
       output: "this.foo.bar[123] = 'hello world';",
       errors: [
         {
-          message: makeErrorMessageForGet('foo.bar', {
-            isImportedGet: false,
-            useOptionalChaining: false,
-          }),
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
@@ -411,10 +393,7 @@ ruleTester.run('no-get', rule, {
       output: "this.foo.bar[123] = 'hello world';",
       errors: [
         {
-          message: makeErrorMessageForGet('foo.bar', {
-            isImportedGet: false,
-            useOptionalChaining: false,
-          }),
+          message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
@@ -442,7 +421,7 @@ ruleTester.run('no-get', rule, {
       });
       this.propertyOutsideClass;
       `,
-      errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
     {
       // Reports violation after (native) proxy class.
@@ -466,7 +445,7 @@ ruleTester.run('no-get', rule, {
       }
       this.propertyOutsideClass;
       `,
-      errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
 
     {
@@ -491,7 +470,7 @@ ruleTester.run('no-get', rule, {
       });
       this.propertyOutsideClass;
       `,
-      errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
     {
       // Reports violation after (native) class with `unknownProperty()`.
@@ -515,7 +494,7 @@ ruleTester.run('no-get', rule, {
       }
       this.propertyOutsideClass;
       `,
-      errors: [{ message: makeErrorMessageForGet('propertyOutsideClass'), type: 'CallExpression' }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
   ],
 });
