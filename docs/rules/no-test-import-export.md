@@ -67,3 +67,14 @@ function beforeEachSetup() {}
 
 export default { beforeEachSetup };
 ```
+
+```javascript
+// Any imports from `tests/helpers` are allowed.
+import { setupApplicationTest } from 'tests/helpers/setup-application-test';
+```
+
+```javascript
+// Any exports from `tests/helpers` are allowed.
+// tests/helpers/setup-application-test.js
+export default function setupApplicationTest() {}
+```
