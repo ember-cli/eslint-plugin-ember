@@ -19,26 +19,37 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-attrs-in-components', rule, {
   valid: [
-    `Component.extend({
-        init() {
-          const newName = get(this, '_name');
-        }
-      });`,
+    "import Component from '@ember/component'; Component.extend({ init() { this.foo.bar; }  });",
+    "import Component from '@ember/component'; class MyComponent extends Component { init() { this.foo.bar; } }",
+    "import Component from '@glimmer/component'; class MyComponent extends Component { constructor() { this.foo.bar; } }",
+
+    // After a component:
+    "import Component from '@ember/component'; Component.extend({}); this.attrs.foo;",
+    "import Component from '@ember/component'; class MyComponent extends Component {} this.attrs.foo;",
+
+    // Not a component:
+    'Random.extend({ init() { this.attrs.foo; }  });',
+    "import Component from 'not-a-component'; class MyComponent extends Component { init() { this.attrs.foo; } }",
   ],
 
   invalid: [
     {
-      code: `Component.extend({
-        init() {
-          const newName = this.attrs.name;
-        }
-      });`,
+      code:
+        "import Component from '@ember/component'; Component.extend({ init() { this.attrs.foo; } });",
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
+    },
+    {
+      code:
+        "import Component from '@ember/component'; class MyComponent extends Component { init() { this.attrs.foo; } }",
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
+    },
+    {
+      code:
+        "import Component from '@glimmer/component'; class MyComponent extends Component { constructor() { this.attrs.foo; } }",
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
     },
   ],
 });
