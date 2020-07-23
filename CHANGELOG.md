@@ -1,3 +1,16 @@
+## v8.9.2 (2020-07-23)
+
+#### :bug: Bug Fix
+* [#895](https://github.com/ember-cli/eslint-plugin-ember/pull/895) Update [no-test-import-export](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-import-export.md) rule to allow importing from anything under `tests/helpers` path ([@bmish](https://github.com/bmish))
+* [#894](https://github.com/ember-cli/eslint-plugin-ember/pull/894) Ensure [no-attrs-in-components](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-attrs-in-components.md) rule only runs inside components ([@bmish](https://github.com/bmish))
+* [#893](https://github.com/ember-cli/eslint-plugin-ember/pull/893) Support array element access in [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md) rule autofix ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#888](https://github.com/ember-cli/eslint-plugin-ember/pull/888) Add npm-package-json-lint ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v8.9.1 (2020-07-05)
 
 #### :bug: Bug Fix
