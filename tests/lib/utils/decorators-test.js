@@ -63,8 +63,8 @@ describe('findDecoratorByNameCallback', () => {
   });
 });
 
+const expressionlessParse = (code) => babelEslint.parse(code).body[0];
 describe('hasDecorator', () => {
-  const expressionlessParse = (code) => babelEslint.parse(code).body[0];
   const withDecorator = '@classic class Rectangle {}';
   const withoutDecorator = 'class Rectangle {}';
   const testCases = [
