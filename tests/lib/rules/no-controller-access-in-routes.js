@@ -32,6 +32,15 @@ ruleTester.run('no-controller-access-in-routes', rule, {
     `,
     `
       import Route from '@ember/routing/route';
+      export default Route.extend({
+        setupController(controller, ...args) {
+          this._super(controller, ...args);
+          const foo = controller.foo;
+        }
+      });
+    `,
+    `
+      import Route from '@ember/routing/route';
       export default class MyRoute extends Route {
         resetController(controller, ...args) {
           super.resetController(controller, ...args);
@@ -39,6 +48,16 @@ ruleTester.run('no-controller-access-in-routes', rule, {
         }
       }
     `,
+    `
+      import Route from '@ember/routing/route';
+      export default Route.extend({
+        resetController(controller, ...args) {
+          this._super(controller, ...args);
+          const foo = controller.foo;
+        }
+      });
+    `,
+
     `
       import Component from '@ember/component';
       import { action, get } from '@ember/object';
@@ -48,6 +67,18 @@ ruleTester.run('no-controller-access-in-routes', rule, {
           const controller = this.controller;
         }
       }
+    `,
+    `
+      import Route from '@ember/routing/route';
+      export default class MyRoute extends Route {}
+      this.controller;
+      this.controllerFor('my');
+    `,
+    `
+      import Route from '@ember/routing/route';
+      export default Route.extend({});
+      this.controller;
+      this.controllerFor('my');
     `,
     {
       code: `
@@ -59,6 +90,19 @@ ruleTester.run('no-controller-access-in-routes', rule, {
             const controller = this.controllerFor('my');
           }
         }
+      `,
+      options: [{ allowControllerFor: true }],
+    },
+    {
+      code: `
+        import Route from '@ember/routing/route';
+        export default Route.extend({
+          actions: {
+            myAction() {
+              const controller = this.controllerFor('my');
+            },
+          },
+        });
       `,
       options: [{ allowControllerFor: true }],
     },
@@ -77,6 +121,34 @@ ruleTester.run('no-controller-access-in-routes', rule, {
       `,
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+    },
+    {
+      code: `
+        import Route from '@ember/routing/route';
+        export default Route.extend({
+          actions: {
+            myAction() {
+              const controller = this.controller;
+            },
+          },
+        });
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+    },
+    {
+      code: `
+        import Route from '@ember/routing/route';
+        import { action } from '@ember/object';
+        export default class MyRoute extends Route {
+          @action
+          myAction() {
+            const controller = this.controllerFor('my');
+          }
+        }
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: `

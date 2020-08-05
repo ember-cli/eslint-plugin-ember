@@ -2,7 +2,7 @@
 
 Accessing the controller in a route outside of `setupController`/`resetController` hooks (where it is passed as an argument) is discouraged.
 
-Additionally doing so without using `controllerFor` might return undefined as the controller is not guaranteed to be eagerly loaded (for optimization purposes).
+If access is required regardless, `controllerFor` must be used to assert the controller isn't undefined as it is not guaranteed to be eagerly loaded (for optimization purposes).
 
 ## Rule Details
 
