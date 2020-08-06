@@ -1,3 +1,13 @@
+## v8.10.0 (2020-08-05)
+
+#### :rocket: Enhancement
+* [#898](https://github.com/ember-cli/eslint-plugin-ember/pull/898) Add new rule [no-controller-access-in-routes](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-controller-access-in-routes.md) ([@emonroy](https://github.com/emonroy))
+* [#887](https://github.com/ember-cli/eslint-plugin-ember/pull/887) Add option for custom computed property macros in [no-assignment-of-untracked-properties-used-in-tracking-contexts](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-assignment-of-untracked-properties-used-in-tracking-contexts.md) rule ([@mongoose700](https://github.com/mongoose700))
+
+#### Committers: 2
+- Eduardo Monroy Martínez ([@emonroy](https://github.com/emonroy))
+- Michael Peirce ([@mongoose700](https://github.com/mongoose700))
+
 ## v8.9.2 (2020-07-23)
 
 #### :bug: Bug Fix
