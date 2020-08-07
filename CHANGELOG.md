@@ -1,3 +1,13 @@
+## v8.10.1 (2020-08-07)
+
+#### :bug: Bug Fix
+* [#908](https://github.com/ember-cli/eslint-plugin-ember/pull/908) Check imported `get`/`getProperties`/`getWithDefault` functions for missing dependencies in [require-computed-property-dependencies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-property-dependencies.md) rule ([@bmish](https://github.com/bmish))
+* [#907](https://github.com/ember-cli/eslint-plugin-ember/pull/907) Check imports in [require-computed-property-dependencies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-computed-property-dependencies.md) rule ([@bmish](https://github.com/bmish))
+* [#906](https://github.com/ember-cli/eslint-plugin-ember/pull/906) Avoid crash from classes extending a non-identifier superclass during Ember core module check ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v8.10.0 (2020-08-05)
 
 #### :rocket: Enhancement
