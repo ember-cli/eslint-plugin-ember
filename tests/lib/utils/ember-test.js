@@ -204,6 +204,24 @@ describe('isEmberCoreModule', () => {
     expect(emberUtils.isEmberCoreModule(context, node, 'Route')).toBeTruthy();
   });
 
+  it('should check if current file is a route with native class', () => {
+    const context = new FauxContext(
+      "import Route from '@ember/routing/route'; class MyRoute extends Route {}",
+      'example-app/some-twisted-path/some-route.js'
+    );
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberCoreModule(context, node, 'Route')).toBeTruthy();
+  });
+
+  it('ignores a native class with a non-identifier super class', () => {
+    const context = new FauxContext(
+      'class MyRoute extends this.ContainerObject {}',
+      'example-app/some-twisted-path/some-route.js'
+    );
+    const node = context.ast.body[0];
+    expect(emberUtils.isEmberCoreModule(context, node, 'Route')).toBeFalsy();
+  });
+
   it('throws when called on wrong type of node', () => {
     const context = new FauxContext('const x = 123;');
     const node = context.ast.body[0];
