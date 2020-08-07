@@ -1043,5 +1043,44 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         },
       ],
     },
+    {
+      // Renamed get import:
+      code:
+        "import { computed, get as g } from '@ember/object'; computed(function() { return g(this, 'foo'); });",
+      output:
+        "import { computed, get as g } from '@ember/object'; computed('foo', function() { return g(this, 'foo'); });",
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: foo',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Renamed getProperties import:
+      code:
+        "import { computed, getProperties as gp } from '@ember/object'; computed(function() { return gp(this, 'foo'); });",
+      output:
+        "import { computed, getProperties as gp } from '@ember/object'; computed('foo', function() { return gp(this, 'foo'); });",
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: foo',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Renamed getWithDefault import:
+      code:
+        "import { computed, getWithDefault as gwd } from '@ember/object'; computed(function() { return gwd(this, 'foo', 'bar'); });",
+      output:
+        "import { computed, getWithDefault as gwd } from '@ember/object'; computed('foo', function() { return gwd(this, 'foo', 'bar'); });",
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: foo',
+          type: 'CallExpression',
+        },
+      ],
+    },
   ],
 });
