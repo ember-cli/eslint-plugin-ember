@@ -6,6 +6,7 @@
 
 const rule = require('../../../lib/rules/computed-property-getters');
 const RuleTester = require('eslint').RuleTester;
+const { addComputedImport } = require('../../helpers/test-case');
 
 //------------------------------------------------------------------------------
 // Tests
@@ -42,6 +43,11 @@ const codeWithRawComputed = [
   `
   {
     foo: computed()
+  }`,
+  `
+  import Ember from 'ember';
+  {
+    foo: Ember.computed()
   }`,
   `
   {
@@ -102,6 +108,12 @@ const codeWithOnlyGetters = [
     }`,
   `{
       foo: computed('model.foo', {
+        get() {}
+      })
+    }`,
+  `import Ember from 'ember';
+   {
+      foo: Ember.computed('model.foo', {
         get() {}
       })
     }`,
@@ -311,6 +323,10 @@ ruleTester.run('computed-property-getters', rule, {
     ...validWithAlwaysWithSetterOptions,
     ...validWithNeverOption,
     ...validWithAlwaysOption,
-  ],
-  invalid: [...inValidWithDefaultOptions, ...inValidWithNeverOption, ...inValidWithAlwaysOption],
+  ].map(addComputedImport),
+  invalid: [
+    ...inValidWithDefaultOptions,
+    ...inValidWithNeverOption,
+    ...inValidWithAlwaysOption,
+  ].map(addComputedImport),
 });

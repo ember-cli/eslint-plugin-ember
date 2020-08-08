@@ -6,6 +6,7 @@
 
 const rule = require('../../../lib/rules/no-duplicate-dependent-keys');
 const RuleTester = require('eslint').RuleTester;
+const { addComputedImport } = require('../../helpers/test-case');
 
 //------------------------------------------------------------------------------
 // Tests
@@ -79,7 +80,7 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
         }).volatile()
       }
       `,
-  ],
+  ].map(addComputedImport),
   invalid: [
     {
       code: `
@@ -97,6 +98,17 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
           message: ERROR_MESSAGE,
         },
       ],
+    },
+    {
+      code: `
+      import Ember from 'ember';
+      { foo: Ember.computed('model.foo', 'model.bar', 'model.baz', 'model.foo', function() {}) }
+      `,
+      output: `
+      import Ember from 'ember';
+      { foo: Ember.computed('model.foo', 'model.bar', 'model.baz',  function() {}) }
+      `,
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: `
@@ -177,5 +189,5 @@ ruleTester.run('no-duplicate-dependent-keys', rule, {
         },
       ],
     },
-  ],
+  ].map(addComputedImport),
 });

@@ -4,6 +4,7 @@
 
 const rule = require('../../../lib/rules/require-computed-macros');
 const RuleTester = require('eslint').RuleTester;
+const { addComputedImport } = require('../../helpers/test-case');
 
 const {
   ERROR_MESSAGE_READS,
@@ -117,6 +118,11 @@ ruleTester.run('require-computed-macros', rule, {
     {
       code: 'computed(function() { return this.x; })',
       output: "computed.reads('x')",
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
+    },
+    {
+      code: "import Ember from 'ember'; Ember.computed(function() { return this.x; })",
+      output: "import Ember from 'ember'; computed.reads('x')",
       errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
     },
     {
@@ -281,5 +287,5 @@ ruleTester.run('require-computed-macros', rule, {
       output: "class Test { @computed.mapBy('children', 'age') someProp }",
       errors: [{ message: ERROR_MESSAGE_MAP_BY, type: 'MethodDefinition' }],
     },
-  ],
+  ].map(addComputedImport),
 });

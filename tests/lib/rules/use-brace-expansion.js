@@ -4,6 +4,7 @@
 
 const rule = require('../../../lib/rules/use-brace-expansion');
 const RuleTester = require('eslint').RuleTester;
+const { addComputedImport } = require('../../helpers/test-case');
 
 const { ERROR_MESSAGE } = rule;
 
@@ -35,7 +36,7 @@ eslintTester.run('use-brace-expansion', rule, {
 
     // Decorator:
     "class Test { @computed('a.{test1,test2}') get someProp() { return true; } }",
-  ],
+  ].map(addComputedImport),
   invalid: [
     {
       code:
@@ -45,10 +46,17 @@ eslintTester.run('use-brace-expansion', rule, {
         {
           message: ERROR_MESSAGE,
           type: 'CallExpression',
-          line: 1,
-          endLine: 1,
-          column: 18,
-          endColumn: 73,
+        },
+      ],
+    },
+    {
+      code:
+        "import Ember from 'ember'; { test: Ember.computed('foo.{name,place}', 'foo.[]', 'foo.{thing,@each.stuff}', function() {}) }",
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -59,10 +67,6 @@ eslintTester.run('use-brace-expansion', rule, {
         {
           message: ERROR_MESSAGE,
           type: 'CallExpression',
-          line: 1,
-          endLine: 1,
-          column: 18,
-          endColumn: 37,
         },
       ],
     },
@@ -73,10 +77,6 @@ eslintTester.run('use-brace-expansion', rule, {
         {
           message: ERROR_MESSAGE,
           type: 'CallExpression',
-          line: 1,
-          endLine: 1,
-          column: 18,
-          endColumn: 52,
         },
       ],
     },
@@ -87,10 +87,6 @@ eslintTester.run('use-brace-expansion', rule, {
         {
           message: ERROR_MESSAGE,
           type: 'CallExpression',
-          line: 1,
-          endLine: 1,
-          column: 18,
-          endColumn: 45,
         },
       ],
     },
@@ -101,10 +97,6 @@ eslintTester.run('use-brace-expansion', rule, {
         {
           message: ERROR_MESSAGE,
           type: 'CallExpression',
-          line: 1,
-          endLine: 1,
-          column: 18,
-          endColumn: 56,
         },
       ],
     },
@@ -115,10 +107,6 @@ eslintTester.run('use-brace-expansion', rule, {
         {
           message: ERROR_MESSAGE,
           type: 'CallExpression',
-          line: 1,
-          endLine: 1,
-          column: 18,
-          endColumn: 45,
         },
       ],
     },
@@ -129,10 +117,6 @@ eslintTester.run('use-brace-expansion', rule, {
         {
           message: ERROR_MESSAGE,
           type: 'CallExpression',
-          line: 1,
-          endLine: 1,
-          column: 18,
-          endColumn: 37,
         },
       ],
     },
@@ -143,12 +127,8 @@ eslintTester.run('use-brace-expansion', rule, {
         {
           message: ERROR_MESSAGE,
           type: 'CallExpression',
-          line: 1,
-          endLine: 1,
-          column: 24,
-          endColumn: 33,
         },
       ],
     },
-  ],
+  ].map(addComputedImport),
 });

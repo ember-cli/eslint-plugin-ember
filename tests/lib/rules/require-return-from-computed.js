@@ -4,6 +4,7 @@
 
 const rule = require('../../../lib/rules/require-return-from-computed');
 const RuleTester = require('eslint').RuleTester;
+const { addComputedImport } = require('../../helpers/test-case');
 
 const { ERROR_MESSAGE } = rule;
 
@@ -26,10 +27,7 @@ eslintTester.run('require-return-from-computed', rule, {
     {
       // This rule intentionally does not apply to native classes / decorator usage.
       // ESLint already has its own recommended rules `getter-return` and `no-setter-return` for this.
-      code: `
-        import { computed } from '@ember/object';
-        class Test { @computed() get someProp() {} set someProp(val) {} }
-      `,
+      code: 'class Test { @computed() get someProp() {} set someProp(val) {} }',
       parser: require.resolve('babel-eslint'),
       parserOptions: {
         ecmaVersion: 6,
@@ -37,10 +35,20 @@ eslintTester.run('require-return-from-computed', rule, {
         ecmaFeatures: { legacyDecorators: true },
       },
     },
-  ],
+  ].map(addComputedImport),
   invalid: [
     {
       code: 'let foo = computed("test", function() { })',
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'FunctionExpression',
+        },
+      ],
+    },
+    {
+      code: "import Ember from 'ember'; let foo = Ember.computed('test', function() { })",
       output: null,
       errors: [
         {
@@ -93,5 +101,5 @@ eslintTester.run('require-return-from-computed', rule, {
         },
       ],
     },
-  ],
+  ].map(addComputedImport),
 });
