@@ -4,6 +4,7 @@
 
 const rule = require('../../../lib/rules/no-volatile-computed-properties');
 const RuleTester = require('eslint').RuleTester;
+const { addComputedImport } = require('../../helpers/test-case');
 
 const { ERROR_MESSAGE } = rule;
 
@@ -11,7 +12,7 @@ const { ERROR_MESSAGE } = rule;
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({ parserOptions: { ecmaVersion: 2018, sourceType: 'module' } });
 ruleTester.run('no-volatile-computed-properties', rule, {
   valid: [
     'computed()',
@@ -31,10 +32,16 @@ ruleTester.run('no-volatile-computed-properties', rule, {
         ecmaFeatures: { legacyDecorators: true },
       },
     },
-  ],
+  ].map(addComputedImport),
   invalid: [
     {
       code: 'computed().volatile()',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
+    },
+
+    {
+      code: "import Ember from 'ember'; Ember.computed().volatile()",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
     },
@@ -57,5 +64,5 @@ ruleTester.run('no-volatile-computed-properties', rule, {
         ecmaFeatures: { legacyDecorators: true },
       },
     },
-  ],
+  ].map(addComputedImport),
 });

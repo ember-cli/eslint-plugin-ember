@@ -4,6 +4,7 @@
 
 const rule = require('../../../lib/rules/no-arrow-function-computed-properties');
 const RuleTester = require('eslint').RuleTester;
+const { addComputedImport } = require('../../helpers/test-case');
 
 const { ERROR_MESSAGE } = rule;
 
@@ -50,10 +51,15 @@ ruleTester.run('no-arrow-function-computed-properties', rule, {
       code: "computed.map('products', product => { return someFunction(product); });",
       options: [{ onlyThisContexts: true }],
     },
-  ],
+  ].map(addComputedImport),
   invalid: [
     {
       code: 'computed(() => { return 123; })',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
+    },
+    {
+      code: "import Ember from 'ember'; Ember.computed(() => { return 123; })",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
     },
@@ -85,5 +91,5 @@ ruleTester.run('no-arrow-function-computed-properties', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'ArrowFunctionExpression' }],
       options: [{ onlyThisContexts: true }],
     },
-  ],
+  ].map(addComputedImport),
 });

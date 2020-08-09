@@ -882,40 +882,111 @@ describe('isComputedProp', () => {
 
   it("should check if it's an computed prop", () => {
     node = parse('computed()');
-    expect(emberUtils.isComputedProp(node)).toBeTruthy();
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeTruthy();
 
     node = parse('Ember.computed()');
-    expect(emberUtils.isComputedProp(node)).toBeTruthy();
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeTruthy();
+
+    node = parse('foo()');
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeFalsy();
+
+    node = parse('Ember.foo()');
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeFalsy();
+
+    node = parse('Foo.computed()');
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeFalsy();
+
+    // Non-standard names:
+    node = parse('c()');
+    expect(emberUtils.isComputedProp(node, 'E', 'c')).toBeTruthy();
+
+    // Non-standard names:
+    node = parse('E.computed()');
+    expect(emberUtils.isComputedProp(node, 'E', 'c')).toBeTruthy();
   });
 
   it('should detect allow-listed computed props with MemberExpressions', () => {
     ['volatile', 'meta', 'readOnly', 'property'].forEach((prop) => {
+      // With includeSuffix
+
       node = parse(`computed().${prop}()`);
-      expect(emberUtils.isComputedProp(node)).toBeTruthy();
+      expect(
+        emberUtils.isComputedProp(node, 'Ember', 'computed', { includeSuffix: true })
+      ).toBeTruthy();
 
       node = parse(`Ember.computed().${prop}()`);
-      expect(emberUtils.isComputedProp(node)).toBeTruthy();
+      expect(
+        emberUtils.isComputedProp(node, 'Ember', 'computed', { includeSuffix: true })
+      ).toBeTruthy();
+
+      // Without includeSuffix
+
+      node = parse(`computed().${prop}()`);
+      expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeFalsy();
+
+      node = parse(`Ember.computed().${prop}()`);
+      expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeFalsy();
     });
   });
 
   it("shouldn't allow other MemberExpressions", () => {
     node = parse('computed().foo()');
-    expect(emberUtils.isComputedProp(node)).not.toBeTruthy();
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).not.toBeTruthy();
 
     node = parse('Ember.computed().foo()');
-    expect(emberUtils.isComputedProp(node)).not.toBeTruthy();
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).not.toBeTruthy();
+
+    node = parse('computed.foo()');
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).not.toBeTruthy();
+
+    node = parse('Ember.computed.foo()');
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).not.toBeTruthy();
   });
 
   it('should detect the computed annotation', () => {
     const program = babelEslint.parse('class Object { @computed() get foo() {} }');
     node = program.body[0].body.body[0].decorators[0].expression;
-    expect(emberUtils.isComputedProp(node)).toBeTruthy();
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeTruthy();
   });
 
   it('should detect the computed annotation without parentheses', () => {
     const program = babelEslint.parse('class Object { @computed get foo() {} }');
     node = program.body[0].body.body[0].decorators[0].expression;
-    expect(emberUtils.isComputedProp(node)).toBeTruthy();
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeTruthy();
+  });
+
+  it('should not detect a sub-module decorator', () => {
+    const program = babelEslint.parse('class Object { @computed.foo() get foo() {} }');
+    node = program.body[0].body.body[0].decorators[0].expression;
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeFalsy();
+  });
+
+  it('should not detect the wrong decorator', () => {
+    const program = babelEslint.parse('class Object { @foo() get foo() {} }');
+    node = program.body[0].body.body[0].decorators[0].expression;
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeFalsy();
+  });
+
+  it('should detect macros', () => {
+    // With includeMacro
+
+    node = parse('computed.someMacro()');
+    expect(
+      emberUtils.isComputedProp(node, 'Ember', 'computed', { includeMacro: true })
+    ).toBeTruthy();
+
+    node = parse('Ember.computed.someMacro()');
+    expect(
+      emberUtils.isComputedProp(node, 'Ember', 'computed', { includeMacro: true })
+    ).toBeTruthy();
+
+    // Without includeMacro
+
+    node = parse('computed.someMacro()');
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeFalsy();
+
+    node = parse('Ember.computed.someMacro()');
+    expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeFalsy();
   });
 });
 
@@ -1312,30 +1383,23 @@ describe('unwrapBraceExpressions', () => {
 describe('hasDuplicateDependentKeys', () => {
   it('reports duplicate dependent keys in computed calls', () => {
     let node = parse("computed('model.{foo,bar}', 'model.bar')");
-    expect(emberUtils.hasDuplicateDependentKeys(node)).toBeTruthy();
+    expect(emberUtils.hasDuplicateDependentKeys(node, 'Ember', 'computed')).toBeTruthy();
     node = parse("Ember.computed('model.{foo,bar}', 'model.bar')");
-    expect(emberUtils.hasDuplicateDependentKeys(node)).toBeTruthy();
+    expect(emberUtils.hasDuplicateDependentKeys(node, 'Ember', 'computed')).toBeTruthy();
   });
 
   it('ignores not repeated dependentKeys', () => {
     let node = parse("computed('model.{foo,bar}', 'model.qux')");
-    expect(emberUtils.hasDuplicateDependentKeys(node)).not.toBeTruthy();
+    expect(emberUtils.hasDuplicateDependentKeys(node, 'Ember', 'computed')).not.toBeTruthy();
     node = parse("Ember.computed('model.{foo,bar}', 'model.qux')");
-    expect(emberUtils.hasDuplicateDependentKeys(node)).not.toBeTruthy();
+    expect(emberUtils.hasDuplicateDependentKeys(node, 'Ember', 'computed')).not.toBeTruthy();
     node = parse("computed('model.{foo,bar}', 'model.qux').volatile()");
-    expect(emberUtils.hasDuplicateDependentKeys(node)).not.toBeTruthy();
+    expect(emberUtils.hasDuplicateDependentKeys(node, 'Ember', 'computed')).not.toBeTruthy();
   });
 
   it('ignores non-computed calls', () => {
     const node = parse("foo('model.{foo,bar}', 'model.bar')");
-    expect(emberUtils.hasDuplicateDependentKeys(node)).not.toBeTruthy();
-  });
-
-  it('reports duplicate dependent keys in computed calls with MemberExp', () => {
-    let node = parse("Ember.computed('model.{foo,bar}', 'model.bar').volatile()");
-    expect(emberUtils.hasDuplicateDependentKeys(node)).toBeTruthy();
-    node = parse("computed('model.{foo,bar}', 'model.bar').volatile()");
-    expect(emberUtils.hasDuplicateDependentKeys(node)).toBeTruthy();
+    expect(emberUtils.hasDuplicateDependentKeys(node, 'Ember', 'computed')).not.toBeTruthy();
   });
 });
 

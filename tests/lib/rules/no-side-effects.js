@@ -4,6 +4,7 @@
 
 const rule = require('../../../lib/rules/no-side-effects');
 const RuleTester = require('eslint').RuleTester;
+const { addComputedImport } = require('../../helpers/test-case');
 
 const { ERROR_MESSAGE } = rule;
 
@@ -69,7 +70,7 @@ eslintTester.run('no-side-effects', rule, {
     'this.setProperties({ x: 123 });',
     'this.x = 123;',
     'this.x.y = 123;',
-  ],
+  ].map(addComputedImport),
   invalid: [
     {
       code: 'prop: computed("test", function() {this.set("testAmount", test.length); return "";})',
@@ -320,5 +321,5 @@ eslintTester.run('no-side-effects', rule, {
         },
       ],
     },
-  ],
+  ].map(addComputedImport),
 });

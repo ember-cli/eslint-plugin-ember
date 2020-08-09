@@ -1,4 +1,5 @@
 const rule = require('../../../lib/rules/no-invalid-dependent-keys');
+const { addComputedImport } = require('../../helpers/test-case');
 const RuleTester = require('eslint').RuleTester;
 
 const {
@@ -53,7 +54,7 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
     // Unrelated functions
     'myFunction("{ key: string }, saving,test}", "b}", false)',
     'myFunction("A string containing curly braces {}}")',
-  ],
+  ].map(addComputedImport),
   invalid: [
     // Unbalanced braces
     {
@@ -62,19 +63,11 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
       errors: [
         {
           message: ERROR_MESSAGE_UNBALANCED_BRACES,
-          line: 1,
-          column: 18,
           type: 'Literal',
-          endLine: 1,
-          endColumn: 35,
         },
         {
           message: ERROR_MESSAGE_UNBALANCED_BRACES,
-          line: 1,
-          column: 37,
           type: 'Literal',
-          endLine: 1,
-          endColumn: 54,
         },
       ],
     },
@@ -84,11 +77,18 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
       errors: [
         {
           message: ERROR_MESSAGE_UNBALANCED_BRACES,
-          line: 1,
-          column: 18,
           type: 'Literal',
-          endLine: 1,
-          endColumn: 68,
+        },
+      ],
+    },
+    {
+      code:
+        "import Ember from 'ember'; { test: Ember.computed('foo.{bar.{name,place},qux.[],{thing,@each.stuff}', function() {}) }",
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE_UNBALANCED_BRACES,
+          type: 'Literal',
         },
       ],
     },
@@ -99,11 +99,7 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
       errors: [
         {
           message: ERROR_MESSAGE_UNBALANCED_BRACES,
-          line: 1,
-          column: 19,
           type: 'Literal',
-          endLine: 1,
-          endColumn: 71,
         },
       ],
     },
@@ -114,11 +110,7 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
       errors: [
         {
           message: ERROR_MESSAGE_UNBALANCED_BRACES,
-          line: 1,
-          column: 19,
           type: 'Literal',
-          endLine: 1,
-          endColumn: 142,
         },
       ],
     },
@@ -209,5 +201,5 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
       output: null,
       errors: [{ message: ERROR_MESSAGE_UNBALANCED_BRACES, type: 'Literal' }],
     },
-  ],
+  ].map(addComputedImport),
 });
