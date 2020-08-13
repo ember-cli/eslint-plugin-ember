@@ -40,10 +40,20 @@ ruleTester.run('no-test-file-importing', rule, {
     },
 
     // Importing anything from tests/helpers is allowed.
-    "import setupApplicationTest from 'tests/helpers/setup-application-test.js';",
+    "import setupApplicationTest from 'tests/helpers/setup-application-test';",
     "import { setupApplicationTest } from 'tests/helpers';",
-    "import setupApplicationTest from 'my-app-name/tests/helpers/setup-application-test.js';",
+    "import setupApplicationTest from 'my-app-name/tests/helpers/setup-application-test';",
     "import { setupApplicationTest } from 'my-app-name/tests/helpers';",
+
+    // Importing anything from test/helpers is allowed (using relative path)
+    {
+      filename: 'my-app-name/tests/helpers/foo.js',
+      code: "import setupApplicationTest from './setup-application-test';",
+    },
+    {
+      filename: 'my-app-name/tests/helpers/nested/foo.js',
+      code: "import setupApplicationTest from '../setup-application-test';",
+    },
   ],
   invalid: [
     {
@@ -90,6 +100,13 @@ ruleTester.run('no-test-file-importing', rule, {
           message: NO_IMPORT_MESSAGE,
         },
       ],
+    },
+    {
+      // Importing from a test file outside test/helpers is disallowed.
+      filename: 'my-app-name/tests/helpers/foo.js',
+      code: "import testModule from '../../test-dir/another-test';",
+      output: null,
+      errors: [{ message: NO_IMPORT_MESSAGE }],
     },
     {
       filename: 'tests/some-test.js',
