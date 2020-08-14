@@ -18,16 +18,25 @@ const eslintTester = new RuleTester({
 
 eslintTester.run('no-side-effects', rule, {
   valid: [
-    'testAmount: alias("test.length")',
-    'testAmount: computed("test.length", { get() { return ""; }, set() { set(this, "testAmount", test.length); }})',
-    'let foo = computed("test", function() { someMap.set(this, "testAmount", test.length); return ""; })',
-    'testAmount: computed("test.length", { get() { return ""; }, set() { setProperties(); }})',
-    'let foo = computed("test", function() { someMap.setProperties(); return ""; })',
-    'import Ember from "ember"; import Foo from "some-other-thing"; let foo = computed("test", function() { Foo.set(this, "testAmount", test.length); return ""; });',
-    'import Ember from "ember"; import Foo from "some-other-thing"; let foo = computed("test", function() { Foo.setProperties(); return ""; });',
-    'computed("test", function() { this.test; })',
-    'computed("test", function() { this.myFunction(); })',
-    'computed("test", function() { let x = 123; x = 456; someObject.x = 123; })',
+    'alias("test.length")',
+    'computed(function() { this.test; })',
+    'computed(function() { this.myFunction(); })',
+
+    // set
+    'computed(function() { foo.set(this, "testAmount", test.length); return ""; });',
+    "computed(function() { foo1.foo2.set('bar', 123); })",
+    'import { set } from "@ember/object"; computed(function() { set(foo, 123); });', // imported set
+    'import Ember from "ember"; computed(function() { Ember.set(foo, 123); });', // Ember.set
+    'computed(function() { let x = 123; x = 456; someObject.x = 123; })', // ES5 setter
+
+    // Inside setter
+    'import { set } from "@ember/object"; computed({ get() { return ""; }, set() { set(this, "testAmount", test.length); }})',
+    'computed({ get() { return ""; }, set() { setProperties(); }})',
+
+    // setProperties
+    'computed(function() { foo.setProperties("bar", 123); return ""; });',
+    'import { setProperties } from "@ember/object"; computed(function() { setProperties(foo, 123); return ""; });', // imported setProperties
+    'import Ember from "ember"; computed(function() { Ember.setProperties(foo, 123); });', // Ember.setProperties
 
     // Decorators:
     {
@@ -62,168 +71,88 @@ eslintTester.run('no-side-effects', rule, {
     // No computed property function body;
     'computed()',
     'computed("test")',
-    'computed("test", function() {})',
+    'computed(function() {})',
     'computed',
 
     // Not in a computed property:
     "this.set('x', 123);",
+    "import { set } from '@ember/object'; set(this, 'x', 123);",
     'this.setProperties({ x: 123 });',
+    "import { setProperties } from '@ember/object'; setProperties(this, 'x', 123);",
+    "import Ember from 'ember'; Ember.set(this, 'x', 123);",
+    "import Ember from 'ember'; Ember.setProperties(this, 'x', 123);",
     'this.x = 123;',
     'this.x.y = 123;',
   ].map(addComputedImport),
   invalid: [
+    // this.set
     {
-      code: 'prop: computed("test", function() {this.set("testAmount", test.length); return "";})',
+      code: 'computed(function() {this.set("testAmount", test.length); return "";})',
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      code: 'computed(function() { this.setProperties("testAmount", test.length); return "";})',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+
+    // imported set
+    {
+      code: 'import { set } from "@ember/object"; computed(function() { set(this, 123); })',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      code: 'import { set } from "@ember/object"; computed(function() { set(this.foo, 123); })',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code:
-        'prop: computed("test", function() { this.setProperties("testAmount", test.length); return "";})',
+        'import { setProperties } from "@ember/object"; computed(function() { setProperties(this, "foo", 123); })',
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code:
-        'prop: computed("test", function() {if (get(this, "testAmount")) { set(this, "testAmount", test.length); } return "";})',
+        'import { setProperties } from "@ember/object"; computed(function() { setProperties(this.foo, 123); })',
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+
+    // Ember.set
+    {
+      code:
+        'import Ember from "ember"; computed(function() { Ember.set(this, "testAmount", test.length); return ""; })',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code:
-        'prop: computed("test", function() {if (get(this, "testAmount")) { setProperties(this, "testAmount", test.length); } return "";})',
+        'import Ember from "ember"; computed(function() { Ember.set(this.foo, "testAmount", test.length); return ""; })',
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code:
-        'testAmount: computed("test.length", { get() { set(this, "testAmount", test.length); }, set() { set(this, "testAmount", test.length); }})',
+        'import Ember from "ember"; computed(function() { Ember.setProperties(this, "testAmount", test.length); return ""; })',
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+
+    // Renamed Ember import
+    {
+      code:
+        'import E from "ember"; computed(function() { E.set(this, "testAmount", test.length); return ""; })',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code:
-        'testAmount: computed("test.length", { get() { setProperties(this, "testAmount", test.length); }, set() { setProperties(this, "testAmount", test.length); }})',
+        'import E from "ember"; computed(function() { E.setProperties(this, "testAmount", test.length); return ""; })',
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
-    },
-    {
-      code:
-        'testAmount: computed("test.length", function() { const setSomething = () => { set(this, "testAmount", test.length); }; setSomething(); })',
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
-    },
-    {
-      code:
-        'testAmount: computed("test.length", function() { const setSomething = () => { setProperties(this, "testAmount", test.length); }; setSomething(); })',
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
-    },
-    {
-      code:
-        'let foo = computed("test", function() { Ember.set(this, "testAmount", test.length); return ""; })',
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
-    },
-    {
-      code:
-        'let foo = computed("test", function() { Ember.setProperties(this, "testAmount", test.length); return ""; })',
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
-    },
-    {
-      code:
-        'import Foo from "ember"; let foo = computed("test", function() { Foo.set(this, "testAmount", test.length); return ""; })',
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
-    },
-    {
-      code:
-        'import Foo from "ember"; let foo = computed("test", function() { Foo.setProperties(this, "testAmount", test.length); return ""; })',
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
-    },
-    {
-      code:
-        'import EmberFoo from "ember"; import Foo from "some-other-thing"; let foo = computed("test", function() { EmberFoo.set(this, "testAmount", test.length); return ""; });',
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
-    },
-    {
-      code:
-        'import EmberFoo from "ember"; import Foo from "some-other-thing"; let foo = computed("test", function() { EmberFoo.setProperties(this, "testAmount", test.length); return ""; });',
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
 
     // Decorator with getter inside object parameter:
@@ -240,12 +169,7 @@ eslintTester.run('no-side-effects', rule, {
         }
       `,
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
       parser: require.resolve('babel-eslint'),
       parserOptions: {
         ecmaVersion: 6,
@@ -262,12 +186,7 @@ eslintTester.run('no-side-effects', rule, {
         }
       `,
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
       parser: require.resolve('babel-eslint'),
       parserOptions: {
         ecmaVersion: 6,
@@ -284,12 +203,7 @@ eslintTester.run('no-side-effects', rule, {
         }
       `,
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'CallExpression',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
       parser: require.resolve('babel-eslint'),
       parserOptions: {
         ecmaVersion: 6,
@@ -300,26 +214,16 @@ eslintTester.run('no-side-effects', rule, {
 
     {
       // ES5 setter:
-      code: 'computed("test", function() { this.x = 123; })',
+      code: 'computed(function() { this.x = 123; })',
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'AssignmentExpression',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
     },
 
     {
       // ES5 setter with nested path:
-      code: 'computed("test", function() { this.x.y = 123; })',
+      code: 'computed(function() { this.x.y = 123; })',
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'AssignmentExpression',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
     },
   ].map(addComputedImport),
 });
