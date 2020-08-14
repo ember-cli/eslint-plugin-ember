@@ -1,3 +1,17 @@
+## v8.11.0 (2020-08-14)
+
+#### :rocket: Enhancement
+* [#912](https://github.com/ember-cli/eslint-plugin-ember/pull/912) Add `catchSafeObjects` option (default false) to [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md) rule to catch `get(foo, 'bar')` ([@bmish](https://github.com/bmish))
+* [#913](https://github.com/ember-cli/eslint-plugin-ember/pull/913) Add `catchUnsafeObjects` option (default false) to [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md) rule to catch `foo.get('bar')` ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#911](https://github.com/ember-cli/eslint-plugin-ember/pull/911) Update [no-test-import-export](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-import-export.md) rule to allow importing from anything under `tests/helpers` path (when using relative path) ([@bmish](https://github.com/bmish))
+* [#909](https://github.com/ember-cli/eslint-plugin-ember/pull/909) Check imports when detecting computed properties in many rules ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
 ## v8.10.1 (2020-08-07)
 
 #### :bug: Bug Fix
