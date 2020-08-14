@@ -191,6 +191,12 @@ ruleTester.run('no-get', rule, {
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
     {
+      code: "foo1.foo2.get('bar');",
+      options: [{ catchUnsafeObjects: true }],
+      output: 'foo1.foo2.bar;',
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
       code: `
       import { get } from '@ember/object';
       import { somethingElse } from '@ember/object';
@@ -269,6 +275,12 @@ ruleTester.run('no-get', rule, {
 
     {
       code: "this.getProperties('prop1', 'prop2');",
+      output: null,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: "foo.getProperties('prop1', 'prop2');",
+      options: [{ catchUnsafeObjects: true }],
       output: null,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },

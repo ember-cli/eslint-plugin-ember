@@ -95,6 +95,7 @@ This rule takes an optional object containing:
 * `boolean` -- `ignoreNestedPaths` -- whether the rule should ignore `this.get('some.nested.property')` (default `false`)
 * `boolean` -- `useOptionalChaining` -- whether the rule should use the [optional chaining operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) `?.` to autofix nested paths such as `this.get('some.nested.property')` to `this.some?.nested?.property` (when this option is off, these nested paths won't be autofixed at all) (default `false`)
 * `boolean` -- `catchSafeObjects` -- whether the rule should catch `get(foo, 'bar')` (default `false`, TODO: enable in next major release)
+* `boolean` -- `catchUnsafeObjects` -- whether the rule should catch `foo.get('bar')` even though we don't know for sure if `foo` is an Ember object (default `false`)
 
 ## Related Rules
 
