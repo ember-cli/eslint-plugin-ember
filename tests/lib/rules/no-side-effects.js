@@ -68,6 +68,12 @@ eslintTester.run('no-side-effects', rule, {
       },
     },
 
+    {
+      // Inside closure:
+      code: "computed(function() { return () => this.set('val', 123); })",
+      options: [{ ignoreClosures: true }],
+    },
+
     // No computed property function body;
     'computed()',
     'computed("test")',
@@ -224,6 +230,21 @@ eslintTester.run('no-side-effects', rule, {
       code: 'computed(function() { this.x.y = 123; })',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
+
+    // Closures
+    {
+      // Inside closure.
+      code: 'computed(function() { () => { this.set() }; })',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      // After closure.
+      code: 'computed(function() { () => {}; this.set(); })',
+      options: [{ ignoreClosures: true }],
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
   ].map(addComputedImport),
 });

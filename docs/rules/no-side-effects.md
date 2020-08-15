@@ -41,3 +41,9 @@ export default Component.extend({
   })
 });
 ```
+
+## Configuration
+
+This rule takes an optional object containing:
+
+* `boolean` -- `ignoreClosures` -- whether the rule should ignore side effects inside closures in computed properties (default `false`)
