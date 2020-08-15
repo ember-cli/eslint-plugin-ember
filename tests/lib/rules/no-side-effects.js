@@ -13,6 +13,7 @@ const { ERROR_MESSAGE } = rule;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
+  parser: require.resolve('babel-eslint'),
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
 });
 
@@ -83,6 +84,23 @@ eslintTester.run('no-side-effects', rule, {
     "import Ember from 'ember'; Ember.setProperties(this, 'x', 123);",
     'this.x = 123;',
     'this.x.y = 123;',
+
+    // Events (but `catchEvents` option off):
+    'computed(function() { this.send(); })',
+    'computed(function() { this.sendAction(); })',
+    'computed(function() { this.sendEvent(); })',
+    'computed(function() { this.trigger(); })',
+    'import { sendEvent } from "@ember/object/events"; computed(function() { sendEvent(); })',
+
+    // Not in a computed property (events):
+    { code: 'this.send()', options: [{ catchEvents: true }] },
+    { code: 'this.sendAction()', options: [{ catchEvents: true }] },
+    { code: 'this.sendEvent()', options: [{ catchEvents: true }] },
+    { code: 'this.trigger()', options: [{ catchEvents: true }] },
+    {
+      code: 'import { sendEvent } from "@ember/object/events"; sendEvent();',
+      options: [{ catchEvents: true }],
+    },
   ].map(addComputedImport),
   invalid: [
     // this.set
@@ -131,6 +149,12 @@ eslintTester.run('no-side-effects', rule, {
     {
       code:
         'import Ember from "ember"; computed(function() { Ember.set(this.foo, "testAmount", test.length); return ""; })',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      code:
+        'import Ember from "ember"; computed(function() { Ember.set(this.foo?.bar, "testAmount", test.length); return ""; })',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
@@ -224,6 +248,67 @@ eslintTester.run('no-side-effects', rule, {
       code: 'computed(function() { this.x.y = 123; })',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
+
+    // Events (from this):
+    {
+      code: 'computed(function() { this.send(); })',
+      options: [{ catchEvents: true }],
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      code: 'computed(function() { this.sendAction(); })',
+      options: [{ catchEvents: true }],
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      code: 'computed(function() { this.sendEvent(); })',
+      options: [{ catchEvents: true }],
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      code: 'computed(function() { this.trigger(); })',
+      options: [{ catchEvents: true }],
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+
+    // Events (from Ember):
+    {
+      code: 'import Ember from "ember"; computed(function() { Ember.send(); })',
+      options: [{ catchEvents: true }],
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      code: 'import Ember from "ember"; computed(function() { Ember.sendAction(); })',
+      options: [{ catchEvents: true }],
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      code: 'import Ember from "ember"; computed(function() { Ember.sendEvent(); })',
+      options: [{ catchEvents: true }],
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      code: 'import Ember from "ember"; computed(function() { Ember.trigger(); })',
+      options: [{ catchEvents: true }],
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+
+    {
+      // Imported sendEvent function:
+      code:
+        'import { sendEvent as se } from "@ember/object/events"; computed(function() { se(); })',
+      options: [{ catchEvents: true }],
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
   ].map(addComputedImport),
 });
