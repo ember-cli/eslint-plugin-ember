@@ -11,7 +11,12 @@ const { ERROR_MESSAGE } = rule;
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+  },
+});
 ruleTester.run('route-path-style', rule, {
   valid: [
     // Implicit path:
@@ -78,6 +83,10 @@ ruleTester.run('route-path-style', rule, {
 
     // Incorrect usage:
     'this.route();',
+
+    // With variable:
+    "this.route('team', { path: myPath });",
+    "this.route('team', { path: `part-${some-variable}` });", // eslint-disable-line no-template-curly-in-string
   ],
   invalid: [
     {
