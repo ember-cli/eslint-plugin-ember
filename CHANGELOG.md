@@ -1,3 +1,15 @@
+## v8.12.0 (2020-08-18)
+
+#### :rocket: Enhancement
+* [#916](https://github.com/ember-cli/eslint-plugin-ember/pull/916) Add `catchEvents` option (default false) to [no-side-effects](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-side-effects.md) rule ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#914](https://github.com/ember-cli/eslint-plugin-ember/pull/914) Improve `set()` detection logic in [no-side-effects](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-side-effects.md) rule to avoid false positives, catch missed cases, and check imports ([@bmish](https://github.com/bmish))
+* [#919](https://github.com/ember-cli/eslint-plugin-ember/pull/919) Fix crash with variable path in [route-path-style](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/route-path-style.md) rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v8.11.0 (2020-08-14)
 
 #### :rocket: Enhancement
