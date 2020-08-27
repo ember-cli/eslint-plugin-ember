@@ -1,3 +1,15 @@
+## v8.13.0 (2020-08-26)
+
+#### :rocket: Enhancement
+* [#920](https://github.com/ember-cli/eslint-plugin-ember/pull/920) Add new rule [no-noop-setup-on-error-in-before](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-noop-setup-on-error-in-before.md) ([@v-korshun](https://github.com/v-korshun))
+
+#### :bug: Bug Fix
+* [#923](https://github.com/ember-cli/eslint-plugin-ember/pull/923) Fix crash with spread syntax in [no-actions-hash](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-actions-hash.md) rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Viktar ([@v-korshun](https://github.com/v-korshun))
+
 ## v8.12.0 (2020-08-18)
 
 #### :rocket: Enhancement
