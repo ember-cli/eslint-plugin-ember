@@ -64,6 +64,11 @@ ruleTester.run('no-actions-hash', rule, {
         },
       });
     `,
+
+    // Spread syntax
+    'Route.extend({ ...foo });',
+    'Route.extend(Evented, { ...foo });',
+    'Route.extend(...foo);',
   ],
 
   invalid: [
