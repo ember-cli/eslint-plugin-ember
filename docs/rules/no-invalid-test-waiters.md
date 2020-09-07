@@ -1,5 +1,7 @@
 # no-invalid-test-waiters
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Prevents invalid usage of test waiters.
 
 ## Rule Details

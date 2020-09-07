@@ -1,5 +1,7 @@
 # no-assignment-of-untracked-properties-used-in-tracking-contexts
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Ember 3.13 added an assertion that fires when using assignment `this.x = 123` on an untracked property that is used in a tracking context such as a computed property.
