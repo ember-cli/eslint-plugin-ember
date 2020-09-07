@@ -28,5 +28,4 @@ jobs:
     - run: yarn lint
     - run: yarn update && git diff --exit-code
     - run: yarn test:coverage --runInBand
-    - run: yarn add --dev eslint@5 && yarn test --runInBand
     - run: yarn add --dev eslint@6 && yarn test --runInBand
