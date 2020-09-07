@@ -1,3 +1,22 @@
+## v8.14.0 (2020-09-07)
+
+#### :rocket: Enhancement
+* [#934](https://github.com/ember-cli/eslint-plugin-ember/pull/934) Add support and enforcement for spread syntax in `order-in-*` rules ([@bmish](https://github.com/bmish))
+* [#928](https://github.com/ember-cli/eslint-plugin-ember/pull/928) Refactor [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-init.md) rule to improve performance ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#933](https://github.com/ember-cli/eslint-plugin-ember/pull/933) Fix spread syntax crash in [routes-segments-snake-case](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/routes-segments-snake-case.md) rule ([@bmish](https://github.com/bmish))
+* [#932](https://github.com/ember-cli/eslint-plugin-ember/pull/932) Fix spread syntax crash in [route-path-style](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/route-path-style.md) rule ([@bmish](https://github.com/bmish))
+* [#930](https://github.com/ember-cli/eslint-plugin-ember/pull/930) Fix spread syntax crash in [no-restricted-resolver-tests](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-restricted-resolver-tests.md) rule ([@bmish](https://github.com/bmish))
+* [#931](https://github.com/ember-cli/eslint-plugin-ember/pull/931) Fix spread syntax crash in [no-unnecessary-route-path-option](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-unnecessary-route-path-option.md) rule ([@bmish](https://github.com/bmish))
+* [#929](https://github.com/ember-cli/eslint-plugin-ember/pull/929) Fix spread syntax crash in [avoid-using-needs-in-controllers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/avoid-using-needs-in-controllers.md) rule ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#935](https://github.com/ember-cli/eslint-plugin-ember/pull/935) Add some more spread syntax tests ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v8.13.0 (2020-08-26)
 
 #### :rocket: Enhancement
