@@ -9,7 +9,7 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({ parser: require.resolve('babel-eslint') });
 eslintTester.run('routes-segments-snake-case', rule, {
   valid: [
     'this.route("tree", { path: ":tree_id"});',
@@ -26,6 +26,7 @@ eslintTester.run('routes-segments-snake-case', rule, {
     'this.route("tree", { path: "/test/:tree_id/test-test/:tree_child_id"});',
     'this.route("tree", { path: "/test/:tree_id/testTest/:tree_child_id"});',
     'this.route("tree", { path: "*:"});',
+    'this.route("tree", { ...foo });',
   ],
   invalid: [
     {
