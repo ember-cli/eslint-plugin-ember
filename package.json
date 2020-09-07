@@ -37,6 +37,9 @@
   "engines": {
     "node": "10.* || 12.* || >= 14"
   },
+  "peerDependencies": {
+    "eslint": ">= 6"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ember-cli/eslint-plugin-ember/issues"
