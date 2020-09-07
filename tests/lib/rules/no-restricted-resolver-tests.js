@@ -12,6 +12,7 @@ const { ERROR_MESSAGES } = rule;
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
+  parser: require.resolve('babel-eslint'),
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
 });
 ruleTester.run('no-restricted-resolver-tests', rule, {
@@ -19,6 +20,7 @@ ruleTester.run('no-restricted-resolver-tests', rule, {
     `
     import { moduleFor } from 'ember-qunit';
     moduleFor('service:session', {
+      ...foo,
       integration: true
     });
     `,
