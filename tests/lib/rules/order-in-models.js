@@ -11,11 +11,13 @@ const RuleTester = require('eslint').RuleTester;
 
 const eslintTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+  parser: require.resolve('babel-eslint'),
 });
 
 eslintTester.run('order-in-models', rule, {
   valid: [
     'export default Model.extend();',
+    'export default Model.extend({ ...foo });',
     `export default Model.extend({
         shape: attr("string"),
         behaviors: hasMany("behaviour"),

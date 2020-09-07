@@ -198,6 +198,16 @@ describe('determinePropertyType', () => {
       expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual('property');
     });
 
+    it('should determine spread syntax as a spread property', () => {
+      const context = new FauxContext(
+        `export default Component.extend({
+          ...foo
+        });`
+      );
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual('spread');
+    });
+
     it('should determine empty methods', () => {
       const context = new FauxContext(
         `export default Component.extend({

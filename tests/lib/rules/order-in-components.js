@@ -11,20 +11,24 @@ const RuleTester = require('eslint').RuleTester;
 
 const eslintTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+  parser: require.resolve('babel-eslint'),
 });
 
 eslintTester.run('order-in-components', rule, {
   valid: [
     'export default Component.extend();',
+    'export default Component.extend({ ...foo });',
     `export default Component.extend({
-        role: "sloth",
+      ...foo,
+      role: "sloth",
 
         vehicle: alias("car"),
 
         levelOfHappiness: computed("attitude", "health", () => {
         }),
 
-        actions: {}
+        actions: {},
+
       });`,
     `export default Component.extend({
         role: ${`${'sloth'}`},
@@ -1023,6 +1027,22 @@ eslintTester.run('order-in-components', rule, {
         {
           message:
             'The "aMethod" method should be above the "customProp" custom property on line 2',
+          line: 3,
+        },
+      ],
+    },
+    {
+      code: `export default Component.extend({
+        role: "sloth",
+        ...spread,
+      });`,
+      output: `export default Component.extend({
+        ...spread,
+              role: "sloth",
+});`,
+      errors: [
+        {
+          message: 'The spread property should be above the "role" property on line 2',
           line: 3,
         },
       ],

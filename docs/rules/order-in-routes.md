@@ -10,6 +10,7 @@ const rules = {
     2,
     {
       order: [
+        'spread',
         'service',
         'inherited-property',
         'property',
