@@ -169,6 +169,7 @@ module.exports = {
         'import/no-unresolved': 'off',
         'import/unambiguous': 'off',
         'jest/expect-expect': 'off',
+        'jest/no-done-callback': 'off',
         'jest/no-test-callback': 'off',
         'jest/require-top-level-describe': 'off',
         'no-console': 'off',
