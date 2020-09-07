@@ -11,6 +11,7 @@ const rules = {
     {
       // eslint-disable-next-line prettier/prettier
       order: [
+        'spread',
         'attribute',
         'relationship',
         'single-line-function',

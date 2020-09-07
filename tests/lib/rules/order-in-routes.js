@@ -11,11 +11,13 @@ const RuleTester = require('eslint').RuleTester;
 
 const eslintTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+  parser: require.resolve('babel-eslint'),
 });
 
 eslintTester.run('order-in-routes', rule, {
   valid: [
     'export default Route.extend();',
+    'export default Route.extend({ ...foo });',
     `export default Route.extend({
         currentUser: service(),
         queryParams: {},

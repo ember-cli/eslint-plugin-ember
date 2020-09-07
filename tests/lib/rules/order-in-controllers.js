@@ -11,11 +11,13 @@ const RuleTester = require('eslint').RuleTester;
 
 const eslintTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+  parser: require.resolve('babel-eslint'),
 });
 
 eslintTester.run('order-in-controllers', rule, {
   valid: [
     'export default Controller.extend();',
+    'export default Controller.extend({ ...foo });',
     `export default Controller.extend({
         application: controller(),
         currentUser: service(),
