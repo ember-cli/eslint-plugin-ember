@@ -79,18 +79,20 @@ describe('rules setup is correct', function () {
   });
 
   describe('rule documentation files', function () {
-    const CONFIG_MSG_RECOMMENDED =
-      ':white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.';
-    const CONFIG_MSG_OCTANE =
-      ':car: The `"extends": "plugin:ember/octane"` property in a configuration file enables this rule.';
-
-    const FIXABLE_MSG =
-      ':wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.';
+    const MESSAGES = {
+      fixable:
+        ':wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.',
+      configRecommended:
+        ':white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.',
+      configOctane:
+        ':car: The `"extends": "plugin:ember/octane"` property in a configuration file enables this rule.',
+    };
 
     RULE_NAMES.forEach((ruleName) => {
       const rule = rules[ruleName];
       const path = join(__dirname, '..', 'docs', 'rules', `${ruleName}.md`);
       const file = readFileSync(path, 'utf8');
+      const lines = file.split('\n');
 
       /* eslint-disable jest/no-conditional-expect */
       // eslint-disable-next-line jest/valid-title
@@ -115,23 +117,37 @@ describe('rules setup is correct', function () {
             expect(file).not.toContain('## Configuration');
           }
 
-          if (rule.meta.fixable === 'code') {
-            expect(file).toContain(FIXABLE_MSG);
-          } else {
-            expect(file).not.toContain(FIXABLE_MSG);
-          }
-
+          // Decide which notices should be shown at the top of the doc.
+          const expectedNotices = [];
+          const unexpectedNotices = [];
           if (rule.meta.docs.recommended) {
-            expect(file).toContain(CONFIG_MSG_RECOMMENDED);
+            expectedNotices.push('configRecommended');
           } else {
-            expect(file).not.toContain(CONFIG_MSG_RECOMMENDED);
+            unexpectedNotices.push('configRecommended');
+          }
+          if (rule.meta.docs.octane) {
+            expectedNotices.push('configOctane');
+          } else {
+            unexpectedNotices.push('configOctane');
+          }
+          if (rule.meta.fixable) {
+            expectedNotices.push('fixable');
+          } else {
+            unexpectedNotices.push('fixable');
           }
 
-          if (rule.meta.docs.octane) {
-            expect(file).toContain(CONFIG_MSG_OCTANE);
-          } else {
-            expect(file).not.toContain(CONFIG_MSG_OCTANE);
-          }
+          // Ensure that expected notices are present in the correct order.
+          let currentLineNumber = 1;
+          expectedNotices.forEach((expectedNotice) => {
+            expect(lines[currentLineNumber]).toStrictEqual('');
+            expect(lines[currentLineNumber + 1]).toStrictEqual(MESSAGES[expectedNotice]);
+            currentLineNumber += 2;
+          });
+
+          // Ensure that unexpected notices are not present.
+          unexpectedNotices.forEach((unexpectedNotice) => {
+            expect(file).not.toContain(MESSAGES[unexpectedNotice]);
+          });
         });
       });
       /* eslint-enable jest/no-conditional-expect */
