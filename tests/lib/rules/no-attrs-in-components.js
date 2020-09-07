@@ -15,11 +15,13 @@ const { ERROR_MESSAGE } = rule;
 
 const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+  parser: require.resolve('babel-eslint'),
 });
 
 ruleTester.run('no-attrs-in-components', rule, {
   valid: [
     "import Component from '@ember/component'; Component.extend({ init() { this.foo.bar; }  });",
+    "import Component from '@ember/component'; Component.extend({ ...foo });",
     "import Component from '@ember/component'; class MyComponent extends Component { init() { this.foo.bar; } }",
     "import Component from '@glimmer/component'; class MyComponent extends Component { constructor() { this.foo.bar; } }",
 
