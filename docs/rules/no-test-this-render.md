@@ -1,5 +1,7 @@
 # no-test-this-render
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Ember's `this.render`/`this.clearRender` method and [`@ember/test-helpers`](https://github.com/emberjs/ember-test-helpers)'s `render`/`clearRender` method are equivalent, but using `@ember/test-helpers`' `render`/`clearRender` method is the recommended approach.
 
 ## Rule Details

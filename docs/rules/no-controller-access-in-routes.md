@@ -1,5 +1,7 @@
 # no-controller-access-in-routes
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Accessing the controller in a route outside of `setupController`/`resetController` hooks (where it is passed as an argument) is discouraged.
 
 If access is required regardless, `controllerFor` must be used to assert the controller isn't undefined as it is not guaranteed to be eagerly loaded (for optimization purposes).

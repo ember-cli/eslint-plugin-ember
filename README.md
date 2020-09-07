@@ -76,7 +76,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |:---|:--------|:------------|
 |  | [computed-property-getters](./docs/rules/computed-property-getters.md) | enforce the consistent use of getters in computed properties |
 | :white_check_mark: | [no-arrow-function-computed-properties](./docs/rules/no-arrow-function-computed-properties.md) | disallow arrow functions in computed properties |
-| :wrench: | [no-assignment-of-untracked-properties-used-in-tracking-contexts](./docs/rules/no-assignment-of-untracked-properties-used-in-tracking-contexts.md) | disallow assignment of untracked properties that are used as computed property dependencies |
+| :white_check_mark::wrench: | [no-assignment-of-untracked-properties-used-in-tracking-contexts](./docs/rules/no-assignment-of-untracked-properties-used-in-tracking-contexts.md) | disallow assignment of untracked properties that are used as computed property dependencies |
 | :car: | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | disallow using computed properties in native classes |
 | :white_check_mark: | [no-deeply-nested-dependent-keys-with-each](./docs/rules/no-deeply-nested-dependent-keys-with-each.md) | disallow usage of deeply-nested computed property dependent keys with `@each` |
 | :white_check_mark::wrench: | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | disallow repeating computed property dependent keys |
@@ -159,7 +159,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [no-capital-letters-in-routes](./docs/rules/no-capital-letters-in-routes.md) | disallow routes with uppercased letters in router.js |
-|  | [no-controller-access-in-routes](./docs/rules/no-controller-access-in-routes.md) | disallow routes from accessing the controller outside of setupController/resetController |
+| :white_check_mark: | [no-controller-access-in-routes](./docs/rules/no-controller-access-in-routes.md) | disallow routes from accessing the controller outside of setupController/resetController |
 | :white_check_mark: | [no-private-routing-service](./docs/rules/no-private-routing-service.md) | disallow injecting the private routing service |
 |  | [no-unnecessary-index-route](./docs/rules/no-unnecessary-index-route.md) | disallow unnecessary `index` route definition |
 | :white_check_mark::wrench: | [no-unnecessary-route-path-option](./docs/rules/no-unnecessary-route-path-option.md) | disallow unnecessary usage of the route `path` option |
@@ -181,17 +181,17 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [no-ember-testing-in-module-scope](./docs/rules/no-ember-testing-in-module-scope.md) | disallow use of `Ember.testing` in module scope |
-|  | [no-invalid-test-waiters](./docs/rules/no-invalid-test-waiters.md) | disallow incorrect usage of test waiter APIs |
+| :white_check_mark: | [no-invalid-test-waiters](./docs/rules/no-invalid-test-waiters.md) | disallow incorrect usage of test waiter APIs |
 | :white_check_mark: | [no-legacy-test-waiters](./docs/rules/no-legacy-test-waiters.md) | disallow the use of the legacy test waiter APIs |
-| :wrench: | [no-noop-setup-on-error-in-before](./docs/rules/no-noop-setup-on-error-in-before.md) | disallows using no-op setupOnerror in `before` or `beforeEach` |
+| :white_check_mark::wrench: | [no-noop-setup-on-error-in-before](./docs/rules/no-noop-setup-on-error-in-before.md) | disallows using no-op setupOnerror in `before` or `beforeEach` |
 | :white_check_mark: | [no-pause-test](./docs/rules/no-pause-test.md) | disallow usage of the `pauseTest` helper in tests |
 |  | [no-replace-test-comments](./docs/rules/no-replace-test-comments.md) | disallow 'Replace this with your real tests' comments in test files |
 | :white_check_mark: | [no-restricted-resolver-tests](./docs/rules/no-restricted-resolver-tests.md) | disallow the use of patterns that use the restricted resolver in tests |
 | :white_check_mark: | [no-test-and-then](./docs/rules/no-test-and-then.md) | disallow usage of the `andThen` test wait helper |
 | :white_check_mark: | [no-test-import-export](./docs/rules/no-test-import-export.md) | disallow importing of "-test.js" in a test file and exporting from a test file |
 | :white_check_mark: | [no-test-module-for](./docs/rules/no-test-module-for.md) | disallow usage of `moduleFor`, `moduleForComponent`, etc |
-|  | [no-test-this-render](./docs/rules/no-test-this-render.md) | disallow usage of the `this.render` in tests, recommending to use @ember/test-helpers' `render` instead. |
-|  | [prefer-ember-test-helpers](./docs/rules/prefer-ember-test-helpers.md) | enforce usage of `@ember/test-helpers` methods over native window methods |
+| :white_check_mark: | [no-test-this-render](./docs/rules/no-test-this-render.md) | disallow usage of the `this.render` in tests, recommending to use @ember/test-helpers' `render` instead. |
+| :white_check_mark: | [prefer-ember-test-helpers](./docs/rules/prefer-ember-test-helpers.md) | enforce usage of `@ember/test-helpers` methods over native window methods |
 
 <!--RULES_TABLE_END-->
 

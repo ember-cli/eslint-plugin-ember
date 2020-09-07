@@ -1,5 +1,7 @@
 # prefer-ember-test-helpers
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 This rule ensures the correct Ember test helper is imported when using methods that have a native window counterpart.
 
 There are currently 3 Ember test helper methods that have a native window counterpart:
