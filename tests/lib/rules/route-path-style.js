@@ -16,6 +16,7 @@ const ruleTester = new RuleTester({
     ecmaVersion: 6,
     sourceType: 'module',
   },
+  parser: require.resolve('babel-eslint'),
 });
 ruleTester.run('route-path-style', rule, {
   valid: [
@@ -61,6 +62,7 @@ ruleTester.run('route-path-style', rule, {
     'this.route("blog", { otherField: "/blog_posts" });',
     'this.route("blog", { otherField: "/blog_posts", path: "/blog" });',
     'this.route("blog-posts", { otherField: "/blog_posts" });',
+    'this.route("blog-posts", { ...foo });',
 
     // Not Ember's route function:
     'test();',
