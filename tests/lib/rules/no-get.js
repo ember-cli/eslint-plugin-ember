@@ -37,7 +37,10 @@ ruleTester.run('no-get', rule, {
 
     // Not `this`.
     "foo.get('bar');",
-    "import { get } from '@ember/object'; get(foo, 'bar');",
+    {
+      code: "import { get } from '@ember/object'; get(foo, 'bar');",
+      options: [{ catchSafeObjects: false }],
+    },
 
     // Not `get`.
     "this.foo('bar');",
@@ -89,7 +92,11 @@ ruleTester.run('no-get', rule, {
 
     // Not `this`.
     "myObject.getProperties('prop1', 'prop2');",
-    "import { getProperties } from '@ember/object'; getProperties(myObject, 'prop1', 'prop2');",
+    {
+      code:
+        "import { getProperties } from '@ember/object'; getProperties(myObject, 'prop1', 'prop2');",
+      options: [{ catchSafeObjects: false }],
+    },
 
     // Not `getProperties`.
     "this.foo('prop1', 'prop2');",
@@ -214,14 +221,12 @@ ruleTester.run('no-get', rule, {
     {
       // Calling the imported function on an unknown object (without `this`).
       code: "import { get } from '@ember/object'; get(foo1.foo2, 'bar');",
-      options: [{ catchSafeObjects: true }],
       output: "import { get } from '@ember/object'; foo1.foo2.bar;",
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
     {
       // Calling the imported function on an unknown object (without `this`) with an object argument that needs parenthesis.
       code: "import { get } from '@ember/object'; get(foo || {}, 'bar');",
-      options: [{ catchSafeObjects: true }],
       output: "import { get } from '@ember/object'; (foo || {}).bar;",
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
@@ -302,7 +307,6 @@ ruleTester.run('no-get', rule, {
     {
       // Calling the imported function on an unknown object (without `this`).
       code: "import { getProperties } from '@ember/object'; getProperties(foo, 'prop1', 'prop2');",
-      options: [{ catchSafeObjects: true }],
       output: null,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
