@@ -1,3 +1,22 @@
+## v9.0.0 (2020-09-07)
+
+#### :boom: Breaking Change
+* [#940](https://github.com/ember-cli/eslint-plugin-ember/pull/940) Enable additional [recommended](https://github.com/ember-cli/eslint-plugin-ember/blob/master/lib/recommended-rules.js) rules ([@bmish](https://github.com/bmish))
+  * [no-assignment-of-untracked-properties-used-in-tracking-contexts](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-assignment-of-untracked-properties-used-in-tracking-contexts.md)
+  * [no-controller-access-in-routes](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-controller-access-in-routes.md)
+  * [no-invalid-test-waiters](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-invalid-test-waiters.md)
+  * [no-noop-setup-on-error-in-before](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-noop-setup-on-error-in-before.md)
+  * [no-test-this-render](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-this-render.md)
+  * [prefer-ember-test-helpers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/prefer-ember-test-helpers.md)
+* [#943](https://github.com/ember-cli/eslint-plugin-ember/pull/943) Enable `catchEvents` option in [no-side-effects](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-side-effects.md) rule ([@bmish](https://github.com/bmish))
+* [#942](https://github.com/ember-cli/eslint-plugin-ember/pull/942) Enable `catchSafeObjects` option in [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md) rule ([@bmish](https://github.com/bmish))
+* [#941](https://github.com/ember-cli/eslint-plugin-ember/pull/941) Enable `catchRouterMicrolib` and `catchRouterMain` options in [no-private-routing-service](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-private-routing-service.md) rule ([@bmish](https://github.com/bmish))
+* [#939](https://github.com/ember-cli/eslint-plugin-ember/pull/939) Drop ESLint 5 support and add peer dependency on ESLint 6+ ([@bmish](https://github.com/bmish))
+* [#938](https://github.com/ember-cli/eslint-plugin-ember/pull/938) Drop Node 13 support ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v8.14.0 (2020-09-07)
 
 #### :rocket: Enhancement
