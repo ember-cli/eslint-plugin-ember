@@ -16,6 +16,7 @@ const ruleTester = new RuleTester({
     ecmaVersion: 2015,
     sourceType: 'module',
   },
+  parser: require.resolve('babel-eslint'),
 });
 
 ruleTester.run('no-unnecessary-service-injection-argument', rule, {
@@ -99,6 +100,8 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
         ecmaFeatures: { legacyDecorators: true },
       },
     },
+
+    'export default Component.extend({ ...foo });',
   ],
   invalid: [
     // `Component` examples:

@@ -15,14 +15,15 @@ const { ERROR_MESSAGE: message } = rule;
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({ parserOptions });
+const ruleTester = new RuleTester({ parserOptions, parser: require.resolve('babel-eslint') });
 ruleTester.run('use-ember-data-rfc-395-imports', rule, {
   valid: [
     "import Model from '@ember-data/model';",
     `import Model, { attr } from '@ember-data';
 
      export default Model.extend({
-       name: attr('string')
+       name: attr('string'),
+       ...foo
      });
     `,
     `import LOL from 'who-knows-but-definitely-not-ember-data';
@@ -43,6 +44,7 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
       code: `import DS from 'ember-data';
 
         export default DS.Model.extend({
+          ...foo
         });
       `,
       output: null,

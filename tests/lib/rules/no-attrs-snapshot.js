@@ -4,6 +4,7 @@ const RuleTester = require('eslint').RuleTester;
 const { ERROR_MESSAGE } = rule;
 const eslintTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+  parser: require.resolve('babel-eslint'),
 });
 
 eslintTester.run('no-attrs-snapshot', rule, {
@@ -22,7 +23,8 @@ eslintTester.run('no-attrs-snapshot', rule, {
             } else {
               this.set('updated', false);
             }
-          }
+          },
+          ...foo
         });`,
     `
         export default Ember.Component({
