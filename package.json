@@ -35,7 +35,7 @@
     "rules"
   ],
   "engines": {
-    "node": "10.* || >= 12"
+    "node": "10.* || 12.* || >= 14"
   },
   "license": "MIT",
   "bugs": {
