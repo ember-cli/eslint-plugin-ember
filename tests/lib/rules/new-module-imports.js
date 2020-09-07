@@ -9,7 +9,9 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-const eslintTester = new RuleTester();
+const eslintTester = new RuleTester({
+  parser: require.resolve('babel-eslint'),
+});
 eslintTester.run('new-module-imports', rule, {
   valid: [
     {
@@ -37,7 +39,8 @@ eslintTester.run('new-module-imports', rule, {
         import { bool } from '@ember/object/computed';
 
         export default Controller.extend({
-          isTrue: bool('')
+          isTrue: bool(''),
+          ...foo
         });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },

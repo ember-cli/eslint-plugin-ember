@@ -19,7 +19,8 @@ ruleTester.run('classic-decorator-hooks', rule, {
     `
       const Foo = EmberObject.extend({
         init() {},
-        destroy() {}
+        destroy() {},
+        ...foo
       })
     `,
     `
