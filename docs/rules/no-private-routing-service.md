@@ -5,8 +5,8 @@
 Disallow the use of:
 
 * The private `-routing` service
-* The private `_routerMicrolib` property (when the `catchRouterMicrolib` option is enabled)
-* The private `router:main` property (when the `catchRouterMain` option is enabled)
+* The private `_routerMicrolib` property
+* The private `router:main` property
 
 There has been a public `router` service since Ember 2.16 and using the private routing service should be unnecessary.
 
@@ -83,8 +83,8 @@ export default class MyComponent extends Component {
 
 This rule takes an optional object containing:
 
-* `boolean` -- `catchRouterMicrolib` -- whether the rule should catch usages of the private property `_routerMicrolib` (default `false`) (TODO: enable this by default in the next major release)
-* `boolean` -- `catchRouterMain` -- whether the rule should catch usages of the private property `router:main` (default `false`) (TODO: enable this by default in the next major release)
+* `boolean` -- `catchRouterMicrolib` -- whether the rule should catch usages of the private property `_routerMicrolib` (default `true`)
+* `boolean` -- `catchRouterMain` -- whether the rule should catch usages of the private property `router:main` (default `true`)
 
 ## References
 

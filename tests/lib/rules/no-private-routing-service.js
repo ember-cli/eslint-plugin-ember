@@ -56,27 +56,18 @@ ruleTester.run('no-private-routing-service', rule, {
     'class MyComponent extends Component { anIntProp=25; }',
 
     // _routerMicrolib
-    "get(this, 'router._routerMicrolib');",
-    'this.router._routerMicrolib;',
-    { code: "get(this, 'router.somethingElse');", options: [{ catchRouterMicrolib: true }] },
-    { code: 'this.router.somethingElse;', options: [{ catchRouterMicrolib: true }] },
+    { code: "get(this, 'router._routerMicrolib');", options: [{ catchRouterMicrolib: false }] },
+    { code: 'this.router._routerMicrolib;', options: [{ catchRouterMicrolib: false }] },
+    "get(this, 'router.somethingElse');",
+    'this.router.somethingElse;',
 
     // router:main
-    "getOwner(this).lookup('router:main');",
-    "owner.lookup('router:main');",
-    "this.owner.lookup('router:main');",
-    {
-      code: "getOwner(this).lookup('router:somethingElse');",
-      options: [{ catchRouterMicrolib: true }],
-    },
-    {
-      code: "owner.lookup('router:somethingElse');",
-      options: [{ catchRouterMicrolib: true }],
-    },
-    {
-      code: "this.owner.lookup('router:somethingElse');",
-      options: [{ catchRouterMicrolib: true }],
-    },
+    { code: "getOwner(this).lookup('router:main');", options: [{ catchRouterMain: false }] },
+    { code: "owner.lookup('router:main');", options: [{ catchRouterMain: false }] },
+    { code: "this.owner.lookup('router:main');", options: [{ catchRouterMain: false }] },
+    "getOwner(this).lookup('router:somethingElse');",
+    "owner.lookup('router:somethingElse');",
+    "this.owner.lookup('router:somethingElse');",
   ],
   invalid: [
     // Classic
@@ -97,25 +88,21 @@ ruleTester.run('no-private-routing-service', rule, {
     {
       code: "get(this, 'router._routerMicrolib');",
       output: null,
-      options: [{ catchRouterMicrolib: true }],
       errors: [{ message: ROUTER_MICROLIB_ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: "get(this, 'router._router._routerMicrolib');",
       output: null,
-      options: [{ catchRouterMicrolib: true }],
       errors: [{ message: ROUTER_MICROLIB_ERROR_MESSAGE, type: 'Literal' }],
     },
     {
       code: 'this.router._routerMicrolib;',
       output: null,
-      options: [{ catchRouterMicrolib: true }],
       errors: [{ message: ROUTER_MICROLIB_ERROR_MESSAGE, type: 'Identifier' }],
     },
     {
       code: 'this.router._router._routerMicrolib;',
       output: null,
-      options: [{ catchRouterMicrolib: true }],
       errors: [{ message: ROUTER_MICROLIB_ERROR_MESSAGE, type: 'Identifier' }],
     },
 
@@ -123,26 +110,22 @@ ruleTester.run('no-private-routing-service', rule, {
     {
       code: "getOwner(this).lookup('router:main');",
       output: null,
-      options: [{ catchRouterMain: true }],
       errors: [{ message: ROUTER_MAIN_ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: "owner.lookup('router:main');",
       output: null,
-      options: [{ catchRouterMain: true }],
       errors: [{ message: ROUTER_MAIN_ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: "this.owner.lookup('router:main');",
       output: null,
-      options: [{ catchRouterMain: true }],
       errors: [{ message: ROUTER_MAIN_ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       // Optional chaining.
       code: "this?.owner?.lookup?.('router:main');",
       output: null,
-      options: [{ catchRouterMain: true }],
       errors: [{ message: ROUTER_MAIN_ERROR_MESSAGE, type: 'OptionalCallExpression' }],
     },
   ],
