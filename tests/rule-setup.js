@@ -92,6 +92,7 @@ describe('rules setup is correct', function () {
       const path = join(__dirname, '..', 'docs', 'rules', `${ruleName}.md`);
       const file = readFileSync(path, 'utf8');
 
+      /* eslint-disable jest/no-conditional-expect */
       // eslint-disable-next-line jest/valid-title
       describe(ruleName, function () {
         it('should have the right contents (title, examples, notices)', function () {
@@ -133,6 +134,7 @@ describe('rules setup is correct', function () {
           }
         });
       });
+      /* eslint-enable jest/no-conditional-expect */
     });
   });
 
