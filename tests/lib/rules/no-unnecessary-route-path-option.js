@@ -11,11 +11,12 @@ const { ERROR_MESSAGE } = rule;
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({ parser: require.resolve('babel-eslint') });
 ruleTester.run('no-unnecessary-route-path-option', rule, {
   valid: [
     'this.route("blog");',
     'this.route("blog", function() {});',
+    'this.route("blog", { ...foo });',
     'this.route("blog", { path: undefined });',
     'this.route("blog", { path: "" });',
     'this.route("blog", { path: "/" });',
