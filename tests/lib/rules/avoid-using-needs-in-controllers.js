@@ -10,6 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
+  parser: require.resolve('babel-eslint'),
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module',
@@ -18,6 +19,7 @@ const eslintTester = new RuleTester({
 eslintTester.run('avoid-using-needs-in-controllers', rule, {
   valid: [
     'export default Controller.extend();',
+    'export default Controller.extend({ ...foo });',
     'export default Controller.extend({ random: [] });',
     'export default FooController.extend();',
     'Controller.reopen();',
