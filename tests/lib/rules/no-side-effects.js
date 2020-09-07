@@ -86,21 +86,22 @@ eslintTester.run('no-side-effects', rule, {
     'this.x.y = 123;',
 
     // Events (but `catchEvents` option off):
-    'computed(function() { this.send(); })',
-    'computed(function() { this.sendAction(); })',
-    'computed(function() { this.sendEvent(); })',
-    'computed(function() { this.trigger(); })',
-    'import { sendEvent } from "@ember/object/events"; computed(function() { sendEvent(); })',
+    { code: 'computed(function() { this.send(); })', options: [{ catchEvents: false }] },
+    { code: 'computed(function() { this.sendAction(); })', options: [{ catchEvents: false }] },
+    { code: 'computed(function() { this.sendEvent(); })', options: [{ catchEvents: false }] },
+    { code: 'computed(function() { this.trigger(); })', options: [{ catchEvents: false }] },
+    {
+      code:
+        'import { sendEvent } from "@ember/object/events"; computed(function() { sendEvent(); })',
+      options: [{ catchEvents: false }],
+    },
 
     // Not in a computed property (events):
-    { code: 'this.send()', options: [{ catchEvents: true }] },
-    { code: 'this.sendAction()', options: [{ catchEvents: true }] },
-    { code: 'this.sendEvent()', options: [{ catchEvents: true }] },
-    { code: 'this.trigger()', options: [{ catchEvents: true }] },
-    {
-      code: 'import { sendEvent } from "@ember/object/events"; sendEvent();',
-      options: [{ catchEvents: true }],
-    },
+    'this.send()',
+    'this.sendAction()',
+    'this.sendEvent()',
+    'this.trigger()',
+    'import { sendEvent } from "@ember/object/events"; sendEvent();',
   ].map(addComputedImport),
   invalid: [
     // this.set
@@ -253,25 +254,21 @@ eslintTester.run('no-side-effects', rule, {
     // Events (from this):
     {
       code: 'computed(function() { this.send(); })',
-      options: [{ catchEvents: true }],
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'computed(function() { this.sendAction(); })',
-      options: [{ catchEvents: true }],
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'computed(function() { this.sendEvent(); })',
-      options: [{ catchEvents: true }],
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'computed(function() { this.trigger(); })',
-      options: [{ catchEvents: true }],
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
@@ -279,25 +276,21 @@ eslintTester.run('no-side-effects', rule, {
     // Events (from Ember):
     {
       code: 'import Ember from "ember"; computed(function() { Ember.send(); })',
-      options: [{ catchEvents: true }],
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'import Ember from "ember"; computed(function() { Ember.sendAction(); })',
-      options: [{ catchEvents: true }],
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'import Ember from "ember"; computed(function() { Ember.sendEvent(); })',
-      options: [{ catchEvents: true }],
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
       code: 'import Ember from "ember"; computed(function() { Ember.trigger(); })',
-      options: [{ catchEvents: true }],
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
@@ -306,7 +299,6 @@ eslintTester.run('no-side-effects', rule, {
       // Imported sendEvent function:
       code:
         'import { sendEvent as se } from "@ember/object/events"; computed(function() { se(); })',
-      options: [{ catchEvents: true }],
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },

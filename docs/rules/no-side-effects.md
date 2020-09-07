@@ -46,4 +46,4 @@ export default Component.extend({
 
 This rule takes an optional object containing:
 
-* `boolean` -- `catchEvents` -- whether the rule should catch function calls that send actions or events (default `false`, TODO: enable in next major release)
+* `boolean` -- `catchEvents` -- whether the rule should catch function calls that send actions or events (default `true`)
