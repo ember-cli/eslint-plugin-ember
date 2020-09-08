@@ -2,30 +2,6 @@
   "name": "eslint-plugin-ember",
   "version": "9.0.0",
   "description": "Eslint plugin for Ember.js apps",
-  "main": "lib/index.js",
-  "files": [
-    "lib"
-  ],
-  "directories": {
-    "rules": "rules",
-    "test": "test"
-  },
-  "scripts": {
-    "changelog": "lerna-changelog",
-    "lint": "npm-run-all --continue-on-error --aggregate-output --parallel lint:*",
-    "lint:docs": "markdownlint '**/*.md'",
-    "lint:js": "eslint . --cache",
-    "lint:package-json": "npmPkgJsonLint .",
-    "start": "yarn run test:watch",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
-    "test:watch": "jest --watchAll",
-    "update": "node ./scripts/update-rules.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ember-cli/eslint-plugin-ember.git"
-  },
   "keywords": [
     "eslint",
     "ember",
@@ -34,17 +10,57 @@
     "styleguide",
     "rules"
   ],
-  "engines": {
-    "node": "10.* || 12.* || >= 14"
-  },
-  "peerDependencies": {
-    "eslint": ">= 6"
-  },
-  "license": "MIT",
+  "homepage": "https://github.com/ember-cli/eslint-plugin-ember#readme",
   "bugs": {
     "url": "https://github.com/ember-cli/eslint-plugin-ember/issues"
   },
-  "homepage": "https://github.com/ember-cli/eslint-plugin-ember#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ember-cli/eslint-plugin-ember.git"
+  },
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "test": "test",
+    "rules": "rules"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "changelog": "lerna-changelog",
+    "lint": "npm-run-all --continue-on-error --aggregate-output --parallel lint:*",
+    "lint:docs": "markdownlint '**/*.md'",
+    "lint:js": "eslint . --cache",
+    "lint:package-json": "sort-package-json --check",
+    "start": "yarn run test:watch",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watchAll",
+    "update": "node ./scripts/update-rules.js"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 96,
+        "functions": 99,
+        "lines": 98,
+        "statements": 98
+      }
+    },
+    "testMatch": [
+      "**/tests/**/*.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/tests/helpers/"
+    ]
+  },
+  "dependencies": {
+    "@ember-data/rfc395-data": "^0.0.4",
+    "ember-rfc176-data": "^0.3.15",
+    "lodash.kebabcase": "^4.1.1",
+    "snake-case": "^3.0.3"
+  },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "^7.8.1",
@@ -61,15 +77,15 @@
     "jest": "^26.4.2",
     "lerna-changelog": "^1.0.1",
     "markdownlint-cli": "^0.23.2",
-    "npm-package-json-lint": "^5.1.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "2.1.1"
+    "prettier": "2.1.1",
+    "sort-package-json": "^1.44.0"
   },
-  "dependencies": {
-    "@ember-data/rfc395-data": "^0.0.4",
-    "ember-rfc176-data": "^0.3.15",
-    "lodash.kebabcase": "^4.1.1",
-    "snake-case": "^3.0.3"
+  "peerDependencies": {
+    "eslint": ">= 6"
+  },
+  "engines": {
+    "node": "10.* || 12.* || >= 14"
   },
   "changelog": {
     "repo": "ember-cli/eslint-plugin-ember",
@@ -79,22 +95,6 @@
       "bug": ":bug: Bug Fix",
       "documentation": ":memo: Documentation",
       "internal": ":house: Internal"
-    }
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "<rootDir>/tests/helpers/"
-    ],
-    "testMatch": [
-      "**/tests/**/*.js"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 96,
-        "functions": 99,
-        "lines": 98,
-        "statements": 98
-      }
     }
   }
 }
