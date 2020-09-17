@@ -2,6 +2,8 @@
 
 :white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
+:wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 Call `_super` in init lifecycle hooks.
 
 When overriding the `init` lifecycle hook inside Ember Components, Controllers, Routes or Mixins, it is necessary to include a call to `_super`.
