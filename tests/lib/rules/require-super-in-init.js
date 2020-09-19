@@ -135,7 +135,9 @@ eslintTester.run('require-super-in-init', rule, {
       code: `export default Component.extend({
         init() {},
       });`,
-      output: null,
+      output: `export default Component.extend({
+        init() {this._super(...arguments);},
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -144,7 +146,12 @@ eslintTester.run('require-super-in-init', rule, {
           this.set('prop', 'value');
         },
       });`,
-      output: null,
+      output: `export default Component.extend({
+        init() {
+          this._super(...arguments);
+this.set('prop', 'value');
+        },
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -154,14 +161,26 @@ eslintTester.run('require-super-in-init', rule, {
           this.set('prop2', 'value2');
         },
       });`,
-      output: null,
+      output: `export default Component.extend({
+        init() {
+          this._super(...arguments);
+this.set('prop', 'value');
+          this.set('prop2', 'value2');
+        },
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
       code: `export default Route.extend({
-        init() {},
+        init() {
+
+        },
       });`,
-      output: null,
+      output: `export default Route.extend({
+        init() {this._super(...arguments);
+
+        },
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -170,7 +189,12 @@ eslintTester.run('require-super-in-init', rule, {
           this.set('prop', 'value');
         },
       });`,
-      output: null,
+      output: `export default Route.extend({
+        init() {
+          this._super(...arguments);
+this.set('prop', 'value');
+        },
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -180,14 +204,22 @@ eslintTester.run('require-super-in-init', rule, {
           this.set('prop2', 'value2');
         },
       });`,
-      output: null,
+      output: `export default Route.extend({
+        init() {
+          this._super(...arguments);
+this.set('prop', 'value');
+          this.set('prop2', 'value2');
+        },
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
       code: `export default Controller.extend({
         init() {},
       });`,
-      output: null,
+      output: `export default Controller.extend({
+        init() {this._super(...arguments);},
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -196,7 +228,12 @@ eslintTester.run('require-super-in-init', rule, {
           this.set('prop', 'value');
         },
       });`,
-      output: null,
+      output: `export default Controller.extend({
+        init() {
+          this._super(...arguments);
+this.set('prop', 'value');
+        },
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -206,14 +243,22 @@ eslintTester.run('require-super-in-init', rule, {
           this.set('prop2', 'value2');
         },
       });`,
-      output: null,
+      output: `export default Controller.extend({
+        init() {
+          this._super(...arguments);
+this.set('prop', 'value');
+          this.set('prop2', 'value2');
+        },
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
       code: `export default Mixin.extend({
         init() {},
       });`,
-      output: null,
+      output: `export default Mixin.extend({
+        init() {this._super(...arguments);},
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -222,7 +267,12 @@ eslintTester.run('require-super-in-init', rule, {
           this.set('prop', 'value');
         },
       });`,
-      output: null,
+      output: `export default Mixin.extend({
+        init() {
+          this._super(...arguments);
+this.set('prop', 'value');
+        },
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -232,14 +282,22 @@ eslintTester.run('require-super-in-init', rule, {
           this.set('prop2', 'value2');
         },
       });`,
-      output: null,
+      output: `export default Mixin.extend({
+        init() {
+          this._super(...arguments);
+this.set('prop', 'value');
+          this.set('prop2', 'value2');
+        },
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
       code: `export default Service.extend({
         init() {},
       });`,
-      output: null,
+      output: `export default Service.extend({
+        init() {this._super(...arguments);},
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -248,7 +306,12 @@ eslintTester.run('require-super-in-init', rule, {
           this.set('prop', 'value');
         },
       });`,
-      output: null,
+      output: `export default Service.extend({
+        init() {
+          this._super(...arguments);
+this.set('prop', 'value');
+        },
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -258,7 +321,13 @@ eslintTester.run('require-super-in-init', rule, {
           this.set('prop2', 'value2');
         },
       });`,
-      output: null,
+      output: `export default Service.extend({
+        init() {
+          this._super(...arguments);
+this.set('prop', 'value');
+          this.set('prop2', 'value2');
+        },
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -267,7 +336,12 @@ eslintTester.run('require-super-in-init', rule, {
           return;
         }
       });`,
-      output: null,
+      output: `export default Component.extend({
+        init() {
+          this._super(...arguments);
+return;
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -276,7 +350,12 @@ eslintTester.run('require-super-in-init', rule, {
           return;
         }
       });`,
-      output: null,
+      output: `export default Route.extend({
+        init() {
+          this._super(...arguments);
+return;
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -285,7 +364,12 @@ eslintTester.run('require-super-in-init', rule, {
           return;
         }
       });`,
-      output: null,
+      output: `export default Controller.extend({
+        init() {
+          this._super(...arguments);
+return;
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -294,7 +378,12 @@ eslintTester.run('require-super-in-init', rule, {
           return;
         }
       });`,
-      output: null,
+      output: `export default Mixin.extend({
+        init() {
+          this._super(...arguments);
+return;
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -303,7 +392,12 @@ eslintTester.run('require-super-in-init', rule, {
           return;
         }
       });`,
-      output: null,
+      output: `export default Service.extend({
+        init() {
+          this._super(...arguments);
+return;
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -312,7 +406,12 @@ eslintTester.run('require-super-in-init', rule, {
           return;
         }
       });`,
-      output: null,
+      output: `export default Component({
+        init() {
+          this._super(...arguments);
+return;
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -321,7 +420,12 @@ eslintTester.run('require-super-in-init', rule, {
           return;
         }
       });`,
-      output: null,
+      output: `export default Route({
+        init() {
+          this._super(...arguments);
+return;
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -330,7 +434,12 @@ eslintTester.run('require-super-in-init', rule, {
           return;
         }
       });`,
-      output: null,
+      output: `export default Controller({
+        init() {
+          this._super(...arguments);
+return;
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -339,7 +448,12 @@ eslintTester.run('require-super-in-init', rule, {
           return;
         }
       });`,
-      output: null,
+      output: `export default Mixin({
+        init() {
+          this._super(...arguments);
+return;
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -348,7 +462,12 @@ eslintTester.run('require-super-in-init', rule, {
           return;
         }
       });`,
-      output: null,
+      output: `export default Service({
+        init() {
+          this._super(...arguments);
+return;
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -357,7 +476,12 @@ eslintTester.run('require-super-in-init', rule, {
           return 'meh';
         }
       });`,
-      output: null,
+      output: `export default Component.extend({
+        init() {
+          this._super(...arguments);
+return 'meh';
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -366,7 +490,12 @@ eslintTester.run('require-super-in-init', rule, {
           return 'meh';
         }
       });`,
-      output: null,
+      output: `export default Route.extend({
+        init() {
+          this._super(...arguments);
+return 'meh';
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -375,7 +504,12 @@ eslintTester.run('require-super-in-init', rule, {
           return 'meh';
         }
       });`,
-      output: null,
+      output: `export default Controller.extend({
+        init() {
+          this._super(...arguments);
+return 'meh';
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -384,7 +518,12 @@ eslintTester.run('require-super-in-init', rule, {
           return 'meh';
         }
       });`,
-      output: null,
+      output: `export default Mixin.extend({
+        init() {
+          this._super(...arguments);
+return 'meh';
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -393,7 +532,12 @@ eslintTester.run('require-super-in-init', rule, {
           return 'meh';
         }
       });`,
-      output: null,
+      output: `export default Service.extend({
+        init() {
+          this._super(...arguments);
+return 'meh';
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -402,7 +546,12 @@ eslintTester.run('require-super-in-init', rule, {
           return 'meh';
         }
       });`,
-      output: null,
+      output: `export default Component({
+        init() {
+          this._super(...arguments);
+return 'meh';
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -411,7 +560,12 @@ eslintTester.run('require-super-in-init', rule, {
           return 'meh';
         }
       });`,
-      output: null,
+      output: `export default Route({
+        init() {
+          this._super(...arguments);
+return 'meh';
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -420,7 +574,12 @@ eslintTester.run('require-super-in-init', rule, {
           return 'meh';
         }
       });`,
-      output: null,
+      output: `export default Controller({
+        init() {
+          this._super(...arguments);
+return 'meh';
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -429,7 +588,12 @@ eslintTester.run('require-super-in-init', rule, {
           return 'meh';
         }
       });`,
-      output: null,
+      output: `export default Mixin({
+        init() {
+          this._super(...arguments);
+return 'meh';
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -438,7 +602,12 @@ eslintTester.run('require-super-in-init', rule, {
           return 'meh';
         }
       });`,
-      output: null,
+      output: `export default Service({
+        init() {
+          this._super(...arguments);
+return 'meh';
+        }
+      });`,
       errors: [{ message, line: 2 }],
     },
     {
@@ -447,7 +616,12 @@ eslintTester.run('require-super-in-init', rule, {
           someRandomIdentifier;
         },
       });`,
-      output: null,
+      output: `export default Service({
+        init() {
+          this._super(...arguments);
+someRandomIdentifier;
+        },
+      });`,
       errors: [{ message, line: 2 }],
     },
   ],
