@@ -1,7 +1,7 @@
 'use strict';
 
 const { readdirSync, readFileSync } = require('fs');
-const { join } = require('path');
+const path = require('path');
 const rules = require('../lib').rules;
 const recommendedRules = require('../lib/recommended-rules.js');
 const octaneRules = require('../lib/octane-rules.js');
@@ -35,8 +35,8 @@ function getAllNamedOptions(jsonSchema) {
 
 describe('rules setup is correct', function () {
   it('should have a list of exported rules and rules directory that match', function () {
-    const path = join(__dirname, '..', 'lib', 'rules');
-    const files = readdirSync(path);
+    const filePath = path.join(__dirname, '..', 'lib', 'rules');
+    const files = readdirSync(filePath);
 
     // eslint-disable-next-line jest/prefer-strict-equal
     expect(RULE_NAMES).toEqual(
@@ -57,8 +57,8 @@ describe('rules setup is correct', function () {
   });
 
   it('should have tests for all rules', function () {
-    const path = join(__dirname, '..', 'tests', 'lib', 'rules');
-    const files = readdirSync(path);
+    const filePath = path.join(__dirname, '..', 'tests', 'lib', 'rules');
+    const files = readdirSync(filePath);
 
     // eslint-disable-next-line jest/prefer-strict-equal
     expect(RULE_NAMES).toEqual(
@@ -67,8 +67,8 @@ describe('rules setup is correct', function () {
   });
 
   it('should have documentation for all rules', function () {
-    const path = join(__dirname, '..', 'docs', 'rules');
-    const files = readdirSync(path);
+    const filePath = path.join(__dirname, '..', 'docs', 'rules');
+    const files = readdirSync(filePath);
 
     // eslint-disable-next-line jest/prefer-strict-equal
     expect(RULE_NAMES).toEqual(
@@ -90,8 +90,8 @@ describe('rules setup is correct', function () {
 
     RULE_NAMES.forEach((ruleName) => {
       const rule = rules[ruleName];
-      const path = join(__dirname, '..', 'docs', 'rules', `${ruleName}.md`);
-      const file = readFileSync(path, 'utf8');
+      const filePath = path.join(__dirname, '..', 'docs', 'rules', `${ruleName}.md`);
+      const file = readFileSync(filePath, 'utf8');
       const lines = file.split('\n');
 
       /* eslint-disable jest/no-conditional-expect */
@@ -155,8 +155,8 @@ describe('rules setup is correct', function () {
   });
 
   it('should mention all rules in the README', function () {
-    const path = join(__dirname, '..', 'README.md');
-    const file = readFileSync(path, 'utf8');
+    const filePath = path.join(__dirname, '..', 'README.md');
+    const file = readFileSync(filePath, 'utf8');
 
     RULE_NAMES.forEach((ruleName) => expect(file).toContain(ruleName));
   });
