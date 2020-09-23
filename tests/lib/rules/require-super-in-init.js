@@ -5,15 +5,16 @@
 const rule = require('../../../lib/rules/require-super-in-init');
 const RuleTester = require('eslint').RuleTester;
 
+const { ERROR_MESSAGE: message } = rule;
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+  parser: require.resolve('babel-eslint'),
 });
-
-const message = 'Call this._super(...arguments) in init hook';
 
 eslintTester.run('require-super-in-init', rule, {
   valid: [
@@ -22,6 +23,19 @@ eslintTester.run('require-super-in-init', rule, {
           return this._super(...arguments);
         }
       });`,
+    `export default Component.extend({
+        didInsertElement() {
+          return this._super(...arguments);
+        }
+      });`,
+    {
+      code: `export default Component.extend({
+        didInsertElement() {
+          return this._super(...arguments);
+        }
+      });`,
+      options: [{ checkInitOnly: true }],
+    },
     `export default Route.extend({
         init() {
           return this._super(...arguments);
@@ -129,6 +143,93 @@ eslintTester.run('require-super-in-init', rule, {
     `export default Service({
         init
       });`,
+
+    // Non-init hooks should not be checked when checkInitOnly = true (default)
+    'export default Component({ didInsertElement() {} });',
+    {
+      code: 'export default Component({ didInsertElement() {} });',
+      options: [{ checkInitOnly: true }],
+    },
+    {
+      code:
+        "import Component from '@ember/component'; class Foo extends Component { didInsertElement() {} }",
+      options: [{ checkNativeClasses: true }],
+    },
+    {
+      code:
+        "import Component from '@ember/component'; class Foo extends Component { didInsertElement() {} }",
+      options: [{ checkNativeClasses: true, checkInitOnly: true }],
+    },
+
+    // Native classes should not be checked when checkNativeClasses = false (default)
+    `import Component from '@ember/component';
+     class Foo extends Component { init() { } }`,
+    {
+      code: `import Component from '@ember/component';
+     class Foo extends Component { init() { } }`,
+      options: [{ checkNativeClasses: false }],
+    },
+
+    // checkNativeClasses = true
+    {
+      code: `import Service from '@ember/service';
+     class Foo extends Service { init() { super.init(...arguments); }}`,
+      options: [{ checkNativeClasses: true }],
+    },
+    {
+      code: `import Component from '@ember/component';
+     class Foo extends Component { didInsertElement() { super.didInsertElement(...arguments); }}`,
+      options: [{ checkNativeClasses: true, checkInitOnly: false }],
+    },
+    {
+      code: `import Service from '@ember/service';
+     class Foo extends Service { didInsertElement() { }}`,
+      options: [{ checkNativeClasses: true, checkInitOnly: false }],
+    },
+
+    // checkInitOnly = false
+    {
+      code: 'export default Component({ didInsertElement() { this._super();} });',
+      options: [{ checkInitOnly: false }],
+    },
+
+    // Not inside Ember class:
+    {
+      code: 'export default Foo({ init() { } });',
+      options: [{ checkInitOnly: false }],
+    },
+    {
+      code: 'class Foo { init() { } }',
+      options: [{ checkNativeClasses: true }],
+    },
+    'export default Foo({ didInsertElement() { } });',
+    {
+      code: 'class Foo { didInsertElement() { } }',
+      options: [{ checkNativeClasses: true, checkInitOnly: false }],
+    },
+    'const foo = { init() { } }',
+
+    // init hook should be checked in all Ember classes:
+    {
+      code:
+        "import Controller from '@ember/controller'; class Foo extends Controller { init() { super.init(...arguments); }}",
+      options: [{ checkNativeClasses: true }],
+    },
+    {
+      code:
+        "import Route from '@ember/routing/route'; class Foo extends Route { init() { super.init(...arguments); }}",
+      options: [{ checkNativeClasses: true }],
+    },
+    {
+      code:
+        "import Service from '@ember/service'; class Foo extends Service { init() { super.init(...arguments); }}",
+      options: [{ checkNativeClasses: true }],
+    },
+    {
+      code:
+        "import Mixin from '@ember/object/mixin'; class Foo extends Mixin { init() { super.init(...arguments); }}",
+      options: [{ checkNativeClasses: true }],
+    },
   ],
   invalid: [
     {
@@ -138,6 +239,26 @@ eslintTester.run('require-super-in-init', rule, {
       output: `export default Component.extend({
         init() {this._super(...arguments);},
       });`,
+      errors: [{ message, line: 2 }],
+    },
+    {
+      code: `export default Component.extend({
+        didInsertElement() {},
+      });`,
+      output: `export default Component.extend({
+        didInsertElement() {this._super(...arguments);},
+      });`,
+      options: [{ checkInitOnly: false }],
+      errors: [{ message, line: 2 }],
+    },
+    {
+      code: `export default Component.extend({
+        init() {},
+      });`,
+      output: `export default Component.extend({
+        init() {this._super(...arguments);},
+      });`,
+      options: [{ checkInitOnly: false }],
       errors: [{ message, line: 2 }],
     },
     {
@@ -623,6 +744,44 @@ someRandomIdentifier;
         },
       });`,
       errors: [{ message, line: 2 }],
+    },
+
+    // Native classes:
+    {
+      code: `import Service from '@ember/service';
+      class Foo extends Service {
+        init() {}
+      }`,
+      output: `import Service from '@ember/service';
+      class Foo extends Service {
+        init() {super.init(...arguments);}
+      }`,
+      options: [{ checkNativeClasses: true }],
+      errors: [{ message, line: 3 }],
+    },
+    {
+      code: `import Component from '@ember/component';
+      class Foo extends Component {
+        didInsertElement() {}
+      }`,
+      output: `import Component from '@ember/component';
+      class Foo extends Component {
+        didInsertElement() {super.didInsertElement(...arguments);}
+      }`,
+      options: [{ checkNativeClasses: true, checkInitOnly: false }],
+      errors: [{ message, line: 3 }],
+    },
+    {
+      code: `import Mixin from '@ember/object/mixin';
+      class Foo extends Mixin {
+        didInsertElement() {}
+      }`,
+      output: `import Mixin from '@ember/object/mixin';
+      class Foo extends Mixin {
+        didInsertElement() {super.didInsertElement(...arguments);}
+      }`,
+      options: [{ checkNativeClasses: true, checkInitOnly: false }],
+      errors: [{ message, line: 3 }],
     },
   ],
 });
