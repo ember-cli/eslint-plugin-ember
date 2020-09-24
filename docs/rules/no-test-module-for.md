@@ -11,12 +11,16 @@ Use `module` instead of `moduleFor`.
 Examples of **incorrect** code for this rule:
 
 ```js
+import { moduleFor } from 'ember-qunit';
+
 moduleFor('Test Name');
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
+import { module } from 'qunit';
+
 module('Test Name', function (hooks) {
   // ...
 });
