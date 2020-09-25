@@ -237,7 +237,8 @@ eslintTester.run('require-super-in-init', rule, {
         init() {},
       });`,
       output: `export default Component.extend({
-        init() {this._super(...arguments);},
+        init() {
+this._super(...arguments);},
       });`,
       errors: [{ message, line: 2 }],
     },
@@ -246,7 +247,8 @@ eslintTester.run('require-super-in-init', rule, {
         didInsertElement() {},
       });`,
       output: `export default Component.extend({
-        didInsertElement() {this._super(...arguments);},
+        didInsertElement() {
+this._super(...arguments);},
       });`,
       options: [{ checkInitOnly: false }],
       errors: [{ message, line: 2 }],
@@ -256,7 +258,8 @@ eslintTester.run('require-super-in-init', rule, {
         init() {},
       });`,
       output: `export default Component.extend({
-        init() {this._super(...arguments);},
+        init() {
+this._super(...arguments);},
       });`,
       options: [{ checkInitOnly: false }],
       errors: [{ message, line: 2 }],
@@ -269,8 +272,8 @@ eslintTester.run('require-super-in-init', rule, {
       });`,
       output: `export default Component.extend({
         init() {
-          this._super(...arguments);
-this.set('prop', 'value');
+this._super(...arguments);
+          this.set('prop', 'value');
         },
       });`,
       errors: [{ message, line: 2 }],
@@ -284,8 +287,8 @@ this.set('prop', 'value');
       });`,
       output: `export default Component.extend({
         init() {
-          this._super(...arguments);
-this.set('prop', 'value');
+this._super(...arguments);
+          this.set('prop', 'value');
           this.set('prop2', 'value2');
         },
       });`,
@@ -298,7 +301,8 @@ this.set('prop', 'value');
         },
       });`,
       output: `export default Route.extend({
-        init() {this._super(...arguments);
+        init() {
+this._super(...arguments);
 
         },
       });`,
@@ -307,13 +311,29 @@ this.set('prop', 'value');
     {
       code: `export default Route.extend({
         init() {
+          // Foo
+          console.log();
+        },
+      });`,
+      output: `export default Route.extend({
+        init() {
+this._super(...arguments);
+          // Foo
+          console.log();
+        },
+      });`,
+      errors: [{ message, line: 2 }],
+    },
+    {
+      code: `export default Route.extend({
+        init() {
           this.set('prop', 'value');
         },
       });`,
       output: `export default Route.extend({
         init() {
-          this._super(...arguments);
-this.set('prop', 'value');
+this._super(...arguments);
+          this.set('prop', 'value');
         },
       });`,
       errors: [{ message, line: 2 }],
@@ -327,8 +347,8 @@ this.set('prop', 'value');
       });`,
       output: `export default Route.extend({
         init() {
-          this._super(...arguments);
-this.set('prop', 'value');
+this._super(...arguments);
+          this.set('prop', 'value');
           this.set('prop2', 'value2');
         },
       });`,
@@ -339,7 +359,8 @@ this.set('prop', 'value');
         init() {},
       });`,
       output: `export default Controller.extend({
-        init() {this._super(...arguments);},
+        init() {
+this._super(...arguments);},
       });`,
       errors: [{ message, line: 2 }],
     },
@@ -351,8 +372,8 @@ this.set('prop', 'value');
       });`,
       output: `export default Controller.extend({
         init() {
-          this._super(...arguments);
-this.set('prop', 'value');
+this._super(...arguments);
+          this.set('prop', 'value');
         },
       });`,
       errors: [{ message, line: 2 }],
@@ -366,8 +387,8 @@ this.set('prop', 'value');
       });`,
       output: `export default Controller.extend({
         init() {
-          this._super(...arguments);
-this.set('prop', 'value');
+this._super(...arguments);
+          this.set('prop', 'value');
           this.set('prop2', 'value2');
         },
       });`,
@@ -378,7 +399,8 @@ this.set('prop', 'value');
         init() {},
       });`,
       output: `export default Mixin.extend({
-        init() {this._super(...arguments);},
+        init() {
+this._super(...arguments);},
       });`,
       errors: [{ message, line: 2 }],
     },
@@ -390,8 +412,8 @@ this.set('prop', 'value');
       });`,
       output: `export default Mixin.extend({
         init() {
-          this._super(...arguments);
-this.set('prop', 'value');
+this._super(...arguments);
+          this.set('prop', 'value');
         },
       });`,
       errors: [{ message, line: 2 }],
@@ -405,8 +427,8 @@ this.set('prop', 'value');
       });`,
       output: `export default Mixin.extend({
         init() {
-          this._super(...arguments);
-this.set('prop', 'value');
+this._super(...arguments);
+          this.set('prop', 'value');
           this.set('prop2', 'value2');
         },
       });`,
@@ -417,7 +439,8 @@ this.set('prop', 'value');
         init() {},
       });`,
       output: `export default Service.extend({
-        init() {this._super(...arguments);},
+        init() {
+this._super(...arguments);},
       });`,
       errors: [{ message, line: 2 }],
     },
@@ -429,8 +452,8 @@ this.set('prop', 'value');
       });`,
       output: `export default Service.extend({
         init() {
-          this._super(...arguments);
-this.set('prop', 'value');
+this._super(...arguments);
+          this.set('prop', 'value');
         },
       });`,
       errors: [{ message, line: 2 }],
@@ -444,8 +467,8 @@ this.set('prop', 'value');
       });`,
       output: `export default Service.extend({
         init() {
-          this._super(...arguments);
-this.set('prop', 'value');
+this._super(...arguments);
+          this.set('prop', 'value');
           this.set('prop2', 'value2');
         },
       });`,
@@ -459,8 +482,8 @@ this.set('prop', 'value');
       });`,
       output: `export default Component.extend({
         init() {
-          this._super(...arguments);
-return;
+this._super(...arguments);
+          return;
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -473,8 +496,8 @@ return;
       });`,
       output: `export default Route.extend({
         init() {
-          this._super(...arguments);
-return;
+this._super(...arguments);
+          return;
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -487,8 +510,8 @@ return;
       });`,
       output: `export default Controller.extend({
         init() {
-          this._super(...arguments);
-return;
+this._super(...arguments);
+          return;
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -501,8 +524,8 @@ return;
       });`,
       output: `export default Mixin.extend({
         init() {
-          this._super(...arguments);
-return;
+this._super(...arguments);
+          return;
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -515,8 +538,8 @@ return;
       });`,
       output: `export default Service.extend({
         init() {
-          this._super(...arguments);
-return;
+this._super(...arguments);
+          return;
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -529,8 +552,8 @@ return;
       });`,
       output: `export default Component({
         init() {
-          this._super(...arguments);
-return;
+this._super(...arguments);
+          return;
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -543,8 +566,8 @@ return;
       });`,
       output: `export default Route({
         init() {
-          this._super(...arguments);
-return;
+this._super(...arguments);
+          return;
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -557,8 +580,8 @@ return;
       });`,
       output: `export default Controller({
         init() {
-          this._super(...arguments);
-return;
+this._super(...arguments);
+          return;
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -571,8 +594,8 @@ return;
       });`,
       output: `export default Mixin({
         init() {
-          this._super(...arguments);
-return;
+this._super(...arguments);
+          return;
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -585,8 +608,8 @@ return;
       });`,
       output: `export default Service({
         init() {
-          this._super(...arguments);
-return;
+this._super(...arguments);
+          return;
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -599,8 +622,8 @@ return;
       });`,
       output: `export default Component.extend({
         init() {
-          this._super(...arguments);
-return 'meh';
+this._super(...arguments);
+          return 'meh';
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -613,8 +636,8 @@ return 'meh';
       });`,
       output: `export default Route.extend({
         init() {
-          this._super(...arguments);
-return 'meh';
+this._super(...arguments);
+          return 'meh';
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -627,8 +650,8 @@ return 'meh';
       });`,
       output: `export default Controller.extend({
         init() {
-          this._super(...arguments);
-return 'meh';
+this._super(...arguments);
+          return 'meh';
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -641,8 +664,8 @@ return 'meh';
       });`,
       output: `export default Mixin.extend({
         init() {
-          this._super(...arguments);
-return 'meh';
+this._super(...arguments);
+          return 'meh';
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -655,8 +678,8 @@ return 'meh';
       });`,
       output: `export default Service.extend({
         init() {
-          this._super(...arguments);
-return 'meh';
+this._super(...arguments);
+          return 'meh';
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -669,8 +692,8 @@ return 'meh';
       });`,
       output: `export default Component({
         init() {
-          this._super(...arguments);
-return 'meh';
+this._super(...arguments);
+          return 'meh';
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -683,8 +706,8 @@ return 'meh';
       });`,
       output: `export default Route({
         init() {
-          this._super(...arguments);
-return 'meh';
+this._super(...arguments);
+          return 'meh';
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -697,8 +720,8 @@ return 'meh';
       });`,
       output: `export default Controller({
         init() {
-          this._super(...arguments);
-return 'meh';
+this._super(...arguments);
+          return 'meh';
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -711,8 +734,8 @@ return 'meh';
       });`,
       output: `export default Mixin({
         init() {
-          this._super(...arguments);
-return 'meh';
+this._super(...arguments);
+          return 'meh';
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -725,8 +748,8 @@ return 'meh';
       });`,
       output: `export default Service({
         init() {
-          this._super(...arguments);
-return 'meh';
+this._super(...arguments);
+          return 'meh';
         }
       });`,
       errors: [{ message, line: 2 }],
@@ -739,8 +762,8 @@ return 'meh';
       });`,
       output: `export default Service({
         init() {
-          this._super(...arguments);
-someRandomIdentifier;
+this._super(...arguments);
+          someRandomIdentifier;
         },
       });`,
       errors: [{ message, line: 2 }],
@@ -754,7 +777,8 @@ someRandomIdentifier;
       }`,
       output: `import Service from '@ember/service';
       class Foo extends Service {
-        init() {super.init(...arguments);}
+        init() {
+super.init(...arguments);}
       }`,
       options: [{ checkNativeClasses: true }],
       errors: [{ message, line: 3 }],
@@ -766,7 +790,8 @@ someRandomIdentifier;
       }`,
       output: `import Component from '@ember/component';
       class Foo extends Component {
-        didInsertElement() {super.didInsertElement(...arguments);}
+        didInsertElement() {
+super.didInsertElement(...arguments);}
       }`,
       options: [{ checkNativeClasses: true, checkInitOnly: false }],
       errors: [{ message, line: 3 }],
@@ -778,7 +803,8 @@ someRandomIdentifier;
       }`,
       output: `import Mixin from '@ember/object/mixin';
       class Foo extends Mixin {
-        didInsertElement() {super.didInsertElement(...arguments);}
+        didInsertElement() {
+super.didInsertElement(...arguments);}
       }`,
       options: [{ checkNativeClasses: true, checkInitOnly: false }],
       errors: [{ message, line: 3 }],
