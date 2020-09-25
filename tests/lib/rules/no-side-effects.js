@@ -102,6 +102,31 @@ eslintTester.run('no-side-effects', rule, {
     'this.sendEvent()',
     'this.trigger()',
     'import { sendEvent } from "@ember/object/events"; sendEvent();',
+
+    // checkPlainGetters = false
+    'import Component from "@ember/component"; class Foo extends Component { get foo() { this.x = 123; } }',
+    {
+      code:
+        'import Component from "@ember/component"; class Foo extends Component { get foo() { this.x = 123; } }',
+      options: [{ checkPlainGetters: false }],
+    },
+
+    // checkPlainGetters = true
+    {
+      code:
+        'import Component from "@ember/component"; class Foo extends Component { get foo() { return 123; } }',
+      options: [{ checkPlainGetters: true }],
+    },
+    {
+      code:
+        'import Component from "@ember/component"; class Foo extends Component { set foo(x) { this.x = x; } }',
+      options: [{ checkPlainGetters: true }],
+    },
+    {
+      // Not Ember class:
+      code: 'class Foo { get foo() { this.x = x; } }',
+      options: [{ checkPlainGetters: true }],
+    },
   ].map(addComputedImport),
   invalid: [
     // this.set
@@ -301,6 +326,15 @@ eslintTester.run('no-side-effects', rule, {
         'import { sendEvent as se } from "@ember/object/events"; computed(function() { se(); })',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+
+    {
+      // checkPlainGetters = true
+      code:
+        'import Component from "@ember/component"; class Foo extends Component { get foo() { this.x = 123; } }',
+      output: null,
+      options: [{ checkPlainGetters: true }],
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
     },
   ].map(addComputedImport),
 });
