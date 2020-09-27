@@ -47,3 +47,4 @@ export default Component.extend({
 This rule takes an optional object containing:
 
 * `boolean` -- `catchEvents` -- whether the rule should catch function calls that send actions or events (default `true`)
+* `boolean` -- `checkPlainGetters` -- whether the rule should check plain (non-computed) getters in native classes for side effects (default `false`, TODO: change default to `true` in next major release)
