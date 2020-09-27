@@ -769,6 +769,24 @@ this._super(...arguments);
       errors: [{ message, line: 2 }],
     },
 
+    // attrs hooks should call super without ...arguments to satisfy ember/no-attrs-snapshot rule.
+    {
+      code: 'Component({ didReceiveAttrs() {} })',
+      output: `Component({ didReceiveAttrs() {
+this._super();} })`,
+      options: [{ checkInitOnly: false }],
+      errors: [{ message, line: 1 }],
+    },
+    {
+      code: `import Component from '@ember/component';
+      class Foo extends Component { didUpdateAttrs() {} }`,
+      output: `import Component from '@ember/component';
+      class Foo extends Component { didUpdateAttrs() {
+super.didUpdateAttrs();} }`,
+      options: [{ checkNativeClasses: true, checkInitOnly: false }],
+      errors: [{ message, line: 2 }],
+    },
+
     // Native classes:
     {
       code: `import Service from '@ember/service';
