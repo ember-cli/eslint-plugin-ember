@@ -1,3 +1,20 @@
+## v9.1.0 (2020-09-27)
+
+#### :rocket: Enhancement
+* [#961](https://github.com/ember-cli/eslint-plugin-ember/pull/961) Add `checkPlainGetters` option (default false) to [no-side-effects](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-side-effects.md) rule ([@bmish](https://github.com/bmish))
+* [#957](https://github.com/ember-cli/eslint-plugin-ember/pull/957) Add `checkInitOnly` (default true) and `checkNativeClasses` (default false) options to [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-init.md) rule ([@bmish](https://github.com/bmish))
+* [#950](https://github.com/ember-cli/eslint-plugin-ember/pull/950) Add autofixer to [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-init.md) rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#956](https://github.com/ember-cli/eslint-plugin-ember/pull/956) Add imports in [no-test-module-for](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-module-for.md) rule doc ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#945](https://github.com/ember-cli/eslint-plugin-ember/pull/945) Add sort-package-json ([@bmish](https://github.com/bmish))
+* [#944](https://github.com/ember-cli/eslint-plugin-ember/pull/944) Ensure rule doc notices are present in the correct order ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v9.0.0 (2020-09-07)
 
 #### :boom: Breaking Change
