@@ -1,3 +1,11 @@
+## v9.1.1 (2020-09-27)
+
+#### :bug: Bug Fix
+* [#962](https://github.com/ember-cli/eslint-plugin-ember/pull/962) Do not pass `...arguments` in autofix for attrs hooks in [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-init.md) rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v9.1.0 (2020-09-27)
 
 #### :rocket: Enhancement
