@@ -7,12 +7,31 @@ const ruleTester = new RuleTester({
     sourceType: 'module',
   },
 });
-const NO_IMPORT_MESSAGE = rule.meta.importMessage;
+
+const { ERROR_MESSAGE_NO_IMPORT } = rule;
 
 ruleTester.run('no-test-support-import', rule, {
   valid: [
     {
       filename: 'foo/tests/some-test-helper.js',
+      code: `
+      import setupModule from './test-support/some-test-helper';
+      import { module, test } from 'qunit';
+
+      module('Acceptance | module', setupModule());
+    `,
+    },
+    {
+      filename: 'foo/test-support/some-test-helper.js',
+      code: `
+      import setupModule from './test-support/some-test-helper';
+      import { module, test } from 'qunit';
+
+      module('Acceptance | module', setupModule());
+    `,
+    },
+    {
+      filename: 'foo/addon-test-support/some-test-helper.js',
       code: `
       import setupModule from './test-support/some-test-helper';
       import { module, test } from 'qunit';
@@ -30,7 +49,31 @@ ruleTester.run('no-test-support-import', rule, {
       output: null,
       errors: [
         {
-          message: NO_IMPORT_MESSAGE,
+          message: ERROR_MESSAGE_NO_IMPORT,
+        },
+      ],
+    },
+    {
+      code: `
+        import setupModule from 'foo/test-support/some-test-helper';
+      `,
+      filename: '@ember/foo/addon/components/index.js',
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE_NO_IMPORT,
+        },
+      ],
+    },
+    {
+      code: `
+        import setupModule from './test-support/some-test-helper';
+      `,
+      filename: 'app/components/index.js',
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE_NO_IMPORT,
         },
       ],
     },

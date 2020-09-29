@@ -1,10 +1,8 @@
 # no-test-support-import
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+No importing of test support files into non-test code..
 
-No importing of test files.
-
-**TL;DR** Do not import from a file located in addon-test-support into production code. Doing so will result in production errors that are not capable of being caught in tests as require statements are available in tests but not on production builds.
+**TL;DR** Do not import from a file located in addon-test-support into non-test code. Doing so will result in production errors that are not capable of being caught in tests as require statements are available in tests but not on production builds.
 
 ## Examples
 
@@ -47,3 +45,9 @@ export default function setupApplicationTest(hooks) {
   // ...
 }
 ```
+
+This is meant as an addition to the [no-test-import-export](no-test-import-export.md) rule as these files do represent test files but are located in addon-test-support rather than in `/tests/`.
+
+## Related Rules
+
+* [no-test-import-export](no-test-import-export.md)

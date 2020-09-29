@@ -41,7 +41,6 @@ Array [
   "no-test-and-then",
   "no-test-import-export",
   "no-test-module-for",
-  "no-test-support-import",
   "no-test-this-render",
   "no-unnecessary-route-path-option",
   "no-volatile-computed-properties",
