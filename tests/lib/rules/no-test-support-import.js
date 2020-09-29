@@ -69,6 +69,19 @@ ruleTester.run('no-test-support-import', rule, {
     },
     {
       code: `
+        import setupModule from 'foo/test-support/some-test-helper';
+      `,
+      filename: 'foo/test-support-foo/index.js',
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE_NO_IMPORT,
+          type: 'ImportDeclaration',
+        },
+      ],
+    },
+    {
+      code: `
         import setupModule from './test-support/some-test-helper';
       `,
       filename: 'app/components/index.js',
