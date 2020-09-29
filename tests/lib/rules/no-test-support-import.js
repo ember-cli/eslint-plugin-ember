@@ -1,0 +1,38 @@
+const rule = require('../../../lib/rules/no-test-support-import');
+const RuleTester = require('eslint').RuleTester;
+
+const ruleTester = new RuleTester({
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+  },
+});
+const NO_IMPORT_MESSAGE = rule.meta.importMessage;
+
+ruleTester.run('no-test-support-import', rule, {
+  valid: [
+    {
+      filename: 'foo/tests/some-test-helper.js',
+      code: `
+      import setupModule from './test-support/some-test-helper';
+      import { module, test } from 'qunit';
+
+      module('Acceptance | module', setupModule());
+    `,
+    },
+  ],
+  invalid: [
+    {
+      code: `
+        import setupModule from './test-support/some-test-helper';
+      `,
+      filename: 'app/routes/index.js',
+      output: null,
+      errors: [
+        {
+          message: NO_IMPORT_MESSAGE,
+        },
+      ],
+    },
+  ],
+});

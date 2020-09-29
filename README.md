@@ -190,6 +190,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [no-test-and-then](./docs/rules/no-test-and-then.md) | disallow usage of the `andThen` test wait helper |
 | :white_check_mark: | [no-test-import-export](./docs/rules/no-test-import-export.md) | disallow importing of "-test.js" in a test file and exporting from a test file |
 | :white_check_mark: | [no-test-module-for](./docs/rules/no-test-module-for.md) | disallow usage of `moduleFor`, `moduleForComponent`, etc |
+| :white_check_mark: | [no-test-support-import](./docs/rules/no-test-support-import.md) | disallow importing of "test-support" files in production code. |
 | :white_check_mark: | [no-test-this-render](./docs/rules/no-test-this-render.md) | disallow usage of the `this.render` in tests, recommending to use @ember/test-helpers' `render` instead. |
 | :white_check_mark: | [prefer-ember-test-helpers](./docs/rules/prefer-ember-test-helpers.md) | enforce usage of `@ember/test-helpers` methods over native window methods |
 
