@@ -50,6 +50,7 @@ ruleTester.run('no-test-support-import', rule, {
       errors: [
         {
           message: ERROR_MESSAGE_NO_IMPORT,
+          type: 'ImportDeclaration',
         },
       ],
     },
@@ -62,6 +63,7 @@ ruleTester.run('no-test-support-import', rule, {
       errors: [
         {
           message: ERROR_MESSAGE_NO_IMPORT,
+          type: 'ImportDeclaration',
         },
       ],
     },
@@ -74,6 +76,7 @@ ruleTester.run('no-test-support-import', rule, {
       errors: [
         {
           message: ERROR_MESSAGE_NO_IMPORT,
+          type: 'ImportDeclaration',
         },
       ],
     },
