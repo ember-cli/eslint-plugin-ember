@@ -1451,7 +1451,17 @@ describe('isObserverDecorator', () => {
       @observes('baz')
       bar() {}
     }`).body[1].body.body[0].decorators[0];
-    expect(emberUtils.isObserverDecorator(node)).toBeTruthy();
+    expect(emberUtils.isObserverDecorator(node, 'observes')).toBeTruthy();
+  });
+
+  it('should be true for an observer decorator with renamed import', () => {
+    const node = babelEslint.parse(`
+    import { observes as observesRenamed } from '@ember-decorators/object';
+    class FooComponent extends Component {
+      @observesRenamed('baz')
+      bar() {}
+    }`).body[1].body.body[0].decorators[0];
+    expect(emberUtils.isObserverDecorator(node, 'observesRenamed')).toBeTruthy();
   });
 
   it('should be false for another type of decorator', () => {
@@ -1461,12 +1471,12 @@ describe('isObserverDecorator', () => {
       @action
       clickHandler() {}
     }`).body[1].body.body[0].decorators[0];
-    expect(emberUtils.isObserverDecorator(node)).toBeFalsy();
+    expect(emberUtils.isObserverDecorator(node, 'observes')).toBeFalsy();
   });
 
   it('throws when called on a non-decorator', () => {
     const node = babelEslint.parse('const x = 123;').body[0];
-    expect(() => emberUtils.isObserverDecorator(node)).toThrow(
+    expect(() => emberUtils.isObserverDecorator(node, 'observes')).toThrow(
       'Should only call this function on a Decorator'
     );
   });

@@ -27,59 +27,31 @@ eslintTester.run('no-observers', rule, {
     'export default Controller.extend();',
     'export default Controller.extend({actions: {},});',
 
-    // Unrelated import statements:
-    "import EmberObject from '@ember/object';",
-    "import { run } from '@ember/runloop';",
-    "import { run as renamedRun } from '@ember/runloop';",
-
     `
     import { action } from '@ember/object';
     class FooComponent extends Component {
       @action
       clickHandler() {}
     }`,
+
+    // Not an Ember observer:
+    'import { observer } from "@ember/object"; observer.foo();',
+    'import { observer } from "@ember/object"; foo.observer();',
+    'import { observer } from "@ember/object"; foo.observer.bar()',
+    'import { observer } from "@ember/object"; foo()',
+    'import Ember from "ember"; import { observer } from "@ember/object"; Ember.foo()',
+
+    // Import missing:
+    'observer();',
+    'Ember.observer();',
+    'observes();',
+    'addObserver();',
+
+    // removeObserver is allowed (we only need to report addObserver).
+    'import { removeObserver } from "@ember/object/observers"; removeObserver();',
+    'import Ember from "ember"; Ember.removeObserver();',
   ],
   invalid: [
-    {
-      code: "import { observer, computed } from '@ember/object';",
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'ImportDeclaration',
-        },
-      ],
-    },
-    {
-      code: "import { observer as foo } from '@ember/object';",
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'ImportDeclaration',
-        },
-      ],
-    },
-    {
-      code: "import { addObserver } from '@ember/object/observers';",
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'ImportDeclaration',
-        },
-      ],
-    },
-    {
-      code: "import { removeObserver } from '@ember/object/observers';",
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'ImportDeclaration',
-        },
-      ],
-    },
     {
       code: `
         export default Component.extend({
@@ -129,7 +101,7 @@ eslintTester.run('no-observers', rule, {
       ],
     },
     {
-      code: 'Ember.addObserver("foo", this, "rerun");',
+      code: 'import Ember from "ember"; Ember.addObserver("foo", this, "rerun");',
       output: null,
       errors: [
         {
@@ -139,7 +111,22 @@ eslintTester.run('no-observers', rule, {
       ],
     },
     {
-      code: 'Ember.observer("text", function() {});',
+      code: 'import { addObserver } from "@ember/object/observers"; addObserver();',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      code: 'import Ember from "ember"; Ember.observer("text", function() {});',
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: 'import { observer } from "@ember/object"; observer("text", function() {});',
       output: null,
       errors: [
         {
