@@ -1,3 +1,15 @@
+## v9.2.0 (2020-10-02)
+
+#### :rocket: Enhancement
+* [#966](https://github.com/ember-cli/eslint-plugin-ember/pull/966) Add new rule [no-test-support-import](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-support-import.md) ([@gabrielcsapo](https://github.com/gabrielcsapo))
+
+#### :bug: Bug Fix
+* [#967](https://github.com/ember-cli/eslint-plugin-ember/pull/967) Avoid false positives and properly check imports in [no-observers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-observers.md) rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Gabriel Csapo ([@gabrielcsapo](https://github.com/gabrielcsapo))
+
 ## v9.1.1 (2020-09-27)
 
 #### :bug: Bug Fix
