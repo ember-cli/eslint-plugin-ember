@@ -18,6 +18,7 @@ ruleTester.run('no-try-invoke', rule, {
     "tryInvoke(this, 'foo');",
     "import { tryInvoke } from '@ember/utils'; foo.tryInvoke(this, 'foo');",
     "import { tryInvoke } from '@ember/utils'; tryInvoke.foo(this, 'foo');",
+    "import { tryInvoke } from '@ember/utils'; foo();",
   ],
   invalid: [
     {
