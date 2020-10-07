@@ -21,6 +21,7 @@ ruleTester.run('no-tryinvoke', rule, {
         import { tryInvoke } from '@ember/utils';
         tryInvoke(this, 'foo');
       `,
+      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -32,6 +33,7 @@ ruleTester.run('no-tryinvoke', rule, {
         import { tryInvoke, isPresent } from '@ember/utils';
         tryInvoke(this, 'foo', ['bar']);
       `,
+      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,

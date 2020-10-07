@@ -1,8 +1,6 @@
 # no-tryinvoke
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
-
-This rule attempts to catch and prevent the use of `tryInvoke`.
+This rule will catch and prevent the use of `tryInvoke`.
 
 ## Rule Details
 

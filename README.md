@@ -141,7 +141,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :white_check_mark: | [no-tryinvoke](./docs/rules/no-tryinvoke.md) | disallow usage of the Ember's `tryInvoke` util |
+|  | [no-tryinvoke](./docs/rules/no-tryinvoke.md) | disallow usage of the Ember's `tryInvoke` util |
 
 ### jQuery
 
