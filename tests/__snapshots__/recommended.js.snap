@@ -42,6 +42,7 @@ Array [
   "no-test-import-export",
   "no-test-module-for",
   "no-test-this-render",
+  "no-tryinvoke",
   "no-unnecessary-route-path-option",
   "no-volatile-computed-properties",
   "prefer-ember-test-helpers",

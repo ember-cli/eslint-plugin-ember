@@ -137,6 +137,12 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :car: | [no-classic-classes](./docs/rules/no-classic-classes.md) | disallow "classic" classes in favor of native JS classes |
 | :white_check_mark::wrench: | [no-ember-super-in-es-classes](./docs/rules/no-ember-super-in-es-classes.md) | disallow use of `this._super` in ES class methods |
 
+### Ember Utils
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :white_check_mark: | [no-tryinvoke](./docs/rules/no-tryinvoke.md) | disallow usage of the Ember's `tryInvoke` util |
+
 ### jQuery
 
 |    | Rule ID | Description |
