@@ -1,4 +1,4 @@
-# no-tryinvoke
+# no-try-invoke
 
 This rule will catch and prevent the use of `tryInvoke`.
 
