@@ -13,16 +13,20 @@ Examples of **incorrect** code for this rule:
 ```js
 import { tryInvoke } from '@ember/utils';
 
-foo() {
-  tryInvoke(this.args, 'bar', ['baz']);
+class FooComponent extends Component {
+  foo() {
+    tryInvoke(this.args, 'bar', ['baz']);
+  }
 }
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
-foo() {
-  this.args.bar?.('baz');
+class FooComponent extends Component {
+  foo() {
+    this.args.bar?.('baz');
+  }
 }
 ```
 

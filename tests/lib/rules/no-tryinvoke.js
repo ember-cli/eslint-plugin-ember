@@ -11,9 +11,7 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-tryinvoke', rule, {
   valid: [
-    {
-      code: 'this.foo?.()',
-    },
+    'this.foo?.()'
   ],
   invalid: [
     {
