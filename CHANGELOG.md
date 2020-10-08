@@ -1,3 +1,15 @@
+## v9.3.0 (2020-10-08)
+
+#### :rocket: Enhancement
+* [#973](https://github.com/ember-cli/eslint-plugin-ember/pull/973) Add new rule [no-try-invoke](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-try-invoke.md) ([@bachvo](https://github.com/bachvo))
+
+#### :bug: Bug Fix
+* [#971](https://github.com/ember-cli/eslint-plugin-ember/pull/971) Handle path separators for different platforms in [no-test-support-import](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-support-import.md) rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- bach vo ([@bachvo](https://github.com/bachvo))
+
 ## v9.2.0 (2020-10-02)
 
 #### :rocket: Enhancement
