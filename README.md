@@ -124,6 +124,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark::wrench: | [no-get-with-default](./docs/rules/no-get-with-default.md) | disallow usage of the Ember's `getWithDefault` function |
 | :white_check_mark::wrench: | [no-get](./docs/rules/no-get.md) | require using ES5 getters instead of Ember's `get` / `getProperties` functions |
 |  | [no-proxies](./docs/rules/no-proxies.md) | disallow using array or object proxies |
+|  | [no-try-invoke](./docs/rules/no-try-invoke.md) | disallow usage of the Ember's `tryInvoke` util |
 | :white_check_mark::wrench: | [require-super-in-init](./docs/rules/require-super-in-init.md) | require super to be called in lifecycle hooks |
 | :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | enforce usage of `Ember.get` and `Ember.set` |
 
