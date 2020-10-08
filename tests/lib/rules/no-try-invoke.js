@@ -4,17 +4,13 @@ const RuleTester = require('eslint').RuleTester;
 const { ERROR_MESSAGE } = rule;
 const ruleTester = new RuleTester({
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2018,
     sourceType: 'module',
   },
 });
 
 ruleTester.run('no-try-invoke', rule, {
   valid: [
-    // with optional chaining
-    'this.foo?.()',
-
-    // with tryInvoke
     "tryInvoke(this, 'foo');",
     "import { tryInvoke } from '@ember/utils'; foo.tryInvoke(this, 'foo');",
     "import { tryInvoke } from '@ember/utils'; tryInvoke.foo(this, 'foo');",
