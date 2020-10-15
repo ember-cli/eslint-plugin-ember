@@ -162,6 +162,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [no-capital-letters-in-routes](./docs/rules/no-capital-letters-in-routes.md) | disallow routes with uppercased letters in router.js |
 | :white_check_mark: | [no-controller-access-in-routes](./docs/rules/no-controller-access-in-routes.md) | disallow routes from accessing the controller outside of setupController/resetController |
 | :white_check_mark: | [no-private-routing-service](./docs/rules/no-private-routing-service.md) | disallow injecting the private routing service |
+|  | [no-shadow-route-definition](./docs/rules/no-shadow-route-definition.md) | enforce no route path definition shadowing |
 |  | [no-unnecessary-index-route](./docs/rules/no-unnecessary-index-route.md) | disallow unnecessary `index` route definition |
 | :white_check_mark::wrench: | [no-unnecessary-route-path-option](./docs/rules/no-unnecessary-route-path-option.md) | disallow unnecessary usage of the route `path` option |
 |  | [route-path-style](./docs/rules/route-path-style.md) | enforce usage of kebab-case (instead of snake_case or camelCase) in route paths |
