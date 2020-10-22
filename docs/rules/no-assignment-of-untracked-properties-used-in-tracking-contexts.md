@@ -136,12 +136,10 @@ export default function rejectBy(dependentKey, propertyKey, value) {
     if (!isArray(parent)) {
       return A();
     }
-    let callback;
-    if (arguments.length === 2) {
-      callback = (item) => !get(item, propertyKey);
-    } else {
-      callback = (item) => get(item, propertyKey) !== value;
-    }
+    const callback =
+      arguments.length === 2
+        ? (item) => !get(item, propertyKey)
+        : (item) => get(item, propertyKey) !== value;
     return A(parent.filter(callback));
   });
 }
