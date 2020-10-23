@@ -106,6 +106,13 @@ ruleTester.run('no-shadow-route-definition', rule, {
     "MyClass.route('blog', { path: '/blog' });",
     "route.unrelatedFunction('blog', { path: 'blog' });",
     "this.route.unrelatedFunction('blog', { path: 'blog' });",
+    {
+      filename: 'my-test.js',
+      code: `
+        this.route("blog");
+        this.route("blog");
+      `,
+    },
   ],
   invalid: [
     {
