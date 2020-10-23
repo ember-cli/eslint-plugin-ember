@@ -443,6 +443,46 @@ ruleTester.run('no-shadow-route-definition', rule, {
     },
     {
       code: `
+        this.route("main", { path: "/" }, function() {
+          this.route("blog", { path: "*blog" });
+        });
+        this.route("blog", { path: "/*anotherWildcard" });
+      `,
+      output: null,
+      errors: [
+        {
+          message: buildErrorMessage({
+            leftRoute: {
+              name: 'blog',
+              fullPath: '/*anotherWildcard',
+              source: {
+                loc: {
+                  start: {
+                    line: 5,
+                    column: 8,
+                  },
+                },
+              },
+            },
+            rightRoute: {
+              name: 'blog',
+              fullPath: '/*blog',
+              source: {
+                loc: {
+                  start: {
+                    line: 3,
+                    column: 10,
+                  },
+                },
+              },
+            },
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `
         this.route("blog", { path: ":blog" });
         this.route("blog", { path: "/:blog" });
       `,
@@ -453,6 +493,44 @@ ruleTester.run('no-shadow-route-definition', rule, {
             leftRoute: {
               name: 'blog',
               fullPath: '/:blog',
+              source: {
+                loc: {
+                  start: {
+                    line: 3,
+                    column: 8,
+                  },
+                },
+              },
+            },
+            rightRoute: {
+              name: 'blog',
+              fullPath: '/:blog',
+              source: {
+                loc: {
+                  start: {
+                    line: 2,
+                    column: 8,
+                  },
+                },
+              },
+            },
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `
+        this.route("blog", { path: ":blog" });
+        this.route("blog", { path: "/:anotherParamName" });
+      `,
+      output: null,
+      errors: [
+        {
+          message: buildErrorMessage({
+            leftRoute: {
+              name: 'blog',
+              fullPath: '/:anotherParamName',
               source: {
                 loc: {
                   start: {
