@@ -599,3 +599,38 @@ ruleTester.run('no-shadow-route-definition', rule, {
     },
   ],
 });
+
+describe('no-shadow-route-definition', () => {
+  it('builds error message string', () => {
+    const message = buildErrorMessage({
+      leftRoute: {
+        name: 'second',
+        fullPath: 'main/',
+        source: {
+          loc: {
+            start: {
+              line: 4,
+              column: 10,
+            },
+          },
+        },
+      },
+      rightRoute: {
+        name: 'first',
+        fullPath: 'main/',
+        source: {
+          loc: {
+            start: {
+              line: 3,
+              column: 10,
+            },
+          },
+        },
+      },
+    });
+
+    expect(message).toStrictEqual(
+      'Route "second" (main/, 4L:10C) is shadowing route "first" (main/, 3L:10C)'
+    );
+  });
+});
