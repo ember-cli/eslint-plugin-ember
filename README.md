@@ -108,6 +108,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [no-new-mixins](./docs/rules/no-new-mixins.md) | disallow the creation of new mixins |
 | :white_check_mark: | [no-observers](./docs/rules/no-observers.md) | disallow usage of observers |
 | :white_check_mark::wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | disallow usage of old shims for modules |
+|  | [no-string-prototype-extensions](./docs/rules/no-string-prototype-extensions.md) | disallow usage of `String` prototype extensions |
 
 ### Ember Data
 
