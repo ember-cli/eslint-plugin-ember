@@ -188,6 +188,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [no-pause-test](./docs/rules/no-pause-test.md) | disallow usage of the `pauseTest` helper in tests |
 |  | [no-replace-test-comments](./docs/rules/no-replace-test-comments.md) | disallow 'Replace this with your real tests' comments in test files |
 | :white_check_mark: | [no-restricted-resolver-tests](./docs/rules/no-restricted-resolver-tests.md) | disallow the use of patterns that use the restricted resolver in tests |
+| :wrench: | [no-settled-after-test-helper](./docs/rules/no-settled-after-test-helper.md) | disallow usage of `await settled()` right after test helper that calls it internally |
 | :white_check_mark: | [no-test-and-then](./docs/rules/no-test-and-then.md) | disallow usage of the `andThen` test wait helper |
 | :white_check_mark: | [no-test-import-export](./docs/rules/no-test-import-export.md) | disallow importing of "-test.js" in a test file and exporting from a test file |
 | :white_check_mark: | [no-test-module-for](./docs/rules/no-test-module-for.md) | disallow usage of `moduleFor`, `moduleForComponent`, etc |
