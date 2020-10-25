@@ -17,6 +17,8 @@ ruleTester.run('no-string-prototype-extensions', rule, {
     "htmlSafe('<b>foo</b>')",
     "someString['foo']()",
     'something.foo()',
+    'dasherize.foo()',
+    'this.dasherize()',
   ],
 
   invalid: [
@@ -29,6 +31,11 @@ ruleTester.run('no-string-prototype-extensions', rule, {
       code: 'someString.capitalize()',
       output: null,
       errors: [{ message: ERROR_MESSAGE, column: 12, endColumn: 22 }],
+    },
+    {
+      code: 'getSomeString().dasherize()',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, column: 17, endColumn: 26 }],
     },
     {
       code: "'<b>foo</b>'.htmlSafe()",
