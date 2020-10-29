@@ -301,64 +301,7 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
         `,
-      errors: [
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-        {
-          type: 'CallExpression',
-          messageId: 'unclosedAttr',
-        },
-      ],
+      errors: new Array(14).fill({ type: 'CallExpression', messageId: 'unclosedAttr' }),
       filename: 'components/foobar-test.js',
     },
 
