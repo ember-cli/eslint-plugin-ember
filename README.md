@@ -197,6 +197,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |  | [no-test-support-import](./docs/rules/no-test-support-import.md) | disallow importing of "test-support" files in production code. |
 | :white_check_mark: | [no-test-this-render](./docs/rules/no-test-this-render.md) | disallow usage of the `this.render` in tests, recommending to use @ember/test-helpers' `render` instead. |
 | :white_check_mark: | [prefer-ember-test-helpers](./docs/rules/prefer-ember-test-helpers.md) | enforce usage of `@ember/test-helpers` methods over native window methods |
+| :wrench: | [require-valid-css-selector-in-test-helpers](./docs/rules/require-valid-css-selector-in-test-helpers.md) | disallow using invalid CSS selectors in test helpers |
 
 <!--RULES_TABLE_END-->
 
