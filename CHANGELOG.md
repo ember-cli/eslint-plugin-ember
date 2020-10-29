@@ -1,3 +1,20 @@
+## v9.4.0 (2020-10-28)
+
+#### :rocket: Enhancement
+* [#985](https://github.com/ember-cli/eslint-plugin-ember/pull/985) Add new rule [no-settled-after-test-helper](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-settled-after-test-helper.md) ([@Turbo87](https://github.com/Turbo87))
+* [#978](https://github.com/ember-cli/eslint-plugin-ember/pull/978) Add new rule [no-shadow-route-definition](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-shadow-route-definition.md) ([@raido](https://github.com/raido))
+* [#986](https://github.com/ember-cli/eslint-plugin-ember/pull/986) Add new rule [no-string-prototype-extensions](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-string-prototype-extensions.md) ([@Turbo87](https://github.com/Turbo87))
+* [#980](https://github.com/ember-cli/eslint-plugin-ember/pull/980) Add new rule [require-valid-css-selector-in-test-helpers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-valid-css-selector-in-test-helpers.md) ([@jsturgis](https://github.com/jsturgis))
+
+#### :house: Internal
+* [#991](https://github.com/ember-cli/eslint-plugin-ember/pull/991) Add test to ensure rule test files have correct test suite name ([@bmish](https://github.com/bmish))
+
+#### Committers: 4
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Jeff Sturgis ([@jsturgis](https://github.com/jsturgis))
+- Raido Kuli ([@raido](https://github.com/raido))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
 ## v9.3.0 (2020-10-08)
 
 #### :rocket: Enhancement
