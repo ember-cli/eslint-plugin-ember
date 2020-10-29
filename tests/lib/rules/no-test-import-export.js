@@ -10,7 +10,7 @@ const ruleTester = new RuleTester({
 const NO_IMPORT_MESSAGE = rule.meta.importMessage;
 const NO_EXPORT_MESSAGE = rule.meta.exportMessage;
 
-ruleTester.run('no-test-file-importing', rule, {
+ruleTester.run('no-test-import-export', rule, {
   valid: [
     `
         import setupModule from './some-test-helper';

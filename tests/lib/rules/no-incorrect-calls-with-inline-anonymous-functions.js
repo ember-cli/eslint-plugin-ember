@@ -17,7 +17,7 @@ const ruleTester = new RuleTester({
     sourceType: 'module',
   },
 });
-ruleTester.run('no-anonymous-functions-to-single-scheduler-methods', rule, {
+ruleTester.run('no-incorrect-calls-with-inline-anonymous-functions', rule, {
   valid: [
     `
       import { once, scheduleOnce, debounce } from '@ember/runloop';

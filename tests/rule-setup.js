@@ -66,6 +66,20 @@ describe('rules setup is correct', function () {
     );
   });
 
+  describe('test files', function () {
+    RULE_NAMES.forEach((ruleName) => {
+      const filePath = path.join(__dirname, '..', 'tests', 'lib', 'rules', `${ruleName}.js`);
+      const file = readFileSync(filePath, 'utf8');
+
+      // eslint-disable-next-line jest/valid-title
+      describe(ruleName, function () {
+        it('should have the right test suite name', function () {
+          expect(file).toContain(`.run('${ruleName}'`);
+        });
+      });
+    });
+  });
+
   it('should have documentation for all rules', function () {
     const filePath = path.join(__dirname, '..', 'docs', 'rules');
     const files = readdirSync(filePath);
