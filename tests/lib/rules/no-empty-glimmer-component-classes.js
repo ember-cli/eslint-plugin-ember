@@ -27,12 +27,20 @@ ruleTester.run('no-empty-glimmer-component-classes', rule, {
         return this.args.bar + this.args.baz;
       }
     }`,
+    'class MyComponent extends NotAGlimmerComponent {}',
   ],
   invalid: [
     {
       code: `import Component from '@glimmer/component';
 
       class MyComponent extends Component {}`,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'ClassDeclaration' }],
+    },
+    {
+      code: `import Component from '@glimmer/component';
+
+      class MyComponent extends Component { /* foo */ }`,
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ClassDeclaration' }],
     },
