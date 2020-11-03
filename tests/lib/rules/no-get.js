@@ -437,6 +437,18 @@ ruleTester.run('no-get', rule, {
       ],
     },
     {
+      // Handle array element access at beginning of string, with optional chaining.
+      code: "this.get('0.foo')",
+      options: [{ useOptionalChaining: true }],
+      output: 'this[0]?.foo',
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
       // Handle array element access (left side of an assignment).
       code: "this.get('foo.0.bar')[123] = 'hello world';",
       output: "this.foo[0].bar[123] = 'hello world';",
