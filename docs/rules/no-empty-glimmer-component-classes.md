@@ -4,7 +4,9 @@ This rule will catch and prevent the use of empty backing classes for Glimmer co
 
 ## Rule Details
 
-This rule aims to disallow the use of empty backing classes for Glimmer components. Template-only Glimmer components where there is no backing class are much faster and lighter-weight than Glimmer components with backing classes, which are much lighter-weight than Ember components. Therefore, you should only have a backing class for a Glimmer component when absolutely necessary. Otherwise, remove the backing class entirely until it is actually needed.
+This rule aims to disallow the use of empty backing classes for Glimmer components when possible. Template-only Glimmer components where there is no backing class are much faster and lighter-weight than Glimmer components with backing classes, which are much lighter-weight than Ember components. Therefore, you should only have a backing class for a Glimmer component when absolutely necessary.
+
+In addons, the empty class should be replaced with a `templateOnly` export. This is because addons can't assume `template-only-glimmer-components` is enabled. In apps, remove the backing class entirely until it is actually needed.
 
 ## Examples
 
@@ -26,6 +28,12 @@ class MyComponent extends Component {
     return this.args.bar + this.args.baz;
   }
 }
+```
+
+```js
+import templateOnly from '@ember/component/template-only';
+
+export default templateOnly();
 ```
 
 ## References
