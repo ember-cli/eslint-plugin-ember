@@ -1,3 +1,15 @@
+## v9.5.0 (2020-11-05)
+
+#### :rocket: Enhancement
+* [#993](https://github.com/ember-cli/eslint-plugin-ember/pull/993) Add new rule [no-empty-glimmer-component-classes](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-empty-glimmer-component-classes.md) ([@hxqlin](https://github.com/hxqlin))
+
+#### :bug: Bug Fix
+* [#998](https://github.com/ember-cli/eslint-plugin-ember/pull/998) Fix autofix for array element access at beginning of path string in `no-get` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Hannah Lin ([@hxqlin](https://github.com/hxqlin))
+
 ## v9.4.0 (2020-10-28)
 
 #### :rocket: Enhancement
