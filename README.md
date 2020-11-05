@@ -138,6 +138,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :car: | [no-actions-hash](./docs/rules/no-actions-hash.md) | disallow the actions hash in components, controllers, and routes |
 | :car: | [no-classic-classes](./docs/rules/no-classic-classes.md) | disallow "classic" classes in favor of native JS classes |
 | :white_check_mark::wrench: | [no-ember-super-in-es-classes](./docs/rules/no-ember-super-in-es-classes.md) | disallow use of `this._super` in ES class methods |
+|  | [no-empty-glimmer-component-classes](./docs/rules/no-empty-glimmer-component-classes.md) | disallow empty backing classes for Glimmer components |
 
 ### jQuery
 
