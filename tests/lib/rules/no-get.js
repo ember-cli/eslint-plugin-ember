@@ -425,10 +425,10 @@ ruleTester.run('no-get', rule, {
       ],
     },
     {
-      // Handle array element access with optional chaining.
-      code: "this.get('foo1.0.bar1bar.1')",
+      // Handle array element access with optional chaining (beginning/middle/end of string).
+      code: "this.get('0.foo1.1.2.bar1bar.3')",
       options: [{ useOptionalChaining: true }],
-      output: 'this.foo1?.[0]?.bar1bar?.[1]',
+      output: 'this[0]?.foo1?.[1]?.[2]?.bar1bar?.[3]',
       errors: [
         {
           message: ERROR_MESSAGE_GET,
@@ -437,10 +437,10 @@ ruleTester.run('no-get', rule, {
       ],
     },
     {
-      // Handle array element access at beginning of string, with optional chaining.
-      code: "this.get('0.foo')",
+      // Handle array element access as entire string.
+      code: "this.get('0')",
       options: [{ useOptionalChaining: true }],
-      output: 'this[0]?.foo',
+      output: 'this[0]',
       errors: [
         {
           message: ERROR_MESSAGE_GET,
@@ -449,9 +449,20 @@ ruleTester.run('no-get', rule, {
       ],
     },
     {
-      // Handle array element access (left side of an assignment).
-      code: "this.get('foo.0.bar')[123] = 'hello world';",
-      output: "this.foo[0].bar[123] = 'hello world';",
+      // Handle array element access (left side of an assignment, beginning/middle/end of string).
+      code: "this.get('0.foo.1.bar.2')[123] = 'hello world';",
+      output: "this[0].foo[1].bar[2][123] = 'hello world';",
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // Handle array element access (left side of an assignment, entire string).
+      code: "this.get('0')[123] = 'hello world';",
+      output: "this[0][123] = 'hello world';",
       errors: [
         {
           message: ERROR_MESSAGE_GET,
