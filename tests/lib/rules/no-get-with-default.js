@@ -19,6 +19,20 @@ ruleTester.run('no-get-with-default', rule, {
     "testClass.getWithDefault('key', [])",
     "import { getWithDefault } from '@ember/object'; getWithDefault.testMethod(testClass, 'key', [])",
     "getWithDefault(this, 'key', []);", // Missing import
+
+    // With catchSafeObjects: false
+    "import { getWithDefault } from '@ember/object'; getProperties('person', 'name', '');",
+    {
+      code: "import { getWithDefault } from '@ember/object'; getProperties('person', 'name', '');",
+      options: [{ catchSafeObjects: false }],
+    },
+
+    // With catchUnsafeObjects: false
+    "person.getWithDefault('name', '');",
+    {
+      code: "person.getWithDefault('name', '');",
+      options: [{ catchUnsafeObjects: false }],
+    },
   ],
   invalid: [
     // this.getWithDefault
@@ -110,6 +124,33 @@ import { getWithDefault } from '@ember/object'; (get(this, SOME_VARIABLE) === un
         "import { getWithDefault } from '@ember/object'; getWithDefault(this, 'name', '').trim()",
       output: `import { get } from '@ember/object';
 import { getWithDefault } from '@ember/object'; (get(this, 'name') === undefined ? '' : get(this, 'name')).trim()`,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+    },
+
+    // With catchSafeObjects: true
+    {
+      code: "import { getWithDefault } from '@ember/object'; getWithDefault(person, 'name', '');",
+      options: [{ catchSafeObjects: true }],
+      output: `import { get } from '@ember/object';
+import { getWithDefault } from '@ember/object'; (get(person, 'name') === undefined ? '' : get(person, 'name'));`,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+    },
+
+    // With catchUnsafeObjects: true
+    {
+      code: "person.getWithDefault('name', '');",
+      options: [{ catchUnsafeObjects: true }],
+      output: "(person.get('name') === undefined ? '' : person.get('name'));",
       errors: [
         {
           message: ERROR_MESSAGE,
