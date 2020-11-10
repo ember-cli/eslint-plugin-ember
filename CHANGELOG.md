@@ -1,3 +1,14 @@
+## v9.6.0 (2020-11-09)
+
+#### :rocket: Enhancement
+* [#1000](https://github.com/ember-cli/eslint-plugin-ember/pull/1000) Add `catchSafeObjects` and `catchUnsafeObjects` options (default false) to [no-get-with-default](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get-with-default.md) rule ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#1001](https://github.com/ember-cli/eslint-plugin-ember/pull/1001) Fix issues with [no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md) rule autofix with array access in nested path ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v9.5.0 (2020-11-05)
 
 #### :rocket: Enhancement
