@@ -66,6 +66,14 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     'export default Foo.extend({ foo: condition ? "foo" : "bar" });',
     'export default Foo.extend({ foo: "foo" && "bar" });',
     'export default Foo.extend({ foo: "foo" || "bar" });',
+    {
+      filename: 'example-app/mirage/models/foo.js',
+      code: 'export default Model.extend({bar: belongsTo()});',
+    },
+    {
+      filename: 'example-app/mirage/factories/foo.js',
+      code: 'export default Factory.extend({bar: []});',
+    },
   ],
   invalid: [
     {
