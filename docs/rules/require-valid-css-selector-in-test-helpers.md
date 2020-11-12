@@ -56,7 +56,7 @@ Examples of **correct** code for this rule:
 ```js
 import { test } from 'qunit';
 
-test('foo', function () {
+test('foo', function (assert) {
   assert.dom('[data-test-foobar]'); // qunit-dom
 });
 ```
