@@ -40,7 +40,10 @@ export default Foo.extend({
 
 ## Configuration
 
-Example configuration:
+If you have properties that you _do_ want to share (for example, read-only configuration values), you can configure eslint to
+ignore specific properties, which Ember doe sinternally for properties such as `actions`. This rule takes a second argument that
+is a list of property names to ignore. The rule makes the default list of ignored properties available for you to extend from,
+as follows:
 
 ```js
 const {
@@ -50,7 +53,7 @@ const {
 module.exports = {
   rules: {
     'ember/avoid-leaking-state-in-ember-objects': [
-      1,
+      'error',
       [...DEFAULT_IGNORED_PROPERTIES, 'array', 'of', 'ignored', 'properties']
     ]
   }
