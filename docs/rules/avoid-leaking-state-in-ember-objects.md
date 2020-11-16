@@ -40,7 +40,11 @@ export default Foo.extend({
 
 ## Configuration
 
-Example configuration:
+If you have properties where you know that the shared state won't be a problem (for example, read-only configuration values),
+you can configure this rule to ignore specific properties. Ember already does this internally for properties such as `actions`.
+
+The configuration of this rule takes a second argument that is a list of property names to ignore. This plugin makes the default
+list of ignored properties available for you to extend from, as follows:
 
 ```js
 const {
@@ -50,7 +54,7 @@ const {
 module.exports = {
   rules: {
     'ember/avoid-leaking-state-in-ember-objects': [
-      1,
+      'error',
       [...DEFAULT_IGNORED_PROPERTIES, 'array', 'of', 'ignored', 'properties']
     ]
   }
