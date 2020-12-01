@@ -2,7 +2,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/require-super-in-init');
+const rule = require('../../../lib/rules/require-super-in-lifecycle-hooks');
 const RuleTester = require('eslint').RuleTester;
 
 const { ERROR_MESSAGE: message } = rule;
@@ -16,7 +16,7 @@ const eslintTester = new RuleTester({
   parser: require.resolve('babel-eslint'),
 });
 
-eslintTester.run('require-super-in-init', rule, {
+eslintTester.run('require-super-in-lifecycle-hooks', rule, {
   valid: [
     `export default Component.extend({
         init() {
