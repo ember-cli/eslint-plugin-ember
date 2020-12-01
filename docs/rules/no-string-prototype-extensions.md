@@ -1,5 +1,7 @@
 # no-string-prototype-extensions
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Ember by default extends certain native JavaScript objects with additional
 methods. This can lead to problems in certain situations. One example is relying
 on these methods in addons, but that addon being used in an app that has the

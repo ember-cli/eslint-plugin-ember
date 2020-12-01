@@ -1,5 +1,7 @@
 # no-test-support-import
 
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 No importing of test support files into non-test code..
 
 **TL;DR** Do not import from a file located in addon-test-support into non-test code. Doing so will result in production errors that are not capable of being caught in tests as require statements are available in tests but not on production builds.

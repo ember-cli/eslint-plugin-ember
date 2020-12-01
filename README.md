@@ -108,7 +108,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [no-new-mixins](./docs/rules/no-new-mixins.md) | disallow the creation of new mixins |
 | :white_check_mark: | [no-observers](./docs/rules/no-observers.md) | disallow usage of observers |
 | :white_check_mark::wrench: | [no-old-shims](./docs/rules/no-old-shims.md) | disallow usage of old shims for modules |
-|  | [no-string-prototype-extensions](./docs/rules/no-string-prototype-extensions.md) | disallow usage of `String` prototype extensions |
+| :white_check_mark: | [no-string-prototype-extensions](./docs/rules/no-string-prototype-extensions.md) | disallow usage of `String` prototype extensions |
 
 ### Ember Data
 
@@ -125,7 +125,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark::wrench: | [no-get-with-default](./docs/rules/no-get-with-default.md) | disallow usage of the Ember's `getWithDefault` function |
 | :white_check_mark::wrench: | [no-get](./docs/rules/no-get.md) | require using ES5 getters instead of Ember's `get` / `getProperties` functions |
 |  | [no-proxies](./docs/rules/no-proxies.md) | disallow using array or object proxies |
-|  | [no-try-invoke](./docs/rules/no-try-invoke.md) | disallow usage of the Ember's `tryInvoke` util |
+| :white_check_mark: | [no-try-invoke](./docs/rules/no-try-invoke.md) | disallow usage of the Ember's `tryInvoke` util |
 | :white_check_mark::wrench: | [require-super-in-lifecycle-hooks](./docs/rules/require-super-in-lifecycle-hooks.md) | require super to be called in lifecycle hooks |
 | :wrench: | [use-ember-get-and-set](./docs/rules/use-ember-get-and-set.md) | enforce usage of `Ember.get` and `Ember.set` |
 
@@ -138,7 +138,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :car: | [no-actions-hash](./docs/rules/no-actions-hash.md) | disallow the actions hash in components, controllers, and routes |
 | :car: | [no-classic-classes](./docs/rules/no-classic-classes.md) | disallow "classic" classes in favor of native JS classes |
 | :white_check_mark::wrench: | [no-ember-super-in-es-classes](./docs/rules/no-ember-super-in-es-classes.md) | disallow use of `this._super` in ES class methods |
-|  | [no-empty-glimmer-component-classes](./docs/rules/no-empty-glimmer-component-classes.md) | disallow empty backing classes for Glimmer components |
+| :white_check_mark: | [no-empty-glimmer-component-classes](./docs/rules/no-empty-glimmer-component-classes.md) | disallow empty backing classes for Glimmer components |
 
 ### jQuery
 
@@ -164,7 +164,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [no-capital-letters-in-routes](./docs/rules/no-capital-letters-in-routes.md) | disallow routes with uppercased letters in router.js |
 | :white_check_mark: | [no-controller-access-in-routes](./docs/rules/no-controller-access-in-routes.md) | disallow routes from accessing the controller outside of setupController/resetController |
 | :white_check_mark: | [no-private-routing-service](./docs/rules/no-private-routing-service.md) | disallow injecting the private routing service |
-|  | [no-shadow-route-definition](./docs/rules/no-shadow-route-definition.md) | enforce no route path definition shadowing |
+| :white_check_mark: | [no-shadow-route-definition](./docs/rules/no-shadow-route-definition.md) | enforce no route path definition shadowing |
 |  | [no-unnecessary-index-route](./docs/rules/no-unnecessary-index-route.md) | disallow unnecessary `index` route definition |
 | :white_check_mark::wrench: | [no-unnecessary-route-path-option](./docs/rules/no-unnecessary-route-path-option.md) | disallow unnecessary usage of the route `path` option |
 |  | [route-path-style](./docs/rules/route-path-style.md) | enforce usage of kebab-case (instead of snake_case or camelCase) in route paths |
@@ -191,14 +191,14 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [no-pause-test](./docs/rules/no-pause-test.md) | disallow usage of the `pauseTest` helper in tests |
 |  | [no-replace-test-comments](./docs/rules/no-replace-test-comments.md) | disallow 'Replace this with your real tests' comments in test files |
 | :white_check_mark: | [no-restricted-resolver-tests](./docs/rules/no-restricted-resolver-tests.md) | disallow the use of patterns that use the restricted resolver in tests |
-| :wrench: | [no-settled-after-test-helper](./docs/rules/no-settled-after-test-helper.md) | disallow usage of `await settled()` right after test helper that calls it internally |
+| :white_check_mark::wrench: | [no-settled-after-test-helper](./docs/rules/no-settled-after-test-helper.md) | disallow usage of `await settled()` right after test helper that calls it internally |
 | :white_check_mark: | [no-test-and-then](./docs/rules/no-test-and-then.md) | disallow usage of the `andThen` test wait helper |
 | :white_check_mark: | [no-test-import-export](./docs/rules/no-test-import-export.md) | disallow importing of "-test.js" in a test file and exporting from a test file |
 | :white_check_mark: | [no-test-module-for](./docs/rules/no-test-module-for.md) | disallow usage of `moduleFor`, `moduleForComponent`, etc |
-|  | [no-test-support-import](./docs/rules/no-test-support-import.md) | disallow importing of "test-support" files in production code. |
+| :white_check_mark: | [no-test-support-import](./docs/rules/no-test-support-import.md) | disallow importing of "test-support" files in production code. |
 | :white_check_mark: | [no-test-this-render](./docs/rules/no-test-this-render.md) | disallow usage of the `this.render` in tests, recommending to use @ember/test-helpers' `render` instead. |
 | :white_check_mark: | [prefer-ember-test-helpers](./docs/rules/prefer-ember-test-helpers.md) | enforce usage of `@ember/test-helpers` methods over native window methods |
-| :wrench: | [require-valid-css-selector-in-test-helpers](./docs/rules/require-valid-css-selector-in-test-helpers.md) | disallow using invalid CSS selectors in test helpers |
+| :white_check_mark::wrench: | [require-valid-css-selector-in-test-helpers](./docs/rules/require-valid-css-selector-in-test-helpers.md) | disallow using invalid CSS selectors in test helpers |
 
 <!--RULES_TABLE_END-->
 
