@@ -48,7 +48,6 @@ module.exports = {
 |:---|:-----|:------------|
 | | [base](./lib/config/base.js) | contains no rules settings, but the basic eslint configuration suitable for any ember project. You can use it to configure rules as you wish. |
 | :white_check_mark: | [recommended](./lib/recommended-rules.js) | extends the `base` configuration by enabling the recommended rules. |
-| :car: | [octane](./lib/octane-rules.js) | extends the `recommended` configuration by enabling octane rules. This ruleset is currently considered **unstable and experimental** :warning: as rules may be added and removed until the final ruleset is settled upon. |
 
 ## 🍟 Rules
 
@@ -65,10 +64,10 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |:---|:--------|:------------|
 | :white_check_mark: | [no-attrs-in-components](./docs/rules/no-attrs-in-components.md) | disallow usage of `this.attrs` in components |
 | :white_check_mark: | [no-attrs-snapshot](./docs/rules/no-attrs-snapshot.md) | disallow use of attrs snapshot in the `didReceiveAttrs` and `didUpdateAttrs` component hooks |
-| :car: | [no-classic-components](./docs/rules/no-classic-components.md) | enforce using Glimmer components |
-| :car: | [no-component-lifecycle-hooks](./docs/rules/no-component-lifecycle-hooks.md) | disallow usage of "classic" ember component lifecycle hooks. Render modifiers or custom functional modifiers should be used instead. |
+| :white_check_mark: | [no-classic-components](./docs/rules/no-classic-components.md) | enforce using Glimmer components |
+| :white_check_mark: | [no-component-lifecycle-hooks](./docs/rules/no-component-lifecycle-hooks.md) | disallow usage of "classic" ember component lifecycle hooks. Render modifiers or custom functional modifiers should be used instead. |
 | :white_check_mark: | [no-on-calls-in-components](./docs/rules/no-on-calls-in-components.md) | disallow usage of `on` to call lifecycle hooks in components |
-| :car: | [require-tagless-components](./docs/rules/require-tagless-components.md) | disallow using the wrapper element of a component |
+| :white_check_mark: | [require-tagless-components](./docs/rules/require-tagless-components.md) | disallow using the wrapper element of a component |
 
 ### Computed Properties
 
@@ -77,7 +76,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |  | [computed-property-getters](./docs/rules/computed-property-getters.md) | enforce the consistent use of getters in computed properties |
 | :white_check_mark: | [no-arrow-function-computed-properties](./docs/rules/no-arrow-function-computed-properties.md) | disallow arrow functions in computed properties |
 | :white_check_mark::wrench: | [no-assignment-of-untracked-properties-used-in-tracking-contexts](./docs/rules/no-assignment-of-untracked-properties-used-in-tracking-contexts.md) | disallow assignment of untracked properties that are used as computed property dependencies |
-| :car: | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | disallow using computed properties in native classes |
+| :white_check_mark: | [no-computed-properties-in-native-classes](./docs/rules/no-computed-properties-in-native-classes.md) | disallow using computed properties in native classes |
 | :white_check_mark: | [no-deeply-nested-dependent-keys-with-each](./docs/rules/no-deeply-nested-dependent-keys-with-each.md) | disallow usage of deeply-nested computed property dependent keys with `@each` |
 | :white_check_mark::wrench: | [no-duplicate-dependent-keys](./docs/rules/no-duplicate-dependent-keys.md) | disallow repeating computed property dependent keys |
 | :white_check_mark::wrench: | [no-incorrect-computed-macros](./docs/rules/no-incorrect-computed-macros.md) | disallow incorrect usage of computed property macros |
@@ -133,10 +132,10 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :car: | [classic-decorator-hooks](./docs/rules/classic-decorator-hooks.md) | enforce using correct hooks for both classic and non-classic classes |
-| :car: | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | disallow usage of classic APIs such as `get`/`set` in classes that aren't explicitly decorated with `@classic` |
-| :car: | [no-actions-hash](./docs/rules/no-actions-hash.md) | disallow the actions hash in components, controllers, and routes |
-| :car: | [no-classic-classes](./docs/rules/no-classic-classes.md) | disallow "classic" classes in favor of native JS classes |
+| :white_check_mark: | [classic-decorator-hooks](./docs/rules/classic-decorator-hooks.md) | enforce using correct hooks for both classic and non-classic classes |
+| :white_check_mark: | [classic-decorator-no-classic-methods](./docs/rules/classic-decorator-no-classic-methods.md) | disallow usage of classic APIs such as `get`/`set` in classes that aren't explicitly decorated with `@classic` |
+| :white_check_mark: | [no-actions-hash](./docs/rules/no-actions-hash.md) | disallow the actions hash in components, controllers, and routes |
+| :white_check_mark: | [no-classic-classes](./docs/rules/no-classic-classes.md) | disallow "classic" classes in favor of native JS classes |
 | :white_check_mark::wrench: | [no-ember-super-in-es-classes](./docs/rules/no-ember-super-in-es-classes.md) | disallow use of `this._super` in ES class methods |
 | :white_check_mark: | [no-empty-glimmer-component-classes](./docs/rules/no-empty-glimmer-component-classes.md) | disallow empty backing classes for Glimmer components |
 
