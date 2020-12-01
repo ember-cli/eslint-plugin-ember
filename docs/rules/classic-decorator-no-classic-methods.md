@@ -1,6 +1,6 @@
 # classic-decorator-no-classic-methods
 
-:car: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Disallows the use of the following classic API methods within a class:
 

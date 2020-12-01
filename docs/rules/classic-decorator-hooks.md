@@ -1,6 +1,6 @@
 # classic-decorator-hooks
 
-:car: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Use the correct lifecycle hooks in classic and non-classic classes. Classic
 classes should use `init`, and non-classic classes should use `constructor`.

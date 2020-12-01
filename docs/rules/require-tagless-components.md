@@ -1,6 +1,6 @@
 # require-tagless-components
 
-:car: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Disallows using the wrapper element of a component.
 
