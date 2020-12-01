@@ -104,7 +104,6 @@ eslintTester.run('no-side-effects', rule, {
     'import { sendEvent } from "@ember/object/events"; sendEvent();',
 
     // checkPlainGetters = false
-    'import Component from "@ember/component"; class Foo extends Component { get foo() { this.x = 123; } }',
     {
       code:
         'import Component from "@ember/component"; class Foo extends Component { get foo() { this.x = 123; } }',
@@ -328,6 +327,13 @@ eslintTester.run('no-side-effects', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
 
+    {
+      // checkPlainGetters = true (default)
+      code:
+        'import Component from "@ember/component"; class Foo extends Component { get foo() { this.x = 123; } }',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
     {
       // checkPlainGetters = true
       code:
