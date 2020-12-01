@@ -48,7 +48,7 @@ Array [
   "require-computed-macros",
   "require-computed-property-dependencies",
   "require-return-from-computed",
-  "require-super-in-init",
+  "require-super-in-lifecycle-hooks",
   "routes-segments-snake-case",
   "use-brace-expansion",
   "use-ember-data-rfc-395-imports",

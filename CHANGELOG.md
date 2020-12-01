@@ -65,7 +65,7 @@
 ## v9.1.1 (2020-09-27)
 
 #### :bug: Bug Fix
-* [#962](https://github.com/ember-cli/eslint-plugin-ember/pull/962) Do not pass `...arguments` in autofix for attrs hooks in [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-init.md) rule ([@bmish](https://github.com/bmish))
+* [#962](https://github.com/ember-cli/eslint-plugin-ember/pull/962) Do not pass `...arguments` in autofix for attrs hooks in [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-lifecycle-hooks.md) rule ([@bmish](https://github.com/bmish))
 
 #### Committers: 1
 - Bryan Mishkin ([@bmish](https://github.com/bmish))
@@ -74,8 +74,8 @@
 
 #### :rocket: Enhancement
 * [#961](https://github.com/ember-cli/eslint-plugin-ember/pull/961) Add `checkPlainGetters` option (default false) to [no-side-effects](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-side-effects.md) rule ([@bmish](https://github.com/bmish))
-* [#957](https://github.com/ember-cli/eslint-plugin-ember/pull/957) Add `checkInitOnly` (default true) and `checkNativeClasses` (default false) options to [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-init.md) rule ([@bmish](https://github.com/bmish))
-* [#950](https://github.com/ember-cli/eslint-plugin-ember/pull/950) Add autofixer to [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-init.md) rule ([@bmish](https://github.com/bmish))
+* [#957](https://github.com/ember-cli/eslint-plugin-ember/pull/957) Add `checkInitOnly` (default true) and `checkNativeClasses` (default false) options to [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-lifecycle-hooks.md) rule ([@bmish](https://github.com/bmish))
+* [#950](https://github.com/ember-cli/eslint-plugin-ember/pull/950) Add autofixer to [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-lifecycle-hooks.md) rule ([@bmish](https://github.com/bmish))
 
 #### :memo: Documentation
 * [#956](https://github.com/ember-cli/eslint-plugin-ember/pull/956) Add imports in [no-test-module-for](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-module-for.md) rule doc ([@bmish](https://github.com/bmish))
@@ -110,7 +110,7 @@
 
 #### :rocket: Enhancement
 * [#934](https://github.com/ember-cli/eslint-plugin-ember/pull/934) Add support and enforcement for spread syntax in `order-in-*` rules ([@bmish](https://github.com/bmish))
-* [#928](https://github.com/ember-cli/eslint-plugin-ember/pull/928) Refactor [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-init.md) rule to improve performance ([@bmish](https://github.com/bmish))
+* [#928](https://github.com/ember-cli/eslint-plugin-ember/pull/928) Refactor [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-lifecycle-hooks.md) rule to improve performance ([@bmish](https://github.com/bmish))
 
 #### :bug: Bug Fix
 * [#933](https://github.com/ember-cli/eslint-plugin-ember/pull/933) Fix spread syntax crash in [routes-segments-snake-case](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/routes-segments-snake-case.md) rule ([@bmish](https://github.com/bmish))

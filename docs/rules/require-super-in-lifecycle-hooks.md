@@ -1,4 +1,4 @@
-# require-super-in-init
+# require-super-in-lifecycle-hooks
 
 :white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
