@@ -144,16 +144,10 @@ eslintTester.run('require-super-in-init', rule, {
         init
       });`,
 
-    // Non-init hooks should not be checked when checkInitOnly = true (default)
-    'export default Component({ didInsertElement() {} });',
+    // Non-init hooks should not be checked when checkInitOnly = true
     {
       code: 'export default Component({ didInsertElement() {} });',
       options: [{ checkInitOnly: true }],
-    },
-    {
-      code:
-        "import Component from '@ember/component'; class Foo extends Component { didInsertElement() {} }",
-      options: [{ checkNativeClasses: true }],
     },
     {
       code:
@@ -253,6 +247,14 @@ this._super(...arguments);},
       options: [{ checkInitOnly: false }],
       errors: [{ message, line: 2 }],
     },
+
+    // checkInitOnly = false
+    {
+      code: 'export default Component.extend({ didInsertElement() {} });',
+      output: `export default Component.extend({ didInsertElement() {
+this._super(...arguments);} });`,
+      errors: [{ message, type: 'Property' }],
+    },
     {
       code: `export default Component.extend({
         init() {},
@@ -264,6 +266,7 @@ this._super(...arguments);},
       options: [{ checkInitOnly: false }],
       errors: [{ message, line: 2 }],
     },
+
     {
       code: `export default Component.extend({
         init() {
@@ -776,6 +779,16 @@ this._super(...arguments);
 this._super();} })`,
       options: [{ checkInitOnly: false }],
       errors: [{ message, line: 1 }],
+    },
+
+    // checkInitOnly = false
+    {
+      code:
+        "import Component from '@ember/component'; class Foo extends Component { didUpdateAttrs() {} }",
+      output: `import Component from '@ember/component'; class Foo extends Component { didUpdateAttrs() {
+super.didUpdateAttrs();} }`,
+      options: [{ checkNativeClasses: true }],
+      errors: [{ message, type: 'MethodDefinition' }],
     },
     {
       code: `import Component from '@ember/component';
