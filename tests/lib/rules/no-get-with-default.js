@@ -27,7 +27,6 @@ ruleTester.run('no-get-with-default', rule, {
     },
 
     // With catchUnsafeObjects: false
-    "person.getWithDefault('name', '');",
     {
       code: "person.getWithDefault('name', '');",
       options: [{ catchUnsafeObjects: false }],
@@ -151,7 +150,12 @@ import { getWithDefault } from '@ember/object'; (get(person, 'name') === undefin
       ],
     },
 
-    // With catchUnsafeObjects: true
+    // With catchUnsafeObjects: true (default)
+    {
+      code: "person.getWithDefault('name', '');",
+      output: "(person.get('name') === undefined ? '' : person.get('name'));",
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
     {
       code: "person.getWithDefault('name', '');",
       options: [{ catchUnsafeObjects: true }],
