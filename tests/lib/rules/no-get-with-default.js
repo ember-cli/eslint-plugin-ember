@@ -16,7 +16,6 @@ ruleTester.run('no-get-with-default', rule, {
     "import { get } from '@ember/object'; get(this, 'target') || [];",
 
     // getWithDefault
-    "testClass.getWithDefault('key', [])",
     "import { getWithDefault } from '@ember/object'; getWithDefault.testMethod(testClass, 'key', [])",
     "getWithDefault(this, 'key', []);", // Missing import
 
