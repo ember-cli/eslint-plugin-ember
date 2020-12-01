@@ -8,8 +8,6 @@ Call super in lifecycle hooks.
 
 When overriding lifecycle hooks inside Ember Components, Controllers, Routes, Mixins, or Services, it is necessary to include a call to super.
 
-By default, this rule only applies to the `init` lifecycle hook and classic classes (see rule options to configure this).
-
 ## Examples
 
 Examples of **incorrect** code for this rule:
@@ -25,7 +23,6 @@ export default Component.extend({
 ```
 
 ```javascript
-// With: checkInitOnly = false
 import Component from '@ember/component';
 
 export default Component.extend({
@@ -96,5 +93,5 @@ class Foo extends Component {
 
 This rule takes an optional object containing:
 
-* `boolean` -- `checkInitOnly` -- whether the rule should only check the `init` lifecycle hook and not other lifecycle hooks (default `true`, TODO: change default to `false` and rename rule to `require-super-in-lifecycle-hooks` in next major release)
+* `boolean` -- `checkInitOnly` -- whether the rule should only check the `init` lifecycle hook and not other lifecycle hooks (default `false`)
 * `boolean` -- `checkNativeClasses` -- whether the rule should check lifecycle hooks in native classes (in addition to classic classes) (default `false`, TODO: change default to `true` in next major release)
