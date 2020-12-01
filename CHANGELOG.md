@@ -1,3 +1,39 @@
+## v10.0.0 (2020-12-01)
+
+#### :boom: Breaking Change
+* [#1025](https://github.com/ember-cli/eslint-plugin-ember/pull/1025) Promote `octane` rules to `recommended` config and delete `octane` config ([@bmish](https://github.com/bmish))
+  * [classic-decorator-hooks](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/classic-decorator-hooks.md)
+  * [classic-decorator-no-classic-methods](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/classic-decorator-no-classic-methods.md)
+  * [no-actions-hash](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-actions-hash.md)
+  * [no-classic-classes](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-classic-classes.md)
+  * [no-classic-components](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-classic-components.md)
+  * [no-component-lifecycle-hooks](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-component-lifecycle-hooks.md)
+  * [no-computed-properties-in-native-classes](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-computed-properties-in-native-classes.md)
+  * [require-tagless-components](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-tagless-components.md)
+* [#1024](https://github.com/ember-cli/eslint-plugin-ember/pull/1024) Enable additional `recommended` rules ([@bmish](https://github.com/bmish))
+  * [no-empty-glimmer-component-classes](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-empty-glimmer-component-classes.md)
+  * [no-settled-after-test-helper](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-settled-after-test-helper.md)
+  * [no-shadow-route-definition](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-shadow-route-definition.md)
+  * [no-string-prototype-extensions](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-string-prototype-extensions.md)
+  * [no-test-support-import](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-support-import.md)
+  * [no-try-invoke](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-try-invoke.md)
+  * [require-valid-css-selector-in-test-helpers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-valid-css-selector-in-test-helpers.md)
+* [#1021](https://github.com/ember-cli/eslint-plugin-ember/pull/1021) Update `checkPlainGetters` option default to true in [no-side-effects](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-side-effects.md) rule ([@bmish](https://github.com/bmish))
+* [#1019](https://github.com/ember-cli/eslint-plugin-ember/pull/1019) Update `checkNativeClasses` option default to true in [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-lifecycle-hooks.md) rule ([@bmish](https://github.com/bmish))
+* [#1018](https://github.com/ember-cli/eslint-plugin-ember/pull/1018) Update `checkInitOnly` option default to false in [require-super-in-init](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-lifecycle-hooks.md) rule ([@bmish](https://github.com/bmish))
+* [#1020](https://github.com/ember-cli/eslint-plugin-ember/pull/1020) Rename `require-super-in-init` rule to [require-super-in-lifecycle-hooks](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-lifecycle-hooks.md) ([@bmish](https://github.com/bmish))
+* [#1022](https://github.com/ember-cli/eslint-plugin-ember/pull/1022) Update `checkSafeObjects` option default to true in [no-get-with-default](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get-with-default.md) rule ([@bmish](https://github.com/bmish))
+* [#1023](https://github.com/ember-cli/eslint-plugin-ember/pull/1023) Update `checkUnsafeObjects` option default to true in [no-get-with-default](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get-with-default.md) rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#1006](https://github.com/ember-cli/eslint-plugin-ember/pull/1006) Elaborate on configuration in [avoid-leaking-state-in-ember-objects](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/avoid-leaking-state-in-ember-objects.md) rule doc ([@cincodenada](https://github.com/cincodenada))
+* [#1005](https://github.com/ember-cli/eslint-plugin-ember/pull/1005) Fix typo in [require-valid-css-selector-in-test-helpers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-valid-css-selector-in-test-helpers.md) rule doc ([@jsturgis](https://github.com/jsturgis))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Jeff Sturgis ([@jsturgis](https://github.com/jsturgis))
+- Joel Bradshaw ([@cincodenada](https://github.com/cincodenada))
+
 ## v9.6.0 (2020-11-09)
 
 #### :rocket: Enhancement
