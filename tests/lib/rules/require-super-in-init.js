@@ -155,9 +155,7 @@ eslintTester.run('require-super-in-init', rule, {
       options: [{ checkNativeClasses: true, checkInitOnly: true }],
     },
 
-    // Native classes should not be checked when checkNativeClasses = false (default)
-    `import Component from '@ember/component';
-     class Foo extends Component { init() { } }`,
+    // Native classes should not be checked when checkNativeClasses = false
     {
       code: `import Component from '@ember/component';
      class Foo extends Component { init() { } }`,
@@ -801,6 +799,12 @@ super.didUpdateAttrs();} }`,
     },
 
     // Native classes:
+    {
+      code: "import Service from '@ember/service'; class Foo extends Service { init() {} }",
+      output: `import Service from '@ember/service'; class Foo extends Service { init() {
+super.init(...arguments);} }`,
+      errors: [{ message, type: 'MethodDefinition' }],
+    },
     {
       code: `import Service from '@ember/service';
       class Foo extends Service {
