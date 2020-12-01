@@ -33,7 +33,6 @@ export default Component.extend({
 ```
 
 ```javascript
-// With: checkNativeClasses = true
 import Component from '@ember/component';
 
 class Foo extends Component {
@@ -94,4 +93,4 @@ class Foo extends Component {
 This rule takes an optional object containing:
 
 * `boolean` -- `checkInitOnly` -- whether the rule should only check the `init` lifecycle hook and not other lifecycle hooks (default `false`)
-* `boolean` -- `checkNativeClasses` -- whether the rule should check lifecycle hooks in native classes (in addition to classic classes) (default `false`, TODO: change default to `true` in next major release)
+* `boolean` -- `checkNativeClasses` -- whether the rule should check lifecycle hooks in native classes (in addition to classic classes) (default `true`)
