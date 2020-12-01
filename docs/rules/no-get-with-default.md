@@ -44,7 +44,7 @@ const test = this.key || [];
 
 This rule takes an optional object containing:
 
-- `boolean` -- `catchSafeObjects` -- whether the rule should catch non-`this` imported usages like `getWithDefault(person, 'name', '')` (default `false`, TODO: enable in next major release)
+- `boolean` -- `catchSafeObjects` -- whether the rule should catch non-`this` imported usages like `getWithDefault(person, 'name', '')` (default `true`)
 - `boolean` -- `catchUnsafeObjects` -- whether the rule should catch non-`this` usages like `person.getWithDefault('name', '')` even though we don't know for sure if `person` is an Ember object (default `false`, TODO: enable in next major release)
 
 ## References
