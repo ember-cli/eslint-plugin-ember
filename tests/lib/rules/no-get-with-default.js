@@ -21,7 +21,6 @@ ruleTester.run('no-get-with-default', rule, {
     "getWithDefault(this, 'key', []);", // Missing import
 
     // With catchSafeObjects: false
-    "import { getWithDefault } from '@ember/object'; getProperties('person', 'name', '');",
     {
       code: "import { getWithDefault } from '@ember/object'; getProperties('person', 'name', '');",
       options: [{ catchSafeObjects: false }],
@@ -133,6 +132,12 @@ import { getWithDefault } from '@ember/object'; (get(this, 'name') === undefined
     },
 
     // With catchSafeObjects: true
+    {
+      code: "import { getWithDefault } from '@ember/object'; getWithDefault(person, 'name', '');",
+      output: `import { get } from '@ember/object';
+import { getWithDefault } from '@ember/object'; (get(person, 'name') === undefined ? '' : get(person, 'name'));`,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
     {
       code: "import { getWithDefault } from '@ember/object'; getWithDefault(person, 'name', '');",
       options: [{ catchSafeObjects: true }],
