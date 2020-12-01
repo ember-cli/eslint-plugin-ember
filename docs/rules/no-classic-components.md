@@ -1,6 +1,6 @@
 # no-classic-components
 
-:car: The `"extends": "plugin:ember/octane"` property in a configuration file enables this rule.
+:car: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 This rule aims to enforce Glimmer components instead of classic ones. We should migrate to Glimmer components because
 they have few advantages:

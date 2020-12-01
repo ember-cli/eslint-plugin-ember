@@ -4,14 +4,12 @@ const { readdirSync, readFileSync } = require('fs');
 const path = require('path');
 const rules = require('../lib').rules;
 const recommendedRules = require('../lib/recommended-rules.js');
-const octaneRules = require('../lib/octane-rules.js');
 const { flat } = require('../lib/utils/javascript');
 
 const RULE_NAMES = Object.keys(rules);
 const RECOMMENDED_RULE_NAMES = Object.keys(recommendedRules).map((name) =>
   name.replace('ember/', '')
 );
-const OCTANE_RULE_NAMES = Object.keys(octaneRules).map((name) => name.replace('ember/', ''));
 
 function getAllNamedOptions(jsonSchema) {
   if (!jsonSchema) {
@@ -49,11 +47,6 @@ describe('rules setup is correct', function () {
       (key) => rules[key].meta.docs.recommended
     );
     expect(RECOMMENDED_RULE_NAMES).toStrictEqual(recommendedRuleNamesFromMeta);
-  });
-
-  it('should list all octane rules in the octane rules file', function () {
-    const octaneRuleNamesFromMeta = RULE_NAMES.filter((key) => rules[key].meta.docs.octane);
-    expect(OCTANE_RULE_NAMES).toStrictEqual(octaneRuleNamesFromMeta);
   });
 
   it('should have tests for all rules', function () {
@@ -98,8 +91,6 @@ describe('rules setup is correct', function () {
         ':wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.',
       configRecommended:
         ':white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.',
-      configOctane:
-        ':car: The `"extends": "plugin:ember/octane"` property in a configuration file enables this rule.',
     };
 
     RULE_NAMES.forEach((ruleName) => {
@@ -138,11 +129,6 @@ describe('rules setup is correct', function () {
             expectedNotices.push('configRecommended');
           } else {
             unexpectedNotices.push('configRecommended');
-          }
-          if (rule.meta.docs.octane) {
-            expectedNotices.push('configOctane');
-          } else {
-            unexpectedNotices.push('configOctane');
           }
           if (rule.meta.fixable) {
             expectedNotices.push('fixable');
