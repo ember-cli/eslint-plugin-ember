@@ -72,6 +72,7 @@ This rule takes an optional object containing:
 
 ## References
 
+* [Ember 3.13 Release Notes](https://blog.emberjs.com/2019/09/25/ember-3-13-released.html) (minimum Ember version needed to use tracked properties)
 * [Ember Guides: Tracked Properties](https://octane-guides-preview.emberjs.com/release/state-management/tracked-properties/)
 * [Tracked Properties Deep Dive](https://www.pzuraq.com/coming-soon-in-ember-octane-part-3-tracked-properties/)
 * [ember-native-class-codemod](https://github.com/ember-codemods/ember-native-class-codemod)
