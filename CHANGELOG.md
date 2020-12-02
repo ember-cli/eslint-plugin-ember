@@ -1,3 +1,11 @@
+## v10.0.1 (2020-12-02)
+
+#### :bug: Bug Fix
+* [#1027](https://github.com/ember-cli/eslint-plugin-ember/pull/1027) Fix crash when non-expression precedes `settled()` in [no-settled-after-test-helper](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-settled-after-test-helper.md) rule ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 1
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
 ## v10.0.0 (2020-12-01)
 
 #### :boom: Breaking Change
