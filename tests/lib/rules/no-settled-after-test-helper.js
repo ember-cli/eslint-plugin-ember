@@ -63,6 +63,17 @@ ruleTester.run('no-settled-after-test-helper', rule, {
         await settled();
       }
     `,
+    `
+      import { settled } from '@ember/test-helpers';
+
+      export async function visit(url) {
+        try {
+          something();
+        } catch {}
+
+        await settled();
+      }
+    `,
   ],
   invalid: [
     {
