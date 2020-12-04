@@ -12,13 +12,17 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-string-prototype-extensions', rule, {
   valid: [
-    "dasherize('myString')",
-    'capitalize(someString)',
-    "htmlSafe('<b>foo</b>')",
+    "import { dasherize } from '@ember/string'; dasherize('myString')",
+    "import { capitalize } from '@ember/string'; capitalize(someString)",
+    "import { htmlSafe } from '@ember/template'; htmlSafe('<b>foo</b>')",
     "someString['foo']()",
     'something.foo()',
     'dasherize.foo()',
     'this.dasherize()',
+
+    // Still allowed to use directly from Ember:
+    "import Ember from 'ember'; Ember.String.htmlSafe('foo');",
+    "import Ember from 'ember'; Ember.String.dasherize('foo');",
   ],
 
   invalid: [
