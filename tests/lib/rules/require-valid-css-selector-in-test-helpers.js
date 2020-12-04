@@ -8,6 +8,18 @@ const ruleTester = new RuleTester({
   },
 });
 
+const EXAMPLE_SELECTORS = [
+  '.foo',
+  '.bar',
+  '  .with-spaces-around-this-one  ',
+  '#userlist',
+  'p',
+  '[data-test-foo] svg',
+  'div.highlighted > p',
+  'iframe[data-src]',
+  'li[data-active="1"]',
+];
+
 ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
   valid: [
     {
@@ -212,6 +224,8 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
       `,
       filename: 'components/foobar-test.js',
     },
+
+    // Ignored because not a test file.
     {
       code: `
         import { module, test } from 'qunit';
@@ -223,6 +237,20 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
         });
       `,
       filename: 'components/foobar.js',
+    },
+
+    // With comma(s) separating multiple selectors:
+    {
+      code: `
+        import { module, test } from 'qunit';
+
+        module('foo', function() {
+          test('foo', function(assert) {
+            assert.dom('${EXAMPLE_SELECTORS.join(',')}');
+          });
+        });
+      `,
+      filename: 'components/foobar-test.js',
     },
   ],
   invalid: [
@@ -658,6 +686,58 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'other',
         },
       ],
+      filename: 'components/foobar-test.js',
+    },
+
+    // With comma(s) separating multiple selectors:
+    {
+      code: `
+        import { module, test } from 'qunit';
+
+        module('foo', function() {
+          test('foo', function(assert) {
+            assert.dom('.foo, 5bar');
+          });
+        });
+        `,
+      output: null,
+      errors: [{ type: 'CallExpression', messageId: 'other' }],
+      filename: 'components/foobar-test.js',
+    },
+    {
+      code: `
+        import { module, test } from 'qunit';
+
+        module('foo', function() {
+          test('foo', function(assert) {
+            assert.dom('.foo, #1234');
+          });
+        });
+        `,
+      output: null,
+      errors: [{ type: 'CallExpression', messageId: 'idStartsWithNumber' }],
+      filename: 'components/foobar-test.js',
+    },
+    {
+      code: `
+        import { module, test } from 'qunit';
+
+        module('foo', function() {
+          test('foo', function(assert) {
+            assert.dom('.foo, [data-test, .bar');
+          });
+        });
+        `,
+      output: `
+        import { module, test } from 'qunit';
+
+        module('foo', function() {
+          test('foo', function(assert) {
+            assert.dom('.foo, [data-test], .bar');
+          });
+        });
+        `,
+      errors: [{ type: 'CallExpression', messageId: 'unclosedAttr' }],
       filename: 'components/foobar-test.js',
     },
   ],
