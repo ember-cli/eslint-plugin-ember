@@ -1,3 +1,15 @@
+## v10.0.2 (2020-12-04)
+
+#### :bug: Bug Fix
+* [#1029](https://github.com/ember-cli/eslint-plugin-ember/pull/1029) Handle comma-separated selectors in [require-valid-css-selector-in-test-helpers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-valid-css-selector-in-test-helpers.md) rule ([@bmish](https://github.com/bmish))
+* [#1030](https://github.com/ember-cli/eslint-plugin-ember/pull/1030) Allow using string functions directly from Ember in [no-string-prototype-extensions](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-string-prototype-extensions.md) rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#1028](https://github.com/ember-cli/eslint-plugin-ember/pull/1028) Mention Ember 3.13 minimum version to use tracked properties and Glimmer components in some rule docs ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
 ## v10.0.1 (2020-12-02)
 
 #### :bug: Bug Fix
