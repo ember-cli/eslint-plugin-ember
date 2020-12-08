@@ -231,9 +231,6 @@ eslintTester.run('require-super-in-lifecycle-hooks', rule, {
       options: [{ checkNativeClasses: true }],
     },
 
-    // Regular component allows glimmer hook to be used without super:
-    "import Component from '@ember/component'; class Foo extends Component { willDestroy() {} }",
-
     // Glimmer component allows non-glimmer hook to be used without super:
     "import Component from '@glimmer/component'; class Foo extends Component { init() {} }",
     "import Component from '@glimmer/component'; class Foo extends Component { didInsertElement() {} }",

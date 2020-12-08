@@ -11,43 +11,47 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-component-lifecycle-hooks', rule, {
   valid: [
+    // Legitimate Glimmer component lifecycle hooks:
     `
       import Component from '@glimmer/component';
       export default class MyComponent extends Component {
+        constructor() {}
         willDestroy() {}
+        foo() {}
       }
     `,
+
+    // Not extending from the component:
     `
       import Component from '@glimmer/component';
       export default class MyClass {
         didUpdate() {}
       }
     `,
+
+    // Just an object:
     `
       export default {
         didUpdate() {},
       }
     `,
+
+    // Not a lifecycle hook:
     `
       import Component from '@ember/component';
       export default Component.extend({
-        willDestroy() {},
+        foo() {},
       });
     `,
+
+    // Just an EmberObject:
     `
       export default EmberObject.extend({
         didUpdate() {},
       });
     `,
-    `
-      import Component from '@ember/component';
-      export const Component1 = Component.extend({
-        willDestroy() {},
-      });
-      export const Component2 = Component.extend({
-        willDestroy() {},
-      });
-    `,
+
+    // Hooks in a random object after a component class:
     `
       import Component from '@ember/component';
       export default class MyComponent extends Component {}
@@ -63,92 +67,10 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
   ],
 
   invalid: [
+    // Glimmer component using classic Ember component lifecycle hook:
     {
       code: `
         import Component from '@glimmer/component';
-        export default class MyComponent extends Component {
-          didDestroyElement() {}
-        }
-      `,
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'MethodDefinition',
-        },
-      ],
-    },
-    {
-      code: `
-        import Component from '@ember/component';
-        export default class MyComponent extends Component {
-          didDestroyElement() {}
-        }
-      `,
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'MethodDefinition',
-        },
-      ],
-    },
-    {
-      code: `
-        import Component from '@ember/component';
-        export default Component.extend({
-          didDestroyElement() {}
-        })
-      `,
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'Identifier',
-        },
-      ],
-    },
-    {
-      code: `
-        import Component from '@ember/component';
-
-        export const Component2 = Component.extend({
-          didDestroyElement() {},
-        });
-
-        export const Component1 = Component.extend({
-          willDestroy() {},
-        });
-      `,
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'Identifier',
-        },
-      ],
-    },
-    {
-      code: `
-        import Component from "@ember/component";
-
-        export const Component1 = Component.extend({
-          test: computed('', function () {}),
-          didDestroyElement() {},
-        });
-      `,
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'Identifier',
-        },
-      ],
-    },
-    {
-      code: `
-        import Component from "@glimmer/component";
-
         export default class MyComponent extends Component {
           myMethod() {
             class FooBarClass {}
@@ -161,6 +83,44 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
         {
           message: ERROR_MESSAGE,
           type: 'MethodDefinition',
+        },
+      ],
+    },
+
+    // Classic component using classic Ember component lifecycle hook (native class):
+    {
+      code: `
+        import Component from '@ember/component';
+        export default class MyComponent extends Component {
+          myMethod() {
+            class FooBarClass {}
+          }
+          didDestroyElement() {}
+        }
+      `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'MethodDefinition',
+        },
+      ],
+    },
+
+    // Classic component using classic Ember component lifecycle hook (classic class):
+    {
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({
+          test: computed('', function () {}),
+          didDestroyElement() {}
+        })
+      `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Identifier',
         },
       ],
     },
