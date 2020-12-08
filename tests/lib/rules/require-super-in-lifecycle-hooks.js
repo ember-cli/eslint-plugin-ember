@@ -144,6 +144,9 @@ eslintTester.run('require-super-in-lifecycle-hooks', rule, {
         init
       });`,
 
+    // Properly-used glimmer hook:
+    "import Component from '@glimmer/component'; class Foo extends Component { willDestroy() { super.willDestroy(); }}",
+
     // Non-init hooks should not be checked when checkInitOnly = true
     {
       code: 'export default Component({ didInsertElement() {} });',
@@ -153,6 +156,11 @@ eslintTester.run('require-super-in-lifecycle-hooks', rule, {
       code:
         "import Component from '@ember/component'; class Foo extends Component { didInsertElement() {} }",
       options: [{ checkNativeClasses: true, checkInitOnly: true }],
+    },
+    {
+      code:
+        "import Component from '@glimmer/component'; class Foo extends Component { willDestroy() {} }",
+      options: [{ checkInitOnly: true }],
     },
 
     // Native classes should not be checked when checkNativeClasses = false
@@ -222,6 +230,13 @@ eslintTester.run('require-super-in-lifecycle-hooks', rule, {
         "import Mixin from '@ember/object/mixin'; class Foo extends Mixin { init() { super.init(...arguments); }}",
       options: [{ checkNativeClasses: true }],
     },
+
+    // Regular component allows glimmer hook to be used without super:
+    "import Component from '@ember/component'; class Foo extends Component { willDestroy() {} }",
+
+    // Glimmer component allows non-glimmer hook to be used without super:
+    "import Component from '@glimmer/component'; class Foo extends Component { init() {} }",
+    "import Component from '@glimmer/component'; class Foo extends Component { didInsertElement() {} }",
   ],
   invalid: [
     {
@@ -263,6 +278,13 @@ this._super(...arguments);},
       });`,
       options: [{ checkInitOnly: false }],
       errors: [{ message, line: 2 }],
+    },
+    {
+      code:
+        'import Component from "@glimmer/component"; class Foo extends Component { willDestroy() {} }',
+      output: `import Component from "@glimmer/component"; class Foo extends Component { willDestroy() {
+super.willDestroy(...arguments);} }`,
+      errors: [{ message, type: 'MethodDefinition' }],
     },
 
     {
