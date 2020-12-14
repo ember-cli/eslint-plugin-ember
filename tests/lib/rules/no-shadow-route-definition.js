@@ -92,6 +92,11 @@ ruleTester.run('no-shadow-route-definition', rule, {
       this.route("post");
     });
     this.route("post");`,
+    // Test nested routes without leading slash (/) in path configuration.
+    `this.route('edit', { path: ':experienceId' }, function () {
+      this.route('views', { path: 'views/:viewId' });
+      this.route('viewcollections', { path: 'viewcollections/:viewCollectionId' });
+    });`,
 
     // Not Ember's route function:
     'test();',
@@ -354,6 +359,35 @@ ruleTester.run('no-shadow-route-definition', rule, {
                   start: {
                     line: 2,
                     column: 8,
+                  },
+                },
+              },
+            },
+          }),
+          type: 'CallExpression',
+        },
+        {
+          message: buildErrorMessage({
+            leftRoute: {
+              name: 'post',
+              fullPath: '/post',
+              source: {
+                loc: {
+                  start: {
+                    line: 8,
+                    column: 10,
+                  },
+                },
+              },
+            },
+            rightRoute: {
+              name: 'post',
+              fullPath: '/post',
+              source: {
+                loc: {
+                  start: {
+                    line: 4,
+                    column: 12,
                   },
                 },
               },
@@ -648,7 +682,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
           message: buildErrorMessage({
             leftRoute: {
               name: 'second',
-              fullPath: 'main/',
+              fullPath: '/main/',
               source: {
                 loc: {
                   start: {
@@ -660,7 +694,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
             },
             rightRoute: {
               name: 'first',
-              fullPath: 'main/',
+              fullPath: '/main/',
               source: {
                 loc: {
                   start: {
