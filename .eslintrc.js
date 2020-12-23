@@ -144,6 +144,7 @@ module.exports = {
 
     // Unicorn rules:
     'unicorn/no-fn-reference-in-iterator': 'off',
+    'unicorn/no-lonely-if': 'off',
     'unicorn/no-null': 'off',
     'unicorn/no-reduce': 'off',
     'unicorn/no-useless-undefined': 'off',

@@ -75,7 +75,7 @@
     "eslint-plugin-markdown": "^1.0.2",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-unicorn": "^23.0.0",
+    "eslint-plugin-unicorn": "^24.0.0",
     "jest": "^26.4.2",
     "lerna-changelog": "^1.0.1",
     "markdownlint-cli": "^0.26.0",
