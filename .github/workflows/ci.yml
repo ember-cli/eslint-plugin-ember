@@ -12,10 +12,11 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}-latest
 
     strategy:
       matrix:
+        os: [ ubuntu, windows ]
         node-version: [10.x, 12.x, 14.x]
 
     steps:
