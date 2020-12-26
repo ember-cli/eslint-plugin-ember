@@ -252,6 +252,20 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
       `,
       filename: 'components/foobar-test.js',
     },
+
+    // With comma(s) inside quotes in a selector:
+    {
+      code: `
+        import { module, test } from 'qunit';
+
+        module('foo', function() {
+          test('foo', function(assert) {
+            assert.dom('[data-test-row="London, England, GB"], .foo').exists();
+          });
+        });
+      `,
+      filename: 'components/foobar-test.js',
+    },
   ],
   invalid: [
     {
@@ -724,7 +738,7 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
 
         module('foo', function() {
           test('foo', function(assert) {
-            assert.dom('.foo, [data-test, .bar');
+            assert.dom('.foo, [data-test-row="London, England, GB", .bar');
           });
         });
         `,
@@ -733,7 +747,7 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
 
         module('foo', function() {
           test('foo', function(assert) {
-            assert.dom('.foo, [data-test], .bar');
+            assert.dom('.foo, [data-test-row="London, England, GB"], .bar');
           });
         });
         `,
