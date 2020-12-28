@@ -33,11 +33,7 @@ ruleTester.run('require-fetch-import', rule, {
     {
       code: "fetch('/something');",
       output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression', line: 1, column: 1 }],
     },
   ],
 });
