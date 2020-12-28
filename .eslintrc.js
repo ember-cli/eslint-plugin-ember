@@ -143,10 +143,10 @@ module.exports = {
     'import/unambiguous': 'error',
 
     // Unicorn rules:
-    'unicorn/no-fn-reference-in-iterator': 'off',
+    'unicorn/no-array-callback-reference': 'off',
+    'unicorn/no-array-reduce': 'off',
     'unicorn/no-lonely-if': 'off',
     'unicorn/no-null': 'off',
-    'unicorn/no-reduce': 'off',
     'unicorn/no-useless-undefined': 'off',
     'unicorn/prevent-abbreviations': 'off',
   },
