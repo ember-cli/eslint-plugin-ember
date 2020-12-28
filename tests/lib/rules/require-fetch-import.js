@@ -7,6 +7,7 @@ const { ERROR_MESSAGE } = rule;
 
 const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+  env: { browser: true },
 });
 
 ruleTester.run('require-fetch-import', rule, {
