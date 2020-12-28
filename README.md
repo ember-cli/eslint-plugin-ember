@@ -184,6 +184,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+|  | [no-current-route-name](./docs/rules/no-current-route-name.md) | disallow usage of the `currentRouteName()` test helper |
 | :white_check_mark: | [no-ember-testing-in-module-scope](./docs/rules/no-ember-testing-in-module-scope.md) | disallow use of `Ember.testing` in module scope |
 | :white_check_mark: | [no-invalid-test-waiters](./docs/rules/no-invalid-test-waiters.md) | disallow incorrect usage of test waiter APIs |
 | :white_check_mark: | [no-legacy-test-waiters](./docs/rules/no-legacy-test-waiters.md) | disallow the use of the legacy test waiter APIs |
