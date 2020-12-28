@@ -8,20 +8,8 @@ Disallow usage of "classic" ember component lifecycle hooks.
 
 As most component lifecycle hooks are gone in glimmer components, this rule aims to:
 
-- remind the developer that those hooks no longer exist in glimmer components
-- encourage migrating away from those hooks in classic ember components
-
-Effectively, this rule disallows following lifecycle hooks in components:
-
-- `didDestroyElement`
-- `didInsertElement`
-- `didReceiveAttrs`
-- `didRender`
-- `didUpdate`
-- `didUpdateAttrs`
-- `willClearRender`
-- `willDestroyElement`
-- `willRender`
+- remind the developer that classic Ember component lifecycle hooks no longer exist in glimmer components
+- encourage migrating away from classic Ember component lifecycle hooks in classic ember components
 
 Custom functional modifiers or @ember/render-modifiers should be used instead.
 
@@ -30,7 +18,10 @@ Custom functional modifiers or @ember/render-modifiers should be used instead.
 Examples of **incorrect** code for this rule:
 
 ```js
+import Component from '@ember/component';
+
 export default class MyComponent extends Component {
+  // Classic Ember component lifecycle hooks:
   didDestroyElement() {}
   didInsertElement() {}
   didReceiveAttrs() {}
@@ -38,42 +29,47 @@ export default class MyComponent extends Component {
   didUpdate() {}
   didUpdateAttrs() {}
   willClearRender() {}
+  willDestroy() {}
   willDestroyElement() {}
+  willInsertElement() {}
   willRender() {}
+  willUpdate() {}
 }
 ```
 
 ```js
-export default Component.extend({
-  didDestroyElement() {},
-  didInsertElement() {},
-  didReceiveAttrs() {},
-  didRender() {},
-  didUpdate() {},
-  didUpdateAttrs() {},
-  willClearRender() {},
-  willDestroyElement() {},
-  willRender() {}
-});
+import GlimmerComponent from '@glimmer/component';
+
+export default class MyComponent extends GlimmerComponent {
+  didInsertElement() {} // This is a classic Ember component lifecycle hook which can't be used in a Glimmer component.
+}
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
+import Component from '@ember/component';
+
 export default class MyComponent extends Component {
   init() {}
-  willDestroy() {}
 }
 ```
 
 ```js
-export default Component.extend({
-  init() {},
+import GlimmerComponent from '@glimmer/component';
+
+export default class MyComponent extends GlimmerComponent {
+  // Glimmer component lifecycle hooks:
+  constructor() {
+    super();
+  }
   willDestroy() {}
-});
+}
 ```
 
 ## Further Reading
 
 - [`@ember/render-modifiers`](https://github.com/emberjs/ember-render-modifiers)
 - [Blog post about modifiers](https://blog.emberjs.com/2019/03/06/coming-soon-in-ember-octane-part-4.html)
+- [Classic component lifecycle hooks](https://guides.emberjs.com/v3.4.0/components/the-component-lifecycle/#toc_order-of-lifecycle-hooks-called)
+- [Glimmer component lifecycle hooks](https://guides.emberjs.com/release/upgrading/current-edition/glimmer-components/#toc_lifecycle-and-properties)
