@@ -1,3 +1,26 @@
+## v10.1.0 (2020-12-28)
+
+#### :rocket: Enhancement
+* [#1056](https://github.com/ember-cli/eslint-plugin-ember/pull/1056) Add new rule [no-current-route-name](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-current-route-name.md) ([@Turbo87](https://github.com/Turbo87))
+* [#1055](https://github.com/ember-cli/eslint-plugin-ember/pull/1055) Add new rule [require-fetch-import](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-fetch-import.md) ([@Turbo87](https://github.com/Turbo87))
+
+#### :bug: Bug Fix
+* [#1054](https://github.com/ember-cli/eslint-plugin-ember/pull/1054) Handle commas inside quotes in selectors in [require-valid-css-selector-in-test-helpers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-valid-css-selector-in-test-helpers.md) rule ([@bmish](https://github.com/bmish))
+* [#1051](https://github.com/ember-cli/eslint-plugin-ember/pull/1051) Fix path checks for Windows in [no-test-import-export](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-import-export.md) and [no-test-support-import](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-test-support-import.md) rules ([@dwickern](https://github.com/dwickern))
+* [#1038](https://github.com/ember-cli/eslint-plugin-ember/pull/1038) Improve detection of global window methods in [prefer-ember-test-helpers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/prefer-ember-test-helpers.md) rule ([@bmish](https://github.com/bmish))
+* [#1043](https://github.com/ember-cli/eslint-plugin-ember/pull/1043) Fix false positive in [no-shadow-route-definition](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-shadow-route-definition.md) rule ([@raido](https://github.com/raido))
+* [#1040](https://github.com/ember-cli/eslint-plugin-ember/pull/1040) `willDestroy` should be considered a classic component lifecycle hook in [require-super-in-lifecycle-hooks](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-lifecycle-hooks.md) and [no-component-lifecycle-hooks](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-component-lifecycle-hooks.md) rules ([@bmish](https://github.com/bmish))
+* [#1036](https://github.com/ember-cli/eslint-plugin-ember/pull/1036) Catch `willDestroy` Glimmer component hook in [require-super-in-lifecycle-hooks](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/require-super-in-lifecycle-hooks.md) rule ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#1052](https://github.com/ember-cli/eslint-plugin-ember/pull/1052) Add Windows to CI testing matrix ([@dwickern](https://github.com/dwickern))
+
+#### Committers: 4
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Derek Wickern ([@dwickern](https://github.com/dwickern))
+- Raido Kuli ([@raido](https://github.com/raido))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
 ## v10.0.2 (2020-12-04)
 
 #### :bug: Bug Fix
