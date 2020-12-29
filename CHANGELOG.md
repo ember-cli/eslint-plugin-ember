@@ -1,3 +1,16 @@
+## v10.1.1 (2020-12-29)
+
+#### :bug: Bug Fix
+* [#1059](https://github.com/ember-cli/eslint-plugin-ember/pull/1059) Do not warn about Glimmer lifecycle hooks on classic components in `no-component-lifecycle-hooks` rule ([@Turbo87](https://github.com/Turbo87))
+
+#### :house: Internal
+* [#1060](https://github.com/ember-cli/eslint-plugin-ember/pull/1060) Automate release process with release-it-lerna-changelog ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
+
 ## v10.1.0 (2020-12-28)
 
 #### :rocket: Enhancement
