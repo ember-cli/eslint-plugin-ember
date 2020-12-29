@@ -44,6 +44,29 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
       });
     `,
 
+    // Legitimate classic component lifecycle hook:
+    `
+      import Component from '@ember/component';
+      export default Component.extend({
+        willDestroy() {},
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export const Component1 = Component.extend({
+        willDestroy() {},
+      });
+      export const Component2 = Component.extend({
+        willDestroy() {},
+      });
+    `,
+    `
+      import Component from '@ember/component';
+      export default class extends Component {
+        willDestroy() {}
+      }
+    `,
+
     // Just an EmberObject:
     `
       export default EmberObject.extend({
@@ -115,6 +138,26 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
           test: computed('', function () {}),
           didDestroyElement() {}
         })
+      `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Identifier',
+        },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+
+        export const Component2 = Component.extend({
+          didDestroyElement() {},
+        });
+
+        export const Component1 = Component.extend({
+          willDestroy() {},
+        });
       `,
       output: null,
       errors: [

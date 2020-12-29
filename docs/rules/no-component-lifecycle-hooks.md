@@ -21,7 +21,7 @@ Examples of **incorrect** code for this rule:
 import Component from '@ember/component';
 
 export default class MyComponent extends Component {
-  // Classic Ember component lifecycle hooks:
+  // Classic Ember component lifecycle hooks (minus willDestroy which is also a Glimmer component lifecycle hook):
   didDestroyElement() {}
   didInsertElement() {}
   didReceiveAttrs() {}
@@ -29,7 +29,6 @@ export default class MyComponent extends Component {
   didUpdate() {}
   didUpdateAttrs() {}
   willClearRender() {}
-  willDestroy() {}
   willDestroyElement() {}
   willInsertElement() {}
   willRender() {}
@@ -52,6 +51,7 @@ import Component from '@ember/component';
 
 export default class MyComponent extends Component {
   init() {}
+  willDestroy() {} // Both a classic and Glimmer component lifecycle hook
 }
 ```
 
