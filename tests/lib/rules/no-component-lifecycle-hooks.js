@@ -167,41 +167,5 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
         },
       ],
     },
-    {
-      code: `
-        import Component from "@ember/component";
-
-        export const Component1 = Component.extend({
-          test: computed('', function () {}),
-          didDestroyElement() {},
-        });
-      `,
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'Identifier',
-        },
-      ],
-    },
-    {
-      code: `
-        import Component from "@glimmer/component";
-
-        export default class MyComponent extends Component {
-          myMethod() {
-            class FooBarClass {}
-          }
-          didDestroyElement() {}
-        }
-      `,
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
-          type: 'MethodDefinition',
-        },
-      ],
-    },
   ],
 });
