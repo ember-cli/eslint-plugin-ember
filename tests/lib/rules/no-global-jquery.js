@@ -16,6 +16,8 @@ const parserOptions = {
   ecmaVersion: 6,
   sourceType: 'module',
 };
+const globals = { $: true, jQuery: true };
+
 const { ERROR_MESSAGE } = rule;
 
 ruleTester.run('no-global-jquery', rule, {
@@ -31,6 +33,7 @@ ruleTester.run('no-global-jquery', rule, {
         });
       `,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -45,6 +48,7 @@ ruleTester.run('no-global-jquery', rule, {
         });
       `,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -58,6 +62,7 @@ ruleTester.run('no-global-jquery', rule, {
         });
       `,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -73,6 +78,7 @@ ruleTester.run('no-global-jquery', rule, {
         });
       `,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -89,6 +95,7 @@ ruleTester.run('no-global-jquery', rule, {
         });
       `,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -105,6 +112,7 @@ ruleTester.run('no-global-jquery', rule, {
         });
       `,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -120,6 +128,7 @@ ruleTester.run('no-global-jquery', rule, {
         });
       `,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -135,6 +144,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -150,6 +160,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -159,6 +170,7 @@ ruleTester.run('no-global-jquery', rule, {
           },
         });`,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -168,6 +180,7 @@ ruleTester.run('no-global-jquery', rule, {
           },
         });`,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -179,6 +192,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -190,6 +204,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -203,6 +218,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -218,6 +234,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -231,6 +248,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -246,6 +264,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -261,6 +280,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -276,6 +296,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
     },
     {
       code: `
@@ -290,6 +311,37 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
+    },
+    {
+      // Function parameter:
+      code: `
+      function addClass($, selector, className) {
+        $(selector).addClass(className);
+      }`,
+      parserOptions,
+      globals,
+    },
+    {
+      // From another object:
+      code: 'Foo.$(selector).attr(attribute);',
+      parserOptions,
+      globals,
+    },
+    {
+      // From another object:
+      code: `
+      const { $ } = Foo;
+      $(selector).attr(attribute);`,
+      parserOptions,
+      globals,
+    },
+    {
+      // Without globals:
+      code: `
+        $('foo');
+        jQuery('foo');`,
+      parserOptions,
     },
   ],
   invalid: [
@@ -301,6 +353,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
       output: null,
       errors: [
         {
@@ -318,6 +371,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
       output: null,
       errors: [
         {
@@ -333,6 +387,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
       output: null,
       errors: [
         {
@@ -350,6 +405,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
       output: null,
       errors: [
         {
@@ -371,6 +427,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
       output: null,
       errors: [
         {
@@ -392,6 +449,7 @@ ruleTester.run('no-global-jquery', rule, {
           }
         });`,
       parserOptions,
+      globals,
       output: null,
       errors: [
         {
