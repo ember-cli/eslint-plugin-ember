@@ -121,6 +121,7 @@ eslintTester.run('no-jquery', rule, {
         import Service from '@ember/service';
         export default Service.extend({
           myFunc(a, b) {
+            jq.post({}, a, b);
             return jq.extend({}, a, b);
           }
         });`,
@@ -129,21 +130,25 @@ eslintTester.run('no-jquery', rule, {
         {
           message: ERROR_MESSAGE,
           type: 'MemberExpression',
+          line: 6,
+        },
+        {
+          message: ERROR_MESSAGE,
+          type: 'MemberExpression',
+          line: 7,
         },
       ],
     },
     // Ember.$
     {
       code: `
+        import Ember from 'ember'
         export default Ember.Component({
           didInsertElement() {
             Ember.$(body).addClass('active')
           }
         });`,
       output: null,
-      globals: {
-        Ember: true,
-      },
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -188,6 +193,7 @@ eslintTester.run('no-jquery', rule, {
     // const jq = Ember.$
     {
       code: `
+        import Ember from 'ember'
         const jq = Ember.$;
         export default Ember.Component({
           didInsertElement() {
@@ -195,9 +201,6 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       output: null,
-      globals: {
-        Ember: true,
-      },
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -208,6 +211,7 @@ eslintTester.run('no-jquery', rule, {
     // const { $ } = Ember;
     {
       code: `
+        import Ember from 'ember'
         const { $ } = Ember;
         export default Ember.Component({
           didInsertElement() {
@@ -215,13 +219,10 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       output: null,
-      globals: {
-        Ember: true,
-      },
       errors: [
         {
           message: ERROR_MESSAGE,
-          line: 5,
+          line: 6,
           type: 'CallExpression',
         },
       ],
@@ -229,6 +230,7 @@ eslintTester.run('no-jquery', rule, {
     // const { $: jq } = Ember;
     {
       code: `
+        import Ember from 'ember'
         const { $: jq } = Ember;
         export default Ember.Component({
           didInsertElement() {
@@ -236,13 +238,10 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       output: null,
-      globals: {
-        Ember: true,
-      },
       errors: [
         {
           message: ERROR_MESSAGE,
-          line: 5,
+          line: 6,
           type: 'CallExpression',
         },
       ],
