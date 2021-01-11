@@ -1,3 +1,9 @@
+/**
+ * Based on work from wikimedia/eslint-plugin-no-jquery
+ *
+ * https://github.com/wikimedia/eslint-plugin-no-jquery/blob/351eca834e002a056f71072af412bb19255157ce/tools/build-all-methods.js
+ */
+
 'use strict';
 
 const fs = require('fs');
@@ -15,7 +21,7 @@ const allMethods = Object.keys($)
 fs.writeFile(
   'lib/utils/jquery-methods.js',
   `${
-    '// This file is built by build-all-methods.js; do not edit it directly.\n' +
+    '// This file is built by scripts/list-jquery-methods.js; do not edit it directly.\n' +
     'module.exports = [\n'
   }${allMethods}\n];\n`,
   (err) => {
