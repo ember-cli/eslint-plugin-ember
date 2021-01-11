@@ -457,5 +457,17 @@ ruleTester.run('no-global-jquery', rule, {
         },
       ],
     },
+    {
+      code: 'jQuery.extend();',
+      parserOptions,
+      globals,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+    },
   ],
 });

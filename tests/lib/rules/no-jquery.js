@@ -28,6 +28,18 @@ eslintTester.run('no-jquery', rule, {
           assert.equal(find('.some-component').textContent.trim(), 'hello world');
         })`,
     },
+    `
+      function addClass($, selector, className) {
+        $(selector).addClass(className);
+      }
+    `,
+    `
+      Foo.$(selector).attr(attribute);
+    `,
+    `
+      const { $ } = Foo;
+      $(selector).attr(attribute);
+    `,
   ],
   invalid: [
     // Global $
@@ -39,9 +51,32 @@ eslintTester.run('no-jquery', rule, {
           }
         });`,
       output: null,
+      globals: {
+        $: true,
+      },
       errors: [
         {
           message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `
+        import Service from '@ember/service';
+        export default Service.extend({
+          myFunc(a, b) {
+            return $.extend({}, a, b);
+          }
+        });`,
+      output: null,
+      globals: {
+        $: true,
+      },
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -58,6 +93,7 @@ eslintTester.run('no-jquery', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -74,6 +110,7 @@ eslintTester.run('no-jquery', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -84,6 +121,7 @@ eslintTester.run('no-jquery', rule, {
         import Service from '@ember/service';
         export default Service.extend({
           myFunc(a, b) {
+            jq.post({}, a, b);
             return jq.extend({}, a, b);
           }
         });`,
@@ -91,12 +129,20 @@ eslintTester.run('no-jquery', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
+          type: 'CallExpression',
+          line: 6,
+        },
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
+          line: 7,
         },
       ],
     },
     // Ember.$
     {
       code: `
+        import Ember from 'ember'
         export default Ember.Component({
           didInsertElement() {
             Ember.$(body).addClass('active')
@@ -106,21 +152,7 @@ eslintTester.run('no-jquery', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
-        },
-      ],
-    },
-    // Em.$
-    {
-      code: `
-        export default Ember.Component({
-          didInsertElement() {
-            Em.$(body).addClass('active')
-          }
-        });`,
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
@@ -128,7 +160,7 @@ eslintTester.run('no-jquery', rule, {
     {
       code: `
         import E from 'ember';
-        export default Ember.Component({
+        export default E.Component({
           didInsertElement() {
             E.$(body).addClass('active')
           }
@@ -137,12 +169,31 @@ eslintTester.run('no-jquery', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    // import $ from ember
+    {
+      code: `
+        import Ember, { $ } from 'ember';
+        export default Ember.Component({
+          didInsertElement() {
+            $(body).addClass('active')
+          }
+        });`,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
     // const jq = Ember.$
     {
       code: `
+        import Ember from 'ember'
         const jq = Ember.$;
         export default Ember.Component({
           didInsertElement() {
@@ -153,12 +204,14 @@ eslintTester.run('no-jquery', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
     // const { $ } = Ember;
     {
       code: `
+        import Ember from 'ember'
         const { $ } = Ember;
         export default Ember.Component({
           didInsertElement() {
@@ -169,6 +222,27 @@ eslintTester.run('no-jquery', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
+          line: 6,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    // const { $: jq } = Ember;
+    {
+      code: `
+        import Ember from 'ember'
+        const { $: jq } = Ember;
+        export default Ember.Component({
+          didInsertElement() {
+            jq(body).addClass('active')
+          }
+        });`,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          line: 6,
+          type: 'CallExpression',
         },
       ],
     },
@@ -184,6 +258,23 @@ eslintTester.run('no-jquery', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `
+        import Ember from 'ember';
+        export default Ember.Component({
+          didInsertElement() {
+            this.$.extend({}, a, b)
+          }
+        });`,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'MemberExpression',
         },
       ],
     },
@@ -204,6 +295,7 @@ eslintTester.run('no-jquery', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },

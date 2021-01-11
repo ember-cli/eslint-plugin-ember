@@ -170,18 +170,6 @@ describe('getSize', () => {
   });
 });
 
-describe('isGlobalCallExpression', () => {
-  it('recognizes when call is not global', () => {
-    const node = parse("$('foo')");
-    expect(utils.isGlobalCallExpression(node, '$', ['$', 'jQuery'])).not.toBeTruthy();
-  });
-
-  it('recognizes when global call', () => {
-    const node = parse("$('foo')");
-    expect(utils.isGlobalCallExpression(node, 'jQuery', ['$', 'jQuery'])).toBeTruthy();
-  });
-});
-
 describe('parseArgs', () => {
   it('should parse arguments', () => {
     const node = parse('Ember.computed("asd", "qwe", "zxc", function() {})');
