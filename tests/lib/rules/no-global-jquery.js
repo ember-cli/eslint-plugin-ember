@@ -458,18 +458,14 @@ ruleTester.run('no-global-jquery', rule, {
       ],
     },
     {
-      code: `
-        export default Ember.Component({
-          init() {
-            jQuery.extend();
-          }
-        });`,
+      code: 'jQuery.extend();',
       parserOptions,
       globals,
       output: null,
       errors: [
         {
           message: ERROR_MESSAGE,
+          type: 'CallExpression',
         },
       ],
     },
