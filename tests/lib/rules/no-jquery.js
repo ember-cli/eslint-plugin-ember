@@ -76,7 +76,7 @@ eslintTester.run('no-jquery', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
-          type: 'MemberExpression',
+          type: 'CallExpression',
         },
       ],
     },
@@ -110,7 +110,7 @@ eslintTester.run('no-jquery', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
-          type: 'MemberExpression',
+          type: 'CallExpression',
         },
       ],
     },
@@ -129,12 +129,12 @@ eslintTester.run('no-jquery', rule, {
       errors: [
         {
           message: ERROR_MESSAGE,
-          type: 'MemberExpression',
+          type: 'CallExpression',
           line: 6,
         },
         {
           message: ERROR_MESSAGE,
-          type: 'MemberExpression',
+          type: 'CallExpression',
           line: 7,
         },
       ],
@@ -160,7 +160,7 @@ eslintTester.run('no-jquery', rule, {
     {
       code: `
         import E from 'ember';
-        export default Ember.Component({
+        export default E.Component({
           didInsertElement() {
             E.$(body).addClass('active')
           }
@@ -176,7 +176,7 @@ eslintTester.run('no-jquery', rule, {
     // import $ from ember
     {
       code: `
-        import { $ } from 'ember';
+        import Ember, { $ } from 'ember';
         export default Ember.Component({
           didInsertElement() {
             $(body).addClass('active')
@@ -264,6 +264,7 @@ eslintTester.run('no-jquery', rule, {
     },
     {
       code: `
+        import Ember from 'ember';
         export default Ember.Component({
           didInsertElement() {
             this.$.extend({}, a, b)
