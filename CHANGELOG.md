@@ -1,3 +1,17 @@
+## v10.1.2 (2021-01-11)
+
+#### :bug: Bug Fix
+* [#1063](https://github.com/ember-cli/eslint-plugin-ember/pull/1063) Improve detection of globals and catch additional jQuery function calls in `no-jquery` rule ([@BarryThePenguin](https://github.com/BarryThePenguin))
+* [#1066](https://github.com/ember-cli/eslint-plugin-ember/pull/1066) Improve detection of globals in `no-global-jquery` rule ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#1069](https://github.com/ember-cli/eslint-plugin-ember/pull/1069) Improve tests for `jquery-ember-run` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Jonathan Haines ([@BarryThePenguin](https://github.com/BarryThePenguin))
+
+
 ## v10.1.1 (2020-12-29)
 
 #### :bug: Bug Fix
