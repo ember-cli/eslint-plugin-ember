@@ -343,7 +343,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
         `,
-      errors: new Array(14).fill({ type: 'CallExpression', messageId: 'unclosedAttr' }),
+      errors: Array.from({ length: 14 }).fill({
+        type: 'CallExpression',
+        messageId: 'unclosedAttr',
+      }),
       filename: 'components/foobar-test.js',
     },
 
