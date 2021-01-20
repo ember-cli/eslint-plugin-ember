@@ -4,7 +4,7 @@
 
 Don’t use jQuery without the Ember Run Loop.
 
-Using plain jQuery invokes actions out of the Ember Run Loop. In order to have a control on all operations in Ember, it's good practice to trigger actions in run loop.
+Using plain jQuery invokes actions outside of the Ember Run Loop. In order to have a control on all operations in Ember, it's good practice to trigger actions in a run loop (using one of the [@ember/runloop](https://api.emberjs.com/ember/3.24/classes/@ember%2Frunloop) functions).
 
 ## Examples
 
