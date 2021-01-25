@@ -60,7 +60,7 @@ describe('rules setup is correct', function () {
   });
 
   describe('test files', function () {
-    RULE_NAMES.forEach((ruleName) => {
+    for (const ruleName of RULE_NAMES) {
       const filePath = path.join(__dirname, '..', 'tests', 'lib', 'rules', `${ruleName}.js`);
       const file = readFileSync(filePath, 'utf8');
 
@@ -70,7 +70,7 @@ describe('rules setup is correct', function () {
           expect(file).toContain(`.run('${ruleName}'`);
         });
       });
-    });
+    }
   });
 
   it('should have documentation for all rules', function () {
@@ -93,7 +93,7 @@ describe('rules setup is correct', function () {
         ':white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.',
     };
 
-    RULE_NAMES.forEach((ruleName) => {
+    for (const ruleName of RULE_NAMES) {
       const rule = rules[ruleName];
       const filePath = path.join(__dirname, '..', 'docs', 'rules', `${ruleName}.md`);
       const file = readFileSync(filePath, 'utf8');
@@ -115,9 +115,9 @@ describe('rules setup is correct', function () {
             expect(file).toContain('## Configuration');
 
             // Ensure all configuration options are mentioned.
-            getAllNamedOptions(rule.meta.schema).forEach((namedOption) =>
-              expect(file).toContain(namedOption)
-            );
+            for (const namedOption of getAllNamedOptions(rule.meta.schema)) {
+              expect(file).toContain(namedOption);
+            }
           } else {
             expect(file).not.toContain('## Configuration');
           }
@@ -138,26 +138,28 @@ describe('rules setup is correct', function () {
 
           // Ensure that expected notices are present in the correct order.
           let currentLineNumber = 1;
-          expectedNotices.forEach((expectedNotice) => {
+          for (const expectedNotice of expectedNotices) {
             expect(lines[currentLineNumber]).toStrictEqual('');
             expect(lines[currentLineNumber + 1]).toStrictEqual(MESSAGES[expectedNotice]);
             currentLineNumber += 2;
-          });
+          }
 
           // Ensure that unexpected notices are not present.
-          unexpectedNotices.forEach((unexpectedNotice) => {
+          for (const unexpectedNotice of unexpectedNotices) {
             expect(file).not.toContain(MESSAGES[unexpectedNotice]);
-          });
+          }
         });
       });
       /* eslint-enable jest/no-conditional-expect */
-    });
+    }
   });
 
   it('should mention all rules in the README', function () {
     const filePath = path.join(__dirname, '..', 'README.md');
     const file = readFileSync(filePath, 'utf8');
 
-    RULE_NAMES.forEach((ruleName) => expect(file).toContain(ruleName));
+    for (const ruleName of RULE_NAMES) {
+      expect(file).toContain(ruleName);
+    }
   });
 });

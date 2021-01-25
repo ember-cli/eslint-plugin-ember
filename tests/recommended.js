@@ -6,11 +6,12 @@ describe('recommended rules', () => {
   it('has the right list', () => {
     const errors = [];
 
-    Object.keys(rules).forEach((name) => {
+    for (const name of Object.keys(rules)) {
+      // eslint-disable-next-line jest/no-if
       if (rules[name].meta.docs.recommended) {
         errors.push(name);
       }
-    });
+    }
 
     expect(errors).toMatchSnapshot();
   });

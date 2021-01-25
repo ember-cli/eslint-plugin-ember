@@ -906,7 +906,7 @@ describe('isComputedProp', () => {
   });
 
   it('should detect allow-listed computed props with MemberExpressions', () => {
-    ['volatile', 'meta', 'readOnly', 'property'].forEach((prop) => {
+    for (const prop of ['volatile', 'meta', 'readOnly', 'property']) {
       // With includeSuffix
 
       node = parse(`computed().${prop}()`);
@@ -926,7 +926,7 @@ describe('isComputedProp', () => {
 
       node = parse(`Ember.computed().${prop}()`);
       expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeFalsy();
-    });
+    }
   });
 
   it("shouldn't allow other MemberExpressions", () => {

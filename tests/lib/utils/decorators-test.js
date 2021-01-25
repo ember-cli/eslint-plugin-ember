@@ -94,12 +94,12 @@ describe('hasDecorator', () => {
       expected: false,
     },
   ];
-  testCases.forEach(({ code, decoratorName, expected }) => {
+  for (const { code, decoratorName, expected } of testCases) {
     it(`('${code}', '${decoratorName}') => ${expected}`, () => {
       const node = expressionlessParse(code);
       expect(decoratorUtils.hasDecorator(node, decoratorName)).toStrictEqual(expected);
     });
-  });
+  }
 });
 
 describe('isClassPropertyWithDecorator', () => {
