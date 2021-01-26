@@ -19,6 +19,8 @@ eslintTester.run('jquery-ember-run', rule, {
     // jQuery/bind from Ember
     `import Ember from "ember";
      Ember.$("#item").on("click", () => { Ember.run.bind(this, this.handle); });`,
+    `import Ember from "ember";
+     Ember.$("#item").on("click", () => { Ember.run.debounce(this, this.handle); });`,
 
     // jQuery from Ember with destructuring
     `import Ember from "ember";
@@ -37,6 +39,9 @@ eslintTester.run('jquery-ember-run', rule, {
     `import { bind } from "@ember/runloop";
      import $ from "jquery";
      $("#item").on("click", () => { bind(this, this.handle); });`,
+    `import { debounce } from "@ember/runloop";
+     import $ from "jquery";
+     $("#item").on("click", () => { debounce(this, this.handle); });`,
 
     // No callback
     'import $ from "jquery"; $("#item");',
@@ -78,28 +83,35 @@ eslintTester.run('jquery-ember-run', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
     },
     {
-      // With function call that isn't `bind`
-      code: 'import $ from "jquery"; $("#item").on("click", () => { notBind(); });',
+      // With function call that isn't a runloop function
+      code: 'import $ from "jquery"; $("#item").on("click", () => { unknownFunction(); });',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
     },
     {
-      // With function call that isn't `Ember`
+      // With unknown imported runloop function
+      code:
+        'import { unknownFunction } from "@ember/runloop"; import $ from "jquery"; $("#item").on("click", () => { unknownFunction(); });',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
+    },
+    {
+      // With not from Ember
       code: 'import $ from "jquery"; $("#item").on("click", () => { notEmber.run.bind(); });',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
     },
     {
-      // With function call that isn't `run`
+      // With not from Ember.run
       code:
         'import Ember from "ember"; import $ from "jquery"; $("#item").on("click", () => { Ember.notRun.bind(); });',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
     },
     {
-      // With function call that isn't `bind`
+      // With unknown function call from Ember.run
       code:
-        'import Ember from "ember"; import $ from "jquery"; $("#item").on("click", () => { Ember.run.notBind(); });',
+        'import Ember from "ember"; import $ from "jquery"; $("#item").on("click", () => { Ember.run.unknownFunction(); });',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
     },
