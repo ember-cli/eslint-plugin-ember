@@ -20,26 +20,37 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-html-safe', rule, {
   valid: [
-    "import { ANYTHING } from '@ember/string';",
-    "import { ANYTHING } from '@ember/template';",
-    "import { htmlSafe } from 'something/else';",
-    "import EmberString from '@ember/string';",
+    // Wrong function:
+    "import { ANYTHING } from '@ember/string'; ANYTHING('foo');",
+    "import { ANYTHING } from '@ember/template'; ANYTHING('foo');",
+
+    // Wrong import path:
+    "import { htmlSafe } from 'something/else'; htmlSafe('foo');",
+
+    // No import:
+    "htmlSafe('foo');",
+    "import EmberString from '@ember/string'; htmlSafe('foo');",
+
+    // Wrong object:
+    "import { htmlSafe } from '@ember/string'; foo.htmlSafe('foo');",
+    "import { htmlSafe } from '@ember/string'; htmlSafe.foo('foo');",
   ],
   invalid: [
     {
-      code: "import { htmlSafe } from '@ember/string';",
+      code: "import { htmlSafe } from '@ember/string'; htmlSafe('foo');",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'ImportSpecifier' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code: "import { htmlSafe } from '@ember/template';",
+      code: "import { htmlSafe } from '@ember/template'; htmlSafe('foo');",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'ImportSpecifier' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code: "import { htmlSafe as myCustomNameForHtmlSafe } from '@ember/template';",
+      code:
+        "import { htmlSafe as myCustomNameForHtmlSafe } from '@ember/template'; myCustomNameForHtmlSafe();",
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'ImportSpecifier' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
   ],
 });
