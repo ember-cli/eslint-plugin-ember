@@ -204,118 +204,93 @@ const codeWithSettersAndGetters = [
     }`,
 ];
 
-const validWithDefaultOptions = [];
-validWithDefaultOptions.push(
-  ...codeWithoutGettersOrSetters.map((code) => ({ code, parserOptions }))
-);
-validWithDefaultOptions.push(...codeWithSettersAndGetters.map((code) => ({ code, parserOptions })));
-validWithDefaultOptions.push(...codeWithRawComputed.map((code) => ({ code, parserOptions })));
+const validWithDefaultOptions = [
+  ...codeWithoutGettersOrSetters.map((code) => ({ code, parserOptions })),
+  ...codeWithSettersAndGetters.map((code) => ({ code, parserOptions })),
+  ...codeWithRawComputed.map((code) => ({ code, parserOptions })),
+];
 
-const validWithAlwaysWithSetterOptions = [];
-validWithAlwaysWithSetterOptions.push(
+const validWithAlwaysWithSetterOptions = [
   ...codeWithoutGettersOrSetters.map((code) => {
     const options = ['always-with-setter'];
     return { code, parserOptions, options };
-  })
-);
-validWithAlwaysWithSetterOptions.push(
+  }),
   ...codeWithSettersAndGetters.map((code) => {
     const options = ['always-with-setter'];
     return { code, parserOptions, options };
-  })
-);
-validWithAlwaysWithSetterOptions.push(
+  }),
   ...codeWithRawComputed.map((code) => {
     const options = ['always-with-setter'];
     return { code, parserOptions, options };
-  })
-);
+  }),
+];
 
-const validWithNeverOption = [];
-validWithNeverOption.push(
+const validWithNeverOption = [
   ...codeWithoutGettersOrSetters.map((code) => {
     const options = ['never'];
     return { code, parserOptions, options };
-  })
-);
-validWithNeverOption.push(
+  }),
   ...codeWithRawComputed.map((code) => {
     const options = ['never'];
     return { code, parserOptions, options };
-  })
-);
+  }),
+];
 
-const validWithAlwaysOption = [];
-validWithAlwaysOption.push(
+const validWithAlwaysOption = [
   ...codeWithOnlyGetters.map((code) => {
     const options = ['always'];
     return { code, parserOptions, options };
-  })
-);
-validWithAlwaysOption.push(
+  }),
   ...codeWithSettersAndGetters.map((code) => {
     const options = ['always'];
     return { code, parserOptions, options };
-  })
-);
-validWithAlwaysOption.push(
+  }),
   ...codeWithRawComputed.map((code) => {
     const options = ['always'];
     return { code, parserOptions, options };
-  })
-);
+  }),
+];
 
-const inValidWithDefaultOptions = [];
-inValidWithDefaultOptions.push(
+const inValidWithDefaultOptions = [
   ...codeWithOnlyGetters.map((code) => ({
     code,
     parserOptions,
     output,
     errors: alwaysWithSetterOptionErrors,
-  }))
-);
-inValidWithDefaultOptions.push(
+  })),
   ...codeWithOnlySetters.map((code) => ({
     code,
     parserOptions,
     output,
     errors: alwaysWithSetterOptionErrors,
-  }))
-);
+  })),
+];
 
-const inValidWithNeverOption = [];
-inValidWithNeverOption.push(
+const inValidWithNeverOption = [
   ...codeWithOnlyGetters.map((code) => {
     const options = ['never'];
     return { code, parserOptions, options, output, errors: neverOptionErrors };
-  })
-);
-inValidWithNeverOption.push(
+  }),
   ...codeWithOnlySetters.map((code) => {
     const options = ['never'];
     return { code, parserOptions, options, output, errors: neverOptionErrors };
-  })
-);
-inValidWithNeverOption.push(
+  }),
   ...codeWithSettersAndGetters.map((code) => {
     const options = ['never'];
     return { code, parserOptions, options, output, errors: neverOptionErrors };
-  })
-);
+  }),
+];
 
-const inValidWithAlwaysOption = [];
-inValidWithAlwaysOption.push(
+const inValidWithAlwaysOption = [
   ...codeWithoutGettersOrSetters.map((code) => {
     const options = ['always'];
     return { code, parserOptions, options, output, errors: alwaysOptionErrors };
-  })
-);
-inValidWithAlwaysOption.push(
+  }),
   ...codeWithOnlySetters.map((code) => {
     const options = ['always'];
     return { code, parserOptions, options, output, errors: alwaysOptionErrors };
-  })
-);
+  }),
+];
 
 ruleTester.run('computed-property-getters', rule, {
   valid: [

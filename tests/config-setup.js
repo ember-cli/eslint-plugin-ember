@@ -24,6 +24,8 @@ describe('config setup is correct', function () {
     // We don't bother mentioning the `base` config in the README.
     const CONFIG_NAMES_WITHOUT_BASE = CONFIG_NAMES.filter((configName) => configName !== 'base');
 
-    CONFIG_NAMES_WITHOUT_BASE.forEach((configName) => expect(file).toContain(configName));
+    for (const configName of CONFIG_NAMES_WITHOUT_BASE) {
+      expect(file).toContain(configName);
+    }
   });
 });
