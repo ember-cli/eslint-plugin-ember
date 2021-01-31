@@ -1,3 +1,16 @@
+## v10.2.0 (2021-01-31)
+
+#### :rocket: Enhancement
+* [#1079](https://github.com/ember-cli/eslint-plugin-ember/pull/1079) Add new rule [no-html-safe](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-html-safe.md) ([@patocallaghan](https://github.com/patocallaghan))
+
+#### :bug: Bug Fix
+* [#1072](https://github.com/ember-cli/eslint-plugin-ember/pull/1072) Improve jquery detection in `jquery-ember-run` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Pat O'Callaghan ([@patocallaghan](https://github.com/patocallaghan))
+
+
 ## v10.1.2 (2021-01-11)
 
 #### :bug: Bug Fix
