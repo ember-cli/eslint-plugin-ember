@@ -113,12 +113,17 @@ describe('isMirageDirectory', () => {
   it('detects the mirage directory', () => {
     expect(emberUtils.isMirageDirectory('example-app/mirage/config.js')).toBeTruthy();
     expect(emberUtils.isMirageDirectory('example-app/mirage/scenarios/foo.js')).toBeTruthy();
+    expect(emberUtils.isMirageDirectory('example-addon/tests/dummy/mirage/config.js')).toBeTruthy();
+    expect(
+      emberUtils.isMirageDirectory('example-addon/tests/dummy/mirage/scenarios/foo.js')
+    ).toBeTruthy();
   });
 
   it('does not detect other directories', () => {
     expect(emberUtils.isMirageDirectory('example-app/app/app.js')).toBeFalsy();
     expect(emberUtils.isMirageDirectory('example-app/tests/test.js')).toBeFalsy();
     expect(emberUtils.isMirageDirectory('example-addon/addon/addon.js')).toBeFalsy();
+    expect(emberUtils.isMirageDirectory('example-addon/tests/dummy/app/app.js')).toBeFalsy();
   });
 });
 
