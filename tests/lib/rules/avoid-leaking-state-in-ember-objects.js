@@ -26,10 +26,8 @@ describe('imports', () => {
 });
 
 const eslintTester = new RuleTester({
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
-  },
+  parser: require.resolve('babel-eslint'),
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
 });
 eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
   valid: [
@@ -66,6 +64,13 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     'export default Foo.extend({ foo: condition ? "foo" : "bar" });',
     'export default Foo.extend({ foo: "foo" && "bar" });',
     'export default Foo.extend({ foo: "foo" || "bar" });',
+    'import Mixin from "@ember/object/mixin"; export default Mixin.create({});',
+    'import Mixin from "@ember/object/mixin"; export default Mixin.create({ harmlessProp: "foo" });',
+    'import Mixin from "@ember/object/mixin"; export default Mixin.create(NestedMixin, {});',
+    'import Mixin from "@ember/object/mixin";',
+    'import Component from "@ember/component"; export default class MyNativeClassComponent extends Component { someArrayField = []; }',
+    'import Component from "@ember/component"; export default class MyNativeClassComponent extends Component { someObjectField = {}; }',
+    'import EmberObject from "@ember/object"; export default class MyNativeClassComponentWithAMixin extends EmberObject.extend(MyMixin) { someArrayField = []; }',
   ],
   invalid: [
     {
@@ -221,6 +226,27 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     },
     {
       code: 'export default Foo.extend({ foo: {} || false });',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+    {
+      code:
+        'import Mixin from "@ember/object/mixin"; export default Mixin.create({ anArray: [] });',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+    {
+      code: 'import Ember from "ember"; export default Ember.Mixin.create({ anObject: {} });',
       output: null,
       errors: [
         {
