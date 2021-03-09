@@ -35,6 +35,10 @@ ruleTester.run('no-classic-classes', rule, {
       export default SomeOtherThing.extend({});
     `,
     'export default Component.extend({});', // No import
+
+    'this.extend();',
+    'this.foo.extend();',
+    'this.foo.bar.extend();',
   ],
 
   invalid: [

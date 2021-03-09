@@ -194,3 +194,19 @@ describe('parseCallee', () => {
     expect(parsedCallee).toStrictEqual(['Ember', 'A']);
   });
 });
+
+describe('startsWithThisExpression', () => {
+  it('should behave correctly', () => {
+    expect(utils.startsWithThisExpression(parse('x'))).toBeFalsy();
+    expect(utils.startsWithThisExpression(parse('x.y'))).toBeFalsy();
+    expect(utils.startsWithThisExpression(parse('x()'))).toBeFalsy();
+    expect(utils.startsWithThisExpression(parse('x.y()'))).toBeFalsy();
+    expect(utils.startsWithThisExpression(parse('x.y.z()'))).toBeFalsy();
+
+    expect(utils.startsWithThisExpression(parse('this'))).toBeTruthy();
+    expect(utils.startsWithThisExpression(parse('this.x'))).toBeTruthy();
+    expect(utils.startsWithThisExpression(parse('this.x.y'))).toBeTruthy();
+    expect(utils.startsWithThisExpression(parse('this.x()'))).toBeTruthy();
+    expect(utils.startsWithThisExpression(parse('this.x.y()'))).toBeTruthy();
+  });
+});
