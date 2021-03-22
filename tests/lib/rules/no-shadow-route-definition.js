@@ -98,6 +98,10 @@ ruleTester.run('no-shadow-route-definition', rule, {
       this.route('viewcollections', { path: 'viewcollections/:viewCollectionId' });
     });`,
 
+    // With dynamic/variable route or path name:
+    'this.route(someVariable);',
+    "this.route('views', { path: someVariable })",
+
     // Not Ember's route function:
     'test();',
     "test('blog');",
