@@ -1,3 +1,21 @@
+## v10.3.0 (2021-03-22)
+
+#### :rocket: Enhancement
+* [#1113](https://github.com/ember-cli/eslint-plugin-ember/pull/1113) Add `additionalClassImports` option to `no-classic-classes` rule ([@scalvert](https://github.com/scalvert))
+
+#### :bug: Bug Fix
+* [#1115](https://github.com/ember-cli/eslint-plugin-ember/pull/1115) Fix crash with dynamic/variable route name in `no-shadow-route-definition` rule ([@bmish](https://github.com/bmish))
+* [#1102](https://github.com/ember-cli/eslint-plugin-ember/pull/1102) Fix crash with `this.extend()` in `no-classic-classes` rule ([@bmish](https://github.com/bmish))
+* [#1114](https://github.com/ember-cli/eslint-plugin-ember/pull/1114) Ensure rules validate arrays in options to have at least one item and unique items ([@bmish](https://github.com/bmish))
+* [#1103](https://github.com/ember-cli/eslint-plugin-ember/pull/1103) Only calculate source module name once in import util function for slight optimization ([@bmish](https://github.com/bmish))
+* [#1081](https://github.com/ember-cli/eslint-plugin-ember/pull/1081) Update `avoid-leaking-state-in-ember-objects` rule to apply to mixins ([@jaydgruber](https://github.com/jaydgruber))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+- [@jaydgruber](https://github.com/jaydgruber)
+
+
 ## v10.2.0 (2021-01-31)
 
 #### :rocket: Enhancement
