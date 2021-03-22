@@ -38,13 +38,19 @@ import Evented from '@ember/object/evented';
 export default class MyComponent extends Component.extend(Evented) {}
 ```
 
+## Configuration
+
+This rule takes an optional object containing:
+
+- `array` -- `additionalInvalidImports` -- Allows you to specify additional imports that should be flagged to disallow calling `extend` on. This allows you to handle the case where your app or addon is importing from a module that performs the `extend`.
+
 ## When Not To Use It
 
-* If you are not ready to transition completely to native JS classes, you should not enable this rule
+- If you are not ready to transition completely to native JS classes, you should not enable this rule
 
 ## Further Reading
 
-* [Ember Octane Release Plan](https://blog.emberjs.com/2019/08/15/octane-release-plan.html)
-  * Includes advice on transition Components to use native, rather than classic, classes
-* [Ember.js Native Class Update - 2019 Edition](https://blog.emberjs.com/2019/01/26/emberjs-native-class-update-2019-edition.html)
-  * **Note:** some of the recommendations made in this blog post are longer relevant, such as using `.extend` when defining a computed property
+- [Ember Octane Release Plan](https://blog.emberjs.com/2019/08/15/octane-release-plan.html)
+  - Includes advice on transition Components to use native, rather than classic, classes
+- [Ember.js Native Class Update - 2019 Edition](https://blog.emberjs.com/2019/01/26/emberjs-native-class-update-2019-edition.html)
+  - **Note:** some of the recommendations made in this blog post are longer relevant, such as using `.extend` when defining a computed property
