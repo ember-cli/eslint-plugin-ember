@@ -22,7 +22,7 @@ export default Component.extend({});
 ```
 
 ```javascript
-// With option: additionalInvalidImports = ['my-custom-addon']
+// With option: additionalClassImports = ['my-custom-addon']
 import CustomClass from 'my-custom-addon';
 
 export default CustomClass.extend({});
