@@ -111,7 +111,7 @@ ruleTester.run('no-classic-classes', rule, {
       `,
       options: [
         {
-          additionalInvalidImports: ['my-custom-addon'],
+          additionalClassImports: ['my-custom-addon'],
         },
       ],
       output: null,
@@ -126,7 +126,7 @@ ruleTester.run('no-classic-classes', rule, {
       `,
       options: [
         {
-          additionalInvalidImports: ['my-custom-addon'],
+          additionalClassImports: ['my-custom-addon'],
         },
       ],
       output: null,

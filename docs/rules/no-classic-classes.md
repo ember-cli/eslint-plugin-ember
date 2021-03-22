@@ -21,6 +21,13 @@ import Component from '@ember/component';
 export default Component.extend({});
 ```
 
+```javascript
+// With option: additionalInvalidImports = ['my-custom-addon']
+import CustomClass from 'my-custom-addon';
+
+export default CustomClass.extend({});
+```
+
 Examples of **correct** code for this rule:
 
 ```javascript
@@ -42,7 +49,7 @@ export default class MyComponent extends Component.extend(Evented) {}
 
 This rule takes an optional object containing:
 
-- `array` -- `additionalInvalidImports` -- Allows you to specify additional imports that should be flagged to disallow calling `extend` on. This allows you to handle the case where your app or addon is importing from a module that performs the `extend`.
+- `string[]` -- `additionalClassImports` -- Allows you to specify additional imports that should be flagged to disallow calling `extend` on. This allows you to handle the case where your app or addon is importing from a module that performs the `extend`.
 
 ## When Not To Use It
 
