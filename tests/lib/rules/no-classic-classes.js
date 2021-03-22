@@ -104,5 +104,18 @@ ruleTester.run('no-classic-classes', rule, {
       output: null,
       errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
     },
+    {
+      code: `
+        import CustomClass from 'my-custom-addon';
+        export default CustomClass.extend({});
+      `,
+      options: [
+        {
+          additionalClassImports: ['my-custom-addon'],
+        },
+      ],
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
+    },
   ],
 });
