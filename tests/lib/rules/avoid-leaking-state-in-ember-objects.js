@@ -71,6 +71,9 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     'import Component from "@ember/component"; export default class MyNativeClassComponent extends Component { someArrayField = []; }',
     'import Component from "@ember/component"; export default class MyNativeClassComponent extends Component { someObjectField = {}; }',
     'import EmberObject from "@ember/object"; export default class MyNativeClassComponentWithAMixin extends EmberObject.extend(MyMixin) { someArrayField = []; }',
+    // https://github.com/ember-cli/eslint-plugin-ember/issues/1116
+    'import Mixin from "@ember/object/mixin"; export default Mixin.create({ harmlessProp: undefined });',
+    'import Mixin from "@ember/object/mixin"; import { inject } from "@ember/service"; export default Mixin.create({ harmlessProp: (inject()) });',
   ],
   invalid: [
     {
@@ -247,6 +250,29 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     },
     {
       code: 'import Ember from "ember"; export default Ember.Mixin.create({ anObject: {} });',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+  ],
+});
+
+const typescriptTester = new RuleTester({
+  parser: require.resolve('@typescript-eslint/parser'),
+  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+});
+typescriptTester.run('avoid-leaking-state-in-ember-objects - typescript', rule, {
+  valid: [
+    'import Mixin from "@ember/object/mixin"; export default Mixin.create({ harmlessProp: undefined as any });',
+    'import Mixin from "@ember/object/mixin"; import { inject } from "@ember/service"; export default Mixin.create({ harmlessProp: (inject() as unknown) as Store });',
+  ],
+  invalid: [
+    {
+      code: 'export default Foo.extend({ someProp: [] as Array });',
       output: null,
       errors: [
         {
