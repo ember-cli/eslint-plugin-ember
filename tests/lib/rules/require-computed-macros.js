@@ -290,47 +290,53 @@ ruleTester.run('require-computed-macros', rule, {
 
     // Self Referential
     {
-      code: "class Test { @computed() get foo() { return this.foo; } }",
+      code: 'class Test { @computed() get foo() { return this.foo; } }',
       options: [{ includeNativeGetters: true }],
-      output: "class Test { @computed() get foo() { return this.foo; } }",
-      errors: [{ message: ERROR_MESSAGE_READS, type: 'MethodDefinition' }]
+      output: 'class Test { @computed() get foo() { return this.foo; } }',
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'MethodDefinition' }],
     },
     {
       code: "class Test { @computed('foo') get foo() { return this.foo; } }",
       options: [{ includeNativeGetters: true }],
       output: "class Test { @computed('foo') get foo() { return this.foo; } }",
-      errors: [{ message: ERROR_MESSAGE_READS, type: 'MethodDefinition' }]
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'MethodDefinition' }],
     },
     {
       code: "class Test { @computed('foo', 'bar') get foo() { return this.foo; } }",
       options: [{ includeNativeGetters: true }],
       output: "class Test { @computed('foo', 'bar') get foo() { return this.foo; } }",
-      errors: [{ message: ERROR_MESSAGE_READS, type: 'MethodDefinition' }]
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'MethodDefinition' }],
     },
     {
       code: "class Test { foo = computed('foo', function() { return this.foo; }) }",
       output: "class Test { foo = computed('foo', function() { return this.foo; }) }",
-      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
     },
     {
       code: "class Test { foo = computed('foo', 'bar', function() { return this.foo; }) }",
       output: "class Test { foo = computed('foo', 'bar', function() { return this.foo; }) }",
-      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }]
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
     },
     {
-      code: "import EmberObject from '@ember/object'; const Test = EmberObject.extend({ foo: computed('foo', function() { return this.foo; }) })",
-      output: "import EmberObject from '@ember/object'; const Test = EmberObject.extend({ foo: computed('foo', function() { return this.foo; }) })",
-      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }]
+      code:
+        "import EmberObject from '@ember/object'; const Test = EmberObject.extend({ foo: computed('foo', function() { return this.foo; }) })",
+      output:
+        "import EmberObject from '@ember/object'; const Test = EmberObject.extend({ foo: computed('foo', function() { return this.foo; }) })",
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
     },
     {
-      code: "import EmberObject from '@ember/object'; const Test = EmberObject.extend({ foo: computed('foo', 'bar', function() { return this.foo; }) })",
-      output: "import EmberObject from '@ember/object'; const Test = EmberObject.extend({ foo: computed('foo', 'bar', function() { return this.foo; }) })",
-      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }]
+      code:
+        "import EmberObject from '@ember/object'; const Test = EmberObject.extend({ foo: computed('foo', 'bar', function() { return this.foo; }) })",
+      output:
+        "import EmberObject from '@ember/object'; const Test = EmberObject.extend({ foo: computed('foo', 'bar', function() { return this.foo; }) })",
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
     },
     {
-      code: "import EmberObject from '@ember/object'; const Test = EmberObject.extend({ foo: computed(function() { return this.foo; }) })",
-      output: "import EmberObject from '@ember/object'; const Test = EmberObject.extend({ foo: computed(function() { return this.foo; }) })",
-      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }]
+      code:
+        "import EmberObject from '@ember/object'; const Test = EmberObject.extend({ foo: computed(function() { return this.foo; }) })",
+      output:
+        "import EmberObject from '@ember/object'; const Test = EmberObject.extend({ foo: computed(function() { return this.foo; }) })",
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
     },
   ].map(addComputedImport),
 });
