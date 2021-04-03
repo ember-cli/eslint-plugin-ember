@@ -94,47 +94,133 @@ ruleTester.run('route-path-style', rule, {
     {
       code: 'this.route("blog_posts");',
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Literal',
+          suggestions: [{ messageId: 'convertToKebabCase', output: 'this.route("blog-posts");' }],
+        },
+      ],
     },
     {
       code: 'this.route("blogPosts");',
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Literal',
+          suggestions: [{ messageId: 'convertToKebabCase', output: 'this.route("blog-posts");' }],
+        },
+      ],
     },
     {
       code: 'this.route("blogPosts", function() {});',
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Literal',
+          suggestions: [
+            { messageId: 'convertToKebabCase', output: 'this.route("blog-posts", function() {});' },
+          ],
+        },
+      ],
     },
     {
       code: 'this.route("blog-posts", { path: "/blog_posts" });',
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Literal',
+          suggestions: [
+            {
+              messageId: 'convertToKebabCase',
+              output: 'this.route("blog-posts", { path: "/blog-posts" });',
+            },
+          ],
+        },
+      ],
     },
     {
       code: 'this.route("blog-posts", { path: "/blogPosts" });',
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Literal',
+          suggestions: [
+            {
+              messageId: 'convertToKebabCase',
+              output: 'this.route("blog-posts", { path: "/blog-posts" });',
+            },
+          ],
+        },
+      ],
     },
     {
       code: 'this.route("blog-posts", { path: "/blogPosts/:blog_id" });',
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Literal',
+          suggestions: [
+            {
+              messageId: 'convertToKebabCase',
+              output: 'this.route("blog-posts", { path: "/blog-posts/:blog_id" });',
+            },
+          ],
+        },
+      ],
     },
     {
       code: 'this.route("blog-posts", { path: "/blog-posts/:blog_id/otherPart" });',
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Literal',
+          suggestions: [
+            {
+              messageId: 'convertToKebabCase',
+              output: 'this.route("blog-posts", { path: "/blog-posts/:blog_id/other-part" });',
+            },
+          ],
+        },
+      ],
     },
     {
       code: 'this.route("blog-posts", { path: "/blogPosts/*path" });',
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Literal',
+          suggestions: [
+            {
+              messageId: 'convertToKebabCase',
+              output: 'this.route("blog-posts", { path: "/blog-posts/*path" });',
+            },
+          ],
+        },
+      ],
     },
     {
       code: 'this.route("blog-posts", { path: "/blogPosts" }, function() {});',
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Literal',
+          suggestions: [
+            {
+              messageId: 'convertToKebabCase',
+              output: 'this.route("blog-posts", { path: "/blog-posts" }, function() {});',
+            },
+          ],
+        },
+      ],
     },
   ],
 });
