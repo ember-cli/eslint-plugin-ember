@@ -113,8 +113,10 @@ ruleTester.run('no-shadow-route-definition', rule, {
     `,
     'this.route(null)',
     'this.route(true)',
-    // Test not crashing on unexpected values
+    // Test not crashing on unexpected values, we bail out
     'this.route({})',
+    'this.route(getRouteName());',
+    'this.route("my-route", { path: getRoutePath() });',
 
     // Not Ember's route function:
     'test();',
