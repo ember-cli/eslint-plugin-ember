@@ -5,7 +5,7 @@
 const rule = require('../../../lib/rules/no-shadow-route-definition');
 const RuleTester = require('eslint').RuleTester;
 
-const { buildErrorMessage, buildUnsupportedArgumentsErrorMessage } = rule;
+const { buildErrorMessage } = rule;
 
 //------------------------------------------------------------------------------
 // Tests
@@ -105,6 +105,16 @@ ruleTester.run('no-shadow-route-definition', rule, {
       this.route('route');
     });
     `,
+    `this.route('first', { path: foo });
+    this.route('second', { path: 'foo' });
+    `,
+    `this.route(foo);
+    this.route('foo');
+    `,
+    'this.route(null)',
+    'this.route(true)',
+    // Test not crashing on unexpected values
+    'this.route({})',
 
     // Not Ember's route function:
     'test();',
@@ -834,35 +844,35 @@ ruleTester.run('no-shadow-route-definition', rule, {
       ],
     },
     {
-      code: 'this.route(true);',
+      code: `
+        this.route(null, { path: someVariable });
+        this.route(null, { path: someVariable });
+      `,
       output: null,
       errors: [
         {
-          message: buildUnsupportedArgumentsErrorMessage({
-            source: {
-              loc: {
-                start: {
-                  line: 1,
-                  column: 0,
+          message: buildErrorMessage({
+            leftRoute: {
+              name: 'null',
+              fullPath: '/someVariable',
+              source: {
+                loc: {
+                  start: {
+                    line: 3,
+                    column: 8,
+                  },
                 },
               },
             },
-          }),
-          type: 'CallExpression',
-        },
-      ],
-    },
-    {
-      code: 'this.route("first", { path: true });',
-      output: null,
-      errors: [
-        {
-          message: buildUnsupportedArgumentsErrorMessage({
-            source: {
-              loc: {
-                start: {
-                  line: 1,
-                  column: 0,
+            rightRoute: {
+              name: 'null',
+              fullPath: '/someVariable',
+              source: {
+                loc: {
+                  start: {
+                    line: 2,
+                    column: 8,
+                  },
                 },
               },
             },
