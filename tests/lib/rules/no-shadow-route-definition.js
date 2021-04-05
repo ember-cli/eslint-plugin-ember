@@ -5,7 +5,7 @@
 const rule = require('../../../lib/rules/no-shadow-route-definition');
 const RuleTester = require('eslint').RuleTester;
 
-const { buildErrorMessage } = rule;
+const { buildErrorMessage, buildUnsupportedArgumentsErrorMessage } = rule;
 
 //------------------------------------------------------------------------------
 // Tests
@@ -101,6 +101,10 @@ ruleTester.run('no-shadow-route-definition', rule, {
     // With dynamic/variable route or path name:
     'this.route(someVariable);',
     "this.route('views', { path: someVariable })",
+    `this.route(someVariable, function () {
+      this.route('route');
+    });
+    `,
 
     // Not Ember's route function:
     'test();',
@@ -705,6 +709,160 @@ ruleTester.run('no-shadow-route-definition', rule, {
                     line: 3,
                     column: 10,
                   },
+                },
+              },
+            },
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `
+        this.route(someVariable, function() {
+          this.route("first", { path: "/" });
+          this.route("second", { path: "/" });
+        });
+      `,
+      output: null,
+      errors: [
+        {
+          message: buildErrorMessage({
+            leftRoute: {
+              name: 'second',
+              fullPath: '/someVariable/',
+              source: {
+                loc: {
+                  start: {
+                    line: 4,
+                    column: 10,
+                  },
+                },
+              },
+            },
+            rightRoute: {
+              name: 'first',
+              fullPath: '/someVariable/',
+              source: {
+                loc: {
+                  start: {
+                    line: 3,
+                    column: 10,
+                  },
+                },
+              },
+            },
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `
+        this.route(someVariable);
+        this.route(someVariable);
+      `,
+      output: null,
+      errors: [
+        {
+          message: buildErrorMessage({
+            leftRoute: {
+              name: 'someVariable',
+              fullPath: '/someVariable',
+              source: {
+                loc: {
+                  start: {
+                    line: 3,
+                    column: 8,
+                  },
+                },
+              },
+            },
+            rightRoute: {
+              name: 'someVariable',
+              fullPath: '/someVariable',
+              source: {
+                loc: {
+                  start: {
+                    line: 2,
+                    column: 8,
+                  },
+                },
+              },
+            },
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `
+        this.route('first', { path: someVariable });
+        this.route('second', { path: someVariable });
+      `,
+      output: null,
+      errors: [
+        {
+          message: buildErrorMessage({
+            leftRoute: {
+              name: 'second',
+              fullPath: '/someVariable',
+              source: {
+                loc: {
+                  start: {
+                    line: 3,
+                    column: 8,
+                  },
+                },
+              },
+            },
+            rightRoute: {
+              name: 'first',
+              fullPath: '/someVariable',
+              source: {
+                loc: {
+                  start: {
+                    line: 2,
+                    column: 8,
+                  },
+                },
+              },
+            },
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: 'this.route(true);',
+      output: null,
+      errors: [
+        {
+          message: buildUnsupportedArgumentsErrorMessage({
+            source: {
+              loc: {
+                start: {
+                  line: 1,
+                  column: 0,
+                },
+              },
+            },
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: 'this.route("first", { path: true });',
+      output: null,
+      errors: [
+        {
+          message: buildUnsupportedArgumentsErrorMessage({
+            source: {
+              loc: {
+                start: {
+                  line: 1,
+                  column: 0,
                 },
               },
             },
