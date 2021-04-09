@@ -97,6 +97,8 @@ ruleTester.run('no-shadow-route-definition', rule, {
       this.route('views', { path: 'views/:viewId' });
       this.route('viewcollections', { path: 'viewcollections/:viewCollectionId' });
     });`,
+    `this.route('post', { path: '/:post' });
+    this.route('edit', { path: '/:post/edit' });`,
 
     // With dynamic/variable route or path name:
     'this.route(someVariable);',
