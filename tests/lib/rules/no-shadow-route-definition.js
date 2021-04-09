@@ -148,6 +148,82 @@ ruleTester.run('no-shadow-route-definition', rule, {
   invalid: [
     {
       code: `
+        this.route('post', { path: '' });
+        this.route('edit', { path: '/' });
+      `,
+      output: null,
+      errors: [
+        {
+          message: buildErrorMessage({
+            leftRoute: {
+              name: 'edit',
+              fullPath: '/',
+              source: {
+                loc: {
+                  start: {
+                    line: 3,
+                    column: 8,
+                  },
+                },
+              },
+            },
+            rightRoute: {
+              name: 'post',
+              fullPath: '',
+              source: {
+                loc: {
+                  start: {
+                    line: 2,
+                    column: 8,
+                  },
+                },
+              },
+            },
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `
+        this.route('post', { path: ' ' });
+        this.route('edit', { path: ' / ' });
+      `,
+      output: null,
+      errors: [
+        {
+          message: buildErrorMessage({
+            leftRoute: {
+              name: 'edit',
+              fullPath: ' / ',
+              source: {
+                loc: {
+                  start: {
+                    line: 3,
+                    column: 8,
+                  },
+                },
+              },
+            },
+            rightRoute: {
+              name: 'post',
+              fullPath: ' ',
+              source: {
+                loc: {
+                  start: {
+                    line: 2,
+                    column: 8,
+                  },
+                },
+              },
+            },
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `
         this.route("blog");
         this.route("blog");
       `,
@@ -157,7 +233,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
           message: buildErrorMessage({
             leftRoute: {
               name: 'blog',
-              fullPath: '/blog',
+              fullPath: 'blog',
               source: {
                 loc: {
                   start: {
@@ -169,7 +245,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
             },
             rightRoute: {
               name: 'blog',
-              fullPath: '/blog',
+              fullPath: 'blog',
               source: {
                 loc: {
                   start: {
@@ -197,7 +273,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
           message: buildErrorMessage({
             leftRoute: {
               name: 'post',
-              fullPath: '/post',
+              fullPath: 'post',
               source: {
                 loc: {
                   start: {
@@ -239,7 +315,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
           message: buildErrorMessage({
             leftRoute: {
               name: 'post',
-              fullPath: '/post',
+              fullPath: 'post',
               source: {
                 loc: {
                   start: {
@@ -281,7 +357,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
           message: buildErrorMessage({
             leftRoute: {
               name: 'post',
-              fullPath: '/post',
+              fullPath: 'post',
               source: {
                 loc: {
                   start: {
@@ -446,7 +522,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
             },
             rightRoute: {
               name: 'blog',
-              fullPath: '/*blog',
+              fullPath: '*blog',
               source: {
                 loc: {
                   start: {
@@ -487,6 +563,46 @@ ruleTester.run('no-shadow-route-definition', rule, {
             rightRoute: {
               name: 'blog',
               fullPath: '/*blog',
+              source: {
+                loc: {
+                  start: {
+                    line: 3,
+                    column: 10,
+                  },
+                },
+              },
+            },
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `
+        this.route("main", { path: " / " }, function() {
+          this.route("blog", { path: " *blog " });
+        });
+        this.route("blog", { path: "/*blog" });
+      `,
+      output: null,
+      errors: [
+        {
+          message: buildErrorMessage({
+            leftRoute: {
+              name: 'blog',
+              fullPath: '/*blog',
+              source: {
+                loc: {
+                  start: {
+                    line: 5,
+                    column: 8,
+                  },
+                },
+              },
+            },
+            rightRoute: {
+              name: 'blog',
+              fullPath: ' /  *blog ',
               source: {
                 loc: {
                   start: {
@@ -564,7 +680,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
             },
             rightRoute: {
               name: 'blog',
-              fullPath: '/:blog',
+              fullPath: ':blog',
               source: {
                 loc: {
                   start: {
@@ -602,7 +718,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
             },
             rightRoute: {
               name: 'blog',
-              fullPath: '/:blog',
+              fullPath: ':blog',
               source: {
                 loc: {
                   start: {
@@ -708,7 +824,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
           message: buildErrorMessage({
             leftRoute: {
               name: 'second',
-              fullPath: '/main/',
+              fullPath: 'main/',
               source: {
                 loc: {
                   start: {
@@ -720,7 +836,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
             },
             rightRoute: {
               name: 'first',
-              fullPath: '/main/',
+              fullPath: 'main/',
               source: {
                 loc: {
                   start: {
@@ -748,7 +864,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
           message: buildErrorMessage({
             leftRoute: {
               name: 'second',
-              fullPath: '/someVariable/',
+              fullPath: 'someVariable/',
               source: {
                 loc: {
                   start: {
@@ -760,7 +876,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
             },
             rightRoute: {
               name: 'first',
-              fullPath: '/someVariable/',
+              fullPath: 'someVariable/',
               source: {
                 loc: {
                   start: {
@@ -786,7 +902,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
           message: buildErrorMessage({
             leftRoute: {
               name: 'someVariable',
-              fullPath: '/someVariable',
+              fullPath: 'someVariable',
               source: {
                 loc: {
                   start: {
@@ -798,7 +914,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
             },
             rightRoute: {
               name: 'someVariable',
-              fullPath: '/someVariable',
+              fullPath: 'someVariable',
               source: {
                 loc: {
                   start: {
@@ -824,7 +940,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
           message: buildErrorMessage({
             leftRoute: {
               name: 'second',
-              fullPath: '/someVariable',
+              fullPath: 'someVariable',
               source: {
                 loc: {
                   start: {
@@ -836,7 +952,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
             },
             rightRoute: {
               name: 'first',
-              fullPath: '/someVariable',
+              fullPath: 'someVariable',
               source: {
                 loc: {
                   start: {
@@ -862,7 +978,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
           message: buildErrorMessage({
             leftRoute: {
               name: 'null',
-              fullPath: '/someVariable',
+              fullPath: 'someVariable',
               source: {
                 loc: {
                   start: {
@@ -874,7 +990,7 @@ ruleTester.run('no-shadow-route-definition', rule, {
             },
             rightRoute: {
               name: 'null',
-              fullPath: '/someVariable',
+              fullPath: 'someVariable',
               source: {
                 loc: {
                   start: {
@@ -922,7 +1038,7 @@ describe('no-shadow-route-definition', () => {
     });
 
     expect(message).toStrictEqual(
-      'Route "second" (main/, 4L:10C) is shadowing route "first" (main/, 3L:10C)'
+      'Route "second" ("main/", 4L:10C) is shadowing route "first" ("main/", 3L:10C)'
     );
   });
 });
