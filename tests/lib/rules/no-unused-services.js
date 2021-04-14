@@ -41,7 +41,7 @@ const usecases = [
 ];
 
 const valid = [];
-usecases.forEach((use) => {
+for (const use of usecases) {
   valid.push({
     code: `
       class MyClass {
@@ -64,24 +64,23 @@ usecases.forEach((use) => {
     `,
     parser: require.resolve('babel-eslint'),
   });
-});
+}
 
 ruleTester.run('no-unused-services', rule, {
   valid,
   invalid: [
     {
-      code: `class MyClass { @service('foo') fooName; }`,
-      output: `class MyClass {  }`,
+      code: "class MyClass { @service('foo') fooName; }",
+      output: 'class MyClass {  }',
       parser: require.resolve('babel-eslint'),
       errors: [{ message }],
     },
 
     {
-      code: `Component.extend({ fooName: service('foo'), });`,
-      output: `Component.extend({  });`,
+      code: "Component.extend({ fooName: service('foo'), });",
+      output: 'Component.extend({  });',
       parser: require.resolve('babel-eslint'),
       errors: [{ message }],
     },
   ],
 });
-

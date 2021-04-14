@@ -11,47 +11,50 @@ By removing unused services, we can reduce the amount of code we have and improv
 Examples of **incorrect** code for this rule:
 
 ```js
-@service('foobarbaz') foo;
-OR
-foo: service('foobarbaz')
+class MyClass {
+  @service('foobarbaz') foo;
 
-// foo is not referenced below at all
+  // foo is not referenced below at all
+}
+
+Component.extend({
+  foo: service('foobarbaz')
+
+  // foo is not referenced below at all
+});
 ```
 
 Examples of **correct** usages of services for this rule:
 
 ```js
-@service('foobarbaz') foo;
-OR
-foo: service('foobarbaz')
+/* Injected service 'foo' above */
 
 // this.get
-this.get('foo')
-this.get('foo.bar')
+this.get('foo');
+this.get('foo.bar');
 
 // this.getProperties
-this.getProperties('foo')
-this.getProperties('foo.bar')
-this.getProperties(['foo'])
-this.getProperties(['foo.bar'])
+this.getProperties('foo');
+this.getProperties('foo.bar');
+this.getProperties(['foo']);
+this.getProperties(['foo.bar']);
 
 // Ember.get
-get(this, 'foo')
-get(this, 'foo.bar')
+get(this, 'foo');
+get(this, 'foo.bar');
 
 // Ember.getProperties
-getProperties(this, 'foo')
-getProperties(this, 'foo.bar')
-getProperties(this, ['foo'])
-getProperties(this, ['foo.bar'])
+getProperties(this, 'foo');
+getProperties(this, 'foo.bar');
+getProperties(this, ['foo']);
+getProperties(this, ['foo.bar']);
 
 // direct this invocation
-this.foo
-this.foo.bar
+this.foo;
+this.foo.bar;
 
 // destructured this
-const { foo } = this
-let { foo } = this
+const { foo } = this;
 ```
 
 ## References
