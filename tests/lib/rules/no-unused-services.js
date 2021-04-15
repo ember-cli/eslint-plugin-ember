@@ -86,7 +86,17 @@ ruleTester.run('no-unused-services', rule, {
       errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }], type: 'Property' }],
     },
     {
+      code: "Component.extend({ fooName: service('foo') });",
+      output: null,
+      errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }], type: 'Property' }],
+    },
+    {
       code: 'Component.extend({ fooName: service(), });',
+      output: null,
+      errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }], type: 'Property' }],
+    },
+    {
+      code: 'Component.extend({ fooName: service() });',
       output: null,
       errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }], type: 'Property' }],
     },

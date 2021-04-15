@@ -16,7 +16,7 @@ import Component from '@glimmer/component';
 export default class MyComponent extends Component {
   @service() myService;
 
-  // foo is not referenced below at all
+  // myService is not referenced below at all
 }
 ```
 
