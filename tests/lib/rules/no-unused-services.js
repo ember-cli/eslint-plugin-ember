@@ -22,6 +22,7 @@ const ruleTester = new RuleTester({
 
 const usecases = [
   'this.fooName;',
+  'this.fooName[0]',
   'this.fooName.prop;',
   'this.fooName.func();',
   "this.get('fooName');",
@@ -42,26 +43,28 @@ const usecases = [
 
 const valid = [];
 for (const use of usecases) {
-  valid.push({
-    code: `
-      class MyClass {
-        @service('foo')
-        fooName;
+  valid.push(
+    `class MyClass {
+      @service('foo') fooName;
 
-        fooFunc() { ${use} }
-      }
-    `,
-  });
+      fooFunc() { ${use} }
+    }`,
+    `class MyClass {
+      @service() fooName;
 
-  valid.push({
-    code: `
-      Component.extend({
-        fooName: service('foo'),
+      fooFunc() { ${use} }
+    }`,
+    `Component.extend({
+      fooName: service('foo'),
 
-        fooFunc() { ${use} }
-      });
-    `,
-  });
+      fooFunc() { ${use} }
+    });`,
+    `Component.extend({
+      fooName: service(),
+
+      fooFunc() { ${use} }
+    });`
+  );
 }
 
 ruleTester.run('no-unused-services', rule, {
@@ -72,9 +75,18 @@ ruleTester.run('no-unused-services', rule, {
       output: null,
       errors: [{ message, suggestions: [{ output: 'class MyClass {  }' }] }],
     },
-
+    {
+      code: 'class MyClass { @service() fooName; }',
+      output: null,
+      errors: [{ message, suggestions: [{ output: 'class MyClass {  }' }] }],
+    },
     {
       code: "Component.extend({ fooName: service('foo'), });",
+      output: null,
+      errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }] }],
+    },
+    {
+      code: 'Component.extend({ fooName: service(), });',
       output: null,
       errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }] }],
     },
