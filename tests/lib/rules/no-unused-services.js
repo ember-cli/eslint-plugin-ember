@@ -5,8 +5,8 @@
 const rule = require('../../../lib/rules/no-unused-services');
 const RuleTester = require('eslint').RuleTester;
 
-const { ERROR_MESSAGE } = rule;
-const message = ERROR_MESSAGE('fooName');
+const { getErrorMessage } = rule;
+const message = getErrorMessage('fooName');
 
 //------------------------------------------------------------------------------
 // Tests
@@ -51,7 +51,6 @@ for (const use of usecases) {
         fooFunc() { ${use} }
       }
     `,
-    parser: require.resolve('babel-eslint'),
   });
 
   valid.push({
@@ -62,7 +61,6 @@ for (const use of usecases) {
         fooFunc() { ${use} }
       });
     `,
-    parser: require.resolve('babel-eslint'),
   });
 }
 
@@ -71,16 +69,14 @@ ruleTester.run('no-unused-services', rule, {
   invalid: [
     {
       code: "class MyClass { @service('foo') fooName; }",
-      output: 'class MyClass {  }',
-      parser: require.resolve('babel-eslint'),
-      errors: [{ message }],
+      output: null,
+      errors: [{ message, suggestions: [{ output: 'class MyClass {  }' }] }],
     },
 
     {
       code: "Component.extend({ fooName: service('foo'), });",
-      output: 'Component.extend({  });',
-      parser: require.resolve('babel-eslint'),
-      errors: [{ message }],
+      output: null,
+      errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }] }],
     },
   ],
 });

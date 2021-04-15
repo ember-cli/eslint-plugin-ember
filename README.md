@@ -156,7 +156,6 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | :white_check_mark: | [no-incorrect-calls-with-inline-anonymous-functions](./docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | disallow inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce` |
 | :white_check_mark: | [no-invalid-debug-function-arguments](./docs/rules/no-invalid-debug-function-arguments.md) | disallow usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. |
 |  | [no-restricted-service-injections](./docs/rules/no-restricted-service-injections.md) | disallow injecting certain services under certain paths |
-| :wrench: | [no-unused-services](./docs/rules/no-unused-services.md) | disallow unused service injections |
 |  | [require-fetch-import](./docs/rules/require-fetch-import.md) | enforce explicit import for `fetch()` |
 
 ### Routes
@@ -172,11 +171,17 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |  | [route-path-style](./docs/rules/route-path-style.md) | enforce usage of kebab-case (instead of snake_case or camelCase) in route paths |
 | :white_check_mark: | [routes-segments-snake-case](./docs/rules/routes-segments-snake-case.md) | enforce usage of snake_cased dynamic segments in routes |
 
-### Stylistic Issues
+### Services
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :wrench: | [no-unnecessary-service-injection-argument](./docs/rules/no-unnecessary-service-injection-argument.md) | disallow unnecessary argument when injecting services |
+|  | [no-unused-services](./docs/rules/no-unused-services.md) | disallow unused service injections |
+
+### Stylistic Issues
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
 | :wrench: | [order-in-components](./docs/rules/order-in-components.md) | enforce proper order of properties in components |
 | :wrench: | [order-in-controllers](./docs/rules/order-in-controllers.md) | enforce proper order of properties in controllers |
 | :wrench: | [order-in-models](./docs/rules/order-in-models.md) | enforce proper order of properties in models |
