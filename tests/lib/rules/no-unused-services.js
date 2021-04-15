@@ -6,7 +6,9 @@ const rule = require('../../../lib/rules/no-unused-services');
 const RuleTester = require('eslint').RuleTester;
 
 const { getErrorMessage } = rule;
-const message = getErrorMessage('fooName');
+
+const SERVICE_NAME = 'fooName';
+const message = getErrorMessage(SERVICE_NAME);
 
 //------------------------------------------------------------------------------
 // Tests
@@ -53,78 +55,136 @@ function generateUseCasesFor(propertyName) {
  * @returns {Array}
  */
 function generateValid() {
-  const name = 'fooName';
-  const usecases = generateUseCasesFor(name);
+  const usecases = generateUseCasesFor(SERVICE_NAME);
   const valid = [];
   for (const use of usecases) {
     valid.push(
-      `class MyClass { @service('foo') ${name}; fooFunc() {${use}} }`,
-      `class MyClass { @service() ${name}; fooFunc() {${use}} }`,
-      `Component.extend({ ${name}: service('foo'), fooFunc() {${use}} });`,
-      `Component.extend({ ${name}: service(), fooFunc() {${use}} });`
+      `class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${use}} }`,
+      `class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${use}} }`,
+      `Component.extend({ ${SERVICE_NAME}: service('foo'), fooFunc() {${use}} });`,
+      `Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${use}} });`
     );
   }
   return valid;
 }
 
-const unrelatedPropUsecases = generateUseCasesFor('unrelatedProp').join('');
+// Testing for unrelated props + some edge cases
+const unrelatedPropUses = generateUseCasesFor('unrelatedProp').join('').concat('let foo;');
 
 ruleTester.run('no-unused-services', rule, {
   valid: generateValid(),
   invalid: [
     {
-      code: `class MyClass { @service('foo') fooName; fooFunc() {${unrelatedPropUsecases}} }`,
+      code: `class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${unrelatedPropUses}} }`,
       output: null,
       errors: [
         {
           message,
-          suggestions: [{ output: `class MyClass {  fooFunc() {${unrelatedPropUsecases}} }` }],
+          suggestions: [{ output: `class MyClass {  fooFunc() {${unrelatedPropUses}} }` }],
           type: 'ClassProperty',
         },
       ],
     },
     {
-      code: `class MyClass { @service() fooName; fooFunc() {${unrelatedPropUsecases}} }`,
+      code: `class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${unrelatedPropUses}} }`,
       output: null,
       errors: [
         {
           message,
-          suggestions: [{ output: `class MyClass {  fooFunc() {${unrelatedPropUsecases}} }` }],
+          suggestions: [{ output: `class MyClass {  fooFunc() {${unrelatedPropUses}} }` }],
           type: 'ClassProperty',
         },
       ],
     },
     {
-      code: `Component.extend({ fooName: service('foo'), fooFunc() {${unrelatedPropUsecases}} });`,
+      code: `Component.extend({ ${SERVICE_NAME}: service('foo'), fooFunc() {${unrelatedPropUses}} });`,
       output: null,
       errors: [
         {
           message,
-          suggestions: [{ output: `Component.extend({  fooFunc() {${unrelatedPropUsecases}} });` }],
+          suggestions: [{ output: `Component.extend({  fooFunc() {${unrelatedPropUses}} });` }],
           type: 'Property',
         },
       ],
     },
     {
-      code: "Component.extend({ fooName: service('foo') });",
+      code: `Component.extend({ ${SERVICE_NAME}: service('foo') });`,
       output: null,
       errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }], type: 'Property' }],
     },
     {
-      code: `Component.extend({ fooName: service(), fooFunc() {${unrelatedPropUsecases}} });`,
+      code: `Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${unrelatedPropUses}} });`,
       output: null,
       errors: [
         {
           message,
-          suggestions: [{ output: `Component.extend({  fooFunc() {${unrelatedPropUsecases}} });` }],
+          suggestions: [{ output: `Component.extend({  fooFunc() {${unrelatedPropUses}} });` }],
           type: 'Property',
         },
       ],
     },
     {
-      code: 'Component.extend({ fooName: service() });',
+      code: `Component.extend({ ${SERVICE_NAME}: service() });`,
       output: null,
       errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }], type: 'Property' }],
+    },
+    /* Multiple Classes */
+    {
+      code: `class MyClass1 { @service() ${SERVICE_NAME}; } class MyClass2 { fooFunc() {this.${SERVICE_NAME};} }`,
+      output: null,
+      errors: [
+        {
+          message,
+          suggestions: [
+            { output: `class MyClass1 {  } class MyClass2 { fooFunc() {this.${SERVICE_NAME};} }` },
+          ],
+          type: 'ClassProperty',
+        },
+      ],
+    },
+    {
+      code: `class MyClass1 { fooFunc() {this.${SERVICE_NAME};} } class MyClass2 { @service() ${SERVICE_NAME}; }`,
+      output: null,
+      errors: [
+        {
+          message,
+          suggestions: [
+            { output: `class MyClass1 { fooFunc() {this.${SERVICE_NAME};} } class MyClass2 {  }` },
+          ],
+          type: 'ClassProperty',
+        },
+      ],
+    },
+    /* Nested Classes */
+    {
+      code: `class MyClass1 { @service() ${SERVICE_NAME}; fooFunc1() { class MyClass2 { fooFunc2() {this.${SERVICE_NAME};} } } }`,
+      output: null,
+      errors: [
+        {
+          message,
+          suggestions: [
+            {
+              output: `class MyClass1 {  fooFunc1() { class MyClass2 { fooFunc2() {this.${SERVICE_NAME};} } } }`,
+            },
+          ],
+          type: 'ClassProperty',
+        },
+      ],
+    },
+    {
+      code: `class MyClass1 { fooFunc1() {this.${SERVICE_NAME};} fooFunc2() { class MyClass2 { @service() ${SERVICE_NAME}; } } }`,
+      output: null,
+      errors: [
+        {
+          message,
+          suggestions: [
+            {
+              output: `class MyClass1 { fooFunc1() {this.${SERVICE_NAME};} fooFunc2() { class MyClass2 {  } } }`,
+            },
+          ],
+          type: 'ClassProperty',
+        },
+      ],
     },
   ],
 });
