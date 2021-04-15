@@ -157,8 +157,12 @@ module.exports = {
       env: { jest: true },
     },
     {
-      // Markdown code samples in documentation:
       files: ['**/*.md'],
+      processor: 'markdown/markdown',
+    },
+    {
+      // Markdown code samples in documentation:
+      files: ['**/*.md/*.js'],
       plugins: ['markdown'],
       parserOptions: {
         sourceType: 'module',
