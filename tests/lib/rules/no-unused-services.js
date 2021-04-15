@@ -73,22 +73,22 @@ ruleTester.run('no-unused-services', rule, {
     {
       code: "class MyClass { @service('foo') fooName; }",
       output: null,
-      errors: [{ message, suggestions: [{ output: 'class MyClass {  }' }] }],
+      errors: [{ message, suggestions: [{ output: 'class MyClass {  }' }], type: 'ClassProperty' }],
     },
     {
       code: 'class MyClass { @service() fooName; }',
       output: null,
-      errors: [{ message, suggestions: [{ output: 'class MyClass {  }' }] }],
+      errors: [{ message, suggestions: [{ output: 'class MyClass {  }' }], type: 'ClassProperty' }],
     },
     {
       code: "Component.extend({ fooName: service('foo'), });",
       output: null,
-      errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }] }],
+      errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }], type: 'Property' }],
     },
     {
       code: 'Component.extend({ fooName: service(), });',
       output: null,
-      errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }] }],
+      errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }], type: 'Property' }],
     },
   ],
 });
