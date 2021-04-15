@@ -20,70 +20,90 @@ const ruleTester = new RuleTester({
   parser: require.resolve('babel-eslint'),
 });
 
-const usecases = [
-  'this.fooName;',
-  'this.fooName[0]',
-  'this.fooName.prop;',
-  'this.fooName.func();',
-  "this.get('fooName');",
-  "this.get('fooName.prop');",
-  "get(this, 'fooName');",
-  "get(this, 'fooName.prop');",
-  "this.getProperties('a', 'fooName');",
-  "this.getProperties('a', 'fooName.prop');",
-  "this.getProperties(['a', 'fooName']);",
-  "this.getProperties(['a', 'fooName.prop']);",
-  "getProperties(this, 'a', 'fooName');",
-  "getProperties(this, 'a', 'fooName.prop');",
-  "getProperties(this, ['a', 'fooName']);",
-  "getProperties(this, ['a', 'fooName.prop']);",
-  'const { a, b, fooName } = this;',
-  'let { a, fooName, b } = this;',
-];
-
-const valid = [];
-for (const use of usecases) {
-  valid.push(
-    `class MyClass {
-      @service('foo') fooName;
-
-      fooFunc() { ${use} }
-    }`,
-    `class MyClass {
-      @service() fooName;
-
-      fooFunc() { ${use} }
-    }`,
-    `Component.extend({
-      fooName: service('foo'),
-
-      fooFunc() { ${use} }
-    });`,
-    `Component.extend({
-      fooName: service(),
-
-      fooFunc() { ${use} }
-    });`
-  );
+/**
+ * Generate an array of usecases using the given property name
+ * @param {String} propertyName The given property name to access
+ * @returns {Array}
+ */
+function generateUseCasesFor(propertyName) {
+  return [
+    `this.${propertyName};`,
+    `this.${propertyName}[0];`,
+    `this.${propertyName}.prop;`,
+    `this.${propertyName}.func();`,
+    `this.get('${propertyName}');`,
+    `this.get('${propertyName}.prop');`,
+    `get(this, '${propertyName}');`,
+    `get(this, '${propertyName}.prop');`,
+    `this.getProperties('a', '${propertyName}');`,
+    `this.getProperties('a', '${propertyName}.prop');`,
+    `this.getProperties(['a', '${propertyName}']);`,
+    `this.getProperties(['a', '${propertyName}.prop']);`,
+    `getProperties(this, 'a', '${propertyName}');`,
+    `getProperties(this, 'a', '${propertyName}.prop');`,
+    `getProperties(this, ['a', '${propertyName}']);`,
+    `getProperties(this, ['a', '${propertyName}.prop']);`,
+    `const { a, b, ${propertyName} } = this;`,
+    `let { c, ${propertyName} : prop, d } = this;`,
+  ];
 }
 
+/**
+ * Generate an array of valid test cases
+ * @returns {Array}
+ */
+function generateValid() {
+  const name = 'fooName';
+  const usecases = generateUseCasesFor(name);
+  const valid = [];
+  for (const use of usecases) {
+    valid.push(
+      `class MyClass { @service('foo') ${name}; fooFunc() {${use}} }`,
+      `class MyClass { @service() ${name}; fooFunc() {${use}} }`,
+      `Component.extend({ ${name}: service('foo'), fooFunc() {${use}} });`,
+      `Component.extend({ ${name}: service(), fooFunc() {${use}} });`
+    );
+  }
+  return valid;
+}
+
+const unrelatedPropUsecases = generateUseCasesFor('unrelatedProp').join('');
+
 ruleTester.run('no-unused-services', rule, {
-  valid,
+  valid: generateValid(),
   invalid: [
     {
-      code: "class MyClass { @service('foo') fooName; }",
+      code: `class MyClass { @service('foo') fooName; fooFunc() {${unrelatedPropUsecases}} }`,
       output: null,
-      errors: [{ message, suggestions: [{ output: 'class MyClass {  }' }], type: 'ClassProperty' }],
+      errors: [
+        {
+          message,
+          suggestions: [{ output: `class MyClass {  fooFunc() {${unrelatedPropUsecases}} }` }],
+          type: 'ClassProperty',
+        },
+      ],
     },
     {
-      code: 'class MyClass { @service() fooName; }',
+      code: `class MyClass { @service() fooName; fooFunc() {${unrelatedPropUsecases}} }`,
       output: null,
-      errors: [{ message, suggestions: [{ output: 'class MyClass {  }' }], type: 'ClassProperty' }],
+      errors: [
+        {
+          message,
+          suggestions: [{ output: `class MyClass {  fooFunc() {${unrelatedPropUsecases}} }` }],
+          type: 'ClassProperty',
+        },
+      ],
     },
     {
-      code: "Component.extend({ fooName: service('foo'), });",
+      code: `Component.extend({ fooName: service('foo'), fooFunc() {${unrelatedPropUsecases}} });`,
       output: null,
-      errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }], type: 'Property' }],
+      errors: [
+        {
+          message,
+          suggestions: [{ output: `Component.extend({  fooFunc() {${unrelatedPropUsecases}} });` }],
+          type: 'Property',
+        },
+      ],
     },
     {
       code: "Component.extend({ fooName: service('foo') });",
@@ -91,9 +111,15 @@ ruleTester.run('no-unused-services', rule, {
       errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }], type: 'Property' }],
     },
     {
-      code: 'Component.extend({ fooName: service(), });',
+      code: `Component.extend({ fooName: service(), fooFunc() {${unrelatedPropUsecases}} });`,
       output: null,
-      errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }], type: 'Property' }],
+      errors: [
+        {
+          message,
+          suggestions: [{ output: `Component.extend({  fooFunc() {${unrelatedPropUsecases}} });` }],
+          type: 'Property',
+        },
+      ],
     },
     {
       code: 'Component.extend({ fooName: service() });',
