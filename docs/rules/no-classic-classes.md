@@ -22,8 +22,8 @@ export default Component.extend({});
 ```
 
 ```javascript
-// With option: additionalClassImports = ['my-custom-addon']
-import CustomClass from 'my-custom-addon';
+// With option: additionalClassImports = ['path/to/my-custom-addon']
+import CustomClass from 'path/to/my-custom-addon';
 
 export default CustomClass.extend({});
 ```
