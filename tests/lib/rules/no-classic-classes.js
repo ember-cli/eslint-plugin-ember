@@ -121,5 +121,23 @@ ruleTester.run('no-classic-classes', rule, {
       output: null,
       errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
     },
+    {
+      code: `
+        import Component from '@ember/component';
+        const config = {};
+        export default Component.extend(config);
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
+    },
+    {
+      code: `
+        import { inject as service } from '@ember/service';
+
+        Service.extend(SomeMixin, {})
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
+    },
   ],
 });
