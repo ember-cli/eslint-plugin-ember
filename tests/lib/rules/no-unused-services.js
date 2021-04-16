@@ -159,7 +159,13 @@ ruleTester.run('no-unused-services', rule, {
     {
       code: `Component.extend({ ${SERVICE_NAME}: service('foo') });`,
       output: null,
-      errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }], type: 'Property' }],
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [{ messageId: 'removeServiceInjection', output: 'Component.extend({  });' }],
+          type: 'Property',
+        },
+      ],
     },
     {
       code: `Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${nonUses}} });`,
@@ -180,7 +186,13 @@ ruleTester.run('no-unused-services', rule, {
     {
       code: `Component.extend({ ${SERVICE_NAME}: service() });`,
       output: null,
-      errors: [{ message, suggestions: [{ output: 'Component.extend({  });' }], type: 'Property' }],
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [{ messageId: 'removeServiceInjection', output: 'Component.extend({  });' }],
+          type: 'Property',
+        },
+      ],
     },
     /* Using get/getProperties without @ember/object import */
     {
@@ -254,9 +266,12 @@ ruleTester.run('no-unused-services', rule, {
       output: null,
       errors: [
         {
-          message,
+          messageId: 'main',
           suggestions: [
-            { output: `class MyClass1 {  } class MyClass2 { fooFunc() {this.${SERVICE_NAME};} }` },
+            {
+              messageId: 'removeServiceInjection',
+              output: `class MyClass1 {  } class MyClass2 { fooFunc() {this.${SERVICE_NAME};} }`,
+            },
           ],
           type: 'ClassProperty',
         },
@@ -267,9 +282,12 @@ ruleTester.run('no-unused-services', rule, {
       output: null,
       errors: [
         {
-          message,
+          messageId: 'main',
           suggestions: [
-            { output: `class MyClass1 { fooFunc() {this.${SERVICE_NAME};} } class MyClass2 {  }` },
+            {
+              messageId: 'removeServiceInjection',
+              output: `class MyClass1 { fooFunc() {this.${SERVICE_NAME};} } class MyClass2 {  }`,
+            },
           ],
           type: 'ClassProperty',
         },
@@ -281,9 +299,10 @@ ruleTester.run('no-unused-services', rule, {
       output: null,
       errors: [
         {
-          message,
+          messageId: 'main',
           suggestions: [
             {
+              messageId: 'removeServiceInjection',
               output: `class MyClass1 {  fooFunc1() { class MyClass2 { fooFunc2() {this.${SERVICE_NAME};} } } }`,
             },
           ],
@@ -296,9 +315,10 @@ ruleTester.run('no-unused-services', rule, {
       output: null,
       errors: [
         {
-          message,
+          messageId: 'main',
           suggestions: [
             {
+              messageId: 'removeServiceInjection',
               output: `class MyClass1 { fooFunc1() {this.${SERVICE_NAME};} fooFunc2() { class MyClass2 {  } } }`,
             },
           ],
