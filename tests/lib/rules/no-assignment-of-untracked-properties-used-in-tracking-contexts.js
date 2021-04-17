@@ -113,7 +113,7 @@ ruleTester.run('no-assignment-of-untracked-properties-used-in-tracking-contexts'
       code: `
       import { computed } from '@ember/object';
       import SomeThing from 'random';
-      SomeThing.extends({
+      SomeThing.extend({
         prop: computed('x', function() {}),
         myFunction() { this.x = 123; }
       })`,
@@ -151,10 +151,10 @@ ruleTester.run('no-assignment-of-untracked-properties-used-in-tracking-contexts'
       code: `
       import { computed } from '@ember/object';
       import Component from '@ember/component';
-      Component.extends({
+      Component.extend({
         prop: computed('x') // This is here to make sure it is not considered in the next class.
       });
-      Component.extends({
+      Component.extend({
         ...someProp.getProperties('propA', 'propB'),
         prop1: computed(),
         prop2: computed(function() {}),
@@ -169,7 +169,7 @@ ruleTester.run('no-assignment-of-untracked-properties-used-in-tracking-contexts'
       import { readOnly, equal, gt } from '@ember/object/computed';
       import { computed } from '@ember/object';
       import Component from '@ember/component';
-      Component.extends({
+      Component.extend({
         actions: {},
       });`,
       filename: '/components/foo.js',
@@ -430,7 +430,7 @@ import { computed } from '@ember/object';
       class MyClass extends Component {
         @tracked x // This is here to ensure that it is ignored in the subsequent class.
       }
-      Component.extends({
+      Component.extend({
         myProp: computed('x', function() {}),
         myFunction() { this.x = 123; }
       })`,
@@ -442,7 +442,7 @@ import { computed } from '@ember/object';
       class MyClass extends Component {
         @tracked x // This is here to ensure that it is ignored in the subsequent class.
       }
-      Component.extends({
+      Component.extend({
         myProp: computed('x', function() {}),
         myFunction() { set(this, 'x', 123); }
       })`,
@@ -459,7 +459,7 @@ import { computed } from '@ember/object';
       code: `
       import { readOnly as ro } from '@ember/object/computed';
       import Component from '@ember/component';
-      Component.extends({
+      Component.extend({
         myProp: ro('x'),
         myFunction() { this.x = 123; }
       })`,
@@ -467,7 +467,7 @@ import { computed } from '@ember/object';
       import { set } from '@ember/object';
 import { readOnly as ro } from '@ember/object/computed';
       import Component from '@ember/component';
-      Component.extends({
+      Component.extend({
         myProp: ro('x'),
         myFunction() { set(this, 'x', 123); }
       })`,
@@ -479,7 +479,7 @@ import { readOnly as ro } from '@ember/object/computed';
       code: `
       import { computed as c } from '@ember/object';
       import Component from '@ember/component';
-      Component.extends({
+      Component.extend({
         myProp: c.readOnly('x'),
         myFunction() { this.x = 123; }
       })`,
@@ -487,7 +487,7 @@ import { readOnly as ro } from '@ember/object/computed';
       import { set } from '@ember/object';
 import { computed as c } from '@ember/object';
       import Component from '@ember/component';
-      Component.extends({
+      Component.extend({
         myProp: c.readOnly('x'),
         myFunction() { set(this, 'x', 123); }
       })`,
@@ -500,7 +500,7 @@ import { computed as c } from '@ember/object';
       code: `
       import { mapBy } from '@ember/object/computed';
       import Component from '@ember/component';
-      Component.extends({
+      Component.extend({
         myProp: mapBy('chores', 'done', true),
         myFunction1() { this.chores = 123; },
         myFunction2() { this.done = 123; } // Allowed since this isn't a dependent key.
@@ -509,7 +509,7 @@ import { computed as c } from '@ember/object';
       import { set } from '@ember/object';
 import { mapBy } from '@ember/object/computed';
       import Component from '@ember/component';
-      Component.extends({
+      Component.extend({
         myProp: mapBy('chores', 'done', true),
         myFunction1() { set(this, 'chores', 123); },
         myFunction2() { this.done = 123; } // Allowed since this isn't a dependent key.
@@ -539,7 +539,7 @@ import { mapBy } from '@ember/object/computed';
       code: `
       import { rejectBy } from 'custom-macros/custom';
       import Component from '@ember/component';
-      Component.extends({
+      Component.extend({
         myProp: rejectBy('chores', 'done', true),
         myFunction1() { this.chores = 123; },
         myFunction2() { this.done = 123; }, // Allowed since this isn't a dependent key.
@@ -548,7 +548,7 @@ import { mapBy } from '@ember/object/computed';
       import { set } from '@ember/object';
 import { rejectBy } from 'custom-macros/custom';
       import Component from '@ember/component';
-      Component.extends({
+      Component.extend({
         myProp: rejectBy('chores', 'done', true),
         myFunction1() { set(this, 'chores', 123); },
         myFunction2() { this.done = 123; }, // Allowed since this isn't a dependent key.
@@ -580,7 +580,7 @@ import { rejectBy } from 'custom-macros/custom';
       code: `
       import { customComputed } from 'custom-macros/ind';
       import Component from '@ember/component';
-      Component.extends({
+      Component.extend({
         myProp: customComputed.t('unused', { tKey: 'dependency.key' }),
         myFunction1() { this.dependency = 123; },
         myFunction2() { this.unused = 123; }, // Allowed since this isn't a dependent key.
@@ -590,7 +590,7 @@ import { rejectBy } from 'custom-macros/custom';
       import { set } from '@ember/object';
 import { customComputed } from 'custom-macros/ind';
       import Component from '@ember/component';
-      Component.extends({
+      Component.extend({
         myProp: customComputed.t('unused', { tKey: 'dependency.key' }),
         myFunction1() { set(this, 'dependency', 123); },
         myFunction2() { this.unused = 123; }, // Allowed since this isn't a dependent key.
