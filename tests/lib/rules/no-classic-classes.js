@@ -26,13 +26,19 @@ ruleTester.run('no-classic-classes', rule, {
     `,
     `
       import Component from '@ember/component';
+      import Evented from '@ember/object/Evented'; // This is a mixin.
 
-      export default class MyRoute extends Route.extend(SomeMixin) {}
+      export default class MyComponent extends Component.extend(Evented) {} // Allowed to extend from mixins only.
     `,
     `
       import SomeOtherThing from 'some-other-library';
 
       export default SomeOtherThing.extend({});
+    `,
+    `
+      import Component from '@ember/component';
+      const notAnObject = 123;
+      export default Component.extend(notAnObject); // Unexpected variable type passed.
     `,
     'export default Component.extend({});', // No import
 
@@ -61,8 +67,17 @@ ruleTester.run('no-classic-classes', rule, {
     {
       code: `
         import Component from '@ember/component';
-        import Evented from '@ember/object/Evented';
+        import Evented from '@ember/object/Evented'; // This is a mixin.
         export default Component.extend(Evented, {});
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, line: 4, type: 'CallExpression' }],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+        const myMockComponent = {};
+        export default Component.extend(myMockComponent); // Object variable provided.
       `,
       output: null,
       errors: [{ message: ERROR_MESSAGE, line: 4, type: 'CallExpression' }],
@@ -86,8 +101,8 @@ ruleTester.run('no-classic-classes', rule, {
     {
       code: `
         import Component from '@ember/component';
-        import Evented from '@ember/object/evented';
-        export default class MyComponent extends Component.extend(Evented, {}) {};
+        import Evented from '@ember/object/evented'; // This is a mixin.
+        export default class MyComponent extends Component.extend(Evented, {}) {}; // Disallowed because an object is extended from.
       `,
       output: null,
       errors: [{ message: ERROR_MESSAGE, line: 4, type: 'CallExpression' }],
