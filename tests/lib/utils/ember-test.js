@@ -204,6 +204,15 @@ describe('isEmberCoreModule', () => {
     expect(emberUtils.isEmberCoreModule(context, node, 'Route')).toBeTruthy();
   });
 
+  it('should handle native class with mixin', () => {
+    const context = new FauxContext(
+      "import Route from '@ember/routing/route'; class MyRoute extends Route.extend(SomeMixin) {}",
+      'example-app/routes/path/to/some-route.js'
+    );
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberCoreModule(context, node, 'Route')).toBeTruthy();
+  });
+
   it('should check if current file is a route with native class', () => {
     const context = new FauxContext(
       "import Route from '@ember/routing/route'; class MyRoute extends Route {}",
@@ -735,6 +744,24 @@ describe('isEmberProxy', () => {
       class MyProxy extends ObjectProxy {}
     `);
     const node = context.ast.body[1];
+    expect(emberUtils.isEmberProxy(context, node)).toBeTruthy();
+  });
+
+  it('should detect ObjectProxy with mixin', () => {
+    const context = new FauxContext(`
+      import ObjectProxy from '@ember/object/proxy';
+      class MyProxy extends ObjectProxy.extend(SomeMixin) {}
+    `);
+    const node = context.ast.body[1];
+    expect(emberUtils.isEmberProxy(context, node)).toBeTruthy();
+  });
+
+  it('should detect ObjectProxy with classic class', () => {
+    const context = new FauxContext(`
+      import ObjectProxy from '@ember/object/proxy';
+      ObjectProxy.extend({});
+    `);
+    const node = context.ast.body[1].expression;
     expect(emberUtils.isEmberProxy(context, node)).toBeTruthy();
   });
 

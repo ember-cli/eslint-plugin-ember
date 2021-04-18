@@ -162,6 +162,15 @@ ruleTester.run('no-get', rule, {
       }
     }
     `,
+    `
+    import ArrayProxy from '@ember/array/proxy';
+    class MyProxy extends ArrayProxy.extend(SomeMixin) {
+      someFunction() {
+        test();
+        console.log(this.get('propertyInsideProxyObject'));
+      }
+    }
+    `,
 
     // Ignores `get()` inside classes with `unknownProperty`:
     `
