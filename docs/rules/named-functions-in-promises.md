@@ -6,7 +6,7 @@ When you use promises and its handlers, use named functions defined on parent ob
 
 ## Examples
 
-```javascript
+```js
 export default Component.extend({
   actions: {
     // BAD
@@ -54,7 +54,7 @@ export default Component.extend({
 
 And then you can make simple unit tests for handlers:
 
-```javascript
+```js
 test('it reloads user in promise handler', function (assert) {
   const component = this.subject();
   // assuming that you have `user` defined with kind of sinon spy on its reload method

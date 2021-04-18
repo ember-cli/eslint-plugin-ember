@@ -15,7 +15,7 @@ Ideally, you should also be using [new-module-imports](./new-module-imports.md);
 
 ## Examples
 
-```javascript
+```js
 // Not recommended
 this.get('fooProperty');
 this.set('fooProperty', 'bar');
@@ -25,7 +25,7 @@ object.getProperties('foo', 'bar');
 object.setProperties({ foo: 'bar', baz: 'qux' });
 ```
 
-```javascript
+```js
 // Recommended
 import { get, set, getWithDefault, getProperties, setProperties } from '@ember/object';
 

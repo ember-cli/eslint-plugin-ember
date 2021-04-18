@@ -15,7 +15,7 @@ For more details and examples of how mixins create problems down-the-line, see t
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 // my-mixin.js
 export default Mixin.create({
   isValidClassName(classname) {
@@ -28,7 +28,7 @@ export default Mixin.create({
 });
 ```
 
-```javascript
+```js
 // my-component.js
 import myMixin from 'my-mixin';
 
@@ -41,7 +41,7 @@ export default Component.extend(myMixin, {
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 // my-utils.js
 export function isValidClassName(classname) {
   return Boolean(className.match('-class'));
@@ -52,7 +52,7 @@ export function hideModal(obj, value) {
 }
 ```
 
-```javascript
+```js
 // my-component.js
 import { isValidClassName } from 'my-utils';
 

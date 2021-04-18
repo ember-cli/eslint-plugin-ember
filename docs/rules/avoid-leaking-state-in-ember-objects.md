@@ -8,7 +8,7 @@ Don't use arrays and objects as default properties in classic classes or mixins.
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 export default Foo.extend({
   items: [],
 
@@ -20,7 +20,7 @@ export default Foo.extend({
 });
 ```
 
-```javascript
+```js
 import Mixin from '@ember/object/mixin';
 
 export default Mixin.create({
@@ -30,7 +30,7 @@ export default Mixin.create({
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 export default Foo.extend({
   init(...args) {
     this._super(...args);
@@ -46,7 +46,7 @@ export default Foo.extend({
 });
 ```
 
-```javascript
+```js
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 

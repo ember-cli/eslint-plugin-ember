@@ -14,14 +14,14 @@ This rule aims to ensure that you do not use a "classic" Ember class where a nat
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 // Extending an Ember class using the "classic" class pattern is not OK
 import Component from '@ember/component';
 
 export default Component.extend({});
 ```
 
-```javascript
+```js
 // With option: additionalClassImports = ['my-custom-addon']
 import CustomClass from 'my-custom-addon';
 
@@ -30,14 +30,14 @@ export default CustomClass.extend({});
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 // Extending using a native JS class is OK
 import Component from '@ember/component';
 
 export default class MyComponent extends Component {}
 ```
 
-```javascript
+```js
 // Including a Mixin is OK
 import Component from '@ember/component';
 import Evented from '@ember/object/evented';

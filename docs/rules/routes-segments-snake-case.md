@@ -14,7 +14,7 @@ this.route('tree', { path: ':treeId' });
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 this.route('tree', { path: ':tree_id' });
 ```
 

@@ -49,7 +49,7 @@ const { testing } = Ember;
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 import Ember from 'ember';
 import Component from '@ember/component';
 

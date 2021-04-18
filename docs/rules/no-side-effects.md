@@ -14,7 +14,7 @@ Note that other side effects like network requests should be avoided as well.
 
 ## Examples
 
-```javascript
+```js
 import Component from '@ember/component';
 import { alias, filterBy } from '@ember/object/computed';
 

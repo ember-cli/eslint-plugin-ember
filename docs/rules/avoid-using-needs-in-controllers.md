@@ -8,7 +8,7 @@ Avoid using `needs` to load other controllers. Inject the required controller in
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 export default Controller.extend({
   needs: ['comments'],
   newComments: alias('controllers.comments.newest')
@@ -17,7 +17,7 @@ export default Controller.extend({
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 import Controller, { inject as controller } from '@ember/controller';
 
 export default Component.extend({

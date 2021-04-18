@@ -14,7 +14,7 @@ There has been a public `router` service since Ember 2.16 and using the private 
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
@@ -23,7 +23,7 @@ export default Component.extend({
 });
 ```
 
-```javascript
+```js
 import Component from '@ember/component';
 
 export default class MyComponent extends Component {
@@ -31,7 +31,7 @@ export default class MyComponent extends Component {
 }
 ```
 
-```javascript
+```js
 // When `catchRouterMicrolib` option is enabled.
 
 import Component from '@ember/component';
@@ -45,7 +45,7 @@ export default class MyComponent extends Component {
 }
 ```
 
-```javascript
+```js
 // When `catchRouterMain` option is enabled.
 
 import Component from '@ember/component';
@@ -61,7 +61,7 @@ export default class MyComponent extends Component {
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
@@ -70,7 +70,7 @@ export default Component.extend({
 });
 ```
 
-```javascript
+```js
 import Component from '@ember/component';
 
 export default class MyComponent extends Component {

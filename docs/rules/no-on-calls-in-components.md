@@ -10,7 +10,7 @@ The order of execution for `on()` is not deterministic.
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 export default Component.extend({
   abc: on('didInsertElement', function () {
     /* custom logic */

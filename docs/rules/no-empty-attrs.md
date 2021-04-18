@@ -20,7 +20,7 @@ export default Model.extend({
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 const { Model, attr } = DS;
 
 export default Model.extend({
