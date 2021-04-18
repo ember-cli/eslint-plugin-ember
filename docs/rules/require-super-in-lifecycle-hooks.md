@@ -12,7 +12,7 @@ When overriding lifecycle hooks inside Ember Components, Controllers, Routes, Mi
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 import Component from '@ember/component';
 
 export default Component.extend({
@@ -22,7 +22,7 @@ export default Component.extend({
 });
 ```
 
-```javascript
+```js
 import Component from '@ember/component';
 
 export default Component.extend({
@@ -32,7 +32,7 @@ export default Component.extend({
 });
 ```
 
-```javascript
+```js
 import Component from '@ember/component';
 
 class Foo extends Component {
@@ -44,7 +44,7 @@ class Foo extends Component {
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 import Component from '@ember/component';
 
 export default Component.extend({
@@ -55,7 +55,7 @@ export default Component.extend({
 });
 ```
 
-```javascript
+```js
 import Component from '@ember/component';
 
 export default Component.extend({
@@ -66,7 +66,7 @@ export default Component.extend({
 });
 ```
 
-```javascript
+```js
 import Component from '@ember/component';
 
 class Foo extends Component {
@@ -77,7 +77,7 @@ class Foo extends Component {
 }
 ```
 
-```javascript
+```js
 import Component from '@ember/component';
 
 class Foo extends Component {

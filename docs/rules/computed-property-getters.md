@@ -19,7 +19,7 @@ String option:
 
 ### always-with-setter
 
-```javascript
+```js
 import EmberObject, { computed } from '@ember/object';
 
 // BAD
@@ -53,7 +53,7 @@ EmberObject.extend({
 
 ### always
 
-```javascript
+```js
 import EmberObject, { computed } from '@ember/object';
 
 // GOOD
@@ -75,7 +75,7 @@ EmberObject.extend({
 
 ### never
 
-```javascript
+```js
 import EmberObject, { computed } from '@ember/object';
 
 // GOOD

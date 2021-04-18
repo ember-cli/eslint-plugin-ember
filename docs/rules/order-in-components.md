@@ -85,7 +85,7 @@ You should write code grouped and ordered in this way:
 
 ## Examples
 
-```javascript
+```js
 const {
   Component,
   computed,

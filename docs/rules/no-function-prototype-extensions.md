@@ -10,7 +10,7 @@ Use computed property syntax, observer syntax or module hooks instead of `.prope
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 export default Component.extend({
   abc: function () {
     /* custom logic */

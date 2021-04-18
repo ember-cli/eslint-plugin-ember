@@ -27,7 +27,7 @@ npm install --save-dev eslint-plugin-ember
 
 ### 2. Modify your `.eslintrc.js`
 
-```javascript
+```js
 // .eslintrc.js
 module.exports = {
   plugins: ['ember'],

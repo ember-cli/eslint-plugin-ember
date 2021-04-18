@@ -79,7 +79,7 @@ class FooComponent extends Component {
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 export default Controller.extend({
   actions: {
     change() {

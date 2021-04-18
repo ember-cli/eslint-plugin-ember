@@ -53,7 +53,7 @@ You should write code grouped and ordered in this way:
 
 ## Examples
 
-```javascript
+```js
 // GOOD
 export default Model.extend({
   // 1. Attributes
@@ -70,7 +70,7 @@ export default Model.extend({
 });
 ```
 
-```javascript
+```js
 // BAD
 export default Model.extend({
   mood: computed('health', 'hunger', function () {

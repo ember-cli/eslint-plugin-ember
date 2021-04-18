@@ -20,7 +20,7 @@ $('#something-rendered-by-jquery-plugin').on('click', () => {
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 import $ from 'jquery';
 import { bind } from '@ember/runloop';
 

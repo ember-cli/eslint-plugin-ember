@@ -12,7 +12,7 @@ Examples of **incorrect** code for this rule:
 
 > app/routes/index.js
 
-```javascript
+```js
 import doSomething from '../test-support/some-other-test';
 
 import Route from '@ember/routing/route';
@@ -30,7 +30,7 @@ Examples of **correct** code for this rule:
 
 > tests/unit/foo-test.js
 
-```javascript
+```js
 import setupModule from '../test-support/setup-module';
 import { module, test } from 'qunit';
 
@@ -39,7 +39,7 @@ module('Acceptance | module', setupModule());
 
 > addon-test-support/setupApplication.js
 
-```javascript
+```js
 import setupModule from '../test-support/setup-module';
 
 export default function setupApplicationTest(hooks) {

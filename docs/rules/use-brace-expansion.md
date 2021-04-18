@@ -20,7 +20,7 @@ export default Component.extend({
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 export default Component.extend({
   fullName: computed('user.{firstName,lastName}', {
     // Code

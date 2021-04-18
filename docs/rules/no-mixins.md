@@ -14,7 +14,7 @@ This rule disallows importing a mixin. This is different than [no-new-mixins](no
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 // my-octane-component.js
 import Component from '@ember/component';
 import FooMixin from '../utils/mixins/foo';
@@ -24,7 +24,7 @@ export default class FooComponent extends Component.extend(FooMixin) {
 }
 ```
 
-```javascript
+```js
 // my-component.js
 import myMixin from 'my-mixin';
 
@@ -37,7 +37,7 @@ export default Component.extend(myMixin, {
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 // my-utils.js
 export function isValidClassName(classname) {
   return Boolean(className.match('-class'));
@@ -48,7 +48,7 @@ export function hideModal(obj, value) {
 }
 ```
 
-```javascript
+```js
 // my-component.js
 import { isValidClassName } from 'my-utils';
 

@@ -12,7 +12,7 @@ While `this._super()` is the only way to invoke an overridden method in an `Embe
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 import Component from '@ember/component';
 
 export default class MyComponent extends Component {
@@ -25,7 +25,7 @@ export default class MyComponent extends Component {
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 import Component from '@ember/component';
 
 export default class MyComponent extends Component {
@@ -36,7 +36,7 @@ export default class MyComponent extends Component {
 }
 ```
 
-```javascript
+```js
 import Component from '@ember/component';
 
 export default Component.extend({

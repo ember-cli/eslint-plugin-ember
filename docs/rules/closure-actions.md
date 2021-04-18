@@ -6,7 +6,7 @@ Always use closure actions (according to DDAU convention). Exception: only when 
 
 ## Examples
 
-```javascript
+```js
 export default Controller.extend({
   actions: {
     detonate() {
@@ -22,7 +22,7 @@ Examples of **incorrect** code for this rule:
 {{awful-component detonate='detonate'}}
 ```
 
-```javascript
+```js
 // awful-component.js
 export default Component.extend({
   actions: {
@@ -39,7 +39,7 @@ Examples of **correct** code for this rule:
 {{pretty-component boom=(action 'detonate')}}
 ```
 
-```javascript
+```js
 // pretty-component.js
 export default Component.extend({
   actions: {

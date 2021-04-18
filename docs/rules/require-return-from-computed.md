@@ -10,7 +10,7 @@ Note that this rule applies only to computed properties in classic classes (i.e.
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 /* eslint "consistent-return": "off" */
 import Component from '@ember/component';
 import { computed } from '@ember/object';
@@ -42,7 +42,7 @@ export default Component.extend({
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 

@@ -26,7 +26,7 @@ Non-method versions of them can still be used, e.g. `@ember/object#get` and
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 export default class MyService extends Service {
   constructor(...args) {
     super(...args);
@@ -37,7 +37,7 @@ export default class MyService extends Service {
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 @classic
 export default class MyService extends Service {
   constructor(...args) {
@@ -47,7 +47,7 @@ export default class MyService extends Service {
 }
 ```
 
-```javascript
+```js
 import { set } from '@ember/object';
 
 export default class MyService extends Service {
@@ -58,7 +58,7 @@ export default class MyService extends Service {
 }
 ```
 
-```javascript
+```js
 import { tracked } from '@glimmer/tracking';
 
 export default class MyService extends Service {

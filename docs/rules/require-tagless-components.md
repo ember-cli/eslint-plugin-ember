@@ -14,14 +14,14 @@ Instead of having the wrapper element implicitly defined by the component, all D
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 // "Classic"-class Ember components that have the default `tagName` of `div`
 import Component from '@ember/component';
 
 export default Component.extend({});
 ```
 
-```javascript
+```js
 // "Classic"-class Ember components that have a `tagName` configured to something besides `''`
 import Component from '@ember/component';
 
@@ -30,14 +30,14 @@ export default Component.extend({
 });
 ```
 
-```javascript
+```js
 // "Native"-class Ember components that have the default `tagName` of `div`
 import Component from '@ember/component';
 
 export default class MyComponent extends Component {}
 ```
 
-```javascript
+```js
 // "Native"-class Ember components that have a `tagName` configured to something besides `''`
 import Component from '@ember/component';
 
@@ -46,7 +46,7 @@ export default class MyComponent extends Component {
 }
 ```
 
-```javascript
+```js
 // "Native"-class Ember components that use the `@tagName` decorator configured to something besides `''`
 import Component from '@ember/component';
 import { tagName } from '@ember-decorators/component';
@@ -57,7 +57,7 @@ export default class MyComponent extends Component {}
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 // "Class"-class Ember components that have a `tagName` configured to `''`
 import Component from '@ember/component';
 
@@ -66,7 +66,7 @@ export default Component.extend({
 });
 ```
 
-```javascript
+```js
 // "Native"-class Ember components that have a `tagName` configured to `''`
 import Component from '@ember/component';
 
@@ -75,7 +75,7 @@ export default class MyComponent extends Component {
 }
 ```
 
-```javascript
+```js
 // "Native"-class Ember components that use the `@tagName` decorator configured `''`
 import Component from '@ember/component';
 import { tagName } from '@ember-decorators/component';
@@ -84,7 +84,7 @@ import { tagName } from '@ember-decorators/component';
 export default class MyComponent extends Component {}
 ```
 
-```javascript
+```js
 // Glimmer components never have a `tagName` and are always valid
 import Component from '@glimmer/component';
 

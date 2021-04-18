@@ -8,7 +8,7 @@ We can do this in two ways:
 
 - Alias the model to another property name in the Controller:
 
-  ```javascript
+  ```js
   import Controller from '@ember/controller';
   import { alias } from '@ember/object/computed';
 
@@ -19,7 +19,7 @@ We can do this in two ways:
 
 - Set it as a property in the Route's `setupController` method:
 
-  ```javascript
+  ```js
   import Route from '@ember/routing/route';
 
   export default Route.extend({
@@ -31,7 +31,7 @@ We can do this in two ways:
 
 If you're passing [multiple models](https://guides.emberjs.com/v2.13.0/routing/specifying-a-routes-model/#toc_multiple-models) as an [`RSVP.hash`](https://emberjs.com/api/classes/RSVP.html#method_hash), you can also alias nested properties:
 
-```javascript
+```js
 import Controller from '@ember/controller';
 import { reads } from '@ember/object/computed';
 

@@ -12,33 +12,33 @@ Due to how qunit unloads a test module, importing a test file will cause any mod
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 import setupModule from './some-other-test';
 import { module, test } from 'qunit';
 
 module('Acceptance | module', setupModule());
 ```
 
-```javascript
+```js
 import { beforeEachSetup, testMethod } from './some-other-test';
 import { module, test } from 'qunit';
 
 module('Acceptance | module', beforeEachSetup());
 ```
 
-```javascript
+```js
 import testModule from '../../test-dir/another-test';
 import { module, test } from 'qunit';
 
 module('Acceptance | module', testModule());
 ```
 
-```javascript
+```js
 // some-test.js
 export function beforeEachSetup() {}
 ```
 
-```javascript
+```js
 // some-test.js
 function beforeEachSetup() {}
 
@@ -47,33 +47,33 @@ export default { beforeEachSetup };
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 import setupModule from './some-test-helper';
 import { module, test } from 'qunit';
 
 module('Acceptance | module', setupModule());
 ```
 
-```javascript
+```js
 // some-test-helper.js
 export function beforeEachSetup() {
   // ...
 }
 ```
 
-```javascript
+```js
 // some-test-helper.js
 function beforeEachSetup() {}
 
 export default { beforeEachSetup };
 ```
 
-```javascript
+```js
 // Any imports from `tests/helpers` are allowed.
 import { setupApplicationTest } from 'tests/helpers/setup-application-test';
 ```
 
-```javascript
+```js
 // Any exports from `tests/helpers` are allowed.
 // tests/helpers/setup-application-test.js
 export default function setupApplicationTest() {}

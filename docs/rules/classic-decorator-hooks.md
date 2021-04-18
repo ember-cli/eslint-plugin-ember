@@ -10,7 +10,7 @@ Additionally, non-classic classes may not use `destroy`.
 
 Examples of **incorrect** code for this rule:
 
-```javascript
+```js
 export default class MyService extends Service {
   init() {
     // ...
@@ -22,7 +22,7 @@ export default class MyService extends Service {
 }
 ```
 
-```javascript
+```js
 @classic
 export default class MyService extends Service {
   constructor() {
@@ -34,7 +34,7 @@ export default class MyService extends Service {
 
 Examples of **correct** code for this rule:
 
-```javascript
+```js
 @classic
 export default class MyService extends Service {
   init() {
@@ -47,7 +47,7 @@ export default class MyService extends Service {
 }
 ```
 
-```javascript
+```js
 export default class MyService extends Service {
   constructor() {
     super();
