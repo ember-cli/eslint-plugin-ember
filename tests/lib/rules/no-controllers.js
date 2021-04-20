@@ -17,6 +17,7 @@ const ruleTester = new RuleTester({
 });
 ruleTester.run('no-controllers', rule, {
   valid: [
+    // Classic class with queryParams.
     `
       import Controller from '@ember/controller';
       export default Controller.extend({
@@ -27,6 +28,18 @@ ruleTester.run('no-controllers', rule, {
         queryParams: ['query', 'sortType', 'sortOrder']
       });
     `,
+    // Classic class with queryParams: checks object argument from variable.
+    `
+      import Controller from '@ember/controller';
+      const body = { queryParams: ['query'] };
+      export default Controller.extend(body);
+    `,
+    // Classic class with queryParams: checks any object argument.
+    `
+      import Controller from '@ember/controller';
+      export default Controller.extend({ queryParams: ['query'] }, {});
+    `,
+    // Native class with queryParams.
     `
       import Controller from '@ember/controller';
       export default class ArticlesController extends Controller {
