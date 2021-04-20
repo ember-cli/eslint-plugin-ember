@@ -18,6 +18,7 @@ const ruleTester = new RuleTester({
 });
 
 const SERVICE_NAME = 'fooName';
+const SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
 const EO_IMPORTS = "import {computed, get, getProperties} from '@ember/object';";
 const RENAMED_EO_IMPORTS =
   "import {computed as cp, get as g, getProperties as gp} from '@ember/object';";
@@ -75,10 +76,10 @@ function generateMacroUseCasesFor(propertyName, renamed = false) {
   const aliasName = renamed ? 'al' : 'alias';
   const aliasImport = renamed ? RENAMED_ALIAS_IMPORT : ALIAS_IMPORT;
   return [
-    `${aliasImport} class MyClass { @service('foo') ${propertyName}; @${aliasName}('${propertyName}.prop') someAlias; }`,
-    `${aliasImport} class MyClass { @service() ${propertyName}; @${aliasName}('${propertyName}.prop') someAlias; }`,
-    `${aliasImport} Component.extend({ ${SERVICE_NAME}: service('foo'), someAlias: ${aliasName}('${propertyName}.prop') });`,
-    `${aliasImport} Component.extend({ ${SERVICE_NAME}: service(), someAlias: ${aliasName}('${propertyName}.prop') });`,
+    `${SERVICE_IMPORT}${aliasImport} class MyClass { @service('foo') ${propertyName}; @${aliasName}('${propertyName}.prop') someAlias; }`,
+    `${SERVICE_IMPORT}${aliasImport} class MyClass { @service() ${propertyName}; @${aliasName}('${propertyName}.prop') someAlias; }`,
+    `${SERVICE_IMPORT}${aliasImport} Component.extend({ ${SERVICE_NAME}: service('foo'), someAlias: ${aliasName}('${propertyName}.prop') });`,
+    `${SERVICE_IMPORT}${aliasImport} Component.extend({ ${SERVICE_NAME}: service(), someAlias: ${aliasName}('${propertyName}.prop') });`,
   ];
 }
 
@@ -92,12 +93,12 @@ function generateComputedUseCasesFor(propertyName, renamed = false) {
   const computedName = renamed ? 'cp' : 'computed';
   const computedImport = renamed ? RENAMED_EO_IMPORTS : EO_IMPORTS;
   return [
-    `${computedImport} class MyClass { @service('foo') ${propertyName}; @${computedName}('${propertyName}.prop') get someComputed() {} }`,
-    `${computedImport} class MyClass { @service() ${propertyName}; @${computedName}('${propertyName}.prop') get someComputed() {} }`,
-    `${computedImport} Component.extend({ ${SERVICE_NAME}: service('foo'), someComputed: ${computedName}('${propertyName}.prop', ()=>{}) });`,
-    `${computedImport} Component.extend({ ${SERVICE_NAME}: service(), someComputed: ${computedName}('${propertyName}.prop', ()=>{}) });`,
-    `${computedImport} Component.extend({ ${SERVICE_NAME}: service('foo'), someComputed: ${computedName}.alias('${propertyName}.prop', ()=>{}) });`,
-    `${computedImport} Component.extend({ ${SERVICE_NAME}: service(), someComputed: ${computedName}.alias('${propertyName}.prop', ()=>{}) });`,
+    `${SERVICE_IMPORT}${computedImport} class MyClass { @service('foo') ${propertyName}; @${computedName}('${propertyName}.prop') get someComputed() {} }`,
+    `${SERVICE_IMPORT}${computedImport} class MyClass { @service() ${propertyName}; @${computedName}('${propertyName}.prop') get someComputed() {} }`,
+    `${SERVICE_IMPORT}${computedImport} Component.extend({ ${SERVICE_NAME}: service('foo'), someComputed: ${computedName}('${propertyName}.prop', ()=>{}) });`,
+    `${SERVICE_IMPORT}${computedImport} Component.extend({ ${SERVICE_NAME}: service(), someComputed: ${computedName}('${propertyName}.prop', ()=>{}) });`,
+    `${SERVICE_IMPORT}${computedImport} Component.extend({ ${SERVICE_NAME}: service('foo'), someComputed: ${computedName}.alias('${propertyName}.prop', ()=>{}) });`,
+    `${SERVICE_IMPORT}${computedImport} Component.extend({ ${SERVICE_NAME}: service(), someComputed: ${computedName}.alias('${propertyName}.prop', ()=>{}) });`,
   ];
 }
 
@@ -111,10 +112,10 @@ function generateValid() {
   const useCases = generateUseCasesFor(SERVICE_NAME);
   for (const use of useCases) {
     valid.push(
-      `class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${use}} }`,
-      `class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${use}} }`,
-      `Component.extend({ ${SERVICE_NAME}: service('foo'), fooFunc() {${use}} });`,
-      `Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${use}} });`
+      `${SERVICE_IMPORT} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${use}} }`,
+      `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${use}} }`,
+      `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service('foo'), fooFunc() {${use}} });`,
+      `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${use}} });`
     );
   }
 
@@ -126,10 +127,10 @@ function generateValid() {
     const imports = idx === 0 ? EO_IMPORTS : RENAMED_EO_IMPORTS;
     for (const use of useCases) {
       valid.push(
-        `${imports} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${use}} }`,
-        `${imports} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${use}} }`,
-        `${imports} Component.extend({ ${SERVICE_NAME}: service('foo'), fooFunc() {${use}} });`,
-        `${imports} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${use}} });`
+        `${SERVICE_IMPORT}${imports} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${use}} }`,
+        `${SERVICE_IMPORT}${imports} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${use}} }`,
+        `${SERVICE_IMPORT}${imports} Component.extend({ ${SERVICE_NAME}: service('foo'), fooFunc() {${use}} });`,
+        `${SERVICE_IMPORT}${imports} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${use}} });`
       );
     }
   }
@@ -159,7 +160,7 @@ ruleTester.run('no-unused-services', rule, {
   valid: generateValid(),
   invalid: [
     {
-      code: `class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${nonUses}} }`,
+      code: `${SERVICE_IMPORT} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${nonUses}} }`,
       output: null,
       errors: [
         {
@@ -167,7 +168,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `class MyClass {  fooFunc() {${nonUses}} }`,
+              output: `${SERVICE_IMPORT} class MyClass {  fooFunc() {${nonUses}} }`,
             },
           ],
           type: 'ClassProperty',
@@ -175,7 +176,7 @@ ruleTester.run('no-unused-services', rule, {
       ],
     },
     {
-      code: `class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${nonUses}} }`,
+      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${nonUses}} }`,
       output: null,
       errors: [
         {
@@ -183,7 +184,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `class MyClass {  fooFunc() {${nonUses}} }`,
+              output: `${SERVICE_IMPORT} class MyClass {  fooFunc() {${nonUses}} }`,
             },
           ],
           type: 'ClassProperty',
@@ -191,7 +192,7 @@ ruleTester.run('no-unused-services', rule, {
       ],
     },
     {
-      code: `Component.extend({ ${SERVICE_NAME}: service('foo'), fooFunc() {${nonUses}} });`,
+      code: `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service('foo'), fooFunc() {${nonUses}} });`,
       output: null,
       errors: [
         {
@@ -199,7 +200,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `Component.extend({  fooFunc() {${nonUses}} });`,
+              output: `${SERVICE_IMPORT} Component.extend({  fooFunc() {${nonUses}} });`,
             },
           ],
           type: 'Property',
@@ -207,18 +208,18 @@ ruleTester.run('no-unused-services', rule, {
       ],
     },
     {
-      code: `Component.extend({ ${SERVICE_NAME}: service('foo') });`,
+      code: `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service('foo') });`,
       output: null,
       errors: [
         {
           messageId: 'main',
-          suggestions: [{ messageId: 'removeServiceInjection', output: 'Component.extend({  });' }],
+          suggestions: [{ messageId: 'removeServiceInjection', output: `${SERVICE_IMPORT} Component.extend({  });` }],
           type: 'Property',
         },
       ],
     },
     {
-      code: `Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${nonUses}} });`,
+      code: `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${nonUses}} });`,
       output: null,
       errors: [
         {
@@ -226,7 +227,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `Component.extend({  fooFunc() {${nonUses}} });`,
+              output: `${SERVICE_IMPORT} Component.extend({  fooFunc() {${nonUses}} });`,
             },
           ],
           type: 'Property',
@@ -234,19 +235,19 @@ ruleTester.run('no-unused-services', rule, {
       ],
     },
     {
-      code: `Component.extend({ ${SERVICE_NAME}: service() });`,
+      code: `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service() });`,
       output: null,
       errors: [
         {
           messageId: 'main',
-          suggestions: [{ messageId: 'removeServiceInjection', output: 'Component.extend({  });' }],
+          suggestions: [{ messageId: 'removeServiceInjection', output: `${SERVICE_IMPORT} Component.extend({  });` }],
           type: 'Property',
         },
       ],
     },
     /* Using get/getProperties without @ember/object import */
     {
-      code: `class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${emberObjectUses1}} }`,
+      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${emberObjectUses1}} }`,
       output: null,
       errors: [
         {
@@ -254,7 +255,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `class MyClass {  fooFunc() {${emberObjectUses1}} }`,
+              output: `${SERVICE_IMPORT} class MyClass {  fooFunc() {${emberObjectUses1}} }`,
             },
           ],
           type: 'ClassProperty',
@@ -262,7 +263,7 @@ ruleTester.run('no-unused-services', rule, {
       ],
     },
     {
-      code: `Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${emberObjectUses1}} });`,
+      code: `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${emberObjectUses1}} });`,
       output: null,
       errors: [
         {
@@ -270,7 +271,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `Component.extend({  fooFunc() {${emberObjectUses1}} });`,
+              output: `${SERVICE_IMPORT} Component.extend({  fooFunc() {${emberObjectUses1}} });`,
             },
           ],
           type: 'Property',
@@ -279,7 +280,7 @@ ruleTester.run('no-unused-services', rule, {
     },
     /* Using get/getProperties with @ember/object import for an unrelatedProp */
     {
-      code: `${EO_IMPORTS} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${emberObjectUses2}} }`,
+      code: `${SERVICE_IMPORT} ${EO_IMPORTS} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${emberObjectUses2}} }`,
       output: null,
       errors: [
         {
@@ -287,7 +288,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `${EO_IMPORTS} class MyClass {  fooFunc() {${emberObjectUses2}} }`,
+              output: `${SERVICE_IMPORT} ${EO_IMPORTS} class MyClass {  fooFunc() {${emberObjectUses2}} }`,
             },
           ],
           type: 'ClassProperty',
@@ -295,7 +296,7 @@ ruleTester.run('no-unused-services', rule, {
       ],
     },
     {
-      code: `${EO_IMPORTS} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${emberObjectUses2}} });`,
+      code: `${SERVICE_IMPORT} ${EO_IMPORTS} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${emberObjectUses2}} });`,
       output: null,
       errors: [
         {
@@ -303,7 +304,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `${EO_IMPORTS} Component.extend({  fooFunc() {${emberObjectUses2}} });`,
+              output: `${SERVICE_IMPORT} ${EO_IMPORTS} Component.extend({  fooFunc() {${emberObjectUses2}} });`,
             },
           ],
           type: 'Property',
@@ -312,7 +313,7 @@ ruleTester.run('no-unused-services', rule, {
     },
     /* Using computed props and macros without the imports */
     {
-      code: `class MyClass { @service() ${SERVICE_NAME}; @alias('${SERVICE_NAME}') someAlias; @computed('${SERVICE_NAME}.prop') get someComputed() {} }`,
+      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; @alias('${SERVICE_NAME}') someAlias; @computed('${SERVICE_NAME}.prop') get someComputed() {} }`,
       output: null,
       errors: [
         {
@@ -320,7 +321,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `class MyClass {  @alias('${SERVICE_NAME}') someAlias; @computed('${SERVICE_NAME}.prop') get someComputed() {} }`,
+              output: `${SERVICE_IMPORT} class MyClass {  @alias('${SERVICE_NAME}') someAlias; @computed('${SERVICE_NAME}.prop') get someComputed() {} }`,
             },
           ],
           type: 'ClassProperty',
@@ -328,7 +329,7 @@ ruleTester.run('no-unused-services', rule, {
       ],
     },
     {
-      code: `Component.extend({ ${SERVICE_NAME}: service(), someAlias1: alias('${SERVICE_NAME}'), someAlias2: computed.alias('${SERVICE_NAME}.prop'), someComputed: computed('${SERVICE_NAME}.prop', ()=>{}) });`,
+      code: `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), someAlias1: alias('${SERVICE_NAME}'), someAlias2: computed.alias('${SERVICE_NAME}.prop'), someComputed: computed('${SERVICE_NAME}.prop', ()=>{}) });`,
       output: null,
       errors: [
         {
@@ -336,7 +337,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `Component.extend({  someAlias1: alias('${SERVICE_NAME}'), someAlias2: computed.alias('${SERVICE_NAME}.prop'), someComputed: computed('${SERVICE_NAME}.prop', ()=>{}) });`,
+              output: `${SERVICE_IMPORT} Component.extend({  someAlias1: alias('${SERVICE_NAME}'), someAlias2: computed.alias('${SERVICE_NAME}.prop'), someComputed: computed('${SERVICE_NAME}.prop', ()=>{}) });`,
             },
           ],
           type: 'Property',
@@ -345,7 +346,7 @@ ruleTester.run('no-unused-services', rule, {
     },
     /* Using computed props and macros with the imports for an unrelatedProp */
     {
-      code: `${EO_IMPORTS}${ALIAS_IMPORT} class MyClass { @service() ${SERVICE_NAME}; @alias('unrelatedProp', '${SERVICE_NAME}') someAlias; @computed('unrelatedProp.prop') get someComputed() {} }`,
+      code: `${SERVICE_IMPORT}${EO_IMPORTS}${ALIAS_IMPORT} class MyClass { @service() ${SERVICE_NAME}; @alias('unrelatedProp', '${SERVICE_NAME}') someAlias; @computed('unrelatedProp.prop') get someComputed() {} }`,
       output: null,
       errors: [
         {
@@ -353,7 +354,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `${EO_IMPORTS}${ALIAS_IMPORT} class MyClass {  @alias('unrelatedProp', '${SERVICE_NAME}') someAlias; @computed('unrelatedProp.prop') get someComputed() {} }`,
+              output: `${SERVICE_IMPORT}${EO_IMPORTS}${ALIAS_IMPORT} class MyClass {  @alias('unrelatedProp', '${SERVICE_NAME}') someAlias; @computed('unrelatedProp.prop') get someComputed() {} }`,
             },
           ],
           type: 'ClassProperty',
@@ -361,7 +362,7 @@ ruleTester.run('no-unused-services', rule, {
       ],
     },
     {
-      code: `${EO_IMPORTS}${ALIAS_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), someAlias1: alias('unrelatedProp', '${SERVICE_NAME}'), someAlias2: computed.alias('unrelatedProp.prop'), someComputed: computed('unrelatedProp.prop', ()=>{}) });`,
+      code: `${SERVICE_IMPORT}${EO_IMPORTS}${ALIAS_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), someAlias1: alias('unrelatedProp', '${SERVICE_NAME}'), someAlias2: computed.alias('unrelatedProp.prop'), someComputed: computed('unrelatedProp.prop', ()=>{}) });`,
       output: null,
       errors: [
         {
@@ -369,7 +370,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `${EO_IMPORTS}${ALIAS_IMPORT} Component.extend({  someAlias1: alias('unrelatedProp', '${SERVICE_NAME}'), someAlias2: computed.alias('unrelatedProp.prop'), someComputed: computed('unrelatedProp.prop', ()=>{}) });`,
+              output: `${SERVICE_IMPORT}${EO_IMPORTS}${ALIAS_IMPORT} Component.extend({  someAlias1: alias('unrelatedProp', '${SERVICE_NAME}'), someAlias2: computed.alias('unrelatedProp.prop'), someComputed: computed('unrelatedProp.prop', ()=>{}) });`,
             },
           ],
           type: 'Property',
@@ -378,7 +379,7 @@ ruleTester.run('no-unused-services', rule, {
     },
     /* Multiple classes */
     {
-      code: `class MyClass1 { @service() ${SERVICE_NAME}; } class MyClass2 { fooFunc() {this.${SERVICE_NAME};} }`,
+      code: `${SERVICE_IMPORT} class MyClass1 { @service() ${SERVICE_NAME}; } class MyClass2 { fooFunc() {this.${SERVICE_NAME};} }`,
       output: null,
       errors: [
         {
@@ -386,7 +387,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `class MyClass1 {  } class MyClass2 { fooFunc() {this.${SERVICE_NAME};} }`,
+              output: `${SERVICE_IMPORT} class MyClass1 {  } class MyClass2 { fooFunc() {this.${SERVICE_NAME};} }`,
             },
           ],
           type: 'ClassProperty',
@@ -394,7 +395,7 @@ ruleTester.run('no-unused-services', rule, {
       ],
     },
     {
-      code: `class MyClass1 { fooFunc() {this.${SERVICE_NAME};} } class MyClass2 { @service() ${SERVICE_NAME}; }`,
+      code: `${SERVICE_IMPORT} class MyClass1 { fooFunc() {this.${SERVICE_NAME};} } class MyClass2 { @service() ${SERVICE_NAME}; }`,
       output: null,
       errors: [
         {
@@ -402,7 +403,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `class MyClass1 { fooFunc() {this.${SERVICE_NAME};} } class MyClass2 {  }`,
+              output: `${SERVICE_IMPORT} class MyClass1 { fooFunc() {this.${SERVICE_NAME};} } class MyClass2 {  }`,
             },
           ],
           type: 'ClassProperty',
@@ -411,7 +412,7 @@ ruleTester.run('no-unused-services', rule, {
     },
     /* Nested classes */
     {
-      code: `class MyClass1 { @service() ${SERVICE_NAME}; fooFunc1() { class MyClass2 { fooFunc2() {this.${SERVICE_NAME};} } } }`,
+      code: `${SERVICE_IMPORT} class MyClass1 { @service() ${SERVICE_NAME}; fooFunc1() { class MyClass2 { fooFunc2() {this.${SERVICE_NAME};} } } }`,
       output: null,
       errors: [
         {
@@ -419,7 +420,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `class MyClass1 {  fooFunc1() { class MyClass2 { fooFunc2() {this.${SERVICE_NAME};} } } }`,
+              output: `${SERVICE_IMPORT} class MyClass1 {  fooFunc1() { class MyClass2 { fooFunc2() {this.${SERVICE_NAME};} } } }`,
             },
           ],
           type: 'ClassProperty',
@@ -427,7 +428,7 @@ ruleTester.run('no-unused-services', rule, {
       ],
     },
     {
-      code: `class MyClass1 { fooFunc1() {this.${SERVICE_NAME};} fooFunc2() { class MyClass2 { @service() ${SERVICE_NAME}; } } }`,
+      code: `${SERVICE_IMPORT} class MyClass1 { fooFunc1() {this.${SERVICE_NAME};} fooFunc2() { class MyClass2 { @service() ${SERVICE_NAME}; } } }`,
       output: null,
       errors: [
         {
@@ -435,7 +436,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `class MyClass1 { fooFunc1() {this.${SERVICE_NAME};} fooFunc2() { class MyClass2 {  } } }`,
+              output: `${SERVICE_IMPORT} class MyClass1 { fooFunc1() {this.${SERVICE_NAME};} fooFunc2() { class MyClass2 {  } } }`,
             },
           ],
           type: 'ClassProperty',
