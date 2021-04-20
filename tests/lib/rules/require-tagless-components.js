@@ -93,6 +93,25 @@ ruleTester.run('require-tagless-components', rule, {
       errors: [{ message: ERROR_MESSAGE, line: 4, type: 'Property' }],
     },
     {
+      // `tagName` but not the last object argument
+      code: `
+        import Component from '@ember/component';
+        export default Component.extend({ tagName: 'span' }, SomeMixin);
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, line: 3, type: 'Property' }],
+    },
+    {
+      // `tagName` but inside a variable
+      code: `
+        import Component from '@ember/component';
+        const body = { tagName: 'span' };
+        export default Component.extend(body);
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, line: 3, type: 'Property' }],
+    },
+    {
       code: `
         import Component from '@ember/component';
         export default class MyComponent extends Component {}
