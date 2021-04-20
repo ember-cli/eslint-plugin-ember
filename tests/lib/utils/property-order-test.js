@@ -50,12 +50,14 @@ describe('determinePropertyType', () => {
   describe('classic classes', () => {
     it('should determine service-type props', () => {
       const context = new FauxContext(
-        `export default Controller.extend({
+        `import {inject as service} from '@ember/service';
+        export default Controller.extend({
           currentUser: service(),
         });`
       );
-      const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller')).toStrictEqual('service');
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(propertyOrder.determinePropertyType(node, 'controller', [], undefined, importName)).toStrictEqual('service');
     });
 
     it('should determine controller-type props', () => {
@@ -261,12 +263,14 @@ describe('determinePropertyType', () => {
   describe('native classes', () => {
     it('should determine service-type props', () => {
       const context = new FauxContext(
-        `class MyController extends Controller {
+        `import {inject as service} from '@ember/service';
+        class MyController extends Controller {
           @service currentUser;
         }`
       );
-      const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller')).toStrictEqual('service');
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].body.body[0];
+      expect(propertyOrder.determinePropertyType(node, 'controller', [], undefined, importName)).toStrictEqual('service');
     });
 
     it('should determine controller-type props', () => {
@@ -372,34 +376,38 @@ describe('reportUnorderedProperties', () => {
     it('should not report nodes if the order is correct', () => {
       const order = ['controller', 'service', 'query-params'];
       const context = new FauxContext(
-        `export default Controller.extend({
-        application: controller(),
-        currentUser: service(),
-        queryParams: [],
-      });`,
+        `import {inject as service} from '@ember/service';
+          export default Controller.extend({
+          application: controller(),
+          currentUser: service(),
+          queryParams: [],
+        });`,
         '',
         jest.fn()
       );
-      const node = context.ast.body[0].declaration;
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration;
 
-      propertyOrder.reportUnorderedProperties(node, context, 'controller', order);
+      propertyOrder.reportUnorderedProperties(node, context, 'controller', order, undefined, importName);
       expect(context.report).not.toHaveBeenCalled();
     });
 
     it('should report nodes if the order is incorrect', () => {
       const order = ['controller', 'service', 'query-params'];
       const context = new FauxContext(
-        `export default Controller.extend({
-          currentUser: service(),
-          application: controller(),
-          queryParams: [],
-        });`,
+        `import {inject as service} from '@ember/service';
+          export default Controller.extend({
+            currentUser: service(),
+            application: controller(),
+            queryParams: [],
+          });`,
         '',
         jest.fn()
       );
-      const node = context.ast.body[0].declaration;
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration;
 
-      propertyOrder.reportUnorderedProperties(node, context, 'controller', order);
+      propertyOrder.reportUnorderedProperties(node, context, 'controller', order, undefined, importName);
       expect(context.report).toHaveBeenCalled(); // eslint-disable-line jest/prefer-called-with
     });
   });
@@ -408,34 +416,38 @@ describe('reportUnorderedProperties', () => {
     it('should not report nodes if the order is correct', () => {
       const order = ['controller', 'service', 'query-params'];
       const context = new FauxContext(
-        `export default class MyController extends Controller {
-          @controller application;
-          @service currentUser;
-          queryParams = [];
-        }`,
+        `import {inject as service} from '@ember/service';
+          export default class MyController extends Controller {
+            @controller application;
+            @service currentUser;
+            queryParams = [];
+          }`,
         '',
         jest.fn()
       );
-      const node = context.ast.body[0].declaration;
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration;
 
-      propertyOrder.reportUnorderedProperties(node, context, 'controller', order);
+      propertyOrder.reportUnorderedProperties(node, context, 'controller', order, undefined, importName);
       expect(context.report).not.toHaveBeenCalled();
     });
 
     it('should report nodes if the order is incorrect', () => {
       const order = ['controller', 'service', 'query-params'];
       const context = new FauxContext(
-        `export default class MyController extends Controller {
-          @service currentUser;
-          @controller application;
-          queryParams = [];
-        }`,
+        `import {inject as service} from '@ember/service';
+          export default class MyController extends Controller {
+            @service currentUser;
+            @controller application;
+            queryParams = [];
+          }`,
         '',
         jest.fn()
       );
-      const node = context.ast.body[0].declaration;
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration;
 
-      propertyOrder.reportUnorderedProperties(node, context, 'controller', order);
+      propertyOrder.reportUnorderedProperties(node, context, 'controller', order, undefined, importName);
       expect(context.report).toHaveBeenCalled(); // eslint-disable-line jest/prefer-called-with
     });
   });

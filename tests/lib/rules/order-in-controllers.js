@@ -18,7 +18,9 @@ eslintTester.run('order-in-controllers', rule, {
   valid: [
     'export default Controller.extend();',
     'export default Controller.extend({ ...foo });',
-    `export default Controller.extend({
+    `
+      import {inject as service} from '@ember/service';
+      export default Controller.extend({
         application: controller(),
         currentUser: service(),
         queryParams: [],
@@ -28,7 +30,9 @@ eslintTester.run('order-in-controllers', rule, {
         _customAction2: function() { const foo = 'bar'; },
         tSomeTask: task(function* () {})
       });`,
-    `export default Controller.extend({
+    `
+      import {inject} from '@ember/service';
+      export default Controller.extend({
         currentUser: inject(),
         queryParams: [],
         customProp: "test",
@@ -68,10 +72,13 @@ eslintTester.run('order-in-controllers', rule, {
       ],
     },
     {
-      code: `export default Controller.extend({
-        queryParams: [],
-        currentUser: service(),
-      });`,
+      code: `
+        import {inject as service} from '@ember/service';
+        export default Controller.extend({
+          queryParams: [],
+          currentUser: service(),
+        });
+      `,
       options: [
         {
           order: ['query-params', 'service'],
@@ -90,33 +97,36 @@ eslintTester.run('order-in-controllers', rule, {
       ],
     },
     `
-        export default Controller.extend({
-          foo: service(),
-          someProp: null,
-          init() {
-            this._super(...arguments);
-          },
-          actions: {
-            onKeyPress: function (event) {}
-          }
-        });
-      `,
+      import {inject as service} from '@ember/service';
+      export default Controller.extend({
+        foo: service(),
+        someProp: null,
+        init() {
+          this._super(...arguments);
+        },
+        actions: {
+          onKeyPress: function (event) {}
+        }
+      });
+    `,
     `
-        export default Controller.extend({
-          foo: service(),
-          init() {
-            this._super(...arguments);
-          },
-          customFoo() {}
-        });
-      `,
-    `
-        export default Controller.extend({
-          foo: service(),
-          init() {
-            this._super(...arguments);
-          }
-        });
+      import {inject as service} from '@ember/service';
+      export default Controller.extend({
+        foo: service(),
+        init() {
+          this._super(...arguments);
+        },
+        customFoo() {}
+      });
+    `,
+    `      
+      import {inject as service} from '@ember/service';
+      export default Controller.extend({
+        foo: service(),
+        init() {
+          this._super(...arguments);
+        }
+      });
     `,
     {
       code: `export default Controller.extend({
@@ -136,54 +146,60 @@ eslintTester.run('order-in-controllers', rule, {
   ],
   invalid: [
     {
-      code: `export default Controller.extend({
+      code: `import {inject as service} from '@ember/service';
+      export default Controller.extend({
         queryParams: [],
         currentUser: service()
       });`,
-      output: `export default Controller.extend({
+      output: `import {inject as service} from '@ember/service';
+      export default Controller.extend({
         currentUser: service(),
               queryParams: [],
 });`,
       errors: [
         {
           message:
-            'The "currentUser" service injection should be above the "queryParams" property on line 2',
-          line: 3,
+            'The "currentUser" service injection should be above the "queryParams" property on line 3',
+          line: 4,
         },
       ],
     },
     {
-      code: `export default Controller.extend({
+      code: `import {inject} from '@ember/service';
+      export default Controller.extend({
         queryParams: [],
         currentUser: inject()
       });`,
-      output: `export default Controller.extend({
+      output: `import {inject} from '@ember/service';
+      export default Controller.extend({
         currentUser: inject(),
               queryParams: [],
 });`,
       errors: [
         {
           message:
-            'The "currentUser" service injection should be above the "queryParams" property on line 2',
-          line: 3,
+            'The "currentUser" service injection should be above the "queryParams" property on line 3',
+          line: 4,
         },
       ],
     },
     {
-      code: `export default Controller.extend({
+      code: `import {inject as service} from '@ember/service';
+      export default Controller.extend({
         currentUser: service(),
         customProp: "test",
         queryParams: []
       });`,
-      output: `export default Controller.extend({
+      output: `import {inject as service} from '@ember/service';
+      export default Controller.extend({
         currentUser: service(),
         queryParams: [],
               customProp: "test",
 });`,
       errors: [
         {
-          message: 'The "queryParams" property should be above the "customProp" property on line 3',
-          line: 4,
+          message: 'The "queryParams" property should be above the "customProp" property on line 4',
+          line: 5,
         },
       ],
     },
@@ -242,19 +258,21 @@ eslintTester.run('order-in-controllers', rule, {
       ],
     },
     {
-      code: `export default Controller.extend({
+      code: `import {inject as service} from '@ember/service';
+      export default Controller.extend({
         currentUser: service(),
         application: controller()
       });`,
-      output: `export default Controller.extend({
+      output: `import {inject as service} from '@ember/service';
+      export default Controller.extend({
         application: controller(),
               currentUser: service(),
 });`,
       errors: [
         {
           message:
-            'The "application" controller injection should be above the "currentUser" service injection on line 2',
-          line: 3,
+            'The "application" controller injection should be above the "currentUser" service injection on line 3',
+          line: 4,
         },
       ],
     },
@@ -280,60 +298,67 @@ eslintTester.run('order-in-controllers', rule, {
     },
     {
       filename: 'example-app/controllers/some-controller.js',
-      code: `export default CustomController.extend({
+      code: `import {inject as service} from '@ember/service';
+      export default CustomController.extend({
         queryParams: [],
         currentUser: service()
       });`,
-      output: `export default CustomController.extend({
+      output: `import {inject as service} from '@ember/service';
+      export default CustomController.extend({
         currentUser: service(),
               queryParams: [],
 });`,
       errors: [
         {
           message:
-            'The "currentUser" service injection should be above the "queryParams" property on line 2',
-          line: 3,
+            'The "currentUser" service injection should be above the "queryParams" property on line 3',
+          line: 4,
         },
       ],
     },
     {
       filename: 'example-app/some-feature/controller.js',
-      code: `export default CustomController.extend({
+      code: `import {inject as service} from '@ember/service';
+      export default CustomController.extend({
         queryParams: [],
         currentUser: service()
       });`,
-      output: `export default CustomController.extend({
+      output: `import {inject as service} from '@ember/service';
+      export default CustomController.extend({
         currentUser: service(),
               queryParams: [],
 });`,
       errors: [
         {
           message:
-            'The "currentUser" service injection should be above the "queryParams" property on line 2',
-          line: 3,
+            'The "currentUser" service injection should be above the "queryParams" property on line 3',
+          line: 4,
         },
       ],
     },
     {
       filename: 'example-app/twisted-path/some-controller.js',
-      code: `export default Controller.extend({
+      code: `import {inject as service} from '@ember/service';
+      export default Controller.extend({
         queryParams: [],
         currentUser: service()
       });`,
-      output: `export default Controller.extend({
+      output: `import {inject as service} from '@ember/service';
+      export default Controller.extend({
         currentUser: service(),
               queryParams: [],
 });`,
       errors: [
         {
           message:
-            'The "currentUser" service injection should be above the "queryParams" property on line 2',
-          line: 3,
+            'The "currentUser" service injection should be above the "queryParams" property on line 3',
+          line: 4,
         },
       ],
     },
     {
       code: `
+        import {inject as service} from '@ember/service';
         export default Controller.extend({
           foo: service(),
           actions: {
@@ -345,6 +370,7 @@ eslintTester.run('order-in-controllers', rule, {
         });
       `,
       output: `
+        import {inject as service} from '@ember/service';
         export default Controller.extend({
           foo: service(),
           init() {
@@ -357,13 +383,14 @@ eslintTester.run('order-in-controllers', rule, {
       `,
       errors: [
         {
-          message: 'The "init" lifecycle hook should be above the actions hash on line 4',
-          line: 7,
+          message: 'The "init" lifecycle hook should be above the actions hash on line 5',
+          line: 8,
         },
       ],
     },
     {
       code: `
+        import {inject as service} from '@ember/service';
         export default Controller.extend({
           foo: service(),
           customFoo() {},
@@ -373,6 +400,7 @@ eslintTester.run('order-in-controllers', rule, {
         });
       `,
       output: `
+        import {inject as service} from '@ember/service';
         export default Controller.extend({
           foo: service(),
           init() {
@@ -384,13 +412,14 @@ eslintTester.run('order-in-controllers', rule, {
       errors: [
         {
           message:
-            'The "init" lifecycle hook should be above the "customFoo" empty method on line 4',
-          line: 5,
+            'The "init" lifecycle hook should be above the "customFoo" empty method on line 5',
+          line: 6,
         },
       ],
     },
     {
       code: `
+        import {inject as service} from '@ember/service';
         export default Controller.extend({
           init() {
             this._super(...arguments);
@@ -399,6 +428,7 @@ eslintTester.run('order-in-controllers', rule, {
         });
       `,
       output: `
+        import {inject as service} from '@ember/service';
         export default Controller.extend({
           foo: service(),
                   init() {
@@ -410,8 +440,8 @@ eslintTester.run('order-in-controllers', rule, {
       errors: [
         {
           message:
-            'The "foo" service injection should be above the "init" lifecycle hook on line 3',
-          line: 6,
+            'The "foo" service injection should be above the "init" lifecycle hook on line 4',
+          line: 7,
         },
       ],
     },
@@ -442,19 +472,21 @@ eslintTester.run('order-in-controllers', rule, {
     {
       code:
         // whitespace is preserved inside `` and it's breaking the test
-        `export default Controller.extend({
+        `import {inject as service} from '@ember/service';
+        export default Controller.extend({
   queryParams: [],
   currentUser: service(),
 });`,
-      output: `export default Controller.extend({
+      output: `import {inject as service} from '@ember/service';
+        export default Controller.extend({
   currentUser: service(),
   queryParams: [],
 });`,
       errors: [
         {
           message:
-            'The "currentUser" service injection should be above the "queryParams" property on line 2',
-          line: 3,
+            'The "currentUser" service injection should be above the "queryParams" property on line 3',
+          line: 4,
         },
       ],
     },

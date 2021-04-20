@@ -66,10 +66,12 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-    `export default Component.extend({
+    `
+      import Ember from 'ember';
+      import {inject as service} from '@ember/service';
+      export default Component.extend({
         abc: Ember.inject.service(),
-        def: inject.service(),
-        ghi: service(),
+        def: service(),
 
         role: "sloth",
 
@@ -80,8 +82,6 @@ eslintTester.run('order-in-components', rule, {
         import { inject } from '@ember/service';
         export default Component.extend({
           abc: inject(),
-          def: inject.service(),
-          ghi: service(),
 
           role: "sloth",
 
@@ -121,7 +121,9 @@ eslintTester.run('order-in-components', rule, {
           return true;
         }
       });`,
-    `export default Component.extend({
+    `
+      import {inject as service} from '@ember/service';
+      export default Component.extend({
         igh: service(),
 
         abc: [],
@@ -172,7 +174,9 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-    `export default Component.extend({
+    `
+      import {inject as service} from '@ember/service';
+      export default Component.extend({
         test: service(),
 
         didReceiveAttrs() {
@@ -180,8 +184,11 @@ eslintTester.run('order-in-components', rule, {
 
         tSomeAction: task(function* (url) {
         })
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import {inject as service} from '@ember/service';
+      export default Component.extend({
         test: service(),
 
         test2: computed.equal("asd", "qwe"),
@@ -191,8 +198,11 @@ eslintTester.run('order-in-components', rule, {
 
         tSomeAction: task(function* (url) {
         }).restartable()
-      });`,
-    `export default Component.extend({
+      });
+    `,
+    `
+      import {inject as service} from '@ember/service';
+      export default Component.extend({
         test: service(),
 
         someEmptyMethod() {},
@@ -206,7 +216,8 @@ eslintTester.run('order-in-components', rule, {
         _anotherPrivateFnc() {
           return true;
         }
-      });`,
+      });
+    `,
     `export default Component.extend({
         classNameBindings: ["filterDateSelectClass"],
         content: [],
@@ -240,17 +251,20 @@ eslintTester.run('order-in-components', rule, {
         actions: {}
       });`,
     {
-      code: `export default Component.extend({
-        role: "sloth",
+      code: `
+        import Ember from 'ember';
+        export default Component.extend({
+          role: "sloth",
 
-        computed1: computed(function() {
-        }),
-        computed2: alias('computed1'),
+          computed1: computed(function() {
+          }),
+          computed2: alias('computed1'),
 
-        actions: {},
+          actions: {},
 
-        foobar: Ember.inject.service(),
-      });`,
+          foobar: Ember.inject.service(),
+        });
+      `,
       options: [
         {
           order: ['property', 'multi-line-function', 'single-line-function', 'actions'],
@@ -258,18 +272,21 @@ eslintTester.run('order-in-components', rule, {
       ],
     },
     {
-      code: `export default Component.extend({
-        role: "sloth",
+      code: `
+        import Ember from 'ember';
+        export default Component.extend({
+          role: "sloth",
 
-        computed1: alias('computed2'),
-        computed2: computed(function() {
-        }),
-        computed3: alias('computed1'),
+          computed1: alias('computed2'),
+          computed2: computed(function() {
+          }),
+          computed3: alias('computed1'),
 
-        actions: {},
+          actions: {},
 
-        foobar: Ember.inject.service(),
-      });`,
+          foobar: Ember.inject.service(),
+        });
+      `,
       options: [
         {
           order: ['property', ['single-line-function', 'multi-line-function'], 'actions'],
@@ -552,35 +569,39 @@ eslintTester.run('order-in-components', rule, {
       ],
     },
     {
-      code: `export default Component.extend({
+      code: `import {inject as service} from '@ember/service';
+      export default Component.extend({
         abc: true,
         i18n: service()
       });`,
-      output: `export default Component.extend({
+      output: `import {inject as service} from '@ember/service';
+      export default Component.extend({
         i18n: service(),
               abc: true,
 });`,
       errors: [
         {
-          message: 'The "i18n" service injection should be above the "abc" property on line 2',
-          line: 3,
+          message: 'The "i18n" service injection should be above the "abc" property on line 3',
+          line: 4,
         },
       ],
     },
     {
-      code: `export default Component.extend({
+      code: `import {inject as service} from '@ember/service';
+      export default Component.extend({
         vehicle: alias("car"),
         i18n: service()
       });`,
-      output: `export default Component.extend({
+      output: `import {inject as service} from '@ember/service';
+      export default Component.extend({
         i18n: service(),
               vehicle: alias("car"),
 });`,
       errors: [
         {
           message:
-            'The "i18n" service injection should be above the "vehicle" single-line function on line 2',
-          line: 3,
+            'The "i18n" service injection should be above the "vehicle" single-line function on line 3',
+          line: 4,
         },
       ],
     },
