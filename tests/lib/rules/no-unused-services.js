@@ -18,11 +18,13 @@ const ruleTester = new RuleTester({
 });
 
 const SERVICE_NAME = 'fooName';
-const EO_IMPORTS = "import {computed, get, getProperties} from '@ember/object';";
+const EO_IMPORTS = "import {computed, get, getProperties, observer} from '@ember/object';";
 const RENAMED_EO_IMPORTS =
-  "import {computed as cp, get as g, getProperties as gp} from '@ember/object';";
+  "import {computed as cp, get as g, getProperties as gp, observer as ob} from '@ember/object';";
 const ALIAS_IMPORT = "import {alias} from '@ember/object/computed';";
 const RENAMED_ALIAS_IMPORT = "import {alias as al} from '@ember/object/computed';";
+const EMBER_IMPORT = "import Ember from 'ember';";
+const RENAMED_EMBER_IMPORT = "import Em from 'ember';";
 
 /**
  * Generate an array of usecases using the given property name
@@ -75,9 +77,7 @@ function generateMacroUseCasesFor(propertyName, renamed = false) {
   const aliasName = renamed ? 'al' : 'alias';
   const aliasImport = renamed ? RENAMED_ALIAS_IMPORT : ALIAS_IMPORT;
   return [
-    `${aliasImport} class MyClass { @service('foo') ${propertyName}; @${aliasName}('${propertyName}.prop') someAlias; }`,
     `${aliasImport} class MyClass { @service() ${propertyName}; @${aliasName}('${propertyName}.prop') someAlias; }`,
-    `${aliasImport} Component.extend({ ${SERVICE_NAME}: service('foo'), someAlias: ${aliasName}('${propertyName}.prop') });`,
     `${aliasImport} Component.extend({ ${SERVICE_NAME}: service(), someAlias: ${aliasName}('${propertyName}.prop') });`,
   ];
 }
@@ -91,13 +91,33 @@ function generateMacroUseCasesFor(propertyName, renamed = false) {
 function generateComputedUseCasesFor(propertyName, renamed = false) {
   const computedName = renamed ? 'cp' : 'computed';
   const computedImport = renamed ? RENAMED_EO_IMPORTS : EO_IMPORTS;
+  const emberName = renamed ? 'Em' : 'Ember';
+  const emberImport = renamed ? RENAMED_EMBER_IMPORT : EMBER_IMPORT;
   return [
-    `${computedImport} class MyClass { @service('foo') ${propertyName}; @${computedName}('${propertyName}.prop') get someComputed() {} }`,
     `${computedImport} class MyClass { @service() ${propertyName}; @${computedName}('${propertyName}.prop') get someComputed() {} }`,
-    `${computedImport} Component.extend({ ${SERVICE_NAME}: service('foo'), someComputed: ${computedName}('${propertyName}.prop', ()=>{}) });`,
     `${computedImport} Component.extend({ ${SERVICE_NAME}: service(), someComputed: ${computedName}('${propertyName}.prop', ()=>{}) });`,
-    `${computedImport} Component.extend({ ${SERVICE_NAME}: service('foo'), someComputed: ${computedName}.alias('${propertyName}.prop', ()=>{}) });`,
     `${computedImport} Component.extend({ ${SERVICE_NAME}: service(), someComputed: ${computedName}.alias('${propertyName}.prop', ()=>{}) });`,
+    `${emberImport} Component.extend({ ${SERVICE_NAME}: service(), someComputed: ${emberName}.computed('${propertyName}.prop', ()=>{}) });`,
+    `${emberImport} Component.extend({ ${SERVICE_NAME}: service(), someComputed: ${emberName}.computed.alias('${propertyName}.prop', ()=>{}) });`,
+  ];
+}
+
+/**
+ * Generate an array of usecases with an observer using the given property name
+ * @param {String} propertyName The given property name to access
+ * @param {Boolean} renamed Whether or not the imports are renamed
+ * @returns {Array}
+ */
+function generateObserverUseCasesFor(propertyName, renamed = false) {
+  const observerName = renamed ? 'ob' : 'observer';
+  const observerImport = renamed ? RENAMED_EO_IMPORTS : EO_IMPORTS;
+  const emberName = renamed ? 'Em' : 'Ember';
+  const emberImport = renamed ? RENAMED_EMBER_IMPORT : EMBER_IMPORT;
+  return [
+    `${observerImport} Component.extend({ ${SERVICE_NAME}: service(), someObserved: ${observerName}('${propertyName}.prop', ()=>{}) });`,
+    `${observerImport} Component.extend({ ${SERVICE_NAME}: service(), someObserved: on('init', ${observerName}('${propertyName}.prop', ()=>{})) });`,
+    `${emberImport} Component.extend({ ${SERVICE_NAME}: service(), someObserved: ${emberName}.observer('${propertyName}.prop', ()=>{}) });`,
+    `${emberImport} Component.extend({ ${SERVICE_NAME}: service(), someObserved: on('init', ${emberName}.observer('${propertyName}.prop', ()=>{})) });`,
   ];
 }
 
@@ -126,9 +146,7 @@ function generateValid() {
     const imports = idx === 0 ? EO_IMPORTS : RENAMED_EO_IMPORTS;
     for (const use of useCases) {
       valid.push(
-        `${imports} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${use}} }`,
         `${imports} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${use}} }`,
-        `${imports} Component.extend({ ${SERVICE_NAME}: service('foo'), fooFunc() {${use}} });`,
         `${imports} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${use}} });`
       );
     }
@@ -142,8 +160,13 @@ function generateValid() {
     ...generateComputedUseCasesFor(SERVICE_NAME),
     ...generateComputedUseCasesFor(SERVICE_NAME, true),
   ];
+  const observerUseCases = [
+    ...generateObserverUseCasesFor(SERVICE_NAME),
+    ...generateObserverUseCasesFor(SERVICE_NAME, true),
+  ];
   valid.push(...macroUseCases);
   valid.push(...computedUseCases);
+  valid.push(...observerUseCases);
 
   return valid;
 }
