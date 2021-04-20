@@ -776,32 +776,38 @@ describe('isInjectedServiceProp', () => {
   describe('classic classes', () => {
     it("should check if it's an injected service prop with renamed import", () => {
       const context = new FauxContext(`
+        import {inject as service} from '@ember/service';
         export default Controller.extend({
           currentUser: service()
         });
       `);
-      const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node, undefined, importName)).toBeTruthy();
     });
 
     it("should check if it's an injected service prop with full import", () => {
       const context = new FauxContext(`
+        import Ember from 'ember';
         export default Controller.extend({
           currentUser: Ember.inject.service()
         });
       `);
-      const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node, importName, undefined)).toBeTruthy();
     });
 
     it("should check if it's an injected service prop with destructured import", () => {
       const context = new FauxContext(`
+        import {inject} from '@ember/service';
         export default Controller.extend({
           currentUser: inject()
         });
       `);
-      const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node, undefined, importName)).toBeTruthy();
     });
 
     it("should check that it's not an injected service prop", () => {
@@ -816,34 +822,40 @@ describe('isInjectedServiceProp', () => {
 
     it("should check that it's not an injected service prop when 'service' is not a function", () => {
       const context = new FauxContext(`
+        import {inject as service} from '@ember/service';
         export default Controller.extend({
           currentUser: service.otherFunction()
         });
       `);
-      const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node, undefined, importName)).toBeFalsy();
     });
   });
 
   describe('native classes', () => {
     it("should check if it's an injected service prop when using renamed import", () => {
       const context = new FauxContext(`
+        import {inject as service} from '@ember/service';
         class MyController extends Controller {
           @service currentUser;
         }
       `);
-      const node = context.ast.body[0].body.body[0];
-      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].body.body[0];
+      expect(emberUtils.isInjectedServiceProp(node, undefined, importName)).toBeTruthy();
     });
 
     it("should check if it's an injected service prop when using decorator", () => {
       const context = new FauxContext(`
+        import {inject} from '@ember/service';
         class MyController extends Controller {
           @inject currentUser;
         }
       `);
-      const node = context.ast.body[0].body.body[0];
-      expect(emberUtils.isInjectedServiceProp(node)).toBeTruthy();
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].body.body[0];
+      expect(emberUtils.isInjectedServiceProp(node, undefined, importName)).toBeTruthy();
     });
 
     it("should check that it's not an injected service prop when using another decorator", () => {
