@@ -18,8 +18,11 @@ const ruleTester = new RuleTester({
 });
 
 const SERVICE_NAME = 'fooName';
-const IMPORTS = "import {get, getProperties} from '@ember/object';";
-const RENAMED_IMPORTS = "import {get as g, getProperties as gp} from '@ember/object';";
+const EO_IMPORTS = "import {computed, get, getProperties} from '@ember/object';";
+const RENAMED_EO_IMPORTS =
+  "import {computed as cp, get as g, getProperties as gp} from '@ember/object';";
+const ALIAS_IMPORT = "import {alias} from '@ember/object/computed';";
+const RENAMED_ALIAS_IMPORT = "import {alias as al} from '@ember/object/computed';";
 
 /**
  * Generate an array of usecases using the given property name
@@ -63,6 +66,42 @@ function generateEmberObjectUseCasesFor(propertyName, renamed = false) {
 }
 
 /**
+ * Generate an array of usecases with a computed macro `alias` using the given property name
+ * @param {String} propertyName The given property name to access
+ * @param {Boolean} renamed Whether or not the imports are renamed
+ * @returns {Array}
+ */
+function generateMacroUseCasesFor(propertyName, renamed = false) {
+  const aliasName = renamed ? 'al' : 'alias';
+  const aliasImport = renamed ? RENAMED_ALIAS_IMPORT : ALIAS_IMPORT;
+  return [
+    `${aliasImport} class MyClass { @service('foo') ${propertyName}; @${aliasName}('${propertyName}.prop') someAlias; }`,
+    `${aliasImport} class MyClass { @service() ${propertyName}; @${aliasName}('${propertyName}.prop') someAlias; }`,
+    `${aliasImport} Component.extend({ ${SERVICE_NAME}: service('foo'), someAlias: ${aliasName}('${propertyName}.prop') });`,
+    `${aliasImport} Component.extend({ ${SERVICE_NAME}: service(), someAlias: ${aliasName}('${propertyName}.prop') });`,
+  ];
+}
+
+/**
+ * Generate an array of usecases with a computed property using the given property name
+ * @param {String} propertyName The given property name to access
+ * @param {Boolean} renamed Whether or not the imports are renamed
+ * @returns {Array}
+ */
+function generateComputedUseCasesFor(propertyName, renamed = false) {
+  const computedName = renamed ? 'cp' : 'computed';
+  const computedImport = renamed ? RENAMED_EO_IMPORTS : EO_IMPORTS;
+  return [
+    `${computedImport} class MyClass { @service('foo') ${propertyName}; @${computedName}('${propertyName}.prop') get someComputed() {} }`,
+    `${computedImport} class MyClass { @service() ${propertyName}; @${computedName}('${propertyName}.prop') get someComputed() {} }`,
+    `${computedImport} Component.extend({ ${SERVICE_NAME}: service('foo'), someComputed: ${computedName}('${propertyName}.prop', ()=>{}) });`,
+    `${computedImport} Component.extend({ ${SERVICE_NAME}: service(), someComputed: ${computedName}('${propertyName}.prop', ()=>{}) });`,
+    `${computedImport} Component.extend({ ${SERVICE_NAME}: service('foo'), someComputed: ${computedName}.alias('${propertyName}.prop', ()=>{}) });`,
+    `${computedImport} Component.extend({ ${SERVICE_NAME}: service(), someComputed: ${computedName}.alias('${propertyName}.prop', ()=>{}) });`,
+  ];
+}
+
+/**
  * Generate an array of valid test cases
  * @returns {Array}
  */
@@ -84,7 +123,7 @@ function generateValid() {
     generateEmberObjectUseCasesFor(SERVICE_NAME, true),
   ];
   for (const [idx, useCases] of emberObjectUseCases.entries()) {
-    const imports = idx === 0 ? IMPORTS : RENAMED_IMPORTS;
+    const imports = idx === 0 ? EO_IMPORTS : RENAMED_EO_IMPORTS;
     for (const use of useCases) {
       valid.push(
         `${imports} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${use}} }`,
@@ -94,6 +133,17 @@ function generateValid() {
       );
     }
   }
+
+  const macroUseCases = [
+    ...generateMacroUseCasesFor(SERVICE_NAME),
+    ...generateMacroUseCasesFor(SERVICE_NAME, true),
+  ];
+  const computedUseCases = [
+    ...generateComputedUseCasesFor(SERVICE_NAME),
+    ...generateComputedUseCasesFor(SERVICE_NAME, true),
+  ];
+  valid.push(...macroUseCases);
+  valid.push(...computedUseCases);
 
   return valid;
 }
@@ -229,7 +279,7 @@ ruleTester.run('no-unused-services', rule, {
     },
     /* Using get/getProperties with @ember/object import for an unrelatedProp */
     {
-      code: `${IMPORTS} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${emberObjectUses2}} }`,
+      code: `${EO_IMPORTS} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${emberObjectUses2}} }`,
       output: null,
       errors: [
         {
@@ -237,7 +287,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `${IMPORTS} class MyClass {  fooFunc() {${emberObjectUses2}} }`,
+              output: `${EO_IMPORTS} class MyClass {  fooFunc() {${emberObjectUses2}} }`,
             },
           ],
           type: 'ClassProperty',
@@ -245,7 +295,7 @@ ruleTester.run('no-unused-services', rule, {
       ],
     },
     {
-      code: `${IMPORTS} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${emberObjectUses2}} });`,
+      code: `${EO_IMPORTS} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${emberObjectUses2}} });`,
       output: null,
       errors: [
         {
@@ -253,7 +303,73 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `${IMPORTS} Component.extend({  fooFunc() {${emberObjectUses2}} });`,
+              output: `${EO_IMPORTS} Component.extend({  fooFunc() {${emberObjectUses2}} });`,
+            },
+          ],
+          type: 'Property',
+        },
+      ],
+    },
+    /* Using computed props and macros without the imports */
+    {
+      code: `class MyClass { @service() ${SERVICE_NAME}; @alias('${SERVICE_NAME}') someAlias; @computed('${SERVICE_NAME}.prop') get someComputed() {} }`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `class MyClass {  @alias('${SERVICE_NAME}') someAlias; @computed('${SERVICE_NAME}.prop') get someComputed() {} }`,
+            },
+          ],
+          type: 'ClassProperty',
+        },
+      ],
+    },
+    {
+      code: `Component.extend({ ${SERVICE_NAME}: service(), someAlias1: alias('${SERVICE_NAME}'), someAlias2: computed.alias('${SERVICE_NAME}.prop'), someComputed: computed('${SERVICE_NAME}.prop', ()=>{}) });`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `Component.extend({  someAlias1: alias('${SERVICE_NAME}'), someAlias2: computed.alias('${SERVICE_NAME}.prop'), someComputed: computed('${SERVICE_NAME}.prop', ()=>{}) });`,
+            },
+          ],
+          type: 'Property',
+        },
+      ],
+    },
+    /* Using computed props and macros with the imports for an unrelatedProp */
+    {
+      code: `${EO_IMPORTS}${ALIAS_IMPORT} class MyClass { @service() ${SERVICE_NAME}; @alias('unrelatedProp', '${SERVICE_NAME}') someAlias; @computed('unrelatedProp.prop') get someComputed() {} }`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${EO_IMPORTS}${ALIAS_IMPORT} class MyClass {  @alias('unrelatedProp', '${SERVICE_NAME}') someAlias; @computed('unrelatedProp.prop') get someComputed() {} }`,
+            },
+          ],
+          type: 'ClassProperty',
+        },
+      ],
+    },
+    {
+      code: `${EO_IMPORTS}${ALIAS_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), someAlias1: alias('unrelatedProp', '${SERVICE_NAME}'), someAlias2: computed.alias('unrelatedProp.prop'), someComputed: computed('unrelatedProp.prop', ()=>{}) });`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${EO_IMPORTS}${ALIAS_IMPORT} Component.extend({  someAlias1: alias('unrelatedProp', '${SERVICE_NAME}'), someAlias2: computed.alias('unrelatedProp.prop'), someComputed: computed('unrelatedProp.prop', ()=>{}) });`,
             },
           ],
           type: 'Property',
