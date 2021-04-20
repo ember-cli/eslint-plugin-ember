@@ -32,10 +32,10 @@ ruleTester.run('no-private-routing-service', rule, {
     `${SERVICE_IMPORT} export default Component.extend({ someService: service('-router') });`,
     `${SERVICE_IMPORT} export default Component.extend({ '-routing': service('routing') });`,
     `${SERVICE_IMPORT} export default Component.extend({ '-routing': service('-router') });`,
-    `Component.extend({ routing: someOtherFunction('-routing') });`,
+    "Component.extend({ routing: someOtherFunction('-routing') });",
     `${SERVICE_IMPORT} export default Component.extend({ someService: service() });`,
-    `export default Component.extend({ notAService: "a value" });`,
-    `export default Component.extend({ anInt: 25 });`,
+    'export default Component.extend({ notAService: "a value" });',
+    'export default Component.extend({ anInt: 25 });',
 
     // Octane
     `${SERVICE_IMPORT} export default class MyComponent extends Component { @service router; }`,

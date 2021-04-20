@@ -57,7 +57,9 @@ describe('determinePropertyType', () => {
       );
       const importName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller', [], undefined, importName)).toStrictEqual('service');
+      expect(
+        propertyOrder.determinePropertyType(node, 'controller', [], undefined, importName)
+      ).toStrictEqual('service');
     });
 
     it('should determine controller-type props', () => {
@@ -270,7 +272,9 @@ describe('determinePropertyType', () => {
       );
       const importName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller', [], undefined, importName)).toStrictEqual('service');
+      expect(
+        propertyOrder.determinePropertyType(node, 'controller', [], undefined, importName)
+      ).toStrictEqual('service');
     });
 
     it('should determine controller-type props', () => {
@@ -388,7 +392,14 @@ describe('reportUnorderedProperties', () => {
       const importName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration;
 
-      propertyOrder.reportUnorderedProperties(node, context, 'controller', order, undefined, importName);
+      propertyOrder.reportUnorderedProperties(
+        node,
+        context,
+        'controller',
+        order,
+        undefined,
+        importName
+      );
       expect(context.report).not.toHaveBeenCalled();
     });
 
@@ -407,7 +418,14 @@ describe('reportUnorderedProperties', () => {
       const importName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration;
 
-      propertyOrder.reportUnorderedProperties(node, context, 'controller', order, undefined, importName);
+      propertyOrder.reportUnorderedProperties(
+        node,
+        context,
+        'controller',
+        order,
+        undefined,
+        importName
+      );
       expect(context.report).toHaveBeenCalled(); // eslint-disable-line jest/prefer-called-with
     });
   });
@@ -428,7 +446,14 @@ describe('reportUnorderedProperties', () => {
       const importName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration;
 
-      propertyOrder.reportUnorderedProperties(node, context, 'controller', order, undefined, importName);
+      propertyOrder.reportUnorderedProperties(
+        node,
+        context,
+        'controller',
+        order,
+        undefined,
+        importName
+      );
       expect(context.report).not.toHaveBeenCalled();
     });
 
@@ -447,7 +472,14 @@ describe('reportUnorderedProperties', () => {
       const importName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration;
 
-      propertyOrder.reportUnorderedProperties(node, context, 'controller', order, undefined, importName);
+      propertyOrder.reportUnorderedProperties(
+        node,
+        context,
+        'controller',
+        order,
+        undefined,
+        importName
+      );
       expect(context.report).toHaveBeenCalled(); // eslint-disable-line jest/prefer-called-with
     });
   });

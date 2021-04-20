@@ -213,7 +213,12 @@ ruleTester.run('no-unused-services', rule, {
       errors: [
         {
           messageId: 'main',
-          suggestions: [{ messageId: 'removeServiceInjection', output: `${SERVICE_IMPORT} Component.extend({  });` }],
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${SERVICE_IMPORT} Component.extend({  });`,
+            },
+          ],
           type: 'Property',
         },
       ],
@@ -240,7 +245,12 @@ ruleTester.run('no-unused-services', rule, {
       errors: [
         {
           messageId: 'main',
-          suggestions: [{ messageId: 'removeServiceInjection', output: `${SERVICE_IMPORT} Component.extend({  });` }],
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${SERVICE_IMPORT} Component.extend({  });`,
+            },
+          ],
           type: 'Property',
         },
       ],
