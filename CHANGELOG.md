@@ -1,3 +1,21 @@
+## v10.4.0 (2021-04-20)
+
+#### :rocket: Enhancement
+* [#1143](https://github.com/ember-cli/eslint-plugin-ember/pull/1143) Add new rule `no-unused-services` ([@lin-ll](https://github.com/lin-ll))
+* [#1127](https://github.com/ember-cli/eslint-plugin-ember/pull/1127) Add automated suggestion to `route-path-style` rule for converting route path to kebab case ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#1150](https://github.com/ember-cli/eslint-plugin-ember/pull/1150) `no-get` rule should ignore proxy classes that look like `ObjectProxy.extend(SomeMixin)` ([@bmish](https://github.com/bmish))
+* [#1149](https://github.com/ember-cli/eslint-plugin-ember/pull/1149) Detect classic classes which have object variables passed to them in `no-classic-classes` rule ([@bmish](https://github.com/bmish))
+* [#1135](https://github.com/ember-cli/eslint-plugin-ember/pull/1135) Fix false positive in same level routes but nested paths in `no-shadow-route-definition` rule ([@raido](https://github.com/raido))
+* [#1132](https://github.com/ember-cli/eslint-plugin-ember/pull/1132) Fix crash with dynamic/variable route name in `no-shadow-route-definition` rule (again) ([@raido](https://github.com/raido))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Lucy Lin ([@lin-ll](https://github.com/lin-ll))
+- Raido Kuli ([@raido](https://github.com/raido))
+
+
 ## v10.3.0 (2021-03-22)
 
 #### :rocket: Enhancement
