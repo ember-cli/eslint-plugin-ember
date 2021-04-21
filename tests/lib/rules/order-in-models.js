@@ -90,6 +90,18 @@ eslintTester.run('order-in-models', rule, {
         },
       ],
     },
+    {
+      code: `import {inject as service} from '@ember/service';
+        export default DS.Model.extend({
+          foo: service(),
+          a: attr('string'),
+          convertA(paramA) {
+          },
+          customProp: { a: 1 }
+        });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{ order: ['service', 'attribute', 'method'] }],
+    },
   ],
   invalid: [
     {
