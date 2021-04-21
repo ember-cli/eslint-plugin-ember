@@ -11,6 +11,9 @@ const {
   ROUTER_MAIN_ERROR_MESSAGE,
 } = rule;
 
+const EMBER_IMPORT = "import Ember from 'ember';";
+const SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
+
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
@@ -26,20 +29,24 @@ const ruleTester = new RuleTester({
 ruleTester.run('no-private-routing-service', rule, {
   valid: [
     // Classic
-    "export default Component.extend({ someService: service('routing') });",
-    "export default Component.extend({ someService: service('-router') });",
-    "export default Component.extend({ '-routing': service('routing') });",
-    "export default Component.extend({ '-routing': service('-router') });",
+    `${SERVICE_IMPORT} export default Component.extend({ someService: service('routing') });`,
+    `${SERVICE_IMPORT} export default Component.extend({ someService: service('-router') });`,
+    `${SERVICE_IMPORT} export default Component.extend({ '-routing': service('routing') });`,
+    `${SERVICE_IMPORT} export default Component.extend({ '-routing': service('-router') });`,
+    `${EMBER_IMPORT} export default Component.extend({ someService: Ember.inject.service('routing') });`,
+    `${EMBER_IMPORT} export default Component.extend({ someService: Ember.inject.service('-router') });`,
+    `${EMBER_IMPORT} export default Component.extend({ '-routing': Ember.inject.service('routing') });`,
+    `${EMBER_IMPORT} export default Component.extend({ '-routing': Ember.inject.service('-router') });`,
     "Component.extend({ routing: someOtherFunction('-routing') });",
-    'export default Component.extend({ someService: service() });',
+    `${SERVICE_IMPORT} export default Component.extend({ someService: service() });`,
     'export default Component.extend({ notAService: "a value" });',
     'export default Component.extend({ anInt: 25 });',
 
     // Octane
-    'export default class MyComponent extends Component { @service router; }',
-    "export default class MyComponent extends Component { @service('router') routing; }",
-    'export default class MyComponent extends Component { @service routing; }',
-    "export default class MyComponent extends Component { @service('routing') routing; }",
+    `${SERVICE_IMPORT} export default class MyComponent extends Component { @service router; }`,
+    `${SERVICE_IMPORT} export default class MyComponent extends Component { @service('router') routing; }`,
+    `${SERVICE_IMPORT} export default class MyComponent extends Component { @service routing; }`,
+    `${SERVICE_IMPORT} export default class MyComponent extends Component { @service('routing') routing; }`,
     `
     export default class MyComponent extends Component {
       @computed('-routing', 'lastName')
@@ -48,8 +55,8 @@ ruleTester.run('no-private-routing-service', rule, {
       }
     }
     `,
-    'class MyComponent extends Component { @service() routing; }',
-    'class MyComponent extends Component { @service() notRouting; }',
+    `${SERVICE_IMPORT} class MyComponent extends Component { @service() routing; }`,
+    `${SERVICE_IMPORT} class MyComponent extends Component { @service() notRouting; }`,
     'class MyComponent extends Component { aProp="routing"; }',
     'class MyComponent extends Component { aProp="-routing"; }',
     'class MyComponent extends Component { aProp="another value"; }',
@@ -72,14 +79,14 @@ ruleTester.run('no-private-routing-service', rule, {
   invalid: [
     // Classic
     {
-      code: "export default Component.extend({ routing: service('-routing') });",
+      code: `${SERVICE_IMPORT} export default Component.extend({ routing: service('-routing') });`,
       output: null,
       errors: [{ message: PRIVATE_ROUTING_SERVICE_ERROR_MESSAGE, type: 'Property' }],
     },
 
     // Octane
     {
-      code: "export default class MyComponent extends Component { @service('-routing') routing; }",
+      code: `${SERVICE_IMPORT} export default class MyComponent extends Component { @service('-routing') routing; }`,
       output: null,
       errors: [{ message: PRIVATE_ROUTING_SERVICE_ERROR_MESSAGE, type: 'ClassProperty' }],
     },

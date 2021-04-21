@@ -18,7 +18,8 @@ eslintTester.run('order-in-routes', rule, {
   valid: [
     'export default Route.extend();',
     'export default Route.extend({ ...foo });',
-    `export default Route.extend({
+    `import {inject as service} from '@ember/service';
+      export default Route.extend({
         currentUser: service(),
         queryParams: {},
         customProp: "test",
@@ -40,7 +41,8 @@ eslintTester.run('order-in-routes', rule, {
         _customAction2: function() { const foo = 'bar'; },
         tSomeTask: task(function* () {})
       });`,
-    `export default Route.extend({
+    `import {inject} from '@ember/service';
+      export default Route.extend({
         currentUser: inject(),
         queryParams: {},
         customProp: "test",
@@ -84,7 +86,8 @@ eslintTester.run('order-in-routes', rule, {
         model() {}
       });`,
     {
-      code: `export default Route.extend({
+      code: `import {inject as service} from '@ember/service';
+      export default Route.extend({
         model() {},
         beforeModel() {},
         currentUser: service(),
@@ -96,7 +99,8 @@ eslintTester.run('order-in-routes', rule, {
       ],
     },
     {
-      code: `export default Route.extend({
+      code: `import {inject as service} from '@ember/service';
+      export default Route.extend({
         deactivate() {},
         beforeModel() {},
         currentUser: service(),
@@ -109,7 +113,8 @@ eslintTester.run('order-in-routes', rule, {
       ],
     },
     {
-      code: `export default Route.extend({
+      code: `import {inject as service} from '@ember/service';
+      export default Route.extend({
         deactivate() {},
         setupController() {},
         beforeModel() {},
@@ -123,22 +128,24 @@ eslintTester.run('order-in-routes', rule, {
       ],
     },
     `
-        export default Route.extend({
-          foo: service(),
-          init() {
-            this._super(...arguments);
-          },
-          actions: {}
-        });
-      `,
+      import {inject as service} from '@ember/service';
+      export default Route.extend({
+        foo: service(),
+        init() {
+          this._super(...arguments);
+        },
+        actions: {}
+      });
+    `,
     `
-        export default Route.extend({
-          foo: service(),
-          init() {
-            this._super(...arguments);
-          },
-          customFoo() {}
-        });
+      import {inject as service} from '@ember/service';
+      export default Route.extend({
+        foo: service(),
+        init() {
+          this._super(...arguments);
+        },
+        customFoo() {}
+      });
     `,
     {
       code: `export default Route.extend({
@@ -158,7 +165,8 @@ eslintTester.run('order-in-routes', rule, {
   ],
   invalid: [
     {
-      code: `export default Route.extend({
+      code: `import {inject as service} from '@ember/service';
+      export default Route.extend({
         queryParams: {},
         currentUser: service(),
         customProp: "test",
@@ -168,7 +176,8 @@ eslintTester.run('order-in-routes', rule, {
         actions: {},
         _customAction() {}
       });`,
-      output: `export default Route.extend({
+      output: `import {inject as service} from '@ember/service';
+      export default Route.extend({
         currentUser: service(),
         queryParams: {},
         customProp: "test",
@@ -181,18 +190,19 @@ eslintTester.run('order-in-routes', rule, {
       errors: [
         {
           message:
-            'The "currentUser" service injection should be above the inherited "queryParams" property on line 2',
-          line: 3,
+            'The "currentUser" service injection should be above the inherited "queryParams" property on line 3',
+          line: 4,
         },
         {
           message:
-            'The "vehicle" single-line function should be above the "beforeModel" lifecycle hook on line 5',
-          line: 7,
+            'The "vehicle" single-line function should be above the "beforeModel" lifecycle hook on line 6',
+          line: 8,
         },
       ],
     },
     {
-      code: `export default Route.extend({
+      code: `import {inject} from '@ember/service';
+      export default Route.extend({
         queryParams: {},
         currentUser: inject(),
         customProp: "test",
@@ -202,7 +212,8 @@ eslintTester.run('order-in-routes', rule, {
         actions: {},
         _customAction() {}
       });`,
-      output: `export default Route.extend({
+      output: `import {inject} from '@ember/service';
+      export default Route.extend({
         currentUser: inject(),
         queryParams: {},
         customProp: "test",
@@ -215,13 +226,13 @@ eslintTester.run('order-in-routes', rule, {
       errors: [
         {
           message:
-            'The "currentUser" service injection should be above the inherited "queryParams" property on line 2',
-          line: 3,
+            'The "currentUser" service injection should be above the inherited "queryParams" property on line 3',
+          line: 4,
         },
         {
           message:
-            'The "vehicle" single-line function should be above the "beforeModel" lifecycle hook on line 5',
-          line: 7,
+            'The "vehicle" single-line function should be above the "beforeModel" lifecycle hook on line 6',
+          line: 8,
         },
       ],
     },
@@ -355,7 +366,8 @@ eslintTester.run('order-in-routes', rule, {
       ],
     },
     {
-      code: `export default Route.extend({
+      code: `import {inject as service} from '@ember/service';
+      export default Route.extend({
         currentUser: service(),
         queryParams: {},
         customProp: "test",
@@ -377,7 +389,8 @@ eslintTester.run('order-in-routes', rule, {
         _customAction2: function() {},
         tSomeTask: task(function* () {})
       });`,
-      output: `export default Route.extend({
+      output: `import {inject as service} from '@ember/service';
+      export default Route.extend({
         currentUser: service(),
         queryParams: {},
         customProp: "test",
@@ -402,28 +415,28 @@ eslintTester.run('order-in-routes', rule, {
       errors: [
         {
           message:
-            'The "redirect" lifecycle hook should be above the "setupController" lifecycle hook on line 11',
-          line: 12,
-        },
-        {
-          message:
-            'The "serialize" lifecycle hook should be above the "setupController" lifecycle hook on line 11',
+            'The "redirect" lifecycle hook should be above the "setupController" lifecycle hook on line 12',
           line: 13,
         },
         {
           message:
-            'The "activate" lifecycle hook should be above the "setupController" lifecycle hook on line 11',
+            'The "serialize" lifecycle hook should be above the "setupController" lifecycle hook on line 12',
           line: 14,
         },
         {
           message:
-            'The "renderTemplate" lifecycle hook should be above the "deactivate" lifecycle hook on line 15',
-          line: 16,
+            'The "activate" lifecycle hook should be above the "setupController" lifecycle hook on line 12',
+          line: 15,
         },
         {
           message:
-            'The "resetController" lifecycle hook should be above the "deactivate" lifecycle hook on line 15',
+            'The "renderTemplate" lifecycle hook should be above the "deactivate" lifecycle hook on line 16',
           line: 17,
+        },
+        {
+          message:
+            'The "resetController" lifecycle hook should be above the "deactivate" lifecycle hook on line 16',
+          line: 18,
         },
       ],
     },
@@ -498,6 +511,7 @@ eslintTester.run('order-in-routes', rule, {
     },
     {
       code: `
+        import {inject as service} from '@ember/service';
         export default Route.extend({
           foo: service(),
           actions: {},
@@ -507,6 +521,7 @@ eslintTester.run('order-in-routes', rule, {
         });
       `,
       output: `
+        import {inject as service} from '@ember/service';
         export default Route.extend({
           foo: service(),
           init() {
@@ -517,13 +532,14 @@ eslintTester.run('order-in-routes', rule, {
       `,
       errors: [
         {
-          message: 'The "init" lifecycle hook should be above the actions hash on line 4',
-          line: 5,
+          message: 'The "init" lifecycle hook should be above the actions hash on line 5',
+          line: 6,
         },
       ],
     },
     {
       code: `
+        import {inject as service} from '@ember/service';
         export default Route.extend({
           foo: service(),
           customFoo() {},
@@ -533,6 +549,7 @@ eslintTester.run('order-in-routes', rule, {
         });
       `,
       output: `
+        import {inject as service} from '@ember/service';
         export default Route.extend({
           foo: service(),
           init() {
@@ -544,13 +561,14 @@ eslintTester.run('order-in-routes', rule, {
       errors: [
         {
           message:
-            'The "init" lifecycle hook should be above the "customFoo" empty method on line 4',
-          line: 5,
+            'The "init" lifecycle hook should be above the "customFoo" empty method on line 5',
+          line: 6,
         },
       ],
     },
     {
       code: `
+        import {inject as service} from '@ember/service';
         export default Route.extend({
           init() {
             this._super(...arguments);
@@ -559,6 +577,7 @@ eslintTester.run('order-in-routes', rule, {
         });
       `,
       output: `
+        import {inject as service} from '@ember/service';
         export default Route.extend({
           foo: service(),
                   init() {
@@ -569,8 +588,8 @@ eslintTester.run('order-in-routes', rule, {
       errors: [
         {
           message:
-            'The "foo" service injection should be above the "init" lifecycle hook on line 3',
-          line: 6,
+            'The "foo" service injection should be above the "init" lifecycle hook on line 4',
+          line: 7,
         },
       ],
     },

@@ -7,6 +7,10 @@ const RuleTester = require('eslint').RuleTester;
 
 const { ERROR_MESSAGE } = rule;
 
+const EMBER_IMPORT = "import Ember from 'ember';";
+const SERVICE_IMPORT = "import {inject} from '@ember/service';";
+const RENAMED_SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
+
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
@@ -22,11 +26,12 @@ const ruleTester = new RuleTester({
 ruleTester.run('no-unnecessary-service-injection-argument', rule, {
   valid: [
     // No argument:
-    'export default Component.extend({ serviceName: service() });',
-    'export default Component.extend({ serviceName: inject() });',
-    'const controller = Controller.extend({ serviceName: service() });',
+    `${EMBER_IMPORT} export default Component.extend({ serviceName: Ember.inject.service() });`,
+    `${RENAMED_SERVICE_IMPORT} export default Component.extend({ serviceName: service() });`,
+    `${SERVICE_IMPORT} export default Component.extend({ serviceName: inject() });`,
+    `${RENAMED_SERVICE_IMPORT} const controller = Controller.extend({ serviceName: service() });`,
     {
-      code: 'class Test { @service serviceName }',
+      code: `${RENAMED_SERVICE_IMPORT} class Test { @service serviceName }`,
       parser: require.resolve('babel-eslint'),
       parserOptions: {
         ecmaVersion: 6,
@@ -35,7 +40,7 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
       },
     },
     {
-      code: 'class Test { @service() serviceName }',
+      code: `${RENAMED_SERVICE_IMPORT} class Test { @service() serviceName }`,
       parser: require.resolve('babel-eslint'),
       parserOptions: {
         ecmaVersion: 6,
@@ -46,11 +51,12 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
 
     // Property name matches service name but service name uses dashes
     // (allowed because it avoids needless runtime camelization <-> dasherization in the resolver):
-    "export default Component.extend({ specialName: service('service-name') });",
-    "export default Component.extend({ specialName: inject('service-name') });",
-    "const controller = Controller.extend({ serviceName: service('service-name') });",
+    `${EMBER_IMPORT} export default Component.extend({ specialName: Ember.inject.service('service-name') });`,
+    `${RENAMED_SERVICE_IMPORT} export default Component.extend({ specialName: service('service-name') });`,
+    `${SERVICE_IMPORT} export default Component.extend({ specialName: inject('service-name') });`,
+    `${RENAMED_SERVICE_IMPORT} const controller = Controller.extend({ serviceName: service('service-name') });`,
     {
-      code: 'class Test { @service("service-name") serviceName }',
+      code: `${RENAMED_SERVICE_IMPORT} class Test { @service("service-name") serviceName }`,
       parser: require.resolve('babel-eslint'),
       parserOptions: {
         ecmaVersion: 6,
@@ -60,9 +66,10 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     },
 
     // Property name does not match service name:
-    "const controller = Controller.extend({ specialName: service('service-name') });",
+    `${EMBER_IMPORT} const controller = Controller.extend({ specialName: Ember.inject.service('service-name') });`,
+    `${RENAMED_SERVICE_IMPORT} const controller = Controller.extend({ specialName: service('service-name') });`,
     {
-      code: 'class Test { @service("specialName") serviceName }',
+      code: `${RENAMED_SERVICE_IMPORT} class Test { @service("specialName") serviceName }`,
       parser: require.resolve('babel-eslint'),
       parserOptions: {
         ecmaVersion: 6,
@@ -72,13 +79,15 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     },
 
     // When usage is ignored because of additional arguments:
-    "export default Component.extend({ serviceName: service('serviceName', EXTRA_PROPERTY) });",
-    "export default Component.extend({ serviceName: inject('serviceName', EXTRA_PROPERTY) });",
+    `${EMBER_IMPORT} export default Component.extend({ serviceName: Ember.inject.service('serviceName', EXTRA_PROPERTY) });`,
+    `${RENAMED_SERVICE_IMPORT} export default Component.extend({ serviceName: service('serviceName', EXTRA_PROPERTY) });`,
+    `${SERVICE_IMPORT} export default Component.extend({ serviceName: inject('serviceName', EXTRA_PROPERTY) });`,
 
     // When usage is ignored because of template literal:
-    'export default Component.extend({ serviceName: service(`serviceName`) });',
+    `${EMBER_IMPORT} export default Component.extend({ serviceName: Ember.inject.service(\`serviceName\`) });`,
+    `${SERVICE_IMPORT} export default Component.extend({ serviceName: service(\`serviceName\`) });`,
     {
-      code: 'class Test { @service(`specialName`) serviceName }',
+      code: `${RENAMED_SERVICE_IMPORT} class Test { @service(\`specialName\`) serviceName }`,
       parser: require.resolve('babel-eslint'),
       parserOptions: {
         ecmaVersion: 6,
@@ -89,7 +98,7 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
 
     // Not Ember's `service()` function:
     "export default Component.extend({ serviceName: otherFunction('serviceName') });",
-    "export default Component.extend({ serviceName: service.otherFunction('serviceName') });",
+    `${RENAMED_SERVICE_IMPORT} export default Component.extend({ serviceName: service.otherFunction('serviceName') });`,
     "export default Component.extend({ serviceName: inject.otherFunction('serviceName') });",
     {
       code: 'class Test { @otherDecorator("name") name }',
@@ -106,32 +115,32 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
   invalid: [
     // `Component` examples:
     {
-      code: "export default Component.extend({ serviceName: service('serviceName') });",
-      output: 'export default Component.extend({ serviceName: service() });',
+      code: `${RENAMED_SERVICE_IMPORT} export default Component.extend({ serviceName: service('serviceName') });`,
+      output: `${RENAMED_SERVICE_IMPORT} export default Component.extend({ serviceName: service() });`,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
-      code: "export default Component.extend({ serviceName: inject('serviceName') });",
-      output: 'export default Component.extend({ serviceName: inject() });',
+      code: `${SERVICE_IMPORT} export default Component.extend({ serviceName: inject('serviceName') });`,
+      output: `${SERVICE_IMPORT} export default Component.extend({ serviceName: inject() });`,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
 
     // `Controller` examples:
     {
-      code: "const controller = Controller.extend({ serviceName: service('serviceName') });",
-      output: 'const controller = Controller.extend({ serviceName: service() });',
+      code: `${RENAMED_SERVICE_IMPORT} const controller = Controller.extend({ serviceName: service('serviceName') });`,
+      output: `${RENAMED_SERVICE_IMPORT} const controller = Controller.extend({ serviceName: service() });`,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
     {
-      code: "const controller = Controller.extend({ serviceName: inject('serviceName') });",
-      output: 'const controller = Controller.extend({ serviceName: inject() });',
+      code: `${SERVICE_IMPORT} const controller = Controller.extend({ serviceName: inject('serviceName') });`,
+      output: `${SERVICE_IMPORT} const controller = Controller.extend({ serviceName: inject() });`,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
 
     // Decorator:
     {
-      code: 'class Test { @service("serviceName") serviceName }',
-      output: 'class Test { @service() serviceName }',
+      code: `${RENAMED_SERVICE_IMPORT} class Test { @service("serviceName") serviceName }`,
+      output: `${RENAMED_SERVICE_IMPORT} class Test { @service() serviceName }`,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
       parser: require.resolve('babel-eslint'),
       parserOptions: {
