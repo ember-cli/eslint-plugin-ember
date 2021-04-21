@@ -853,6 +853,18 @@ describe('isInjectedServiceProp', () => {
       const node = context.ast.body[1].declaration.arguments[0].properties[0];
       expect(emberUtils.isInjectedServiceProp(node, importName, undefined)).toBeFalsy();
     });
+    
+    it("should check that it's not an injected service prop with Ember.foo.service", () => {
+      const context = new FauxContext(`
+        import Ember from 'ember';
+        export default Controller.extend({
+          currentUser: Ember.foo.service()
+        });
+      `);
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node, importName, undefined)).toBeFalsy();
+    });
 
     it("should check that it's not an injected service prop with Ember.service.foo", () => {
       const context = new FauxContext(`
@@ -869,7 +881,7 @@ describe('isInjectedServiceProp', () => {
     it("should check that it's not an injected service prop with foo.service.inject", () => {
       const context = new FauxContext(`
         export default Controller.extend({
-          currentUser: Ember.service.foo()
+          currentUser: foo.service.inject()
         });
       `);
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
