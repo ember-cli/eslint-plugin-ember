@@ -853,7 +853,7 @@ describe('isInjectedServiceProp', () => {
       const node = context.ast.body[1].declaration.arguments[0].properties[0];
       expect(emberUtils.isInjectedServiceProp(node, importName, undefined)).toBeFalsy();
     });
-    
+
     it("should check that it's not an injected service prop with Ember.foo.service", () => {
       const context = new FauxContext(`
         import Ember from 'ember';
