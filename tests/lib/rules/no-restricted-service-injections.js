@@ -3,6 +3,7 @@ const rule = require('../../../lib/rules/no-restricted-service-injections');
 
 const { DEFAULT_ERROR_MESSAGE } = rule;
 
+const EMBER_IMPORT = "import Ember from 'ember';";
 const SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
 
 const ruleTester = new RuleTester({
@@ -22,8 +23,20 @@ ruleTester.run('no-restricted-service-injections', rule, {
       filename: 'app/components/path.js',
     },
     {
+      // Service name doesn't match (with property name):
+      code: `${EMBER_IMPORT} Component.extend({ myService: Ember.inject.service() })`,
+      options: [{ paths: ['app/components'], services: ['abc'] }],
+      filename: 'app/components/path.js',
+    },
+    {
       // Service name doesn't match (with string argument):
       code: `${SERVICE_IMPORT} Component.extend({ randomName: service('myService') })`,
+      options: [{ paths: ['app/components'], services: ['abc'] }],
+      filename: 'app/components/path.js',
+    },
+    {
+      // Service name doesn't match (with string argument):
+      code: `${EMBER_IMPORT} Component.extend({ randomName: Ember.inject.service('myService') })`,
       options: [{ paths: ['app/components'], services: ['abc'] }],
       filename: 'app/components/path.js',
     },

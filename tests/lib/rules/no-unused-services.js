@@ -153,22 +153,6 @@ function generateValid() {
     }
   }
 
-  const macroUseCases = [
-    ...generateMacroUseCasesFor(SERVICE_NAME),
-    ...generateMacroUseCasesFor(SERVICE_NAME, true),
-  ];
-  const computedUseCases = [
-    ...generateComputedUseCasesFor(SERVICE_NAME),
-    ...generateComputedUseCasesFor(SERVICE_NAME, true),
-  ];
-  const observerUseCases = [
-    ...generateObserverUseCasesFor(SERVICE_NAME),
-    ...generateObserverUseCasesFor(SERVICE_NAME, true),
-  ];
-  valid.push(...macroUseCases);
-  valid.push(...computedUseCases);
-  valid.push(...observerUseCases);
-
   return valid;
 }
 
@@ -180,7 +164,21 @@ const emberObjectUses1 = generateEmberObjectUseCasesFor(SERVICE_NAME).join('');
 const emberObjectUses2 = generateEmberObjectUseCasesFor('unrelatedProp').join('');
 
 ruleTester.run('no-unused-services', rule, {
-  valid: generateValid(),
+  valid: [
+    ...generateValid(),
+    ...generateMacroUseCasesFor(SERVICE_NAME),
+    ...generateMacroUseCasesFor(SERVICE_NAME, true),
+    ...generateComputedUseCasesFor(SERVICE_NAME),
+    ...generateComputedUseCasesFor(SERVICE_NAME, true),
+    ...generateObserverUseCasesFor(SERVICE_NAME),
+    ...generateObserverUseCasesFor(SERVICE_NAME, true),
+    `class MyClass { @service() ${SERVICE_NAME}; }`,
+    `Component.extend({ ${SERVICE_NAME}: service() });`,
+    `Component.extend({ ${SERVICE_NAME}: Ember.inject.service() });`,
+    `${SERVICE_IMPORT} class MyClass {}`,
+    `${SERVICE_IMPORT} Component.extend({});`,
+    'const foo = service();',
+  ],
   invalid: [
     {
       code: `${SERVICE_IMPORT} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${nonUses}} }`,
@@ -313,7 +311,7 @@ ruleTester.run('no-unused-services', rule, {
     },
     /* Using get/getProperties with @ember/object import for an unrelatedProp */
     {
-      code: `${SERVICE_IMPORT} ${EO_IMPORTS} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${emberObjectUses2}} }`,
+      code: `${SERVICE_IMPORT}${EO_IMPORTS} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${emberObjectUses2}} }`,
       output: null,
       errors: [
         {
@@ -321,7 +319,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `${SERVICE_IMPORT} ${EO_IMPORTS} class MyClass {  fooFunc() {${emberObjectUses2}} }`,
+              output: `${SERVICE_IMPORT}${EO_IMPORTS} class MyClass {  fooFunc() {${emberObjectUses2}} }`,
             },
           ],
           type: 'ClassProperty',
@@ -329,7 +327,7 @@ ruleTester.run('no-unused-services', rule, {
       ],
     },
     {
-      code: `${SERVICE_IMPORT} ${EO_IMPORTS} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${emberObjectUses2}} });`,
+      code: `${SERVICE_IMPORT}${EO_IMPORTS} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${emberObjectUses2}} });`,
       output: null,
       errors: [
         {
@@ -337,7 +335,7 @@ ruleTester.run('no-unused-services', rule, {
           suggestions: [
             {
               messageId: 'removeServiceInjection',
-              output: `${SERVICE_IMPORT} ${EO_IMPORTS} Component.extend({  fooFunc() {${emberObjectUses2}} });`,
+              output: `${SERVICE_IMPORT}${EO_IMPORTS} Component.extend({  fooFunc() {${emberObjectUses2}} });`,
             },
           ],
           type: 'Property',
@@ -404,6 +402,87 @@ ruleTester.run('no-unused-services', rule, {
             {
               messageId: 'removeServiceInjection',
               output: `${SERVICE_IMPORT}${EO_IMPORTS}${ALIAS_IMPORT} Component.extend({  someAlias1: alias('unrelatedProp', '${SERVICE_NAME}'), someAlias2: computed.alias('unrelatedProp.prop'), someComputed: computed('unrelatedProp.prop', ()=>{}) });`,
+            },
+          ],
+          type: 'Property',
+        },
+      ],
+    },
+    {
+      code: `${SERVICE_IMPORT}${EO_IMPORTS}${ALIAS_IMPORT} class MyClass { @service() ${SERVICE_NAME}; @alias(${SERVICE_NAME}) someAlias; @computed(${SERVICE_NAME}) get someComputed() {} }`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${SERVICE_IMPORT}${EO_IMPORTS}${ALIAS_IMPORT} class MyClass {  @alias(${SERVICE_NAME}) someAlias; @computed(${SERVICE_NAME}) get someComputed() {} }`,
+            },
+          ],
+          type: 'ClassProperty',
+        },
+      ],
+    },
+    {
+      code: `${SERVICE_IMPORT}${EO_IMPORTS}${ALIAS_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), someAlias1: alias(${SERVICE_NAME}), someAlias2: computed.alias(${SERVICE_NAME}), someComputed: computed(${SERVICE_NAME}, ()=>{}) });`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${SERVICE_IMPORT}${EO_IMPORTS}${ALIAS_IMPORT} Component.extend({  someAlias1: alias(${SERVICE_NAME}), someAlias2: computed.alias(${SERVICE_NAME}), someComputed: computed(${SERVICE_NAME}, ()=>{}) });`,
+            },
+          ],
+          type: 'Property',
+        },
+      ],
+    },
+    /* Using dummy macros that don't have dependent key props */
+    {
+      code: `${SERVICE_IMPORT} import {foobar} from '@ember/object/computed'; class MyClass { @service() ${SERVICE_NAME}; @foobar('${SERVICE_NAME}') someFoobar; }`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${SERVICE_IMPORT} import {foobar} from '@ember/object/computed'; class MyClass {  @foobar('${SERVICE_NAME}') someFoobar; }`,
+            },
+          ],
+          type: 'ClassProperty',
+        },
+      ],
+    },
+    {
+      code: `${SERVICE_IMPORT} import {foobar} from '@ember/object/computed'; Component.extend({ ${SERVICE_NAME}: service(), someFoobar: foobar('${SERVICE_NAME}') });`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${SERVICE_IMPORT} import {foobar} from '@ember/object/computed'; Component.extend({  someFoobar: foobar('${SERVICE_NAME}') });`,
+            },
+          ],
+          type: 'Property',
+        },
+      ],
+    },
+    {
+      code: `${SERVICE_IMPORT}${EMBER_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), someFoobar: Ember.computed.foobar('${SERVICE_NAME}') });`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${SERVICE_IMPORT}${EMBER_IMPORT} Component.extend({  someFoobar: Ember.computed.foobar('${SERVICE_NAME}') });`,
             },
           ],
           type: 'Property',

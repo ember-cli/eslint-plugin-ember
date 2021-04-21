@@ -11,6 +11,7 @@ const {
   ROUTER_MAIN_ERROR_MESSAGE,
 } = rule;
 
+const EMBER_IMPORT = "import Ember from 'ember';";
 const SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
 
 //------------------------------------------------------------------------------
@@ -32,6 +33,10 @@ ruleTester.run('no-private-routing-service', rule, {
     `${SERVICE_IMPORT} export default Component.extend({ someService: service('-router') });`,
     `${SERVICE_IMPORT} export default Component.extend({ '-routing': service('routing') });`,
     `${SERVICE_IMPORT} export default Component.extend({ '-routing': service('-router') });`,
+    `${EMBER_IMPORT} export default Component.extend({ someService: Ember.inject.service('routing') });`,
+    `${EMBER_IMPORT} export default Component.extend({ someService: Ember.inject.service('-router') });`,
+    `${EMBER_IMPORT} export default Component.extend({ '-routing': Ember.inject.service('routing') });`,
+    `${EMBER_IMPORT} export default Component.extend({ '-routing': Ember.inject.service('-router') });`,
     "Component.extend({ routing: someOtherFunction('-routing') });",
     `${SERVICE_IMPORT} export default Component.extend({ someService: service() });`,
     'export default Component.extend({ notAService: "a value" });',

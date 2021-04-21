@@ -7,6 +7,7 @@ const RuleTester = require('eslint').RuleTester;
 
 const { ERROR_MESSAGE } = rule;
 
+const EMBER_IMPORT = "import Ember from 'ember';";
 const SERVICE_IMPORT = "import {inject} from '@ember/service';";
 const RENAMED_SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
 
@@ -25,6 +26,7 @@ const ruleTester = new RuleTester({
 ruleTester.run('no-unnecessary-service-injection-argument', rule, {
   valid: [
     // No argument:
+    `${EMBER_IMPORT} export default Component.extend({ serviceName: Ember.inject.service() });`,
     `${RENAMED_SERVICE_IMPORT} export default Component.extend({ serviceName: service() });`,
     `${SERVICE_IMPORT} export default Component.extend({ serviceName: inject() });`,
     `${RENAMED_SERVICE_IMPORT} const controller = Controller.extend({ serviceName: service() });`,
@@ -49,9 +51,10 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
 
     // Property name matches service name but service name uses dashes
     // (allowed because it avoids needless runtime camelization <-> dasherization in the resolver):
+    `${EMBER_IMPORT} export default Component.extend({ specialName: Ember.inject.service('service-name') });`,
     `${RENAMED_SERVICE_IMPORT} export default Component.extend({ specialName: service('service-name') });`,
     `${SERVICE_IMPORT} export default Component.extend({ specialName: inject('service-name') });`,
-    "const controller = Controller.extend({ serviceName: service('service-name') });",
+    `${RENAMED_SERVICE_IMPORT} const controller = Controller.extend({ serviceName: service('service-name') });`,
     {
       code: `${RENAMED_SERVICE_IMPORT} class Test { @service("service-name") serviceName }`,
       parser: require.resolve('babel-eslint'),
@@ -63,7 +66,8 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     },
 
     // Property name does not match service name:
-    "const controller = Controller.extend({ specialName: service('service-name') });",
+    `${EMBER_IMPORT} const controller = Controller.extend({ specialName: Ember.inject.service('service-name') });`,
+    `${RENAMED_SERVICE_IMPORT} const controller = Controller.extend({ specialName: service('service-name') });`,
     {
       code: `${RENAMED_SERVICE_IMPORT} class Test { @service("specialName") serviceName }`,
       parser: require.resolve('babel-eslint'),
@@ -75,10 +79,12 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     },
 
     // When usage is ignored because of additional arguments:
+    `${EMBER_IMPORT} export default Component.extend({ serviceName: Ember.inject.service('serviceName', EXTRA_PROPERTY) });`,
     `${RENAMED_SERVICE_IMPORT} export default Component.extend({ serviceName: service('serviceName', EXTRA_PROPERTY) });`,
     `${SERVICE_IMPORT} export default Component.extend({ serviceName: inject('serviceName', EXTRA_PROPERTY) });`,
 
     // When usage is ignored because of template literal:
+    `${EMBER_IMPORT} export default Component.extend({ serviceName: Ember.inject.service(\`serviceName\`) });`,
     `${SERVICE_IMPORT} export default Component.extend({ serviceName: service(\`serviceName\`) });`,
     {
       code: `${RENAMED_SERVICE_IMPORT} class Test { @service(\`specialName\`) serviceName }`,
