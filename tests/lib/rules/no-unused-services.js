@@ -24,6 +24,8 @@ const RENAMED_EO_IMPORTS =
   "import {computed as cp, get as g, getProperties as gp, observer as ob} from '@ember/object';";
 const ALIAS_IMPORT = "import {alias} from '@ember/object/computed';";
 const RENAMED_ALIAS_IMPORT = "import {alias as al} from '@ember/object/computed';";
+const OBSERVES_IMPORT = "import {observes} from '@ember-decorators/object';";
+const RENAMED_OBSERVES_IMPORT = "import {observes as obs} from '@ember-decorators/object';";
 const EMBER_IMPORT = "import Ember from 'ember';";
 const RENAMED_EMBER_IMPORT = "import Em from 'ember';";
 
@@ -112,6 +114,8 @@ function generateComputedUseCasesFor(propertyName, renamed = false) {
 function generateObserverUseCasesFor(propertyName, renamed = false) {
   const observerName = renamed ? 'ob' : 'observer';
   const observerImport = renamed ? RENAMED_EO_IMPORTS : EO_IMPORTS;
+  const observesName = renamed ? 'obs' : 'observes';
+  const observesImport = renamed ? RENAMED_OBSERVES_IMPORT : OBSERVES_IMPORT;
   const emberName = renamed ? 'Em' : 'Ember';
   const emberImport = renamed ? RENAMED_EMBER_IMPORT : EMBER_IMPORT;
   return [
@@ -119,6 +123,7 @@ function generateObserverUseCasesFor(propertyName, renamed = false) {
     `${SERVICE_IMPORT}${observerImport} Component.extend({ ${SERVICE_NAME}: service(), someObserved: on('init', ${observerName}('${propertyName}.prop', ()=>{})) });`,
     `${SERVICE_IMPORT}${emberImport} Component.extend({ ${SERVICE_NAME}: service(), someObserved: ${emberName}.observer('${propertyName}.prop', ()=>{}) });`,
     `${SERVICE_IMPORT}${emberImport} Component.extend({ ${SERVICE_NAME}: service(), someObserved: on('init', ${emberName}.observer('${propertyName}.prop', ()=>{})) });`,
+    `${SERVICE_IMPORT}${observesImport} class MyClass { @service() ${propertyName}; @${observesName}('${propertyName}.prop') get someVal() {} }`,
   ];
 }
 
