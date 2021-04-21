@@ -1005,6 +1005,45 @@ ruleTester.run('no-shadow-route-definition', rule, {
         },
       ],
     },
+
+    {
+      code: `
+        const options1 = { path: '/' }; this.route('post', options1);
+        const options2 = { path: '/' }; this.route('edit', options2);
+      `,
+      output: null,
+      errors: [
+        {
+          message: buildErrorMessage({
+            leftRoute: {
+              name: 'edit',
+              fullPath: '/',
+              source: {
+                loc: {
+                  start: {
+                    line: 3,
+                    column: 40,
+                  },
+                },
+              },
+            },
+            rightRoute: {
+              name: 'post',
+              fullPath: '/',
+              source: {
+                loc: {
+                  start: {
+                    line: 2,
+                    column: 40,
+                  },
+                },
+              },
+            },
+          }),
+          type: 'CallExpression',
+        },
+      ],
+    },
   ],
 });
 

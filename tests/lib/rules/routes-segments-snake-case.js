@@ -39,6 +39,12 @@ eslintTester.run('routes-segments-snake-case', rule, {
       ],
     },
     {
+      // With object variable.
+      code: 'const options = { path: ":treeId"}; this.route("tree", options);',
+      output: null,
+      errors: [{ message: 'Use snake case in dynamic segments of routes', type: 'Literal' }],
+    },
+    {
       code: 'this.route("tree", { path: ":tree-id" });',
       output: null,
       errors: [
