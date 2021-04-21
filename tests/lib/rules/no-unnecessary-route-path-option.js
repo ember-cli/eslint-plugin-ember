@@ -75,5 +75,37 @@ ruleTester.run('no-unnecessary-route-path-option', rule, {
       output: 'this.route("blog", { otherOption: true  });',
       errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
     },
+    {
+      code: 'this.route("blog", { firstOption: true, path: "/blog", lastOption: true });',
+      output: 'this.route("blog", { firstOption: true,  lastOption: true });',
+      errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
+    },
+
+    {
+      // With object variable: single option.
+      code: 'const options = { path: "blog" }; this.route("blog", options);',
+      output: 'const options = {  }; this.route("blog", options);',
+      errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
+    },
+    {
+      // With object variable: first option.
+      code: 'const options = { path: "blog", somethingElse: true }; this.route("blog", options);',
+      output: 'const options = {  somethingElse: true }; this.route("blog", options);',
+      errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
+    },
+    {
+      // With object variable: last option.
+      code: 'const options = { somethingElse: true, path: "blog" }; this.route("blog", options);',
+      output: 'const options = { somethingElse: true  }; this.route("blog", options);',
+      errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
+    },
+    {
+      // With object variable: middle option.
+      code:
+        'const options = { firstOption: true, path: "blog", lastOption: true }; this.route("blog", options);',
+      output:
+        'const options = { firstOption: true,  lastOption: true }; this.route("blog", options);',
+      errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
+    },
   ],
 });

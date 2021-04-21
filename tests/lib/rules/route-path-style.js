@@ -159,6 +159,23 @@ ruleTester.run('route-path-style', rule, {
       ],
     },
     {
+      // With object variable.
+      code: 'const options = { path: "/blogPosts" }; this.route("blog-posts", options);',
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'Literal',
+          suggestions: [
+            {
+              messageId: 'convertToKebabCase',
+              output: 'const options = { path: "/blog-posts" }; this.route("blog-posts", options);',
+            },
+          ],
+        },
+      ],
+    },
+    {
       code: 'this.route("blog-posts", { path: "/blogPosts/:blog_id" });',
       output: null,
       errors: [
