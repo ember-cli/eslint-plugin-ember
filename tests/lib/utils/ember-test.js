@@ -1293,16 +1293,61 @@ describe('isActionsProp', () => {
 });
 
 describe('getModuleProperties', () => {
-  const module = parse(`
+  it("returns module's properties", () => {
+    const code = `
     Ember.Component.extend(SomeMixin, {
       asd: 'qwe',
       actions: {},
       someMethod() {}
-    })
-  `);
+    })`;
+    const parsed = babelEslint.parseForESLint(code);
+    const moduleNode = parsed.ast.body[0].expression;
+    const properties = emberUtils.getModuleProperties(moduleNode, parsed.scopeManager);
+    expect(properties).toHaveLength(3);
+  });
 
-  it("returns module's properties", () => {
-    const properties = emberUtils.getModuleProperties(module);
+  it("returns module's properties when object is not last argument", () => {
+    const code = `
+    Ember.Component.extend({
+      asd: 'qwe',
+      actions: {},
+      someMethod() {}
+    }, SomeMixin)
+  `;
+    const parsed = babelEslint.parseForESLint(code);
+    const moduleNode = parsed.ast.body[0].expression;
+    const properties = emberUtils.getModuleProperties(moduleNode, parsed.scopeManager);
+    expect(properties).toHaveLength(3);
+  });
+
+  it("returns module's properties when there are multiple objects", () => {
+    const code = `
+    Ember.Component.extend({
+      asd: 'qwe',
+      actions: {},
+      someMethod() {}
+    }, {
+      asd: 'abc'
+    })
+  `;
+    const parsed = babelEslint.parseForESLint(code);
+    const moduleNode = parsed.ast.body[0].expression;
+    const properties = emberUtils.getModuleProperties(moduleNode, parsed.scopeManager);
+    expect(properties).toHaveLength(4);
+  });
+
+  it("returns module's properties when object from a variable", () => {
+    const code = `
+    const body = {
+      asd: 'qwe',
+      actions: {},
+      someMethod() {}
+    };
+    Ember.Component.extend(body)
+  `;
+    const parsed = babelEslint.parseForESLint(code);
+    const moduleNode = parsed.ast.body[1].expression;
+    const properties = emberUtils.getModuleProperties(moduleNode, parsed.scopeManager);
     expect(properties).toHaveLength(3);
   });
 });
@@ -1554,6 +1599,16 @@ describe('isEmberObjectImplementingUnknownProperty', () => {
     const node = babelEslint.parse('class MyClass extends EmberObject { unknownProperty() {} }')
       .body[0];
     expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeTruthy();
+  });
+
+  it('should be true for a classic class EmberObject with `unknownProperty` in an object variable', () => {
+    const parsed = babelEslint.parseForESLint(
+      'const body = { unknownProperty() {} }; EmberObject.extend(body);'
+    );
+    const node = parsed.ast.body[1].expression;
+    expect(
+      emberUtils.isEmberObjectImplementingUnknownProperty(node, parsed.scopeManager)
+    ).toBeTruthy();
   });
 
   it('should be false for a native class EmberObject without `unknownProperty`', () => {

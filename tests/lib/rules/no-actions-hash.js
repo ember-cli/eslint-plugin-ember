@@ -83,6 +83,12 @@ ruleTester.run('no-actions-hash', rule, {
       errors: [{ type: 'Property', message: ERROR_MESSAGE }],
     },
     {
+      // With object variable.
+      code: 'const body = { actions: { } }; export default Component.extend(body); ',
+      output: null,
+      errors: [{ type: 'Property', message: ERROR_MESSAGE }],
+    },
+    {
       code: `
         import Component from '@ember/component';
         export default class MyComponent extends Component {

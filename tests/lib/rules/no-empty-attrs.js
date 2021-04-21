@@ -43,6 +43,12 @@ eslintTester.run('no-empty-attrs', rule, {
       errors: [{ message, line: 2 }],
     },
     {
+      // With object variable.
+      code: 'const body = {name: attr()}; export default Model.extend(body);',
+      output: null,
+      errors: [{ message, line: 1 }],
+    },
+    {
       code: `export default Model.extend({
         name: attr("string"),
         points: attr("number"),

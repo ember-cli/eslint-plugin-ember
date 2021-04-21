@@ -84,6 +84,17 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
       ],
     },
     {
+      // With object variable.
+      code: 'const body = {someProp: []}; export default Foo.extend(body);',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+    {
       code: 'export default Foo.extend({someProp: new Ember.A()});',
       output: null,
       errors: [

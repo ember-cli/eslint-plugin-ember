@@ -52,6 +52,13 @@ eslintTester.run('no-on-calls-in-components', rule, {
       errors: [{ message, line: 2 }],
     },
     {
+      // With object variable.
+      code:
+        'const body = { test: on("didInsertElement", function () {}) }; export default Component.extend(body);',
+      output: null,
+      errors: [{ message, line: 1 }],
+    },
+    {
       code: `export default Component.extend({
         test: on("init", observer("someProperty", function () {
           return true;

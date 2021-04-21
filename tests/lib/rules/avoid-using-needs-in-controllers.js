@@ -39,6 +39,17 @@ eslintTester.run('avoid-using-needs-in-controllers', rule, {
       ],
     },
     {
+      // With object variable.
+      code: 'const body = { needs: [] }; export default Controller.extend(body);',
+      output: null,
+      errors: [
+        {
+          message:
+            '`needs` API has been deprecated, `Ember.inject.controller` should be used instead',
+        },
+      ],
+    },
+    {
       code: 'Controller.reopenClass({ needs: [] });',
       output: null,
       errors: [

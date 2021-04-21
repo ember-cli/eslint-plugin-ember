@@ -27,6 +27,7 @@ eslintTester.run('alias-model-in-controller', rule, {
     'export default Ember.Controller.extend({nail: computed.reads("model")});',
     'export default Ember.Controller.extend({nail: Ember.computed.reads("model")});',
     'export default Ember.Controller.extend(TestMixin, {nail: Ember.computed.alias("model")});',
+    'const body = {nail: Ember.computed.alias("model")}; export default Ember.Controller.extend(TestMixin, body);', // With object variable.
     'export default Ember.Controller.extend(TestMixin, TestMixin2, {nail: Ember.computed.alias("model")});',
     {
       filename: 'example-app/controllers/path/to/some-feature.js',
