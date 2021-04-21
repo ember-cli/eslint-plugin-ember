@@ -98,7 +98,7 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
 
     // Not Ember's `service()` function:
     "export default Component.extend({ serviceName: otherFunction('serviceName') });",
-    "export default Component.extend({ serviceName: service.otherFunction('serviceName') });",
+    `${RENAMED_SERVICE_IMPORT} export default Component.extend({ serviceName: service.otherFunction('serviceName') });`,
     "export default Component.extend({ serviceName: inject.otherFunction('serviceName') });",
     {
       code: 'class Test { @otherDecorator("name") name }',

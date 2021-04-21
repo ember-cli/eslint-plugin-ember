@@ -810,6 +810,72 @@ describe('isInjectedServiceProp', () => {
       expect(emberUtils.isInjectedServiceProp(node, undefined, importName)).toBeTruthy();
     });
 
+    it("should check that it's not an injected service prop without the renamed import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          currentUser: service()
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+    });
+
+    it("should check that it's not an injected service prop without the full import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          currentUser: Ember.inject.service()
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+    });
+
+    it("should check that it's not an injected service prop with Ember.inject", () => {
+      const context = new FauxContext(`
+        import Ember from 'ember';
+        export default Controller.extend({
+          currentUser: Ember.inject()
+        });
+      `);
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node, importName, undefined)).toBeFalsy();
+    });
+
+    it("should check that it's not an injected service prop with Ember.inject.foo", () => {
+      const context = new FauxContext(`
+        import Ember from 'ember';
+        export default Controller.extend({
+          currentUser: Ember.inject.foo()
+        });
+      `);
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node, importName, undefined)).toBeFalsy();
+    });
+
+    it("should check that it's not an injected service prop with Ember.service.foo", () => {
+      const context = new FauxContext(`
+        import Ember from 'ember';
+        export default Controller.extend({
+          currentUser: Ember.service.foo()
+        });
+      `);
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node, importName, undefined)).toBeFalsy();
+    });
+
+    it("should check that it's not an injected service prop with foo.service.inject", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          currentUser: Ember.service.foo()
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
+    });
+
     it("should check that it's not an injected service prop", () => {
       const context = new FauxContext(`
         export default Controller.extend({
@@ -856,6 +922,16 @@ describe('isInjectedServiceProp', () => {
       const importName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].body.body[0];
       expect(emberUtils.isInjectedServiceProp(node, undefined, importName)).toBeTruthy();
+    });
+
+    it("should check that it's not an injected service prop without an import", () => {
+      const context = new FauxContext(`
+        class MyController extends Controller {
+          @service currentUser;
+        }
+      `);
+      const node = context.ast.body[0].body.body[0];
+      expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
     });
 
     it("should check that it's not an injected service prop when using another decorator", () => {
