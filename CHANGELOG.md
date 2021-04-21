@@ -1,3 +1,23 @@
+## v10.4.1 (2021-04-21)
+
+#### :bug: Bug Fix
+* [#1160](https://github.com/ember-cli/eslint-plugin-ember/pull/1160) Account for observer dependent keys in `no-unused-services` rule ([@lin-ll](https://github.com/lin-ll))
+* [#1164](https://github.com/ember-cli/eslint-plugin-ember/pull/1164) Account for `observes` decorator in `no-unused-services` rule ([@lin-ll](https://github.com/lin-ll))
+* [#1162](https://github.com/ember-cli/eslint-plugin-ember/pull/1162) Update several rules to check imports when checking for Ember service injections ([@lin-ll](https://github.com/lin-ll))
+* [#1167](https://github.com/ember-cli/eslint-plugin-ember/pull/1167) Update route rules to handle route path option passed as object variable ([@bmish](https://github.com/bmish))
+* [#1165](https://github.com/ember-cli/eslint-plugin-ember/pull/1165) Improve robustness of classic class body detection in several rules using `getModuleProperties` util ([@bmish](https://github.com/bmish))
+* [#1159](https://github.com/ember-cli/eslint-plugin-ember/pull/1159) Improve robustness of classic class component body detection in `require-tagless-components` rule ([@bmish](https://github.com/bmish))
+* [#1158](https://github.com/ember-cli/eslint-plugin-ember/pull/1158) Improve robustness of classic class controller body detection in `no-controllers` rule ([@bmish](https://github.com/bmish))
+* [#1168](https://github.com/ember-cli/eslint-plugin-ember/pull/1168) Avoid some false positives with jQuery usage when recognizing extended objects ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#1161](https://github.com/ember-cli/eslint-plugin-ember/pull/1161) Tweak messaging around false positives in `no-unused-services` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Lucy Lin ([@lin-ll](https://github.com/lin-ll))
+
+
 ## v10.4.0 (2021-04-20)
 
 #### :rocket: Enhancement
