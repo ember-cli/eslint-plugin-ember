@@ -556,6 +556,48 @@ describe('isEmberService', () => {
   });
 });
 
+describe('isExtendObject', () => {
+  it('should detect using extend function name', () => {
+    const node = parse('foo.extend()');
+    expect(emberUtils.isExtendObject(node)).toBeTruthy();
+  });
+
+  it('should detect using extend string name', () => {
+    const node = parse('foo["extend"]()');
+    expect(emberUtils.isExtendObject(node)).toBeTruthy();
+  });
+
+  it('should detect using nested object', () => {
+    const node = parse('foo.bar.extend()');
+    expect(emberUtils.isExtendObject(node)).toBeTruthy();
+  });
+
+  it('should not detect a potential jQuery usage with `$`', () => {
+    const node = parse('$.extend()');
+    expect(emberUtils.isExtendObject(node)).toBeFalsy();
+  });
+
+  it('should not detect a potential jQuery usage with `jQuery`', () => {
+    const node = parse('jQuery.extend()');
+    expect(emberUtils.isExtendObject(node)).toBeFalsy();
+  });
+
+  it('should not detect with non-extend name', () => {
+    const node = parse('foo.notExtend()');
+    expect(emberUtils.isExtendObject(node)).toBeFalsy();
+  });
+
+  it('should not detect with no object', () => {
+    const node = parse('extend()');
+    expect(emberUtils.isExtendObject(node)).toBeFalsy();
+  });
+
+  it('should not detect with wrong function', () => {
+    const node = parse('extend.foo()');
+    expect(emberUtils.isExtendObject(node)).toBeFalsy();
+  });
+});
+
 describe('isEmberArrayProxy', () => {
   it('should detect using old module style', () => {
     const context = new FauxContext('Ember.ArrayProxy.extend()');
