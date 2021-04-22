@@ -4,7 +4,7 @@ Disallow unused service injections.
 
 By removing unused service injections, we can reduce the amount of code we have and improve code readability.
 
-**Note**: This rule can exhibit false positives when an injected service is only used in:
+**Warning**: This rule can exhibit false positives when an injected service is only used in:
 
 - The corresponding handlebars template file for a controller or component
 - A mixin or parent class that the current class extends from
