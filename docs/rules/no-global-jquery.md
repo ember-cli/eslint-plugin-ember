@@ -35,5 +35,4 @@ export default Component.extend({
     $('.foo').addClass('bar'); // deconstruction from Ember object
   }
 });
-
 ```

@@ -33,7 +33,6 @@ export default Component({
     }
   }
 });
-
 ```
 
 Examples of **correct** code for this rule:
@@ -56,7 +55,6 @@ export default Component({
     }
   }
 });
-
 ```
 
 ## When Not To Use It

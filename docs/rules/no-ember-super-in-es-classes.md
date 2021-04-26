@@ -45,3 +45,4 @@ export default Component.extend({
     // Other logic
   }
 });
+```
