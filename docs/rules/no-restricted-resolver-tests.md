@@ -108,7 +108,6 @@ setupComponentTest('display-page', {
 setupModelTest('post', {
   integration: true
 });
-
 ```
 
 ## Further Reading
