@@ -176,7 +176,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |:---|:--------|:------------|
 |  | [no-restricted-service-injections](./docs/rules/no-restricted-service-injections.md) | disallow injecting certain services under certain paths |
 | :wrench: | [no-unnecessary-service-injection-argument](./docs/rules/no-unnecessary-service-injection-argument.md) | disallow unnecessary argument when injecting services |
-|  | [no-unused-services](./docs/rules/no-unused-services.md) | disallow unused service injections |
+|  | [no-unused-services](./docs/rules/no-unused-services.md) | disallow unused service injections (see rule doc for limitations) |
 
 ### Stylistic Issues
 
