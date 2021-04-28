@@ -148,6 +148,7 @@ module.exports = {
     'unicorn/no-lonely-if': 'off',
     'unicorn/no-null': 'off',
     'unicorn/no-useless-undefined': 'off',
+    'unicorn/prefer-module': 'off',
     'unicorn/prevent-abbreviations': 'off',
   },
   overrides: [
