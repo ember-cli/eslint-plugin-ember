@@ -164,7 +164,7 @@ function generateValid() {
 // Testing for unrelated props + some edge cases
 const unrelatedPropUses = generateUseCasesFor('unrelatedProp');
 const edgeCases = ['let foo;', `this.prop.${SERVICE_NAME};`];
-const nonUses = unrelatedPropUses.concat(edgeCases).join('');
+const nonUses = [...unrelatedPropUses, ...edgeCases].join('');
 const emberObjectUses1 = generateEmberObjectUseCasesFor(SERVICE_NAME).join('');
 const emberObjectUses2 = generateEmberObjectUseCasesFor('unrelatedProp').join('');
 
