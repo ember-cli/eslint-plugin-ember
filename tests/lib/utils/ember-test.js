@@ -1,11 +1,11 @@
 'use strict';
 
-const babelEslint = require('babel-eslint');
+const { parse: babelESLintParse, parseForESLint } = require('../../helpers/babel-eslint-parser');
 const emberUtils = require('../../../lib/utils/ember');
 const { FauxContext } = require('../../helpers/faux-context');
 
 function parse(code) {
-  return babelEslint.parse(code).body[0].expression;
+  return babelESLintParse(code).body[0].expression;
 }
 
 function getProperty(code) {
@@ -1113,25 +1113,25 @@ describe('isComputedProp', () => {
   });
 
   it('should detect the computed annotation', () => {
-    const program = babelEslint.parse('class Object { @computed() get foo() {} }');
+    const program = babelESLintParse('class Object { @computed() get foo() {} }');
     node = program.body[0].body.body[0].decorators[0].expression;
     expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeTruthy();
   });
 
   it('should detect the computed annotation without parentheses', () => {
-    const program = babelEslint.parse('class Object { @computed get foo() {} }');
+    const program = babelESLintParse('class Object { @computed get foo() {} }');
     node = program.body[0].body.body[0].decorators[0].expression;
     expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeTruthy();
   });
 
   it('should not detect a sub-module decorator', () => {
-    const program = babelEslint.parse('class Object { @computed.foo() get foo() {} }');
+    const program = babelESLintParse('class Object { @computed.foo() get foo() {} }');
     node = program.body[0].body.body[0].decorators[0].expression;
     expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeFalsy();
   });
 
   it('should not detect the wrong decorator', () => {
-    const program = babelEslint.parse('class Object { @foo() get foo() {} }');
+    const program = babelESLintParse('class Object { @foo() get foo() {} }');
     node = program.body[0].body.body[0].decorators[0].expression;
     expect(emberUtils.isComputedProp(node, 'Ember', 'computed')).toBeFalsy();
   });
@@ -1342,7 +1342,7 @@ describe('getModuleProperties', () => {
       actions: {},
       someMethod() {}
     })`;
-    const parsed = babelEslint.parseForESLint(code);
+    const parsed = parseForESLint(code);
     const moduleNode = parsed.ast.body[0].expression;
     const properties = emberUtils.getModuleProperties(moduleNode, parsed.scopeManager);
     expect(properties).toHaveLength(3);
@@ -1356,7 +1356,7 @@ describe('getModuleProperties', () => {
       someMethod() {}
     }, SomeMixin)
   `;
-    const parsed = babelEslint.parseForESLint(code);
+    const parsed = parseForESLint(code);
     const moduleNode = parsed.ast.body[0].expression;
     const properties = emberUtils.getModuleProperties(moduleNode, parsed.scopeManager);
     expect(properties).toHaveLength(3);
@@ -1372,7 +1372,7 @@ describe('getModuleProperties', () => {
       asd: 'abc'
     })
   `;
-    const parsed = babelEslint.parseForESLint(code);
+    const parsed = parseForESLint(code);
     const moduleNode = parsed.ast.body[0].expression;
     const properties = emberUtils.getModuleProperties(moduleNode, parsed.scopeManager);
     expect(properties).toHaveLength(4);
@@ -1387,7 +1387,7 @@ describe('getModuleProperties', () => {
     };
     Ember.Component.extend(body)
   `;
-    const parsed = babelEslint.parseForESLint(code);
+    const parsed = parseForESLint(code);
     const moduleNode = parsed.ast.body[1].expression;
     const properties = emberUtils.getModuleProperties(moduleNode, parsed.scopeManager);
     expect(properties).toHaveLength(3);
@@ -1619,32 +1619,31 @@ describe('hasDuplicateDependentKeys', () => {
 
 describe('getEmberImportAliasName', () => {
   it('should get the proper name of default import', () => {
-    const node = babelEslint.parse("import foo from 'ember'").body[0];
+    const node = babelESLintParse("import foo from 'ember'").body[0];
     expect(emberUtils.getEmberImportAliasName(node)).toStrictEqual('foo');
   });
 });
 
 describe('isEmberObjectImplementingUnknownProperty', () => {
   it('should be true for a classic class EmberObject with `unknownProperty`', () => {
-    const node = babelEslint.parse('EmberObject.extend({ unknownProperty() {} });').body[0]
+    const node = babelESLintParse('EmberObject.extend({ unknownProperty() {} });').body[0]
       .expression;
     expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeTruthy();
   });
 
   it('should be false for a classic class EmberObject without `unknownProperty`', () => {
-    const node = babelEslint.parse('EmberObject.extend({ somethingElse() {} });').body[0]
-      .expression;
+    const node = babelESLintParse('EmberObject.extend({ somethingElse() {} });').body[0].expression;
     expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeFalsy();
   });
 
   it('should be true for a native class EmberObject with `unknownProperty`', () => {
-    const node = babelEslint.parse('class MyClass extends EmberObject { unknownProperty() {} }')
+    const node = babelESLintParse('class MyClass extends EmberObject { unknownProperty() {} }')
       .body[0];
     expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeTruthy();
   });
 
   it('should be true for a classic class EmberObject with `unknownProperty` in an object variable', () => {
-    const parsed = babelEslint.parseForESLint(
+    const parsed = parseForESLint(
       'const body = { unknownProperty() {} }; EmberObject.extend(body);'
     );
     const node = parsed.ast.body[1].expression;
@@ -1654,13 +1653,13 @@ describe('isEmberObjectImplementingUnknownProperty', () => {
   });
 
   it('should be false for a native class EmberObject without `unknownProperty`', () => {
-    const node = babelEslint.parse('class MyClass extends EmberObject { somethingElse() {} }')
+    const node = babelESLintParse('class MyClass extends EmberObject { somethingElse() {} }')
       .body[0];
     expect(emberUtils.isEmberObjectImplementingUnknownProperty(node)).toBeFalsy();
   });
 
   it('throws when called on wrong type of node', () => {
-    const node = babelEslint.parse('const x = 123;').body[0];
+    const node = babelESLintParse('const x = 123;').body[0];
     expect(() => emberUtils.isEmberObjectImplementingUnknownProperty(node)).toThrow(
       'Function should only be called on a `CallExpression` (classic class) or `ClassDeclaration` (native class)'
     );
@@ -1669,7 +1668,7 @@ describe('isEmberObjectImplementingUnknownProperty', () => {
 
 describe('isObserverDecorator', () => {
   it('should be true for an observer decorator', () => {
-    const node = babelEslint.parse(`
+    const node = babelESLintParse(`
     import { observes } from '@ember-decorators/object';
     class FooComponent extends Component {
       @observes('baz')
@@ -1679,7 +1678,7 @@ describe('isObserverDecorator', () => {
   });
 
   it('should be true for an observer decorator with renamed import', () => {
-    const node = babelEslint.parse(`
+    const node = babelESLintParse(`
     import { observes as observesRenamed } from '@ember-decorators/object';
     class FooComponent extends Component {
       @observesRenamed('baz')
@@ -1689,7 +1688,7 @@ describe('isObserverDecorator', () => {
   });
 
   it('should be false for another type of decorator', () => {
-    const node = babelEslint.parse(`
+    const node = babelESLintParse(`
     import { action } from '@ember/object';
     class FooComponent extends Component {
       @action
@@ -1699,7 +1698,7 @@ describe('isObserverDecorator', () => {
   });
 
   it('throws when called on a non-decorator', () => {
-    const node = babelEslint.parse('const x = 123;').body[0];
+    const node = babelESLintParse('const x = 123;').body[0];
     expect(() => emberUtils.isObserverDecorator(node, 'observes')).toThrow(
       'Should only call this function on a Decorator'
     );

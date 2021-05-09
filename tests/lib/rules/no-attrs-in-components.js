@@ -15,7 +15,7 @@ const { ERROR_MESSAGE } = rule;
 
 const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-  parser: require.resolve('babel-eslint'),
+  parser: require.resolve('@babel/eslint-parser'),
 });
 
 ruleTester.run('no-attrs-in-components', rule, {

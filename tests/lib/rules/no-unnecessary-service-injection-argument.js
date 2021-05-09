@@ -20,7 +20,7 @@ const ruleTester = new RuleTester({
     ecmaVersion: 2015,
     sourceType: 'module',
   },
-  parser: require.resolve('babel-eslint'),
+  parser: require.resolve('@babel/eslint-parser'),
 });
 
 ruleTester.run('no-unnecessary-service-injection-argument', rule, {
@@ -32,7 +32,7 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     `${RENAMED_SERVICE_IMPORT} const controller = Controller.extend({ serviceName: service() });`,
     {
       code: `${RENAMED_SERVICE_IMPORT} class Test { @service serviceName }`,
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
@@ -41,7 +41,7 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     },
     {
       code: `${RENAMED_SERVICE_IMPORT} class Test { @service() serviceName }`,
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
@@ -57,7 +57,7 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     `${RENAMED_SERVICE_IMPORT} const controller = Controller.extend({ serviceName: service('service-name') });`,
     {
       code: `${RENAMED_SERVICE_IMPORT} class Test { @service("service-name") serviceName }`,
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
@@ -70,7 +70,7 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     `${RENAMED_SERVICE_IMPORT} const controller = Controller.extend({ specialName: service('service-name') });`,
     {
       code: `${RENAMED_SERVICE_IMPORT} class Test { @service("specialName") serviceName }`,
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
@@ -88,7 +88,7 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     `${SERVICE_IMPORT} export default Component.extend({ serviceName: service(\`serviceName\`) });`,
     {
       code: `${RENAMED_SERVICE_IMPORT} class Test { @service(\`specialName\`) serviceName }`,
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
@@ -102,7 +102,7 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     "export default Component.extend({ serviceName: inject.otherFunction('serviceName') });",
     {
       code: 'class Test { @otherDecorator("name") name }',
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
@@ -142,7 +142,7 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
       code: `${RENAMED_SERVICE_IMPORT} class Test { @service("serviceName") serviceName }`,
       output: `${RENAMED_SERVICE_IMPORT} class Test { @service() serviceName }`,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',

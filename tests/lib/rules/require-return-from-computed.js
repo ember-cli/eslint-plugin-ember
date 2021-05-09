@@ -28,7 +28,7 @@ eslintTester.run('require-return-from-computed', rule, {
       // This rule intentionally does not apply to native classes / decorator usage.
       // ESLint already has its own recommended rules `getter-return` and `no-setter-return` for this.
       code: 'class Test { @computed() get someProp() {} set someProp(val) {} }',
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',

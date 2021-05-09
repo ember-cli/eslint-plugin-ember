@@ -11,7 +11,7 @@ const { ERROR_MESSAGE } = rule;
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({ parser: require.resolve('babel-eslint') });
+const ruleTester = new RuleTester({ parser: require.resolve('@babel/eslint-parser') });
 ruleTester.run('no-unnecessary-route-path-option', rule, {
   valid: [
     'this.route("blog");',

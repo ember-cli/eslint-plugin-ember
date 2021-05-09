@@ -1,7 +1,7 @@
 'use strict';
 
 const cpdkUtils = require('../../../lib/utils/computed-property-dependent-keys');
-const babelEslint = require('babel-eslint');
+const { parse: babelESLintParse } = require('../../helpers/babel-eslint-parser');
 
 describe('collapseKeys', () => {
   it('returns the right result', () => {
@@ -143,7 +143,7 @@ describe('findComputedPropertyDependentKeys', () => {
       ],
     ]);
 
-    const classNode = babelEslint.parse(`
+    const classNode = babelESLintParse(`
       import { computed as c } from '@ember/object';
       import { rejectBy, t } from 'custom-macros/macros';
       import { somethingElse } from 'custom-macros';
@@ -247,7 +247,7 @@ describe('findComputedPropertyDependentKeys', () => {
       ],
     ]);
 
-    const classNode = babelEslint.parse(`
+    const classNode = babelESLintParse(`
       import { computed as c } from '@ember/object';
       import { rejectBy, t } from 'custom-macros/macros';
       import { somethingElse } from 'custom-macros';

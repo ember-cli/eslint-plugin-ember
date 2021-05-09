@@ -1,14 +1,14 @@
 'use strict';
 
-const babelEslint = require('babel-eslint');
+const { parse: babelESLintParse } = require('../../helpers/babel-eslint-parser');
 const utils = require('../../../lib/utils/utils');
 
 function parse(code) {
-  return babelEslint.parse(code).body[0].expression;
+  return babelESLintParse(code).body[0].expression;
 }
 
 function parseVariableDeclarator(code) {
-  return babelEslint.parse(code).body[0].declarations[0];
+  return babelESLintParse(code).body[0].declarations[0];
 }
 
 describe('collectObjectPatternBindings', () => {
@@ -111,7 +111,7 @@ describe('getPropertyValue', () => {
     },
   };
 
-  const node = babelEslint.parse(`
+  const node = babelESLintParse(`
     export default Ember.Component({
       init() {
         this._super(...arguments);

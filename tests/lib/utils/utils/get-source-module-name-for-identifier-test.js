@@ -1,6 +1,6 @@
 const { getSourceModuleNameForIdentifier } = require('../../../../lib/utils/import');
 const { FauxContext } = require('../../../helpers/faux-context');
-const babelEslint = require('babel-eslint');
+const { parse: babelESLintParse } = require('../../../helpers/babel-eslint-parser');
 
 describe('getSourceModuleNameForIdentifier', () => {
   describe('when the identifier is not imported', () => {
@@ -59,7 +59,7 @@ describe('getSourceModuleNameForIdentifier', () => {
         Model.extend();
       `);
 
-      const node = babelEslint.parse('Model.extend({})').body[0].expression.callee;
+      const node = babelESLintParse('Model.extend({})').body[0].expression.callee;
 
       expect(getSourceModuleNameForIdentifier(context, node)).toStrictEqual('@ember-data/model');
     });
@@ -71,7 +71,7 @@ describe('getSourceModuleNameForIdentifier', () => {
         DS.Model.extend();
       `);
 
-      const node = babelEslint.parse('DS.Model.extend({})').body[0].expression.callee;
+      const node = babelESLintParse('DS.Model.extend({})').body[0].expression.callee;
 
       expect(getSourceModuleNameForIdentifier(context, node)).toStrictEqual('ember-data');
     });
@@ -83,7 +83,7 @@ describe('getSourceModuleNameForIdentifier', () => {
         Some.Long.Chained.Path.extend();
       `);
 
-      const node = babelEslint.parse('Some.Long.Chained.Path.extend({})').body[0].expression.callee;
+      const node = babelESLintParse('Some.Long.Chained.Path.extend({})').body[0].expression.callee;
 
       expect(getSourceModuleNameForIdentifier(context, node)).toStrictEqual('some-path');
     });
@@ -96,7 +96,7 @@ describe('getSourceModuleNameForIdentifier', () => {
         export default class SomeClass extends Model.extend(Mixin) {}
       `);
 
-      const node = babelEslint.parse('Model.extend(Mixin)').body[0].expression;
+      const node = babelESLintParse('Model.extend(Mixin)').body[0].expression;
 
       expect(getSourceModuleNameForIdentifier(context, node)).toStrictEqual('@ember-data/model');
     });
