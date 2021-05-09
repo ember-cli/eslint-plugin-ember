@@ -133,7 +133,7 @@ ruleTester.run('no-private-routing-service', rule, {
       // Optional chaining.
       code: "this?.owner?.lookup?.('router:main');",
       output: null,
-      errors: [{ message: ROUTER_MAIN_ERROR_MESSAGE, type: 'OptionalCallExpression' }],
+      errors: [{ message: ROUTER_MAIN_ERROR_MESSAGE, type: 'CallExpression' }],
     },
   ],
 });
