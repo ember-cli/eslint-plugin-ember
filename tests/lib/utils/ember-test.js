@@ -961,9 +961,31 @@ describe('isInjectedServiceProp', () => {
           @service currentUser;
         }
       `);
+      const node = context.ast.body[1].body.body[0];
+      expect(emberUtils.isInjectedServiceProp(node, undefined, 'service')).toBeTruthy();
+    });
+
+    it("should check if it's an injected service prop when service is from another object", () => {
+      const context = new FauxContext(`
+        import {inject as service} from '@ember/service';
+        class MyController extends Controller {
+          @foo.service currentUser;
+        }
+      `);
+      const node = context.ast.body[1].body.body[0];
+      expect(emberUtils.isInjectedServiceProp(node, undefined, 'service')).toBeFalsy();
+    });
+
+    it("should check if it's an injected service prop when another function from service", () => {
+      const context = new FauxContext(`
+        import {inject as service} from '@ember/service';
+        class MyController extends Controller {
+          @service.foo currentUser;
+        }
+      `);
       const importName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].body.body[0];
-      expect(emberUtils.isInjectedServiceProp(node, undefined, importName)).toBeTruthy();
+      expect(emberUtils.isInjectedServiceProp(node, undefined, importName)).toBeFalsy();
     });
 
     it("should check if it's an injected service prop when using decorator", () => {
