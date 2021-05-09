@@ -11,7 +11,7 @@ const RuleTester = require('eslint').RuleTester;
 
 const eslintTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-  parser: require.resolve('babel-eslint'),
+  parser: require.resolve('@babel/eslint-parser'),
 });
 
 eslintTester.run('order-in-controllers', rule, {
@@ -119,7 +119,7 @@ eslintTester.run('order-in-controllers', rule, {
         customFoo() {}
       });
     `,
-    `      
+    `
       import {inject as service} from '@ember/service';
       export default Controller.extend({
         foo: service(),

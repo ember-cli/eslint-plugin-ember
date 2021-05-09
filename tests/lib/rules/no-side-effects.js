@@ -13,7 +13,7 @@ const { ERROR_MESSAGE } = rule;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parser: require.resolve('babel-eslint'),
+  parser: require.resolve('@babel/eslint-parser'),
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
 });
 
@@ -47,7 +47,7 @@ eslintTester.run('no-side-effects', rule, {
           get fullName() { return this.first + ' ' + this.last; }
         }
       `,
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
@@ -61,7 +61,7 @@ eslintTester.run('no-side-effects', rule, {
           get fullName() { return 'foo'; }
         }
       `,
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
@@ -219,7 +219,7 @@ eslintTester.run('no-side-effects', rule, {
       `,
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
@@ -236,7 +236,7 @@ eslintTester.run('no-side-effects', rule, {
       `,
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
@@ -253,7 +253,7 @@ eslintTester.run('no-side-effects', rule, {
       `,
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',

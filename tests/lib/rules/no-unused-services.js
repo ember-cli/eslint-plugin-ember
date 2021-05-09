@@ -14,7 +14,7 @@ const ruleTester = new RuleTester({
     ecmaVersion: 6,
     sourceType: 'module',
   },
-  parser: require.resolve('babel-eslint'),
+  parser: require.resolve('@babel/eslint-parser'),
 });
 
 const SERVICE_NAME = 'fooName';

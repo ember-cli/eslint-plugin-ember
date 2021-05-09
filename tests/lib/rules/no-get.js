@@ -5,7 +5,7 @@ const RuleTester = require('eslint').RuleTester;
 const { ERROR_MESSAGE_GET, ERROR_MESSAGE_GET_PROPERTIES } = rule;
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('babel-eslint'),
+  parser: require.resolve('@babel/eslint-parser'),
   parserOptions: {
     ecmaVersion: 2015,
     sourceType: 'module',

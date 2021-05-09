@@ -1,10 +1,10 @@
 'use strict';
 
-const babelEslint = require('babel-eslint');
+const { parse: babelESLintParse } = require('../../helpers/babel-eslint-parser');
 const scopeReferencesThis = require('../../../lib/utils/scope-references-this');
 
 function parse(code) {
-  return babelEslint.parse(code).body[0];
+  return babelESLintParse(code).body[0];
 }
 
 describe('scopeReferencesThis', function () {

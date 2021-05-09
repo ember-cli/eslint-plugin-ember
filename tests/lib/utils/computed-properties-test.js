@@ -1,8 +1,8 @@
-const babelEslint = require('babel-eslint');
+const { parse: babelESLintParse } = require('../../helpers/babel-eslint-parser');
 const computedPropertyUtils = require('../../../lib/utils/computed-properties');
 
 function parse(code) {
-  return babelEslint.parse(code).body[0].expression;
+  return babelESLintParse(code).body[0].expression;
 }
 
 describe('getComputedPropertyFunctionBody', () => {

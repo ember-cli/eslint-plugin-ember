@@ -2,10 +2,13 @@
 
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 2017,
     sourceType: 'script',
+    babelOptions: {
+      configFile: require.resolve('./.babelrc'),
+    },
   },
   plugins: ['eslint-plugin', 'filenames', 'import', 'jest', 'node', 'prettier', 'unicorn'],
   extends: [

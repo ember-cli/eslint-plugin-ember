@@ -15,7 +15,10 @@ const { ERROR_MESSAGE: message } = rule;
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({ parserOptions, parser: require.resolve('babel-eslint') });
+const ruleTester = new RuleTester({
+  parserOptions,
+  parser: require.resolve('@babel/eslint-parser'),
+});
 ruleTester.run('use-ember-data-rfc-395-imports', rule, {
   valid: [
     "import Model from '@ember-data/model';",

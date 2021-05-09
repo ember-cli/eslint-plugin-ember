@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parser: require.resolve('babel-eslint'),
+  parser: require.resolve('@babel/eslint-parser'),
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module',

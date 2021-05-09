@@ -1,10 +1,10 @@
 'use strict';
 
-const babelEslint = require('babel-eslint');
+const { parse: babelESLintParse } = require('../../helpers/babel-eslint-parser');
 const propertySetterUtils = require('../../../lib/utils/property-setter');
 
 function parse(code) {
-  return babelEslint.parse(code).body[0];
+  return babelESLintParse(code).body[0];
 }
 
 describe('isThisSet', () => {

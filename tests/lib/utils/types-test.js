@@ -1,8 +1,8 @@
-const babelEslint = require('babel-eslint');
+const { parse: babelESLintParse } = require('../../helpers/babel-eslint-parser');
 const types = require('../../../lib/utils/types');
 
 function parse(code) {
-  return babelEslint.parse(code).body[0].expression;
+  return babelESLintParse(code).body[0].expression;
 }
 
 describe('function sort order', function () {
@@ -115,7 +115,7 @@ describe('isObjectExpression', () => {
 });
 
 describe('isReturnStatement', () => {
-  const node = babelEslint.parse('return').body[0];
+  const node = babelESLintParse('return').body[0];
 
   it('should check if node is a return statement', () => {
     expect(types.isReturnStatement(node)).toBeTruthy();

@@ -7,7 +7,7 @@ const EMBER_IMPORT = "import Ember from 'ember';";
 const SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('babel-eslint'),
+  parser: require.resolve('@babel/eslint-parser'),
   parserOptions: {
     ecmaVersion: 2015,
     sourceType: 'module',

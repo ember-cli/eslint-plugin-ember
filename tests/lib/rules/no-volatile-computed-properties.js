@@ -25,7 +25,7 @@ ruleTester.run('no-volatile-computed-properties', rule, {
     {
       // Decorator:
       code: "class Test { @computed('prop') get someProp() {} }",
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
@@ -52,17 +52,20 @@ ruleTester.run('no-volatile-computed-properties', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
     },
 
+    /*
+    // This is invalid syntax according to @babel/eslint-parser.
     {
       // Decorator:
       code: "class Test { @computed('prop').volatile() get someProp() {} }",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
-      parser: require.resolve('babel-eslint'),
+      parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
       },
     },
+    */
   ].map(addComputedImport),
 });

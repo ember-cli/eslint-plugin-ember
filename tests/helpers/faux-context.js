@@ -1,6 +1,6 @@
 'use strict';
 
-const babelEslint = require('babel-eslint');
+const { parseForESLint } = require('../helpers/babel-eslint-parser');
 
 /**
  * Builds a fake ESLint context object that's enough to satisfy the contract
@@ -8,7 +8,7 @@ const babelEslint = require('babel-eslint');
  */
 class FauxContext {
   constructor(code, filename = '', report = () => {}) {
-    const { ast } = babelEslint.parseForESLint(code);
+    const { ast } = parseForESLint(code);
 
     this.ast = ast;
     this.filename = filename;

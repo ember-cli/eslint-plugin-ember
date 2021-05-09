@@ -1,10 +1,10 @@
 'use strict';
 
-const babelEslint = require('babel-eslint');
+const { parse: babelESLintParse } = require('../../helpers/babel-eslint-parser');
 const propertyGetterUtils = require('../../../lib/utils/property-getter');
 
 function parse(code) {
-  return babelEslint.parse(code).body[0].expression;
+  return babelESLintParse(code).body[0].expression;
 }
 
 describe('isSimpleThisExpression', () => {
