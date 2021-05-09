@@ -175,6 +175,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 
 | Name    | Description | :white_check_mark: | :wrench: |
 |:--------|:------------|:---------------|:-----------|
+| [no-implicit-service-injection-argument](./docs/rules/no-implicit-service-injection-argument.md) | disallow omitting the injected service name argument |  | :wrench: |
 | [no-restricted-service-injections](./docs/rules/no-restricted-service-injections.md) | disallow injecting certain services under certain paths |  |  |
 | [no-unnecessary-service-injection-argument](./docs/rules/no-unnecessary-service-injection-argument.md) | disallow unnecessary argument when injecting services |  | :wrench: |
 | [no-unused-services](./docs/rules/no-unused-services.md) | disallow unused service injections (see rule doc for limitations) |  |  |
