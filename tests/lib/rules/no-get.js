@@ -81,8 +81,7 @@ ruleTester.run('no-get', rule, {
       options: [{ ignoreNestedPaths: true }],
     },
     {
-      code:
-        "import { getProperties } from '@ember/object'; getProperties(this, ['foo', 'bar.baz']);",
+      code: "import { getProperties } from '@ember/object'; getProperties(this, ['foo', 'bar.baz']);",
       options: [{ ignoreNestedPaths: true }],
     }, // With parameters in array.
 
@@ -93,8 +92,7 @@ ruleTester.run('no-get', rule, {
     // Not `this`.
     "myObject.getProperties('prop1', 'prop2');",
     {
-      code:
-        "import { getProperties } from '@ember/object'; getProperties(myObject, 'prop1', 'prop2');",
+      code: "import { getProperties } from '@ember/object'; getProperties(myObject, 'prop1', 'prop2');",
       options: [{ catchSafeObjects: false }],
     },
 
@@ -129,8 +127,7 @@ ruleTester.run('no-get', rule, {
       options: [{ ignoreGetProperties: true }],
     },
     {
-      code:
-        "import { getProperties } from '@ember/object'; getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
+      code: "import { getProperties } from '@ember/object'; getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
       options: [{ ignoreGetProperties: true }],
     },
 
@@ -326,8 +323,7 @@ ruleTester.run('no-get', rule, {
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
-      code:
-        "import { getProperties } from '@ember/object'; getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
+      code: "import { getProperties } from '@ember/object'; getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
       output: null,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },

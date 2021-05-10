@@ -22,8 +22,7 @@ eslintTester.run('closure-actions', rule, {
   ],
   invalid: [
     {
-      code:
-        'export default Component.extend({actions: {pushLever() {this.sendAction("detonate");}}});',
+      code: 'export default Component.extend({actions: {pushLever() {this.sendAction("detonate");}}});',
       output: null,
       errors: [
         {

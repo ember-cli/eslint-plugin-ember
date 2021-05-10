@@ -82,8 +82,7 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
       ],
     },
     {
-      code:
-        "import Ember from 'ember'; { test: Ember.computed('foo.{bar.{name,place},qux.[],{thing,@each.stuff}', function() {}) }",
+      code: "import Ember from 'ember'; { test: Ember.computed('foo.{bar.{name,place},qux.[],{thing,@each.stuff}', function() {}) }",
       output: null,
       errors: [
         {
@@ -93,8 +92,7 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
       ],
     },
     {
-      code:
-        '{ test:  computed("foo.{bar.{name,place,baz,stuff,test.@each.content}", function() {}) }',
+      code: '{ test:  computed("foo.{bar.{name,place,baz,stuff,test.@each.content}", function() {}) }',
       output: null,
       errors: [
         {
@@ -104,8 +102,7 @@ eslintTester.run('no-invalid-dependent-keys', rule, {
       ],
     },
     {
-      code:
-        '{ test:  computed("foo1.bar1.{name1,place1,baz1,stuff1,test1.@each.content1,fields1.@each.{name1,value1},custom1.@each.{question1,choice1}}}", function() {}) }',
+      code: '{ test:  computed("foo1.bar1.{name1,place1,baz1,stuff1,test1.@each.content1,fields1.@each.{name1,value1},custom1.@each.{question1,choice1}}}", function() {}) }',
       output: null,
       errors: [
         {

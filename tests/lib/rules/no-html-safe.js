@@ -47,8 +47,7 @@ ruleTester.run('no-html-safe', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code:
-        "import { htmlSafe as myCustomNameForHtmlSafe } from '@ember/template'; myCustomNameForHtmlSafe();",
+      code: "import { htmlSafe as myCustomNameForHtmlSafe } from '@ember/template'; myCustomNameForHtmlSafe();",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },

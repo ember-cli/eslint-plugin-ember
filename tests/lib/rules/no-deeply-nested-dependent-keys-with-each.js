@@ -51,8 +51,7 @@ ruleTester.run('no-deeply-nested-dependent-keys-with-each', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code:
-        "import Ember from 'ember'; Ember.computed('foo.@each.bar.baz', function() {}).readOnly()",
+      code: "import Ember from 'ember'; Ember.computed('foo.@each.bar.baz', function() {}).readOnly()",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
@@ -67,14 +66,12 @@ ruleTester.run('no-deeply-nested-dependent-keys-with-each', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code:
-        "import { computed } from '@ember/object'; computed('foo.@each.bar.baz', function() {})",
+      code: "import { computed } from '@ember/object'; computed('foo.@each.bar.baz', function() {})",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code:
-        "import { computed } from '@ember/object'; computed('foo.@each.bar.baz', function() {}).readOnly()",
+      code: "import { computed } from '@ember/object'; computed('foo.@each.bar.baz', function() {}).readOnly()",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
@@ -84,14 +81,12 @@ ruleTester.run('no-deeply-nested-dependent-keys-with-each', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code:
-        "import { computed } from '@ember/object'; computed('foo.@each.bar.@each.baz', function() {})",
+      code: "import { computed } from '@ember/object'; computed('foo.@each.bar.@each.baz', function() {})",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code:
-        "import { computed } from '@ember/object'; class Test { @computed('foo.@each.bar.baz') get someProp() { return true; } }",
+      code: "import { computed } from '@ember/object'; class Test { @computed('foo.@each.bar.baz') get someProp() { return true; } }",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },

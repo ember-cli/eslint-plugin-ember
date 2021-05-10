@@ -101,8 +101,7 @@ ruleTester.run('no-unnecessary-route-path-option', rule, {
     },
     {
       // With object variable: middle option.
-      code:
-        'const options = { firstOption: true, path: "blog", lastOption: true }; this.route("blog", options);',
+      code: 'const options = { firstOption: true, path: "blog", lastOption: true }; this.route("blog", options);',
       output:
         'const options = { firstOption: true,  lastOption: true }; this.route("blog", options);',
       errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
