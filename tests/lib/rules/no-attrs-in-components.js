@@ -36,20 +36,17 @@ ruleTester.run('no-attrs-in-components', rule, {
 
   invalid: [
     {
-      code:
-        "import Component from '@ember/component'; Component.extend({ init() { this.attrs.foo; } });",
+      code: "import Component from '@ember/component'; Component.extend({ init() { this.attrs.foo; } });",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
     },
     {
-      code:
-        "import Component from '@ember/component'; class MyComponent extends Component { init() { this.attrs.foo; } }",
+      code: "import Component from '@ember/component'; class MyComponent extends Component { init() { this.attrs.foo; } }",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
     },
     {
-      code:
-        "import Component from '@glimmer/component'; class MyComponent extends Component { constructor() { this.attrs.foo; } }",
+      code: "import Component from '@glimmer/component'; class MyComponent extends Component { constructor() { this.attrs.foo; } }",
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
     },

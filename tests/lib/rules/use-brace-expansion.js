@@ -39,8 +39,7 @@ eslintTester.run('use-brace-expansion', rule, {
   ].map(addComputedImport),
   invalid: [
     {
-      code:
-        '{ test: computed("foo.{name,place}", "foo.[]", "foo.{thing,@each.stuff}", function() {}) }',
+      code: '{ test: computed("foo.{name,place}", "foo.[]", "foo.{thing,@each.stuff}", function() {}) }',
       output: null,
       errors: [
         {
@@ -50,8 +49,7 @@ eslintTester.run('use-brace-expansion', rule, {
       ],
     },
     {
-      code:
-        "import Ember from 'ember'; { test: Ember.computed('foo.{name,place}', 'foo.[]', 'foo.{thing,@each.stuff}', function() {}) }",
+      code: "import Ember from 'ember'; { test: Ember.computed('foo.{name,place}', 'foo.[]', 'foo.{thing,@each.stuff}', function() {}) }",
       output: null,
       errors: [
         {

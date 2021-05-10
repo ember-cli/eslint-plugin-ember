@@ -149,8 +149,7 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     },
     // Dynamic key with missing dependency:
     {
-      code:
-        "import Ember from 'ember'; Ember.computed(dynamic, function() { return this.undeclared; });",
+      code: "import Ember from 'ember'; Ember.computed(dynamic, function() { return this.undeclared; });",
       output:
         "import Ember from 'ember'; Ember.computed(dynamic, 'undeclared', function() { return this.undeclared; });",
       options: [{ allowDynamicKeys: false }],
@@ -167,8 +166,7 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     },
     // Multiple dynamic (identifier and spread) keys with missing dependency:
     {
-      code:
-        "import Ember from 'ember'; Ember.computed(dynamic, ...moreDynamic, function() { return this.undeclared; });",
+      code: "import Ember from 'ember'; Ember.computed(dynamic, ...moreDynamic, function() { return this.undeclared; });",
       output:
         "import Ember from 'ember'; Ember.computed(dynamic, ...moreDynamic, 'undeclared', function() { return this.undeclared; });",
       options: [{ allowDynamicKeys: false }],
@@ -970,8 +968,7 @@ ruleTester.run('require-computed-property-dependencies', rule, {
 
     {
       // Optional chaining:
-      code:
-        "import { computed } from '@ember/object'; computed(function() { return this.x?.y?.z; })",
+      code: "import { computed } from '@ember/object'; computed(function() { return this.x?.y?.z; })",
       output:
         "import { computed } from '@ember/object'; computed('x.y.z', function() { return this.x?.y?.z; })",
       errors: [
@@ -983,8 +980,7 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     },
     {
       // Optional chaining plus overlap with non-optional-chaining:
-      code:
-        "import { computed } from '@ember/object'; computed(function() { return this.x?.y?.z + this.x.y.foo; })",
+      code: "import { computed } from '@ember/object'; computed(function() { return this.x?.y?.z + this.x.y.foo; })",
       output:
         "import { computed } from '@ember/object'; computed('x.y.{foo,z}', function() { return this.x?.y?.z + this.x.y.foo; })",
       errors: [
@@ -996,8 +992,7 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     },
     {
       // Optional chaining with function call:
-      code:
-        "import { computed } from '@ember/object'; computed(function() { return this.x?.y?.someFunction(); })",
+      code: "import { computed } from '@ember/object'; computed(function() { return this.x?.y?.someFunction(); })",
       output:
         "import { computed } from '@ember/object'; computed('x.y', function() { return this.x?.y?.someFunction(); })",
       errors: [
@@ -1009,8 +1004,7 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     },
     {
       // Optional chaining with array/object access:
-      code:
-        "import { computed } from '@ember/object'; computed(function() { return this.x?.someArrayOrObject[index]; })",
+      code: "import { computed } from '@ember/object'; computed(function() { return this.x?.someArrayOrObject[index]; })",
       output:
         "import { computed } from '@ember/object'; computed('x.someArrayOrObject', function() { return this.x?.someArrayOrObject[index]; })",
       errors: [
@@ -1045,8 +1039,7 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     },
     {
       // Renamed get import:
-      code:
-        "import { computed, get as g } from '@ember/object'; computed(function() { return g(this, 'foo'); });",
+      code: "import { computed, get as g } from '@ember/object'; computed(function() { return g(this, 'foo'); });",
       output:
         "import { computed, get as g } from '@ember/object'; computed('foo', function() { return g(this, 'foo'); });",
       errors: [
@@ -1058,8 +1051,7 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     },
     {
       // Renamed getProperties import:
-      code:
-        "import { computed, getProperties as gp } from '@ember/object'; computed(function() { return gp(this, 'foo'); });",
+      code: "import { computed, getProperties as gp } from '@ember/object'; computed(function() { return gp(this, 'foo'); });",
       output:
         "import { computed, getProperties as gp } from '@ember/object'; computed('foo', function() { return gp(this, 'foo'); });",
       errors: [
@@ -1071,8 +1063,7 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     },
     {
       // Renamed getWithDefault import:
-      code:
-        "import { computed, getWithDefault as gwd } from '@ember/object'; computed(function() { return gwd(this, 'foo', 'bar'); });",
+      code: "import { computed, getWithDefault as gwd } from '@ember/object'; computed(function() { return gwd(this, 'foo', 'bar'); });",
       output:
         "import { computed, getWithDefault as gwd } from '@ember/object'; computed('foo', function() { return gwd(this, 'foo', 'bar'); });",
       errors: [

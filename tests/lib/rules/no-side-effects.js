@@ -91,8 +91,7 @@ eslintTester.run('no-side-effects', rule, {
     { code: 'computed(function() { this.sendEvent(); })', options: [{ catchEvents: false }] },
     { code: 'computed(function() { this.trigger(); })', options: [{ catchEvents: false }] },
     {
-      code:
-        'import { sendEvent } from "@ember/object/events"; computed(function() { sendEvent(); })',
+      code: 'import { sendEvent } from "@ember/object/events"; computed(function() { sendEvent(); })',
       options: [{ catchEvents: false }],
     },
 
@@ -105,20 +104,17 @@ eslintTester.run('no-side-effects', rule, {
 
     // checkPlainGetters = false
     {
-      code:
-        'import Component from "@ember/component"; class Foo extends Component { get foo() { this.x = 123; } }',
+      code: 'import Component from "@ember/component"; class Foo extends Component { get foo() { this.x = 123; } }',
       options: [{ checkPlainGetters: false }],
     },
 
     // checkPlainGetters = true
     {
-      code:
-        'import Component from "@ember/component"; class Foo extends Component { get foo() { return 123; } }',
+      code: 'import Component from "@ember/component"; class Foo extends Component { get foo() { return 123; } }',
       options: [{ checkPlainGetters: true }],
     },
     {
-      code:
-        'import Component from "@ember/component"; class Foo extends Component { set foo(x) { this.x = x; } }',
+      code: 'import Component from "@ember/component"; class Foo extends Component { set foo(x) { this.x = x; } }',
       options: [{ checkPlainGetters: true }],
     },
     {
@@ -152,54 +148,46 @@ eslintTester.run('no-side-effects', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code:
-        'import { setProperties } from "@ember/object"; computed(function() { setProperties(this, "foo", 123); })',
+      code: 'import { setProperties } from "@ember/object"; computed(function() { setProperties(this, "foo", 123); })',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code:
-        'import { setProperties } from "@ember/object"; computed(function() { setProperties(this.foo, 123); })',
+      code: 'import { setProperties } from "@ember/object"; computed(function() { setProperties(this.foo, 123); })',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
 
     // Ember.set
     {
-      code:
-        'import Ember from "ember"; computed(function() { Ember.set(this, "testAmount", test.length); return ""; })',
+      code: 'import Ember from "ember"; computed(function() { Ember.set(this, "testAmount", test.length); return ""; })',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code:
-        'import Ember from "ember"; computed(function() { Ember.set(this.foo, "testAmount", test.length); return ""; })',
+      code: 'import Ember from "ember"; computed(function() { Ember.set(this.foo, "testAmount", test.length); return ""; })',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code:
-        'import Ember from "ember"; computed(function() { Ember.set(this.foo?.bar, "testAmount", test.length); return ""; })',
+      code: 'import Ember from "ember"; computed(function() { Ember.set(this.foo?.bar, "testAmount", test.length); return ""; })',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code:
-        'import Ember from "ember"; computed(function() { Ember.setProperties(this, "testAmount", test.length); return ""; })',
+      code: 'import Ember from "ember"; computed(function() { Ember.setProperties(this, "testAmount", test.length); return ""; })',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
 
     // Renamed Ember import
     {
-      code:
-        'import E from "ember"; computed(function() { E.set(this, "testAmount", test.length); return ""; })',
+      code: 'import E from "ember"; computed(function() { E.set(this, "testAmount", test.length); return ""; })',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
-      code:
-        'import E from "ember"; computed(function() { E.setProperties(this, "testAmount", test.length); return ""; })',
+      code: 'import E from "ember"; computed(function() { E.setProperties(this, "testAmount", test.length); return ""; })',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
@@ -321,23 +309,20 @@ eslintTester.run('no-side-effects', rule, {
 
     {
       // Imported sendEvent function:
-      code:
-        'import { sendEvent as se } from "@ember/object/events"; computed(function() { se(); })',
+      code: 'import { sendEvent as se } from "@ember/object/events"; computed(function() { se(); })',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
 
     {
       // checkPlainGetters = true (default)
-      code:
-        'import Component from "@ember/component"; class Foo extends Component { get foo() { this.x = 123; } }',
+      code: 'import Component from "@ember/component"; class Foo extends Component { get foo() { this.x = 123; } }',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
     },
     {
       // checkPlainGetters = true
-      code:
-        'import Component from "@ember/component"; class Foo extends Component { get foo() { this.x = 123; } }',
+      code: 'import Component from "@ember/component"; class Foo extends Component { get foo() { this.x = 123; } }',
       output: null,
       options: [{ checkPlainGetters: true }],
       errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],

@@ -64,8 +64,7 @@ eslintTester.run('jquery-ember-run', rule, {
     },
     {
       // jQuery from Ember with destructuring
-      code:
-        'import Ember from "ember"; const { $ } = Ember; $("#item").on("click", () => { this.handle(); });',
+      code: 'import Ember from "ember"; const { $ } = Ember; $("#item").on("click", () => { this.handle(); });',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
     },
@@ -90,8 +89,7 @@ eslintTester.run('jquery-ember-run', rule, {
     },
     {
       // With unknown imported runloop function
-      code:
-        'import { unknownFunction } from "@ember/runloop"; import $ from "jquery"; $("#item").on("click", () => { unknownFunction(); });',
+      code: 'import { unknownFunction } from "@ember/runloop"; import $ from "jquery"; $("#item").on("click", () => { unknownFunction(); });',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
     },
@@ -103,15 +101,13 @@ eslintTester.run('jquery-ember-run', rule, {
     },
     {
       // With not from Ember.run
-      code:
-        'import Ember from "ember"; import $ from "jquery"; $("#item").on("click", () => { Ember.notRun.bind(); });',
+      code: 'import Ember from "ember"; import $ from "jquery"; $("#item").on("click", () => { Ember.notRun.bind(); });',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
     },
     {
       // With unknown function call from Ember.run
-      code:
-        'import Ember from "ember"; import $ from "jquery"; $("#item").on("click", () => { Ember.run.unknownFunction(); });',
+      code: 'import Ember from "ember"; import $ from "jquery"; $("#item").on("click", () => { Ember.run.unknownFunction(); });',
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
     },

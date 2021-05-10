@@ -246,8 +246,7 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
       ],
     },
     {
-      code:
-        'import Mixin from "@ember/object/mixin"; export default Mixin.create({ anArray: [] });',
+      code: 'import Mixin from "@ember/object/mixin"; export default Mixin.create({ anArray: [] });',
       output: null,
       errors: [
         {

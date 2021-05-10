@@ -193,16 +193,14 @@ eslintTester.run('use-ember-get-and-set', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code:
-        'import Ember from "ember"; const { getWithDefault } = Ember; this.getWithDefault("test", "default")',
+      code: 'import Ember from "ember"; const { getWithDefault } = Ember; this.getWithDefault("test", "default")',
       output:
         'import Ember from "ember"; const { getWithDefault } = Ember; getWithDefault(this, "test", "default")',
       errors: [{ message: 'Use get/set' }],
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code:
-        'import Ember from "ember"; const { getWithDefault } = Ember; controller.getWithDefault("test", "default")',
+      code: 'import Ember from "ember"; const { getWithDefault } = Ember; controller.getWithDefault("test", "default")',
       output:
         'import Ember from "ember"; const { getWithDefault } = Ember; getWithDefault(controller, "test", "default")',
       errors: [{ message: 'Use get/set' }],
@@ -227,56 +225,49 @@ eslintTester.run('use-ember-get-and-set', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code:
-        'import Ember from "ember"; const { getProperties } = Ember; this.getProperties("test", "test2")',
+      code: 'import Ember from "ember"; const { getProperties } = Ember; this.getProperties("test", "test2")',
       output:
         'import Ember from "ember"; const { getProperties } = Ember; getProperties(this, "test", "test2")',
       errors: [{ message: 'Use get/set' }],
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code:
-        'import Ember from "ember"; const { getProperties } = Ember; controller.getProperties("test", "test2")',
+      code: 'import Ember from "ember"; const { getProperties } = Ember; controller.getProperties("test", "test2")',
       output:
         'import Ember from "ember"; const { getProperties } = Ember; getProperties(controller, "test", "test2")',
       errors: [{ message: 'Use get/set' }],
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code:
-        'import Ember from "ember"; const { getProperties } = Ember; model.getProperties("test", "test2")',
+      code: 'import Ember from "ember"; const { getProperties } = Ember; model.getProperties("test", "test2")',
       output:
         'import Ember from "ember"; const { getProperties } = Ember; getProperties(model, "test", "test2")',
       errors: [{ message: 'Use get/set' }],
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code:
-        'import Ember from "ember"; const { setProperties } = Ember; this.setProperties({test: "value"})',
+      code: 'import Ember from "ember"; const { setProperties } = Ember; this.setProperties({test: "value"})',
       output:
         'import Ember from "ember"; const { setProperties } = Ember; setProperties(this, {test: "value"})',
       errors: [{ message: 'Use get/set' }],
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code:
-        'import Ember from "ember"; const { setProperties } = Ember; controller.setProperties({test: "value"})',
+      code: 'import Ember from "ember"; const { setProperties } = Ember; controller.setProperties({test: "value"})',
       output:
         'import Ember from "ember"; const { setProperties } = Ember; setProperties(controller, {test: "value"})',
       errors: [{ message: 'Use get/set' }],
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code:
-        'import Ember from "ember"; const { setProperties } = Ember; model.setProperties({test: "value"})',
+      code: 'import Ember from "ember"; const { setProperties } = Ember; model.setProperties({test: "value"})',
       output:
         'import Ember from "ember"; const { setProperties } = Ember; setProperties(model, {test: "value"})',
       errors: [{ message: 'Use get/set' }],
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code:
-        'import Ember from "ember"; const { getProperties } = Ember; controller.getProperties("test", "test2")',
+      code: 'import Ember from "ember"; const { getProperties } = Ember; controller.getProperties("test", "test2")',
       filename: 'app/tests/unit/controllers/controller-test.js',
       output:
         'import Ember from "ember"; const { getProperties } = Ember; getProperties(controller, "test", "test2")',
@@ -284,8 +275,7 @@ eslintTester.run('use-ember-get-and-set', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code:
-        'import Ember from "ember"; const { setProperties } = Ember; controller.setProperties({test: "value"})',
+      code: 'import Ember from "ember"; const { setProperties } = Ember; controller.setProperties({test: "value"})',
       filename: 'app/tests/unit/controllers/controller-test.js',
       output:
         'import Ember from "ember"; const { setProperties } = Ember; setProperties(controller, {test: "value"})',
@@ -293,8 +283,7 @@ eslintTester.run('use-ember-get-and-set', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
     },
     {
-      code:
-        'import Ember from "ember"; const { getWithDefault } = Ember; controller.getWithDefault("test", "default")',
+      code: 'import Ember from "ember"; const { getWithDefault } = Ember; controller.getWithDefault("test", "default")',
       filename: 'app/tests/unit/controllers/controller-test.js',
       output:
         'import Ember from "ember"; const { getWithDefault } = Ember; getWithDefault(controller, "test", "default")',
