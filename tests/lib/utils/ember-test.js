@@ -852,6 +852,30 @@ describe('isInjectedServiceProp', () => {
       expect(emberUtils.isInjectedServiceProp(node, undefined, importName)).toBeTruthy();
     });
 
+    it("should check that it's not an injected service prop with foo.service", () => {
+      const context = new FauxContext(`
+        import {inject as service} from '@ember/service';
+        export default Controller.extend({
+          currentUser: foo.service()
+        });
+      `);
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node, undefined, importName)).toBeFalsy();
+    });
+
+    it("should check that it's not an injected service prop with foo.service.inject", () => {
+      const context = new FauxContext(`
+        import {inject as service} from '@ember/service';
+        export default Controller.extend({
+          currentUser: foo.service.inject()
+        });
+      `);
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedServiceProp(node, undefined, importName)).toBeFalsy();
+    });
+
     it("should check that it's not an injected service prop without the renamed import", () => {
       const context = new FauxContext(`
         export default Controller.extend({
@@ -918,16 +942,6 @@ describe('isInjectedServiceProp', () => {
       const importName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration.arguments[0].properties[0];
       expect(emberUtils.isInjectedServiceProp(node, importName, undefined)).toBeFalsy();
-    });
-
-    it("should check that it's not an injected service prop with foo.service.inject", () => {
-      const context = new FauxContext(`
-        export default Controller.extend({
-          currentUser: foo.service.inject()
-        });
-      `);
-      const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(emberUtils.isInjectedServiceProp(node)).toBeFalsy();
     });
 
     it("should check that it's not an injected service prop", () => {
@@ -1036,12 +1050,34 @@ describe('isInjectedControllerProp', () => {
 
     it("should check if it's an injected controller prop with full import", () => {
       const context = new FauxContext(`
+        import Ember from 'ember';
+        export default Controller.extend({
+          application: Ember.inject.controller(),
+        });
+      `);
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedControllerProp(node, importName)).toBeTruthy();
+    });
+
+    it("should check if it's not an injected controller prop without full import", () => {
+      const context = new FauxContext(`
         export default Controller.extend({
           application: Ember.inject.controller(),
         });
       `);
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+      expect(emberUtils.isInjectedControllerProp(node)).toBeFalsy();
+    });
+
+    it("should check if it's not an injected controller prop with foo.controller", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          application: foo.controller(),
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedControllerProp(node)).toBeFalsy();
     });
   });
 
@@ -1195,12 +1231,24 @@ describe('isObserverProp', () => {
 
     it("should check if it's an observer prop with full import", () => {
       const context = new FauxContext(`
+        import Ember from 'ember';
+        export default Controller.extend({
+          someObserver: Ember.observer(),
+        });
+      `);
+      const importName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(emberUtils.isObserverProp(node, importName)).toBeTruthy();
+    });
+
+    it("should check that it's not an observer prop without full import", () => {
+      const context = new FauxContext(`
         export default Controller.extend({
           someObserver: Ember.observer(),
         });
       `);
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(emberUtils.isObserverProp(node)).toBeTruthy();
+      expect(emberUtils.isObserverProp(node)).toBeFalsy();
     });
 
     it("should check if it's an observer prop with multi-line observer", () => {
