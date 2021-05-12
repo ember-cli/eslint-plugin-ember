@@ -62,6 +62,20 @@ describe('determinePropertyType', () => {
       ).toStrictEqual('service');
     });
 
+    it('should determine controller-type props with full import', () => {
+      const context = new FauxContext(
+        `import Ember from 'ember';
+        export default Controller.extend({
+          application: Ember.inject.controller(),
+        });`
+      );
+      const importEmberName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(
+        propertyOrder.determinePropertyType(node, 'controller', [], importEmberName)
+      ).toStrictEqual('controller');
+    });
+
     it('should determine controller-type props', () => {
       const context = new FauxContext(
         `export default Controller.extend({
@@ -134,6 +148,20 @@ describe('determinePropertyType', () => {
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
       expect(propertyOrder.determinePropertyType(node, 'model')).toStrictEqual('relationship');
+    });
+
+    it('should determine observer-type props with full import', () => {
+      const context = new FauxContext(
+        `import Ember from 'ember';
+        export default Controller.extend({
+          someObvs: Ember.observer(),
+        });`
+      );
+      const importEmberName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(
+        propertyOrder.determinePropertyType(node, 'controller', [], importEmberName)
+      ).toStrictEqual('observer');
     });
 
     it('should determine observer-type props', () => {
