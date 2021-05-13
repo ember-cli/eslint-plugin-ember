@@ -96,7 +96,8 @@ eslintTester.run('order-in-components', rule, {
 
         ghi: alias("def")
       });`,
-    `export default Component.extend({
+    `import {observer} from '@ember/object';
+    export default Component.extend({
         levelOfHappiness: computed("attitude", "health", () => {
         }),
 
@@ -108,7 +109,8 @@ eslintTester.run('order-in-components', rule, {
 
         actions: {}
       });`,
-    `export default Component.extend({
+    `import {observer} from '@ember/object';
+    export default Component.extend({
         abc: observer("aaaa", () => {
         }),
 
@@ -123,6 +125,7 @@ eslintTester.run('order-in-components', rule, {
       });`,
     `
       import {inject as service} from '@ember/service';
+      import {observer} from '@ember/object';
       export default Component.extend({
         igh: service(),
 
@@ -629,12 +632,14 @@ eslintTester.run('order-in-components', rule, {
       ],
     },
     {
-      code: `export default Component.extend({
+      code: `import {observer} from '@ember/object';
+      export default Component.extend({
         levelOfHappiness: observer("attitude", "health", () => {
         }),
         vehicle: alias("car")
       });`,
-      output: `export default Component.extend({
+      output: `import {observer} from '@ember/object';
+      export default Component.extend({
         vehicle: alias("car"),
               levelOfHappiness: observer("attitude", "health", () => {
         }),
@@ -642,19 +647,21 @@ eslintTester.run('order-in-components', rule, {
       errors: [
         {
           message:
-            'The "vehicle" single-line function should be above the "levelOfHappiness" observer on line 2',
-          line: 4,
+            'The "vehicle" single-line function should be above the "levelOfHappiness" observer on line 3',
+          line: 5,
         },
       ],
     },
     {
-      code: `export default Component.extend({
+      code: `import {observer} from '@ember/object';
+      export default Component.extend({
         levelOfHappiness: observer("attitude", "health", () => {
         }),
         aaa: computed("attitude", "health", () => {
         })
       });`,
-      output: `export default Component.extend({
+      output: `import {observer} from '@ember/object';
+      export default Component.extend({
         aaa: computed("attitude", "health", () => {
         }),
               levelOfHappiness: observer("attitude", "health", () => {
@@ -663,19 +670,21 @@ eslintTester.run('order-in-components', rule, {
       errors: [
         {
           message:
-            'The "aaa" multi-line function should be above the "levelOfHappiness" observer on line 2',
-          line: 4,
+            'The "aaa" multi-line function should be above the "levelOfHappiness" observer on line 3',
+          line: 5,
         },
       ],
     },
     {
-      code: `export default Component.extend({
+      code: `import {observer} from '@ember/object';
+      export default Component.extend({
         init() {
         },
         levelOfHappiness: observer("attitude", "health", () => {
         })
       });`,
-      output: `export default Component.extend({
+      output: `import {observer} from '@ember/object';
+      export default Component.extend({
         levelOfHappiness: observer("attitude", "health", () => {
         }),
               init() {
@@ -684,8 +693,8 @@ eslintTester.run('order-in-components', rule, {
       errors: [
         {
           message:
-            'The "levelOfHappiness" observer should be above the "init" lifecycle hook on line 2',
-          line: 4,
+            'The "levelOfHappiness" observer should be above the "init" lifecycle hook on line 3',
+          line: 5,
         },
       ],
     },

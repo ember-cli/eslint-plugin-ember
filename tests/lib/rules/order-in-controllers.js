@@ -41,7 +41,8 @@ eslintTester.run('order-in-controllers', rule, {
         _customAction2: function() {},
         tSomeTask: task(function* () {})
       });`,
-    `export default Controller.extend({
+    `import {observer} from '@ember/object';
+    export default Controller.extend({
         queryParams: [],
         customProp: "test",
         comp: computed("test", function() {}),
@@ -277,13 +278,15 @@ eslintTester.run('order-in-controllers', rule, {
       ],
     },
     {
-      code: `export default Controller.extend({
+      code: `import {observer} from '@ember/object';
+      export default Controller.extend({
         test: "asd",
         obs: observer("asd", function() {}),
         comp: computed("asd", function() {}),
         actions: {}
       });`,
-      output: `export default Controller.extend({
+      output: `import {observer} from '@ember/object';
+      export default Controller.extend({
         test: "asd",
         comp: computed("asd", function() {}),
         obs: observer("asd", function() {}),
@@ -291,8 +294,8 @@ eslintTester.run('order-in-controllers', rule, {
       });`,
       errors: [
         {
-          message: 'The "comp" single-line function should be above the "obs" observer on line 3',
-          line: 4,
+          message: 'The "comp" single-line function should be above the "obs" observer on line 4',
+          line: 5,
         },
       ],
     },

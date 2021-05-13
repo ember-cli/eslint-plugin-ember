@@ -55,10 +55,10 @@ describe('determinePropertyType', () => {
           currentUser: service(),
         });`
       );
-      const importName = context.ast.body[0].specifiers[0].local.name;
+      const importInjectName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration.arguments[0].properties[0];
       expect(
-        propertyOrder.determinePropertyType(node, 'controller', [], undefined, importName)
+        propertyOrder.determinePropertyType(node, 'controller', [], undefined, importInjectName)
       ).toStrictEqual('service');
     });
 
@@ -166,12 +166,23 @@ describe('determinePropertyType', () => {
 
     it('should determine observer-type props', () => {
       const context = new FauxContext(
-        `export default Controller.extend({
+        `import {observer} from '@ember/object';
+        export default Controller.extend({
           someObvs: observer(),
         });`
       );
-      const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller')).toStrictEqual('observer');
+      const importObserverName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(
+        propertyOrder.determinePropertyType(
+          node,
+          'controller',
+          [],
+          undefined,
+          undefined,
+          importObserverName
+        )
+      ).toStrictEqual('observer');
     });
 
     it('should determine actions', () => {
@@ -298,10 +309,10 @@ describe('determinePropertyType', () => {
           @service currentUser;
         }`
       );
-      const importName = context.ast.body[0].specifiers[0].local.name;
+      const importInjectName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].body.body[0];
       expect(
-        propertyOrder.determinePropertyType(node, 'controller', [], undefined, importName)
+        propertyOrder.determinePropertyType(node, 'controller', [], undefined, importInjectName)
       ).toStrictEqual('service');
     });
 
@@ -357,12 +368,23 @@ describe('determinePropertyType', () => {
 
     it('should determine observer-type props', () => {
       const context = new FauxContext(
-        `class MyController extends Controller {
+        `import {observer} from '@ember/object';
+        class MyController extends Controller {
           @observer someObvs;
         }`
       );
-      const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller')).toStrictEqual('observer');
+      const importObserverName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].body.body[0];
+      expect(
+        propertyOrder.determinePropertyType(
+          node,
+          'controller',
+          [],
+          undefined,
+          undefined,
+          importObserverName
+        )
+      ).toStrictEqual('observer');
     });
 
     it('should determine single-line functions', () => {
@@ -417,7 +439,7 @@ describe('reportUnorderedProperties', () => {
         '',
         jest.fn()
       );
-      const importName = context.ast.body[0].specifiers[0].local.name;
+      const importInjectName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration;
 
       propertyOrder.reportUnorderedProperties(
@@ -426,7 +448,8 @@ describe('reportUnorderedProperties', () => {
         'controller',
         order,
         undefined,
-        importName
+        importInjectName,
+        undefined
       );
       expect(context.report).not.toHaveBeenCalled();
     });
@@ -443,7 +466,7 @@ describe('reportUnorderedProperties', () => {
         '',
         jest.fn()
       );
-      const importName = context.ast.body[0].specifiers[0].local.name;
+      const importInjectName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration;
 
       propertyOrder.reportUnorderedProperties(
@@ -452,7 +475,7 @@ describe('reportUnorderedProperties', () => {
         'controller',
         order,
         undefined,
-        importName
+        importInjectName
       );
       expect(context.report).toHaveBeenCalled(); // eslint-disable-line jest/prefer-called-with
     });
@@ -471,7 +494,7 @@ describe('reportUnorderedProperties', () => {
         '',
         jest.fn()
       );
-      const importName = context.ast.body[0].specifiers[0].local.name;
+      const importInjectName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration;
 
       propertyOrder.reportUnorderedProperties(
@@ -480,7 +503,7 @@ describe('reportUnorderedProperties', () => {
         'controller',
         order,
         undefined,
-        importName
+        importInjectName
       );
       expect(context.report).not.toHaveBeenCalled();
     });
@@ -497,7 +520,7 @@ describe('reportUnorderedProperties', () => {
         '',
         jest.fn()
       );
-      const importName = context.ast.body[0].specifiers[0].local.name;
+      const importInjectName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration;
 
       propertyOrder.reportUnorderedProperties(
@@ -506,7 +529,7 @@ describe('reportUnorderedProperties', () => {
         'controller',
         order,
         undefined,
-        importName
+        importInjectName
       );
       expect(context.report).toHaveBeenCalled(); // eslint-disable-line jest/prefer-called-with
     });
