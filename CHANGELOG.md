@@ -1,3 +1,19 @@
+## v10.4.2 (2021-05-13)
+
+#### :bug: Bug Fix
+* [#1195](https://github.com/ember-cli/eslint-plugin-ember/pull/1195) Fix false positives with service/controller/observer detection in some rules ([@lin-ll](https://github.com/lin-ll))
+* [#1187](https://github.com/ember-cli/eslint-plugin-ember/pull/1187) Fix optional chaining support to handle newer ChainExpression implementation ([@bmish](https://github.com/bmish))
+* [#1179](https://github.com/ember-cli/eslint-plugin-ember/pull/1179) Handle spread syntax with both `babel-eslint` and `@babel/eslint-parser` parsers in `order-in-*` rules ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#1191](https://github.com/ember-cli/eslint-plugin-ember/pull/1191) Use `requireindex` to export rules and configs ([@bmish](https://github.com/bmish))
+* [#1180](https://github.com/ember-cli/eslint-plugin-ember/pull/1180) Switch from `babel-eslint` to `@babel/eslint-parser` ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Lucy Lin ([@lin-ll](https://github.com/lin-ll))
+
+
 ## v10.4.1 (2021-04-21)
 
 #### :bug: Bug Fix
