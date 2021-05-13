@@ -20,6 +20,7 @@ eslintTester.run('order-in-controllers', rule, {
     'export default Controller.extend({ ...foo });',
     `
       import {inject as service} from '@ember/service';
+      import {inject as controller} from '@ember/controller';
       export default Controller.extend({
         application: controller(),
         currentUser: service(),
@@ -87,7 +88,8 @@ eslintTester.run('order-in-controllers', rule, {
       ],
     },
     {
-      code: `export default Controller.extend({
+      code: `import {inject as controller} from '@ember/controller';
+      export default Controller.extend({
         queryParams: [],
         application: controller(),
       });`,
@@ -259,12 +261,14 @@ eslintTester.run('order-in-controllers', rule, {
       ],
     },
     {
-      code: `import {inject as service} from '@ember/service';
+      code: `import {inject as controller} from '@ember/controller';
+      import {inject as service} from '@ember/service';
       export default Controller.extend({
         currentUser: service(),
         application: controller()
       });`,
-      output: `import {inject as service} from '@ember/service';
+      output: `import {inject as controller} from '@ember/controller';
+      import {inject as service} from '@ember/service';
       export default Controller.extend({
         application: controller(),
               currentUser: service(),
@@ -272,8 +276,8 @@ eslintTester.run('order-in-controllers', rule, {
       errors: [
         {
           message:
-            'The "application" controller injection should be above the "currentUser" service injection on line 3',
-          line: 4,
+            'The "application" controller injection should be above the "currentUser" service injection on line 4',
+          line: 5,
         },
       ],
     },
