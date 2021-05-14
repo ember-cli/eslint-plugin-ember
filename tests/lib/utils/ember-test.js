@@ -1040,12 +1040,16 @@ describe('isInjectedControllerProp', () => {
   describe('classic classes', () => {
     it("should check if it's an injected controller prop with destructed import", () => {
       const context = new FauxContext(`
+        import {inject as controller} from '@ember/controller';
         export default Controller.extend({
           application: controller(),
         });
       `);
-      const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+      const importControllerName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(
+        emberUtils.isInjectedControllerProp(node, undefined, importControllerName)
+      ).toBeTruthy();
     });
 
     it("should check if it's an injected controller prop with full import", () => {
@@ -1055,9 +1059,19 @@ describe('isInjectedControllerProp', () => {
           application: Ember.inject.controller(),
         });
       `);
-      const importName = context.ast.body[0].specifiers[0].local.name;
+      const importEmberName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration.arguments[0].properties[0];
-      expect(emberUtils.isInjectedControllerProp(node, importName)).toBeTruthy();
+      expect(emberUtils.isInjectedControllerProp(node, importEmberName)).toBeTruthy();
+    });
+
+    it("should check if it's not an injected controller prop without import", () => {
+      const context = new FauxContext(`
+        export default Controller.extend({
+          application: controller(),
+        });
+      `);
+      const node = context.ast.body[0].declaration.arguments[0].properties[0];
+      expect(emberUtils.isInjectedControllerProp(node)).toBeFalsy();
     });
 
     it("should check if it's not an injected controller prop without full import", () => {
@@ -1084,12 +1098,26 @@ describe('isInjectedControllerProp', () => {
   describe('native classes', () => {
     it("should check if it's an injected controller prop with decorator", () => {
       const context = new FauxContext(`
+        import {inject as controller} from '@ember/controller';
+        class MyController extends Controller {
+          @controller application;
+        }
+      `);
+      const importControllerName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].body.body[0];
+      expect(
+        emberUtils.isInjectedControllerProp(node, undefined, importControllerName)
+      ).toBeTruthy();
+    });
+
+    it("should check if it's not an injected controller prop with decorator without import", () => {
+      const context = new FauxContext(`
         class MyController extends Controller {
           @controller application;
         }
       `);
       const node = context.ast.body[0].body.body[0];
-      expect(emberUtils.isInjectedControllerProp(node)).toBeTruthy();
+      expect(emberUtils.isInjectedControllerProp(node)).toBeFalsy();
     });
 
     it("should check that it's not an injected controller prop", () => {

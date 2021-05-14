@@ -78,12 +78,24 @@ describe('determinePropertyType', () => {
 
     it('should determine controller-type props', () => {
       const context = new FauxContext(
-        `export default Controller.extend({
+        `import {inject as controller} from '@ember/controller';
+        export default Controller.extend({
           application: controller(),
         });`
       );
-      const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller')).toStrictEqual('controller');
+      const importControllerName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].declaration.arguments[0].properties[0];
+      expect(
+        propertyOrder.determinePropertyType(
+          node,
+          'controller',
+          [],
+          undefined,
+          undefined,
+          undefined,
+          importControllerName
+        )
+      ).toStrictEqual('controller');
     });
 
     it('should determine init-type props', () => {
@@ -318,12 +330,24 @@ describe('determinePropertyType', () => {
 
     it('should determine controller-type props', () => {
       const context = new FauxContext(
-        `class MyController extends Controller {
+        `import {inject as controller} from '@ember/controller';
+        class MyController extends Controller {
           @controller application;
         }`
       );
-      const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller')).toStrictEqual('controller');
+      const importControllerName = context.ast.body[0].specifiers[0].local.name;
+      const node = context.ast.body[1].body.body[0];
+      expect(
+        propertyOrder.determinePropertyType(
+          node,
+          'controller',
+          [],
+          undefined,
+          undefined,
+          undefined,
+          importControllerName
+        )
+      ).toStrictEqual('controller');
     });
 
     it('should determine init-type props', () => {
@@ -431,7 +455,8 @@ describe('reportUnorderedProperties', () => {
       const order = ['controller', 'service', 'query-params'];
       const context = new FauxContext(
         `import {inject as service} from '@ember/service';
-          export default Controller.extend({
+        import {inject as controller} from '@ember/controller';
+        export default Controller.extend({
           application: controller(),
           currentUser: service(),
           queryParams: [],
@@ -440,7 +465,8 @@ describe('reportUnorderedProperties', () => {
         jest.fn()
       );
       const importInjectName = context.ast.body[0].specifiers[0].local.name;
-      const node = context.ast.body[1].declaration;
+      const importControllerName = context.ast.body[1].specifiers[0].local.name;
+      const node = context.ast.body[2].declaration;
 
       propertyOrder.reportUnorderedProperties(
         node,
@@ -449,7 +475,8 @@ describe('reportUnorderedProperties', () => {
         order,
         undefined,
         importInjectName,
-        undefined
+        undefined,
+        importControllerName
       );
       expect(context.report).not.toHaveBeenCalled();
     });
@@ -458,7 +485,8 @@ describe('reportUnorderedProperties', () => {
       const order = ['controller', 'service', 'query-params'];
       const context = new FauxContext(
         `import {inject as service} from '@ember/service';
-          export default Controller.extend({
+        import {inject as controller} from '@ember/controller';
+        export default Controller.extend({
             currentUser: service(),
             application: controller(),
             queryParams: [],
@@ -467,7 +495,8 @@ describe('reportUnorderedProperties', () => {
         jest.fn()
       );
       const importInjectName = context.ast.body[0].specifiers[0].local.name;
-      const node = context.ast.body[1].declaration;
+      const importControllerName = context.ast.body[1].specifiers[0].local.name;
+      const node = context.ast.body[2].declaration;
 
       propertyOrder.reportUnorderedProperties(
         node,
@@ -475,7 +504,9 @@ describe('reportUnorderedProperties', () => {
         'controller',
         order,
         undefined,
-        importInjectName
+        importInjectName,
+        undefined,
+        importControllerName
       );
       expect(context.report).toHaveBeenCalled(); // eslint-disable-line jest/prefer-called-with
     });
@@ -486,7 +517,8 @@ describe('reportUnorderedProperties', () => {
       const order = ['controller', 'service', 'query-params'];
       const context = new FauxContext(
         `import {inject as service} from '@ember/service';
-          export default class MyController extends Controller {
+        import {inject as controller} from '@ember/controller';
+        export default class MyController extends Controller {
             @controller application;
             @service currentUser;
             queryParams = [];
@@ -495,7 +527,8 @@ describe('reportUnorderedProperties', () => {
         jest.fn()
       );
       const importInjectName = context.ast.body[0].specifiers[0].local.name;
-      const node = context.ast.body[1].declaration;
+      const importControllerName = context.ast.body[1].specifiers[0].local.name;
+      const node = context.ast.body[2].declaration;
 
       propertyOrder.reportUnorderedProperties(
         node,
@@ -503,7 +536,9 @@ describe('reportUnorderedProperties', () => {
         'controller',
         order,
         undefined,
-        importInjectName
+        importInjectName,
+        undefined,
+        importControllerName
       );
       expect(context.report).not.toHaveBeenCalled();
     });
@@ -512,7 +547,8 @@ describe('reportUnorderedProperties', () => {
       const order = ['controller', 'service', 'query-params'];
       const context = new FauxContext(
         `import {inject as service} from '@ember/service';
-          export default class MyController extends Controller {
+        import {inject as controller} from '@ember/controller';
+        export default class MyController extends Controller {
             @service currentUser;
             @controller application;
             queryParams = [];
@@ -521,7 +557,8 @@ describe('reportUnorderedProperties', () => {
         jest.fn()
       );
       const importInjectName = context.ast.body[0].specifiers[0].local.name;
-      const node = context.ast.body[1].declaration;
+      const importControllerName = context.ast.body[1].specifiers[0].local.name;
+      const node = context.ast.body[2].declaration;
 
       propertyOrder.reportUnorderedProperties(
         node,
@@ -529,7 +566,9 @@ describe('reportUnorderedProperties', () => {
         'controller',
         order,
         undefined,
-        importInjectName
+        importInjectName,
+        undefined,
+        importControllerName
       );
       expect(context.report).toHaveBeenCalled(); // eslint-disable-line jest/prefer-called-with
     });
