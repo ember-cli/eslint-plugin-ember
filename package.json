@@ -60,7 +60,7 @@
     "@ember-data/rfc395-data": "^0.0.4",
     "css-tree": "^1.0.0-alpha.39",
     "ember-rfc176-data": "^0.3.15",
-    "eslint-utils": "^2.1.0",
+    "eslint-utils": "^3.0.0",
     "lodash.kebabcase": "^4.1.1",
     "requireindex": "^1.2.0",
     "snake-case": "^3.0.3"
