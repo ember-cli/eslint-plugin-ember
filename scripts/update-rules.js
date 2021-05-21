@@ -24,8 +24,8 @@ const recommendedRulesFile = path.resolve(__dirname, '../lib/recommended-rules.j
 const tablePlaceholder = /<!--RULES_TABLE_START-->[\S\s]*<!--RULES_TABLE_END-->/;
 const readmeContent = fs.readFileSync(readmeFile, 'utf8');
 
-const STAR = ':white_check_mark:';
-const PEN = ':wrench:';
+const RECOMMENDED = ':white_check_mark:';
+const FIXABLE = ':wrench:';
 
 const rules = fs
   .readdirSync(root)
@@ -49,17 +49,18 @@ let rulesTableContent = categories
   .map(
     (category) => `### ${category}
 
-|    | Rule ID | Description |
-|:---|:--------|:------------|
+| Name    | Description | ${RECOMMENDED} | ${FIXABLE} |
+|:--------|:------------|:---------------|:-----------|
 ${rules
   .filter(([, rule]) => rule.meta.docs.category === category && !rule.meta.deprecated)
   .map((entry) => {
     const name = entry[0];
     const meta = entry[1].meta;
-    const mark = `${meta.docs.recommended ? STAR : ''}${meta.fixable ? PEN : ''}`;
     const link = `[${name}](./docs/rules/${name}.md)`;
     const description = meta.docs.description || '(no description)';
-    return `| ${mark} | ${link} | ${description} |`;
+    return `| ${link} | ${description} | ${meta.docs.recommended ? RECOMMENDED : ''} | ${
+      meta.fixable ? FIXABLE : ''
+    } |`;
   })
   .join('\n')}
 `
@@ -73,7 +74,7 @@ if (deprecatedRules.length > 0) {
 
 > :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
 
-| Rule ID | Replaced by |
+| Name    | Replaced by |
 |:--------|:------------|
 ${deprecatedRules
   .map((entry) => {
