@@ -3,8 +3,8 @@
 const plugin = require('../lib');
 const ember = require('../lib/utils/ember');
 const utils = require('../lib/utils/utils');
-const base = require('../lib/config/base.js');
-const recommended = require('../lib/config/recommended.js');
+const base = require('../lib/config/base');
+const recommended = require('../lib/config/recommended');
 
 describe('plugin exports', () => {
   describe('utils', () => {

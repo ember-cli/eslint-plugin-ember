@@ -3,7 +3,7 @@
 const { readdirSync, readFileSync } = require('fs');
 const path = require('path');
 const rules = require('../lib').rules;
-const recommendedRules = require('../lib/recommended-rules.js');
+const recommendedRules = require('../lib/recommended-rules');
 const { flat } = require('../lib/utils/javascript');
 
 const RULE_NAMES = Object.keys(rules);
