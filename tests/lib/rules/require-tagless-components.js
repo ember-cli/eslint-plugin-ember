@@ -30,7 +30,17 @@ ruleTester.run('require-tagless-components', rule, {
     `,
     `
       import Component from '@ember/component';
+      export default Component.extend(Mixin, { tagName: '' });
+    `,
+    `
+      import Component from '@ember/component';
       export default class MyComponent extends Component {
+        tagName = ''
+      }
+    `,
+    `
+      import Component from '@ember/component';
+      export default class MyComponent extends Component.extend(Mixin) {
         tagName = ''
       }
     `,
@@ -56,6 +66,31 @@ ruleTester.run('require-tagless-components', rule, {
         tagName = 'some-non-empty-value';
       }
     `,
+    {
+      // Classic service in component file.
+      code: `
+        import Service from '@ember/service';
+        export default Service.extend({});
+      `,
+      filename: 'app/components/foo.js',
+    },
+    {
+      // Native service in component file.
+      code: `
+        import Service from '@ember/service';
+        export default class MyService extends Service {};
+      `,
+      filename: 'app/components/foo.js',
+    },
+    {
+      // Should ignore test files.
+      code: `
+        import Component from '@ember/component';
+        export default class MyComponent extends Component {};
+        Component.extend({});
+      `,
+      filename: 'tests/integration/components/foo-test.js',
+    },
   ],
   invalid: [
     {
