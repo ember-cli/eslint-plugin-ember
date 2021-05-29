@@ -582,6 +582,11 @@ describe('isExtendObject', () => {
     expect(emberUtils.isExtendObject(node)).toBeFalsy();
   });
 
+  it('should not detect a potential lodash usage', () => {
+    expect(emberUtils.isExtendObject(parse('_.extend()'))).toBeFalsy();
+    expect(emberUtils.isExtendObject(parse('lodash.extend()'))).toBeFalsy();
+  });
+
   it('should not detect with non-extend name', () => {
     const node = parse('foo.notExtend()');
     expect(emberUtils.isExtendObject(node)).toBeFalsy();
