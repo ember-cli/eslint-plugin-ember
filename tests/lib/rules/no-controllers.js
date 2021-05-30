@@ -28,6 +28,13 @@ ruleTester.run('no-controllers', rule, {
         queryParams: ['query', 'sortType', 'sortOrder']
       });
     `,
+    // Classic class with queryParams with string literal property name.
+    `
+      import Controller from '@ember/controller';
+      export default Controller.extend({
+        'queryParams': ['query', 'sortType', 'sortOrder']
+      });
+    `,
     // Classic class with queryParams: checks object argument from variable.
     `
       import Controller from '@ember/controller';
@@ -46,6 +53,13 @@ ruleTester.run('no-controllers', rule, {
         get filteredArticles() {}
         @tracked category = null;
         queryParams = ['category'];
+      }
+    `,
+    // Native class with queryParams with string literal property name.
+    `
+      import Controller from '@ember/controller';
+      export default class ArticlesController extends Controller {
+        'queryParams' = ['category'];
       }
     `,
   ],

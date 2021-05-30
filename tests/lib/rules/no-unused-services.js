@@ -139,8 +139,10 @@ function generateValid() {
     valid.push(
       `${SERVICE_IMPORT} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${use}} }`,
       `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${use}} }`,
+      `${SERVICE_IMPORT} class MyClass { @service() '${SERVICE_NAME}'; fooFunc() {${use}} }`,
       `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service('foo'), fooFunc() {${use}} });`,
-      `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${use}} });`
+      `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${use}} });`,
+      `${SERVICE_IMPORT} Component.extend({ '${SERVICE_NAME}': service(), fooFunc() {${use}} });`
     );
   }
 

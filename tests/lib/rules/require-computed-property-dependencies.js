@@ -85,8 +85,10 @@ ruleTester.run('require-computed-property-dependencies', rule, {
           console.log(this.intl);
           return this.name + this.intl.t('some.translation.key');
           console.log(this.otherService);
+          console.log(this.serviceNameInStringLiteral);
         }),
-        otherService: service() // Service injection coming after computed property.
+        otherService: service(), // Service injection coming after computed property.
+        'serviceNameInStringLiteral': service() // Property name as string literal.
       });
     `,
     // Should ignore the left side of an assignment.
@@ -117,8 +119,13 @@ ruleTester.run('require-computed-property-dependencies', rule, {
       import { inject as service } from '@ember/service';
       class Test {
         @service i18n; // Service names not required as dependent keys by default.
+        @service 'serviceNameInStringLiteral';
+
         @computed('first', 'last')
         get fullName() { return this.i18n.t(this.first + ' ' + this.last); }
+
+        @computed()
+        get foo() { return this.serviceNameInStringLiteral; }
       }
     `,
   ],

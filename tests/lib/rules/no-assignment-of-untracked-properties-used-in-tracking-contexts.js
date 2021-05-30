@@ -55,6 +55,19 @@ ruleTester.run('no-assignment-of-untracked-properties-used-in-tracking-contexts'
       filename: '/components/foo.js',
     },
     {
+      // Assignment of tracked property with string literal property name.
+      code: `
+      import { computed } from '@ember/object';
+      import Component from '@ember/component';
+      import { tracked } from '@glimmer/tracking';
+      class MyClass extends Component {
+        @tracked 'x'
+        @computed('x') get prop() {}
+        myFunction() { this.x = 123; }
+      }`,
+      filename: '/components/foo.js',
+    },
+    {
       // Assignment of tracked property (with aliased `tracked` import).
       code: `
       import { computed } from '@ember/object';

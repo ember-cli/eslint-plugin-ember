@@ -81,6 +81,14 @@ ruleTester.run('no-restricted-service-injections', rule, {
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'Property' }],
     },
     {
+      // Without service name argument (property name as string literal):
+      code: `${SERVICE_IMPORT} Component.extend({ 'myService': service() })`,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
+      output: null,
+      filename: 'app/components/path.js',
+      errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'Property' }],
+    },
+    {
       // With camelized service name argument:
       code: `${SERVICE_IMPORT} Component.extend({ randomName: service('myService') })`,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
@@ -139,6 +147,14 @@ ruleTester.run('no-restricted-service-injections', rule, {
     {
       // With decorator without service name argument (with parentheses):
       code: `${SERVICE_IMPORT} class MyComponent extends Component { @service() myService }`,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
+      output: null,
+      filename: 'app/components/path.js',
+      errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'ClassProperty' }],
+    },
+    {
+      // With decorator without service name argument (with parentheses) (with property name as string literal):
+      code: `${SERVICE_IMPORT} class MyComponent extends Component { @service() 'myService' }`,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
       output: null,
       filename: 'app/components/path.js',
