@@ -155,6 +155,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | [no-html-safe](./docs/rules/no-html-safe.md) | disallow the use of `htmlSafe` |  |  |
 | [no-incorrect-calls-with-inline-anonymous-functions](./docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | disallow inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce` | :white_check_mark: |  |
 | [no-invalid-debug-function-arguments](./docs/rules/no-invalid-debug-function-arguments.md) | disallow usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. | :white_check_mark: |  |
+| [no-restricted-property-modifications](./docs/rules/no-restricted-property-modifications.md) | disallow modifying the specified properties |  | :wrench: |
 | [require-fetch-import](./docs/rules/require-fetch-import.md) | enforce explicit import for `fetch()` |  |  |
 
 ### Routes
