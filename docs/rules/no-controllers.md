@@ -2,7 +2,9 @@
 
 Some people may prefer to avoid the use of controllers in their applications, typically in favor of components which can be more portable and easier to test.
 
-This rule disallows controller usage, except when the controller is used to define `queryParams`.
+This rule disallows controller usage, except when the controller is used to define `queryParams` (a feature currently only available in controllers).
+
+Note: this rule will not be added to the `recommended` configuration until controller usage has become less common / deprecated.
 
 ## Examples
 

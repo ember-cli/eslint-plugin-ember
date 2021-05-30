@@ -2,6 +2,8 @@
 
 :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
+Note: this rule will not be added to the `recommended` configuration because it enforces an opinionated, stylistic preference.
+
 ## Configuration
 
 ```js
