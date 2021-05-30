@@ -4,6 +4,8 @@ Ember developers using blueprints to generate classes should write real tests.
 
 Leaving the default test comment in place is a sign of a rushed class.
 
+Note: this rule will not be added to the `recommended` configuration because it would cause the default ember-cli blueprint to contain lint violations.
+
 ## Rule Details
 
 This rule aims to nudge developers into writing more/better tests.

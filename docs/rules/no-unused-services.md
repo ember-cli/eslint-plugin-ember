@@ -10,7 +10,7 @@ By removing unused service injections, we can reduce the amount of code we have 
 - A mixin or parent class that the current class extends from
 - A child class that extends from the current class
 
-Given these significant limitations, the rule is not currently recommended for production usage, but some may find it useful to experiment with.
+Given these significant limitations, the rule is not currently recommended for production usage, but some may find it useful to experiment with. The rule will not be added to the `recommended` configuration unless the limitations can be addressed.
 
 ## Examples
 

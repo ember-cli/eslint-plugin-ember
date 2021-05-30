@@ -4,6 +4,8 @@ Be explicit with Ember data attribute types.
 
 Ember Data handles not specifying a transform in model description. Nonetheless this could lead to ambiguity. This rule ensures that the right transform is specified for every attribute.
 
+Note: this rule is not in the `recommended` configuration because the Ember Data team recommends not using transforms unless you actually want to transform something.
+
 ## Examples
 
 Examples of **incorrect** code for this rule:

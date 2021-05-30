@@ -7,6 +7,8 @@ You may want to disallow the use of Ember proxy objects (`ObjectProxy`, `ArrayPr
 3. Proxies can add unnecessary complexity.
 4. Proxies do not support ES5 getters which were introduced in [Ember 3.1](https://blog.emberjs.com/2018/04/13/ember-3-1-released.html) (they still require using `this.get()`)
 
+Note: this rule is not in the `recommended` configuration because there are legitimate usages of proxies.
+
 ## Rule Details
 
 This rule disallows using Ember proxy objects (`ObjectProxy`, `ArrayProxy`).
