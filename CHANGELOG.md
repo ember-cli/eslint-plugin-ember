@@ -1,7 +1,7 @@
 ## v10.5.0 (2021-05-30)
 
 #### :rocket: Enhancement
-* [#1188](https://github.com/ember-cli/eslint-plugin-ember/pull/1188) Add new rule [no-implicit-service-injection-argument](no-implicit-service-injection-argument) ([@bmish](https://github.com/bmish))
+* [#1188](https://github.com/ember-cli/eslint-plugin-ember/pull/1188) Add new rule [no-implicit-service-injection-argument](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-implicit-service-injection-argument.md) ([@bmish](https://github.com/bmish))
 * [#1194](https://github.com/ember-cli/eslint-plugin-ember/pull/1194) Add new rule [no-restricted-property-modifications](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-restricted-property-modifications.md) ([@bmish](https://github.com/bmish))
 * [#1199](https://github.com/ember-cli/eslint-plugin-ember/pull/1199) build(deps): bump eslint-utils from 2.1.0 to 3.0.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
 
