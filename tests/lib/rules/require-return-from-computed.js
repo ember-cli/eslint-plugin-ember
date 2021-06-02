@@ -13,7 +13,7 @@ const { ERROR_MESSAGE } = rule;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
 });
 
 eslintTester.run('require-return-from-computed', rule, {
@@ -30,7 +30,7 @@ eslintTester.run('require-return-from-computed', rule, {
       code: 'class Test { @computed() get someProp() {} set someProp(val) {} }',
       parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
-        ecmaVersion: 6,
+        ecmaVersion: 2020,
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
       },

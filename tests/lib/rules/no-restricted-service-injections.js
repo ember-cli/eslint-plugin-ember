@@ -9,7 +9,7 @@ const SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
 const ruleTester = new RuleTester({
   parser: require.resolve('@babel/eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2015,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
 });

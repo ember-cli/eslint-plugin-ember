@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
   parser: require.resolve('@babel/eslint-parser'),
 });
 
@@ -83,7 +83,7 @@ eslintTester.run('order-in-models', rule, {
         },
         customProp: { a: 1 }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       options: [
         {
           order: ['attribute', 'method', 'custom:customProp'],
@@ -99,7 +99,7 @@ eslintTester.run('order-in-models', rule, {
           },
           customProp: { a: 1 }
         });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       options: [{ order: ['service', 'attribute', 'method'] }],
     },
   ],
@@ -292,7 +292,7 @@ eslintTester.run('order-in-models', rule, {
         },
               customProp: { a: 1 },
 });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       options: [
         {
           order: ['method', 'custom:customProp'],

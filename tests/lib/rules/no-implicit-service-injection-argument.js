@@ -17,7 +17,7 @@ const SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
 
 const ruleTester = new RuleTester({
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 2020,
     sourceType: 'module',
     ecmaFeatures: { legacyDecorators: true },
   },

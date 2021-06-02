@@ -14,7 +14,7 @@ const { ERROR_MESSAGE_REQUIRE_TAGLESS_COMPONENTS: ERROR_MESSAGE } = rule;
 const ruleTester = new RuleTester({
   parser: require.resolve('@babel/eslint-parser'),
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 2020,
     sourceType: 'module',
     ecmaFeatures: {
       legacyDecorators: true,

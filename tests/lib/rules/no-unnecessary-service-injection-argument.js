@@ -17,7 +17,7 @@ const RENAMED_SERVICE_IMPORT = "import {inject as service} from '@ember/service'
 
 const ruleTester = new RuleTester({
   parserOptions: {
-    ecmaVersion: 2015,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
   parser: require.resolve('@babel/eslint-parser'),
@@ -34,7 +34,7 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
       code: `${RENAMED_SERVICE_IMPORT} class Test { @service serviceName }`,
       parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
-        ecmaVersion: 6,
+        ecmaVersion: 2020,
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
       },

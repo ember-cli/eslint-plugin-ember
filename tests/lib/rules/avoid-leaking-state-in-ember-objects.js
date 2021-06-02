@@ -27,7 +27,7 @@ describe('imports', () => {
 
 const eslintTester = new RuleTester({
   parser: require.resolve('@babel/eslint-parser'),
-  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
 });
 eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
   valid: [
