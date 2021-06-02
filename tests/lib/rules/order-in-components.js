@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
   parser: require.resolve('@babel/eslint-parser'),
 });
 
@@ -336,7 +336,7 @@ eslintTester.run('order-in-components', rule, {
         }).volatile(),
         bar() { const foo = 'bar'}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       options: [
         {
           order: [
@@ -357,7 +357,7 @@ eslintTester.run('order-in-components', rule, {
         },
         customProp: { a: 1 }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       options: [
         {
           order: ['property', 'actions', 'custom:customProp', 'method'],
@@ -971,7 +971,7 @@ eslintTester.run('order-in-components', rule, {
         bar() { const foo = 'bar'},
         onBar: () => {}
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       errors: [
         {
           message:
@@ -1021,7 +1021,7 @@ eslintTester.run('order-in-components', rule, {
         customProp: { a: 1 },
               actions: {},
 });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       options: [
         {
           order: ['property', 'custom:customProp', 'actions', 'method'],
@@ -1047,7 +1047,7 @@ eslintTester.run('order-in-components', rule, {
         },
               customProp: { a: 1 },
 });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       options: [
         {
           order: ['method', 'custom:customProp'],

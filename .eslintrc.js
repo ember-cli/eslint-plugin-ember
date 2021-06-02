@@ -4,7 +4,7 @@ module.exports = {
   root: true,
   parser: '@babel/eslint-parser',
   parserOptions: {
-    ecmaVersion: 2017,
+    ecmaVersion: 2020,
     sourceType: 'script',
     babelOptions: {
       configFile: require.resolve('./.babelrc'),

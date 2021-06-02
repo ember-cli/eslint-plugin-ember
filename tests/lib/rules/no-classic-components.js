@@ -13,7 +13,7 @@ const RuleTester = require('eslint').RuleTester;
 
 const { ERROR_MESSAGE } = rule;
 const parserOptions = {
-  ecmaVersion: 6,
+  ecmaVersion: 2020,
   sourceType: 'module',
 };
 const ruleTester = new RuleTester({ parserOptions });

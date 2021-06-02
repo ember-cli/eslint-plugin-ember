@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 6 },
+  parserOptions: { ecmaVersion: 2020 },
 });
 
 eslintTester.run('named-functions-in-promises', rule, {

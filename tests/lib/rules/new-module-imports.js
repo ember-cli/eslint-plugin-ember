@@ -19,7 +19,7 @@ eslintTester.run('new-module-imports', rule, {
 
         const { Handlebars: { Utils: { escapeExpression } } } = Ember
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
     },
     'Ember.Handlebars.Utils.escapeExpression("foo");',
     'Ember.onerror = function() {};',
@@ -31,7 +31,7 @@ eslintTester.run('new-module-imports', rule, {
 
         export default Component.extend({});
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
     },
     {
       code: `
@@ -43,22 +43,22 @@ eslintTester.run('new-module-imports', rule, {
           ...foo
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
     },
     {
       code: `import LOL from 'who-knows-but-definitely-not-ember';
 
         const { Controller } = LOL;
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
     },
     {
       code: 'export const Ember = 1;',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
     },
     {
       code: 'for (let i = 0; i < 10; i++) { }',
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
     },
     'SomethingRandom.Ember.Service;',
   ],
@@ -70,7 +70,7 @@ eslintTester.run('new-module-imports', rule, {
 
         export default Component.extend({});
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -85,7 +85,7 @@ eslintTester.run('new-module-imports', rule, {
 
         const { Controller } = LOL;
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -102,7 +102,7 @@ eslintTester.run('new-module-imports', rule, {
 
         export default Controller.extend({});
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -124,7 +124,7 @@ eslintTester.run('new-module-imports', rule, {
 
         export default Component.extend({});
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -148,7 +148,7 @@ eslintTester.run('new-module-imports', rule, {
           myService: service('my-service')
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -177,7 +177,7 @@ eslintTester.run('new-module-imports', rule, {
 
         export default Component.extend({});
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       output: null,
       errors: [
         {
@@ -193,7 +193,7 @@ eslintTester.run('new-module-imports', rule, {
       ],
     },
     {
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       code: 'export default Ember.Service;',
       output: null,
       errors: [
@@ -204,7 +204,7 @@ eslintTester.run('new-module-imports', rule, {
       ],
     },
     {
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       code: 'export default Ember.Service.extend({});',
       output: null,
       errors: [
