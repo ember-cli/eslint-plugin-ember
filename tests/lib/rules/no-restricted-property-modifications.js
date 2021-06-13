@@ -138,38 +138,38 @@ ruleTester.run('no-restricted-property-modifications', rule, {
     // ****************************************
     {
       code: "import {alias} from '@ember/object/computed'; alias('currentUser')",
-      options: [{ properties: ['currentUser'] }],
       output: "import {alias} from '@ember/object/computed'; readOnly('currentUser')",
+      options: [{ properties: ['currentUser'] }],
       errors: [{ messageId: 'useReadOnlyMacro', type: 'CallExpression' }],
     },
     {
       code: "import {alias} from '@ember/object/computed'; alias('currentUser.isUS')",
-      options: [{ properties: ['currentUser'] }],
       output: "import {alias} from '@ember/object/computed'; readOnly('currentUser.isUS')",
+      options: [{ properties: ['currentUser'] }],
       errors: [{ messageId: 'useReadOnlyMacro', type: 'CallExpression' }],
     },
     {
       code: "import {computed} from '@ember/object'; computed.alias('currentUser')",
-      options: [{ properties: ['currentUser'] }],
       output: "import {computed} from '@ember/object'; computed.readOnly('currentUser')",
+      options: [{ properties: ['currentUser'] }],
       errors: [{ messageId: 'useReadOnlyMacro', type: 'CallExpression' }],
     },
     {
       code: "import {reads} from '@ember/object/computed'; reads('currentUser')",
-      options: [{ properties: ['currentUser'] }],
       output: "import {reads} from '@ember/object/computed'; readOnly('currentUser')",
+      options: [{ properties: ['currentUser'] }],
       errors: [{ messageId: 'useReadOnlyMacro', type: 'CallExpression' }],
     },
     {
       code: "import {reads} from '@ember/object/computed'; reads('currentUser.isUS')",
-      options: [{ properties: ['currentUser'] }],
       output: "import {reads} from '@ember/object/computed'; readOnly('currentUser.isUS')",
+      options: [{ properties: ['currentUser'] }],
       errors: [{ messageId: 'useReadOnlyMacro', type: 'CallExpression' }],
     },
     {
       code: "import {computed} from '@ember/object'; computed.reads('currentUser')",
-      options: [{ properties: ['currentUser'] }],
       output: "import {computed} from '@ember/object'; computed.readOnly('currentUser')",
+      options: [{ properties: ['currentUser'] }],
       errors: [{ messageId: 'useReadOnlyMacro', type: 'CallExpression' }],
     },
 
@@ -178,14 +178,14 @@ ruleTester.run('no-restricted-property-modifications', rule, {
     // ****************************************
     {
       code: "this.set('currentUser', {})",
-      options: [{ properties: ['currentUser'] }],
       output: null,
+      options: [{ properties: ['currentUser'] }],
       errors: [{ messageId: 'doNotUseSet', type: 'CallExpression' }],
     },
     {
       code: "this.set('currentUser.somePermission', true)",
-      options: [{ properties: ['currentUser'] }],
       output: null,
+      options: [{ properties: ['currentUser'] }],
       errors: [{ messageId: 'doNotUseSet', type: 'CallExpression' }],
     },
 
@@ -194,14 +194,14 @@ ruleTester.run('no-restricted-property-modifications', rule, {
     // ****************************************
     {
       code: 'this.currentUser = {};',
-      options: [{ properties: ['currentUser'] }],
       output: null,
+      options: [{ properties: ['currentUser'] }],
       errors: [{ messageId: 'doNotUseAssignment', type: 'AssignmentExpression' }],
     },
     {
       code: 'this.currentUser.foo = true;',
-      options: [{ properties: ['currentUser'] }],
       output: null,
+      options: [{ properties: ['currentUser'] }],
       errors: [{ messageId: 'doNotUseAssignment', type: 'AssignmentExpression' }],
     },
   ],

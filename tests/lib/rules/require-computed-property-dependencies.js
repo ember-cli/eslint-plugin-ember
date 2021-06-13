@@ -704,7 +704,6 @@ ruleTester.run('require-computed-property-dependencies', rule, {
           })
         });
       `,
-      options: [{ requireServiceNames: true }],
       output: `
         import Ember from 'ember';
         import Component from '@ember/component';
@@ -717,6 +716,7 @@ ruleTester.run('require-computed-property-dependencies', rule, {
           })
         });
       `,
+      options: [{ requireServiceNames: true }],
       errors: [
         {
           message: 'Use of undeclared dependencies in computed property: intl',

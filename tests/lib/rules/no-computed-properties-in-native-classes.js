@@ -165,12 +165,12 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
 
         export default class MyComponent extends Component {}
       `,
+      output: null,
       options: [
         {
           ignoreClassic: true,
         },
       ],
-      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
     },
     {
@@ -180,12 +180,12 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
 
         export default class MyComponent extends Component {}
       `,
+      output: null,
       options: [
         {
           ignoreClassic: false,
         },
       ],
-      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
     },
     {
@@ -197,12 +197,12 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
         @classic
         export default class MyComponent extends Component {}
       `,
+      output: null,
       options: [
         {
           ignoreClassic: false,
         },
       ],
-      output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
     },
   ],

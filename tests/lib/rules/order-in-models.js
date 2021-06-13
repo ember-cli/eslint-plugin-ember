@@ -83,12 +83,12 @@ eslintTester.run('order-in-models', rule, {
         },
         customProp: { a: 1 }
       });`,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       options: [
         {
           order: ['attribute', 'method', 'custom:customProp'],
         },
       ],
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
     },
     {
       code: `import {inject as service} from '@ember/service';
@@ -99,8 +99,8 @@ eslintTester.run('order-in-models', rule, {
           },
           customProp: { a: 1 }
         });`,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       options: [{ order: ['service', 'attribute', 'method'] }],
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
     },
   ],
   invalid: [
@@ -292,12 +292,12 @@ eslintTester.run('order-in-models', rule, {
         },
               customProp: { a: 1 },
 });`,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       options: [
         {
           order: ['method', 'custom:customProp'],
         },
       ],
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       errors: [
         {
           message:

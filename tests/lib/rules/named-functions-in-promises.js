@@ -87,12 +87,12 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().then(() => {return user.reload();});',
+      output: null,
       options: [
         {
           allowSimpleArrowFunction: true,
         },
       ],
-      output: null,
       errors: [
         {
           message: 'Use named functions defined on objects to handle promises',
@@ -101,12 +101,12 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().catch(() => {return error.handle();});',
+      output: null,
       options: [
         {
           allowSimpleArrowFunction: true,
         },
       ],
-      output: null,
       errors: [
         {
           message: 'Use named functions defined on objects to handle promises',
@@ -115,12 +115,12 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().finally(() => {return finallyDo();});',
+      output: null,
       options: [
         {
           allowSimpleArrowFunction: true,
         },
       ],
-      output: null,
       errors: [
         {
           message: 'Use named functions defined on objects to handle promises',
@@ -165,12 +165,12 @@ eslintTester.run('named-functions-in-promises', rule, {
     },
     {
       code: 'user.save().then(user => user.name);',
+      output: null,
       options: [
         {
           allowSimpleArrowFunction: true,
         },
       ],
-      output: null,
       errors: [
         {
           message: 'Use named functions defined on objects to handle promises',

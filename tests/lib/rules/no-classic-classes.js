@@ -128,12 +128,12 @@ ruleTester.run('no-classic-classes', rule, {
         import CustomClass from 'my-custom-addon';
         export default CustomClass.extend({});
       `,
+      output: null,
       options: [
         {
           additionalClassImports: ['my-custom-addon'],
         },
       ],
-      output: null,
       errors: [{ message: ERROR_MESSAGE, line: 3, type: 'CallExpression' }],
     },
   ],

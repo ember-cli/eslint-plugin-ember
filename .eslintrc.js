@@ -105,7 +105,6 @@ module.exports = {
           'https://github.com/ember-cli/eslint-plugin-ember/tree/master/docs/rules/{{name}}.md',
       },
     ],
-    'eslint-plugin/test-case-property-ordering': 'off',
 
     // Filenames:
     'filenames/match-regex': ['error', '^.?[a-z0-9-]+$'], // Kebab-case.
