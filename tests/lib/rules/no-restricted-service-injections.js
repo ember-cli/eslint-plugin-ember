@@ -18,151 +18,153 @@ ruleTester.run('no-restricted-service-injections', rule, {
   valid: [
     {
       // Service name doesn't match (with property name):
+      filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} Component.extend({ myService: service() })`,
       options: [{ paths: ['app/components'], services: ['abc'] }],
-      filename: 'app/components/path.js',
     },
     {
       // Service name doesn't match (with property name):
+      filename: 'app/components/path.js',
       code: `${EMBER_IMPORT} Component.extend({ myService: Ember.inject.service() })`,
       options: [{ paths: ['app/components'], services: ['abc'] }],
-      filename: 'app/components/path.js',
     },
     {
       // Service name doesn't match (with string argument):
+      filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} Component.extend({ randomName: service('myService') })`,
       options: [{ paths: ['app/components'], services: ['abc'] }],
-      filename: 'app/components/path.js',
     },
     {
       // Service name doesn't match (with string argument):
+      filename: 'app/components/path.js',
       code: `${EMBER_IMPORT} Component.extend({ randomName: Ember.inject.service('myService') })`,
       options: [{ paths: ['app/components'], services: ['abc'] }],
-      filename: 'app/components/path.js',
     },
     {
       // Service name doesn't match (with decorator)
+      filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} class MyComponent extends Component { @service('myService') randomName }`,
       options: [{ paths: ['app/components'], services: ['abc'] }],
-      filename: 'app/components/path.js',
     },
     {
       // Service scope doesn't match:
+      filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} Component.extend({ randomName: service('scope/myService') })`,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
-      filename: 'app/components/path.js',
     },
     {
       // File path doesn't match:
+      filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} Component.extend({ myService: service() })`,
       options: [{ paths: ['other/path'], services: ['my-service'] }],
-      filename: 'app/components/path.js',
     },
     {
       // Not the service decorator:
+      filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} Component.extend({ myService: otherDecorator() })`,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
-      filename: 'app/components/path.js',
     },
     {
       // Ignores injection due to dynamic variable usage:
+      filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} Component.extend({ myService: service(SOME_VARIABLE) })`,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
-      filename: 'app/components/path.js',
     },
   ],
   invalid: [
     {
       // Without service name argument:
-      code: `${SERVICE_IMPORT} Component.extend({ myService: service() })`,
-      options: [{ paths: ['app/components'], services: ['my-service'] }],
-      output: null,
       filename: 'app/components/path.js',
+      code: `${SERVICE_IMPORT} Component.extend({ myService: service() })`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'Property' }],
     },
     {
       // Without service name argument (property name as string literal):
-      code: `${SERVICE_IMPORT} Component.extend({ 'myService': service() })`,
-      options: [{ paths: ['app/components'], services: ['my-service'] }],
-      output: null,
       filename: 'app/components/path.js',
+      code: `${SERVICE_IMPORT} Component.extend({ 'myService': service() })`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'Property' }],
     },
     {
       // With camelized service name argument:
-      code: `${SERVICE_IMPORT} Component.extend({ randomName: service('myService') })`,
-      options: [{ paths: ['app/components'], services: ['my-service'] }],
-      output: null,
       filename: 'app/components/path.js',
+      code: `${SERVICE_IMPORT} Component.extend({ randomName: service('myService') })`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'Property' }],
     },
     {
       // With dasherized service name argument:
-      code: `${SERVICE_IMPORT} Component.extend({ randomName: service('my-service') })`,
-      options: [{ paths: ['app/components'], services: ['my-service'] }],
-      output: null,
       filename: 'app/components/path.js',
+      code: `${SERVICE_IMPORT} Component.extend({ randomName: service('my-service') })`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'Property' }],
     },
     {
       // With nested, camelized service name:
-      code: `${SERVICE_IMPORT} Component.extend({ randomName: service('scope/myService') })`,
-      options: [{ paths: ['app/components'], services: ['scope/my-service'] }],
-      output: null,
       filename: 'app/components/path.js',
+      code: `${SERVICE_IMPORT} Component.extend({ randomName: service('scope/myService') })`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['scope/my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'Property' }],
     },
     {
       // With nested, dasherized service name:
-      code: `${SERVICE_IMPORT} Component.extend({ randomName: service('scope/my-service') })`,
-      options: [{ paths: ['app/components'], services: ['scope/my-service'] }],
-      output: null,
       filename: 'app/components/path.js',
+      code: `${SERVICE_IMPORT} Component.extend({ randomName: service('scope/my-service') })`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['scope/my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'Property' }],
     },
     {
       // With decorator with camelized service name argument:
-      code: `${SERVICE_IMPORT} class MyComponent extends Component { @service('myService') randomName }`,
-      options: [{ paths: ['app/components'], services: ['my-service'] }],
-      output: null,
       filename: 'app/components/path.js',
+      code: `${SERVICE_IMPORT} class MyComponent extends Component { @service('myService') randomName }`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'ClassProperty' }],
     },
     {
       // With decorator with dasherized service name argument:
-      code: `${SERVICE_IMPORT} class MyComponent extends Component { @service('my-service') randomName }`,
-      options: [{ paths: ['app/components'], services: ['my-service'] }],
-      output: null,
       filename: 'app/components/path.js',
+      code: `${SERVICE_IMPORT} class MyComponent extends Component { @service('my-service') randomName }`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'ClassProperty' }],
     },
     {
       // With decorator without service name argument (without parentheses):
-      code: `${SERVICE_IMPORT} class MyComponent extends Component { @service myService }`,
-      options: [{ paths: ['app/components'], services: ['my-service'] }],
-      output: null,
       filename: 'app/components/path.js',
+      code: `${SERVICE_IMPORT} class MyComponent extends Component { @service myService }`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'ClassProperty' }],
     },
     {
       // With decorator without service name argument (with parentheses):
-      code: `${SERVICE_IMPORT} class MyComponent extends Component { @service() myService }`,
-      options: [{ paths: ['app/components'], services: ['my-service'] }],
-      output: null,
       filename: 'app/components/path.js',
+      code: `${SERVICE_IMPORT} class MyComponent extends Component { @service() myService }`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'ClassProperty' }],
     },
     {
       // With decorator without service name argument (with parentheses) (with property name as string literal):
-      code: `${SERVICE_IMPORT} class MyComponent extends Component { @service() 'myService' }`,
-      options: [{ paths: ['app/components'], services: ['my-service'] }],
-      output: null,
       filename: 'app/components/path.js',
+      code: `${SERVICE_IMPORT} class MyComponent extends Component { @service() 'myService' }`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'ClassProperty' }],
     },
     {
       // With custom error message:
+      filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} Component.extend({ myService: service() })`,
+      output: null,
       options: [
         {
           paths: ['app/components'],
@@ -170,19 +172,17 @@ ruleTester.run('no-restricted-service-injections', rule, {
           message: 'my-service is deprecated, please do not use it.',
         },
       ],
-      output: null,
-      filename: 'app/components/path.js',
       errors: [{ message: 'my-service is deprecated, please do not use it.', type: 'Property' }],
     },
     {
       // With multiple violations:
+      filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} Component.extend({ myService: service() })`,
+      output: null,
       options: [
         { paths: ['app/components'], services: ['my-service'], message: 'Error 1' },
         { paths: ['app/components'], services: ['my-service'], message: 'Error 2' },
       ],
-      output: null,
-      filename: 'app/components/path.js',
       errors: [
         { message: 'Error 1', type: 'Property' },
         { message: 'Error 2', type: 'Property' },
@@ -190,10 +190,10 @@ ruleTester.run('no-restricted-service-injections', rule, {
     },
     {
       // Without specifying any paths (should match any path):
-      code: `${SERVICE_IMPORT} Component.extend({ myService: service() })`,
-      options: [{ services: ['my-service'] }],
-      output: null,
       filename: 'app/components/path.js',
+      code: `${SERVICE_IMPORT} Component.extend({ myService: service() })`,
+      output: null,
+      options: [{ services: ['my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'Property' }],
     },
   ],

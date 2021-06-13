@@ -352,9 +352,9 @@ ruleTester.run('no-global-jquery', rule, {
             this.el = $('.test');
           }
         });`,
+      output: null,
       parserOptions,
       globals,
-      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -370,9 +370,9 @@ ruleTester.run('no-global-jquery', rule, {
             }
           }
         });`,
+      output: null,
       parserOptions,
       globals,
-      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -386,9 +386,9 @@ ruleTester.run('no-global-jquery', rule, {
             this.el = jQuery('.test');
           }
         });`,
+      output: null,
       parserOptions,
       globals,
-      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -404,9 +404,9 @@ ruleTester.run('no-global-jquery', rule, {
             }
           }
         });`,
+      output: null,
       parserOptions,
       globals,
-      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -426,9 +426,9 @@ ruleTester.run('no-global-jquery', rule, {
             }
           }
         });`,
+      output: null,
       parserOptions,
       globals,
-      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -448,9 +448,9 @@ ruleTester.run('no-global-jquery', rule, {
             }
           }
         });`,
+      output: null,
       parserOptions,
       globals,
-      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -459,9 +459,9 @@ ruleTester.run('no-global-jquery', rule, {
     },
     {
       code: 'jQuery.extend();',
+      output: null,
       parserOptions,
       globals,
-      output: null,
       errors: [
         {
           message: ERROR_MESSAGE,

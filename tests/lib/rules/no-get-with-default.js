@@ -135,9 +135,9 @@ import { getWithDefault } from '@ember/object'; (get(person, 'name') === undefin
     },
     {
       code: "import { getWithDefault } from '@ember/object'; getWithDefault(person, 'name', '');",
-      options: [{ catchSafeObjects: true }],
       output: `import { get } from '@ember/object';
 import { getWithDefault } from '@ember/object'; (get(person, 'name') === undefined ? '' : get(person, 'name'));`,
+      options: [{ catchSafeObjects: true }],
       errors: [
         {
           message: ERROR_MESSAGE,
@@ -154,8 +154,8 @@ import { getWithDefault } from '@ember/object'; (get(person, 'name') === undefin
     },
     {
       code: "person.getWithDefault('name', '');",
-      options: [{ catchUnsafeObjects: true }],
       output: "(person.get('name') === undefined ? '' : person.get('name'));",
+      options: [{ catchUnsafeObjects: true }],
       errors: [
         {
           message: ERROR_MESSAGE,

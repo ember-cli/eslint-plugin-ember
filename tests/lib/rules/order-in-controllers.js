@@ -139,12 +139,12 @@ eslintTester.run('order-in-controllers', rule, {
         },
         customProp: { a: 1 }
       });`,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       options: [
         {
           order: ['property', 'actions', 'custom:customProp'],
         },
       ],
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
     },
   ],
   invalid: [
@@ -510,12 +510,12 @@ eslintTester.run('order-in-controllers', rule, {
         },
               customProp: { a: 1 },
 });`,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       options: [
         {
           order: ['method', 'custom:customProp'],
         },
       ],
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       errors: [
         {
           message:

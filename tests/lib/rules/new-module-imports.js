@@ -70,8 +70,8 @@ eslintTester.run('new-module-imports', rule, {
 
         export default Component.extend({});
       `,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       output: null,
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       errors: [
         {
           message:
@@ -85,8 +85,8 @@ eslintTester.run('new-module-imports', rule, {
 
         const { Controller } = LOL;
       `,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       output: null,
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       errors: [
         {
           message:
@@ -102,8 +102,8 @@ eslintTester.run('new-module-imports', rule, {
 
         export default Controller.extend({});
       `,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       output: null,
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       errors: [
         {
           message: "Use `import $ from 'jquery';` instead of using Ember destructuring",
@@ -124,8 +124,8 @@ eslintTester.run('new-module-imports', rule, {
 
         export default Component.extend({});
       `,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       output: null,
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       errors: [
         {
           message:
@@ -148,8 +148,8 @@ eslintTester.run('new-module-imports', rule, {
           myService: service('my-service')
         });
       `,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       output: null,
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       errors: [
         {
           message:
@@ -177,8 +177,8 @@ eslintTester.run('new-module-imports', rule, {
 
         export default Component.extend({});
       `,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       output: null,
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       errors: [
         {
           message:
@@ -193,9 +193,9 @@ eslintTester.run('new-module-imports', rule, {
       ],
     },
     {
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       code: 'export default Ember.Service;',
       output: null,
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       errors: [
         {
           message: "Use `import Service from '@ember/service';` instead of using Ember.Service",
@@ -204,9 +204,9 @@ eslintTester.run('new-module-imports', rule, {
       ],
     },
     {
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       code: 'export default Ember.Service.extend({});',
       output: null,
+      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       errors: [
         {
           message: "Use `import Service from '@ember/service';` instead of using Ember.Service",

@@ -68,28 +68,28 @@ ruleTester.run('require-tagless-components', rule, {
     `,
     {
       // Classic service in component file.
+      filename: 'app/components/foo.js',
       code: `
         import Service from '@ember/service';
         export default Service.extend({});
       `,
-      filename: 'app/components/foo.js',
     },
     {
       // Native service in component file.
+      filename: 'app/components/foo.js',
       code: `
         import Service from '@ember/service';
         export default class MyService extends Service {};
       `,
-      filename: 'app/components/foo.js',
     },
     {
       // Should ignore test files.
+      filename: 'tests/integration/components/foo-test.js',
       code: `
         import Component from '@ember/component';
         export default class MyComponent extends Component {};
         Component.extend({});
       `,
-      filename: 'tests/integration/components/foo-test.js',
     },
   ],
   invalid: [

@@ -23,12 +23,13 @@ const EXAMPLE_SELECTORS = [
 ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
   valid: [
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { find } from '@ember/test-helpers';
         find('[data-test-pizza]')`,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { find } from '@ember/test-helpers';
         import { module, test } from 'qunit';
@@ -39,9 +40,9 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -51,9 +52,9 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -63,25 +64,25 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
       import { find } from '@ember/test-helpers';
       import { module } from 'qunit';
 
       module('foo', function() {});
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
       import { find as module } from '@ember/test-helpers';
       module('[data-test-foo]');
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -93,9 +94,9 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -105,9 +106,9 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -117,9 +118,9 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -129,9 +130,9 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -141,9 +142,9 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -153,9 +154,9 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -165,9 +166,9 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -177,9 +178,9 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -189,15 +190,15 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         this.click('.foobar');
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { fillIn } from '@ember/test-helpers';
         import { module, test } from 'qunit';
@@ -208,9 +209,9 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { fillIn, visit } from '@ember/test-helpers';
         import { module, test } from 'qunit';
@@ -222,11 +223,11 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
 
     // Ignored because not a test file.
     {
+      filename: 'components/foobar.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -236,11 +237,11 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar.js',
     },
 
     // With comma(s) separating multiple selectors:
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -250,11 +251,11 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
 
     // With comma(s) inside quotes in a selector:
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -264,11 +265,11 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           });
         });
       `,
-      filename: 'components/foobar-test.js',
     },
   ],
   invalid: [
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -293,10 +294,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'unclosedAttr',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { find, click, fillIn, findAll, focus, blur, doubleClick, scrollTo, select, tap, triggerEvent, triggerKeyEvent, typeIn, waitFor } from '@ember/test-helpers';
         import { module, test } from 'qunit';
@@ -347,10 +348,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
         type: 'CallExpression',
         messageId: 'unclosedAttr',
       }),
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { find } from '@ember/test-helpers';
         find('[data-test-pizza');`,
@@ -363,10 +364,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'unclosedAttr',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -391,10 +392,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'unclosedAttr',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -419,10 +420,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'unclosedAttr',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -447,10 +448,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'unclosedAttr',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -475,10 +476,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'unclosedAttr',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -495,10 +496,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'idStartsWithNumber',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -513,10 +514,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'other',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -533,10 +534,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'other',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { find as findRenamed } from '@ember/test-helpers';
 
@@ -553,10 +554,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'unclosedAttr',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test as testRenamed } from 'qunit';
 
@@ -581,10 +582,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'unclosedAttr',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -601,10 +602,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'other',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { expect } from 'chai';
         import { describe, it } from 'mocha';
@@ -629,10 +630,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'other',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { expect } from 'chai';
         import { describe, it } from 'mocha';
@@ -657,10 +658,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'other',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -680,10 +681,10 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'other',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -703,11 +704,11 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
           messageId: 'other',
         },
       ],
-      filename: 'components/foobar-test.js',
     },
 
     // With comma(s) separating multiple selectors:
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -719,9 +720,9 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
         `,
       output: null,
       errors: [{ type: 'CallExpression', messageId: 'other' }],
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -733,9 +734,9 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
         `,
       output: null,
       errors: [{ type: 'CallExpression', messageId: 'idStartsWithNumber' }],
-      filename: 'components/foobar-test.js',
     },
     {
+      filename: 'components/foobar-test.js',
       code: `
         import { module, test } from 'qunit';
 
@@ -755,7 +756,6 @@ ruleTester.run('require-valid-css-selector-in-test-helpers', rule, {
         });
         `,
       errors: [{ type: 'CallExpression', messageId: 'unclosedAttr' }],
-      filename: 'components/foobar-test.js',
     },
   ],
 });

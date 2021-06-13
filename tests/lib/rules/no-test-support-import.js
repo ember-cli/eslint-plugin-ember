@@ -42,49 +42,49 @@ ruleTester.run('no-test-support-import', rule, {
   ],
   invalid: [
     {
-      code: `
-        import setupModule from './test-support/some-test-helper';
-      `,
       filename: 'app/routes/index.js',
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE_NO_IMPORT,
-          type: 'ImportDeclaration',
-        },
-      ],
-    },
-    {
-      code: `
-        import setupModule from 'foo/test-support/some-test-helper';
-      `,
-      filename: '@ember/foo/addon/components/index.js',
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE_NO_IMPORT,
-          type: 'ImportDeclaration',
-        },
-      ],
-    },
-    {
-      code: `
-        import setupModule from 'foo/test-support/some-test-helper';
-      `,
-      filename: 'foo/test-support-foo/index.js',
-      output: null,
-      errors: [
-        {
-          message: ERROR_MESSAGE_NO_IMPORT,
-          type: 'ImportDeclaration',
-        },
-      ],
-    },
-    {
       code: `
         import setupModule from './test-support/some-test-helper';
       `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE_NO_IMPORT,
+          type: 'ImportDeclaration',
+        },
+      ],
+    },
+    {
+      filename: '@ember/foo/addon/components/index.js',
+      code: `
+        import setupModule from 'foo/test-support/some-test-helper';
+      `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE_NO_IMPORT,
+          type: 'ImportDeclaration',
+        },
+      ],
+    },
+    {
+      filename: 'foo/test-support-foo/index.js',
+      code: `
+        import setupModule from 'foo/test-support/some-test-helper';
+      `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE_NO_IMPORT,
+          type: 'ImportDeclaration',
+        },
+      ],
+    },
+    {
       filename: 'app/components/index.js',
+      code: `
+        import setupModule from './test-support/some-test-helper';
+      `,
       output: null,
       errors: [
         {

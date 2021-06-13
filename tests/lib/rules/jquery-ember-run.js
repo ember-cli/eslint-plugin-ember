@@ -71,8 +71,8 @@ eslintTester.run('jquery-ember-run', rule, {
     {
       // Global jQuery
       code: '$("#item").on("click", () => {this.handle();});',
-      globals: { $: true },
       output: null,
+      globals: { $: true },
       errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
     },
     {

@@ -161,8 +161,8 @@ ruleTester.run('no-controller-access-in-routes', rule, {
           }
         }
       `,
-      options: [{ allowControllerFor: false }],
       output: null,
+      options: [{ allowControllerFor: false }],
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {
