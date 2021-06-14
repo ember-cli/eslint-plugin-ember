@@ -97,7 +97,6 @@ module.exports = {
 
     // eslint-plugin rules:
     'eslint-plugin/consistent-output': ['error', 'always'],
-    'eslint-plugin/no-deprecated-report-api': 'off',
     'eslint-plugin/require-meta-docs-url': [
       'error',
       {
