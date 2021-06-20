@@ -91,6 +91,8 @@ describe('rules setup is correct', function () {
         ':wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.',
       configRecommended:
         ':white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.',
+      hasSuggestions:
+        '💡 Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).',
     };
 
     for (const ruleName of RULE_NAMES) {
@@ -134,6 +136,11 @@ describe('rules setup is correct', function () {
             expectedNotices.push('fixable');
           } else {
             unexpectedNotices.push('fixable');
+          }
+          if (rules[ruleName].meta.hasSuggestions) {
+            expectedNotices.push('hasSuggestions');
+          } else {
+            unexpectedNotices.push('hasSuggestions');
           }
 
           // Ensure that expected notices are present in the correct order.

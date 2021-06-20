@@ -1,5 +1,7 @@
 # route-path-style
 
+💡 Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+
 Enforces usage of kebab-case (instead of snake_case or camelCase) in route paths.
 
 A best practice on the web is to use kebab-case (hyphens) for separating words in URLs. This style is good for readability, clarity, SEO, etc.
