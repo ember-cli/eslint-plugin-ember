@@ -26,6 +26,7 @@ const readmeContent = fs.readFileSync(readmeFile, 'utf8');
 
 const RECOMMENDED = ':white_check_mark:';
 const FIXABLE = ':wrench:';
+const SUGGESTIONS = '💡';
 
 const rules = fs
   .readdirSync(root)
@@ -49,8 +50,8 @@ let rulesTableContent = categories
   .map(
     (category) => `### ${category}
 
-| Name    | Description | ${RECOMMENDED} | ${FIXABLE} |
-|:--------|:------------|:---------------|:-----------|
+| Name    | Description | ${RECOMMENDED} | ${FIXABLE} | ${SUGGESTIONS} |
+|:--------|:------------|:---------------|:-----------|:---------------|
 ${rules
   .filter(([, rule]) => rule.meta.docs.category === category && !rule.meta.deprecated)
   .map((entry) => {
@@ -60,7 +61,7 @@ ${rules
     const description = meta.docs.description || '(no description)';
     return `| ${link} | ${description} | ${meta.docs.recommended ? RECOMMENDED : ''} | ${
       meta.fixable ? FIXABLE : ''
-    } |`;
+    } | ${meta.hasSuggestions ? SUGGESTIONS : ''} |`;
   })
   .join('\n')}
 `
