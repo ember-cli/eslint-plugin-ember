@@ -1,3 +1,19 @@
+## v10.5.1 (2021-06-20)
+
+#### :bug: Bug Fix
+* [#1237](https://github.com/ember-cli/eslint-plugin-ember/pull/1237) Stop using deprecated ESLint `report` API ([@bmish](https://github.com/bmish))
+* [#1230](https://github.com/ember-cli/eslint-plugin-ember/pull/1230) Use `meta.hasSuggestions` for suggestable rules to prepare for ESLint 8 ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#1241](https://github.com/ember-cli/eslint-plugin-ember/pull/1241) Indicate which rules provide automated suggestions in README rules table ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#1222](https://github.com/ember-cli/eslint-plugin-ember/pull/1222) Use `ecmaVersion` of `2020` internally for tests/linting ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
 ## v10.5.0 (2021-05-30)
 
 #### :rocket: Enhancement
