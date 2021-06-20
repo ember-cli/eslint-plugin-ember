@@ -1,5 +1,7 @@
 # no-unused-services
 
+💡 Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+
 Disallow unused service injections.
 
 By removing unused service injections, we can reduce the amount of code we have and improve code readability.
