@@ -79,7 +79,7 @@
     "eslint-plugin-markdown": "^2.0.1",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-unicorn": "^31.0.0",
+    "eslint-plugin-unicorn": "^34.0.0",
     "jest": "^27.0.3",
     "jquery": "^3.5.1",
     "jsdom": "^16.4.0",
