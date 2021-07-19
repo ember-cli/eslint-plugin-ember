@@ -6,6 +6,8 @@ because this non-wrapped version does not have a built-in test waiter. Because
 of this it is generally better to use [ember-fetch] and explicitly
 `import fetch from 'fetch'`.
 
+Note: this rule is not in the `recommended` configuration because the global `fetch` is a web standard.
+
 ## Rule Details
 
 The rule looks for `fetch()` calls and reports them as issues if no
