@@ -1,6 +1,6 @@
 # no-jquery
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 This rule attempts to catch and prevent any usage of jQuery.
 

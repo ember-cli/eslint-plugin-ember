@@ -1,6 +1,6 @@
 # no-restricted-property-modifications
 
-:wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 There are some properties, especially globally-injected ones, that you may want to treat as read-only, and ensure that no one modifies them.
 

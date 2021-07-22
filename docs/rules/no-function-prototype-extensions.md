@@ -1,6 +1,6 @@
 # no-function-prototype-extensions
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Do not use Ember's `function` prototype extensions.
 

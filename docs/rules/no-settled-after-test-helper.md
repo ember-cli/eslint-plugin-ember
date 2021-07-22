@@ -1,8 +1,8 @@
 # no-settled-after-test-helper
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
-:wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Most of the test helper functions in
 [`@ember/test-helpers`](https://github.com/emberjs/ember-test-helpers) call

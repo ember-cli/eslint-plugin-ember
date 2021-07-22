@@ -1,6 +1,6 @@
 # no-pause-test
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Disallow use of `pauseTest` helper in tests.
 

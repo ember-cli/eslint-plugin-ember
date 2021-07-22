@@ -1,6 +1,6 @@
 # no-capital-letters-in-routes
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Raise an error when there is a route with upper-cased letters in router.js.
 

@@ -1,6 +1,6 @@
 # no-classic-components
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 This rule aims to enforce Glimmer components instead of classic ones. We should migrate to Glimmer components because
 they have few advantages:

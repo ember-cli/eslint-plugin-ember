@@ -1,6 +1,6 @@
 # no-deeply-nested-dependent-keys-with-each
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Disallows usage of deeply-nested computed property dependent keys with `@each`.
 

@@ -1,6 +1,6 @@
 # no-classic-classes
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Disallow "classic" classes in favor of native JS classes.
 

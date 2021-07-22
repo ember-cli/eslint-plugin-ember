@@ -1,6 +1,6 @@
 # no-attrs-snapshot
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Disallow use of attrs snapshot in `didReceiveAttrs` and `didUpdateAttrs`.
 

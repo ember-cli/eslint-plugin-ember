@@ -1,6 +1,6 @@
 # avoid-leaking-state-in-ember-objects
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Don't use arrays and objects as default properties in classic classes or mixins. In native classes, it is safe to assign objects to fields.
 

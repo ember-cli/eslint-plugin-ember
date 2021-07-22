@@ -24,8 +24,8 @@ const recommendedRulesFile = path.resolve(__dirname, '../lib/recommended-rules.j
 const tablePlaceholder = /<!--RULES_TABLE_START-->[\S\s]*<!--RULES_TABLE_END-->/;
 const readmeContent = fs.readFileSync(readmeFile, 'utf8');
 
-const RECOMMENDED = ':white_check_mark:';
-const FIXABLE = ':wrench:';
+const RECOMMENDED = '✅';
+const FIXABLE = '🔧';
 const SUGGESTIONS = '💡';
 
 const rules = fs

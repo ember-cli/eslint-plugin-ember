@@ -88,9 +88,9 @@ describe('rules setup is correct', function () {
   describe('rule documentation files', function () {
     const MESSAGES = {
       fixable:
-        ':wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.',
+        '🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.',
       configRecommended:
-        ':white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.',
+        '✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.',
       hasSuggestions:
         '💡 Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).',
     };

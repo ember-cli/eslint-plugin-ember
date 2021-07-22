@@ -1,6 +1,6 @@
 # no-test-and-then
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Use `await` instead of `andThen` test wait helper.
 

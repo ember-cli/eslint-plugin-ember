@@ -1,6 +1,6 @@
 # no-volatile-computed-properties
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Volatile computed properties are deprecated as of Ember 3.9.
 

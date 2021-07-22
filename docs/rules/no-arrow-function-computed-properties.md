@@ -1,6 +1,6 @@
 # no-arrow-function-computed-properties
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Arrow functions should not be used in computed properties because they are unable to access other properties (using `this.property`) of the same object. Accidental usage can thus lead to bugs.
 

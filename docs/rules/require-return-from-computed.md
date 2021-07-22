@@ -1,6 +1,6 @@
 # require-return-from-computed
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Always return a value from a computed property function.
 

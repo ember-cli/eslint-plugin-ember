@@ -1,6 +1,6 @@
 # avoid-using-needs-in-controllers
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Avoid using `needs` to load other controllers. Inject the required controller instead. `needs` was deprecated in ember 1.x and removed in 2.0.
 
@@ -30,4 +30,4 @@ export default Component.extend({
 
 | Issue | Link |
 | :-- | :-- |
-| :x: Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |
+| ❌ Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

@@ -1,6 +1,6 @@
 # no-mixins
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Using mixins to share code appears easy at first. But they add significant complexity as a project grows. Furthermore, the [Octane programming model](https://guides.emberjs.com/release/upgrading/current-edition/) eliminates the need to use them in favor of native class semantics and other primitives.
 

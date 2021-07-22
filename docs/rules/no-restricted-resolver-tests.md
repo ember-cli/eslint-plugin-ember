@@ -1,6 +1,6 @@
 # no-restricted-resolver-tests
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Don't use constructs or configuration that use the restricted resolver in tests.
 

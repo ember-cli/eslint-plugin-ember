@@ -1,8 +1,8 @@
 # TODO: rule-name-goes-here
 
-(TODO: only include this line if the rule is recommended) :white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+(TODO: only include this line if the rule is recommended) ✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
-(TODO: only include this line if the rule is fixable) :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+(TODO: only include this line if the rule is fixable) 🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 TODO: context about the problem goes here
 

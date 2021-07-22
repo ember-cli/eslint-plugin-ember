@@ -1,6 +1,6 @@
 # no-test-support-import
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 No importing of test support files into non-test code..
 

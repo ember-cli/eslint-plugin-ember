@@ -1,6 +1,6 @@
 # no-actions-hash
 
-:white_check_mark: The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
 Disallows the actions hash in components and controllers.
 
