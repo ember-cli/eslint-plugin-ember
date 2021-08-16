@@ -57,6 +57,17 @@ ruleTester.run('no-controller-access-in-routes', rule, {
         }
       });
     `,
+    `
+      import Route from '@ember/routing/route';
+      export default Route.extend({
+        actions: {
+          myAction() {
+            const { foo } = this;
+            const { controller } = bar;
+          },
+        },
+      });
+    `,
 
     `
       import Component from '@ember/component';
@@ -276,6 +287,20 @@ ruleTester.run('no-controller-access-in-routes', rule, {
       `,
       output: null,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    {
+      code: `
+        import Route from '@ember/routing/route';
+        import { action } from '@ember/object';
+        export default class MyRoute extends Route {
+          @action
+          myAction() {
+            const { controller } = this;
+          }
+        }
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'Property' }],
     },
   ],
 });
