@@ -65,6 +65,12 @@ ruleTester.run('no-controller-access-in-routes', rule, {
             const { foo } = this;
             const { controller } = bar;
           },
+          myAction2() {
+            const controller = this;
+          },
+          myAction3() {
+            let controller4;
+          },
         },
       });
     `,
