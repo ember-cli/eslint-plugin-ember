@@ -1,4 +1,14 @@
 
+
+## v10.5.3 (2021-08-17)
+
+#### :bug: Bug Fix
+* [#1283](https://github.com/ember-cli/eslint-plugin-ember/pull/1283) Fix crash with `let foo` in `no-controller-access-in-routes` ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
 ## v10.5.2 (2021-08-17)
 
 #### :bug: Bug Fix
