@@ -1,3 +1,24 @@
+
+## v10.5.2 (2021-08-17)
+
+#### :bug: Bug Fix
+* [#1281](https://github.com/ember-cli/eslint-plugin-ember/pull/1281) Catch destructured controller access in `no-controller-access-in-routes` rule ([@bmish](https://github.com/bmish))
+* [#1277](https://github.com/ember-cli/eslint-plugin-ember/pull/1277) Fix IIFE crash in `require-return-from-computed` rule ([@aniketh-deepsource](https://github.com/aniketh-deepsource))
+
+#### :memo: Documentation
+* [#1275](https://github.com/ember-cli/eslint-plugin-ember/pull/1275) Fix typo in `no-controller-access-in-routes` rule doc ([@locks](https://github.com/locks))
+* [#1245](https://github.com/ember-cli/eslint-plugin-ember/pull/1245) Explain how to fix violations in `no-empty-glimmer-component-classes` rule doc ([@hxqlin](https://github.com/hxqlin))
+
+#### :house: Internal
+* [#1280](https://github.com/ember-cli/eslint-plugin-ember/pull/1280) Add CodeQL ([@bmish](https://github.com/bmish))
+
+#### Committers: 4
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Hannah Lin ([@hxqlin](https://github.com/hxqlin))
+- Ricardo Mendes ([@locks](https://github.com/locks))
+- [@aniketh-deepsource](https://github.com/aniketh-deepsource)
+
+
 ## v10.5.1 (2021-06-20)
 
 #### :bug: Bug Fix
