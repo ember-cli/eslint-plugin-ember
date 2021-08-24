@@ -210,6 +210,24 @@ ruleTester.run('no-get', rule, {
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
     {
+      code: "foo1.foo2.get('bar').baz;",
+      output: 'foo1.foo2.bar.baz;',
+      options: [{ catchUnsafeObjects: true, useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "foo1.foo2.get('bar.bar').baz;",
+      output: null,
+      options: [{ catchUnsafeObjects: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "foo1.foo2.get('bar.bar').baz;",
+      output: 'foo1.foo2.bar.bar.baz;',
+      options: [{ catchUnsafeObjects: true, useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
       code: `
       import { get } from '@ember/object';
       import { somethingElse } from '@ember/object';
@@ -364,6 +382,17 @@ ruleTester.run('no-get', rule, {
     {
       code: "this.get('foo.bar');",
       output: 'this.foo?.bar;',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: "this.get('foo.bar').baz;",
+      output: 'this.foo.bar.baz;',
       options: [{ useOptionalChaining: true }],
       errors: [
         {
