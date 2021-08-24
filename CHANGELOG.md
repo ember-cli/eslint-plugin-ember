@@ -1,5 +1,15 @@
 
 
+
+## v10.5.4 (2021-08-24)
+
+#### :bug: Bug Fix
+* [#1286](https://github.com/ember-cli/eslint-plugin-ember/pull/1286) Avoid unnecessary optional chaining in autofix for `no-get` rule when using `useOptionalChaining` option ([@raycohen](https://github.com/raycohen))
+
+#### Committers: 1
+- Ray Cohen ([@raycohen](https://github.com/raycohen))
+
+
 ## v10.5.3 (2021-08-17)
 
 #### :bug: Bug Fix
