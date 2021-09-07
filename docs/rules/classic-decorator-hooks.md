@@ -26,7 +26,7 @@ export default class MyService extends Service {
 @classic
 export default class MyService extends Service {
   constructor() {
-    super();
+    super(...arguments);
     // ...
   }
 }
@@ -50,7 +50,7 @@ export default class MyService extends Service {
 ```js
 export default class MyService extends Service {
   constructor() {
-    super();
+    super(...arguments);
     // ...
   }
 
