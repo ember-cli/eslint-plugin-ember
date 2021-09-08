@@ -25,8 +25,8 @@ export default class MyService extends Service {
 ```js
 @classic
 export default class MyService extends Service {
-  constructor() {
-    super(...arguments);
+  constructor(...args) {
+    super(...args);
     // ...
   }
 }
@@ -49,8 +49,8 @@ export default class MyService extends Service {
 
 ```js
 export default class MyService extends Service {
-  constructor() {
-    super(...arguments);
+  constructor(...args) {
+    super(...args);
     // ...
   }
 
