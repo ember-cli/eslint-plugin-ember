@@ -50,7 +50,9 @@ Examples of **correct** code for this rule:
 import Component from '@ember/component';
 
 export default class MyComponent extends Component {
-  init() {}
+  init(...args) {
+    this._super(args);
+  }
   willDestroy() {} // Both a classic and Glimmer component lifecycle hook
 }
 ```
@@ -60,8 +62,8 @@ import GlimmerComponent from '@glimmer/component';
 
 export default class MyComponent extends GlimmerComponent {
   // Glimmer component lifecycle hooks:
-  constructor() {
-    super();
+  constructor(...args) {
+    super(args);
   }
   willDestroy() {}
 }
