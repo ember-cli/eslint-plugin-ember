@@ -63,7 +63,7 @@ import GlimmerComponent from '@glimmer/component';
 export default class MyComponent extends GlimmerComponent {
   // Glimmer component lifecycle hooks:
   constructor(...args) {
-    super(args);
+    super(...args);
   }
   willDestroy() {}
 }
