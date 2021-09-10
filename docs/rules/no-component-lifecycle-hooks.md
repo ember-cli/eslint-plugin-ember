@@ -51,7 +51,7 @@ import Component from '@ember/component';
 
 export default class MyComponent extends Component {
   init(...args) {
-    this._super(args);
+    this._super(...args);
   }
   willDestroy() {} // Both a classic and Glimmer component lifecycle hook
 }
