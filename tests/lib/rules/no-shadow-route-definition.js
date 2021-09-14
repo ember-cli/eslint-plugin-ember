@@ -124,6 +124,37 @@ ruleTester.run('no-shadow-route-definition', rule, {
       this.route('route');
     });`,
 
+    // Test if else conditions for route definitions
+    `if (this.options.getTreatmentIsEnabled('test-key')) {
+      this.route('new-route', { path: '/test' });
+    } else {
+      this.route('old-route', { path: '/test' });
+    }`,
+
+    `if (this.options.getTreatmentIsEnabled('test-key')) {
+      this.route('new-route', { path: '/test' });
+    } else {
+      if (false) {
+        this.route('old-route', { path: '/test' });
+      } else {
+        this.route('old-route-v2', { path: '/test' });
+      }
+    }`,
+
+    `if (this.options.getTreatmentIsEnabled('test-key')) {
+      if (true) {
+        this.route('new-route', { path: '/test' });
+      } else {
+        this.route('new-route-v2', { path: '/test' });
+      }
+    } else {
+      if (false) {
+        this.route('old-route', { path: '/test' });
+      } else {
+        this.route('old-route-v2', { path: '/test' });
+      }
+    }`,
+
     // Not Ember's route function:
     'test();',
     "test('blog');",
