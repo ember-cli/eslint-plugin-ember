@@ -21,12 +21,29 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: |
+          node_modules
+          .cache/yarn
+        key: eslint-plugin-ember-${{ hashFiles('yarn.lock') }}
+        restore-keys: eslint-plugin-ember
+
     - run: yarn install --frozen-lockfile --non-interactive
+      env:
+        YARN_CACHE_FOLDER: .cache/yarn
+
     - run: yarn lint
+
     - run: yarn update && git diff --exit-code
+
     - run: yarn test:coverage --runInBand
+
     - run: yarn add --dev eslint@6 && yarn test --runInBand
