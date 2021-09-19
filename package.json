@@ -34,7 +34,7 @@
     "lint:js": "eslint . --cache",
     "lint:package-json": "npmPkgJsonLint .",
     "lint:package-json-sorting": "sort-package-json --check",
-    "lint:package-json-sorting:fix": "sort-package-json --fix package.json",
+    "lint:package-json-sorting:fix": "sort-package-json package.json",
     "release": "release-it",
     "start": "yarn run test:watch",
     "test": "jest",
