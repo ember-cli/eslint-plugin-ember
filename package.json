@@ -4,6 +4,8 @@
   "description": "Eslint plugin for Ember.js apps",
   "keywords": [
     "eslint",
+    "eslintplugin",
+    "eslint-plugin",
     "ember",
     "ember.js",
     "plugin",
