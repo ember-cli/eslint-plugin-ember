@@ -1,6 +1,27 @@
 
 
 
+
+## v10.5.5 (2021-09-20)
+
+#### :bug: Bug Fix
+* [#1297](https://github.com/ember-cli/eslint-plugin-ember/pull/1297) Support if/else route definitions in `no-shadow-route-definition` rule ([@raido](https://github.com/raido))
+
+#### :memo: Documentation
+* [#1300](https://github.com/ember-cli/eslint-plugin-ember/pull/1300) Add `eslint-plugin` keywords in package.json ([@bmish](https://github.com/bmish))
+* [#1294](https://github.com/ember-cli/eslint-plugin-ember/pull/1294) Super call missing arguments in some rule docs ([@StephanH90](https://github.com/StephanH90))
+
+#### :house: Internal
+* [#1301](https://github.com/ember-cli/eslint-plugin-ember/pull/1301) Add jsdoc `type` annotation to rules ([@bmish](https://github.com/bmish))
+* [#1299](https://github.com/ember-cli/eslint-plugin-ember/pull/1299) Cache dependencies on GitHub Actions to speed up CI ([@ddzz](https://github.com/ddzz))
+
+#### Committers: 4
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Darius Dzien ([@ddzz](https://github.com/ddzz))
+- Raido Kuli ([@raido](https://github.com/raido))
+- [@StephanH90](https://github.com/StephanH90)
+
+
 ## v10.5.4 (2021-08-24)
 
 #### :bug: Bug Fix
