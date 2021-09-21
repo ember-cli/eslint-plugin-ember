@@ -39,8 +39,8 @@
     "lint:package-json-sorting:fix": "sort-package-json package.json",
     "release": "release-it",
     "start": "yarn run test:watch",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "jest --maxWorkers=4",
+    "test:coverage": "jest --maxWorkers=4 --coverage",
     "test:watch": "jest --watchAll",
     "update": "node ./scripts/update-rules.js && node ./scripts/list-jquery-methods.js"
   },
@@ -56,6 +56,7 @@
     "testMatch": [
       "**/tests/**/*.js"
     ],
+    "testEnvironment": "node",
     "testPathIgnorePatterns": [
       "<rootDir>/tests/helpers/"
     ]
