@@ -1,7 +1,7 @@
-const babelEslint = require('@babel/eslint-parser');
+const babelESLint = require('@babel/eslint-parser');
 
 function parse(code) {
-  return babelEslint.parse(code, {
+  return babelESLint.parse(code, {
     babelOptions: {
       configFile: require.resolve('../../.babelrc'),
     },
@@ -9,7 +9,7 @@ function parse(code) {
 }
 
 function parseForESLint(code) {
-  return babelEslint.parseForESLint(code, {
+  return babelESLint.parseForESLint(code, {
     babelOptions: {
       configFile: require.resolve('../../.babelrc'),
     },
