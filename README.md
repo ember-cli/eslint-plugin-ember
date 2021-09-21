@@ -4,7 +4,7 @@
 [![NPM downloads](https://img.shields.io/npm/dm/eslint-plugin-ember.svg?style=flat)](https://npmjs.org/package/eslint-plugin-ember)
 ![CI](https://github.com/ember-cli/eslint-plugin-ember/workflows/CI/badge.svg)
 
-> An ESlint plugin that provides set of rules for Ember Applications based on commonly known good practices.
+> An ESLint plugin that provides a set of rules for Ember Applications based on commonly known good practices.
 
 ## ❗️Requirements
 
