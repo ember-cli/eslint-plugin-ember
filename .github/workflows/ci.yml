@@ -9,9 +9,6 @@ on:
   pull_request:
     branches: [ master ]
 
-env:
-  YARN_CACHE_FOLDER: .cache/yarn
-
 jobs:
   build:
 
