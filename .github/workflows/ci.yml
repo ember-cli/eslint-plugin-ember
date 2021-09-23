@@ -23,22 +23,12 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-
-    - name: Cache dependencies
-      uses: actions/cache@v2
-      with:
-        path: |
-          node_modules
-          .cache/yarn
-        key: eslint-plugin-ember-${{ hashFiles('yarn.lock') }}
-        restore-keys: eslint-plugin-ember
+        cache: 'yarn'
 
     - run: yarn install --frozen-lockfile --non-interactive
-      env:
-        YARN_CACHE_FOLDER: .cache/yarn
 
     - run: yarn lint
 
