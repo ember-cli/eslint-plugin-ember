@@ -4,7 +4,6 @@ const { readdirSync, readFileSync } = require('fs');
 const path = require('path');
 const rules = require('../lib').rules;
 const recommendedRules = require('../lib/recommended-rules');
-const { flat } = require('../lib/utils/javascript');
 
 const RULE_NAMES = Object.keys(rules);
 const RECOMMENDED_RULE_NAMES = Object.keys(recommendedRules).map((name) =>
@@ -17,7 +16,7 @@ function getAllNamedOptions(jsonSchema) {
   }
 
   if (Array.isArray(jsonSchema)) {
-    return flat(jsonSchema.map(getAllNamedOptions));
+    return jsonSchema.map(getAllNamedOptions).flat();
   }
 
   if (jsonSchema.items) {
