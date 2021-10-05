@@ -32,7 +32,7 @@
   "scripts": {
     "changelog": "lerna-changelog",
     "lint": "npm-run-all --continue-on-error --aggregate-output --parallel lint:*",
-    "lint:docs": "markdownlint **/*.md",
+    "lint:docs": "markdownlint '**/*.md'",
     "lint:js": "eslint . --cache",
     "lint:package-json": "npmPkgJsonLint .",
     "lint:package-json-sorting": "sort-package-json --check",
