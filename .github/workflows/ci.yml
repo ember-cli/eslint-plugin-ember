@@ -37,3 +37,7 @@ jobs:
     - run: yarn test:coverage --runInBand
 
     - run: yarn add --dev eslint@6 && yarn test --runInBand
+
+    - name: "Test ESLint 8"
+      if: ${{ matrix.node-version != '10.x' }}
+      run: yarn add --dev eslint@8 eslint-plugin-unicorn@37 && yarn test --runInBand
