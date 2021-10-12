@@ -2,6 +2,16 @@
 
 
 
+
+## v10.5.6 (2021-10-12)
+
+#### :bug: Bug Fix
+* [#1333](https://github.com/ember-cli/eslint-plugin-ember/pull/1333) Support ESLint v8 by switching from ESLint's internal traverser to `estraverse` ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
 ## v10.5.5 (2021-09-20)
 
 #### :bug: Bug Fix
