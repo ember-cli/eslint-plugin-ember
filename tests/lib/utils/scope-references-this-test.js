@@ -11,6 +11,7 @@ describe('scopeReferencesThis', function () {
   it('recognizes simple cases`', function () {
     expect(scopeReferencesThis(parse('this'))).toBeTruthy(); // `this` uses `this`
     expect(scopeReferencesThis(parse('"this"'))).toBeFalsy(); // the string "this" does not use this
+    expect(scopeReferencesThis(parse('class Foo { @someDecorator() someProp }'))).toBeFalsy(); // Does not throw with node type (ClassProperty) not handled by estraverse.
   });
 
   it('can find nested `this`', function () {

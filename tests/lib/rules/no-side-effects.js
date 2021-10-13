@@ -22,6 +22,7 @@ eslintTester.run('no-side-effects', rule, {
     'alias("test.length")',
     'computed(function() { this.test; })',
     'computed(function() { this.myFunction(); })',
+    'computed(function() { class Foo { @someDecorator() someProp } })', // Does not throw with node type (ClassProperty) not handled by estraverse.
 
     // set
     'computed(function() { foo.set(this, "testAmount", test.length); return ""; });',
