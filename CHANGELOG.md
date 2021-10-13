@@ -3,6 +3,16 @@
 
 
 
+
+## v10.5.7 (2021-10-13)
+
+#### :bug: Bug Fix
+* [#1336](https://github.com/ember-cli/eslint-plugin-ember/pull/1336) Avoid crash when estraverse does not recognize node type during traversal ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
 ## v10.5.6 (2021-10-12)
 
 #### :bug: Bug Fix
