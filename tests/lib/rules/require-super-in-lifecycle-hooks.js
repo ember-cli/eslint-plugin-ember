@@ -228,6 +228,9 @@ eslintTester.run('require-super-in-lifecycle-hooks', rule, {
     // Glimmer component allows non-glimmer hook to be used without super:
     "import Component from '@glimmer/component'; class Foo extends Component { init() {} }",
     "import Component from '@glimmer/component'; class Foo extends Component { didInsertElement() {} }",
+
+    // Does not throw with node type (ClassProperty) not handled by estraverse.
+    'Component.extend({init() { class Foo { @someDecorator() someProp }; return this._super(...arguments); } });',
   ],
   invalid: [
     {
