@@ -99,7 +99,7 @@
     "eslint": ">= 6"
   },
   "engines": {
-    "node": "12.* || >= 14"
+    "node": "12.* || 14.* || >= 16"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
