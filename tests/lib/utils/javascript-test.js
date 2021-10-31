@@ -19,8 +19,8 @@ describe('duplicateArrays', () => {
 
 describe('removeWhitespace', () => {
   it('returns the right result', () => {
-    expect(javascriptUtils.removeWhitespace('abcdef')).toStrictEqual('abcdef');
-    expect(javascriptUtils.removeWhitespace('abc def')).toStrictEqual('abcdef');
-    expect(javascriptUtils.removeWhitespace(' abc def ')).toStrictEqual('abcdef');
+    expect(javascriptUtils.removeWhitespace('abcdef')).toBe('abcdef');
+    expect(javascriptUtils.removeWhitespace('abc def')).toBe('abcdef');
+    expect(javascriptUtils.removeWhitespace(' abc def ')).toBe('abcdef');
   });
 });

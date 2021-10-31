@@ -43,7 +43,7 @@ describe('getMacrosFromImports', () => {
 describe('getTrackedArgumentCount', () => {
   it('returns the correct number for some example macros', () => {
     expect(getTrackedArgumentCount('and')).toStrictEqual(Number.MAX_VALUE);
-    expect(getTrackedArgumentCount('readOnly')).toStrictEqual(1);
+    expect(getTrackedArgumentCount('readOnly')).toBe(1);
   });
 });
 
@@ -54,12 +54,10 @@ describe('macroToCanonicalName', () => {
       ['readOnly', 'readOnlyRenamed'],
     ]);
 
-    expect(macroToCanonicalName('and', macroImportNames)).toStrictEqual('and');
-    expect(macroToCanonicalName('readOnlyRenamed', macroImportNames)).toStrictEqual('readOnly');
+    expect(macroToCanonicalName('and', macroImportNames)).toBe('and');
+    expect(macroToCanonicalName('readOnlyRenamed', macroImportNames)).toBe('readOnly');
 
-    expect(macroToCanonicalName('computed.readOnly', macroImportNames)).toStrictEqual('readOnly');
-    expect(macroToCanonicalName('computedRenamed.readOnly', macroImportNames)).toStrictEqual(
-      'readOnly'
-    );
+    expect(macroToCanonicalName('computed.readOnly', macroImportNames)).toBe('readOnly');
+    expect(macroToCanonicalName('computedRenamed.readOnly', macroImportNames)).toBe('readOnly');
   });
 });

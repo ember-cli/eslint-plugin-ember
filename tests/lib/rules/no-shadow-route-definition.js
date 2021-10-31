@@ -1107,7 +1107,7 @@ describe('no-shadow-route-definition', () => {
       },
     });
 
-    expect(message).toStrictEqual(
+    expect(message).toBe(
       'Route "second" ("main/", 4L:10C) is shadowing route "first" ("main/", 3L:10C)'
     );
   });

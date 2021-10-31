@@ -22,9 +22,9 @@ describe('collapseKeys', () => {
 describe('expandKey', () => {
   it('returns the right result', () => {
     // No expansion possible
-    expect(cpdkUtils.expandKey('')).toStrictEqual('');
-    expect(cpdkUtils.expandKey('foo')).toStrictEqual('foo');
-    expect(cpdkUtils.expandKey('foo.bar')).toStrictEqual('foo.bar');
+    expect(cpdkUtils.expandKey('')).toBe('');
+    expect(cpdkUtils.expandKey('foo')).toBe('foo');
+    expect(cpdkUtils.expandKey('foo.bar')).toBe('foo.bar');
     expect(cpdkUtils.expandKey('foo.{bar}')).toStrictEqual(['foo.bar']);
 
     // Expansion possible
@@ -40,33 +40,25 @@ describe('expandKey', () => {
 describe('computedPropertyDependencyMatchesKeyPath', () => {
   it('returns the right result', () => {
     // False:
-    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo', 'bar')).toStrictEqual(false);
-    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.bar', 'bar')).toStrictEqual(
-      false
-    );
+    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo', 'bar')).toBe(false);
+    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.bar', 'bar')).toBe(false);
 
     // True:
-    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.bar', 'foo')).toStrictEqual(
-      true
-    );
-    expect(
-      cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.@each.bar', 'foo')
-    ).toStrictEqual(true);
-    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.[]', 'foo')).toStrictEqual(true);
-    expect(
-      cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.bar.xyz', 'foo.bar')
-    ).toStrictEqual(true);
+    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.bar', 'foo')).toBe(true);
+    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.@each.bar', 'foo')).toBe(true);
+    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.[]', 'foo')).toBe(true);
+    expect(cpdkUtils.computedPropertyDependencyMatchesKeyPath('foo.bar.xyz', 'foo.bar')).toBe(true);
   });
 });
 
 describe('keyExistsAsPrefixInList', () => {
   it('returns the right result', () => {
     // False:
-    expect(cpdkUtils.keyExistsAsPrefixInList(['a', 'b.c'], 'x')).toStrictEqual(false);
-    expect(cpdkUtils.keyExistsAsPrefixInList(['a', 'b.c'], 'c')).toStrictEqual(false);
+    expect(cpdkUtils.keyExistsAsPrefixInList(['a', 'b.c'], 'x')).toBe(false);
+    expect(cpdkUtils.keyExistsAsPrefixInList(['a', 'b.c'], 'c')).toBe(false);
 
     // True:
-    expect(cpdkUtils.keyExistsAsPrefixInList(['a', 'b.c'], 'b')).toStrictEqual(true);
+    expect(cpdkUtils.keyExistsAsPrefixInList(['a', 'b.c'], 'b')).toBe(true);
   });
 });
 

@@ -111,9 +111,9 @@ module.exports = {
 
     // Optional jest rules:
     'jest/consistent-test-it': 'error',
-    'jest/lowercase-name': 'error',
+    'jest/prefer-lowercase-title': 'error',
     'jest/no-duplicate-hooks': 'error',
-    'jest/no-expect-resolves': 'error',
+    'jest/no-restricted-matchers': 'error',
     'jest/no-hooks': 'error',
     'jest/no-if': 'error',
     'jest/no-large-snapshots': 'error',
@@ -152,6 +152,8 @@ module.exports = {
     'unicorn/no-useless-undefined': 'off',
     'unicorn/prefer-module': 'off',
     'unicorn/prevent-abbreviations': 'off',
+    'unicorn/prefer-object-from-entries': 'off',
+    'unicorn/no-array-method-this-argument': 'off',
   },
   overrides: [
     {
