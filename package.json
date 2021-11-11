@@ -39,8 +39,7 @@
     "lint:package-json-sorting:fix": "sort-package-json package.json",
     "release": "release-it",
     "start": "yarn run test:watch",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "jest --coverage",
     "test:watch": "jest --watchAll",
     "update": "node ./scripts/update-rules.js && node ./scripts/list-jquery-methods.js"
   },
