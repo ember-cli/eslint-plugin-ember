@@ -74,7 +74,7 @@
     "@babel/eslint-parser": "^7.15.8",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-proposal-decorators": "^7.15.8",
-    "eslint": "^7.8.1",
+    "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.0.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-eslint-plugin": "^3.6.1",
