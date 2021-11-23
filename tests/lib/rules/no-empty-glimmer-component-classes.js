@@ -12,6 +12,7 @@ const { ERROR_MESSAGE } = rule;
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
+  parser: require.resolve('@babel/eslint-parser'),
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
@@ -28,6 +29,11 @@ ruleTester.run('no-empty-glimmer-component-classes', rule, {
       }
     }`,
     'class MyComponent extends NotAGlimmerComponent {}',
+    `import Component from '@glimmer/component';
+    import MyDecorator from 'my-decorator';
+
+    @MyDecorator
+    class MyComponent extends Component {}`,
   ],
   invalid: [
     {
