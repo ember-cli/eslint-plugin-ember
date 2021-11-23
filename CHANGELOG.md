@@ -4,6 +4,22 @@
 
 
 
+
+## v10.5.8 (2021-11-23)
+
+#### :bug: Bug Fix
+* [#1374](https://github.com/ember-cli/eslint-plugin-ember/pull/1374) Allow empty-but-decorated classes in `no-empty-glimmer-component-classes` rule ([@adrigzr](https://github.com/adrigzr))
+
+#### :memo: Documentation
+* [#1364](https://github.com/ember-cli/eslint-plugin-ember/pull/1364) Fix typos in violation message for `classic-decorator-hooks` rule ([@nlfurniss](https://github.com/nlfurniss))
+
+#### Committers: 4
+- Adrián González Rus ([@adrigzr](https://github.com/adrigzr))
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Darius D. ([@ddzz](https://github.com/ddzz))
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+
+
 ## v10.5.7 (2021-10-13)
 
 #### :bug: Bug Fix
