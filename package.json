@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "@ember-data/rfc395-data": "^0.0.4",
-    "css-tree": "^1.0.0-alpha.39",
+    "css-tree": "^2.0.1",
     "ember-rfc176-data": "^0.3.15",
     "eslint-utils": "^3.0.0",
     "estraverse": "^5.2.0",
