@@ -63,11 +63,14 @@
   },
   "dependencies": {
     "@ember-data/rfc395-data": "^0.0.4",
+    "@glimmer/syntax": "^0.83.1",
     "css-tree": "^2.0.4",
     "ember-rfc176-data": "^0.3.15",
+    "ember-template-imports": "^2.0.0",
     "eslint-utils": "^3.0.0",
     "estraverse": "^5.2.0",
     "lodash.kebabcase": "^4.1.1",
+    "magic-string": "^0.25.7",
     "requireindex": "^1.2.0",
     "snake-case": "^3.0.3"
   },
