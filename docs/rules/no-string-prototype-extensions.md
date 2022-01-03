@@ -8,7 +8,7 @@ on these methods in addons, but that addon being used in an app that has the
 extensions disabled.
 
 Additionally, the prototype extensions for the `String` object have been
-deprecated in [RFC #236](http://emberjs.github.io/rfcs/0236-deprecation-ember-string.html).
+deprecated in [RFC #236](https://emberjs.github.io/rfcs/0236-deprecation-ember-string.html).
 
 ## Rule Details
 
@@ -64,4 +64,4 @@ dasherize('myString');
 ## References
 
 * [Prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
-* [String prototype extensions deprecation RFC](http://emberjs.github.io/rfcs/0236-deprecation-ember-string.html#string-prototype-extensions)
+* [String prototype extensions deprecation RFC](https://emberjs.github.io/rfcs/0236-deprecation-ember-string.html#string-prototype-extensions)
