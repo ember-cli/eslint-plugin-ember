@@ -42,6 +42,6 @@ deprecate('Title is no longer supported.', title, { id: 'unwanted-title', until:
 
 ## Further Reading
 
-* See the [documentation](https://www.emberjs.com/api/ember/release/functions/@ember%2Fdebug/assert) for the Ember `assert` function.
-* See the [documentation](https://www.emberjs.com/api/ember/release/functions/@ember%2Fdebug/warn) for the Ember `warn` function.
-* See the [documentation](https://emberjs.com/api/api/ember/release/functions/@ember%2Fapplication%2Fdeprecations/deprecate) for the Ember `deprecate` function.
+* See the [documentation](https://api.emberjs.com/ember/release/functions/@ember%2Fdebug/assert) for the Ember `assert` function.
+* See the [documentation](https://api.emberjs.com/ember/release/functions/@ember%2Fdebug/warn) for the Ember `warn` function.
+* See the [documentation](https://api.emberjs.com/ember/3.4/functions/@ember%2Fapplication%2Fdeprecations/deprecate) for the Ember `deprecate` function.

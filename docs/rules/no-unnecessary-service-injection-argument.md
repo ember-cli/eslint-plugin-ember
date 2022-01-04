@@ -48,4 +48,4 @@ export default Component.extend({
 ## References
 
 * Ember [Services](https://guides.emberjs.com/release/applications/services/) guide
-* Ember [inject](https://emberjs.com/api/ember/release/functions/@ember%2Fservice/inject) function spec
+* Ember [inject](https://api.emberjs.com/ember/release/functions/@ember%2Fservice/inject) function spec
