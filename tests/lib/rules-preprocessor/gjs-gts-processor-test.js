@@ -151,7 +151,18 @@ describe('template-vars', () => {
 
         // This gives more meaningful information than
         // checking if results is empty / length === 0
-        expect(results?.[0]?.messages?.[0]?.message || '').toStrictEqual('');
+        let message = '';
+
+        // When node 12 is dropped, change this to optional chaining
+        if (results && results[0]) {
+          if (results[0].messages && results[0].messages[0]) {
+            if (results[0].messages[0].message) {
+              message = results[0].messages[0].message || '';
+            }
+          }
+        }
+
+        expect(message).toStrictEqual('');
         expect(resultErrors).toHaveLength(0);
       });
     }
