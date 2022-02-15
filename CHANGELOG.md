@@ -5,6 +5,24 @@
 
 
 
+
+## v10.5.9 (2022-02-14)
+
+#### :bug: Bug Fix
+* [#1431](https://github.com/ember-cli/eslint-plugin-ember/pull/1431) Fix crash in `jquery-ember-run` rule ([@ef4](https://github.com/ef4))
+
+#### :memo: Documentation
+* [#1410](https://github.com/ember-cli/eslint-plugin-ember/pull/1410) Fix broken URLs in documentation ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#1402](https://github.com/ember-cli/eslint-plugin-ember/pull/1402) Add GitHub Actions to Dependabot config ([@ddzz](https://github.com/ddzz))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Darius D. ([@ddzz](https://github.com/ddzz))
+- Edward Faulkner ([@ef4](https://github.com/ef4))
+
+
 ## v10.5.8 (2021-11-23)
 
 #### :bug: Bug Fix
