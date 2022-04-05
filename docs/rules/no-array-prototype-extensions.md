@@ -2,7 +2,7 @@
 
 Do not use Ember's `array` prototype extensions.
 
-Use primitive array functions instead of `.filterBy`, `.toArray()` in Ember modules.
+Use native array functions instead of `.filterBy`, `.toArray()` in Ember modules.
 
 Use lodash helper functions instead of `.uniqBy()`, `sortBy()` in Ember modules.
 
