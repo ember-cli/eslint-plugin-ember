@@ -42,14 +42,16 @@ Examples of **correct** code for this rule:
 
 ```js
 /** Helper functions **/
+import { uniqBy, sortBy } from 'lodash';
+
 export default class SampleComponent extends Component {
   abc = ['x', 'y', 'z', 'x'];
 
   def = this.abc.filter((el) => el !== 'x');
   ghi = [...new Set(this.abc)];
   jkl = [...this.abc];
-  mno = uniqBy(this.abc, 'y'); // lodash helper function
-  pqr = sortBy(this.abc, 'z'); // lodash helper function
+  mno = uniqBy(this.abc, 'y');
+  pqr = sortBy(this.abc, 'z');
 }
 ```
 

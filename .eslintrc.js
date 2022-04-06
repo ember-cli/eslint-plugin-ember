@@ -186,6 +186,7 @@ module.exports = {
         'no-unused-labels': 'off',
         'no-unused-vars': 'off',
         'no-useless-constructor': 'off',
+        'node/no-extraneous-import': 'off',
         'node/no-missing-import': 'off',
         'node/no-missing-require': 'off',
         'node/no-unsupported-features/es-syntax': 'off',
