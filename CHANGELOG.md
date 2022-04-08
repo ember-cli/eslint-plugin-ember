@@ -6,6 +6,16 @@
 
 
 
+
+## v10.6.0 (2022-04-08)
+
+#### :rocket: Enhancement
+* [#1461](https://github.com/ember-cli/eslint-plugin-ember/pull/1461) Add new rule `no-array-prototype-extensions` ([@smilland](https://github.com/smilland))
+
+#### Committers: 1
+- Hang Li ([@smilland](https://github.com/smilland))
+
+
 ## v10.5.9 (2022-02-14)
 
 #### :bug: Bug Fix
