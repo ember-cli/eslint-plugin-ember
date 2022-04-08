@@ -15,6 +15,7 @@ Examples of **incorrect** code for this rule:
 ```js
 /** Helper functions **/
 import Component from '@glimmer/component';
+
 export default class SampleComponent extends Component {
   abc = ['x', 'y', 'z', 'x'];
 
