@@ -65,3 +65,8 @@ dasherize('myString');
 
 * [Prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
 * [String prototype extensions deprecation RFC](https://emberjs.github.io/rfcs/0236-deprecation-ember-string.html#string-prototype-extensions)
+
+## Related Rules
+
+* [no-array-prototype-extensions](no-array-prototype-extensions.md)
+* [no-function-prototype-extensions](no-function-prototype-extensions.md)

@@ -14,6 +14,7 @@ Examples of **incorrect** code for this rule:
 
 ```js
 /** Helper functions **/
+import Component from '@glimmer/component';
 export default class SampleComponent extends Component {
   abc = ['x', 'y', 'z', 'x'];
 
@@ -27,6 +28,7 @@ export default class SampleComponent extends Component {
 
 ```js
 /** Observable-based functions **/
+import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
 export default class SampleComponent extends Component {
@@ -42,6 +44,7 @@ Examples of **correct** code for this rule:
 
 ```js
 /** Helper functions **/
+import Component from '@glimmer/component';
 import { uniqBy, sortBy } from 'lodash';
 
 export default class SampleComponent extends Component {
@@ -58,6 +61,7 @@ export default class SampleComponent extends Component {
 ```js
 /** Observable-based functions **/
 /** Use immutable tracked property is OK **/
+import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
@@ -74,6 +78,7 @@ export default class SampleComponent extends Component {
 ```js
 /** Observable-based functions **/
 /** Use TrackedArray is OK **/
+import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { TrackedArray } from 'tracked-built-ins';
@@ -90,6 +95,8 @@ export default class SampleComponent extends Component {
 
 ## References
 
+* [EmberArray](https://api.emberjs.com/ember/release/classes/EmberArray)
+* [MutableArray](https://api.emberjs.com/ember/release/classes/MutableArray) 
 * [Prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
 * Array prototype extensions deprecation RFC
 

@@ -39,3 +39,7 @@ export default Component.extend({
   }
 });
 ```
+## Related Rules
+
+* [no-array-prototype-extensions](no-array-prototype-extensions.md)
+* [no-string-prototype-extensions](no-string-prototype-extensions.md)

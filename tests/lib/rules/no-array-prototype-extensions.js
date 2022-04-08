@@ -23,16 +23,22 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     "get(something, 'foo.0.bar')",
     "get(something, 'foo.0')",
     "get(something, 'foo')[0]",
-    "get(something, 'firstObjects')",
-    "get(something, 'lastObjects')",
+    "get(something, 'notfirstObject')",
+    "get(something, 'lastObjectSibling')",
+    "get(something, 'foo.lastObjectSibling.bar')",
+    'firstObject',
+    'lastObject',
     'something.length',
     'something.firstObject()',
     'something[something.length - 1]',
+    'something.isAny',
+    "something['compact']",
+    /** Optional chaining */
+    'arr?.notfirstObject?.foo',
+    'arr?.filter?.()',
     /** Replace is part of string native prototypes */
     "'something'.replace()",
     'something.replace()',
-    'something.isAny',
-    "something['compact']",
   ],
   invalid: [
     {
@@ -42,6 +48,16 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     },
     {
       code: 'something.filterBy()',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something?.firstObject?.foo',
+      output: null,
+      errors: [{ messageId: 'main', type: 'MemberExpression' }],
+    },
+    {
+      code: 'something?.filterBy?.()',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
