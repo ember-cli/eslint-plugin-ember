@@ -39,6 +39,7 @@ export default Component.extend({
   }
 });
 ```
+
 ## Related Rules
 
 * [no-array-prototype-extensions](no-array-prototype-extensions.md)

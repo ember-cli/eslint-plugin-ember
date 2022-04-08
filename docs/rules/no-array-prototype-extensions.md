@@ -97,7 +97,7 @@ export default class SampleComponent extends Component {
 ## References
 
 * [EmberArray](https://api.emberjs.com/ember/release/classes/EmberArray)
-* [MutableArray](https://api.emberjs.com/ember/release/classes/MutableArray) 
+* [MutableArray](https://api.emberjs.com/ember/release/classes/MutableArray)
 * [Prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
 * Array prototype extensions deprecation RFC
 
