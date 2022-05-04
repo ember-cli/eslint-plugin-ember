@@ -7,6 +7,16 @@
 
 
 
+
+## v10.6.1 (2022-05-04)
+
+#### :bug: Bug Fix
+* [#1476](https://github.com/ember-cli/eslint-plugin-ember/pull/1476) Catch `replace` in `no-array-prototype-extensions` rule ([@smilland](https://github.com/smilland))
+
+#### Committers: 1
+- Hang Li ([@smilland](https://github.com/smilland))
+
+
 ## v10.6.0 (2022-04-08)
 
 #### :rocket: Enhancement
