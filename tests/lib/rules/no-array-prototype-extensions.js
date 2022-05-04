@@ -33,12 +33,15 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'something[something.length - 1]',
     'something.isAny',
     "something['compact']",
+    'replace()',
+    'replace(foo)',
+    'replace(foo, bar, baz)',
     /** Optional chaining */
     'arr?.notfirstObject?.foo',
     'arr?.filter?.()',
-    /** Replace is part of string native prototypes */
-    "'something'.replace()",
-    'something.replace()',
+    /** String.prototype.replace() */
+    "'something'.replace(regexp, 'substring')",
+    "something.replace(regexp, 'substring')",
   ],
   invalid: [
     {
@@ -269,6 +272,11 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     },
     {
       code: 'something.unshiftObjects()',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.replace(1, 2, someArray)',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
