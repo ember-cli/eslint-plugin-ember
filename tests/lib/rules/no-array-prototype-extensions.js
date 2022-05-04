@@ -33,6 +33,9 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'something[something.length - 1]',
     'something.isAny',
     "something['compact']",
+    'replace()',
+    'replace(foo)',
+    'replace(foo, bar, baz)',
     /** Optional chaining */
     'arr?.notfirstObject?.foo',
     'arr?.filter?.()',
