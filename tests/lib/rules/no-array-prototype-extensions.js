@@ -36,8 +36,9 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     /** Optional chaining */
     'arr?.notfirstObject?.foo',
     'arr?.filter?.()',
-    /** String prototype replace */
+    /** String.prototype.replace() */
     "'something'.replace(regexp, 'substring')",
+    "something.replace(regexp, 'substring')",
   ],
   invalid: [
     {
