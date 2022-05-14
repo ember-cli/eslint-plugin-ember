@@ -36,8 +36,8 @@ module.exports = {
     'plugin:ember/recommended' // or other configuration
   ],
   rules: {
-    // override rule settings here
-    'ember/no-jquery': 'error'
+    // override / enable optional rules
+    'ember/no-replace-test-comments': 'error'
   }
 };
 ```
