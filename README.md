@@ -158,7 +158,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 | [no-incorrect-calls-with-inline-anonymous-functions](./docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | disallow inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce` | ✅ |  |  |
 | [no-invalid-debug-function-arguments](./docs/rules/no-invalid-debug-function-arguments.md) | disallow usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. | ✅ |  |  |
 | [no-restricted-property-modifications](./docs/rules/no-restricted-property-modifications.md) | disallow modifying the specified properties |  | 🔧 |  |
-| [no-unsafe-this-access-in-async-function](./docs/rules/no-unsafe-this-access-in-async-function.md) | disallow `this` access after await unless destruction protection is present | ✅ | 🔧 |  |
+| [no-unsafe-this-access-in-async-function](./docs/rules/no-unsafe-this-access-in-async-function.md) | disallow `this` access after await unless destruction protection is present |  | 🔧 |  |
 | [require-fetch-import](./docs/rules/require-fetch-import.md) | enforce explicit import for `fetch()` |  |  |  |
 
 ### Routes
