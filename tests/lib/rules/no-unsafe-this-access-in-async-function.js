@@ -18,14 +18,16 @@ const ruleTester = new RuleTester({
 });
 
 function eachDefaultExport(builder, rest = {}) {
-  let paths = [...rule.FRAMEWORK_EXTENDABLES, ...rule.KNOWN_DESTROYABLES].map(x => x.importPath);
-  let results = [];
+  const paths = [...rule.FRAMEWORK_EXTENDABLES, ...rule.KNOWN_DESTROYABLES].map(
+    (x) => x.importPath
+  );
+  const results = [];
 
-  for (let importPath of paths) {
-    let specifier = 'X';
-    let testCase = {
+  for (const importPath of paths) {
+    const specifier = 'X';
+    const testCase = {
       ...rest,
-      code: `import ${specifier} from '${importPath}'\n\n` + builder(specifier),
+      code: `import ${specifier} from '${importPath}'\n\n${builder(specifier)}`,
     };
 
     results.push(testCase);
@@ -33,7 +35,6 @@ function eachDefaultExport(builder, rest = {}) {
 
   return results;
 }
-
 
 ruleTester.run('no-unsafe-this-access-in-async-function', rule, {
   valid: [
@@ -43,7 +44,8 @@ ruleTester.run('no-unsafe-this-access-in-async-function', rule, {
         this.foo;
       }
     }`,
-    eachDefaultExport((parentClass) => `
+    eachDefaultExport(
+      (parentClass) => `
       class extends ${parentClass} {
         async foo() {
           await Promise.resolve();
@@ -53,8 +55,10 @@ ruleTester.run('no-unsafe-this-access-in-async-function', rule, {
           this.hello();
         }
       }
-    `),
-    eachDefaultExport((parentClass) => `
+    `
+    ),
+    eachDefaultExport(
+      (parentClass) => `
       import { isDestroying, isDestroyed } from '@ember/destroyable';
 
       class extends ${parentClass} {
@@ -66,8 +70,10 @@ ruleTester.run('no-unsafe-this-access-in-async-function', rule, {
           this.hello();
         }
       }
-    `),
-    eachDefaultExport((parentClass) => `
+    `
+    ),
+    eachDefaultExport(
+      (parentClass) => `
       import { isDestroying as A, isDestroyed as B } from '@ember/destroyable';
 
       class extends ${parentClass} {
@@ -79,7 +85,8 @@ ruleTester.run('no-unsafe-this-access-in-async-function', rule, {
           this.hello();
         }
       }
-    `),
+    `
+    ),
   ],
   invalild: [
     {
@@ -104,6 +111,6 @@ ruleTester.run('no-unsafe-this-access-in-async-function', rule, {
           }
         }
       `,
-    }
-  ]
-})
+    },
+  ],
+});
