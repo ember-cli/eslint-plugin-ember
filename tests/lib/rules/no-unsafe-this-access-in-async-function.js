@@ -88,7 +88,7 @@ ruleTester.run('no-unsafe-this-access-in-async-function', rule, {
     `
     ),
   ],
-  invalild: [
+  invalid: [
     {
       code: `
         import Component from '@glimmer/component';
