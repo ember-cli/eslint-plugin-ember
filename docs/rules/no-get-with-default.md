@@ -50,7 +50,7 @@ This rule takes an optional object containing:
 ## References
 
 - [RFC](https://github.com/emberjs/rfcs/pull/554/) to deprecate `getWithDefault`
-- [spec](http://api.emberjs.com/ember/3.13/functions/@ember%2Fobject/getWithDefault)
+- [spec](https://api.emberjs.com/ember/3.13/functions/@ember%2Fobject/getWithDefault)
 
 ## Related Rules
 

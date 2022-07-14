@@ -124,7 +124,7 @@ This rule takes an optional object containing:
 ## References
 
 * [Guide](https://guides.emberjs.com/release/object-model/computed-properties/) for computed properties
-* [Spec](http://api.emberjs.com/ember/release/modules/@ember%2Fobject#functions-computed) for computed property macros
+* [Spec](https://api.emberjs.com/ember/release/modules/@ember%2Fobject#functions-computed) for computed property macros
 
 ## Related Rules
 

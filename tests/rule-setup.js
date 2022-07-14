@@ -58,6 +58,20 @@ describe('rules setup is correct', function () {
     );
   });
 
+  describe('rule files', function () {
+    for (const ruleName of RULE_NAMES) {
+      const filePath = path.join(__dirname, '..', 'lib', 'rules', `${ruleName}.js`);
+      const file = readFileSync(filePath, 'utf8');
+
+      // eslint-disable-next-line jest/valid-title
+      describe(ruleName, function () {
+        it('should have the jsdoc comment for rule type', function () {
+          expect(file).toContain("/** @type {import('eslint').Rule.RuleModule} */");
+        });
+      });
+    }
+  });
+
   describe('test files', function () {
     for (const ruleName of RULE_NAMES) {
       const filePath = path.join(__dirname, '..', 'tests', 'lib', 'rules', `${ruleName}.js`);

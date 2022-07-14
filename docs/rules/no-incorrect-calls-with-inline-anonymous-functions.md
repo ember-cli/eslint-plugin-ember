@@ -62,5 +62,5 @@ export default Component.extend({
 ## References
 
 - [Ember debounce API Docs](https://api.emberjs.com/ember/release/functions/@ember%2Frunloop/debounce)
-- [Ember once API Docs](http://api.emberjs.com/ember/release/functions/@ember%2Frunloop/once)
+- [Ember once API Docs](https://api.emberjs.com/ember/release/functions/@ember%2Frunloop/once)
 - [Ember scheduleOnce API Docs](https://api.emberjs.com/ember/release/functions/@ember%2Frunloop/scheduleOnce)

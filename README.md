@@ -36,8 +36,8 @@ module.exports = {
     'plugin:ember/recommended' // or other configuration
   ],
   rules: {
-    // override rule settings here
-    'ember/no-jquery': 'error'
+    // override / enable optional rules
+    'ember/no-replace-test-comments': 'error'
   }
 };
 ```
@@ -103,6 +103,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |:--------|:------------|:---------------|:-----------|:---------------|
 | [closure-actions](./docs/rules/closure-actions.md) | enforce usage of closure actions | ✅ |  |  |
 | [new-module-imports](./docs/rules/new-module-imports.md) | enforce using "New Module Imports" from Ember RFC #176 | ✅ |  |  |
+| [no-array-prototype-extensions](./docs/rules/no-array-prototype-extensions.md) | disallow usage of Ember's `Array` prototype extensions |  |  |  |
 | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | disallow usage of Ember's `function` prototype extensions | ✅ |  |  |
 | [no-mixins](./docs/rules/no-mixins.md) | disallow the usage of mixins | ✅ |  |  |
 | [no-new-mixins](./docs/rules/no-new-mixins.md) | disallow the creation of new mixins | ✅ |  |  |
@@ -227,7 +228,7 @@ If you have any suggestions, ideas, or problems, feel free to [create an issue](
   - `docs/rules/new-rule.md` (documentation, start from the template -- [raw](https://raw.githubusercontent.com/ember-cli/eslint-plugin-ember/master/docs/rules/_TEMPLATE_.md), [rendered](docs/rules/_TEMPLATE_.md))
   - `tests/lib/rules/new-rule.js` (tests, see [no-proxies](tests/lib/rules/no-proxies.js) for an example)
 - Run `yarn update` to automatically update the README and other files (and re-run this if you change the rule name or description)
-- Make sure your changes will pass [CI](.travis.yml) by running:
+- Make sure your changes will pass [CI](./.github/workflows/ci.yml) by running:
   - `yarn test`
   - `yarn lint` (`yarn lint:js --fix` can fix many errors)
 - Create a PR and link the created issue in the description

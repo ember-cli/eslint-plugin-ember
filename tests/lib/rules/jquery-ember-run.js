@@ -94,6 +94,12 @@ eslintTester.run('jquery-ember-run', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
     },
     {
+      // With assignment
+      code: 'import $ from "jquery"; $("#item").on("click", () => { this.value = 1; });',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
+    {
       // With not from Ember
       code: 'import $ from "jquery"; $("#item").on("click", () => { notEmber.run.bind(); });',
       output: null,

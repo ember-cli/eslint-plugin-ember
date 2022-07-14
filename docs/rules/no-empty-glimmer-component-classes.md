@@ -44,6 +44,14 @@ const MyComponent = templateOnly();
 export default MyComponent;
 ```
 
+```js
+import Component from '@glimmer/component';
+import MyDecorator from 'my-decorator';
+
+@MyDecorator
+class MyComponent extends Component {}
+```
+
 ## References
 
 - [Glimmer Components - Octane Upgrade Guide](https://guides.emberjs.com/release/upgrading/current-edition/glimmer-components/)

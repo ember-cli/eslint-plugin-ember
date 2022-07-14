@@ -2,6 +2,80 @@
 
 
 
+
+
+
+
+
+
+## v10.6.1 (2022-05-04)
+
+#### :bug: Bug Fix
+* [#1476](https://github.com/ember-cli/eslint-plugin-ember/pull/1476) Catch `replace` in `no-array-prototype-extensions` rule ([@smilland](https://github.com/smilland))
+
+#### Committers: 1
+- Hang Li ([@smilland](https://github.com/smilland))
+
+
+## v10.6.0 (2022-04-08)
+
+#### :rocket: Enhancement
+* [#1461](https://github.com/ember-cli/eslint-plugin-ember/pull/1461) Add new rule `no-array-prototype-extensions` ([@smilland](https://github.com/smilland))
+
+#### Committers: 1
+- Hang Li ([@smilland](https://github.com/smilland))
+
+
+## v10.5.9 (2022-02-14)
+
+#### :bug: Bug Fix
+* [#1431](https://github.com/ember-cli/eslint-plugin-ember/pull/1431) Fix crash in `jquery-ember-run` rule ([@ef4](https://github.com/ef4))
+
+#### :memo: Documentation
+* [#1410](https://github.com/ember-cli/eslint-plugin-ember/pull/1410) Fix broken URLs in documentation ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#1402](https://github.com/ember-cli/eslint-plugin-ember/pull/1402) Add GitHub Actions to Dependabot config ([@ddzz](https://github.com/ddzz))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Darius D. ([@ddzz](https://github.com/ddzz))
+- Edward Faulkner ([@ef4](https://github.com/ef4))
+
+
+## v10.5.8 (2021-11-23)
+
+#### :bug: Bug Fix
+* [#1374](https://github.com/ember-cli/eslint-plugin-ember/pull/1374) Allow empty-but-decorated classes in `no-empty-glimmer-component-classes` rule ([@adrigzr](https://github.com/adrigzr))
+
+#### :memo: Documentation
+* [#1364](https://github.com/ember-cli/eslint-plugin-ember/pull/1364) Fix typos in violation message for `classic-decorator-hooks` rule ([@nlfurniss](https://github.com/nlfurniss))
+
+#### Committers: 4
+- Adrián González Rus ([@adrigzr](https://github.com/adrigzr))
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Darius D. ([@ddzz](https://github.com/ddzz))
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+
+
+## v10.5.7 (2021-10-13)
+
+#### :bug: Bug Fix
+* [#1336](https://github.com/ember-cli/eslint-plugin-ember/pull/1336) Avoid crash when estraverse does not recognize node type during traversal ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
+## v10.5.6 (2021-10-12)
+
+#### :bug: Bug Fix
+* [#1333](https://github.com/ember-cli/eslint-plugin-ember/pull/1333) Support ESLint v8 by switching from ESLint's internal traverser to `estraverse` ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
 ## v10.5.5 (2021-09-20)
 
 #### :bug: Bug Fix

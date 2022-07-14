@@ -23,6 +23,8 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     // ES5 getter usage:
     "import Ember from 'ember'; Ember.computed('name', function() { return this.name; });",
     "import Ember from 'ember'; Ember.computed('name', function() { return this.get('name'); });",
+    // Does not throw with node type (ClassProperty) not handled by estraverse.
+    "import Ember from 'ember'; Ember.computed('name', function() { class Foo { @someDecorator() someProp } });",
     // String concatenation in dependent key:
     "import Ember from 'ember';  Ember.computed('na' + 'me', function() { return this.get('name'); });",
     // Optional chaining:
