@@ -97,7 +97,7 @@
     "sort-package-json": "^1.52.0"
   },
   "peerDependencies": {
-    "eslint": ">= 6"
+    "eslint": ">= 7"
   },
   "engines": {
     "node": "10.* || 12.* || >= 14"
