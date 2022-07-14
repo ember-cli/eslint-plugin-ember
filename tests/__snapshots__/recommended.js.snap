@@ -10,6 +10,7 @@ Array [
   "jquery-ember-run",
   "new-module-imports",
   "no-actions-hash",
+  "no-array-prototype-extensions",
   "no-arrow-function-computed-properties",
   "no-assignment-of-untracked-properties-used-in-tracking-contexts",
   "no-attrs-in-components",
