@@ -46,8 +46,7 @@ module.exports = {
 
 |    | Name | Description |
 |:---|:-----|:------------|
-| | [base](./lib/config/base.js) | contains no rules settings, but the basic eslint configuration suitable for any ember project. You can use it to configure rules as you wish. |
-| ✅ | [recommended](./lib/recommended-rules.js) | extends the `base` configuration by enabling the recommended rules. |
+| ✅ | [recommended](./lib/recommended-rules.js) | enables the `recommended` rules |
 
 ## 🍟 Rules
 
