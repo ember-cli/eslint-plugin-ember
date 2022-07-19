@@ -21,7 +21,8 @@
     "url": "git+https://github.com/ember-cli/eslint-plugin-ember.git"
   },
   "license": "MIT",
-  "main": "lib/index.js",
+  "exports": "./lib/index.js",
+  "main": "./lib/index.js",
   "directories": {
     "test": "test",
     "rules": "rules"
@@ -81,7 +82,7 @@
     "eslint-plugin-filenames": "^1.3.2",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^24.5.2",
-    "eslint-plugin-markdown": "^2.0.1",
+    "eslint-plugin-markdown": "^3.0.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-unicorn": "^31.0.0",
@@ -97,7 +98,7 @@
     "sort-package-json": "^1.52.0"
   },
   "peerDependencies": {
-    "eslint": ">= 6"
+    "eslint": ">= 7"
   },
   "engines": {
     "node": "14.* || 16.* || >= 18"
