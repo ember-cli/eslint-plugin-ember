@@ -9,22 +9,6 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 // ------------------------------------------------------------------------------
 
-describe('imports', () => {
-  it('should expose the default ignored properties', () => {
-    expect(rule.DEFAULT_IGNORED_PROPERTIES).toStrictEqual([
-      'classNames',
-      'classNameBindings',
-      'actions',
-      'concatenatedProperties',
-      'mergedProperties',
-      'positionalParams',
-      'attributeBindings',
-      'queryParams',
-      'attrs',
-    ]);
-  });
-});
-
 const eslintTester = new RuleTester({
   parser: require.resolve('@babel/eslint-parser'),
   parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
@@ -71,11 +55,25 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     'import Component from "@ember/component"; export default class MyNativeClassComponent extends Component { someArrayField = []; }',
     'import Component from "@ember/component"; export default class MyNativeClassComponent extends Component { someObjectField = {}; }',
     'import EmberObject from "@ember/object"; export default class MyNativeClassComponentWithAMixin extends EmberObject.extend(MyMixin) { someArrayField = []; }',
+    { code: 'export default Foo.extend({ someProp: [] });', options: [['someProp']] }, // With options.
+    { code: 'export default Foo.extend({ someProp: [], actions: {} });', options: [['someProp']] }, // With options and known Ember property.
   ],
   invalid: [
     {
       code: 'export default Foo.extend({someProp: []});',
       output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+    {
+      // With options.
+      code: 'export default Foo.extend({someProp: [], someProp2: [], actions: {} });',
+      output: null,
+      options: [['someProp']],
       errors: [
         {
           message:
