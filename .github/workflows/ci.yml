@@ -35,5 +35,3 @@ jobs:
     - run: yarn update && git diff --exit-code
 
     - run: yarn test:coverage --runInBand
-
-    - run: yarn add --dev eslint@6 && yarn test --runInBand
