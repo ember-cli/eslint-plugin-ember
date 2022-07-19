@@ -11,7 +11,6 @@ const rules = {
   'ember/order-in-models': [
     2,
     {
-      // eslint-disable-next-line prettier/prettier
       order: [
         'spread',
         'attribute',
@@ -27,7 +26,6 @@ const rules = {
 If you want some of properties to be treated equally in order you can group them into arrays, like so:
 
 ```js
-// eslint-disable-next-line prettier/prettier
 order: [
   'attribute',
   'relationship',
