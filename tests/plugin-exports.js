@@ -2,7 +2,6 @@
 
 const plugin = require('../lib');
 const ember = require('../lib/utils/ember');
-const base = require('../lib/config/base');
 const recommended = require('../lib/config/recommended');
 
 describe('plugin exports', () => {
@@ -14,7 +13,7 @@ describe('plugin exports', () => {
 
   describe('configs', () => {
     it('has the right configurations', () => {
-      expect(plugin.configs).toStrictEqual({ base, recommended });
+      expect(plugin.configs).toStrictEqual({ recommended });
     });
   });
 });
