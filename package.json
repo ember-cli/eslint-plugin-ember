@@ -21,7 +21,8 @@
     "url": "git+https://github.com/ember-cli/eslint-plugin-ember.git"
   },
   "license": "MIT",
-  "main": "lib/index.js",
+  "exports": "./lib/index.js",
+  "main": "./lib/index.js",
   "directories": {
     "test": "test",
     "rules": "rules"
