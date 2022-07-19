@@ -9,7 +9,7 @@
 ## ❗️Requirements
 
 - [ESLint](https://eslint.org/) `>= 6`
-- [Node.js](https://nodejs.org/) `10.* || 12.* || >= 14`
+- [Node.js](https://nodejs.org/) `14.* || 16.* || >= 18`
 
 ## 🚀 Usage
 
@@ -46,8 +46,7 @@ module.exports = {
 
 |    | Name | Description |
 |:---|:-----|:------------|
-| | [base](./lib/config/base.js) | contains no rules settings, but the basic eslint configuration suitable for any ember project. You can use it to configure rules as you wish. |
-| ✅ | [recommended](./lib/recommended-rules.js) | extends the `base` configuration by enabling the recommended rules. |
+| ✅ | [recommended](./lib/recommended-rules.js) | enables the `recommended` rules |
 
 ## 🍟 Rules
 
@@ -103,7 +102,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |:--------|:------------|:---------------|:-----------|:---------------|
 | [closure-actions](./docs/rules/closure-actions.md) | enforce usage of closure actions | ✅ |  |  |
 | [new-module-imports](./docs/rules/new-module-imports.md) | enforce using "New Module Imports" from Ember RFC #176 | ✅ |  |  |
-| [no-array-prototype-extensions](./docs/rules/no-array-prototype-extensions.md) | disallow usage of Ember's `Array` prototype extensions |  |  |  |
+| [no-array-prototype-extensions](./docs/rules/no-array-prototype-extensions.md) | disallow usage of Ember's `Array` prototype extensions | ✅ |  |  |
 | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | disallow usage of Ember's `function` prototype extensions | ✅ |  |  |
 | [no-mixins](./docs/rules/no-mixins.md) | disallow the usage of mixins | ✅ |  |  |
 | [no-new-mixins](./docs/rules/no-new-mixins.md) | disallow the creation of new mixins | ✅ |  |  |

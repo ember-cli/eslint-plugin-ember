@@ -19,10 +19,13 @@ ruleTester.run('no-get', rule, {
     // **************************
 
     // Nested property path.
-    { code: "this.get('foo.bar');", options: [{ ignoreNestedPaths: true }] },
+    {
+      code: "this.get('foo.bar');",
+      options: [{ ignoreNestedPaths: true, useOptionalChaining: false }],
+    },
     {
       code: "import { get } from '@ember/object'; get(this, 'foo.bar');",
-      options: [{ ignoreNestedPaths: true }],
+      options: [{ ignoreNestedPaths: true, useOptionalChaining: false }],
     },
 
     // Template literals.
@@ -74,15 +77,21 @@ ruleTester.run('no-get', rule, {
     // **************************
 
     // Nested property path.
-    { code: "this.getProperties('foo', 'bar.baz');", options: [{ ignoreNestedPaths: true }] },
-    { code: "this.getProperties(['foo', 'bar.baz']);", options: [{ ignoreNestedPaths: true }] }, // With parameters in array.
+    {
+      code: "this.getProperties('foo', 'bar.baz');",
+      options: [{ ignoreNestedPaths: true, useOptionalChaining: false }],
+    },
+    {
+      code: "this.getProperties(['foo', 'bar.baz']);",
+      options: [{ ignoreNestedPaths: true, useOptionalChaining: false }],
+    }, // With parameters in array.
     {
       code: "import { getProperties } from '@ember/object'; getProperties(this, 'foo', 'bar.baz');",
-      options: [{ ignoreNestedPaths: true }],
+      options: [{ ignoreNestedPaths: true, useOptionalChaining: false }],
     },
     {
       code: "import { getProperties } from '@ember/object'; getProperties(this, ['foo', 'bar.baz']);",
-      options: [{ ignoreNestedPaths: true }],
+      options: [{ ignoreNestedPaths: true, useOptionalChaining: false }],
     }, // With parameters in array.
 
     // Template literals.
@@ -216,12 +225,21 @@ ruleTester.run('no-get', rule, {
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
     {
+      // useOptionalChaining = false
       code: "foo1.foo2.get('bar.bar').baz;",
       output: null,
+      options: [{ catchUnsafeObjects: true, useOptionalChaining: false }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      // useOptionalChaining = true (implicit)
+      code: "foo1.foo2.get('bar.bar').baz;",
+      output: 'foo1.foo2.bar.bar.baz;',
       options: [{ catchUnsafeObjects: true }],
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
     {
+      // useOptionalChaining = true (explicit)
       code: "foo1.foo2.get('bar.bar').baz;",
       output: 'foo1.foo2.bar.bar.baz;',
       options: [{ catchUnsafeObjects: true, useOptionalChaining: true }],
