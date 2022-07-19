@@ -1,5 +1,7 @@
 # no-array-prototype-extensions
 
+✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+
 Do not use Ember's `array` prototype extensions.
 
 Use native array functions instead of `.filterBy`, `.toArray()` in Ember modules.
