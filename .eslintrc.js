@@ -152,7 +152,6 @@ module.exports = {
     'unicorn/no-null': 'off',
     'unicorn/no-useless-undefined': 'off',
     'unicorn/prefer-module': 'off',
-    'unicorn/prefer-object-from-entries': 'off',
     'unicorn/prevent-abbreviations': 'off',
   },
   overrides: [
