@@ -111,6 +111,7 @@ module.exports = {
 
     // Optional jest rules:
     'jest/consistent-test-it': 'error',
+    'jest/lowercase-name': 'error',
     'jest/no-duplicate-hooks': 'error',
     'jest/no-hooks': 'error',
     'jest/no-if': 'error',
@@ -119,12 +120,11 @@ module.exports = {
     'jest/no-test-return-statement': 'error',
     'jest/prefer-called-with': 'error',
     'jest/prefer-hooks-on-top': 'error',
-    'jest/prefer-lowercase-title': 'error',
     'jest/prefer-spy-on': 'error',
     'jest/prefer-strict-equal': 'error',
     'jest/prefer-todo': 'error',
-    'jest/require-top-level-describe': 'error',
     'jest/require-to-throw-message': 'error',
+    'jest/require-top-level-describe': 'error',
     'jest/valid-title': 'error',
 
     // Optional import rules:
