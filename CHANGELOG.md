@@ -8,6 +8,37 @@
 
 
 
+
+## v11.0.0 (2022-07-20)
+
+#### :boom: Breaking Change
+* [#1517](https://github.com/ember-cli/eslint-plugin-ember/pull/1517) Add `no-array-prototype-extensions` as `recommended` rule ([@bmish](https://github.com/bmish))
+* [#1515](https://github.com/ember-cli/eslint-plugin-ember/pull/1515) Drop support for ESLint v6 ([@bmish](https://github.com/bmish))
+* [#1318](https://github.com/ember-cli/eslint-plugin-ember/pull/1318) Drop support for Node 10, 12, 15, 17 ([@aggmoulik](https://github.com/aggmoulik))
+* [#1519](https://github.com/ember-cli/eslint-plugin-ember/pull/1519) Enable `useOptionalChaining` option by default for `no-get` rule ([@bmish](https://github.com/bmish))
+* [#1518](https://github.com/ember-cli/eslint-plugin-ember/pull/1518) Remove `base` config ([@bmish](https://github.com/bmish))
+* [#1516](https://github.com/ember-cli/eslint-plugin-ember/pull/1516) Set config `ecmaVersion` to `2020` ([@bmish](https://github.com/bmish))
+* [#1513](https://github.com/ember-cli/eslint-plugin-ember/pull/1513) Stop exporting non-Ember utils ([@bmish](https://github.com/bmish))
+* [#1514](https://github.com/ember-cli/eslint-plugin-ember/pull/1514) Strictly define Node API ([@bmish](https://github.com/bmish))
+* [#1512](https://github.com/ember-cli/eslint-plugin-ember/pull/1512) Update `avoid-leaking-state-in-ember-objects` rule to augment instead of replace default config ([@bmish](https://github.com/bmish))
+
+#### :rocket: Enhancement
+* [#1529](https://github.com/ember-cli/eslint-plugin-ember/pull/1529) Better support native class property definitions (and update to ESLint v8 internally) ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#1484](https://github.com/ember-cli/eslint-plugin-ember/pull/1484) Improve links in `no-array-prototype-extensions` rule doc ([@bmish](https://github.com/bmish))
+* [#1480](https://github.com/ember-cli/eslint-plugin-ember/pull/1480) Update optional rule example to use actual optional rule ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#1481](https://github.com/ember-cli/eslint-plugin-ember/pull/1481) Add Node 18 to CI ([@ddzz](https://github.com/ddzz))
+* [#1352](https://github.com/ember-cli/eslint-plugin-ember/pull/1352) Upgrade ESLint dependencies and fix new linting issues ([@ddzz](https://github.com/ddzz))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Darius Dzien ([@ddzz](https://github.com/ddzz))
+- Moulik Aggarwal ([@aggmoulik](https://github.com/aggmoulik))
+
+
 ## v10.6.1 (2022-05-04)
 
 #### :bug: Bug Fix
