@@ -102,24 +102,32 @@ describe('hasDecorator', () => {
   }
 });
 
-describe('isClassPropertyWithDecorator', () => {
+describe('isClassPropertyOrPropertyDefinitionWithDecorator', () => {
   it('should not find anything with non-decorator', () => {
     const node = babelESLintParse('const x = 123').body[0];
-    expect(decoratorUtils.isClassPropertyWithDecorator(node, 'random')).toBe(false);
+    expect(decoratorUtils.isClassPropertyOrPropertyDefinitionWithDecorator(node, 'random')).toBe(
+      false
+    );
   });
 
   it('should not find anything with wrong decorator name', () => {
     const node = babelESLintParse('class Test { @tracked x }').body[0].body.body[0];
-    expect(decoratorUtils.isClassPropertyWithDecorator(node, 'random')).toBe(false);
+    expect(decoratorUtils.isClassPropertyOrPropertyDefinitionWithDecorator(node, 'random')).toBe(
+      false
+    );
   });
 
   it('should find something with Identifier decorator', () => {
     const node = babelESLintParse('class Test { @tracked x }').body[0].body.body[0];
-    expect(decoratorUtils.isClassPropertyWithDecorator(node, 'tracked')).toBe(true);
+    expect(decoratorUtils.isClassPropertyOrPropertyDefinitionWithDecorator(node, 'tracked')).toBe(
+      true
+    );
   });
 
   it('should find something with CallExpression decorator', () => {
     const node = babelESLintParse('class Test { @tracked x }').body[0].body.body[0];
-    expect(decoratorUtils.isClassPropertyWithDecorator(node, 'tracked')).toBe(true);
+    expect(decoratorUtils.isClassPropertyOrPropertyDefinitionWithDecorator(node, 'tracked')).toBe(
+      true
+    );
   });
 });

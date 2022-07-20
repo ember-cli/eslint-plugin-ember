@@ -162,7 +162,13 @@ ruleTester.run('require-tagless-components', rule, {
         }
       `,
       output: null,
-      errors: [{ message: ERROR_MESSAGE, line: 4, type: 'ClassProperty' }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          line: 4,
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
     },
     {
       code: `

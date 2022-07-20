@@ -24,7 +24,7 @@ module.exports = {
     'prettier',
   ],
   env: {
-    es6: true,
+    es2020: true,
     node: true,
     jest: true,
   },
@@ -123,8 +123,8 @@ module.exports = {
     'jest/prefer-spy-on': 'error',
     'jest/prefer-strict-equal': 'error',
     'jest/prefer-todo': 'error',
-    'jest/require-top-level-describe': 'error',
     'jest/require-to-throw-message': 'error',
+    'jest/require-top-level-describe': 'error',
     'jest/valid-title': 'error',
 
     // Optional import rules:

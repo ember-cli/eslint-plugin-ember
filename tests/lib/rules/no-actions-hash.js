@@ -99,7 +99,12 @@ ruleTester.run('no-actions-hash', rule, {
         }
       `,
       output: null,
-      errors: [{ type: 'ClassProperty', message: ERROR_MESSAGE }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
     },
     {
       code: `
@@ -122,7 +127,12 @@ ruleTester.run('no-actions-hash', rule, {
         }
       `,
       output: null,
-      errors: [{ type: 'ClassProperty', message: ERROR_MESSAGE }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
     },
     {
       code: `
@@ -145,7 +155,12 @@ ruleTester.run('no-actions-hash', rule, {
         }
       `,
       output: null,
-      errors: [{ type: 'ClassProperty', message: ERROR_MESSAGE }],
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
     },
   ],
 });
