@@ -6,7 +6,7 @@
 
 'use strict';
 
-const fs = require('fs');
+const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
 
 const { window } = new JSDOM('');

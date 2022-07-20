@@ -1,7 +1,7 @@
 'use strict';
 
-const { readdirSync, readFileSync } = require('fs');
-const path = require('path');
+const { readdirSync, readFileSync } = require('node:fs');
+const path = require('node:path');
 const rules = require('../lib').rules;
 const recommendedRules = require('../lib/recommended-rules');
 
@@ -16,7 +16,7 @@ function getAllNamedOptions(jsonSchema) {
   }
 
   if (Array.isArray(jsonSchema)) {
-    return jsonSchema.map(getAllNamedOptions).flat();
+    return jsonSchema.flatMap(getAllNamedOptions);
   }
 
   if (jsonSchema.items) {

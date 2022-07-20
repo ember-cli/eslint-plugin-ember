@@ -20,7 +20,7 @@ const VALID_USAGES_BASIC = [
   },
 ];
 
-const VALID_USAGES_FOR_EACH_DEBUG_FUNCTION = DEBUG_FUNCTIONS.map((debugFunction) => [
+const VALID_USAGES_FOR_EACH_DEBUG_FUNCTION = DEBUG_FUNCTIONS.flatMap((debugFunction) => [
   {
     code: `import { ${debugFunction} } from '@ember/debug'; OtherClass.${debugFunction}(true, 'My string.');`,
   },
@@ -71,11 +71,11 @@ const VALID_USAGES_FOR_EACH_DEBUG_FUNCTION = DEBUG_FUNCTIONS.map((debugFunction)
   {
     code: `Ember.${debugFunction}.unrelatedFunction(true, 'My description.');`,
   },
-]).flat();
+]);
 
 const VALID_USAGES = [...VALID_USAGES_BASIC, ...VALID_USAGES_FOR_EACH_DEBUG_FUNCTION];
 
-const INVALID_USAGES = DEBUG_FUNCTIONS.map((debugFunction) => [
+const INVALID_USAGES = DEBUG_FUNCTIONS.flatMap((debugFunction) => [
   {
     code: `import { ${debugFunction} } from '@ember/debug'; ${debugFunction}(true, 'My description.');`,
     output: null,
@@ -111,7 +111,7 @@ const INVALID_USAGES = DEBUG_FUNCTIONS.map((debugFunction) => [
     output: null,
     errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
   },
-]).flat();
+]);
 
 const ruleTester = new RuleTester({
   parserOptions: {

@@ -1,7 +1,7 @@
 'use strict';
 
-const { readdirSync, readFileSync } = require('fs');
-const path = require('path');
+const { readdirSync, readFileSync } = require('node:fs');
+const path = require('node:path');
 const configs = require('../lib').configs;
 
 const CONFIG_NAMES = Object.keys(configs);
