@@ -126,7 +126,12 @@ ruleTester.run('no-restricted-service-injections', rule, {
       code: `${SERVICE_IMPORT} class MyComponent extends Component { @service('myService') randomName }`,
       output: null,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
-      errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'ClassProperty' }],
+      errors: [
+        {
+          message: DEFAULT_ERROR_MESSAGE,
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
     },
     {
       // With decorator with dasherized service name argument:
@@ -134,7 +139,12 @@ ruleTester.run('no-restricted-service-injections', rule, {
       code: `${SERVICE_IMPORT} class MyComponent extends Component { @service('my-service') randomName }`,
       output: null,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
-      errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'ClassProperty' }],
+      errors: [
+        {
+          message: DEFAULT_ERROR_MESSAGE,
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
     },
     {
       // With decorator without service name argument (without parentheses):
@@ -142,7 +152,12 @@ ruleTester.run('no-restricted-service-injections', rule, {
       code: `${SERVICE_IMPORT} class MyComponent extends Component { @service myService }`,
       output: null,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
-      errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'ClassProperty' }],
+      errors: [
+        {
+          message: DEFAULT_ERROR_MESSAGE,
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
     },
     {
       // With decorator without service name argument (with parentheses):
@@ -150,7 +165,12 @@ ruleTester.run('no-restricted-service-injections', rule, {
       code: `${SERVICE_IMPORT} class MyComponent extends Component { @service() myService }`,
       output: null,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
-      errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'ClassProperty' }],
+      errors: [
+        {
+          message: DEFAULT_ERROR_MESSAGE,
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
     },
     {
       // With decorator without service name argument (with parentheses) (with property name as string literal):
@@ -158,7 +178,12 @@ ruleTester.run('no-restricted-service-injections', rule, {
       code: `${SERVICE_IMPORT} class MyComponent extends Component { @service() 'myService' }`,
       output: null,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
-      errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'ClassProperty' }],
+      errors: [
+        {
+          message: DEFAULT_ERROR_MESSAGE,
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
     },
     {
       // With custom error message:

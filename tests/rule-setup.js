@@ -16,7 +16,7 @@ function getAllNamedOptions(jsonSchema) {
   }
 
   if (Array.isArray(jsonSchema)) {
-    return jsonSchema.map(getAllNamedOptions).flat();
+    return jsonSchema.flatMap(getAllNamedOptions);
   }
 
   if (jsonSchema.items) {
@@ -159,7 +159,7 @@ describe('rules setup is correct', function () {
           // Ensure that expected notices are present in the correct order.
           let currentLineNumber = 1;
           for (const expectedNotice of expectedNotices) {
-            expect(lines[currentLineNumber]).toStrictEqual('');
+            expect(lines[currentLineNumber]).toBe('');
             expect(lines[currentLineNumber + 1]).toStrictEqual(MESSAGES[expectedNotice]);
             currentLineNumber += 2;
           }

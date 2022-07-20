@@ -18,22 +18,16 @@ describe('getComputedPropertyFunctionBody', () => {
 
   it('gets the result when using FunctionExpression and no dependent keys', () => {
     const node = parse('computed(function() {})');
-    expect(computedPropertyUtils.getComputedPropertyFunctionBody(node).type).toStrictEqual(
-      'BlockStatement'
-    );
+    expect(computedPropertyUtils.getComputedPropertyFunctionBody(node).type).toBe('BlockStatement');
   });
 
   it('gets the result when using FunctionExpression and one dependent key', () => {
     const node = parse('computed("dep1", function() {})');
-    expect(computedPropertyUtils.getComputedPropertyFunctionBody(node).type).toStrictEqual(
-      'BlockStatement'
-    );
+    expect(computedPropertyUtils.getComputedPropertyFunctionBody(node).type).toBe('BlockStatement');
   });
 
   it('gets the result when using explicit getter', () => {
     const node = parse('computed("dep1", { get() {}})');
-    expect(computedPropertyUtils.getComputedPropertyFunctionBody(node).type).toStrictEqual(
-      'BlockStatement'
-    );
+    expect(computedPropertyUtils.getComputedPropertyFunctionBody(node).type).toBe('BlockStatement');
   });
 });

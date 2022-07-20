@@ -90,13 +90,13 @@ describe('function sort order', function () {
 
 describe('getName', () => {
   it('should behave correctly', () => {
-    expect(utils.getName(parse('x'))).toStrictEqual('x');
-    expect(utils.getName(parse('x()'))).toStrictEqual('x');
-    expect(utils.getName(parse('x?.()'))).toStrictEqual('x');
-    expect(utils.getName(parse('x.y'))).toStrictEqual('x.y');
-    expect(utils.getName(parse('x?.y'))).toStrictEqual('x.y');
-    expect(utils.getName(parse('x.y()'))).toStrictEqual('x.y');
-    expect(utils.getName(parse('x?.y?.()'))).toStrictEqual('x.y');
+    expect(utils.getName(parse('x'))).toBe('x');
+    expect(utils.getName(parse('x()'))).toBe('x');
+    expect(utils.getName(parse('x?.()'))).toBe('x');
+    expect(utils.getName(parse('x.y'))).toBe('x.y');
+    expect(utils.getName(parse('x?.y'))).toBe('x.y');
+    expect(utils.getName(parse('x.y()'))).toBe('x.y');
+    expect(utils.getName(parse('x?.y?.()'))).toBe('x.y');
   });
 });
 
@@ -136,12 +136,12 @@ describe('getPropertyValue', () => {
 
   it('should return value when using a simple property path for simpleObject', () => {
     const value = utils.getPropertyValue(simpleObject, 'foo');
-    expect(value).toStrictEqual(true);
+    expect(value).toBe(true);
   });
 
   it('should return value when using a full property path for simpleObject', () => {
     const buzz = utils.getPropertyValue(simpleObject, 'bar.fizz.buzz');
-    expect(buzz).toStrictEqual('buzz');
+    expect(buzz).toBe('buzz');
   });
 
   it('should return null when property value not found for node', () => {
@@ -151,12 +151,12 @@ describe('getPropertyValue', () => {
 
   it('should return value when using a simple property path for node', () => {
     const type = utils.getPropertyValue(node, 'type');
-    expect(type).toStrictEqual('CallExpression');
+    expect(type).toBe('CallExpression');
   });
 
   it('should return value when using a full property path for node', () => {
     const name = utils.getPropertyValue(node, 'callee.object.name');
-    expect(name).toStrictEqual('Ember');
+    expect(name).toBe('Ember');
   });
 });
 
@@ -166,7 +166,7 @@ describe('getSize', () => {
   );
 
   it('should check size of given expression', () => {
-    expect(utils.getSize(node)).toStrictEqual(6);
+    expect(utils.getSize(node)).toBe(6);
   });
 });
 

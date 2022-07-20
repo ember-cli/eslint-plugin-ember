@@ -199,7 +199,7 @@ ruleTester.run('no-unused-services', rule, {
               output: `${SERVICE_IMPORT} class MyClass {  fooFunc() {${nonUses}} }`,
             },
           ],
-          type: 'ClassProperty',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
@@ -215,7 +215,7 @@ ruleTester.run('no-unused-services', rule, {
               output: `${SERVICE_IMPORT} class MyClass {  fooFunc() {${nonUses}} }`,
             },
           ],
-          type: 'ClassProperty',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
@@ -296,7 +296,7 @@ ruleTester.run('no-unused-services', rule, {
               output: `${SERVICE_IMPORT} class MyClass {  fooFunc() {${emberObjectUses1}} }`,
             },
           ],
-          type: 'ClassProperty',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
@@ -329,7 +329,7 @@ ruleTester.run('no-unused-services', rule, {
               output: `${SERVICE_IMPORT}${EO_IMPORTS} class MyClass {  fooFunc() {${emberObjectUses2}} }`,
             },
           ],
-          type: 'ClassProperty',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
@@ -362,7 +362,7 @@ ruleTester.run('no-unused-services', rule, {
               output: `${SERVICE_IMPORT} class MyClass {  @alias('${SERVICE_NAME}') someAlias; @computed('${SERVICE_NAME}.prop') get someComputed() {} }`,
             },
           ],
-          type: 'ClassProperty',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
@@ -395,7 +395,7 @@ ruleTester.run('no-unused-services', rule, {
               output: `${SERVICE_IMPORT}${EO_IMPORTS}${ALIAS_IMPORT} class MyClass {  @alias('unrelatedProp', '${SERVICE_NAME}') someAlias; @computed('unrelatedProp.prop') get someComputed() {} }`,
             },
           ],
-          type: 'ClassProperty',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
@@ -427,7 +427,7 @@ ruleTester.run('no-unused-services', rule, {
               output: `${SERVICE_IMPORT}${EO_IMPORTS}${ALIAS_IMPORT} class MyClass {  @alias(${SERVICE_NAME}) someAlias; @computed(${SERVICE_NAME}) get someComputed() {} }`,
             },
           ],
-          type: 'ClassProperty',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
@@ -460,7 +460,7 @@ ruleTester.run('no-unused-services', rule, {
               output: `${SERVICE_IMPORT} import {foobar} from '@ember/object/computed'; class MyClass {  @foobar('${SERVICE_NAME}') someFoobar; }`,
             },
           ],
-          type: 'ClassProperty',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
@@ -509,7 +509,7 @@ ruleTester.run('no-unused-services', rule, {
               output: `${SERVICE_IMPORT} class MyClass1 {  } class MyClass2 { fooFunc() {this.${SERVICE_NAME};} }`,
             },
           ],
-          type: 'ClassProperty',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
@@ -525,7 +525,7 @@ ruleTester.run('no-unused-services', rule, {
               output: `${SERVICE_IMPORT} class MyClass1 { fooFunc() {this.${SERVICE_NAME};} } class MyClass2 {  }`,
             },
           ],
-          type: 'ClassProperty',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
@@ -542,7 +542,7 @@ ruleTester.run('no-unused-services', rule, {
               output: `${SERVICE_IMPORT} class MyClass1 {  fooFunc1() { class MyClass2 { fooFunc2() {this.${SERVICE_NAME};} } } }`,
             },
           ],
-          type: 'ClassProperty',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
@@ -558,7 +558,7 @@ ruleTester.run('no-unused-services', rule, {
               output: `${SERVICE_IMPORT} class MyClass1 { fooFunc1() {this.${SERVICE_NAME};} fooFunc2() { class MyClass2 {  } } }`,
             },
           ],
-          type: 'ClassProperty',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
