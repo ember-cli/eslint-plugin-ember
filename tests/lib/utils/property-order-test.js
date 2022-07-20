@@ -59,7 +59,7 @@ describe('determinePropertyType', () => {
       const node = context.ast.body[1].declaration.arguments[0].properties[0];
       expect(
         propertyOrder.determinePropertyType(node, 'controller', [], undefined, importInjectName)
-      ).toStrictEqual('service');
+      ).toBe('service');
     });
 
     it('should determine controller-type props with full import', () => {
@@ -71,9 +71,9 @@ describe('determinePropertyType', () => {
       );
       const importEmberName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration.arguments[0].properties[0];
-      expect(
-        propertyOrder.determinePropertyType(node, 'controller', [], importEmberName)
-      ).toStrictEqual('controller');
+      expect(propertyOrder.determinePropertyType(node, 'controller', [], importEmberName)).toBe(
+        'controller'
+      );
     });
 
     it('should determine controller-type props', () => {
@@ -95,7 +95,7 @@ describe('determinePropertyType', () => {
           undefined,
           importControllerName
         )
-      ).toStrictEqual('controller');
+      ).toBe('controller');
     });
 
     it('should determine init-type props', () => {
@@ -105,7 +105,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller')).toStrictEqual('init');
+      expect(propertyOrder.determinePropertyType(node, 'controller')).toBe('init');
     });
 
     it('should determine component lifecycle hooks', () => {
@@ -115,9 +115,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'component')).toStrictEqual(
-        'didInsertElement'
-      );
+      expect(propertyOrder.determinePropertyType(node, 'component')).toBe('didInsertElement');
     });
 
     it('should determine query-params', () => {
@@ -127,7 +125,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller')).toStrictEqual('query-params');
+      expect(propertyOrder.determinePropertyType(node, 'controller')).toBe('query-params');
     });
 
     it('should determine inherited properties', () => {
@@ -137,9 +135,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller')).toStrictEqual(
-        'inherited-property'
-      );
+      expect(propertyOrder.determinePropertyType(node, 'controller')).toBe('inherited-property');
     });
 
     it('should determine attributes', () => {
@@ -149,7 +145,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'model')).toStrictEqual('attribute');
+      expect(propertyOrder.determinePropertyType(node, 'model')).toBe('attribute');
     });
 
     it('should determine relationships', () => {
@@ -159,7 +155,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'model')).toStrictEqual('relationship');
+      expect(propertyOrder.determinePropertyType(node, 'model')).toBe('relationship');
     });
 
     it('should determine observer-type props with full import', () => {
@@ -171,9 +167,9 @@ describe('determinePropertyType', () => {
       );
       const importEmberName = context.ast.body[0].specifiers[0].local.name;
       const node = context.ast.body[1].declaration.arguments[0].properties[0];
-      expect(
-        propertyOrder.determinePropertyType(node, 'controller', [], importEmberName)
-      ).toStrictEqual('observer');
+      expect(propertyOrder.determinePropertyType(node, 'controller', [], importEmberName)).toBe(
+        'observer'
+      );
     });
 
     it('should determine observer-type props', () => {
@@ -194,7 +190,7 @@ describe('determinePropertyType', () => {
           undefined,
           importObserverName
         )
-      ).toStrictEqual('observer');
+      ).toBe('observer');
     });
 
     it('should determine actions', () => {
@@ -204,7 +200,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'component')).toStrictEqual('actions');
+      expect(propertyOrder.determinePropertyType(node, 'component')).toBe('actions');
     });
 
     it('should determine single-line functions', () => {
@@ -214,9 +210,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'component')).toStrictEqual(
-        'single-line-function'
-      );
+      expect(propertyOrder.determinePropertyType(node, 'component')).toBe('single-line-function');
     });
 
     it('should determine multi-line functions', () => {
@@ -228,9 +222,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'component')).toStrictEqual(
-        'multi-line-function'
-      );
+      expect(propertyOrder.determinePropertyType(node, 'component')).toBe('multi-line-function');
     });
 
     it('should determine properties', () => {
@@ -240,7 +232,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual('property');
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toBe('property');
     });
 
     it('should determine template literals as properties', () => {
@@ -250,7 +242,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual('property');
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toBe('property');
     });
 
     it('should determine spread syntax as a spread property', () => {
@@ -260,7 +252,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual('spread');
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toBe('spread');
     });
 
     it('should determine empty methods', () => {
@@ -270,9 +262,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual(
-        'empty-method'
-      );
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toBe('empty-method');
     });
 
     it('should determine methods', () => {
@@ -282,7 +272,7 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual('method');
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toBe('method');
     });
 
     it('should determine custom properties when given order with custom property', () => {
@@ -297,7 +287,7 @@ describe('determinePropertyType', () => {
           'custom:myBarProperty',
           'custom:myFooProperty',
         ])
-      ).toStrictEqual('custom:myFooProperty');
+      ).toBe('custom:myFooProperty');
     });
 
     it('should determine custom properties as normal properties when given order without custom property', () => {
@@ -307,9 +297,9 @@ describe('determinePropertyType', () => {
         });`
       );
       const node = context.ast.body[0].declaration.arguments[0].properties[0];
-      expect(
-        propertyOrder.determinePropertyType(node, 'component', ['custom:myBarProperty'])
-      ).toStrictEqual('property');
+      expect(propertyOrder.determinePropertyType(node, 'component', ['custom:myBarProperty'])).toBe(
+        'property'
+      );
     });
   });
 
@@ -325,7 +315,7 @@ describe('determinePropertyType', () => {
       const node = context.ast.body[1].body.body[0];
       expect(
         propertyOrder.determinePropertyType(node, 'controller', [], undefined, importInjectName)
-      ).toStrictEqual('service');
+      ).toBe('service');
     });
 
     it('should determine controller-type props', () => {
@@ -347,7 +337,7 @@ describe('determinePropertyType', () => {
           undefined,
           importControllerName
         )
-      ).toStrictEqual('controller');
+      ).toBe('controller');
     });
 
     it('should determine init-type props', () => {
@@ -357,7 +347,7 @@ describe('determinePropertyType', () => {
         }`
       );
       const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller')).toStrictEqual('init');
+      expect(propertyOrder.determinePropertyType(node, 'controller')).toBe('init');
     });
 
     it('should determine query-params', () => {
@@ -367,7 +357,7 @@ describe('determinePropertyType', () => {
         }`
       );
       const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller')).toStrictEqual('query-params');
+      expect(propertyOrder.determinePropertyType(node, 'controller')).toBe('query-params');
     });
 
     it('should determine attributes', () => {
@@ -377,7 +367,7 @@ describe('determinePropertyType', () => {
         }`
       );
       const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'model')).toStrictEqual('attribute');
+      expect(propertyOrder.determinePropertyType(node, 'model')).toBe('attribute');
     });
 
     it('should determine relationships', () => {
@@ -387,7 +377,7 @@ describe('determinePropertyType', () => {
         }`
       );
       const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'model')).toStrictEqual('relationship');
+      expect(propertyOrder.determinePropertyType(node, 'model')).toBe('relationship');
     });
 
     it('should determine observer-type props', () => {
@@ -408,7 +398,7 @@ describe('determinePropertyType', () => {
           undefined,
           importObserverName
         )
-      ).toStrictEqual('observer');
+      ).toBe('observer');
     });
 
     it('should determine single-line functions', () => {
@@ -418,9 +408,7 @@ describe('determinePropertyType', () => {
         }`
       );
       const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'component')).toStrictEqual(
-        'single-line-function'
-      );
+      expect(propertyOrder.determinePropertyType(node, 'component')).toBe('single-line-function');
     });
 
     it('should determine multi-line functions', () => {
@@ -432,7 +420,7 @@ describe('determinePropertyType', () => {
         }`
       );
       const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual(
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toBe(
         'multi-line-function'
       );
     });
@@ -444,7 +432,7 @@ describe('determinePropertyType', () => {
         }`
       );
       const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'component', [])).toStrictEqual('property');
+      expect(propertyOrder.determinePropertyType(node, 'component', [])).toBe('property');
     });
   });
 });

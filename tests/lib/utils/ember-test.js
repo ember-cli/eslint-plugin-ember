@@ -1741,7 +1741,7 @@ describe('hasDuplicateDependentKeys', () => {
 describe('getEmberImportAliasName', () => {
   it('should get the proper name of default import', () => {
     const node = babelESLintParse("import foo from 'ember'").body[0];
-    expect(emberUtils.getEmberImportAliasName(node)).toStrictEqual('foo');
+    expect(emberUtils.getEmberImportAliasName(node)).toBe('foo');
   });
 });
 

@@ -91,6 +91,7 @@ ${deprecatedRules
 `;
 }
 
+// eslint-disable-next-line unicorn/prefer-object-from-entries
 const recommendedRules = rules.reduce((obj, entry) => {
   const name = `ember/${entry[0]}`;
   const recommended = entry[1].meta.docs.recommended;

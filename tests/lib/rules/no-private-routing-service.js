@@ -88,7 +88,12 @@ ruleTester.run('no-private-routing-service', rule, {
     {
       code: `${SERVICE_IMPORT} export default class MyComponent extends Component { @service('-routing') routing; }`,
       output: null,
-      errors: [{ message: PRIVATE_ROUTING_SERVICE_ERROR_MESSAGE, type: 'ClassProperty' }],
+      errors: [
+        {
+          message: PRIVATE_ROUTING_SERVICE_ERROR_MESSAGE,
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
     },
 
     // _routerMicrolib (`catchRouterMicrolib` option on)
