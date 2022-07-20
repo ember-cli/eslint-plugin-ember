@@ -152,6 +152,7 @@ module.exports = {
     'unicorn/no-null': 'off',
     'unicorn/no-useless-undefined': 'off',
     'unicorn/prefer-module': 'off',
+    'unicorn/prefer-node-protocol': 'off', // Enable once we drop support for Node 14.0.0.
     'unicorn/prevent-abbreviations': 'off',
   },
   overrides: [
