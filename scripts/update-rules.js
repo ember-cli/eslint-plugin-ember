@@ -11,8 +11,8 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // ------------------------------------------------------------------------------
 // Main
@@ -91,7 +91,6 @@ ${deprecatedRules
 `;
 }
 
-// eslint-disable-next-line unicorn/prefer-object-from-entries
 const recommendedRules = rules.reduce((obj, entry) => {
   const name = `ember/${entry[0]}`;
   const recommended = entry[1].meta.docs.recommended;

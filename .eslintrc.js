@@ -115,6 +115,7 @@ module.exports = {
     'jest/no-hooks': 'error',
     'jest/no-if': 'error',
     'jest/no-large-snapshots': 'error',
+    'jest/no-restricted-matchers': 'error',
     'jest/no-test-return-statement': 'error',
     'jest/prefer-called-with': 'error',
     'jest/prefer-hooks-on-top': 'error',
@@ -145,6 +146,7 @@ module.exports = {
 
     // Unicorn rules:
     'unicorn/no-array-callback-reference': 'off',
+    'unicorn/no-array-method-this-argument': 'off',
     'unicorn/no-array-reduce': 'off',
     'unicorn/no-lonely-if': 'off',
     'unicorn/no-null': 'off',
