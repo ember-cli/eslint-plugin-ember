@@ -1,7 +1,7 @@
 'use strict';
 
-const { readdirSync, readFileSync } = require('node:fs');
-const path = require('node:path');
+const { readdirSync, readFileSync } = require('fs');
+const path = require('path');
 const rules = require('../lib').rules;
 const recommendedRules = require('../lib/recommended-rules');
 

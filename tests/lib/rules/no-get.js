@@ -1,4 +1,4 @@
-const path = require('node:path');
+const path = require('path');
 const rule = require('../../../lib/rules/no-get');
 const RuleTester = require('eslint').RuleTester;
 
