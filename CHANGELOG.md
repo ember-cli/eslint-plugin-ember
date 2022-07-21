@@ -9,6 +9,16 @@
 
 
 
+
+## v11.0.1 (2022-07-21)
+
+#### :bug: Bug Fix
+* [#1536](https://github.com/ember-cli/eslint-plugin-ember/pull/1536) Ignore some commonly-known non-array functions/objects to reduce false positives in `no-array-prototype-extensions` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
 ## v11.0.0 (2022-07-20)
 
 #### :boom: Breaking Change
