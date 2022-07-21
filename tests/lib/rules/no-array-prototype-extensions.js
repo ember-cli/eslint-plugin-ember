@@ -42,6 +42,38 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     /** String.prototype.replace() */
     "'something'.replace(regexp, 'substring')",
     "something.replace(regexp, 'substring')",
+
+    // Global non-array class (Promise.reject)
+    'window.Promise.reject();',
+    'Promise.reject();',
+    'Promise.reject("some reason");',
+    'reject();',
+
+    // Global non-array class (*storage.clear)
+    'window.localStorage.clear();',
+    'window.sessionStorage.clear();',
+    'localStorage.clear();',
+    'sessionStorage.clear();',
+    'clear();',
+
+    // Global non-array class (location.replace)
+    'window.document.location.replace(url)',
+    'document.location.replace(url)',
+    'location.replace(url)',
+
+    // Lodash utility functions
+    "lodash.compact([0, 1, false, 2, '', 3]);",
+    "_.compact([0, 1, false, 2, '', 3]);",
+    '_.reject(users, function(o) { return !o.active; });',
+    "_.toArray({ 'a': 1, 'b': 2 });",
+    '_.uniq([2, 1, 2]);',
+    '_.uniqBy([2.1, 1.2, 2.3], Math.floor);',
+    "_.replace('Hi Fred', 'Fred', 'Barney');",
+
+    // jQuery
+    '$( "li" ).toArray();',
+    'jQuery( "li" ).toArray();',
+    'jquery( "li" ).toArray();',
   ],
   invalid: [
     {
