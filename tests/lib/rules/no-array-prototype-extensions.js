@@ -74,6 +74,16 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     '$( "li" ).toArray();',
     'jQuery( "li" ).toArray();',
     'jquery( "li" ).toArray();',
+
+    // Non-array classes with clear() method
+    'const foo = new Set(); foo.clear();',
+    'const foo = new WeakSet(); foo.clear();',
+    'const foo = new Map(); foo.clear();',
+    'const foo = new WeakMap(); foo.clear();',
+    'const foo = new TrackedMap(); foo.clear();',
+    'const foo = new TrackedSet(); foo.clear();',
+    'const foo = new TrackedWeakMap(); foo.clear();',
+    'const foo = new TrackedWeakSet(); foo.clear();',
   ],
   invalid: [
     {
