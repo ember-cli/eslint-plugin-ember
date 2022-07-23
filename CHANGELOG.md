@@ -10,6 +10,18 @@
 
 
 
+
+## v11.0.2 (2022-07-23)
+
+#### :bug: Bug Fix
+* [#1538](https://github.com/ember-cli/eslint-plugin-ember/pull/1538) Fix false positive with simple Set/Map-initialized objects in `no-array-prototype-extensions` rule ([@bmish](https://github.com/bmish))
+* [#1539](https://github.com/ember-cli/eslint-plugin-ember/pull/1539) Fix false positive with `RSVP.reject()` in `no-array-prototype-extensions` ([@gilest](https://github.com/gilest))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Giles Thompson ([@gilest](https://github.com/gilest))
+
+
 ## v11.0.1 (2022-07-21)
 
 #### :bug: Bug Fix
