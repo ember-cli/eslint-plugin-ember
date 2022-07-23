@@ -49,6 +49,10 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'Promise.reject("some reason");',
     'reject();',
 
+    // Global non-array class (RSVP.reject)
+    'RSVP.reject();',
+    'RSVP.reject("some reason");',
+
     // Global non-array class (*storage.clear)
     'window.localStorage.clear();',
     'window.sessionStorage.clear();',
