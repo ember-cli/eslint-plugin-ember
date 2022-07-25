@@ -88,6 +88,30 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'const foo = new TrackedSet(); foo.clear();',
     'const foo = new TrackedWeakMap(); foo.clear();',
     'const foo = new TrackedWeakSet(); foo.clear();',
+
+    // Class property definition with non-array class.
+    `class MyClass {
+      foo = new Set();
+      myFunc() {
+        this.foo.clear();
+      }
+    }`,
+
+    {
+      // Class property definition with non-array class (TypeScript).
+      code: `
+      class MyClass {
+        foo: Set<UploadFile> = new Set();
+        myFunc() {
+          this.foo.clear();
+        }
+      }
+      `,
+      parser: require.resolve('@typescript-eslint/parser'),
+    },
+
+    // TODO: handle non-Identifier property names:
+    'foo["clear"]();',
   ],
   invalid: [
     {
@@ -97,6 +121,11 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     },
     {
       code: 'something.filterBy()',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.else.filterBy()',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
@@ -323,6 +352,106 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     },
     {
       code: 'something.replace(1, 2, someArray)',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Variable.
+      code: 'const foo = new Array(); foo.clear();',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Class property with array value.
+      code: `
+      class MyClass {
+        foo = new Array();
+        myFunc() {
+          this.foo.clear();
+        }
+      }`,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Class property with array value (TypeScript).
+      code: `
+      class MyClass {
+        foo: Array<UploadFile> = new Array();
+        myFunc() {
+          this.foo.clear();
+        }
+      }
+      `,
+      output: null,
+      parser: require.resolve('@typescript-eslint/parser'),
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Class property with no value.
+      code: `
+      class MyClass {
+        foo;
+        myFunc() {
+          this.foo.clear();
+        }
+      }`,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Class property but not declared anywhere.
+      code: `
+      class MyClass {
+        myFunc() {
+          this.foo.clear();
+        }
+      }`,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Two classes (should not ignore first class property).
+      code: `
+      class MyClass1 {
+        foo = new Set();
+      }
+      class MyClass2 {
+        myFunc() {
+          this.foo.clear();
+        }
+      }`,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Nested classes (should not ignore outer class property).
+      code: `
+      class MyClass1 {
+        foo = new Set();
+        myFunc() {
+          class MyClass2 {
+            myFunc() {
+              this.foo.clear();
+            }
+          }
+        }
+      }
+      `,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Nested classes (should remember first class properties).
+      code: `
+      class MyClass1 {
+        foo = new Array();
+        myFunc() {
+          class MyClass2 {}
+          this.foo.clear();
+        }
+      }
+      `,
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
