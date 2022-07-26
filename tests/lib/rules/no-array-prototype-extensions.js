@@ -97,6 +97,14 @@ ruleTester.run('no-array-prototype-extensions', rule, {
       }
     }`,
 
+    // Class property definition (private) with non-array class.
+    `class MyClass {
+      #foo = new Set();
+      myFunc() {
+        this.#foo.clear();
+      }
+    }`,
+
     {
       // Class property definition with non-array class (TypeScript).
       code: `
@@ -104,6 +112,33 @@ ruleTester.run('no-array-prototype-extensions', rule, {
         foo: Set<UploadFile> = new Set();
         myFunc() {
           this.foo.clear();
+        }
+      }
+      `,
+      parser: require.resolve('@typescript-eslint/parser'),
+    },
+
+    {
+      // Class property definition (private) with non-array class (TypeScript).
+      code: `
+      class MyClass {
+        #foo: Set<UploadFile> = new TrackedSet();
+        myFunc() {
+          this.#foo.clear();
+        }
+      }
+      `,
+      parser: require.resolve('@typescript-eslint/parser'),
+    },
+    {
+      // Class property definition (private) with non-array class (TypeScript) (does not confuse public/private properties).
+      code: `
+      class MyClass {
+        #foo: Set<UploadFile> = new TrackedSet();
+        foo: Array<UploadFile> = new Array();
+
+        myFunc() {
+          this.#foo.clear();
         }
       }
       `,
@@ -374,12 +409,54 @@ ruleTester.run('no-array-prototype-extensions', rule, {
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // Class property (private) with array value.
+      code: `
+      class MyClass {
+        #foo = new Array();
+        myFunc() {
+          this.#foo.clear();
+        }
+      }`,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
       // Class property with array value (TypeScript).
       code: `
       class MyClass {
         foo: Array<UploadFile> = new Array();
         myFunc() {
           this.foo.clear();
+        }
+      }
+      `,
+      output: null,
+      parser: require.resolve('@typescript-eslint/parser'),
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Class property (private) with array value (TypeScript).
+      code: `
+      class MyClass {
+        #foo: Array<UploadFile> = new Array();
+        myFunc() {
+          this.#foo.clear();
+        }
+      }
+      `,
+      output: null,
+      parser: require.resolve('@typescript-eslint/parser'),
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Class property definition (private) with array class (TypeScript) (does not confuse public/private properties).
+      code: `
+      class MyClass {
+        #foo: Array<UploadFile> = new Array();
+        foo: Set<UploadFile> = new Set();
+
+        myFunc() {
+          this.#foo.clear();
         }
       }
       `,
