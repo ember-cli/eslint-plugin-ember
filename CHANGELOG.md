@@ -11,6 +11,17 @@
 
 
 
+
+## v11.0.3 (2022-07-26)
+
+#### :bug: Bug Fix
+* [#1544](https://github.com/ember-cli/eslint-plugin-ember/pull/1544) Fix false positive with Set/Map-initialized *private* class properties in `no-array-prototype-extensions` rule ([@bmish](https://github.com/bmish))
+* [#1543](https://github.com/ember-cli/eslint-plugin-ember/pull/1543) Fix false positive with Set/Map-initialized *public* class properties in `no-array-prototype-extensions` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
 ## v11.0.2 (2022-07-23)
 
 #### :bug: Bug Fix
