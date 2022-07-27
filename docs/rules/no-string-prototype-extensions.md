@@ -2,18 +2,13 @@
 
 ✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
-Ember by default extends certain native JavaScript objects with additional
-methods. This can lead to problems in certain situations. One example is relying
-on these methods in addons, but that addon being used in an app that has the
-extensions disabled.
+By default, Ember extends certain native JavaScript objects with additional methods. This can lead to problems in some situations. One example is relying on these methods in an addon that is used inside an app that has the extensions disabled.
 
-Additionally, the prototype extensions for the `String` object have been
-deprecated in [RFC #236](https://emberjs.github.io/rfcs/0236-deprecation-ember-string.html).
+The prototype extensions for the `String` object were deprecated in [RFC #236](https://emberjs.github.io/rfcs/0236-deprecation-ember-string.html).
 
 ## Rule Details
 
-This rule will look for method calls that match any of the forbidden `String`
-prototype extension methods.
+This rule will disallow method calls that match any of the forbidden `String` prototype extension method names.
 
 ## Examples
 
@@ -63,8 +58,8 @@ dasherize('myString');
 
 ## References
 
-* [Prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
-* [String prototype extensions deprecation RFC](https://emberjs.github.io/rfcs/0236-deprecation-ember-string.html#string-prototype-extensions)
+* [Ember prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
+* [Ember String prototype extensions deprecation RFC](https://emberjs.github.io/rfcs/0236-deprecation-ember-string.html#string-prototype-extensions)
 
 ## Related Rules
 

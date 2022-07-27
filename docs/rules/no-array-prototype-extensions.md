@@ -2,13 +2,28 @@
 
 ✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
 
-Do not use Ember's `array` prototype extensions.
+By default, Ember extends certain native JavaScript objects with additional methods. This can lead to problems in some situations. One example is relying on these methods in an addon that is used inside an app that has the extensions disabled.
 
-Use native array functions instead of `.filterBy`, `.toArray()` in Ember modules.
+The prototype extensions for the `Array` object will likely become deprecated in the future.
 
-Use lodash helper functions instead of `.uniqBy()`, `sortBy()` in Ember modules.
+Some alternatives:
 
-Use immutable update style with `@tracked` properties or `TrackedArray` from `tracked-built-ins` instead of `.pushObject`, `removeObject` in Ember modules.
+* Use native array functions instead of `.filterBy()`, `.toArray()` in Ember modules
+* Use lodash helper functions instead of `.uniqBy()`, `.sortBy()` in Ember modules
+* Use immutable update style with `@tracked` properties or `TrackedArray` from `tracked-built-ins` instead of `.pushObject`, `removeObject` in Ember modules
+
+## Rule Details
+
+This rule will disallow method calls that match any of the forbidden `Array` prototype extension method names.
+
+Note that to reduce false positives, the rule ignores some common known-non-array classes/objects whose functions overlap with the array extension function names:
+
+* `Set.clear()`
+* `Map.clear()`
+* `Promise.reject()`
+* etc
+
+If you run into additional false positives, please file a bug or submit a PR to add it to the rule's hardcoded ignore list.
 
 ## Examples
 
@@ -100,8 +115,8 @@ export default class SampleComponent extends Component {
 
 * [EmberArray](https://api.emberjs.com/ember/release/classes/EmberArray)
 * Ember [MutableArray](https://api.emberjs.com/ember/release/classes/MutableArray)
-* [Prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
-* Array prototype extensions deprecation RFC (TODO: add link when available)
+* [Ember Prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
+* Ember Array prototype extensions deprecation RFC (TODO: add link when available)
 * [Native JavaScript array functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
 
 ## Related Rules
