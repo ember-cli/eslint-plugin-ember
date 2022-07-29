@@ -48,17 +48,23 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'Promise.reject();',
     'Promise.reject("some reason");',
     'reject();',
+    'this.reject();',
 
     // Global non-array class (RSVP.reject)
     'RSVP.reject();',
     'RSVP.reject("some reason");',
+    'RSVP.Promise.reject();',
+    'Ember.RSVP.reject();',
+    'Ember.RSVP.Promise.reject();',
 
     // Global non-array class (*storage.clear)
     'window.localStorage.clear();',
     'window.sessionStorage.clear();',
     'localStorage.clear();',
     'sessionStorage.clear();',
+    'sessionStorage?.clear();',
     'clear();',
+    'this.clear();',
 
     // Global non-array class (location.replace)
     'window.document.location.replace(url)',
