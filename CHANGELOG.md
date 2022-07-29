@@ -12,6 +12,19 @@
 
 
 
+
+## v11.0.4 (2022-07-29)
+
+#### :bug: Bug Fix
+* [#1546](https://github.com/ember-cli/eslint-plugin-ember/pull/1546) Fix false positives with `RSVP.Promise.reject()` in `no-array-prototype-extensions` rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#1545](https://github.com/ember-cli/eslint-plugin-ember/pull/1545) Improve documentation for `no-*-prototype-extensions` rules ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
 ## v11.0.3 (2022-07-26)
 
 #### :bug: Bug Fix
