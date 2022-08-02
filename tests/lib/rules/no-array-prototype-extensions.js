@@ -57,6 +57,24 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'Ember.RSVP.reject();',
     'Ember.RSVP.Promise.reject();',
 
+    // `reject()` on instance of `RSVP.defer`.
+    `
+    import { defer } from 'rsvp';
+    const deferred = defer();
+    deferred.reject();`,
+    `
+    import { defer } from 'rsvp';
+    const requestDeferred = defer();
+    requestDeferred.reject();`,
+    `
+    import { defer } from 'rsvp';
+    const promise = defer();
+    promise.reject();`,
+    `
+    import { defer } from 'rsvp';
+    const fooPromise = defer();
+    fooPromise.reject();`,
+
     // Global non-array class (*storage.clear)
     'window.localStorage.clear();',
     'window.sessionStorage.clear();',
