@@ -95,6 +95,35 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'const foo = new TrackedWeakMap(); foo.clear();',
     'const foo = new TrackedWeakSet(); foo.clear();',
 
+    // Variable names with the Set/Map words and Set/Map function call.
+    'set.clear();',
+    'map.clear();',
+    'foo.set.clear();', // Longer chain.
+    // PascalCase
+    'Set.clear();',
+    'Map.clear();',
+    'SetFoo.clear();',
+    'SetMap.clear();',
+    'MySet.clear();',
+    'MyMap.clear();',
+    // camelCase
+    'aSetOfStuff.clear();',
+    'aMapOfStuff.clear();',
+    'setOfStuff.clear();',
+    'mapOfStuff.clear();',
+    // UPPER_CASE
+    'SET.clear();',
+    'MAP.clear();',
+    'SET_OF_STUFF.clear();',
+    'MAP_OF_STUFF.clear();',
+    'MY_SET.clear();',
+    'MY_MAP.clear();',
+    // snake_case
+    'a_set_of_stuff.clear();',
+    'a_map_of_stuff.clear();',
+    'set_foo.clear();',
+    'map_foo.clear();',
+
     // Class property definition with non-array class.
     `class MyClass {
       foo = new Set();
@@ -156,17 +185,65 @@ ruleTester.run('no-array-prototype-extensions', rule, {
   ],
   invalid: [
     {
-      code: '[1, 2, 3].filterBy()',
+      code: '[1, 2, 3].clear()',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
-      code: 'something.filterBy()',
+      code: 'something.clear()',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
-      code: 'something.else.filterBy()',
+      // map function call in chain
+      code: 'something.map().clear()',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // set at beginning of chain but not directly before function call.
+      code: 'productSetMatcher.requiredItems.clear();',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // jquery at beginning of chain but not directly before function call.
+      code: 'jquery().foo.clear()',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Set in variable name but not a Set function.
+      code: 'set.filterBy()',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Set in variable name but not as its own word.
+      code: 'settle.clear()',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Map in variable name (front) but not as its own word.
+      code: 'mApple.clear()',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Map in variable name (middle) but not as its own word.
+      code: 'pumaParent.clear()',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Map in variable name (inside word) but not as its own word.
+      code: 'mapleTree.clear()',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.else.clear()',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
@@ -176,12 +253,12 @@ ruleTester.run('no-array-prototype-extensions', rule, {
       errors: [{ messageId: 'main', type: 'MemberExpression' }],
     },
     {
-      code: 'something?.filterBy?.()',
+      code: 'something?.clear?.()',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
-      code: 'getSomething().filterBy()',
+      code: 'getSomething().clear()',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
@@ -323,11 +400,6 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     },
     {
       code: 'something.addObjects()',
-      output: null,
-      errors: [{ messageId: 'main', type: 'CallExpression' }],
-    },
-    {
-      code: 'something.clear()',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
