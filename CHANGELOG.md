@@ -13,6 +13,17 @@
 
 
 
+
+## v11.0.5 (2022-08-02)
+
+#### :bug: Bug Fix
+* [#1552](https://github.com/ember-cli/eslint-plugin-ember/pull/1552) Fix false positive with `reject()` on instance of `RSVP.defer()` in `no-array-prototype-extensions` rule ([@bmish](https://github.com/bmish))
+* [#1547](https://github.com/ember-cli/eslint-plugin-ember/pull/1547) Improve false positive detection, especially for variable names containing Set/Map, in `no-array-prototype-extensions` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
 ## v11.0.4 (2022-07-29)
 
 #### :bug: Bug Fix
