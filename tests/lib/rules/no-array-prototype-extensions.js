@@ -142,6 +142,9 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'set_foo.clear();',
     'map_foo.clear();',
 
+    // super
+    'super.clear();',
+
     // Class property definition with non-array class.
     `class MyClass {
       foo = new Set();
