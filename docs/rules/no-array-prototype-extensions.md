@@ -121,5 +121,6 @@ export default class SampleComponent extends Component {
 
 ## Related Rules
 
+* [no-array-prototype-extensions](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-array-prototype-extensions.md) from ember-template-lint
 * [no-function-prototype-extensions](no-function-prototype-extensions.md)
 * [no-string-prototype-extensions](no-string-prototype-extensions.md)
