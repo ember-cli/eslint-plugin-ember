@@ -4,7 +4,7 @@
 
 By default, Ember extends certain native JavaScript objects with additional methods. This can lead to problems in some situations. One example is relying on these methods in an addon that is used inside an app that has the extensions disabled.
 
-The prototype extensions for the `function` object will likely become deprecated in the future.
+The prototype extensions for the `function` object were deprecated in [RFC #272](https://rfcs.emberjs.com/id/0272-deprecation-native-function-prototype-extensions).
 
 Use computed property syntax, observer syntax, or module hooks instead of `.property()`, `.observes()` or `.on()` in Ember modules.
 
@@ -48,7 +48,8 @@ export default Component.extend({
 
 ## References
 
-* [Ember Prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
+* [Ember prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
+* [Ember function prototype extensions deprecation RFC](https://rfcs.emberjs.com/id/0272-deprecation-native-function-prototype-extensions)
 
 ## Related Rules
 
