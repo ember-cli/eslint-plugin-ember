@@ -10,6 +10,8 @@ Some alternatives:
 * Use lodash helper functions instead of `.uniqBy()`, `.sortBy()` in Ember modules
 * Use immutable update style with `@tracked` properties or `TrackedArray` from `tracked-built-ins` instead of `.pushObject`, `removeObject` in Ember modules
 
+Note: this rule is not in the `recommended` configuration because of the risk of false positives.
+
 ## Rule Details
 
 This rule will disallow method calls that match any of the forbidden `Array` prototype extension method names.
