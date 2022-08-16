@@ -4,7 +4,7 @@
 
 By default, Ember extends certain native JavaScript objects with additional methods. This can lead to problems in some situations. One example is relying on these methods in an addon that is used inside an app that has the extensions disabled.
 
-The prototype extensions for the `String` object were deprecated in [RFC #236](https://emberjs.github.io/rfcs/0236-deprecation-ember-string.html).
+The prototype extensions for the `String` object were deprecated in [RFC #236](https://rfcs.emberjs.com/id/0236-deprecation-ember-string/).
 
 ## Rule Details
 
@@ -59,7 +59,7 @@ dasherize('myString');
 ## References
 
 * [Ember prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
-* [Ember String prototype extensions deprecation RFC](https://emberjs.github.io/rfcs/0236-deprecation-ember-string.html#string-prototype-extensions)
+* [Ember String prototype extensions deprecation RFC](https://rfcs.emberjs.com/id/0236-deprecation-ember-string/)
 
 ## Related Rules
 
