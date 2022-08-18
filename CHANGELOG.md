@@ -69,7 +69,7 @@
 ## v11.0.0 (2022-07-20)
 
 #### :boom: Breaking Change
-* [#1517](https://github.com/ember-cli/eslint-plugin-ember/pull/1517) Add `no-array-prototype-extensions` as `recommended` rule ([@bmish](https://github.com/bmish))
+* [#1517](https://github.com/ember-cli/eslint-plugin-ember/pull/1517) Add `no-array-prototype-extensions` as `recommended` rule (NOTE: removed as `recommended` in v11.0.6) ([@bmish](https://github.com/bmish))
 * [#1515](https://github.com/ember-cli/eslint-plugin-ember/pull/1515) Drop support for ESLint v6 ([@bmish](https://github.com/bmish))
 * [#1318](https://github.com/ember-cli/eslint-plugin-ember/pull/1318) Drop support for Node 10, 12, 15, 17 ([@aggmoulik](https://github.com/aggmoulik))
 * [#1519](https://github.com/ember-cli/eslint-plugin-ember/pull/1519) Enable `useOptionalChaining` option by default for `no-get` rule ([@bmish](https://github.com/bmish))

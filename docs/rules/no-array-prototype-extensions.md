@@ -1,7 +1,5 @@
 # no-array-prototype-extensions
 
-✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
-
 By default, Ember extends certain native JavaScript objects with additional methods. This can lead to problems in some situations. One example is relying on these methods in an addon that is used inside an app that has the extensions disabled.
 
 The prototype extensions for the `Array` object will likely become deprecated in the future.
@@ -11,6 +9,8 @@ Some alternatives:
 * Use native array functions instead of `.filterBy()`, `.toArray()` in Ember modules
 * Use lodash helper functions instead of `.uniqBy()`, `.sortBy()` in Ember modules
 * Use immutable update style with `@tracked` properties or `TrackedArray` from `tracked-built-ins` instead of `.pushObject`, `removeObject` in Ember modules
+
+Note: this rule is not in the `recommended` configuration because of the risk of false positives.
 
 ## Rule Details
 
