@@ -14,6 +14,22 @@
 
 
 
+
+## v11.0.6 (2022-08-18)
+
+#### :bug: Bug Fix
+* [#1562](https://github.com/ember-cli/eslint-plugin-ember/pull/1562) Remove `no-array-prototype-extensions` rule from `recommended` config ([@ef4](https://github.com/ef4))
+* [#1555](https://github.com/ember-cli/eslint-plugin-ember/pull/1555) Ignore `super` in `no-array-prototype-extensions` rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#1569](https://github.com/ember-cli/eslint-plugin-ember/pull/1569) Add link to Ember function prototype extension deprecation RFC ([@bmish](https://github.com/bmish))
+* [#1554](https://github.com/ember-cli/eslint-plugin-ember/pull/1554) Mention `no-array-prototype-extensions` ember-template-lint rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Edward Faulkner ([@ef4](https://github.com/ef4))
+
+
 ## v11.0.5 (2022-08-02)
 
 #### :bug: Bug Fix
