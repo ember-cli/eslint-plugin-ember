@@ -2303,10 +2303,10 @@ ember-rfc176-data@^0.3.15:
   resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.17.tgz#d4fc6c33abd6ef7b3440c107a28e04417b49860a"
   integrity sha512-EVzTTKqxv9FZbEh6Ktw56YyWRAA0MijKvl7H8C06wVF+8f/cRRz3dXxa4nkwjzyVwx4rzKGuIGq77hxJAQhWWw==
 
-ember-template-imports@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/ember-template-imports/-/ember-template-imports-2.0.1.tgz#942fbda0ae9a806eb2f83ebd61743704c4c66d90"
-  integrity sha512-2J0p3NU1hyP9VW6FX7/IAQtJPP0jDg/4zS3E2aYGND7uzuFbGJRgz9Ifze7yKkgWd7EAGnCjDQYCm5jTLu8Fvg==
+ember-template-imports@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/ember-template-imports/-/ember-template-imports-3.1.1.tgz#9b7a4f37c0a638b3d3d9894dade494efceb30f9a"
+  integrity sha512-ZsujuOwaF6lWDDeKC0NleCUAC8f06CfxWQPmejNnxg5gUdqHFTfW9L++X9RLLV/pJZ6eCtax7L94XkXQJ1LfBA==
   dependencies:
     babel-import-util "^0.2.0"
     broccoli-stew "^3.0.0"
