@@ -156,13 +156,8 @@ describe('template-vars', () => {
         // checking if results is empty / length === 0
         let message = '';
 
-        // When node 12 is dropped, change this to optional chaining
         if (results && results[0]) {
-          if (results[0].messages && results[0].messages[0]) {
-            if (results[0].messages[0].message) {
-              message = results[0].messages[0].message || '';
-            }
-          }
+          message = results[0]?.messages[0]?.message || '';
         }
 
         expect(message).toBe('');
