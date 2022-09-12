@@ -33,7 +33,7 @@ function initESLint(options) {
         sourceType: 'module',
       },
       plugins: ['ember'],
-      extends: ['plugin:ember/base'],
+      extends: ['plugin:ember/recommended'],
       rules: {
         'no-undef': 'error',
       },
@@ -49,6 +49,9 @@ const valid = [
       import Component from '@glimmer/component';
 
       export default class MyComponent extends Component {
+        constructor() {
+          super(...arguments);
+        }
       }
     `,
   },
@@ -147,7 +150,7 @@ describe('template-vars', () => {
       it(code, async () => {
         const eslint = initESLint();
         const results = await eslint.lintText(code, { filePath: filename });
-        const resultErrors = results.map((result) => result.messages).flat();
+        const resultErrors = results.flatMap((result) => result.messages);
 
         // This gives more meaningful information than
         // checking if results is empty / length === 0
@@ -162,7 +165,7 @@ describe('template-vars', () => {
           }
         }
 
-        expect(message).toStrictEqual('');
+        expect(message).toBe('');
         expect(resultErrors).toHaveLength(0);
       });
     }
@@ -177,7 +180,7 @@ describe('template-vars', () => {
         const eslint = initESLint();
         const results = await eslint.lintText(code, { filePath: filename });
 
-        const resultErrors = results.map((result) => result.messages).flat();
+        const resultErrors = results.flatMap((result) => result.messages);
         expect(resultErrors).toHaveLength(errors.length);
 
         for (const [index, error] of resultErrors.entries()) {
