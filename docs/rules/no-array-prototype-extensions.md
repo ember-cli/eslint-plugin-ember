@@ -2,7 +2,7 @@
 
 By default, Ember extends certain native JavaScript objects with additional methods. This can lead to problems in some situations. One example is relying on these methods in an addon that is used inside an app that has the extensions disabled.
 
-The prototype extensions for the `Array` object will likely become deprecated in the future.
+The prototype extensions for the `Array` object were deprecated in [RFC #848](https://rfcs.emberjs.com/id/0848-deprecate-array-prototype-extensions).
 
 Some alternatives:
 
@@ -116,7 +116,7 @@ export default class SampleComponent extends Component {
 * [EmberArray](https://api.emberjs.com/ember/release/classes/EmberArray)
 * Ember [MutableArray](https://api.emberjs.com/ember/release/classes/MutableArray)
 * [Ember Prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
-* Ember Array prototype extensions deprecation RFC (TODO: add link when available)
+* [Ember Array prototype extensions deprecation RFC](https://rfcs.emberjs.com/id/0848-deprecate-array-prototype-extensions)
 * [Native JavaScript array functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
 
 ## Related Rules
