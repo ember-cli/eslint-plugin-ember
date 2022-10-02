@@ -73,19 +73,19 @@ The autofixer for this rule will update assignments to use `set`. Alternatively,
 
 ## Configuration
 
-* object -- containing the following properties:
-  * array -- `extraMacros` -- Array of configurations for custom computed property macros which have dependent keys as arguments, each with hte following properties:
-    * string -- `name` -- The name the macro is exported with
-    * string -- `path` -- The file path used for importing the macro
-    * string -- `indexName` -- If this macro can also be imported through an index (like `computed` for `computed.and`), include it here
-    * string -- `indexPath` -- The path for importing the index. For example, with `import { computed } from '@ember/object'` and `computed.and(...)`, `@ember/object` is the `indexPath` and `computed` is the `indexName`.
-    * array -- `argumentFormat` -- array of configurations for how to parse the arguments of the macro to extract the computed dependencies, with at least one of the following properties:
-      * object -- `strings` -- Configuration for extracting raw strings from the argument list, with the following options:
-        * number -- `count` -- How many arguments to consider as dependencies. Use `Number.MAX_VALUE` for all of them.
-        * number -- `startIndex` -- Defaults to zero. If it's something else, that many arguments will be skipped before checking for `count` dependencies.
-      * object -- `objects` -- Configuration for extracting the values of an object as dependency keys, with the following properties:
-        * number -- `index` -- The index of the argument to be checked.
-        * array -- `keys` -- Array of strings for which keys values should be checked for. If not provided, all values will be checked.
+- object -- containing the following properties:
+  - array -- `extraMacros` -- Array of configurations for custom computed property macros which have dependent keys as arguments, each with hte following properties:
+    - string -- `name` -- The name the macro is exported with
+    - string -- `path` -- The file path used for importing the macro
+    - string -- `indexName` -- If this macro can also be imported through an index (like `computed` for `computed.and`), include it here
+    - string -- `indexPath` -- The path for importing the index. For example, with `import { computed } from '@ember/object'` and `computed.and(...)`, `@ember/object` is the `indexPath` and `computed` is the `indexName`.
+    - array -- `argumentFormat` -- array of configurations for how to parse the arguments of the macro to extract the computed dependencies, with at least one of the following properties:
+      - object -- `strings` -- Configuration for extracting raw strings from the argument list, with the following options:
+        - number -- `count` -- How many arguments to consider as dependencies. Use `Number.MAX_VALUE` for all of them.
+        - number -- `startIndex` -- Defaults to zero. If it's something else, that many arguments will be skipped before checking for `count` dependencies.
+      - object -- `objects` -- Configuration for extracting the values of an object as dependency keys, with the following properties:
+        - number -- `index` -- The index of the argument to be checked.
+        - array -- `keys` -- Array of strings for which keys values should be checked for. If not provided, all values will be checked.
 
 Example configuration:
 
@@ -147,6 +147,6 @@ export default function rejectBy(dependentKey, propertyKey, value) {
 
 ## References
 
-* [Spec](https://api.emberjs.com/ember/release/functions/@ember%2Fobject/set) for `set()`
-* [Spec](https://api.emberjs.com/ember/3.16/functions/@glimmer%2Ftracking/tracked) for `@tracked`
-* [Guide](https://guides.emberjs.com/release/upgrading/current-edition/tracked-properties/) for tracked properties
+- [Spec](https://api.emberjs.com/ember/release/functions/@ember%2Fobject/set) for `set()`
+- [Spec](https://api.emberjs.com/ember/3.16/functions/@glimmer%2Ftracking/tracked) for `@tracked`
+- [Guide](https://guides.emberjs.com/release/upgrading/current-edition/tracked-properties/) for tracked properties

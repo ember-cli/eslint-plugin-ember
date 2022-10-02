@@ -77,9 +77,9 @@ To avoid false positives from relying on implicit returns in some code branches,
 
 ## Related Rules
 
-* [consistent-return] from eslint
-* [getter-return] from eslint
-* [no-setter-return] from eslint
+- [consistent-return] from eslint
+- [getter-return] from eslint
+- [no-setter-return] from eslint
 
 [consistent-return]: https://eslint.org/docs/rules/consistent-return
 [getter-return]: https://eslint.org/docs/rules/getter-return

@@ -6,9 +6,9 @@ When using computed properties, do not introduce side effects. Side effects make
 
 This rule currently disallows the following side-effect-causing statements inside computed properties:
 
-* `this.set('x', 123);`
-* `this.setProperties({ x: 123 });`
-* `this.x = 123;`
+- `this.set('x', 123);`
+- `this.setProperties({ x: 123 });`
+- `this.x = 123;`
 
 Note that other side effects like network requests should be avoided as well.
 
@@ -46,5 +46,5 @@ export default Component.extend({
 
 This rule takes an optional object containing:
 
-* `boolean` -- `catchEvents` -- whether the rule should catch function calls that send actions or events (default `true`)
-* `boolean` -- `checkPlainGetters` -- whether the rule should check plain (non-computed) getters in native classes for side effects (default `true`)
+- `boolean` -- `catchEvents` -- whether the rule should catch function calls that send actions or events (default `true`)
+- `boolean` -- `checkPlainGetters` -- whether the rule should check plain (non-computed) getters in native classes for side effects (default `true`)

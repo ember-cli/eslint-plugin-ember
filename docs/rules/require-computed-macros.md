@@ -6,10 +6,10 @@
 
 It is preferred to use Ember's computed property macros as opposed to manually writing out logic in a computed property function. Reasons include:
 
-* Conciseness
-* Readability
-* Reduced chance of typos
-* Reduced chance of missing dependencies
+- Conciseness
+- Readability
+- Reduced chance of typos
+- Reduced chance of missing dependencies
 
 Note that by default, this rule only applies in classic classes (i.e. `Component.extend({})`) and not in native JavaScript classes with decorators (read more about the `includeNativeGetters` option in the configuration section of this doc).
 
@@ -119,13 +119,13 @@ export default Component.extend({
 
 This rule takes an optional object containing:
 
-* `boolean` -- `includeNativeGetters` -- whether the rule should check and autofix computed properties with native getters (i.e. `@computed() get someProp() {}`) to use computed property macros (default `false`). This is off by default because in the Ember Octane world, the better improvement would be to keep the native getter and use tracked properties instead of computed properties.
+- `boolean` -- `includeNativeGetters` -- whether the rule should check and autofix computed properties with native getters (i.e. `@computed() get someProp() {}`) to use computed property macros (default `false`). This is off by default because in the Ember Octane world, the better improvement would be to keep the native getter and use tracked properties instead of computed properties.
 
 ## References
 
-* [Guide](https://guides.emberjs.com/release/object-model/computed-properties/) for computed properties
-* [Spec](https://api.emberjs.com/ember/release/modules/@ember%2Fobject#functions-computed) for computed property macros
+- [Guide](https://guides.emberjs.com/release/object-model/computed-properties/) for computed properties
+- [Spec](https://api.emberjs.com/ember/release/modules/@ember%2Fobject#functions-computed) for computed property macros
 
 ## Related Rules
 
-* [no-incorrect-computed-macros](no-incorrect-computed-macros.md)
+- [no-incorrect-computed-macros](no-incorrect-computed-macros.md)

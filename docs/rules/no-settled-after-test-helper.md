@@ -59,8 +59,8 @@ test('...', async function (assert) {
 
 ## Migration
 
-* Have a look at the [ember-test-waiters](https://github.com/emberjs/ember-test-waiters) project
+- Have a look at the [ember-test-waiters](https://github.com/emberjs/ember-test-waiters) project
 
 ## References
 
-* [`settled()`](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#settled)
+- [`settled()`](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#settled)

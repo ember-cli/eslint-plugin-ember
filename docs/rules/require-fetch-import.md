@@ -29,10 +29,10 @@ const result = fetch('/something');
 
 ## Migration
 
-* Add `import fetch from 'fetch';` to all files that need it
+- Add `import fetch from 'fetch';` to all files that need it
 
 ## References
 
-* [@ember/test-waiters](https://github.com/emberjs/ember-test-waiters) addon
+- [@ember/test-waiters](https://github.com/emberjs/ember-test-waiters) addon
 
 [ember-fetch]: https://github.com/ember-cli/ember-fetch/

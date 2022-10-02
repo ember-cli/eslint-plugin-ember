@@ -58,10 +58,10 @@ dasherize('myString');
 
 ## References
 
-* [Ember prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
-* [Ember String prototype extensions deprecation RFC](https://rfcs.emberjs.com/id/0236-deprecation-ember-string/)
+- [Ember prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
+- [Ember String prototype extensions deprecation RFC](https://rfcs.emberjs.com/id/0236-deprecation-ember-string/)
 
 ## Related Rules
 
-* [no-array-prototype-extensions](no-array-prototype-extensions.md)
-* [no-function-prototype-extensions](no-function-prototype-extensions.md)
+- [no-array-prototype-extensions](no-array-prototype-extensions.md)
+- [no-function-prototype-extensions](no-function-prototype-extensions.md)

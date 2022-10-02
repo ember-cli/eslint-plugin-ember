@@ -20,10 +20,10 @@ this.route('tree', { path: ':tree_id' });
 
 ## References
 
-* [Ember Routing Guide](https://guides.emberjs.com/release/routing/)
+- [Ember Routing Guide](https://guides.emberjs.com/release/routing/)
 
 ## Related Rules
 
-* [no-capital-letters-in-routes](no-capital-letters-in-routes.md)
-* [no-unnecessary-route-path-option](no-unnecessary-route-path-option.md)
-* [route-path-style](route-path-style.md)
+- [no-capital-letters-in-routes](no-capital-letters-in-routes.md)
+- [no-unnecessary-route-path-option](no-unnecessary-route-path-option.md)
+- [route-path-style](route-path-style.md)

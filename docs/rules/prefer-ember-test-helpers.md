@@ -6,9 +6,9 @@ This rule ensures the correct Ember test helper is imported when using methods t
 
 There are currently 3 Ember test helper methods that have a native window counterpart:
 
-* blur
-* find
-* focus
+- blur
+- find
+- focus
 
 If these methods are not properly imported from Ember's test-helpers suite, and the native window method version is used instead, any intended asynchronous functions won't work as intended, which can cause tests to fail silently.
 
@@ -62,5 +62,5 @@ test('foo', async (assert) => {
 
 ## References
 
-* [Web API Window Methods](https://developer.mozilla.org/en-US/docs/Web/API/Window#Methods)
-* [Ember Test Helpers API Methods](https://github.com/emberjs/ember-test-helpers/blob/master/API.md)
+- [Web API Window Methods](https://developer.mozilla.org/en-US/docs/Web/API/Window#Methods)
+- [Ember Test Helpers API Methods](https://github.com/emberjs/ember-test-helpers/blob/master/API.md)

@@ -1,3 +1,6 @@
 {
-  "line-length": false
+  "line-length": false,
+  "ul-style": {
+    "style": "dash"
+  }
 }

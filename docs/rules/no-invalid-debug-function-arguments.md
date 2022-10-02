@@ -6,9 +6,9 @@ Catch usages of Ember&#39;s `assert()` / `warn()` / `deprecate()` functions that
 
 This rule aims to catch a common mistake when using Ember's debug functions:
 
-* `assert(String description, Boolean condition)`
-* `warn(String description, Boolean condition, Object options)`
-* `deprecate(String description, Boolean condition, Object options)`
+- `assert(String description, Boolean condition)`
+- `warn(String description, Boolean condition, Object options)`
+- `deprecate(String description, Boolean condition, Object options)`
 
 When calling one of these functions, the author may mistakenly pass the `description` and `condition` arguments in the reverse order, and not notice because the function will be silent with a truthy string as the `condition`.
 
@@ -42,6 +42,6 @@ deprecate('Title is no longer supported.', title, { id: 'unwanted-title', until:
 
 ## Further Reading
 
-* See the [documentation](https://api.emberjs.com/ember/release/functions/@ember%2Fdebug/assert) for the Ember `assert` function.
-* See the [documentation](https://api.emberjs.com/ember/release/functions/@ember%2Fdebug/warn) for the Ember `warn` function.
-* See the [documentation](https://api.emberjs.com/ember/3.4/functions/@ember%2Fapplication%2Fdeprecations/deprecate) for the Ember `deprecate` function.
+- See the [documentation](https://api.emberjs.com/ember/release/functions/@ember%2Fdebug/assert) for the Ember `assert` function.
+- See the [documentation](https://api.emberjs.com/ember/release/functions/@ember%2Fdebug/warn) for the Ember `warn` function.
+- See the [documentation](https://api.emberjs.com/ember/3.4/functions/@ember%2Fapplication%2Fdeprecations/deprecate) for the Ember `deprecate` function.

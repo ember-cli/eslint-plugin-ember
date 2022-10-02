@@ -2,8 +2,8 @@
 
 In some parts of your application, you may prefer to disallow certain services from being injected. This can be useful for:
 
-* Deprecating services one folder at a time
-* Creating isolation between different parts of your application
+- Deprecating services one folder at a time
+- Creating isolation between different parts of your application
 
 ## Rule Details
 
@@ -43,12 +43,12 @@ class MyComponent extends Component {
 
 ## Configuration
 
-* object[] -- containing the following properties:
-  * string[] -- `services` -- list of (kebab-case) service names that should be disallowed from being injected under the specified paths
-  * string[] -- `paths` -- optional list of regexp file paths that injecting the specified services should be disallowed under (omit this field to match any path)
-  * string -- `message` -- optional custom error message to display for violations
+- object[] -- containing the following properties:
+  - string[] -- `services` -- list of (kebab-case) service names that should be disallowed from being injected under the specified paths
+  - string[] -- `paths` -- optional list of regexp file paths that injecting the specified services should be disallowed under (omit this field to match any path)
+  - string -- `message` -- optional custom error message to display for violations
 
 ## Related Rules
 
-* The [no-restricted-imports](https://eslint.org/docs/rules/no-restricted-imports) or [import/no-restricted-paths](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-restricted-paths.md) rules are the JavaScript import statement equivalent of this rule.
-* ember-template-lint has a [no-restricted-invocations](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-restricted-invocations.md) rule for disallowing component usages.
+- The [no-restricted-imports](https://eslint.org/docs/rules/no-restricted-imports) or [import/no-restricted-paths](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-restricted-paths.md) rules are the JavaScript import statement equivalent of this rule.
+- ember-template-lint has a [no-restricted-invocations](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-restricted-invocations.md) rule for disallowing component usages.

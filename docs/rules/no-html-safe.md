@@ -107,9 +107,9 @@ export default helper(substring);
 
 ## Related Rules
 
-* ember-template-lint has a [no-triple-curlies](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-triple-curlies.md) rule for the template equivalent of this rule.
+- ember-template-lint has a [no-triple-curlies](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-triple-curlies.md) rule for the template equivalent of this rule.
 
 ## References
 
-* [Ember's `htmlSafe` API documentation](https://api.emberjs.com/ember/release/functions/@ember%2Ftemplate/htmlSafe)
-* [MDN's Cross-site Scripting (XSS) documentation](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting)
+- [Ember's `htmlSafe` API documentation](https://api.emberjs.com/ember/release/functions/@ember%2Ftemplate/htmlSafe)
+- [MDN's Cross-site Scripting (XSS) documentation](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting)

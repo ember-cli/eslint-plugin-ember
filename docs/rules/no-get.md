@@ -10,13 +10,13 @@ Starting in Ember 3.1, native ES5 getters are available, which eliminates much o
 
 This rule disallows:
 
-* `this.get('someProperty')` when `this.someProperty` can be used
-* `this.getProperties('prop1', 'prop2')` when `{ prop1: this.prop1, prop2: this.prop2 }` can be used
+- `this.get('someProperty')` when `this.someProperty` can be used
+- `this.getProperties('prop1', 'prop2')` when `{ prop1: this.prop1, prop2: this.prop2 }` can be used
 
 **WARNING**: there are a number of circumstances where `get` / `getProperties` still need to be used, and you may need to manually disable the rule for these (although the rule will attempt to ignore them):
 
-* Ember proxy objects (`ObjectProxy`, `ArrayProxy`)
-* Objects implementing the `unknownProperty` method
+- Ember proxy objects (`ObjectProxy`, `ArrayProxy`)
+- Objects implementing the `unknownProperty` method
 
 In addition, `mirage/config.js` will be excluded from this rule.
 
@@ -91,21 +91,21 @@ export default EmberObject.extend({
 
 This rule takes an optional object containing:
 
-* `boolean` -- `ignoreGetProperties` -- whether the rule should ignore `getProperties` (default `false`)
-* `boolean` -- `ignoreNestedPaths` -- whether the rule should ignore `this.get('some.nested.property')` (can't be enabled at the same time as `useOptionalChaining`) (default `false`)
-* `boolean` -- `useOptionalChaining` -- whether the rule should use the [optional chaining operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) `?.` to autofix nested paths such as `this.get('some.nested.property')` to `this.some?.nested?.property` (when this option is off, these nested paths won't be autofixed at all) (default `true`)
-* `boolean` -- `catchSafeObjects` -- whether the rule should catch non-`this` imported usages like `get(foo, 'bar')` (default `true`)
-* `boolean` -- `catchUnsafeObjects` -- whether the rule should catch non-`this` usages like `foo.get('bar')` even though we don't know for sure if `foo` is an Ember object (default `false`)
+- `boolean` -- `ignoreGetProperties` -- whether the rule should ignore `getProperties` (default `false`)
+- `boolean` -- `ignoreNestedPaths` -- whether the rule should ignore `this.get('some.nested.property')` (can't be enabled at the same time as `useOptionalChaining`) (default `false`)
+- `boolean` -- `useOptionalChaining` -- whether the rule should use the [optional chaining operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) `?.` to autofix nested paths such as `this.get('some.nested.property')` to `this.some?.nested?.property` (when this option is off, these nested paths won't be autofixed at all) (default `true`)
+- `boolean` -- `catchSafeObjects` -- whether the rule should catch non-`this` imported usages like `get(foo, 'bar')` (default `true`)
+- `boolean` -- `catchUnsafeObjects` -- whether the rule should catch non-`this` usages like `foo.get('bar')` even though we don't know for sure if `foo` is an Ember object (default `false`)
 
 ## Related Rules
 
-* [no-proxies](no-proxies.md)
+- [no-proxies](no-proxies.md)
 
 ## References
 
-* [Ember 3.1 Release Notes](https://blog.emberjs.com/2018/04/13/ember-3-1-released.html) describing "ES5 Getters for Computed Properties"
-* [Ember get Spec](https://api.emberjs.com/ember/release/functions/@ember%2Fobject/get)
-* [Ember getProperties Spec](https://api.emberjs.com/ember/release/functions/@ember%2Fobject/getProperties)
-* [Ember ES5 Getter RFC](https://github.com/emberjs/rfcs/blob/master/text/0281-es5-getters.md)
-* [es5-getter-ember-codemod](https://github.com/rondale-sc/es5-getter-ember-codemod)
-* [More context](https://github.com/emberjs/ember.js/issues/16148) about the proxy object exception to this rule
+- [Ember 3.1 Release Notes](https://blog.emberjs.com/2018/04/13/ember-3-1-released.html) describing "ES5 Getters for Computed Properties"
+- [Ember get Spec](https://api.emberjs.com/ember/release/functions/@ember%2Fobject/get)
+- [Ember getProperties Spec](https://api.emberjs.com/ember/release/functions/@ember%2Fobject/getProperties)
+- [Ember ES5 Getter RFC](https://github.com/emberjs/rfcs/blob/master/text/0281-es5-getters.md)
+- [es5-getter-ember-codemod](https://github.com/rondale-sc/es5-getter-ember-codemod)
+- [More context](https://github.com/emberjs/ember.js/issues/16148) about the proxy object exception to this rule

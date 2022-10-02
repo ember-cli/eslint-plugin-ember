@@ -30,5 +30,5 @@ test('behaves correctly', async function (assert) {
 
 ## Migration
 
-* [async-await-codemod](https://github.com/sgilroy/async-await-codemod) can help convert async function calls / promise chains to use `await`
-* [ember-test-helpers-codemod](https://github.com/simonihmig/ember-test-helpers-codemod) has transforms such as [click](https://github.com/simonihmig/ember-test-helpers-codemod/blob/master/transforms/acceptance/transforms/click.js) that can be modified to call `makeAwait()` and `dropAndThen()` on the function calls that you're trying to bring into compliance with this rule
+- [async-await-codemod](https://github.com/sgilroy/async-await-codemod) can help convert async function calls / promise chains to use `await`
+- [ember-test-helpers-codemod](https://github.com/simonihmig/ember-test-helpers-codemod) has transforms such as [click](https://github.com/simonihmig/ember-test-helpers-codemod/blob/master/transforms/acceptance/transforms/click.js) that can be modified to call `makeAwait()` and `dropAndThen()` on the function calls that you're trying to bring into compliance with this rule

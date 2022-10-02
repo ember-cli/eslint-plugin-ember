@@ -68,12 +68,12 @@ export default class MyComponent extends Component {}
 
 This rule takes an optional object containing:
 
-* `boolean` -- `ignoreClassic` -- whether the rule should ignore usage inside of native classes labeled with `@classic` (default `true`)
+- `boolean` -- `ignoreClassic` -- whether the rule should ignore usage inside of native classes labeled with `@classic` (default `true`)
 
 ## References
 
-* [Ember 3.13 Release Notes](https://blog.emberjs.com/2019/09/25/ember-3-13-released.html) (minimum Ember version needed to use tracked properties)
-* [Ember Guides: Tracked Properties](https://octane-guides-preview.emberjs.com/release/state-management/tracked-properties/)
-* [Tracked Properties Deep Dive](https://www.pzuraq.com/coming-soon-in-ember-octane-part-3-tracked-properties/)
-* [ember-native-class-codemod](https://github.com/ember-codemods/ember-native-class-codemod)
-* [ember-classic-decorator](https://github.com/emberjs/ember-classic-decorator)
+- [Ember 3.13 Release Notes](https://blog.emberjs.com/2019/09/25/ember-3-13-released.html) (minimum Ember version needed to use tracked properties)
+- [Ember Guides: Tracked Properties](https://octane-guides-preview.emberjs.com/release/state-management/tracked-properties/)
+- [Tracked Properties Deep Dive](https://www.pzuraq.com/coming-soon-in-ember-octane-part-3-tracked-properties/)
+- [ember-native-class-codemod](https://github.com/ember-codemods/ember-native-class-codemod)
+- [ember-classic-decorator](https://github.com/emberjs/ember-classic-decorator)

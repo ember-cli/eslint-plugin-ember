@@ -52,4 +52,4 @@ export default Component.extend({
 
 ## References
 
-* [RFC](https://github.com/emberjs/rfcs/blob/master/text/0335-deprecate-send-action.md) to deprecate `sendAction`
+- [RFC](https://github.com/emberjs/rfcs/blob/master/text/0335-deprecate-send-action.md) to deprecate `sendAction`

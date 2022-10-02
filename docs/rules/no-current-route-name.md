@@ -25,10 +25,10 @@ assert.equal(currentURL(), '/foo');
 
 ## Migration
 
-* Replace `currentRouteName()` with `currentURL()` and adjust
+- Replace `currentRouteName()` with `currentURL()` and adjust
   the assertion expectations
 
 ## References
 
-* [currentRouteName()](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#currentroutename) documentation
-* [currentURL()](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#currenturl) documentation
+- [currentRouteName()](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#currentroutename) documentation
+- [currentURL()](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#currenturl) documentation

@@ -8,8 +8,8 @@ For practical strategies on removing mixins see [this discourse thread](https://
 
 For more details and examples of how mixins create problems down-the-line, see these excellent blog posts:
 
-* [Mixins Considered Harmful](https://reactjs.org/blog/2016/07/13/mixins-considered-harmful.html)
-* [Why Are Mixins Considered Harmful?](https://raganwald.com/2016/07/16/why-are-mixins-considered-harmful.html)
+- [Mixins Considered Harmful](https://reactjs.org/blog/2016/07/13/mixins-considered-harmful.html)
+- [Why Are Mixins Considered Harmful?](https://raganwald.com/2016/07/16/why-are-mixins-considered-harmful.html)
 
 ## Examples
 
@@ -65,4 +65,4 @@ export default Component.extend({
 
 ## Related Rules
 
-* [no-mixins](no-mixins.md)
+- [no-mixins](no-mixins.md)
