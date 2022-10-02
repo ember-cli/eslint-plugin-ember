@@ -43,5 +43,5 @@ setProperties(object, { foo: 'bar', baz: 'qux' });
 
 This rule takes an optional object containing:
 
-* `boolean` -- `ignoreThisExpressions` -- setting to `true` allows use of `this.get()` and `this.set()` where you will generally know if `this` is an `Ember.Object`.
-* `boolean` -- `ignoreNonThisExpressions` -- setting to  `true` allows use of non-Ember objects like `server.get()` and `map.set()`.
+- `boolean` -- `ignoreThisExpressions` -- setting to `true` allows use of `this.get()` and `this.set()` where you will generally know if `this` is an `Ember.Object`.
+- `boolean` -- `ignoreNonThisExpressions` -- setting to  `true` allows use of non-Ember objects like `server.get()` and `map.set()`.

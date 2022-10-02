@@ -38,9 +38,9 @@ const Person = EmberObject.extend({
 
 This rule takes an optional object containing:
 
-* `boolean` -- `onlyThisContexts` -- whether the rule should allow or disallow computed properties where the arrow function body does not contain a `this` reference (default: `false`)
+- `boolean` -- `onlyThisContexts` -- whether the rule should allow or disallow computed properties where the arrow function body does not contain a `this` reference (default: `false`)
 
 ## References
 
-* [Arrow function spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
-* [Computed property spec](https://api.emberjs.com/ember/release/classes/ComputedProperty)
+- [Arrow function spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+- [Computed property spec](https://api.emberjs.com/ember/release/classes/ComputedProperty)

@@ -44,4 +44,4 @@ test('baz', function (assert) {
 
 ## References
 
-* [Rendering Helpers on `@ember/test-helpers`](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#rendering-helpers).
+- [Rendering Helpers on `@ember/test-helpers`](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#rendering-helpers).

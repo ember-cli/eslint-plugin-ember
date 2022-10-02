@@ -33,7 +33,7 @@ const Person = EmberObject.extend({
 
 ## References
 
-* [Deprecation RFC](https://github.com/emberjs/rfcs/blob/master/text/0370-deprecate-computed-volatile.md)
-* [Deprecation list](https://deprecations.emberjs.com/v3.x/#toc_computed-property-volatile)
-* [Volatile spec](https://api.emberjs.com/ember/release/classes/ComputedProperty/methods/volatile?anchor=volatile)
-* [Computed property spec](https://api.emberjs.com/ember/release/classes/ComputedProperty)
+- [Deprecation RFC](https://github.com/emberjs/rfcs/blob/master/text/0370-deprecate-computed-volatile.md)
+- [Deprecation list](https://deprecations.emberjs.com/v3.x/#toc_computed-property-volatile)
+- [Volatile spec](https://api.emberjs.com/ember/release/classes/ComputedProperty/methods/volatile?anchor=volatile)
+- [Computed property spec](https://api.emberjs.com/ember/release/classes/ComputedProperty)

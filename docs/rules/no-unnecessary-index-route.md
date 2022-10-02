@@ -24,10 +24,10 @@ this.route('blog-posts');
 
 ## References
 
-* [Ember Routing Guide](https://guides.emberjs.com/release/routing/)
+- [Ember Routing Guide](https://guides.emberjs.com/release/routing/)
 
 ## Related Rules
 
-* [no-capital-letters-in-routes](no-capital-letters-in-routes.md)
-* [no-unnecessary-route-path-option](no-unnecessary-route-path-option.md)
-* [routes-segments-snake-case](routes-segments-snake-case.md)
+- [no-capital-letters-in-routes](no-capital-letters-in-routes.md)
+- [no-unnecessary-route-path-option](no-unnecessary-route-path-option.md)
+- [routes-segments-snake-case](routes-segments-snake-case.md)

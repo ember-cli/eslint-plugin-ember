@@ -61,9 +61,9 @@ export default Component.extend({
 
 ## References
 
-* [Mixins Considered Harmful](https://reactjs.org/blog/2016/07/13/mixins-considered-harmful.html)
-* [Why Are Mixins Considered Harmful?](https://raganwald.com/2016/07/16/why-are-mixins-considered-harmful.html)
+- [Mixins Considered Harmful](https://reactjs.org/blog/2016/07/13/mixins-considered-harmful.html)
+- [Why Are Mixins Considered Harmful?](https://raganwald.com/2016/07/16/why-are-mixins-considered-harmful.html)
 
 ## Related Rules
 
-* [no-new-mixins](no-new-mixins.md)
+- [no-new-mixins](no-new-mixins.md)

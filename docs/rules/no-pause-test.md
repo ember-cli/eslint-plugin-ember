@@ -56,4 +56,4 @@ module('Acceptance | foo test', function (hooks) {
 
 ## Further Reading
 
-* [ember-test-helpers pauseTest documentation](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#pausetest)
+- [ember-test-helpers pauseTest documentation](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#pausetest)

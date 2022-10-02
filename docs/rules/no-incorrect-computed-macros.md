@@ -38,9 +38,9 @@ export default Component.extend({
 
 ## Related Rules
 
-* [require-computed-macros](require-computed-macros.md)
+- [require-computed-macros](require-computed-macros.md)
 
 ## References
 
-* [Guide](https://guides.emberjs.com/release/object-model/computed-properties/) for computed properties
-* [Spec](https://api.emberjs.com/ember/release/modules/@ember%2Fobject#functions-computed) for computed property macros
+- [Guide](https://guides.emberjs.com/release/object-model/computed-properties/) for computed properties
+- [Spec](https://api.emberjs.com/ember/release/modules/@ember%2Fobject#functions-computed) for computed property macros

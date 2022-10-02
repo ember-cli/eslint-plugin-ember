@@ -34,9 +34,9 @@ export default class Page extends Component {
 
 ## Related Rules
 
-* [no-unnecessary-service-injection-argument](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-unnecessary-service-injection-argument.md) is the opposite of this rule
+- [no-unnecessary-service-injection-argument](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-unnecessary-service-injection-argument.md) is the opposite of this rule
 
 ## References
 
-* Ember [Services](https://guides.emberjs.com/release/applications/services/) guide
-* Ember [inject](https://api.emberjs.com/ember/release/functions/@ember%2Fservice/inject) function spec
+- Ember [Services](https://guides.emberjs.com/release/applications/services/) guide
+- Ember [inject](https://api.emberjs.com/ember/release/functions/@ember%2Fservice/inject) function spec

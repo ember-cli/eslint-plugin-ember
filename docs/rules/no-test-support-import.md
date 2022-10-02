@@ -52,4 +52,4 @@ This is meant as an addition to the [no-test-import-export](no-test-import-expor
 
 ## Related Rules
 
-* [no-test-import-export](no-test-import-export.md)
+- [no-test-import-export](no-test-import-export.md)

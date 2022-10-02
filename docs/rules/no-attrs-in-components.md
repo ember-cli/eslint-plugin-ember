@@ -25,4 +25,4 @@ const name = this._name;
 
 ## Further Reading
 
-* <https://locks.svbtle.com/to-attrs-or-not-to-attrs>
+- <https://locks.svbtle.com/to-attrs-or-not-to-attrs>

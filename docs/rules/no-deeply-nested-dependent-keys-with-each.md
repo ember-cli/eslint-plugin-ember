@@ -36,4 +36,4 @@ export default Component.extend({
 
 ## Further Reading
 
-* See the [documentation](https://guides.emberjs.com/release/object-model/computed-properties-and-aggregate-data/) for Ember computed properties with `@each`
+- See the [documentation](https://guides.emberjs.com/release/object-model/computed-properties-and-aggregate-data/) for Ember computed properties with `@each`

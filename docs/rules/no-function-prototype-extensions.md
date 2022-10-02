@@ -48,10 +48,10 @@ export default Component.extend({
 
 ## References
 
-* [Ember prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
-* [Ember function prototype extensions deprecation RFC](https://rfcs.emberjs.com/id/0272-deprecation-native-function-prototype-extensions)
+- [Ember prototype extensions documentation](https://guides.emberjs.com/release/configuring-ember/disabling-prototype-extensions/)
+- [Ember function prototype extensions deprecation RFC](https://rfcs.emberjs.com/id/0272-deprecation-native-function-prototype-extensions)
 
 ## Related Rules
 
-* [no-array-prototype-extensions](no-array-prototype-extensions.md)
-* [no-string-prototype-extensions](no-string-prototype-extensions.md)
+- [no-array-prototype-extensions](no-array-prototype-extensions.md)
+- [no-string-prototype-extensions](no-string-prototype-extensions.md)

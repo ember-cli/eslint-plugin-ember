@@ -30,7 +30,7 @@ module('Test Name', function (hooks) {
 
 A short guide for how each of the legacy APIs converts to the new APIs:
 
-* `moduleFor`, `moduleForModel`
+- `moduleFor`, `moduleForModel`
 
     ```js
     import { module, test } from 'qunit';
@@ -41,7 +41,7 @@ A short guide for how each of the legacy APIs converts to the new APIs:
     });
     ```
 
-* `moduleForComponent`
+- `moduleForComponent`
 
     ```js
     import { module, test } from 'qunit';
@@ -52,7 +52,7 @@ A short guide for how each of the legacy APIs converts to the new APIs:
     });
     ```
 
-* `moduleForAcceptance`
+- `moduleForAcceptance`
 
     ```js
     import { module, test } from 'qunit';
@@ -65,6 +65,6 @@ A short guide for how each of the legacy APIs converts to the new APIs:
 
 ## References
 
-* [moduleFor* deprecation notice from ember-qunit 4.5.0](https://github.com/emberjs/ember-qunit/blob/master/CHANGELOG.md#rocket-enhancement-1)
+- [moduleFor* deprecation notice from ember-qunit 4.5.0](https://github.com/emberjs/ember-qunit/blob/master/CHANGELOG.md#rocket-enhancement-1)
 
-* Codemod for automated upgrade of tests: [ember-qunit-codemod](https://github.com/ember-codemods/ember-qunit-codemod)
+- Codemod for automated upgrade of tests: [ember-qunit-codemod](https://github.com/ember-codemods/ember-qunit-codemod)
