@@ -96,7 +96,7 @@
     "prettier": "^2.1.1",
     "release-it": "^15.1.3",
     "release-it-lerna-changelog": "^5.0.0",
-    "sort-package-json": "^1.52.0",
+    "sort-package-json": "^2.0.0",
     "typescript": "^4.7.4"
   },
   "peerDependencies": {
