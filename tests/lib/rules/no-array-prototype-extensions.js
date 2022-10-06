@@ -234,9 +234,32 @@ ruleTester.run('no-array-prototype-extensions', rule, {
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      code: `
+      const arr = [];
+
+      function getAge() {
+        return 16;
+      }
+
+      arr.filterBy("age", getAge());
+      `,
+      output: `
+      import { get } from '@ember/object';
+const arr = [];
+
+      function getAge() {
+        return 16;
+      }
+
+      arr.filter(item => get(item, "age") === getAge());
+      `,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
       // Set in variable name but not a Set function.
-      code: 'set.filterBy()',
-      output: null,
+      code: 'set.filterBy("age", 18);',
+      output: `import { get } from '@ember/object';
+set.filter(item => get(item, "age") === 18);`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
