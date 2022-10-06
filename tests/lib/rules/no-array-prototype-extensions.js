@@ -234,6 +234,7 @@ ruleTester.run('no-array-prototype-extensions', rule, {
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // filterBy with two arguments
       code: `
       const arr = [];
 
@@ -252,6 +253,21 @@ const arr = [];
       }
 
       arr.filter(item => get(item, "age") === getAge());
+      `,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // filterBy with one argument
+      code: `
+      const arr = [];
+
+      arr.filterBy("age");
+      `,
+      output: `
+      import { get } from '@ember/object';
+const arr = [];
+
+      arr.filter(item => get(item, "age"));
       `,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
