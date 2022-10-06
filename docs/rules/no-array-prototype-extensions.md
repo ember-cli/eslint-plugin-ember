@@ -1,5 +1,7 @@
 # no-array-prototype-extensions
 
+🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 By default, Ember extends certain native JavaScript objects with additional methods. This can lead to problems in some situations. One example is relying on these methods in an addon that is used inside an app that has the extensions disabled.
 
 The prototype extensions for the `Array` object were deprecated in [RFC #848](https://rfcs.emberjs.com/id/0848-deprecate-array-prototype-extensions).

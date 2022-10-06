@@ -326,7 +326,7 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     },
     {
       code: 'something.any()',
-      output: null,
+      output: 'something.some()',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
