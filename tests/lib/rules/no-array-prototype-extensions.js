@@ -559,8 +559,26 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of params are passed, we will skip auto-fixing
       code: 'something.without()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When unexpected number of params are passed, we will skip auto-fixing
+      code: 'something.without(1, 2)',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.without(1)',
+      output: 'something.indexOf(1) > -1 ? something.filter(item => item !== 1) : something',
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.somethingElse.without(1)',
+      output:
+        'something.somethingElse.indexOf(1) > -1 ? something.somethingElse.filter(item => item !== 1) : something.somethingElse',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
