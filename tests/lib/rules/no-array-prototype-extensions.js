@@ -533,8 +533,19 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
-      code: 'something.toArray()',
+      // When unexpected number of params are passed, we will skip auto-fixing
+      code: 'something.toArray(1)',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.toArray()',
+      output: '[...something]',
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.somethingElse.toArray()',
+      output: '[...something.somethingElse]',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
