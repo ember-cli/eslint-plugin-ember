@@ -234,9 +234,81 @@ ruleTester.run('no-array-prototype-extensions', rule, {
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // filterBy with two arguments
+      code: `
+      const arr = [];
+
+      function getAge() {
+        return 16;
+      }
+
+      arr.filterBy("age", getAge());
+      `,
+      output: `
+      import { get } from '@ember/object';
+const arr = [];
+
+      function getAge() {
+        return 16;
+      }
+
+      arr.filter(item => get(item, "age") === getAge());
+      `,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // filterBy with one argument
+      code: `
+      const arr = [];
+
+      arr.filterBy("age");
+      `,
+      output: `
+      import { get } from '@ember/object';
+const arr = [];
+
+      arr.filter(item => get(item, "age"));
+      `,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // filterBy with one argument and `get` import statement already imported
+      code: `
+      import { get as g } from '@ember/object';
+      const arr = [];
+
+      arr.filterBy("age");
+      `,
+      output: `
+      import { get as g } from '@ember/object';
+      const arr = [];
+
+      arr.filter(item => g(item, "age"));
+      `,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // filterBy with one argument and `get` import statement imported from a different package
+      code: `
+      import { get as g } from 'dummy';
+      const arr = [];
+
+      arr.filterBy("age");
+      `,
+      output: `
+      import { get } from '@ember/object';
+import { get as g } from 'dummy';
+      const arr = [];
+
+      arr.filter(item => get(item, "age"));
+      `,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
       // Set in variable name but not a Set function.
-      code: 'set.filterBy()',
-      output: null,
+      code: 'set.filterBy("age", 18);',
+      output: `import { get } from '@ember/object';
+set.filter(item => get(item, "age") === 18);`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -321,12 +393,18 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     },
     {
       code: 'something.compact()',
+      output: 'something.filter(item => item !== undefined && item !== null)',
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When unexpected number of params are passed, skipping auto-fixing
+      code: 'something.compact(1, getVal(), 3)',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
       code: 'something.any()',
-      output: null,
+      output: 'something.some()',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {

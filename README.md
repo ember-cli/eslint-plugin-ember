@@ -102,7 +102,7 @@ Rules are grouped by category to help you understand their purpose. Each rule ha
 |:--------|:------------|:---------------|:-----------|:---------------|
 | [closure-actions](./docs/rules/closure-actions.md) | enforce usage of closure actions | ✅ |  |  |
 | [new-module-imports](./docs/rules/new-module-imports.md) | enforce using "New Module Imports" from Ember RFC #176 | ✅ |  |  |
-| [no-array-prototype-extensions](./docs/rules/no-array-prototype-extensions.md) | disallow usage of Ember's `Array` prototype extensions |  |  |  |
+| [no-array-prototype-extensions](./docs/rules/no-array-prototype-extensions.md) | disallow usage of Ember's `Array` prototype extensions |  | 🔧 |  |
 | [no-function-prototype-extensions](./docs/rules/no-function-prototype-extensions.md) | disallow usage of Ember's `function` prototype extensions | ✅ |  |  |
 | [no-mixins](./docs/rules/no-mixins.md) | disallow the usage of mixins | ✅ |  |  |
 | [no-new-mixins](./docs/rules/no-new-mixins.md) | disallow the creation of new mixins | ✅ |  |  |
