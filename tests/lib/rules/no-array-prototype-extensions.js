@@ -16,6 +16,8 @@ ruleTester.run('no-array-prototype-extensions', rule, {
   valid: [
     '[1, 2, 4].filter(el => { /* ... */ })',
     'something.filter(el => { /* ... */ })',
+    'something.find(item => item.isValid)',
+    'something.find(item => item.age === 18, {})',
     "filterBy(something, 'foo')",
     'this.filterBy()',
     'something[0]',
@@ -408,8 +410,54 @@ set.filter(item => get(item, "age") === 18);`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer doesn't get triggered
       code: 'something.findBy()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When unexpected number of arguments are passed, auto-fixer doesn't get triggered
+      code: 'something.findBy(1, 2, 3)',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // findBy with single argument
+      code: "something.findBy('abc')",
+      output: `import { get } from '@ember/object';
+something.find(item => get(item, 'abc'))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // findBy with two arguments
+      code: "something.findBy('abc', 'def')",
+      output: `import { get } from '@ember/object';
+something.find(item => get(item, 'abc') === 'def')`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // findBy with two arguments and @ember/object's `get` is already imported
+      code: `import { get } from '@ember/object';
+      something.findBy('abc', 'def')`,
+      output: `import { get } from '@ember/object';
+      something.find(item => get(item, 'abc') === 'def')`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // findBy with two arguments and @ember/object's `get` is imported with an alias
+      code: `import { get as g } from '@ember/object';
+      something.findBy('abc', 'def')`,
+      output: `import { get as g } from '@ember/object';
+      something.find(item => g(item, 'abc') === 'def')`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // findBy with two arguments and `get` is imported from package other than @ember/object
+      code: `import { get as g } from 'dummy';
+      something.findBy('abc', 'def')`,
+      output: `import { get } from '@ember/object';
+import { get as g } from 'dummy';
+      something.find(item => get(item, 'abc') === 'def')`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
