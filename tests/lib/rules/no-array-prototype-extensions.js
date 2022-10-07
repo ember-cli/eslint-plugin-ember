@@ -321,7 +321,13 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     },
     {
       code: 'something.compact()',
-      output: null,
+      output: 'something.filter(item => item !== undefined && item !== null)',
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Invalid as compact function doesn't support any params. Autofixer removes all the arguments and include the right callback
+      code: 'something.compact(1, getVal(), 3)',
+      output: 'something.filter(item => item !== undefined && item !== null)',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
