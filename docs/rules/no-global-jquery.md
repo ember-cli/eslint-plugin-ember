@@ -36,3 +36,8 @@ export default Component.extend({
   }
 });
 ```
+
+## Related
+
+- [jquery-ember-run](./jquery-ember-run.md)
+- [no-jquery](./no-jquery.md)
