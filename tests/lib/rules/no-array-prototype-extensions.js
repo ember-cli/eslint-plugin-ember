@@ -397,12 +397,6 @@ set.filter(item => get(item, "age") === 18);`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
-      // Invalid as compact function doesn't support any params. Autofixer removes all the arguments and include the right callback
-      code: 'something.compact(1, getVal(), 3)',
-      output: 'something.filter(item => item !== undefined && item !== null)',
-      errors: [{ messageId: 'main', type: 'CallExpression' }],
-    },
-    {
       code: 'something.any()',
       output: 'something.some()',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
