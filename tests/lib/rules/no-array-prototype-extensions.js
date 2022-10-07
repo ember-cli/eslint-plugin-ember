@@ -481,8 +481,25 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.mapBy()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When unexpected number of arguments are passed, auto-fixer will not run
+      code: 'something.mapBy(1, 2)',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: "something.mapBy('abc')",
+      output: "something.map(item => item['abc'])",
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.mapBy(def)',
+      output: 'something.map(item => item[def])',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -503,6 +520,7 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // Function call in chain
       code: 'something.somethingElse.objectAt(1)',
       output: 'something.somethingElse[1]',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
@@ -576,9 +594,9 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
-      code: 'something.somethingElse.without(1)',
+      code: "something.somethingElse.without('abc')",
       output:
-        'something.somethingElse.indexOf(1) > -1 ? something.somethingElse.filter(item => item !== 1) : something.somethingElse',
+        "something.somethingElse.indexOf('abc') > -1 ? something.somethingElse.filter(item => item !== 'abc') : something.somethingElse",
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
