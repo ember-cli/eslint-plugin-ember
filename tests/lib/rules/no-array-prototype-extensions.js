@@ -16,6 +16,8 @@ ruleTester.run('no-array-prototype-extensions', rule, {
   valid: [
     '[1, 2, 4].filter(el => { /* ... */ })',
     'something.filter(el => { /* ... */ })',
+    'something.find(item => item.isValid)',
+    'something.find(item => item.age === 18, {})',
     "filterBy(something, 'foo')",
     'this.filterBy()',
     'something[0]',
