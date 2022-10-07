@@ -393,6 +393,12 @@ set.filter(item => get(item, "age") === 18);`,
     },
     {
       code: 'something.compact()',
+      output: 'something.filter(item => item !== undefined && item !== null)',
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When unexpected number of params are passed, skipping auto-fixing
+      code: 'something.compact(1, getVal(), 3)',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
