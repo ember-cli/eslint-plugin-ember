@@ -29,3 +29,8 @@ $('#something-rendered-by-jquery-plugin').on(
   bind(this, this._handlerActionFromController)
 );
 ```
+
+## Related
+
+- [no-global-jquery](./no-global-jquery.md)
+- [no-jquery](./no-jquery.md)
