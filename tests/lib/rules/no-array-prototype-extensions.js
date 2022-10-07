@@ -438,8 +438,25 @@ set.filter(item => get(item, "age") === 18);`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.objectAt()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When unexpected number of arguments are passed, auto-fixer will not run
+      code: 'something.objectAt(1, 2)',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.objectAt(1)',
+      output: 'something[1]',
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.somethingElse.objectAt(1)',
+      output: 'something.somethingElse[1]',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
