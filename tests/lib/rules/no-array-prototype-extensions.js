@@ -573,16 +573,11 @@ import { get as g } from 'dummy';
     {
       // Arguments containing strings
       code: "something.sortBy('abc', 'def')",
-      output: `import { compare } from '@ember/utils';
+      output: `import { get } from '@ember/object';
+import { compare } from '@ember/utils';
 something.sort((a, b) => {
-          const sortKeys = ['abc', 'def'];
-          for (let i = 0; i < sortKeys.length; i++) {
-            let key = sortKeys[i];
-            let propA = get(a, key);
-            let propB = get(b, key);
-            // return 1 or -1 else continue to the next sortKey
-            let compareValue = compare(propA, propB);
-
+          for (const key of ['abc', 'def']) {
+            const compareValue = compare(get(a, key), get(b, key));
             if (compareValue) {
               return compareValue;
             }
@@ -594,16 +589,11 @@ something.sort((a, b) => {
     {
       // Arguments other than strings
       code: "something.sortBy('abc', def)",
-      output: `import { compare } from '@ember/utils';
+      output: `import { get } from '@ember/object';
+import { compare } from '@ember/utils';
 something.sort((a, b) => {
-          const sortKeys = ['abc', def];
-          for (let i = 0; i < sortKeys.length; i++) {
-            let key = sortKeys[i];
-            let propA = get(a, key);
-            let propB = get(b, key);
-            // return 1 or -1 else continue to the next sortKey
-            let compareValue = compare(propA, propB);
-
+          for (const key of ['abc', def]) {
+            const compareValue = compare(get(a, key), get(b, key));
             if (compareValue) {
               return compareValue;
             }
@@ -616,16 +606,11 @@ something.sort((a, b) => {
       // When compare method is already imported from @ember/utils.
       code: `import { compare } from '@ember/utils';
       something.sortBy('abc', 'def')`,
-      output: `import { compare } from '@ember/utils';
+      output: `import { get } from '@ember/object';
+import { compare } from '@ember/utils';
       something.sort((a, b) => {
-          const sortKeys = ['abc', 'def'];
-          for (let i = 0; i < sortKeys.length; i++) {
-            let key = sortKeys[i];
-            let propA = get(a, key);
-            let propB = get(b, key);
-            // return 1 or -1 else continue to the next sortKey
-            let compareValue = compare(propA, propB);
-
+          for (const key of ['abc', 'def']) {
+            const compareValue = compare(get(a, key), get(b, key));
             if (compareValue) {
               return compareValue;
             }
@@ -638,16 +623,11 @@ something.sort((a, b) => {
       // When compare method is already imported with alias from @ember/utils.
       code: `import { compare as comp } from '@ember/utils';
       something.sortBy('abc', 'def')`,
-      output: `import { compare as comp } from '@ember/utils';
+      output: `import { get } from '@ember/object';
+import { compare as comp } from '@ember/utils';
       something.sort((a, b) => {
-          const sortKeys = ['abc', 'def'];
-          for (let i = 0; i < sortKeys.length; i++) {
-            let key = sortKeys[i];
-            let propA = get(a, key);
-            let propB = get(b, key);
-            // return 1 or -1 else continue to the next sortKey
-            let compareValue = comp(propA, propB);
-
+          for (const key of ['abc', 'def']) {
+            const compareValue = comp(get(a, key), get(b, key));
             if (compareValue) {
               return compareValue;
             }
@@ -660,17 +640,70 @@ something.sort((a, b) => {
       // When compare method is already imported from a package other than @ember/utils.
       code: `import { compare as comp } from '@custom/utils';
       something.sortBy('abc', 'def')`,
-      output: `import { compare } from '@ember/utils';
+      output: `import { get } from '@ember/object';
+import { compare } from '@ember/utils';
 import { compare as comp } from '@custom/utils';
       something.sort((a, b) => {
-          const sortKeys = ['abc', 'def'];
-          for (let i = 0; i < sortKeys.length; i++) {
-            let key = sortKeys[i];
-            let propA = get(a, key);
-            let propB = get(b, key);
-            // return 1 or -1 else continue to the next sortKey
-            let compareValue = compare(propA, propB);
-
+          for (const key of ['abc', 'def']) {
+            const compareValue = compare(get(a, key), get(b, key));
+            if (compareValue) {
+              return compareValue;
+            }
+          }
+          return 0;
+        })`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When get method is already imported from @ember/object.
+      code: `import { compare as comp } from '@custom/utils';
+      import { get } from '@ember/object';
+      something.sortBy('abc', 'def')`,
+      output: `import { compare } from '@ember/utils';
+import { compare as comp } from '@custom/utils';
+      import { get } from '@ember/object';
+      something.sort((a, b) => {
+          for (const key of ['abc', 'def']) {
+            const compareValue = compare(get(a, key), get(b, key));
+            if (compareValue) {
+              return compareValue;
+            }
+          }
+          return 0;
+        })`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When get method is already imported from a package other than @ember/object.
+      code: `import { compare as comp } from '@custom/utils';
+      import { get as g } from '@custom/object';
+      something.sortBy('abc', 'def')`,
+      output: `import { get } from '@ember/object';
+import { compare } from '@ember/utils';
+import { compare as comp } from '@custom/utils';
+      import { get as g } from '@custom/object';
+      something.sort((a, b) => {
+          for (const key of ['abc', 'def']) {
+            const compareValue = compare(get(a, key), get(b, key));
+            if (compareValue) {
+              return compareValue;
+            }
+          }
+          return 0;
+        })`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When get method is already imported with an alias from @ember/object package.
+      code: `import { compare as comp } from '@custom/utils';
+      import { get as g } from '@ember/object';
+      something.sortBy('abc', 'def')`,
+      output: `import { compare } from '@ember/utils';
+import { compare as comp } from '@custom/utils';
+      import { get as g } from '@ember/object';
+      something.sort((a, b) => {
+          for (const key of ['abc', 'def']) {
+            const compareValue = compare(g(a, key), g(b, key));
             if (compareValue) {
               return compareValue;
             }
