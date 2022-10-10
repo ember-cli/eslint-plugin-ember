@@ -570,6 +570,115 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // Arguments containing strings
+      code: "something.sortBy('abc', 'def')",
+      output: `import { compare } from '@ember/utils';
+something.sort((a, b) => {
+          const sortKeys = ['abc', 'def'];
+          for (let i = 0; i < sortKeys.length; i++) {
+            let key = sortKeys[i];
+            let propA = get(a, key);
+            let propB = get(b, key);
+            // return 1 or -1 else continue to the next sortKey
+            let compareValue = compare(propA, propB);
+
+            if (compareValue) {
+              return compareValue;
+            }
+          }
+          return 0;
+        })`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Arguments other than strings
+      code: "something.sortBy('abc', def)",
+      output: `import { compare } from '@ember/utils';
+something.sort((a, b) => {
+          const sortKeys = ['abc', def];
+          for (let i = 0; i < sortKeys.length; i++) {
+            let key = sortKeys[i];
+            let propA = get(a, key);
+            let propB = get(b, key);
+            // return 1 or -1 else continue to the next sortKey
+            let compareValue = compare(propA, propB);
+
+            if (compareValue) {
+              return compareValue;
+            }
+          }
+          return 0;
+        })`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When compare method is already imported from @ember/utils.
+      code: `import { compare } from '@ember/utils';
+      something.sortBy('abc', 'def')`,
+      output: `import { compare } from '@ember/utils';
+      something.sort((a, b) => {
+          const sortKeys = ['abc', 'def'];
+          for (let i = 0; i < sortKeys.length; i++) {
+            let key = sortKeys[i];
+            let propA = get(a, key);
+            let propB = get(b, key);
+            // return 1 or -1 else continue to the next sortKey
+            let compareValue = compare(propA, propB);
+
+            if (compareValue) {
+              return compareValue;
+            }
+          }
+          return 0;
+        })`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When compare method is already imported with alias from @ember/utils.
+      code: `import { compare as comp } from '@ember/utils';
+      something.sortBy('abc', 'def')`,
+      output: `import { compare as comp } from '@ember/utils';
+      something.sort((a, b) => {
+          const sortKeys = ['abc', 'def'];
+          for (let i = 0; i < sortKeys.length; i++) {
+            let key = sortKeys[i];
+            let propA = get(a, key);
+            let propB = get(b, key);
+            // return 1 or -1 else continue to the next sortKey
+            let compareValue = comp(propA, propB);
+
+            if (compareValue) {
+              return compareValue;
+            }
+          }
+          return 0;
+        })`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When compare method is already imported from a package other than @ember/utils.
+      code: `import { compare as comp } from '@custom/utils';
+      something.sortBy('abc', 'def')`,
+      output: `import { compare } from '@ember/utils';
+import { compare as comp } from '@custom/utils';
+      something.sort((a, b) => {
+          const sortKeys = ['abc', 'def'];
+          for (let i = 0; i < sortKeys.length; i++) {
+            let key = sortKeys[i];
+            let propA = get(a, key);
+            let propB = get(b, key);
+            // return 1 or -1 else continue to the next sortKey
+            let compareValue = compare(propA, propB);
+
+            if (compareValue) {
+              return compareValue;
+            }
+          }
+          return 0;
+        })`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
       // When unexpected number of params are passed, we will skip auto-fixing
       code: 'something.toArray(1)',
       output: null,
