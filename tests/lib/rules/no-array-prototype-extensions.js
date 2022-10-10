@@ -587,7 +587,7 @@ import { get as g } from 'dummy';
     },
     {
       code: 'something.uniq()',
-      output: null,
+      output: '[...new Set(something)]',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
