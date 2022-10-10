@@ -697,6 +697,12 @@ import { compare as comp } from '@custom/utils';
     },
     {
       code: 'something.uniq()',
+      output: '[...new Set(something)]',
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When unexpected number of params are passed, we will skip auto-fixing
+      code: 'something.uniq(1)',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
