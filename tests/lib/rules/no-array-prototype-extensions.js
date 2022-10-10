@@ -494,12 +494,31 @@ import { get as g } from 'dummy';
     },
     {
       code: "something.mapBy('abc')",
-      output: "something.map(item => item['abc'])",
+      output: `import { get } from '@ember/object';
+something.map(item => get(item, 'abc'))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
       code: 'something.mapBy(def)',
-      output: 'something.map(item => item[def])',
+      output: `import { get } from '@ember/object';
+something.map(item => get(item, def))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // @ember/object's `get` is already imported
+      code: `import { get } from '@ember/object';
+      something.mapBy('abc')`,
+      output: `import { get } from '@ember/object';
+      something.map(item => get(item, 'abc'))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // `get` is imported from package other than @ember/object
+      code: `import { get as g } from 'dummy';
+      something.mapBy('abc')`,
+      output: `import { get } from '@ember/object';
+import { get as g } from 'dummy';
+      something.map(item => get(item, 'abc'))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -590,13 +609,13 @@ import { get as g } from 'dummy';
     },
     {
       code: 'something.without(1)',
-      output: 'something.indexOf(1) > -1 ? something.filter(item => item !== 1) : something',
+      output: '(something.indexOf(1) > -1 ? something.filter(item => item !== 1) : something)',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
       code: "something.somethingElse.without('abc')",
       output:
-        "something.somethingElse.indexOf('abc') > -1 ? something.somethingElse.filter(item => item !== 'abc') : something.somethingElse",
+        "(something.somethingElse.indexOf('abc') > -1 ? something.somethingElse.filter(item => item !== 'abc') : something.somethingElse)",
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
