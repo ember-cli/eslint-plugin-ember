@@ -565,6 +565,7 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.sortBy()',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
