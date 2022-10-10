@@ -481,8 +481,44 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.mapBy()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When unexpected number of arguments are passed, auto-fixer will not run
+      code: 'something.mapBy(1, 2)',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: "something.mapBy('abc')",
+      output: `import { get } from '@ember/object';
+something.map(item => get(item, 'abc'))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.mapBy(def)',
+      output: `import { get } from '@ember/object';
+something.map(item => get(item, def))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // @ember/object's `get` is already imported
+      code: `import { get } from '@ember/object';
+      something.mapBy('abc')`,
+      output: `import { get } from '@ember/object';
+      something.map(item => get(item, 'abc'))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // `get` is imported from package other than @ember/object
+      code: `import { get as g } from 'dummy';
+      something.mapBy('abc')`,
+      output: `import { get } from '@ember/object';
+import { get as g } from 'dummy';
+      something.map(item => get(item, 'abc'))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -503,6 +539,7 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // Function call in chain
       code: 'something.somethingElse.objectAt(1)',
       output: 'something.somethingElse[1]',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
@@ -572,13 +609,13 @@ import { get as g } from 'dummy';
     },
     {
       code: 'something.without(1)',
-      output: 'something.indexOf(1) > -1 ? something.filter(item => item !== 1) : something',
+      output: '(something.indexOf(1) > -1 ? something.filter(item => item !== 1) : something)',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
-      code: 'something.somethingElse.without(1)',
+      code: "something.somethingElse.without('abc')",
       output:
-        'something.somethingElse.indexOf(1) > -1 ? something.somethingElse.filter(item => item !== 1) : something.somethingElse',
+        "(something.somethingElse.indexOf('abc') > -1 ? something.somethingElse.filter(item => item !== 'abc') : something.somethingElse)",
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
