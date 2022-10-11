@@ -621,8 +621,14 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.objectsAt()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.objectsAt(1, 2)',
+      output: '[1, 2].map((ind) => something[ind])',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
