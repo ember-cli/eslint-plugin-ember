@@ -550,8 +550,23 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.reject()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Single argument is passed
+      code: 'something.reject(function(el) { return el.isFlagged; })',
+      output:
+        'something.filter(function() { return !(function(el) { return el.isFlagged; }).apply(this, arguments); })',
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Two arguments are passed
+      code: 'something.reject(function(el) { return el.isFlagged && this.isFlagged; }, {isFlagged: true})',
+      output:
+        'something.filter(function() { return !(function(el) { return el.isFlagged && this.isFlagged; }).apply(this, arguments); }, {isFlagged: true})',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
