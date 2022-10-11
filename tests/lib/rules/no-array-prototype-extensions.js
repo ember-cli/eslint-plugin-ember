@@ -471,13 +471,89 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.isAny()',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      code: 'something.isAny("abc")',
+      output: `import { get } from '@ember/object';
+something.some(item => get(item, "abc"))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.isAny("abc", "def")',
+      output: `import { get } from '@ember/object';
+something.some(item => get(item, "abc") === "def")`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported from '@ember/object' package
+      code: `import { get } from '@ember/object';
+      something.isAny('abc', def)`,
+      output: `import { get } from '@ember/object';
+      something.some(item => get(item, 'abc') === def)`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported with alias from '@ember/object' package
+      code: `import { get as g } from '@ember/object';
+      something.isAny(abc, 'def')`,
+      output: `import { get as g } from '@ember/object';
+      something.some(item => g(item, abc) === 'def')`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported from a package other than '@ember/object'
+      code: `import { get as g } from '@custom/object';
+      something.isAny('abc', 'def')`,
+      output: `import { get } from '@ember/object';
+import { get as g } from '@custom/object';
+      something.some(item => get(item, 'abc') === 'def')`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.isEvery()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.isEvery("abc")',
+      output: `import { get } from '@ember/object';
+something.every(item => get(item, "abc"))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.isEvery("abc", "def")',
+      output: `import { get } from '@ember/object';
+something.every(item => get(item, "abc") === "def")`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported from '@ember/object' package
+      code: `import { get } from '@ember/object';
+      something.isEvery('abc', def)`,
+      output: `import { get } from '@ember/object';
+      something.every(item => get(item, 'abc') === def)`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported with alias from '@ember/object' package
+      code: `import { get as g } from '@ember/object';
+      something.isEvery(abc, 'def')`,
+      output: `import { get as g } from '@ember/object';
+      something.every(item => g(item, abc) === 'def')`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported from a package other than '@ember/object'
+      code: `import { get as g } from '@custom/object';
+      something.isEvery('abc', 'def')`,
+      output: `import { get } from '@ember/object';
+import { get as g } from '@custom/object';
+      something.every(item => get(item, 'abc') === 'def')`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
