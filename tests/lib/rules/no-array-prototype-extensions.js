@@ -641,14 +641,14 @@ import { get as g } from 'dummy';
       // Single argument is passed
       code: 'something.reject(function(el) { return el.isFlagged; })',
       output:
-        'something.filter(function() { return !(function(el) { return el.isFlagged; }).apply(this, arguments); })',
+        'something.filter(function(...args) { return !(function(el) { return el.isFlagged; }).apply(this, args); })',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
       // Two arguments are passed
       code: 'something.reject(function(el) { return el.isFlagged && this.isFlagged; }, {isFlagged: true})',
       output:
-        'something.filter(function() { return !(function(el) { return el.isFlagged && this.isFlagged; }).apply(this, arguments); }, {isFlagged: true})',
+        'something.filter(function(...args) { return !(function(el) { return el.isFlagged && this.isFlagged; }).apply(this, args); }, {isFlagged: true})',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
