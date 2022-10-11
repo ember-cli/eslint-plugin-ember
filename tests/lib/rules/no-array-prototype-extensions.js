@@ -555,8 +555,48 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.rejectBy()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Single argument is passed
+      code: 'something.rejectBy("abc")',
+      output: `import { get } from '@ember/object';
+something.filter(item => !get(item, "abc"))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Two arguments are passed
+      code: 'something.rejectBy("abc", "def")',
+      output: `import { get } from '@ember/object';
+something.filter(item => get(item, "abc") !== "def")`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` is already imported from '@ember/object' package
+      code: `import { get } from '@ember/object';
+      something.rejectBy("abc")`,
+      output: `import { get } from '@ember/object';
+      something.filter(item => !get(item, "abc"))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` is already imported with alias from '@ember/object' package
+      code: `import { get as g } from '@ember/object';
+      something.rejectBy("abc")`,
+      output: `import { get as g } from '@ember/object';
+      something.filter(item => !g(item, "abc"))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` is already imported from a package other than '@ember/object'
+      code: `import { get as g } from '@custom/object';
+      something.rejectBy("abc")`,
+      output: `import { get } from '@ember/object';
+import { get as g } from '@custom/object';
+      something.filter(item => !get(item, "abc"))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
