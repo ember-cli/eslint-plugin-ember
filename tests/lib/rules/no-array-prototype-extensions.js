@@ -740,8 +740,130 @@ import { compare as comp } from '@custom/utils';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of params are passed, we will skip auto-fixing
       code: 'something.uniqBy()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Primitive value as an argument
+      code: 'something.uniqBy(1)',
+      output: `import { get } from '@ember/object';
+something.reduce(([uniqArr, itemsSet, getterFn], item) => {
+          const val = getterFn(item);
+          if (!itemsSet.has(val)) {
+            itemsSet.add(val);
+            uniqArr.push(item);
+          }
+          return [uniqArr, itemsSet, getterFn];
+        }, [[], new Set(), (item) => get(item, 1)])[0]`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Dynamic value as an argument
+      code: 'something.uniqBy(abc)',
+      output: `import { get } from '@ember/object';
+something.reduce(([uniqArr, itemsSet, getterFn], item) => {
+          const val = getterFn(item);
+          if (!itemsSet.has(val)) {
+            itemsSet.add(val);
+            uniqArr.push(item);
+          }
+          return [uniqArr, itemsSet, getterFn];
+        }, [[], new Set(), typeof abc === 'function' ? abc : (item) => get(item, abc)])[0]`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // get method is already imported from @ember/object package.
+      code: `import { get } from '@ember/object';
+      something.uniqBy('abc').sort()`,
+      output: `import { get } from '@ember/object';
+      something.reduce(([uniqArr, itemsSet, getterFn], item) => {
+          const val = getterFn(item);
+          if (!itemsSet.has(val)) {
+            itemsSet.add(val);
+            uniqArr.push(item);
+          }
+          return [uniqArr, itemsSet, getterFn];
+        }, [[], new Set(), (item) => get(item, 'abc')])[0].sort()`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // get method is already imported from a package other than @ember/object.
+      code: `import { get as g } from '@custom/object';
+      something.uniqBy('abc').sort()`,
+      output: `import { get } from '@ember/object';
+import { get as g } from '@custom/object';
+      something.reduce(([uniqArr, itemsSet, getterFn], item) => {
+          const val = getterFn(item);
+          if (!itemsSet.has(val)) {
+            itemsSet.add(val);
+            uniqArr.push(item);
+          }
+          return [uniqArr, itemsSet, getterFn];
+        }, [[], new Set(), (item) => get(item, 'abc')])[0].sort()`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // get method is already imported with an alias from @ember/object package.
+      code: `import { get as g } from '@ember/object';
+      something.uniqBy('abc')`,
+      output: `import { get as g } from '@ember/object';
+      something.reduce(([uniqArr, itemsSet, getterFn], item) => {
+          const val = getterFn(item);
+          if (!itemsSet.has(val)) {
+            itemsSet.add(val);
+            uniqArr.push(item);
+          }
+          return [uniqArr, itemsSet, getterFn];
+        }, [[], new Set(), (item) => g(item, 'abc')])[0]`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When arrow function expression is passed as argument
+      code: `import { get as g } from '@ember/object';
+      something.uniqBy(() => true)`,
+      output: `import { get as g } from '@ember/object';
+      something.reduce(([uniqArr, itemsSet, getterFn], item) => {
+          const val = getterFn(item);
+          if (!itemsSet.has(val)) {
+            itemsSet.add(val);
+            uniqArr.push(item);
+          }
+          return [uniqArr, itemsSet, getterFn];
+        }, [[], new Set(), () => true])[0]`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When function expression is passed as argument
+      code: `import { get as g } from '@ember/object';
+      something.uniqBy(function test() { return true; })`,
+      output: `import { get as g } from '@ember/object';
+      something.reduce(([uniqArr, itemsSet, getterFn], item) => {
+          const val = getterFn(item);
+          if (!itemsSet.has(val)) {
+            itemsSet.add(val);
+            uniqArr.push(item);
+          }
+          return [uniqArr, itemsSet, getterFn];
+        }, [[], new Set(), function test() { return true; }])[0]`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When function expression is passed as argument
+      code: `function test() { return true; }
+      import { get as g } from '@ember/object';
+      something.uniqBy(test)`,
+      output: `function test() { return true; }
+      import { get as g } from '@ember/object';
+      something.reduce(([uniqArr, itemsSet, getterFn], item) => {
+          const val = getterFn(item);
+          if (!itemsSet.has(val)) {
+            itemsSet.add(val);
+            uniqArr.push(item);
+          }
+          return [uniqArr, itemsSet, getterFn];
+        }, [[], new Set(), typeof test === 'function' ? test : (item) => g(item, test)])[0]`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
