@@ -735,8 +735,46 @@ import { get as g } from '@custom/object';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.setEach()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When unexpected number of arguments are passed, auto-fixer will not run
+      code: 'something.setEach("abc")',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.setEach("abc", 2)',
+      output: `import { set } from '@ember/object';
+something.forEach(item => set(item, "abc", 2))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When get method is already imported from @ember/object package.
+      code: `import { set } from '@ember/object';
+      something.setEach("abc", 2)`,
+      output: `import { set } from '@ember/object';
+      something.forEach(item => set(item, "abc", 2))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When get method is already imported as alias from @ember/object package.
+      code: `import { set as s } from '@ember/object';
+      something.setEach("abc", 2)`,
+      output: `import { set as s } from '@ember/object';
+      something.forEach(item => s(item, "abc", 2))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When get method is already imported from a package other than @ember/object.
+      code: `import { set as s } from '@custom/object';
+      something.setEach("abc", 2)`,
+      output: `import { set } from '@ember/object';
+import { set as s } from '@custom/object';
+      something.forEach(item => set(item, "abc", 2))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
