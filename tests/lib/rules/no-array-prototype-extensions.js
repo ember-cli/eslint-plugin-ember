@@ -466,8 +466,46 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.invoke()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.invoke("abc")',
+      output: `import { get } from '@ember/object';
+something.map(item => get(item, "abc")?.())`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.invoke("abc", "def")',
+      output: `import { get } from '@ember/object';
+something.map(item => get(item, "abc")?.("def"))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported from '@ember/object' package
+      code: `import { get } from '@ember/object';
+      something.invoke('abc', {})`,
+      output: `import { get } from '@ember/object';
+      something.map(item => get(item, 'abc')?.({}))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported with alias from '@ember/object' package
+      code: `import { get as g } from '@ember/object';
+      something.invoke('abc', {})`,
+      output: `import { get as g } from '@ember/object';
+      something.map(item => g(item, 'abc')?.({}))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported from a package other than '@ember/object'
+      code: `import { get as g } from '@custom/object';
+      something.invoke('abc', {}, 'test', true)`,
+      output: `import { get } from '@ember/object';
+import { get as g } from '@custom/object';
+      something.map(item => get(item, 'abc')?.({}, 'test', true))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
