@@ -800,6 +800,21 @@ something.sort((a, b) => {
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // Single argument.
+      code: 'something.sortBy(getKey())',
+      output: `import { get } from '@ember/object';
+import { compare } from '@ember/utils';
+something.sort((a, b) => {
+            const key = getKey();
+            const compareValue = compare(get(a, key), get(b, key));
+            if (compareValue) {
+              return compareValue;
+            }
+            return 0;
+          })`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
       // Arguments other than strings
       code: "something.sortBy('abc', def)",
       output: `import { get } from '@ember/object';
