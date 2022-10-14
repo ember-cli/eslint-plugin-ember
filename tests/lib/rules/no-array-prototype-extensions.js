@@ -487,7 +487,7 @@ something.map(item => get(item, def))`,
     {
       // When `get` method is already imported from `@ember/object` package
       code: `import { get } from '@ember/object';
-      something.mapBy('abc')`,
+      something.getEach('abc')`,
       output: `import { get } from '@ember/object';
       something.map(item => get(item, 'abc'))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
@@ -495,7 +495,7 @@ something.map(item => get(item, def))`,
     {
       // When `get` method is already imported as alias from `@ember/object` package
       code: `import { get as g } from '@ember/object';
-      something.mapBy('abc')`,
+      something.getEach('abc')`,
       output: `import { get as g } from '@ember/object';
       something.map(item => g(item, 'abc'))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
@@ -503,7 +503,7 @@ something.map(item => get(item, def))`,
     {
       // When `get` method is already imported from a other than `@ember/object`
       code: `import { get as g } from 'dummy';
-      something.mapBy('abc')`,
+      something.getEach('abc')`,
       output: `import { get } from '@ember/object';
 import { get as g } from 'dummy';
       something.map(item => get(item, 'abc'))`,
