@@ -461,8 +461,52 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.getEach()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When unexpected number of arguments are passed, auto-fixer will not run
+      code: 'something.getEach(1, 2)',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: "something.getEach('abc')",
+      output: `import { get } from '@ember/object';
+something.map(item => get(item, 'abc'))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.getEach(def)',
+      output: `import { get } from '@ember/object';
+something.map(item => get(item, def))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported from `@ember/object` package
+      code: `import { get } from '@ember/object';
+      something.mapBy('abc')`,
+      output: `import { get } from '@ember/object';
+      something.map(item => get(item, 'abc'))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported as alias from `@ember/object` package
+      code: `import { get as g } from '@ember/object';
+      something.mapBy('abc')`,
+      output: `import { get as g } from '@ember/object';
+      something.map(item => g(item, 'abc'))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported from a other than `@ember/object`
+      code: `import { get as g } from 'dummy';
+      something.mapBy('abc')`,
+      output: `import { get } from '@ember/object';
+import { get as g } from 'dummy';
+      something.map(item => get(item, 'abc'))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
