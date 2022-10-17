@@ -510,8 +510,46 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.invoke()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.invoke("abc")',
+      output: `import { get } from '@ember/object';
+something.map(item => get(item, "abc")?.())`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.invoke("abc", "def")',
+      output: `import { get } from '@ember/object';
+something.map(item => get(item, "abc")?.("def"))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported from '@ember/object' package
+      code: `import { get } from '@ember/object';
+      something.invoke('abc', {})`,
+      output: `import { get } from '@ember/object';
+      something.map(item => get(item, 'abc')?.({}))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported with alias from '@ember/object' package
+      code: `import { get as g } from '@ember/object';
+      something.invoke('abc', {})`,
+      output: `import { get as g } from '@ember/object';
+      something.map(item => g(item, 'abc')?.({}))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When `get` method is already imported from a package other than '@ember/object'
+      code: `import { get as g } from '@custom/object';
+      something.invoke('abc', {}, 'test', true)`,
+      output: `import { get } from '@ember/object';
+import { get as g } from '@custom/object';
+      something.map(item => get(item, 'abc')?.({}, 'test', true))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -741,8 +779,46 @@ import { get as g } from '@custom/object';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.setEach()',
       output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When unexpected number of arguments are passed, auto-fixer will not run
+      code: 'something.setEach("abc")',
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.setEach("abc", 2)',
+      output: `import { set } from '@ember/object';
+something.forEach(item => set(item, "abc", 2))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When get method is already imported from @ember/object package.
+      code: `import { set } from '@ember/object';
+      something.setEach("abc", 2)`,
+      output: `import { set } from '@ember/object';
+      something.forEach(item => set(item, "abc", 2))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When get method is already imported as alias from @ember/object package.
+      code: `import { set as s } from '@ember/object';
+      something.setEach("abc", 2)`,
+      output: `import { set as s } from '@ember/object';
+      something.forEach(item => s(item, "abc", 2))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // When get method is already imported from a package other than @ember/object.
+      code: `import { set as s } from '@custom/object';
+      something.setEach("abc", 2)`,
+      output: `import { set } from '@ember/object';
+import { set as s } from '@custom/object';
+      something.forEach(item => set(item, "abc", 2))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -765,6 +841,21 @@ something.sort((a, b) => {
           }
           return 0;
         })`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Single argument.
+      code: 'something.sortBy(getKey())',
+      output: `import { get } from '@ember/object';
+import { compare } from '@ember/utils';
+something.sort((a, b) => {
+            const key = getKey();
+            const compareValue = compare(get(a, key), get(b, key));
+            if (compareValue) {
+              return compareValue;
+            }
+            return 0;
+          })`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
