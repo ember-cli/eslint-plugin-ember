@@ -12,13 +12,13 @@ Some alternatives:
 - Use lodash helper functions instead of `.uniqBy()`, `.sortBy()` in Ember modules
 - Use immutable update style with `@tracked` properties or `TrackedArray` from `tracked-built-ins` instead of `.pushObject`, `removeObject` in Ember modules
 
-Note: this rule is not in the `recommended` configuration because of the risk of false positives.
-
 ## Rule Details
 
 This rule will disallow method calls that match any of the forbidden `Array` prototype extension method names.
 
-Note that to reduce false positives, the rule ignores some common known-non-array classes/objects whose functions overlap with the array extension function names:
+The rule autofixes all [EmberArray](https://api.emberjs.com/ember/release/classes/EmberArray) functions. It does not autofix the mutation functions from [MutableArray](https://api.emberjs.com/ember/release/classes/MutableArray) or `firstObject` / `lastObject`, as these involve reactivity/observability and may require a more involved change to convert to `@tracked` or `TrackedArray`.
+
+To reduce false positives, the rule ignores some common known-non-array classes/objects whose functions overlap with the array extension function names:
 
 - `Set.clear()`
 - `Map.clear()`
@@ -26,6 +26,8 @@ Note that to reduce false positives, the rule ignores some common known-non-arra
 - etc
 
 If you run into additional false positives, please file a bug or submit a PR to add it to the rule's hardcoded ignore list.
+
+This rule is not in the `recommended` configuration because of the risk of false positives.
 
 ## Examples
 
