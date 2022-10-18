@@ -15,6 +15,43 @@
 
 
 
+
+## v11.1.0 (2022-10-18)
+
+#### :rocket: Enhancement
+* [#1632](https://github.com/ember-cli/eslint-plugin-ember/pull/1632) Add `getEach` to `map` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1633](https://github.com/ember-cli/eslint-plugin-ember/pull/1633) Add `setEach` to `forEach` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1631](https://github.com/ember-cli/eslint-plugin-ember/pull/1631) Add `invoke` to `map` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1629](https://github.com/ember-cli/eslint-plugin-ember/pull/1629) Add `reject` to `filter` autofixer for no-array-prototype-extensions rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1628](https://github.com/ember-cli/eslint-plugin-ember/pull/1628) Add `objectsAt` to `map` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1630](https://github.com/ember-cli/eslint-plugin-ember/pull/1630) Add `isAny` and `isEvery` autofixers for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1627](https://github.com/ember-cli/eslint-plugin-ember/pull/1627) Add `rejectBy` to `filter` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1626](https://github.com/ember-cli/eslint-plugin-ember/pull/1626) Add `uniqBy` to `reduce` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1621](https://github.com/ember-cli/eslint-plugin-ember/pull/1621) Add `sortBy` to `sort` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1620](https://github.com/ember-cli/eslint-plugin-ember/pull/1620) Add `uniq` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1619](https://github.com/ember-cli/eslint-plugin-ember/pull/1619) Add `mapBy` to `map` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1617](https://github.com/ember-cli/eslint-plugin-ember/pull/1617) Add `without` to `filter` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1616](https://github.com/ember-cli/eslint-plugin-ember/pull/1616) Add `toArray` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1615](https://github.com/ember-cli/eslint-plugin-ember/pull/1615) Add `objectAt` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1614](https://github.com/ember-cli/eslint-plugin-ember/pull/1614) Add `findBy` to `find` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1611](https://github.com/ember-cli/eslint-plugin-ember/pull/1611) Add `compact` to `filter` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1610](https://github.com/ember-cli/eslint-plugin-ember/pull/1610) Add `filterBy` to `filter` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+* [#1609](https://github.com/ember-cli/eslint-plugin-ember/pull/1609) Add `any` to `some` autofixer for `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+
+#### :bug: Bug Fix
+* [#1635](https://github.com/ember-cli/eslint-plugin-ember/pull/1635) Simpler autofix for `sortBy` with single arg for `no-array-prototype-extension` rule ([@bmish](https://github.com/bmish))
+
+#### :memo: Documentation
+* [#1639](https://github.com/ember-cli/eslint-plugin-ember/pull/1639) Explain what the autofixer covers in `no-array-prototype-extensions` rule doc ([@bmish](https://github.com/bmish))
+* [#1618](https://github.com/ember-cli/eslint-plugin-ember/pull/1618) Add codemod links for jQuery-related rules ([@bmish](https://github.com/bmish))
+* [#1601](https://github.com/ember-cli/eslint-plugin-ember/pull/1601) Switch to dash for markdown lists ([@bmish](https://github.com/bmish))
+* [#1582](https://github.com/ember-cli/eslint-plugin-ember/pull/1582) Add link to deprecation RFC in `no-array-prototype-extensions` rule doc ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Santhosh Venkata Rama Siva Thanakala Gani ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+
+
 ## v11.0.6 (2022-08-18)
 
 #### :bug: Bug Fix
