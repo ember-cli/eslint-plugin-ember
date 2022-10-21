@@ -832,7 +832,7 @@ import { set as s } from '@custom/object';
       code: "something.sortBy('abc', 'def')",
       output: `import { get } from '@ember/object';
 import { compare } from '@ember/utils';
-something.sort((a, b) => {
+[...something].sort((a, b) => {
           for (const key of ['abc', 'def']) {
             const compareValue = compare(get(a, key), get(b, key));
             if (compareValue) {
@@ -848,14 +848,23 @@ something.sort((a, b) => {
       code: 'something.sortBy(getKey())',
       output: `import { get } from '@ember/object';
 import { compare } from '@ember/utils';
-something.sort((a, b) => {
-            const key = getKey();
+[...something].sort((a, b) => compare(get(a, getKey()), get(b, getKey())))`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Spread element as argument
+      code: 'something.sortBy(...abc)',
+      output: `import { get } from '@ember/object';
+import { compare } from '@ember/utils';
+[...something].sort((a, b) => {
+          for (const key of [...abc]) {
             const compareValue = compare(get(a, key), get(b, key));
             if (compareValue) {
               return compareValue;
             }
-            return 0;
-          })`,
+          }
+          return 0;
+        })`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -863,7 +872,7 @@ something.sort((a, b) => {
       code: "something.sortBy('abc', def)",
       output: `import { get } from '@ember/object';
 import { compare } from '@ember/utils';
-something.sort((a, b) => {
+[...something].sort((a, b) => {
           for (const key of ['abc', def]) {
             const compareValue = compare(get(a, key), get(b, key));
             if (compareValue) {
@@ -880,7 +889,7 @@ something.sort((a, b) => {
       something.sortBy('abc', 'def')`,
       output: `import { get } from '@ember/object';
 import { compare } from '@ember/utils';
-      something.sort((a, b) => {
+      [...something].sort((a, b) => {
           for (const key of ['abc', 'def']) {
             const compareValue = compare(get(a, key), get(b, key));
             if (compareValue) {
@@ -897,7 +906,7 @@ import { compare } from '@ember/utils';
       something.sortBy('abc', 'def')`,
       output: `import { get } from '@ember/object';
 import { compare as comp } from '@ember/utils';
-      something.sort((a, b) => {
+      [...something].sort((a, b) => {
           for (const key of ['abc', 'def']) {
             const compareValue = comp(get(a, key), get(b, key));
             if (compareValue) {
@@ -915,7 +924,7 @@ import { compare as comp } from '@ember/utils';
       output: `import { get } from '@ember/object';
 import { compare } from '@ember/utils';
 import { compare as comp } from '@custom/utils';
-      something.sort((a, b) => {
+      [...something].sort((a, b) => {
           for (const key of ['abc', 'def']) {
             const compareValue = compare(get(a, key), get(b, key));
             if (compareValue) {
@@ -934,7 +943,7 @@ import { compare as comp } from '@custom/utils';
       output: `import { compare } from '@ember/utils';
 import { compare as comp } from '@custom/utils';
       import { get } from '@ember/object';
-      something.sort((a, b) => {
+      [...something].sort((a, b) => {
           for (const key of ['abc', 'def']) {
             const compareValue = compare(get(a, key), get(b, key));
             if (compareValue) {
@@ -954,7 +963,7 @@ import { compare as comp } from '@custom/utils';
 import { compare } from '@ember/utils';
 import { compare as comp } from '@custom/utils';
       import { get as g } from '@custom/object';
-      something.sort((a, b) => {
+      [...something].sort((a, b) => {
           for (const key of ['abc', 'def']) {
             const compareValue = compare(get(a, key), get(b, key));
             if (compareValue) {
@@ -973,7 +982,7 @@ import { compare as comp } from '@custom/utils';
       output: `import { compare } from '@ember/utils';
 import { compare as comp } from '@custom/utils';
       import { get as g } from '@ember/object';
-      something.sort((a, b) => {
+      [...something].sort((a, b) => {
           for (const key of ['abc', 'def']) {
             const compareValue = compare(g(a, key), g(b, key));
             if (compareValue) {
