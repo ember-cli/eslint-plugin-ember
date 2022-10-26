@@ -1,4 +1,6 @@
-# no-proxies
+# ember/no-proxies
+
+<!-- end auto-generated rule header -->
 
 You may want to disallow the use of Ember proxy objects (`ObjectProxy`, `ArrayProxy`) in your application for a number of reasons:
 

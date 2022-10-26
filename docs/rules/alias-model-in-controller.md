@@ -1,4 +1,6 @@
-# alias-model-in-controller
+# ember/alias-model-in-controller
+
+<!-- end auto-generated rule header -->
 
 It makes code more readable if the model has the same name as a subject.
 

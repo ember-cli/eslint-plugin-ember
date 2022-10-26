@@ -1,4 +1,6 @@
-# computed-property-getters
+# ember/computed-property-getters
+
+<!-- end auto-generated rule header -->
 
 Enforce the consistent use of getters in computed properties.
 

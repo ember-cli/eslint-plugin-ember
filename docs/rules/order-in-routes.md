@@ -1,6 +1,8 @@
-# order-in-routes
+# ember/order-in-routes
 
-🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
+<!-- end auto-generated rule header -->
 
 Note: this rule will not be added to the `recommended` configuration because it enforces an opinionated, stylistic preference.
 

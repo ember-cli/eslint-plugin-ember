@@ -1,4 +1,6 @@
-# require-fetch-import
+# ember/require-fetch-import
+
+<!-- end auto-generated rule header -->
 
 Using `fetch()` without importing it causes the browser to use the native,
 non-wrapped `window.fetch()`. This is generally fine, but makes testing harder

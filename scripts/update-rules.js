@@ -19,77 +19,13 @@ const path = require('path');
 // ------------------------------------------------------------------------------
 
 const root = path.resolve(__dirname, '../lib/rules');
-const readmeFile = path.resolve(__dirname, '../README.md');
 const recommendedRulesFile = path.resolve(__dirname, '../lib/recommended-rules.js');
-const tablePlaceholder = /<!--RULES_TABLE_START-->[\S\s]*<!--RULES_TABLE_END-->/;
-const readmeContent = fs.readFileSync(readmeFile, 'utf8');
-
-const RECOMMENDED = '✅';
-const FIXABLE = '🔧';
-const SUGGESTIONS = '💡';
 
 const rules = fs
   .readdirSync(root)
   .filter((file) => path.extname(file) === '.js')
   .map((file) => path.basename(file, '.js'))
   .map((fileName) => [fileName, require(path.join(root, fileName))]); // eslint-disable-line import/no-dynamic-require
-
-const categories = rules
-  .map((entry) => entry[1].meta.docs.category)
-  .reduce((arr, category) => {
-    if (!arr.includes(category)) {
-      arr.push(category);
-    }
-    return arr;
-  }, [])
-  .sort(function (a, b) {
-    return a.toLowerCase().localeCompare(b.toLowerCase()); // Case-insensitive sort function.
-  });
-
-let rulesTableContent = categories
-  .map(
-    (category) => `### ${category}
-
-| Name    | Description | ${RECOMMENDED} | ${FIXABLE} | ${SUGGESTIONS} |
-|:--------|:------------|:---------------|:-----------|:---------------|
-${rules
-  .filter(([, rule]) => rule.meta.docs.category === category && !rule.meta.deprecated)
-  .map((entry) => {
-    const name = entry[0];
-    const meta = entry[1].meta;
-    const link = `[${name}](./docs/rules/${name}.md)`;
-    const description = meta.docs.description || '(no description)';
-    return `| ${link} | ${description} | ${meta.docs.recommended ? RECOMMENDED : ''} | ${
-      meta.fixable ? FIXABLE : ''
-    } | ${meta.hasSuggestions ? SUGGESTIONS : ''} |`;
-  })
-  .join('\n')}
-`
-  )
-  .join('\n');
-
-const deprecatedRules = rules.filter((entry) => entry[1].meta.deprecated);
-if (deprecatedRules.length > 0) {
-  rulesTableContent += `
-### Deprecated
-
-> :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
-
-| Name    | Replaced by |
-|:--------|:------------|
-${deprecatedRules
-  .map((entry) => {
-    const name = entry[0];
-    const meta = entry[1].meta;
-    const link = `[${name}](./docs/rules/${name}.md)`;
-    const replacedBy =
-      (meta.docs.replacedBy || []).map((id) => `[${id}](./docs/rules/${id}.md)`).join(', ') ||
-      '(no replacement)';
-    return `| ${link} | ${replacedBy} |`;
-  })
-  .join('\n')}
-`;
-}
 
 const recommendedRules = rules.reduce((obj, entry) => {
   const name = `ember/${entry[0]}`;
@@ -107,13 +43,5 @@ const recommendedRulesContent = `/*
  * definitions, execute "npm run update"
  */
 module.exports = ${JSON.stringify(recommendedRules, null, 2)}`;
-
-fs.writeFileSync(
-  readmeFile,
-  readmeContent.replace(
-    tablePlaceholder,
-    `<!--RULES_TABLE_START-->\n\n${rulesTableContent}\n<!--RULES_TABLE_END-->`
-  )
-);
 
 fs.writeFileSync(recommendedRulesFile, recommendedRulesContent);

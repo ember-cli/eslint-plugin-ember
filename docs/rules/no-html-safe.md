@@ -1,4 +1,6 @@
-# no-html-safe
+# ember/no-html-safe
+
+<!-- end auto-generated rule header -->
 
 `htmlSafe` marks a string as safe for unescaped output with Ember templates so you can render it as HTML. `htmlSafe` does **not** perform input sanitization. While useful this can inadvertently open you up to Cross-site Scripting (XSS) vulnerabilities, especially if the string was generated from user input or some other untrusted source. **You should only ever use `htmlSafe` with trusted or sanitized input**.
 

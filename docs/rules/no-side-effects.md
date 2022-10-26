@@ -1,6 +1,8 @@
-# no-side-effects
+# ember/no-side-effects
 
-✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ This rule is enabled in the `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
+<!-- end auto-generated rule header -->
 
 When using computed properties, do not introduce side effects. Side effects make it much more difficult to reason about the origin of changes.
 

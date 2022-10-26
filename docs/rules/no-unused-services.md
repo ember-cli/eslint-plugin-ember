@@ -1,6 +1,8 @@
-# no-unused-services
+# ember/no-unused-services
 
-💡 Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+💡 This rule is manually fixable by [editor suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+
+<!-- end auto-generated rule header -->
 
 Disallow unused service injections.
 

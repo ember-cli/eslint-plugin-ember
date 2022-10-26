@@ -1,4 +1,6 @@
-# no-controllers
+# ember/no-controllers
+
+<!-- end auto-generated rule header -->
 
 Some people may prefer to avoid the use of controllers in their applications, typically in favor of components which can be more portable and easier to test.
 
