@@ -1,4 +1,6 @@
-# no-empty-attrs
+# ember/no-empty-attrs
+
+<!-- end auto-generated rule header -->
 
 Be explicit with Ember data attribute types.
 

@@ -1,6 +1,8 @@
-# route-path-style
+# ember/route-path-style
 
-💡 Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+💡 This rule is manually fixable by [editor suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+
+<!-- end auto-generated rule header -->
 
 Enforces usage of kebab-case (instead of snake_case or camelCase) in route paths.
 

@@ -1,6 +1,8 @@
-# no-pause-test
+# ember/no-pause-test
 
-✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ This rule is enabled in the `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
+<!-- end auto-generated rule header -->
 
 Disallow use of `pauseTest` helper in tests.
 

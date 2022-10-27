@@ -1,6 +1,8 @@
-# no-computed-properties-in-native-classes
+# ember/no-computed-properties-in-native-classes
 
-✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ This rule is enabled in the `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
+<!-- end auto-generated rule header -->
 
 Since the beginning of Ember's existence, Computed Properties (CPs) have been used to accomplish reactivity in the framework. With Ember Octane, new features were introduced including Glimmer components, native JavaScript classes and Tracked Properties. With Ember Octane's new programming model, CPs are no longer needed. If using native JavaScript classes, Tracked Properties should be used instead as they give us the same benefit of CPs but with less boilerplate and more flexibility.
 

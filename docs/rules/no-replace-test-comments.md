@@ -1,4 +1,6 @@
-# no-replace-test-comments
+# ember/no-replace-test-comments
+
+<!-- end auto-generated rule header -->
 
 Ember developers using blueprints to generate classes should write real tests.
 

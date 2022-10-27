@@ -1,4 +1,6 @@
-# no-restricted-service-injections
+# ember/no-restricted-service-injections
+
+<!-- end auto-generated rule header -->
 
 In some parts of your application, you may prefer to disallow certain services from being injected. This can be useful for:
 

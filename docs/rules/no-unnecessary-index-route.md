@@ -1,4 +1,6 @@
-# no-unnecessary-index-route
+# ember/no-unnecessary-index-route
+
+<!-- end auto-generated rule header -->
 
 Disallow unnecessary `index` route definition.
 

@@ -1,4 +1,6 @@
-# named-functions-in-promises
+# ember/named-functions-in-promises
+
+<!-- end auto-generated rule header -->
 
 Use named functions defined on objects to handle promises.
 

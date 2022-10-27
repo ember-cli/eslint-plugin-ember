@@ -1,8 +1,10 @@
-# require-valid-css-selector-in-test-helpers
+# ember/require-valid-css-selector-in-test-helpers
 
-✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ This rule is enabled in the `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
 
-🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
+<!-- end auto-generated rule header -->
 
 Test helpers and querySelector methods should be called with valid CSS selectors. Most of the time invalid selectors will result in a failing test but that is not always the case.
 

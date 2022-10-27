@@ -1,6 +1,8 @@
-# prefer-ember-test-helpers
+# ember/prefer-ember-test-helpers
 
-✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ This rule is enabled in the `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
+<!-- end auto-generated rule header -->
 
 This rule ensures the correct Ember test helper is imported when using methods that have a native window counterpart.
 

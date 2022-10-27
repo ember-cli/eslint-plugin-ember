@@ -1,6 +1,8 @@
-# no-test-module-for
+# ember/no-test-module-for
 
-✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
+✅ This rule is enabled in the `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
+<!-- end auto-generated rule header -->
 
 Use `module` instead of `moduleFor`.
 
