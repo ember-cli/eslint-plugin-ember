@@ -850,7 +850,7 @@ import { compare } from '@ember/utils';
 import { compare } from '@ember/utils';
 [...something].sort((a, b) => {
               const key = getKey();
-              return compare(get(a, getKey()), get(b, getKey()));
+              return compare(get(a, key), get(b, key));
             })`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
