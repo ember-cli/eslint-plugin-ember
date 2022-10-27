@@ -833,22 +833,33 @@ import { set as s } from '@custom/object';
       output: `import { get } from '@ember/object';
 import { compare } from '@ember/utils';
 [...something].sort((a, b) => {
-          for (const key of ['abc', 'def']) {
-            const compareValue = compare(get(a, key), get(b, key));
-            if (compareValue) {
-              return compareValue;
+            for (const key of ['abc', 'def']) {
+              const compareValue = compare(get(a, key), get(b, key));
+              if (compareValue) {
+                return compareValue;
+              }
             }
-          }
-          return 0;
-        })`,
+            return 0;
+          })`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
-      // Single argument.
+      // Single call expression argument.
       code: 'something.sortBy(getKey())',
       output: `import { get } from '@ember/object';
 import { compare } from '@ember/utils';
-[...something].sort((a, b) => compare(get(a, getKey()), get(b, getKey())))`,
+[...something].sort((a, b) => {
+              const key = getKey();
+              return compare(get(a, getKey()), get(b, getKey()));
+            })`,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Single non CallExpression argument.
+      code: "something.sortBy('abc')",
+      output: `import { get } from '@ember/object';
+import { compare } from '@ember/utils';
+[...something].sort((a, b) => compare(get(a, 'abc'), get(b, 'abc')))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -857,14 +868,14 @@ import { compare } from '@ember/utils';
       output: `import { get } from '@ember/object';
 import { compare } from '@ember/utils';
 [...something].sort((a, b) => {
-          for (const key of [...abc]) {
-            const compareValue = compare(get(a, key), get(b, key));
-            if (compareValue) {
-              return compareValue;
+            for (const key of [...abc]) {
+              const compareValue = compare(get(a, key), get(b, key));
+              if (compareValue) {
+                return compareValue;
+              }
             }
-          }
-          return 0;
-        })`,
+            return 0;
+          })`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -873,14 +884,14 @@ import { compare } from '@ember/utils';
       output: `import { get } from '@ember/object';
 import { compare } from '@ember/utils';
 [...something].sort((a, b) => {
-          for (const key of ['abc', def]) {
-            const compareValue = compare(get(a, key), get(b, key));
-            if (compareValue) {
-              return compareValue;
+            for (const key of ['abc', def]) {
+              const compareValue = compare(get(a, key), get(b, key));
+              if (compareValue) {
+                return compareValue;
+              }
             }
-          }
-          return 0;
-        })`,
+            return 0;
+          })`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -890,14 +901,14 @@ import { compare } from '@ember/utils';
       output: `import { get } from '@ember/object';
 import { compare } from '@ember/utils';
       [...something].sort((a, b) => {
-          for (const key of ['abc', 'def']) {
-            const compareValue = compare(get(a, key), get(b, key));
-            if (compareValue) {
-              return compareValue;
+            for (const key of ['abc', 'def']) {
+              const compareValue = compare(get(a, key), get(b, key));
+              if (compareValue) {
+                return compareValue;
+              }
             }
-          }
-          return 0;
-        })`,
+            return 0;
+          })`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -907,14 +918,14 @@ import { compare } from '@ember/utils';
       output: `import { get } from '@ember/object';
 import { compare as comp } from '@ember/utils';
       [...something].sort((a, b) => {
-          for (const key of ['abc', 'def']) {
-            const compareValue = comp(get(a, key), get(b, key));
-            if (compareValue) {
-              return compareValue;
+            for (const key of ['abc', 'def']) {
+              const compareValue = comp(get(a, key), get(b, key));
+              if (compareValue) {
+                return compareValue;
+              }
             }
-          }
-          return 0;
-        })`,
+            return 0;
+          })`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -925,14 +936,14 @@ import { compare as comp } from '@ember/utils';
 import { compare } from '@ember/utils';
 import { compare as comp } from '@custom/utils';
       [...something].sort((a, b) => {
-          for (const key of ['abc', 'def']) {
-            const compareValue = compare(get(a, key), get(b, key));
-            if (compareValue) {
-              return compareValue;
+            for (const key of ['abc', 'def']) {
+              const compareValue = compare(get(a, key), get(b, key));
+              if (compareValue) {
+                return compareValue;
+              }
             }
-          }
-          return 0;
-        })`,
+            return 0;
+          })`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -944,14 +955,14 @@ import { compare as comp } from '@custom/utils';
 import { compare as comp } from '@custom/utils';
       import { get } from '@ember/object';
       [...something].sort((a, b) => {
-          for (const key of ['abc', 'def']) {
-            const compareValue = compare(get(a, key), get(b, key));
-            if (compareValue) {
-              return compareValue;
+            for (const key of ['abc', 'def']) {
+              const compareValue = compare(get(a, key), get(b, key));
+              if (compareValue) {
+                return compareValue;
+              }
             }
-          }
-          return 0;
-        })`,
+            return 0;
+          })`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -964,14 +975,14 @@ import { compare } from '@ember/utils';
 import { compare as comp } from '@custom/utils';
       import { get as g } from '@custom/object';
       [...something].sort((a, b) => {
-          for (const key of ['abc', 'def']) {
-            const compareValue = compare(get(a, key), get(b, key));
-            if (compareValue) {
-              return compareValue;
+            for (const key of ['abc', 'def']) {
+              const compareValue = compare(get(a, key), get(b, key));
+              if (compareValue) {
+                return compareValue;
+              }
             }
-          }
-          return 0;
-        })`,
+            return 0;
+          })`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -983,14 +994,14 @@ import { compare as comp } from '@custom/utils';
 import { compare as comp } from '@custom/utils';
       import { get as g } from '@ember/object';
       [...something].sort((a, b) => {
-          for (const key of ['abc', 'def']) {
-            const compareValue = compare(g(a, key), g(b, key));
-            if (compareValue) {
-              return compareValue;
+            for (const key of ['abc', 'def']) {
+              const compareValue = compare(g(a, key), g(b, key));
+              if (compareValue) {
+                return compareValue;
+              }
             }
-          }
-          return 0;
-        })`,
+            return 0;
+          })`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
