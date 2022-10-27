@@ -16,6 +16,24 @@
 
 
 
+
+## v11.2.0 (2022-10-27)
+
+#### :rocket: Enhancement
+* [#1395](https://github.com/ember-cli/eslint-plugin-ember/pull/1395) Support `<template>` (no-undef, etc) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :bug: Bug Fix
+* [#1640](https://github.com/ember-cli/eslint-plugin-ember/pull/1640) Avoid in-place sorting in `sortBy` autofixer in `no-array-prototype-extensions` rule ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+
+#### :memo: Documentation
+* [#1646](https://github.com/ember-cli/eslint-plugin-ember/pull/1646) Automate docs with eslint-doc-generator ([@bmish](https://github.com/bmish))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Santhosh Venkata Rama Siva Thanakala Gani ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
+
 ## v11.1.0 (2022-10-18)
 
 #### :rocket: Enhancement
