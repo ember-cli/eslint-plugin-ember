@@ -2491,14 +2491,15 @@ eslint-config-prettier@^8.5.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz#5a81680ec934beca02c7b1a61cf8ca34b66feab1"
   integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
 
-eslint-doc-generator@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/eslint-doc-generator/-/eslint-doc-generator-0.15.0.tgz#7b5462023d299886caa5b8e18ad76d83c2f86a1e"
-  integrity sha512-gg1y955ZgAofpn4+DF7fhdB3nYf7pLJA7G5Ejh5PL8f9R1VZTRPfB6xfXuHa7KFXNjIW95s79a4SSQkjVzlkyQ==
+eslint-doc-generator@^0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/eslint-doc-generator/-/eslint-doc-generator-0.17.0.tgz#e7d415788b67b25364e5044a5aa60b7428fefb4d"
+  integrity sha512-kCjGg1DxPVbpbTzFCVkQogvnkTJkYhKm9OcUTquloJW1L8+lWd0DRd0UzOgwEvvxly9tP2PDbRo+SriulRHT/A==
   dependencies:
     "@typescript-eslint/utils" "^5.38.1"
     camelcase "^7.0.0"
     commander "^9.4.0"
+    jest-diff "^29.2.1"
     markdown-table "^3.0.2"
     type-fest "^3.0.0"
 
