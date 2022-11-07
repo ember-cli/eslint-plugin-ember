@@ -1,6 +1,6 @@
 # ember/no-classic-classes
 
-✅ This rule is enabled in the `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
 
 <!-- end auto-generated rule header -->
 
