@@ -72,7 +72,7 @@
     "eslint-utils": "^3.0.0",
     "estraverse": "^5.2.0",
     "lodash.kebabcase": "^4.1.1",
-    "magic-string": "^0.25.7",
+    "magic-string": "^0.26.7",
     "requireindex": "^1.2.0",
     "snake-case": "^3.0.3"
   },
