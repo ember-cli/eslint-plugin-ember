@@ -79,16 +79,17 @@ const valid = [
       </template>
     `,
   },
-  {
-    filename: 'my-component.gjs',
-    code: `
-      const Foo = <template>hi</template>
+// SKIP this scenario. Tracked in https://github.com/ember-cli/eslint-plugin-ember/issues/1685
+//   {
+//     filename: 'my-component.gjs',
+//     code: `
+//       const Foo = <template>hi</template>
 
-      <template>
-        <Foo />
-      </template>
-    `,
-  },
+//       <template>
+//         <Foo />
+//       </template>
+//     `,
+//   },
 ];
 
 const invalid = [
