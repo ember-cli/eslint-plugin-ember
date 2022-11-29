@@ -82,7 +82,7 @@ const valid = [
   {
     filename: 'my-component.gjs',
     code: `
-      const Foo = <template>hi</template>
+      const Foo = <template>"hi"</template>
 
       <template>
         <Foo />
