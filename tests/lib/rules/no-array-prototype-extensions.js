@@ -697,6 +697,11 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      code: 'something?.objectAt(1)',
+      output: 'something?.[1]',
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
       // Function call in chain
       code: 'something.somethingElse.objectAt(1)',
       output: 'something.somethingElse[1]',
