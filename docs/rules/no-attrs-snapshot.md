@@ -49,11 +49,11 @@ export default Component({
     this.updated = false;
   },
   didReceiveAttrs() {
-    if (this._valueCache !== this.value) {
+    if (this._valueCache === this.value) {
+      this.set('updated', false);
+    } else {
       this._valueCache = this.value;
       this.set('updated', true);
-    } else {
-      this.set('updated', false);
     }
   }
 });
