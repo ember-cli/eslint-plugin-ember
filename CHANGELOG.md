@@ -17,6 +17,20 @@
 
 
 
+
+## v11.2.1 (2022-11-30)
+
+#### :bug: Bug Fix
+* [#1687](https://github.com/ember-cli/eslint-plugin-ember/pull/1687) Don't lose optional chaining with `objectAt` in autofix for `no-array-prototype-extensions` rule ([@52052100](https://github.com/52052100))
+
+#### :house: Internal
+* [#1686](https://github.com/ember-cli/eslint-plugin-ember/pull/1686) Temporarily skip failing test scenario for gjs/gts processor ([@nlfurniss](https://github.com/nlfurniss))
+
+#### Committers: 2
+- Lan Yang ([@52052100](https://github.com/52052100))
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+
+
 ## v11.2.0 (2022-10-27)
 
 #### :rocket: Enhancement
