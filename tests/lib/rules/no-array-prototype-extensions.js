@@ -703,6 +703,12 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // Function call in optional chaining
+      code: 'something.somethingElse?.objectAt(1)',
+      output: 'something.somethingElse?.[1]',
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
       // When unexpected number of arguments are passed, auto-fixer will not run
       code: 'something.objectsAt()',
       output: null,
