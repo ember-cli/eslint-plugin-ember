@@ -6,7 +6,7 @@
 
 <!-- end auto-generated rule header -->
 
-It makes code more readable if the model has the same name as a subject.
+Disallow the use of a class decorator on an export declaration. Enforces use of the decorator on the class directly before exporting the result.
 
 ## Background
 
