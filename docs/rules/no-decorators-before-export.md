@@ -1,5 +1,9 @@
 # ember/no-decorators-before-export
 
+💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
 <!-- end auto-generated rule header -->
 
 It makes code more readable if the model has the same name as a subject.
@@ -48,7 +52,7 @@ Considering that this syntax was non-spec even at the point that ember adopted d
 
 ## Examples
 
-**Good**
+### Good
 
 ```ts
 import classic from 'ember-classic-decorators';
@@ -70,7 +74,7 @@ class MyKlass extends EmberObject {}
 export { MyKlass };
 ```
 
-**Bad**
+### Bad
 
 ```ts
 import classic from 'ember-classic-decorators';

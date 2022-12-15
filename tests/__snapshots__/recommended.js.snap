@@ -20,6 +20,7 @@ exports[`recommended rules has the right list 1`] = `
   "no-component-lifecycle-hooks",
   "no-computed-properties-in-native-classes",
   "no-controller-access-in-routes",
+  "no-decorators-before-export",
   "no-deeply-nested-dependent-keys-with-each",
   "no-duplicate-dependent-keys",
   "no-ember-super-in-es-classes",
