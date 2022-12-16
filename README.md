@@ -115,6 +115,12 @@ module.exports = {
 | [no-empty-attrs](docs/rules/no-empty-attrs.md)                                 | disallow usage of empty attributes in Ember Data models              |    |    |    |
 | [use-ember-data-rfc-395-imports](docs/rules/use-ember-data-rfc-395-imports.md) | enforce usage of `@ember-data/` package imports instead `ember-data` | ✅  | 🔧 |    |
 
+### Ember Decorator
+
+| Name                                                                             | Description                                          | 💼 | 🔧 | 💡 |
+| :------------------------------------------------------------------------------- | :--------------------------------------------------- | :- | :- | :- |
+| [no-tracked-properties-from-args](docs/rules/no-tracked-properties-from-args.md) | disallow creating @tracked properties from this.args |    |    |    |
+
 ### Ember Object
 
 | Name                                                                                       | Description                                                                    | 💼 | 🔧 | 💡 |
