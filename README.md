@@ -155,6 +155,7 @@ module.exports = {
 | [no-incorrect-calls-with-inline-anonymous-functions](docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | disallow inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce`                                    | ✅  |    |    |
 | [no-invalid-debug-function-arguments](docs/rules/no-invalid-debug-function-arguments.md)                               | disallow usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. | ✅  |    |    |
 | [no-restricted-property-modifications](docs/rules/no-restricted-property-modifications.md)                             | disallow modifying the specified properties                                                                                   |    | 🔧 |    |
+| [no-runloop](docs/rules/no-runloop.md)                                                                                 | disallow usage of `@ember/runloop` functions                                                                                  |    |    |    |
 | [require-fetch-import](docs/rules/require-fetch-import.md)                                                             | enforce explicit import for `fetch()`                                                                                         |    |    |    |
 
 ### Routes
