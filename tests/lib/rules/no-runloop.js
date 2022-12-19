@@ -35,14 +35,14 @@ eslintTester.run('no-runloop', rule, {
         run();
         later();
       `,
-      options: [['run']],
+      options: [{ allowList: ['run'] }],
     },
     {
       code: `
         import { run as foobar } from '@ember/runloop';
         foobar();
       `,
-      options: [['run']],
+      options: [{ allowList: ['run'] }],
     },
     `
       import run from '@ember/runloop';
@@ -63,7 +63,7 @@ eslintTester.run('no-runloop', rule, {
         import { run } from '@ember/runloop';
         run.later();
       `,
-      options: [['later']],
+      options: [{ allowList: ['later'] }],
     },
   ],
   invalid: [
@@ -73,7 +73,12 @@ eslintTester.run('no-runloop', rule, {
         run();
       `,
       output: null,
-      errors: [{ messageId: 'main' }],
+      errors: [
+        {
+          messageId: 'main',
+          type: 'CallExpression',
+        },
+      ],
     },
     {
       code: `
@@ -81,7 +86,12 @@ eslintTester.run('no-runloop', rule, {
         foobar();
       `,
       output: null,
-      errors: [{ messageId: 'main' }],
+      errors: [
+        {
+          messageId: 'main',
+          type: 'CallExpression',
+        },
+      ],
     },
     {
       code: `
@@ -89,7 +99,12 @@ eslintTester.run('no-runloop', rule, {
         later();
       `,
       output: null,
-      errors: [{ messageId: 'lifelineReplacement' }],
+      errors: [
+        {
+          messageId: 'lifelineReplacement',
+          type: 'CallExpression',
+        },
+      ],
     },
     {
       code: `
@@ -97,7 +112,12 @@ eslintTester.run('no-runloop', rule, {
         foobar();
       `,
       output: null,
-      errors: [{ messageId: 'lifelineReplacement' }],
+      errors: [
+        {
+          messageId: 'lifelineReplacement',
+          type: 'CallExpression',
+        },
+      ],
     },
     {
       code: `
@@ -106,8 +126,13 @@ eslintTester.run('no-runloop', rule, {
         later();
       `,
       output: null,
-      options: [['run']],
-      errors: [{ messageId: 'lifelineReplacement' }],
+      options: [{ allowList: ['run'] }],
+      errors: [
+        {
+          messageId: 'lifelineReplacement',
+          type: 'CallExpression',
+        },
+      ],
     },
     {
       code: `
@@ -116,8 +141,13 @@ eslintTester.run('no-runloop', rule, {
         later();
       `,
       output: null,
-      options: [['later']],
-      errors: [{ messageId: 'main' }],
+      options: [{ allowList: ['later'] }],
+      errors: [
+        {
+          messageId: 'main',
+          type: 'CallExpression',
+        },
+      ],
     },
     // chaining off of `run`
     {
@@ -126,7 +156,12 @@ eslintTester.run('no-runloop', rule, {
         run.later();
       `,
       output: null,
-      errors: [{ messageId: 'lifelineReplacement' }],
+      errors: [
+        {
+          messageId: 'lifelineReplacement',
+          type: 'CallExpression',
+        },
+      ],
     },
     {
       code: `
@@ -134,7 +169,12 @@ eslintTester.run('no-runloop', rule, {
         run.begin();
       `,
       output: null,
-      errors: [{ messageId: 'main' }],
+      errors: [
+        {
+          messageId: 'main',
+          type: 'CallExpression',
+        },
+      ],
     },
     {
       code: `
@@ -142,7 +182,12 @@ eslintTester.run('no-runloop', rule, {
         foobar.schedule();
       `,
       output: null,
-      errors: [{ messageId: 'lifelineReplacement' }],
+      errors: [
+        {
+          messageId: 'lifelineReplacement',
+          type: 'CallExpression',
+        },
+      ],
     },
   ],
 });

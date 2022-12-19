@@ -56,12 +56,17 @@ export default class MyComponent extends Component {
 
 ## Configuration
 
-If you have `@ember/runloop` functions that you wish to allow, you can configure this rule to allow specific methods. The configuration takes an array of strings, where the strings must be names of runloop functions.
+If you have `@ember/runloop` functions that you wish to allow, you can configure this rule to allow specific methods. The configuration takes an object with the `allowList` property, which is an array of strings where the strings must be names of runloop functions.
 
 ```ts
 module.exports = {
   rules: {
-    'ember/no-runloop': ['error', ['debounce', 'begin', 'end']],
+    'ember/no-runloop': [
+      'error',
+      {
+        allowList: ['debounce', 'begin', 'end'],
+      },
+    ],
   },
 };
 ```
