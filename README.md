@@ -115,12 +115,6 @@ module.exports = {
 | [no-empty-attrs](docs/rules/no-empty-attrs.md)                                 | disallow usage of empty attributes in Ember Data models              |    |    |    |
 | [use-ember-data-rfc-395-imports](docs/rules/use-ember-data-rfc-395-imports.md) | enforce usage of `@ember-data/` package imports instead `ember-data` | ✅  | 🔧 |    |
 
-### Ember Decorator
-
-| Name                                                                             | Description                                          | 💼 | 🔧 | 💡 |
-| :------------------------------------------------------------------------------- | :--------------------------------------------------- | :- | :- | :- |
-| [no-tracked-properties-from-args](docs/rules/no-tracked-properties-from-args.md) | disallow creating @tracked properties from this.args |    |    |    |
-
 ### Ember Object
 
 | Name                                                                                       | Description                                                                    | 💼 | 🔧 | 💡 |
@@ -143,6 +137,7 @@ module.exports = {
 | [no-classic-classes](docs/rules/no-classic-classes.md)                                     | disallow "classic" classes in favor of native JS classes                                                       | ✅  |    |    |
 | [no-ember-super-in-es-classes](docs/rules/no-ember-super-in-es-classes.md)                 | disallow use of `this._super` in ES class methods                                                              | ✅  | 🔧 |    |
 | [no-empty-glimmer-component-classes](docs/rules/no-empty-glimmer-component-classes.md)     | disallow empty backing classes for Glimmer components                                                          | ✅  |    |    |
+| [no-tracked-properties-from-args](docs/rules/no-tracked-properties-from-args.md)           | disallow creating @tracked properties from this.args                                                           |    |    |    |
 
 ### jQuery
 
