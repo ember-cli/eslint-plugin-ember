@@ -20,6 +20,7 @@ class Example {
 ```
 
 Examples of **correct** code for this rule:
+
 ```js
 class Example {
     get someValue() {
