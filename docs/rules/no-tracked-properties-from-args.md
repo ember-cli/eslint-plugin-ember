@@ -7,6 +7,7 @@ Disallow creation of @tracked properties from args.
 ## Rule Details
 
 This rule disallows the creation of @tracked properties with values from `this.args`. The @tracked property will not be updated when the args change, which is almost never what you want. Instead, use a getter to derive the desired state.
+If you need to modify a specific arg, consider having the parent provide a way for the child component to update it. This avoids having two sources of truth that you will need to keep in sync.
 
 ## Examples
 
