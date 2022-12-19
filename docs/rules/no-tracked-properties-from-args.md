@@ -6,7 +6,7 @@ Disallow creation of @tracked properties from args.
 
 ## Rule Details
 
-This rule disallows the creation of @tracked properties with values from `this.args`. The @tracked property will not be updated when the args change, which is almost never what you want.
+This rule disallows the creation of @tracked properties with values from `this.args`. The @tracked property will not be updated when the args change, which is almost never what you want. Instead, use a getter to derive the desired state.
 
 ## Examples
 
