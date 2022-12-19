@@ -12,7 +12,7 @@ This rule disallows usage of `@ember/runloop` functions.
 
 Example of **incorrect** code for this rule:
 
-```ts
+```js
 import Component from '@glimmer/component';
 import { run } from '@ember/runloop';
 
@@ -58,7 +58,7 @@ export default class MyComponent extends Component {
 
 If you have `@ember/runloop` functions that you wish to allow, you can configure this rule to allow specific methods. The configuration takes an object with the `allowList` property, which is an array of strings where the strings must be names of runloop functions.
 
-```ts
+```js
 module.exports = {
   rules: {
     'ember/no-runloop': [
