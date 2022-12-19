@@ -75,7 +75,7 @@ ruleTester.run('no-tracked-properties-from-args', rule, {
       errors: [
         {
           messageId: 'main',
-          type: 'PropertyDefinition',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
@@ -91,7 +91,7 @@ ruleTester.run('no-tracked-properties-from-args', rule, {
       errors: [
         {
           messageId: 'main',
-          type: 'PropertyDefinition',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
         },
       ],
     },
