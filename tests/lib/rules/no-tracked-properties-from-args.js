@@ -5,8 +5,6 @@
 const rule = require('../../../lib/rules/no-tracked-properties-from-args');
 const RuleTester = require('eslint').RuleTester;
 
-const { ERROR_MESSAGE } = rule;
-
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
@@ -23,7 +21,7 @@ ruleTester.run('no-tracked-properties-from-args', rule, {
   valid: [
     `
       import { tracked } from '@glimmer/tracking'
-      
+
       class Test {
         @someDecorator test = this.args.test
       }`,
