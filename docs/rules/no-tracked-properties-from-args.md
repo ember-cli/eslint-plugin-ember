@@ -13,7 +13,14 @@ This rule disallows the creation of @tracked properties with values from `this.a
 Examples of **incorrect** code for this rule:
 
 ```js
-@tracked invalid = this.args.someValue;
+@tracked someValue = this.args.someValue;
+```
+
+Examples of **correct** code for this rule:
+```js
+get someValue() {
+    return this.args.someValue;
+}
 ```
 
 ## References

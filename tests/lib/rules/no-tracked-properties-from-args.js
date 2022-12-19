@@ -21,44 +21,78 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-tracked-properties-from-args', rule, {
   valid: [
-    `class Test {
+    `
+      import { tracked } from '@glimmer/tracking'
+      
+      class Test {
         @someDecorator test = this.args.test
       }`,
-    `class Test {
+    `
+      import { tracked } from '@glimmer/tracking'
+
+      class Test {
         @tracked test = this.someValue
       }`,
-    `class Test {
+    `
+      import { tracked } from '@glimmer/tracking'
+
+      class Test {
         @tracked test = 7
       }`,
-    `class Test {
+    `
+      import { tracked } from '@glimmer/tracking'
+      
+      class Test {
         test = 7
       }`,
-    `class Test {
+    `
+      import { tracked } from '@glimmer/tracking'
+
+      class Test {
         test = "test"
       }`,
+    `
+      import { tracked } from '@glimmer/tracking'
+
+      class Test {
+        @tracked test = this.notArgs.args.test
+      }`,
+    `
+      import { tracked as fooTracked } from '@glimmer/tracking';
+
+      class Test {
+        @fooTracked test = this.notArgs.args.test
+      }
+    `,
   ],
   invalid: [
     {
-      code: `class Test {
+      code: `
+      import { tracked } from '@glimmer/tracking'
+
+      class Test {
         @tracked test = this.args.test;
       }`,
       output: null,
       errors: [
         {
-          message: ERROR_MESSAGE,
+          messageId: 'main',
           type: 'PropertyDefinition',
         },
       ],
     },
     {
-      code: `class Test {
-        @tracked 
-        test = this.args.test;
-      }`,
+      code: `
+      import { tracked as fooTracked } from '@glimmer/tracking';
+      
+      class Test {
+        @fooTracked test = this.args.test
+      }
+    `,
       output: null,
       errors: [
         {
-          message: ERROR_MESSAGE,
+          messageId: 'main',
           type: 'PropertyDefinition',
         },
       ],
