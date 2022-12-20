@@ -18,6 +18,22 @@
 
 
 
+
+## v11.3.0 (2022-12-20)
+
+#### :rocket: Enhancement
+* [#1703](https://github.com/ember-cli/eslint-plugin-ember/pull/1703) Add new rule `no-runloop` ([@lin-ll](https://github.com/lin-ll))
+* [#1702](https://github.com/ember-cli/eslint-plugin-ember/pull/1702) Add new rule `no-tracked-properties-from-args` ([@joancc](https://github.com/joancc))
+
+#### :memo: Documentation
+* [#1693](https://github.com/ember-cli/eslint-plugin-ember/pull/1693) Mention ESLint overrides for glob patterns in `no-restricted-service-injections` rule doc ([@bmish](https://github.com/bmish))
+
+#### Committers: 3
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Joan Cejudo ([@joancc](https://github.com/joancc))
+- Lucy Lin ([@lin-ll](https://github.com/lin-ll))
+
+
 ## v11.2.1 (2022-11-30)
 
 #### :bug: Bug Fix
