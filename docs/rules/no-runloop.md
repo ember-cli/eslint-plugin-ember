@@ -17,8 +17,8 @@ import Component from '@glimmer/component';
 import { run } from '@ember/runloop';
 
 export default class MyComponent extends Component {
-  constructor() {
-    super(...arguments);
+  constructor(...args) {
+    super(...args);
 
     run.later(() => {
       this.set('date', new Date());
