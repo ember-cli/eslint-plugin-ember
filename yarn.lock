@@ -2539,9 +2539,9 @@ eslint-config-prettier@^8.5.0:
   integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
 
 eslint-doc-generator@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-doc-generator/-/eslint-doc-generator-1.0.2.tgz#c62d8cea15bcee750893d59fd6545b5f6a7f8ab1"
-  integrity sha512-sxmN888UWuQQ+X9t7C04iUboGAre/RJZhSpZeUwmBRCXabBk2gnYSaDCER2uHwtKzE+2Wut8wWBaUr6RL+XZaQ==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-doc-generator/-/eslint-doc-generator-1.1.0.tgz#81d7303f09680e0946de7240f86376a082da281b"
+  integrity sha512-Ib46pWKk9KExZZyuluHPSrBAMjOiyfkIAqMW3u6Sa0zNyltLTkZos/Cu9CkU10FCUhpZfPziVmTB+P08RCJIRA==
   dependencies:
     "@typescript-eslint/utils" "^5.38.1"
     ajv "^8.11.2"
@@ -2551,6 +2551,7 @@ eslint-doc-generator@^1.0.0:
     deepmerge "^4.2.2"
     dot-prop "^7.2.0"
     jest-diff "^29.2.1"
+    json-schema-traverse "^1.0.0"
     markdown-table "^3.0.3"
     no-case "^3.0.4"
     type-fest "^3.0.0"
