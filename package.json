@@ -45,7 +45,7 @@
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watchAll",
     "update": "node ./scripts/update-rules.js && node ./scripts/list-jquery-methods.js && npm-run-all update:eslint-docs",
-    "update:eslint-docs": "eslint-doc-generator --rule-list-split meta.docs.category --rule-doc-section-include Examples --rule-doc-title-format prefix-name --url-configs \"https://github.com/ember-cli/eslint-plugin-ember#-configurations\""
+    "update:eslint-docs": "eslint-doc-generator"
   },
   "jest": {
     "coverageThreshold": {
