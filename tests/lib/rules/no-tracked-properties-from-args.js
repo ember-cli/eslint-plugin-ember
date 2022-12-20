@@ -62,6 +62,11 @@ ruleTester.run('no-tracked-properties-from-args', rule, {
         @fooTracked test = this.notArgs.args.test
       }
     `,
+    `
+      class Test{
+        notInitializedProperty;
+      }
+    `,
   ],
   invalid: [
     {
