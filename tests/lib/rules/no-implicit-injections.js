@@ -118,6 +118,7 @@ ruleTester.run('no-implicit-injections', rule, {
     },
   ],
   invalid: [
+    // Basic store lint error in routes/controllers
     {
       filename: 'routes/index.js',
       code: `
@@ -168,6 +169,64 @@ import Controller from '@ember/controller';
       }`,
       errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
     },
+    // Existing import for service injection
+    {
+      filename: 'routes/index.js',
+      code: `
+      import { inject as service } from '@ember/service';
+      import Route from '@ember/routing/route';
+
+      export default class IndexRoute extends Route {
+        @service('router') router;
+        message = 'hello';
+        async model() {
+          return this.store.findAll('rental');
+        }
+      }`,
+      output: `
+      import { inject as service } from '@ember/service';
+      import Route from '@ember/routing/route';
+
+      export default class IndexRoute extends Route {
+        @service('store') store;
+@service('router') router;
+        message = 'hello';
+        async model() {
+          return this.store.findAll('rental');
+        }
+      }`,
+      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+    },
+
+    {
+      filename: 'routes/index.js',
+      code: `
+      import { inject } from '@ember/service';
+      import Route from '@ember/routing/route';
+
+      export default class IndexRoute extends Route {
+        @inject('router') router;
+        message = 'hello';
+        async model() {
+          return this.store.findAll('rental');
+        }
+      }`,
+      output: `
+      import { inject } from '@ember/service';
+      import Route from '@ember/routing/route';
+
+      export default class IndexRoute extends Route {
+        @inject('store') store;
+@inject('router') router;
+        message = 'hello';
+        async model() {
+          return this.store.findAll('rental');
+        }
+      }`,
+      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+    },
+
+    // Custom options
     {
       filename: 'components/foobar.js',
       code: `
@@ -195,6 +254,7 @@ get isSmallScreen() {
       ],
       errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
     },
+    // Custom options with dasherized service name
     {
       filename: 'components/foobar.js',
       code: `
