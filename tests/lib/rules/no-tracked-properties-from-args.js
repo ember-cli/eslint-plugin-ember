@@ -62,8 +62,35 @@ ruleTester.run('no-tracked-properties-from-args', rule, {
         @fooTracked test = this.notArgs.args.test
       }
     `,
+    `
+      import { tracked } from '@glimmer/tracking';
+
+      class Test {
+        @tracked test = this.args2.test
+      }
+    `,
+    `
+      class Test{
+        notInitializedProperty;
+      }
+    `,
   ],
   invalid: [
+    {
+      code: `
+      import { tracked } from '@glimmer/tracking'
+
+      class Test {
+        @tracked test = this.args;
+      }`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
+    },
     {
       code: `
       import { tracked } from '@glimmer/tracking'
