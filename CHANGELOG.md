@@ -19,6 +19,20 @@
 
 
 
+
+## v11.3.1 (2022-12-21)
+
+#### :bug: Bug Fix
+* [#1712](https://github.com/ember-cli/eslint-plugin-ember/pull/1712) Fix crash with `no-tracked-properties-from-args` rule ([@joancc](https://github.com/joancc))
+
+#### :house: Internal
+* [#1713](https://github.com/ember-cli/eslint-plugin-ember/pull/1713) Switch to config file for `eslint-doc-generator` ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Joan Cejudo ([@joancc](https://github.com/joancc))
+
+
 ## v11.3.0 (2022-12-20)
 
 #### :rocket: Enhancement
