@@ -39,6 +39,21 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
         }
       }`,
     },
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import { inject as service } from '@ember/service';
+      export default class SettingsRoute extends Route {
+        @service() router;
+        @service session;
+        beforeModel() {
+          if (!this.session.isAuthenticated) {
+            this.router.transitionTo('login');
+          }
+        }
+      }`,
+    },
   ],
   invalid: [
     // Basic lint error in routes
