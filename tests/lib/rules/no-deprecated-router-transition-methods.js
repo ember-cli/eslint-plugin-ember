@@ -5,7 +5,7 @@
 const rule = require('../../../lib/rules/no-deprecated-router-transition-methods');
 const RuleTester = require('eslint').RuleTester;
 
-const { ERROR_MESSAGE } = rule;
+const { createErrorMessage } = rule;
 
 //------------------------------------------------------------------------------
 // Tests
@@ -86,7 +86,12 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
           }
         }
       }`,
-      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+      errors: [
+        {
+          message: createErrorMessage('transitionTo', 'transitionTo', 'Route'),
+          type: 'MemberExpression',
+        },
+      ],
     },
     {
       filename: 'routes/index.js',
@@ -117,7 +122,12 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
           }
         }
       }`,
-      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+      errors: [
+        {
+          message: createErrorMessage('replaceWith', 'replaceWith', 'Route'),
+          type: 'MemberExpression',
+        },
+      ],
     },
     // Basic lint error in controllers
     {
@@ -148,7 +158,12 @@ import Controller from '@ember/controller';
           return this.router.transitionTo('post', post.id);
         }
       }`,
-      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+      errors: [
+        {
+          message: createErrorMessage('transitionToRoute', 'transitionTo', 'Controller'),
+          type: 'MemberExpression',
+        },
+      ],
     },
     {
       filename: 'controllers/new-post.js',
@@ -178,7 +193,12 @@ import Controller from '@ember/controller';
           return this.router.replaceWith('post', post.id);
         }
       }`,
-      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+      errors: [
+        {
+          message: createErrorMessage('replaceRoute', 'replaceWith', 'Controller'),
+          type: 'MemberExpression',
+        },
+      ],
     },
 
     // Existing router service
@@ -214,7 +234,12 @@ import Controller from '@ember/controller';
           return this.routerService.transitionTo('post', post.id);
         }
       }`,
-      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+      errors: [
+        {
+          message: createErrorMessage('transitionToRoute', 'transitionTo', 'Controller'),
+          type: 'MemberExpression',
+        },
+      ],
     },
     {
       filename: 'controllers/new-post.js',
@@ -248,7 +273,12 @@ import Controller from '@ember/controller';
           return this.routerService.transitionTo('post', post.id);
         }
       }`,
-      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+      errors: [
+        {
+          message: createErrorMessage('transitionToRoute', 'transitionTo', 'Controller'),
+          type: 'MemberExpression',
+        },
+      ],
     },
     // Existing injection name other than service
     {
@@ -280,7 +310,12 @@ import Controller from '@ember/controller';
           }
         }
       }`,
-      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+      errors: [
+        {
+          message: createErrorMessage('transitionTo', 'transitionTo', 'Route'),
+          type: 'MemberExpression',
+        },
+      ],
     },
   ],
 });
