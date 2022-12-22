@@ -21,7 +21,6 @@ exports[`recommended rules has the right list 1`] = `
   "no-computed-properties-in-native-classes",
   "no-controller-access-in-routes",
   "no-deeply-nested-dependent-keys-with-each",
-  "no-deprecated-router-transition-methods",
   "no-duplicate-dependent-keys",
   "no-ember-super-in-es-classes",
   "no-ember-testing-in-module-scope",

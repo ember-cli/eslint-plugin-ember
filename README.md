@@ -101,7 +101,7 @@ module.exports = {
 | [closure-actions](docs/rules/closure-actions.md)                                                 | enforce usage of closure actions                          | ✅  |    |    |
 | [new-module-imports](docs/rules/new-module-imports.md)                                           | enforce using "New Module Imports" from Ember RFC #176    | ✅  |    |    |
 | [no-array-prototype-extensions](docs/rules/no-array-prototype-extensions.md)                     | disallow usage of Ember's `Array` prototype extensions    |    | 🔧 |    |
-| [no-deprecated-router-transition-methods](docs/rules/no-deprecated-router-transition-methods.md) | enforce usage of router service transition methods        | ✅  | 🔧 |    |
+| [no-deprecated-router-transition-methods](docs/rules/no-deprecated-router-transition-methods.md) | enforce usage of router service transition methods        |    | 🔧 |    |
 | [no-function-prototype-extensions](docs/rules/no-function-prototype-extensions.md)               | disallow usage of Ember's `function` prototype extensions | ✅  |    |    |
 | [no-implicit-injections](docs/rules/no-implicit-injections.md)                                   | enforce usage of implicit service injections              |    | 🔧 |    |
 | [no-mixins](docs/rules/no-mixins.md)                                                             | disallow the usage of mixins                              | ✅  |    |    |

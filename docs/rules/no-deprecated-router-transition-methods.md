@@ -1,14 +1,8 @@
 # ember/no-deprecated-router-transition-methods
 
-💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
-
 🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
-
-✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
-
-🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Ember 3.26 introduced a deprecation for using `transitionTo` and `replaceWith` in Routes or `transitionToRoute` and `replaceRoute` in Controllers. These methods should be replaced with an injected router service and calls to `this.router.transitionTo` and `this.router.replaceWith` instead.
 
