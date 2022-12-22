@@ -1,14 +1,8 @@
 # ember/no-implicit-injections
 
-💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
-
 🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
-
-✅ The `"extends": "plugin:ember/recommended"` property in a configuration file enables this rule.
-
-🔧 The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Ember 3.26 introduced a deprecation for relying on implicit service injections or allowing addons to implicitly inject services into all classes of certain types. Support for this is dropped in Ember 4.0.
 
@@ -37,8 +31,8 @@ export default class IndexRoute extends Route {
 ```
 
 ```js
-// controller/index.js
-import Route from '@ember/routing/route';
+// controllers/index.js
+import Controller from '@ember/controller';
 import { action } from '@ember/object';
 
 export default class IndexController extends Controller {
@@ -99,14 +93,14 @@ Example config:
 ```js
 module.exports = {
   rules: {
-    'ember/no-implicit-injections': {
+    'ember/no-implicit-injections': [2, {
       services: [
         // Ember Responsive Used to Auto Inject the media service in Components/Controllers
         { serviceName: 'media', moduleNames: ['Component', 'Controller'] },
         // Ember CLI Flash Used to Auto Inject the flashMessages service in all modules
         { serviceName: 'flashMessages' },
       ]
-    }
+    }]
   }
 }
 ```
