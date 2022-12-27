@@ -26,7 +26,15 @@ ruleTester.run('no-implicit-injections', rule, {
       filename: 'routes/index.js',
       code: `
       import Route from '@ember/routing/route';
+      import Controller from '@ember/controller';
       import { inject as service } from '@ember/service';
+
+      export class IndexController extends Controller {
+        @service('store') store;
+        async loadData() {
+          return this.store.findAll('rental');
+        }
+      }
 
       export default class IndexRoute extends Route {
         @service('store') store;
@@ -173,6 +181,7 @@ import Controller from '@ember/controller';
       code: `
       import { inject as service } from '@ember/service';
       import Route from '@ember/routing/route';
+      import Component from '@glimmer/component';
 
       export default class IndexRoute extends Route {
         @service('router') router;
@@ -180,10 +189,26 @@ import Controller from '@ember/controller';
         async model() {
           return this.store.findAll('rental');
         }
+      }
+
+      export class IndexRow extends Component {
+        @service('store') storeService;
+
+        navigate() {
+          this.store.find(this.args.id);
+        }
+      }
+
+
+      export class IndexTable extends Component {
+        loadData() {
+          this.store.find(this.args.id);
+        }
       }`,
       output: `
       import { inject as service } from '@ember/service';
       import Route from '@ember/routing/route';
+      import Component from '@glimmer/component';
 
       export default class IndexRoute extends Route {
         @service('store') store;
@@ -191,6 +216,21 @@ import Controller from '@ember/controller';
         message = 'hello';
         async model() {
           return this.store.findAll('rental');
+        }
+      }
+
+      export class IndexRow extends Component {
+        @service('store') storeService;
+
+        navigate() {
+          this.store.find(this.args.id);
+        }
+      }
+
+
+      export class IndexTable extends Component {
+        loadData() {
+          this.store.find(this.args.id);
         }
       }`,
       errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
@@ -282,6 +322,47 @@ import Component from '@ember/component';
       ],
       errors: [
         { messageId: 'main', data: { serviceName: 'flashMessages' }, type: 'MemberExpression' },
+      ],
+    },
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+
+      export class IndexController extends Controller {
+        async loadData() {
+          return this.store.findAll('rental');
+        }
+      }
+
+      export default class IndexRoute extends Route {
+        async model() {
+          return this.store.findAll('rental');
+        }
+      }`,
+      output: `
+      import Route from '@ember/routing/route';
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+
+      export class IndexController extends Controller {
+        @service('store') store;
+async loadData() {
+          return this.store.findAll('rental');
+        }
+      }
+
+      export default class IndexRoute extends Route {
+        @service('store') store;
+async model() {
+          return this.store.findAll('rental');
+        }
+      }`,
+      errors: [
+        { messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' },
+        { messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' },
       ],
     },
   ],
