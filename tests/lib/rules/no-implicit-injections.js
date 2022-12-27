@@ -5,8 +5,6 @@
 const rule = require('../../../lib/rules/no-implicit-injections');
 const RuleTester = require('eslint').RuleTester;
 
-const { ERROR_MESSAGE } = rule;
-
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
@@ -141,7 +139,7 @@ message = 'hello';
           return this.store.findAll('rental');
         }
       }`,
-      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
     },
     {
       filename: 'controller/index.js',
@@ -167,7 +165,7 @@ import Controller from '@ember/controller';
           return this.store.findAll('user');
         }
       }`,
-      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
     },
     // Existing import for service injection
     {
@@ -195,7 +193,7 @@ import Controller from '@ember/controller';
           return this.store.findAll('rental');
         }
       }`,
-      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
     },
 
     {
@@ -223,7 +221,7 @@ import Controller from '@ember/controller';
           return this.store.findAll('rental');
         }
       }`,
-      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
     },
 
     // Custom options
@@ -252,7 +250,7 @@ get isSmallScreen() {
           services: [{ serviceName: 'media', moduleNames: ['Component', 'Controller'] }],
         },
       ],
-      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+      errors: [{ messageId: 'main', data: { serviceName: 'media' }, type: 'MemberExpression' }],
     },
     // Custom options with dasherized service name
     {
@@ -282,7 +280,9 @@ import Component from '@ember/component';
           services: [{ serviceName: 'flashMessages' }],
         },
       ],
-      errors: [{ message: ERROR_MESSAGE, type: 'MemberExpression' }],
+      errors: [
+        { messageId: 'main', data: { serviceName: 'flashMessages' }, type: 'MemberExpression' },
+      ],
     },
   ],
 });
