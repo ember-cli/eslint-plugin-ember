@@ -88,7 +88,7 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
       }`,
       errors: [
         {
-          message: createErrorMessage('transitionTo', 'transitionTo', 'Route'),
+          messageId: 'main',
           type: 'MemberExpression',
         },
       ],
@@ -124,7 +124,7 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
       }`,
       errors: [
         {
-          message: createErrorMessage('replaceWith', 'replaceWith', 'Route'),
+          messageId: 'main',
           type: 'MemberExpression',
         },
       ],
@@ -160,7 +160,7 @@ import Controller from '@ember/controller';
       }`,
       errors: [
         {
-          message: createErrorMessage('transitionToRoute', 'transitionTo', 'Controller'),
+          messageId: 'main',
           type: 'MemberExpression',
         },
       ],
@@ -195,7 +195,7 @@ import Controller from '@ember/controller';
       }`,
       errors: [
         {
-          message: createErrorMessage('replaceRoute', 'replaceWith', 'Controller'),
+          messageId: 'main',
           type: 'MemberExpression',
         },
       ],
@@ -236,7 +236,7 @@ import Controller from '@ember/controller';
       }`,
       errors: [
         {
-          message: createErrorMessage('transitionToRoute', 'transitionTo', 'Controller'),
+          messageId: 'main',
           type: 'MemberExpression',
         },
       ],
@@ -275,7 +275,7 @@ import Controller from '@ember/controller';
       }`,
       errors: [
         {
-          message: createErrorMessage('transitionToRoute', 'transitionTo', 'Controller'),
+          messageId: 'main',
           type: 'MemberExpression',
         },
       ],
@@ -312,7 +312,7 @@ import Controller from '@ember/controller';
       }`,
       errors: [
         {
-          message: createErrorMessage('transitionTo', 'transitionTo', 'Route'),
+          messageId: 'main',
           type: 'MemberExpression',
         },
       ],

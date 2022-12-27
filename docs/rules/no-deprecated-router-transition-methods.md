@@ -86,11 +86,6 @@ export default class NewPostController extends Controller {
 
 The autofixer for this rule will update classes and add injections for the configured services.
 
-## Related Rules
-
-- [no-unnecessary-service-injection-argument](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-unnecessary-service-injection-argument.md) omit service injection argument if possible
-- [no-implicit-service-injection-argument](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-unnecessary-service-injection-argument.md) require the service injection argument for all services (fix output for this rule follows this pattern)
-
 ## References
 
 - [Deprecation](https://deprecations.emberjs.com/v3.x/#toc_routing-transition-methods)
