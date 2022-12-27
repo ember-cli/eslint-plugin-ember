@@ -107,8 +107,8 @@ module.exports = {
 
 ## Related Rules
 
-- [no-unnecessary-service-injection-argument](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-unnecessary-service-injection-argument.md) omit service injection argument if possible
-- [no-implicit-service-injection-argument](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-unnecessary-service-injection-argument.md) require the service injection argument for all services (fix output for this rule follows this pattern)
+- [no-unnecessary-service-injection-argument](no-unnecessary-service-injection-argument.md) omit service injection argument if possible
+- [no-implicit-service-injection-argument](no-unnecessary-service-injection-argument.md) require the service injection argument for all services (fix output for this rule follows this pattern)
 
 ## References
 
