@@ -71,8 +71,8 @@
     "ember-template-imports": "^3.1.1",
     "eslint-utils": "^3.0.0",
     "estraverse": "^5.2.0",
-    "lodash.kebabcase": "^4.1.1",
     "lodash.camelcase": "^4.1.1",
+    "lodash.kebabcase": "^4.1.1",
     "magic-string": "^0.27.0",
     "requireindex": "^1.2.0",
     "snake-case": "^3.0.3"

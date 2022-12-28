@@ -23,7 +23,7 @@ Examples of **incorrect** code for this rule:
 import Route from '@ember/routing/route';
 
 export default class IndexRoute extends Route {
-  async model() {
+  model() {
     return this.store.findAll('rental');
   }
 }
@@ -37,7 +37,7 @@ import { action } from '@ember/object';
 
 export default class IndexController extends Controller {
   @action
-  async loadUsers() {
+  loadUsers() {
     return this.store.findAll('user');
   }
 }
@@ -53,7 +53,7 @@ import { inject as service } from '@ember/service';
 export default class IndexRoute extends Route {
   @service('store') store;
 
-  async model() {
+  model() {
     return this.store.findAll('rental');
   }
 }
@@ -69,7 +69,7 @@ export default class IndexController extends Controller {
   @service('store') store;
 
   @action
-  async loadUsers() {
+  loadUsers() {
     return this.store.findAll('user');
   }
 }
