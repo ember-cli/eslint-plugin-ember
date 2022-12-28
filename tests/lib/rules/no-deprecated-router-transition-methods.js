@@ -5,8 +5,6 @@
 const rule = require('../../../lib/rules/no-deprecated-router-transition-methods');
 const RuleTester = require('eslint').RuleTester;
 
-const { createErrorMessage } = rule;
-
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------

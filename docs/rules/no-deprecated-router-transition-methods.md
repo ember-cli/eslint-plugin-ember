@@ -38,7 +38,7 @@ import { action } from '@ember/object';
 export default class NewPostController extends Controller {
   @action
   async save({ title, text }) {
-    let post = this.store.createRecord('post', { title, text });
+    const post = this.store.createRecord('post', { title, text });
     await post.save();
     return this.transitionToRoute('post', post.id);
   }
@@ -75,7 +75,7 @@ export default class NewPostController extends Controller {
 
   @action
   async save({ title, text }) {
-    let post = this.store.createRecord('post', { title, text });
+    const post = this.store.createRecord('post', { title, text });
     await post.save();
     return this.router.transitionTo('post', post.id);
   }
