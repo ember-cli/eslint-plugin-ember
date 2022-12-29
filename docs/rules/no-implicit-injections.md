@@ -110,3 +110,4 @@ module.exports = {
 ## References
 
 - [Deprecation](https://deprecations.emberjs.com/v3.x/#toc_implicit-injections)
+- [Ember Data Store Service](https://api.emberjs.com/ember-data/release/classes/Store)
