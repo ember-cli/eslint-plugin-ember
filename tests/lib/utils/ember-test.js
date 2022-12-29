@@ -235,7 +235,7 @@ describe('isEmberCoreModule', () => {
     const context = new FauxContext('const x = 123;');
     const node = context.ast.body[0];
     expect(() => emberUtils.isEmberCoreModule(context, node, 'Route')).toThrow(
-      'Function should only be called on a `CallExpression` (classic class) or `ClassDeclaration` (native class)'
+      'Function should only be called on a `CallExpression` (classic class) or `ClassDeclaration`/`ClassExpression` (native class)'
     );
   });
 });

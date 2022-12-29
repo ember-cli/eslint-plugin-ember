@@ -23,7 +23,7 @@ const ruleTester = new RuleTester({
 ruleTester.run('no-implicit-injections', rule, {
   valid: [
     {
-      filename: 'routes/index.js',
+      filename: 'pods/index.js',
       code: `
       import Route from '@ember/routing/route';
       import Controller from '@ember/controller';
@@ -36,7 +36,7 @@ ruleTester.run('no-implicit-injections', rule, {
         }
       }
 
-      export default class IndexRoute extends Route {
+      export class IndexRoute extends Route {
         @service('store') store;
         async model() {
           return this.store.findAll('rental');
@@ -121,6 +121,80 @@ ruleTester.run('no-implicit-injections', rule, {
           services: [{ serviceName: 'media' }],
         },
       ],
+    },
+    // Works for modules with multiple module types
+    {
+      filename: 'pods/user.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+
+      export class User {
+        get mediaAccount() {
+          return this.media.account;
+        }
+      }
+
+      export class UserController extends Controller {
+        @service('media') media;
+
+        get isSmallScreen() {
+          return this.media.isXs;
+        }
+      }
+
+      export class UserRoute extends Route {
+        get isSmallScreen() {
+          return this.media.isXs;
+        }
+      }`,
+      options: [
+        {
+          services: [{ serviceName: 'media', moduleNames: ['Component', 'Controller'] }],
+        },
+      ],
+    },
+
+    // Reassesses Module Type for Nested Classes
+    {
+      filename: 'controllers/register.js',
+      code: `
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+
+      export class RegisterController extends Controller {
+        @service('store') store;
+        async loadData() {
+          return this.store.findAll('rental');
+        }
+
+        getMediaUser() {
+          return class Register {
+            get storeInfo() {
+              return this.store.address;
+            }
+          }
+        }
+      }`,
+    },
+
+    // Nested Ember Module Definition (used in some meta programming instances or decorators)
+    {
+      filename: 'utils/loads-user-controller.js',
+      code: `
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+
+      export function mediaAwareRoute() {
+        return class UserController extends Controller {
+          @inject('store') store;
+          async loadData() {
+            return this.store.findAll('rental');
+          }
+        }
+      }`,
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
     },
   ],
   invalid: [
@@ -364,6 +438,131 @@ async model() {
         { messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' },
         { messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' },
       ],
+    },
+    // Works for modules with multiple module types
+    {
+      filename: 'pods/user.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+
+      export class User {
+        get mediaAccount() {
+          return this.media.account;
+        }
+      }
+
+      export class UserController extends Controller {
+        get isSmallScreen() {
+          return this.media.isXs;
+        }
+      }
+
+      export class UserRoute extends Route {
+        get isSmallScreen() {
+          return this.media.isXs;
+        }
+      }`,
+      output: `
+      import Route from '@ember/routing/route';
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+
+      export class User {
+        get mediaAccount() {
+          return this.media.account;
+        }
+      }
+
+      export class UserController extends Controller {
+        @service('media') media;
+get isSmallScreen() {
+          return this.media.isXs;
+        }
+      }
+
+      export class UserRoute extends Route {
+        get isSmallScreen() {
+          return this.media.isXs;
+        }
+      }`,
+      options: [
+        {
+          services: [{ serviceName: 'media', moduleNames: ['Component', 'Controller'] }],
+        },
+      ],
+      errors: [{ messageId: 'main', data: { serviceName: 'media' }, type: 'MemberExpression' }],
+    },
+
+    // Reassesses Module Type for Nested Classes
+    {
+      filename: 'controllers/register.js',
+      code: `
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+
+      export class RegisterController extends Controller {
+        async loadData() {
+          return this.store.findAll('rental');
+        }
+
+        getMediaUser() {
+          return class Register {
+            get storeInfo() {
+              return this.store.address;
+            }
+          }
+        }
+      }`,
+      output: `
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+
+      export class RegisterController extends Controller {
+        @service('store') store;
+async loadData() {
+          return this.store.findAll('rental');
+        }
+
+        getMediaUser() {
+          return class Register {
+            get storeInfo() {
+              return this.store.address;
+            }
+          }
+        }
+      }`,
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
+    },
+
+    // Nested Ember Module Definition (used in some meta programming instances or decorators)
+    {
+      filename: 'utils/loads-user-controller.js',
+      code: `
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+
+      export function mediaAwareRoute() {
+        return class UserController extends Controller {
+          async loadData() {
+            return this.store.findAll('rental');
+          }
+        }
+      }`,
+      output: `
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+
+      export function mediaAwareRoute() {
+        return class UserController extends Controller {
+          @service('store') store;
+async loadData() {
+            return this.store.findAll('rental');
+          }
+        }
+      }`,
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
     },
   ],
 });
