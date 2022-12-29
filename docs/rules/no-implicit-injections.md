@@ -93,22 +93,19 @@ Example config:
 ```js
 module.exports = {
   rules: {
-    'ember/no-implicit-injections': [2, {
+    'ember/no-implicit-injections': ['error', {
       services: [
         // Ember Responsive Used to Auto Inject the media service in Components/Controllers
         { serviceName: 'media', moduleNames: ['Component', 'Controller'] },
         // Ember CLI Flash Used to Auto Inject the flashMessages service in all modules
         { serviceName: 'flashMessages' },
+        // Check for uses of the store in Routes or Controllers
+        { serviceName: 'store', moduleNames: ['Route', 'Controller'] },
       ]
     }]
   }
 }
 ```
-
-## Related Rules
-
-- [no-unnecessary-service-injection-argument](no-unnecessary-service-injection-argument.md) omit service injection argument if possible
-- [no-implicit-service-injection-argument](no-unnecessary-service-injection-argument.md) require the service injection argument for all services (fix output for this rule follows this pattern)
 
 ## References
 
