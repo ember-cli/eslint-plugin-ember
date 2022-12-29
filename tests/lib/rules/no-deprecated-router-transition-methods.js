@@ -22,11 +22,13 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-deprecated-router-transition-methods', rule, {
   valid: [
+    // Route Uses RouterService.transitionTo
     {
       filename: 'routes/index.js',
       code: `
       import Route from '@ember/routing/route';
       import { inject as service } from '@ember/service';
+
       export default class SettingsRoute extends Route {
         @service('router') router;
         @service session;
@@ -37,11 +39,68 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
         }
       }`,
     },
+    // Route Uses RouterService.replaceWith
     {
       filename: 'routes/index.js',
       code: `
       import Route from '@ember/routing/route';
       import { inject as service } from '@ember/service';
+
+      export default class SettingsRoute extends Route {
+        @service('router') router;
+        @service session;
+        beforeModel() {
+          if (!this.session.isAuthenticated) {
+            this.router.replaceWith('login');
+          }
+        }
+      }`,
+    },
+    // Controller Uses RouterService.transitionTo
+    {
+      filename: 'controllers/index.js',
+      code: `
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+      import { action } from '@ember/object';
+
+      export default class NewPostController1 extends Controller {
+        @service('router') router;
+
+        @action
+        async save({ title, text }) {
+          let post = this.store.createRecord('post', { title, text });
+          await post.save();
+          return this.router.transitionTo('post', post.id);
+        }
+      }`,
+    },
+    // Controller Uses RouterService.replaceWith
+    {
+      filename: 'controllers/index.js',
+      code: `
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+      import { action } from '@ember/object';
+
+      export default class NewPostController1 extends Controller {
+        @service('router') router;
+
+        @action
+        async save({ title, text }) {
+          let post = this.store.createRecord('post', { title, text });
+          await post.save();
+          return this.router.replaceWith('post', post.id);
+        }
+      }`,
+    },
+    // Route Uses RouterService.transitionTo on service injected without serviceName
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import { inject as service } from '@ember/service';
+
       export default class SettingsRoute extends Route {
         @service() router;
         @service session;
@@ -55,32 +114,49 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
     {
       filename: 'routes/index.js',
       code: `
-import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+      import Route from '@ember/routing/route';
+      import { inject as service } from '@ember/service';
 
-export class SettingsIndexRoute extends Route {
-  model() {
-    return [];
-  }
-}
+      export default class SettingsRoute extends Route {
+        @service router;
+        @service session;
+        beforeModel() {
+          if (!this.session.isAuthenticated) {
+            this.router.transitionTo('login');
+          }
+        }
+      }`,
+    },
+    // Test Multiple Classes in One File
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import { inject as service } from '@ember/service';
 
-export class SettingsDetailRoute extends Route {
-  @service('settings') settingsService;
+      export class SettingsIndexRoute extends Route {
+        model() {
+          return [];
+        }
+      }
 
-  async model(id) {
-    return new Setting(await this.settingsService.find(id));
-  }
-}
+      export class SettingsDetailRoute extends Route {
+        @service('settings') settingsService;
 
-export class SettingsRoute extends Route {
-  @service() router;
-  @service session;
-  beforeModel() {
-    if (!this.session.isAuthenticated) {
-      this.router.transitionTo('login');
-    }
-  }
-}`,
+        async model(id) {
+          return new Setting(await this.settingsService.find(id));
+        }
+      }
+
+      export class SettingsRoute extends Route {
+        @service() router;
+        @service session;
+        beforeModel() {
+          if (!this.session.isAuthenticated) {
+            this.router.transitionTo('login');
+          }
+        }
+      }`,
     },
   ],
   invalid: [

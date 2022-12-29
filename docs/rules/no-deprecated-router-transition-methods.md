@@ -84,8 +84,9 @@ export default class NewPostController extends Controller {
 
 ## Migration
 
-The autofixer for this rule will update classes and add injections for the configured services.
+The autofixer for this rule will update method calls to use the router service, and will inject the router service as needed.
 
 ## References
 
 - [Deprecation](https://deprecations.emberjs.com/v3.x/#toc_routing-transition-methods)
+- [Router Service](https://api.emberjs.com/ember/release/classes/RouterService)
