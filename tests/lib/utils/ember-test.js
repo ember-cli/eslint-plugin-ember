@@ -222,6 +222,17 @@ describe('isEmberCoreModule', () => {
     expect(emberUtils.isEmberCoreModule(context, node, 'Route')).toBeTruthy();
   });
 
+  it('should check core modules from ClassExpressions', () => {
+    const context = new FauxContext(
+      `import Route from '@ember/routing/route';
+
+      (class MyRoute extends Route {})`,
+      'example-app/some-twisted-path/some-route.js'
+    );
+    const node = context.ast.body[1].expression;
+    expect(emberUtils.isEmberCoreModule(context, node, 'Route')).toBeTruthy();
+  });
+
   it('ignores a native class with a non-identifier super class', () => {
     const context = new FauxContext(
       'class MyRoute extends this.ContainerObject {}',
@@ -235,7 +246,7 @@ describe('isEmberCoreModule', () => {
     const context = new FauxContext('const x = 123;');
     const node = context.ast.body[0];
     expect(() => emberUtils.isEmberCoreModule(context, node, 'Route')).toThrow(
-      'Function should only be called on a `CallExpression` (classic class) or `ClassDeclaration` (native class)'
+      'Function should only be called on a `CallExpression` (classic class) or `ClassDeclaration`/`ClassExpression` (native class)'
     );
   });
 });
