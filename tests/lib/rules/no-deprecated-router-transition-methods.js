@@ -208,6 +208,22 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
         }
       }`,
     },
+    // Rule does not fire in components or modules outside of controller/routes
+    {
+      filename: 'components/index.js',
+      code: `
+      import Component from '@ember/component';
+      import { action } from '@ember/object';
+
+      export default class NewPostComponent extends Component {
+        @action
+        async save({ title, text }) {
+          let post = this.store.createRecord('post', { title, text });
+          await post.save();
+          return this.transitionTo('post', post.id);
+        }
+      }`,
+    },
     // Test ignore rule in non Ember classes
     {
       filename: 'routes/index.js',
