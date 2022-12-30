@@ -208,6 +208,56 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
         }
       }`,
     },
+    // Test ignore rule in non Ember classes
+    {
+      filename: 'routes/index.js',
+      code: `
+      export class Settings {
+        model() {
+          this.transitionTo('index')
+        }
+      }`,
+    },
+
+    // Test rule in class returned by function
+    {
+      filename: 'controllers/index.js',
+      code: `
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+      import { action } from '@ember/object';
+
+      export default function saver() {
+        return class NewPostController1 extends Controller {
+          @service('router') router;
+
+          @action
+          async save({ title, text }) {
+            let post = this.store.createRecord('post', { title, text });
+            await post.save();
+            return this.router.replaceWith('post', post.id);
+          }
+        }
+      }`,
+    },
+
+    // Test rule is not triggered by invalid nested classes
+    {
+      filename: 'controllers/index.js',
+      code: `
+      import Controller from '@ember/controller';
+
+      export default class NewPostController1 extends Controller {
+        createSetting() {
+          return class Settings {
+            model() {
+              this.transitionTo('index');
+            }
+          };
+        }
+      }`,
+    },
+
     // Test Multiple Classes in One File
     {
       filename: 'routes/index.js',
@@ -445,6 +495,7 @@ import Controller from '@ember/controller';
         },
       ],
     },
+    // Controller uses transitionToRoute with custom service injection import
     {
       filename: 'controllers/new-post.js',
       code: `
@@ -521,6 +572,7 @@ import Controller from '@ember/controller';
         },
       ],
     },
+    // Test multiple classes in a single file
     {
       filename: 'routes/index.js',
       code: `
@@ -601,6 +653,51 @@ import Controller from '@ember/controller';
           messageId: 'main',
           type: 'MemberExpression',
         },
+        {
+          messageId: 'main',
+          type: 'MemberExpression',
+        },
+      ],
+    },
+
+    // Test rule in class returned by function
+    {
+      filename: 'controllers/index.js',
+      code: `
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+      import { action } from '@ember/object';
+
+      export default function saver() {
+        return class NewPostController1 extends Controller {
+          @service('router') router;
+
+          @action
+          async save({ title, text }) {
+            let post = this.store.createRecord('post', { title, text });
+            await post.save();
+            return this.replaceRoute('post', post.id);
+          }
+        }
+      }`,
+      output: `
+      import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+      import { action } from '@ember/object';
+
+      export default function saver() {
+        return class NewPostController1 extends Controller {
+          @service('router') router;
+
+          @action
+          async save({ title, text }) {
+            let post = this.store.createRecord('post', { title, text });
+            await post.save();
+            return this.router.replaceWith('post', post.id);
+          }
+        }
+      }`,
+      errors: [
         {
           messageId: 'main',
           type: 'MemberExpression',
