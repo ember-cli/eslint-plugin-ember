@@ -85,7 +85,7 @@ This lint rule will search for instances of `store` used in routes or controller
 
 - object -- containing the following properties:
   - array -- `denyList` -- Array of configuration objects configuring the lint rule to check for use of implicit injected services
-    - string -- `service` -- The name of the service that is implicitly injected
+    - string -- `service` -- The (kebab-case) service name that should be checked for implicit injections and error if found
     - array -- `moduleNames` -- Array of string listing the types of classes (controller, route, component, etc) to check for implicit injections. If an array is declared only those class types will be checked for implicit injection. (Defaults to checking all class files/types)
 
 Example config:
