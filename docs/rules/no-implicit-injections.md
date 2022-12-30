@@ -86,7 +86,8 @@ This lint rule will search for instances of `store` used in routes or controller
 - object -- containing the following properties:
   - array -- `denyList` -- Array of configuration objects configuring the lint rule to check for use of implicit injected services
     - string -- `service` -- The (kebab-case) service name that should be checked for implicit injections and error if found
-    - array -- `moduleNames` -- Array of string listing the types of classes (`Controller`, `Route`, `Component`, etc) to check for implicit injections. If an array is declared, only those class types will be checked for implicit injection. (Defaults to checking all class files/types)
+    - array -- `propertyName` -- The property name where the service would be injected in classes. This defaults to the camel case version of the `service` config above.
+    - array -- `moduleNames` -- Array of string listing the types of classes (`Controller`, `Route`, `Component`, etc) to check for implicit injections. If an array is declared, only those class types will be checked for implicit injection. (Defaults to checking all Ember Module class files/types)
 
 Example config:
 
@@ -101,6 +102,8 @@ module.exports = {
         { service: 'flash-messages' },
         // Check for uses of the store in Routes or Controllers
         { service: 'store', moduleNames: ['Route', 'Controller'] },
+        // Check for the feature service injected as "featureChecker"
+        { service: 'feature', propertyName: 'featureChecker' },
       ]
     }]
   }

@@ -26,6 +26,9 @@ const FLASH_MESSAGES_CONFIG = {
 const MEDIA_CONFIG = {
   denyList: [{ service: 'media', moduleNames: ['Component', 'Controller'] }],
 };
+const FEATURE_CHECKER_CONFIG = {
+  denyList: [{ service: 'feature', propertyName: 'featureChecker' }],
+};
 
 function createClassUsage(serviceDefinition) {
   return {
@@ -196,15 +199,30 @@ ruleTester.run('no-implicit-injections', rule, {
       }`,
       options: [MEDIA_CONFIG],
     },
-    // Can ignore non-matching module types for custom config
+    // Ignores use when property name is modified from 1:1 mapping
+    {
+      filename: 'controllers/index.js',
+      code: `
+      import Controller from '@ember/controller';
+
+      export default class IndexController extends Controller {
+        get isSmallScreen() {
+          return this.feature.isXs;
+        }
+      }`,
+      options: [FEATURE_CHECKER_CONFIG],
+    },
+    // Can detect changed property mapping
     {
       filename: 'routes/index.js',
       code: `
       import Route from '@ember/routing/route';
 
       export default class IndexRoute extends Route {
-        get isSmallScreen() {
-          return this.media.isXs;
+        featureChecker = null;
+
+        get canVisitCheckout() {
+          return this.featureChecker.isEnabled('checkout');
         }
       }`,
       options: [MEDIA_CONFIG],
@@ -685,6 +703,33 @@ async loadData() {
         { messageId: 'main', data: { serviceName: 'flash-messages' }, type: 'MemberExpression' },
       ],
     },
+    // Can detect changed property mapping
+    {
+      filename: 'routes/checkout.js',
+      code: `
+      import { inject as service } from '@ember/service';
+      import Route from '@ember/routing/route';
+
+      export default class CheckoutRoute extends Route {
+        get canVisitCheckout() {
+          return this.featureChecker.isEnabled('checkout');
+        }
+      }`,
+      output: `
+      import { inject as service } from '@ember/service';
+      import Route from '@ember/routing/route';
+
+      export default class CheckoutRoute extends Route {
+        @service('feature') featureChecker;
+get canVisitCheckout() {
+          return this.featureChecker.isEnabled('checkout');
+        }
+      }`,
+      options: [FEATURE_CHECKER_CONFIG],
+      errors: [{ messageId: 'main', data: { serviceName: 'feature' }, type: 'MemberExpression' }],
+    },
+
+    // Check use and fix in legacy ember components
     {
       filename: 'pods/index.js',
       code: `
