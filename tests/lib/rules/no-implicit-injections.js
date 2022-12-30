@@ -704,14 +704,16 @@ async loadData() {
 
         export default Component.extend({
           flashMessages: service('flash-messages'),
-          actions: {
+actions: {
             save() {
               return this.flashMessages.warn('some message');
             }
           }
         });`,
       options: [FLASH_MESSAGES_CONFIG],
-      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
+      errors: [
+        { messageId: 'main', data: { serviceName: 'flash-messages' }, type: 'MemberExpression' },
+      ],
     },
   ],
 });
