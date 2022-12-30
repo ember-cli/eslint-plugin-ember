@@ -20,25 +20,139 @@ const ruleTester = new RuleTester({
   },
 });
 
+function validRouteClassUsage(serviceDefinition) {
+  return {
+    filename: 'routes/index.js',
+    code: `
+    import Route from '@ember/routing/route';
+    import { inject as service } from '@ember/service';
+
+    export default class SettingsRoute extends Route {
+      ${serviceDefinition}
+      @service session;
+
+      beforeModel() {
+        if (!this.session.isAuthenticated) {
+          this.router.transitionTo('login');
+        }
+      }
+    }`,
+  };
+}
+
+function validRouteExtendUsage(serviceDefinition) {
+  return {
+    filename: 'routes/index.js',
+    code: `
+    import Route from '@ember/routing/route';
+    import { inject as service } from '@ember/service';
+
+    export default Route.extend({
+      ${serviceDefinition}
+      session: service(),
+
+      beforeModel() {
+        if (!this.session.isAuthenticated) {
+          this.router.transitionTo('login');
+        }
+      }
+    })`,
+  };
+}
+
+function invalidRouteClassUsage(serviceDefinition, { routerServiceName, methodUsed }) {
+  return {
+    filename: 'routes/index.js',
+    errors: [
+      {
+        messageId: 'main',
+        data: { methodUsed, desiredMethod: methodUsed, moduleType: 'Route' },
+        type: 'MemberExpression',
+      },
+    ],
+    code: `
+    import Route from '@ember/routing/route';
+    import { inject as service } from '@ember/service';
+
+    export default class SettingsRoute extends Route {
+      ${serviceDefinition}
+      @service session;
+
+      beforeModel() {
+        if (!this.session.isAuthenticated) {
+          this.${methodUsed}('login');
+        }
+      }
+    }`,
+    output: `
+    import Route from '@ember/routing/route';
+    import { inject as service } from '@ember/service';
+
+    export default class SettingsRoute extends Route {
+      ${serviceDefinition}
+      @service session;
+
+      beforeModel() {
+        if (!this.session.isAuthenticated) {
+          this.${routerServiceName ?? 'router'}.${methodUsed}('login');
+        }
+      }
+    }`,
+  };
+}
+
+function invalidRouteExtendUsage(serviceDefinition, { routerServiceName, methodUsed }) {
+  return {
+    filename: 'routes/index.js',
+    errors: [
+      {
+        messageId: 'main',
+        data: { methodUsed, desiredMethod: methodUsed, moduleType: 'Route' },
+        type: 'MemberExpression',
+      },
+    ],
+    code: `
+    import Route from '@ember/routing/route';
+    import { inject as service } from '@ember/service';
+
+    export default Route.extend({
+      ${serviceDefinition}
+      session: service(),
+
+      beforeModel() {
+        if (!this.session.isAuthenticated) {
+          this.${methodUsed}('login');
+        }
+      }
+    })`,
+    output: `
+    import Route from '@ember/routing/route';
+    import { inject as service } from '@ember/service';
+
+    export default Route.extend({
+      ${serviceDefinition}
+      session: service(),
+
+      beforeModel() {
+        if (!this.session.isAuthenticated) {
+          this.${routerServiceName ?? 'router'}.${methodUsed}('login');
+        }
+      }
+    })`,
+  };
+}
+
 ruleTester.run('no-deprecated-router-transition-methods', rule, {
   valid: [
-    // Route Uses RouterService.transitionTo
-    {
-      filename: 'routes/index.js',
-      code: `
-      import Route from '@ember/routing/route';
-      import { inject as service } from '@ember/service';
+    // Route Uses RouterService.transitionTo with different service injection types
+    validRouteClassUsage('@service router'),
+    validRouteClassUsage('@service() router'),
+    validRouteClassUsage("@service('router') router"),
 
-      export default class SettingsRoute extends Route {
-        @service('router') router;
-        @service session;
-        beforeModel() {
-          if (!this.session.isAuthenticated) {
-            this.router.transitionTo('login');
-          }
-        }
-      }`,
-    },
+    // Legacy .extends Route Uses RouterService.transitionTo with different service injection types
+    validRouteExtendUsage('router: service(),'),
+    validRouteExtendUsage("router: service('router'),"),
+
     // Route Uses RouterService.replaceWith
     {
       filename: 'routes/index.js',
@@ -94,39 +208,6 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
         }
       }`,
     },
-    // Route Uses RouterService.transitionTo on service injected without serviceName
-    {
-      filename: 'routes/index.js',
-      code: `
-      import Route from '@ember/routing/route';
-      import { inject as service } from '@ember/service';
-
-      export default class SettingsRoute extends Route {
-        @service() router;
-        @service session;
-        beforeModel() {
-          if (!this.session.isAuthenticated) {
-            this.router.transitionTo('login');
-          }
-        }
-      }`,
-    },
-    {
-      filename: 'routes/index.js',
-      code: `
-      import Route from '@ember/routing/route';
-      import { inject as service } from '@ember/service';
-
-      export default class SettingsRoute extends Route {
-        @service router;
-        @service session;
-        beforeModel() {
-          if (!this.session.isAuthenticated) {
-            this.router.transitionTo('login');
-          }
-        }
-      }`,
-    },
     // Test Multiple Classes in One File
     {
       filename: 'routes/index.js',
@@ -160,6 +241,25 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
     },
   ],
   invalid: [
+    // Route Uses RouterService.transitionTo with different service injection types
+    invalidRouteClassUsage('@service router', { methodUsed: 'transitionTo' }),
+    invalidRouteClassUsage('@service() router', { methodUsed: 'transitionTo' }),
+    invalidRouteClassUsage("@service('router') router", { methodUsed: 'transitionTo' }),
+    invalidRouteClassUsage("@service('router') routerService", {
+      methodUsed: 'transitionTo',
+      routerServiceName: 'routerService',
+    }),
+
+    // Legacy .extends Route Uses RouterService.transitionTo with different service injection types
+    invalidRouteExtendUsage('router: service(),', { methodUsed: 'transitionTo' }),
+    invalidRouteExtendUsage("router: service('router'),", {
+      methodUsed: 'transitionTo',
+    }),
+    invalidRouteExtendUsage("routerMcRouteFace: service('router'),", {
+      methodUsed: 'transitionTo',
+      routerServiceName: 'routerMcRouteFace',
+    }),
+
     // Basic lint error in routes
     {
       filename: 'routes/index.js',
