@@ -20,6 +20,53 @@ const ruleTester = new RuleTester({
   },
 });
 
+const FLASH_MESSAGES_CONFIG = {
+  denyList: [{ service: 'flash-messages' }],
+};
+const MEDIA_CONFIG = {
+  denyList: [{ service: 'media', moduleNames: ['Component', 'Controller'] }],
+};
+
+function createClassUsage(serviceDefinition) {
+  return {
+    filename: 'pods/index.js',
+    code: `
+    import { inject as service } from '@ember/service';
+    import Component from '@ember/component';
+
+    export default class FoobarTestError extends Component {
+      ${serviceDefinition}
+
+      @action
+      save() {
+        return this.flashMessages.warn('some message');
+      }
+    }`,
+    options: [FLASH_MESSAGES_CONFIG],
+  };
+}
+
+function createExtendUsage(serviceDefinition) {
+  return {
+    filename: 'pods/index.js',
+    code: `
+    import { inject as service } from '@ember/service';
+    import Component from '@ember/component';
+
+    export default Component.extend({
+      ${serviceDefinition}
+
+      actions: {
+
+        save() {
+          return this.flashMessages.warn('some message');
+        }
+      }
+    });`,
+    options: [FLASH_MESSAGES_CONFIG],
+  };
+}
+
 ruleTester.run('no-implicit-injections', rule, {
   valid: [
     // Basic use in Route and Controller in single file
@@ -147,11 +194,7 @@ ruleTester.run('no-implicit-injections', rule, {
           return this.media.isXs;
         }
       }`,
-      options: [
-        {
-          denyList: [{ service: 'media', moduleNames: ['Component', 'Controller'] }],
-        },
-      ],
+      options: [MEDIA_CONFIG],
     },
     // Can ignore non-matching module types for custom config
     {
@@ -164,11 +207,7 @@ ruleTester.run('no-implicit-injections', rule, {
           return this.media.isXs;
         }
       }`,
-      options: [
-        {
-          denyList: [{ service: 'media', moduleNames: ['Component', 'Controller'] }],
-        },
-      ],
+      options: [MEDIA_CONFIG],
     },
     // Ignores use outside of classes
     {
@@ -210,11 +249,7 @@ ruleTester.run('no-implicit-injections', rule, {
           return this.media.isXs;
         }
       }`,
-      options: [
-        {
-          denyList: [{ service: 'media', moduleNames: ['Component', 'Controller'] }],
-        },
-      ],
+      options: [MEDIA_CONFIG],
     },
 
     // Reassesses Module Type for Nested Classes
@@ -255,8 +290,17 @@ ruleTester.run('no-implicit-injections', rule, {
           }
         }
       }`,
-      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
     },
+
+    // Exhaustive check for property definition type
+    createClassUsage('@service flashMessages'),
+    createClassUsage('@service() flashMessages'),
+    createClassUsage("@service('flashMessages') flashMessages"),
+    createClassUsage("@service('flash-messages') flashMessages"),
+
+    createExtendUsage('flashMessages: service(),'),
+    createExtendUsage("flashMessages: service('flashMessages'),"),
+    createExtendUsage("flashMessages: service('flash-messages'),"),
   ],
   invalid: [
     // Basic store lint error in routes/controllers
@@ -420,11 +464,7 @@ get isSmallScreen() {
           return this.media.isXs;
         }
       }`,
-      options: [
-        {
-          denyList: [{ service: 'media', moduleNames: ['Component', 'Controller'] }],
-        },
-      ],
+      options: [MEDIA_CONFIG],
       errors: [{ messageId: 'main', data: { serviceName: 'media' }, type: 'MemberExpression' }],
     },
     // Custom options with dasherized service name
@@ -435,7 +475,7 @@ get isSmallScreen() {
 
       export default class FoobarTestError extends Component {
         @action
-        get save() {
+        save() {
           return this.flashMessages.warn('some message');
         }
       }`,
@@ -446,15 +486,11 @@ import Component from '@ember/component';
       export default class FoobarTestError extends Component {
         @service('flash-messages') flashMessages;
 @action
-        get save() {
+        save() {
           return this.flashMessages.warn('some message');
         }
       }`,
-      options: [
-        {
-          denyList: [{ service: 'flash-messages' }],
-        },
-      ],
+      options: [FLASH_MESSAGES_CONFIG],
       errors: [
         { messageId: 'main', data: { serviceName: 'flash-messages' }, type: 'MemberExpression' },
       ],
@@ -548,11 +584,7 @@ get isSmallScreen() {
           return this.media.isXs;
         }
       }`,
-      options: [
-        {
-          denyList: [{ service: 'media', moduleNames: ['Component', 'Controller'] }],
-        },
-      ],
+      options: [MEDIA_CONFIG],
       errors: [{ messageId: 'main', data: { serviceName: 'media' }, type: 'MemberExpression' }],
     },
 
@@ -623,6 +655,62 @@ async loadData() {
           }
         }
       }`,
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
+    },
+
+    {
+      code: `
+      import { inject as service } from '@ember/service';
+      import Component from '@ember/component';
+
+      export default class FoobarTestError extends Component {
+        @action
+        save() {
+          return this.flashMessages.warn('some message');
+        }
+      }`,
+      output: `
+      import { inject as service } from '@ember/service';
+      import Component from '@ember/component';
+
+      export default class FoobarTestError extends Component {
+        @service('flash-messages') flashMessages;
+@action
+        save() {
+          return this.flashMessages.warn('some message');
+        }
+      }`,
+      options: [FLASH_MESSAGES_CONFIG],
+      errors: [
+        { messageId: 'main', data: { serviceName: 'flash-messages' }, type: 'MemberExpression' },
+      ],
+    },
+    {
+      filename: 'pods/index.js',
+      code: `
+        import { inject as service } from '@ember/service';
+        import Component from '@ember/component';
+
+        export default Component.extend({
+          actions: {
+            save() {
+              return this.flashMessages.warn('some message');
+            }
+          }
+        });`,
+      output: `
+        import { inject as service } from '@ember/service';
+        import Component from '@ember/component';
+
+        export default Component.extend({
+          flashMessages: service('flash-messages'),
+          actions: {
+            save() {
+              return this.flashMessages.warn('some message');
+            }
+          }
+        });`,
+      options: [FLASH_MESSAGES_CONFIG],
       errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
     },
   ],
