@@ -20,6 +20,21 @@
 
 
 
+
+## v11.4.0 (2022-12-30)
+
+#### :rocket: Enhancement
+* [#1715](https://github.com/ember-cli/eslint-plugin-ember/pull/1715) Add new rule `no-deprecated-router-transition-methods` ([@rtablada](https://github.com/rtablada))
+* [#1714](https://github.com/ember-cli/eslint-plugin-ember/pull/1714) Add new rule `no-implicit-injections` ([@rtablada](https://github.com/rtablada))
+
+#### :house: Internal
+* [#1720](https://github.com/ember-cli/eslint-plugin-ember/pull/1720) Deprecate trivial node type check helpers ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Ryan Tablada ([@rtablada](https://github.com/rtablada))
+
+
 ## v11.3.1 (2022-12-21)
 
 #### :bug: Bug Fix
