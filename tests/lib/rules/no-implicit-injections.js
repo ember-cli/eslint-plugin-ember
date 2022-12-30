@@ -22,6 +22,7 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-implicit-injections', rule, {
   valid: [
+    // Basic use in Route and Controller in single file
     {
       filename: 'pods/index.js',
       code: `
@@ -43,6 +44,7 @@ ruleTester.run('no-implicit-injections', rule, {
         }
       }`,
     },
+    // Basic use in Controller
     {
       filename: 'controller/index.js',
       code: `
@@ -52,6 +54,42 @@ ruleTester.run('no-implicit-injections', rule, {
 
       export default class IndexController extends Controller {
         @service('store') store;
+        @action
+        async loadUsers() {
+          return this.store.findAll('user');
+        }
+      }`,
+    },
+    // Ignores if some other property getter is defined
+    {
+      filename: 'controller/index.js',
+      code: `
+      import Controller from '@ember/controller';
+      import { action } from '@ember/object';
+      import { inject as service } from '@ember/service';
+      import storeMock from './my-mock';
+
+      export default class IndexController extends Controller {
+        store = storeMock;
+
+        @action
+        async loadUsers() {
+          return this.store.findAll('user');
+        }
+      }`,
+    },
+    // Ignores if some other property getter is defined
+    {
+      filename: 'controller/index.js',
+      code: `
+      import Controller from '@ember/controller';
+      import { action } from '@ember/object';
+      import { inject as service } from '@ember/service';
+
+      export default class IndexController extends Controller {
+        get store() {
+          return {}
+        }
         @action
         async loadUsers() {
           return this.store.findAll('user');
@@ -72,6 +110,7 @@ ruleTester.run('no-implicit-injections', rule, {
         }
       }`,
     },
+    // Does not check for Store use in Components
     {
       filename: 'components/foobar.js',
       code: `
@@ -83,6 +122,7 @@ ruleTester.run('no-implicit-injections', rule, {
         }
       }`,
     },
+    // Does not check for Store use in GlimmerComponents
     {
       filename: 'components/foobar.js',
       code: `
@@ -94,6 +134,26 @@ ruleTester.run('no-implicit-injections', rule, {
         }
       }`,
     },
+    // Checks custom config
+    {
+      filename: 'controllers/index.js',
+      code: `
+      import Controller from '@ember/controller';
+
+      export default class IndexController extends Controller {
+        @service('media') media;
+
+        get isSmallScreen() {
+          return this.media.isXs;
+        }
+      }`,
+      options: [
+        {
+          denyList: [{ service: 'media', moduleNames: ['Component', 'Controller'] }],
+        },
+      ],
+    },
+    // Can ignore non-matching module types for custom config
     {
       filename: 'routes/index.js',
       code: `
@@ -110,6 +170,7 @@ ruleTester.run('no-implicit-injections', rule, {
         },
       ],
     },
+    // Ignores use outside of classes
     {
       filename: 'utils/support.js',
       code: `
@@ -122,7 +183,7 @@ ruleTester.run('no-implicit-injections', rule, {
         },
       ],
     },
-    // Works for modules with multiple module types
+    // Custom Configs work with multiple class/module types both matching and not
     {
       filename: 'pods/user.js',
       code: `
