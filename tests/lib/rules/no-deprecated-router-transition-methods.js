@@ -326,6 +326,45 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
       routerServiceName: 'routerMcRouteFace',
     }),
 
+    // Legacy .extends without an existing router service injection
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import { inject as service } from '@ember/service';
+
+      export default Route.extend({
+        session: service(),
+
+        beforeModel() {
+          if (!this.session.isAuthenticated) {
+            this.transitionTo('login');
+          }
+        }
+      })`,
+      output: `
+      import Route from '@ember/routing/route';
+      import { inject as service } from '@ember/service';
+
+      export default Route.extend({
+        router: service('router'),
+session: service(),
+
+        beforeModel() {
+          if (!this.session.isAuthenticated) {
+            this.router.transitionTo('login');
+          }
+        }
+      })`,
+      errors: [
+        {
+          messageId: 'main',
+          data: { methodUsed: 'transitionTo', desiredMethod: 'transitionTo', moduleType: 'Route' },
+          type: 'MemberExpression',
+        },
+      ],
+    },
+
     // Basic lint error in routes
     {
       filename: 'routes/index.js',
