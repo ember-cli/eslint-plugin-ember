@@ -106,7 +106,7 @@ ruleTester.run('no-implicit-injections', rule, {
       }`,
       options: [
         {
-          services: [{ serviceName: 'media', moduleNames: ['Component', 'Controller'] }],
+          denyList: [{ service: 'media', moduleNames: ['Component', 'Controller'] }],
         },
       ],
     },
@@ -118,7 +118,7 @@ ruleTester.run('no-implicit-injections', rule, {
       }`,
       options: [
         {
-          services: [{ serviceName: 'media' }],
+          denyList: [{ service: 'media' }],
         },
       ],
     },
@@ -151,7 +151,7 @@ ruleTester.run('no-implicit-injections', rule, {
       }`,
       options: [
         {
-          services: [{ serviceName: 'media', moduleNames: ['Component', 'Controller'] }],
+          denyList: [{ service: 'media', moduleNames: ['Component', 'Controller'] }],
         },
       ],
     },
@@ -361,7 +361,7 @@ get isSmallScreen() {
       }`,
       options: [
         {
-          services: [{ serviceName: 'media', moduleNames: ['Component', 'Controller'] }],
+          denyList: [{ service: 'media', moduleNames: ['Component', 'Controller'] }],
         },
       ],
       errors: [{ messageId: 'main', data: { serviceName: 'media' }, type: 'MemberExpression' }],
@@ -391,11 +391,11 @@ import Component from '@ember/component';
       }`,
       options: [
         {
-          services: [{ serviceName: 'flashMessages' }],
+          denyList: [{ service: 'flash-messages' }],
         },
       ],
       errors: [
-        { messageId: 'main', data: { serviceName: 'flashMessages' }, type: 'MemberExpression' },
+        { messageId: 'main', data: { serviceName: 'flash-messages' }, type: 'MemberExpression' },
       ],
     },
     {
@@ -489,7 +489,7 @@ get isSmallScreen() {
       }`,
       options: [
         {
-          services: [{ serviceName: 'media', moduleNames: ['Component', 'Controller'] }],
+          denyList: [{ service: 'media', moduleNames: ['Component', 'Controller'] }],
         },
       ],
       errors: [{ messageId: 'main', data: { serviceName: 'media' }, type: 'MemberExpression' }],

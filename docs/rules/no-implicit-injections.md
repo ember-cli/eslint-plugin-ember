@@ -84,8 +84,8 @@ The autofixer for this rule will update classes and add injections for the confi
 This lint rule will search for instances of `store` used in routes or controllers by default. If you have other services that you would like to check for uses of, the configuration can be overridden.
 
 - object -- containing the following properties:
-  - array -- `services` -- Array of configuration objects configuring the lint rule to check for use of implicit injected services
-    - string -- `serviceName` -- The name of the service that is implicitly injected
+  - array -- `denyList` -- Array of configuration objects configuring the lint rule to check for use of implicit injected services
+    - string -- `service` -- The name of the service that is implicitly injected
     - array -- `moduleNames` -- Array of string listing the types of classes (controller, route, component, etc) to check for implicit injections. If an array is declared only those class types will be checked for implicit injection. (Defaults to checking all class files/types)
 
 Example config:
@@ -94,13 +94,13 @@ Example config:
 module.exports = {
   rules: {
     'ember/no-implicit-injections': ['error', {
-      services: [
+      denyList: [
         // Ember Responsive Used to Auto Inject the media service in Components/Controllers
-        { serviceName: 'media', moduleNames: ['Component', 'Controller'] },
+        { service: 'media', moduleNames: ['Component', 'Controller'] },
         // Ember CLI Flash Used to Auto Inject the flashMessages service in all modules
-        { serviceName: 'flashMessages' },
+        { service: 'flash-messages' },
         // Check for uses of the store in Routes or Controllers
-        { serviceName: 'store', moduleNames: ['Route', 'Controller'] },
+        { service: 'store', moduleNames: ['Route', 'Controller'] },
       ]
     }]
   }
