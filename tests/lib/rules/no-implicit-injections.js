@@ -29,6 +29,9 @@ const MEDIA_CONFIG = {
 const FEATURE_CHECKER_CONFIG = {
   denyList: [{ service: 'feature', propertyName: 'featureChecker' }],
 };
+const NESTED_SERVICE_CONFIG = {
+  denyList: [{ service: 'cart/checkout', propertyName: 'checkout' }],
+};
 
 function createClassUsage(serviceDefinition) {
   return {
@@ -216,16 +219,33 @@ ruleTester.run('no-implicit-injections', rule, {
     {
       filename: 'routes/index.js',
       code: `
+      import { inject as service } from '@ember/service';
       import Route from '@ember/routing/route';
 
       export default class IndexRoute extends Route {
-        featureChecker = null;
+        @service('feature') featureChecker;
 
         get canVisitCheckout() {
           return this.featureChecker.isEnabled('checkout');
         }
       }`,
-      options: [MEDIA_CONFIG],
+      options: [FEATURE_CHECKER_CONFIG],
+    },
+    // Can work with services with nested module paths
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import { inject as service } from '@ember/service';
+
+      export default class IndexRoute extends Route {
+        @service('cart/checkout') checkout;
+
+        model() {
+          return this.checkout.viewCart();
+        }
+      }`,
+      options: [NESTED_SERVICE_CONFIG],
     },
     // Ignores use outside of classes
     {
@@ -727,6 +747,34 @@ get canVisitCheckout() {
       }`,
       options: [FEATURE_CHECKER_CONFIG],
       errors: [{ messageId: 'main', data: { serviceName: 'feature' }, type: 'MemberExpression' }],
+    },
+
+    // Can work with services with nested module paths
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import { inject as service } from '@ember/service';
+
+      export default class IndexRoute extends Route {
+        model() {
+          return this.checkout.viewCart();
+        }
+      }`,
+      output: `
+      import Route from '@ember/routing/route';
+      import { inject as service } from '@ember/service';
+
+      export default class IndexRoute extends Route {
+        @service('cart/checkout') checkout;
+model() {
+          return this.checkout.viewCart();
+        }
+      }`,
+      options: [NESTED_SERVICE_CONFIG],
+      errors: [
+        { messageId: 'main', data: { serviceName: 'cart/checkout' }, type: 'MemberExpression' },
+      ],
     },
 
     // Check use and fix in legacy ember components
