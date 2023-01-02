@@ -345,6 +345,19 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
       export default Component.extend(SomeMixin, {
       });`,
     },
+
+    // Does not error when dot access decorator is used
+    {
+      filename: 'controllers/dot-access.js',
+      code: `
+      import Controller from '@ember/controller';
+      import SomeMixin from './my-mixin';
+      import EmberObject, { computed } from '@ember/object';
+
+      export default class FoobarTestError extends Controller {
+        @computed.reads('model.actors') actors;
+      }`,
+    },
   ],
   invalid: [
     // Route Uses RouterService.transitionTo with different service injection types

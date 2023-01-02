@@ -397,6 +397,19 @@ ruleTester.run('no-implicit-injections', rule, {
       });`,
       options: [FLASH_MESSAGES_CONFIG],
     },
+
+    // Does not error when dot access decorator is used
+    {
+      filename: 'controllers/dot-access.js',
+      code: `
+      import Controller from '@ember/controller';
+      import SomeMixin from './my-mixin';
+      import EmberObject, { computed } from '@ember/object';
+
+      export default class FoobarTestError extends Controller {
+        @computed.reads('model.actors') actors;
+      }`,
+    },
   ],
   invalid: [
     // Basic store lint error in routes/controllers
