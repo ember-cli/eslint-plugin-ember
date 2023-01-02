@@ -339,6 +339,64 @@ ruleTester.run('no-implicit-injections', rule, {
     createExtendUsage('flashMessages: service(),'),
     createExtendUsage("flashMessages: service('flashMessages'),"),
     createExtendUsage("flashMessages: service('flash-messages'),"),
+
+    // Does not error on .create
+    {
+      filename: 'utils/loads-user-controller.js',
+      code: `
+      import EmberObject from '@ember/object';
+
+      const myObj = EmberObject.create();`,
+    },
+
+    // Does not error on empty .extend
+    {
+      filename: 'utils/loads-user-controller.js',
+      code: `
+      import EmberObject from '@ember/object';
+
+      const myObj = EmberObject.extend()`,
+    },
+
+    // Does not error when using mixin with native class (common for validations)
+    {
+      filename: 'controller-mixin/index.js',
+      code: `
+      import { inject as service } from '@ember/service';
+      import Component from '@ember/component';
+      import SomeMixin from './my-mixin';
+
+      export default class FoobarTestError extends Component.extend(SomeMixin) {
+        @service flashMessages;
+
+        @action
+        save() {
+          return this.flashMessages.warn('some message');
+        }
+      }`,
+      options: [FLASH_MESSAGES_CONFIG],
+    },
+
+    // Does not error when using Mixin
+    {
+      filename: 'controller/index.js',
+      code: `
+      import { inject as service } from '@ember/service';
+      import Component from '@ember/component';
+      import SomeMixin from './my-mixin';
+
+      export default Component.extend(SomeMixin, {
+        flashMessages: service(),
+
+        actions: {
+
+          save() {
+            return this.flashMessages.warn('some message');
+          }
+        }
+      });`,
+      options: [FLASH_MESSAGES_CONFIG],
+    },
   ],
   invalid: [
     // Basic store lint error in routes/controllers
