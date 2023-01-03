@@ -10,6 +10,7 @@ const { ERROR_MESSAGE } = rule;
 const EMBER_IMPORT = "import Ember from 'ember';";
 const INJECT_IMPORT = "import {inject} from '@ember/service';";
 const SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
+const NEW_SERVICE_IMPORT = "import {service} from '@ember/service';";
 
 //------------------------------------------------------------------------------
 // Tests
@@ -36,6 +37,7 @@ ruleTester.run('no-implicit-service-injection-argument', rule, {
 
     // With argument (native class)
     `${SERVICE_IMPORT} class Test { @service('service-name') serviceName }`,
+    `${NEW_SERVICE_IMPORT} class Test { @service('service-name') serviceName }`,
 
     // Not Ember's `service()` function (classic class):
     'export default Component.extend({ serviceName: otherFunction() });',
@@ -69,11 +71,16 @@ ruleTester.run('no-implicit-service-injection-argument', rule, {
       output: `${SERVICE_IMPORT} export default Component.extend({ 'serviceName': service('service-name') });`,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
-
     // Decorator:
     {
       code: `${SERVICE_IMPORT} class Test { @service() serviceName }`,
       output: `${SERVICE_IMPORT} class Test { @service('service-name') serviceName }`,
+      errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
+    },
+    // Decorator with new import
+    {
+      code: `${NEW_SERVICE_IMPORT} class Test { @service() serviceName }`,
+      output: `${NEW_SERVICE_IMPORT} class Test { @service('service-name') serviceName }`,
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
     },
     {

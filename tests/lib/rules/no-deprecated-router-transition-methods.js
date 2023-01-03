@@ -680,6 +680,43 @@ import Controller from '@ember/controller';
         },
       ],
     },
+    // Injecting with `service` export
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import { service } from '@ember/service';
+
+      export default class SettingsRoute extends Route {
+        @service session;
+
+        beforeModel() {
+          if (!this.session.isAuthenticated) {
+            this.transitionTo('login');
+          }
+        }
+      }`,
+      output: `
+      import Route from '@ember/routing/route';
+      import { service } from '@ember/service';
+
+      export default class SettingsRoute extends Route {
+        @service('router') router;
+@service session;
+
+        beforeModel() {
+          if (!this.session.isAuthenticated) {
+            this.router.transitionTo('login');
+          }
+        }
+      }`,
+      errors: [
+        {
+          messageId: 'main',
+          type: 'MemberExpression',
+        },
+      ],
+    },
     // Test multiple classes in a single file
     {
       filename: 'routes/index.js',
