@@ -10,6 +10,7 @@ const { ERROR_MESSAGE } = rule;
 const EMBER_IMPORT = "import Ember from 'ember';";
 const SERVICE_IMPORT = "import {inject} from '@ember/service';";
 const RENAMED_SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
+const NEW_SERVICE_IMPORT = "import {service} from '@ember/service';";
 
 //------------------------------------------------------------------------------
 // Tests
@@ -50,6 +51,7 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     `${RENAMED_SERVICE_IMPORT} const controller = Controller.extend({ serviceName: service('service-name') });`,
     `${RENAMED_SERVICE_IMPORT} class Test { @service("service-name") serviceName }`,
     `${RENAMED_SERVICE_IMPORT} class Test { @service("service-name") 'serviceName' }`,
+    `${NEW_SERVICE_IMPORT} class Test { @service("service-name") 'serviceName' }`,
 
     // Property name does not match service name:
     `${EMBER_IMPORT} const controller = Controller.extend({ specialName: Ember.inject.service('service-name') });`,
@@ -103,6 +105,12 @@ ruleTester.run('no-unnecessary-service-injection-argument', rule, {
     {
       code: `${RENAMED_SERVICE_IMPORT} class Test { @service("serviceName") serviceName }`,
       output: `${RENAMED_SERVICE_IMPORT} class Test { @service() serviceName }`,
+      errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
+    },
+    // Decorator, with new import
+    {
+      code: `${NEW_SERVICE_IMPORT} class Test { @service("serviceName") serviceName }`,
+      output: `${NEW_SERVICE_IMPORT} class Test { @service() serviceName }`,
       errors: [{ message: ERROR_MESSAGE, type: 'Literal' }],
     },
   ],

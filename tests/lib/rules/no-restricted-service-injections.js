@@ -5,6 +5,7 @@ const { DEFAULT_ERROR_MESSAGE } = rule;
 
 const EMBER_IMPORT = "import Ember from 'ember';";
 const SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
+const NEW_SERVICE_IMPORT = "import {service} from '@ember/service';";
 
 const ruleTester = new RuleTester({
   parser: require.resolve('@babel/eslint-parser'),
@@ -47,6 +48,12 @@ ruleTester.run('no-restricted-service-injections', rule, {
       options: [{ paths: ['app/components'], services: ['abc'] }],
     },
     {
+      // Service name doesn't match (with decorator and new import)
+      filename: 'app/components/path.js',
+      code: `${NEW_SERVICE_IMPORT} class MyComponent extends Component { @service('myService') randomName }`,
+      options: [{ paths: ['app/components'], services: ['abc'] }],
+    },
+    {
       // Service scope doesn't match:
       filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} Component.extend({ randomName: service('scope/myService') })`,
@@ -76,6 +83,14 @@ ruleTester.run('no-restricted-service-injections', rule, {
       // Without service name argument:
       filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} Component.extend({ myService: service() })`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
+      errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'Property' }],
+    },
+    {
+      // Without service name argument and new import:
+      filename: 'app/components/path.js',
+      code: `${NEW_SERVICE_IMPORT} Component.extend({ myService: service() })`,
       output: null,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'Property' }],
