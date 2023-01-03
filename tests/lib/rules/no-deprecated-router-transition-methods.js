@@ -305,6 +305,59 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
         }
       }`,
     },
+
+    // Does not error on .create
+    {
+      filename: 'utils/loads-user-controller.js',
+      code: `
+      import Controller from '@ember/controller';
+
+      const myObj = Controller.create();`,
+    },
+
+    // Does not error on empty .extend
+    {
+      filename: 'utils/loads-user-controller.js',
+      code: `
+      import Controller from '@ember/controller';
+
+      const myObj = Controller.extend()`,
+    },
+
+    // Does not error when using mixin with native class (common for validations)
+    {
+      filename: 'controllers/index.js',
+      code: `
+      import Controller from '@ember/controller';
+      import SomeMixin from './my-mixin';
+
+      export default class FoobarTestError extends Controller.extend(SomeMixin) {
+      }`,
+    },
+
+    // Does not error when using Mixin
+    {
+      filename: 'controller/index.js',
+      code: `
+      import Controller from '@ember/controller';
+      import SomeMixin from './my-mixin';
+
+      export default Component.extend(SomeMixin, {
+      });`,
+    },
+
+    // Does not error when dot access decorator is used
+    {
+      filename: 'controllers/dot-access.js',
+      code: `
+      import Controller from '@ember/controller';
+      import SomeMixin from './my-mixin';
+      import EmberObject, { computed } from '@ember/object';
+
+      export default class FoobarTestError extends Controller {
+        @computed.reads('model.actors') actors;
+      }`,
+    },
   ],
   invalid: [
     // Route Uses RouterService.transitionTo with different service injection types
