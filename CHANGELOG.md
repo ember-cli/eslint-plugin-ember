@@ -21,6 +21,16 @@
 
 
 
+
+## v11.4.1 (2023-01-03)
+
+#### :bug: Bug Fix
+* [#1722](https://github.com/ember-cli/eslint-plugin-ember/pull/1722) Fix some crashes including with legacy classes in `no-deprecated-router-transition-methods` and `no-implicit-injections` rules ([@rtablada](https://github.com/rtablada))
+
+#### Committers: 1
+- Ryan Tablada ([@rtablada](https://github.com/rtablada))
+
+
 ## v11.4.0 (2022-12-30)
 
 #### :rocket: Enhancement
