@@ -93,6 +93,23 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         'serviceNameInStringLiteral': service() // Property name as string literal.
       });
     `,
+    // Should ignore injected service names via `service` method:
+    `
+      import Ember from 'ember';
+      import Component from '@ember/component';
+      import { service } from '@ember/service';
+      Component.extend({
+        intl: service(),
+        myProperty: Ember.computed('name', function() {
+          console.log(this.intl);
+          return this.name + this.intl.t('some.translation.key');
+          console.log(this.otherService);
+          console.log(this.serviceNameInStringLiteral);
+        }),
+        otherService: service(), // Service injection coming after computed property.
+        'serviceNameInStringLiteral': service() // Property name as string literal.
+      });
+    `,
     // Should ignore the left side of an assignment.
     "import Ember from 'ember'; Ember.computed('right', function() { this.left = this.right; })",
     // Should ignore the left side of an assignment with nested path.

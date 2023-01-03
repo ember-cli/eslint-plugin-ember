@@ -19,6 +19,7 @@ const ruleTester = new RuleTester({
 
 const SERVICE_NAME = 'fooName';
 const SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
+const NEW_SERVICE_IMPORT = "import {service} from '@ember/service';";
 const EO_IMPORTS = "import {computed, get, getProperties, observer} from '@ember/object';";
 const RENAMED_EO_IMPORTS =
   "import {computed as cp, get as g, getProperties as gp, observer as ob} from '@ember/object';";
@@ -131,18 +132,18 @@ function generateObserverUseCasesFor(propertyName, renamed = false) {
  * Generate an array of valid test cases
  * @returns {Array}
  */
-function generateValid() {
+function generateValid(importString = SERVICE_IMPORT) {
   const valid = [];
 
   const useCases = generateUseCasesFor(SERVICE_NAME);
   for (const use of useCases) {
     valid.push(
-      `${SERVICE_IMPORT} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${use}} }`,
-      `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${use}} }`,
-      `${SERVICE_IMPORT} class MyClass { @service() '${SERVICE_NAME}'; fooFunc() {${use}} }`,
-      `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service('foo'), fooFunc() {${use}} });`,
-      `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${use}} });`,
-      `${SERVICE_IMPORT} Component.extend({ '${SERVICE_NAME}': service(), fooFunc() {${use}} });`
+      `${importString} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${use}} }`,
+      `${importString} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${use}} }`,
+      `${importString} class MyClass { @service() '${SERVICE_NAME}'; fooFunc() {${use}} }`,
+      `${importString} Component.extend({ ${SERVICE_NAME}: service('foo'), fooFunc() {${use}} });`,
+      `${importString} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${use}} });`,
+      `${importString} Component.extend({ '${SERVICE_NAME}': service(), fooFunc() {${use}} });`
     );
   }
 
@@ -154,8 +155,8 @@ function generateValid() {
     const imports = idx === 0 ? EO_IMPORTS : RENAMED_EO_IMPORTS;
     for (const use of useCases) {
       valid.push(
-        `${SERVICE_IMPORT}${imports} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${use}} }`,
-        `${SERVICE_IMPORT}${imports} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${use}} });`
+        `${importString}${imports} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${use}} }`,
+        `${importString}${imports} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${use}} });`
       );
     }
   }
@@ -173,6 +174,7 @@ const emberObjectUses2 = generateEmberObjectUseCasesFor('unrelatedProp').join(''
 ruleTester.run('no-unused-services', rule, {
   valid: [
     ...generateValid(),
+    ...generateValid(NEW_SERVICE_IMPORT),
     ...generateMacroUseCasesFor(SERVICE_NAME),
     ...generateMacroUseCasesFor(SERVICE_NAME, true),
     ...generateComputedUseCasesFor(SERVICE_NAME),
@@ -197,6 +199,23 @@ ruleTester.run('no-unused-services', rule, {
             {
               messageId: 'removeServiceInjection',
               output: `${SERVICE_IMPORT} class MyClass {  fooFunc() {${nonUses}} }`,
+            },
+          ],
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
+    },
+    // With new import
+    {
+      code: `${NEW_SERVICE_IMPORT} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${nonUses}} }`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${NEW_SERVICE_IMPORT} class MyClass {  fooFunc() {${nonUses}} }`,
             },
           ],
           // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
