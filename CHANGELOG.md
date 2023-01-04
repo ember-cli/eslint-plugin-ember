@@ -22,6 +22,20 @@
 
 
 
+
+## v11.4.2 (2023-01-04)
+
+#### :bug: Bug Fix
+* [#1731](https://github.com/ember-cli/eslint-plugin-ember/pull/1731) Handle new service import style in several rules ([@wagenet](https://github.com/wagenet))
+
+#### :house: Internal
+* [#1730](https://github.com/ember-cli/eslint-plugin-ember/pull/1730) Add eslint-remote-tester ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Peter Wagenet ([@wagenet](https://github.com/wagenet))
+
+
 ## v11.4.1 (2023-01-03)
 
 #### :bug: Bug Fix
