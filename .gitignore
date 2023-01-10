@@ -13,5 +13,4 @@ npm-debug.log
 .vscode
 
 # eslint-remote-tester
-.cache-eslint-remote-tester
 eslint-remote-tester-results
