@@ -68,6 +68,6 @@ describe('nodeToDependentKey', () => {
 
     context = new FauxContext('this.x()');
     node = context.ast.body[0].expression;
-    expect(propertyGetterUtils.nodeToDependentKey(node, context)).toBe('');
+    expect(propertyGetterUtils.nodeToDependentKey(node, context)).toBeUndefined();
   });
 });
