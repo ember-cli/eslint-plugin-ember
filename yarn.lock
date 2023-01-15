@@ -2660,9 +2660,9 @@ eslint-config-prettier@^8.5.0:
   integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
 
 eslint-doc-generator@^1.0.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/eslint-doc-generator/-/eslint-doc-generator-1.3.0.tgz#01fc1756ca332fc9f1a80bcff1cacb305b45fd5b"
-  integrity sha512-Ht/7gTUp6nPC0umR/kowgnRMFq2ZbD+iO5OFL4ODDtBcH0N6NylntyaoGCf8wsETwXLXyzS6rs/llXLOj1eWbw==
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/eslint-doc-generator/-/eslint-doc-generator-1.4.1.tgz#eeb4ba0bd78cb568b17b0c94668095f2737ef427"
+  integrity sha512-OXYdpT3atpY+sKZVwdYs7CYjj51Q0Vm+A4EKc4h6zsgjicq+7S5HOhf8Ps3apWfWNaYzV0RsdKIBhi3ZruL14w==
   dependencies:
     "@typescript-eslint/utils" "^5.38.1"
     ajv "^8.11.2"
