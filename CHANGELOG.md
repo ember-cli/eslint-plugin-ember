@@ -23,6 +23,16 @@
 
 
 
+
+## v11.4.3 (2023-01-15)
+
+#### :bug: Bug Fix
+* [#1735](https://github.com/ember-cli/eslint-plugin-ember/pull/1735) Fix crash from attempting to access non-existent dependent key in `no-tracked-property-from-args` rule ([@joancc](https://github.com/joancc))
+
+#### Committers: 1
+- Joan Cejudo ([@joancc](https://github.com/joancc))
+
+
 ## v11.4.2 (2023-01-04)
 
 #### :bug: Bug Fix
