@@ -74,6 +74,13 @@ ruleTester.run('no-tracked-properties-from-args', rule, {
         notInitializedProperty;
       }
     `,
+    `
+      import { tracked as fooTracked } from '@glimmer/tracking';
+
+      class Test {
+        someProperty = this.someMethod();
+      }
+    `,
   ],
   invalid: [
     {

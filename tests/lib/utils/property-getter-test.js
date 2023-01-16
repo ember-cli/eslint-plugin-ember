@@ -2,6 +2,7 @@
 
 const { parse: babelESLintParse } = require('../../helpers/babel-eslint-parser');
 const propertyGetterUtils = require('../../../lib/utils/property-getter');
+const { FauxContext } = require('../../helpers/faux-context');
 
 function parse(code) {
   return babelESLintParse(code).body[0].expression;
@@ -48,5 +49,25 @@ describe('isThisGetCall', () => {
     // True:
     expect(propertyGetterUtils.isThisGetCall(parse('this.get("property")'))).toBeTruthy();
     expect(propertyGetterUtils.isThisGetCall(parse('this.get("x.y")'))).toBeTruthy();
+  });
+});
+
+describe('nodeToDependentKey', () => {
+  it('behaves correctly', () => {
+    let context = new FauxContext('this.x');
+    let node = context.ast.body[0];
+    expect(propertyGetterUtils.nodeToDependentKey(node, context)).toBe('x');
+
+    context = new FauxContext('this.x.y');
+    node = context.ast.body[0];
+    expect(propertyGetterUtils.nodeToDependentKey(node, context)).toBe('x.y');
+
+    context = new FauxContext('this.get("x")');
+    node = context.ast.body[0].expression;
+    expect(propertyGetterUtils.nodeToDependentKey(node, context)).toBe('x');
+
+    context = new FauxContext('this.x()');
+    node = context.ast.body[0].expression;
+    expect(propertyGetterUtils.nodeToDependentKey(node, context)).toBeUndefined();
   });
 });

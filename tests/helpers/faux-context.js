@@ -1,7 +1,7 @@
 'use strict';
 
 const { parseForESLint } = require('../helpers/babel-eslint-parser');
-
+const { SourceCode } = require('eslint');
 /**
  * Builds a fake ESLint context object that's enough to satisfy the contract
  * expected by `getSourceModuleNameForIdentifier` and `isEmberCoreModule`
@@ -13,6 +13,7 @@ class FauxContext {
     this.ast = ast;
     this.filename = filename;
     this.report = report;
+    this.code = code;
   }
 
   /**
@@ -25,6 +26,10 @@ class FauxContext {
 
   getFilename() {
     return this.filename;
+  }
+
+  getSourceCode() {
+    return new SourceCode(this.code, this.ast);
   }
 }
 
