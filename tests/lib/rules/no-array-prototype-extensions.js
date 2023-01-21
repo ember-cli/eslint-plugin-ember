@@ -203,7 +203,23 @@ ruleTester.run('no-array-prototype-extensions', rule, {
       parser: require.resolve('@typescript-eslint/parser'),
     },
 
-    // TODO: handle non-Identifier property names:
+    // function definition with Ember Array initialization.
+    `
+      function myFunction(){
+        const array = A([1, 2, 3])
+
+        array.toArray()
+      }
+      `,
+    `
+      function myFunction(){
+        const array = EmberArray([1, 2, 3])
+
+        array.without(2)
+      }
+      `,
+
+    // // TODO: handle non-Identifier property names:
     'foo["clear"]();',
   ],
   invalid: [
