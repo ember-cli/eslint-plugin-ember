@@ -203,23 +203,21 @@ ruleTester.run('no-array-prototype-extensions', rule, {
       parser: require.resolve('@typescript-eslint/parser'),
     },
 
-    // function definition with Ember Array initialization.
+    // Methods called directly on EmberArray.
     `
-      function myFunction(){
-        const array = A([1, 2, 3])
+      import { A } from '@ember/array'
 
-        array.toArray()
-      }
-      `,
+      const array = A([1, 2, 3])
+      array.toArray()
+    `,
     `
-      function myFunction(){
-        const array = EmberArray([1, 2, 3])
+      import { A as SomeWeirdName } from '@ember/array'
 
-        array.without(2)
-      }
-      `,
+      const array = SomeWeirdName([1, 2, 3])
+      array.without(2)
+    `,
 
-    // // TODO: handle non-Identifier property names:
+    // TODO: handle non-Identifier property names:
     'foo["clear"]();',
   ],
   invalid: [
