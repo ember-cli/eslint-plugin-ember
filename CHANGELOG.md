@@ -24,6 +24,16 @@
 
 
 
+
+## v11.4.4 (2023-01-23)
+
+#### :bug: Bug Fix
+* [#1749](https://github.com/ember-cli/eslint-plugin-ember/pull/1749) Ignore direct instantiation of `EmberArray` in `no-array-prototype-extensions` rule ([@canrozanes](https://github.com/canrozanes))
+
+#### Committers: 1
+- Can Rozanes ([@canrozanes](https://github.com/canrozanes))
+
+
 ## v11.4.3 (2023-01-15)
 
 #### :bug: Bug Fix
