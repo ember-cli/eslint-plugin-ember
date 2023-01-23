@@ -210,6 +210,11 @@ ruleTester.run('no-array-prototype-extensions', rule, {
       const array = A([1, 2, 3])
       array.toArray()
     `,
+      `
+      import { A } from '@ember/array'
+
+      A([1, 2, 3]).toArray();
+    `,
     `
       import { A as SomeWeirdName } from '@ember/array'
 
