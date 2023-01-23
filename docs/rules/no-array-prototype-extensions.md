@@ -117,6 +117,15 @@ export default class SampleComponent extends Component {
 }
 ```
 
+```js
+/** Direct usage of `@ember/array` **/
+/** Use A() is OK **/
+import { A } from '@ember/array';
+
+const arr = A(['a', 'a', 'b', 'b']);
+arr.uniq();
+```
+
 ## References
 
 - [EmberArray](https://api.emberjs.com/ember/release/classes/EmberArray)

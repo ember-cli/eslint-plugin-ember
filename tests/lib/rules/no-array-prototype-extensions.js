@@ -203,6 +203,25 @@ ruleTester.run('no-array-prototype-extensions', rule, {
       parser: require.resolve('@typescript-eslint/parser'),
     },
 
+    // Methods called directly on EmberArray.
+    `
+      import { A } from '@ember/array'
+
+      const array = A([1, 2, 3])
+      array.toArray()
+    `,
+    `
+      import { A } from '@ember/array'
+
+      A([1, 2, 3]).toArray();
+    `,
+    `
+      import { A as SomeWeirdName } from '@ember/array'
+
+      const array = SomeWeirdName([1, 2, 3])
+      array.without(2)
+    `,
+
     // TODO: handle non-Identifier property names:
     'foo["clear"]();',
   ],
