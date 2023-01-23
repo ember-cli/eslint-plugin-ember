@@ -122,7 +122,7 @@ export default class SampleComponent extends Component {
 /** Use A() is OK **/
 import { A } from '@ember/array';
 
-let arr = A(['a', 'a', 'b', 'b']);
+const arr = A(['a', 'a', 'b', 'b']);
 arr.uniq();
 ```
 
