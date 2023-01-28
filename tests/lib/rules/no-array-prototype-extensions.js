@@ -52,6 +52,10 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'reject();',
     'this.reject();',
 
+    // Promise.any()
+    'Promise.any();',
+    'window.Promise.any();',
+
     // Global non-array class (RSVP.reject)
     'RSVP.reject();',
     'RSVP.reject("some reason");',
