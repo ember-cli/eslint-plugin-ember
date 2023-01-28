@@ -25,6 +25,17 @@
 
 
 
+
+## v11.4.5 (2023-01-28)
+
+#### :bug: Bug Fix
+* [#1748](https://github.com/ember-cli/eslint-plugin-ember/pull/1748) Ignore Ember Data `store` service calls in `no-array-prototype-extensions` rule ([@bmish](https://github.com/bmish))
+* [#1761](https://github.com/ember-cli/eslint-plugin-ember/pull/1761) Fix false positive with `Promise.any()` in `no-array-prototype-extensions` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
 ## v11.4.4 (2023-01-23)
 
 #### :bug: Bug Fix
