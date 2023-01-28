@@ -27,6 +27,7 @@ To reduce false positives, the rule ignores some common known-non-array classes/
 - `localStorage.clear()` / `sessionStorage.clear()`
 - `Promise.any()` / `Promise.reject()`
 - Lodash / jQuery
+- Ember Data `this.store` service
 - etc
 
 If you run into additional false positives, please file a bug or submit a PR to add it to the rule's hardcoded ignore list.

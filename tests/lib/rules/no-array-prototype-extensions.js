@@ -226,6 +226,25 @@ ruleTester.run('no-array-prototype-extensions', rule, {
       array.without(2)
     `,
 
+    // Ember Data call with await.
+    `
+    class MyClass {
+      async _fetch(query) {
+        const response = await this.store.query('foo-bar', query);
+        return response.toArray();
+      }
+    }
+    `,
+    // Ember Data call without await.
+    `
+    class MyClass {
+      _fetch(query) {
+        const response = this.store.peekAll('foo-bar', query);
+        return response.toArray();
+      }
+    }
+    `,
+
     // TODO: handle non-Identifier property names:
     'foo["clear"]();',
   ],
