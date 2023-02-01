@@ -26,6 +26,16 @@
 
 
 
+
+## v11.4.6 (2023-02-01)
+
+#### :bug: Bug Fix
+* [#1767](https://github.com/ember-cli/eslint-plugin-ember/pull/1767) Bump ember-template-imports to `v3.4.1` ([@gossi](https://github.com/gossi))
+
+#### Committers: 1
+- Thomas Gossmann ([@gossi](https://github.com/gossi))
+
+
 ## v11.4.5 (2023-01-28)
 
 #### :bug: Bug Fix
