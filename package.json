@@ -74,7 +74,7 @@
     "estraverse": "^5.2.0",
     "lodash.camelcase": "^4.1.1",
     "lodash.kebabcase": "^4.1.1",
-    "magic-string": "^0.27.0",
+    "magic-string": "^0.29.0",
     "requireindex": "^1.2.0",
     "snake-case": "^3.0.3"
   },
