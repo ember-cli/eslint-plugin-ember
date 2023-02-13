@@ -8,7 +8,7 @@ Enforce no route path definition shadowing in Router.
 
 ## Rule Details
 
-This rule disallows defining shadowing route definitions.
+This rule disallows defining shadowing route definitions. Shadowing will result in the router failing to resolve the path of the shadowed route, leading to undesirable and incomprehensible behavior (e.g. hooks of the shadowed route not firing even though the URL matches its path).
 
 ## Examples
 
