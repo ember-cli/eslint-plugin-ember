@@ -256,8 +256,8 @@ describe('line/col numbers should be correct', () => {
   });
 });
 
-describe('template tag failing test repro', () => {
-  it('should break', async () => {
+describe('lint errors on the exact line as the <template> tag', () => {
+  it('correctly outputs the lint error', async () => {
     const eslint = initESLint();
     const code = `
     import Component from '@glimmer/component';
@@ -270,7 +270,7 @@ describe('template tag failing test repro', () => {
       foo = 'bar';
       <template>
         <div>
-          this breaks if there isn't a newline above template tag
+          some totally random, non-meaningful text 
         </div>
       </template>
     }
