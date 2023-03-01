@@ -36,6 +36,8 @@ function initESLint(options) {
       extends: ['plugin:ember/recommended'],
       rules: {
         'no-undef': 'error',
+        'ember/no-get': 'off',
+        'ember/no-array-prototype-extensions': 'error',
       },
     },
     ...options,
@@ -195,5 +197,60 @@ describe('template-vars', () => {
         }
       });
     }
+  });
+});
+
+describe('line/col numbers should be correct', () => {
+  it('line and col should be correct', async () => {
+    const eslint = initESLint();
+    const code = `
+    import Component from '@glimmer/component';
+    import { get } from '@ember/object';
+    
+    export default class MyComponent extends Component {
+      constructor() {
+        super(...arguments);
+      }
+
+      get truncatedList() {
+        return get(
+          this.truncatedList,
+          this.isImgList ? 'firstObject.attributes.firstObject' : 'firstObject'
+        );
+      }
+
+      <template>
+        <div>this is necessary to break the tests</div>
+      </template>
+    }
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(2);
+
+    expect(resultErrors[0]).toStrictEqual({
+      column: 28,
+      endColumn: 64,
+      endLine: 13,
+      line: 13,
+      message: "Don't use Ember's array prototype extensions",
+      messageId: 'main',
+      nodeType: 'Literal',
+      ruleId: 'ember/no-array-prototype-extensions',
+      severity: 2,
+    });
+
+    expect(resultErrors[1]).toStrictEqual({
+      column: 67,
+      endColumn: 80,
+      endLine: 13,
+      line: 13,
+      message: "Don't use Ember's array prototype extensions",
+      messageId: 'main',
+      nodeType: 'Literal',
+      ruleId: 'ember/no-array-prototype-extensions',
+      severity: 2,
+    });
   });
 });
