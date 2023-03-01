@@ -35,6 +35,7 @@ function initESLint(options) {
       plugins: ['ember'],
       extends: ['plugin:ember/recommended'],
       rules: {
+        'lines-between-class-members': 'error',
         'no-undef': 'error',
         'ember/no-get': 'off',
         'ember/no-array-prototype-extensions': 'error',
@@ -252,5 +253,31 @@ describe('line/col numbers should be correct', () => {
       ruleId: 'ember/no-array-prototype-extensions',
       severity: 2,
     });
+  });
+});
+
+describe('template tag failing test repro', () => {
+  it('should break', async () => {
+    const eslint = initESLint();
+    const code = `
+    import Component from '@glimmer/component';
+
+    export default class MyComponent extends Component {
+      constructor() {
+        super(...arguments);
+      }
+
+      foo = 'bar';
+      <template>
+        <div>
+          this breaks if there isn't a newline above template tag
+        </div>
+      </template>
+    }
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(0);
   });
 });
