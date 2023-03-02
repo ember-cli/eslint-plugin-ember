@@ -280,6 +280,6 @@ describe('lint errors on the exact line as the <template> tag', () => {
     const resultErrors = results.flatMap((result) => result.messages);
     expect(resultErrors).toHaveLength(1);
     expect(resultErrors[0].message).toBe('Expected blank line between class members.');
-    expect(resultErrors[0].line).toBe(9);
+    expect(resultErrors[0].line).toBe(10);
   });
 });
