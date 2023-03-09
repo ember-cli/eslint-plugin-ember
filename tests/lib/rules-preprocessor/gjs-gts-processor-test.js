@@ -326,6 +326,46 @@ describe('lint errors on the exact line as the <template> tag', () => {
 });
 
 describe('multiple tokens in same file', () => {
+  // TODO: this test still fails, needs to rework the token searching logic
+  it('correctly maps duplicate tokens to the correct lines', async () => {
+    const eslint = initESLint();
+    const code = `
+      // comment one
+      // comment two
+      // comment three
+      const two = 2;
+
+      const three = <template> "bar" </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(2);
+
+    expect(resultErrors[0]).toStrictEqual({
+      column: 13,
+      endColumn: 16,
+      endLine: 5,
+      line: 5,
+      message: "'two' is assigned a value but never used.",
+      messageId: 'unusedVar',
+      nodeType: 'Identifier',
+      ruleId: 'no-unused-vars',
+      severity: 2,
+    });
+
+    expect(resultErrors[1]).toStrictEqual({
+      column: 13,
+      endColumn: 18,
+      endLine: 7,
+      line: 7,
+      message: "'three' is assigned a value but never used.",
+      messageId: 'unusedVar',
+      nodeType: 'Identifier',
+      ruleId: 'no-unused-vars',
+      severity: 2,
+    });
+  });
   it('correctly maps duplicate <template> tokens to the correct lines', async () => {
     const eslint = initESLint();
     const code = `
