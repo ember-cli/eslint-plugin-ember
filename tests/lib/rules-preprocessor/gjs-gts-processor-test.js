@@ -37,6 +37,7 @@ function initESLint(options) {
       rules: {
         'lines-between-class-members': 'error',
         'no-undef': 'error',
+        'no-unused-vars': 'error',
         'ember/no-get': 'off',
         'ember/no-array-prototype-extensions': 'error',
       },
@@ -145,6 +146,47 @@ const invalid = [
       },
     ],
   },
+  {
+    filename: 'my-component.gjs',
+    code: `
+      import Component from '@glimmer/component';
+
+      export default class MyComponent extends Component {
+        foo = "bar";
+        <template>"hi"</template>
+      }
+    `,
+    errors: [
+      {
+        message: 'Expected blank line between class members.',
+        line: 6,
+        endLine: 6,
+        column: 9,
+        endColumn: 33,
+      },
+    ],
+  },
+  {
+    filename: 'my-component.gjs',
+    code: `
+      import Component from '@glimmer/component';
+
+      export default class MyComponent extends Component {
+        foo = "bar";
+        <template>"hi"
+        </template>
+      }
+    `,
+    errors: [
+      {
+        message: 'Expected blank line between class members.',
+        line: 6,
+        endLine: 7,
+        column: 9,
+        endColumn: 19,
+      },
+    ],
+  },
 ];
 
 describe('template-vars', () => {
@@ -207,7 +249,7 @@ describe('line/col numbers should be correct', () => {
     const code = `
     import Component from '@glimmer/component';
     import { get } from '@ember/object';
-    
+
     export default class MyComponent extends Component {
       constructor() {
         super(...arguments);
@@ -270,7 +312,7 @@ describe('lint errors on the exact line as the <template> tag', () => {
       foo = 'bar';
       <template>
         <div>
-          some totally random, non-meaningful text 
+          some totally random, non-meaningful text
         </div>
       </template>
     }
@@ -280,5 +322,37 @@ describe('lint errors on the exact line as the <template> tag', () => {
     const resultErrors = results.flatMap((result) => result.messages);
     expect(resultErrors).toHaveLength(1);
     expect(resultErrors[0].message).toBe('Expected blank line between class members.');
+  });
+});
+
+describe('multiple tokens in same file', () => {
+  it('correctly maps duplicate <template> tokens to the correct lines', async () => {
+    const eslint = initESLint();
+    const code = `
+    import Component from '@glimmer/component';
+
+    export const fakeTemplate = <template>
+      <div>"foo!"</div>
+    </template>
+
+    export default class MyComponent extends Component {
+      constructor() {
+        super(...arguments);
+      }
+
+      foo = 'bar';
+      <template>
+        <div>
+          some totally random, non-meaningful text
+        </div>
+      </template>
+    }
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(1);
+    expect(resultErrors[0].message).toBe('Expected blank line between class members.');
+    expect(resultErrors[0].line).toBe(14);
   });
 });
