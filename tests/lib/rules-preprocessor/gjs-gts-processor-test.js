@@ -329,7 +329,6 @@ describe('lint errors on the exact line as the <template> tag', () => {
 });
 
 describe('multiple tokens in same file', () => {
-  // TODO: this test still fails, needs to rework the token searching logic
   it('correctly maps duplicate tokens to the correct lines', async () => {
     const eslint = initESLint();
     const code = `
