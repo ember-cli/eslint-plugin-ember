@@ -27,6 +27,17 @@
 
 
 
+
+## v11.4.7 (2023-03-02)
+
+#### :bug: Bug Fix
+* [#1793](https://github.com/ember-cli/eslint-plugin-ember/pull/1793) [gjs] Fix bug with regex issues when parsing GLIMMER_TEMPLATE ([@hmajoros](https://github.com/hmajoros))
+* [#1792](https://github.com/ember-cli/eslint-plugin-ember/pull/1792) [gjs] Return original diagnostic if transformed line matches original line in glimmer preprocessor ([@hmajoros](https://github.com/hmajoros))
+
+#### Committers: 1
+- Hank Majoros ([@hmajoros](https://github.com/hmajoros))
+
+
 ## v11.4.6 (2023-02-01)
 
 #### :bug: Bug Fix
