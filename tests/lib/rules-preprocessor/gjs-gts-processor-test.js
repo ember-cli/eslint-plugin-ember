@@ -152,6 +152,22 @@ const invalid = [
   {
     filename: 'my-component.gjs',
     code: `
+      <template>
+        <F_0_O />
+      </template>
+    `,
+    errors: [
+      {
+        message: "Error in template: 'F_0_O' is not defined.",
+        line: 2,
+        column: 7,
+        endColumn: 17,
+      },
+    ],
+  },
+  {
+    filename: 'my-component.gjs',
+    code: `
       import Component from '@glimmer/component';
 
       export default class MyComponent extends Component {
