@@ -28,6 +28,19 @@
 
 
 
+
+## v11.4.8 (2023-03-14)
+
+#### :bug: Bug Fix
+* [#1801](https://github.com/ember-cli/eslint-plugin-ember/pull/1801) Fix issue with token mapping for lint errors on template tokens in gjs/gts files by displaying eslint error on the opening `<template>` tag ([@hmajoros](https://github.com/hmajoros))
+* [#1788](https://github.com/ember-cli/eslint-plugin-ember/pull/1788) Fix `no-array-prototype extensions` undefined error from trying to access callee from non-CallExpression ([@canrozanes](https://github.com/canrozanes))
+* [#1795](https://github.com/ember-cli/eslint-plugin-ember/pull/1795) refactor glimmer post-process, better handle template tag ([@hmajoros](https://github.com/hmajoros))
+
+#### Committers: 2
+- Can Rozanes ([@canrozanes](https://github.com/canrozanes))
+- Hank Majoros ([@hmajoros](https://github.com/hmajoros))
+
+
 ## v11.4.7 (2023-03-02)
 
 #### :bug: Bug Fix
