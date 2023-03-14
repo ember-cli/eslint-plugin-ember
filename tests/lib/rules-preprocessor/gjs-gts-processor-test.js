@@ -110,9 +110,10 @@ const invalid = [
     `,
     errors: [
       {
-        message: "'on' is not defined.",
-        line: 5,
-        column: 11,
+        message: "Error in template: 'on' is not defined.",
+        line: 4,
+        column: 7,
+        endColumn: 17,
       },
     ],
   },
@@ -125,9 +126,10 @@ const invalid = [
     `,
     errors: [
       {
-        message: "'noop' is not defined.",
-        line: 3,
-        column: 11,
+        message: "Error in template: 'noop' is not defined.",
+        line: 2,
+        column: 7,
+        endColumn: 17,
       },
     ],
   },
@@ -140,9 +142,26 @@ const invalid = [
     `,
     errors: [
       {
-        message: "'Foo' is not defined.",
-        line: 3,
-        column: 10,
+        message: "Error in template: 'Foo' is not defined.",
+        line: 2,
+        column: 7,
+        endColumn: 17,
+      },
+    ],
+  },
+  {
+    filename: 'my-component.gjs',
+    code: `
+      <template>
+        <F_0_O />
+      </template>
+    `,
+    errors: [
+      {
+        message: "Error in template: 'F_0_O' is not defined.",
+        line: 2,
+        column: 7,
+        endColumn: 17,
       },
     ],
   },
@@ -162,7 +181,7 @@ const invalid = [
         line: 6,
         endLine: 6,
         column: 9,
-        endColumn: 33,
+        endColumn: 34,
       },
     ],
   },
@@ -183,7 +202,7 @@ const invalid = [
         line: 6,
         endLine: 7,
         column: 9,
-        endColumn: 19,
+        endColumn: 20,
       },
     ],
   },
@@ -326,6 +345,82 @@ describe('lint errors on the exact line as the <template> tag', () => {
 });
 
 describe('multiple tokens in same file', () => {
+  it('correctly maps duplicate tokens to the correct lines', async () => {
+    const eslint = initESLint();
+    const code = `
+      // comment one
+      // comment two
+      // comment three
+      const two = 2;
+
+      const three = <template> "bar" </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(2);
+
+    expect(resultErrors[0]).toStrictEqual({
+      column: 13,
+      endColumn: 16,
+      endLine: 5,
+      line: 5,
+      message: "'two' is assigned a value but never used.",
+      messageId: 'unusedVar',
+      nodeType: 'Identifier',
+      ruleId: 'no-unused-vars',
+      severity: 2,
+    });
+
+    expect(resultErrors[1]).toStrictEqual({
+      column: 13,
+      endColumn: 18,
+      endLine: 7,
+      line: 7,
+      message: "'three' is assigned a value but never used.",
+      messageId: 'unusedVar',
+      nodeType: 'Identifier',
+      ruleId: 'no-unused-vars',
+      severity: 2,
+    });
+  });
+
+  it('handles duplicate template tokens', async () => {
+    const eslint = initESLint();
+    const code = `
+      // comment Bad 
+
+      const tmpl = <template><Bad /></template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(2);
+
+    expect(resultErrors[0]).toStrictEqual({
+      column: 13,
+      endColumn: 17,
+      endLine: 4,
+      line: 4,
+      message: "'tmpl' is assigned a value but never used.",
+      messageId: 'unusedVar',
+      nodeType: 'Identifier',
+      ruleId: 'no-unused-vars',
+      severity: 2,
+    });
+
+    expect(resultErrors[1]).toStrictEqual({
+      column: 20,
+      endColumn: 30,
+      endLine: 4,
+      line: 4,
+      message: "Error in template: 'Bad' is not defined.",
+      messageId: 'undef',
+      nodeType: 'Identifier',
+      ruleId: 'no-undef',
+      severity: 2,
+    });
+  });
   it('correctly maps duplicate <template> tokens to the correct lines', async () => {
     const eslint = initESLint();
     const code = `
