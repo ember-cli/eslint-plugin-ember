@@ -2875,9 +2875,9 @@ eslint-plugin-unicorn@^46.0.0:
     strip-indent "^3.0.0"
 
 eslint-remote-tester-repositories@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-remote-tester-repositories/-/eslint-remote-tester-repositories-1.0.0.tgz#92b2b035bec17a39fcb4a018ad22b31c2e707a5b"
-  integrity sha512-2tngPTc/zT/nyUZKZYkNCLCgSIvAsWDaaC3ce9zlYLijlmPd9ka70Logxiazu9NwS4cIaXTzTLGupr2u7m7+cw==
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-remote-tester-repositories/-/eslint-remote-tester-repositories-1.0.1.tgz#2e5f15fa6bb631e72e817772867ff6771ed20b51"
+  integrity sha512-XL9PqGBDL4rORnQ74b/3tqbJUpMlPz9gzKSrmYFtakLBQ/ayBELB/HZvd6ZEl+mH0vBeSYtUH7E/rawBsf9Qzg==
 
 eslint-remote-tester@^3.0.0:
   version "3.0.0"
