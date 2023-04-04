@@ -347,6 +347,11 @@ ruleTester.run('no-get', rule, {
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
+      code: "const obj = this.getProperties('obj.foo');", // With invalid JS variable name.
+      output: null,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
       code: `
       import { getProperties } from '@ember/object';
       import { somethingElse } from '@ember/object';
