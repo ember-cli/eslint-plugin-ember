@@ -337,6 +337,16 @@ ruleTester.run('no-get', rule, {
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
+      code: "const obj = this.getProperties('1');", // With invalid JS variable name.
+      output: null,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: "const obj = this.getProperties('a*');", // With invalid JS variable name.
+      output: null,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
       code: `
       import { getProperties } from '@ember/object';
       import { somethingElse } from '@ember/object';
@@ -401,8 +411,7 @@ ruleTester.run('no-get', rule, {
       `,
       output: `
       import { getProperties } from '@ember/object';
-      const foo = this.obj.foo;
-      const bar = this.obj.bar;
+      const { foo, bar } = this.obj;
       `,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
@@ -417,8 +426,7 @@ ruleTester.run('no-get', rule, {
       `,
       output: `
       import { getProperties } from '@ember/object';
-      const qux = this.obj.foo;
-      const bar = this.obj.bar;
+      const { foo: qux, bar } = this.obj;
       `,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
@@ -433,7 +441,28 @@ ruleTester.run('no-get', rule, {
         "frex"
       );
       `,
-      output: null,
+      output: `
+      import { getProperties } from '@ember/object';
+      const { foo, bar, ...qux } = this.obj;
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { getProperties } from '@ember/object';
+
+      const { foo, bar, baz } = getProperties(
+        get(obj, 't.s'),
+        'foo',
+        'bar',
+        'baz',
+      );
+      `,
+      output: `
+      import { getProperties } from '@ember/object';
+
+      const { foo, bar, baz } = get(obj, 't.s');
+      `,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
 
