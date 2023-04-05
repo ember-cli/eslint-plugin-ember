@@ -321,18 +321,33 @@ ruleTester.run('no-get', rule, {
     // **************************
 
     {
-      code: "this.getProperties('prop1', 'prop2');",
-      output: null,
+      code: "let obj = this.getProperties('prop1', 'prop2');",
+      output: 'let obj = { prop1: this.prop1, prop2: this.prop2 };',
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
-      code: "foo.getProperties('prop1', 'prop2');",
-      output: null,
+      code: "const baz = foo.getProperties('prop1', 'prop2');",
+      output: 'const baz = { prop1: foo.prop1, prop2: foo.prop2 };',
       options: [{ catchUnsafeObjects: true }],
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
-      code: "this.getProperties(['prop1', 'prop2']);", // With parameters in array.
+      code: "const obj = this.getProperties(['prop1', 'prop2']);", // With parameters in array.
+      output: 'const obj = { prop1: this.prop1, prop2: this.prop2 };',
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: "const obj = this.getProperties('1');", // With invalid JS variable name.
+      output: null,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: "const obj = this.getProperties('a*');", // With invalid JS variable name.
+      output: null,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: "const obj = this.getProperties('obj.foo');", // With invalid JS variable name.
       output: null,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
@@ -341,26 +356,118 @@ ruleTester.run('no-get', rule, {
       import { getProperties } from '@ember/object';
       import { somethingElse } from '@ember/object';
       import { random } from 'random';
-      getProperties(this, 'prop1', 'prop2');
+      const obj = getProperties(this, 'prop1', 'prop2');
       `,
-      output: null,
+      output: `
+      import { getProperties } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      const obj = { prop1: this.prop1, prop2: this.prop2 };
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { getProperties } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      function foo(){
+        return getProperties(this, 'prop1', 'prop2');
+      }
+      `,
+      output: `
+      import { getProperties } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      function foo(){
+        return { prop1: this.prop1, prop2: this.prop2 };
+      }
+      `,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
       // Calling the imported function on an unknown object (without `this`).
-      code: "import { getProperties } from '@ember/object'; getProperties(foo, 'prop1', 'prop2');",
-      output: null,
+      code: "import { getProperties } from '@ember/object'; let obj = getProperties(foo, 'prop1', 'prop2');",
+      output:
+        "import { getProperties } from '@ember/object'; let obj = { prop1: foo.prop1, prop2: foo.prop2 };",
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
       // With renamed import:
-      code: "import { getProperties as gp } from '@ember/object'; gp(this, 'prop1', 'prop2');",
-      output: null,
+      code: "import { getProperties as gp } from '@ember/object'; const obj = gp(this, 'prop1', 'prop2');",
+      output:
+        "import { getProperties as gp } from '@ember/object'; const obj = { prop1: this.prop1, prop2: this.prop2 };",
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
-      code: "import { getProperties } from '@ember/object'; getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
-      output: null,
+      code: "import { getProperties } from '@ember/object'; const obj = getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
+      output:
+        "import { getProperties } from '@ember/object'; const obj = { prop1: this.prop1, prop2: this.prop2 };",
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { getProperties } from '@ember/object';
+      const { foo, bar } = getProperties(
+        this.obj,
+        "foo",
+        "bar"
+      );
+      `,
+      output: `
+      import { getProperties } from '@ember/object';
+      const { foo, bar } = this.obj;
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { getProperties } from '@ember/object';
+      const { foo: qux, bar } = getProperties(
+        this.obj,
+        "bar",
+        "foo"
+      );
+      `,
+      output: `
+      import { getProperties } from '@ember/object';
+      const { foo: qux, bar } = this.obj;
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { getProperties } from '@ember/object';
+      const { foo, bar, ...qux } = getProperties(
+        this.obj,
+        "foo",
+        "bar",
+        "baz",
+        "frex"
+      );
+      `,
+      output: `
+      import { getProperties } from '@ember/object';
+      const { foo, bar, ...qux } = this.obj;
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { getProperties } from '@ember/object';
+
+      const { foo, bar, baz } = getProperties(
+        get(obj, 't.s'),
+        'foo',
+        'bar',
+        'baz',
+      );
+      `,
+      output: `
+      import { getProperties } from '@ember/object';
+
+      const { foo, bar, baz } = get(obj, 't.s');
+      `,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
 
