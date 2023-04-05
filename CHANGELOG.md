@@ -30,6 +30,16 @@
 
 
 
+
+## v11.5.0 (2023-04-05)
+
+#### :rocket: Enhancement
+* [#1823](https://github.com/ember-cli/eslint-plugin-ember/pull/1823) Add `getProperties` autofixer to `no-get` rule ([@ArtixZ](https://github.com/ArtixZ))
+
+#### Committers: 1
+- [@ArtixZ](https://github.com/ArtixZ)
+
+
 ## v11.4.9 (2023-03-28)
 
 #### :bug: Bug Fix
