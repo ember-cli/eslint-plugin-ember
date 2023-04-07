@@ -31,6 +31,16 @@
 
 
 
+
+## v11.5.1 (2023-04-07)
+
+#### :bug: Bug Fix
+* [#1828](https://github.com/ember-cli/eslint-plugin-ember/pull/1828) Clarify error message for `no-pause-test` rule ([@deanmarano](https://github.com/deanmarano))
+
+#### Committers: 1
+- Dean Marano ([@deanmarano](https://github.com/deanmarano))
+
+
 ## v11.5.0 (2023-04-05)
 
 #### :rocket: Enhancement

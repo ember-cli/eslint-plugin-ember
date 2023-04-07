@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-ember",
-  "version": "11.5.0",
+  "version": "11.5.1",
   "description": "ESLint plugin for Ember.js apps",
   "keywords": [
     "eslint",
