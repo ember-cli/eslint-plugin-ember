@@ -8,7 +8,7 @@
 
 Call super in lifecycle hooks.
 
-When overriding lifecycle hooks inside Ember Components, Controllers, Routes, Mixins, or Services, it is necessary to include a call to super.
+When overriding lifecycle hooks inside Ember Components, Controllers, Routes, Mixins, or Services, it is necessary to include a call to super. It is necessary to call the super.int() hook with arguments.
 
 ## Examples
 
@@ -20,7 +20,7 @@ import Component from '@ember/component';
 export default Component.extend({
   init() {
     this.set('items', []);
-  }
+  },
 });
 ```
 
@@ -30,7 +30,7 @@ import Component from '@ember/component';
 export default Component.extend({
   didInsertElement() {
     // ...
-  }
+  },
 });
 ```
 
@@ -53,7 +53,7 @@ export default Component.extend({
   init(...args) {
     this._super(...args);
     this.set('items', []);
-  }
+  },
 });
 ```
 
@@ -64,7 +64,7 @@ export default Component.extend({
   didInsertElement(...args) {
     this._super(...args);
     // ...
-  }
+  },
 });
 ```
 
