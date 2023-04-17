@@ -858,5 +858,70 @@ super.didInsertElement(...arguments);}
       options: [{ checkNativeClasses: true, checkInitOnly: false }],
       errors: [{ message, line: 3 }],
     },
+
+    // init hooks shoudn't call super without ...arguments
+    {
+      code: `import Service from '@ember/service';
+      class Foo extends Service {
+        init() {
+          super.init();
+        }
+      }`,
+      output: `import Service from '@ember/service';
+      class Foo extends Service {
+        init() {
+          super.init(...arguments);
+        }
+      }`,
+      options: [{ checkNativeClasses: true }],
+      errors: [{ message, line: 3 }],
+    },
+    {
+      code: `import Service from '@ember/service';
+      class Foo extends Service {
+        init() {
+          super.init();
+          console.log();
+        }
+      }`,
+      output: `import Service from '@ember/service';
+      class Foo extends Service {
+        init() {
+          super.init(...arguments);
+          console.log();
+        }
+      }`,
+      options: [{ checkNativeClasses: true }],
+      errors: [{ message, line: 3 }],
+    },
+    {
+      code: `export default Component.extend({
+        init() {
+          this._super();
+        },
+      });`,
+      output: `export default Component.extend({
+        init() {
+          this._super(...arguments);
+        },
+      });`,
+      options: [{ checkInitOnly: false }],
+      errors: [{ message, line: 2 }],
+    },
+    {
+      code: `export default Component.extend({
+        init() {
+          this._super();
+          console.log();
+        },
+      });`,
+      output: `export default Component.extend({
+        init() {
+          this._super(...arguments);
+          console.log();
+        },
+      });`,
+      errors: [{ message, line: 2 }],
+    },
   ],
 });
