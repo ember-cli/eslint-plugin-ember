@@ -912,13 +912,15 @@ super.didInsertElement(...arguments);}
       code: `export default Component.extend({
         init() {
           this._super();
-          console.log();
+          this.set('prop', 'value');
+          this.set('prop2', 'value2');
         },
       });`,
       output: `export default Component.extend({
         init() {
           this._super(...arguments);
-          console.log();
+          this.set('prop', 'value');
+          this.set('prop2', 'value2');
         },
       });`,
       errors: [{ message, line: 2 }],
