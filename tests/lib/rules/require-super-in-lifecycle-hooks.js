@@ -231,6 +231,19 @@ eslintTester.run('require-super-in-lifecycle-hooks', rule, {
 
     // Does not throw with node type (ClassProperty) not handled by estraverse.
     'Component.extend({init() { class Foo { @someDecorator() someProp }; return this._super(...arguments); } });',
+
+    // init hook should not be checked for arguments when requireArgs = false
+    `import Service from '@ember/service';
+      class Foo extends Service {
+        init() {
+          super.init();
+        }
+      }`,
+    `export default Component.extend({
+        init() {
+          this._super(...arguments);
+        },
+      });`,
   ],
   invalid: [
     {
@@ -873,7 +886,7 @@ super.didInsertElement(...arguments);}
           super.init(...arguments);
         }
       }`,
-      options: [{ checkNativeClasses: true }],
+      options: [{ requireArgs: true }],
       errors: [{ message, line: 3 }],
     },
     {
@@ -891,7 +904,7 @@ super.didInsertElement(...arguments);}
           console.log();
         }
       }`,
-      options: [{ checkNativeClasses: true }],
+      options: [{ requireArgs: true }],
       errors: [{ message, line: 3 }],
     },
     {
@@ -905,7 +918,7 @@ super.didInsertElement(...arguments);}
           this._super(...arguments);
         },
       });`,
-      options: [{ checkInitOnly: false }],
+      options: [{ requireArgs: true }],
       errors: [{ message, line: 2 }],
     },
     {
@@ -923,6 +936,7 @@ super.didInsertElement(...arguments);}
           this.set('prop2', 'value2');
         },
       });`,
+      options: [{ requireArgs: true }],
       errors: [{ message, line: 2 }],
     },
   ],
