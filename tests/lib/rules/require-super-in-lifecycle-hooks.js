@@ -239,11 +239,28 @@ eslintTester.run('require-super-in-lifecycle-hooks', rule, {
           super.init();
         }
       }`,
+    {
+      code: `import Service from '@ember/service';
+        class Foo extends Service {
+          init() {
+            super.init();
+          }
+        }`,
+      options: [{ requireArgs: false }],
+    },
     `export default Component.extend({
         init() {
           this._super(...arguments);
         },
       });`,
+    {
+      code: `export default Component.extend({
+        init() {
+          this._super(...arguments);
+        },
+      });`,
+      options: [{ requireArgs: false }],
+    },
   ],
   invalid: [
     {
