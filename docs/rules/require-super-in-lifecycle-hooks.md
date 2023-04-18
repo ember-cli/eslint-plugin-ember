@@ -8,7 +8,7 @@
 
 Call super in lifecycle hooks.
 
-When overriding lifecycle hooks inside Ember Components, Controllers, Routes, Mixins, or Services, it is necessary to include a call to super. It is necessary to call the super.int() hook with arguments.
+When overriding lifecycle hooks inside Ember Components, Controllers, Routes, Mixins, or Services, it is necessary to include a call to super.
 
 ## Examples
 
@@ -96,3 +96,4 @@ This rule takes an optional object containing:
 
 - `boolean` -- `checkInitOnly` -- whether the rule should only check the `init` lifecycle hook and not other lifecycle hooks (default `false`)
 - `boolean` -- `checkNativeClasses` -- whether the rule should check lifecycle hooks in native classes (in addition to classic classes) (default `true`)
+- `boolean` -- `requireArgs` -- whether the rule should check if super() in init hook is called with args (default `false`)
