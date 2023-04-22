@@ -32,6 +32,16 @@
 
 
 
+
+## v11.5.2 (2023-04-22)
+
+#### :bug: Bug Fix
+* [#1841](https://github.com/ember-cli/eslint-plugin-ember/pull/1841) Fix a bug in autofixer and autofix additional cases with `firstObject and `lastObject` in `no-get` rule ([@ArtixZ](https://github.com/ArtixZ))
+
+#### Committers: 1
+- [@ArtixZ](https://github.com/ArtixZ)
+
+
 ## v11.5.1 (2023-04-07)
 
 #### :bug: Bug Fix
