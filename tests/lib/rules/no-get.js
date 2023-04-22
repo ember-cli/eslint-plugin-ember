@@ -226,8 +226,9 @@ ruleTester.run('no-get', rule, {
     },
     {
       // useOptionalChaining = false
+      // We can safely autofix nested paths when the result of get() is chained,
       code: "foo1.foo2.get('bar.bar').baz;",
-      output: null,
+      output: 'foo1.foo2.bar.bar.baz;',
       options: [{ catchUnsafeObjects: true, useOptionalChaining: false }],
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
@@ -619,6 +620,18 @@ ruleTester.run('no-get', rule, {
       ],
     },
     {
+      // We can safely autofix nested paths when the result of get() is chained,
+      code: "this.get('foo.0.bar')[123];",
+      output: 'this.foo[0].bar[123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
       // Handle array element access (left side of an assignment, entire string).
       code: "this.get('0')[123] = 'hello world';",
       output: "this[0][123] = 'hello world';",
@@ -643,6 +656,194 @@ ruleTester.run('no-get', rule, {
       ],
     },
 
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      get(this, 'foo.firstObject.bar');
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      this.foo?.[0]?.bar;
+      `,
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { get as g } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      g(obj.baz.qux, 'foo.firstObject.bar');
+      `,
+      output: `
+      import { get as g } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      obj.baz.qux.foo?.[0]?.bar;
+      `,
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      // `firstObject` used in the middle of a path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('foo.firstObject.bar')[123];",
+      output: 'this.foo[0].bar[123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `firstObject` used in the middle of a path.
+      // And the resolved path of `get` is NOT chained (getResultIsChained=false).
+      code: "this.get('foo.firstObject.bar');",
+      output: 'this.foo?.[0]?.bar;',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `firstObject` used at the beginning of a path.
+      // And the resolved path of `get` is NOT chained (getResultIsChained=false).
+      code: "this.get('firstObject.bar');",
+      output: 'this[0]?.bar;',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `firstObject` used as the entire path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('firstObject')[123];",
+      output: 'this[0][123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `firstObject` used in the middle of a path.
+      // And `get` is used in a left side of an assignment (isInLeftSideOfAssignmentExpression=true).
+      code: "this.get('foo.firstObject.bar')[123] = 'hello world';",
+      output: "this.foo[0].bar[123] = 'hello world';",
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used in the middle of a path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('foo.lastObject.bar')[123];",
+      output: 'this.foo[this.foo.length - 1].bar[123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used at the beginning of a path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('lastObject.bar')[123];",
+      output: 'this[this.length - 1].bar[123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used as the entire path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('lastObject')[123];",
+      output: 'this[this.length - 1][123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used in the middle of a path.
+      // And the resolved path of `get` is NOT chained (getResultIsChained=false).
+      code: "this.get('foo.lastObject.bar');",
+      output: 'this.foo?.[this.foo.length - 1]?.bar;',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used at the beginning of a path.
+      // And the resolved path of `get` is NOT chained (getResultIsChained=false).
+      code: "this.get('lastObject.bar');",
+      output: 'this[this.length - 1]?.bar;',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used in the middle of a path.
+      // When multiple `lastObject` are chained, it won't auto-fix.
+      code: "this.get('foo.lastObject.bar.lastObject')[123];",
+      output: null,
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used at the beginning of a path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('lastObject.bar.lastObject')[123];",
+      output: null,
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
     {
       // Reports violation after (classic) proxy class.
       code: `
