@@ -702,6 +702,19 @@ ruleTester.run('no-get', rule, {
       ],
     },
     {
+      // `firstObject` used in multiple places in a path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('firstObject.foo.firstObject.bar')[123];",
+      output: 'this[0].foo[0].bar[123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
       // `firstObject` used in the middle of a path.
       // And the resolved path of `get` is NOT chained (getResultIsChained=false).
       code: "this.get('foo.firstObject.bar');",
@@ -757,7 +770,7 @@ ruleTester.run('no-get', rule, {
       // `lastObject` used in the middle of a path.
       // And the result of get() is chained (getResultIsChained=true).
       code: "this.get('foo.lastObject.bar')[123];",
-      output: 'this.foo[this.foo.length - 1].bar[123];',
+      output: 'this.foo.at(-1).bar[123];',
       options: [{ useOptionalChaining: true }],
       errors: [
         {
@@ -770,7 +783,7 @@ ruleTester.run('no-get', rule, {
       // `lastObject` used at the beginning of a path.
       // And the result of get() is chained (getResultIsChained=true).
       code: "this.get('lastObject.bar')[123];",
-      output: 'this[this.length - 1].bar[123];',
+      output: 'this.at(-1).bar[123];',
       options: [{ useOptionalChaining: true }],
       errors: [
         {
@@ -783,7 +796,7 @@ ruleTester.run('no-get', rule, {
       // `lastObject` used as the entire path.
       // And the result of get() is chained (getResultIsChained=true).
       code: "this.get('lastObject')[123];",
-      output: 'this[this.length - 1][123];',
+      output: 'this.at(-1)[123];',
       options: [{ useOptionalChaining: true }],
       errors: [
         {
@@ -796,7 +809,7 @@ ruleTester.run('no-get', rule, {
       // `lastObject` used in the middle of a path.
       // And the resolved path of `get` is NOT chained (getResultIsChained=false).
       code: "this.get('foo.lastObject.bar');",
-      output: 'this.foo?.[this.foo.length - 1]?.bar;',
+      output: 'this.foo?.at(-1)?.bar;',
       options: [{ useOptionalChaining: true }],
       errors: [
         {
@@ -809,7 +822,7 @@ ruleTester.run('no-get', rule, {
       // `lastObject` used at the beginning of a path.
       // And the resolved path of `get` is NOT chained (getResultIsChained=false).
       code: "this.get('lastObject.bar');",
-      output: 'this[this.length - 1]?.bar;',
+      output: 'this.at(-1)?.bar;',
       options: [{ useOptionalChaining: true }],
       errors: [
         {
@@ -820,9 +833,8 @@ ruleTester.run('no-get', rule, {
     },
     {
       // `lastObject` used in the middle of a path.
-      // When multiple `lastObject` are chained, it won't auto-fix.
       code: "this.get('foo.lastObject.bar.lastObject')[123];",
-      output: null,
+      output: 'this.foo.at(-1).bar.at(-1)[123];',
       options: [{ useOptionalChaining: true }],
       errors: [
         {
@@ -835,7 +847,7 @@ ruleTester.run('no-get', rule, {
       // `lastObject` used at the beginning of a path.
       // And the result of get() is chained (getResultIsChained=true).
       code: "this.get('lastObject.bar.lastObject')[123];",
-      output: null,
+      output: 'this.at(-1).bar.at(-1)[123];',
       options: [{ useOptionalChaining: true }],
       errors: [
         {
