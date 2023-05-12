@@ -35,6 +35,8 @@ function initESLint(options) {
       plugins: ['ember'],
       extends: ['plugin:ember/recommended'],
       rules: {
+        semi: ['error', 'always'],
+        'object-curly-spacing': ['error', 'always'],
         'lines-between-class-members': 'error',
         'no-undef': 'error',
         'no-unused-vars': 'error',
@@ -388,7 +390,7 @@ describe('multiple tokens in same file', () => {
   it('handles duplicate template tokens', async () => {
     const eslint = initESLint();
     const code = `
-      // comment Bad 
+      // comment Bad
 
       const tmpl = <template><Bad /></template>
     `;
