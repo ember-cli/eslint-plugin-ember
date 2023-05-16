@@ -53,11 +53,9 @@ ruleTester.run('no-get', rule, {
     "this.get('foo', 'bar');",
     "import { get } from '@ember/object'; get(this, 'foo', 'bar');",
 
-    // Non-string parameter.
-    'this.get(5);',
-    'this.get(MY_PROP);',
-    "import { get } from '@ember/object'; get(this, 5);",
-    "import { get } from '@ember/object'; get(this, MY_PROP);",
+    // Non-string, non-numerical, non-identifier parameter.
+    'this.get({});',
+    "import { get } from '@ember/object'; get(this, {});",
 
     // Unknown sub-function call:
     "this.get.foo('bar');",
@@ -938,6 +936,58 @@ ruleTester.run('no-get', rule, {
         }
       }
       this.propertyOutsideClass;
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    // Accessing numerical index with get
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      get(foo, 5);
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      foo[5];
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: 'this.get(5);',
+      output: 'this[5];',
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    // Accessing calculated property with get
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const bar = 'baz';
+      get(foo, bar);
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const bar = 'baz';
+      foo[bar];
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      const foo = 'bar';
+      this.get(foo);
+      `,
+      output: `
+      const foo = 'bar';
+      this[foo];
       `,
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
