@@ -33,6 +33,19 @@
 
 
 
+
+## v11.6.0 (2023-05-16)
+
+#### :rocket: Enhancement
+* [#1853](https://github.com/ember-cli/eslint-plugin-ember/pull/1853) Support autofix in gts files ([@patricklx](https://github.com/patricklx))
+
+#### :bug: Bug Fix
+* [#1852](https://github.com/ember-cli/eslint-plugin-ember/pull/1852) Only show `no-undef` errors for templates in gts files ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
 ## v11.5.2 (2023-04-22)
 
 #### :bug: Bug Fix
