@@ -939,7 +939,7 @@ ruleTester.run('no-get', rule, {
       `,
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
-    // Accessing numerical index with get
+    // Accessing numerical property with get
     {
       code: `
       import { get } from '@ember/object';
@@ -960,7 +960,7 @@ ruleTester.run('no-get', rule, {
       output: 'this[5];',
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
-    // Accessing calculated property with get
+    // Accessing identifier property with get
     {
       code: `
       import { get } from '@ember/object';
