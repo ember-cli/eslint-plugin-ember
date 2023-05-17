@@ -53,9 +53,9 @@ ruleTester.run('no-get', rule, {
     "this.get('foo', 'bar');",
     "import { get } from '@ember/object'; get(this, 'foo', 'bar');",
 
-    // Non-string, non-numerical, non-identifier parameter.
-    'this.get({});',
-    "import { get } from '@ember/object'; get(this, {});",
+    // Non-string, non-numerical parameter.
+    'this.get(MY_PROP);',
+    "import { get } from '@ember/object'; get(this, MY_PROP);",
 
     // Unknown sub-function call:
     "this.get.foo('bar');",
@@ -958,37 +958,6 @@ ruleTester.run('no-get', rule, {
     {
       code: 'this.get(5);',
       output: 'this[5];',
-      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
-    },
-    // Accessing identifier property with get
-    {
-      code: `
-      import { get } from '@ember/object';
-      import { somethingElse } from '@ember/object';
-      import { random } from 'random';
-
-      const bar = 'baz';
-      get(foo, bar);
-      `,
-      output: `
-      import { get } from '@ember/object';
-      import { somethingElse } from '@ember/object';
-      import { random } from 'random';
-
-      const bar = 'baz';
-      foo[bar];
-      `,
-      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
-    },
-    {
-      code: `
-      const foo = 'bar';
-      this.get(foo);
-      `,
-      output: `
-      const foo = 'bar';
-      this[foo];
-      `,
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
   ],
