@@ -86,6 +86,19 @@ const valid = [
       </template>
     `,
   },
+  {
+    filename: 'my-component.gjs',
+    code: `
+      import Component from '@glimmer/component';
+      export default class MyComponent extends Component {
+        foo() {
+          return this.args.bar + this.args.baz;
+        }
+
+        <template>Hello World!</template>
+      }
+    `,
+  },
   /**
    * TODO: SKIP this scenario. Tracked in https://github.com/ember-cli/eslint-plugin-ember/issues/1685
   {
