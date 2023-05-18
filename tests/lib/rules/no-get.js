@@ -960,5 +960,62 @@ ruleTester.run('no-get', rule, {
       output: 'this[5];',
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
+    // Logical and conditional expressions
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const bar = baz ? get(foo, 'biz') : get(foo, 'buzz');
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const bar = baz ? foo.biz : foo.buzz;
+      `,
+      errors: [
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+      ],
+    },
+    {
+      code: "foo ? this.get('bar') : this.get('baz')",
+      output: 'foo ? this.bar : this.baz',
+      errors: [
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+      ],
+    },
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const bar = get(foo, 'biz') || get(foo, 'buzz');
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const bar = foo.biz || foo.buzz;
+      `,
+      errors: [
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+      ],
+    },
+    {
+      code: "this.get('bar') || this.get('baz')",
+      output: 'this.bar || this.baz',
+      errors: [
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+      ],
+    },
   ],
 });
