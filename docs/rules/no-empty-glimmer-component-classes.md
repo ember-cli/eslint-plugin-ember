@@ -26,7 +26,7 @@ import Component from '@glimmer/component';
 class MyComponent extends Component {}
 ```
 
-```js
+```
 import Component from '@glimmer/component';
 
 export default class MyComponent extends Component {
@@ -62,7 +62,7 @@ import MyDecorator from 'my-decorator';
 class MyComponent extends Component {}
 ```
 
-```js
+```
 import Component from '@glimmer/component';
 
 export default class MyComponent extends Component {
