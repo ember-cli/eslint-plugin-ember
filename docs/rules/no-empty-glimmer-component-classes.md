@@ -26,6 +26,7 @@ import Component from '@glimmer/component';
 class MyComponent extends Component {}
 ```
 
+<!-- markdownlint-disable-next-line MD040 -->
 ```
 import Component from '@glimmer/component';
 
@@ -62,6 +63,7 @@ import MyDecorator from 'my-decorator';
 class MyComponent extends Component {}
 ```
 
+<!-- markdownlint-disable-next-line MD040 -->
 ```
 import Component from '@glimmer/component';
 
