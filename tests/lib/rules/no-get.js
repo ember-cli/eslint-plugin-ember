@@ -70,6 +70,16 @@ ruleTester.run('no-get', rule, {
     // Missing import:
     "get(this, 'foo');",
 
+    // Ternary expressions with non-literal consequent or alternate
+    'this.get(foo ? bar : baz)',
+    `
+    import { get } from '@ember/object';
+    import { somethingElse } from '@ember/object';
+    import { random } from 'random';
+
+    const buzz = get(foo, bar ? baz : biz);
+    `,
+
     // **************************
     // getProperties
     // **************************
@@ -1016,6 +1026,77 @@ ruleTester.run('no-get', rule, {
         { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
         { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
       ],
+    },
+    // Ternary expressions with literal consequent and alternate
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const buzz = get(foo, bar ? 'biz' : 'baz');
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const buzz = bar ? foo.biz : foo.baz;
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get(foo ? 'bar' : 'baz')",
+      output: 'foo ? this.bar : this.baz',
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    // Ternary expressions with literal consequent and alternate with optional chaining
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const buzz = get(foo, bar ? 'biz.baz' : 'baz.biz');
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const buzz = bar ? foo.biz?.baz : foo.baz?.biz;
+      `,
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get(foo ? 'bar.baz' : 'baz.bar')",
+      output: 'foo ? this.bar?.baz : this.baz?.bar',
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    // Ternary expressions with left-hand side of assignment expression
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      get(foo, bar ? 'biz' : 'baz').buzz = 'something';
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      (bar ? foo.biz : foo.baz).buzz = 'something';
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get(foo ? 'bar' : 'baz').buzz = 'something';",
+      output: "(foo ? this.bar : this.baz).buzz = 'something';",
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
   ],
 });
