@@ -1050,6 +1050,28 @@ ruleTester.run('no-get', rule, {
       output: 'foo ? this.bar : this.baz',
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const buzz = get(foo, bar ? 5 : 'baz');
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const buzz = bar ? foo[5] : foo.baz;
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get(foo ? 5 : 'baz')",
+      output: 'foo ? this[5] : this.baz',
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
     // Ternary expressions with literal consequent and alternate with optional chaining
     {
       code: `
