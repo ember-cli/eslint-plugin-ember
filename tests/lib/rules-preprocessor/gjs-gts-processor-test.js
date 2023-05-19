@@ -40,6 +40,7 @@ function initESLint(options) {
         'object-curly-spacing': ['error', 'always'],
         'lines-between-class-members': 'error',
         'no-undef': 'error',
+        'ember/ember-template-lint': 'error',
         'no-unused-vars': 'error',
         'ember/no-get': 'off',
         'ember/no-array-prototype-extensions': 'error',
