@@ -34,6 +34,20 @@
 
 
 
+
+## v11.7.0 (2023-05-19)
+
+#### :rocket: Enhancement
+* [#1865](https://github.com/ember-cli/eslint-plugin-ember/pull/1865) Support autofix of numerical property access and ternary expressions in `no-get` rule ([@evanjehl](https://github.com/evanjehl))
+
+#### :bug: Bug Fix
+* [#1866](https://github.com/ember-cli/eslint-plugin-ember/pull/1866) Account for class only having template tag in `no-empty-glimmer-component-classes` rule ([@chrisrng](https://github.com/chrisrng))
+
+#### Committers: 2
+- Chris Ng ([@chrisrng](https://github.com/chrisrng))
+- [@evanjehl](https://github.com/evanjehl)
+
+
 ## v11.6.0 (2023-05-16)
 
 #### :rocket: Enhancement
