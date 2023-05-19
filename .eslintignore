@@ -1,3 +1,6 @@
 coverage/
 node_modules
 lib/recommended-rules.js
+
+# Contains <template> in js markdown
+docs/rules/no-empty-glimmer-component-classes.md
