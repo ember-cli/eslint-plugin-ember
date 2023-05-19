@@ -86,6 +86,19 @@ const valid = [
       </template>
     `,
   },
+  {
+    filename: 'my-component.gjs',
+    code: `
+      import Component from '@glimmer/component';
+      export default class MyComponent extends Component {
+        foo() {
+          return this.args.bar + this.args.baz;
+        }
+
+        <template>Hello World!</template>
+      }
+    `,
+  },
   /**
    * TODO: SKIP this scenario. Tracked in https://github.com/ember-cli/eslint-plugin-ember/issues/1685
   {
@@ -102,6 +115,21 @@ const valid = [
 ];
 
 const invalid = [
+  {
+    filename: 'my-component.gjs',
+    code: `import Component from '@glimmer/component';
+    export default class Chris extends Component {
+      <template>Hello!</template>
+    }`,
+    errors: [
+      {
+        message: 'Do not create empty backing classes for Glimmer template tag only components.',
+        line: 2,
+        column: 20,
+        endColumn: 6,
+      },
+    ],
+  },
   {
     filename: 'my-component.gjs',
     code: `
