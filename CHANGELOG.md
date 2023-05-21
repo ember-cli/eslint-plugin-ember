@@ -35,6 +35,18 @@
 
 
 
+
+## v11.7.1 (2023-05-21)
+
+#### :bug: Bug Fix
+* [#1870](https://github.com/ember-cli/eslint-plugin-ember/pull/1870) Fix crash with default computed property import in `no-unused-services` rule ([@bmish](https://github.com/bmish))
+* [#1869](https://github.com/ember-cli/eslint-plugin-ember/pull/1869) Avoid crash with `inject` decorator in `no-restricted-service-injections` rule ([@bmish](https://github.com/bmish))
+* [#1871](https://github.com/ember-cli/eslint-plugin-ember/pull/1871) Avoid further decorator detection crashes in `no-restricted-service-injections` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
 ## v11.7.0 (2023-05-19)
 
 #### :rocket: Enhancement
