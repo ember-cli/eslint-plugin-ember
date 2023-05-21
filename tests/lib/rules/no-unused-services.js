@@ -187,6 +187,7 @@ ruleTester.run('no-unused-services', rule, {
     `${SERVICE_IMPORT} class MyClass {}`,
     `${SERVICE_IMPORT} Component.extend({});`,
     'const foo = service();',
+    "import ComputedProperty from '@ember/object/computed';",
   ],
   invalid: [
     {
