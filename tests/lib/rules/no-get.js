@@ -53,10 +53,8 @@ ruleTester.run('no-get', rule, {
     "this.get('foo', 'bar');",
     "import { get } from '@ember/object'; get(this, 'foo', 'bar');",
 
-    // Non-string parameter.
-    'this.get(5);',
+    // Non-string, non-numerical parameter.
     'this.get(MY_PROP);',
-    "import { get } from '@ember/object'; get(this, 5);",
     "import { get } from '@ember/object'; get(this, MY_PROP);",
 
     // Unknown sub-function call:
@@ -71,6 +69,16 @@ ruleTester.run('no-get', rule, {
 
     // Missing import:
     "get(this, 'foo');",
+
+    // Ternary expressions with non-literal consequent or alternate
+    'this.get(foo ? bar : baz)',
+    `
+    import { get } from '@ember/object';
+    import { somethingElse } from '@ember/object';
+    import { random } from 'random';
+
+    const buzz = get(foo, bar ? baz : biz);
+    `,
 
     // **************************
     // getProperties
@@ -226,8 +234,9 @@ ruleTester.run('no-get', rule, {
     },
     {
       // useOptionalChaining = false
+      // We can safely autofix nested paths when the result of get() is chained,
       code: "foo1.foo2.get('bar.bar').baz;",
-      output: null,
+      output: 'foo1.foo2.bar.bar.baz;',
       options: [{ catchUnsafeObjects: true, useOptionalChaining: false }],
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
@@ -321,18 +330,33 @@ ruleTester.run('no-get', rule, {
     // **************************
 
     {
-      code: "this.getProperties('prop1', 'prop2');",
-      output: null,
+      code: "let obj = this.getProperties('prop1', 'prop2');",
+      output: 'let obj = { prop1: this.prop1, prop2: this.prop2 };',
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
-      code: "foo.getProperties('prop1', 'prop2');",
-      output: null,
+      code: "const baz = foo.getProperties('prop1', 'prop2');",
+      output: 'const baz = { prop1: foo.prop1, prop2: foo.prop2 };',
       options: [{ catchUnsafeObjects: true }],
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
-      code: "this.getProperties(['prop1', 'prop2']);", // With parameters in array.
+      code: "const obj = this.getProperties(['prop1', 'prop2']);", // With parameters in array.
+      output: 'const obj = { prop1: this.prop1, prop2: this.prop2 };',
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: "const obj = this.getProperties('1');", // With invalid JS variable name.
+      output: null,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: "const obj = this.getProperties('a*');", // With invalid JS variable name.
+      output: null,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: "const obj = this.getProperties('obj.foo');", // With invalid JS variable name.
       output: null,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
@@ -341,26 +365,118 @@ ruleTester.run('no-get', rule, {
       import { getProperties } from '@ember/object';
       import { somethingElse } from '@ember/object';
       import { random } from 'random';
-      getProperties(this, 'prop1', 'prop2');
+      const obj = getProperties(this, 'prop1', 'prop2');
       `,
-      output: null,
+      output: `
+      import { getProperties } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      const obj = { prop1: this.prop1, prop2: this.prop2 };
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { getProperties } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      function foo(){
+        return getProperties(this, 'prop1', 'prop2');
+      }
+      `,
+      output: `
+      import { getProperties } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      function foo(){
+        return { prop1: this.prop1, prop2: this.prop2 };
+      }
+      `,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
       // Calling the imported function on an unknown object (without `this`).
-      code: "import { getProperties } from '@ember/object'; getProperties(foo, 'prop1', 'prop2');",
-      output: null,
+      code: "import { getProperties } from '@ember/object'; let obj = getProperties(foo, 'prop1', 'prop2');",
+      output:
+        "import { getProperties } from '@ember/object'; let obj = { prop1: foo.prop1, prop2: foo.prop2 };",
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
       // With renamed import:
-      code: "import { getProperties as gp } from '@ember/object'; gp(this, 'prop1', 'prop2');",
-      output: null,
+      code: "import { getProperties as gp } from '@ember/object'; const obj = gp(this, 'prop1', 'prop2');",
+      output:
+        "import { getProperties as gp } from '@ember/object'; const obj = { prop1: this.prop1, prop2: this.prop2 };",
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
     {
-      code: "import { getProperties } from '@ember/object'; getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
-      output: null,
+      code: "import { getProperties } from '@ember/object'; const obj = getProperties(this, ['prop1', 'prop2']);", // With parameters in array.
+      output:
+        "import { getProperties } from '@ember/object'; const obj = { prop1: this.prop1, prop2: this.prop2 };",
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { getProperties } from '@ember/object';
+      const { foo, bar } = getProperties(
+        this.obj,
+        "foo",
+        "bar"
+      );
+      `,
+      output: `
+      import { getProperties } from '@ember/object';
+      const { foo, bar } = this.obj;
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { getProperties } from '@ember/object';
+      const { foo: qux, bar } = getProperties(
+        this.obj,
+        "bar",
+        "foo"
+      );
+      `,
+      output: `
+      import { getProperties } from '@ember/object';
+      const { foo: qux, bar } = this.obj;
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { getProperties } from '@ember/object';
+      const { foo, bar, ...qux } = getProperties(
+        this.obj,
+        "foo",
+        "bar",
+        "baz",
+        "frex"
+      );
+      `,
+      output: `
+      import { getProperties } from '@ember/object';
+      const { foo, bar, ...qux } = this.obj;
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { getProperties } from '@ember/object';
+
+      const { foo, bar, baz } = getProperties(
+        get(obj, 't.s'),
+        'foo',
+        'bar',
+        'baz',
+      );
+      `,
+      output: `
+      import { getProperties } from '@ember/object';
+
+      const { foo, bar, baz } = get(obj, 't.s');
+      `,
       errors: [{ message: ERROR_MESSAGE_GET_PROPERTIES, type: 'CallExpression' }],
     },
 
@@ -512,6 +628,18 @@ ruleTester.run('no-get', rule, {
       ],
     },
     {
+      // We can safely autofix nested paths when the result of get() is chained,
+      code: "this.get('foo.0.bar')[123];",
+      output: 'this.foo[0].bar[123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
       // Handle array element access (left side of an assignment, entire string).
       code: "this.get('0')[123] = 'hello world';",
       output: "this[0][123] = 'hello world';",
@@ -536,6 +664,194 @@ ruleTester.run('no-get', rule, {
       ],
     },
 
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      get(this, 'foo.firstObject.bar');
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      this.foo?.[0]?.bar;
+      `,
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { get as g } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      g(obj.baz.qux, 'foo.firstObject.bar');
+      `,
+      output: `
+      import { get as g } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      obj.baz.qux.foo?.[0]?.bar;
+      `,
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      // `firstObject` used in the middle of a path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('foo.firstObject.bar')[123];",
+      output: 'this.foo[0].bar[123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `firstObject` used in the middle of a path.
+      // And the resolved path of `get` is NOT chained (getResultIsChained=false).
+      code: "this.get('foo.firstObject.bar');",
+      output: 'this.foo?.[0]?.bar;',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `firstObject` used at the beginning of a path.
+      // And the resolved path of `get` is NOT chained (getResultIsChained=false).
+      code: "this.get('firstObject.bar');",
+      output: 'this[0]?.bar;',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `firstObject` used as the entire path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('firstObject')[123];",
+      output: 'this[0][123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `firstObject` used in the middle of a path.
+      // And `get` is used in a left side of an assignment (isInLeftSideOfAssignmentExpression=true).
+      code: "this.get('foo.firstObject.bar')[123] = 'hello world';",
+      output: "this.foo[0].bar[123] = 'hello world';",
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used in the middle of a path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('foo.lastObject.bar')[123];",
+      output: 'this.foo[this.foo.length - 1].bar[123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used at the beginning of a path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('lastObject.bar')[123];",
+      output: 'this[this.length - 1].bar[123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used as the entire path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('lastObject')[123];",
+      output: 'this[this.length - 1][123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used in the middle of a path.
+      // And the resolved path of `get` is NOT chained (getResultIsChained=false).
+      code: "this.get('foo.lastObject.bar');",
+      output: 'this.foo?.[this.foo.length - 1]?.bar;',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used at the beginning of a path.
+      // And the resolved path of `get` is NOT chained (getResultIsChained=false).
+      code: "this.get('lastObject.bar');",
+      output: 'this[this.length - 1]?.bar;',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used in the middle of a path.
+      // When multiple `lastObject` are chained, it won't auto-fix.
+      code: "this.get('foo.lastObject.bar.lastObject')[123];",
+      output: null,
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // `lastObject` used at the beginning of a path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('lastObject.bar.lastObject')[123];",
+      output: null,
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
     {
       // Reports violation after (classic) proxy class.
       code: `
@@ -631,6 +947,177 @@ ruleTester.run('no-get', rule, {
       }
       this.propertyOutsideClass;
       `,
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    // Accessing numerical property with get
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      get(foo, 5);
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+      foo[5];
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: 'this.get(5);',
+      output: 'this[5];',
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    // Logical and conditional expressions
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const bar = baz ? get(foo, 'biz') : get(foo, 'buzz');
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const bar = baz ? foo.biz : foo.buzz;
+      `,
+      errors: [
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+      ],
+    },
+    {
+      code: "foo ? this.get('bar') : this.get('baz')",
+      output: 'foo ? this.bar : this.baz',
+      errors: [
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+      ],
+    },
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const bar = get(foo, 'biz') || get(foo, 'buzz');
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const bar = foo.biz || foo.buzz;
+      `,
+      errors: [
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+      ],
+    },
+    {
+      code: "this.get('bar') || this.get('baz')",
+      output: 'this.bar || this.baz',
+      errors: [
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+        { message: ERROR_MESSAGE_GET, type: 'CallExpression' },
+      ],
+    },
+    // Ternary expressions with literal consequent and alternate
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const buzz = get(foo, bar ? 'biz' : 'baz');
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const buzz = bar ? foo.biz : foo.baz;
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get(foo ? 'bar' : 'baz')",
+      output: 'foo ? this.bar : this.baz',
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const buzz = get(foo, bar ? 5 : 'baz');
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const buzz = bar ? foo[5] : foo.baz;
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get(foo ? 5 : 'baz')",
+      output: 'foo ? this[5] : this.baz',
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    // Ternary expressions with literal consequent and alternate with optional chaining
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const buzz = get(foo, bar ? 'biz.baz' : 'baz.biz');
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      const buzz = bar ? foo.biz?.baz : foo.baz?.biz;
+      `,
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get(foo ? 'bar.baz' : 'baz.bar')",
+      output: 'foo ? this.bar?.baz : this.baz?.bar',
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    // Ternary expressions with left-hand side of assignment expression
+    {
+      code: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      get(foo, bar ? 'biz' : 'baz').buzz = 'something';
+      `,
+      output: `
+      import { get } from '@ember/object';
+      import { somethingElse } from '@ember/object';
+      import { random } from 'random';
+
+      (bar ? foo.biz : foo.baz).buzz = 'something';
+      `,
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get(foo ? 'bar' : 'baz').buzz = 'something';",
+      output: "(foo ? this.bar : this.baz).buzz = 'something';",
       errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
   ],

@@ -24,6 +24,128 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+## v11.7.0 (2023-05-19)
+
+#### :rocket: Enhancement
+* [#1865](https://github.com/ember-cli/eslint-plugin-ember/pull/1865) Support autofix of numerical property access and ternary expressions in `no-get` rule ([@evanjehl](https://github.com/evanjehl))
+
+#### :bug: Bug Fix
+* [#1866](https://github.com/ember-cli/eslint-plugin-ember/pull/1866) Account for class only having template tag in `no-empty-glimmer-component-classes` rule ([@chrisrng](https://github.com/chrisrng))
+
+#### Committers: 2
+- Chris Ng ([@chrisrng](https://github.com/chrisrng))
+- [@evanjehl](https://github.com/evanjehl)
+
+
+## v11.6.0 (2023-05-16)
+
+#### :rocket: Enhancement
+* [#1853](https://github.com/ember-cli/eslint-plugin-ember/pull/1853) Support autofix in gts files ([@patricklx](https://github.com/patricklx))
+
+#### :bug: Bug Fix
+* [#1852](https://github.com/ember-cli/eslint-plugin-ember/pull/1852) Only show `no-undef` errors for templates in gts files ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
+## v11.5.2 (2023-04-22)
+
+#### :bug: Bug Fix
+* [#1841](https://github.com/ember-cli/eslint-plugin-ember/pull/1841) Fix a bug in autofixer and autofix additional cases with `firstObject and `lastObject` in `no-get` rule ([@ArtixZ](https://github.com/ArtixZ))
+
+#### Committers: 1
+- [@ArtixZ](https://github.com/ArtixZ)
+
+
+## v11.5.1 (2023-04-07)
+
+#### :bug: Bug Fix
+* [#1828](https://github.com/ember-cli/eslint-plugin-ember/pull/1828) Clarify error message for `no-pause-test` rule ([@deanmarano](https://github.com/deanmarano))
+
+#### Committers: 1
+- Dean Marano ([@deanmarano](https://github.com/deanmarano))
+
+
+## v11.5.0 (2023-04-05)
+
+#### :rocket: Enhancement
+* [#1823](https://github.com/ember-cli/eslint-plugin-ember/pull/1823) Add `getProperties` autofixer to `no-get` rule ([@ArtixZ](https://github.com/ArtixZ))
+
+#### Committers: 1
+- [@ArtixZ](https://github.com/ArtixZ)
+
+
+## v11.4.9 (2023-03-28)
+
+#### :bug: Bug Fix
+* [#1819](https://github.com/ember-cli/eslint-plugin-ember/pull/1819) Bump ember-template-imports to 3.4.2 ([@hmajoros](https://github.com/hmajoros))
+
+#### Committers: 1
+- Hank Majoros ([@hmajoros](https://github.com/hmajoros))
+
+
+## v11.4.8 (2023-03-14)
+
+#### :bug: Bug Fix
+* [#1801](https://github.com/ember-cli/eslint-plugin-ember/pull/1801) Fix issue with token mapping for lint errors on template tokens in gjs/gts files by displaying eslint error on the opening `<template>` tag ([@hmajoros](https://github.com/hmajoros))
+* [#1788](https://github.com/ember-cli/eslint-plugin-ember/pull/1788) Fix `no-array-prototype extensions` undefined error from trying to access callee from non-CallExpression ([@canrozanes](https://github.com/canrozanes))
+* [#1795](https://github.com/ember-cli/eslint-plugin-ember/pull/1795) refactor glimmer post-process, better handle template tag ([@hmajoros](https://github.com/hmajoros))
+
+#### Committers: 2
+- Can Rozanes ([@canrozanes](https://github.com/canrozanes))
+- Hank Majoros ([@hmajoros](https://github.com/hmajoros))
+
+
+## v11.4.7 (2023-03-02)
+
+#### :bug: Bug Fix
+* [#1793](https://github.com/ember-cli/eslint-plugin-ember/pull/1793) [gjs] Fix bug with regex issues when parsing GLIMMER_TEMPLATE ([@hmajoros](https://github.com/hmajoros))
+* [#1792](https://github.com/ember-cli/eslint-plugin-ember/pull/1792) [gjs] Return original diagnostic if transformed line matches original line in glimmer preprocessor ([@hmajoros](https://github.com/hmajoros))
+
+#### Committers: 1
+- Hank Majoros ([@hmajoros](https://github.com/hmajoros))
+
+
+## v11.4.6 (2023-02-01)
+
+#### :bug: Bug Fix
+* [#1767](https://github.com/ember-cli/eslint-plugin-ember/pull/1767) Bump ember-template-imports to `v3.4.1` ([@gossi](https://github.com/gossi))
+
+#### Committers: 1
+- Thomas Gossmann ([@gossi](https://github.com/gossi))
+
+
+## v11.4.5 (2023-01-28)
+
+#### :bug: Bug Fix
+* [#1748](https://github.com/ember-cli/eslint-plugin-ember/pull/1748) Ignore Ember Data `store` service calls in `no-array-prototype-extensions` rule ([@bmish](https://github.com/bmish))
+* [#1761](https://github.com/ember-cli/eslint-plugin-ember/pull/1761) Fix false positive with `Promise.any()` in `no-array-prototype-extensions` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
+## v11.4.4 (2023-01-23)
+
+#### :bug: Bug Fix
+* [#1749](https://github.com/ember-cli/eslint-plugin-ember/pull/1749) Ignore direct instantiation of `EmberArray` in `no-array-prototype-extensions` rule ([@canrozanes](https://github.com/canrozanes))
+
+#### Committers: 1
+- Can Rozanes ([@canrozanes](https://github.com/canrozanes))
+
+
 ## v11.4.3 (2023-01-15)
 
 #### :bug: Bug Fix

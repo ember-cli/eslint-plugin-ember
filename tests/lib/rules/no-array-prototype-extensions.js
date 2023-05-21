@@ -52,6 +52,10 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'reject();',
     'this.reject();',
 
+    // Promise.any()
+    'Promise.any();',
+    'window.Promise.any();',
+
     // Global non-array class (RSVP.reject)
     'RSVP.reject();',
     'RSVP.reject("some reason");',
@@ -202,6 +206,44 @@ ruleTester.run('no-array-prototype-extensions', rule, {
       `,
       parser: require.resolve('@typescript-eslint/parser'),
     },
+
+    // Methods called directly on EmberArray.
+    `
+      import { A } from '@ember/array'
+
+      const array = A([1, 2, 3])
+      array.toArray()
+    `,
+    `
+      import { A } from '@ember/array'
+
+      A([1, 2, 3]).toArray();
+    `,
+    `
+      import { A as SomeWeirdName } from '@ember/array'
+
+      const array = SomeWeirdName([1, 2, 3])
+      array.without(2)
+    `,
+
+    // Ember Data call with await.
+    `
+    class MyClass {
+      async _fetch(query) {
+        const response = await this.store.query('foo-bar', query);
+        return response.toArray();
+      }
+    }
+    `,
+    // Ember Data call without await.
+    `
+    class MyClass {
+      _fetch(query) {
+        const response = this.store.peekAll('foo-bar', query);
+        return response.toArray();
+      }
+    }
+    `,
 
     // TODO: handle non-Identifier property names:
     'foo["clear"]();',

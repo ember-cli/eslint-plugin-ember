@@ -24,7 +24,10 @@ To reduce false positives, the rule ignores some common known-non-array classes/
 
 - `Set.clear()`
 - `Map.clear()`
-- `Promise.reject()`
+- `localStorage.clear()` / `sessionStorage.clear()`
+- `Promise.any()` / `Promise.reject()`
+- Lodash / jQuery
+- Ember Data `this.store` service
 - etc
 
 If you run into additional false positives, please file a bug or submit a PR to add it to the rule's hardcoded ignore list.
@@ -115,6 +118,15 @@ export default class SampleComponent extends Component {
     abc.push(newItem);
   }
 }
+```
+
+```js
+/** Direct usage of `@ember/array` **/
+/** Use A() is OK **/
+import { A } from '@ember/array';
+
+const arr = A(['a', 'a', 'b', 'b']);
+arr.uniq();
 ```
 
 ## References
