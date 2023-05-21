@@ -1,7 +1,7 @@
 /* eslint filenames/match-regex:off */
-const { getPathIgnorePattern } = require('eslint-remote-tester-repositories');
 const fs = require('fs');
 
+/** @type {import('eslint-remote-tester').Config} */
 module.exports = {
   /** Repositories to scan */
   repositories: [
@@ -28,9 +28,6 @@ module.exports = {
     'typed-ember/ember-cli-typescript',
   ],
 
-  /** Optional pattern used to exclude paths */
-  pathIgnorePattern: getPathIgnorePattern(),
-
   /** Extensions of files under scanning */
   extensions: ['js', 'ts'],
 
@@ -40,6 +37,7 @@ module.exports = {
   /** ESLint configuration */
   eslintrc: {
     plugins: ['ember'],
+
     // Enable all of our rules.
     rules: Object.fromEntries(
       fs
@@ -58,5 +56,12 @@ module.exports = {
           return [ruleName, value];
         })
     ),
+
+    overrides: [
+      {
+        files: ['*.ts'],
+        parser: '@typescript-eslint/parser',
+      },
+    ],
   },
 };

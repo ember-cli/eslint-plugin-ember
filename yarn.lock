@@ -2911,11 +2911,6 @@ eslint-plugin-unicorn@^46.0.0:
     semver "^7.3.8"
     strip-indent "^3.0.0"
 
-eslint-remote-tester-repositories@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-remote-tester-repositories/-/eslint-remote-tester-repositories-1.0.1.tgz#2e5f15fa6bb631e72e817772867ff6771ed20b51"
-  integrity sha512-XL9PqGBDL4rORnQ74b/3tqbJUpMlPz9gzKSrmYFtakLBQ/ayBELB/HZvd6ZEl+mH0vBeSYtUH7E/rawBsf9Qzg==
-
 eslint-remote-tester@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/eslint-remote-tester/-/eslint-remote-tester-3.0.0.tgz#aa9b357d65250245f1d6556b4decaf993e2c72f4"
