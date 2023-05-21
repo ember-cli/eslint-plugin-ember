@@ -84,13 +84,6 @@ ruleTester.run('no-restricted-service-injections', rule, {
       code: `${SERVICE_IMPORT} Component.extend({ myService: service(SOME_VARIABLE) })`,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
     },
-    {
-      // TODO: This should be invalid. With `inject.service` decorator.
-      filename: 'app/components/path.js',
-      code: `${INJECT_IMPORT} class MyComponent extends Component { @inject.service('myService') randomName }`,
-      output: null,
-      options: [{ paths: ['app/components'], services: ['my-service'] }],
-    },
   ],
   invalid: [
     {
@@ -290,6 +283,14 @@ ruleTester.run('no-restricted-service-injections', rule, {
       output: null,
       options: [{ services: ['store'] }],
       parser: require.resolve('@typescript-eslint/parser'),
+      errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'PropertyDefinition' }],
+    },
+    {
+      // inject.service() decorator
+      filename: 'app/components/path.js',
+      code: `${INJECT_IMPORT} class MyComponent extends Component { @inject.service('myService') randomName }`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'PropertyDefinition' }],
     },
   ],
