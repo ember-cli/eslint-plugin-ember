@@ -84,6 +84,13 @@ ruleTester.run('no-restricted-service-injections', rule, {
       code: `${SERVICE_IMPORT} Component.extend({ myService: service(SOME_VARIABLE) })`,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
     },
+    {
+      // TODO: This should be invalid. With `inject.service` decorator.
+      filename: 'app/components/path.js',
+      code: `${INJECT_IMPORT} class MyComponent extends Component { @inject.service('myService') randomName }`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
+    },
   ],
   invalid: [
     {
@@ -156,7 +163,7 @@ ruleTester.run('no-restricted-service-injections', rule, {
       ],
     },
     {
-      // With decorator with camelized service name argument:
+      // With decorator with camelized service name argument (inject):
       filename: 'app/components/path.js',
       code: `${INJECT_IMPORT} class MyComponent extends Component { @inject('myService') randomName }`,
       output: null,
@@ -211,6 +218,19 @@ ruleTester.run('no-restricted-service-injections', rule, {
       // With decorator without service name argument (with parentheses) (with property name as string literal):
       filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} class MyComponent extends Component { @service() 'myService' }`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
+      errors: [
+        {
+          message: DEFAULT_ERROR_MESSAGE,
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
+    },
+    {
+      // With chained decorator
+      filename: 'app/components/path.js',
+      code: `${EMBER_IMPORT} class MyComponent extends Component { @Ember.inject.service('myService') randomName }`,
       output: null,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
       errors: [
