@@ -34,6 +34,34 @@ ruleTester.run('no-empty-glimmer-component-classes', rule, {
 
     @MyDecorator
     class MyComponent extends Component {}`,
+    {
+      code: `
+      import Component from '@glimmer/component';
+
+      interface ListSignature<T> {
+        Args: {
+          items: Array<T>;
+        };
+        Blocks: {
+          default: [item: T]
+        };
+      }
+
+      export default class List<T> extends Component<ListSignature<T>> {}
+      `,
+      parser: require.resolve('@typescript-eslint/parser'),
+    },
+    {
+      code: `
+        import Component from '@glimmer/component';
+
+        export interface SomeSig {}
+        export interface SomeOtherSig {}
+
+        export default class MyComponent<SomeSig> extends Component<SomeOtherSig> {}
+      `,
+      parser: require.resolve('@typescript-eslint/parser'),
+    },
   ],
   invalid: [
     {
@@ -48,6 +76,18 @@ ruleTester.run('no-empty-glimmer-component-classes', rule, {
 
       class MyComponent extends Component { /* foo */ }`,
       output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'ClassDeclaration' }],
+    },
+    {
+      code: `
+      import Component from '@glimmer/component';
+
+      export interface TypeSig {}
+
+      export default class MyComponent extends Component<TypeSig> {}
+      `,
+      output: null,
+      parser: require.resolve('@typescript-eslint/parser'),
       errors: [{ message: ERROR_MESSAGE, type: 'ClassDeclaration' }],
     },
   ],
