@@ -8,7 +8,7 @@ This rule will catch and prevent the use of empty backing classes for Glimmer co
 
 ## Rule Details
 
-This rule aims to disallow the use of empty backing classes for Glimmer components when possible including only using ember template tags in your Glimmer component. Template-only Glimmer components where there is no backing class are much faster and lighter-weight than Glimmer components with backing classes, which are much lighter-weight than Ember components. Therefore, you should only have a backing class for a Glimmer component when absolutely necessary.
+This rule aims to disallow the use of empty backing classes for Glimmer components when possible including only using ember template tags in your Glimmer component. Template-only Glimmer components where there is no backing class are much faster and lighter-weight than Glimmer components with backing classes, which are much lighter-weight than Ember components. Therefore, you should only have a backing class for a Glimmer component when absolutely necessary. An exception to this case is if you need the component to be generic over part of its type signature.
 
 To fix violations of this rule:
 
@@ -32,6 +32,14 @@ import Component from '@glimmer/component';
 export default class MyComponent extends Component {
   <template>Hello World!</template>
 }
+```
+
+```ts
+import Component from '@glimmer/component';
+
+export interface TypeSig {}
+
+export default class MyComponent extends Component<TypeSig> {}
 ```
 
 Examples of **correct** code for this rule:
@@ -72,6 +80,15 @@ export default class MyComponent extends Component {
 
   <template>Hello World!</template>
 }
+```
+
+```ts
+import Component from '@glimmer/component';
+
+export interface SomeSig {}
+export interface SomeOtherSig {}
+
+export default class MyComponent<SomeSig> extends Component<SomeOtherSig> {}
 ```
 
 ## References
