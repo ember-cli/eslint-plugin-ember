@@ -36,6 +36,16 @@
 
 
 
+
+## v11.7.2 (2023-05-23)
+
+#### :bug: Bug Fix
+* [#1876](https://github.com/ember-cli/eslint-plugin-ember/pull/1876) Allow generic type in TypeScript class in `no-empty-glimmer-component-classes` rule ([@chrisrng](https://github.com/chrisrng))
+
+#### Committers: 7
+- Chris Ng ([@chrisrng](https://github.com/chrisrng))
+
+
 ## v11.7.1 (2023-05-21)
 
 #### :bug: Bug Fix
