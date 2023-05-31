@@ -37,6 +37,16 @@
 
 
 
+
+## v11.8.0 (2023-05-31)
+
+#### :rocket: Enhancement
+* [#1847](https://github.com/ember-cli/eslint-plugin-ember/pull/1847) Add `useAt` option to autofix `.lastObject` to `.at(-1)` in `no-get` rule ([@ArtixZ](https://github.com/ArtixZ))
+
+#### Committers: 1
+- [@ArtixZ](https://github.com/ArtixZ)
+
+
 ## v11.7.2 (2023-05-23)
 
 #### :bug: Bug Fix
