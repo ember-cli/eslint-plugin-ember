@@ -13,10 +13,10 @@ const plugin = require('../../../lib');
 /**
  * Helper function which creates ESLint instance with enabled/disabled autofix feature.
  *
- * @param {CLIEngineOptions} [options={}] Whether to enable autofix feature.
+ * @param {String} parser The parser to use.
  * @returns {ESLint} ESLint instance to execute in tests.
  */
-function initESLint(options) {
+function initESLint(parser = '@babel/eslint-parser') {
   // tests must be run with ESLint 7+
   return new ESLint({
     ignore: false,
@@ -27,7 +27,7 @@ function initESLint(options) {
       env: {
         browser: true,
       },
-      parser: '@babel/eslint-parser',
+      parser,
       parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
@@ -35,6 +35,9 @@ function initESLint(options) {
       plugins: ['ember'],
       extends: ['plugin:ember/recommended'],
       rules: {
+        quotes: ['error', 'single'],
+        semi: ['error', 'always'],
+        'object-curly-spacing': ['error', 'always'],
         'lines-between-class-members': 'error',
         'no-undef': 'error',
         'no-unused-vars': 'error',
@@ -42,7 +45,6 @@ function initESLint(options) {
         'ember/no-array-prototype-extensions': 'error',
       },
     },
-    ...options,
   });
 }
 
@@ -83,6 +85,37 @@ const valid = [
       </template>
     `,
   },
+  {
+    filename: 'my-component.gjs',
+    code: `
+      import Component from '@glimmer/component';
+      export default class MyComponent extends Component {
+        foo() {
+          return this.args.bar + this.args.baz;
+        }
+
+        <template>Hello World!</template>
+      }
+    `,
+  },
+  {
+    filename: 'my-component.gts',
+    code: `import Component from '@glimmer/component';
+
+    interface ListSignature<T> {
+      Args: {
+        items: Array<T>;
+      };
+      Blocks: {
+        default: [item: T]
+      };
+    }
+
+    export default class List<T> extends Component<ListSignature<T>> {
+      <template>Hello!</template>
+    }`,
+    parser: '@typescript-eslint/parser',
+  },
   /**
    * TODO: SKIP this scenario. Tracked in https://github.com/ember-cli/eslint-plugin-ember/issues/1685
   {
@@ -99,6 +132,22 @@ const valid = [
 ];
 
 const invalid = [
+  {
+    filename: 'my-component.gjs',
+    code: `import Component from '@glimmer/component';
+    export default class MyComponent extends Component {
+      <template>Hello!</template>
+    }`,
+    errors: [
+      {
+        message: 'Do not create empty backing classes for Glimmer template tag only components.',
+        line: 2,
+        column: 20,
+        endColumn: 6,
+      },
+    ],
+  },
+
   {
     filename: 'my-component.gjs',
     code: `
@@ -171,7 +220,7 @@ const invalid = [
       import Component from '@glimmer/component';
 
       export default class MyComponent extends Component {
-        foo = "bar";
+        foo = 'bar';
         <template>"hi"</template>
       }
     `,
@@ -191,7 +240,7 @@ const invalid = [
       import Component from '@glimmer/component';
 
       export default class MyComponent extends Component {
-        foo = "bar";
+        foo = 'bar';
         <template>"hi"
         </template>
       }
@@ -206,16 +255,46 @@ const invalid = [
       },
     ],
   },
+  {
+    filename: 'my-component.gjs',
+    code: `
+      import Component from "@glimmer/component";
+      export default class MyComponent extends Component {
+        foo = 'bar';
+        <template>"hi"
+        </template>
+      }
+    `,
+    errors: [
+      {
+        message: 'Strings must use singlequote.',
+        line: 2,
+        endLine: 2,
+        endColumn: 49,
+        column: 29,
+        fix: {
+          range: [29, 49],
+        },
+      },
+      {
+        message: 'Expected blank line between class members.',
+        line: 5,
+        endLine: 6,
+        column: 9,
+        endColumn: 20,
+      },
+    ],
+  },
 ];
 
 describe('template-vars', () => {
   describe('valid', () => {
     for (const scenario of valid) {
-      const { code, filename } = scenario;
+      const { code, filename, parser } = scenario;
 
       // eslint-disable-next-line jest/valid-title
       it(code, async () => {
-        const eslint = initESLint();
+        const eslint = initESLint(parser);
         const results = await eslint.lintText(code, { filePath: filename });
         const resultErrors = results.flatMap((result) => result.messages);
 
@@ -235,11 +314,11 @@ describe('template-vars', () => {
 
   describe('invalid', () => {
     for (const scenario of invalid) {
-      const { code, filename, errors } = scenario;
+      const { code, filename, errors, parser } = scenario;
 
       // eslint-disable-next-line jest/valid-title
       it(code, async () => {
-        const eslint = initESLint();
+        const eslint = initESLint(parser);
         const results = await eslint.lintText(code, { filePath: filename });
 
         const resultErrors = results.flatMap((result) => result.messages);
@@ -388,7 +467,7 @@ describe('multiple tokens in same file', () => {
   it('handles duplicate template tokens', async () => {
     const eslint = initESLint();
     const code = `
-      // comment Bad 
+      // comment Bad
 
       const tmpl = <template><Bad /></template>
     `;

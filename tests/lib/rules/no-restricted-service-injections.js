@@ -4,6 +4,7 @@ const rule = require('../../../lib/rules/no-restricted-service-injections');
 const { DEFAULT_ERROR_MESSAGE } = rule;
 
 const EMBER_IMPORT = "import Ember from 'ember';";
+const INJECT_IMPORT = "import {inject} from '@ember/service';";
 const SERVICE_IMPORT = "import {inject as service} from '@ember/service';";
 const NEW_SERVICE_IMPORT = "import {service} from '@ember/service';";
 
@@ -21,6 +22,12 @@ ruleTester.run('no-restricted-service-injections', rule, {
       // Service name doesn't match (with property name):
       filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} Component.extend({ myService: service() })`,
+      options: [{ paths: ['app/components'], services: ['abc'] }],
+    },
+    {
+      // Service name doesn't match (with property name):
+      filename: 'app/components/path.js',
+      code: `${INJECT_IMPORT} Component.extend({ myService: inject() })`,
       options: [{ paths: ['app/components'], services: ['abc'] }],
     },
     {
@@ -75,6 +82,13 @@ ruleTester.run('no-restricted-service-injections', rule, {
       // Ignores injection due to dynamic variable usage:
       filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} Component.extend({ myService: service(SOME_VARIABLE) })`,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
+    },
+    {
+      // TODO: This should be invalid. With `inject.service` decorator.
+      filename: 'app/components/path.js',
+      code: `${INJECT_IMPORT} class MyComponent extends Component { @inject.service('myService') randomName }`,
+      output: null,
       options: [{ paths: ['app/components'], services: ['my-service'] }],
     },
   ],
@@ -149,6 +163,19 @@ ruleTester.run('no-restricted-service-injections', rule, {
       ],
     },
     {
+      // With decorator with camelized service name argument (inject):
+      filename: 'app/components/path.js',
+      code: `${INJECT_IMPORT} class MyComponent extends Component { @inject('myService') randomName }`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
+      errors: [
+        {
+          message: DEFAULT_ERROR_MESSAGE,
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
+    },
+    {
       // With decorator with dasherized service name argument:
       filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} class MyComponent extends Component { @service('my-service') randomName }`,
@@ -201,6 +228,19 @@ ruleTester.run('no-restricted-service-injections', rule, {
       ],
     },
     {
+      // With chained decorator
+      filename: 'app/components/path.js',
+      code: `${EMBER_IMPORT} class MyComponent extends Component { @Ember.inject.service('myService') randomName }`,
+      output: null,
+      options: [{ paths: ['app/components'], services: ['my-service'] }],
+      errors: [
+        {
+          message: DEFAULT_ERROR_MESSAGE,
+          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
+        },
+      ],
+    },
+    {
       // With custom error message:
       filename: 'app/components/path.js',
       code: `${SERVICE_IMPORT} Component.extend({ myService: service() })`,
@@ -235,6 +275,22 @@ ruleTester.run('no-restricted-service-injections', rule, {
       output: null,
       options: [{ services: ['my-service'] }],
       errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'Property' }],
+    },
+
+    {
+      // TypeScript annotated injection (TypeScript).
+      code: `
+      import Route from '@ember/routing/route';
+      ${INJECT_IMPORT}
+      import type Store from '@ember-data/store';
+      export default class ApplicationRoute extends Route {
+        @inject declare store: Store;
+      }
+      `,
+      output: null,
+      options: [{ services: ['store'] }],
+      parser: require.resolve('@typescript-eslint/parser'),
+      errors: [{ message: DEFAULT_ERROR_MESSAGE, type: 'PropertyDefinition' }],
     },
   ],
 });

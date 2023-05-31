@@ -33,6 +33,55 @@
 
 
 
+
+
+
+
+## v11.7.2 (2023-05-23)
+
+#### :bug: Bug Fix
+* [#1876](https://github.com/ember-cli/eslint-plugin-ember/pull/1876) Allow generic type in TypeScript class in `no-empty-glimmer-component-classes` rule ([@chrisrng](https://github.com/chrisrng))
+
+#### Committers: 7
+- Chris Ng ([@chrisrng](https://github.com/chrisrng))
+
+
+## v11.7.1 (2023-05-21)
+
+#### :bug: Bug Fix
+* [#1870](https://github.com/ember-cli/eslint-plugin-ember/pull/1870) Fix crash with default computed property import in `no-unused-services` rule ([@bmish](https://github.com/bmish))
+* [#1869](https://github.com/ember-cli/eslint-plugin-ember/pull/1869) Avoid crash with `inject` decorator in `no-restricted-service-injections` rule ([@bmish](https://github.com/bmish))
+* [#1871](https://github.com/ember-cli/eslint-plugin-ember/pull/1871) Avoid further decorator detection crashes in `no-restricted-service-injections` rule ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
+## v11.7.0 (2023-05-19)
+
+#### :rocket: Enhancement
+* [#1865](https://github.com/ember-cli/eslint-plugin-ember/pull/1865) Support autofix of numerical property access and ternary expressions in `no-get` rule ([@evanjehl](https://github.com/evanjehl))
+
+#### :bug: Bug Fix
+* [#1866](https://github.com/ember-cli/eslint-plugin-ember/pull/1866) Account for class only having template tag in `no-empty-glimmer-component-classes` rule ([@chrisrng](https://github.com/chrisrng))
+
+#### Committers: 2
+- Chris Ng ([@chrisrng](https://github.com/chrisrng))
+- [@evanjehl](https://github.com/evanjehl)
+
+
+## v11.6.0 (2023-05-16)
+
+#### :rocket: Enhancement
+* [#1853](https://github.com/ember-cli/eslint-plugin-ember/pull/1853) Support autofix in gts files ([@patricklx](https://github.com/patricklx))
+
+#### :bug: Bug Fix
+* [#1852](https://github.com/ember-cli/eslint-plugin-ember/pull/1852) Only show `no-undef` errors for templates in gts files ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
 ## v11.5.2 (2023-04-22)
 
 #### :bug: Bug Fix
