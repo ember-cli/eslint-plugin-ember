@@ -74,7 +74,7 @@ import ObjectProxy from '@ember/object/proxy';
 export default ObjectProxy.extend({
   someFunction() {
     const foo = this.get('propertyInsideProxyObject'); // Allowed because inside proxy object.
-  }
+  },
 });
 ```
 
@@ -85,7 +85,7 @@ export default EmberObject.extend({
   unknownProperty(key) {},
   someFunction() {
     const foo = this.get('property'); // Allowed because inside object implementing `unknownProperty()`.
-  }
+  },
 });
 ```
 
@@ -95,6 +95,7 @@ This rule takes an optional object containing:
 
 - `boolean` -- `ignoreGetProperties` -- whether the rule should ignore `getProperties` (default `false`)
 - `boolean` -- `ignoreNestedPaths` -- whether the rule should ignore `this.get('some.nested.property')` (can't be enabled at the same time as `useOptionalChaining`) (default `false`)
+- `boolean` -- `useAt` -- whether the rule should use `at(-1)` [Array.prototype.at()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at) to replace `lastObject` (default `false`) (TODO: enable by default once we require Node 16.6)
 - `boolean` -- `useOptionalChaining` -- whether the rule should use the [optional chaining operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) `?.` to autofix nested paths such as `this.get('some.nested.property')` to `this.some?.nested?.property` (when this option is off, these nested paths won't be autofixed at all) (default `true`)
 - `boolean` -- `catchSafeObjects` -- whether the rule should catch non-`this` imported usages like `get(foo, 'bar')` (default `true`)
 - `boolean` -- `catchUnsafeObjects` -- whether the rule should catch non-`this` usages like `foo.get('bar')` even though we don't know for sure if `foo` is an Ember object (default `false`)
