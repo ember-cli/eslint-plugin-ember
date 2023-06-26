@@ -38,6 +38,20 @@
 
 
 
+
+## v11.9.0 (2023-06-26)
+
+#### :rocket: Enhancement
+* [#1899](https://github.com/ember-cli/eslint-plugin-ember/pull/1899) Check template tags for service usages in `no-unused-services` ([@lin-ll](https://github.com/lin-ll))
+
+#### :house: Internal
+* [#1898](https://github.com/ember-cli/eslint-plugin-ember/pull/1898) [no-empty-glimmer-component-classes] Import the template tag value instead of hardcode ([@chrisrng](https://github.com/chrisrng))
+
+#### Committers: 2
+- Chris Ng ([@chrisrng](https://github.com/chrisrng))
+- Lucy Lin ([@lin-ll](https://github.com/lin-ll))
+
+
 ## v11.8.0 (2023-05-31)
 
 #### :rocket: Enhancement
