@@ -43,6 +43,7 @@ function initESLint(parser = '@babel/eslint-parser') {
         'no-unused-vars': 'error',
         'ember/no-get': 'off',
         'ember/no-array-prototype-extensions': 'error',
+        'ember/no-unused-services': 'error',
       },
     },
   });
@@ -115,6 +116,23 @@ const valid = [
       <template>Hello!</template>
     }`,
     parser: '@typescript-eslint/parser',
+  },
+  {
+    filename: 'my-component.gjs',
+    code: `
+      import Component from '@glimmer/component';
+      import { inject as service } from '@ember/service';
+
+      export default class MyComponent extends Component {
+        @service foo;
+
+        <template>
+          {{this.foo}}
+          <div></div>
+          foobar
+        </template>
+      }
+    `,
   },
   /**
    * TODO: SKIP this scenario. Tracked in https://github.com/ember-cli/eslint-plugin-ember/issues/1685
@@ -282,6 +300,37 @@ const invalid = [
         endLine: 6,
         column: 9,
         endColumn: 20,
+      },
+    ],
+  },
+  {
+    filename: 'my-component.gjs',
+    code: `
+      import Component from '@glimmer/component';
+      import { inject as service } from '@ember/service';
+
+      export default class MyComponent extends Component {
+        @service foo;
+
+        @service bar;
+
+        <template>
+          {{this.foo.bar}}
+          {{this.bartender}}
+          <div>this.bar</div>
+          this.bar.foo
+          something.bar
+        </template>
+      }
+    `,
+    errors: [
+      {
+        message:
+          'The service `bar` is not referenced in this file and might be unused (note: it could still be used in a corresponding handlebars template file, mixin, or parent/child class).',
+        line: 8,
+        endLine: 8,
+        endColumn: 22,
+        column: 9,
       },
     ],
   },

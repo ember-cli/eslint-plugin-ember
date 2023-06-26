@@ -70,6 +70,7 @@
     "css-tree": "^2.0.4",
     "ember-rfc176-data": "^0.3.15",
     "ember-template-imports": "^3.4.2",
+    "ember-template-recast": "^6.1.4",
     "eslint-utils": "^3.0.0",
     "estraverse": "^5.2.0",
     "lodash.camelcase": "^4.1.1",
