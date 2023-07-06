@@ -4,7 +4,7 @@
 
 What's wrong with `{{did-insert}}`, `{{did-update}}`, and `{{will-destroy}}`?
 
-These modifiers were meant for temporary migration purposes for quickly migrating `@ember/component` from before Octane to the `@glimmer/component` we have today. Since `@ember/compoennt` implicitly had a wrapping `div` around each component and `@glimmer/compoennt`s have "outer HTML" semantics, an automated migration could have ended up looking something like:
+These modifiers were meant for temporary migration purposes for quickly migrating `@ember/component` from before Octane to the `@glimmer/component` we have today. Since `@ember/component` implicitly had a wrapping `div` around each component and `@glimmer/component`s have "outer HTML" semantics, an automated migration could have ended up looking something like:
 
 ```hbs
 <div
