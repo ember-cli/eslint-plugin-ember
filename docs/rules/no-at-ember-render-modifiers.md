@@ -43,6 +43,8 @@ import didUpdate from '@ember/render-modifiers/modifiers/did-update';
 import willDestroy from '@ember/render-modifiers/modifiers/will-destroy';
 ```
 
+For more examples, see [the docs on ember-template-lint](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-at-ember-render-modifiers.md).
+
 ## References
 
 - [Editions](https://emberjs.com/editions/)
