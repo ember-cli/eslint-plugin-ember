@@ -39,6 +39,16 @@
 
 
 
+
+## v11.10.0 (2023-07-07)
+
+#### :rocket: Enhancement
+* [#1902](https://github.com/ember-cli/eslint-plugin-ember/pull/1902) Add new rule `no-at-ember-render-modifiers` ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
+
 ## v11.9.0 (2023-06-26)
 
 #### :rocket: Enhancement
