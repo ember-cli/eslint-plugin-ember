@@ -18,7 +18,13 @@ const ruleTester = new RuleTester({
   },
 });
 ruleTester.run('no-at-ember-render-modifiers', rule, {
-  valid: ['import x from "x"', ''],
+  valid: [
+    'import x from "x"',
+    '',
+    "import { x } from 'foo';",
+    "import x from '@ember/foo';",
+    "import x from '@ember/render-modifiers-foo';",
+  ],
   invalid: [
     {
       code: 'import "@ember/render-modifiers";',
