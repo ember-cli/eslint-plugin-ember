@@ -64,7 +64,6 @@ exports[`recommended rules has the right list 1`] = `
   "require-super-in-lifecycle-hooks",
   "require-tagless-components",
   "require-valid-css-selector-in-test-helpers",
-  "routes-segments-snake-case",
   "use-brace-expansion",
   "use-ember-data-rfc-395-imports",
 ]

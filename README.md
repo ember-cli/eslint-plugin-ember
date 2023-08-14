@@ -173,7 +173,7 @@ module.exports = {
 | [no-unnecessary-index-route](docs/rules/no-unnecessary-index-route.md)             | disallow unnecessary `index` route definition                                            |    |    |    |
 | [no-unnecessary-route-path-option](docs/rules/no-unnecessary-route-path-option.md) | disallow unnecessary usage of the route `path` option                                    | ✅  | 🔧 |    |
 | [route-path-style](docs/rules/route-path-style.md)                                 | enforce usage of kebab-case (instead of snake_case or camelCase) in route paths          |    |    | 💡 |
-| [routes-segments-snake-case](docs/rules/routes-segments-snake-case.md)             | enforce usage of snake_cased dynamic segments in routes                                  | ✅  |    |    |
+| [routes-segments-snake-case](docs/rules/routes-segments-snake-case.md)             | enforce usage of snake_cased dynamic segments in routes                                  |    |    |    |
 
 ### Services
 
