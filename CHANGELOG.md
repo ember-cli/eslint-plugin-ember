@@ -40,6 +40,16 @@
 
 
 
+
+## v11.11.0 (2023-08-21)
+
+#### :rocket: Enhancement
+* [#1920](https://github.com/ember-cli/eslint-plugin-ember/pull/1920) Use custom parser for gts/gjs ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
 ## v11.10.0 (2023-07-07)
 
 #### :rocket: Enhancement
