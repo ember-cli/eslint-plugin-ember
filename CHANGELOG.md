@@ -41,6 +41,16 @@
 
 
 
+
+## v11.11.1 (2023-08-22)
+
+#### :bug: Bug Fix
+* [#1941](https://github.com/ember-cli/eslint-plugin-ember/pull/1941) Revert "Use custom parser for gts/gjs (#1920)" ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+
 ## v11.11.0 (2023-08-21)
 
 #### :rocket: Enhancement
