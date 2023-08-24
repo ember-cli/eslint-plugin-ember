@@ -53,9 +53,42 @@ learn more [here](https://github.com/ember-template-imports/ember-template-impor
 module.exports = {
   overrides: [
     {
-      files: ['**/*.gts', '**/*.gjs'],
+      files: ['**/*.{js,ts,gjs,gts}'],
+      plugins: ['ember'],
+      extends: [
+        'eslint:recommended',
+        'plugin:ember/gts-recommended', // or other configuration
+      ],
+      rules: {
+        // override / enable optional rules
+        'ember/no-replace-test-comments': 'error'
+      }
+    },
+    {
+      files: ['**/*.gts'],
       parser: 'eslint-plugin-ember/gjs-gts-parser',
-    }
+      plugins: ['ember'],
+      extends: [
+        'eslint:recommended',
+        'plugin:ember/gts-recommended', // or other configuration
+      ],
+    },
+    {
+      files: ['**/*.gjs'],
+      parser: 'eslint-plugin-ember/gjs-gts-parser',
+      plugins: ['ember'],
+      extends: [
+        'eslint:recommended',
+        'plugin:ember/gjs-recommended', // or other configuration
+      ],
+    },
+    {
+      files: ['tests/**/*.{js,ts,gjs,gts}'],
+      rules: {
+        // override / enable optional rules
+        'ember/no-replace-test-comments': 'error'
+      }
+    },
   ],
 };
 ```
@@ -64,9 +97,12 @@ module.exports = {
 
 <!-- begin auto-generated configs list -->
 
-|    | Name          |
-| :- | :------------ |
-| ✅  | `recommended` |
+|    | Name              |
+| :- | :---------------- |
+|    | `base`            |
+| ✅  | `recommended`     |
+|    | `recommended-gjs` |
+|    | `recommended-gts` |
 
 <!-- end auto-generated configs list -->
 
