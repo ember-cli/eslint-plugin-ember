@@ -44,11 +44,16 @@ module.exports = {
 
 ## 🧰 Configurations
 
-|    | Name | Description |
-|:---|:-----|:------------|
-| ✅ | [recommended](./lib/recommended-rules.js) | enables the `recommended` rules |
+<!-- begin auto-generated configs list -->
+
+|    | Name          |
+| :- | :------------ |
+| ✅  | `recommended` |
+
+<!-- end auto-generated configs list -->
 
 ## 🍟 Rules
+
 <!-- begin auto-generated rules list -->
 
 💼 [Configurations](https://github.com/ember-cli/eslint-plugin-ember#-configurations) enabled in.\
