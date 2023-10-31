@@ -788,6 +788,20 @@ ruleTester.run('no-get', rule, {
       ],
     },
     {
+      // useAt default value
+      // `lastObject` used at the beginning of a path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('lastObject.bar')[123];",
+      output: 'this.at(-1).bar[123];',
+      options: [{ useOptionalChaining: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
       // `lastObject` used at the beginning of a path.
       // And the result of get() is chained (getResultIsChained=true).
       code: "this.get('lastObject.bar')[123];",
