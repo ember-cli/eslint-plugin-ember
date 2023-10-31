@@ -110,7 +110,7 @@
     "typescript": "^5.0.2"
   },
   "peerDependencies": {
-    "eslint": ">= 7"
+    "eslint": ">= 8"
   },
   "engines": {
     "node": "18.* || 20.* || >= 21"
