@@ -93,7 +93,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^27.0.1",
     "eslint-plugin-markdown": "^3.0.0",
-    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-n": "^16.2.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-unicorn": "^46.0.1",
     "eslint-remote-tester": "^3.0.0",
@@ -113,7 +113,7 @@
     "eslint": ">= 7"
   },
   "engines": {
-    "node": "14.* || 16.* || >= 18"
+    "node": "18.* || 20.* || >= 21"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
