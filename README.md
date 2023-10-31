@@ -101,10 +101,10 @@ module.exports = {
 | [closure-actions](docs/rules/closure-actions.md)                                                 | enforce usage of closure actions                          | ✅  |    |    |
 | [new-module-imports](docs/rules/new-module-imports.md)                                           | enforce using "New Module Imports" from Ember RFC #176    | ✅  |    |    |
 | [no-array-prototype-extensions](docs/rules/no-array-prototype-extensions.md)                     | disallow usage of Ember's `Array` prototype extensions    |    | 🔧 |    |
-| [no-at-ember-render-modifiers](docs/rules/no-at-ember-render-modifiers.md)                       | disallow importing from @ember/render-modifiers           |    |    |    |
-| [no-deprecated-router-transition-methods](docs/rules/no-deprecated-router-transition-methods.md) | enforce usage of router service transition methods        |    | 🔧 |    |
+| [no-at-ember-render-modifiers](docs/rules/no-at-ember-render-modifiers.md)                       | disallow importing from @ember/render-modifiers           | ✅  |    |    |
+| [no-deprecated-router-transition-methods](docs/rules/no-deprecated-router-transition-methods.md) | enforce usage of router service transition methods        | ✅  | 🔧 |    |
 | [no-function-prototype-extensions](docs/rules/no-function-prototype-extensions.md)               | disallow usage of Ember's `function` prototype extensions | ✅  |    |    |
-| [no-implicit-injections](docs/rules/no-implicit-injections.md)                                   | enforce usage of implicit service injections              |    | 🔧 |    |
+| [no-implicit-injections](docs/rules/no-implicit-injections.md)                                   | enforce usage of implicit service injections              | ✅  | 🔧 |    |
 | [no-mixins](docs/rules/no-mixins.md)                                                             | disallow the usage of mixins                              | ✅  |    |    |
 | [no-new-mixins](docs/rules/no-new-mixins.md)                                                     | disallow the creation of new mixins                       | ✅  |    |    |
 | [no-observers](docs/rules/no-observers.md)                                                       | disallow usage of observers                               | ✅  |    |    |
@@ -140,7 +140,7 @@ module.exports = {
 | [no-classic-classes](docs/rules/no-classic-classes.md)                                     | disallow "classic" classes in favor of native JS classes                                                       | ✅  |    |    |
 | [no-ember-super-in-es-classes](docs/rules/no-ember-super-in-es-classes.md)                 | disallow use of `this._super` in ES class methods                                                              | ✅  | 🔧 |    |
 | [no-empty-glimmer-component-classes](docs/rules/no-empty-glimmer-component-classes.md)     | disallow empty backing classes for Glimmer components                                                          | ✅  |    |    |
-| [no-tracked-properties-from-args](docs/rules/no-tracked-properties-from-args.md)           | disallow creating @tracked properties from this.args                                                           |    |    |    |
+| [no-tracked-properties-from-args](docs/rules/no-tracked-properties-from-args.md)           | disallow creating @tracked properties from this.args                                                           | ✅  |    |    |
 
 ### jQuery
 
@@ -159,7 +159,7 @@ module.exports = {
 | [no-incorrect-calls-with-inline-anonymous-functions](docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | disallow inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce`                                    | ✅  |    |    |
 | [no-invalid-debug-function-arguments](docs/rules/no-invalid-debug-function-arguments.md)                               | disallow usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. | ✅  |    |    |
 | [no-restricted-property-modifications](docs/rules/no-restricted-property-modifications.md)                             | disallow modifying the specified properties                                                                                   |    | 🔧 |    |
-| [no-runloop](docs/rules/no-runloop.md)                                                                                 | disallow usage of `@ember/runloop` functions                                                                                  |    |    |    |
+| [no-runloop](docs/rules/no-runloop.md)                                                                                 | disallow usage of `@ember/runloop` functions                                                                                  | ✅  |    |    |
 | [require-fetch-import](docs/rules/require-fetch-import.md)                                                             | enforce explicit import for `fetch()`                                                                                         |    |    |    |
 
 ### Routes

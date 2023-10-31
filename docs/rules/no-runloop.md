@@ -1,5 +1,7 @@
 # ember/no-runloop
 
+💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Ember's runloop functions are not lifecycle-aware and don't ensure that an object's async is cleaned up. It is recommended to use [`ember-lifeline`](https://ember-lifeline.github.io/ember-lifeline/), [`ember-concurrency`](http://ember-concurrency.com/docs/introduction/), or [`@ember/destroyable`](https://rfcs.emberjs.com/id/0580-destroyables/) instead.
