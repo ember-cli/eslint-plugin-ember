@@ -20,7 +20,7 @@ import Component from '@ember/component';
 export default Component.extend({
   init() {
     this.set('items', []);
-  }
+  },
 });
 ```
 
@@ -30,7 +30,7 @@ import Component from '@ember/component';
 export default Component.extend({
   didInsertElement() {
     // ...
-  }
+  },
 });
 ```
 
@@ -53,7 +53,7 @@ export default Component.extend({
   init(...args) {
     this._super(...args);
     this.set('items', []);
-  }
+  },
 });
 ```
 
@@ -64,7 +64,7 @@ export default Component.extend({
   didInsertElement(...args) {
     this._super(...args);
     // ...
-  }
+  },
 });
 ```
 
@@ -96,3 +96,4 @@ This rule takes an optional object containing:
 
 - `boolean` -- `checkInitOnly` -- whether the rule should only check the `init` lifecycle hook and not other lifecycle hooks (default `false`)
 - `boolean` -- `checkNativeClasses` -- whether the rule should check lifecycle hooks in native classes (in addition to classic classes) (default `true`)
+- `boolean` -- `requireArgs` -- whether the rule should check if super() in init hook is called with args (default `false`)

@@ -231,6 +231,36 @@ eslintTester.run('require-super-in-lifecycle-hooks', rule, {
 
     // Does not throw with node type (ClassProperty) not handled by estraverse.
     'Component.extend({init() { class Foo { @someDecorator() someProp }; return this._super(...arguments); } });',
+
+    // init hook should not be checked for arguments when requireArgs = false
+    `import Service from '@ember/service';
+      class Foo extends Service {
+        init() {
+          super.init();
+        }
+      }`,
+    {
+      code: `import Service from '@ember/service';
+        class Foo extends Service {
+          init() {
+            super.init();
+          }
+        }`,
+      options: [{ requireArgs: false }],
+    },
+    `export default Component.extend({
+        init() {
+          this._super(...arguments);
+        },
+      });`,
+    {
+      code: `export default Component.extend({
+        init() {
+          this._super(...arguments);
+        },
+      });`,
+      options: [{ requireArgs: false }],
+    },
   ],
   invalid: [
     {
@@ -857,6 +887,74 @@ super.didInsertElement(...arguments);}
       }`,
       options: [{ checkNativeClasses: true, checkInitOnly: false }],
       errors: [{ message, line: 3 }],
+    },
+
+    // init hooks shoudn't call super without ...arguments
+    {
+      code: `import Service from '@ember/service';
+      class Foo extends Service {
+        init() {
+          super.init();
+        }
+      }`,
+      output: `import Service from '@ember/service';
+      class Foo extends Service {
+        init() {
+          super.init(...arguments);
+        }
+      }`,
+      options: [{ requireArgs: true }],
+      errors: [{ message, line: 3 }],
+    },
+    {
+      code: `import Service from '@ember/service';
+      class Foo extends Service {
+        init() {
+          super.init();
+          console.log();
+        }
+      }`,
+      output: `import Service from '@ember/service';
+      class Foo extends Service {
+        init() {
+          super.init(...arguments);
+          console.log();
+        }
+      }`,
+      options: [{ requireArgs: true }],
+      errors: [{ message, line: 3 }],
+    },
+    {
+      code: `export default Component.extend({
+        init() {
+          this._super();
+        },
+      });`,
+      output: `export default Component.extend({
+        init() {
+          this._super(...arguments);
+        },
+      });`,
+      options: [{ requireArgs: true }],
+      errors: [{ message, line: 2 }],
+    },
+    {
+      code: `export default Component.extend({
+        init() {
+          this._super();
+          this.set('prop', 'value');
+          this.set('prop2', 'value2');
+        },
+      });`,
+      output: `export default Component.extend({
+        init() {
+          this._super(...arguments);
+          this.set('prop', 'value');
+          this.set('prop2', 'value2');
+        },
+      });`,
+      options: [{ requireArgs: true }],
+      errors: [{ message, line: 2 }],
     },
   ],
 });
