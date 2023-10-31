@@ -66,5 +66,10 @@ export default class MyRoute extends Route {
 
 ## Configuration
 
-- object -- containing the following properties:
-  - boolean -- `allowControllerFor` -- whether the rule should allow or disallow routes from accessing the controller outside of `setupController`/`resetController` via `controllerFor` (default: `false`)
+<!-- begin auto-generated rule options list -->
+
+| Name                 | Description                                                                                                                                        | Type    | Default |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- | :------ | :------ |
+| `allowControllerFor` | Whether the rule should allow or disallow routes from accessing the controller outside of `setupController`/`resetController` via `controllerFor`. | Boolean | `false` |
+
+<!-- end auto-generated rule options list -->

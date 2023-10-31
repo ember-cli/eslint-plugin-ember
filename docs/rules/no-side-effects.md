@@ -46,7 +46,11 @@ export default Component.extend({
 
 ## Configuration
 
-This rule takes an optional object containing:
+<!-- begin auto-generated rule options list -->
 
-- `boolean` -- `catchEvents` -- whether the rule should catch function calls that send actions or events (default `true`)
-- `boolean` -- `checkPlainGetters` -- whether the rule should check plain (non-computed) getters in native classes for side effects (default `true`)
+| Name                | Description                                                                                    | Type    | Default |
+| :------------------ | :--------------------------------------------------------------------------------------------- | :------ | :------ |
+| `catchEvents`       | Whether the rule should catch function calls that send actions or events.                      | Boolean | `true`  |
+| `checkPlainGetters` | Whether the rule should check plain (non-computed) getters in native classes for side effects. | Boolean | `true`  |
+
+<!-- end auto-generated rule options list -->

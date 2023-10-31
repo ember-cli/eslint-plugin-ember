@@ -8,6 +8,14 @@ Note: this rule will not be added to the `recommended` configuration because it 
 
 ## Configuration
 
+<!-- begin auto-generated rule options list -->
+
+| Name    | Type  |
+| :------ | :---- |
+| `order` | Array |
+
+<!-- end auto-generated rule options list -->
+
 ```js
 const rules = {
   'ember/order-in-models': [

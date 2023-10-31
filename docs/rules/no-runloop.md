@@ -58,7 +58,13 @@ export default class MyComponent extends Component {
 
 ## Configuration
 
-If you have `@ember/runloop` functions that you wish to allow, you can configure this rule to allow specific methods. The configuration takes an object with the `allowList` property, which is an array of strings where the strings must be names of runloop functions.
+<!-- begin auto-generated rule options list -->
+
+| Name        | Description                                                                                                                                                                                                                                                               | Type     |
+| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------- |
+| `allowList` | If you have `@ember/runloop` functions that you wish to allow, you can configure this rule to allow specific methods. The configuration takes an object with the `allowList` property, which is an array of strings where the strings must be names of runloop functions. | String[] |
+
+<!-- end auto-generated rule options list -->
 
 ```js
 module.exports = {

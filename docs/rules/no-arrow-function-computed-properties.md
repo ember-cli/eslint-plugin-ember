@@ -38,9 +38,13 @@ const Person = EmberObject.extend({
 
 ## Configuration
 
-This rule takes an optional object containing:
+<!-- begin auto-generated rule options list -->
 
-- `boolean` -- `onlyThisContexts` -- whether the rule should allow or disallow computed properties where the arrow function body does not contain a `this` reference (default: `false`)
+| Name               | Description                                                                                                                      | Type    | Default |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------- | :------ | :------ |
+| `onlyThisContexts` | Whether the rule should allow or disallow computed properties where the arrow function body does not contain a `this` reference. | Boolean | `false` |
+
+<!-- end auto-generated rule options list -->
 
 ## References
 

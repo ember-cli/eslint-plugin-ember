@@ -41,11 +41,10 @@ TODO: suggest any fast/automated techniques for fixing violations in a large cod
 
 ## Configuration
 
-TODO: exclude this section if the rule has no extra configuration
-
-- object -- containing the following properties:
-  - string -- `parameterName1` -- TODO: description of parameter including the possible values and default value
-  - boolean -- `parameterName2` -- TODO: description of parameter including the possible values and default value
+<!-- begin auto-generated rule options list -->
+TODO: exclude this section if the rule has no extra configuration.
+TODO: ensure `meta.schema` contains descriptions, constraints, defaults, etc for all options.
+<!-- end auto-generated rule options list -->
 
 ## Related Rules
 

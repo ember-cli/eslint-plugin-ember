@@ -91,14 +91,18 @@ export default EmberObject.extend({
 
 ## Configuration
 
-This rule takes an optional object containing:
+<!-- begin auto-generated rule options list -->
 
-- `boolean` -- `ignoreGetProperties` -- whether the rule should ignore `getProperties` (default `false`)
-- `boolean` -- `ignoreNestedPaths` -- whether the rule should ignore `this.get('some.nested.property')` (can't be enabled at the same time as `useOptionalChaining`) (default `false`)
-- `boolean` -- `useAt` -- whether the rule should use `at(-1)` [Array.prototype.at()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at) to replace `lastObject` (default `true`)
-- `boolean` -- `useOptionalChaining` -- whether the rule should use the [optional chaining operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) `?.` to autofix nested paths such as `this.get('some.nested.property')` to `this.some?.nested?.property` (when this option is off, these nested paths won't be autofixed at all) (default `true`)
-- `boolean` -- `catchSafeObjects` -- whether the rule should catch non-`this` imported usages like `get(foo, 'bar')` (default `true`)
-- `boolean` -- `catchUnsafeObjects` -- whether the rule should catch non-`this` usages like `foo.get('bar')` even though we don't know for sure if `foo` is an Ember object (default `false`)
+| Name                  | Description                                                                                                                                                                                                                                                                                                                                   | Type    | Default |
+| :-------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ | :------ |
+| `catchSafeObjects`    | Whether the rule should catch non-`this` imported usages like `get(foo, 'bar')`.                                                                                                                                                                                                                                                              | Boolean | `true`  |
+| `catchUnsafeObjects`  | Whether the rule should catch non-`this` usages like `foo.get('bar')` even though we don't know for sure if `foo` is an Ember object.                                                                                                                                                                                                         | Boolean | `false` |
+| `ignoreGetProperties` | Whether the rule should ignore `getProperties`.                                                                                                                                                                                                                                                                                               | Boolean | `false` |
+| `ignoreNestedPaths`   | Whether the rule should ignore `this.get('some.nested.property')` (can't be enabled at the same time as `useOptionalChaining`).                                                                                                                                                                                                               | Boolean | `false` |
+| `useAt`               | Whether the rule should use `at(-1)` [Array.prototype.at()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at) to replace `lastObject`.                                                                                                                                                               | Boolean | `true`  |
+| `useOptionalChaining` | Whether the rule should use the [optional chaining operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) `?.` to autofix nested paths such as `this.get('some.nested.property')` to `this.some?.nested?.property` (when this option is off, these nested paths won't be autofixed at all). | Boolean | `true`  |
+
+<!-- end auto-generated rule options list -->
 
 ## Related Rules
 

@@ -45,10 +45,17 @@ class MyComponent extends Component {
 
 ## Configuration
 
-- object[] -- containing the following properties:
-  - string[] -- `services` -- list of (kebab-case) service names that should be disallowed from being injected under the specified paths
-  - string[] -- `paths` -- optional list of regexp file paths that injecting the specified services should be disallowed under (omit this field to match any path) (for glob patterns, use [ESLint `overrides`](https://eslint.org/docs/latest/user-guide/configuring/configuration-files#configuration-based-on-glob-patterns) instead)
-  - string -- `message` -- optional custom error message to display for violations
+Accepts an array of the objects with the following options:
+
+<!-- begin auto-generated rule options list -->
+
+| Name       | Description                                                                                                                                                                                                                                                                                                    | Type     | Required |
+| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------- | :------- |
+| `message`  | Optional custom error message to display for violations.                                                                                                                                                                                                                                                       | String   |          |
+| `paths`    | Optional list of regexp file paths that injecting the specified services should be disallowed under (omit this field to match any path) (for glob patterns, use [ESLint `overrides`](https://eslint.org/docs/latest/user-guide/configuring/configuration-files#configuration-based-on-glob-patterns) instead). | String[] |          |
+| `services` | List of (kebab-case) service names that should be disallowed from being injected under the specified paths.                                                                                                                                                                                                    | String[] | Yes      |
+
+<!-- end auto-generated rule options list -->
 
 ## Related Rules
 
