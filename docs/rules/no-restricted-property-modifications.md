@@ -56,7 +56,12 @@ export default class MyComponent extends Component {
 
 ## Configuration
 
-- object -- containing the following properties:
-  - `String[]` -- `properties` -- array of names of properties that should not be modified (modifying child/nested/sub-properties of these is also not allowed)
+<!-- begin auto-generated rule options list -->
+
+| Name         | Description                                                                                                                    | Type     | Required |
+| :----------- | :----------------------------------------------------------------------------------------------------------------------------- | :------- | :------- |
+| `properties` | Array of names of properties that should not be modified (modifying child/nested/sub-properties of these is also not allowed). | String[] | Yes      |
+
+<!-- end auto-generated rule options list -->
 
 Not yet implemented: There is currently no way to configure whether sub-properties are restricted from modification. To make this configurable, the `properties` array option could be updated to also accept objects of the form `{ name: 'myPropertyName', includeSubProperties: false }` where `includeSubProperties` defaults to `true`.
