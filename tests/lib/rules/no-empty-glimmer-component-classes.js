@@ -55,6 +55,16 @@ ruleTester.run('no-empty-glimmer-component-classes', rule, {
       code: `
         import Component from '@glimmer/component';
 
+        export default class MyComponent extends Component {
+          property = '';
+        }
+      `,
+      parser: require.resolve('@typescript-eslint/parser'),
+    },
+    {
+      code: `
+        import Component from '@glimmer/component';
+
         export interface SomeSig {}
         export interface SomeOtherSig {}
 

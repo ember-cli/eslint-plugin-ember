@@ -42,6 +42,24 @@ module.exports = {
 };
 ```
 
+## gts/gjs
+
+lint files having `First-Class Component Templates`
+
+learn more [here](https://github.com/ember-template-imports/ember-template-imports)
+
+```js
+// .eslintrc.js
+module.exports = {
+  overrides: [
+    {
+      files: ['**/*.gts', '**/*.gjs'],
+      parser: 'eslint-plugin-ember/gjs-gts-parser',
+    }
+  ],
+};
+```
+
 ## 🧰 Configurations
 
 <!-- begin auto-generated configs list -->

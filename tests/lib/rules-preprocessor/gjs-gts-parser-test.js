@@ -10,13 +10,15 @@
 const { ESLint } = require('eslint');
 const plugin = require('../../../lib');
 
+const gjsGtsParser = require.resolve('../../../lib/parsers/gjs-gts-parser');
+
 /**
  * Helper function which creates ESLint instance with enabled/disabled autofix feature.
  *
  * @param {String} parser The parser to use.
  * @returns {ESLint} ESLint instance to execute in tests.
  */
-function initESLint(parser = '@babel/eslint-parser') {
+function initESLint(parser = gjsGtsParser) {
   // tests must be run with ESLint 7+
   return new ESLint({
     ignore: false,
@@ -27,13 +29,30 @@ function initESLint(parser = '@babel/eslint-parser') {
       env: {
         browser: true,
       },
-      parser,
       parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
       },
+      parser,
       plugins: ['ember'],
       extends: ['plugin:ember/recommended'],
+      overrides: [
+        {
+          files: ['**/*.gts'],
+          parserOptions: {
+            project: './tsconfig.eslint.json',
+            tsconfigRootDir: __dirname,
+            extraFileExtensions: ['.gts'],
+          },
+          extends: [
+            'plugin:@typescript-eslint/recommended-requiring-type-checking',
+            'plugin:ember/recommended',
+          ],
+          rules: {
+            'no-trailing-spaces': 'error',
+          },
+        },
+      ],
       rules: {
         quotes: ['error', 'single'],
         semi: ['error', 'always'],
@@ -60,7 +79,7 @@ const valid = [
           super(...arguments);
         }
       }
-    `,
+  `,
   },
   {
     filename: 'my-component.gjs',
@@ -113,9 +132,11 @@ const valid = [
     }
 
     export default class List<T> extends Component<ListSignature<T>> {
-      <template>Hello!</template>
+      <template>
+        <div>Hello!</div>
+      </template>
     }`,
-    parser: '@typescript-eslint/parser',
+    parser: gjsGtsParser,
   },
   {
     filename: 'my-component.gjs',
@@ -134,22 +155,48 @@ const valid = [
       }
     `,
   },
-  /**
-   * TODO: SKIP this scenario. Tracked in https://github.com/ember-cli/eslint-plugin-ember/issues/1685
   {
     filename: 'my-component.gjs',
     code: `
-      const Foo = <template>hi</template>
+      const Foo = <template>hi</template>;
 
       <template>
         <Foo />
       </template>
     `,
   },
-   */
 ];
 
 const invalid = [
+  {
+    parser: '@typescript-eslint/parser',
+    filename: 'my-component.gjs',
+    code: `import Component from '@glimmer/component';
+    export default class MyComponent extends Component {
+      <template>Hello!</template>
+    }`,
+    errors: [
+      {
+        message:
+          'Parsing error: Unexpected token. A constructor, method, accessor, or property was expected.\n' +
+          'To lint Gjs/Gts files please follow the setup guide at https://github.com/ember-cli/eslint-plugin-ember#gtsgjs',
+        line: 3,
+        column: 6,
+      },
+    ],
+  },
+  {
+    filename: 'my-component.gjs',
+    code: `import Component from '@glimmer/component';
+    export default classsss MyComponent extends Component {
+      <template>Hello!</template>
+    }`,
+    errors: [
+      {
+        message: 'Parsing error: Parse Error at <anon>:2:29: 2:40',
+      },
+    ],
+  },
   {
     filename: 'my-component.gjs',
     code: `import Component from '@glimmer/component';
@@ -165,7 +212,6 @@ const invalid = [
       },
     ],
   },
-
   {
     filename: 'my-component.gjs',
     code: `
@@ -177,10 +223,10 @@ const invalid = [
     `,
     errors: [
       {
-        message: "Error in template: 'on' is not defined.",
-        line: 4,
-        column: 7,
-        endColumn: 17,
+        message: "'on' is not defined.",
+        line: 5,
+        column: 11,
+        endColumn: 13,
       },
     ],
   },
@@ -193,10 +239,34 @@ const invalid = [
     `,
     errors: [
       {
-        message: "Error in template: 'noop' is not defined.",
-        line: 2,
-        column: 7,
-        endColumn: 17,
+        message: "'noop' is not defined.",
+        line: 3,
+        column: 11,
+        endColumn: 15,
+      },
+    ],
+  },
+  {
+    filename: 'my-component.gjs',
+    code: `
+      <template>
+      {{#let 'x' as |noop notUsed usedEl|}}
+        {{noop}}
+        <usedEl />
+      {{/let}}
+      </template>
+    `,
+    errors: [
+      {
+        column: 27,
+        endColumn: 34,
+        endLine: 3,
+        line: 3,
+        message: "'notUsed' is defined but never used.",
+        messageId: 'unusedVar',
+        nodeType: 'BlockParam',
+        ruleId: 'no-unused-vars',
+        severity: 2,
       },
     ],
   },
@@ -209,10 +279,10 @@ const invalid = [
     `,
     errors: [
       {
-        message: "Error in template: 'Foo' is not defined.",
-        line: 2,
-        column: 7,
-        endColumn: 17,
+        message: "'Foo' is not defined.",
+        line: 3,
+        column: 9,
+        endColumn: 16,
       },
     ],
   },
@@ -225,10 +295,10 @@ const invalid = [
     `,
     errors: [
       {
-        message: "Error in template: 'F_0_O' is not defined.",
-        line: 2,
-        column: 7,
-        endColumn: 17,
+        message: "'F_0_O' is not defined.",
+        line: 3,
+        column: 9,
+        endColumn: 18,
       },
     ],
   },
@@ -270,6 +340,29 @@ const invalid = [
         endLine: 7,
         column: 9,
         endColumn: 20,
+      },
+    ],
+  },
+  {
+    filename: 'my-component.gts',
+    parser: gjsGtsParser,
+    code: `
+      import Component from '@glimmer/component';
+
+      export default class MyComponent extends Component {
+        foo = 'bar';
+
+        <template>
+          <div></div>${'  '}
+        </template>
+      }`,
+    errors: [
+      {
+        message: 'Trailing spaces not allowed.',
+        line: 8,
+        endLine: 8,
+        column: 22,
+        endColumn: 24,
       },
     ],
   },
@@ -344,18 +437,14 @@ describe('template-vars', () => {
       // eslint-disable-next-line jest/valid-title
       it(code, async () => {
         const eslint = initESLint(parser);
-        const results = await eslint.lintText(code, { filePath: filename });
+        const results = await eslint.lintText(code, {
+          filePath: `./tests/lib/rules-preprocessor/${filename}`,
+        });
         const resultErrors = results.flatMap((result) => result.messages);
 
         // This gives more meaningful information than
         // checking if results is empty / length === 0
-        let message = '';
-
-        if (results && results[0]) {
-          message = results[0]?.messages[0]?.message || '';
-        }
-
-        expect(message).toBe('');
+        expect(results[0]?.messages).toHaveLength(0);
         expect(resultErrors).toHaveLength(0);
       });
     }
@@ -368,7 +457,9 @@ describe('template-vars', () => {
       // eslint-disable-next-line jest/valid-title
       it(code, async () => {
         const eslint = initESLint(parser);
-        const results = await eslint.lintText(code, { filePath: filename });
+        const results = await eslint.lintText(code, {
+          filePath: `./tests/lib/rules-preprocessor/${filename}`,
+        });
 
         const resultErrors = results.flatMap((result) => result.messages);
         expect(resultErrors).toHaveLength(errors.length);
@@ -472,6 +563,40 @@ describe('lint errors on the exact line as the <template> tag', () => {
   });
 });
 
+describe('supports eslint directives inside templates', () => {
+  it('works with mustache comment', async () => {
+    const eslint = initESLint();
+    const code = `
+    // test comment
+    <template>
+      <div>
+        {{!eslint-disable-next-line}}
+        {{test}}
+      </div>
+    </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(0);
+  });
+  it('works with html comment', async () => {
+    const eslint = initESLint();
+    const code = `
+    <template>
+      <div>
+        <!--eslint-disable-next-line-->
+        {{test}}
+      </div>
+    </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(0);
+  });
+});
+
 describe('multiple tokens in same file', () => {
   it('correctly maps duplicate tokens to the correct lines', async () => {
     const eslint = initESLint();
@@ -481,7 +606,7 @@ describe('multiple tokens in same file', () => {
       // comment three
       const two = 2;
 
-      const three = <template> "bar" </template>
+      const three = <template> "bar" </template>;
     `;
     const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
 
@@ -518,7 +643,7 @@ describe('multiple tokens in same file', () => {
     const code = `
       // comment Bad
 
-      const tmpl = <template><Bad /></template>
+      const tmpl = <template><Bad /></template>;
     `;
     const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
 
@@ -538,13 +663,13 @@ describe('multiple tokens in same file', () => {
     });
 
     expect(resultErrors[1]).toStrictEqual({
-      column: 20,
-      endColumn: 30,
+      column: 30,
+      endColumn: 37,
       endLine: 4,
       line: 4,
-      message: "Error in template: 'Bad' is not defined.",
+      message: "'Bad' is not defined.",
       messageId: 'undef',
-      nodeType: 'Identifier',
+      nodeType: 'GlimmerElementNode',
       ruleId: 'no-undef',
       severity: 2,
     });
@@ -555,8 +680,8 @@ describe('multiple tokens in same file', () => {
     import Component from '@glimmer/component';
 
     export const fakeTemplate = <template>
-      <div>"foo!"</div>
-    </template>
+      <div>{{foo}}</div>
+    </template>;
 
     export default class MyComponent extends Component {
       constructor() {
@@ -566,7 +691,7 @@ describe('multiple tokens in same file', () => {
       foo = 'bar';
       <template>
         <div>
-          some totally random, non-meaningful text
+          some totally random, non-meaningful text {{bar}}
         </div>
       </template>
     }
@@ -574,8 +699,11 @@ describe('multiple tokens in same file', () => {
     const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
 
     const resultErrors = results.flatMap((result) => result.messages);
-    expect(resultErrors).toHaveLength(1);
-    expect(resultErrors[0].message).toBe('Expected blank line between class members.');
-    expect(resultErrors[0].line).toBe(14);
+    expect(resultErrors).toHaveLength(2);
+    expect(resultErrors[0].message).toBe("'foo' is not defined.");
+    expect(resultErrors[0].line).toBe(5);
+
+    expect(resultErrors[1].message).toBe("'bar' is not defined.");
+    expect(resultErrors[1].line).toBe(16);
   });
 });
