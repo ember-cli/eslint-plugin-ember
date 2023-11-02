@@ -22,8 +22,6 @@ Otherwise, it receives the same options as the original and can run together wit
 ## Rule Details
 
 Enforce consistent indentation for fcct templates
-
-
 ## Examples
 
 Examples of **incorrect** code for this rule:
