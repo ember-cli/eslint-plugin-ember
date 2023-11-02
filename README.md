@@ -44,7 +44,7 @@ module.exports = {
 
 ## gts/gjs
 
-lint files having `First-Class Component Templates`
+lint files having `First-Class Component Templates` (fcct)
 
 learn more [here](https://github.com/ember-template-imports/ember-template-imports)
 
@@ -58,6 +58,49 @@ module.exports = {
     }
   ],
 };
+```
+
+### rules applied to fcct templates
+* semi rule, same as prettier https://github.com/gitKrystan/prettier-plugin-ember-template-tag/issues/1
+* no-undef rule will take effect for template vars (includes js scope)
+* no-unsed rule will take effect for template block params
+
+rules in tempates can be disabled with eslint directives with mustache or html comments:
+
+
+[!NOTE]
+html does not have the distinction of line or block comments, which is why block comments should start with `!<--- ... -->` (3 dashes and a space, end with 2 dashes)
+
+```hbs
+<template>
+  <div>
+    {{!eslint-disable-next-line}}
+    {{test}}
+  </div>
+  <div>
+    {{!--eslint-disable--}}
+    {{test}}
+    {{test}}
+    {{test}}
+    {{!--eslint-enable--}}
+  </div>
+</template>
+```
+
+```
+<template>
+  <div>
+    <!--eslint-disable-next-line-->
+    {{test}}
+  </div>
+  <div>
+    <!--- eslint-disable -->
+    {{test}}
+    {{test}}
+    {{test}}
+    <!--- eslint-enable -->
+  </div>
+</template>
 ```
 
 ## 🧰 Configurations
