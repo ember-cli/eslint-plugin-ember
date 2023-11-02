@@ -62,7 +62,7 @@ module.exports = {
 
 ### rules applied to fcct templates
 
-- semi rule, same as prettier https://github.com/gitKrystan/prettier-plugin-ember-template-tag/issues/1
+- semi rule, same as [prettier plugin](https://github.com/gitKrystan/prettier-plugin-ember-template-tag/issues/1)
 - no-undef rule will take effect for template vars (includes js scope)
 - no-unsed rule will take effect for template block params
 
