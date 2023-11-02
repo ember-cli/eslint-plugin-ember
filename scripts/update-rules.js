@@ -18,25 +18,25 @@ const path = require('path');
 // Main
 // ------------------------------------------------------------------------------
 
-const root = path.resolve(__dirname, '../lib/rules');
-const recommendedRulesFile = path.resolve(__dirname, '../lib/recommended-rules.js');
+function generate(filename, filter) {
+  const root = path.resolve(__dirname, '../lib/rules');
+  const recommendedRulesFile = path.resolve(__dirname, filename);
 
-const rules = fs
-  .readdirSync(root)
-  .filter((file) => path.extname(file) === '.js')
-  .map((file) => path.basename(file, '.js'))
-  .map((fileName) => [fileName, require(path.join(root, fileName))]); // eslint-disable-line import/no-dynamic-require
+  const rules = fs
+    .readdirSync(root)
+    .filter((file) => path.extname(file) === '.js')
+    .map((file) => path.basename(file, '.js'))
+    .map((fileName) => [fileName, require(path.join(root, fileName))]); // eslint-disable-line import/no-dynamic-require
 
-const recommendedRules = rules.reduce((obj, entry) => {
-  const name = `ember/${entry[0]}`;
-  const recommended = entry[1].meta.docs.recommended;
-  if (recommended) {
-    obj[name] = 'error'; // eslint-disable-line no-param-reassign
-  }
-  return obj;
-}, {});
+  const recommendedRules = rules.reduce((obj, entry) => {
+    const name = `ember/${entry[0]}`;
+    if (filter(entry)) {
+      obj[name] = 'error'; // eslint-disable-line no-param-reassign
+    }
+    return obj;
+  }, {});
 
-const recommendedRulesContent = `/*
+  const recommendedRulesContent = `/*
  * IMPORTANT!
  * This file has been automatically generated.
  * In order to update its content based on rules'
@@ -44,4 +44,9 @@ const recommendedRulesContent = `/*
  */
 module.exports = ${JSON.stringify(recommendedRules, null, 2)}`;
 
-fs.writeFileSync(recommendedRulesFile, recommendedRulesContent);
+  fs.writeFileSync(recommendedRulesFile, recommendedRulesContent);
+}
+
+generate('../lib/recommended-rules.js', (entry) => entry[1].meta.docs.recommended);
+generate('../lib/recommended-rules-gjs.js', (entry) => entry[1].meta.docs.category === 'gjs');
+generate('../lib/recommended-rules-gts.js', (entry) => entry[1].meta.docs.category === 'gts');
