@@ -5,8 +5,6 @@
 const rule = require('../../../lib/rules/template-no-let-reference');
 const RuleTester = require('eslint').RuleTester;
 
-const { ERROR_MESSAGE } = rule;
-
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
@@ -48,7 +46,7 @@ ruleTester.run('template-no-let-reference', rule, {
       </template>
       `,
       output: null,
-      errors: [{ type: 'VarHead', message: ERROR_MESSAGE }],
+      errors: [{ type: 'VarHead', message: rule.meta.messages['no-let'] }],
     },
     {
       code: `
@@ -58,7 +56,7 @@ ruleTester.run('template-no-let-reference', rule, {
       </template>
       `,
       output: null,
-      errors: [{ type: 'GlimmerElementNode', message: ERROR_MESSAGE }],
+      errors: [{ type: 'GlimmerElementNode', message: rule.meta.messages['no-let'] }],
     },
   ],
 });
