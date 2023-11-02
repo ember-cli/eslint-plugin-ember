@@ -23,18 +23,6 @@ Otherwise, it receives the same options as the original and can run together wit
 
 Enforce consistent indentation for fcct templates
 
-```js
-const rules = {
-  'ember/template-indent': [
-    'error',
-    2, // or 'tab'
-    {
-      ignoreComments: false,
-      ignoredNodes: []
-    }
-  ]
-};
-```
 
 ## Examples
 
