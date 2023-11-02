@@ -57,7 +57,7 @@ module.exports = {
       plugins: ['ember'],
       extends: [
         'eslint:recommended',
-        'plugin:ember/gts-recommended', // or other configuration
+        'plugin:ember/recommended', // or other configuration
       ],
       rules: {
         // override / enable optional rules
@@ -97,12 +97,9 @@ module.exports = {
 
 - semi rule, same as [prettier plugin](https://github.com/gitKrystan/prettier-plugin-ember-template-tag/issues/1)
 - no-undef rule will take effect for template vars (includes js scope)
-- no-unsed rule will take effect for template block params
+- no-unused rule will take effect for template block params
 
-rules in tempates can be disabled with eslint directives with mustache or html comments:
-
-[!NOTE]
-html does not have the distinction of line or block comments, which is why block comments should start with `<!--- ... -->` (3 dashes and a space, end with 2 dashes)
+rules in templates can be disabled with eslint directives with mustache or html comments:
 
 ```hbs
 <template>
@@ -127,11 +124,11 @@ html does not have the distinction of line or block comments, which is why block
     {{test}}
   </div>
   <div>
-    <!--- eslint-disable -->
+    <!-- eslint-disable -->
     {{test}}
     {{test}}
     {{test}}
-    <!--- eslint-enable -->
+    <!-- eslint-enable -->
   </div>
 </template>
 ```

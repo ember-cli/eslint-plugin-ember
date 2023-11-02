@@ -573,6 +573,13 @@ describe('supports eslint directives inside templates', () => {
         {{!eslint-disable-next-line}}
         {{test}}
       </div>
+      <div>
+        {{!--eslint-disable--}}
+        {{test}}
+        {{test}}
+        {{test}}
+        {{!--eslint-enable--}}
+      </div>
     </template>
     `;
     const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
@@ -587,6 +594,13 @@ describe('supports eslint directives inside templates', () => {
       <div>
         <!--eslint-disable-next-line-->
         {{test}}
+      </div>
+      <div>
+        <!-- eslint-disable -->
+        {{test}}
+        {{test}}
+        {{test}}
+        <!-- eslint-enable -->
       </div>
     </template>
     `;

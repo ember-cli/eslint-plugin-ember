@@ -70,7 +70,7 @@
   "dependencies": {
     "@babel/eslint-parser": "^7.15.8",
     "@ember-data/rfc395-data": "^0.0.4",
-    "@glimmer/syntax": "^0.85.8",
+    "@glimmer/syntax": "^0.85.11",
     "@typescript-eslint/parser": "^5.62.0",
     "@typescript-eslint/scope-manager": "^5.62.0",
     "content-tag": "^1.1.2",
