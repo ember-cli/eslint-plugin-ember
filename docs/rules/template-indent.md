@@ -4,6 +4,10 @@
 
 <!-- end auto-generated rule header -->
 
+## Rule Details
+
+Enforce consistent indentation for fcct templates.
+
 This rule extends the base [eslint indent](https://eslint.org/docs/latest/rules/indent) rule, but only applies the indents to Glimmer Nodes.
 
 Otherwise, it receives the same options as the original and can run together with the base rule.
@@ -18,10 +22,6 @@ Otherwise, it receives the same options as the original and can run together wit
 | `ignoredNodes`   | String[] |         |
 
 <!-- end auto-generated rule options list -->
-
-## Rule Details
-
-Enforce consistent indentation for fcct templates
 
 ## Examples
 
