@@ -57,7 +57,7 @@ module.exports = {
       plugins: ['ember'],
       extends: [
         'eslint:recommended',
-        'plugin:ember/gts-recommended', // or other configuration
+        'plugin:ember/recommended', // or other configuration
       ],
       rules: {
         // override / enable optional rules
@@ -101,8 +101,8 @@ module.exports = {
 
 rules in tempates can be disabled with eslint directives with mustache or html comments:
 
-[!NOTE]
-html does not have the distinction of line or block comments, which is why block comments should start with `<!--- ... -->` (3 dashes and a space, end with 2 dashes)
+> [!NOTE]  
+> html does not have the distinction of line or block comments, which is why block comments should start with `<!--- ... -->` (3 dashes and a space, end with 2 dashes)
 
 ```hbs
 <template>
