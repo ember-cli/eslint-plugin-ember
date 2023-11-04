@@ -87,6 +87,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-decorators": "^7.23.2",
+    "@release-it-plugins/lerna-changelog": "^6.0.0",
     "@types/eslint": "^8.44.6",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "eslint": "^8.52.0",
@@ -110,7 +111,6 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^3.0.3",
     "release-it": "^16.2.1",
-    "release-it-lerna-changelog": "^5.0.0",
     "sort-package-json": "^2.6.0",
     "typescript": "^5.2.2"
   },
@@ -135,7 +135,7 @@
   },
   "release-it": {
     "plugins": {
-      "release-it-lerna-changelog": {
+      "@release-it-plugins/lerna-changelog": {
         "infile": "CHANGELOG.md",
         "launchEditor": true
       }
