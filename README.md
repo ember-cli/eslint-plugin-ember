@@ -137,12 +137,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 <!-- begin auto-generated configs list -->
 
-|    | Name              |
-| :- | :---------------- |
-|    | `base`            |
-| ✅  | `recommended`     |
-|    | `recommended-gjs` |
-|    | `recommended-gts` |
+|                                 | Name              |
+| :------------------------------ | :---------------- |
+|                                 | `base`            |
+| ✅                               | `recommended`     |
+| ![gjs logo](/docs/svgs/gjs.svg) | `recommended-gjs` |
+| ![gts logo](/docs/svgs/gts.svg) | `recommended-gts` |
 
 <!-- end auto-generated configs list -->
 
