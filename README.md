@@ -48,13 +48,17 @@ lint files having `First-Class Component Templates` (fcct)
 
 learn more [here](https://github.com/ember-template-imports/ember-template-imports)
 
+> [!NOTE]
+> special care should be used when setting up parsers, since they cannot be overwritten. thus they should be used in override only and specific to file types
+
 ```js
 // .eslintrc.js
 module.exports = {
   overrides: [
     {
-      files: ['**/*.{js,ts,gjs,gts}'],
+      files: ['**/*.{js,ts}'],
       plugins: ['ember'],
+      parser: '@typescript-eslint/parser',
       extends: [
         'eslint:recommended',
         'plugin:ember/recommended', // or other configuration
@@ -70,6 +74,7 @@ module.exports = {
       plugins: ['ember'],
       extends: [
         'eslint:recommended',
+        'plugin:ember/recommended',
         'plugin:ember/gts-recommended', // or other configuration
       ],
     },
@@ -79,6 +84,7 @@ module.exports = {
       plugins: ['ember'],
       extends: [
         'eslint:recommended',
+        'plugin:ember/recommended',
         'plugin:ember/gjs-recommended', // or other configuration
       ],
     },
