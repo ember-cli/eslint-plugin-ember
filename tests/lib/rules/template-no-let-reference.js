@@ -17,9 +17,17 @@ ruleTester.run('template-no-let-reference', rule, {
   valid: [
     `
       const a = '';
+      function create(d) {
       <template>
+        <Abc as |x a|>
+          {{x}}
+          {{a}}
+        </Abc>
       {{a}}
+      {{d}}
+      {{this.f}}
       </template>
+      }
     `,
     `
       const a = '';
