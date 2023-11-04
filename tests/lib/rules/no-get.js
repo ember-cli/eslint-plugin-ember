@@ -7,7 +7,7 @@ const { ERROR_MESSAGE_GET, ERROR_MESSAGE_GET_PROPERTIES } = rule;
 const ruleTester = new RuleTester({
   parser: require.resolve('@babel/eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2022,
     sourceType: 'module',
   },
 });
@@ -31,11 +31,11 @@ ruleTester.run('no-get', rule, {
     // Template literals.
     {
       code: 'this.get(`foo`);',
-      parserOptions: { ecmaVersion: 2020 },
+      parserOptions: { ecmaVersion: 2022 },
     },
     {
       code: "import { get } from '@ember/object'; get(this, `foo`);",
-      parserOptions: { ecmaVersion: 2020 },
+      parserOptions: { ecmaVersion: 2022 },
     },
 
     // Not `this`.

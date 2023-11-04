@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
   parser: require.resolve('@babel/eslint-parser'),
 });
 
@@ -347,7 +347,7 @@ eslintTester.run('order-in-components', rule, {
           ],
         },
       ],
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
     },
     {
       code: `export default Component.extend({
@@ -362,7 +362,7 @@ eslintTester.run('order-in-components', rule, {
           order: ['property', 'actions', 'custom:customProp', 'method'],
         },
       ],
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
     },
   ],
   invalid: [
@@ -971,7 +971,7 @@ eslintTester.run('order-in-components', rule, {
         bar() { const foo = 'bar'},
         onBar: () => {}
       });`,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
       errors: [
         {
           message:
@@ -1026,7 +1026,7 @@ eslintTester.run('order-in-components', rule, {
           order: ['property', 'custom:customProp', 'actions', 'method'],
         },
       ],
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
       errors: [
         {
           message: 'The "customProp" custom property should be above the actions hash on line 3',
@@ -1052,7 +1052,7 @@ eslintTester.run('order-in-components', rule, {
           order: ['method', 'custom:customProp'],
         },
       ],
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
       errors: [
         {
           message:

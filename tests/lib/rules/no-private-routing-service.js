@@ -22,7 +22,7 @@ const NEW_SERVICE_IMPORT = "import {service} from '@ember/service';";
 const ruleTester = new RuleTester({
   parser: require.resolve('@babel/eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2022,
     sourceType: 'module',
   },
 });

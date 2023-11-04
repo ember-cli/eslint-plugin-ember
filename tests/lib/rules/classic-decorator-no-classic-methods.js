@@ -7,7 +7,7 @@ const { disallowedMethodErrorMessage } = rule;
 
 const ruleTester = new RuleTester({
   parser: require.resolve('@babel/eslint-parser'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 
 ruleTester.run('classic-decorator-no-classic-methods', rule, {

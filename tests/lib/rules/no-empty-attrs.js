@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 
 const message = 'Supply proper attribute type';
@@ -24,7 +24,7 @@ eslintTester.run('no-empty-attrs', rule, {
       code: `someArrayOfStrings.filter(function(attr) {
         return attr.underscore();
       });`,
-      parserOptions: { ecmaVersion: 2020 },
+      parserOptions: { ecmaVersion: 2022 },
     },
     `export default Model.extend({
         someArray: someArrayOfStrings.filter(function(attr) {
