@@ -14,7 +14,7 @@ const { ERROR_MESSAGE } = rule;
 
 const eslintTester = new RuleTester({
   parser: require.resolve('@babel/eslint-parser'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 
 eslintTester.run('no-side-effects', rule, {
@@ -50,7 +50,7 @@ eslintTester.run('no-side-effects', rule, {
       `,
       parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
-        ecmaVersion: 2020,
+        ecmaVersion: 2022,
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
       },
@@ -64,7 +64,7 @@ eslintTester.run('no-side-effects', rule, {
       `,
       parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
-        ecmaVersion: 2020,
+        ecmaVersion: 2022,
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
       },
@@ -210,7 +210,7 @@ eslintTester.run('no-side-effects', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
       parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
-        ecmaVersion: 2020,
+        ecmaVersion: 2022,
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
       },
@@ -227,7 +227,7 @@ eslintTester.run('no-side-effects', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
       parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
-        ecmaVersion: 2020,
+        ecmaVersion: 2022,
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
       },
@@ -244,7 +244,7 @@ eslintTester.run('no-side-effects', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'CallExpression' }],
       parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
-        ecmaVersion: 2020,
+        ecmaVersion: 2022,
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
       },

@@ -14,7 +14,7 @@ const { addComputedImport } = require('../../helpers/test-case');
 
 const { PREVENT_GETTER_MESSAGE, ALWAYS_GETTER_MESSAGE, ALWAYS_WITH_SETTER_MESSAGE } = rule;
 const ruleTester = new RuleTester();
-const parserOptions = { ecmaVersion: 2020, sourceType: 'module' };
+const parserOptions = { ecmaVersion: 2022, sourceType: 'module' };
 const output = null;
 
 const alwaysWithSetterOptionErrors = [

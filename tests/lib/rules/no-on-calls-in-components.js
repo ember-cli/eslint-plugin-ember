@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 
 const message = "Don't use .on() for component lifecycle events.";
@@ -40,7 +40,7 @@ eslintTester.run('no-on-calls-in-components', rule, {
         ...foo,
       });
       `,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
     },
   ],
   invalid: [

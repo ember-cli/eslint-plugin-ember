@@ -11,12 +11,12 @@ const RuleTester = require('eslint').RuleTester;
 
 const ruleTester = new RuleTester({
   parser: require.resolve('../../../lib/parsers/gjs-gts-parser.js'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 
 const ruleTesterWithBaseIntent = new RuleTester({
   parser: require.resolve('../../../lib/parsers/gjs-gts-parser.js'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
   rules: {
     indent: 'warn',
   },

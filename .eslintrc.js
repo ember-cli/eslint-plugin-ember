@@ -4,7 +4,7 @@ module.exports = {
   root: true,
   parser: '@babel/eslint-parser',
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2022,
     sourceType: 'script',
     babelOptions: {
       configFile: require.resolve('./.babelrc'),
@@ -24,7 +24,7 @@ module.exports = {
     'prettier',
   ],
   env: {
-    es2020: true,
+    es2022: true,
     node: true,
     jest: true,
   },

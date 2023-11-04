@@ -12,7 +12,7 @@ const RuleTester = require('eslint').RuleTester;
 const ruleTester = new RuleTester({
   parser: require.resolve('@babel/eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2022,
     sourceType: 'module',
   },
 });
@@ -39,7 +39,7 @@ ruleTester.run('no-tracked-properties-from-args', rule, {
       }`,
     `
       import { tracked } from '@glimmer/tracking'
-      
+
       class Test {
         test = 7
       }`,
@@ -116,7 +116,7 @@ ruleTester.run('no-tracked-properties-from-args', rule, {
     {
       code: `
       import { tracked as fooTracked } from '@glimmer/tracking';
-      
+
       class Test {
         @fooTracked test = this.args.test
       }
