@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`recommended rules gjs config has the right list 1`] = `
+[
+  "template-no-let-reference",
+]
+`;
+
+exports[`recommended rules gts config has the right list 1`] = `
+[
+  "template-no-let-reference",
+]
+`;
+
 exports[`recommended rules has the right list 1`] = `
 [
   "avoid-leaking-state-in-ember-objects",
@@ -70,7 +82,6 @@ exports[`recommended rules has the right list 1`] = `
   "require-tagless-components",
   "require-valid-css-selector-in-test-helpers",
   "routes-segments-snake-case",
-  "template-no-let-reference",
   "use-brace-expansion",
   "use-ember-data-rfc-395-imports",
 ]

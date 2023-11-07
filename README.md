@@ -75,7 +75,7 @@ module.exports = {
       extends: [
         'eslint:recommended',
         'plugin:ember/recommended',
-        'plugin:ember/gts-recommended', // or other configuration
+        'plugin:ember/recommended-gts',
       ],
     },
     {
@@ -85,7 +85,7 @@ module.exports = {
       extends: [
         'eslint:recommended',
         'plugin:ember/recommended',
-        'plugin:ember/gjs-recommended', // or other configuration
+        'plugin:ember/recommended-gjs',
       ],
     },
     {
@@ -143,12 +143,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 <!-- begin auto-generated configs list -->
 
-|    | Name              |
-| :- | :---------------- |
-|    | `base`            |
-| ✅  | `recommended`     |
-|    | `recommended-gjs` |
-|    | `recommended-gts` |
+|                                 | Name              |
+| :------------------------------ | :---------------- |
+|                                 | `base`            |
+| ✅                               | `recommended`     |
+| ![gjs logo](/docs/svgs/gjs.svg) | `recommended-gjs` |
+| ![gts logo](/docs/svgs/gts.svg) | `recommended-gts` |
 
 <!-- end auto-generated configs list -->
 
@@ -158,6 +158,8 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 💼 [Configurations](https://github.com/ember-cli/eslint-plugin-ember#-configurations) enabled in.\
 ✅ Set in the `recommended` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
+![gjs logo](/docs/svgs/gjs.svg) Set in the `recommended-gjs` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
+![gts logo](/docs/svgs/gts.svg) Set in the `recommended-gts` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).\
 💡 Manually fixable by [editor suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
@@ -237,17 +239,17 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Ember Octane
 
-| Name                                                                                       | Description                                                                                                    | 💼 | 🔧 | 💡 |
-| :----------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- | :- | :- | :- |
-| [classic-decorator-hooks](docs/rules/classic-decorator-hooks.md)                           | enforce using correct hooks for both classic and non-classic classes                                           | ✅  |    |    |
-| [classic-decorator-no-classic-methods](docs/rules/classic-decorator-no-classic-methods.md) | disallow usage of classic APIs such as `get`/`set` in classes that aren't explicitly decorated with `@classic` | ✅  |    |    |
-| [no-actions-hash](docs/rules/no-actions-hash.md)                                           | disallow the actions hash in components, controllers, and routes                                               | ✅  |    |    |
-| [no-classic-classes](docs/rules/no-classic-classes.md)                                     | disallow "classic" classes in favor of native JS classes                                                       | ✅  |    |    |
-| [no-ember-super-in-es-classes](docs/rules/no-ember-super-in-es-classes.md)                 | disallow use of `this._super` in ES class methods                                                              | ✅  | 🔧 |    |
-| [no-empty-glimmer-component-classes](docs/rules/no-empty-glimmer-component-classes.md)     | disallow empty backing classes for Glimmer components                                                          | ✅  |    |    |
-| [no-tracked-properties-from-args](docs/rules/no-tracked-properties-from-args.md)           | disallow creating @tracked properties from this.args                                                           | ✅  |    |    |
-| [template-indent](docs/rules/template-indent.md)                                           | enforce consistent indentation for gts/gjs templates                                                           |    | 🔧 |    |
-| [template-no-let-reference](docs/rules/template-no-let-reference.md)                       | disallow referencing let variables in \<template\>                                                             | ✅  |    |    |
+| Name                                                                                       | Description                                                                                                    | 💼                                                              | 🔧 | 💡 |
+| :----------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- | :- | :- |
+| [classic-decorator-hooks](docs/rules/classic-decorator-hooks.md)                           | enforce using correct hooks for both classic and non-classic classes                                           | ✅                                                               |    |    |
+| [classic-decorator-no-classic-methods](docs/rules/classic-decorator-no-classic-methods.md) | disallow usage of classic APIs such as `get`/`set` in classes that aren't explicitly decorated with `@classic` | ✅                                                               |    |    |
+| [no-actions-hash](docs/rules/no-actions-hash.md)                                           | disallow the actions hash in components, controllers, and routes                                               | ✅                                                               |    |    |
+| [no-classic-classes](docs/rules/no-classic-classes.md)                                     | disallow "classic" classes in favor of native JS classes                                                       | ✅                                                               |    |    |
+| [no-ember-super-in-es-classes](docs/rules/no-ember-super-in-es-classes.md)                 | disallow use of `this._super` in ES class methods                                                              | ✅                                                               | 🔧 |    |
+| [no-empty-glimmer-component-classes](docs/rules/no-empty-glimmer-component-classes.md)     | disallow empty backing classes for Glimmer components                                                          | ✅                                                               |    |    |
+| [no-tracked-properties-from-args](docs/rules/no-tracked-properties-from-args.md)           | disallow creating @tracked properties from this.args                                                           | ✅                                                               |    |    |
+| [template-indent](docs/rules/template-indent.md)                                           | enforce consistent indentation for gts/gjs templates                                                           |                                                                 | 🔧 |    |
+| [template-no-let-reference](docs/rules/template-no-let-reference.md)                       | disallow referencing let variables in \<template\>                                                             | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 
 ### jQuery
 
