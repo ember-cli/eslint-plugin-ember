@@ -70,7 +70,7 @@ module.exports = {
       plugins: ['ember'],
       extends: [
         'eslint:recommended',
-        'plugin:ember/gts-recommended', // or other configuration
+        'plugin:ember/recommended-gts', // or other configuration
       ],
     },
     {
@@ -79,7 +79,7 @@ module.exports = {
       plugins: ['ember'],
       extends: [
         'eslint:recommended',
-        'plugin:ember/gjs-recommended', // or other configuration
+        'plugin:ember/recommended-gjs', // or other configuration
       ],
     },
     {
