@@ -64,7 +64,7 @@ ruleTester.run('template-no-let-reference', rule, {
       </template>
       `,
       output: null,
-      errors: [{ type: 'GlimmerElementNode', message: rule.meta.messages['no-let'] }],
+      errors: [{ type: 'GlimmerElementNodePart', message: rule.meta.messages['no-let'] }],
     },
   ],
 });
