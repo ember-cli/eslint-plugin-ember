@@ -159,9 +159,13 @@ const valid = [
     filename: 'my-component.gjs',
     code: `
       const Foo = <template>hi</template>;
-
+      const Bar = 'x';
       <template>
-        <Foo />
+        <Foo as |Abc Xyz|>
+          <Abc.x />
+          {{Xyz.x}}
+        </Foo>
+        <Bar.x />
       </template>
     `,
   },
