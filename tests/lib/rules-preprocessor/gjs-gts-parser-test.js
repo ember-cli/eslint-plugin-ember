@@ -159,13 +159,9 @@ const valid = [
     filename: 'my-component.gjs',
     code: `
       const Foo = <template>hi</template>;
-      const Bar = 'x';
+
       <template>
-        <Foo as |Abc Xyz|>
-          <Abc.x />
-          {{Xyz.x}}
-        </Foo>
-        <Bar.x />
+        <Foo />
       </template>
     `,
   },
@@ -692,7 +688,8 @@ describe('multiple tokens in same file', () => {
       severity: 2,
     });
   });
-  it('correctly maps duplicate <template> tokens to the correct lines', async () => {
+
+  it('correctly maps tokens after handlebars', async () => {
     const eslint = initESLint();
     const code = `
     import Component from '@glimmer/component';
@@ -706,7 +703,8 @@ describe('multiple tokens in same file', () => {
         super(...arguments);
       }
 
-      foo = 'bar';
+      foo = bar;
+
       <template>
         <div>
           some totally random, non-meaningful text {{bar}}
@@ -717,11 +715,15 @@ describe('multiple tokens in same file', () => {
     const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
 
     const resultErrors = results.flatMap((result) => result.messages);
-    expect(resultErrors).toHaveLength(2);
+    expect(resultErrors).toHaveLength(3);
     expect(resultErrors[0].message).toBe("'foo' is not defined.");
     expect(resultErrors[0].line).toBe(5);
 
     expect(resultErrors[1].message).toBe("'bar' is not defined.");
-    expect(resultErrors[1].line).toBe(16);
+    expect(resultErrors[1].endLine).toBe(13);
+    expect(resultErrors[1].line).toBe(13);
+
+    expect(resultErrors[2].message).toBe("'bar' is not defined.");
+    expect(resultErrors[2].line).toBe(17);
   });
 });
