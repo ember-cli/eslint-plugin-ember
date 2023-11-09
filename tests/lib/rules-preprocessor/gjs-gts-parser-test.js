@@ -159,9 +159,13 @@ const valid = [
     filename: 'my-component.gjs',
     code: `
       const Foo = <template>hi</template>;
-
+      const Bar = 'x';
       <template>
-        <Foo />
+        <Foo as |Abc Xyz|>
+          <Abc.x />
+          {{Xyz.x}}
+        </Foo>
+        <Bar.x />
       </template>
     `,
   },
@@ -253,6 +257,8 @@ const invalid = [
       {{#let 'x' as |noop notUsed usedEl|}}
         {{noop}}
         <usedEl />
+        <undef.x />
+        <non-std-html-tag />
       {{/let}}
       </template>
     `,
@@ -268,6 +274,28 @@ const invalid = [
         ruleId: 'no-unused-vars',
         severity: 2,
       },
+      {
+        column: 10,
+        endColumn: 15,
+        endLine: 6,
+        line: 6,
+        message: "'undef' is not defined.",
+        messageId: 'undef',
+        nodeType: 'GlimmerElementNodePart',
+        ruleId: 'no-undef',
+        severity: 2,
+      },
+      {
+        column: 10,
+        endColumn: 26,
+        endLine: 7,
+        line: 7,
+        message: "'non-std-html-tag' is not defined.",
+        messageId: 'undef',
+        nodeType: 'GlimmerElementNodePart',
+        ruleId: 'no-undef',
+        severity: 2,
+      },
     ],
   },
   {
@@ -275,14 +303,25 @@ const invalid = [
     code: `
       <template>
         <Foo />
+        <Bar>
+          <div></div>
+        </Bar>
       </template>
     `,
     errors: [
       {
         message: "'Foo' is not defined.",
         line: 3,
-        column: 9,
-        endColumn: 16,
+        endLine: 3,
+        column: 10,
+        endColumn: 13,
+      },
+      {
+        message: "'Bar' is not defined.",
+        line: 4,
+        endLine: 4,
+        column: 10,
+        endColumn: 13,
       },
     ],
   },
@@ -297,8 +336,8 @@ const invalid = [
       {
         message: "'F_0_O' is not defined.",
         line: 3,
-        column: 9,
-        endColumn: 18,
+        column: 10,
+        endColumn: 15,
       },
     ],
   },
@@ -677,13 +716,13 @@ describe('multiple tokens in same file', () => {
     });
 
     expect(resultErrors[1]).toStrictEqual({
-      column: 30,
-      endColumn: 37,
+      column: 31,
+      endColumn: 34,
       endLine: 4,
       line: 4,
       message: "'Bad' is not defined.",
       messageId: 'undef',
-      nodeType: 'GlimmerElementNode',
+      nodeType: 'GlimmerElementNodePart',
       ruleId: 'no-undef',
       severity: 2,
     });
