@@ -44,6 +44,17 @@
 
 
 
+
+## v12.0.0-alpha.2 (2023-11-10)
+
+#### :bug: Bug Fix
+* [#1994](https://github.com/ember-cli/eslint-plugin-ember/pull/1994) [gjs/gts parser] fix locations for ast after templates ([@patricklx](https://github.com/patricklx))
+* [#1992](https://github.com/ember-cli/eslint-plugin-ember/pull/1992) [gjs/gts parser] fix references for tags with a dot & non standard html tags ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
 ## v12.0.0-alpha.1 (2023-11-07)
 
 #### :boom: Breaking Change
