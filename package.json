@@ -68,6 +68,7 @@
     ]
   },
   "dependencies": {
+    "@babel/core": "^7.23.3",
     "@babel/eslint-parser": "^7.22.15",
     "@ember-data/rfc395-data": "^0.0.4",
     "@glimmer/syntax": "^0.85.12",
@@ -116,7 +117,13 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "eslint": ">= 8"
+    "eslint": ">= 8",
+    "typescript": "*"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
   },
   "engines": {
     "node": "18.* || 20.* || >= 21"
