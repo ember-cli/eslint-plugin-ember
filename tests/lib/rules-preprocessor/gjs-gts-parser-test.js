@@ -91,6 +91,10 @@ const valid = [
       <template>
         <div {{on 'click' noop}} />
       </template>
+
+      <template>
+        <div {{on 'click' noop}} />
+      </template>
     `,
   },
   {
