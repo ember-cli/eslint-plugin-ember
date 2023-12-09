@@ -1,9 +1,0 @@
-coverage/
-node_modules
-lib/recommended-rules.js
-lib/recommended-rules-gjs.js
-lib/recommended-rules-gts.js
-
-# Contains <template> in js markdown
-docs/rules/no-empty-glimmer-component-classes.md
-docs/rules/template-no-let-reference.md
