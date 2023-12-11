@@ -21,7 +21,10 @@
     "url": "git+https://github.com/ember-cli/eslint-plugin-ember.git"
   },
   "license": "MIT",
-  "exports": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./configs/*": "./lib/config/*.js"
+  },
   "main": "./lib/index.js",
   "directories": {
     "test": "test",
@@ -84,7 +87,7 @@
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-proposal-decorators": "^7.15.8",
     "@typescript-eslint/parser": "^5.31.0",
-    "eslint": "^8.20.0",
+    "eslint": "^8.55.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-doc-generator": "^1.0.0",
     "eslint-plugin-eslint-comments": "^3.2.0",

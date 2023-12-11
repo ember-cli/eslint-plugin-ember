@@ -2,7 +2,7 @@
 
 const plugin = require('../lib');
 const ember = require('../lib/utils/ember');
-const recommended = require('../lib/config/recommended');
+const recommendedLegacy = require('../lib/config-legacy/recommended');
 
 describe('plugin exports', () => {
   describe('utils', () => {
@@ -12,8 +12,8 @@ describe('plugin exports', () => {
   });
 
   describe('configs', () => {
-    it('has the right configurations', () => {
-      expect(plugin.configs).toStrictEqual({ recommended });
+    it('has the right configurations (legacy)', () => {
+      expect(plugin.configs).toStrictEqual({ recommended: recommendedLegacy });
     });
   });
 });
