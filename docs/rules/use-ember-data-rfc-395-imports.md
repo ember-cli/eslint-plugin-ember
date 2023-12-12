@@ -14,6 +14,8 @@ The goal of this rule is to ease the migration to the new @ember-data packages.
 
 ember-data has been split in multiple packages. For instance, its store is now released in "@ember-data/store" package. These packages have been released starting from ember-data version 3.11.
 
+For TypeScript users, imports from `ember-data/types/registries/*` are still allowed since there is currently no equivalent in the new packages.
+
 ## Examples
 
 Examples of **incorrect** code for this rule:
