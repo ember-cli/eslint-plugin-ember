@@ -92,7 +92,11 @@ class Foo extends Component {
 
 ## Configuration
 
-This rule takes an optional object containing:
+<!-- begin auto-generated rule options list -->
 
-- `boolean` -- `checkInitOnly` -- whether the rule should only check the `init` lifecycle hook and not other lifecycle hooks (default `false`)
-- `boolean` -- `checkNativeClasses` -- whether the rule should check lifecycle hooks in native classes (in addition to classic classes) (default `true`)
+| Name                 | Description                                                                                       | Type    | Default |
+| :------------------- | :------------------------------------------------------------------------------------------------ | :------ | :------ |
+| `checkInitOnly`      | Whether the rule should only check the `init` lifecycle hook and not other lifecycle hooks.       | Boolean | `false` |
+| `checkNativeClasses` | Whether the rule should check lifecycle hooks in native classes (in addition to classic classes). | Boolean | `true`  |
+
+<!-- end auto-generated rule options list -->

@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 2020 },
+  parserOptions: { ecmaVersion: 2022 },
 });
 
 eslintTester.run('no-ember-super-in-es-classes', rule, {

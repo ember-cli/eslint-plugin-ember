@@ -68,9 +68,13 @@ export default class MyComponent extends Component {}
 
 ## Configuration
 
-This rule takes an optional object containing:
+<!-- begin auto-generated rule options list -->
 
-- `boolean` -- `ignoreClassic` -- whether the rule should ignore usage inside of native classes labeled with `@classic` (default `true`)
+| Name            | Description                                                                            | Type    | Default |
+| :-------------- | :------------------------------------------------------------------------------------- | :------ | :------ |
+| `ignoreClassic` | Whether the rule should ignore usage inside of native classes labeled with `@classic`. | Boolean | `true`  |
+
+<!-- end auto-generated rule options list -->
 
 ## References
 

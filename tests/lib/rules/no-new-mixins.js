@@ -11,7 +11,7 @@ const RuleTester = require('eslint').RuleTester;
 
 const { ERROR_MESSAGE } = rule;
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 eslintTester.run('no-new-mixins', rule, {
   valid: [

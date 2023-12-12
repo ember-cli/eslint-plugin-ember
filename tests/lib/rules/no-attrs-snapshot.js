@@ -3,7 +3,7 @@ const RuleTester = require('eslint').RuleTester;
 
 const { ERROR_MESSAGE } = rule;
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
   parser: require.resolve('@babel/eslint-parser'),
 });
 

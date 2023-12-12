@@ -83,10 +83,14 @@ export default class MyComponent extends Component {
 
 ## Configuration
 
-This rule takes an optional object containing:
+<!-- begin auto-generated rule options list -->
 
-- `boolean` -- `catchRouterMicrolib` -- whether the rule should catch usages of the private property `_routerMicrolib` (default `true`)
-- `boolean` -- `catchRouterMain` -- whether the rule should catch usages of the private property `router:main` (default `true`)
+| Name                  | Description                                                                     | Type    | Default |
+| :-------------------- | :------------------------------------------------------------------------------ | :------ | :------ |
+| `catchRouterMain`     | Whether the rule should catch usages of the private property `router:main`.     | Boolean | `true`  |
+| `catchRouterMicrolib` | Whether the rule should catch usages of the private property `_routerMicrolib`. | Boolean | `true`  |
+
+<!-- end auto-generated rule options list -->
 
 ## References
 

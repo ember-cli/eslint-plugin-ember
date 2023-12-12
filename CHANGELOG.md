@@ -1,46 +1,58 @@
+## v12.0.0-alpha.2 (2023-11-10)
+
+#### :bug: Bug Fix
+* [#1994](https://github.com/ember-cli/eslint-plugin-ember/pull/1994) [gjs/gts parser] fix locations for ast after templates ([@patricklx](https://github.com/patricklx))
+* [#1992](https://github.com/ember-cli/eslint-plugin-ember/pull/1992) [gjs/gts parser] fix references for tags with a dot & non standard html tags ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
 
 
+## v12.0.0-alpha.1 (2023-11-07)
+
+#### :boom: Breaking Change
+* [#1981](https://github.com/ember-cli/eslint-plugin-ember/pull/1981) Add `template-no-let-reference` rule to `recommended-gjs` and `recommended-gts` configs  ([@patricklx](https://github.com/patricklx))
+
+#### :rocket: Enhancement
+* [#1984](https://github.com/ember-cli/eslint-plugin-ember/pull/1984) Update `@typescript-eslint/` dependencies to v6 ([@patricklx](https://github.com/patricklx))
+
+#### :memo: Documentation
+* [#1980](https://github.com/ember-cli/eslint-plugin-ember/pull/1980) Improve gts gjs configuration example ([@patricklx](https://github.com/patricklx))
+* [#1990](https://github.com/ember-cli/eslint-plugin-ember/pull/1990) Fix names for `recommended-gts` / `recommended-gjs` configs in readme ([@c0rydoras](https://github.com/c0rydoras))
+
+#### Committers: 2
+- Arthur Deierlein ([@c0rydoras](https://github.com/c0rydoras))
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
 
 
+## v12.0.0-alpha.0 (2023-11-04)
 
+#### :boom: Breaking Change
+* [#1962](https://github.com/ember-cli/eslint-plugin-ember/pull/1962) Drop support for Node 14, 16, 19 ([@patricklx](https://github.com/patricklx))
+* [#1963](https://github.com/ember-cli/eslint-plugin-ember/pull/1963) Add new `recommended` rules: `no-at-ember-render-modifiers`, `no-deprecated-router-transition-methods`, `no-implicit-injections`, `no-runloop`, `no-tracked-properties-from-args`, ([@patricklx](https://github.com/patricklx))
+* [#1977](https://github.com/ember-cli/eslint-plugin-ember/pull/1977) Add new `recommended` rule: `template-no-let-reference` ([@bmish](https://github.com/bmish))
+* [#1967](https://github.com/ember-cli/eslint-plugin-ember/pull/1967) Drop support for ESLint 7 ([@bmish](https://github.com/bmish))
+* [#1978](https://github.com/ember-cli/eslint-plugin-ember/pull/1978) Set config `ecmaVersion` to `2022` ([@bmish](https://github.com/bmish))
+* [#1965](https://github.com/ember-cli/eslint-plugin-ember/pull/1965) Change `useAt` option default to `true` at in `no-get` rule ([@patricklx](https://github.com/patricklx))
 
+#### :rocket: Enhancement
+* [#1939](https://github.com/ember-cli/eslint-plugin-ember/pull/1939) Add new rule `template-no-let-reference` ([@patricklx](https://github.com/patricklx))
+* [#1943](https://github.com/ember-cli/eslint-plugin-ember/pull/1943) Add new rule `template-indent` ([@patricklx](https://github.com/patricklx))
+* [#1971](https://github.com/ember-cli/eslint-plugin-ember/pull/1971) Add template block comment eslint directives ([@patricklx](https://github.com/patricklx))
+* [#1944](https://github.com/ember-cli/eslint-plugin-ember/pull/1944) Add gts/gjs configs ([@patricklx](https://github.com/patricklx))
+* [#1942](https://github.com/ember-cli/eslint-plugin-ember/pull/1942) Use custom parser for gts/gjs ([@patricklx](https://github.com/patricklx))
+* [#1975](https://github.com/ember-cli/eslint-plugin-ember/pull/1975) Update almost all dependencies ([@bmish](https://github.com/bmish))
 
+#### :memo: Documentation
+* [#1969](https://github.com/ember-cli/eslint-plugin-ember/pull/1969) Add automatic rule option lists with eslint-doc-generator ([@bmish](https://github.com/bmish))
+* [#1966](https://github.com/ember-cli/eslint-plugin-ember/pull/1966) Automatically generate README configs list with eslint-doc-generator ([@bmish](https://github.com/bmish))
 
+#### :house: Internal
+* [#1974](https://github.com/ember-cli/eslint-plugin-ember/pull/1974) Update eslint-plugin-unicorn to v49 ([@bmish](https://github.com/bmish))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
 
 
 ## v11.12.0 (2023-12-12)

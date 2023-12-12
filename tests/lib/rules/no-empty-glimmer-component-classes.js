@@ -14,7 +14,7 @@ const { ERROR_MESSAGE } = rule;
 const ruleTester = new RuleTester({
   parser: require.resolve('@babel/eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2022,
     sourceType: 'module',
   },
 });
@@ -48,6 +48,16 @@ ruleTester.run('no-empty-glimmer-component-classes', rule, {
       }
 
       export default class List<T> extends Component<ListSignature<T>> {}
+      `,
+      parser: require.resolve('@typescript-eslint/parser'),
+    },
+    {
+      code: `
+        import Component from '@glimmer/component';
+
+        export default class MyComponent extends Component {
+          property = '';
+        }
       `,
       parser: require.resolve('@typescript-eslint/parser'),
     },

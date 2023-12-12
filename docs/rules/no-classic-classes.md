@@ -49,9 +49,13 @@ export default class MyComponent extends Component.extend(Evented) {}
 
 ## Configuration
 
-This rule takes an optional object containing:
+<!-- begin auto-generated rule options list -->
 
-- `string[]` -- `additionalClassImports` -- Allows you to specify additional imports that should be flagged to disallow calling `extend` on. This allows you to handle the case where your app or addon is importing from a module that performs the `extend`.
+| Name                     | Description                                                                                                                                                                                                        | Type     |
+| :----------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------- |
+| `additionalClassImports` | Allows you to specify additional imports that should be flagged to disallow calling `extend` on. This allows you to handle the case where your app or addon is importing from a module that performs the `extend`. | String[] |
+
+<!-- end auto-generated rule options list -->
 
 ## When Not To Use It
 

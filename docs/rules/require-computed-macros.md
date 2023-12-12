@@ -119,9 +119,13 @@ export default Component.extend({
 
 ## Configuration
 
-This rule takes an optional object containing:
+<!-- begin auto-generated rule options list -->
 
-- `boolean` -- `includeNativeGetters` -- whether the rule should check and autofix computed properties with native getters (i.e. `@computed() get someProp() {}`) to use computed property macros (default `false`). This is off by default because in the Ember Octane world, the better improvement would be to keep the native getter and use tracked properties instead of computed properties.
+| Name                   | Description                                                                                                                                                                                                                                                                                                                              | Type    | Default |
+| :--------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ | :------ |
+| `includeNativeGetters` | Whether the rule should check and autofix computed properties with native getters (i.e. `@computed() get someProp() {}`) to use computed property macros. This is off by default because in the Ember Octane world, the better improvement would be to keep the native getter and use tracked properties instead of computed properties. | Boolean | `false` |
+
+<!-- end auto-generated rule options list -->
 
 ## References
 

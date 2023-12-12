@@ -17,10 +17,10 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu, windows ]
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [18.x, 20.x, 21.x]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
@@ -35,5 +35,3 @@ jobs:
     - run: yarn update && git diff --exit-code
 
     - run: yarn test:coverage --runInBand
-
-    - run: yarn add --dev eslint@7 && yarn test --runInBand

@@ -12,7 +12,7 @@ const { ERROR_MESSAGE: message } = rule;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
   parser: require.resolve('@babel/eslint-parser'),
 });
 
@@ -88,7 +88,7 @@ eslintTester.run('require-super-in-lifecycle-hooks', rule, {
     'export default Service.extend();',
     {
       code: 'export default Service.extend({ ...spread })',
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
     },
     `export default Component({
         init() {

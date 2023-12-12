@@ -115,7 +115,7 @@ const INVALID_USAGES = DEBUG_FUNCTIONS.flatMap((debugFunction) => [
 
 const ruleTester = new RuleTester({
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2022,
     sourceType: 'module',
   },
 });

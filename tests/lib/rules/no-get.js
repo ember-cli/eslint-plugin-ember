@@ -7,7 +7,7 @@ const { ERROR_MESSAGE_GET, ERROR_MESSAGE_GET_PROPERTIES } = rule;
 const ruleTester = new RuleTester({
   parser: require.resolve('@babel/eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2022,
     sourceType: 'module',
   },
 });
@@ -31,11 +31,11 @@ ruleTester.run('no-get', rule, {
     // Template literals.
     {
       code: 'this.get(`foo`);',
-      parserOptions: { ecmaVersion: 2020 },
+      parserOptions: { ecmaVersion: 2022 },
     },
     {
       code: "import { get } from '@ember/object'; get(this, `foo`);",
-      parserOptions: { ecmaVersion: 2020 },
+      parserOptions: { ecmaVersion: 2022 },
     },
 
     // Not `this`.
@@ -780,6 +780,20 @@ ruleTester.run('no-get', rule, {
       code: "this.get('foo.lastObject.bar')[123];",
       output: 'this.foo.at(-1).bar[123];',
       options: [{ useOptionalChaining: true, useAt: true }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // useAt default value
+      // `lastObject` used at the beginning of a path.
+      // And the result of get() is chained (getResultIsChained=true).
+      code: "this.get('lastObject.bar')[123];",
+      output: 'this.at(-1).bar[123];',
+      options: [{ useOptionalChaining: true }],
       errors: [
         {
           message: ERROR_MESSAGE_GET,

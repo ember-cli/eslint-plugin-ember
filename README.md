@@ -8,8 +8,8 @@
 
 ## ❗️Requirements
 
-- [ESLint](https://eslint.org/) `>= 7`
-- [Node.js](https://nodejs.org/) `14.* || 16.* || >= 18`
+- [ESLint](https://eslint.org/) `>= 8`
+- [Node.js](https://nodejs.org/) `18.* || 20.* || >= 21`
 
 ## 🚀 Usage
 
@@ -53,17 +53,124 @@ module.exports = {
 };
 ```
 
+## gts/gjs
+
+lint files having `First-Class Component Templates` (fcct)
+
+learn more [here](https://github.com/ember-template-imports/ember-template-imports)
+
+> [!NOTE]
+> special care should be used when setting up parsers, since they cannot be overwritten. thus they should be used in override only and specific to file types
+
+```js
+// .eslintrc.js
+module.exports = {
+  overrides: [
+    {
+      files: ['**/*.{js,ts}'],
+      plugins: ['ember'],
+      parser: '@typescript-eslint/parser',
+      extends: [
+        'eslint:recommended',
+        'plugin:ember/recommended', // or other configuration
+      ],
+      rules: {
+        // override / enable optional rules
+        'ember/no-replace-test-comments': 'error'
+      }
+    },
+    {
+      files: ['**/*.gts'],
+      parser: 'eslint-plugin-ember/gjs-gts-parser',
+      plugins: ['ember'],
+      extends: [
+        'eslint:recommended',
+        'plugin:ember/recommended',
+        'plugin:ember/recommended-gts',
+      ],
+    },
+    {
+      files: ['**/*.gjs'],
+      parser: 'eslint-plugin-ember/gjs-gts-parser',
+      plugins: ['ember'],
+      extends: [
+        'eslint:recommended',
+        'plugin:ember/recommended',
+        'plugin:ember/recommended-gjs',
+      ],
+    },
+    {
+      files: ['tests/**/*.{js,ts,gjs,gts}'],
+      rules: {
+        // override / enable optional rules
+        'ember/no-replace-test-comments': 'error'
+      }
+    },
+  ],
+};
+```
+
+### rules applied to fcct templates
+
+- semi rule, same as [prettier plugin](https://github.com/gitKrystan/prettier-plugin-ember-template-tag/issues/1)
+- no-undef rule will take effect for template vars (includes js scope)
+- no-unused rule will take effect for template block params
+
+rules in templates can be disabled with eslint directives with mustache or html comments:
+
+```hbs
+<template>
+  <div>
+    {{!eslint-disable-next-line}}
+    {{test}}
+  </div>
+  <div>
+    {{!--eslint-disable--}}
+    {{test}}
+    {{test}}
+    {{test}}
+    {{!--eslint-enable--}}
+  </div>
+</template>
+```
+
+```hbs
+<template>
+  <div>
+    <!--eslint-disable-next-line-->
+    {{test}}
+  </div>
+  <div>
+    <!-- eslint-disable -->
+    {{test}}
+    {{test}}
+    {{test}}
+    <!-- eslint-enable -->
+  </div>
+</template>
+```
+
 ## 🧰 Configurations
 
-|    | Name | Description |
-|:---|:-----|:------------|
-| ✅ | [recommended](./lib/recommended-rules.js) | enables the `recommended` rules |
+<!-- begin auto-generated configs list -->
+
+|                                 | Name              |
+| :------------------------------ | :---------------- |
+|                                 | `base`            |
+| ✅                               | `recommended`     |
+| ![gjs logo](/docs/svgs/gjs.svg) | `recommended-gjs` |
+| ![gts logo](/docs/svgs/gts.svg) | `recommended-gts` |
+
+<!-- end auto-generated configs list -->
 
 ## 🍟 Rules
+
 <!-- begin auto-generated rules list -->
 
 💼 [Configurations](https://github.com/ember-cli/eslint-plugin-ember#-configurations) enabled in.\
 ✅ Set in the `recommended` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
+![gjs logo](/docs/svgs/gjs.svg) Set in the `recommended-gjs` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
+![gts logo](/docs/svgs/gts.svg) Set in the `recommended-gts` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).\
 💡 Manually fixable by [editor suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
@@ -112,10 +219,10 @@ module.exports = {
 | [closure-actions](docs/rules/closure-actions.md)                                                 | enforce usage of closure actions                          | ✅  |    |    |
 | [new-module-imports](docs/rules/new-module-imports.md)                                           | enforce using "New Module Imports" from Ember RFC #176    | ✅  |    |    |
 | [no-array-prototype-extensions](docs/rules/no-array-prototype-extensions.md)                     | disallow usage of Ember's `Array` prototype extensions    |    | 🔧 |    |
-| [no-at-ember-render-modifiers](docs/rules/no-at-ember-render-modifiers.md)                       | disallow importing from @ember/render-modifiers           |    |    |    |
-| [no-deprecated-router-transition-methods](docs/rules/no-deprecated-router-transition-methods.md) | enforce usage of router service transition methods        |    | 🔧 |    |
+| [no-at-ember-render-modifiers](docs/rules/no-at-ember-render-modifiers.md)                       | disallow importing from @ember/render-modifiers           | ✅  |    |    |
+| [no-deprecated-router-transition-methods](docs/rules/no-deprecated-router-transition-methods.md) | enforce usage of router service transition methods        | ✅  | 🔧 |    |
 | [no-function-prototype-extensions](docs/rules/no-function-prototype-extensions.md)               | disallow usage of Ember's `function` prototype extensions | ✅  |    |    |
-| [no-implicit-injections](docs/rules/no-implicit-injections.md)                                   | enforce usage of implicit service injections              |    | 🔧 |    |
+| [no-implicit-injections](docs/rules/no-implicit-injections.md)                                   | enforce usage of implicit service injections              | ✅  | 🔧 |    |
 | [no-mixins](docs/rules/no-mixins.md)                                                             | disallow the usage of mixins                              | ✅  |    |    |
 | [no-new-mixins](docs/rules/no-new-mixins.md)                                                     | disallow the creation of new mixins                       | ✅  |    |    |
 | [no-observers](docs/rules/no-observers.md)                                                       | disallow usage of observers                               | ✅  |    |    |
@@ -143,15 +250,17 @@ module.exports = {
 
 ### Ember Octane
 
-| Name                                                                                       | Description                                                                                                    | 💼 | 🔧 | 💡 |
-| :----------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- | :- | :- | :- |
-| [classic-decorator-hooks](docs/rules/classic-decorator-hooks.md)                           | enforce using correct hooks for both classic and non-classic classes                                           | ✅  |    |    |
-| [classic-decorator-no-classic-methods](docs/rules/classic-decorator-no-classic-methods.md) | disallow usage of classic APIs such as `get`/`set` in classes that aren't explicitly decorated with `@classic` | ✅  |    |    |
-| [no-actions-hash](docs/rules/no-actions-hash.md)                                           | disallow the actions hash in components, controllers, and routes                                               | ✅  |    |    |
-| [no-classic-classes](docs/rules/no-classic-classes.md)                                     | disallow "classic" classes in favor of native JS classes                                                       | ✅  |    |    |
-| [no-ember-super-in-es-classes](docs/rules/no-ember-super-in-es-classes.md)                 | disallow use of `this._super` in ES class methods                                                              | ✅  | 🔧 |    |
-| [no-empty-glimmer-component-classes](docs/rules/no-empty-glimmer-component-classes.md)     | disallow empty backing classes for Glimmer components                                                          | ✅  |    |    |
-| [no-tracked-properties-from-args](docs/rules/no-tracked-properties-from-args.md)           | disallow creating @tracked properties from this.args                                                           |    |    |    |
+| Name                                                                                       | Description                                                                                                    | 💼                                                              | 🔧 | 💡 |
+| :----------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- | :- | :- |
+| [classic-decorator-hooks](docs/rules/classic-decorator-hooks.md)                           | enforce using correct hooks for both classic and non-classic classes                                           | ✅                                                               |    |    |
+| [classic-decorator-no-classic-methods](docs/rules/classic-decorator-no-classic-methods.md) | disallow usage of classic APIs such as `get`/`set` in classes that aren't explicitly decorated with `@classic` | ✅                                                               |    |    |
+| [no-actions-hash](docs/rules/no-actions-hash.md)                                           | disallow the actions hash in components, controllers, and routes                                               | ✅                                                               |    |    |
+| [no-classic-classes](docs/rules/no-classic-classes.md)                                     | disallow "classic" classes in favor of native JS classes                                                       | ✅                                                               |    |    |
+| [no-ember-super-in-es-classes](docs/rules/no-ember-super-in-es-classes.md)                 | disallow use of `this._super` in ES class methods                                                              | ✅                                                               | 🔧 |    |
+| [no-empty-glimmer-component-classes](docs/rules/no-empty-glimmer-component-classes.md)     | disallow empty backing classes for Glimmer components                                                          | ✅                                                               |    |    |
+| [no-tracked-properties-from-args](docs/rules/no-tracked-properties-from-args.md)           | disallow creating @tracked properties from this.args                                                           | ✅                                                               |    |    |
+| [template-indent](docs/rules/template-indent.md)                                           | enforce consistent indentation for gts/gjs templates                                                           |                                                                 | 🔧 |    |
+| [template-no-let-reference](docs/rules/template-no-let-reference.md)                       | disallow referencing let variables in \<template\>                                                             | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 
 ### jQuery
 
@@ -170,7 +279,7 @@ module.exports = {
 | [no-incorrect-calls-with-inline-anonymous-functions](docs/rules/no-incorrect-calls-with-inline-anonymous-functions.md) | disallow inline anonymous functions as arguments to `debounce`, `once`, and `scheduleOnce`                                    | ✅  |    |    |
 | [no-invalid-debug-function-arguments](docs/rules/no-invalid-debug-function-arguments.md)                               | disallow usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. | ✅  |    |    |
 | [no-restricted-property-modifications](docs/rules/no-restricted-property-modifications.md)                             | disallow modifying the specified properties                                                                                   |    | 🔧 |    |
-| [no-runloop](docs/rules/no-runloop.md)                                                                                 | disallow usage of `@ember/runloop` functions                                                                                  |    |    |    |
+| [no-runloop](docs/rules/no-runloop.md)                                                                                 | disallow usage of `@ember/runloop` functions                                                                                  | ✅  |    |    |
 | [require-fetch-import](docs/rules/require-fetch-import.md)                                                             | enforce explicit import for `fetch()`                                                                                         |    |    |    |
 
 ### Routes

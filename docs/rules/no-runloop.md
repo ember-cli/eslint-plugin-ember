@@ -1,5 +1,7 @@
 # ember/no-runloop
 
+💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Ember's runloop functions are not lifecycle-aware and don't ensure that an object's async is cleaned up. It is recommended to use [`ember-lifeline`](https://ember-lifeline.github.io/ember-lifeline/), [`ember-concurrency`](http://ember-concurrency.com/docs/introduction/), or [`@ember/destroyable`](https://rfcs.emberjs.com/id/0580-destroyables/) instead.
@@ -56,7 +58,13 @@ export default class MyComponent extends Component {
 
 ## Configuration
 
-If you have `@ember/runloop` functions that you wish to allow, you can configure this rule to allow specific methods. The configuration takes an object with the `allowList` property, which is an array of strings where the strings must be names of runloop functions.
+<!-- begin auto-generated rule options list -->
+
+| Name        | Description                                                                                                                                                                                                                                                               | Type     |
+| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------- |
+| `allowList` | If you have `@ember/runloop` functions that you wish to allow, you can configure this rule to allow specific methods. The configuration takes an object with the `allowList` property, which is an array of strings where the strings must be names of runloop functions. | String[] |
+
+<!-- end auto-generated rule options list -->
 
 ```js
 module.exports = {

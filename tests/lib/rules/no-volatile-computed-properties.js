@@ -12,7 +12,7 @@ const { ERROR_MESSAGE } = rule;
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({ parserOptions: { ecmaVersion: 2020, sourceType: 'module' } });
+const ruleTester = new RuleTester({ parserOptions: { ecmaVersion: 2022, sourceType: 'module' } });
 ruleTester.run('no-volatile-computed-properties', rule, {
   valid: [
     'computed()',
@@ -27,7 +27,7 @@ ruleTester.run('no-volatile-computed-properties', rule, {
       code: "class Test { @computed('prop') get someProp() {} }",
       parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
-        ecmaVersion: 2020,
+        ecmaVersion: 2022,
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
       },
@@ -61,7 +61,7 @@ ruleTester.run('no-volatile-computed-properties', rule, {
       errors: [{ message: ERROR_MESSAGE, type: 'Identifier' }],
       parser: require.resolve('@babel/eslint-parser'),
       parserOptions: {
-        ecmaVersion: 2020,
+        ecmaVersion: 2022,
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
       },

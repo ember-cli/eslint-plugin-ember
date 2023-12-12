@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
   parser: require.resolve('@babel/eslint-parser'),
 });
 
@@ -88,7 +88,7 @@ eslintTester.run('order-in-models', rule, {
           order: ['attribute', 'method', 'custom:customProp'],
         },
       ],
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
     },
     {
       code: `import {inject as service} from '@ember/service';
@@ -100,7 +100,7 @@ eslintTester.run('order-in-models', rule, {
           customProp: { a: 1 }
         });`,
       options: [{ order: ['service', 'attribute', 'method'] }],
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
     },
   ],
   invalid: [
@@ -297,7 +297,7 @@ eslintTester.run('order-in-models', rule, {
           order: ['method', 'custom:customProp'],
         },
       ],
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
       errors: [
         {
           message:

@@ -9,7 +9,7 @@ const RuleTester = require('eslint').RuleTester;
 
 const ruleTester = new RuleTester({
   parser: require.resolve('@babel/eslint-parser'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 
 ruleTester.run('no-array-prototype-extensions', rule, {

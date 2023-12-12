@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`recommended rules gjs config has the right list 1`] = `
+[
+  "template-no-let-reference",
+]
+`;
+
+exports[`recommended rules gts config has the right list 1`] = `
+[
+  "template-no-let-reference",
+]
+`;
+
 exports[`recommended rules has the right list 1`] = `
 [
   "avoid-leaking-state-in-ember-objects",
@@ -12,6 +24,7 @@ exports[`recommended rules has the right list 1`] = `
   "no-actions-hash",
   "no-arrow-function-computed-properties",
   "no-assignment-of-untracked-properties-used-in-tracking-contexts",
+  "no-at-ember-render-modifiers",
   "no-attrs-in-components",
   "no-attrs-snapshot",
   "no-capital-letters-in-routes",
@@ -21,6 +34,7 @@ exports[`recommended rules has the right list 1`] = `
   "no-computed-properties-in-native-classes",
   "no-controller-access-in-routes",
   "no-deeply-nested-dependent-keys-with-each",
+  "no-deprecated-router-transition-methods",
   "no-duplicate-dependent-keys",
   "no-ember-super-in-es-classes",
   "no-ember-testing-in-module-scope",
@@ -29,6 +43,7 @@ exports[`recommended rules has the right list 1`] = `
   "no-get-with-default",
   "no-get",
   "no-global-jquery",
+  "no-implicit-injections",
   "no-incorrect-calls-with-inline-anonymous-functions",
   "no-incorrect-computed-macros",
   "no-invalid-debug-function-arguments",
@@ -45,6 +60,7 @@ exports[`recommended rules has the right list 1`] = `
   "no-pause-test",
   "no-private-routing-service",
   "no-restricted-resolver-tests",
+  "no-runloop",
   "no-settled-after-test-helper",
   "no-shadow-route-definition",
   "no-side-effects",
@@ -54,6 +70,7 @@ exports[`recommended rules has the right list 1`] = `
   "no-test-module-for",
   "no-test-support-import",
   "no-test-this-render",
+  "no-tracked-properties-from-args",
   "no-try-invoke",
   "no-unnecessary-route-path-option",
   "no-volatile-computed-properties",
