@@ -81,7 +81,7 @@ module.exports = {
     },
     {
       files: ['**/*.gts'],
-      parser: 'eslint-plugin-ember/gjs-gts-parser',
+      parser: 'ember-eslint-parser',
       plugins: ['ember'],
       extends: [
         'eslint:recommended',
@@ -91,7 +91,7 @@ module.exports = {
     },
     {
       files: ['**/*.gjs'],
-      parser: 'eslint-plugin-ember/gjs-gts-parser',
+      parser: 'ember-eslint-parser',
       plugins: ['ember'],
       extends: [
         'eslint:recommended',

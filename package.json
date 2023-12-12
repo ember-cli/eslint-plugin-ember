@@ -23,8 +23,7 @@
   "license": "MIT",
   "exports": {
     ".": "./lib/index.js",
-    "./configs/*": "./lib/config/*.js",
-    "./gjs-gts-parser": "./lib/parsers/gjs-gts-parser.js"
+    "./configs/*": "./lib/config/*.js"
   },
   "main": "./lib/index.js",
   "directories": {
@@ -38,12 +37,8 @@
     "changelog": "lerna-changelog",
     "lint": "npm-run-all --continue-on-error --aggregate-output --parallel \"lint:!(fix)\"",
     "lint:docs": "markdownlint \"**/*.md\"",
-    "lint:docs:fix": "npm-run-all \"lint:docs -- --fix\"",
     "lint:eslint-docs": "npm-run-all \"update:eslint-docs -- --check\"",
-    "lint:eslint-docs:fix": "npm-run-all \"update:eslint-docs\"",
-    "lint:fix": "npm-run-all \"lint:*:fix\"",
     "lint:js": "eslint --cache .",
-    "lint:js:fix": "npm-run-all \"lint:js -- --fix\"",
     "lint:package-json": "npmPkgJsonLint .",
     "lint:package-json-sorting": "sort-package-json --check",
     "lint:package-json-sorting:fix": "sort-package-json package.json",
@@ -54,7 +49,11 @@
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watchAll",
     "update": "node ./scripts/update-rules.js && node ./scripts/list-jquery-methods.js && npm-run-all update:eslint-docs",
-    "update:eslint-docs": "eslint-doc-generator"
+    "update:eslint-docs": "eslint-doc-generator",
+    "lint:js:fix": "npm-run-all \"lint:js -- --fix\"",
+    "lint:fix": "npm-run-all \"lint:*:fix\"",
+    "lint:eslint-docs:fix": "npm-run-all \"update:eslint-docs\"",
+    "lint:docs:fix": "npm-run-all \"lint:docs -- --fix\""
   },
   "jest": {
     "coverageThreshold": {
@@ -137,10 +136,6 @@
   "engines": {
     "node": "18.* || 20.* || >= 21"
   },
-  "volta": {
-    "node": "21.5.0",
-    "yarn": "1.22.21"
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
@@ -168,5 +163,9 @@
       "release": true,
       "tokenRef": "GITHUB_AUTH"
     }
+  },
+  "volta": {
+    "node": "21.5.0",
+    "yarn": "1.22.21"
   }
 }

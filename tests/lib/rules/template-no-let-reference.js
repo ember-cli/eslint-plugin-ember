@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('../../../lib/parsers/gjs-gts-parser.js'),
+  parser: require.resolve('ember-eslint-parser'),
   parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 ruleTester.run('template-no-let-reference', rule, {
