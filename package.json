@@ -89,7 +89,8 @@
     "lodash.camelcase": "^4.3.0",
     "lodash.kebabcase": "^4.1.1",
     "requireindex": "^1.2.0",
-    "snake-case": "^3.0.3"
+    "snake-case": "^3.0.3",
+    "ember-eslint-parser": "^0.0.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",

@@ -2523,6 +2523,11 @@ electron-to-chromium@^1.4.535:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.575.tgz#7c0b87eb2c6214a993699792abd704de41255c39"
   integrity sha512-kY2BGyvgAHiX899oF6xLXSIf99bAvvdPhDoJwG77nxCSyWYuRH6e9a9a3gpXBvCs6lj4dQZJkfnW2hdKWHEISg==
 
+ember-eslint-parser@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/ember-eslint-parser/-/ember-eslint-parser-0.0.1.tgz#e2b84f4c2e35e1ed150211028544e35fc8473cd7"
+  integrity sha512-EmULNGyiIINAq4k35WgAPhWml/mf8h8nINuL2PywHgXKtAqxXbe+kd7t8u7VCxB7vvqVTsXdoa6eXnDVLnzw5Q==
+
 ember-rfc176-data@^0.3.18:
   version "0.3.18"
   resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.18.tgz#bb6fdcef49999981317ea81b6cc9210fb4108d65"
