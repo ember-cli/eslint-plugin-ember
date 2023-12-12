@@ -5,6 +5,7 @@
     "strictNullChecks": true
   },
   "include": [
-    "*"
-  ]
+    "**/*.ts",
+    "**/*.gts"
+  ],
 }

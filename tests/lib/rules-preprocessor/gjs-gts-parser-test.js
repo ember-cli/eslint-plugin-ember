@@ -9,6 +9,8 @@
 
 const { ESLint } = require('eslint');
 const plugin = require('../../../lib');
+const { writeFileSync, readFileSync } = require('node:fs');
+const { join } = require('node:path');
 
 const gjsGtsParser = require.resolve('../../../lib/parsers/gjs-gts-parser');
 
@@ -388,18 +390,28 @@ const invalid = [
     code: `
       import Component from '@glimmer/component';
 
+      const foo: any = '';
+
       export default class MyComponent extends Component {
         foo = 'bar';
 
         <template>
           <div></div>${'  '}
+          {{foo}}
         </template>
       }`,
     errors: [
       {
+        message: 'Unexpected any. Specify a different type.',
+        line: 4,
+        endLine: 4,
+        column: 18,
+        endColumn: 21,
+      },
+      {
         message: 'Trailing spaces not allowed.',
-        line: 8,
-        endLine: 8,
+        line: 10,
+        endLine: 10,
         column: 22,
         endColumn: 24,
       },
@@ -764,5 +776,114 @@ describe('multiple tokens in same file', () => {
 
     expect(resultErrors[2].message).toBe("'bar' is not defined.");
     expect(resultErrors[2].line).toBe(17);
+  });
+
+  it('lints while being type aware', async () => {
+    const eslint = new ESLint({
+      ignore: false,
+      useEslintrc: false,
+      plugins: { ember: plugin },
+      overrideConfig: {
+        root: true,
+        env: {
+          browser: true,
+        },
+        plugins: ['ember'],
+        extends: ['plugin:ember/recommended'],
+        overrides: [
+          {
+            files: ['**/*.gts'],
+            parser: 'eslint-plugin-ember/gjs-gts-parser',
+            parserOptions: {
+              project: './tsconfig.eslint.json',
+              tsconfigRootDir: __dirname,
+              extraFileExtensions: ['.gts'],
+            },
+            extends: [
+              'plugin:@typescript-eslint/recommended-requiring-type-checking',
+              'plugin:ember/recommended',
+            ],
+            rules: {
+              'no-trailing-spaces': 'error',
+              '@typescript-eslint/prefer-string-starts-ends-with': 'error',
+            },
+          },
+          {
+            files: ['**/*.ts'],
+            parser: '@typescript-eslint/parser',
+            parserOptions: {
+              project: './tsconfig.eslint.json',
+              tsconfigRootDir: __dirname,
+              extraFileExtensions: ['.gts'],
+            },
+            extends: [
+              'plugin:@typescript-eslint/recommended-requiring-type-checking',
+              'plugin:ember/recommended',
+            ],
+            rules: {
+              'no-trailing-spaces': 'error',
+            },
+          },
+        ],
+        rules: {
+          quotes: ['error', 'single'],
+          semi: ['error', 'always'],
+          'object-curly-spacing': ['error', 'always'],
+          'lines-between-class-members': 'error',
+          'no-undef': 'error',
+          'no-unused-vars': 'error',
+          'ember/no-get': 'off',
+          'ember/no-array-prototype-extensions': 'error',
+          'ember/no-unused-services': 'error',
+        },
+      },
+    });
+
+    let results = await eslint.lintFiles(['**/*.gts', '**/*.ts']);
+
+    let resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(3);
+
+    expect(resultErrors[0].message).toBe("Use 'String#startsWith' method instead.");
+    expect(resultErrors[0].line).toBe(6);
+
+    expect(resultErrors[1].line).toBe(7);
+    expect(resultErrors[1].message).toBe("Use 'String#startsWith' method instead.");
+
+    expect(resultErrors[2].line).toBe(8);
+    expect(resultErrors[2].message).toBe("Use 'String#startsWith' method instead.");
+
+    const filePath = join(__dirname, 'ember_ts', 'bar.gts');
+    const content = readFileSync(filePath).toString();
+    try {
+      writeFileSync(filePath, content.replace("'42'", '42'));
+
+      results = await eslint.lintFiles(['**/*.gts', '**/*.ts']);
+
+      resultErrors = results.flatMap((result) => result.messages);
+      expect(resultErrors).toHaveLength(2);
+
+      expect(resultErrors[0].message).toBe("Use 'String#startsWith' method instead.");
+      expect(resultErrors[0].line).toBe(6);
+
+      expect(resultErrors[1].line).toBe(8);
+      expect(resultErrors[1].message).toBe("Use 'String#startsWith' method instead.");
+    } finally {
+      writeFileSync(filePath, content);
+    }
+
+    results = await eslint.lintFiles(['**/*.gts', '**/*.ts']);
+
+    resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(3);
+
+    expect(resultErrors[0].message).toBe("Use 'String#startsWith' method instead.");
+    expect(resultErrors[0].line).toBe(6);
+
+    expect(resultErrors[1].message).toBe("Use 'String#startsWith' method instead.");
+    expect(resultErrors[1].line).toBe(7);
+
+    expect(resultErrors[2].line).toBe(8);
+    expect(resultErrors[2].message).toBe("Use 'String#startsWith' method instead.");
   });
 });
