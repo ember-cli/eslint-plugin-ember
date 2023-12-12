@@ -23,6 +23,7 @@
   "license": "MIT",
   "exports": {
     ".": "./lib/index.js",
+    "./configs/*": "./lib/config/*.js",
     "./gjs-gts-parser": "./lib/parsers/gjs-gts-parser.js"
   },
   "main": "./lib/index.js",

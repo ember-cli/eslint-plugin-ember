@@ -1,50 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## v12.0.0-alpha.2 (2023-11-10)
 
 #### :bug: Bug Fix
@@ -100,6 +53,19 @@
 #### Committers: 2
 - Bryan Mishkin ([@bmish](https://github.com/bmish))
 - Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
+## v11.12.0 (2023-12-12)
+
+#### :rocket: Enhancement
+* [#2020](https://github.com/ember-cli/eslint-plugin-ember/pull/2020) Support ESLint flat config ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#2027](https://github.com/ember-cli/eslint-plugin-ember/pull/2027) Allow ember-data type registry imports in `use-ember-data-rfc-395-imports` rule ([@wagenet](https://github.com/wagenet))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Peter Wagenet ([@wagenet](https://github.com/wagenet))
 
 
 ## v11.11.1 (2023-08-22)

@@ -25,10 +25,21 @@ Or
 npm install --save-dev eslint-plugin-ember
 ```
 
-### 2. Modify your `.eslintrc.js`
+### 2. Update your config
 
 ```js
-// .eslintrc.js
+// eslint.config.js (flat config)
+const eslintPluginEmberRecommended = require('eslint-plugin-ember/configs/recommended');
+
+module.exports = [
+  ...eslintPluginEmberRecommended,
+];
+```
+
+or
+
+```js
+// .eslintrc.js (legacy config)
 module.exports = {
   plugins: ['ember'],
   extends: [
