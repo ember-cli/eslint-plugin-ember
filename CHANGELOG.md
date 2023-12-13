@@ -1,3 +1,22 @@
+
+## v12.0.0-alpha.3 (2023-12-13)
+
+#### :rocket: Enhancement
+* [#2020](https://github.com/ember-cli/eslint-plugin-ember/pull/2020) Support ESLint flat config ([@bmish](https://github.com/bmish))
+
+#### :bug: Bug Fix
+* [#1996](https://github.com/ember-cli/eslint-plugin-ember/pull/1996) [gjs-gts-parser] fix type aware linting when using ts+gts files ([@patricklx](https://github.com/patricklx))
+* [#2005](https://github.com/ember-cli/eslint-plugin-ember/pull/2005) [gjs-gts-parser] fix parsing when there are multiple default <template> blocks (not allowed) ([@patricklx](https://github.com/patricklx))
+* [#2027](https://github.com/ember-cli/eslint-plugin-ember/pull/2027) Allow ember-data type registry imports in `use-ember-data-rfc-395-imports` rule ([@wagenet](https://github.com/wagenet))
+
+#### :house: Internal
+* [#2018](https://github.com/ember-cli/eslint-plugin-ember/pull/2018) Switch to ESLint flat config internally ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
 ## v12.0.0-alpha.2 (2023-11-10)
 
 #### :bug: Bug Fix
