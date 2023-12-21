@@ -39,6 +39,7 @@
     "lint": "npm-run-all --continue-on-error --aggregate-output --parallel lint:*",
     "lint:docs": "markdownlint \"**/*.md\"",
     "lint:eslint-docs": "npm-run-all \"update:eslint-docs -- --check\"",
+    "lint:fix": "yarn lint:js --fix && yarn lint:package-json-sorting:fix",
     "lint:js": "eslint --cache .",
     "lint:package-json": "npmPkgJsonLint .",
     "lint:package-json-sorting": "sort-package-json --check",
