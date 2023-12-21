@@ -42,7 +42,7 @@
     "lint:eslint-docs": "npm-run-all \"update:eslint-docs -- --check\"",
     "lint:fix": "npm-run-all \"lint:*:fix\"",
     "lint:js": "eslint --cache .",
-    "lint:js:fix": "eslint . --fix",
+    "lint:js:fix": "npm-run-all \"lint:js -- --fix\"",
     "lint:package-json": "npmPkgJsonLint .",
     "lint:package-json-sorting": "sort-package-json --check",
     "lint:package-json-sorting:fix": "sort-package-json package.json",
