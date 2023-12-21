@@ -38,6 +38,7 @@
     "lint": "npm-run-all --continue-on-error --aggregate-output --parallel \"lint:!(fix)\"",
     "lint:docs": "markdownlint \"**/*.md\"",
     "lint:eslint-docs": "npm-run-all \"update:eslint-docs -- --check\"",
+    "lint:fix": "npm-run-all \"lint:*:fix\"",
     "lint:js": "eslint --cache .",
     "lint:package-json": "npmPkgJsonLint .",
     "lint:package-json-sorting": "sort-package-json --check",
@@ -51,7 +52,6 @@
     "update": "node ./scripts/update-rules.js && node ./scripts/list-jquery-methods.js && npm-run-all update:eslint-docs",
     "update:eslint-docs": "eslint-doc-generator",
     "lint:js:fix": "npm-run-all \"lint:js -- --fix\"",
-    "lint:fix": "npm-run-all \"lint:*:fix\"",
     "lint:eslint-docs:fix": "npm-run-all \"update:eslint-docs\"",
     "lint:docs:fix": "npm-run-all \"lint:docs -- --fix\""
   },
@@ -74,7 +74,6 @@
   "dependencies": {
     "@ember-data/rfc395-data": "^0.0.4",
     "@glimmer/syntax": "^0.85.12",
-    "@typescript-eslint/parser": "^6.9.1",
     "css-tree": "^2.3.1",
     "ember-eslint-parser": "^0.1.1",
     "ember-rfc176-data": "^0.3.18",
@@ -117,7 +116,8 @@
     "release-it": "^16.2.1",
     "sort-package-json": "^2.6.0",
     "typescript": "^5.2.2",
-    "@babel/eslint-parser": "^7.22.15"
+    "@babel/eslint-parser": "^7.22.15",
+    "@typescript-eslint/parser": "^6.9.1"
   },
   "peerDependencies": {
     "eslint": ">= 8",
@@ -130,6 +130,10 @@
   },
   "engines": {
     "node": "18.* || 20.* || >= 21"
+  },
+  "volta": {
+    "node": "21.5.0",
+    "yarn": "1.22.21"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -158,9 +162,5 @@
       "release": true,
       "tokenRef": "GITHUB_AUTH"
     }
-  },
-  "volta": {
-    "node": "21.5.0",
-    "yarn": "1.22.21"
   }
 }
