@@ -40,6 +40,7 @@
     "lint:docs": "markdownlint \"**/*.md\"",
     "lint:docs:fix": "npm-run-all \"update:docs -- --fix\"",
     "lint:eslint-docs": "npm-run-all \"update:eslint-docs -- --check\"",
+    "lint:eslint-docs:fix": "npm-run-all \"update:eslint-docs\"",
     "lint:fix": "npm-run-all \"lint:*:fix\"",
     "lint:js": "eslint --cache .",
     "lint:js:fix": "npm-run-all \"lint:js -- --fix\"",
