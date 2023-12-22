@@ -23,8 +23,7 @@
   "license": "MIT",
   "exports": {
     ".": "./lib/index.js",
-    "./configs/*": "./lib/config/*.js",
-    "./gjs-gts-parser": "./lib/parsers/gjs-gts-parser.js"
+    "./configs/*": "./lib/config/*.js"
   },
   "main": "./lib/index.js",
   "directories": {
@@ -73,25 +72,20 @@
     ]
   },
   "dependencies": {
-    "@babel/core": "^7.23.3",
-    "@babel/eslint-parser": "^7.22.15",
     "@ember-data/rfc395-data": "^0.0.4",
     "@glimmer/syntax": "^0.85.12",
-    "@typescript-eslint/parser": "^6.9.1",
-    "@typescript-eslint/scope-manager": "^6.9.1",
-    "content-tag": "^1.1.2",
     "css-tree": "^2.3.1",
+    "ember-eslint-parser": "^0.2.0",
     "ember-rfc176-data": "^0.3.18",
-    "eslint-scope": "^7.2.2",
     "eslint-utils": "^3.0.0",
     "estraverse": "^5.3.0",
-    "html-tags": "^3.3.1",
     "lodash.camelcase": "^4.3.0",
     "lodash.kebabcase": "^4.1.1",
     "requireindex": "^1.2.0",
     "snake-case": "^3.0.3"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.22.15",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-decorators": "^7.23.2",
     "@eslint/eslintrc": "^2.1.4",
@@ -99,6 +93,7 @@
     "@release-it-plugins/lerna-changelog": "^6.0.0",
     "@types/eslint": "^8.44.6",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-doc-generator": "^1.5.3",

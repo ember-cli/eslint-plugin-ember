@@ -12,7 +12,7 @@ const plugin = require('../../../lib');
 const { writeFileSync, readFileSync } = require('node:fs');
 const { join } = require('node:path');
 
-const gjsGtsParser = require.resolve('../../../lib/parsers/gjs-gts-parser');
+const gjsGtsParser = require.resolve('ember-eslint-parser');
 
 /**
  * Helper function which creates ESLint instance with enabled/disabled autofix feature.
@@ -793,7 +793,7 @@ describe('multiple tokens in same file', () => {
         overrides: [
           {
             files: ['**/*.gts'],
-            parser: 'eslint-plugin-ember/gjs-gts-parser',
+            parser: 'ember-eslint-parser',
             parserOptions: {
               project: './tsconfig.eslint.json',
               tsconfigRootDir: __dirname,
