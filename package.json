@@ -93,6 +93,7 @@
     "@release-it-plugins/lerna-changelog": "^6.0.0",
     "@types/eslint": "^8.44.6",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-doc-generator": "^1.5.3",
@@ -116,8 +117,7 @@
     "prettier": "^3.0.3",
     "release-it": "^16.2.1",
     "sort-package-json": "^2.6.0",
-    "typescript": "^5.2.2",
-    "@typescript-eslint/parser": "^6.9.1"
+    "typescript": "^5.2.2"
   },
   "peerDependencies": {
     "eslint": ">= 8",
