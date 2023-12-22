@@ -1,4 +1,18 @@
 
+
+## v12.0.0-alpha.4 (2023-12-22)
+
+#### :boom: Breaking Change
+* [#2028](https://github.com/ember-cli/eslint-plugin-ember/pull/2028) Move gjs/gts parser to `ember-eslint-parser` library ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* [#2036](https://github.com/ember-cli/eslint-plugin-ember/pull/2036) Add `lint:fix` script ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#2037](https://github.com/ember-cli/eslint-plugin-ember/pull/2037) Add volta in package.json ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
+
 ## v12.0.0-alpha.3 (2023-12-13)
 
 #### :rocket: Enhancement
