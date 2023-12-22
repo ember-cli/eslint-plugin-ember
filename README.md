@@ -62,6 +62,8 @@ learn more [here](https://github.com/ember-template-imports/ember-template-impor
 > [!NOTE]
 > special care should be used when setting up parsers, since they cannot be overwritten. thus they should be used in override only and specific to file types
 
+gjs/gts support is provided by the [ember-eslint-parser](https://github.com/NullVoxPopuli/ember-eslint-parser)
+
 ```js
 // .eslintrc.js
 module.exports = {
