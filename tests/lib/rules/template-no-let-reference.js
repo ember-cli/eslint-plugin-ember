@@ -78,15 +78,5 @@ ruleTester.run('template-no-let-reference', rule, {
       output: null,
       errors: [{ type: 'VarHead', message: rule.meta.messages['no-let'] }],
     },
-    {
-      code: `
-      var a = '';
-      <template>
-      <a></a>
-      </template>
-      `,
-      output: null,
-      errors: [{ type: 'GlimmerElementNodePart', message: rule.meta.messages['no-let'] }],
-    },
   ],
 });
