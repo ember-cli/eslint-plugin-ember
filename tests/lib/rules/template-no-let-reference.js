@@ -64,7 +64,7 @@ ruleTester.run('template-no-let-reference', rule, {
         </nav>
       </footer>
     </template>;
-    `
+    `,
   ],
 
   invalid: [
