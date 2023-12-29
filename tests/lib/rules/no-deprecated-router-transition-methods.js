@@ -381,7 +381,7 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
       });
 
       `,
-    }
+    },
   ],
   invalid: [
     // Route Uses RouterService.transitionTo with different service injection types
