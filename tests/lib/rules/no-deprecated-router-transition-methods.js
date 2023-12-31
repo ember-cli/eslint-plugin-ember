@@ -358,6 +358,30 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
         @computed.reads('model.actors') actors;
       }`,
     },
+
+    // Does not error when `this` is from a test context
+    {
+      filename: 'tests/application/output-demos-test.ts',
+      code: `
+      import Controller from '@ember/controller';
+      import { visit } from '@ember/test-helpers';
+      import { module, test } from 'qunit';
+      import { setupApplicationTest } from 'ember-qunit';
+
+      module('Output > Demos', function (hooks) {
+        setupApplicationTest(hooks);
+
+        module('The output frame renders every demo', function () {
+            test('example', async function (assert) {
+              class FakeController extends Controller {}
+              this.owner.register('controller:edit', FakeController);
+              await visit('/edit');
+            });
+        });
+      });
+
+      `,
+    },
   ],
   invalid: [
     // Route Uses RouterService.transitionTo with different service injection types
