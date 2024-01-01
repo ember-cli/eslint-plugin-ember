@@ -2436,9 +2436,9 @@ electron-to-chromium@^1.4.601:
   integrity sha512-1n7zWYh8eS0L9Uy+GskE0lkBUNK83cXTVJI0pU3mGprFsbfSdAc15VTFbo+A+Bq4pwstmL30AVcEU3Fo463lNg==
 
 ember-eslint-parser@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/ember-eslint-parser/-/ember-eslint-parser-0.2.4.tgz#ecab5fc32f535b7546adf2a81f60f8508d927027"
-  integrity sha512-bWtxLkR4lZFlPsg/I+qRqa94xrwgOnOJJ3a86F5wPpZjKcqM6s7My95+jUma555GbLDktM4FHAImmiTj2mMSbQ==
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/ember-eslint-parser/-/ember-eslint-parser-0.2.5.tgz#3c2cddcbf5134aebd0d88018357797a1b66a455d"
+  integrity sha512-ht3kkY6h+kWb6yW2OrqFG9TpC4pgdiTflDYMmJtHgZbbrIPD8fCeo8jVPBYCIO5HCHqxVwmT1H0rNlRRhWfUJg==
   dependencies:
     "@babel/eslint-parser" "^7.23.3"
     "@glimmer/syntax" "^0.85.13"
