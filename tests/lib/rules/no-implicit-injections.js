@@ -16,6 +16,7 @@ const ruleTester = new RuleTester({
     sourceType: 'module',
     babelOptions: {
       configFile: require.resolve('../../../.babelrc'),
+      plugins: [['@babel/plugin-proposal-decorators', { legacy: true }]],
     },
   },
 });
@@ -878,6 +879,34 @@ actions: {
       errors: [
         { messageId: 'main', data: { serviceName: 'flash-messages' }, type: 'MemberExpression' },
       ],
+    },
+
+    // Legacy .extend class with decorators
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import { action } from '@ember/object';
+
+      export default Route.extend({
+        @action
+        foo() {
+          this.store.find('test');
+        }
+      });`,
+      output: `
+      import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+      import { action } from '@ember/object';
+
+      export default Route.extend({
+        store: service('store'),
+@action
+        foo() {
+          this.store.find('test');
+        }
+      });`,
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
     },
   ],
 });
