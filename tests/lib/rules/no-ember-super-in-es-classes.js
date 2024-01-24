@@ -18,6 +18,7 @@ eslintTester.run('no-ember-super-in-es-classes', rule, {
     'EmberObject.extend({ init() { this._super(); } })',
     'EmberObject.extend({ init(a, b) { this._super(a, b); } })',
     'EmberObject.extend({ init() { this._super(...arguments); } })',
+    'class Foo { bar() { Baz.reopen({ quux() { this._super(); } }); } }',
   ],
   invalid: [
     {
