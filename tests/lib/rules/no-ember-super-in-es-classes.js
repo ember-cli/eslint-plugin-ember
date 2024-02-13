@@ -18,6 +18,9 @@ eslintTester.run('no-ember-super-in-es-classes', rule, {
     'EmberObject.extend({ init() { this._super(); } })',
     'EmberObject.extend({ init(a, b) { this._super(a, b); } })',
     'EmberObject.extend({ init() { this._super(...arguments); } })',
+    'class Foo { bar() { Baz.reopen({ quux() { this._super(); } }); } }',
+    'class Foo { bar() { return function() { this._super(); }; } }',
+    'class Foo { bar() { return { baz() { this._super() } }; } }',
   ],
   invalid: [
     {
@@ -66,6 +69,20 @@ eslintTester.run('no-ember-super-in-es-classes', rule, {
     {
       code: 'class Foo { [Symbol.iterator]() { this._super(); } }',
       output: 'class Foo { [Symbol.iterator]() { super[Symbol.iterator](); } }',
+      errors: [
+        { message: "Don't use `this._super` in ES classes; instead, you should use `super`" },
+      ],
+    },
+    {
+      code: 'class Foo { init() { return { a: this._super() }; } }',
+      output: 'class Foo { init() { return { a: super.init() }; } }',
+      errors: [
+        { message: "Don't use `this._super` in ES classes; instead, you should use `super`" },
+      ],
+    },
+    {
+      code: 'class Foo { init() { return () => { this._super(); }; } }',
+      output: 'class Foo { init() { return () => { super.init(); }; } }',
       errors: [
         { message: "Don't use `this._super` in ES classes; instead, you should use `super`" },
       ],
