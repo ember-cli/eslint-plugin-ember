@@ -228,6 +228,7 @@ module.exports = [
       'no-unused-vars': 'off',
       'no-useless-constructor': 'off',
       'prettier/prettier': ['error', { trailingComma: 'none' }],
+      'unicorn/consistent-function-scoping': 'off',
       'unicorn/filename-case': 'off',
     },
   },
