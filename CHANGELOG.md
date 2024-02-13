@@ -1,6 +1,26 @@
 
 
 
+
+## v12.0.1 (2024-02-13)
+
+#### :bug: Bug Fix
+* [#2071](https://github.com/ember-cli/eslint-plugin-ember/pull/2071) Fix nested classes case in `no-ember-super-in-es-classes` ([@CvX](https://github.com/CvX))
+
+#### :memo: Documentation
+* [#2088](https://github.com/ember-cli/eslint-plugin-ember/pull/2088) add doc about gts imports in ts files ([@patricklx](https://github.com/patricklx))
+* [#2068](https://github.com/ember-cli/eslint-plugin-ember/pull/2068) add `plugin:@typescript-eslint/recommended` to readme for GTS ([@evoactivity](https://github.com/evoactivity))
+
+#### :house: Internal
+* [#2090](https://github.com/ember-cli/eslint-plugin-ember/pull/2090) Refresh lockfile ([@bmish](https://github.com/bmish))
+
+#### Committers: 4
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Jarek Radosz ([@CvX](https://github.com/CvX))
+- Liam Potter ([@evoactivity](https://github.com/evoactivity))
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
 ## v12.0.0 (2024-01-13)
 
 #### :boom: Breaking Change
