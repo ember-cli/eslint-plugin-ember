@@ -90,9 +90,9 @@ const valid = [
 
       const noop = () => {};
 
-      <template>
+      export const Two = <template>
         <div {{on 'click' noop}} />
-      </template>
+      </template>;
 
       <template>
         <div {{on 'click' noop}} />
@@ -268,8 +268,8 @@ const invalid = [
       {
         column: 27,
         endColumn: 34,
-        endLine: 3,
-        line: 3,
+        endLine: 2,
+        line: 2,
         message: "'notUsed' is defined but never used.",
         messageId: 'unusedVar',
         nodeType: 'BlockParam',
@@ -279,8 +279,8 @@ const invalid = [
       {
         column: 10,
         endColumn: 15,
-        endLine: 6,
-        line: 6,
+        endLine: 5,
+        line: 5,
         message: "'undef' is not defined.",
         messageId: 'undef',
         nodeType: 'GlimmerElementNodePart',
@@ -290,8 +290,8 @@ const invalid = [
       {
         column: 10,
         endColumn: 26,
-        endLine: 7,
-        line: 7,
+        endLine: 6,
+        line: 6,
         message: "'non-std-html-tag' is not defined.",
         messageId: 'undef',
         nodeType: 'GlimmerElementNodePart',
@@ -313,15 +313,15 @@ const invalid = [
     errors: [
       {
         message: "'Foo' is not defined.",
-        line: 3,
-        endLine: 3,
+        line: 2,
+        endLine: 2,
         column: 10,
         endColumn: 13,
       },
       {
         message: "'Bar' is not defined.",
-        line: 4,
-        endLine: 4,
+        line: 3,
+        endLine: 3,
         column: 10,
         endColumn: 13,
       },
@@ -337,7 +337,7 @@ const invalid = [
     errors: [
       {
         message: "'F_0_O' is not defined.",
-        line: 3,
+        line: 2,
         column: 10,
         endColumn: 15,
       },
@@ -715,7 +715,10 @@ describe('multiple tokens in same file', () => {
     const resultErrors = results.flatMap((result) => result.messages);
     expect(resultErrors).toHaveLength(2);
 
-    expect(resultErrors[0]).toStrictEqual({
+    const noUndef = resultErrors.find((error) => error.ruleId === 'no-undef');
+    const noUnusedVars = resultErrors.find((error) => error.ruleId === 'no-unused-vars');
+
+    expect(noUnusedVars).toStrictEqual({
       column: 13,
       endColumn: 17,
       endLine: 4,
@@ -727,11 +730,11 @@ describe('multiple tokens in same file', () => {
       severity: 2,
     });
 
-    expect(resultErrors[1]).toStrictEqual({
-      column: 31,
-      endColumn: 34,
-      endLine: 4,
-      line: 4,
+    expect(noUndef).toStrictEqual({
+      column: 12,
+      endColumn: 15,
+      endLine: 1,
+      line: 1,
       message: "'Bad' is not defined.",
       messageId: 'undef',
       nodeType: 'GlimmerElementNodePart',
