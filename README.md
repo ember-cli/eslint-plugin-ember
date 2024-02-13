@@ -64,6 +64,9 @@ learn more [here](https://github.com/ember-template-imports/ember-template-impor
 
 gjs/gts support is provided by the [ember-eslint-parser](https://github.com/NullVoxPopuli/ember-eslint-parser)
 
+> [!NOTE]
+> if you import .gts files in .ts files, then `ember-eslint-parser` is required for .ts as well to enable typed linting
+
 ```js
 // .eslintrc.js
 module.exports = {
