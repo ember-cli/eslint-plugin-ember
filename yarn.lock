@@ -2483,10 +2483,10 @@ electron-to-chromium@^1.4.648:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.667.tgz#2767d998548e5eeeaf8bdaffd67b56796bfbed3d"
   integrity sha512-66L3pLlWhTNVUhnmSA5+qDM3fwnXsM6KAqE36e2w4KN0g6pkEtlT5bs41FQtQwVwKnfhNBXiWRLPs30HSxd7Kw==
 
-ember-eslint-parser@^0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/ember-eslint-parser/-/ember-eslint-parser-0.3.4.tgz#faec69bd25853120cf312cbe8c581672f87f119b"
-  integrity sha512-yb531OZbv3x52oh8QjKDhmuNc+7qWYKxnHSzvUyIBGPm9SOhDupxtqKnZnUXc7bGtt6Z1MWEkxMV34SPbwnhBg==
+ember-eslint-parser@^0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/ember-eslint-parser/-/ember-eslint-parser-0.3.5.tgz#19072b82fe95b7893ad1c1e1a84e7426db8df176"
+  integrity sha512-59Qadm1jKWawnWsQrVeDKvlVwn8wBczRlOOP2i4QKeJCSjZIswgEFQUNKH3wkGxXMxbZVPgtLoSeUM3UiHADhQ==
   dependencies:
     "@babel/eslint-parser" "7.23.10"
     "@glimmer/syntax" "^0.88.0"
