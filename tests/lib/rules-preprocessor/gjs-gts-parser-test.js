@@ -90,9 +90,9 @@ const valid = [
 
       const noop = () => {};
 
-      <template>
+      export const Foo = <template>
         <div {{on 'click' noop}} />
-      </template>
+      </template>;
 
       <template>
         <div {{on 'click' noop}} />
