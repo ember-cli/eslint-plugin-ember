@@ -2,6 +2,21 @@
 
 
 
+
+## v12.0.2 (2024-02-15)
+
+#### :bug: Bug Fix
+* [#2092](https://github.com/ember-cli/eslint-plugin-ember/pull/2092) Fix flat config for gts/gjs and `noop` parser name ([@bmish](https://github.com/bmish))
+* [#2091](https://github.com/ember-cli/eslint-plugin-ember/pull/2091) Upgrade ember-eslint-parser to 0.3.6 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* [#2093](https://github.com/ember-cli/eslint-plugin-ember/pull/2093) Update linting ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
+
 ## v12.0.1 (2024-02-13)
 
 #### :bug: Bug Fix
