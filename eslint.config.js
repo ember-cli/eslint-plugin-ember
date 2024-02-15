@@ -2,14 +2,16 @@
 /* eslint filenames/match-regex:"off" */
 
 const js = require('@eslint/js');
-const { FlatCompat } = require('@eslint/eslintrc');
+const babelEslintParser = require('@babel/eslint-parser');
 const eslintPluginEslintPluginAll = require('eslint-plugin-eslint-plugin/configs/all');
 const eslintPluginFilenames = require('eslint-plugin-filenames');
 const eslintPluginJest = require('eslint-plugin-jest');
 const eslintPluginMarkdown = require('eslint-plugin-markdown');
 const eslintPluginN = require('eslint-plugin-n');
-const babelEslintParser = require('@babel/eslint-parser');
+const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
+const eslintPluginUnicorn = require('eslint-plugin-unicorn');
 const globals = require('globals');
+const { FlatCompat } = require('@eslint/eslintrc');
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
@@ -22,13 +24,14 @@ module.exports = [
     'plugin:eslint-comments/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
-    'plugin:prettier/recommended',
-    'plugin:unicorn/recommended'
+    'plugin:prettier/recommended'
   ),
 
+  // Flat configs:
+  eslintPluginPrettierRecommended,
   eslintPluginEslintPluginAll,
-
   eslintPluginN.configs['flat/recommended'],
+  eslintPluginUnicorn.configs['flat/recommended'],
 
   {
     ignores: [
