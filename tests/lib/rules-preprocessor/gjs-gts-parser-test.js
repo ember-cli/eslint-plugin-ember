@@ -90,22 +90,6 @@ const valid = [
 
       const noop = () => {};
 
-      <template>
-        <div {{on 'click' noop}} />
-      </template>
-
-      <template>
-        <div {{on 'click' noop}} />
-      </template>
-    `,
-  },
-  {
-    filename: 'my-component.gjs',
-    code: `
-      import { on } from '@ember/modifier';
-
-      const noop = () => {};
-
       export default <template>
         <div {{on 'click' noop}} />
       </template>
@@ -200,6 +184,27 @@ const invalid = [
     errors: [
       {
         message: 'Parsing error: Parse Error at <anon>:2:29: 2:40',
+      },
+    ],
+  },
+  {
+    filename: 'my-component.gjs',
+    code: `
+      import { on } from '@ember/modifier';
+
+      const noop = () => {};
+
+      <template>
+        <div {{on 'click' noop}} />
+      </template>
+
+      <template>
+        <div {{on 'click' noop}} />
+      </template>
+    `,
+    errors: [
+      {
+        message: 'Missing semicolon.',
       },
     ],
   },
