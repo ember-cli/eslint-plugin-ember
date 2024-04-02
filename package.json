@@ -123,8 +123,8 @@
     "typescript-eslint/parser": "*"
   },
   "peerDependenciesMeta": {
-    "typescript": {
-      "typescript-eslint/parser": true
+    "typescript-eslint/parser": {
+      "optional": true
     }
   },
   "engines": {
