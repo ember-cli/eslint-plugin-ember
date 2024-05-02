@@ -97,7 +97,7 @@ export default class SampleComponent extends Component {
 
   @action
   someAction(newItem) {
-    this.abc = [...abc, newItem];
+    this.abc = [...this.abc, newItem];
   }
 }
 ```
