@@ -3,6 +3,22 @@
 
 
 
+
+## v12.1.0 (2024-05-14)
+
+#### :rocket: Enhancement
+* [#2117](https://github.com/ember-cli/eslint-plugin-ember/pull/2117) update ember eslint parser ([@patricklx](https://github.com/patricklx))
+
+#### :bug: Bug Fix
+* [#2107](https://github.com/ember-cli/eslint-plugin-ember/pull/2107) include recommended ts-eslint rules for gts ([@patricklx](https://github.com/patricklx))
+
+#### :memo: Documentation
+* [#2142](https://github.com/ember-cli/eslint-plugin-ember/pull/2142) Fix spread operator sample in `no-array-prototype-extensions` rule doc ([@mkszepp](https://github.com/mkszepp))
+
+#### Committers: 2
+- Markus Sanin ([@mkszepp](https://github.com/mkszepp))
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## v12.0.2 (2024-02-15)
 
 #### :bug: Bug Fix
