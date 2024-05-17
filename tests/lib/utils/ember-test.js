@@ -139,6 +139,8 @@ describe('isTestFile', () => {
   it('detects test files', () => {
     expect(emberUtils.isTestFile('some-test.js')).toBeTruthy();
     expect(emberUtils.isTestFile('some-test.ts')).toBeTruthy();
+    expect(emberUtils.isTestFile('some-test.gjs')).toBeTruthy();
+    expect(emberUtils.isTestFile('some-test.gts')).toBeTruthy();
   });
 
   it('does not detect other files', () => {
