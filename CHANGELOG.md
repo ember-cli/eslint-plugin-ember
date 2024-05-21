@@ -4,6 +4,18 @@
 
 
 
+
+## v12.1.1 (2024-05-21)
+
+#### :bug: Bug Fix
+* [#2149](https://github.com/ember-cli/eslint-plugin-ember/pull/2149) Bump parser version ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#2148](https://github.com/ember-cli/eslint-plugin-ember/pull/2148) fix test after parser update, resolves #2118 ([@patricklx](https://github.com/patricklx))
+* [#2147](https://github.com/ember-cli/eslint-plugin-ember/pull/2147) fix isTestFile - test-aware lints were not correctly identifying gjs and gts tests and test files ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
+
 ## v12.1.0 (2024-05-14)
 
 #### :rocket: Enhancement
