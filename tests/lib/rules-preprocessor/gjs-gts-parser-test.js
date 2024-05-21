@@ -261,7 +261,7 @@ const invalid = [
     filename: 'my-component.gjs',
     code: `
       <template>
-      {{#let 'x' as |noop notUsed usedEl|}}
+      {{#let 'x' as |noop usedEl notUsed|}}
         {{noop}}
         <usedEl />
         <undef.x />
@@ -271,8 +271,8 @@ const invalid = [
     `,
     errors: [
       {
-        column: 27,
-        endColumn: 34,
+        column: 34,
+        endColumn: 41,
         endLine: 3,
         line: 3,
         message: "'notUsed' is defined but never used.",
