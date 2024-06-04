@@ -87,6 +87,17 @@ eslintTester.run('no-runloop', rule, {
       function constructor() {};
       constructor();
     `,
+    `
+      import { hasOwnProperty, isPrototypeOf, propertyIsEnumerable, toLocaleString, toString, valueOf, constructor } from './util';
+      
+      hasOwnProperty();
+      isPrototypeOf();
+      propertyIsEnumerable();
+      toLocaleString();
+      toString();
+      valueOf();
+      constructor();
+    `,
   ],
   invalid: [
     {
