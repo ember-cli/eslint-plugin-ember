@@ -65,6 +65,39 @@ eslintTester.run('no-runloop', rule, {
       `,
       options: [{ allowList: ['later'] }],
     },
+    `
+      function hasOwnProperty() {};
+      hasOwnProperty();
+      
+      function isPrototypeOf() {};
+      isPrototypeOf();
+      
+      function propertyIsEnumerable() {};
+      propertyIsEnumerable();
+      
+      function toLocaleString() {};
+      toLocaleString();
+      
+      function toString() {};
+      toString();
+      
+      function valueOf() {};
+      valueOf();
+      
+      function constructor() {};
+      constructor();
+    `,
+    `
+      import { hasOwnProperty, isPrototypeOf, propertyIsEnumerable, toLocaleString, toString, valueOf, constructor } from './util';
+      
+      hasOwnProperty();
+      isPrototypeOf();
+      propertyIsEnumerable();
+      toLocaleString();
+      toString();
+      valueOf();
+      constructor();
+    `,
   ],
   invalid: [
     {
