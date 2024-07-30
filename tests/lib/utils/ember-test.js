@@ -136,11 +136,18 @@ describe('isMirageConfig', () => {
 });
 
 describe('isTestFile', () => {
-  it('detects test files', () => {
+  it('detects test files ending with -test', () => {
     expect(emberUtils.isTestFile('some-test.js')).toBeTruthy();
     expect(emberUtils.isTestFile('some-test.ts')).toBeTruthy();
     expect(emberUtils.isTestFile('some-test.gjs')).toBeTruthy();
     expect(emberUtils.isTestFile('some-test.gts')).toBeTruthy();
+  });
+
+  it('detects test files ending with _test', () => {
+    expect(emberUtils.isTestFile('some_test.js')).toBeTruthy();
+    expect(emberUtils.isTestFile('some_test.ts')).toBeTruthy();
+    expect(emberUtils.isTestFile('some_test.gjs')).toBeTruthy();
+    expect(emberUtils.isTestFile('some_test.gts')).toBeTruthy();
   });
 
   it('does not detect other files', () => {
