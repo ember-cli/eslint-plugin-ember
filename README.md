@@ -237,10 +237,11 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Ember Data
 
-| Name                                                                           | Description                                                          | 💼 | 🔧 | 💡 |
-| :----------------------------------------------------------------------------- | :------------------------------------------------------------------- | :- | :- | :- |
-| [no-empty-attrs](docs/rules/no-empty-attrs.md)                                 | disallow usage of empty attributes in Ember Data models              |    |    |    |
-| [use-ember-data-rfc-395-imports](docs/rules/use-ember-data-rfc-395-imports.md) | enforce usage of `@ember-data/` package imports instead `ember-data` | ✅  | 🔧 |    |
+| Name                                                                                   | Description                                                           | 💼 | 🔧 | 💡 |
+| :------------------------------------------------------------------------------------- | :-------------------------------------------------------------------- | :- | :- | :- |
+| [no-empty-attrs](docs/rules/no-empty-attrs.md)                                         | disallow usage of empty attributes in Ember Data models               |    |    |    |
+| [require-async-inverse-relationship](docs/rules/require-async-inverse-relationship.md) | require inverse to be specified in @belongsTo and @hasMany decorators |    |    |    |
+| [use-ember-data-rfc-395-imports](docs/rules/use-ember-data-rfc-395-imports.md)         | enforce usage of `@ember-data/` package imports instead `ember-data`  | ✅  | 🔧 |    |
 
 ### Ember Object
 
