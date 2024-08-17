@@ -5,6 +5,27 @@
 
 
 
+
+## v12.2.0 (2024-08-17)
+
+#### :rocket: Enhancement
+* [#2155](https://github.com/ember-cli/eslint-plugin-ember/pull/2155) Add new ember-data rule: `require-async-inverse-relationship` ([@wozny1989](https://github.com/wozny1989))
+* [#2157](https://github.com/ember-cli/eslint-plugin-ember/pull/2157) Consider `_test.{js|ts|gjs|gts}` as test file. ([@HEYGUL](https://github.com/HEYGUL))
+
+#### :bug: Bug Fix
+* [#2159](https://github.com/ember-cli/eslint-plugin-ember/pull/2159) Fix deprecation blocking eslint v9 ([@LucasHill](https://github.com/LucasHill))
+* [#2151](https://github.com/ember-cli/eslint-plugin-ember/pull/2151) Fix false positive error for `no-runloop` ([@mkszepp](https://github.com/mkszepp))
+
+#### :house: Internal
+* [#2153](https://github.com/ember-cli/eslint-plugin-ember/pull/2153) Fix API deprecations blocking eslint v9 compatibility ([@LucasHill](https://github.com/LucasHill))
+
+#### Committers: 4
+- Adam Woźny ([@wozny1989](https://github.com/wozny1989))
+- GUL ([@HEYGUL](https://github.com/HEYGUL))
+- Lucas Hill ([@LucasHill](https://github.com/LucasHill))
+- Markus Sanin ([@mkszepp](https://github.com/mkszepp))
+
+
 ## v12.1.1 (2024-05-21)
 
 #### :bug: Bug Fix
