@@ -44,6 +44,7 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
     "import ModelRegistry from 'ember-data/types/registries/model';",
     "import SerializerRegistry from 'ember-data/types/registries/serializer';",
     "import TransformRegistry from 'ember-data/types/registries/transform';",
+    "import Store from 'ember-data/store';",
   ],
 
   invalid: [
