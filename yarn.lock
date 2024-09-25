@@ -1313,7 +1313,7 @@
     semver "^7.6.0"
     ts-api-utils "^1.3.0"
 
-"@typescript-eslint/utils@8.7.0":
+"@typescript-eslint/utils@8.7.0", "@typescript-eslint/utils@^6.0.0 || ^7.0.0 || ^8.0.0":
   version "8.7.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-8.7.0.tgz#cef3f70708b5b5fd7ed8672fc14714472bd8a011"
   integrity sha512-ZbdUdwsl2X/s3CiyAu3gOlfQzpbuG3nTWKPoIvAu1pu5r8viiJvv2NPN2AqArL35NCYtw/lrPPfM4gxrMLNLPw==
@@ -1323,7 +1323,7 @@
     "@typescript-eslint/types" "8.7.0"
     "@typescript-eslint/typescript-estree" "8.7.0"
 
-"@typescript-eslint/utils@^5.10.0", "@typescript-eslint/utils@^5.38.1":
+"@typescript-eslint/utils@^5.38.1":
   version "5.62.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.62.0.tgz#141e809c71636e4a75daa39faed2fb5f4b10df86"
   integrity sha512-n8oxjeb5aIbPFEtmQxQYOLI0i9n5ySBEY/ZEHHZqKQSFnxio1rv6dthascc9dLuwrL0RC5mPCxB7vnAVGAYWAQ==
@@ -2797,12 +2797,12 @@ eslint-plugin-import@^2.29.0:
     semver "^6.3.1"
     tsconfig-paths "^3.15.0"
 
-eslint-plugin-jest@^27.8.0:
-  version "27.8.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-27.8.0.tgz#c8900c3e74e4c6b8cee67ea77dbc8de9cbd9e093"
-  integrity sha512-347hVFiu4ZKMYl5xFp0X81gLNwBdno0dl0CMpUMjwuAux9X/M2a7z+ab2VHmPL6XCT87q8nv1vaVzhIO4TE/hw==
+eslint-plugin-jest@^28.8.3:
+  version "28.8.3"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-28.8.3.tgz#c5699bba0ad06090ad613535e4f1572f4c2567c0"
+  integrity sha512-HIQ3t9hASLKm2IhIOqnu+ifw7uLZkIlR7RYNv7fMcEi/p0CIiJmfriStQS2LDkgtY4nyLbIZAD+JL347Yc2ETQ==
   dependencies:
-    "@typescript-eslint/utils" "^5.10.0"
+    "@typescript-eslint/utils" "^6.0.0 || ^7.0.0 || ^8.0.0"
 
 eslint-plugin-markdown@^3.0.1:
   version "3.0.1"
