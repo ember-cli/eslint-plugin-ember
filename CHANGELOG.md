@@ -6,6 +6,17 @@
 
 
 
+
+## v12.2.1 (2024-09-25)
+
+#### :bug: Bug Fix
+* [#2163](https://github.com/ember-cli/eslint-plugin-ember/pull/2163) Bump the parser ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#2162](https://github.com/ember-cli/eslint-plugin-ember/pull/2162) Allow imports from `ember-data/store` ([@Windvis](https://github.com/Windvis))
+
+#### Committers: 2
+- Sam Van Campenhout ([@Windvis](https://github.com/Windvis))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## v12.2.0 (2024-08-17)
 
 #### :rocket: Enhancement
