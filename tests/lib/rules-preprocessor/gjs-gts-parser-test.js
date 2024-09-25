@@ -169,7 +169,8 @@ const invalid = [
       {
         message:
           'Parsing error: Unexpected token. A constructor, method, accessor, or property was expected.\n' +
-          'To lint Gjs/Gts files please follow the setup guide at https://github.com/ember-cli/eslint-plugin-ember#gtsgjs',
+          'To lint Gjs/Gts files please follow the setup guide at https://github.com/ember-cli/eslint-plugin-ember#gtsgjs\n' +
+          'Note that this error can also happen if you have multiple versions of ember-eslint-plugin in your node_modules',
         line: 3,
         column: 6,
       },

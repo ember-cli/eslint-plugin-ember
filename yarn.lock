@@ -49,10 +49,19 @@
     json5 "^2.2.3"
     semver "^6.3.1"
 
-"@babel/eslint-parser@7.23.10", "@babel/eslint-parser@^7.22.15":
+"@babel/eslint-parser@^7.22.15":
   version "7.23.10"
   resolved "https://registry.yarnpkg.com/@babel/eslint-parser/-/eslint-parser-7.23.10.tgz#2d4164842d6db798873b40e0c4238827084667a2"
   integrity sha512-3wSYDPZVnhseRnxRJH6ZVTNknBz76AEnyC+AYYhasjP3Yy23qz0ERR7Fcd2SHmYuSFJ2kY9gaaDd3vyqU09eSw==
+  dependencies:
+    "@nicolo-ribaudo/eslint-scope-5-internals" "5.1.1-v1"
+    eslint-visitor-keys "^2.1.0"
+    semver "^6.3.1"
+
+"@babel/eslint-parser@^7.23.10":
+  version "7.25.1"
+  resolved "https://registry.yarnpkg.com/@babel/eslint-parser/-/eslint-parser-7.25.1.tgz#469cee4bd18a88ff3edbdfbd227bd20e82aa9b82"
+  integrity sha512-Y956ghgTT4j7rKesabkh5WeqgSFZVFwaPR0IWFm7KFHFmmJ4afbG49SmfW4S+GyRPx0Dy5jxEWA5t0rpxfElWg==
   dependencies:
     "@nicolo-ribaudo/eslint-scope-5-internals" "5.1.1-v1"
     eslint-visitor-keys "^2.1.0"
@@ -2146,10 +2155,10 @@ configstore@^6.0.0:
     write-file-atomic "^3.0.3"
     xdg-basedir "^5.0.1"
 
-content-tag@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/content-tag/-/content-tag-1.2.2.tgz#8cbc3cdb9957a81f7c425b138e334330dd6fd78d"
-  integrity sha512-9guqKIx2H+78N17otBpl8yLZbQGL5q1vBO/jDb3gF2JjixtcVpC62jDUNxjVMNoaZ09oxRX84ZOD6VX02qkVvg==
+content-tag@^2.0.1:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/content-tag/-/content-tag-2.0.2.tgz#978802d97df21516daa10d78e2a1f148e89eab8b"
+  integrity sha512-qHRyTp02dgzRK2tsCFxZ1H289bZOuSLNpupr6prvnSFq4SFPmNlBKbbE5PCMb+8+Z1a1z+yCVtXvQIGUCCa3lQ==
 
 convert-source-map@^2.0.0:
   version "2.0.0"
@@ -2478,14 +2487,14 @@ electron-to-chromium@^1.4.648:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.667.tgz#2767d998548e5eeeaf8bdaffd67b56796bfbed3d"
   integrity sha512-66L3pLlWhTNVUhnmSA5+qDM3fwnXsM6KAqE36e2w4KN0g6pkEtlT5bs41FQtQwVwKnfhNBXiWRLPs30HSxd7Kw==
 
-ember-eslint-parser@^0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/ember-eslint-parser/-/ember-eslint-parser-0.4.3.tgz#a7ca3c380872719610b94c7a06cc550ced745031"
-  integrity sha512-wMPoaaA+i/F/tPPxURRON9XXJH5MRUOZ5x/9CVJTSpL+0n4EWphyztb20gR+ZJeShnOACQpAdFy6YSS1/JSHKw==
+ember-eslint-parser@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/ember-eslint-parser/-/ember-eslint-parser-0.5.2.tgz#798db22f54a3038f0dfdcc6fc766887b99c449fa"
+  integrity sha512-289KjJ08QxK1Ytf+aq04QMoQ8WvhXCInJixcGuS5SWBFNlVuEs9yAZ06VXzVSuZ9zMAqX24MTMvD7ICVFN7QSg==
   dependencies:
-    "@babel/eslint-parser" "7.23.10"
+    "@babel/eslint-parser" "^7.23.10"
     "@glimmer/syntax" "^0.92.0"
-    content-tag "^1.2.2"
+    content-tag "^2.0.1"
     eslint-scope "^7.2.2"
     html-tags "^3.3.1"
 
