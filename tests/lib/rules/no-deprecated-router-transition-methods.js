@@ -16,6 +16,7 @@ const ruleTester = new RuleTester({
     sourceType: 'module',
     babelOptions: {
       configFile: require.resolve('../../../.babelrc'),
+      plugins: [['@babel/plugin-proposal-decorators', { legacy: true }]],
     },
   },
 });
@@ -869,6 +870,40 @@ import Controller from '@ember/controller';
       errors: [
         {
           messageId: 'main',
+          type: 'MemberExpression',
+        },
+      ],
+    },
+
+    // Legacy .extend Route with decorators
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import { action } from '@ember/object';
+
+      export default Route.extend({
+        @action
+        foo() {
+          this.transitionTo('login');
+        }
+      });`,
+      output: `
+      import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+      import { action } from '@ember/object';
+
+      export default Route.extend({
+        router: service('router'),
+@action
+        foo() {
+          this.router.transitionTo('login');
+        }
+      });`,
+      errors: [
+        {
+          messageId: 'main',
+          data: { methodUsed: 'transitionTo', desiredMethod: 'transitionTo', moduleType: 'Route' },
           type: 'MemberExpression',
         },
       ],
