@@ -235,4 +235,20 @@ module.exports = [
       'unicorn/filename-case': 'off',
     },
   },
+  {
+    files: ['**/*.mjs'],
+    languageOptions: {
+      parser: babelEslintParser,
+      parserOptions: {
+        ecmaFeatures: { modules: true },
+        ecmaVersion: 2022,
+        babelOptions: {
+          configFile: require.resolve('./.babelrc'),
+        },
+      },
+    },
+    rules: {
+      'import/extensions': ['error', 'ignorePackages'],
+    },
+  },
 ];
