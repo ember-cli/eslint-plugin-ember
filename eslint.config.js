@@ -248,7 +248,17 @@ module.exports = [
       },
     },
     rules: {
+      // Extensions are required in ESM
       'import/extensions': ['error', 'ignorePackages'],
+      // These don't appear to work correctly
+      // All these throw on the import of a dependency
+      'import/namespace': 'off',
+      'import/no-deprecated': 'off',
+      'import/default': 'off',
+      'import/no-named-as-default': 'off',
+      'import/no-named-as-default-member': 'off',
+      'import/no-unresalved': 'off',
+      'import/no-missing-import': 'off',
     },
   },
 ];
