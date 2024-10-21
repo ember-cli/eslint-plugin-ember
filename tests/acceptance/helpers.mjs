@@ -8,7 +8,8 @@ const require = createRequire(import.meta.url);
 const { Project } = require('fixturify-project');
 const { Scenarios } = require('scenario-tester');
 
-export const libDir = join(import.meta.dirname, '../../');
+const lib = join(import.meta.dirname, '../../package.json');
+export const libDir = dirname(require.resolve(lib));
 export const fixturesDir = join(import.meta.dirname, './fixtures');
 
 export function withScenario(name) {
@@ -16,7 +17,7 @@ export function withScenario(name) {
   const fixturePath = dirname(require.resolve(manifestPath));
   const project = Project.fromDir(fixturePath, { linkDevDeps: true });
 
-  return Scenarios.fromProject(project).expand({
+  return Scenarios.fromProject(() => project).expand({
     basic: async (project) => {
       project.linkDevDependency('eslint-plugin-ember', {
         baseDir: libDir,

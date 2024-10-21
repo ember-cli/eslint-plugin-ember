@@ -4,7 +4,6 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "eslint": "^9.13.0"
-    "eslint-plugin-ember": "link:../../../"
+    "eslint": "^9.13.0",
   }
 }

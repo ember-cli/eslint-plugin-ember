@@ -5,6 +5,7 @@ describe('Acceptance | flat-config', () => {
   withScenario('plain-gjs').forEachScenario((scenario) => {
     describe(scenario.name, () => {
       it('lints gjs without error', async () => {
+        console.log({ scenario });
         let project = await scenario.prepare();
 
         await project.execute('pnpm install');
