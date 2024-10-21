@@ -1,0 +1,8 @@
+{
+  "name": "fixture-plain-gjs",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "eslint": "^9.13.0"
+  }
+}

@@ -35,3 +35,23 @@ jobs:
     - run: yarn update && git diff --exit-code
 
     - run: yarn test:coverage --runInBand
+
+  acceptance:
+    runs-on: ${{ matrix.os }}-latest
+
+    strategy:
+      matrix:
+        os: [ ubuntu, windows ]
+        node-version: [18.x, 20.x, 21.x]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
+
+    - run: yarn install --frozen-lockfile --non-interactive
+    - run: yarn vitest
