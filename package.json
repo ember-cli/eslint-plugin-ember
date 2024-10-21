@@ -23,6 +23,9 @@
   "license": "MIT",
   "exports": {
     ".": "./lib/index.js",
+    "./recommended": {
+      "import": "./lib/recommended.mjs"
+    },
     "./configs/*": "./lib/config/*.js"
   },
   "main": "./lib/index.js",
