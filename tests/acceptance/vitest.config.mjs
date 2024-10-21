@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   test: {
-    exclude: [],
+    include: ['tests/acceptance/*/*.test.{js,mjs,ts,mts}'],
+    exclude: ['**/node_modules/**'],
   },
 });
