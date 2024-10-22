@@ -450,7 +450,7 @@ describe('reportUnorderedProperties', () => {
           queryParams: [],
         });`,
         '',
-        jest.fn()
+        vi.fn()
       );
       const importInjectName = context.ast.body[0].specifiers[0].local.name;
       const importControllerName = context.ast.body[1].specifiers[0].local.name;
@@ -480,7 +480,7 @@ describe('reportUnorderedProperties', () => {
             queryParams: [],
           });`,
         '',
-        jest.fn()
+        vi.fn()
       );
       const importInjectName = context.ast.body[0].specifiers[0].local.name;
       const importControllerName = context.ast.body[1].specifiers[0].local.name;
@@ -512,7 +512,7 @@ describe('reportUnorderedProperties', () => {
             queryParams = [];
           }`,
         '',
-        jest.fn()
+        vi.fn()
       );
       const importInjectName = context.ast.body[0].specifiers[0].local.name;
       const importControllerName = context.ast.body[1].specifiers[0].local.name;
@@ -542,7 +542,7 @@ describe('reportUnorderedProperties', () => {
             queryParams = [];
           }`,
         '',
-        jest.fn()
+        vi.fn()
       );
       const importInjectName = context.ast.body[0].specifiers[0].local.name;
       const importControllerName = context.ast.body[1].specifiers[0].local.name;

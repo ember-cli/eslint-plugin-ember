@@ -5,7 +5,6 @@ const js = require('@eslint/js');
 const babelEslintParser = require('@babel/eslint-parser');
 const eslintPluginEslintPluginAll = require('eslint-plugin-eslint-plugin/configs/all');
 const eslintPluginFilenames = require('eslint-plugin-filenames');
-const eslintPluginJest = require('eslint-plugin-jest');
 const eslintPluginMarkdown = require('eslint-plugin-markdown');
 const eslintPluginN = require('eslint-plugin-n');
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
@@ -168,29 +167,7 @@ module.exports = [
   {
     // Test files:
     files: ['**/*.js', '**/*.js.snap'],
-    plugins: { jest: eslintPluginJest },
-    rules: {
-      ...eslintPluginJest.configs.recommended.rules,
-      ...eslintPluginJest.configs.style.rules,
-
-      // Optional jest rules:
-      'jest/consistent-test-it': 'error',
-      'jest/no-duplicate-hooks': 'error',
-      'jest/no-hooks': 'error',
-      'jest/no-if': 'error',
-      'jest/no-large-snapshots': 'error',
-      'jest/no-restricted-matchers': 'error',
-      'jest/no-test-return-statement': 'error',
-      'jest/prefer-called-with': 'error',
-      'jest/prefer-hooks-on-top': 'error',
-      'jest/prefer-lowercase-title': 'error',
-      'jest/prefer-spy-on': 'error',
-      'jest/prefer-strict-equal': 'error',
-      'jest/prefer-todo': 'error',
-      'jest/require-to-throw-message': 'error',
-      'jest/require-top-level-describe': 'error',
-      'jest/valid-title': 'error',
-    },
+    plugins: {},
     languageOptions: {
       globals: {
         ...globals.jest,
@@ -216,10 +193,6 @@ module.exports = [
       'filenames/match-regex': 'off',
       'import/no-unresolved': 'off',
       'import/unambiguous': 'off',
-      'jest/expect-expect': 'off',
-      'jest/no-done-callback': 'off',
-      'jest/no-test-callback': 'off',
-      'jest/require-top-level-describe': 'off',
       'n/no-extraneous-import': 'off',
       'n/no-missing-import': 'off',
       'n/no-missing-require': 'off',

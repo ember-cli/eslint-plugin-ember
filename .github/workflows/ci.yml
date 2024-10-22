@@ -45,4 +45,4 @@ jobs:
         cache: 'pnpm'
 
     - run: pnpm install
-    - run: pnpm test:coverage --runInBand
+    - run: pnpm test:coverage
