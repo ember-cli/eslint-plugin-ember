@@ -44,8 +44,8 @@
     "lint:eslint-docs": "npm-run-all \"update:eslint-docs -- --check\"",
     "lint:eslint-docs:fix": "npm-run-all \"update:eslint-docs\"",
     "lint:fix": "npm-run-all \"lint:*:fix\"",
-    "lint:js": "eslint --cache .",
-    "lint:js:fix": "npm-run-all \"lint:js -- --fix\"",
+    "lint:js": "eslint .",
+    "lint:js:fix": "pnpm lint:js --fix",
     "lint:package-json": "npmPkgJsonLint .",
     "lint:package-json-sorting": "sort-package-json --check",
     "lint:package-json-sorting:fix": "sort-package-json package.json",
@@ -89,7 +89,7 @@
     "eslint-plugin-filenames": "^1.3.2",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-markdown": "^3.0.1",
-    "eslint-plugin-n": "^16.2.0",
+    "eslint-plugin-n": "^17.11.1",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-unicorn": "^51.0.0",
     "eslint-remote-tester": "^3.0.1",
@@ -116,10 +116,10 @@
       "optional": true
     }
   },
+  "packageManager": "pnpm@9.12.2",
   "engines": {
     "node": "18.* || 20.* || >= 21"
   },
-  "packageManager": "pnpm@9.12.2",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },

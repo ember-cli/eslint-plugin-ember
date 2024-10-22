@@ -33,22 +33,9 @@ module.exports = [
   eslintPluginUnicorn.configs['flat/recommended'],
 
   {
-    ignores: [
-      'coverage/',
-      'node_modules/',
-      'lib/recommended-rules.js',
-      'lib/recommended-rules-gjs.js',
-      'lib/recommended-rules-gts.js',
-      'tests/__snapshots__/',
-
-      // # Contains <template> in js markdown
-      'docs/rules/no-empty-glimmer-component-classes.md',
-      'docs/rules/template-no-let-reference.md',
-    ],
-  },
-  {
     languageOptions: {
       parser: babelEslintParser,
+      sourceType: 'script',
       parserOptions: {
         ecmaVersion: 2022,
         sourceType: 'script',
@@ -152,6 +139,8 @@ module.exports = [
       'import/no-webpack-loader-syntax': 'error',
       'import/unambiguous': 'error',
 
+      'n/no-unsupported-features/node-builtins': 'off',
+
       // Unicorn rules:
       'unicorn/no-array-callback-reference': 'off',
       'unicorn/no-array-method-this-argument': 'off',
@@ -183,6 +172,7 @@ module.exports = [
     // Markdown code samples in documentation:
     files: ['**/*.md/*.js'],
     languageOptions: {
+      sourceType: 'module',
       parserOptions: {
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
@@ -232,6 +222,23 @@ module.exports = [
       'import/no-named-as-default-member': 'off',
       'import/no-unresalved': 'off',
       'import/no-missing-import': 'off',
+
+      // vite config format does not match regex
+      'filenames/match-regex': 'off',
     },
+  },
+  {
+    ignores: [
+      'coverage/',
+      'node_modules/',
+      'lib/recommended-rules.js',
+      'lib/recommended-rules-gjs.js',
+      'lib/recommended-rules-gts.js',
+      'tests/__snapshots__/',
+
+      // # Contains <template> in js markdown
+      'docs/rules/no-empty-glimmer-component-classes.md',
+      'docs/rules/template-no-let-reference.md',
+    ],
   },
 ];

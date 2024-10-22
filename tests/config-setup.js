@@ -11,7 +11,6 @@ describe('config setup is correct', function () {
     const filePath = path.join(__dirname, '..', 'lib', 'config');
     const files = readdirSync(filePath);
 
-    // eslint-disable-next-line jest/prefer-strict-equal
     expect(CONFIG_NAMES).toEqual(
       files.filter((file) => !file.startsWith('.')).map((file) => file.replace('.js', ''))
     );

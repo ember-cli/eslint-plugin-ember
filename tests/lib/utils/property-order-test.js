@@ -496,7 +496,7 @@ describe('reportUnorderedProperties', () => {
         undefined,
         importControllerName
       );
-      expect(context.report).toHaveBeenCalled(); // eslint-disable-line jest/prefer-called-with
+      expect(context.report).toHaveBeenCalled();
     });
   });
 
@@ -558,7 +558,7 @@ describe('reportUnorderedProperties', () => {
         undefined,
         importControllerName
       );
-      expect(context.report).toHaveBeenCalled(); // eslint-disable-line jest/prefer-called-with
+      expect(context.report).toHaveBeenCalled();
     });
   });
 });

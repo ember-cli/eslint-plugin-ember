@@ -10,10 +10,10 @@ export default defineConfig({
       hooks: 'list',
     },
     coverage: {
-      "branches": 95,
-      "functions": 98.95,
-      "lines": 98,
-      "statements": 98
-    }
+      branches: 95,
+      functions: 98.95,
+      lines: 98,
+      statements: 98,
+    },
   },
 });
