@@ -16,12 +16,6 @@
 ### 1. Install plugin
 
 ```shell
-yarn add --dev eslint-plugin-ember
-```
-
-Or
-
-```shell
 npm install --save-dev eslint-plugin-ember
 ```
 
@@ -354,10 +348,10 @@ If you have any suggestions, ideas, or problems, feel free to [create an issue](
   - `lib/rules/new-rule.js` (implementation, see [no-proxies](lib/rules/no-proxies.js) for an example)
   - `docs/rules/new-rule.md` (documentation, start from the template -- [raw](https://raw.githubusercontent.com/ember-cli/eslint-plugin-ember/master/docs/rules/_TEMPLATE_.md), [rendered](docs/rules/_TEMPLATE_.md))
   - `tests/lib/rules/new-rule.js` (tests, see [no-proxies](tests/lib/rules/no-proxies.js) for an example)
-- Run `yarn update` to automatically update the README and other files (and re-run this if you change the rule name or description)
+- Run `pnpm update` to automatically update the README and other files (and re-run this if you change the rule name or description)
 - Make sure your changes will pass [CI](./.github/workflows/ci.yml) by running:
-  - `yarn test`
-  - `yarn lint` (`yarn lint:js --fix` can fix many errors)
+  - `pnpm test`
+  - `pnpm lint` (`pnpm lint:js --fix` can fix many errors)
 - Create a PR and link the created issue in the description
 
 Note that new rules should not immediately be added to the [recommended](./lib/recommended-rules.js) configuration, as we only consider such breaking changes during major version updates.
