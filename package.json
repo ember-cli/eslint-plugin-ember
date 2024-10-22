@@ -84,7 +84,7 @@
     "lodash.camelcase": "^4.3.0",
     "lodash.kebabcase": "^4.1.1",
     "requireindex": "^1.2.0",
-    "snake-case": "^3.0.3"
+    "snake-case": "^4.0.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",
