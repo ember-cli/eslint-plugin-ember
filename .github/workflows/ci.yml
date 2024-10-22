@@ -10,8 +10,22 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  self-lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: pnpm/action-setup@v4
+      with:
+        run_install: false
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22.x
+        cache: 'pnpm'
 
+    - run: pnpm install
+    - run: pnpm lint
+
+  build:
     runs-on: ${{ matrix.os }}-latest
 
     strategy:
@@ -31,7 +45,4 @@ jobs:
         cache: 'pnpm'
 
     - run: pnpm install
-
-    - run: pnpm lint
-
     - run: pnpm test:coverage --runInBand
