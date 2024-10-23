@@ -1,5 +1,26 @@
 # Changelog
 
+## Release (2024-10-23)
+
+eslint-plugin-ember 12.3.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2191](https://github.com/ember-cli/eslint-plugin-ember/pull/2191) Provide better gjs/gts config support for eslint 9 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2195](https://github.com/ember-cli/eslint-plugin-ember/pull/2195) fix: Typo in error message ([@HeroicEric](https://github.com/HeroicEric))
+
+#### :house: Internal
+* `eslint-plugin-ember`
+  * [#2198](https://github.com/ember-cli/eslint-plugin-ember/pull/2198) Switch away from release-it to release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2196](https://github.com/ember-cli/eslint-plugin-ember/pull/2196) Switch to pnpm + vitest (away from yarn @ 1 and jest) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- Eric Kelly ([@HeroicEric](https://github.com/HeroicEric))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 
 
 
