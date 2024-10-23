@@ -120,6 +120,10 @@
   "engines": {
     "node": "18.* || 20.* || >= 21"
   },
+  "volta": {
+    "node": "22.10.0",
+    "pnpm": "9.12.2"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
