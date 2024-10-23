@@ -37,7 +37,6 @@
     "lib"
   ],
   "scripts": {
-    "changelog": "lerna-changelog",
     "lint": "npm-run-all --continue-on-error --aggregate-output --parallel \"lint:!(fix)\"",
     "lint:docs": "markdownlint \"**/*.md\"",
     "lint:docs:fix": "pnpm lint:docs --fix",
@@ -124,15 +123,5 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
-  },
-  "changelog": {
-    "repo": "ember-cli/eslint-plugin-ember",
-    "labels": {
-      "breaking": ":boom: Breaking Change",
-      "enhancement": ":rocket: Enhancement",
-      "bug": ":bug: Bug Fix",
-      "documentation": ":memo: Documentation",
-      "internal": ":house: Internal"
-    }
   }
 }
