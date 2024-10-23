@@ -15,7 +15,6 @@ describe('rules setup is correct', function () {
     const filePath = path.join(__dirname, '..', 'lib', 'rules');
     const files = readdirSync(filePath);
 
-    // eslint-disable-next-line jest/prefer-strict-equal
     expect(RULE_NAMES).toEqual(
       files.filter((file) => !file.startsWith('.')).map((file) => file.replace('.js', ''))
     );
@@ -32,7 +31,6 @@ describe('rules setup is correct', function () {
     const filePath = path.join(__dirname, '..', 'tests', 'lib', 'rules');
     const files = readdirSync(filePath);
 
-    // eslint-disable-next-line jest/prefer-strict-equal
     expect(RULE_NAMES).toEqual(
       files.filter((file) => !file.startsWith('.')).map((file) => file.replace('.js', ''))
     );
@@ -43,7 +41,6 @@ describe('rules setup is correct', function () {
       const filePath = path.join(__dirname, '..', 'lib', 'rules', `${ruleName}.js`);
       const file = readFileSync(filePath, 'utf8');
 
-      // eslint-disable-next-line jest/valid-title
       describe(ruleName, function () {
         it('should have the jsdoc comment for rule type', function () {
           expect(file).toContain("/** @type {import('eslint').Rule.RuleModule} */");
@@ -57,7 +54,6 @@ describe('rules setup is correct', function () {
       const filePath = path.join(__dirname, '..', 'tests', 'lib', 'rules', `${ruleName}.js`);
       const file = readFileSync(filePath, 'utf8');
 
-      // eslint-disable-next-line jest/valid-title
       describe(ruleName, function () {
         it('should have the right test suite name', function () {
           expect(file).toContain(`.run('${ruleName}'`);
@@ -70,7 +66,6 @@ describe('rules setup is correct', function () {
     const filePath = path.join(__dirname, '..', 'docs', 'rules');
     const files = readdirSync(filePath);
 
-    // eslint-disable-next-line jest/prefer-strict-equal
     expect(RULE_NAMES).toEqual(
       files
         .filter((file) => !file.startsWith('.') && file !== '_TEMPLATE_.md')

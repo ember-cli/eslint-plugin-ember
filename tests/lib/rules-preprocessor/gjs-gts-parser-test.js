@@ -491,7 +491,6 @@ describe('template-vars', () => {
     for (const scenario of valid) {
       const { code, filename, parser } = scenario;
 
-      // eslint-disable-next-line jest/valid-title
       it(code, async () => {
         const eslint = initESLint(parser);
         const results = await eslint.lintText(code, {
@@ -511,7 +510,6 @@ describe('template-vars', () => {
     for (const scenario of invalid) {
       const { code, filename, errors, parser } = scenario;
 
-      // eslint-disable-next-line jest/valid-title
       it(code, async () => {
         const eslint = initESLint(parser);
         const results = await eslint.lintText(code, {

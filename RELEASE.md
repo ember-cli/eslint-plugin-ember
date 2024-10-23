@@ -8,4 +8,4 @@
 
 4. `export EDITOR="vim"` to choose an editor for editing the changelog
 
-5. `yarn release` (uses [@release-it-plugins/lerna-changelog](https://github.com/release-it-plugins/lerna-changelog) to handle versioning, the changelog, publishing to GitHub and NPM, etc)
+5. `pnpm release` (uses [@release-it-plugins/lerna-changelog](https://github.com/release-it-plugins/lerna-changelog) to handle versioning, the changelog, publishing to GitHub and NPM, etc)

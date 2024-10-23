@@ -5,7 +5,6 @@ const js = require('@eslint/js');
 const babelEslintParser = require('@babel/eslint-parser');
 const eslintPluginEslintPluginAll = require('eslint-plugin-eslint-plugin/configs/all');
 const eslintPluginFilenames = require('eslint-plugin-filenames');
-const eslintPluginJest = require('eslint-plugin-jest');
 const eslintPluginMarkdown = require('eslint-plugin-markdown');
 const eslintPluginN = require('eslint-plugin-n');
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
@@ -34,22 +33,9 @@ module.exports = [
   eslintPluginUnicorn.configs['flat/recommended'],
 
   {
-    ignores: [
-      'coverage/',
-      'node_modules/',
-      'lib/recommended-rules.js',
-      'lib/recommended-rules-gjs.js',
-      'lib/recommended-rules-gts.js',
-      'tests/__snapshots__/',
-
-      // # Contains <template> in js markdown
-      'docs/rules/no-empty-glimmer-component-classes.md',
-      'docs/rules/template-no-let-reference.md',
-    ],
-  },
-  {
     languageOptions: {
       parser: babelEslintParser,
+      sourceType: 'script',
       parserOptions: {
         ecmaVersion: 2022,
         sourceType: 'script',
@@ -153,6 +139,8 @@ module.exports = [
       'import/no-webpack-loader-syntax': 'error',
       'import/unambiguous': 'error',
 
+      'n/no-unsupported-features/node-builtins': 'off',
+
       // Unicorn rules:
       'unicorn/no-array-callback-reference': 'off',
       'unicorn/no-array-method-this-argument': 'off',
@@ -168,29 +156,7 @@ module.exports = [
   {
     // Test files:
     files: ['**/*.js', '**/*.js.snap'],
-    plugins: { jest: eslintPluginJest },
-    rules: {
-      ...eslintPluginJest.configs.recommended.rules,
-      ...eslintPluginJest.configs.style.rules,
-
-      // Optional jest rules:
-      'jest/consistent-test-it': 'error',
-      'jest/no-duplicate-hooks': 'error',
-      'jest/no-hooks': 'error',
-      'jest/no-if': 'error',
-      'jest/no-large-snapshots': 'error',
-      'jest/no-restricted-matchers': 'error',
-      'jest/no-test-return-statement': 'error',
-      'jest/prefer-called-with': 'error',
-      'jest/prefer-hooks-on-top': 'error',
-      'jest/prefer-lowercase-title': 'error',
-      'jest/prefer-spy-on': 'error',
-      'jest/prefer-strict-equal': 'error',
-      'jest/prefer-todo': 'error',
-      'jest/require-to-throw-message': 'error',
-      'jest/require-top-level-describe': 'error',
-      'jest/valid-title': 'error',
-    },
+    plugins: {},
     languageOptions: {
       globals: {
         ...globals.jest,
@@ -206,6 +172,7 @@ module.exports = [
     // Markdown code samples in documentation:
     files: ['**/*.md/*.js'],
     languageOptions: {
+      sourceType: 'module',
       parserOptions: {
         sourceType: 'module',
         ecmaFeatures: { legacyDecorators: true },
@@ -216,10 +183,6 @@ module.exports = [
       'filenames/match-regex': 'off',
       'import/no-unresolved': 'off',
       'import/unambiguous': 'off',
-      'jest/expect-expect': 'off',
-      'jest/no-done-callback': 'off',
-      'jest/no-test-callback': 'off',
-      'jest/require-top-level-describe': 'off',
       'n/no-extraneous-import': 'off',
       'n/no-missing-import': 'off',
       'n/no-missing-require': 'off',
@@ -259,6 +222,23 @@ module.exports = [
       'import/no-named-as-default-member': 'off',
       'import/no-unresalved': 'off',
       'import/no-missing-import': 'off',
+
+      // vite config format does not match regex
+      'filenames/match-regex': 'off',
     },
+  },
+  {
+    ignores: [
+      'coverage/',
+      'node_modules/',
+      'lib/recommended-rules.js',
+      'lib/recommended-rules-gjs.js',
+      'lib/recommended-rules-gts.js',
+      'tests/__snapshots__/',
+
+      // # Contains <template> in js markdown
+      'docs/rules/no-empty-glimmer-component-classes.md',
+      'docs/rules/template-no-let-reference.md',
+    ],
   },
 ];
