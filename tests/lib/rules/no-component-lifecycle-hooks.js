@@ -87,6 +87,16 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
 
       const someRandomClassOrObject = { didDestroyElement() { } };
     `,
+    `
+      import Component from '@ember/component';
+
+      export default class CommentInput extends Component.extend() {
+      }
+
+      export class CommentInput2 {
+        didDestroyElement() {}
+      }
+    `,
   ],
 
   invalid: [
@@ -164,6 +174,22 @@ ruleTester.run('no-component-lifecycle-hooks', rule, {
         {
           message: ERROR_MESSAGE,
           type: 'Identifier',
+        },
+      ],
+    },
+    {
+      code: `
+        import Component from '@ember/component';
+
+        export default class CommentInput extends Component.extend() {
+          didDestroyElement() {}
+        }
+      `,
+      output: null,
+      errors: [
+        {
+          message: ERROR_MESSAGE,
+          type: 'MethodDefinition',
         },
       ],
     },
