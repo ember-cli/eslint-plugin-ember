@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2024-10-25)
+
+eslint-plugin-ember 12.3.1 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2200](https://github.com/ember-cli/eslint-plugin-ember/pull/2200) Fix no-component-lifecycle-hook in double extended classic component ([@wagenet](https://github.com/wagenet))
+
+#### Committers: 1
+- Peter Wagenet ([@wagenet](https://github.com/wagenet))
+
 ## Release (2024-10-23)
 
 eslint-plugin-ember 12.3.0 (minor)

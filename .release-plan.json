@@ -1,25 +1,17 @@
 {
   "solution": {
     "eslint-plugin-ember": {
-      "impact": "minor",
-      "oldVersion": "12.2.1",
-      "newVersion": "12.3.0",
+      "impact": "patch",
+      "oldVersion": "12.3.0",
+      "newVersion": "12.3.1",
       "constraints": [
-        {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        },
         {
           "impact": "patch",
           "reason": "Appears in changelog section :bug: Bug Fix"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2024-10-23)\n\neslint-plugin-ember 12.3.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2191](https://github.com/ember-cli/eslint-plugin-ember/pull/2191) Provide better gjs/gts config support for eslint 9 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2195](https://github.com/ember-cli/eslint-plugin-ember/pull/2195) fix: Typo in error message ([@HeroicEric](https://github.com/HeroicEric))\n\n#### :house: Internal\n* `eslint-plugin-ember`\n  * [#2198](https://github.com/ember-cli/eslint-plugin-ember/pull/2198) Switch away from release-it to release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#2196](https://github.com/ember-cli/eslint-plugin-ember/pull/2196) Switch to pnpm + vitest (away from yarn @ 1 and jest) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 2\n- Eric Kelly ([@HeroicEric](https://github.com/HeroicEric))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2024-10-25)\n\neslint-plugin-ember 12.3.1 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2200](https://github.com/ember-cli/eslint-plugin-ember/pull/2200) Fix no-component-lifecycle-hook in double extended classic component ([@wagenet](https://github.com/wagenet))\n\n#### Committers: 1\n- Peter Wagenet ([@wagenet](https://github.com/wagenet))\n"
 }
