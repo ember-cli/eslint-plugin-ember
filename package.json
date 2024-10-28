@@ -58,7 +58,7 @@
   },
   "dependencies": {
     "@ember-data/rfc395-data": "^0.0.4",
-    "css-tree": "^2.3.1",
+    "css-tree": "^3.0.0",
     "ember-eslint-parser": "^0.5.3",
     "ember-rfc176-data": "^0.3.18",
     "eslint-utils": "^3.0.0",
