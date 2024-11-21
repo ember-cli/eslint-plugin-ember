@@ -92,7 +92,7 @@
     "eslint-remote-tester": "^3.0.1",
     "globals": "^14.0.0",
     "jquery": "^3.7.1",
-    "jsdom": "^24.0.0",
+    "jsdom": "^25.0.1",
     "markdownlint-cli": "^0.42.0",
     "npm-package-json-lint": "^7.0.0",
     "npm-run-all": "^4.1.5",
