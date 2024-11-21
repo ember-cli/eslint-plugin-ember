@@ -184,7 +184,13 @@ const invalid = [
     }`,
     errors: [
       {
-        message: 'Parsing error: Parse Error at <anon>:2:29: 2:40',
+        message: `Parsing error: × Expected ';', got 'MyComponent'
+   ╭─[1:1]
+ 1 │ import Component from '@glimmer/component';
+ 2 │     export default classsss MyComponent extends Component {
+   ·                             ───────────
+ 3 │       <template>Hello!</template>
+   ╰────`,
       },
     ],
   },
