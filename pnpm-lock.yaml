@@ -112,8 +112,8 @@ importers:
         specifier: ^24.0.0
         version: 24.1.3
       markdownlint-cli:
-        specifier: ^0.39.0
-        version: 0.39.0
+        specifier: ^0.42.0
+        version: 0.42.0
       npm-package-json-lint:
         specifier: ^7.0.0
         version: 7.1.0(typescript@5.6.3)
@@ -1163,9 +1163,9 @@ packages:
     resolution: {integrity: sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug==}
     engines: {node: '>=14'}
 
-  commander@11.1.0:
-    resolution: {integrity: sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==}
-    engines: {node: '>=16'}
+  commander@12.1.0:
+    resolution: {integrity: sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==}
+    engines: {node: '>=18'}
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
@@ -1728,13 +1728,13 @@ packages:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
     engines: {node: '>=10.13.0'}
 
-  glob@10.3.16:
-    resolution: {integrity: sha512-JDKXl1DiuuHJ6fVS2FXjownaavciiHNUU4mOvV/B793RLh05vZL1rcPnCSaOgv1hDT6RDlY7AB7ZUvFYAtPgAw==}
-    engines: {node: '>=16 || 14 >=14.18'}
-    hasBin: true
-
   glob@10.4.5:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
+    hasBin: true
+
+  glob@11.0.0:
+    resolution: {integrity: sha512-9UiX/Bl6J2yaBbxKoEBRm4Cipxgok8kQYcOPEhScPwebu2I0HoQOuYdIO6S3hLuWoZgpDpwQZMzTFxgpkyT76g==}
+    engines: {node: 20 || >=22}
     hasBin: true
 
   glob@7.2.3:
@@ -1876,6 +1876,10 @@ packages:
 
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
+    engines: {node: '>= 4'}
+
+  ignore@6.0.2:
+    resolution: {integrity: sha512-InwqeHHN2XpumIkMvpl/DCJVrAHgCsG5+cn1XlnLWGwtZBm8QJfSusItfrwx81CTp5agNZqpKU2J/ccC5nGT4A==}
     engines: {node: '>= 4'}
 
   import-fresh@3.3.0:
@@ -2089,6 +2093,10 @@ packages:
   jackspeak@3.4.3:
     resolution: {integrity: sha512-OGlZQpz2yfahA/Rd1Y8Cd9SIEsqvXkLVoSw/cgwhnhFMDbsQFeZYoJJ7bIZBS9BcamUW96asq/npPWugM+RQBw==}
 
+  jackspeak@4.0.2:
+    resolution: {integrity: sha512-bZsjR/iRjl1Nk1UkjGpAzLNfQtzuijhn2g+pbZb98HQ1Gk8vM9hfbxeMBP+M2/UUdwj0RqGG3mlvk2MsAqwvEw==}
+    engines: {node: 20 || >=22}
+
   jest-diff@29.7.0:
     resolution: {integrity: sha512-LMIgiIrhigmPrs03JHpxUh2yISK3vLFPkAodPeo0+BuF7wA2FoQbkEg1u8gBYBThncu7e1oEDUfIXVuTqLRUjw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -2162,9 +2170,6 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
-  jsonc-parser@3.2.1:
-    resolution: {integrity: sha512-AilxAyFOAcK5wA1+LeaySVBrHsGQvUFCDWXKpZjzaL0PqW+xfBOttn8GNtWKFWqneyMZj41MWF9Kl6iPWLwgOA==}
-
   jsonc-parser@3.3.1:
     resolution: {integrity: sha512-HUgH65KyejrUFPvHFPbqOY0rsFip3Bo5wb4ngvdi1EpCYWUQDC5V+Y7mZws+DLkr4M//zQJoanu1SP+87Dv1oQ==}
 
@@ -2174,6 +2179,10 @@ packages:
   jsonparse@1.3.1:
     resolution: {integrity: sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==}
     engines: {'0': node >= 0.2.0}
+
+  jsonpointer@5.0.1:
+    resolution: {integrity: sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ==}
+    engines: {node: '>=0.10.0'}
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -2247,6 +2256,10 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
+  lru-cache@11.0.1:
+    resolution: {integrity: sha512-CgeuL5uom6j/ZVrg7G/+1IXqRY8JXX4Hghfy5YE0EhoYQWvndP1kufu58cmZLNIDKnRhZrXfdS9urVWx98AipQ==}
+    engines: {node: 20 || >=22}
+
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
@@ -2276,24 +2289,24 @@ packages:
     resolution: {integrity: sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==}
     engines: {node: '>=8'}
 
-  markdown-it@14.0.0:
-    resolution: {integrity: sha512-seFjF0FIcPt4P9U39Bq1JYblX0KZCjDLFFQPHpL5AzHpqPEKtosxmdq/LTVZnjfH7tjt9BxStm+wXcDBNuYmzw==}
+  markdown-it@14.1.0:
+    resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
     hasBin: true
 
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
 
-  markdownlint-cli@0.39.0:
-    resolution: {integrity: sha512-ZuFN7Xpsbn1Nbp0YYkeLOfXOMOfLQBik2lKRy8pVI/llmKQ2uW7x+8k5OMgF6o7XCsTDSYC/OOmeJ+3qplvnJQ==}
+  markdownlint-cli@0.42.0:
+    resolution: {integrity: sha512-AjkzhhZa3TmEGi/CE2Wpmny69x1IrzqK2gPB0k8SmNMRgnSAJfyEO5FgZdWTHtJ6Nrdv5FWt5c4C5pkG6Dk30A==}
     engines: {node: '>=18'}
     hasBin: true
 
-  markdownlint-micromark@0.1.8:
-    resolution: {integrity: sha512-1ouYkMRo9/6gou9gObuMDnvZM8jC/ly3QCFQyoSPCS2XV1ZClU0xpKbL1Ar3bWWRT1RnBZkWUEiNKrI2CwiBQA==}
-    engines: {node: '>=16'}
+  markdownlint-micromark@0.1.10:
+    resolution: {integrity: sha512-no5ZfdqAdWGxftCLlySHSgddEjyW4kui4z7amQcGsSKfYC5v/ou+8mIQVyg9KQMeEZLNtz9OPDTj7nnTnoR4FQ==}
+    engines: {node: '>=18'}
 
-  markdownlint@0.33.0:
-    resolution: {integrity: sha512-4lbtT14A3m0LPX1WS/3d1m7Blg+ZwiLq36WvjQqFGsX3Gik99NV+VXp/PW3n+Q62xyPdbvGOCfjPqjW+/SKMig==}
+  markdownlint@0.35.0:
+    resolution: {integrity: sha512-wgp8yesWjFBL7bycA3hxwHRdsZGJhjhyP1dSxKVKrza0EPFYtn+mHtkVy6dvP1kGSjovyG5B8yNP6Frj0UFUJg==}
     engines: {node: '>=18'}
 
   mdast-util-from-markdown@0.8.5:
@@ -2345,6 +2358,10 @@ packages:
   min-indent@1.0.1:
     resolution: {integrity: sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==}
     engines: {node: '>=4'}
+
+  minimatch@10.0.1:
+    resolution: {integrity: sha512-ethXTt3SGGR+95gudmqJ1eNhRO7eGEGIgYA9vnPatK4/etz2MEVDno5GMCibdMTuBMyElzIlgxMna3K94XDIDQ==}
+    engines: {node: 20 || >=22}
 
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
@@ -2615,6 +2632,10 @@ packages:
   path-scurry@1.11.1:
     resolution: {integrity: sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA==}
     engines: {node: '>=16 || 14 >=14.18'}
+
+  path-scurry@2.0.0:
+    resolution: {integrity: sha512-ypGJsmGtdXUOeM5u93TyeIEfEhM6s+ljAhrk5vAvSx8uyY/02OvrZnA0YNGUrPXfpJMgI1ODd3nwz8Npx4O4cg==}
+    engines: {node: 20 || >=22}
 
   path-type@3.0.0:
     resolution: {integrity: sha512-T2ZUsdZFHgA3u4e5PfPbjd7HDDpxPnQb5jN0SrDsjNSuVXHJqtwTnWqG0B1jZrgmJ/7lj1EmVIByWt1gxGkWvg==}
@@ -2938,6 +2959,10 @@ packages:
   smart-buffer@4.2.0:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}
     engines: {node: '>= 6.0.0', npm: '>= 3.0.0'}
+
+  smol-toml@1.3.0:
+    resolution: {integrity: sha512-tWpi2TsODPScmi48b/OQZGi2lgUmBCHy6SZrhi/FdnnHiU1GwebbCfuQuxsC3nHaLwtYeJGPrDZDIeodDOc4pA==}
+    engines: {node: '>= 18'}
 
   snake-case@3.0.4:
     resolution: {integrity: sha512-LAOh4z89bGQvl9pFfNF8V146i7o7/CqFPbqzYgP+yYzDIDeS9HaNFtXABamRW+AQzEVODcvE79ljJ+8a9YSdMg==}
@@ -4580,7 +4605,7 @@ snapshots:
 
   commander@10.0.1: {}
 
-  commander@11.1.0: {}
+  commander@12.1.0: {}
 
   concat-map@0.0.1: {}
 
@@ -5307,14 +5332,6 @@ snapshots:
     dependencies:
       is-glob: 4.0.3
 
-  glob@10.3.16:
-    dependencies:
-      foreground-child: 3.3.0
-      jackspeak: 3.4.3
-      minimatch: 9.0.5
-      minipass: 7.1.2
-      path-scurry: 1.11.1
-
   glob@10.4.5:
     dependencies:
       foreground-child: 3.3.0
@@ -5323,6 +5340,15 @@ snapshots:
       minipass: 7.1.2
       package-json-from-dist: 1.0.1
       path-scurry: 1.11.1
+
+  glob@11.0.0:
+    dependencies:
+      foreground-child: 3.3.0
+      jackspeak: 4.0.2
+      minimatch: 10.0.1
+      minipass: 7.1.2
+      package-json-from-dist: 1.0.1
+      path-scurry: 2.0.0
 
   glob@7.2.3:
     dependencies:
@@ -5463,6 +5489,8 @@ snapshots:
       safer-buffer: 2.1.2
 
   ignore@5.3.2: {}
+
+  ignore@6.0.2: {}
 
   import-fresh@3.3.0:
     dependencies:
@@ -5670,6 +5698,10 @@ snapshots:
     optionalDependencies:
       '@pkgjs/parseargs': 0.11.0
 
+  jackspeak@4.0.2:
+    dependencies:
+      '@isaacs/cliui': 8.0.2
+
   jest-diff@29.7.0:
     dependencies:
       chalk: 4.1.2
@@ -5743,8 +5775,6 @@ snapshots:
 
   json5@2.2.3: {}
 
-  jsonc-parser@3.2.1: {}
-
   jsonc-parser@3.3.1: {}
 
   jsonfile@6.1.0:
@@ -5754,6 +5784,8 @@ snapshots:
       graceful-fs: 4.2.11
 
   jsonparse@1.3.1: {}
+
+  jsonpointer@5.0.1: {}
 
   keyv@4.5.4:
     dependencies:
@@ -5822,6 +5854,8 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
+  lru-cache@11.0.1: {}
+
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
@@ -5870,7 +5904,7 @@ snapshots:
 
   map-obj@4.3.0: {}
 
-  markdown-it@14.0.0:
+  markdown-it@14.1.0:
     dependencies:
       argparse: 2.0.1
       entities: 4.5.0
@@ -5881,24 +5915,26 @@ snapshots:
 
   markdown-table@3.0.4: {}
 
-  markdownlint-cli@0.39.0:
+  markdownlint-cli@0.42.0:
     dependencies:
-      commander: 11.1.0
+      commander: 12.1.0
       get-stdin: 9.0.0
-      glob: 10.3.16
-      ignore: 5.3.2
+      glob: 11.0.0
+      ignore: 6.0.2
       js-yaml: 4.1.0
-      jsonc-parser: 3.2.1
-      markdownlint: 0.33.0
-      minimatch: 9.0.5
+      jsonc-parser: 3.3.1
+      jsonpointer: 5.0.1
+      markdownlint: 0.35.0
+      minimatch: 10.0.1
       run-con: 1.3.2
+      smol-toml: 1.3.0
 
-  markdownlint-micromark@0.1.8: {}
+  markdownlint-micromark@0.1.10: {}
 
-  markdownlint@0.33.0:
+  markdownlint@0.35.0:
     dependencies:
-      markdown-it: 14.0.0
-      markdownlint-micromark: 0.1.8
+      markdown-it: 14.1.0
+      markdownlint-micromark: 0.1.10
 
   mdast-util-from-markdown@0.8.5:
     dependencies:
@@ -5958,6 +5994,10 @@ snapshots:
   mimic-fn@2.1.0: {}
 
   min-indent@1.0.1: {}
+
+  minimatch@10.0.1:
+    dependencies:
+      brace-expansion: 2.0.1
 
   minimatch@3.1.2:
     dependencies:
@@ -6264,6 +6304,11 @@ snapshots:
   path-scurry@1.11.1:
     dependencies:
       lru-cache: 10.4.3
+      minipass: 7.1.2
+
+  path-scurry@2.0.0:
+    dependencies:
+      lru-cache: 11.0.1
       minipass: 7.1.2
 
   path-type@3.0.0:
@@ -6597,6 +6642,8 @@ snapshots:
       is-fullwidth-code-point: 3.0.0
 
   smart-buffer@4.2.0: {}
+
+  smol-toml@1.3.0: {}
 
   snake-case@3.0.4:
     dependencies:
