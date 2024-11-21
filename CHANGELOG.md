@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2024-11-21)
+
+eslint-plugin-ember 12.3.2 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2216](https://github.com/ember-cli/eslint-plugin-ember/pull/2216) upgrade parser ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
 ## Release (2024-10-25)
 
 eslint-plugin-ember 12.3.1 (patch)
