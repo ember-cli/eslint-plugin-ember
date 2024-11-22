@@ -272,7 +272,6 @@ const invalid = [
         {{noop}}
         <usedEl />
         <undef.x />
-        <non-std-html-tag />
       {{/let}}
       </template>
     `,
@@ -294,17 +293,6 @@ const invalid = [
         endLine: 6,
         line: 6,
         message: "'undef' is not defined.",
-        messageId: 'undef',
-        nodeType: 'GlimmerElementNodePart',
-        ruleId: 'no-undef',
-        severity: 2,
-      },
-      {
-        column: 10,
-        endColumn: 26,
-        endLine: 7,
-        line: 7,
-        message: "'non-std-html-tag' is not defined.",
         messageId: 'undef',
         nodeType: 'GlimmerElementNodePart',
         ruleId: 'no-undef',
