@@ -15,8 +15,8 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       ember-eslint-parser:
-        specifier: ^0.5.5
-        version: 0.5.5(@babel/core@7.26.0)(@typescript-eslint/parser@8.11.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)
+        specifier: ^0.5.6
+        version: 0.5.6(@babel/core@7.26.0)(@typescript-eslint/parser@8.11.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)
       ember-rfc176-data:
         specifier: ^0.3.18
         version: 0.3.18
@@ -1322,8 +1322,8 @@ packages:
   electron-to-chromium@1.5.42:
     resolution: {integrity: sha512-gIfKavKDw1mhvic9nbzA5lZw8QSHpdMwLwXc0cWidQz9B15pDoDdDH4boIatuFfeoCatb3a/NGL6CYRVFxGZ9g==}
 
-  ember-eslint-parser@0.5.5:
-    resolution: {integrity: sha512-8YB9G6ZPtdEiLoaO9RuIZVgxKoTss8rPIcI78Bt+ZKty6eoRgks6AdjiztUDSyVwq6pDjwkCnDGXSNqT076M6A==}
+  ember-eslint-parser@0.5.6:
+    resolution: {integrity: sha512-mtneR5Z0TlGUR5tutJFv6xOjt5hLk532KoBooEb6rZXTXJbZvzEvXuUrYocCT4Os7IGHp3Elsjgd5tB9ufuPPQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@babel/core': ^7.23.6
@@ -2308,6 +2308,9 @@ packages:
   markdownlint@0.35.0:
     resolution: {integrity: sha512-wgp8yesWjFBL7bycA3hxwHRdsZGJhjhyP1dSxKVKrza0EPFYtn+mHtkVy6dvP1kGSjovyG5B8yNP6Frj0UFUJg==}
     engines: {node: '>=18'}
+
+  mathml-tag-names@2.1.3:
+    resolution: {integrity: sha512-APMBEanjybaPzUrfqU0IMU5I0AswKMH7k8OTLs0vvV4KZpExkTkY87nR/zpbuTPj+gARop7aGUbl11pnDfW6xg==}
 
   mdast-util-from-markdown@0.8.5:
     resolution: {integrity: sha512-2hkTXtYYnr+NubD/g6KGBS/0mFmBcifAsI0yIWRiRo0PjVs6SSOSOdtzbp6kSGnShDN6G5aWZpKQ2lWRy27mWQ==}
@@ -4754,7 +4757,7 @@ snapshots:
 
   electron-to-chromium@1.5.42: {}
 
-  ember-eslint-parser@0.5.5(@babel/core@7.26.0)(@typescript-eslint/parser@8.11.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1):
+  ember-eslint-parser@0.5.6(@babel/core@7.26.0)(@typescript-eslint/parser@8.11.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1):
     dependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@8.57.1)
@@ -4762,6 +4765,7 @@ snapshots:
       content-tag: 2.0.3
       eslint-scope: 7.2.2
       html-tags: 3.3.1
+      mathml-tag-names: 2.1.3
       svg-tags: 1.0.0
     optionalDependencies:
       '@typescript-eslint/parser': 8.11.0(eslint@8.57.1)(typescript@5.6.3)
@@ -5939,6 +5943,8 @@ snapshots:
     dependencies:
       markdown-it: 14.1.0
       markdownlint-micromark: 0.1.10
+
+  mathml-tag-names@2.1.3: {}
 
   mdast-util-from-markdown@0.8.5:
     dependencies:
