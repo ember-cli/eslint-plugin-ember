@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2024-11-22)
+
+eslint-plugin-ember 12.3.3 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2220](https://github.com/ember-cli/eslint-plugin-ember/pull/2220) Bump minimum parser version (fixes SVGs, MathML, custom-elements) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2024-11-21)
 
 eslint-plugin-ember 12.3.2 (patch)

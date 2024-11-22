@@ -2,8 +2,8 @@
   "solution": {
     "eslint-plugin-ember": {
       "impact": "patch",
-      "oldVersion": "12.3.1",
-      "newVersion": "12.3.2",
+      "oldVersion": "12.3.2",
+      "newVersion": "12.3.3",
       "constraints": [
         {
           "impact": "patch",
@@ -13,5 +13,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2024-11-21)\n\neslint-plugin-ember 12.3.2 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2216](https://github.com/ember-cli/eslint-plugin-ember/pull/2216) upgrade parser ([@patricklx](https://github.com/patricklx))\n\n#### Committers: 1\n- Patrick Pircher ([@patricklx](https://github.com/patricklx))\n"
+  "description": "## Release (2024-11-22)\n\neslint-plugin-ember 12.3.3 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2220](https://github.com/ember-cli/eslint-plugin-ember/pull/2220) Bump minimum parser version (fixes SVGs, MathML, custom-elements) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
