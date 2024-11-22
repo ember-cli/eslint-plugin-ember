@@ -873,5 +873,59 @@ import Controller from '@ember/controller';
         },
       ],
     },
+
+    // Multiple classes in a single file
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import { action } from '@ember/object';
+
+      export class SettingsRoute extends Route {
+        @action
+        foo() {
+          this.transitionTo('login');
+        }
+      }
+
+      export class AnotherRoute extends Route {
+        @action
+        foo() {
+          this.transitionTo('login');
+        }
+      }`,
+      output: `
+      import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+      import { action } from '@ember/object';
+
+      export class SettingsRoute extends Route {
+        @service('router') router;
+@action
+        foo() {
+          this.router.transitionTo('login');
+        }
+      }
+
+      export class AnotherRoute extends Route {
+        @service('router') router;
+@action
+        foo() {
+          this.router.transitionTo('login');
+        }
+      }`,
+      errors: [
+        {
+          messageId: 'main',
+          data: { methodUsed: 'transitionTo', desiredMethod: 'transitionTo', moduleType: 'Route' },
+          type: 'MemberExpression',
+        },
+        {
+          messageId: 'main',
+          data: { methodUsed: 'transitionTo', desiredMethod: 'transitionTo', moduleType: 'Route' },
+          type: 'MemberExpression',
+        },
+      ],
+    },
   ],
 });
