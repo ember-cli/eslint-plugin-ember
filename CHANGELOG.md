@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-01-30)
+
+eslint-plugin-ember 12.4.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2251](https://github.com/ember-cli/eslint-plugin-ember/pull/2251) Force bump the parser to latest, 0.5.9 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2024-11-22)
 
 eslint-plugin-ember 12.3.3 (patch)
