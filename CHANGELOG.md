@@ -2,6 +2,22 @@
 
 ## Release (2025-01-30)
 
+eslint-plugin-ember 12.5.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2251](https://github.com/ember-cli/eslint-plugin-ember/pull/2251) Force bump the parser to latest, 0.5.9 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* `eslint-plugin-ember`
+  * [#2252](https://github.com/ember-cli/eslint-plugin-ember/pull/2252) Prepare Release ([@github-actions[bot]](https://github.com/apps/github-actions))
+
+#### Committers: 2
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+- [@github-actions[bot]](https://github.com/apps/github-actions)
+
+## Release (2025-01-30)
+
 eslint-plugin-ember 12.4.0 (minor)
 
 #### :rocket: Enhancement
