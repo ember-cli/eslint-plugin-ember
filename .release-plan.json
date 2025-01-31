@@ -2,16 +2,20 @@
   "solution": {
     "eslint-plugin-ember": {
       "impact": "minor",
-      "oldVersion": "12.3.3",
-      "newVersion": "12.4.0",
+      "oldVersion": "12.4.0",
+      "newVersion": "12.5.0",
       "constraints": [
         {
           "impact": "minor",
           "reason": "Appears in changelog section :rocket: Enhancement"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-01-30)\n\neslint-plugin-ember 12.4.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2251](https://github.com/ember-cli/eslint-plugin-ember/pull/2251) Force bump the parser to latest, 0.5.9 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-01-30)\n\neslint-plugin-ember 12.5.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2251](https://github.com/ember-cli/eslint-plugin-ember/pull/2251) Force bump the parser to latest, 0.5.9 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* `eslint-plugin-ember`\n  * [#2252](https://github.com/ember-cli/eslint-plugin-ember/pull/2252) Prepare Release ([@github-actions[bot]](https://github.com/apps/github-actions))\n\n#### Committers: 2\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n- [@github-actions[bot]](https://github.com/apps/github-actions)\n"
 }
