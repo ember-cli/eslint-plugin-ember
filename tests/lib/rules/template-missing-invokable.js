@@ -85,6 +85,14 @@ ruleTester.run('template-missing-invokable', rule, {
         {{/if}}
       </template>
       `,
+      options: [
+        {
+          invokables: {
+            eq: ['eq', 'ember-truth-helpers'],
+          },
+        },
+      ],
+
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
 
@@ -101,6 +109,13 @@ ruleTester.run('template-missing-invokable', rule, {
         {{eq 1 1}}
       </template>
     `,
+      options: [
+        {
+          invokables: {
+            eq: ['eq', 'ember-truth-helpers'],
+          },
+        },
+      ],
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
     {
@@ -117,6 +132,13 @@ ruleTester.run('template-missing-invokable', rule, {
         <MyComponent @flag={{eq 1 1}} />
       </template>
     `,
+      options: [
+        {
+          invokables: {
+            eq: ['eq', 'ember-truth-helpers'],
+          },
+        },
+      ],
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
 
@@ -135,6 +157,13 @@ ruleTester.run('template-missing-invokable', rule, {
           <button {{on "click" doSomething}}>Go</button>
         </template>
       `,
+      options: [
+        {
+          invokables: {
+            on: ['on', '@ember/modifier'],
+          },
+        },
+      ],
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
     // Multiple copies of a fixable invocation
@@ -172,6 +201,13 @@ ruleTester.run('template-missing-invokable', rule, {
           {{/if}}
         </template>
       `,
+      options: [
+        {
+          invokables: {
+            eq: ['eq', 'ember-truth-helpers'],
+          },
+        },
+      ],
       errors: [
         { type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] },
         { type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] },
