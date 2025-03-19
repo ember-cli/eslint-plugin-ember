@@ -166,6 +166,7 @@ ruleTester.run('template-missing-invokable', rule, {
       ],
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
+
     // Multiple copies of a fixable invocation
     {
       code: `
@@ -213,6 +214,34 @@ ruleTester.run('template-missing-invokable', rule, {
         { type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] },
         { type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] },
       ],
+    },
+
+    // Auto-fix with a default export
+    {
+      code: `
+      <template>
+        {{#if (eq 1 1)}}
+          They're equal
+        {{/if}}
+      </template>
+      `,
+      output: `import eq from 'ember-truth-helpers/helpers/equal';
+
+      <template>
+        {{#if (eq 1 1)}}
+          They're equal
+        {{/if}}
+      </template>
+      `,
+      options: [
+        {
+          invokables: {
+            eq: ['default', 'ember-truth-helpers/helpers/equal'],
+          },
+        },
+      ],
+
+      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
   ],
 });
