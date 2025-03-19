@@ -262,6 +262,8 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [no-tracked-properties-from-args](docs/rules/no-tracked-properties-from-args.md)           | disallow creating @tracked properties from this.args                                                           | ✅                                                               |    |    |
 | [template-indent](docs/rules/template-indent.md)                                           | enforce consistent indentation for gts/gjs templates                                                           |                                                                 | 🔧 |    |
 | [template-no-let-reference](docs/rules/template-no-let-reference.md)                       | disallow referencing let variables in \<template\>                                                             | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-missing-invokable](docs/rules/template-missing-invokable.md)                     | auto-fix to import missing helpers, modifiers, or components from a configured list in \<template\>            | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+
 
 ### jQuery
 
