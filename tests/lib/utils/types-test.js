@@ -1,12 +1,14 @@
 const { parse: babelESLintParse } = require('../../helpers/babel-eslint-parser');
 const types = require('../../../lib/utils/types');
 
-function parse(code, isClassDeclaration = false) {
-  if (isClassDeclaration) {
-    // return ClassBody
-    return babelESLintParse(code).body[0].body;
+function parse(code) {
+  const { body } = babelESLintParse(code);
+  const [firstBodyNode] = body;
+  if (firstBodyNode.type === 'ClassDeclaration') {
+    // return first node within ClassBody
+    return firstBodyNode.body.body[0];
   }
-  return babelESLintParse(code).body[0].expression;
+  return firstBodyNode.expression;
 }
 
 describe('function sort order', function () {
@@ -131,9 +133,8 @@ describe('isPropAccessor', () => {
     const node = parse(
       `class Test {
       get fooProp() {}
-    }`,
-      true
-    ).body[0];
+    }`
+    );
     expect(types.isPropAccessor(node)).toBeTruthy();
   });
 
@@ -141,9 +142,8 @@ describe('isPropAccessor', () => {
     const node = parse(
       `class Test {
       set fooProp(bar) {}
-    }`,
-      true
-    ).body[0];
+    }`
+    );
     expect(types.isPropAccessor(node)).toBeTruthy();
   });
 
@@ -151,9 +151,8 @@ describe('isPropAccessor', () => {
     const node = parse(
       `class Test {
       fooProp() {}
-    }`,
-      true
-    ).body[0];
+    }`
+    );
     expect(types.isPropAccessor(node)).toBeFalsy();
   });
 });
