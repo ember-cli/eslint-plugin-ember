@@ -1,7 +1,11 @@
 const { parse: babelESLintParse } = require('../../helpers/babel-eslint-parser');
 const types = require('../../../lib/utils/types');
 
-function parse(code) {
+function parse(code, isClassDeclaration = false) {
+  if (isClassDeclaration) {
+    // return ClassBody
+    return babelESLintParse(code).body[0].body;
+  }
   return babelESLintParse(code).body[0].expression;
 }
 
@@ -42,6 +46,14 @@ describe('isCallWithFunctionExpression', () => {
 
   it('should check if node is call with function expression', () => {
     expect(types.isCallWithFunctionExpression(node)).toBeTruthy();
+  });
+});
+
+describe('isCallWithArrowFunctionExpression', () => {
+  const node = parse('mysteriousFnc(() => {})');
+
+  it('should check if node is call with function expression', () => {
+    expect(types.isCallWithArrowFunctionExpression(node)).toBeTruthy();
   });
 });
 
@@ -111,6 +123,38 @@ describe('isObjectExpression', () => {
 
   it('should check if node is identifier', () => {
     expect(types.isObjectExpression(node)).toBeTruthy();
+  });
+});
+
+describe('isPropAccessor', () => {
+  it('should check if node is a getter', () => {
+    const node = parse(
+      `class Test {
+      get fooProp() {}
+    }`,
+      true
+    ).body[0];
+    expect(types.isPropAccessor(node)).toBeTruthy();
+  });
+
+  it('should check if node is a setter', () => {
+    const node = parse(
+      `class Test {
+      set fooProp(bar) {}
+    }`,
+      true
+    ).body[0];
+    expect(types.isPropAccessor(node)).toBeTruthy();
+  });
+
+  it('should check if node is a not a getter/setter', () => {
+    const node = parse(
+      `class Test {
+      fooProp() {}
+    }`,
+      true
+    ).body[0];
+    expect(types.isPropAccessor(node)).toBeFalsy();
   });
 });
 
