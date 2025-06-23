@@ -261,6 +261,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [no-empty-glimmer-component-classes](docs/rules/no-empty-glimmer-component-classes.md)     | disallow empty backing classes for Glimmer components                                                          | ✅                                                               |    |    |
 | [no-tracked-properties-from-args](docs/rules/no-tracked-properties-from-args.md)           | disallow creating @tracked properties from this.args                                                           | ✅                                                               |    |    |
 | [template-indent](docs/rules/template-indent.md)                                           | enforce consistent indentation for gts/gjs templates                                                           |                                                                 | 🔧 |    |
+| [template-missing-invokable](docs/rules/template-missing-invokable.md)                     | disallow missing helpers, modifiers, or components in \<template\> with auto-fix to import them                |                                                                 | 🔧 |    |
 | [template-no-let-reference](docs/rules/template-no-let-reference.md)                       | disallow referencing let variables in \<template\>                                                             | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 
 ### jQuery
