@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-07-12)
+
+eslint-plugin-ember 12.6.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2306](https://github.com/ember-cli/eslint-plugin-ember/pull/2306) Add names for the eslint-inspector ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-01-30)
 
 eslint-plugin-ember 12.5.0 (minor)
