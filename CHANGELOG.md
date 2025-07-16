@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-07-16)
+
+eslint-plugin-ember 12.6.1 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2308](https://github.com/ember-cli/eslint-plugin-ember/pull/2308) fix: disallow extra properties in rule options ([@andreww2012](https://github.com/andreww2012))
+
+#### Committers: 1
+- Andrew Kazakov ([@andreww2012](https://github.com/andreww2012))
+
 ## Release (2025-07-12)
 
 eslint-plugin-ember 12.6.0 (minor)
