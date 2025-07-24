@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2025-07-24)
+
+eslint-plugin-ember 12.7.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2282](https://github.com/ember-cli/eslint-plugin-ember/pull/2282) Add no-builtin-form-components rule ([@wagenet](https://github.com/wagenet))
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2308](https://github.com/ember-cli/eslint-plugin-ember/pull/2308) fix: disallow extra properties in rule options ([@andreww2012](https://github.com/andreww2012))
+
+#### Committers: 2
+- Andrew Kazakov ([@andreww2012](https://github.com/andreww2012))
+- Peter Wagenet ([@wagenet](https://github.com/wagenet))
+
 ## Release (2025-07-12)
 
 eslint-plugin-ember 12.6.0 (minor)
