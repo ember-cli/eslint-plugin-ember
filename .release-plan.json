@@ -2,16 +2,20 @@
   "solution": {
     "eslint-plugin-ember": {
       "impact": "minor",
-      "oldVersion": "12.5.0",
-      "newVersion": "12.6.0",
+      "oldVersion": "12.6.0",
+      "newVersion": "12.7.0",
       "constraints": [
         {
           "impact": "minor",
           "reason": "Appears in changelog section :rocket: Enhancement"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-07-12)\n\neslint-plugin-ember 12.6.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2306](https://github.com/ember-cli/eslint-plugin-ember/pull/2306) Add names for the eslint-inspector ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-07-24)\n\neslint-plugin-ember 12.7.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2282](https://github.com/ember-cli/eslint-plugin-ember/pull/2282) Add no-builtin-form-components rule ([@wagenet](https://github.com/wagenet))\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2308](https://github.com/ember-cli/eslint-plugin-ember/pull/2308) fix: disallow extra properties in rule options ([@andreww2012](https://github.com/andreww2012))\n\n#### Committers: 2\n- Andrew Kazakov ([@andreww2012](https://github.com/andreww2012))\n- Peter Wagenet ([@wagenet](https://github.com/wagenet))\n"
 }
