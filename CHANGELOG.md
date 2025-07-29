@@ -2319,7 +2319,7 @@ and drops support for Node.js 4 and ESLint 3.
 - Alon Bukai ([Alonski](https://github.com/Alonski))
 - Claudia Cuevas ([clcuevas](https://github.com/clcuevas))
 - Jacek Bandura ([jbandura](https://github.com/jbandura))
-- Richard Machielse ([rmachielse](https://github.com/rmachielse))
+- [rmachielse](https://github.com/rmachielse)
 - Robert Jackson ([rwjblue](https://github.com/rwjblue))
 - Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
 -
@@ -2364,7 +2364,7 @@ and drops support for Node.js 4 and ESLint 3.
 - Claudia Cuevas ([clcuevas](https://github.com/clcuevas))
 - Jacek Bandura ([jbandura](https://github.com/jbandura))
 - Michał Sajnóg ([michalsnik](https://github.com/michalsnik))
-- Richard Machielse ([rmachielse](https://github.com/rmachielse))
+- [rmachielse](https://github.com/rmachielse)
 - Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
 
 
@@ -2393,7 +2393,7 @@ and drops support for Node.js 4 and ESLint 3.
 - Kelly Selden ([kellyselden](https://github.com/kellyselden))
 - Michał Sajnóg ([michalsnik](https://github.com/michalsnik))
 - Przemysław Nowak ([PrzemoRevolve](https://github.com/PrzemoRevolve))
-- Richard Machielse ([rmachielse](https://github.com/rmachielse))
+- [rmachielse](https://github.com/rmachielse)
 - Szymon Kabelis ([eskab](https://github.com/eskab))
 - Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
 - [JoelWAnna](https://github.com/JoelWAnna)
