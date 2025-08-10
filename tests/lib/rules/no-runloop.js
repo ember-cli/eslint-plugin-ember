@@ -234,6 +234,6 @@ eslintTester.run('no-runloop', rule, {
           type: 'CallExpression',
         },
       ],
-    }
+    },
   ],
 });
