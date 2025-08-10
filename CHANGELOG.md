@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2025-08-10)
+
+eslint-plugin-ember 12.7.1 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2315](https://github.com/ember-cli/eslint-plugin-ember/pull/2315) fix: no-runloop: catch namespace imports ([@Geodewd549](https://github.com/Geodewd549))
+
+#### :memo: Documentation
+* `eslint-plugin-ember`
+  * [#2313](https://github.com/ember-cli/eslint-plugin-ember/pull/2313) Remove name from CHANGELOG ([@rmachielse](https://github.com/rmachielse))
+
+#### Committers: 2
+- Richard ([@rmachielse](https://github.com/rmachielse))
+- [@Geodewd549](https://github.com/Geodewd549)
+
 ## Release (2025-07-24)
 
 eslint-plugin-ember 12.7.0 (minor)
