@@ -222,5 +222,18 @@ eslintTester.run('no-runloop', rule, {
         },
       ],
     },
+    {
+      code: `
+        import * as run from '@ember/runloop';
+        run.later();
+      `,
+      output: null,
+      errors: [
+        {
+          messageId: 'lifelineReplacement',
+          type: 'CallExpression',
+        },
+      ],
+    }
   ],
 });
