@@ -23,7 +23,7 @@ jobs:
       command: ${{ steps.check-release.outputs.command }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
           ref: 'master'
@@ -43,7 +43,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
         with:
           node-version: 18
