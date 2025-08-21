@@ -1290,7 +1290,7 @@ import { get as g } from '@custom/object';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
-      code: 'something.setObject()',
+      code: 'something.setObjects()',
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
