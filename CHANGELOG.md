@@ -1,5 +1,23 @@
 # Changelog
 
+## Release (2025-08-22)
+
+eslint-plugin-ember 12.7.1 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2320](https://github.com/ember-cli/eslint-plugin-ember/pull/2320) fix: `no-array-prototype-extensions` rule to lint against `setObjects()` ([@MrChocolatine](https://github.com/MrChocolatine))
+  * [#2315](https://github.com/ember-cli/eslint-plugin-ember/pull/2315) fix: no-runloop: catch namespace imports ([@Geodewd549](https://github.com/Geodewd549))
+
+#### :memo: Documentation
+* `eslint-plugin-ember`
+  * [#2313](https://github.com/ember-cli/eslint-plugin-ember/pull/2313) Remove name from CHANGELOG ([@rmachielse](https://github.com/rmachielse))
+
+#### Committers: 3
+- Richard ([@rmachielse](https://github.com/rmachielse))
+- [@Geodewd549](https://github.com/Geodewd549)
+- [@MrChocolatine](https://github.com/MrChocolatine)
+
 ## Release (2025-07-24)
 
 eslint-plugin-ember 12.7.0 (minor)

@@ -1,21 +1,21 @@
 {
   "solution": {
     "eslint-plugin-ember": {
-      "impact": "minor",
-      "oldVersion": "12.6.0",
-      "newVersion": "12.7.0",
+      "impact": "patch",
+      "oldVersion": "12.7.0",
+      "newVersion": "12.7.1",
       "constraints": [
-        {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        },
         {
           "impact": "patch",
           "reason": "Appears in changelog section :bug: Bug Fix"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :memo: Documentation"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-07-24)\n\neslint-plugin-ember 12.7.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2282](https://github.com/ember-cli/eslint-plugin-ember/pull/2282) Add no-builtin-form-components rule ([@wagenet](https://github.com/wagenet))\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2308](https://github.com/ember-cli/eslint-plugin-ember/pull/2308) fix: disallow extra properties in rule options ([@andreww2012](https://github.com/andreww2012))\n\n#### Committers: 2\n- Andrew Kazakov ([@andreww2012](https://github.com/andreww2012))\n- Peter Wagenet ([@wagenet](https://github.com/wagenet))\n"
+  "description": "## Release (2025-08-22)\n\neslint-plugin-ember 12.7.1 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2320](https://github.com/ember-cli/eslint-plugin-ember/pull/2320) fix: `no-array-prototype-extensions` rule to lint against `setObjects()` ([@MrChocolatine](https://github.com/MrChocolatine))\n  * [#2315](https://github.com/ember-cli/eslint-plugin-ember/pull/2315) fix: no-runloop: catch namespace imports ([@Geodewd549](https://github.com/Geodewd549))\n\n#### :memo: Documentation\n* `eslint-plugin-ember`\n  * [#2313](https://github.com/ember-cli/eslint-plugin-ember/pull/2313) Remove name from CHANGELOG ([@rmachielse](https://github.com/rmachielse))\n\n#### Committers: 3\n- Richard ([@rmachielse](https://github.com/rmachielse))\n- [@Geodewd549](https://github.com/Geodewd549)\n- [@MrChocolatine](https://github.com/MrChocolatine)\n"
 }
