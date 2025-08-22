@@ -2,6 +2,17 @@
 
 ## Release (2025-08-22)
 
+eslint-plugin-ember 12.7.2 (patch)
+
+#### :house: Internal
+* `eslint-plugin-ember`
+  * [#2321](https://github.com/ember-cli/eslint-plugin-ember/pull/2321) chore: add npm provenance to publishing ([@bmish](https://github.com/bmish))
+
+#### Committers: 1
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+
+## Release (2025-08-22)
+
 eslint-plugin-ember 12.7.1 (patch)
 
 #### :bug: Bug Fix
