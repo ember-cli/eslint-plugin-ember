@@ -2,8 +2,8 @@
   "solution": {
     "eslint-plugin-ember": {
       "impact": "patch",
-      "oldVersion": "12.7.1",
-      "newVersion": "12.7.2",
+      "oldVersion": "12.7.2",
+      "newVersion": "12.7.3",
       "constraints": [
         {
           "impact": "patch",
@@ -13,5 +13,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-08-22)\n\neslint-plugin-ember 12.7.2 (patch)\n\n#### :house: Internal\n* `eslint-plugin-ember`\n  * [#2321](https://github.com/ember-cli/eslint-plugin-ember/pull/2321) chore: add npm provenance to publishing ([@bmish](https://github.com/bmish))\n\n#### Committers: 1\n- Bryan Mishkin ([@bmish](https://github.com/bmish))\n"
+  "description": "## Release (2025-08-22)\n\neslint-plugin-ember 12.7.3 (patch)\n\n#### :house: Internal\n* `eslint-plugin-ember`\n  * [#2323](https://github.com/ember-cli/eslint-plugin-ember/pull/2323) chore: add npm provenance to publishing (second attempt) ([@bmish](https://github.com/bmish))\n\n#### Committers: 1\n- Bryan Mishkin ([@bmish](https://github.com/bmish))\n"
 }
