@@ -879,5 +879,51 @@ actions: {
         { messageId: 'main', data: { serviceName: 'flash-messages' }, type: 'MemberExpression' },
       ],
     },
+
+    // Multiple classes in a single file
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import { action } from '@ember/object';
+
+      export class SettingsRoute extends Route {
+        @action
+        foo() {
+          this.store.find('test');
+        }
+      }
+
+      export class AnotherRoute extends Route {
+        @action
+        foo() {
+          this.store.find('test');
+        }
+      }`,
+      output: `
+      import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+      import { action } from '@ember/object';
+
+      export class SettingsRoute extends Route {
+        @service('store') store;
+@action
+        foo() {
+          this.store.find('test');
+        }
+      }
+
+      export class AnotherRoute extends Route {
+        @service('store') store;
+@action
+        foo() {
+          this.store.find('test');
+        }
+      }`,
+      errors: [
+        { messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' },
+        { messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' },
+      ],
+    },
   ],
 });
