@@ -247,6 +247,12 @@ ruleTester.run('no-array-prototype-extensions', rule, {
 
     // TODO: handle non-Identifier property names:
     'foo["clear"]();',
+
+    // Common ember-cli-mirage calls
+    'this.server.schema.users.findBy()',
+    'this.server.schema.devices.findBy()',
+    'this.server.schema.users.findBy({ foo: "bar" })',
+    'this.server.schema.devices.findBy({ foo: "bar" })',
   ],
   invalid: [
     {
