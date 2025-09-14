@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2025-09-14)
+
+eslint-plugin-ember 12.7.4 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2331](https://github.com/ember-cli/eslint-plugin-ember/pull/2331) fix: Ignore `findBy` calls from `ember-cli-mirage` in `no-array-prototype-extensions` ([@VasylMarchuk](https://github.com/VasylMarchuk))
+
+#### :house: Internal
+* `eslint-plugin-ember`
+  * [#2332](https://github.com/ember-cli/eslint-plugin-ember/pull/2332) chore: try actions/setup-node before pnpm/action-setup ([@bmish](https://github.com/bmish))
+
+#### Committers: 2
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Vasyl Marchuk ([@VasylMarchuk](https://github.com/VasylMarchuk))
+
 ## Release (2025-08-22)
 
 eslint-plugin-ember 12.7.3 (patch)
