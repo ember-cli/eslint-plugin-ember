@@ -52,10 +52,10 @@ jobs:
         with:
           fetch-depth: 0
           ref: 'master'
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v5
         with:
           node-version: 18
-      - uses: pnpm/action-setup@v4
       - run: pnpm install --frozen-lockfile
       - name: "Generate Explanation and Prep Changelogs"
         id: explanation
