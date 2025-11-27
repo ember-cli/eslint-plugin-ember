@@ -72,6 +72,16 @@ class MyComponent extends Component {}
 
 ```js
 import Component from '@glimmer/component';
+import MyDecorator from 'my-decorator';
+
+@MyDecorator
+class MyComponent extends Component {
+  <template>foo</template>
+}
+```
+
+```js
+import Component from '@glimmer/component';
 
 export default class MyComponent extends Component {
   foo() {
