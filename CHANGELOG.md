@@ -2,6 +2,17 @@
 
 ## Release (2025-11-27)
 
+* eslint-plugin-ember 12.7.6 (patch)
+
+#### :house: Internal
+* `eslint-plugin-ember`
+  * [#2334](https://github.com/ember-cli/eslint-plugin-ember/pull/2334) pnpm dlx create-release-plan-setup@latest --update ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
+## Release (2025-11-27)
+
 eslint-plugin-ember 12.7.5 (patch)
 
 #### :bug: Bug Fix
