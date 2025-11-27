@@ -2,20 +2,16 @@
   "solution": {
     "eslint-plugin-ember": {
       "impact": "patch",
-      "oldVersion": "12.7.3",
-      "newVersion": "12.7.4",
+      "oldVersion": "12.7.4",
+      "newVersion": "12.7.5",
       "constraints": [
         {
           "impact": "patch",
           "reason": "Appears in changelog section :bug: Bug Fix"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-09-14)\n\neslint-plugin-ember 12.7.4 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2331](https://github.com/ember-cli/eslint-plugin-ember/pull/2331) fix: Ignore `findBy` calls from `ember-cli-mirage` in `no-array-prototype-extensions` ([@VasylMarchuk](https://github.com/VasylMarchuk))\n\n#### :house: Internal\n* `eslint-plugin-ember`\n  * [#2332](https://github.com/ember-cli/eslint-plugin-ember/pull/2332) chore: try actions/setup-node before pnpm/action-setup ([@bmish](https://github.com/bmish))\n\n#### Committers: 2\n- Bryan Mishkin ([@bmish](https://github.com/bmish))\n- Vasyl Marchuk ([@VasylMarchuk](https://github.com/VasylMarchuk))\n"
+  "description": "## Release (2025-11-27)\n\neslint-plugin-ember 12.7.5 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2349](https://github.com/ember-cli/eslint-plugin-ember/pull/2349) fix: allow decorated template-tag-only classes ([@CvX](https://github.com/CvX))\n\n#### Committers: 1\n- Jarek Radosz ([@CvX](https://github.com/CvX))\n"
 }

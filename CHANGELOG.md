@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-11-27)
+
+eslint-plugin-ember 12.7.5 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2349](https://github.com/ember-cli/eslint-plugin-ember/pull/2349) fix: allow decorated template-tag-only classes ([@CvX](https://github.com/CvX))
+
+#### Committers: 1
+- Jarek Radosz ([@CvX](https://github.com/CvX))
+
 ## Release (2025-09-14)
 
 eslint-plugin-ember 12.7.4 (patch)
