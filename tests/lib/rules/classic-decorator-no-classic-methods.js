@@ -47,6 +47,14 @@ ruleTester.run('classic-decorator-no-classic-methods', rule, {
         foo = otherClass.get('bar');
       }
     `,
+    `
+      class Foo extends Bar {
+        #get = (k) => {};
+        foo = () => {
+          this.#get('abc');
+        }
+      }
+    `,
   ],
 
   invalid: [
