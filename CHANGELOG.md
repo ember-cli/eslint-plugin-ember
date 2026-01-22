@@ -1,5 +1,23 @@
 # Changelog
 
+## Release (2026-01-22)
+
+* eslint-plugin-ember 12.7.6 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2363](https://github.com/ember-cli/eslint-plugin-ember/pull/2363) fix: classic-decorator-no-classic-methods matching private identifiers ([@c0rydoras](https://github.com/c0rydoras))
+  * [#2364](https://github.com/ember-cli/eslint-plugin-ember/pull/2364) Consider .test.{js|ts|gjs|gts} as a test file pattern ([@lego-technix](https://github.com/lego-technix))
+
+#### :house: Internal
+* `eslint-plugin-ember`
+  * [#2334](https://github.com/ember-cli/eslint-plugin-ember/pull/2334) pnpm dlx create-release-plan-setup@latest --update ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 3
+- Arthur ([@c0rydoras](https://github.com/c0rydoras))
+- LEGO Technix ([@lego-technix](https://github.com/lego-technix))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-11-27)
 
 eslint-plugin-ember 12.7.5 (patch)
