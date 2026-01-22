@@ -150,6 +150,13 @@ describe('isTestFile', () => {
     expect(emberUtils.isTestFile('some_test.gts')).toBeTruthy();
   });
 
+  it('detects test files ending with .test', () => {
+    expect(emberUtils.isTestFile('some.test.js')).toBeTruthy();
+    expect(emberUtils.isTestFile('some.test.ts')).toBeTruthy();
+    expect(emberUtils.isTestFile('some.test.gjs')).toBeTruthy();
+    expect(emberUtils.isTestFile('some.test.gts')).toBeTruthy();
+  });
+
   it('does not detect other files', () => {
     expect(emberUtils.isTestFile('some-component.js')).toBeFalsy();
     expect(emberUtils.isTestFile('my-testing-component.js')).toBeFalsy();
