@@ -6,6 +6,8 @@ const base = require('../lib/config-legacy/base');
 const recommended = require('../lib/config-legacy/recommended');
 const recommendedGjs = require('../lib/config-legacy/recommended-gjs');
 const recommendedGts = require('../lib/config-legacy/recommended-gts');
+const strictGjs = require('../lib/config-legacy/strict-gjs');
+const strictGts = require('../lib/config-legacy/strict-gts');
 
 describe('plugin exports', () => {
   describe('utils', () => {
@@ -21,6 +23,8 @@ describe('plugin exports', () => {
         recommended,
         'recommended-gjs': recommendedGjs,
         'recommended-gts': recommendedGts,
+        'strict-gjs': strictGjs,
+        'strict-gts': strictGts,
       });
     });
   });
