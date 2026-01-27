@@ -176,11 +176,13 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Accessibility
 
-| Name                                                                             | Description                       | 💼                                                              | 🔧 | 💡 |
-| :------------------------------------------------------------------------------- | :-------------------------------- | :-------------------------------------------------------------- | :- | :- |
-| [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md) | disallow accesskey attribute      | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md) | disallow autofocus attribute      | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-no-positive-tabindex](docs/rules/template-no-positive-tabindex.md)     | disallow positive tabindex values | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| Name                                                                             | Description                          | 💼                                                              | 🔧 | 💡 |
+| :------------------------------------------------------------------------------- | :----------------------------------- | :-------------------------------------------------------------- | :- | :- |
+| [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)           | disallow abstract ARIA roles         | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md) | disallow accesskey attribute         | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)       | disallow aria-hidden on body element | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md) | disallow autofocus attribute         | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| [template-no-positive-tabindex](docs/rules/template-no-positive-tabindex.md)     | disallow positive tabindex values    | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 
 ### Best Practices
 
@@ -246,6 +248,8 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [no-observers](docs/rules/no-observers.md)                                                       | disallow usage of observers                               | ✅                                                               |    |    |
 | [no-old-shims](docs/rules/no-old-shims.md)                                                       | disallow usage of old shims for modules                   | ✅                                                               | 🔧 |    |
 | [no-string-prototype-extensions](docs/rules/no-string-prototype-extensions.md)                   | disallow usage of `String` prototype extensions           | ✅                                                               |    |    |
+| [template-deprecated-inline-view-helper](docs/rules/template-deprecated-inline-view-helper.md)   | disallow inline {{view}} helper                           | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-deprecated-render-helper](docs/rules/template-deprecated-render-helper.md)             | disallow {{render}} helper                                | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-action](docs/rules/template-no-action.md)                                           | disallow {{action}} helper                                | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-partial](docs/rules/template-no-partial.md)                                         | disallow {{partial}} helper                               | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 
