@@ -12,7 +12,6 @@ ruleTester.run('template-no-heading-inside-button', rule, {
     '<template><h1>Title</h1></template>',
     '<template><div><h2>Heading</h2></div></template>',
 
-    // Test cases ported from ember-template-lint
     '<template><button>Show More</button></template>',
     '<template><button><span>thumbs-up emoji</span>Show More</button></template>',
     '<template><button><div>Show More</div></button></template>',
@@ -32,7 +31,6 @@ ruleTester.run('template-no-heading-inside-button', rule, {
       errors: [{ messageId: 'noHeading' }],
     },
 
-    // Test cases ported from ember-template-lint
     {
       code: '<template><button><h1>Page Title</h1></button></template>',
       output: null,

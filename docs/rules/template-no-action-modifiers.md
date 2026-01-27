@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
-
 Disallow usage of `{{action}}` modifiers in templates.
 
 The `{{action}}` modifier has been deprecated in favor of the `{{on}}` modifier. The `{{on}}` modifier provides a more explicit and flexible way to handle events.

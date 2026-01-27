@@ -8,7 +8,6 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-input-tagname', rule, {
   valid: [
     '<template>{{input value=this.foo}}</template>',
-    // Test cases ported from ember-template-lint
     '<template>{{input type="text"}}</template>',
     '<template>{{component "input" type="text"}}</template>',
     '<template>{{yield (component "input" type="text")}}</template>',
@@ -20,7 +19,6 @@ ruleTester.run('template-no-input-tagname', rule, {
       errors: [{ messageId: 'unexpected' }],
     },
 
-    // Test cases ported from ember-template-lint
     {
       code: '<template>{{input tagName="foo"}}</template>',
       output: null,

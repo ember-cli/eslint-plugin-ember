@@ -51,7 +51,7 @@ ruleTester.run('template-no-empty-headings', rule, {
       errors: [{ messageId: 'emptyHeading' }],
     },
     {
-      code: `<template><h1>
+      code: `<template><h1> 
  &nbsp;</h1></template>`,
       output: null,
       errors: [{ messageId: 'emptyHeading' }],
@@ -62,7 +62,7 @@ ruleTester.run('template-no-empty-headings', rule, {
       errors: [{ messageId: 'emptyHeading' }],
     },
     {
-      code: `<template><h1><span>
+      code: `<template><h1><span> 
  &nbsp;</span></h1></template>`,
       output: null,
       errors: [{ messageId: 'emptyHeading' }],

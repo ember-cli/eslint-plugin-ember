@@ -34,12 +34,12 @@ ruleTester.run('template-no-chained-this', rule, {
     },
     {
       code: '<template><this.this.Component /></template>',
-      output: '<template><this.Component /></template>',
+      output: null,
       errors: [{ messageId: 'noChainedThis' }],
     },
     {
       code: '<template>{{#this.this.value}}woo{{/this.this.value}}</template>',
-      output: '<template>{{#this.value}}woo{{/this.value}}</template>',
+      output: null,
       errors: [{ messageId: 'noChainedThis' }],
     },
     {

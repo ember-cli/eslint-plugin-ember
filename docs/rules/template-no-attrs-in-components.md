@@ -8,14 +8,14 @@ This rule prevents the usage of `this.attrs` property to access values passed to
 
 This rule **forbids** the following:
 
-```hbs
-{{this.attrs.foo}}
+```gjs
+<template>{{this.attrs.foo}}</template>
 ```
 
 This rule **allows** the following:
 
-```hbs
-{{@foo}}
+```gjs
+<template>{{@foo}}</template>
 ```
 
 ## References

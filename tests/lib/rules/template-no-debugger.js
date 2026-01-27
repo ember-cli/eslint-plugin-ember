@@ -28,6 +28,9 @@ ruleTester.run('template-no-debugger', rule, {
     `<template>
       <div data-test-debugger={{true}}></div>
     </template>`,
+
+    '<template>{{foo}}</template>',
+    '<template>{{button}}</template>',
   ],
 
   invalid: [
@@ -70,6 +73,12 @@ ruleTester.run('template-no-debugger', rule, {
           type: 'GlimmerBlockStatement',
         },
       ],
+    },
+
+    {
+      code: '<template>{{#debugger}}Invalid!{{/debugger}}</template>',
+      output: null,
+      errors: [{ message: 'Unexpected debugger statement in template.' }],
     },
   ],
 });

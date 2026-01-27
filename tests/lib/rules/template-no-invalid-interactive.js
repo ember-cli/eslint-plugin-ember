@@ -34,7 +34,6 @@ ruleTester.run('template-no-invalid-interactive', rule, {
       output: null,
     },
 
-    // Test cases ported from ember-template-lint
     '<template><button {{action "foo"}}></button></template>',
     '<template><canvas {{on "mousedown"}}></canvas></template>',
     '<template><div role="button" {{action "foo"}}></div></template>',
@@ -99,7 +98,6 @@ ruleTester.run('template-no-invalid-interactive', rule, {
       ],
     },
 
-    // Test cases ported from ember-template-lint
     {
       code: '<template><div {{on "click" this.actionName}}>...</div></template>',
       output: null,

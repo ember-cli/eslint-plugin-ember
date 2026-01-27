@@ -14,6 +14,12 @@ ruleTester.run('template-no-action-modifiers', rule, {
     '<template>{{action "myAction"}}</template>',
     '<template>{{this.action}}</template>',
     '<template>{{@action}}</template>',
+
+    '<template><button onclick={{action "foo"}}></button></template>',
+    '<template><a href="#" onclick={{action "foo"}}></a></template>',
+    '<template><div action></div></template>',
+    '<template>{{foo-bar (action "foo")}}</template>',
+    '<template>{{foo-bar action}}</template>',
   ],
 
   invalid: [
@@ -45,6 +51,35 @@ ruleTester.run('template-no-action-modifiers', rule, {
           message: 'Do not use action modifiers. Use on modifier with a function instead.',
           type: 'GlimmerElementModifierStatement',
         },
+      ],
+    },
+
+    {
+      code: '<template><div {{action this.foo}}></div></template>',
+      output: null,
+      errors: [
+        { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
+      ],
+    },
+    {
+      code: '<template><div {{action this.foo bar baz}}></div></template>',
+      output: null,
+      errors: [
+        { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
+      ],
+    },
+    {
+      code: '<template><button {{action "foo"}}></button></template>',
+      output: null,
+      errors: [
+        { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
+      ],
+    },
+    {
+      code: '<template><a href="#" {{action "foo"}}></a></template>',
+      output: null,
+      errors: [
+        { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
       ],
     },
   ],

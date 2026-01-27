@@ -12,6 +12,8 @@ ruleTester.run('template-builtin-component-arguments', rule, {
     '<template><Input @type="text" size="10" /></template>',
     '<template><Input @type="checkbox" @checked={{true}} /></template>',
     '<template><Textarea @value="Tomster" /></template>',
+
+    '<template><Input/></template>',
   ],
   invalid: [
     {
