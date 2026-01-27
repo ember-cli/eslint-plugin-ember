@@ -190,7 +190,10 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | :--------------------------------------------------------------------------------- | :----------------------------------------------------- | :-------------------------------------------------------------- | :- | :- |
 | [template-no-debugger](docs/rules/template-no-debugger.md)                         | disallow {{debugger}} in templates                     | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-duplicate-attributes](docs/rules/template-no-duplicate-attributes.md) | disallow duplicate attribute names in templates        | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                 | disallow duplicate id attributes                       | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-inline-styles](docs/rules/template-no-inline-styles.md)               | disallow inline styles                                 |                                                                 |    |    |
 | [template-no-log](docs/rules/template-no-log.md)                                   | disallow {{log}} in templates                          | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-unnecessary-concat](docs/rules/template-no-unnecessary-concat.md)     | disallow unnecessary string concatenation              | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
 | [template-require-button-type](docs/rules/template-require-button-type.md)         | require button elements to have a valid type attribute | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
 
 ### Components
@@ -252,6 +255,8 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-deprecated-render-helper](docs/rules/template-deprecated-render-helper.md)             | disallow {{render}} helper                                | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-action](docs/rules/template-no-action.md)                                           | disallow {{action}} helper                                | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-partial](docs/rules/template-no-partial.md)                                         | disallow {{partial}} helper                               | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-unbound](docs/rules/template-no-unbound.md)                                         | disallow {{unbound}} helper                               | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-with](docs/rules/template-no-with.md)                                               | disallow {{with}} helper                                  | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 
 ### Ember Data
 
@@ -322,9 +327,10 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Security
 
-| Name                                                                   | Description                                                   | 💼                                                              | 🔧 | 💡 |
-| :--------------------------------------------------------------------- | :------------------------------------------------------------ | :-------------------------------------------------------------- | :- | :- |
-| [template-no-triple-curlies](docs/rules/template-no-triple-curlies.md) | disallow usage of triple curly brackets (unescaped variables) | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| Name                                                                   | Description                                                     | 💼                                                              | 🔧 | 💡 |
+| :--------------------------------------------------------------------- | :-------------------------------------------------------------- | :-------------------------------------------------------------- | :- | :- |
+| [template-link-rel-noopener](docs/rules/template-link-rel-noopener.md) | require rel="noopener noreferrer" on links with target="_blank" | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| [template-no-triple-curlies](docs/rules/template-no-triple-curlies.md) | disallow usage of triple curly brackets (unescaped variables)   | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 
 ### Services
 
