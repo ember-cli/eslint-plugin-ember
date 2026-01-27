@@ -174,12 +174,20 @@ rules in templates can be disabled with eslint directives with mustache or html 
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).\
 💡 Manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
 
+### Accessibility
+
+| Name                                                                         | Description                       | 💼                                                              | 🔧 | 💡 |
+| :--------------------------------------------------------------------------- | :-------------------------------- | :-------------------------------------------------------------- | :- | :- |
+| [template-no-positive-tabindex](docs/rules/template-no-positive-tabindex.md) | disallow positive tabindex values | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+
 ### Best Practices
 
-| Name                                                       | Description                        | 💼                                                              | 🔧 | 💡 |
-| :--------------------------------------------------------- | :--------------------------------- | :-------------------------------------------------------------- | :- | :- |
-| [template-no-debugger](docs/rules/template-no-debugger.md) | disallow {{debugger}} in templates | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-log](docs/rules/template-no-log.md)           | disallow {{log}} in templates      | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| Name                                                                               | Description                                            | 💼                                                              | 🔧 | 💡 |
+| :--------------------------------------------------------------------------------- | :----------------------------------------------------- | :-------------------------------------------------------------- | :- | :- |
+| [template-no-debugger](docs/rules/template-no-debugger.md)                         | disallow {{debugger}} in templates                     | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-duplicate-attributes](docs/rules/template-no-duplicate-attributes.md) | disallow duplicate attribute names in templates        | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| [template-no-log](docs/rules/template-no-log.md)                                   | disallow {{log}} in templates                          | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-require-button-type](docs/rules/template-require-button-type.md)         | require button elements to have a valid type attribute | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
 
 ### Components
 
