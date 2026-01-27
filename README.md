@@ -186,19 +186,22 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Best Practices
 
-| Name                                                                               | Description                                            | 💼                                                              | 🔧 | 💡 |
-| :--------------------------------------------------------------------------------- | :----------------------------------------------------- | :-------------------------------------------------------------- | :- | :- |
-| [template-no-args-paths](docs/rules/template-no-args-paths.md)                     | disallow @args in paths                                | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-debugger](docs/rules/template-no-debugger.md)                         | disallow {{debugger}} in templates                     | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-duplicate-attributes](docs/rules/template-no-duplicate-attributes.md) | disallow duplicate attribute names in templates        | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                 | disallow duplicate id attributes                       | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-inline-styles](docs/rules/template-no-inline-styles.md)               | disallow inline styles                                 |                                                                 |    |    |
-| [template-no-input-block](docs/rules/template-no-input-block.md)                   | disallow block usage of {{input}} helper               | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-input-tagname](docs/rules/template-no-input-tagname.md)               | disallow tagName attribute on {{input}} helper         | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-log](docs/rules/template-no-log.md)                                   | disallow {{log}} in templates                          | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-unnecessary-concat](docs/rules/template-no-unnecessary-concat.md)     | disallow unnecessary string concatenation              | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-no-valueless-arguments](docs/rules/template-no-valueless-arguments.md)   | disallow valueless named arguments                     | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-require-button-type](docs/rules/template-require-button-type.md)         | require button elements to have a valid type attribute | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| Name                                                                                                       | Description                                            | 💼                                                              | 🔧 | 💡 |
+| :--------------------------------------------------------------------------------------------------------- | :----------------------------------------------------- | :-------------------------------------------------------------- | :- | :- |
+| [template-no-args-paths](docs/rules/template-no-args-paths.md)                                             | disallow @args in paths                                | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-debugger](docs/rules/template-no-debugger.md)                                                 | disallow {{debugger}} in templates                     | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-duplicate-attributes](docs/rules/template-no-duplicate-attributes.md)                         | disallow duplicate attribute names in templates        | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                                         | disallow duplicate id attributes                       | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-forbidden-elements](docs/rules/template-no-forbidden-elements.md)                             | disallow specific HTML elements                        |                                                                 |    |    |
+| [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                       | disallow inline styles                                 |                                                                 |    |    |
+| [template-no-input-block](docs/rules/template-no-input-block.md)                                           | disallow block usage of {{input}} helper               | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                       | disallow tagName attribute on {{input}} helper         | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-log](docs/rules/template-no-log.md)                                                           | disallow {{log}} in templates                          | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                               | disallow obsolete HTML elements                        | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-this-in-template-only-components](docs/rules/template-no-this-in-template-only-components.md) | disallow this in template-only components (gjs/gts)    | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-unnecessary-concat](docs/rules/template-no-unnecessary-concat.md)                             | disallow unnecessary string concatenation              | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| [template-no-valueless-arguments](docs/rules/template-no-valueless-arguments.md)                           | disallow valueless named arguments                     | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-require-button-type](docs/rules/template-require-button-type.md)                                 | require button elements to have a valid type attribute | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
 
 ### Components
 
@@ -349,6 +352,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 | Name                                                                                         | Description                                                | 💼 | 🔧 | 💡 |
 | :------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :- | :- | :- |
+| [template-no-quoteless-attributes](docs/rules/template-no-quoteless-attributes.md)           | require quotes on all attribute values                     |    | 🔧 |    |
 | [template-no-unnecessary-curly-strings](docs/rules/template-no-unnecessary-curly-strings.md) | disallow unnecessary curly braces in string interpolations |    |    |    |
 
 ### Stylistic Issues
