@@ -1,8 +1,8 @@
 # ember/template-no-action-modifiers
 
-<!-- end auto-generated rule header -->
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
+<!-- end auto-generated rule header -->
 
 Disallow usage of `{{action}}` modifiers in templates.
 
@@ -16,42 +16,30 @@ This rule disallows using `{{action}}` as an element modifier.
 
 ### Incorrect ❌
 
-```gjs
-<template>
-  <button {{action "save"}}>Save</button>
-</template>
+```hbs
+<button {{action 'save'}}>Save</button>
 ```
 
-```gjs
-<template>
-  <div {{action "onClick"}}>Click me</div>
-</template>
+```hbs
+<div {{action 'onClick'}}>Click me</div>
 ```
 
-```gjs
-<template>
-  <form {{action "submit" on="submit"}}>Submit</form>
-</template>
+```hbs
+<form {{action 'submit' on='submit'}}>Submit</form>
 ```
 
 ### Correct ✅
 
-```gjs
-<template>
-  <button {{on "click" this.handleClick}}>Save</button>
-</template>
+```hbs
+<button {{on 'click' this.handleClick}}>Save</button>
 ```
 
-```gjs
-<template>
-  <div {{on "click" this.onClick}}>Click me</div>
-</template>
+```hbs
+<div {{on 'click' this.onClick}}>Click me</div>
 ```
 
-```gjs
-<template>
-  <form {{on "submit" this.handleSubmit}}>Submit</form>
-</template>
+```hbs
+<form {{on 'submit' this.handleSubmit}}>Submit</form>
 ```
 
 ## Related Rules

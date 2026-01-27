@@ -8,7 +8,6 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-inline-styles', rule, {
   valid: [
     '<template><div class="foo"></div></template>',
-    // Test cases ported from ember-template-lint
     '<template><div></div></template>',
     '<template><span></span></template>',
     '<template><ul class="dummy"></ul></template>',
@@ -22,4 +21,23 @@ ruleTester.run('template-no-inline-styles', rule, {
       errors: [{ messageId: 'noInlineStyles' }],
     },
   ],
+});
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-inline-styles', rule, {
+  valid: [
+    '<div></div>',
+    '<span></span>',
+    '<ul class="dummy"></ul>',
+    '<div style={{foo}}></div>',
+    '<div style={{html-safe (concat "background-image: url(" url ")")}}></div>',
+  ],
+  invalid: [],
 });

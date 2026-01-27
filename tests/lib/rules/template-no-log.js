@@ -28,6 +28,14 @@ ruleTester.run('template-no-log', rule, {
     `<template>
       <div data-test-log={{true}}></div>
     </template>`,
+
+    '<template>{{foo}}</template>',
+    '<template>{{button}}</template>',
+    '<template>{{#each this.logs as |log|}}{{log}}{{/each}}</template>',
+    '<template>{{#let this.log as |log|}}{{log}}{{/let}}</template>',
+    '<template>{{#let (component "my-log-component") as |log|}}{{#log}}message{{/log}}{{/let}}</template>',
+    '<template><Logs @logs={{this.logs}} as |log|>{{log}}</Logs></template>',
+    '<template><Logs @logs={{this.logs}} as |log|><Log>{{log}}</Log></Logs></template>',
   ],
 
   invalid: [
@@ -70,6 +78,96 @@ ruleTester.run('template-no-log', rule, {
           type: 'GlimmerBlockStatement',
         },
       ],
+    },
+
+    {
+      code: '<template>{{log}}</template>',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '<template>{{log "Logs are best for debugging!"}}</template>',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '<template>{{#log}}Arrgh!{{/log}}</template>',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '<template>{{#log "Foo"}}{{/log}}</template>',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '<template>{{#each this.messages as |message|}}{{log message}}{{/each}}</template>',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '<template>{{#let this.message as |message|}}{{log message}}{{/let}}</template>',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '<template><Messages @messages={{this.messages}} as |message|>{{#log}}{{message}}{{/log}}</Messages></template>',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+  ],
+});
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-log (hbs)', rule, {
+  valid: [
+    '{{foo}}',
+    '{{button}}',
+    '{{#each this.logs as |log|}}{{log}}{{/each}}',
+    '{{#let this.log as |log|}}{{log}}{{/let}}',
+    '{{#let (component "my-log-component") as |log|}}{{#log}}message{{/log}}{{/let}}',
+    '<Logs @logs={{this.logs}} as |log|>{{log}}</Logs>',
+    '<Logs @logs={{this.logs}} as |log|><Log>{{log}}</Log></Logs>',
+  ],
+  invalid: [
+    {
+      code: '{{log}}',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '{{log "Logs are best for debugging!"}}',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '{{#log}}Arrgh!{{/log}}',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '{{#log "Foo"}}{{/log}}',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '{{#each this.messages as |message|}}{{log message}}{{/each}}',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '{{#let this.message as |message|}}{{log message}}{{/let}}',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '<Messages @messages={{this.messages}} as |message|>{{#log}}{{message}}{{/log}}</Messages>',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
     },
   ],
 });

@@ -12,7 +12,6 @@ ruleTester.run('template-no-heading-inside-button', rule, {
     '<template><h1>Title</h1></template>',
     '<template><div><h2>Heading</h2></div></template>',
 
-    // Test cases ported from ember-template-lint
     '<template><button>Show More</button></template>',
     '<template><button><span>thumbs-up emoji</span>Show More</button></template>',
     '<template><button><div>Show More</div></button></template>',
@@ -32,7 +31,6 @@ ruleTester.run('template-no-heading-inside-button', rule, {
       errors: [{ messageId: 'noHeading' }],
     },
 
-    // Test cases ported from ember-template-lint
     {
       code: '<template><button><h1>Page Title</h1></button></template>',
       output: null,
@@ -72,6 +70,67 @@ ruleTester.run('template-no-heading-inside-button', rule, {
       code: '<template><div role="button"><h6>Heading in a div with a role of button</h6></div></template>',
       output: null,
       errors: [{ messageId: 'noHeading' }],
+    },
+  ],
+});
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-heading-inside-button', rule, {
+  valid: [
+    '<button>Show More</button>',
+    '<button><span>thumbs-up emoji</span>Show More</button>',
+    '<button><div>Show More</div></button>',
+    '<div>Showing that it is not a button</div>',
+    '<div><h1>Page Title in a div is fine</h1></div>',
+    '<h1>Page Title</h1>',
+  ],
+  invalid: [
+    {
+      code: '<button><h1>Page Title</h1></button>',
+      output: null,
+      errors: [{ message: 'Buttons should not contain heading elements' }],
+    },
+    {
+      code: '<button><h2>Heading Title</h2></button>',
+      output: null,
+      errors: [{ message: 'Buttons should not contain heading elements' }],
+    },
+    {
+      code: '<button><h3>Heading Title</h3></button>',
+      output: null,
+      errors: [{ message: 'Buttons should not contain heading elements' }],
+    },
+    {
+      code: '<button><h4>Heading Title</h4></button>',
+      output: null,
+      errors: [{ message: 'Buttons should not contain heading elements' }],
+    },
+    {
+      code: '<button><h5>Heading Title</h5></button>',
+      output: null,
+      errors: [{ message: 'Buttons should not contain heading elements' }],
+    },
+    {
+      code: '<button><div><h1>Heading Title</h1></div></button>',
+      output: null,
+      errors: [{ message: 'Buttons should not contain heading elements' }],
+    },
+    {
+      code: '<button><h6>Heading Title</h6></button>',
+      output: null,
+      errors: [{ message: 'Buttons should not contain heading elements' }],
+    },
+    {
+      code: '<div role="button"><h6>Heading in a div with a role of button</h6></div>',
+      output: null,
+      errors: [{ message: 'Buttons should not contain heading elements' }],
     },
   ],
 });
