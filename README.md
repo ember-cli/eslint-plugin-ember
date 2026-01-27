@@ -188,12 +188,16 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 | Name                                                                               | Description                                            | 💼                                                              | 🔧 | 💡 |
 | :--------------------------------------------------------------------------------- | :----------------------------------------------------- | :-------------------------------------------------------------- | :- | :- |
+| [template-no-args-paths](docs/rules/template-no-args-paths.md)                     | disallow @args in paths                                | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-debugger](docs/rules/template-no-debugger.md)                         | disallow {{debugger}} in templates                     | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-duplicate-attributes](docs/rules/template-no-duplicate-attributes.md) | disallow duplicate attribute names in templates        | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
 | [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                 | disallow duplicate id attributes                       | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-inline-styles](docs/rules/template-no-inline-styles.md)               | disallow inline styles                                 |                                                                 |    |    |
+| [template-no-input-block](docs/rules/template-no-input-block.md)                   | disallow block usage of {{input}} helper               | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-input-tagname](docs/rules/template-no-input-tagname.md)               | disallow tagName attribute on {{input}} helper         | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-log](docs/rules/template-no-log.md)                                   | disallow {{log}} in templates                          | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-unnecessary-concat](docs/rules/template-no-unnecessary-concat.md)     | disallow unnecessary string concatenation              | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| [template-no-valueless-arguments](docs/rules/template-no-valueless-arguments.md)   | disallow valueless named arguments                     | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-require-button-type](docs/rules/template-require-button-type.md)         | require button elements to have a valid type attribute | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
 
 ### Components
@@ -340,6 +344,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [no-restricted-service-injections](docs/rules/no-restricted-service-injections.md)                   | disallow injecting certain services under certain paths           |    |    |    |
 | [no-unnecessary-service-injection-argument](docs/rules/no-unnecessary-service-injection-argument.md) | disallow unnecessary argument when injecting services             |    | 🔧 |    |
 | [no-unused-services](docs/rules/no-unused-services.md)                                               | disallow unused service injections (see rule doc for limitations) |    |    | 💡 |
+
+### Style
+
+| Name                                                                                         | Description                                                | 💼 | 🔧 | 💡 |
+| :------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :- | :- | :- |
+| [template-no-unnecessary-curly-strings](docs/rules/template-no-unnecessary-curly-strings.md) | disallow unnecessary curly braces in string interpolations |    |    |    |
 
 ### Stylistic Issues
 
