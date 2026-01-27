@@ -174,6 +174,13 @@ rules in templates can be disabled with eslint directives with mustache or html 
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).\
 💡 Manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
 
+### Best Practices
+
+| Name                                                       | Description                        | 💼                                                              | 🔧 | 💡 |
+| :--------------------------------------------------------- | :--------------------------------- | :-------------------------------------------------------------- | :- | :- |
+| [template-no-debugger](docs/rules/template-no-debugger.md) | disallow {{debugger}} in templates | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-log](docs/rules/template-no-log.md)           | disallow {{log}} in templates      | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+
 ### Components
 
 | Name                                                                       | Description                                                                                                                          | 💼 | 🔧 | 💡 |
@@ -296,6 +303,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [no-unnecessary-route-path-option](docs/rules/no-unnecessary-route-path-option.md) | disallow unnecessary usage of the route `path` option                                    | ✅  | 🔧 |    |
 | [route-path-style](docs/rules/route-path-style.md)                                 | enforce usage of kebab-case (instead of snake_case or camelCase) in route paths          |    |    | 💡 |
 | [routes-segments-snake-case](docs/rules/routes-segments-snake-case.md)             | enforce usage of snake_cased dynamic segments in routes                                  | ✅  |    |    |
+
+### Security
+
+| Name                                                                   | Description                                                   | 💼                                                              | 🔧 | 💡 |
+| :--------------------------------------------------------------------- | :------------------------------------------------------------ | :-------------------------------------------------------------- | :- | :- |
+| [template-no-triple-curlies](docs/rules/template-no-triple-curlies.md) | disallow usage of triple curly brackets (unescaped variables) | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 
 ### Services
 
