@@ -1,7 +1,5 @@
 # ember/template-deprecated-render-helper
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
-
 > **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
 
 <!-- end auto-generated rule header -->

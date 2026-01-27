@@ -21,14 +21,14 @@ The HTML attribute `role` must never have the following values:
 
 This rule **forbids** the following:
 
-```hbs
-<div role='window'> Hello, world! </div>
+```gjs
+<template><div role='window'> Hello, world! </div></template>
 ```
 
 This rule **allows** the following:
 
-```hbs
-<div role='button'> Push it </div>
+```gjs
+<template><div role='button'> Push it </div></template>
 ```
 
 ## References

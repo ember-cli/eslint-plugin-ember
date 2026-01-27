@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
-
 Disallow `@arguments` on HTML elements.
 
 Arguments (using the `@` prefix) are a feature specific to Ember components. They should not be used on regular HTML elements, which only support standard HTML attributes.
@@ -52,6 +50,26 @@ This rule disallows using `@arguments` on HTML elements. Use regular attributes 
 <template>
   <MyComponent @title="Hello" @onClick={{this.handler}} />
 </template>
+```
+
+Yielded components, named blocks, and path expressions are also allowed:
+
+```hbs
+{{#let (component 'bar') as |foo|}}
+  <foo @name='1' />
+{{/let}}
+```
+
+```hbs
+<foo.some.name @name='1' />
+<@foo @name='2' />
+<@foo.bar @name='2' />
+```
+
+```hbs
+<MyComponent>
+  <:slot @name='Header'></:slot>
+</MyComponent>
 ```
 
 ## Related Rules

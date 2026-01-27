@@ -60,4 +60,4 @@ Accepts an array of the objects with the following options:
 ## Related Rules
 
 - The [no-restricted-imports](https://eslint.org/docs/rules/no-restricted-imports) or [import/no-restricted-paths](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-restricted-paths.md) rules are the JavaScript import statement equivalent of this rule.
-- ember-template-lint has a [no-restricted-invocations](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-restricted-invocations.md) rule for disallowing component usages.
+- eslint-plugin-ember has a [template-no-restricted-invocations](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-restricted-invocations.md) rule for disallowing component usages.

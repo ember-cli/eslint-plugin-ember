@@ -89,17 +89,17 @@ hbsRuleTester.run('template-no-inline-linkto', rule, {
     // Inline curly form is not allowed
     {
       code: "{{link-to 'Link text' 'routeName'}}",
-      output: "{{#link-to 'routeName'}}Link text{{/link-to}}",
+      output: null,
       errors: [{ messageId: 'noInlineLinkTo' }],
     },
     {
       code: "{{link-to 'Link text' 'routeName' one two}}",
-      output: "{{#link-to 'routeName' one two}}Link text{{/link-to}}",
+      output: null,
       errors: [{ messageId: 'noInlineLinkTo' }],
     },
     {
       code: "{{link-to (concat 'Hello' @username) 'routeName' one two}}",
-      output: "{{#link-to 'routeName' one two}}{{concat 'Hello' @username}}{{/link-to}}",
+      output: null,
       errors: [{ messageId: 'noInlineLinkTo' }],
     },
     {

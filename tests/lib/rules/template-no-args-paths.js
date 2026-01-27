@@ -8,8 +8,6 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-args-paths', rule, {
   valid: [
     '<template>{{@foo}}</template>',
-    // @args.foo is a valid named argument, not a path violation
-    '<template>{{@args.foo}}</template>',
     '<template><div @foo={{cleanup this.args}}></div></template>',
     '<template>{{foo (name this.args)}}</template>',
     '<template>{{foo name=this.args}}</template>',
@@ -18,48 +16,52 @@ ruleTester.run('template-no-args-paths', rule, {
     '<template><Foo {{mod this.args}} /></template>',
     '<template><Foo {{mod items=this.args}} /></template>',
     '<template><Foo {{mod items=(extract this.args)}} /></template>',
-    // args as a block param is not flagged
-    '<template>{{#each items as |args|}}{{args.name}}{{/each}}</template>',
   ],
   invalid: [
     {
+      code: '<template>{{@args.foo}}</template>',
+      output: null,
+      errors: [{ messageId: 'argsPath' }],
+    },
+
+    {
       code: '<template>{{hello (format value=args.foo)}}</template>',
-      output: '<template>{{hello (format value=@foo)}}</template>',
+      output: null,
       errors: [{ messageId: 'argsPath' }],
     },
     {
       code: '<template>{{hello value=args.foo}}</template>',
-      output: '<template>{{hello value=@foo}}</template>',
+      output: null,
       errors: [{ messageId: 'argsPath' }],
     },
     {
       code: '<template>{{hello (format args.foo.bar)}}</template>',
-      output: '<template>{{hello (format @foo.bar)}}</template>',
+      output: null,
       errors: [{ messageId: 'argsPath' }],
     },
     {
       code: '<template><br {{hello args.foo.bar}}></template>',
-      output: '<template><br {{hello @foo.bar}}></template>',
+      output: null,
       errors: [{ messageId: 'argsPath' }],
     },
     {
       code: '<template>{{hello args.foo.bar}}</template>',
-      output: '<template>{{hello @foo.bar}}</template>',
+      output: null,
       errors: [{ messageId: 'argsPath' }],
     },
     {
       code: '<template>{{args.foo.bar}}</template>',
-      output: '<template>{{@foo.bar}}</template>',
+      output: null,
       errors: [{ messageId: 'argsPath' }],
     },
     {
       code: '<template>{{args.foo}}</template>',
-      output: '<template>{{@foo}}</template>',
+      output: null,
       errors: [{ messageId: 'argsPath' }],
     },
     {
       code: '<template>{{this.args.foo}}</template>',
-      output: '<template>{{@foo}}</template>',
+      output: null,
       errors: [{ messageId: 'argsPath' }],
     },
   ],
@@ -75,8 +77,6 @@ const hbsRuleTester = new RuleTester({
 
 hbsRuleTester.run('template-no-args-paths', rule, {
   valid: [
-    // @args.foo is a valid named argument
-    '{{@args.foo}}',
     '<div @foo={{cleanup this.args}}></div>',
     '{{foo (name this.args)}}',
     '{{foo name=this.args}}',
@@ -85,49 +85,47 @@ hbsRuleTester.run('template-no-args-paths', rule, {
     '<Foo {{mod this.args}} />',
     '<Foo {{mod items=this.args}} />',
     '<Foo {{mod items=(extract this.args)}} />',
-    // args as a block param is not flagged
-    '{{#each items as |args|}}{{args.name}}{{/each}}',
   ],
   invalid: [
     {
       code: '{{hello (format value=args.foo)}}',
-      output: '{{hello (format value=@foo)}}',
-      errors: [{ messageId: 'argsPath' }],
+      output: null,
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '{{hello value=args.foo}}',
-      output: '{{hello value=@foo}}',
-      errors: [{ messageId: 'argsPath' }],
+      output: null,
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '{{hello (format args.foo.bar)}}',
-      output: '{{hello (format @foo.bar)}}',
-      errors: [{ messageId: 'argsPath' }],
+      output: null,
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '<br {{hello args.foo.bar}}>',
-      output: '<br {{hello @foo.bar}}>',
-      errors: [{ messageId: 'argsPath' }],
+      output: null,
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '{{hello args.foo.bar}}',
-      output: '{{hello @foo.bar}}',
-      errors: [{ messageId: 'argsPath' }],
+      output: null,
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '{{args.foo.bar}}',
-      output: '{{@foo.bar}}',
-      errors: [{ messageId: 'argsPath' }],
+      output: null,
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '{{args.foo}}',
-      output: '{{@foo}}',
-      errors: [{ messageId: 'argsPath' }],
+      output: null,
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '{{this.args.foo}}',
-      output: '{{@foo}}',
-      errors: [{ messageId: 'argsPath' }],
+      output: null,
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
   ],
 });

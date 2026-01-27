@@ -21,28 +21,14 @@ function generateError(name) {
 
 ruleTester.run('template-no-curly-component-invocation', rule, {
   valid: [
-    // With noImplicitThis:true (default), explicit this/@ paths are always valid
-    '<template>{{this.foo}}</template>',
-    '<template>{{@bar}}</template>',
+    '<template>{{foo}}</template>',
+    '<template>{{foo.bar}}</template>',
     '<template>{{42}}</template>',
     '<template>{{true}}</template>',
     '<template>{{foo bar}}</template>',
     '<template>{{#each items as |item|}}{{item}}{{/each}}</template>',
-    // ElementNode block params should be recognized as local variables
-    '<template><Foo as |bar|>{{bar}}</Foo></template>',
-    '<template><Foo as |bar|>{{bar.baz}}</Foo></template>',
     '<template>{{#if someProperty}}yay{{/if}}</template>',
     '<template><FooBar /></template>',
-    {
-      // {{foo}} is not flagged when noImplicitThis is disabled
-      code: '<template>{{foo}}</template>',
-      options: [{ noImplicitThis: false }],
-    },
-    {
-      // {{foo.bar}} is not flagged when noImplicitThis is disabled
-      code: '<template>{{foo.bar}}</template>',
-      options: [{ noImplicitThis: false }],
-    },
     {
       code: '<template>{{foo-bar}}</template>',
       options: [{ allow: ['foo-bar'] }],
@@ -69,7 +55,7 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '<template>{{#foo-bar}}content{{/foo-bar}}</template>',
-      output: '<template><FooBar>content</FooBar></template>',
+      output: null,
       errors: [
         {
           message:
@@ -79,7 +65,7 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '<template>{{#foo-bar}}{{/foo-bar}}</template>',
-      output: '<template><FooBar></FooBar></template>',
+      output: null,
       errors: [
         {
           message:
@@ -89,7 +75,7 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '<template>{{#foo-bar/baz/boo-foo}}block{{/foo-bar/baz/boo-foo}}</template>',
-      output: '<template><FooBar::Baz::BooFoo>block</FooBar::Baz::BooFoo></template>',
+      output: null,
       errors: [
         {
           message:
@@ -99,25 +85,13 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '<template>{{#some-component foo="bar"}}foo{{/some-component}}</template>',
-      output: '<template><SomeComponent @foo="bar">foo</SomeComponent></template>',
+      output: null,
       errors: [
         {
           message:
             "You are using the component {{#some-component}} with curly component syntax. You should use <SomeComponent> instead. If it is actually a helper you must manually add it to the 'no-curly-component-invocation' rule configuration, e.g. `'no-curly-component-invocation': { allow: ['some-component'] }`.",
         },
       ],
-    },
-    {
-      // noImplicitThis:true (default) flags plain single-word names
-      code: '<template>{{foo}}</template>',
-      output: null,
-      errors: [{ message: generateError('foo') }],
-    },
-    {
-      // noImplicitThis:true (default) flags multi-part paths
-      code: '<template>{{foo.bar}}</template>',
-      output: null,
-      errors: [{ message: generateError('foo.bar') }],
     },
     {
       code: '<template>{{foo}}</template>',
@@ -183,29 +157,14 @@ function generateThisBlockError(name) {
 
 hbsRuleTester.run('template-no-curly-component-invocation', rule, {
   valid: [
-    // Plain single-word / multi-part paths are valid when noImplicitThis is disabled
-    {
-      code: '{{foo}}',
-      options: [{ noImplicitThis: false }],
-    },
-    {
-      code: '{{foo.bar}}',
-      options: [{ noImplicitThis: false }],
-    },
-    {
-      code: '{{model.selectedTransfersCount}}',
-      options: [{ noImplicitThis: false }],
-    },
-    {
-      code: '{{request.note}}',
-      options: [{ noImplicitThis: false }],
-    },
-    // Built-in helpers / keywords (always valid)
+    // Simple expressions (no dash = not a component)
+    '{{foo}}',
+    '{{foo.bar}}',
+    '{{model.selectedTransfersCount}}',
+    '{{request.note}}',
+    // Built-in helpers / keywords
     '{{#each items as |item|}}{{item}}{{/each}}',
     '{{#each items as |item|}}{{item.foo}}{{/each}}',
-    // ElementNode block params should be recognized as local variables
-    '<Foo as |bar|>{{bar}}</Foo>',
-    '<Foo as |bar|>{{bar.baz}}</Foo>',
     '{{42}}',
     '{{true}}',
     '{{undefined}}',
@@ -235,7 +194,6 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     '<Nested::GoodCode @someProperty={{-50}} @someProperty="-50" @someProperty={{true}} />',
     '{{some-valid-helper param}}',
     '{{some/valid-nested-helper param}}',
-    // Explicit this/@ paths are always valid
     '{{@someArg}}',
     '{{this.someProperty}}',
     '{{#-in-element destinationElement}}Hello{{/-in-element}}',
@@ -264,30 +222,6 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
       code: '{{#aaa-bbb bar=baz}}{{/aaa-bbb}}',
       options: [{ allow: ['aaa-bbb', 'aaa/bbb'] }],
     },
-    // noImplicitThis: block params exempt {{item}} even with noImplicitThis:true
-    {
-      code: '{{#each items as |item|}}{{item}}{{/each}}',
-      options: [{ noImplicitThis: true }],
-    },
-    // noImplicitThis: block params exempt multi-part access too
-    {
-      code: '{{#each items as |item|}}{{item.name}}{{/each}}',
-      options: [{ noImplicitThis: true }],
-    },
-    // noImplicitThis: explicit this./ @ paths never flagged
-    {
-      code: '{{this.someProperty}}',
-      options: [{ noImplicitThis: true }],
-    },
-    {
-      code: '{{@someArg}}',
-      options: [{ noImplicitThis: true }],
-    },
-    // disallow: block params exempt the disallowed name
-    {
-      code: '{{#each items as |disallowed|}}{{disallowed}}{{/each}}',
-      options: [{ disallow: ['disallowed'], noImplicitThis: false }],
-    },
   ],
   invalid: [
     {
@@ -302,17 +236,17 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '{{#foo-bar}}{{/foo-bar}}',
-      output: '<FooBar></FooBar>',
+      output: null,
       errors: [{ message: generateBlockError('foo-bar') }],
     },
     {
       code: '{{#foo-bar as |foo-baz|}}{{foo-baz}}{{/foo-bar}}',
-      output: '<FooBar as |foo-baz|>{{foo-baz}}</FooBar>',
+      output: null,
       errors: [{ message: generateBlockError('foo-bar') }, { message: generateError('foo-baz') }],
     },
     {
       code: '{{#foo-bar as |foo-baz|}}{{#foo-baz as |foo-boo|}}{{foo-boo}}{{/foo-baz}}{{/foo-bar}}',
-      output: '<FooBar as |foo-baz|>{{#foo-baz as |foo-boo|}}{{foo-boo}}{{/foo-baz}}</FooBar>',
+      output: null,
       errors: [
         { message: generateBlockError('foo-bar') },
         { message: generateBlockError('foo-baz') },
@@ -321,12 +255,12 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '{{#foo-bar as |foo-baz|}}{{foos-baz}}{{/foo-bar}}',
-      output: '<FooBar as |foo-baz|>{{foos-baz}}</FooBar>',
+      output: null,
       errors: [{ message: generateBlockError('foo-bar') }, { message: generateError('foos-baz') }],
     },
     {
       code: '{{#this.foo-bar as |foo-baz|}}{{foos-baz}}{{/this.foo-bar}}',
-      output: '<This.fooBar as |foo-baz|>{{foos-baz}}</This.fooBar>',
+      output: null,
       errors: [
         { message: generateThisBlockError('this.foo-bar') },
         { message: generateError('foos-baz') },
@@ -334,7 +268,7 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '{{#this.fooBar as |foo-baz|}}{{foos-baz}}{{/this.fooBar}}',
-      output: '<This.fooBar as |foo-baz|>{{foos-baz}}</This.fooBar>',
+      output: null,
       errors: [
         { message: generateBlockError('this.fooBar') },
         { message: generateError('foos-baz') },
@@ -342,7 +276,7 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '{{#@foo-bar as |foo-baz|}}{{foos-baz}}{{/@foo-bar}}',
-      output: '<@fooBar as |foo-baz|>{{foos-baz}}</@fooBar>',
+      output: null,
       errors: [
         { message: generateThisBlockError('@foo-bar') },
         { message: generateError('foos-baz') },
@@ -350,12 +284,12 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '{{#@fooBar as |foo-baz|}}{{foos-baz}}{{/@fooBar}}',
-      output: '<@fooBar as |foo-baz|>{{foos-baz}}</@fooBar>',
+      output: null,
       errors: [{ message: generateBlockError('@fooBar') }, { message: generateError('foos-baz') }],
     },
     {
       code: '{{#let (component "foo") as |my-component|}}{{#my-component}}{{/my-component}}{{/let}}',
-      output: '{{#let (component "foo") as |my-component|}}<MyComponent></MyComponent>{{/let}}',
+      output: null,
       errors: [{ message: generateBlockError('my-component') }],
     },
     // Curly component invocations with hash params
@@ -363,12 +297,6 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
       code: '{{foo-bar bar=baz}}',
       output: null,
       errors: [{ message: generateError('foo-bar') }],
-    },
-    // Multi-part path with named args is always flagged ({{foo.bar bar=baz}})
-    {
-      code: '{{foo.bar bar=baz}}',
-      output: null,
-      errors: [{ message: generateError('foo.bar') }],
     },
     // link-to with positional params
     {
@@ -400,20 +328,6 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
       output: null,
       options: [{ disallow: ['disallowed'] }],
       errors: [{ message: generateError('disallowed') }],
-    },
-    // noImplicitThis: plain single-word name flagged with noImplicitThis:true
-    {
-      code: '{{foo}}',
-      output: null,
-      options: [{ noImplicitThis: true }],
-      errors: [{ message: generateError('foo') }],
-    },
-    // noImplicitThis: multi-part path flagged with noImplicitThis:true
-    {
-      code: '{{foo.bar}}',
-      output: null,
-      options: [{ noImplicitThis: true }],
-      errors: [{ message: generateError('foo.bar') }],
     },
   ],
 });

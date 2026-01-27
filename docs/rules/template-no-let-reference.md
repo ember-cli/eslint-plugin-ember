@@ -6,7 +6,7 @@
 
 Disallows referencing let/var variables in templates.
 
-```js
+```gjs
 // app/components/foo.gjs
 let foo = 1;
 
@@ -29,12 +29,12 @@ Use `const` variables instead of `let`.
 
 Examples of **incorrect** code for this rule:
 
-```js
+```gjs
 let x = 1;
 <template>{{ x }}</template>;
 ```
 
-```js
+```gjs
 let Comp = x; // SomeComponent
 <template>
   <Comp />
@@ -43,12 +43,12 @@ let Comp = x; // SomeComponent
 
 Examples of **correct** code for this rule:
 
-```js
+```gjs
 const x = 1;
 <template>{{ x }}</template>;
 ```
 
-```js
+```gjs
 const Comp = x; // SomeComponent
 <template>
   <Comp />

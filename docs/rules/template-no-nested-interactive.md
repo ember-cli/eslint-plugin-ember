@@ -99,13 +99,12 @@ Examples of **correct** code for this rule:
 
 ## Options
 
-| Name                        | Type       | Default | Description                                                   |
-| --------------------------- | ---------- | ------- | ------------------------------------------------------------- |
-| `additionalInteractiveTags` | `string[]` | `[]`    | Extra tag names to consider interactive.                      |
-| `ignoredTags`               | `string[]` | `[]`    | Tag names to skip checking.                                   |
-| `ignoreTabindex`            | `boolean`  | `false` | If `true`, `tabindex` does not make an element interactive.   |
-| `ignoreUsemap`              | `boolean`  | `false` | If `true`, `usemap` does not make an element interactive.     |
-| `ignoreUsemapAttribute`     | `boolean`  | `false` | Alias for `ignoreUsemap` (original ember-template-lint name). |
+| Name                        | Type       | Default | Description                                                 |
+| --------------------------- | ---------- | ------- | ----------------------------------------------------------- |
+| `additionalInteractiveTags` | `string[]` | `[]`    | Extra tag names to consider interactive.                    |
+| `ignoredTags`               | `string[]` | `[]`    | Tag names to skip checking.                                 |
+| `ignoreTabindex`            | `boolean`  | `false` | If `true`, `tabindex` does not make an element interactive. |
+| `ignoreUsemap`              | `boolean`  | `false` | If `true`, `usemap` does not make an element interactive.   |
 
 ## References
 

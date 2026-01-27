@@ -62,6 +62,10 @@ This rule disallows using block params on HTML elements. Use components if you n
 </template>
 ```
 
+## Migration
+
+- Remove the unused block parameters or fix the tag name to refer to a component
+
 ## Related Rules
 
 - [template-no-arguments-for-html-elements](./template-no-arguments-for-html-elements.md)

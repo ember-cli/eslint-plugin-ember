@@ -139,6 +139,6 @@ arr.uniq();
 
 ## Related Rules
 
-- [no-array-prototype-extensions](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-array-prototype-extensions.md) from ember-template-lint
+- [template-no-array-prototype-extensions](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-array-prototype-extensions.md) from eslint-plugin-ember
 - [no-function-prototype-extensions](no-function-prototype-extensions.md)
 - [no-string-prototype-extensions](no-string-prototype-extensions.md)

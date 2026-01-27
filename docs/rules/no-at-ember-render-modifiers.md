@@ -45,7 +45,7 @@ import didUpdate from '@ember/render-modifiers/modifiers/did-update';
 import willDestroy from '@ember/render-modifiers/modifiers/will-destroy';
 ```
 
-For more examples, see [the docs on ember-template-lint](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-at-ember-render-modifiers.md).
+For more examples, see [the docs on eslint-plugin-ember](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-at-ember-render-modifiers.md).
 
 ## References
 
@@ -53,6 +53,6 @@ For more examples, see [the docs on ember-template-lint](https://github.com/embe
 - [Octane Upgrade Guide](https://guides.emberjs.com/release/upgrading/current-edition/)
 - [Component Documentation](https://guides.emberjs.com/release/components/)
 - [Avoiding Lifecycle in Component](https://nullvoxpopuli.com/avoiding-lifecycle)
-- [The `ember-template-lint` version of this rule](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-at-ember-render-modifiers.md)
+- [The `eslint-plugin-ember` version of this rule](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-at-ember-render-modifiers.md)
 - [`ember-modifier`](https://github.com/ember-modifier/ember-modifier)
 - [`@ember/render-modifiers`](https://github.com/emberjs/ember-render-modifiers) (deprecated)

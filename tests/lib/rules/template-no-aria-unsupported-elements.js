@@ -11,6 +11,13 @@ ruleTester.run('template-no-aria-unsupported-elements', rule, {
     '<template><div role="button" aria-label="Submit"></div></template>',
     '<template><button aria-pressed="true">Toggle</button></template>',
     '<template><input aria-label="Username"></template>',
+
+    '<template><meta charset="UTF-8" /></template>',
+    '<template><html lang="en"></html></template>',
+    '<template><script></script></template>',
+    '<template><div></div></template>',
+    '<template><div aria-foo="true"></div></template>',
+    '<template><div role="foo"></div></template>',
   ],
 
   invalid: [
@@ -26,6 +33,54 @@ ruleTester.run('template-no-aria-unsupported-elements', rule, {
     },
     {
       code: '<template><style role="presentation"></style></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+
+    {
+      code: '<template><meta charset="UTF-8" aria-hidden="false" /></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<template><html lang="en" role="application"></html></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<template><script aria-hidden="false"></script></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+  ],
+});
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-aria-unsupported-elements (hbs)', rule, {
+  valid: [
+    '<meta charset="UTF-8" />',
+    '<html lang="en"></html>',
+    '<script></script>',
+    '<div></div>',
+    '<div aria-foo="true"></div>',
+    '<div role="foo"></div>',
+  ],
+  invalid: [
+    {
+      code: '<meta charset="UTF-8" aria-hidden="false" />',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<html lang="en" role="application"></html>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<script aria-hidden="false"></script>',
       output: null,
       errors: [{ messageId: 'unsupported' }],
     },

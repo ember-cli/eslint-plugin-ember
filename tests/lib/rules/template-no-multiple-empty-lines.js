@@ -50,6 +50,9 @@ r
 
 <div>bar</div>
 </template>`,
+
+    // Multiple empty lines in JS code outside <template> must NOT be flagged
+    'const foo = 1;\n\n\nconst bar = 2;\n\n<template><div>ok</div></template>',
   ],
 
   invalid: [

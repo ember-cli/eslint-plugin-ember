@@ -1254,6 +1254,10 @@ packages:
     resolution: {integrity: sha512-COROpnaoap1E2F000S62r6A60uHZnmlvomhfyT2DlTcrY1OrBKn2UhH7qn5wTC9zMvD0AY7csdPSNwKP+7WiQw==}
     engines: {node: '>= 0.4'}
 
+  array-buffer-byte-length@1.0.1:
+    resolution: {integrity: sha512-ahC5W1xgou+KTXix4sAO8Ki12Q+jf4i0+tmk3sC+zgcynshkHxzpXdImBehiUYKKKDwvfFiJl1tZt6ewscS1Mg==}
+    engines: {node: '>= 0.4'}
+
   array-buffer-byte-length@1.0.2:
     resolution: {integrity: sha512-LHE+8BuR7RYGDKvnrmcuSq3tDcKv9OFEXQt/HpbZhY7V6h0zlUXutnAD82GiFx9rdieCMjkvtcsPqBwgUl1Iiw==}
     engines: {node: '>= 0.4'}
@@ -5134,6 +5138,11 @@ snapshots:
   argparse@2.0.1: {}
 
   aria-query@5.3.2: {}
+
+  array-buffer-byte-length@1.0.1:
+    dependencies:
+      call-bind: 1.0.7
+      is-array-buffer: 3.0.4
 
   array-buffer-byte-length@1.0.2:
     dependencies:

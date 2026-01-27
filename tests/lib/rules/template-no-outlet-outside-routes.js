@@ -16,45 +16,23 @@ ruleTester.run('template-no-outlet-outside-routes', rule, {
     '<template><div>Content</div></template>',
     '<template>{{foo}}</template>',
     '<template>{{button}}</template>',
-    // GJS route templates — outlet is allowed
-    {
-      filename: 'app/routes/foo.gjs',
-      code: '<template>{{outlet}}</template>',
-    },
-    {
-      filename: 'app/routes/foo.gts',
-      code: '<template>{{outlet}}</template>',
-    },
-    // Block form in GJS route templates — outlet is allowed
-    {
-      filename: 'app/routes/foo.gjs',
-      code: '<template>{{#outlet}}content{{/outlet}}</template>',
-    },
   ],
   invalid: [
-    // Co-located component (explicit filename)
+    // GJS files are always components — outlet should be flagged
     {
-      filename: 'app/components/my-component.gjs',
       code: '<template>{{outlet}}</template>',
       output: null,
       errors: [{ messageId: 'noOutletOutsideRoutes' }],
     },
     {
-      filename: 'app/components/my-component.gts',
-      code: '<template>{{outlet}}</template>',
-      output: null,
-      errors: [{ messageId: 'noOutletOutsideRoutes' }],
-    },
-    {
-      filename: 'app/components/my-component.gjs',
       code: '<template><div>{{outlet}}</div></template>',
       output: null,
       errors: [{ messageId: 'noOutletOutsideRoutes' }],
     },
-    // Block form in component
+    // Co-located component (explicit filename)
     {
       filename: 'app/components/my-component.gjs',
-      code: '<template>{{#outlet}}content{{/outlet}}</template>',
+      code: '<template>{{outlet}}</template>',
       output: null,
       errors: [{ messageId: 'noOutletOutsideRoutes' }],
     },
@@ -74,6 +52,9 @@ hbsRuleTester.run('template-no-outlet-outside-routes', rule, {
     // Non-outlet usage
     '{{foo}}',
     '{{button}}',
+    // Block form is ambiguous (could be a component named "outlet")
+    '{{#outlet}}Why?!{{/outlet}}',
+    '{{#outlet}}Works because ambiguous{{/outlet}}',
     // Route templates — outlet is allowed
     {
       filename: 'app/templates/foo/route.hbs',
@@ -83,21 +64,12 @@ hbsRuleTester.run('template-no-outlet-outside-routes', rule, {
       filename: 'app/templates/routes/foo.hbs',
       code: '{{outlet}}',
     },
-    // Block form in route templates
-    {
-      filename: 'app/templates/foo/route.hbs',
-      code: '{{#outlet}}Why?!{{/outlet}}',
-    },
-    {
-      filename: 'app/templates/routes/foo.hbs',
-      code: '{{#outlet}}Why?!{{/outlet}}',
-    },
     // Ambiguous path — not clearly a component, so allowed
     {
       filename: 'app/templates/something/foo.hbs',
-      code: '{{#outlet}}Works because ambiguous{{/outlet}}',
+      code: '{{outlet}}',
     },
-    // "components" appears in prefix but not under <app>/templates/components/ or <app>/components/
+    // "components" in the prefix but not under templates/components/ or app/components/
     {
       filename: 'components/templates/application.hbs',
       code: '{{outlet}}',
@@ -129,13 +101,6 @@ hbsRuleTester.run('template-no-outlet-outside-routes', rule, {
     {
       filename: 'app/components/foo/layout.hbs',
       code: '<div>{{outlet}}</div>',
-      output: null,
-      errors: [{ messageId: 'noOutletOutsideRoutes' }],
-    },
-    // Block form in component template
-    {
-      filename: 'app/components/foo/layout.hbs',
-      code: '{{#outlet}}content{{/outlet}}',
       output: null,
       errors: [{ messageId: 'noOutletOutsideRoutes' }],
     },

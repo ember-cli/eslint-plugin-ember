@@ -28,11 +28,6 @@ ruleTester.run('template-no-action-on-submit-button', rule, {
     '<template><form><div type="submit"></div></form></template>',
     '<template><form><div type="submit" {{action this.handleClick}}></div></form></template>',
     '<template><form><div type="submit" {{on "click" this.handleClick}}></div></form></template>',
-    // <form method="dialog"> — click handlers are intentional (closes dialog)
-    // https://github.com/ember-template-lint/ember-template-lint/issues/2989
-    '<template><form method="dialog"><button type="submit" {{on "click" this.handleClick}} /></form></template>',
-    '<template><form method="dialog"><button {{action this.handleClick}} /></form></template>',
-    '<template><form method="DIALOG"><button type="submit" {{on "click" this.handleClick}} /></form></template>',
     // Outside a form — valid
     '<template><button {{action this.handleClick}} /></template>',
     '<template><button {{action this.handleClick on="click"}}/></template>',
@@ -115,9 +110,6 @@ hbsRuleTester.run('template-no-action-on-submit-button (hbs)', rule, {
     '<form><div type="submit"></div></form>',
     '<form><div type="submit" {{action this.handleClick}}></div></form>',
     '<form><div type="submit" {{on "click" this.handleClick}}></div></form>',
-    // <form method="dialog"> — click handlers are intentional
-    '<form method="dialog"><button type="submit" {{on "click" this.handleClick}} /></form>',
-    '<form method="dialog"><button {{action this.handleClick}} /></form>',
     // Outside a form — valid
     '<button {{action this.handleClick}} />',
     '<button {{action this.handleClick on="click"}}/>',

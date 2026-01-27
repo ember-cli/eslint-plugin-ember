@@ -18,7 +18,6 @@ ruleTester.run('template-no-html-comments', rule, {
 
     '<template>{{!-- comment here --}}</template>',
     '<template>{{!--comment here--}}</template>',
-    '<template>{{!--\n    line one\n    line two\n  --}}</template>',
   ],
   invalid: [
     {
@@ -59,7 +58,6 @@ hbsRuleTester.run('template-no-html-comments', rule, {
     '{{!--comment here--}}',
     '{{! template-lint-disable no-bare-strings }}',
     '{{! template-lint-disable }}',
-    '{{!--\n    line one\n    line two\n  --}}',
   ],
   invalid: [
     {

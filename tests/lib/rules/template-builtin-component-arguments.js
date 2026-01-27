@@ -12,20 +12,8 @@ ruleTester.run('template-builtin-component-arguments', rule, {
     '<template><Input @type="text" size="10" /></template>',
     '<template><Input @type="checkbox" @checked={{true}} /></template>',
     '<template><Textarea @value="Tomster" /></template>',
-    // In GJS/GTS: custom Input/Textarea components (not imported from @ember/component) are fine
-    // https://github.com/ember-template-lint/ember-template-lint/issues/2786
-    {
-      filename: 'test.gjs',
-      code: 'import { Input } from "my-custom-lib"; <template><Input type="text" /></template>',
-    },
-    {
-      filename: 'test.gjs',
-      code: '<template><Input type="text" /></template>',
-    },
-    {
-      filename: 'test.gts',
-      code: '<template><Textarea value="text" /></template>',
-    },
+
+    '<template><Input/></template>',
   ],
   invalid: [
     // In GJS/GTS: only flag when imported from @ember/component
@@ -100,6 +88,56 @@ hbsRuleTester.run('template-builtin-component-arguments (hbs)', rule, {
       ],
     },
     {
+      code: '<Textarea value="Tomster" />',
+      output: null,
+      errors: [
+        {
+          message:
+            'Setting the `value` attribute on the builtin <Textarea> component is not allowed. Did you mean `@value`?',
+        },
+      ],
+    },
+  ],
+});
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-builtin-component-arguments (hbs)', rule, {
+  valid: [
+    { filename: 'layout.hbs', code: '<Input/>' },
+    { filename: 'layout.hbs', code: '<input type="text" size="10" />' },
+    { filename: 'layout.hbs', code: '<Input @type="text" size="10" />' },
+    { filename: 'layout.hbs', code: '<Input @type="checkbox" @checked={{true}} />' },
+    { filename: 'layout.hbs', code: '<Textarea @value="Tomster" />' },
+  ],
+  invalid: [
+    {
+      filename: 'layout.hbs',
+      code: '<Input type="text" size="10" />',
+      output: null,
+      errors: [
+        {
+          message:
+            'Setting the `type` attribute on the builtin <Input> component is not allowed. Did you mean `@type`?',
+        },
+      ],
+    },
+    {
+      filename: 'layout.hbs',
+      code: '<Input @type="checkbox" checked />',
+      output: null,
+      errors: [
+        {
+          message:
+            'Setting the `checked` attribute on the builtin <Input> component is not allowed. Did you mean `@checked`?',
+        },
+      ],
+    },
+    {
+      filename: 'layout.hbs',
       code: '<Textarea value="Tomster" />',
       output: null,
       errors: [

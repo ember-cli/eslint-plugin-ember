@@ -52,6 +52,17 @@ function initESLint(parser = gjsGtsParser) {
           ],
           rules: {
             'no-trailing-spaces': 'error',
+            // Disable newly added recommended rules that would cause test failures
+            'ember/template-no-curly-component-invocation': 'off',
+            'ember/template-no-extra-mut-helper-argument': 'off',
+            'ember/template-no-index-component-invocation': 'off',
+            'ember/template-no-redundant-role': 'off',
+            'ember/template-no-splattributes-with-class': 'off',
+            'ember/template-no-yield-block-params-to-else-inverse': 'off',
+            'ember/template-require-iframe-src-attribute': 'off',
+            'ember/template-require-splattributes': 'off',
+            'ember/template-require-valid-named-block-naming-format': 'off',
+            'ember/template-simple-modifiers': 'off',
           },
         },
       ],
@@ -65,6 +76,18 @@ function initESLint(parser = gjsGtsParser) {
         'ember/no-get': 'off',
         'ember/no-array-prototype-extensions': 'error',
         'ember/no-unused-services': 'error',
+        // Disable newly added recommended rules that would cause test failures
+        // These tests are for parser functionality, not for these specific rules
+        'ember/template-no-curly-component-invocation': 'off',
+        'ember/template-no-extra-mut-helper-argument': 'off',
+        'ember/template-no-index-component-invocation': 'off',
+        'ember/template-no-redundant-role': 'off',
+        'ember/template-no-splattributes-with-class': 'off',
+        'ember/template-no-yield-block-params-to-else-inverse': 'off',
+        'ember/template-require-iframe-src-attribute': 'off',
+        'ember/template-require-splattributes': 'off',
+        'ember/template-require-valid-named-block-naming-format': 'off',
+        'ember/template-simple-modifiers': 'off',
       },
     },
   });
@@ -804,6 +827,17 @@ describe('multiple tokens in same file', () => {
             rules: {
               'no-trailing-spaces': 'error',
               '@typescript-eslint/prefer-string-starts-ends-with': 'error',
+              // Disable newly added recommended rules that would cause test failures
+              'ember/template-no-curly-component-invocation': 'off',
+              'ember/template-no-extra-mut-helper-argument': 'off',
+              'ember/template-no-index-component-invocation': 'off',
+              'ember/template-no-redundant-role': 'off',
+              'ember/template-no-splattributes-with-class': 'off',
+              'ember/template-no-yield-block-params-to-else-inverse': 'off',
+              'ember/template-require-iframe-src-attribute': 'off',
+              'ember/template-require-splattributes': 'off',
+              'ember/template-require-valid-named-block-naming-format': 'off',
+              'ember/template-simple-modifiers': 'off',
             },
           },
           {
@@ -820,6 +854,17 @@ describe('multiple tokens in same file', () => {
             ],
             rules: {
               'no-trailing-spaces': 'error',
+              // Disable newly added recommended rules that would cause test failures
+              'ember/template-no-curly-component-invocation': 'off',
+              'ember/template-no-extra-mut-helper-argument': 'off',
+              'ember/template-no-index-component-invocation': 'off',
+              'ember/template-no-redundant-role': 'off',
+              'ember/template-no-splattributes-with-class': 'off',
+              'ember/template-no-yield-block-params-to-else-inverse': 'off',
+              'ember/template-require-iframe-src-attribute': 'off',
+              'ember/template-require-splattributes': 'off',
+              'ember/template-require-valid-named-block-naming-format': 'off',
+              'ember/template-simple-modifiers': 'off',
             },
           },
         ],

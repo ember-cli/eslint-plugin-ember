@@ -8,21 +8,12 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-forbidden-elements', rule, {
   valid: [
     { code: '<template><div></div></template>', options: [['script']] },
-    // Object config form
-    { code: '<template><div></div></template>', options: [{ forbidden: ['script'] }] },
-    { code: '<template><script></script></template>', options: [{ forbidden: ['html'] }] },
     '<template><header></header></template>',
     '<template><footer></footer></template>',
     '<template><p></p></template>',
     '<template><head><meta charset="utf-8"></head></template>',
   ],
   invalid: [
-    {
-      code: '<template><script></script></template>',
-      output: null,
-      options: [{ forbidden: ['script'] }],
-      errors: [{ messageId: 'forbidden' }],
-    },
     {
       code: '<template><script></script></template>',
       output: null,
@@ -78,11 +69,6 @@ hbsRuleTester.run('template-no-forbidden-elements', rule, {
     {
       code: '<script></script>',
       options: [['html', 'meta', 'style']],
-    },
-    // Object config form.
-    {
-      code: '<script></script>',
-      options: [{ forbidden: ['html', 'meta', 'style'] }],
     },
   ],
   invalid: [

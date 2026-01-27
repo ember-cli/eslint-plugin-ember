@@ -1,7 +1,5 @@
 # ember/template-no-multiple-empty-lines
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
-
 <!-- end auto-generated rule header -->
 
 Disallows multiple consecutive empty lines in templates.

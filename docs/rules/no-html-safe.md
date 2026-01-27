@@ -109,7 +109,7 @@ export default helper(substring);
 
 ## Related Rules
 
-- ember-template-lint has a [no-triple-curlies](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-triple-curlies.md) rule for the template equivalent of this rule.
+- eslint-plugin-ember has a [template-no-triple-curlies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-triple-curlies.md) rule for the template equivalent of this rule.
 
 ## References
 

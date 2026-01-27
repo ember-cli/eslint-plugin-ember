@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'recommended'` property in a configuration file enables this rule.
-
 The builtin `Input` component has several arguments that match attributes
 of the lower-case `input` HTML element. These arguments should be set via e.g.
 `@type`, instead of `type`, but it is easy to forget and can cause subtle
@@ -32,34 +30,34 @@ other attributes or builtin components.
 
 This rule **forbids** the following:
 
-```hbs
-<Input type='text' size='10' />
+```gjs
+<template><Input type='text' size='10' /></template>
 ```
 
-```hbs
-<Input @type='checkbox' checked />
+```gjs
+<template><Input @type='checkbox' checked /></template>
 ```
 
-```hbs
-<Textarea value="Hello, Tom!" /></Textarea>
+```gjs
+<template><Textarea value="Hello, Tom!" /></Textarea></template>
 ```
 
 This rule **allows** the following:
 
-```hbs
-<input type='text' size='10' />
+```gjs
+<template><input type='text' size='10' /></template>
 ```
 
-```hbs
-<Input @type='text' size='10' />
+```gjs
+<template><Input @type='text' size='10' /></template>
 ```
 
-```hbs
-<Input @type='checkbox' @checked={{true}} />
+```gjs
+<template><Input @type='checkbox' @checked={{true}} /></template>
 ```
 
-```hbs
-<Textarea @value="Hello, Tom!" /></Textarea>
+```gjs
+<template><Textarea @value="Hello, Tom!" /></Textarea></template>
 ```
 
 ## Migration

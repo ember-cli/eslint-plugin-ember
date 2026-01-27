@@ -15,7 +15,6 @@ This rule enforces at least one newline (or no newline) at the end of template f
 This rule accepts a single string option:
 
 - `"always"` (default) — enforces that template files end with a newline
-- `"editorconfig"` — requires or disallows a final newline based on the project's `.editorconfig` settings (via `insert_final_newline`); throws if `insert_final_newline` is not set
 - `"never"` — enforces that template files do not end with a newline
 
 ## Examples

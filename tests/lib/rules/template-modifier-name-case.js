@@ -7,14 +7,13 @@ const ruleTester = new RuleTester({
 });
 
 ruleTester.run('template-modifier-name-case', rule, {
-  // Rule is HBS-only: hyphenated identifiers are not valid JS, so camelCase
-  // modifier names in .gjs/.gts files are intentional and must not be flagged.
   valid: [
     '<template><div {{did-insert}}></div></template>',
     '<template><div {{did-update}}></div></template>',
     '<template><div {{on-click}}></div></template>',
     '<template><div {{(modifier "did-insert")}}></div></template>',
     '<template><div {{(modifier "on-click")}}></div></template>',
+
     '<template><div {{did-insert "something"}}></div></template>',
     '<template><div {{did-insert action=something}}></div></template>',
     '<template><button {{on "click" somethingAmazing}}></button></template>',
@@ -25,14 +24,92 @@ ruleTester.run('template-modifier-name-case', rule, {
     '<template><div {{(modifier "foo-bar")}}></div></template>',
     '<template><div {{(if this.foo (modifier "foo-bar"))}}></div></template>',
     '<template><div {{(modifier this.fooBar)}}></div></template>',
-    // camelCase modifiers in GJS are not flagged — hyphenated names are invalid JS identifiers
-    '<template><div {{didInsert}}></div></template>',
-    '<template><div {{doSomething}}></div></template>',
-    '<template><div {{fooBar}}></div></template>',
-    '<template><div {{FooBar}}></div></template>',
-    '<template><div {{(modifier "fooBar")}}></div></template>',
   ],
-  invalid: [],
+  invalid: [
+    {
+      code: '<template><div {{didInsert}}></div></template>',
+      output: '<template><div {{did-insert}}></div></template>',
+      errors: [
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.',
+        },
+      ],
+    },
+    {
+      code: '<template><div {{doSomething}}></div></template>',
+      output: '<template><div {{do-something}}></div></template>',
+      errors: [
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `doSomething` with `do-something`.',
+        },
+      ],
+    },
+    {
+      code: '<template><div {{fooBar}}></div></template>',
+      output: '<template><div {{foo-bar}}></div></template>',
+      errors: [
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.',
+        },
+      ],
+    },
+    {
+      code: '<template><div {{(modifier "didInsert")}}></div></template>',
+      output: '<template><div {{(modifier "did-insert")}}></div></template>',
+      errors: [
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.',
+        },
+      ],
+    },
+
+    {
+      code: '<template><div class="monkey" {{didInsert "something" with="somethingElse"}}></div></template>',
+      output:
+        '<template><div class="monkey" {{did-insert "something" with="somethingElse"}}></div></template>',
+      errors: [
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.',
+        },
+      ],
+    },
+    {
+      code: '<template><a href="#" onclick={{amazingActionThing "foo"}} {{doSomething}}></a></template>',
+      output:
+        '<template><a href="#" onclick={{amazingActionThing "foo"}} {{do-something}}></a></template>',
+      errors: [
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `doSomething` with `do-something`.',
+        },
+      ],
+    },
+    {
+      code: '<template><div {{(modifier "fooBar")}}></div></template>',
+      output: '<template><div {{(modifier "foo-bar")}}></div></template>',
+      errors: [
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.',
+        },
+      ],
+    },
+    {
+      code: '<template><div {{(if this.foo (modifier "fooBar"))}}></div></template>',
+      output: '<template><div {{(if this.foo (modifier "foo-bar"))}}></div></template>',
+      errors: [
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.',
+        },
+      ],
+    },
+  ],
 });
 
 const hbsRuleTester = new RuleTester({
@@ -45,58 +122,68 @@ const hbsRuleTester = new RuleTester({
 
 hbsRuleTester.run('template-modifier-name-case', rule, {
   valid: [
-    { filename: 'test.hbs', code: '<div {{did-insert}}></div>' },
-    { filename: 'test.hbs', code: '<div {{did-insert "something"}}></div>' },
-    { filename: 'test.hbs', code: '<div {{did-insert action=something}}></div>' },
-    { filename: 'test.hbs', code: '<button {{on "click" somethingAmazing}}></button>' },
-    { filename: 'test.hbs', code: '<button onclick={{do-a-thing "foo"}}></button>' },
-    { filename: 'test.hbs', code: '<button onclick={{doAThing "foo"}}></button>' },
-    {
-      filename: 'test.hbs',
-      code: '<a href="#" onclick={{amazingActionThing "foo"}} {{did-insert}}></a>',
-    },
-    { filename: 'test.hbs', code: '<div didInsert></div>' },
-    { filename: 'test.hbs', code: '<div {{(modifier "foo-bar")}}></div>' },
-    { filename: 'test.hbs', code: '<div {{(if this.foo (modifier "foo-bar"))}}></div>' },
-    { filename: 'test.hbs', code: '<div {{(modifier this.fooBar)}}></div>' },
+    '<div {{did-insert}}></div>',
+    '<div {{did-insert "something"}}></div>',
+    '<div {{did-insert action=something}}></div>',
+    '<button {{on "click" somethingAmazing}}></button>',
+    '<button onclick={{do-a-thing "foo"}}></button>',
+    '<button onclick={{doAThing "foo"}}></button>',
+    '<a href="#" onclick={{amazingActionThing "foo"}} {{did-insert}}></a>',
+    '<div didInsert></div>',
+    '<div {{(modifier "foo-bar")}}></div>',
+    '<div {{(if this.foo (modifier "foo-bar"))}}></div>',
+    '<div {{(modifier this.fooBar)}}></div>',
   ],
   invalid: [
     {
-      filename: 'test.hbs',
       code: '<div {{didInsert}}></div>',
       output: '<div {{did-insert}}></div>',
-      errors: [{ messageId: 'dasherized' }],
+      errors: [
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.',
+        },
+      ],
     },
     {
-      filename: 'test.hbs',
       code: '<div class="monkey" {{didInsert "something" with="somethingElse"}}></div>',
       output: '<div class="monkey" {{did-insert "something" with="somethingElse"}}></div>',
-      errors: [{ messageId: 'dasherized' }],
-    },
-    // PascalCase: index-0 guard prevents leading dash
-    {
-      filename: 'test.hbs',
-      code: '<div {{FooBar}}></div>',
-      output: '<div {{foo-bar}}></div>',
-      errors: [{ messageId: 'dasherized' }],
+      errors: [
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.',
+        },
+      ],
     },
     {
-      filename: 'test.hbs',
       code: '<a href="#" onclick={{amazingActionThing "foo"}} {{doSomething}}></a>',
       output: '<a href="#" onclick={{amazingActionThing "foo"}} {{do-something}}></a>',
-      errors: [{ messageId: 'dasherized' }],
+      errors: [
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `doSomething` with `do-something`.',
+        },
+      ],
     },
     {
-      filename: 'test.hbs',
       code: '<div {{(modifier "fooBar")}}></div>',
       output: '<div {{(modifier "foo-bar")}}></div>',
-      errors: [{ messageId: 'dasherized' }],
+      errors: [
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.',
+        },
+      ],
     },
     {
-      filename: 'test.hbs',
       code: '<div {{(if this.foo (modifier "fooBar"))}}></div>',
       output: '<div {{(if this.foo (modifier "foo-bar"))}}></div>',
-      errors: [{ messageId: 'dasherized' }],
+      errors: [
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.',
+        },
+      ],
     },
   ],
 });

@@ -8,7 +8,6 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-input-tagname', rule, {
   valid: [
     '<template>{{input value=this.foo}}</template>',
-    // Test cases ported from ember-template-lint
     '<template>{{input type="text"}}</template>',
     '<template>{{component "input" type="text"}}</template>',
     '<template>{{yield (component "input" type="text")}}</template>',
@@ -20,7 +19,6 @@ ruleTester.run('template-no-input-tagname', rule, {
       errors: [{ messageId: 'unexpected' }],
     },
 
-    // Test cases ported from ember-template-lint
     {
       code: '<template>{{input tagName="foo"}}</template>',
       output: null,
@@ -50,6 +48,54 @@ ruleTester.run('template-no-input-tagname', rule, {
       code: '<template>{{yield (component "input" tagName=bar)}}</template>',
       output: null,
       errors: [{ messageId: 'unexpected' }],
+    },
+  ],
+});
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-input-tagname', rule, {
+  valid: [
+    '{{input type="text"}}',
+    '{{component "input" type="text"}}',
+    '{{yield (component "input" type="text")}}',
+  ],
+  invalid: [
+    {
+      code: '{{input tagName="foo"}}',
+      output: null,
+      errors: [{ message: 'Unexpected tagName usage on input helper.' }],
+    },
+    {
+      code: '{{input tagName=bar}}',
+      output: null,
+      errors: [{ message: 'Unexpected tagName usage on input helper.' }],
+    },
+    {
+      code: '{{component "input" tagName="foo"}}',
+      output: null,
+      errors: [{ message: 'Unexpected tagName usage on input helper.' }],
+    },
+    {
+      code: '{{component "input" tagName=bar}}',
+      output: null,
+      errors: [{ message: 'Unexpected tagName usage on input helper.' }],
+    },
+    {
+      code: '{{yield (component "input" tagName="foo")}}',
+      output: null,
+      errors: [{ message: 'Unexpected tagName usage on input helper.' }],
+    },
+    {
+      code: '{{yield (component "input" tagName=bar)}}',
+      output: null,
+      errors: [{ message: 'Unexpected tagName usage on input helper.' }],
     },
   ],
 });

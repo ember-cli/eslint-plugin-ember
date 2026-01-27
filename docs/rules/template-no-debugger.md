@@ -49,4 +49,4 @@ Examples of **correct** code for this rule:
 
 ## References
 
-- [ember-template-lint no-debugger](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-debugger.md)
+- [eslint-plugin-ember template-no-debugger](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-debugger.md)

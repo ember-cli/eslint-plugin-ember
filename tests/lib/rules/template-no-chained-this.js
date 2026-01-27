@@ -49,3 +49,50 @@ ruleTester.run('template-no-chained-this', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-chained-this (hbs)', rule, {
+  valid: [
+    '{{this.value}}',
+    '{{this.thisvalue}}',
+    '<this.Component />',
+    '{{component this.dynamicComponent}}',
+    '{{@argName}}',
+  ],
+  invalid: [
+    {
+      code: '{{this.this.value}}',
+      output: '{{this.value}}',
+      errors: [{ messageId: 'noChainedThis' }],
+    },
+    {
+      code: '{{#this.this.value}}woo{{/this.this.value}}',
+      output: '{{#this.value}}woo{{/this.value}}',
+      errors: [{ messageId: 'noChainedThis' }],
+    },
+    {
+      code: '{{helper value=this.this.foo}}',
+      output: '{{helper value=this.foo}}',
+      errors: [{ messageId: 'noChainedThis' }],
+    },
+    {
+      code: '<this.this.Component />',
+      output: '<this.Component />',
+      errors: [{ messageId: 'noChainedThis' }],
+    },
+    {
+      code: '{{#if this.this.condition}}true{{/if}}',
+      output: '{{#if this.condition}}true{{/if}}',
+      errors: [{ messageId: 'noChainedThis' }],
+    },
+    {
+      code: '{{component this.this.dynamicComponent}}',
+      output: '{{component this.dynamicComponent}}',
+      errors: [{ messageId: 'noChainedThis' }],
+    },
+  ],
+});

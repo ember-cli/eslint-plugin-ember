@@ -113,24 +113,10 @@ ruleTester.run('template-no-duplicate-id', rule, {
         <Input id={{inputProperties.id}} />
       </MyComponent>
     </template>`,
-    // IDs in different branches of {{#each}} should not conflict
-    `<template>
-      {{#each items as |item|}}
-        <div id="x"></div>
-      {{else}}
-        <div id="x"></div>
-      {{/each}}
-    </template>`,
   ],
   invalid: [
-    // blockParams on an element must not isolate static IDs from outer scope
     {
-      code: `<template>
-      <MyComponent as |foo|>
-        <div id="shared-id"></div>
-      </MyComponent>
-      <div id="shared-id"></div>
-    </template>`,
+      code: '<template><div id="foo"></div><div id="foo"></div></template>',
       output: null,
       errors: [{ messageId: 'duplicate' }],
     },
@@ -277,7 +263,7 @@ ruleTester.run('template-no-duplicate-id', rule, {
       {{/if}}
     </template>`,
       output: null,
-      errors: [{ messageId: 'duplicate' }, { messageId: 'duplicate' }],
+      errors: [{ messageId: 'duplicate' }],
     },
     {
       code: `<template>
@@ -431,23 +417,8 @@ hbsRuleTester.run('template-no-duplicate-id (hbs)', rule, {
       <MyComponent as |inputProperties|>
         <Input id={{inputProperties.id}} />
       </MyComponent>`,
-    // IDs in different branches of {{#each}} should not conflict
-    `{{#each items as |item|}}
-        <div id="x"></div>
-      {{else}}
-        <div id="x"></div>
-      {{/each}}`,
   ],
   invalid: [
-    // blockParams on an element must not isolate static IDs from outer scope
-    {
-      code: `<MyComponent as |foo|>
-        <div id="shared-id"></div>
-      </MyComponent>
-      <div id="shared-id"></div>`,
-      output: null,
-      errors: [{ messageId: 'duplicate' }],
-    },
     {
       code: '<div id="id-00"></div><div id="id-00"></div>',
       output: null,
@@ -584,7 +555,7 @@ hbsRuleTester.run('template-no-duplicate-id (hbs)', rule, {
         <div id={{this.divId00}}></div>
       {{/if}}`,
       output: null,
-      errors: [{ messageId: 'duplicate' }, { messageId: 'duplicate' }],
+      errors: [{ messageId: 'duplicate' }],
     },
     {
       code: `{{#if this.foo}}

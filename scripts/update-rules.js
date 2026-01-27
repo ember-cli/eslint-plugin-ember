@@ -18,7 +18,7 @@ const path = require('path');
 // Main
 // ------------------------------------------------------------------------------
 
-function generate(filename, filter) {
+function generate(filename, filter, { disableFilter } = {}) {
   const root = path.resolve(__dirname, '../lib/rules');
   const recommendedRulesFile = path.resolve(__dirname, filename);
 
@@ -30,7 +30,9 @@ function generate(filename, filter) {
 
   const recommendedRules = rules.reduce((obj, entry) => {
     const name = `ember/${entry[0]}`;
-    if (filter(entry)) {
+    if (disableFilter && disableFilter(entry)) {
+      obj[name] = 'off'; // eslint-disable-line no-param-reassign
+    } else if (filter(entry)) {
       obj[name] = 'error'; // eslint-disable-line no-param-reassign
     }
     return obj;
@@ -48,6 +50,15 @@ module.exports = ${JSON.stringify(recommendedRules, null, 2)};
   fs.writeFileSync(recommendedRulesFile, recommendedRulesContent);
 }
 
+// Loose-mode rules that are in the base recommended config need to be turned off
+// in gjs/gts configs, since those patterns don't exist in strict mode.
+const isLooseRecommended = (entry) =>
+  entry[1].meta.docs.recommended && entry[1].meta.docs.templateMode === 'loose';
+
 generate('../lib/recommended-rules.js', (entry) => entry[1].meta.docs.recommended);
-generate('../lib/recommended-rules-gjs.js', (entry) => entry[1].meta.docs.recommendedGjs);
-generate('../lib/recommended-rules-gts.js', (entry) => entry[1].meta.docs.recommendedGts);
+generate('../lib/recommended-rules-gjs.js', (entry) => entry[1].meta.docs.recommendedGjs, {
+  disableFilter: isLooseRecommended,
+});
+generate('../lib/recommended-rules-gts.js', (entry) => entry[1].meta.docs.recommendedGts, {
+  disableFilter: isLooseRecommended,
+});
