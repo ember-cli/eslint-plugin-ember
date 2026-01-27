@@ -49,9 +49,12 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
-## Configuration
+## Options
 
-You can customize the order by providing an `order` array:
+| Name          | Type       | Default                                    | Description                                                                                                                  |
+| ------------- | ---------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| `order`       | `string[]` | `["arguments", "attributes", "modifiers"]` | The order of token type groups. Valid values: `"arguments"`, `"attributes"`, `"modifiers"`, `"splattributes"`, `"comments"`. |
+| `alphabetize` | `boolean`  | `true`                                     | Whether to alphabetize attributes within each group.                                                                         |
 
 ```js
 module.exports = {
@@ -59,7 +62,8 @@ module.exports = {
     'ember/template-attribute-order': [
       'error',
       {
-        order: ['class', 'id', 'role', 'aria-', 'type'],
+        order: ['arguments', 'attributes', 'modifiers'],
+        alphabetize: true,
       },
     ],
   },
@@ -68,4 +72,4 @@ module.exports = {
 
 ## References
 
-- [ember-template-lint attribute-order](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/attribute-order.md)
+- [eslint-plugin-ember template-attribute-order](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-attribute-order.md)

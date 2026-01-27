@@ -8,27 +8,30 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-attribute-order', rule, {
   valid: [
+    // Alphabetized attributes
     '<template><div class="foo" id="bar"></div></template>',
-    '<template><button class="btn" role="button" aria-label="Submit"></button></template>',
-    '<template><input type="text" name="username" value=""></template>',
+    '<template><button aria-label="Submit" class="btn" role="button"></button></template>',
+    '<template><input name="username" type="text" value=""></template>',
     '<template><div data-test-id="foo"></div></template>',
+    // Arguments before attributes (default order)
+    '<template><MyComponent @arg="val" class="foo" /></template>',
   ],
 
   invalid: [
     {
       code: '<template><div id="bar" class="foo"></div></template>',
       output: null,
-      errors: [{ messageId: 'wrongOrder' }],
+      errors: [{ messageId: 'notAlphabetized' }],
     },
     {
-      code: '<template><button aria-label="Submit" role="button"></button></template>',
+      code: '<template><button role="button" aria-label="Submit"></button></template>',
       output: null,
-      errors: [{ messageId: 'wrongOrder' }],
+      errors: [{ messageId: 'notAlphabetized' }],
     },
     {
-      code: '<template><input name="username" type="text"></template>',
+      code: '<template><input type="text" name="username"></template>',
       output: null,
-      errors: [{ messageId: 'wrongOrder' }],
+      errors: [{ messageId: 'notAlphabetized' }],
     },
   ],
 });

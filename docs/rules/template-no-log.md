@@ -55,4 +55,4 @@ Examples of **correct** code for this rule:
 
 ## References
 
-- [ember-template-lint no-log](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-log.md)
+- [eslint-plugin-ember template-no-log](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-log.md)
