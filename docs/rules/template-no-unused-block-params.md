@@ -1,0 +1,57 @@
+# ember/template-no-unused-block-params
+
+💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
+
+<!-- end auto-generated rule header -->
+
+✅ The `extends: 'plugin:ember/strict-gjs'` and `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
+
+Disallow unused block parameters in templates.
+
+## Rule Details
+
+This rule reports block parameters that are declared but never used within the block.
+
+## Examples
+
+Examples of **incorrect** code for this rule:
+
+```gjs
+<template>
+  {{#each items as |item|}}
+    Hello
+  {{/each}}
+</template>
+
+<template>
+  {{#each items as |item index|}}
+    {{item.name}}
+  {{/each}}
+</template>
+```
+
+Examples of **correct** code for this rule:
+
+```gjs
+<template>
+  {{#each items as |item|}}
+    {{item.name}}
+  {{/each}}
+</template>
+
+<template>
+  {{#each items as |item index|}}
+    {{index}}: {{item.name}}
+  {{/each}}
+</template>
+
+<template>
+  {{#let user as |u|}}
+    {{u.name}}
+  {{/let}}
+</template>
+```
+
+## References
+
+- [Ember Guides - Block Parameters](https://guides.emberjs.com/release/components/block-content/)
