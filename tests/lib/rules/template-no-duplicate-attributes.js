@@ -38,7 +38,7 @@ ruleTester.run('template-no-duplicate-attributes', rule, {
         <div class="foo" class="bar"></div>
       </template>`,
       output: `<template>
-        <div class="foo" ></div>
+        <div class="foo"></div>
       </template>`,
       errors: [{
         message: "Duplicate attribute 'class' found in the Element.",
@@ -50,7 +50,7 @@ ruleTester.run('template-no-duplicate-attributes', rule, {
         <input type="text" disabled type="email" />
       </template>`,
       output: `<template>
-        <input type="text" disabled  />
+        <input type="text" disabled />
       </template>`,
       errors: [{
         message: "Duplicate attribute 'type' found in the Element.",
@@ -62,7 +62,7 @@ ruleTester.run('template-no-duplicate-attributes', rule, {
         {{helper foo="bar" foo="baz"}}
       </template>`,
       output: `<template>
-        {{helper foo="bar" }}
+        {{helper foo="bar"}}
       </template>`,
       errors: [{
         message: "Duplicate attribute 'foo' found in the MustacheStatement.",
@@ -76,7 +76,7 @@ ruleTester.run('template-no-duplicate-attributes', rule, {
         {{/if}}
       </template>`,
       output: `<template>
-        {{#if condition key="a" }}
+        {{#if condition key="a"}}
           content
         {{/if}}
       </template>`,

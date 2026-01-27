@@ -71,5 +71,21 @@ ruleTester.run('template-require-button-type', rule, {
         type: 'GlimmerAttrNode',
       }],
     },
+    {
+      code: `<template>
+        <form>
+          <button type="invalid">Submit</button>
+        </form>
+      </template>`,
+      output: `<template>
+        <form>
+          <button type="submit">Submit</button>
+        </form>
+      </template>`,
+      errors: [{
+        message: 'Button type must be "button", "submit", or "reset"',
+        type: 'GlimmerAttrNode',
+      }],
+    },
   ],
 });
