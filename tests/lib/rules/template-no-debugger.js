@@ -37,7 +37,7 @@ ruleTester.run('template-no-debugger', rule, {
       </template>`,
       output: null,
       errors: [{
-        message: 'Unexpected {{debugger}} usage.',
+        message: 'Unexpected debugger statement in template.',
         type: 'GlimmerMustacheStatement',
       }],
     },
@@ -49,7 +49,7 @@ ruleTester.run('template-no-debugger', rule, {
       </template>`,
       output: null,
       errors: [{
-        message: 'Unexpected {{debugger}} usage.',
+        message: 'Unexpected debugger statement in template.',
         type: 'GlimmerMustacheStatement',
       }],
     },
@@ -61,7 +61,7 @@ ruleTester.run('template-no-debugger', rule, {
       </template>`,
       output: null,
       errors: [{
-        message: 'Unexpected {{debugger}} usage.',
+        message: 'Unexpected debugger statement in template.',
         type: 'GlimmerBlockStatement',
       }],
     },

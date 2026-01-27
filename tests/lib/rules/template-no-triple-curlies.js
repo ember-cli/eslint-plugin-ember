@@ -34,7 +34,7 @@ ruleTester.run('template-no-triple-curlies', rule, {
       </template>`,
       output: null,
       errors: [{
-        message: 'Usage of triple curly brackets is unsafe. Use {{htmlSafe}} if absolutely necessary.',
+        message: 'Usage of triple curly brackets is unsafe. Use htmlSafe helper if absolutely necessary.',
         type: 'GlimmerMustacheStatement',
       }],
     },
@@ -46,7 +46,7 @@ ruleTester.run('template-no-triple-curlies', rule, {
       </template>`,
       output: null,
       errors: [{
-        message: 'Usage of triple curly brackets is unsafe. Use {{htmlSafe}} if absolutely necessary.',
+        message: 'Usage of triple curly brackets is unsafe. Use htmlSafe helper if absolutely necessary.',
         type: 'GlimmerMustacheStatement',
       }],
     },

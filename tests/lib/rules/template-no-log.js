@@ -37,7 +37,7 @@ ruleTester.run('template-no-log', rule, {
       </template>`,
       output: null,
       errors: [{
-        message: 'Unexpected {{log}} usage.',
+        message: 'Unexpected log statement in template.',
         type: 'GlimmerMustacheStatement',
       }],
     },
@@ -49,7 +49,7 @@ ruleTester.run('template-no-log', rule, {
       </template>`,
       output: null,
       errors: [{
-        message: 'Unexpected {{log}} usage.',
+        message: 'Unexpected log statement in template.',
         type: 'GlimmerMustacheStatement',
       }],
     },
@@ -61,7 +61,7 @@ ruleTester.run('template-no-log', rule, {
       </template>`,
       output: null,
       errors: [{
-        message: 'Unexpected {{log}} usage.',
+        message: 'Unexpected log statement in template.',
         type: 'GlimmerBlockStatement',
       }],
     },
