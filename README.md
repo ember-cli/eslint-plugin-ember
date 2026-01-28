@@ -176,13 +176,16 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Accessibility
 
-| Name                                                                             | Description                          | 💼                                                              | 🔧 | 💡 |
-| :------------------------------------------------------------------------------- | :----------------------------------- | :-------------------------------------------------------------- | :- | :- |
-| [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)           | disallow abstract ARIA roles         | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md) | disallow accesskey attribute         | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)       | disallow aria-hidden on body element | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md) | disallow autofocus attribute         | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-no-positive-tabindex](docs/rules/template-no-positive-tabindex.md)     | disallow positive tabindex values    | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| Name                                                                                 | Description                                       | 💼                                                              | 🔧 | 💡 |
+| :----------------------------------------------------------------------------------- | :------------------------------------------------ | :-------------------------------------------------------------- | :- | :- |
+| [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)               | disallow abstract ARIA roles                      | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md)     | disallow accesskey attribute                      | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)           | disallow aria-hidden on body element              | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md)     | disallow autofocus attribute                      | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| [template-no-heading-inside-button](docs/rules/template-no-heading-inside-button.md) | disallow heading elements inside button elements  | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-positive-tabindex](docs/rules/template-no-positive-tabindex.md)         | disallow positive tabindex values                 | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-require-iframe-title](docs/rules/template-require-iframe-title.md)         | require iframe elements to have a title attribute | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-require-valid-alt-text](docs/rules/template-require-valid-alt-text.md)     | require valid alt text for images                 | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 
 ### Best Practices
 
