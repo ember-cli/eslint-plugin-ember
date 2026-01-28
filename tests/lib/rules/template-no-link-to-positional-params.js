@@ -9,18 +9,18 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-link-to-positional-params', rule, {
   valid: [
     {
+      filename: 'test.gjs',
       code: '<template><LinkTo @route="index">Home</LinkTo></template>',
-      filename: 'test.gjs',
       output: null,
     },
     {
+      filename: 'test.gjs',
       code: '<template><LinkTo @route="posts.post" @model={{this.post}}>Post</LinkTo></template>',
-      filename: 'test.gjs',
       output: null,
     },
     {
-      code: '<template><a href="/home">Home</a></template>',
       filename: 'test.gjs',
+      code: '<template><a href="/home">Home</a></template>',
       output: null,
     },
   ],

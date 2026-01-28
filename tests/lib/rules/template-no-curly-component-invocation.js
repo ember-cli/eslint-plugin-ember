@@ -13,15 +13,15 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
     // Angle bracket invocation
     '<template><MyComponent /></template>',
     '<template><my-component /></template>',
-    
+
     // Helpers are allowed
     '<template>{{some-helper "arg"}}</template>',
     '<template>{{lowercase-helper}}</template>',
-    
+
     // Property access
     '<template>{{this.myComponent}}</template>',
     '<template>{{@myComponent}}</template>',
-    
+
     // Built-in helpers
     '<template>{{yield}}</template>',
     '<template>{{outlet}}</template>',

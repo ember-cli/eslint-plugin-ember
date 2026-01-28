@@ -9,13 +9,13 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-block-params', rule, {
   valid: [
     {
-      code: '<template><MyComponent>Content</MyComponent></template>',
       filename: 'test.gjs',
+      code: '<template><MyComponent>Content</MyComponent></template>',
       output: null,
     },
     {
-      code: '<template><MyComponent as |item|>{{item.name}}</MyComponent></template>',
       filename: 'test.gjs',
+      code: '<template><MyComponent as |item|>{{item.name}}</MyComponent></template>',
       output: null,
     },
   ],

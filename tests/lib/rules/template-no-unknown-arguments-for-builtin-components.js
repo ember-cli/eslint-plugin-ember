@@ -9,6 +9,7 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-unknown-arguments-for-builtin-components', rule, {
   valid: [
     {
+      filename: 'my-component.gjs',
       code: `
         import Component from '@glimmer/component';
         export default class MyComponent extends Component {
@@ -17,10 +18,10 @@ ruleTester.run('template-no-unknown-arguments-for-builtin-components', rule, {
           </template>
         }
       `,
-      filename: 'my-component.gjs',
       output: null,
     },
     {
+      filename: 'my-component.gjs',
       code: `
         import Component from '@glimmer/component';
         export default class MyComponent extends Component {
@@ -29,13 +30,13 @@ ruleTester.run('template-no-unknown-arguments-for-builtin-components', rule, {
           </template>
         }
       `,
-      filename: 'my-component.gjs',
       output: null,
     },
   ],
 
   invalid: [
     {
+      filename: 'my-component.gjs',
       code: `
         import Component from '@glimmer/component';
         export default class MyComponent extends Component {
@@ -44,7 +45,6 @@ ruleTester.run('template-no-unknown-arguments-for-builtin-components', rule, {
           </template>
         }
       `,
-      filename: 'my-component.gjs',
       output: null,
       errors: [
         {
@@ -53,6 +53,7 @@ ruleTester.run('template-no-unknown-arguments-for-builtin-components', rule, {
       ],
     },
     {
+      filename: 'my-component.gjs',
       code: `
         import Component from '@glimmer/component';
         export default class MyComponent extends Component {
@@ -61,7 +62,6 @@ ruleTester.run('template-no-unknown-arguments-for-builtin-components', rule, {
           </template>
         }
       `,
-      filename: 'my-component.gjs',
       output: null,
       errors: [
         {

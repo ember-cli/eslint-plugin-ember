@@ -9,31 +9,31 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-ambiguous-glimmer-paths', rule, {
   valid: [
     {
+      filename: 'test.gjs',
       code: '<template>{{this.name}}</template>',
-      filename: 'test.gjs',
       output: null,
     },
     {
+      filename: 'test.gjs',
       code: '<template>{{@title}}</template>',
-      filename: 'test.gjs',
       output: null,
     },
     {
+      filename: 'test.gjs',
       code: '<template>{{MyComponent}}</template>',
-      filename: 'test.gjs',
       output: null,
     },
     {
-      code: '<template>{{if this.isActive "active" "inactive"}}</template>',
       filename: 'test.gjs',
+      code: '<template>{{if this.isActive "active" "inactive"}}</template>',
       output: null,
     },
   ],
 
   invalid: [
     {
-      code: '<template>{{user.name}}</template>',
       filename: 'test.gjs',
+      code: '<template>{{user.name}}</template>',
       output: null,
       errors: [
         {
@@ -43,8 +43,8 @@ ruleTester.run('template-no-ambiguous-glimmer-paths', rule, {
       ],
     },
     {
-      code: '<template>{{model.title}}</template>',
       filename: 'test.gjs',
+      code: '<template>{{model.title}}</template>',
       output: null,
       errors: [
         {

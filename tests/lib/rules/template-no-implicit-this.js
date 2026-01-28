@@ -13,23 +13,23 @@ ruleTester.run('template-no-implicit-this', rule, {
     // Explicit this
     '<template>{{this.property}}</template>',
     '<template>{{this.method}}</template>',
-    
+
     // Named arguments
     '<template>{{@arg}}</template>',
     '<template>{{@myArg}}</template>',
-    
+
     // Built-in helpers
     '<template>{{yield}}</template>',
     '<template>{{outlet}}</template>',
     '<template>{{has-block}}</template>',
-    
+
     // Helpers with params
     '<template>{{if condition "yes" "no"}}</template>',
     '<template>{{each items}}</template>',
-    
+
     // Helpers with dashes
     '<template>{{my-helper}}</template>',
-    
+
     // Components (PascalCase)
     '<template>{{MyComponent}}</template>',
   ],

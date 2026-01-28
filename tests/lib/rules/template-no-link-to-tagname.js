@@ -9,38 +9,38 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-link-to-tagname', rule, {
   valid: [
     {
+      filename: 'test.gjs',
       code: '<template><LinkTo @route="index">Home</LinkTo></template>',
-      filename: 'test.gjs',
       output: null,
     },
     {
+      filename: 'test.gjs',
       code: '<template><link-to @route="about">About</link-to></template>',
-      filename: 'test.gjs',
       output: null,
     },
     {
-      code: '<template><a href="/home">Home</a></template>',
       filename: 'test.gjs',
+      code: '<template><a href="/home">Home</a></template>',
       output: null,
     },
   ],
 
   invalid: [
     {
+      filename: 'test.gjs',
       code: '<template><LinkTo @route="index" tagName="button">Home</LinkTo></template>',
-      filename: 'test.gjs',
       output: null,
       errors: [{ messageId: 'noLinkToTagname' }],
     },
     {
+      filename: 'test.gjs',
       code: '<template><LinkTo @route="about" @tagName="span">About</LinkTo></template>',
-      filename: 'test.gjs',
       output: null,
       errors: [{ messageId: 'noLinkToTagname' }],
     },
     {
-      code: '<template><link-to @route="contact" tagName="div">Contact</link-to></template>',
       filename: 'test.gjs',
+      code: '<template><link-to @route="contact" tagName="div">Contact</link-to></template>',
       output: null,
       errors: [{ messageId: 'noLinkToTagname' }],
     },

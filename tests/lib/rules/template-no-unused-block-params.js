@@ -13,10 +13,10 @@ ruleTester.run('template-no-unused-block-params', rule, {
     // All params used
     '<template>{{#each items as |item|}}{{item.name}}{{/each}}</template>',
     '<template>{{#each items as |item index|}}{{index}}: {{item}}{{/each}}</template>',
-    
+
     // No block params
     '<template>{{#each items}}{{this}}{{/each}}</template>',
-    
+
     // Param used in nested path
     '<template>{{#let user as |u|}}{{u.name}}{{/let}}</template>',
   ],

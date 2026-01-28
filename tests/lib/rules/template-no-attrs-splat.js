@@ -9,21 +9,21 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-attrs-splat', rule, {
   valid: [
     {
-      code: '<template><div ...attributes>Content</div></template>',
       filename: 'test.gjs',
+      code: '<template><div ...attributes>Content</div></template>',
       output: null,
     },
     {
-      code: '<template><MyComponent ...attributes /></template>',
       filename: 'test.gjs',
+      code: '<template><MyComponent ...attributes /></template>',
       output: null,
     },
   ],
 
   invalid: [
     {
-      code: '<template><div {{...attrs}}>Content</div></template>',
       filename: 'test.gjs',
+      code: '<template><div {{...attrs}}>Content</div></template>',
       output: null,
       errors: [{ messageId: 'noAttrsSplat' }],
     },

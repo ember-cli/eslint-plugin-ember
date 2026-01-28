@@ -12,11 +12,11 @@ ruleTester.run('template-no-unnecessary-component-helper', rule, {
   valid: [
     // Angle bracket invocation
     '<template><MyComponent /></template>',
-    
+
     // Dynamic component names (necessary use)
     '<template>{{component this.componentName}}</template>',
     '<template>{{component @componentName}}</template>',
-    
+
     // No component helper
     '<template>{{my-helper}}</template>',
   ],
