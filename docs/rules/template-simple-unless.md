@@ -1,4 +1,6 @@
-# template-simple-unless
+# ember/template-simple-unless
+
+<!-- end auto-generated rule header -->
 
 ✅ The `extends: 'plugin:ember/strict-gjs'` or `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
 
@@ -41,8 +43,6 @@ Examples of **correct** code for this rule:
   {{/if}}
 </template>
 ```
-
-## Config
 
 <!-- begin auto-generated rule meta list -->
 - strictGjs: true

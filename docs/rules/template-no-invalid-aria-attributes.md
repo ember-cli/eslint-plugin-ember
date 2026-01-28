@@ -1,4 +1,6 @@
-# template-no-invalid-aria-attributes
+# ember/template-no-invalid-aria-attributes
+
+<!-- end auto-generated rule header -->
 
 ✅ The `extends: 'plugin:ember/strict-gjs'` or `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
 
@@ -37,8 +39,6 @@ Examples of **correct** code for this rule:
   <div aria-describedby="description-id">Content</div>
 </template>
 ```
-
-## Config
 
 <!-- begin auto-generated rule meta list -->
 - strictGjs: true

@@ -131,7 +131,6 @@ module.exports = [
 ];
 ```
 
-
 ### rules applied to fcct templates
 
 - semi rule, same as [prettier plugin](https://github.com/gitKrystan/prettier-plugin-ember-template-tag/issues/1)
@@ -182,8 +181,8 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | ✅                               | `recommended`     |
 | ![gjs logo](/docs/svgs/gjs.svg) | `recommended-gjs` |
 | ![gts logo](/docs/svgs/gts.svg) | `recommended-gts` |
-| ![gjs logo](/docs/svgs/gjs.svg) | `strict-gjs`      |
-| ![gts logo](/docs/svgs/gts.svg) | `strict-gts`      |
+|                                 | `strict-gjs`      |
+|                                 | `strict-gts`      |
 
 <!-- end auto-generated configs list -->
 
@@ -195,51 +194,50 @@ rules in templates can be disabled with eslint directives with mustache or html 
 ✅ Set in the `recommended` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
 ![gjs logo](/docs/svgs/gjs.svg) Set in the `recommended-gjs` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
 ![gts logo](/docs/svgs/gts.svg) Set in the `recommended-gts` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
-![gjs logo](/docs/svgs/gjs.svg)🔒 Set in the `strict-gjs` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
-![gts logo](/docs/svgs/gts.svg)🔒 Set in the `strict-gts` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).\
 💡 Manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
 
 ### Accessibility
 
-| Name                                                                                 | Description                                       | 💼                                                              | 🔧 | 💡 |
-| :----------------------------------------------------------------------------------- | :------------------------------------------------ | :-------------------------------------------------------------- | :- | :- |
-| [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)               | disallow abstract ARIA roles                      | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md)     | disallow accesskey attribute                      | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)           | disallow aria-hidden on body element              | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md)     | disallow autofocus attribute                      | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-no-empty-headings](docs/rules/template-no-empty-headings.md)               | disallow empty heading elements                   | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-heading-inside-button](docs/rules/template-no-heading-inside-button.md) | disallow heading elements inside button elements  | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-positive-tabindex](docs/rules/template-no-positive-tabindex.md)         | disallow positive tabindex values                 | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-require-iframe-title](docs/rules/template-require-iframe-title.md)         | require iframe elements to have a title attribute | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-require-valid-alt-text](docs/rules/template-require-valid-alt-text.md)     | require valid alt text for images                 | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| Name                                                                                     | Description                                        | 💼                                          | 🔧 | 💡 |
+| :--------------------------------------------------------------------------------------- | :------------------------------------------------- | :------------------------------------------ | :- | :- |
+| [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)                   | disallow abstract ARIA roles                       | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md)         | disallow accesskey attribute                       | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
+| [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)               | disallow aria-hidden on body element               | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
+| [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md)         | disallow autofocus attribute                       | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
+| [template-no-empty-headings](docs/rules/template-no-empty-headings.md)                   | disallow empty heading elements                    | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-heading-inside-button](docs/rules/template-no-heading-inside-button.md)     | disallow heading elements inside button elements   | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-invalid-aria-attributes](docs/rules/template-no-invalid-aria-attributes.md) | disallow invalid aria-* attributes                 |                                             |    |    |
+| [template-no-invalid-link-title](docs/rules/template-no-invalid-link-title.md)           | disallow invalid title attributes on link elements |                                             |    |    |
+| [template-no-positive-tabindex](docs/rules/template-no-positive-tabindex.md)             | disallow positive tabindex values                  | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-require-iframe-title](docs/rules/template-require-iframe-title.md)             | require iframe elements to have a title attribute  | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-require-valid-alt-text](docs/rules/template-require-valid-alt-text.md)         | require valid alt text for images                  | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 
 ### Best Practices
 
-| Name                                                                                                       | Description                                            | 💼                                                              | 🔧 | 💡 |
-| :--------------------------------------------------------------------------------------------------------- | :----------------------------------------------------- | :-------------------------------------------------------------- | :- | :- |
-| [template-no-args-paths](docs/rules/template-no-args-paths.md)                                             | disallow @args in paths                                | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-bare-yield](docs/rules/template-no-bare-yield.md)                                             | disallow yield without parameters                      | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-debugger](docs/rules/template-no-debugger.md)                                                 | disallow {{debugger}} in templates                     | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-duplicate-attributes](docs/rules/template-no-duplicate-attributes.md)                         | disallow duplicate attribute names in templates        | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                                         | disallow duplicate id attributes                       | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-forbidden-elements](docs/rules/template-no-forbidden-elements.md)                             | disallow specific HTML elements                        |                                                                 |    |    |
-| [template-no-html-comments](docs/rules/template-no-html-comments.md)                                       | disallow HTML comments in templates                    | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                       | disallow inline styles                                 |                                                                 |    |    |
-| [template-no-input-block](docs/rules/template-no-input-block.md)                                           | disallow block usage of {{input}} helper               | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                       | disallow tagName attribute on {{input}} helper         | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-log](docs/rules/template-no-log.md)                                                           | disallow {{log}} in templates                          | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                               | disallow negated conditions in if/unless               | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                               | disallow obsolete HTML elements                        | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                       | disallow {{outlet}} outside of route templates         | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-this-in-template-only-components](docs/rules/template-no-this-in-template-only-components.md) | disallow this in template-only components (gjs/gts)    | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-unnecessary-concat](docs/rules/template-no-unnecessary-concat.md)                             | disallow unnecessary string concatenation              | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-no-unnecessary-curly-in-string-attrs](docs/rules/template-no-unnecessary-curly-in-string-attrs.md) | disallow unnecessary curly braces in string attributes | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-valueless-arguments](docs/rules/template-no-valueless-arguments.md)                           | disallow valueless named arguments                     | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-require-button-type](docs/rules/template-require-button-type.md)                                 | require button elements to have a valid type attribute | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-require-each-key](docs/rules/template-require-each-key.md)                                       | require key attribute in {{#each}} loops               | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-simple-unless](docs/rules/template-simple-unless.md)                                             | require simple conditions in unless blocks             | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-splat-attributes-only](docs/rules/template-splat-attributes-only.md)                             | disallow ...spread other than ...attributes            | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| Name                                                                                                       | Description                                                            | 💼                                          | 🔧 | 💡 |
+| :--------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :------------------------------------------ | :- | :- |
+| [template-no-args-paths](docs/rules/template-no-args-paths.md)                                             | disallow @args in paths                                                | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-bare-yield](docs/rules/template-no-bare-yield.md)                                             | disallow {{yield}} without parameters outside of contextual components |                                             |    |    |
+| [template-no-debugger](docs/rules/template-no-debugger.md)                                                 | disallow {{debugger}} in templates                                     | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-duplicate-attributes](docs/rules/template-no-duplicate-attributes.md)                         | disallow duplicate attribute names in templates                        | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
+| [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                                         | disallow duplicate id attributes                                       | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-forbidden-elements](docs/rules/template-no-forbidden-elements.md)                             | disallow specific HTML elements                                        |                                             |    |    |
+| [template-no-html-comments](docs/rules/template-no-html-comments.md)                                       | disallow HTML comments in templates                                    |                                             |    |    |
+| [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                       | disallow inline styles                                                 |                                             |    |    |
+| [template-no-input-block](docs/rules/template-no-input-block.md)                                           | disallow block usage of {{input}} helper                               | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                       | disallow tagName attribute on {{input}} helper                         | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-log](docs/rules/template-no-log.md)                                                           | disallow {{log}} in templates                                          | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                               | disallow negated conditions in if/unless                               |                                             |    |    |
+| [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                               | disallow obsolete HTML elements                                        | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                       | disallow {{outlet}} outside of route templates                         |                                             |    |    |
+| [template-no-this-in-template-only-components](docs/rules/template-no-this-in-template-only-components.md) | disallow this in template-only components (gjs/gts)                    | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-unnecessary-concat](docs/rules/template-no-unnecessary-concat.md)                             | disallow unnecessary string concatenation                              | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
+| [template-no-valueless-arguments](docs/rules/template-no-valueless-arguments.md)                           | disallow valueless named arguments                                     | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-require-button-type](docs/rules/template-require-button-type.md)                                 | require button elements to have a valid type attribute                 | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
+| [template-require-each-key](docs/rules/template-require-each-key.md)                                       | require key attribute in {{#each}} loops                               |                                             |    |    |
+| [template-simple-unless](docs/rules/template-simple-unless.md)                                             | require simple conditions in unless blocks                             |                                             |    |    |
+| [template-splat-attributes-only](docs/rules/template-splat-attributes-only.md)                             | disallow ...spread other than ...attributes                            | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 
 ### Components
 
@@ -282,27 +280,27 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Deprecations
 
-| Name                                                                                             | Description                                               | 💼                                                              | 🔧 | 💡 |
-| :----------------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :-------------------------------------------------------------- | :- | :- |
-| [closure-actions](docs/rules/closure-actions.md)                                                 | enforce usage of closure actions                          | ✅                                                               |    |    |
-| [new-module-imports](docs/rules/new-module-imports.md)                                           | enforce using "New Module Imports" from Ember RFC #176    | ✅                                                               |    |    |
-| [no-array-prototype-extensions](docs/rules/no-array-prototype-extensions.md)                     | disallow usage of Ember's `Array` prototype extensions    |                                                                 | 🔧 |    |
-| [no-at-ember-render-modifiers](docs/rules/no-at-ember-render-modifiers.md)                       | disallow importing from @ember/render-modifiers           | ✅                                                               |    |    |
-| [no-deprecated-router-transition-methods](docs/rules/no-deprecated-router-transition-methods.md) | enforce usage of router service transition methods        | ✅                                                               | 🔧 |    |
-| [no-function-prototype-extensions](docs/rules/no-function-prototype-extensions.md)               | disallow usage of Ember's `function` prototype extensions | ✅                                                               |    |    |
-| [no-implicit-injections](docs/rules/no-implicit-injections.md)                                   | enforce usage of implicit service injections              | ✅                                                               | 🔧 |    |
-| [no-mixins](docs/rules/no-mixins.md)                                                             | disallow the usage of mixins                              | ✅                                                               |    |    |
-| [no-new-mixins](docs/rules/no-new-mixins.md)                                                     | disallow the creation of new mixins                       | ✅                                                               |    |    |
-| [no-observers](docs/rules/no-observers.md)                                                       | disallow usage of observers                               | ✅                                                               |    |    |
-| [no-old-shims](docs/rules/no-old-shims.md)                                                       | disallow usage of old shims for modules                   | ✅                                                               | 🔧 |    |
-| [no-string-prototype-extensions](docs/rules/no-string-prototype-extensions.md)                   | disallow usage of `String` prototype extensions           | ✅                                                               |    |    |
-| [template-deprecated-inline-view-helper](docs/rules/template-deprecated-inline-view-helper.md)   | disallow inline {{view}} helper                           | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-deprecated-render-helper](docs/rules/template-deprecated-render-helper.md)             | disallow {{render}} helper                                | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-action](docs/rules/template-no-action.md)                                           | disallow {{action}} helper                                | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-attrs-in-components](docs/rules/template-no-attrs-in-components.md)                 | disallow attrs in component templates                     | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-partial](docs/rules/template-no-partial.md)                                         | disallow {{partial}} helper                               | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-unbound](docs/rules/template-no-unbound.md)                                         | disallow {{unbound}} helper                               | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
-| [template-no-with](docs/rules/template-no-with.md)                                               | disallow {{with}} helper                                  | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| Name                                                                                             | Description                                               | 💼                                          | 🔧 | 💡 |
+| :----------------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :------------------------------------------ | :- | :- |
+| [closure-actions](docs/rules/closure-actions.md)                                                 | enforce usage of closure actions                          | ✅                                           |    |    |
+| [new-module-imports](docs/rules/new-module-imports.md)                                           | enforce using "New Module Imports" from Ember RFC #176    | ✅                                           |    |    |
+| [no-array-prototype-extensions](docs/rules/no-array-prototype-extensions.md)                     | disallow usage of Ember's `Array` prototype extensions    |                                             | 🔧 |    |
+| [no-at-ember-render-modifiers](docs/rules/no-at-ember-render-modifiers.md)                       | disallow importing from @ember/render-modifiers           | ✅                                           |    |    |
+| [no-deprecated-router-transition-methods](docs/rules/no-deprecated-router-transition-methods.md) | enforce usage of router service transition methods        | ✅                                           | 🔧 |    |
+| [no-function-prototype-extensions](docs/rules/no-function-prototype-extensions.md)               | disallow usage of Ember's `function` prototype extensions | ✅                                           |    |    |
+| [no-implicit-injections](docs/rules/no-implicit-injections.md)                                   | enforce usage of implicit service injections              | ✅                                           | 🔧 |    |
+| [no-mixins](docs/rules/no-mixins.md)                                                             | disallow the usage of mixins                              | ✅                                           |    |    |
+| [no-new-mixins](docs/rules/no-new-mixins.md)                                                     | disallow the creation of new mixins                       | ✅                                           |    |    |
+| [no-observers](docs/rules/no-observers.md)                                                       | disallow usage of observers                               | ✅                                           |    |    |
+| [no-old-shims](docs/rules/no-old-shims.md)                                                       | disallow usage of old shims for modules                   | ✅                                           | 🔧 |    |
+| [no-string-prototype-extensions](docs/rules/no-string-prototype-extensions.md)                   | disallow usage of `String` prototype extensions           | ✅                                           |    |    |
+| [template-deprecated-inline-view-helper](docs/rules/template-deprecated-inline-view-helper.md)   | disallow inline {{view}} helper                           | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-deprecated-render-helper](docs/rules/template-deprecated-render-helper.md)             | disallow {{render}} helper                                | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-action](docs/rules/template-no-action.md)                                           | disallow {{action}} helper                                | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-attrs-in-components](docs/rules/template-no-attrs-in-components.md)                 | disallow attrs in component templates                     | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-partial](docs/rules/template-no-partial.md)                                         | disallow {{partial}} helper                               | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-unbound](docs/rules/template-no-unbound.md)                                         | disallow {{unbound}} helper                               | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-with](docs/rules/template-no-with.md)                                               | disallow {{with}} helper                                  | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 
 ### Ember Data
 
@@ -373,10 +371,10 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Security
 
-| Name                                                                   | Description                                                     | 💼                                                              | 🔧 | 💡 |
-| :--------------------------------------------------------------------- | :-------------------------------------------------------------- | :-------------------------------------------------------------- | :- | :- |
-| [template-link-rel-noopener](docs/rules/template-link-rel-noopener.md) | require rel="noopener noreferrer" on links with target="_blank" | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
-| [template-no-triple-curlies](docs/rules/template-no-triple-curlies.md) | disallow usage of triple curly brackets (unescaped variables)   | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| Name                                                                   | Description                                                     | 💼                                          | 🔧 | 💡 |
+| :--------------------------------------------------------------------- | :-------------------------------------------------------------- | :------------------------------------------ | :- | :- |
+| [template-link-rel-noopener](docs/rules/template-link-rel-noopener.md) | require rel="noopener noreferrer" on links with target="_blank" | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
+| [template-no-triple-curlies](docs/rules/template-no-triple-curlies.md) | disallow usage of triple curly brackets (unescaped variables)   | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 
 ### Services
 
@@ -389,10 +387,11 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Style
 
-| Name                                                                                         | Description                                                | 💼 | 🔧 | 💡 |
-| :------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :- | :- | :- |
-| [template-no-quoteless-attributes](docs/rules/template-no-quoteless-attributes.md)           | require quotes on all attribute values                     |    | 🔧 |    |
-| [template-no-unnecessary-curly-strings](docs/rules/template-no-unnecessary-curly-strings.md) | disallow unnecessary curly braces in string interpolations |    |    |    |
+| Name                                                                                                         | Description                                                | 💼 | 🔧 | 💡 |
+| :----------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :- | :- | :- |
+| [template-no-quoteless-attributes](docs/rules/template-no-quoteless-attributes.md)                           | require quotes on all attribute values                     |    | 🔧 |    |
+| [template-no-unnecessary-curly-in-string-attrs](docs/rules/template-no-unnecessary-curly-in-string-attrs.md) | disallow unnecessary curly braces in attributes            |    |    |    |
+| [template-no-unnecessary-curly-strings](docs/rules/template-no-unnecessary-curly-strings.md)                 | disallow unnecessary curly braces in string interpolations |    |    |    |
 
 ### Stylistic Issues
 
@@ -448,3 +447,6 @@ Note that new rules should not immediately be added to the [recommended](./lib/r
 ## 🔓 License
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
+
+[badge-strict-gjs]: https://img.shields.io/badge/strict--gjs-blue
+[badge-strict-gts]: https://img.shields.io/badge/strict--gts-blue

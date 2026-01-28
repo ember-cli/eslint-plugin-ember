@@ -1,9 +1,14 @@
-'use strict';
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/template-no-negated-condition');
-const RuleTester = require('../../eslint-rule-tester').default;
+const RuleTester = require('eslint').RuleTester;
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
 
 ruleTester.run('template-no-negated-condition', rule, {
   valid: [
