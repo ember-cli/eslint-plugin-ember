@@ -205,6 +205,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-unnecessary-concat](docs/rules/template-no-unnecessary-concat.md)                             | disallow unnecessary string concatenation              | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
 | [template-no-valueless-arguments](docs/rules/template-no-valueless-arguments.md)                           | disallow valueless named arguments                     | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-require-button-type](docs/rules/template-require-button-type.md)                                 | require button elements to have a valid type attribute | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) | 🔧 |    |
+| [template-splat-attributes-only](docs/rules/template-splat-attributes-only.md)                             | disallow ...spread other than ...attributes            | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 
 ### Components
 
@@ -264,6 +265,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-deprecated-inline-view-helper](docs/rules/template-deprecated-inline-view-helper.md)   | disallow inline {{view}} helper                           | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-deprecated-render-helper](docs/rules/template-deprecated-render-helper.md)             | disallow {{render}} helper                                | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-action](docs/rules/template-no-action.md)                                           | disallow {{action}} helper                                | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
+| [template-no-attrs-in-components](docs/rules/template-no-attrs-in-components.md)                 | disallow attrs in component templates                     | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-partial](docs/rules/template-no-partial.md)                                         | disallow {{partial}} helper                               | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-unbound](docs/rules/template-no-unbound.md)                                         | disallow {{unbound}} helper                               | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
 | [template-no-with](docs/rules/template-no-with.md)                                               | disallow {{with}} helper                                  | ![gjs logo](/docs/svgs/gjs.svg) ![gts logo](/docs/svgs/gts.svg) |    |    |
