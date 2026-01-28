@@ -32,10 +32,13 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
       output: `<template>
         <input type="text"/>
       </template>`,
-      errors: [{
-        message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.',
-        type: 'GlimmerAttrNode',
-      }],
+      errors: [
+        {
+          message:
+            'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.',
+          type: 'GlimmerAttrNode',
+        },
+      ],
     },
     {
       code: `<template>
@@ -44,9 +47,11 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
       output: `<template>
         <textarea></textarea>
       </template>`,
-      errors: [{
-        type: 'GlimmerAttrNode',
-      }],
+      errors: [
+        {
+          type: 'GlimmerAttrNode',
+        },
+      ],
     },
   ],
 });

@@ -9,11 +9,13 @@ Disallows the {{render}} helper which is deprecated.
 ## Examples
 
 Incorrect:
+
 ```gjs
 <template>{{render "user"}}</template>
 ```
 
 Correct:
+
 ```gjs
 <template><User /></template>
 ```

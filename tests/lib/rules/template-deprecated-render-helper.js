@@ -7,13 +7,11 @@ const ruleTester = new RuleTester({
 });
 
 ruleTester.run('template-deprecated-render-helper', rule, {
-  valid: [
-    '<template><MyComponent /></template>',
-    '<template>{{this.render}}</template>',
-  ],
+  valid: ['<template><MyComponent /></template>', '<template>{{this.render}}</template>'],
   invalid: [
     {
       code: '<template>{{render "user"}}</template>',
+      output: null,
       errors: [{ messageId: 'deprecated' }],
     },
   ],

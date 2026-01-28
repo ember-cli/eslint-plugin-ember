@@ -30,10 +30,12 @@ ruleTester.run('template-no-partial', rule, {
         {{partial "user-info"}}
       </template>`,
       output: null,
-      errors: [{
-        message: 'Unexpected partial usage. Partials are deprecated, use components instead.',
-        type: 'GlimmerMustacheStatement',
-      }],
+      errors: [
+        {
+          message: 'Unexpected partial usage. Partials are deprecated, use components instead.',
+          type: 'GlimmerMustacheStatement',
+        },
+      ],
     },
     {
       code: `<template>
@@ -42,9 +44,11 @@ ruleTester.run('template-no-partial', rule, {
         </div>
       </template>`,
       output: null,
-      errors: [{
-        type: 'GlimmerMustacheStatement',
-      }],
+      errors: [
+        {
+          type: 'GlimmerMustacheStatement',
+        },
+      ],
     },
   ],
 });

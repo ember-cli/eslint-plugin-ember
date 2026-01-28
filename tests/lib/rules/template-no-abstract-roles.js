@@ -7,17 +7,16 @@ const ruleTester = new RuleTester({
 });
 
 ruleTester.run('template-no-abstract-roles', rule, {
-  valid: [
-    '<template><div role="button"></div></template>',
-    '<template><div></div></template>',
-  ],
+  valid: ['<template><div role="button"></div></template>', '<template><div></div></template>'],
   invalid: [
     {
       code: '<template><div role="command"></div></template>',
+      output: null,
       errors: [{ messageId: 'abstractRole' }],
     },
     {
       code: '<template><div role="widget"></div></template>',
+      output: null,
       errors: [{ messageId: 'abstractRole' }],
     },
   ],

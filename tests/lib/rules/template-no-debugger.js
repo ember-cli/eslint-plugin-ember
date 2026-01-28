@@ -36,10 +36,12 @@ ruleTester.run('template-no-debugger', rule, {
         {{debugger}}
       </template>`,
       output: null,
-      errors: [{
-        message: 'Unexpected debugger statement in template.',
-        type: 'GlimmerMustacheStatement',
-      }],
+      errors: [
+        {
+          message: 'Unexpected debugger statement in template.',
+          type: 'GlimmerMustacheStatement',
+        },
+      ],
     },
     {
       code: `<template>
@@ -48,10 +50,12 @@ ruleTester.run('template-no-debugger', rule, {
         {{/if}}
       </template>`,
       output: null,
-      errors: [{
-        message: 'Unexpected debugger statement in template.',
-        type: 'GlimmerMustacheStatement',
-      }],
+      errors: [
+        {
+          message: 'Unexpected debugger statement in template.',
+          type: 'GlimmerMustacheStatement',
+        },
+      ],
     },
     {
       code: `<template>
@@ -60,10 +64,12 @@ ruleTester.run('template-no-debugger', rule, {
         {{/debugger}}
       </template>`,
       output: null,
-      errors: [{
-        message: 'Unexpected debugger statement in template.',
-        type: 'GlimmerBlockStatement',
-      }],
+      errors: [
+        {
+          message: 'Unexpected debugger statement in template.',
+          type: 'GlimmerBlockStatement',
+        },
+      ],
     },
   ],
 });

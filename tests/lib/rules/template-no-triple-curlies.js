@@ -33,10 +33,13 @@ ruleTester.run('template-no-triple-curlies', rule, {
         {{{this.content}}}
       </template>`,
       output: null,
-      errors: [{
-        message: 'Usage of triple curly brackets is unsafe. Use htmlSafe helper if absolutely necessary.',
-        type: 'GlimmerMustacheStatement',
-      }],
+      errors: [
+        {
+          message:
+            'Usage of triple curly brackets is unsafe. Use htmlSafe helper if absolutely necessary.',
+          type: 'GlimmerMustacheStatement',
+        },
+      ],
     },
     {
       code: `<template>
@@ -45,10 +48,13 @@ ruleTester.run('template-no-triple-curlies', rule, {
         </div>
       </template>`,
       output: null,
-      errors: [{
-        message: 'Usage of triple curly brackets is unsafe. Use htmlSafe helper if absolutely necessary.',
-        type: 'GlimmerMustacheStatement',
-      }],
+      errors: [
+        {
+          message:
+            'Usage of triple curly brackets is unsafe. Use htmlSafe helper if absolutely necessary.',
+          type: 'GlimmerMustacheStatement',
+        },
+      ],
     },
   ],
 });

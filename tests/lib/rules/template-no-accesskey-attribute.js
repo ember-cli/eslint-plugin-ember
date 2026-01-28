@@ -32,10 +32,13 @@ ruleTester.run('template-no-accesskey-attribute', rule, {
       output: `<template>
         <button>Save</button>
       </template>`,
-      errors: [{
-        message: 'No access key attribute allowed. Inconsistencies between keyboard shortcuts and keyboard commands used by screenreader and keyboard only users create accessibility complications.',
-        type: 'GlimmerAttrNode',
-      }],
+      errors: [
+        {
+          message:
+            'No access key attribute allowed. Inconsistencies between keyboard shortcuts and keyboard commands used by screenreader and keyboard only users create accessibility complications.',
+          type: 'GlimmerAttrNode',
+        },
+      ],
     },
     {
       code: `<template>
@@ -44,9 +47,11 @@ ruleTester.run('template-no-accesskey-attribute', rule, {
       output: `<template>
         <a href="#">Home</a>
       </template>`,
-      errors: [{
-        type: 'GlimmerAttrNode',
-      }],
+      errors: [
+        {
+          type: 'GlimmerAttrNode',
+        },
+      ],
     },
   ],
 });

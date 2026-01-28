@@ -38,10 +38,12 @@ ruleTester.run('template-require-button-type', rule, {
       output: `<template>
         <button type="button">Click me</button>
       </template>`,
-      errors: [{
-        message: 'All `<button>` elements should have a valid `type` attribute',
-        type: 'GlimmerElementNode',
-      }],
+      errors: [
+        {
+          message: 'All `<button>` elements should have a valid `type` attribute',
+          type: 'GlimmerElementNode',
+        },
+      ],
     },
     {
       code: `<template>
@@ -54,10 +56,12 @@ ruleTester.run('template-require-button-type', rule, {
           <button type="submit">Submit</button>
         </form>
       </template>`,
-      errors: [{
-        message: 'All `<button>` elements should have a valid `type` attribute',
-        type: 'GlimmerElementNode',
-      }],
+      errors: [
+        {
+          message: 'All `<button>` elements should have a valid `type` attribute',
+          type: 'GlimmerElementNode',
+        },
+      ],
     },
     {
       code: `<template>
@@ -66,10 +70,12 @@ ruleTester.run('template-require-button-type', rule, {
       output: `<template>
         <button type="button">Click</button>
       </template>`,
-      errors: [{
-        message: 'Button type must be "button", "submit", or "reset"',
-        type: 'GlimmerAttrNode',
-      }],
+      errors: [
+        {
+          message: 'Button type must be "button", "submit", or "reset"',
+          type: 'GlimmerAttrNode',
+        },
+      ],
     },
     {
       code: `<template>
@@ -82,10 +88,12 @@ ruleTester.run('template-require-button-type', rule, {
           <button type="submit">Submit</button>
         </form>
       </template>`,
-      errors: [{
-        message: 'Button type must be "button", "submit", or "reset"',
-        type: 'GlimmerAttrNode',
-      }],
+      errors: [
+        {
+          message: 'Button type must be "button", "submit", or "reset"',
+          type: 'GlimmerAttrNode',
+        },
+      ],
     },
   ],
 });

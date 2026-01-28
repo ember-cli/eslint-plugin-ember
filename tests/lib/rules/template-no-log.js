@@ -36,10 +36,12 @@ ruleTester.run('template-no-log', rule, {
         {{log "debug message"}}
       </template>`,
       output: null,
-      errors: [{
-        message: 'Unexpected log statement in template.',
-        type: 'GlimmerMustacheStatement',
-      }],
+      errors: [
+        {
+          message: 'Unexpected log statement in template.',
+          type: 'GlimmerMustacheStatement',
+        },
+      ],
     },
     {
       code: `<template>
@@ -48,10 +50,12 @@ ruleTester.run('template-no-log', rule, {
         {{/if}}
       </template>`,
       output: null,
-      errors: [{
-        message: 'Unexpected log statement in template.',
-        type: 'GlimmerMustacheStatement',
-      }],
+      errors: [
+        {
+          message: 'Unexpected log statement in template.',
+          type: 'GlimmerMustacheStatement',
+        },
+      ],
     },
     {
       code: `<template>
@@ -60,10 +64,12 @@ ruleTester.run('template-no-log', rule, {
         {{/log}}
       </template>`,
       output: null,
-      errors: [{
-        message: 'Unexpected log statement in template.',
-        type: 'GlimmerBlockStatement',
-      }],
+      errors: [
+        {
+          message: 'Unexpected log statement in template.',
+          type: 'GlimmerBlockStatement',
+        },
+      ],
     },
   ],
 });

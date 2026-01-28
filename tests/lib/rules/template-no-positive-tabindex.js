@@ -36,30 +36,36 @@ ruleTester.run('template-no-positive-tabindex', rule, {
         <div tabindex="1">Content</div>
       </template>`,
       output: null,
-      errors: [{
-        message: 'Avoid positive integer values for tabindex.',
-        type: 'GlimmerAttrNode',
-      }],
+      errors: [
+        {
+          message: 'Avoid positive integer values for tabindex.',
+          type: 'GlimmerAttrNode',
+        },
+      ],
     },
     {
       code: `<template>
         <div tabindex="5">Content</div>
       </template>`,
       output: null,
-      errors: [{
-        message: 'Avoid positive integer values for tabindex.',
-        type: 'GlimmerAttrNode',
-      }],
+      errors: [
+        {
+          message: 'Avoid positive integer values for tabindex.',
+          type: 'GlimmerAttrNode',
+        },
+      ],
     },
     {
       code: `<template>
         <button tabindex="2">Click</button>
       </template>`,
       output: null,
-      errors: [{
-        message: 'Avoid positive integer values for tabindex.',
-        type: 'GlimmerAttrNode',
-      }],
+      errors: [
+        {
+          message: 'Avoid positive integer values for tabindex.',
+          type: 'GlimmerAttrNode',
+        },
+      ],
     },
   ],
 });

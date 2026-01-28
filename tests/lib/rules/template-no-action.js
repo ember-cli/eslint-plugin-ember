@@ -36,20 +36,26 @@ ruleTester.run('template-no-action', rule, {
         <button {{on "click" (action "save")}}>Save</button>
       </template>`,
       output: null,
-      errors: [{
-        message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
-        type: 'GlimmerSubExpression',
-      }],
+      errors: [
+        {
+          message:
+            'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
+          type: 'GlimmerSubExpression',
+        },
+      ],
     },
     {
       code: `<template>
         {{action "doSomething"}}
       </template>`,
       output: null,
-      errors: [{
-        message: 'Do not use `action` as {{action ...}}. Instead, use the `on` modifier and `fn` helper.',
-        type: 'GlimmerMustacheStatement',
-      }],
+      errors: [
+        {
+          message:
+            'Do not use `action` in templates. Instead, use the `on` modifier and `fn` helper.',
+          type: 'GlimmerMustacheStatement',
+        },
+      ],
     },
   ],
 });

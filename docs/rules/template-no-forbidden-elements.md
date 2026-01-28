@@ -2,6 +2,10 @@
 
 <!-- end auto-generated rule header -->
 
+## Config
+
+This rule takes an array of element names to forbid.
+
 ## Examples
 
 See ember-template-lint documentation.

@@ -7,13 +7,11 @@ const ruleTester = new RuleTester({
 });
 
 ruleTester.run('template-deprecated-inline-view-helper', rule, {
-  valid: [
-    '<template><MyComponent /></template>',
-    '<template>{{view}}</template>',
-  ],
+  valid: ['<template><MyComponent /></template>', '<template>{{view}}</template>'],
   invalid: [
     {
       code: '<template>{{view class="foo"}}</template>',
+      output: null,
       errors: [{ messageId: 'deprecated' }],
     },
   ],

@@ -40,10 +40,12 @@ ruleTester.run('template-no-duplicate-attributes', rule, {
       output: `<template>
         <div class="foo"></div>
       </template>`,
-      errors: [{
-        message: "Duplicate attribute 'class' found in the Element.",
-        type: 'GlimmerAttrNode',
-      }],
+      errors: [
+        {
+          message: "Duplicate attribute 'class' found in the Element.",
+          type: 'GlimmerAttrNode',
+        },
+      ],
     },
     {
       code: `<template>
@@ -52,10 +54,12 @@ ruleTester.run('template-no-duplicate-attributes', rule, {
       output: `<template>
         <input type="text" disabled />
       </template>`,
-      errors: [{
-        message: "Duplicate attribute 'type' found in the Element.",
-        type: 'GlimmerAttrNode',
-      }],
+      errors: [
+        {
+          message: "Duplicate attribute 'type' found in the Element.",
+          type: 'GlimmerAttrNode',
+        },
+      ],
     },
     {
       code: `<template>
@@ -64,10 +68,12 @@ ruleTester.run('template-no-duplicate-attributes', rule, {
       output: `<template>
         {{helper foo="bar"}}
       </template>`,
-      errors: [{
-        message: "Duplicate attribute 'foo' found in the MustacheStatement.",
-        type: 'GlimmerHashPair',
-      }],
+      errors: [
+        {
+          message: "Duplicate attribute 'foo' found in the MustacheStatement.",
+          type: 'GlimmerHashPair',
+        },
+      ],
     },
     {
       code: `<template>
@@ -80,10 +86,12 @@ ruleTester.run('template-no-duplicate-attributes', rule, {
           content
         {{/if}}
       </template>`,
-      errors: [{
-        message: "Duplicate attribute 'key' found in the BlockStatement.",
-        type: 'GlimmerHashPair',
-      }],
+      errors: [
+        {
+          message: "Duplicate attribute 'key' found in the BlockStatement.",
+          type: 'GlimmerHashPair',
+        },
+      ],
     },
   ],
 });
