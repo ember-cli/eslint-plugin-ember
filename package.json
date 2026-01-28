@@ -75,7 +75,6 @@
     "@babel/plugin-proposal-decorators": "^7.23.2",
     "@eslint/eslintrc": "^3.0.1",
     "@eslint/js": "^9.19.0",
-    "@glimmer/env": "^0.1.7",
     "@types/eslint": "^8.44.6",
     "@typescript-eslint/parser": "^8.11.0",
     "@vitest/coverage-v8": "^2.1.3",
