@@ -110,6 +110,28 @@ module.exports = {
 };
 ```
 
+### Strict Template Linting (Optional)
+
+For enhanced template linting in `gjs`/`gts` files, use the `strict-gjs` or `strict-gts` configs. These include additional template rules ported from `ember-template-lint`:
+
+```javascript
+// eslint.config.js
+const ember = require('eslint-plugin-ember');
+
+module.exports = [
+  ...ember.configs.recommended,
+  {
+    files: ['**/*.gts'],
+    extends: ['plugin:ember/strict-gts'],
+  },
+  {
+    files: ['**/*.gjs'],
+    extends: ['plugin:ember/strict-gjs'],
+  },
+];
+```
+
+
 ### rules applied to fcct templates
 
 - semi rule, same as [prettier plugin](https://github.com/gitKrystan/prettier-plugin-ember-template-tag/issues/1)
@@ -160,6 +182,8 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | ✅                               | `recommended`     |
 | ![gjs logo](/docs/svgs/gjs.svg) | `recommended-gjs` |
 | ![gts logo](/docs/svgs/gts.svg) | `recommended-gts` |
+| ![gjs logo](/docs/svgs/gjs.svg) | `strict-gjs`      |
+| ![gts logo](/docs/svgs/gts.svg) | `strict-gts`      |
 
 <!-- end auto-generated configs list -->
 
@@ -171,6 +195,8 @@ rules in templates can be disabled with eslint directives with mustache or html 
 ✅ Set in the `recommended` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
 ![gjs logo](/docs/svgs/gjs.svg) Set in the `recommended-gjs` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
 ![gts logo](/docs/svgs/gts.svg) Set in the `recommended-gts` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
+![gjs logo](/docs/svgs/gjs.svg)🔒 Set in the `strict-gjs` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
+![gts logo](/docs/svgs/gts.svg)🔒 Set in the `strict-gts` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).\
 💡 Manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
 
