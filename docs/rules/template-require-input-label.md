@@ -1,4 +1,6 @@
-# template-require-input-label
+# ember/template-require-input-label
+
+<!-- end auto-generated rule header -->
 
 ✅ The `extends: 'plugin:ember/strict-gjs'` and `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
 

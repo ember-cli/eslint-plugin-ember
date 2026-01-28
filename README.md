@@ -199,37 +199,36 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Accessibility
 
-| Name                                                                                     | Description                                                 | 💼                                          | 🔧 | 💡 |
-| :--------------------------------------------------------------------------------------- | :---------------------------------------------------------- | :------------------------------------------ | :- | :- |
-| [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)                   | disallow abstract ARIA roles                                | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
-| [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md)         | disallow accesskey attribute                                | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
-| [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)               | disallow aria-hidden on body element                        | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
-| [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md)         | disallow autofocus attribute                                | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
-| [template-no-empty-headings](docs/rules/template-no-empty-headings.md)                   | disallow empty heading elements                             | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
-| [template-no-heading-inside-button](docs/rules/template-no-heading-inside-button.md)     | disallow heading elements inside button elements            | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
-| [template-no-invalid-aria-attributes](docs/rules/template-no-invalid-aria-attributes.md) | disallow invalid aria-* attributes                          |                                             |    |    |
-| [template-no-invalid-interactive](docs/rules/template-no-invalid-interactive.md)         | disallow non-interactive elements with interactive handlers |                                             |    |    |
-| [template-no-invalid-link-title](docs/rules/template-no-invalid-link-title.md)           | disallow invalid title attributes on link elements          |                                             |    |    |
-| [template-no-nested-interactive](docs/rules/template-no-nested-interactive.md)           | disallow nested interactive elements                        |                                             |    |    |
-| [template-no-positive-tabindex](docs/rules/template-no-positive-tabindex.md)             | disallow positive tabindex values                           | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
-| [template-require-iframe-title](docs/rules/template-require-iframe-title.md)             | require iframe elements to have a title attribute           | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
-| [template-require-input-label](docs/rules/template-require-input-label.md)               | require input elements to have associated labels            |                                             |    |    |
-| [template-require-valid-alt-text](docs/rules/template-require-valid-alt-text.md)         | require valid alt text for images                           | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| Name                                                                                     | Description                                        | 💼                                          | 🔧 | 💡 |
+| :--------------------------------------------------------------------------------------- | :------------------------------------------------- | :------------------------------------------ | :- | :- |
+| [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)                   | disallow abstract ARIA roles                       | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md)         | disallow accesskey attribute                       | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
+| [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)               | disallow aria-hidden on body element               | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
+| [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md)         | disallow autofocus attribute                       | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
+| [template-no-empty-headings](docs/rules/template-no-empty-headings.md)                   | disallow empty heading elements                    | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-heading-inside-button](docs/rules/template-no-heading-inside-button.md)     | disallow heading elements inside button elements   | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-invalid-aria-attributes](docs/rules/template-no-invalid-aria-attributes.md) | disallow invalid aria-* attributes                 |                                             |    |    |
+| [template-no-invalid-link-title](docs/rules/template-no-invalid-link-title.md)           | disallow invalid title attributes on link elements |                                             |    |    |
+| [template-no-positive-tabindex](docs/rules/template-no-positive-tabindex.md)             | disallow positive tabindex values                  | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-require-iframe-title](docs/rules/template-require-iframe-title.md)             | require iframe elements to have a title attribute  | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-require-input-label](docs/rules/template-require-input-label.md)               | Require label for form input elements              |                                             |    |    |
+| [template-require-valid-alt-text](docs/rules/template-require-valid-alt-text.md)         | require valid alt text for images                  | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 
 ### Best Practices
 
 | Name                                                                                                       | Description                                                            | 💼                                          | 🔧 | 💡 |
 | :--------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :------------------------------------------ | :- | :- |
 | [template-no-args-paths](docs/rules/template-no-args-paths.md)                                             | disallow @args in paths                                                | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
-| [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md)           | disallow arguments for HTML elements                                   |                                             |    |    |
-| [template-no-bare-strings](docs/rules/template-no-bare-strings.md)                                         | disallow bare strings in templates                                     |                                             |    |    |
 | [template-no-bare-yield](docs/rules/template-no-bare-yield.md)                                             | disallow {{yield}} without parameters outside of contextual components |                                             |    |    |
+| [template-no-capital-arguments](docs/rules/template-no-capital-arguments.md)                               | disallow capital arguments (use lowercase @arg instead of @Arg)        |                                             |    |    |
+| [template-no-curly-component-invocation](docs/rules/template-no-curly-component-invocation.md)             | disallow curly component invocation                                    |                                             |    |    |
 | [template-no-debugger](docs/rules/template-no-debugger.md)                                                 | disallow {{debugger}} in templates                                     | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 | [template-no-duplicate-attributes](docs/rules/template-no-duplicate-attributes.md)                         | disallow duplicate attribute names in templates                        | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
 | [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                                         | disallow duplicate id attributes                                       | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                       | disallow element event actions (use {{on}} modifier instead)           |                                             |    |    |
 | [template-no-forbidden-elements](docs/rules/template-no-forbidden-elements.md)                             | disallow specific HTML elements                                        |                                             |    |    |
 | [template-no-html-comments](docs/rules/template-no-html-comments.md)                                       | disallow HTML comments in templates                                    |                                             |    |    |
-| [template-no-implicit-this](docs/rules/template-no-implicit-this.md)                                       | disallow implicit this in templates                                    |                                             | 🔧 |    |
+| [template-no-implicit-this](docs/rules/template-no-implicit-this.md)                                       | require explicit `this` in property access                             |                                             |    |    |
 | [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                       | disallow inline styles                                                 |                                             |    |    |
 | [template-no-input-block](docs/rules/template-no-input-block.md)                                           | disallow block usage of {{input}} helper                               | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 | [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                       | disallow tagName attribute on {{input}} helper                         | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
@@ -237,8 +236,11 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                               | disallow negated conditions in if/unless                               |                                             |    |    |
 | [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                               | disallow obsolete HTML elements                                        | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 | [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                       | disallow {{outlet}} outside of route templates                         |                                             |    |    |
+| [template-no-potential-path-strings](docs/rules/template-no-potential-path-strings.md)                     | disallow potential path strings in templates                           |                                             |    |    |
 | [template-no-this-in-template-only-components](docs/rules/template-no-this-in-template-only-components.md) | disallow this in template-only components (gjs/gts)                    | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| [template-no-unnecessary-component-helper](docs/rules/template-no-unnecessary-component-helper.md)         | disallow unnecessary component helper                                  |                                             |    |    |
 | [template-no-unnecessary-concat](docs/rules/template-no-unnecessary-concat.md)                             | disallow unnecessary string concatenation                              | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
+| [template-no-unused-block-params](docs/rules/template-no-unused-block-params.md)                           | disallow unused block parameters in templates                          |                                             |    |    |
 | [template-no-valueless-arguments](docs/rules/template-no-valueless-arguments.md)                           | disallow valueless named arguments                                     | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 | [template-require-button-type](docs/rules/template-require-button-type.md)                                 | require button elements to have a valid type attribute                 | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
 | [template-require-each-key](docs/rules/template-require-each-key.md)                                       | require key attribute in {{#each}} loops                               |                                             |    |    |
@@ -304,7 +306,6 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-deprecated-render-helper](docs/rules/template-deprecated-render-helper.md)             | disallow {{render}} helper                                | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 | [template-no-action](docs/rules/template-no-action.md)                                           | disallow {{action}} helper                                | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 | [template-no-attrs-in-components](docs/rules/template-no-attrs-in-components.md)                 | disallow attrs in component templates                     | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
-| [template-no-curly-component-invocation](docs/rules/template-no-curly-component-invocation.md)   | disallow curly component invocation                       |                                             |    |    |
 | [template-no-partial](docs/rules/template-no-partial.md)                                         | disallow {{partial}} helper                               | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 | [template-no-unbound](docs/rules/template-no-unbound.md)                                         | disallow {{unbound}} helper                               | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 | [template-no-with](docs/rules/template-no-with.md)                                               | disallow {{with}} helper                                  | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
@@ -363,6 +364,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [no-runloop](docs/rules/no-runloop.md)                                                                                 | disallow usage of `@ember/runloop` functions                                                                                  | ✅  |    |    |
 | [require-fetch-import](docs/rules/require-fetch-import.md)                                                             | enforce explicit import for `fetch()`                                                                                         |    |    |    |
 
+### Possible Errors
+
+| Name                                                                                                                       | Description                                        | 💼 | 🔧 | 💡 |
+| :------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------- | :- | :- | :- |
+| [template-no-unknown-arguments-for-builtin-components](docs/rules/template-no-unknown-arguments-for-builtin-components.md) | disallow unknown arguments for built-in components |    |    |    |
+
 ### Routes
 
 | Name                                                                               | Description                                                                              | 💼 | 🔧 | 💡 |
@@ -399,6 +406,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-quoteless-attributes](docs/rules/template-no-quoteless-attributes.md)                           | require quotes on all attribute values                     |    | 🔧 |    |
 | [template-no-unnecessary-curly-in-string-attrs](docs/rules/template-no-unnecessary-curly-in-string-attrs.md) | disallow unnecessary curly braces in attributes            |    |    |    |
 | [template-no-unnecessary-curly-strings](docs/rules/template-no-unnecessary-curly-strings.md)                 | disallow unnecessary curly braces in string interpolations |    |    |    |
+| [template-no-whitespace-within-word](docs/rules/template-no-whitespace-within-word.md)                       | disallow whitespace within mustache or block expressions   |    |    |    |
 
 ### Stylistic Issues
 
