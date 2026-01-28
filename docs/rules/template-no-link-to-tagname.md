@@ -1,4 +1,8 @@
-# template-no-link-to-tagname
+# ember/template-no-link-to-tagname
+
+💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
+
+<!-- end auto-generated rule header -->
 
 > Disallow tagName attribute on LinkTo component
 

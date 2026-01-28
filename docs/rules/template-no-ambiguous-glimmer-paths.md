@@ -1,4 +1,8 @@
-# template-no-ambiguous-glimmer-paths
+# ember/template-no-ambiguous-glimmer-paths
+
+💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
+
+<!-- end auto-generated rule header -->
 
 > Disallow ambiguous path in templates
 

@@ -1,4 +1,8 @@
-# template-no-attrs-splat
+# ember/template-no-attrs-splat
+
+💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
+
+<!-- end auto-generated rule header -->
 
 > Disallow attribute splat on components
 

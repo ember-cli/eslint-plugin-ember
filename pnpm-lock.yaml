@@ -11,6 +11,9 @@ importers:
       '@ember-data/rfc395-data':
         specifier: ^0.0.4
         version: 0.0.4
+      '@glimmer/env':
+        specifier: ^0.1.7
+        version: 0.1.7
       css-tree:
         specifier: ^3.0.1
         version: 3.0.1

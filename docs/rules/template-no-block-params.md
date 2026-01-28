@@ -1,4 +1,8 @@
-# template-no-block-params
+# ember/template-no-block-params
+
+💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
+
+<!-- end auto-generated rule header -->
 
 > Disallow yielding/invoking a component block without parameters
 

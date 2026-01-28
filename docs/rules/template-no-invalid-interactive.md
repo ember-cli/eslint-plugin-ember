@@ -1,4 +1,8 @@
-# template-no-invalid-interactive
+# ember/template-no-invalid-interactive
+
+💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
+
+<!-- end auto-generated rule header -->
 
 > Disallow non-interactive elements with interactive handlers
 
