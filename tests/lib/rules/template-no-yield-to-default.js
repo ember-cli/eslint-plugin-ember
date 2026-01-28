@@ -35,7 +35,8 @@ ruleTester.run('template-no-yield-to-default', rule, {
       output: null,
       errors: [
         {
-          message: 'Do not use (yield to="default"). Use (yield) without the "to" argument instead.',
+          message:
+            'Do not use (yield to="default"). Use (yield) without the "to" argument instead.',
           type: 'GlimmerMustacheStatement',
         },
       ],
@@ -49,7 +50,8 @@ ruleTester.run('template-no-yield-to-default', rule, {
       output: null,
       errors: [
         {
-          message: 'Do not use (yield to="default"). Use (yield) without the "to" argument instead.',
+          message:
+            'Do not use (yield to="default"). Use (yield) without the "to" argument instead.',
           type: 'GlimmerMustacheStatement',
         },
       ],
@@ -63,7 +65,8 @@ ruleTester.run('template-no-yield-to-default', rule, {
       output: null,
       errors: [
         {
-          message: 'Do not use (yield to="default"). Use (yield) without the "to" argument instead.',
+          message:
+            'Do not use (yield to="default"). Use (yield) without the "to" argument instead.',
           type: 'GlimmerMustacheStatement',
         },
       ],

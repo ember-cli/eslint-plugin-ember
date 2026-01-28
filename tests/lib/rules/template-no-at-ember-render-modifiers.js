@@ -35,7 +35,8 @@ ruleTester.run('template-no-at-ember-render-modifiers', rule, {
       output: null,
       errors: [
         {
-          message: 'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
+          message:
+            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
           type: 'GlimmerElementModifierStatement',
         },
       ],
@@ -47,7 +48,8 @@ ruleTester.run('template-no-at-ember-render-modifiers', rule, {
       output: null,
       errors: [
         {
-          message: 'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
+          message:
+            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
           type: 'GlimmerElementModifierStatement',
         },
       ],
@@ -59,7 +61,8 @@ ruleTester.run('template-no-at-ember-render-modifiers', rule, {
       output: null,
       errors: [
         {
-          message: 'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
+          message:
+            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
           type: 'GlimmerElementModifierStatement',
         },
       ],

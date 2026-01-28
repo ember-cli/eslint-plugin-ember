@@ -38,7 +38,8 @@ ruleTester.run('template-no-input-placeholder', rule, {
       output: null,
       errors: [
         {
-          message: 'Do not use placeholder attribute. Use a label instead for better accessibility.',
+          message:
+            'Do not use placeholder attribute. Use a label instead for better accessibility.',
           type: 'GlimmerAttrNode',
         },
       ],
@@ -50,7 +51,8 @@ ruleTester.run('template-no-input-placeholder', rule, {
       output: null,
       errors: [
         {
-          message: 'Do not use placeholder attribute. Use a label instead for better accessibility.',
+          message:
+            'Do not use placeholder attribute. Use a label instead for better accessibility.',
           type: 'GlimmerAttrNode',
         },
       ],
@@ -62,7 +64,8 @@ ruleTester.run('template-no-input-placeholder', rule, {
       output: null,
       errors: [
         {
-          message: 'Do not use placeholder attribute. Use a label instead for better accessibility.',
+          message:
+            'Do not use placeholder attribute. Use a label instead for better accessibility.',
           type: 'GlimmerAttrNode',
         },
       ],

@@ -22,7 +22,7 @@ ruleTester.run('template-linebreak-style', rule, {
     `<template>
       <div></div>
     </template>`,
-    `<template><div></div></template>`,
+    '<template><div></div></template>',
   ],
 
   invalid: [],

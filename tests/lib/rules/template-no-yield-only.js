@@ -38,7 +38,8 @@ ruleTester.run('template-no-yield-only', rule, {
       output: null,
       errors: [
         {
-          message: 'Component should not only yield. Add wrapper element or additional functionality.',
+          message:
+            'Component should not only yield. Add wrapper element or additional functionality.',
           type: 'GlimmerMustacheStatement',
         },
       ],
@@ -52,17 +53,19 @@ ruleTester.run('template-no-yield-only', rule, {
       output: null,
       errors: [
         {
-          message: 'Component should not only yield. Add wrapper element or additional functionality.',
+          message:
+            'Component should not only yield. Add wrapper element or additional functionality.',
           type: 'GlimmerMustacheStatement',
         },
       ],
     },
     {
-      code: `<template>{{yield}}</template>`,
+      code: '<template>{{yield}}</template>',
       output: null,
       errors: [
         {
-          message: 'Component should not only yield. Add wrapper element or additional functionality.',
+          message:
+            'Component should not only yield. Add wrapper element or additional functionality.',
           type: 'GlimmerMustacheStatement',
         },
       ],

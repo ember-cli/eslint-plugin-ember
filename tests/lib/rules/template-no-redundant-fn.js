@@ -51,8 +51,7 @@ ruleTester.run('template-no-redundant-fn', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Unnecessary use of (fn) helper. Pass the function directly instead: this.save',
+          message: 'Unnecessary use of (fn) helper. Pass the function directly instead: this.save',
           type: 'GlimmerMustacheStatement',
         },
       ],
