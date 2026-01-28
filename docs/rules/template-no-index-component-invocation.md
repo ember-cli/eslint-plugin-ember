@@ -16,13 +16,13 @@ Examples of **incorrect** code for this rule:
 
 ```gjs
 <template>
-  <MyComponent/index />
+  <MyComponent::Index />
 </template>
 ```
 
 ```gjs
 <template>
-  <Foo/index />
+  <Foo::Index />
 </template>
 ```
 

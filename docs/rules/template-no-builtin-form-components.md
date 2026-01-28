@@ -8,7 +8,7 @@ Disallows usage of built-in form components.
 
 ## Rule Details
 
-Built-in Ember components like `<Input>`, `<Textarea>`, and `<LinkTo>` should be replaced with native HTML elements for better performance and simpler code.
+Built-in Ember components like `<Input>` and `<Textarea>` should be replaced with native HTML elements for better performance and simpler code.
 
 ## Examples
 

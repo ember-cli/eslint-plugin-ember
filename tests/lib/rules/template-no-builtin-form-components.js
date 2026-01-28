@@ -52,17 +52,5 @@ ruleTester.run('template-no-builtin-form-components', rule, {
         },
       ],
     },
-    {
-      code: `<template>
-        <LinkTo @route="index">Home</LinkTo>
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message: 'Do not use built-in form components. Use native HTML elements instead.',
-          type: 'GlimmerElementNode',
-        },
-      ],
-    },
   ],
 });
