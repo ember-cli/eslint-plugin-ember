@@ -10,10 +10,13 @@ exports[`recommended rules > gjs config has the right list 1`] = `
   "template-no-action",
   "template-no-args-paths",
   "template-no-aria-hidden-body",
+  "template-no-attrs-in-components",
   "template-no-autofocus-attribute",
   "template-no-debugger",
   "template-no-duplicate-attributes",
   "template-no-duplicate-id",
+  "template-no-empty-headings",
+  "template-no-heading-inside-button",
   "template-no-input-block",
   "template-no-input-tagname",
   "template-no-let-reference",
@@ -28,6 +31,9 @@ exports[`recommended rules > gjs config has the right list 1`] = `
   "template-no-valueless-arguments",
   "template-no-with",
   "template-require-button-type",
+  "template-require-iframe-title",
+  "template-require-valid-alt-text",
+  "template-splat-attributes-only",
 ]
 `;
 
@@ -41,10 +47,13 @@ exports[`recommended rules > gts config has the right list 1`] = `
   "template-no-action",
   "template-no-args-paths",
   "template-no-aria-hidden-body",
+  "template-no-attrs-in-components",
   "template-no-autofocus-attribute",
   "template-no-debugger",
   "template-no-duplicate-attributes",
   "template-no-duplicate-id",
+  "template-no-empty-headings",
+  "template-no-heading-inside-button",
   "template-no-input-block",
   "template-no-input-tagname",
   "template-no-let-reference",
@@ -59,6 +68,9 @@ exports[`recommended rules > gts config has the right list 1`] = `
   "template-no-valueless-arguments",
   "template-no-with",
   "template-require-button-type",
+  "template-require-iframe-title",
+  "template-require-valid-alt-text",
+  "template-splat-attributes-only",
 ]
 `;
 
