@@ -1,6 +1,6 @@
 # ember/template-no-bare-strings
 
-💡 This rule is _not_ enabled in any [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations) by default.
+💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
 
 <!-- end auto-generated rule header -->
 

@@ -1,8 +1,8 @@
 # ember/template-eol-last
 
-💡 This rule is _not_ enabled in any [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations) by default.
+💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
 
-🔧 The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 
