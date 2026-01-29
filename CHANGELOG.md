@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-01-29)
+
+* eslint-plugin-ember 12.7.7 (patch)
+
+#### :house: Internal
+* `eslint-plugin-ember`
+  * [#2368](https://github.com/ember-cli/eslint-plugin-ember/pull/2368) We have prettier (and thus editors detect and run it), but what we check in CI is different ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-01-22)
 
 * eslint-plugin-ember 12.7.6 (patch)
