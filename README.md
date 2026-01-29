@@ -473,7 +473,6 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [order-in-controllers](docs/rules/order-in-controllers.md)                     | enforce proper order of properties in controllers              |                                             | 🔧 |    |
 | [order-in-models](docs/rules/order-in-models.md)                               | enforce proper order of properties in models                   |                                             | 🔧 |    |
 | [order-in-routes](docs/rules/order-in-routes.md)                               | enforce proper order of properties in routes                   |                                             | 🔧 |    |
-| [template-attribute-indentation](docs/rules/template-attribute-indentation.md) | enforce consistent attribute indentation in templates          |                                             | 🔧 |    |
 | [template-attribute-order](docs/rules/template-attribute-order.md)             | enforce consistent ordering of attributes in template elements | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 | [template-block-indentation](docs/rules/template-block-indentation.md)         | enforce consistent block indentation in templates              |                                             | 🔧 |    |
 | [template-eol-last](docs/rules/template-eol-last.md)                           | require newline at end of template files                       | ![badge-strict-gjs][] ![badge-strict-gts][] | 🔧 |    |
