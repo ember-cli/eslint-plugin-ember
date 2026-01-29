@@ -12,6 +12,20 @@ Multiple consecutive blank lines reduce readability and should be limited.
 
 This rule enforces a maximum number of consecutive empty lines (default: 1).
 
+## Config
+
+This rule accepts an object with a `max` property to specify the maximum number of consecutive empty lines allowed:
+
+```json
+{
+  "rules": {
+    "ember/template-no-multiple-empty-lines": ["error", { "max": 1 }]
+  }
+}
+```
+
+- `max` (default: `1`): Maximum number of consecutive empty lines allowed
+
 ## Examples
 
 Examples of **incorrect** code for this rule:

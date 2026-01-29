@@ -13,6 +13,7 @@ Bare strings in templates make internationalization (i18n) difficult. This rule 
 This rule disallows text content in templates that isn't wrapped in a translation helper or passed as a property.
 
 The following are allowed:
+
 - Whitespace-only strings
 - Strings containing only numbers and punctuation
 - Strings in an allowlist (configurable)

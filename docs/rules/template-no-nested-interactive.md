@@ -13,6 +13,7 @@ Nested interactive elements (like a button inside a link) are not accessible to 
 This rule disallows nesting interactive elements inside other interactive elements.
 
 Interactive elements include:
+
 - `<a>`
 - `<button>`
 - `<details>`

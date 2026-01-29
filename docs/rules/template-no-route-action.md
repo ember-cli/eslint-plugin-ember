@@ -57,11 +57,13 @@ Examples of **correct** code for this rule:
 ## Migration
 
 Replace:
+
 ```gjs
 <button {{on "click" (route-action "save" model)}}>Save</button>
 ```
 
 With:
+
 ```gjs
 <button {{on "click" (fn this.save model)}}>Save</button>
 ```

@@ -13,6 +13,7 @@ Landmark elements should not be nested within other landmarks. This creates conf
 This rule disallows nesting landmark elements or roles within other landmark elements or roles.
 
 Landmark elements include:
+
 - `<header>` (banner)
 - `<nav>` (navigation)
 - `<main>` (main)

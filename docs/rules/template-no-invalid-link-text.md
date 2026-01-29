@@ -11,6 +11,7 @@ Link text should be descriptive and provide context about the destination. Gener
 ## Rule Details
 
 This rule disallows the following link text values:
+
 - "click here"
 - "here"
 - "link"

@@ -53,11 +53,13 @@ Examples of **correct** code for this rule:
 ## Migration
 
 Replace:
+
 ```gjs
 <form action="/submit">
 ```
 
 With:
+
 ```gjs
 <form {{on "submit" this.handleSubmit}}>
 ```

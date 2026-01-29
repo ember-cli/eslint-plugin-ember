@@ -56,6 +56,6 @@ Examples of **correct** code for this rule:
 
 ## References
 
-- [MDN: <a> - The Anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a)
+- [MDN: \<a\> - The Anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a)
 - [WebAIM: Links and Hypertext](https://webaim.org/techniques/hypertext/)
 - [ember-template-lint link-href-attributes](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/link-href-attributes.md)

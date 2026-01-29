@@ -15,6 +15,7 @@ HTML5 semantic elements like `<nav>`, `<main>`, and `<aside>` have implicit ARIA
 This rule disallows adding explicit `role` attributes when the element already has that role implicitly.
 
 Implicit landmark roles:
+
 - `<header>` → `role="banner"` (when not nested in `<article>` or `<section>`)
 - `<footer>` → `role="contentinfo"` (when not nested in `<article>` or `<section>`)
 - `<nav>` → `role="navigation"`

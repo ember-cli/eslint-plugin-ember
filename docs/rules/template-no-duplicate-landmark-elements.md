@@ -13,6 +13,7 @@ HTML5 landmark elements (like `<nav>`, `<header>`, `<footer>`, etc.) help screen
 This rule ensures that when multiple landmark elements of the same type appear in a template, each has a unique `aria-label` or `aria-labelledby` attribute.
 
 Landmark elements checked:
+
 - `header`
 - `footer`
 - `main`

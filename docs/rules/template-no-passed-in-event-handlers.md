@@ -57,11 +57,13 @@ Examples of **correct** code for this rule:
 ## Migration
 
 Replace:
+
 ```gjs
 <MyComponent @onClick={{this.handleClick}} />
 ```
 
 With:
+
 ```gjs
 <MyComponent>
   <button {{on "click" this.handleClick}}>Click</button>

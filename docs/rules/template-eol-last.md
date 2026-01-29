@@ -55,6 +55,7 @@ Examples of **correct** code for this rule with `"never"` option:
 ## Configuration
 
 This rule takes one option:
+
 - `"always"` (default): requires a newline at the end
 - `"never"`: disallows a newline at the end
 

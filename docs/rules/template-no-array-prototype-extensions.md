@@ -13,6 +13,7 @@ Ember historically provided Array prototype extensions like `firstObject` and `l
 ## Rule Details
 
 This rule disallows using Ember Array prototype extensions in templates:
+
 - `firstObject`
 - `lastObject`
 - `@each`

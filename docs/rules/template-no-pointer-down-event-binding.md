@@ -51,16 +51,19 @@ Examples of **correct** code for this rule:
 ## Migration
 
 Replace:
+
 ```gjs
 <button {{on "pointerdown" this.action}}>
 ```
 
 With:
+
 ```gjs
 <button {{on "click" this.action}}>
 ```
 
 Or for keyboard support:
+
 ```gjs
 <button {{on "click" this.action}} {{on "keydown" this.handleKey}}>
 ```

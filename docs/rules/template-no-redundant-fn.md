@@ -51,11 +51,13 @@ Examples of **correct** code for this rule:
 ## Migration
 
 Replace:
+
 ```gjs
 <button {{on "click" (fn this.action)}}>
 ```
 
 With:
+
 ```gjs
 <button {{on "click" this.action}}>
 ```

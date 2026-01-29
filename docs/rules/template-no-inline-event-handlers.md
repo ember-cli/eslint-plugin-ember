@@ -57,11 +57,13 @@ Examples of **correct** code for this rule:
 ## Migration
 
 Replace:
+
 ```gjs
 <button onclick="alert('clicked')">
 ```
 
 With:
+
 ```gjs
 <button {{on "click" this.handleClick}}>
 ```

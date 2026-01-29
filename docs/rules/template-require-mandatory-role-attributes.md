@@ -13,6 +13,7 @@ Certain ARIA roles require specific attributes to be present for the role to be 
 This rule checks that elements with ARIA roles include all required ARIA attributes for that role.
 
 Required attributes by role:
+
 - `checkbox`: requires `aria-checked`
 - `radio`: requires `aria-checked`
 - `slider`: requires `aria-valuenow`, `aria-valuemin`, `aria-valuemax`

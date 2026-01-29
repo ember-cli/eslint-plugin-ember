@@ -13,6 +13,7 @@ Some ARIA roles must be contained within specific parent roles to be meaningful 
 This rule checks that context-dependent ARIA roles are used within the appropriate parent roles.
 
 Roles requiring context:
+
 - `listitem` → must be in `list`
 - `option` → must be in `listbox`
 - `tab` → must be in `tablist`

@@ -51,6 +51,7 @@ Examples of **correct** code for this rule:
 ## Migration
 
 In your component:
+
 ```js
 import { htmlSafe } from '@ember/template';
 
@@ -62,6 +63,7 @@ export default class MyComponent extends Component {
 ```
 
 Then in template:
+
 ```gjs
 <template>
   <div style={{this.computedStyle}}>Content</div>
