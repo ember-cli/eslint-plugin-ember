@@ -29,7 +29,6 @@ export default class IndexRoute extends Route {
     return this.store.findAll('rental');
   }
 }
-
 ```
 
 ```js
@@ -96,20 +95,23 @@ Example config:
 ```js
 module.exports = {
   rules: {
-    'ember/no-implicit-injections': ['error', {
-      denyList: [
-        // Ember Responsive Used to Auto Inject the media service in Components/Controllers
-        { service: 'media', moduleNames: ['Component', 'Controller'] },
-        // Ember CLI Flash Used to Auto Inject the flashMessages service in all modules
-        { service: 'flash-messages' },
-        // Check for uses of the store in Routes or Controllers
-        { service: 'store', moduleNames: ['Route', 'Controller'] },
-        // Check for the feature service injected as "featureChecker"
-        { service: 'feature', propertyName: 'featureChecker' },
-      ]
-    }]
-  }
-}
+    'ember/no-implicit-injections': [
+      'error',
+      {
+        denyList: [
+          // Ember Responsive Used to Auto Inject the media service in Components/Controllers
+          { service: 'media', moduleNames: ['Component', 'Controller'] },
+          // Ember CLI Flash Used to Auto Inject the flashMessages service in all modules
+          { service: 'flash-messages' },
+          // Check for uses of the store in Routes or Controllers
+          { service: 'store', moduleNames: ['Route', 'Controller'] },
+          // Check for the feature service injected as "featureChecker"
+          { service: 'feature', propertyName: 'featureChecker' },
+        ],
+      },
+    ],
+  },
+};
 ```
 
 ## References

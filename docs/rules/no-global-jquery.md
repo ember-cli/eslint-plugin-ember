@@ -19,7 +19,7 @@ export default Component.extend({
   init(...args) {
     this._super(...args);
     $('.foo').addClass('bar'); // global usage
-  }
+  },
 });
 ```
 
@@ -35,7 +35,7 @@ export default Component.extend({
     Ember.$('.foo').addClass('bar'); // usage from Ember object
     // or even better
     $('.foo').addClass('bar'); // deconstruction from Ember object
-  }
+  },
 });
 ```
 

@@ -42,10 +42,10 @@ const rules = {
         'willClearRender',
         'didDestroyElement',
         'actions',
-        'method'
-      ]
-    }
-  ]
+        'method',
+      ],
+    },
+  ],
 };
 ```
 
@@ -70,7 +70,7 @@ order: [
   'willClearRender',
   'didDestroyElement',
   'actions',
-  ['method', 'empty-method']
+  ['method', 'empty-method'],
 ];
 ```
 
@@ -101,7 +101,7 @@ You should write code grouped and ordered in this way:
 const {
   Component,
   computed,
-  inject: { service }
+  inject: { service },
 } = Ember;
 const { alias } = computed;
 
@@ -146,18 +146,18 @@ export default Component.extend({
   actions: {
     sneakyAction() {
       return this._secretMethod();
-    }
+    },
   },
 
   // 9. Custom / private methods
   _secretMethod() {
     // custom secret method logic
-  }
+  },
 });
 ```
 
 ## Help Wanted
 
-| Issue | Link |
-| :-- | :-- |
+| Issue                                      | Link                                                                |
+| :----------------------------------------- | :------------------------------------------------------------------ |
 | ❌ Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

@@ -25,7 +25,7 @@ Examples of **incorrect** code for this rule:
 export default Component.extend({
   didInsertElement() {
     this.$('input').focus();
-  }
+  },
 });
 ```
 
@@ -35,7 +35,7 @@ export default Component.extend({
     $('body').addClass('expanded');
     // or
     Ember.$('body').addClass('expanded');
-  }
+  },
 });
 ```
 
@@ -45,7 +45,7 @@ Examples of **correct** code for this rule:
 export default Component.extend({
   didInsertElement() {
     this.element.querySelector('input').focus();
-  }
+  },
 });
 ```
 
@@ -53,7 +53,7 @@ export default Component.extend({
 export default Component.extend({
   click() {
     document.body.classList.add('expanded');
-  }
+  },
 });
 ```
 

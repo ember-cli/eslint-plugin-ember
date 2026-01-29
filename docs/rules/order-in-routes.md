@@ -39,10 +39,10 @@ const rules = {
         'resetController',
         'deactivate',
         'actions',
-        ['method', 'empty-method']
-      ]
-    }
-  ]
+        ['method', 'empty-method'],
+      ],
+    },
+  ],
 };
 ```
 
@@ -63,10 +63,10 @@ order: [
     'setupController',
     'renderTemplate',
     'resetController',
-    'deactivate'
+    'deactivate',
   ],
   'actions',
-  ['method', 'empty-method']
+  ['method', 'empty-method'],
 ];
 ```
 
@@ -97,7 +97,7 @@ You should write code grouped and ordered in this way:
 ```js
 const {
   Route,
-  inject: { service }
+  inject: { service },
 } = Ember;
 
 export default Route.extend({
@@ -106,7 +106,7 @@ export default Route.extend({
 
   // 2. Default route's properties
   queryParams: {
-    sortBy: { refreshModel: true }
+    sortBy: { refreshModel: true },
   },
 
   // 3. Custom properties
@@ -140,18 +140,18 @@ export default Route.extend({
   actions: {
     sneakyAction() {
       return this._secretMethod();
-    }
+    },
   },
 
   // 9. Custom / private methods
   _secretMethod() {
     // custom secret method logic
-  }
+  },
 });
 ```
 
 ## Help Wanted
 
-| Issue | Link |
-| :-- | :-- |
+| Issue                                      | Link                                                                |
+| :----------------------------------------- | :------------------------------------------------------------------ |
 | ❌ Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

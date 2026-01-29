@@ -9,7 +9,7 @@
 Ember 3.13 added an assertion that fires when using assignment `this.x = 123` on an untracked property that is used in a tracking context such as a computed property.
 
 > You attempted to update "propertyX" to "valueY",
-but it is being tracked by a tracking context, such as a template, computed property, or observer.
+> but it is being tracked by a tracking context, such as a template, computed property, or observer.
 >
 > In order to make sure the context updates properly, you must invalidate the property when updating it.
 >
@@ -104,10 +104,10 @@ module.exports = {
           argumentFormat: [
             {
               strings: {
-                count: 1
-              }
-            }
-          ]
+                count: 1,
+              },
+            },
+          ],
         },
         {
           name: 't',
@@ -115,14 +115,14 @@ module.exports = {
           argumentFormat: [
             {
               objects: {
-                index: 1
-              }
-            }
-          ]
-        }
-      ]
-    }
-  }
+                index: 1,
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
 };
 ```
 

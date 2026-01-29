@@ -14,7 +14,7 @@ See [@ef4's](https://github.com/ef4/) [canonical answer](https://discuss.emberjs
 Observers do have some limited uses. They let you reflect state from your application to foreign interfaces that don't follow Ember's data flow conventions.
 
 ```hbs
-{{input value=text key-up="change"}}
+{{input value=text key-up='change'}}
 ```
 
 ## Examples
@@ -27,7 +27,7 @@ import { observer } from '@ember/object';
 export default Controller.extend({
   change: observer('text', function () {
     console.log(`change detected: ${this.text}`);
-  })
+  }),
 });
 ```
 
@@ -86,7 +86,7 @@ export default Controller.extend({
   actions: {
     change() {
       console.log(`change detected: ${this.text}`);
-    }
-  }
+    },
+  },
 });
 ```

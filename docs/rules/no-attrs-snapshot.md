@@ -33,7 +33,7 @@ export default Component({
     } else {
       this.set('updated', false);
     }
-  }
+  },
 });
 ```
 
@@ -55,7 +55,7 @@ export default Component({
       this._valueCache = this.value;
       this.set('updated', true);
     }
-  }
+  },
 });
 ```
 

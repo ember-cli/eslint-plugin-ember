@@ -13,7 +13,7 @@ Examples of **incorrect** code for this rule:
 ```js
 export default Controller.extend({
   needs: ['comments'],
-  newComments: alias('controllers.comments.newest')
+  newComments: alias('controllers.comments.newest'),
 });
 ```
 
@@ -24,12 +24,12 @@ import Controller, { inject as controller } from '@ember/controller';
 
 export default Component.extend({
   comments: controller(),
-  newComments: alias('comments.newest')
+  newComments: alias('comments.newest'),
 });
 ```
 
 ## Help Wanted
 
-| Issue | Link |
-| :-- | :-- |
+| Issue                                      | Link                                                                |
+| :----------------------------------------- | :------------------------------------------------------------------ |
 | ❌ Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

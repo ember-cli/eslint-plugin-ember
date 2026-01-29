@@ -16,7 +16,7 @@ Examples of **incorrect** code for this rule:
 export default Component.extend({
   abc: on('didInsertElement', function () {
     /* custom logic */
-  })
+  }),
 });
 ```
 
@@ -26,6 +26,6 @@ Examples of **correct** code for this rule:
 export default Component.extend({
   didInsertElement() {
     /* custom logic */
-  }
+  },
 });
 ```

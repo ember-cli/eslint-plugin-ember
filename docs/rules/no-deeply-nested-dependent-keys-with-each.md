@@ -18,7 +18,7 @@ Examples of **incorrect** code for this rule:
 export default Component.extend({
   displayNames: computed('todos.@each.owner.name', function () {
     return this.todos.map((todo) => todo.owner.name);
-  })
+  }),
 });
 ```
 
@@ -32,7 +32,7 @@ export default Component.extend({
 
   owners: computed('todos.@each.owner', function () {
     return this.todos.mapBy('owner');
-  })
+  }),
 });
 ```
 

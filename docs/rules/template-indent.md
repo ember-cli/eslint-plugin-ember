@@ -31,7 +31,7 @@ Examples of **incorrect** code for this rule:
 // my-octane-component.gjs
 <template>
   <div>
-    
+
         </div>
 </template>
 }

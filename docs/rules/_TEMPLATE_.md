@@ -42,8 +42,10 @@ TODO: suggest any fast/automated techniques for fixing violations in a large cod
 ## Configuration
 
 <!-- begin auto-generated rule options list -->
+
 TODO: exclude this section if the rule has no extra configuration.
 TODO: ensure `meta.schema` contains descriptions, constraints, defaults, etc for all options.
+
 <!-- end auto-generated rule options list -->
 
 ## Related Rules
