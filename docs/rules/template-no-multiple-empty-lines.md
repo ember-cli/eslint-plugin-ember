@@ -10,15 +10,7 @@ Multiple consecutive blank lines reduce readability and should be limited.
 
 ## Rule Details
 
-This rule enforces a maximum number of consecutive empty lines.
-
-## Options
-
-```js
-{
-  max: 1, // default
-}
-```
+This rule enforces a maximum number of consecutive empty lines (default: 1).
 
 ## Examples
 
