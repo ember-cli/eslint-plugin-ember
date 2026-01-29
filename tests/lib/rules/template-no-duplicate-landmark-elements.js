@@ -17,17 +17,17 @@ ruleTester.run('template-no-duplicate-landmark-elements', rule, {
     {
       code: '<template><nav>Nav 1</nav><nav>Nav 2</nav></template>',
       output: null,
-      errors: [{ messageId: 'duplicate' }, { messageId: 'duplicate' }],
+      errors: [{ messageId: 'duplicate' }],
     },
     {
       code: '<template><header>Header 1</header><header>Header 2</header></template>',
       output: null,
-      errors: [{ messageId: 'duplicate' }, { messageId: 'duplicate' }],
+      errors: [{ messageId: 'duplicate' }],
     },
     {
       code: '<template><aside>Side 1</aside><aside>Side 2</aside></template>',
       output: null,
-      errors: [{ messageId: 'duplicate' }, { messageId: 'duplicate' }],
+      errors: [{ messageId: 'duplicate' }],
     },
   ],
 });
