@@ -28,7 +28,6 @@ module.exports = [
     'plugin:eslint-comments/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
-    'plugin:prettier/recommended',
     'prettier'
   ),
 
@@ -199,7 +198,6 @@ module.exports = [
       'no-unused-labels': 'off',
       'no-unused-vars': 'off',
       'no-useless-constructor': 'off',
-      'prettier/prettier': ['error', { trailingComma: 'none' }],
       'unicorn/consistent-function-scoping': 'off',
       'unicorn/filename-case': 'off',
     },

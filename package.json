@@ -43,7 +43,7 @@
     "lint:eslint-docs": "pnpm update:eslint-docs --check",
     "lint:eslint-docs:fix": "npm-run-all \"update:eslint-docs\"",
     "lint:fix": "npm-run-all \"lint:*:fix\" && pnpm format",
-    "lint:js": "eslint .",
+    "lint:js": "eslint \"./{lib,docs,tests}/**/*\"",
     "lint:prettier": "prettier . --check",
     "lint:js:fix": "pnpm lint:js --fix",
     "lint:package-json": "npmPkgJsonLint .",
