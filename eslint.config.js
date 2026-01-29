@@ -230,7 +230,7 @@ module.exports = [
   {
     ignores: [
       'coverage/',
-      'node_modules/',
+      'node_modules/**',
       'lib/recommended-rules.js',
       'lib/recommended-rules-gjs.js',
       'lib/recommended-rules-gts.js',

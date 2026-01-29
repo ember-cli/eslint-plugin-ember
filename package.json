@@ -44,11 +44,13 @@
     "lint:eslint-docs:fix": "npm-run-all \"update:eslint-docs\"",
     "lint:fix": "npm-run-all \"lint:*:fix\"",
     "lint:js": "eslint .",
+    "lint:prettier": "prettier . --check",
     "lint:js:fix": "pnpm lint:js --fix",
     "lint:package-json": "npmPkgJsonLint .",
     "lint:package-json-sorting": "sort-package-json --check",
     "lint:package-json-sorting:fix": "sort-package-json package.json",
     "lint:remote": "eslint-remote-tester",
+    "format": "prettier . --write",
     "start": "pnpm test:watch",
     "test": "vitest run",
     "test:coverage": "vitest --coverage",
@@ -118,7 +120,7 @@
     "node": "18.* || 20.* || >= 21"
   },
   "volta": {
-    "node": "22.10.0",
+    "node": "22.22.0",
     "pnpm": "9.12.2"
   },
   "publishConfig": {
