@@ -35,16 +35,10 @@ Examples of **correct** code for this rule:
 
 ```hbs
 <!-- Instead of using the Input component -->
-<input 
-  value={{this.value}}
-  {{on "input" this.updateValue}}
-/>
+<input value={{this.value}} {{on 'input' this.updateValue}} />
 
 <!-- Instead of using the Textarea component -->
-<textarea 
-  value={{this.value}}
-  {{on "input" this.updateValue}}
-/>
+<textarea value={{this.value}} {{on 'input' this.updateValue}} />
 ```
 
 ## Migration
@@ -54,18 +48,18 @@ Examples of **correct** code for this rule:
 Replace:
 
 ```hbs
-<Input @value={{this.value}} @type="text" @placeholder="Enter text" {{on "input" this.handleInput}} />
+<Input
+  @value={{this.value}}
+  @type='text'
+  @placeholder='Enter text'
+  {{on 'input' this.handleInput}}
+/>
 ```
 
 With:
 
 ```hbs
-<input 
-  value={{this.value}}
-  type="text"
-  placeholder="Enter text"
-  {{on "input" this.handleInput}}
-/>
+<input value={{this.value}} type='text' placeholder='Enter text' {{on 'input' this.handleInput}} />
 ```
 
 ### Textarea Component
@@ -73,17 +67,13 @@ With:
 Replace:
 
 ```hbs
-<Textarea @value={{this.value}} @placeholder="Enter text" {{on "input" this.handleInput}} />
+<Textarea @value={{this.value}} @placeholder='Enter text' {{on 'input' this.handleInput}} />
 ```
 
 With:
 
 ```hbs
-<textarea 
-  value={{this.value}}
-  placeholder="Enter text"
-  {{on "input" this.handleInput}}
-/>
+<textarea value={{this.value}} placeholder='Enter text' {{on 'input' this.handleInput}} />
 ```
 
 ## References

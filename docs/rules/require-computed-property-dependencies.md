@@ -29,7 +29,7 @@ import EmberObject, { computed } from '@ember/object';
 export default EmberObject.extend({
   name: computed(function () {
     return `${this.firstName} ${this.lastName}`;
-  })
+  }),
 });
 ```
 
@@ -41,7 +41,7 @@ import EmberObject, { computed } from '@ember/object';
 export default EmberObject.extend({
   name: computed('firstName', 'lastName', function () {
     return `${this.firstName} ${this.lastName}`;
-  })
+  }),
 });
 ```
 

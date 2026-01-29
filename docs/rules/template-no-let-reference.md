@@ -11,10 +11,10 @@ Disallows referencing let/var variables in templates.
 let foo = 1;
 
 function increment() {
-foo++;
+  foo++;
 }
 
-export default <template>{{foo}}</template>;
+export default <template>{{ foo }}</template>;
 ```
 
 This does not "work" – it doesn't error, but it will essentially capture and compile in the value of the foo variable at some arbitrary point and never update again. Even if the component is torn down and a new instance is created/rendered, it will probably still hold on to the old value when the template was initially compiled.
@@ -31,30 +31,26 @@ Examples of **incorrect** code for this rule:
 
 ```js
 let x = 1;
-<template>
-  {{x}}
-</template>
+<template>{{ x }}</template>;
 ```
 
 ```js
 let Comp = x; // SomeComponent
 <template>
   <Comp />
-</template>
+</template>;
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
 const x = 1;
-<template>
-  {{x}}
-</template>
+<template>{{ x }}</template>;
 ```
 
 ```js
 const Comp = x; // SomeComponent
 <template>
   <Comp />
-</template>
+</template>;
 ```

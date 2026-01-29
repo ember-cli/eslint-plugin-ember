@@ -17,7 +17,7 @@ Examples of **incorrect** code for this rule:
 
 ```js
 class Example {
-    @tracked someValue = this.args.someValue;
+  @tracked someValue = this.args.someValue;
 }
 ```
 
@@ -25,9 +25,9 @@ Examples of **correct** code for this rule:
 
 ```js
 class Example {
-    get someValue() {
-        return this.args.someValue;
-    }
+  get someValue() {
+    return this.args.someValue;
+  }
 }
 ```
 

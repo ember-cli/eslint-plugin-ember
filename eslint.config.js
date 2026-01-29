@@ -7,10 +7,15 @@ const eslintPluginEslintPluginAll = require('eslint-plugin-eslint-plugin/configs
 const eslintPluginFilenames = require('eslint-plugin-filenames');
 const eslintPluginMarkdown = require('eslint-plugin-markdown');
 const eslintPluginN = require('eslint-plugin-n');
-const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
+
 const eslintPluginUnicorn = require('eslint-plugin-unicorn');
+const eslintConfigPrettier = require('eslint-config-prettier');
 const globals = require('globals');
 const { FlatCompat } = require('@eslint/eslintrc');
+const { includeIgnoreFile } = require('@eslint/compat');
+const path = require('node:path');
+
+const gitignorePath = path.resolve(__dirname, '.gitignore');
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
@@ -23,14 +28,14 @@ module.exports = [
     'plugin:eslint-comments/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
-    'plugin:prettier/recommended'
+    'prettier'
   ),
 
   // Flat configs:
-  eslintPluginPrettierRecommended,
   eslintPluginEslintPluginAll,
   eslintPluginN.configs['flat/recommended'],
   eslintPluginUnicorn.configs['flat/recommended'],
+  eslintConfigPrettier,
 
   {
     languageOptions: {
@@ -193,7 +198,6 @@ module.exports = [
       'no-unused-labels': 'off',
       'no-unused-vars': 'off',
       'no-useless-constructor': 'off',
-      'prettier/prettier': ['error', { trailingComma: 'none' }],
       'unicorn/consistent-function-scoping': 'off',
       'unicorn/filename-case': 'off',
     },
@@ -241,4 +245,5 @@ module.exports = [
       'docs/rules/template-no-let-reference.md',
     ],
   },
+  includeIgnoreFile(gitignorePath, 'Imported .gitignore patterns'),
 ];

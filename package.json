@@ -37,17 +37,19 @@
     "lib"
   ],
   "scripts": {
+    "format": "prettier . --write",
     "lint": "npm-run-all --continue-on-error --aggregate-output --parallel \"lint:!(fix)\"",
     "lint:docs": "markdownlint \"**/*.md\"",
     "lint:docs:fix": "pnpm lint:docs --fix",
     "lint:eslint-docs": "pnpm update:eslint-docs --check",
     "lint:eslint-docs:fix": "npm-run-all \"update:eslint-docs\"",
-    "lint:fix": "npm-run-all \"lint:*:fix\"",
-    "lint:js": "eslint .",
+    "lint:fix": "npm-run-all \"lint:*:fix\" && pnpm format",
+    "lint:js": "eslint \"./{lib,docs,tests}/**/*\"",
     "lint:js:fix": "pnpm lint:js --fix",
     "lint:package-json": "npmPkgJsonLint .",
     "lint:package-json-sorting": "sort-package-json --check",
     "lint:package-json-sorting:fix": "sort-package-json package.json",
+    "lint:prettier": "prettier . --check",
     "lint:remote": "eslint-remote-tester",
     "start": "pnpm test:watch",
     "test": "vitest run",
@@ -73,6 +75,7 @@
     "@babel/eslint-parser": "^7.22.15",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-decorators": "^7.23.2",
+    "@eslint/compat": "^2.0.1",
     "@eslint/eslintrc": "^3.0.1",
     "@eslint/js": "^9.19.0",
     "@types/eslint": "^8.44.6",
@@ -87,7 +90,6 @@
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-markdown": "^5.1.0",
     "eslint-plugin-n": "^17.11.1",
-    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-unicorn": "^51.0.0",
     "eslint-remote-tester": "^3.0.1",
     "globals": "^16.4.0",
@@ -118,7 +120,7 @@
     "node": "18.* || 20.* || >= 21"
   },
   "volta": {
-    "node": "22.10.0",
+    "node": "22.22.0",
     "pnpm": "9.12.2"
   },
   "publishConfig": {

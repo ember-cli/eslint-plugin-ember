@@ -19,7 +19,7 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
-  myServiceName: service('myServiceName')
+  myServiceName: service('myServiceName'),
 });
 ```
 
@@ -27,19 +27,19 @@ Examples of **correct** code for this rule:
 
 ```js
 export default Component.extend({
-  myServiceName: service()
+  myServiceName: service(),
 });
 ```
 
 ```js
 export default Component.extend({
-  myServiceName: service('my-service-name')
+  myServiceName: service('my-service-name'),
 });
 ```
 
 ```js
 export default Component.extend({
-  otherSpecialName: service('my-service-name')
+  otherSpecialName: service('my-service-name'),
 });
 ```
 

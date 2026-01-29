@@ -1,1 +1,7 @@
+node_modules/
+dist/
 lib/recommended-rules.js
+CHANGELOG.md
+README.md
+pnpm-lock.yaml
+.github/*

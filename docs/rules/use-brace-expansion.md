@@ -16,7 +16,7 @@ Examples of **incorrect** code for this rule:
 export default Component.extend({
   fullName: computed('user.firstName', 'user.lastName', {
     // Code
-  })
+  }),
 });
 ```
 
@@ -26,6 +26,6 @@ Examples of **correct** code for this rule:
 export default Component.extend({
   fullName: computed('user.{firstName,lastName}', {
     // Code
-  })
+  }),
 });
 ```

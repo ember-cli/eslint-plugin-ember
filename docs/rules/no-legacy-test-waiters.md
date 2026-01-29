@@ -34,7 +34,7 @@ export default Component.extend({
     someAsync()
       .then(() => console.log('hi'))
       .finally(() => counter--);
-  }
+  },
 });
 ```
 
@@ -62,7 +62,7 @@ export default Component.extend({
 
   willDestroy() {
     unregisterWaiter(waiter);
-  }
+  },
 });
 ```
 
@@ -81,7 +81,7 @@ export default Component.extend({
     someAsync()
       .then(() => console.log('hi'))
       .finally(() => waiter.endAsync(token));
-  }
+  },
 });
 ```
 

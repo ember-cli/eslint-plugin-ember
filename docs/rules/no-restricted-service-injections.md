@@ -17,19 +17,19 @@ With this example configuration:
 
 ```json
 [
-    "error",
-    {
-        "paths": ["folder1", "folder2", "folder3"],
-        "services": ["deprecated-service"],
-        "message": "Please stop using this service as it is in the process of being deprecated",
-    },
-    {
-        "paths": ["isolated-folder"],
-        "services": ["service-disallowed-for-use-in-isolated-folder"],
-    },
-    {
-        "services": ["service-disallowed-anywhere"],
-    },
+  "error",
+  {
+    "paths": ["folder1", "folder2", "folder3"],
+    "services": ["deprecated-service"],
+    "message": "Please stop using this service as it is in the process of being deprecated"
+  },
+  {
+    "paths": ["isolated-folder"],
+    "services": ["service-disallowed-for-use-in-isolated-folder"]
+  },
+  {
+    "services": ["service-disallowed-anywhere"]
+  }
 ]
 ```
 

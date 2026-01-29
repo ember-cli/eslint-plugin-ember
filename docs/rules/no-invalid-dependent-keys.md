@@ -28,7 +28,7 @@ export default Component.extend({
   // Unbalanced braces:
   fullName: computed('user.{firstName,lastName', {
     // Code
-  })
+  }),
 });
 ```
 
@@ -37,7 +37,7 @@ export default Component.extend({
   // Unnecessary braces:
   userId: computed('user.{id}', {
     // Code
-  })
+  }),
 });
 ```
 
@@ -46,7 +46,7 @@ export default Component.extend({
   // Terminal `@each`:
   items: computed('arr.@each', {
     // Code
-  })
+  }),
 });
 ```
 
@@ -55,7 +55,7 @@ export default Component.extend({
   // `[]` in the middle:
   items: computed('arr.[].id', {
     // Code
-  })
+  }),
 });
 ```
 
@@ -64,7 +64,7 @@ export default Component.extend({
   // Leading period:
   userId: computed('.user.id', {
     // Code
-  })
+  }),
 });
 ```
 
@@ -73,7 +73,7 @@ export default Component.extend({
   // Space:
   userId: computed('user .id', {
     // Code
-  })
+  }),
 });
 ```
 
@@ -83,7 +83,7 @@ Examples of **correct** code for this rule:
 export default Component.extend({
   fullName: computed('user.{firstName,lastName}', {
     // Code
-  })
+  }),
 });
 ```
 
@@ -91,7 +91,7 @@ export default Component.extend({
 export default Component.extend({
   userId: computed('user.id', {
     // Code
-  })
+  }),
 });
 ```
 
@@ -99,7 +99,7 @@ export default Component.extend({
 export default Component.extend({
   items: computed('arr.[]', {
     // Code
-  })
+  }),
 });
 ```
 
@@ -107,7 +107,7 @@ export default Component.extend({
 export default Component.extend({
   items: computed('arr.@each.id', {
     // Code
-  })
+  }),
 });
 ```
 

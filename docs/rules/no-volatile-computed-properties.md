@@ -18,7 +18,7 @@ Examples of **incorrect** code for this rule:
 const Person = EmberObject.extend({
   fullName: computed(function () {
     return `${this.firstName} ${this.lastName}`;
-  }).volatile()
+  }).volatile(),
 });
 ```
 
@@ -29,7 +29,7 @@ const Person = EmberObject.extend({
   // Native getter:
   get fullName() {
     return `${this.firstName} ${this.lastName}`;
-  }
+  },
 });
 ```
 
