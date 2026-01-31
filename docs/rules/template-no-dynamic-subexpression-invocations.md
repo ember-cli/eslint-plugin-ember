@@ -1,0 +1,66 @@
+# ember/template-no-dynamic-subexpression-invocations
+
+💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
+
+<!-- end auto-generated rule header -->
+
+💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
+
+Disallow dynamic helper invocations.
+
+Dynamic helper invocations (where the helper name comes from a property or argument) make code harder to understand and can have performance implications. Use explicit helper names instead.
+
+## Rule Details
+
+This rule disallows invoking helpers dynamically using `this` or `@` properties.
+
+## Examples
+
+### Incorrect ❌
+
+```gjs
+<template>
+  {{(this.helper "arg")}}
+</template>
+```
+
+```gjs
+<template>
+  {{(@helperName "value")}}
+</template>
+```
+
+```gjs
+<template>
+  {{this.formatter this.data}}
+</template>
+```
+
+### Correct ✅
+
+```gjs
+<template>
+  {{format-date this.date}}
+</template>
+```
+
+```gjs
+<template>
+  {{(upper-case this.name)}}
+</template>
+```
+
+```gjs
+<template>
+  {{this.formattedData}}
+</template>
+```
+
+## Related Rules
+
+- [template-no-implicit-this](./template-no-implicit-this.md)
+
+## References
+
+- [Ember Guides - Template Helpers](https://guides.emberjs.com/release/components/helper-functions/)
+- [ember-template-lint: no-dynamic-subexpression-invocations](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-dynamic-subexpression-invocations.md)
