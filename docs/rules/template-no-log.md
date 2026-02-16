@@ -1,7 +1,5 @@
 # ember/template-no-log
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
-
 <!-- end auto-generated rule header -->
 
 Disallows usage of `{{log}}` in templates.

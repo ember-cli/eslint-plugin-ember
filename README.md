@@ -160,8 +160,6 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | ✅                               | `recommended`     |
 | ![gjs logo](/docs/svgs/gjs.svg) | `recommended-gjs` |
 | ![gts logo](/docs/svgs/gts.svg) | `recommended-gts` |
-|                                 | `strict-gjs`      |
-|                                 | `strict-gts`      |
 
 <!-- end auto-generated configs list -->
 
@@ -178,9 +176,9 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Best Practices
 
-| Name                                             | Description                   | 💼                                          | 🔧 | 💡 |
-| :----------------------------------------------- | :---------------------------- | :------------------------------------------ | :- | :- |
-| [template-no-log](docs/rules/template-no-log.md) | disallow {{log}} in templates | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
+| Name                                             | Description                   | 💼 | 🔧 | 💡 |
+| :----------------------------------------------- | :---------------------------- | :- | :- | :- |
+| [template-no-log](docs/rules/template-no-log.md) | disallow {{log}} in templates |    |    |    |
 
 ### Components
 
@@ -368,6 +366,3 @@ Note that new rules should not immediately be added to the [recommended](./lib/r
 ## 🔓 License
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
-
-[badge-strict-gjs]: https://img.shields.io/badge/strict--gjs-blue
-[badge-strict-gts]: https://img.shields.io/badge/strict--gts-blue
