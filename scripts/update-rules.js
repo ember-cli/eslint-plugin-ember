@@ -42,7 +42,7 @@ function generate(filename, filter) {
  * In order to update its content based on rules'
  * definitions, execute "npm run update"
  */
-module.exports = ${JSON.stringify(recommendedRules, null, 2).replace(/"/g, "'")};
+module.exports = ${JSON.stringify(recommendedRules, null, 2)};
 `;
 
   fs.writeFileSync(recommendedRulesFile, recommendedRulesContent);
