@@ -1,4 +1,4 @@
-# ember/template-no-let-reference
+# ember/no-let-reference
 
 💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): ![gjs logo](/docs/svgs/gjs.svg) `recommended-gjs`, ![gts logo](/docs/svgs/gts.svg) `recommended-gts`.
 

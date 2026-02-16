@@ -2,7 +2,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/template-indent');
+const rule = require('../../../lib/rules/indent');
 const RuleTester = require('eslint').RuleTester;
 
 //------------------------------------------------------------------------------
@@ -22,7 +22,7 @@ const ruleTesterWithBaseIntent = new RuleTester({
   },
 });
 
-ruleTester.run('template-indent', rule, {
+ruleTester.run('indent', rule, {
   valid: [
     `<template>
     <div>
@@ -294,7 +294,7 @@ write
 });
 
 // make sure this works together with the base indent rule
-ruleTesterWithBaseIntent.run('template-indent-with-base.indent', rule, {
+ruleTesterWithBaseIntent.run('indent-with-base.indent', rule, {
   valid: [
     `
 class MyClass {
