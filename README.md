@@ -176,9 +176,10 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Best Practices
 
-| Name                                             | Description                   | 💼 | 🔧 | 💡 |
-| :----------------------------------------------- | :---------------------------- | :- | :- | :- |
-| [template-no-log](docs/rules/template-no-log.md) | disallow {{log}} in templates |    |    |    |
+| Name                                                       | Description                        | 💼 | 🔧 | 💡 |
+| :--------------------------------------------------------- | :--------------------------------- | :- | :- | :- |
+| [template-no-debugger](docs/rules/template-no-debugger.md) | disallow {{debugger}} in templates |    |    |    |
+| [template-no-log](docs/rules/template-no-log.md)           | disallow {{log}} in templates      |    |    |    |
 
 ### Components
 
