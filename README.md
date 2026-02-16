@@ -368,3 +368,6 @@ Note that new rules should not immediately be added to the [recommended](./lib/r
 ## 🔓 License
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
+
+[badge-strict-gjs]: https://img.shields.io/badge/strict--gjs-blue
+[badge-strict-gts]: https://img.shields.io/badge/strict--gts-blue
