@@ -174,6 +174,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).\
 💡 Manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
 
+### Best Practices
+
+| Name                                             | Description                   | 💼 | 🔧 | 💡 |
+| :----------------------------------------------- | :---------------------------- | :- | :- | :- |
+| [template-no-log](docs/rules/template-no-log.md) | disallow {{log}} in templates |    |    |    |
+
 ### Components
 
 | Name                                                                       | Description                                                                                                                          | 💼 | 🔧 | 💡 |
