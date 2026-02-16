@@ -42,7 +42,8 @@ function generate(filename, filter) {
  * In order to update its content based on rules'
  * definitions, execute "npm run update"
  */
-module.exports = ${JSON.stringify(recommendedRules, null, 2)}`;
+module.exports = ${JSON.stringify(recommendedRules, null, 2).replace(/"/g, "'")};
+`;
 
   fs.writeFileSync(recommendedRulesFile, recommendedRulesContent);
 }
@@ -50,3 +51,5 @@ module.exports = ${JSON.stringify(recommendedRules, null, 2)}`;
 generate('../lib/recommended-rules.js', (entry) => entry[1].meta.docs.recommended);
 generate('../lib/recommended-rules-gjs.js', (entry) => entry[1].meta.docs.recommendedGjs);
 generate('../lib/recommended-rules-gts.js', (entry) => entry[1].meta.docs.recommendedGts);
+generate('../lib/strict-rules-gjs.js', (entry) => entry[1].meta.docs.strictGjs);
+generate('../lib/strict-rules-gts.js', (entry) => entry[1].meta.docs.strictGts);

@@ -160,6 +160,8 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | ✅                               | `recommended`     |
 | ![gjs logo](/docs/svgs/gjs.svg) | `recommended-gjs` |
 | ![gts logo](/docs/svgs/gts.svg) | `recommended-gts` |
+|                                 | `strict-gjs`      |
+|                                 | `strict-gts`      |
 
 <!-- end auto-generated configs list -->
 
@@ -173,6 +175,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 ![gts logo](/docs/svgs/gts.svg) Set in the `recommended-gts` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).\
 💡 Manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
+
+### Best Practices
+
+| Name                                             | Description                   | 💼                                          | 🔧 | 💡 |
+| :----------------------------------------------- | :---------------------------- | :------------------------------------------ | :- | :- |
+| [template-no-log](docs/rules/template-no-log.md) | disallow {{log}} in templates | ![badge-strict-gjs][] ![badge-strict-gts][] |    |    |
 
 ### Components
 
