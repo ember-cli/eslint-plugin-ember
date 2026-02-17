@@ -304,6 +304,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [route-path-style](docs/rules/route-path-style.md)                                 | enforce usage of kebab-case (instead of snake_case or camelCase) in route paths          |    |    | 💡 |
 | [routes-segments-snake-case](docs/rules/routes-segments-snake-case.md)             | enforce usage of snake_cased dynamic segments in routes                                  | ✅  |    |    |
 
+### Security
+
+| Name                                                                   | Description                                                     | 💼 | 🔧 | 💡 |
+| :--------------------------------------------------------------------- | :-------------------------------------------------------------- | :- | :- | :- |
+| [template-link-rel-noopener](docs/rules/template-link-rel-noopener.md) | require rel="noopener noreferrer" on links with target="_blank" |    | 🔧 |    |
+
 ### Services
 
 | Name                                                                                                 | Description                                                       | 💼 | 🔧 | 💡 |
