@@ -236,6 +236,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [no-observers](docs/rules/no-observers.md)                                                       | disallow usage of observers                               | ✅  |    |    |
 | [no-old-shims](docs/rules/no-old-shims.md)                                                       | disallow usage of old shims for modules                   | ✅  | 🔧 |    |
 | [no-string-prototype-extensions](docs/rules/no-string-prototype-extensions.md)                   | disallow usage of `String` prototype extensions           | ✅  |    |    |
+| [template-deprecated-inline-view-helper](docs/rules/template-deprecated-inline-view-helper.md)   | disallow inline {{view}} helper                           |    |    |    |
 
 ### Ember Data
 
