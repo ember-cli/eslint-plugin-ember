@@ -179,6 +179,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | Name                                                                             | Description                             | 💼 | 🔧 | 💡 |
 | :------------------------------------------------------------------------------- | :-------------------------------------- | :- | :- | :- |
 | [template-link-href-attributes](docs/rules/template-link-href-attributes.md)     | require href attribute on link elements |    |    |    |
+| [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)           | disallow abstract ARIA roles            |    |    |    |
 | [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md) | disallow accesskey attribute            |    | 🔧 |    |
 
 ### Best Practices
