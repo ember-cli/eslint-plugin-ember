@@ -315,12 +315,13 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Stylistic Issues
 
-| Name                                                       | Description                                       | 💼 | 🔧 | 💡 |
-| :--------------------------------------------------------- | :------------------------------------------------ | :- | :- | :- |
-| [order-in-components](docs/rules/order-in-components.md)   | enforce proper order of properties in components  |    | 🔧 |    |
-| [order-in-controllers](docs/rules/order-in-controllers.md) | enforce proper order of properties in controllers |    | 🔧 |    |
-| [order-in-models](docs/rules/order-in-models.md)           | enforce proper order of properties in models      |    | 🔧 |    |
-| [order-in-routes](docs/rules/order-in-routes.md)           | enforce proper order of properties in routes      |    | 🔧 |    |
+| Name                                                             | Description                                         | 💼 | 🔧 | 💡 |
+| :--------------------------------------------------------------- | :-------------------------------------------------- | :- | :- | :- |
+| [order-in-components](docs/rules/order-in-components.md)         | enforce proper order of properties in components    |    | 🔧 |    |
+| [order-in-controllers](docs/rules/order-in-controllers.md)       | enforce proper order of properties in controllers   |    | 🔧 |    |
+| [order-in-models](docs/rules/order-in-models.md)                 | enforce proper order of properties in models        |    | 🔧 |    |
+| [order-in-routes](docs/rules/order-in-routes.md)                 | enforce proper order of properties in routes        |    | 🔧 |    |
+| [template-inline-link-to](docs/rules/template-inline-link-to.md) | disallow inline link-to, use the block form instead |    | 🔧 |    |
 
 ### Testing
 
