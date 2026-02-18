@@ -176,9 +176,10 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Accessibility
 
-| Name                                                                         | Description                             | 💼 | 🔧 | 💡 |
-| :--------------------------------------------------------------------------- | :-------------------------------------- | :- | :- | :- |
-| [template-link-href-attributes](docs/rules/template-link-href-attributes.md) | require href attribute on link elements |    |    |    |
+| Name                                                                           | Description                             | 💼 | 🔧 | 💡 |
+| :----------------------------------------------------------------------------- | :-------------------------------------- | :- | :- | :- |
+| [template-link-href-attributes](docs/rules/template-link-href-attributes.md)   | require href attribute on link elements |    |    |    |
+| [template-no-down-event-binding](docs/rules/template-no-down-event-binding.md) | disallow mouse down event bindings      |    |    |    |
 
 ### Best Practices
 
