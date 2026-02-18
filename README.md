@@ -182,11 +182,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Best Practices
 
-| Name                                                                                       | Description                                               | 💼 | 🔧 | 💡 |
-| :----------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :- | :- | :- |
-| [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md) | disallow setting certain attributes on builtin components |    |    |    |
-| [template-no-debugger](docs/rules/template-no-debugger.md)                                 | disallow {{debugger}} in templates                        |    |    |    |
-| [template-no-log](docs/rules/template-no-log.md)                                           | disallow {{log}} in templates                             |    |    |    |
+| Name                                                                                                     | Description                                               | 💼 | 🔧 | 💡 |
+| :------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :- | :- | :- |
+| [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md)               | disallow setting certain attributes on builtin components |    |    |    |
+| [template-no-attribute-splat-on-html-element](docs/rules/template-no-attribute-splat-on-html-element.md) | disallow ...attributes on HTML elements                   |    |    |    |
+| [template-no-debugger](docs/rules/template-no-debugger.md)                                               | disallow {{debugger}} in templates                        |    |    |    |
+| [template-no-log](docs/rules/template-no-log.md)                                                         | disallow {{log}} in templates                             |    |    |    |
 
 ### Components
 
