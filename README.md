@@ -176,9 +176,10 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Accessibility
 
-| Name                                                                         | Description                             | 💼 | 🔧 | 💡 |
-| :--------------------------------------------------------------------------- | :-------------------------------------- | :- | :- | :- |
-| [template-link-href-attributes](docs/rules/template-link-href-attributes.md) | require href attribute on link elements |    |    |    |
+| Name                                                                             | Description                             | 💼 | 🔧 | 💡 |
+| :------------------------------------------------------------------------------- | :-------------------------------------- | :- | :- | :- |
+| [template-link-href-attributes](docs/rules/template-link-href-attributes.md)     | require href attribute on link elements |    |    |    |
+| [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md) | disallow accesskey attribute            |    | 🔧 |    |
 
 ### Best Practices
 
