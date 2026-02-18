@@ -160,6 +160,8 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | ✅                               | `recommended`     |
 | ![gjs logo](/docs/svgs/gjs.svg) | `recommended-gjs` |
 | ![gts logo](/docs/svgs/gts.svg) | `recommended-gts` |
+|                                 | `strict-gjs`      |
+|                                 | `strict-gts`      |
 
 <!-- end auto-generated configs list -->
 
