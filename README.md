@@ -190,6 +190,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | Name                                                                                             | Description                                               | 💼 | 🔧 | 💡 |
 | :----------------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :- | :- | :- |
 | [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md)       | disallow setting certain attributes on builtin components |    |    |    |
+| [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                       | disallow usage of {{action}} modifiers                    |    |    |    |
 | [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md) | disallow @arguments on HTML elements                      |    |    |    |
 | [template-no-debugger](docs/rules/template-no-debugger.md)                                       | disallow {{debugger}} in templates                        |    |    |    |
 | [template-no-log](docs/rules/template-no-log.md)                                                 | disallow {{log}} in templates                             |    |    |    |
