@@ -332,13 +332,14 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Stylistic Issues
 
-| Name                                                               | Description                                                    | 💼 | 🔧 | 💡 |
-| :----------------------------------------------------------------- | :------------------------------------------------------------- | :- | :- | :- |
-| [order-in-components](docs/rules/order-in-components.md)           | enforce proper order of properties in components               |    | 🔧 |    |
-| [order-in-controllers](docs/rules/order-in-controllers.md)         | enforce proper order of properties in controllers              |    | 🔧 |    |
-| [order-in-models](docs/rules/order-in-models.md)                   | enforce proper order of properties in models                   |    | 🔧 |    |
-| [order-in-routes](docs/rules/order-in-routes.md)                   | enforce proper order of properties in routes                   |    | 🔧 |    |
-| [template-attribute-order](docs/rules/template-attribute-order.md) | enforce consistent ordering of attributes in template elements |    |    |    |
+| Name                                                                     | Description                                                    | 💼 | 🔧 | 💡 |
+| :----------------------------------------------------------------------- | :------------------------------------------------------------- | :- | :- | :- |
+| [order-in-components](docs/rules/order-in-components.md)                 | enforce proper order of properties in components               |    | 🔧 |    |
+| [order-in-controllers](docs/rules/order-in-controllers.md)               | enforce proper order of properties in controllers              |    | 🔧 |    |
+| [order-in-models](docs/rules/order-in-models.md)                         | enforce proper order of properties in models                   |    | 🔧 |    |
+| [order-in-routes](docs/rules/order-in-routes.md)                         | enforce proper order of properties in routes                   |    | 🔧 |    |
+| [template-attribute-order](docs/rules/template-attribute-order.md)       | enforce consistent ordering of attributes in template elements |    |    |    |
+| [template-modifier-name-case](docs/rules/template-modifier-name-case.md) | require dasherized names for modifiers                         |    | 🔧 |    |
 
 ### Testing
 
