@@ -65,6 +65,7 @@
     "ember-rfc176-data": "^0.3.18",
     "eslint-utils": "^3.0.0",
     "estraverse": "^5.3.0",
+    "html-tags": "^3.3.1",
     "lodash.camelcase": "^4.3.0",
     "lodash.kebabcase": "^4.1.1",
     "requireindex": "^1.2.0",
