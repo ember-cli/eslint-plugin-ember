@@ -189,6 +189,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | Name                                                                                       | Description                                               | 💼 | 🔧 | 💡 |
 | :----------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :- | :- | :- |
 | [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md) | disallow setting certain attributes on builtin components |    |    |    |
+| [template-no-builtin-form-components](docs/rules/template-no-builtin-form-components.md)   | disallow usage of built-in form components                |    |    |    |
 | [template-no-debugger](docs/rules/template-no-debugger.md)                                 | disallow {{debugger}} in templates                        |    |    |    |
 | [template-no-log](docs/rules/template-no-log.md)                                           | disallow {{log}} in templates                             |    |    |    |
 
