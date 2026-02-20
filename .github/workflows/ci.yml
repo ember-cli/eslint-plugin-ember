@@ -46,3 +46,25 @@ jobs:
 
     - run: pnpm install
     - run: pnpm test:coverage
+
+  eslint-versions:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        eslint-version: [8, 9, 10]
+
+    steps:
+    - uses: actions/checkout@v6
+    - uses: pnpm/action-setup@v4
+      with:
+        run_install: false
+    - uses: actions/setup-node@v6
+      with:
+        node-version: 22.x
+        cache: 'pnpm'
+
+    - run: pnpm install
+    - name: Install ESLint ${{ matrix.eslint-version }}
+      run: pnpm add -D eslint@${{ matrix.eslint-version }} --ignore-workspace-root-check
+    - name: Test with ESLint ${{ matrix.eslint-version }}
+      run: pnpm test
