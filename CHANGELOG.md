@@ -1,5 +1,40 @@
 # Changelog
 
+## Release (2026-02-20)
+
+* eslint-plugin-ember 12.8.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2414](https://github.com/ember-cli/eslint-plugin-ember/pull/2414) Extract rule: template-no-capital-arguments ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2407](https://github.com/ember-cli/eslint-plugin-ember/pull/2407) Extract rule: template-no-attrs-in-components ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2412](https://github.com/ember-cli/eslint-plugin-ember/pull/2412) Extract rule: template-no-block-params-for-html-elements ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2408](https://github.com/ember-cli/eslint-plugin-ember/pull/2408) Extract rule: template-no-autofocus-attribute ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2421](https://github.com/ember-cli/eslint-plugin-ember/pull/2421) Extract rule: template-no-array-prototype-extensions ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2404](https://github.com/ember-cli/eslint-plugin-ember/pull/2404) Extract rule: template-no-aria-hidden-body ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2424](https://github.com/ember-cli/eslint-plugin-ember/pull/2424) Extract rule: template-no-action-modifiers ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2403](https://github.com/ember-cli/eslint-plugin-ember/pull/2403) Extract rule: template-no-arguments-for-html-elements ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2405](https://github.com/ember-cli/eslint-plugin-ember/pull/2405) Extract rule: template-no-aria-unsupported-elements ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2423](https://github.com/ember-cli/eslint-plugin-ember/pull/2423) Extract rule: template-no-action ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2420](https://github.com/ember-cli/eslint-plugin-ember/pull/2420) Add strict-gjs and strict-gts configs so that users could opt in to these new rules from ember-template-lint before we do our next major ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2398](https://github.com/ember-cli/eslint-plugin-ember/pull/2398) Extract rule: template-no-abstract-roles ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2399](https://github.com/ember-cli/eslint-plugin-ember/pull/2399) Extract rule: template-no-accesskey-attribute ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2396](https://github.com/ember-cli/eslint-plugin-ember/pull/2396) Extract rule: template-link-rel-noopener ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2395](https://github.com/ember-cli/eslint-plugin-ember/pull/2395) Extract rule: template-link-href-attributes ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2391](https://github.com/ember-cli/eslint-plugin-ember/pull/2391) Extract rule: template-builtin-component-arguments ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2390](https://github.com/ember-cli/eslint-plugin-ember/pull/2390) Extract rule: template-attribute-order ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2383](https://github.com/ember-cli/eslint-plugin-ember/pull/2383) Port template-no-debugger rule from PR #2371 ([@Copilot](https://github.com/apps/copilot-swe-agent))
+  * [#2381](https://github.com/ember-cli/eslint-plugin-ember/pull/2381) Port template-no-log rule from PR #2371 ([@Copilot](https://github.com/apps/copilot-swe-agent))
+
+#### :house: Internal
+* `eslint-plugin-ember`
+  * [#2382](https://github.com/ember-cli/eslint-plugin-ember/pull/2382) Cleanup unused snapshots ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2368](https://github.com/ember-cli/eslint-plugin-ember/pull/2368) We have prettier (and thus editors detect and run it), but what we check in CI is different ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- Copilot [Bot] ([@copilot-swe-agent](https://github.com/apps/copilot-swe-agent))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-01-22)
 
 * eslint-plugin-ember 12.7.6 (patch)
