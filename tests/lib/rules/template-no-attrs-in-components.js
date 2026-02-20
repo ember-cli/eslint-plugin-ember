@@ -15,18 +15,15 @@ ruleTester.run('template-no-attrs-in-components', rule, {
      class MyComponent extends Component {
        <template>{{this.args.name}}</template>
      }`,
+    // Bare attrs is not accessible without this, so it's allowed
+    '<template>{{attrs.value}}</template>',
+    '<template>{{attrs}}</template>',
+    `import Component from '@glimmer/component';
+     class MyComponent extends Component {
+       <template>{{attrs.name}}</template>
+     }`,
   ],
   invalid: [
-    {
-      code: '<template>{{attrs.value}}</template>',
-      output: null,
-      errors: [{ messageId: 'noAttrs' }],
-    },
-    {
-      code: '<template>{{attrs}}</template>',
-      output: null,
-      errors: [{ messageId: 'noAttrs' }],
-    },
     {
       code: '<template>{{this.attrs.value}}</template>',
       output: null,
@@ -45,15 +42,6 @@ ruleTester.run('template-no-attrs-in-components', rule, {
        }`,
       output: null,
       errors: [{ messageId: 'noThisAttrs' }],
-    },
-    // Class component using attrs
-    {
-      code: `import Component from '@glimmer/component';
-       class MyComponent extends Component {
-         <template>{{attrs.name}}</template>
-       }`,
-      output: null,
-      errors: [{ messageId: 'noAttrs' }],
     },
   ],
 });
