@@ -4,8 +4,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'plugin:ember/strict-gjs'` or `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
-
 In Ember route templates, the model should be accessed via `this.model` in the controller or component, not as an `@model` argument. The `@model` argument pattern is more appropriate for components. This rule primarily targets `.hbs` files in the `templates/` directory.
 
 ## Rule Details
@@ -55,9 +53,3 @@ Examples of **correct** code for this rule:
 
 - [eslint-plugin-ember template-no-model-argument-in-route-templates](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-model-argument-in-route-templates.md)
 - [Ember Guides: Controllers](https://guides.emberjs.com/release/routing/controllers/)
-
-<!-- begin auto-generated rule meta list -->
-
-- strictGjs: true
-- strictGts: true
-<!-- end auto-generated rule meta list -->

@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'plugin:ember/strict-gjs'` or `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
-
 Disallow `{{yield}}` without parameters outside of contextual components.
 
 ## Rule Details
@@ -31,9 +29,3 @@ Examples of **correct** code for this rule:
   {{yield @model}}
 </template>
 ```
-
-<!-- begin auto-generated rule meta list -->
-
-- strictGjs: true
-- strictGts: true
-<!-- end auto-generated rule meta list -->

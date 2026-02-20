@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
-
 Disallow nested `...attributes` usage.
 
 The `...attributes` syntax is used to pass HTML attributes to components. It should only be used on the top-level element of a component template, not on nested elements. Using it on nested elements can lead to unexpected behavior and makes it unclear which element receives the attributes.

@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'plugin:ember/strict-gjs'` or `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
-
 Disallow the `scope` attribute on elements other than `<th>` or `<td>` elements.
 
 ## Rule Details
@@ -56,9 +54,3 @@ Examples of **correct** code for this rule:
 
 - [eslint-plugin-ember template-no-scope-outside-table-headings](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-scope-outside-table-headings.md)
 - [MDN: scope attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope)
-
-<!-- begin auto-generated rule meta list -->
-
-- strictGjs: true
-- strictGts: true
-<!-- end auto-generated rule meta list -->

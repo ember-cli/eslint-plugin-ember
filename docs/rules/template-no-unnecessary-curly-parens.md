@@ -4,8 +4,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'plugin:ember/strict-gjs'` or `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
-
 Disallow unnecessary curlies around simple values in templates. This is a stylistic rule that promotes cleaner template code. It only flags simple single identifiers without path separators or parameters.
 
 ## Rule Details
@@ -57,9 +55,3 @@ Examples of **correct** code for this rule:
 ## References
 
 - [eslint-plugin-ember template-no-unnecessary-curly-parens](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-unnecessary-curly-parens.md)
-
-<!-- begin auto-generated rule meta list -->
-
-- strictGjs: true
-- strictGts: true
-<!-- end auto-generated rule meta list -->

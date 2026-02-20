@@ -49,9 +49,3 @@ function myComponent() {
 ## References
 
 - [Glimmer Components](https://guides.emberjs.com/release/upgrading/current-edition/glimmer-components/)
-
-<!-- begin auto-generated rule meta list -->
-
-- strictGjs: true
-- strictGts: true
-<!-- end auto-generated rule meta list -->

@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'plugin:ember/strict-gjs'` or `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
-
 Disallow invalid `title` attributes on link elements. The title should not be empty or the same as the link text.
 
 ## Rule Details
@@ -35,9 +33,3 @@ Examples of **correct** code for this rule:
   <a href="/page">Page</a>
 </template>
 ```
-
-<!-- begin auto-generated rule meta list -->
-
-- strictGjs: true
-- strictGts: true
-<!-- end auto-generated rule meta list -->

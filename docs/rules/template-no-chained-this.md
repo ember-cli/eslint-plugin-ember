@@ -4,8 +4,6 @@
 
 <!-- end auto-generated rule header -->
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
-
 Disallow chained property access on `this`.
 
 Accessing deeply nested properties through `this` (like `this.user.name`) in templates makes components harder to refactor and test. It also creates tight coupling between the template and the component's internal structure. Use local variables or computed properties instead.

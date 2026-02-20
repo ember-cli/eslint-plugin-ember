@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
-
 Disallow `@arguments` on HTML elements.
 
 Arguments (using the `@` prefix) are a feature specific to Ember components. They should not be used on regular HTML elements, which only support standard HTML attributes.

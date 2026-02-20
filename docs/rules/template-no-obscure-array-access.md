@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'plugin:ember/strict-gjs'` or `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
-
 Disallow obscure array access patterns like `objectPath.@each.property` or `objectPath.[].property` in templates.
 
 ## Rule Details
@@ -57,9 +55,3 @@ Examples of **correct** code for this rule:
 ## References
 
 - [eslint-plugin-ember template-no-obscure-array-access](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-obscure-array-access.md)
-
-<!-- begin auto-generated rule meta list -->
-
-- strictGjs: true
-- strictGts: true
-<!-- end auto-generated rule meta list -->

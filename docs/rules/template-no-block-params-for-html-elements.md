@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
-
 Disallow block params on HTML elements.
 
 Block params (using the `as |param|` syntax) are a feature specific to Ember components and block helpers. They should not be used on regular HTML elements.

@@ -4,8 +4,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'plugin:ember/strict-gjs'` and `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
-
 Disallow unnecessary usage of the `{{component}}` helper with static component names.
 
 ## Rule Details

@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
-
 Disallow dynamic helper invocations.
 
 Dynamic helper invocations (where the helper name comes from a property or argument) make code harder to understand and can have performance implications. Use explicit helper names instead.

@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'plugin:ember/strict-gjs'` or `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
-
 Disallow unbalanced mustache curlies in templates.
 
 ## Rule Details
@@ -59,9 +57,3 @@ Examples of **correct** code for this rule:
 ## References
 
 - [eslint-plugin-ember template-no-unbalanced-curlies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-unbalanced-curlies.md)
-
-<!-- begin auto-generated rule meta list -->
-
-- strictGjs: true
-- strictGts: true
-<!-- end auto-generated rule meta list -->

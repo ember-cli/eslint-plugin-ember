@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
-
 Disallow usage of the `(mut)` helper.
 
 The `(mut)` helper was used in classic Ember to create two-way bindings. In modern Ember (Octane and beyond), this pattern is discouraged in favor of explicit one-way data flow with actions or setters.

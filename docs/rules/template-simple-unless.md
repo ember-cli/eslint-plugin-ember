@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'plugin:ember/strict-gjs'` or `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
-
 Require simple conditions in `{{#unless}}` blocks. Complex expressions should use `{{#if}}` with negation instead.
 
 ## Rule Details
@@ -51,9 +49,3 @@ Examples of **correct** code for this rule:
 | `allowlist`  | `string[]` | `[]`    | Helper names allowed inside `{{unless}}`.                                   |
 | `denylist`   | `string[]` | `[]`    | Helper names explicitly denied inside `{{unless}}`.                         |
 | `maxHelpers` | `integer`  | `1`     | Maximum number of helpers allowed inside `{{unless}}` (`-1` for unlimited). |
-
-<!-- begin auto-generated rule meta list -->
-
-- strictGjs: true
-- strictGts: true
-<!-- end auto-generated rule meta list -->

@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'plugin:ember/strict-gjs'` or `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
-
 Disallow unnecessary curly braces around string literals in attributes.
 
 ## Rule Details
@@ -31,9 +29,3 @@ Examples of **correct** code for this rule:
   <div class={{this.dynamicClass}}>Content</div>
 </template>
 ```
-
-<!-- begin auto-generated rule meta list -->
-
-- strictGjs: true
-- strictGts: true
-<!-- end auto-generated rule meta list -->

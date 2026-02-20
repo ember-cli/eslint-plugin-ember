@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
-
 Disallow invalid meta tags.
 
 Meta tags should use proper encoding (UTF-8) for consistent cross-browser behavior and internationalization support.

@@ -4,8 +4,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'plugin:ember/strict-gjs'` or `extends: 'plugin:ember/strict-gts'` property in a configuration file enables this rule.
-
 Disallow HTML comments in templates. HTML comments will be visible in the rendered output, which may expose sensitive information or clutter the DOM.
 
 ## Rule Details
@@ -36,9 +34,3 @@ Examples of **correct** code for this rule:
   <div>Content</div>
 </template>
 ```
-
-<!-- begin auto-generated rule meta list -->
-
-- strictGjs: true
-- strictGts: true
-<!-- end auto-generated rule meta list -->

@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): `strict-gjs`, `strict-gts`.
-
 Disallow `action` attribute on submit buttons.
 
 Using the `action` attribute on submit buttons is a common mistake. Instead, you should use the `{{on}}` modifier to handle click events, or handle form submission at the form level.
