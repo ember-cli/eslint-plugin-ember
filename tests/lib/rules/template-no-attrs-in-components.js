@@ -7,7 +7,15 @@ const ruleTester = new RuleTester({
 });
 
 ruleTester.run('template-no-attrs-in-components', rule, {
-  valid: ['<template>{{@value}}</template>', '<template>{{this.value}}</template>'],
+  valid: [
+    '<template>{{@value}}</template>',
+    '<template>{{this.value}}</template>',
+    // Class component with normal this access
+    `import Component from '@glimmer/component';
+     class MyComponent extends Component {
+       <template>{{this.args.name}}</template>
+     }`,
+  ],
   invalid: [
     {
       code: '<template>{{attrs.value}}</template>',
@@ -16,6 +24,34 @@ ruleTester.run('template-no-attrs-in-components', rule, {
     },
     {
       code: '<template>{{attrs}}</template>',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    {
+      code: '<template>{{this.attrs.value}}</template>',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    {
+      code: '<template>{{this.attrs}}</template>',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    // Class component using this.attrs
+    {
+      code: `import Component from '@glimmer/component';
+       class MyComponent extends Component {
+         <template>{{this.attrs.name}}</template>
+       }`,
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    // Class component using attrs
+    {
+      code: `import Component from '@glimmer/component';
+       class MyComponent extends Component {
+         <template>{{attrs.name}}</template>
+       }`,
       output: null,
       errors: [{ messageId: 'noAttrs' }],
     },

@@ -8,45 +8,34 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-chained-this', rule, {
   valid: [
-    '<template>{{this.user}}</template>',
-    '<template>{{userName}}</template>',
-    '<template>{{@user}}</template>',
-    '<template>{{get this.user "name"}}</template>',
+    '<template>{{this.value}}</template>',
+    '<template>{{this.thisvalue}}</template>',
+    '<template>{{@argName}}</template>',
+    '<template>{{this.user.name}}</template>',
+    '<template><this.Component /></template>',
+    '<template>{{component this.dynamicComponent}}</template>',
   ],
 
   invalid: [
     {
-      code: '<template>{{this.user.name}}</template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'Do not chain property access on this (this.user.name). Use local variables or getters instead.',
-          type: 'GlimmerPathExpression',
-        },
-      ],
+      code: '<template>{{this.this.value}}</template>',
+      output: '<template>{{this.value}}</template>',
+      errors: [{ messageId: 'noChainedThis' }],
     },
     {
-      code: '<template>{{this.model.user.firstName}}</template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'Do not chain property access on this (this.model.user.firstName). Use local variables or getters instead.',
-          type: 'GlimmerPathExpression',
-        },
-      ],
+      code: '<template>{{helper value=this.this.foo}}</template>',
+      output: '<template>{{helper value=this.foo}}</template>',
+      errors: [{ messageId: 'noChainedThis' }],
     },
     {
-      code: '<template><div>{{this.data.items.length}}</div></template>',
+      code: '<template>{{#if this.this.condition}}true{{/if}}</template>',
+      output: '<template>{{#if this.condition}}true{{/if}}</template>',
+      errors: [{ messageId: 'noChainedThis' }],
+    },
+    {
+      code: '<template><this.this.Component /></template>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not chain property access on this (this.data.items.length). Use local variables or getters instead.',
-          type: 'GlimmerPathExpression',
-        },
-      ],
+      errors: [{ messageId: 'noChainedThis' }],
     },
   ],
 });
