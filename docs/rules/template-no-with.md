@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'recommended'` property in a configuration file enables this rule.
-
 The use of `{{with}}` has been deprecated, you should replace it with either `{{let}}` or a combination of `{{let}}`, `{{if}}` and `{{else}}`.
 
 ## Examples

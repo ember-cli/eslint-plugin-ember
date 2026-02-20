@@ -4,8 +4,6 @@
 
 <!-- end auto-generated rule header -->
 
-🔧 The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
-
 There is no `this` context in template-only components.
 
 ## Examples

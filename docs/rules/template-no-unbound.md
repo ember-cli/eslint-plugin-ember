@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'recommended'` property in a configuration file enables this rule.
-
 `{{unbound}}` is a legacy hold over from the days in which Ember's template engine was less performant. Its use today
 is vestigial, and it no longer offers performance benefits.
 

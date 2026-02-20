@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'recommended'` property in a configuration file enables this rule.
-
 Some elements are entirely obsolete and must not be used by authors.
 
 This rule forbids the use of obsolete elements.

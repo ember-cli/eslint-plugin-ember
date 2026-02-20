@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'recommended'` property in a configuration file enables this rule.
-
 It is easy to introduce typos when typing out `...attributes` or to use e.g.
 `...arguments` instead. Unfortunately, that leads to a cryptic runtime error,
 but does not fail the build.

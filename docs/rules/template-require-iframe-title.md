@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'recommended'` property in a configuration file enables this rule.
-
 ## `<iframe>`
 
 `<iframe>` elements must have a unique title property to indicate its content to the user.

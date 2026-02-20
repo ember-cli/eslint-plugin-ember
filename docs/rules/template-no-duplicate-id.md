@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'recommended'` property in a configuration file enables this rule.
-
 Valid HTML requires that `id` attribute values are unique.
 
 This rule does a basic check to ensure that `id` attribute values are not the same.

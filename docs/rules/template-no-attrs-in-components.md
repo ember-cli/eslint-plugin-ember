@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'recommended'` property in a configuration file enables this rule.
-
 This rule prevents the usage of `attrs` property to access values passed to the component since all the values can be accessed directly from the template.
 
 ## Examples

@@ -2,8 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-✅ The `extends: 'recommended'` property in a configuration file enables this rule.
-
 In Ember 1.12, support for invoking the inline View helper was deprecated.
 
 ## Examples
