@@ -184,6 +184,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)                       | disallow abstract ARIA roles                                                     |    |    |    |
 | [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md)             | disallow accesskey attribute                                                     |    | 🔧 |    |
 | [template-no-aria-unsupported-elements](docs/rules/template-no-aria-unsupported-elements.md) | disallow ARIA roles, states, and properties on elements that do not support them |    |    |    |
+| [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md)             | disallow autofocus attribute                                                     |    | 🔧 |    |
 
 ### Best Practices
 
