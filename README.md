@@ -195,6 +195,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                       | disallow usage of {{action}} modifiers                    |    |    |    |
 | [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md) | disallow @arguments on HTML elements                      |    |    |    |
 | [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)   | disallow usage of Ember Array prototype extensions        |    |    |    |
+| [template-no-chained-this](docs/rules/template-no-chained-this.md)                               | disallow redundant `this.this` in templates               |    | 🔧 |    |
 | [template-no-debugger](docs/rules/template-no-debugger.md)                                       | disallow {{debugger}} in templates                        |    |    |    |
 | [template-no-log](docs/rules/template-no-log.md)                                                 | disallow {{log}} in templates                             |    |    |    |
 
