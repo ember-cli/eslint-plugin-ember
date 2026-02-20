@@ -189,15 +189,16 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Best Practices
 
-| Name                                                                                                   | Description                                               | 💼 | 🔧 | 💡 |
-| :----------------------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :- | :- | :- |
-| [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md)             | disallow setting certain attributes on builtin components |    |    |    |
-| [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                             | disallow usage of {{action}} modifiers                    |    |    |    |
-| [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md)       | disallow @arguments on HTML elements                      |    |    |    |
-| [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)         | disallow usage of Ember Array prototype extensions        |    |    |    |
-| [template-no-block-params-for-html-elements](docs/rules/template-no-block-params-for-html-elements.md) | disallow block params on HTML elements                    |    |    |    |
-| [template-no-debugger](docs/rules/template-no-debugger.md)                                             | disallow {{debugger}} in templates                        |    |    |    |
-| [template-no-log](docs/rules/template-no-log.md)                                                       | disallow {{log}} in templates                             |    |    |    |
+| Name                                                                                                   | Description                                                     | 💼 | 🔧 | 💡 |
+| :----------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- | :- | :- | :- |
+| [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md)             | disallow setting certain attributes on builtin components       |    |    |    |
+| [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                             | disallow usage of {{action}} modifiers                          |    |    |    |
+| [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md)       | disallow @arguments on HTML elements                            |    |    |    |
+| [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)         | disallow usage of Ember Array prototype extensions              |    |    |    |
+| [template-no-block-params-for-html-elements](docs/rules/template-no-block-params-for-html-elements.md) | disallow block params on HTML elements                          |    |    |    |
+| [template-no-capital-arguments](docs/rules/template-no-capital-arguments.md)                           | disallow capital arguments (use lowercase @arg instead of @Arg) |    |    |    |
+| [template-no-debugger](docs/rules/template-no-debugger.md)                                             | disallow {{debugger}} in templates                              |    |    |    |
+| [template-no-log](docs/rules/template-no-log.md)                                                       | disallow {{log}} in templates                                   |    |    |    |
 
 ### Components
 
