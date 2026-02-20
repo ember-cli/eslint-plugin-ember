@@ -8,6 +8,11 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-block-params-for-html-elements', rule, {
   valid: [
+    `let div = <template>{{yield "hello"}}</template>;
+    <template>
+      <div as |greeting|>{{greeting}}</div>
+    </template>
+    `,
     '<template><div>Content</div></template>',
     '<template><MyComponent as |item|>{{item.name}}</MyComponent></template>',
     '<template>{{#each this.items as |item|}}<li>{{item}}</li>{{/each}}</template>',
