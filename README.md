@@ -196,6 +196,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md) | disallow @arguments on HTML elements                      |    |    |    |
 | [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)   | disallow usage of Ember Array prototype extensions        |    |    |    |
 | [template-no-debugger](docs/rules/template-no-debugger.md)                                       | disallow {{debugger}} in templates                        |    |    |    |
+| [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                               | disallow duplicate id attributes                          |    |    |    |
 | [template-no-log](docs/rules/template-no-log.md)                                                 | disallow {{log}} in templates                             |    |    |    |
 
 ### Components
