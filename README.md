@@ -186,6 +186,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)                   | disallow aria-hidden on body element                                             |    | 🔧 |    |
 | [template-no-aria-unsupported-elements](docs/rules/template-no-aria-unsupported-elements.md) | disallow ARIA roles, states, and properties on elements that do not support them |    |    |    |
 | [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md)             | disallow autofocus attribute                                                     |    | 🔧 |    |
+| [template-no-empty-headings](docs/rules/template-no-empty-headings.md)                       | disallow empty heading elements                                                  |    |    |    |
 
 ### Best Practices
 
