@@ -22,7 +22,7 @@ Examples of **correct** code for this rule:
 
 ```gjs
 <template>
-  {{yield this}}
+  {{yield (Object greeting="hello there")}}
 </template>
 
 <template>
