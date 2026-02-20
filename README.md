@@ -183,6 +183,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-link-href-attributes](docs/rules/template-link-href-attributes.md)                 | require href attribute on link elements                                          |    |    |    |
 | [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)                       | disallow abstract ARIA roles                                                     |    |    |    |
 | [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md)             | disallow accesskey attribute                                                     |    | 🔧 |    |
+| [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)                   | disallow aria-hidden on body element                                             |    | 🔧 |    |
 | [template-no-aria-unsupported-elements](docs/rules/template-no-aria-unsupported-elements.md) | disallow ARIA roles, states, and properties on elements that do not support them |    |    |    |
 
 ### Best Practices
