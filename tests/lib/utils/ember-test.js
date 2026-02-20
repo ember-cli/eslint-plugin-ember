@@ -5,7 +5,13 @@ const emberUtils = require('../../../lib/utils/ember');
 const { FauxContext } = require('../../helpers/faux-context');
 
 function parse(code) {
-  return babelESLintParse(code).body[0].expression;
+  const { body } = babelESLintParse(code);
+  const [firstBodyNode] = body;
+  if (firstBodyNode.type === 'ClassDeclaration') {
+    // return first node within ClassBody
+    return firstBodyNode.body.body[0];
+  }
+  return firstBodyNode.expression;
 }
 
 function getProperty(code) {
@@ -327,7 +333,7 @@ describe('isEmberComponent', () => {
   });
 });
 
-describe('isGlimerComponent', () => {
+describe('isGlimmerComponent', () => {
   describe("should check if it's a Glimmer Component", () => {
     it('should detect Component when using native classes', () => {
       const context = new FauxContext(`
@@ -1482,6 +1488,18 @@ describe('isActionsProp', () => {
   });
 });
 
+describe('isActionMethod', () => {
+  const node = parse(
+    `class Test {
+    @action foo() {}
+  }`
+  );
+
+  it('should be actions method', () => {
+    expect(emberUtils.isActionMethod(node)).toBeTruthy();
+  });
+});
+
 describe('getModuleProperties', () => {
   it("returns module's properties", () => {
     const code = `
@@ -1542,6 +1560,18 @@ describe('getModuleProperties', () => {
   });
 });
 
+describe('isSingleLineAccessor', () => {
+  const node = parse(
+    `class Test {
+    get foo() { return 'bar'; }
+  }`
+  );
+
+  it('should be single line accessor', () => {
+    expect(emberUtils.isSingleLineAccessor(node)).toBeTruthy();
+  });
+});
+
 describe('isSingleLineFn', () => {
   const property = getProperty(`test = {
     test: computed.or('asd', 'qwe')
@@ -1567,6 +1597,20 @@ describe('isSingleLineFn', () => {
     `);
     node = context.ast.body[0].body.body[0];
     expect(emberUtils.isSingleLineFn(node)).toBeFalsy();
+  });
+});
+
+describe('isMultiLineAccessor', () => {
+  const node = parse(
+    `class Test {
+    get foo() { 
+      return 'bar';
+    }
+  }`
+  );
+
+  it('should be multi line accessor', () => {
+    expect(emberUtils.isMultiLineAccessor(node)).toBeTruthy();
   });
 });
 
@@ -1621,6 +1665,11 @@ describe('isFunctionExpression', () => {
 
     property = getProperty(`test = {
       test: () => {}
+    }`);
+    expect(emberUtils.isFunctionExpression(property.value)).toBeTruthy();
+
+    property = getProperty(`test = {
+      test: someFn(() => {})
     }`);
     expect(emberUtils.isFunctionExpression(property.value)).toBeTruthy();
   });
