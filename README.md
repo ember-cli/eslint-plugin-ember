@@ -309,6 +309,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [no-runloop](docs/rules/no-runloop.md)                                                                                 | disallow usage of `@ember/runloop` functions                                                                                  | ✅  |    |    |
 | [require-fetch-import](docs/rules/require-fetch-import.md)                                                             | enforce explicit import for `fetch()`                                                                                         |    |    |    |
 
+### Possible Errors
+
+| Name                                                                                         | Description                                               | 💼 | 🔧 | 💡 |
+| :------------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :- | :- | :- |
+| [template-no-extra-mut-helper-argument](docs/rules/template-no-extra-mut-helper-argument.md) | disallow passing more than one argument to the mut helper |    |    |    |
+
 ### Routes
 
 | Name                                                                               | Description                                                                              | 💼 | 🔧 | 💡 |
