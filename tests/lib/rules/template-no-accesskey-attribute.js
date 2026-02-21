@@ -60,22 +60,22 @@ ruleTester.run('template-no-accesskey-attribute', rule, {
     // Test cases ported from ember-template-lint
     {
       code: '<template><button accesskey="n"></button></template>',
-      output: null,
+      output: `<template><button></button></template>`,
       errors: [{ message: 'No access key attribute allowed. Inconsistencies between keyboard shortcuts and keyboard commands used by screenreader and keyboard only users create accessibility complications.' }],
     },
     {
       code: '<template><button accesskey></button></template>',
-      output: null,
+      output: `<template><button></button></template>`,
       errors: [{ message: 'No access key attribute allowed. Inconsistencies between keyboard shortcuts and keyboard commands used by screenreader and keyboard only users create accessibility complications.' }],
     },
     {
       code: '<template><button accesskey={{some-key}}></button></template>',
-      output: null,
+      output: `<template><button></button></template>`,
       errors: [{ message: 'No access key attribute allowed. Inconsistencies between keyboard shortcuts and keyboard commands used by screenreader and keyboard only users create accessibility complications.' }],
     },
     {
       code: '<template><button accesskey="{{some-key}}"></button></template>',
-      output: null,
+      output: `<template><button></button></template>`,
       errors: [{ message: 'No access key attribute allowed. Inconsistencies between keyboard shortcuts and keyboard commands used by screenreader and keyboard only users create accessibility complications.' }],
     },
   ],

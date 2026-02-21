@@ -35,7 +35,7 @@ ruleTester.run('template-no-unnecessary-component-helper', rule, {
     // Test cases ported from ember-template-lint
     {
       code: '<template>{{component "my-component-name" foo=123 bar=456}}</template>',
-      output: null,
+      output: `<template>{{my-component-name foo=123 bar=456}}</template>`,
       errors: [{ messageId: 'noUnnecessaryComponent' }],
     },
     {
@@ -45,8 +45,8 @@ ruleTester.run('template-no-unnecessary-component-helper', rule, {
     },
     {
       code: '<template><Foo @arg={{component "allowed-component"}}>{{component "forbidden-component"}}</Foo></template>',
-      output: null,
-      errors: [{ messageId: 'noUnnecessaryComponent' }],
+      output: `<template><Foo @arg={{allowed-component}}>{{forbidden-component}}</Foo></template>`,
+      errors: [{ messageId: 'noUnnecessaryComponent' }, { messageId: 'noUnnecessaryComponent' }],
     },
   ],
 });

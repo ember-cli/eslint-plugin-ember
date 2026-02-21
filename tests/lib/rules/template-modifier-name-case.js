@@ -71,23 +71,23 @@ ruleTester.run('template-modifier-name-case', rule, {
     // Test cases ported from ember-template-lint
     {
       code: '<template><div class="monkey" {{didInsert "something" with="somethingElse"}}></div></template>',
-      output: null,
+      output: `<template><div class="monkey" {{did-insert "something" with="somethingElse"}}></div></template>`,
       errors: [{ message: 'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.' }],
     },
     {
       code: '<template><a href="#" onclick={{amazingActionThing "foo"}} {{doSomething}}></a></template>',
-      output: null,
-      errors: [{ message: 'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.' }],
+      output: `<template><a href="#" onclick={{amazingActionThing "foo"}} {{do-something}}></a></template>`,
+      errors: [{ message: 'Use dasherized names for modifier invocation. Please replace `doSomething` with `do-something`.' }],
     },
     {
       code: '<template><div {{(modifier "fooBar")}}></div></template>',
-      output: null,
-      errors: [{ message: 'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.' }],
+      output: `<template><div {{(modifier "foo-bar")}}></div></template>`,
+      errors: [{ message: 'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.' }],
     },
     {
       code: '<template><div {{(if this.foo (modifier "fooBar"))}}></div></template>',
-      output: null,
-      errors: [{ message: 'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.' }],
+      output: `<template><div {{(if this.foo (modifier "foo-bar"))}}></div></template>`,
+      errors: [{ message: 'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.' }],
     },
   ],
 });

@@ -25,7 +25,7 @@ ruleTester.run('template-no-aria-hidden-body', rule, {
     // Test cases ported from ember-template-lint
     {
       code: '<template><body aria-hidden></body></template>',
-      output: null,
+      output: `<template><body></body></template>`,
       errors: [{ messageId: 'noAriaHiddenBody' }],
     },
   ],

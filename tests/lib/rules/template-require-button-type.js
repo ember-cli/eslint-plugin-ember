@@ -83,7 +83,7 @@ ruleTester.run('template-require-button-type', rule, {
       </template>`,
       errors: [
         {
-          message: 'Button type must be "button", "submit", or "reset"',
+          message: 'All `<button>` elements should have a valid `type` attribute',
           type: 'GlimmerAttrNode',
         },
       ],
@@ -101,7 +101,7 @@ ruleTester.run('template-require-button-type', rule, {
       </template>`,
       errors: [
         {
-          message: 'Button type must be "button", "submit", or "reset"',
+          message: 'All `<button>` elements should have a valid `type` attribute',
           type: 'GlimmerAttrNode',
         },
       ],
@@ -110,32 +110,32 @@ ruleTester.run('template-require-button-type', rule, {
     // Test cases ported from ember-template-lint
     {
       code: '<template><button></button></template>',
-      output: null,
+      output: `<template><button type="button"></button></template>`,
       errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
     },
     {
       code: '<template><button>label</button></template>',
-      output: null,
+      output: `<template><button type="button">label</button></template>`,
       errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
     },
     {
       code: '<template><button type="" /></template>',
-      output: null,
+      output: `<template><button type="button" /></template>`,
       errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
     },
     {
       code: '<template><button type="foo" /></template>',
-      output: null,
+      output: `<template><button type="button" /></template>`,
       errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
     },
     {
       code: '<template><button type=42 /></template>',
-      output: null,
+      output: `<template><button type="button" /></template>`,
       errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
     },
     {
       code: '<template><form><button></button></form></template>',
-      output: null,
+      output: `<template><form><button type="submit"></button></form></template>`,
       errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
     },
   ],

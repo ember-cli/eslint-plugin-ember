@@ -82,32 +82,32 @@ ruleTester.run('template-require-media-caption', rule, {
     {
       code: '<template><video></video></template>',
       output: null,
-      errors: [{ message: 'Media elements (<video>) must have a <track> element with kind=' }],
+      errors: [{ message: 'Media elements (<video>) must have a <track> element with kind="captions".' }],
     },
     {
       code: '<template><audio><track /></audio></template>',
       output: null,
-      errors: [{ message: 'Media elements (<video>) must have a <track> element with kind=' }],
+      errors: [{ message: 'Media elements (<audio>) must have a <track> element with kind="captions".' }],
     },
     {
       code: '<template><video><track kind="subtitles" /></video></template>',
       output: null,
-      errors: [{ message: 'Media elements (<video>) must have a <track> element with kind=' }],
+      errors: [{ message: 'Media elements (<video>) must have a <track> element with kind="captions".' }],
     },
     {
       code: '<template><audio muted="false"></audio></template>',
       output: null,
-      errors: [{ message: 'Media elements (<video>) must have a <track> element with kind=' }],
+      errors: [{ message: 'Media elements (<audio>) must have a <track> element with kind="captions".' }],
     },
     {
       code: '<template><audio muted="false"><track kind="descriptions" /></audio></template>',
       output: null,
-      errors: [{ message: 'Media elements (<video>) must have a <track> element with kind=' }],
+      errors: [{ message: 'Media elements (<audio>) must have a <track> element with kind="captions".' }],
     },
     {
       code: '<template><video muted=false></video></template>',
       output: null,
-      errors: [{ message: 'Media elements (<video>) must have a <track> element with kind=' }],
+      errors: [{ message: 'Media elements (<video>) must have a <track> element with kind="captions".' }],
     },
   ],
 });

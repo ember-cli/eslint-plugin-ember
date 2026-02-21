@@ -30,12 +30,12 @@ ruleTester.run('template-no-html-comments', rule, {
     // Test cases ported from ember-template-lint
     {
       code: '<template><!-- comment here --></template>',
-      output: null,
+      output: `<template>{{! comment here }}</template>`,
       errors: [{ messageId: 'noHtmlComments' }],
     },
     {
       code: '<template><!--comment here--></template>',
-      output: null,
+      output: `<template>{{!comment here}}</template>`,
       errors: [{ messageId: 'noHtmlComments' }],
     },
   ],

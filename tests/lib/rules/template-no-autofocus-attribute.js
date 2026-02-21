@@ -70,17 +70,17 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
     // Test cases ported from ember-template-lint
     {
       code: '<template><input autofocus /></template>',
-      output: null,
+      output: `<template><input/></template>`,
       errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
     },
     {
       code: '<template><input type="text" autofocus="autofocus" /></template>',
-      output: null,
+      output: `<template><input type="text" /></template>`,
       errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
     },
     {
       code: '<template><input autofocus={{this.foo}} /></template>',
-      output: null,
+      output: `<template><input /></template>`,
       errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
     },
     {
@@ -95,17 +95,17 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
     },
     {
       code: '<template><div autofocus="true"></div></template>',
-      output: null,
+      output: `<template><div></div></template>`,
       errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
     },
     {
       code: '<template><h1 autofocus="autofocus"><span>Valid Heading</span></h1></template>',
-      output: null,
+      output: `<template><h1><span>Valid Heading</span></h1></template>`,
       errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
     },
     {
       code: '<template><CustomComponent autofocus={{this.foo}} /></template>',
-      output: null,
+      output: `<template><CustomComponent /></template>`,
       errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
     },
   ],

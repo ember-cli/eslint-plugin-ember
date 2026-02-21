@@ -44,22 +44,22 @@ ruleTester.run('template-no-unnecessary-curly-parens', rule, {
     // Test cases ported from ember-template-lint
     {
       code: '<template><FooBar @x="{{index}}X{{(someHelper foo)}}" /></template>',
-      output: null,
+      output: `<template><FooBar @x="{{index}}X{{someHelper foo}}" /></template>`,
       errors: [{ messageId: 'noUnnecessaryCurlyParens' }],
     },
     {
       code: '<template><FooBar @x="{{index}}XY{{(someHelper foo)}}" /></template>',
-      output: null,
+      output: `<template><FooBar @x="{{index}}XY{{someHelper foo}}" /></template>`,
       errors: [{ messageId: 'noUnnecessaryCurlyParens' }],
     },
     {
       code: '<template><FooBar @x="{{index}}--{{(someHelper foo)}}" /></template>',
-      output: null,
+      output: `<template><FooBar @x="{{index}}--{{someHelper foo}}" /></template>`,
       errors: [{ messageId: 'noUnnecessaryCurlyParens' }],
     },
     {
       code: '<template>{{(helper a="b")}}</template>',
-      output: null,
+      output: `<template>{{helper a="b"}}</template>`,
       errors: [{ messageId: 'noUnnecessaryCurlyParens' }],
     },
   ],
