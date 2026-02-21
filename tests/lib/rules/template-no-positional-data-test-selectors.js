@@ -25,6 +25,59 @@ ruleTester.run('template-no-positional-data-test-selectors', rule, {
     `<template>
       <button data-test-button></button>
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    `<template>
+      {{#if data-test-foo}}
+      {{/if}}
+    </template>`,
+    `<template>
+      <div data-test-blah></div>
+    </template>`,
+    `<template>
+      <Foo data-test-derp />
+    </template>`,
+    `<template>
+      {{something data-test-lol=true}}
+    </template>`,
+    `<template>
+      {{#if dataSomething}}
+        <div> hello </div>
+      {{/if}}
+    </template>`,
+    `<template>
+      <div
+        data-test-msg-connections-typeahead-result={{true}}
+      >
+      </div>
+    </template>`,
+    `<template>
+      <div
+        data-test-msg-connections-typeahead-result="foo-bar"
+      >
+      </div>
+    </template>`,
+    `<template>
+      {{badge
+        data-test-profile-card-one-to-one-connection-distance=true
+        degreeText=(t "i18n_distance_v2" distance=recipientDistance)
+        degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
+      }}
+    </template>`,
+    `<template>
+      {{badge
+        data-test-profile-card-one-to-one-connection-distance="foo-bar"
+        degreeText=(t "i18n_distance_v2" distance=recipientDistance)
+        degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
+      }}
+    </template>`,
+    `<template>
+      <div
+        data-test-profile=true
+      >
+        hello
+      </div>
+    </template>`,
   ],
 
   invalid: [
@@ -63,6 +116,19 @@ ruleTester.run('template-no-positional-data-test-selectors', rule, {
           type: 'GlimmerAttrNode',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: `<template>
+        {{badge
+          data-test-profile-card-one-to-one-connection-distance
+          degreeText=(t "i18n_distance_v2" distance=recipientDistance)
+          degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
+        }}
+      </template>`,
+      output: null,
+      errors: [{ message: 'Use named data-test attributes instead of positional data-test-* attributes.' }],
     },
   ],
 });

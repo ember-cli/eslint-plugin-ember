@@ -22,6 +22,11 @@ ruleTester.run('template-no-partial', rule, {
     `<template>
       {{this.partial}}
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{foo}}</template>',
+    '<template>{{button}}</template>',
+    '<template><Component @param={{"partial"}} /></template>',
   ],
 
   invalid: [
@@ -49,6 +54,13 @@ ruleTester.run('template-no-partial', rule, {
           type: 'GlimmerMustacheStatement',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>{{partial "foo"}}</template>',
+      output: null,
+      errors: [{ message: 'Unexpected partial usage. Partials are deprecated, use components instead.' }],
     },
   ],
 });

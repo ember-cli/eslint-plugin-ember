@@ -22,6 +22,10 @@ ruleTester.run('template-require-form-method', rule, {
       output: null,
       options: [{ allowedMethods: ['get'] }],
     },
+  
+    // Test cases ported from ember-template-lint
+    '<template><div/></template>',
+    '<template><div></div></template>',
   ],
   invalid: [
     {
@@ -53,6 +57,28 @@ ruleTester.run('template-require-form-method', rule, {
           message: 'All `<form>` elements should have `method` attribute with value of `POST`',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><form method=""></form></template>',
+      output: null,
+      errors: [{ message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' }],
+    },
+    {
+      code: '<template><form method=42></form></template>',
+      output: null,
+      errors: [{ message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' }],
+    },
+    {
+      code: '<template><form method=" ge t "></form></template>',
+      output: null,
+      errors: [{ message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' }],
+    },
+    {
+      code: '<template><form method=" pos t "></form></template>',
+      output: null,
+      errors: [{ message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' }],
     },
   ],
 });

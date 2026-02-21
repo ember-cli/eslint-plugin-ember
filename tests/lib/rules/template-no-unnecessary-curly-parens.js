@@ -15,6 +15,14 @@ ruleTester.run('template-no-unnecessary-curly-parens', rule, {
     '<template>{{helper param}}</template>',
     '<template>{{#if condition}}text{{/if}}</template>',
     '<template>{{this.property}}</template>',
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{foo}}</template>',
+    '<template>{{this.foo}}</template>',
+    '<template>{{(helper)}}</template>',
+    '<template>{{(this.helper)}}</template>',
+    '<template>{{concat "a" "b"}}</template>',
+    '<template>{{concat (capitalize "foo") "-bar"}}</template>',
   ],
   invalid: [
     {
@@ -30,6 +38,28 @@ ruleTester.run('template-no-unnecessary-curly-parens', rule, {
     {
       code: '<template>{{(if condition "yes" "no")}}</template>',
       output: '<template>{{if condition "yes" "no"}}</template>',
+      errors: [{ messageId: 'noUnnecessaryCurlyParens' }],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><FooBar @x="{{index}}X{{(someHelper foo)}}" /></template>',
+      output: null,
+      errors: [{ messageId: 'noUnnecessaryCurlyParens' }],
+    },
+    {
+      code: '<template><FooBar @x="{{index}}XY{{(someHelper foo)}}" /></template>',
+      output: null,
+      errors: [{ messageId: 'noUnnecessaryCurlyParens' }],
+    },
+    {
+      code: '<template><FooBar @x="{{index}}--{{(someHelper foo)}}" /></template>',
+      output: null,
+      errors: [{ messageId: 'noUnnecessaryCurlyParens' }],
+    },
+    {
+      code: '<template>{{(helper a="b")}}</template>',
+      output: null,
       errors: [{ messageId: 'noUnnecessaryCurlyParens' }],
     },
   ],

@@ -29,6 +29,12 @@ ruleTester.run('template-template-length', rule, {
 </template>`,
       options: [false],
     },
+  
+    // Test cases ported from ember-template-lint
+    `<template>testing this
+and
+this
+and	his</template>`,
   ],
   invalid: [
     {

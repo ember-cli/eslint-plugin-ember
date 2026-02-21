@@ -23,6 +23,14 @@ ruleTester.run('template-no-link-to-tagname', rule, {
       code: '<template><a href="/home">Home</a></template>',
       output: null,
     },
+  
+    // Test cases ported from ember-template-lint
+    '<template><Foo @route="routeName" @tagName="button">Link text</Foo></template>',
+    '<template><LinkTo @route="routeName">Link text</LinkTo></template>',
+    '<template>{{#link-to "routeName"}}Link text{{/link-to}}</template>',
+    '<template>{{#foo "routeName" tagName="button"}}Link text{{/foo}}</template>',
+    '<template>{{link-to "Link text" "routeName"}}</template>',
+    '<template>{{foo "Link text" "routeName" tagName="button"}}</template>',
   ],
 
   invalid: [
@@ -41,6 +49,23 @@ ruleTester.run('template-no-link-to-tagname', rule, {
     {
       filename: 'test.gjs',
       code: '<template><link-to @route="contact" tagName="div">Contact</link-to></template>',
+      output: null,
+      errors: [{ messageId: 'noLinkToTagname' }],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><LinkTo @route="routeName" @tagName="button">Link text</LinkTo></template>',
+      output: null,
+      errors: [{ messageId: 'noLinkToTagname' }],
+    },
+    {
+      code: '<template>{{#link-to "routeName" tagName="button"}}Link text{{/link-to}}</template>',
+      output: null,
+      errors: [{ messageId: 'noLinkToTagname' }],
+    },
+    {
+      code: '<template>{{link-to "Link text" "routeName" tagName="button"}}</template>',
       output: null,
       errors: [{ messageId: 'noLinkToTagname' }],
     },

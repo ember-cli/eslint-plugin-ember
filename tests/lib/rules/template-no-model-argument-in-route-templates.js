@@ -24,6 +24,10 @@ ruleTester.run('template-no-model-argument-in-route-templates', rule, {
       filename: 'app/components/user-card.gjs',
       code: '<template>{{@model}}</template>',
     },
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{model}}</template>',
+    '<template>{{@modelythingy}}</template>',
   ],
   invalid: [
     {
@@ -42,6 +46,18 @@ ruleTester.run('template-no-model-argument-in-route-templates', rule, {
       filename: 'app/templates/posts/show.hbs',
       code: '<template>{{@model.id}}</template>',
       output: '<template>{{this.model.id}}</template>',
+      errors: [{ messageId: 'noModelArgumentInRouteTemplates' }],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>{{@model.foo}}</template>',
+      output: null,
+      errors: [{ messageId: 'noModelArgumentInRouteTemplates' }],
+    },
+    {
+      code: '<template>{{@model.foo.bar}}</template>',
+      output: null,
       errors: [{ messageId: 'noModelArgumentInRouteTemplates' }],
     },
   ],

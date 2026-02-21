@@ -25,5 +25,14 @@ ruleTester.run('template-require-strict-mode', rule, {
         },
       ],
     },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: `<template><div>
+  hello
+</div></template>`,
+      output: null,
+      errors: [{ message: 'Templates are required to be in strict mode. Consider refactoring to template tag format.' }],
+    },
   ],
 });

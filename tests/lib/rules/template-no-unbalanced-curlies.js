@@ -19,8 +19,68 @@ ruleTester.run('template-no-unbalanced-curlies', rule, {
     '<template>{{#if condition}}{{value}}{{/if}}</template>',
     '<template>{{helper param1 param2}}</template>',
     '<template>{{{unescaped}}}</template>',
+  
+    // Test cases ported from ember-template-lint
+    '<template>{foo}</template>',
+    '<template>{{foo}}</template>',
+    '<template>{{{foo}}}</template>',
+    `<template>{{{foo
+}}}</template>`,
+    '<template>\\{{foo}}</template>',
+    '<template>\\{{foo}}\\{{foo}}</template>',
+    '<template>\\{{foo}}{{foo}}</template>',
+    `<template>\{{foo
+}}</template>`,
   ],
   invalid: [
     // Parser catches these before the rule runs, so no invalid cases to test
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>foo}}</template>',
+      output: null,
+      errors: [{ messageId: 'noUnbalancedCurlies' }],
+    },
+    {
+      code: '<template>{foo}}</template>',
+      output: null,
+      errors: [{ messageId: 'noUnbalancedCurlies' }],
+    },
+    {
+      code: '<template>foo}}}</template>',
+      output: null,
+      errors: [{ messageId: 'noUnbalancedCurlies' }],
+    },
+    {
+      code: '<template>{foo}}}</template>',
+      output: null,
+      errors: [{ messageId: 'noUnbalancedCurlies' }],
+    },
+    {
+      code: `<template>{foo
+}}}</template>`,
+      output: null,
+      errors: [{ messageId: 'noUnbalancedCurlies' }],
+    },
+    {
+      code: `<template>{foo
+}}}
+bar</template>`,
+      output: null,
+      errors: [{ messageId: 'noUnbalancedCurlies' }],
+    },
+    {
+      code: `<template>{foor
+barr
+r
+baz}}}</template>`,
+      output: null,
+      errors: [{ messageId: 'noUnbalancedCurlies' }],
+    },
+    {
+      code: '<template>{foorbarrrbaz}}}</template>',
+      output: null,
+      errors: [{ messageId: 'noUnbalancedCurlies' }],
+    },
   ],
 });

@@ -19,6 +19,19 @@ ruleTester.run('template-no-unused-block-params', rule, {
 
     // Param used in nested path
     '<template>{{#let user as |u|}}{{u.name}}{{/let}}</template>',
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{cat}}</template>',
+    '<template>{{#each cats as |cat|}}{{cat}}{{/each}}</template>',
+    '<template>{{#each cats as |cat|}}{{partial "cat"}}{{/each}}</template>',
+    '<template>{{#each cats as |cat|}}{{cat.name}}{{/each}}</template>',
+    '<template>{{#each cats as |cat|}}{{meow cat}}{{/each}}</template>',
+    '<template>{{#each cats as |cat index|}}{{index}}{{/each}}</template>',
+    '<template>{{#each cats as |cat index|}}{{#each cat.lives as |life|}}{{index}}: {{life}}{{/each}}{{/each}}</template>',
+    '<template>{{#each cats as |cat|}}{{#meow-meow cat as |cat|}}{{cat}}{{/meow-meow}}{{/each}}</template>',
+    '<template>{{#with (component "foo-bar") as |FooBar|}}<FooBar />{{/with}}</template>',
+    '<template><BurgerMenu as |menu|><header>Something</header><menu.item>Text</menu.item></BurgerMenu></template>',
+    '<template>{{#burger-menu as |menu|}}<header>Something</header>{{#menu.item}}Text{{/menu.item}}{{/burger-menu}}</template>',
   ],
   invalid: [
     {
@@ -35,6 +48,23 @@ ruleTester.run('template-no-unused-block-params', rule, {
       code: '<template>{{#let value as |v|}}Something{{/let}}</template>',
       output: null,
       errors: [{ messageId: 'unusedBlockParam', data: { param: 'v' } }],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>{{#each cats as |cat|}}Dogs{{/each}}</template>',
+      output: null,
+      errors: [{ messageId: 'unusedBlockParam' }],
+    },
+    {
+      code: '<template>{{#each cats as |cat index|}}{{cat}}{{/each}}</template>',
+      output: null,
+      errors: [{ messageId: 'unusedBlockParam' }],
+    },
+    {
+      code: '<template>{{#each cats as |cat index|}}{{/each}}</template>',
+      output: null,
+      errors: [{ messageId: 'unusedBlockParam' }],
     },
   ],
 });

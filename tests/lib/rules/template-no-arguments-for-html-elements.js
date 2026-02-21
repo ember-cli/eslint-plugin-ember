@@ -18,6 +18,18 @@ ruleTester.run('template-no-arguments-for-html-elements', rule, {
 <template>
   <div @greeting="hello" />
 </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template><Input @name=1 /></template>',
+    `<template>{{#let (component 'foo') as |bar|}} <bar @name="1" as |n|><n/></bar> {{/let}}</template>`,
+    '<template><@externalComponent /></template>',
+    `<template><MyComponent>
+    <:slot @name="Header"></:slot>
+  </MyComponent></template>`,
+    '<template><@foo.bar @name="2" /></template>',
+    '<template><this.name @boo="bar"></this.name></template>',
+    '<template><@foo @name="2" /></template>',
+    '<template><foo.some.name @name="1" /></template>',
   ],
 
   invalid: [
@@ -53,6 +65,23 @@ ruleTester.run('template-no-arguments-for-html-elements', rule, {
           type: 'GlimmerAttrNode',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><div @value="1"></div></template>',
+      output: null,
+      errors: [{ message: '@arguments can only be used on components, not HTML elements. Use regular attributes instead.' }],
+    },
+    {
+      code: '<template><div @value></div></template>',
+      output: null,
+      errors: [{ message: '@arguments can only be used on components, not HTML elements. Use regular attributes instead.' }],
+    },
+    {
+      code: '<template><img @src="12"></template>',
+      output: null,
+      errors: [{ message: '@arguments can only be used on components, not HTML elements. Use regular attributes instead.' }],
     },
   ],
 });

@@ -28,6 +28,22 @@ ruleTester.run('template-no-route-action', rule, {
     `<template>
       <Component @action={{this.handleAction}} />
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    "<template>{{custom-component onUpdate=(action 'updateFoo')}}</template>",
+    "<template>{{custom-component onUpdate=(fn this.updateFoo 'bar')}}</template>",
+    '<template>{{custom-component onUpdate=this.updateFoo}}</template>',
+    "<template><CustomComponent @onUpdate={{if true (action 'updateFoo')}} /></template>",
+    "<template><CustomComponent @onUpdate={{if true (fn this.updateFoo 'bar')}} /></template>",
+    '<template><CustomComponent @onUpdate={{if true (this.updateFoo)}} /></template>',
+    `<template>{{yield (hash
+      someProp="someVal"
+      updateFoo=(fn this.updateFoo)
+    )}}</template>`,
+    "<template><CustomComponent @onUpdate={{action 'updateFoo'}} /></template>",
+    "<template><CustomComponent @onUpdate={{fn this.updateFoo 'bar'}} /></template>",
+    '<template><CustomComponent @onUpdate={{this.updateFoo}} /></template>',
+    '<template><div></div></template>',
   ],
 
   invalid: [
@@ -69,6 +85,38 @@ ruleTester.run('template-no-route-action', rule, {
           type: 'GlimmerMustacheStatement',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: "<template><CustomComponent @onUpdate={{if true (route-action 'updateFoo' 'bar')}} /></template>",
+      output: null,
+      errors: [{ message: 'Do not use the (route-action) helper. Use the (fn) helper or closure actions instead.' }],
+    },
+    {
+      code: "<template>{{custom-component onUpdate=(route-action 'updateFoo' 'bar')}}</template>",
+      output: null,
+      errors: [{ message: 'Do not use the (route-action) helper. Use the (fn) helper or closure actions instead.' }],
+    },
+    {
+      code: `<template>{{yield (hash
+        someProp="someVal"
+        updateFoo=(route-action 'updateFoo')
+      )}}</template>`,
+      output: null,
+      errors: [{ message: 'Do not use the (route-action) helper. Use the (fn) helper or closure actions instead.' }],
+    },
+    {
+      code: `<template><CustomComponent
+        @onUpdate={{route-action 'updateFoo'}}
+      /></template>`,
+      output: null,
+      errors: [{ message: 'Do not use the (route-action) helper. Use the (fn) helper or closure actions instead.' }],
+    },
+    {
+      code: "<template><CustomComponent @onUpdate={{route-action 'updateBar' 'bar'}} /></template>",
+      output: null,
+      errors: [{ message: 'Do not use the (route-action) helper. Use the (fn) helper or closure actions instead.' }],
     },
   ],
 });

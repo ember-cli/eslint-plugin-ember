@@ -49,5 +49,63 @@ ruleTester.run('template-no-implicit-this', rule, {
       output: null,
       errors: [{ messageId: 'noImplicitThis' }],
     },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>{{book}}</template>',
+      output: null,
+      errors: [{ messageId: 'noImplicitThis' }],
+    },
+    {
+      code: '<template>{{book-details}}</template>',
+      output: null,
+      errors: [{ messageId: 'noImplicitThis' }],
+    },
+    {
+      code: '<template>{{book.author}}</template>',
+      output: null,
+      errors: [{ messageId: 'noImplicitThis' }],
+    },
+    {
+      code: '<template>{{helper book}}</template>',
+      output: null,
+      errors: [{ messageId: 'noImplicitThis' }],
+    },
+    {
+      code: '<template>{{#helper book}}{{/helper}}</template>',
+      output: null,
+      errors: [{ messageId: 'noImplicitThis' }],
+    },
+    {
+      code: '<template><MyComponent @prop={{can.do}} /></template>',
+      output: null,
+      errors: [{ messageId: 'noImplicitThis' }],
+    },
+    {
+      code: '<template>{{session.user.name}}</template>',
+      output: null,
+      errors: [{ messageId: 'noImplicitThis' }],
+    },
+    {
+      code: '<template><MyComponent @prop={{session.user.name}} /></template>',
+      output: null,
+      errors: [{ messageId: 'noImplicitThis' }],
+    },
+    {
+      code: `<template>import { hbs } from 'ember-cli-htmlbars';
+        import { setComponentTemplate } from '@ember/component';
+        import templateOnly from '@ember/component/template-only';
+        export const SomeComponent = setComponentTemplate(hbs\`{{book}}\`, templateOnly());</template>`,
+      output: null,
+      errors: [{ messageId: 'noImplicitThis' }],
+    },
+    {
+      code: `<template>import { hbs } from 'ember-cli-htmlbars';
+        import { setComponentTemplate } from '@ember/component';
+        import templateOnly from '@ember/component/template-only';
+        export const SomeComponent = setComponentTemplate(hbs\`{{book}}\`, templateOnly());</template>`,
+      output: null,
+      errors: [{ messageId: 'noImplicitThis' }],
+    },
   ],
 });

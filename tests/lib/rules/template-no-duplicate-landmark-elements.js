@@ -29,5 +29,42 @@ ruleTester.run('template-no-duplicate-landmark-elements', rule, {
       output: null,
       errors: [{ messageId: 'duplicate' }],
     },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><nav></nav><nav></nav></template>',
+      output: null,
+      errors: [{ messageId: 'duplicate' }],
+    },
+    {
+      code: '<template><nav></nav><div role="navigation"></div></template>',
+      output: null,
+      errors: [{ messageId: 'duplicate' }],
+    },
+    {
+      code: '<template><nav></nav><nav aria-label="secondary navigation"></nav></template>',
+      output: null,
+      errors: [{ messageId: 'duplicate' }],
+    },
+    {
+      code: '<template><main></main><div role="main"></div></template>',
+      output: null,
+      errors: [{ messageId: 'duplicate' }],
+    },
+    {
+      code: '<template><nav aria-label="site navigation"></nav><nav aria-label="site navigation"></nav></template>',
+      output: null,
+      errors: [{ messageId: 'duplicate' }],
+    },
+    {
+      code: '<template><form aria-label="search-form"></form><form aria-label="search-form"></form></template>',
+      output: null,
+      errors: [{ messageId: 'duplicate' }],
+    },
+    {
+      code: '<template><form aria-labelledby="form-title"></form><form aria-labelledby="form-title"></form></template>',
+      output: null,
+      errors: [{ messageId: 'duplicate' }],
+    },
   ],
 });

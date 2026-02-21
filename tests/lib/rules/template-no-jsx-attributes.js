@@ -55,5 +55,17 @@ ruleTester.run('template-no-jsx-attributes', rule, {
         },
       ],
     },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><div autoPlay></div></template>',
+      output: null,
+      errors: [{ message: 'Incorrect html attribute name detected - ' }],
+    },
+    {
+      code: '<template><div contentEditable></div></template>',
+      output: null,
+      errors: [{ message: 'Incorrect html attribute name detected - ' }],
+    },
   ],
 });

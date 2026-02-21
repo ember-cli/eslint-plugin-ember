@@ -25,6 +25,9 @@ ruleTester.run('template-no-triple-curlies', rule, {
     `<template>
       {{htmlSafe this.content}}
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{foo}}</template>',
   ],
 
   invalid: [
@@ -55,6 +58,14 @@ ruleTester.run('template-no-triple-curlies', rule, {
           type: 'GlimmerMustacheStatement',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: `<template>
+ {{{foo}}}</template>`,
+      output: null,
+      errors: [{ message: 'Usage of triple curly brackets is unsafe. Use htmlSafe helper if absolutely necessary.' }],
     },
   ],
 });

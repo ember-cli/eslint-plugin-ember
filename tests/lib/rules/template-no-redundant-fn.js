@@ -28,6 +28,14 @@ ruleTester.run('template-no-redundant-fn', rule, {
     `<template>
       <Component @action={{this.myAction}} />
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template><button {{on "click" this.handleClick}}>Click Me</button></template>',
+    '<template><button {{on "click" (fn this.handleClick "foo")}}>Click Me</button></template>',
+    '<template><SomeComponent @onClick={{this.handleClick}} /></template>',
+    '<template><SomeComponent @onClick={{fn this.handleClick "foo"}} /></template>',
+    '<template>{{foo bar=this.handleClick}}></template>',
+    '<template>{{foo bar=(fn this.handleClick "foo")}}></template>',
   ],
 
   invalid: [
@@ -55,6 +63,23 @@ ruleTester.run('template-no-redundant-fn', rule, {
           type: 'GlimmerMustacheStatement',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><button {{on "click" (fn this.handleClick)}}>Click Me</button></template>',
+      output: null,
+      errors: [{ message: 'Unnecessary use of (fn) helper. Pass the function directly instead: this.handleClick' }],
+    },
+    {
+      code: '<template><SomeComponent @onClick={{fn this.handleClick}} /></template>',
+      output: null,
+      errors: [{ message: 'Unnecessary use of (fn) helper. Pass the function directly instead: this.handleClick' }],
+    },
+    {
+      code: '<template>{{foo bar=(fn this.handleClick)}}></template>',
+      output: null,
+      errors: [{ message: 'Unnecessary use of (fn) helper. Pass the function directly instead: this.handleClick' }],
     },
   ],
 });

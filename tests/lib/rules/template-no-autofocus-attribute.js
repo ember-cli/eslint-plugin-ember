@@ -22,6 +22,19 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
     `<template>
       <button>Click me</button>
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template><input /></template>',
+    '<template><input type="text" disabled="true" /></template>',
+    '<template><input type="password" disabled={{false}} /></template>',
+    '<template><input type="password" disabled /></template>',
+    '<template>{{input type="text" disabled=true}}</template>',
+    '<template>{{component "input" type="text" disabled=true}}</template>',
+    '<template><div></div></template>',
+    '<template><h1><span>Valid Heading</span></h1></template>',
+    '<template><CustomComponent /></template>',
+    '<template><CustomComponent disabled /></template>',
+    '<template><CustomComponent disabled=true /></template>',
   ],
 
   invalid: [
@@ -52,6 +65,48 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
           type: 'GlimmerAttrNode',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><input autofocus /></template>',
+      output: null,
+      errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
+    },
+    {
+      code: '<template><input type="text" autofocus="autofocus" /></template>',
+      output: null,
+      errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
+    },
+    {
+      code: '<template><input autofocus={{this.foo}} /></template>',
+      output: null,
+      errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
+    },
+    {
+      code: '<template>{{input type="text" autofocus=true}}</template>',
+      output: null,
+      errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
+    },
+    {
+      code: '<template>{{component "input" type="text" autofocus=true}}</template>',
+      output: null,
+      errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
+    },
+    {
+      code: '<template><div autofocus="true"></div></template>',
+      output: null,
+      errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
+    },
+    {
+      code: '<template><h1 autofocus="autofocus"><span>Valid Heading</span></h1></template>',
+      output: null,
+      errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
+    },
+    {
+      code: '<template><CustomComponent autofocus={{this.foo}} /></template>',
+      output: null,
+      errors: [{ message: 'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.' }],
     },
   ],
 });

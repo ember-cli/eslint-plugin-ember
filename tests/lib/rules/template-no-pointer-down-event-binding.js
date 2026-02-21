@@ -25,6 +25,65 @@ ruleTester.run('template-no-pointer-down-event-binding', rule, {
     `<template>
       <div {{on "mousedown" this.handleMouseDown}}>Content</div>
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    "<template><div {{on 'mouseup' this.doSomething}}></div></template>",
+    "<template><div {{action this.doSomething on='mouseup'}}></div></template>",
+    '<template><input type="text" onmouseup="myFunction()"></template>',
+    `<template>re not catching component arguments
+    </template>`,
+    `<template>,
+    </template>`,
+    `<template>,
+  ],
+
+  bad: [
+    {
+      template: </template>`,
+    `<template>,
+      verifyResults(results) {
+        expect(results).toMatchInlineSnapshot(\`
+          [
+            {
+              "column": 10,
+              "endColumn": 21,
+              "endLine": 1,
+              "filePath": "layout.hbs",
+              "line": 1,
+              "message": "Avoid binding to a pointer \`down\` event; bind to a pointer \`up\` event instead",
+              "rule": "no-pointer-down-event-binding",
+              "severity": 2,
+              "source": ""mousedown"",
+            },
+          ]
+        \`);
+      },
+    },
+    {
+      template: </template>`,
+    `<template>,
+      verifyResults(results) {
+        expect(results).toMatchInlineSnapshot(\`
+          [
+            {
+              "column": 34,
+              "endColumn": 45,
+              "endLine": 1,
+              "filePath": "layout.hbs",
+              "line": 1,
+              "message": "Avoid binding to a pointer \`down\` event; bind to a pointer \`up\` event instead",
+              "rule": "no-pointer-down-event-binding",
+              "severity": 2,
+              "source": ""mousedown"",
+            },
+          ]
+        \`);
+      },
+    },
+    {
+      // Detecting the \`on\` param works, even if it</template>`,
+    '<template>{{action}}</template>',
+    '<template><div {{action this.doSomething preventDefault=true on="mousedown"}}></div></template>',
   ],
 
   invalid: [

@@ -6,10 +6,21 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 ruleTester.run('template-no-unbound', rule, {
-  valid: ['<template>{{this.value}}</template>'],
+  valid: ['<template>{{this.value}}</template>'
+    // Test cases ported from ember-template-lint
+    '<template>{{foo}}</template>',
+    '<template>{{button}}</template>',
+  ],
   invalid: [
     {
       code: '<template>{{unbound foo}}</template>',
+      output: null,
+      errors: [{ messageId: 'unexpected' }],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>{{my-thing foo=(unbound foo)}}</template>',
       output: null,
       errors: [{ messageId: 'unexpected' }],
     },

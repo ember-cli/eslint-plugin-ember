@@ -76,5 +76,22 @@ ruleTester.run('template-no-index-component-invocation', rule, {
         },
       ],
     },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>{{foo/bar (component "foo/index")}}</template>',
+      output: null,
+      errors: [{ message: 'Replace `{{foo/index ...` to `{{foo ...`' }],
+    },
+    {
+      code: '<template>{{foo/bar name=(component "foo/index")}}</template>',
+      output: null,
+      errors: [{ message: 'Replace `{{foo/index ...` to `{{foo ...`' }],
+    },
+    {
+      code: '<template><Foo::Bar::Index /></template>',
+      output: null,
+      errors: [{ message: 'Replace `{{foo/index ...` to `{{foo ...`' }],
+    },
   ],
 });

@@ -30,6 +30,13 @@ ruleTester.run('template-no-duplicate-attributes', rule, {
         {{item}}
       {{/each}}
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{my-component firstName=firstName lastName=lastName}}</template>',
+    '<template> {{fullName}}</template>',
+    '<template><a class="btn">{{btnLabel}}</a></template>',
+    '<template>{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age)}}</template>',
+    '<template>{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName) age=age)}}</template>',
   ],
 
   invalid: [
@@ -92,6 +99,33 @@ ruleTester.run('template-no-duplicate-attributes', rule, {
           type: 'GlimmerHashPair',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>{{my-component firstName=firstName lastName=lastName firstName=firstName}}</template>',
+      output: null,
+      errors: [{ message: 'Duplicate attribute ' }],
+    },
+    {
+      code: '<template>{{#my-component firstName=firstName lastName=lastName firstName=firstName as |fullName|}}{{/my-component}}</template>',
+      output: null,
+      errors: [{ message: 'Duplicate attribute ' }],
+    },
+    {
+      code: '<template><a class="btn" class="btn">{{btnLabel}}</a></template>',
+      output: null,
+      errors: [{ message: 'Duplicate attribute ' }],
+    },
+    {
+      code: '<template>{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age firstName=firstName)}}</template>',
+      output: null,
+      errors: [{ message: 'Duplicate attribute ' }],
+    },
+    {
+      code: '<template>{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName firstName=firstName) age=age)}}</template>',
+      output: null,
+      errors: [{ message: 'Duplicate attribute ' }],
     },
   ],
 });

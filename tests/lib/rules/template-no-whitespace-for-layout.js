@@ -15,6 +15,20 @@ ruleTester.run('template-no-whitespace-for-layout', rule, {
     '<template><div>Hello World</div></template>',
     '<template><div>Hello  World</div></template>',
     '<template><div>Text</div></template>',
+  
+    // Test cases ported from ember-template-lint
+    '<template>Start to finish</template>',
+    '<template>Start&nbsp;to&nbsp;finish</template>',
+    '<template>Start<br>to<br>finish</template>',
+    `<template><div>
+  example
+</div></template>`,
+    `<template><div
+  foo="bar"
+  baz="qux"
+>
+  example
+</div></template>`,
   ],
   invalid: [
     {
@@ -29,6 +43,28 @@ ruleTester.run('template-no-whitespace-for-layout', rule, {
     },
     {
       code: '<template><div>Multiple     spaces</div></template>',
+      output: null,
+      errors: [{ messageId: 'noWhitespaceForLayout' }],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>START  FINISH</template>',
+      output: null,
+      errors: [{ messageId: 'noWhitespaceForLayout' }],
+    },
+    {
+      code: '<template>START&nbsp;&nbsp;FINISH</template>',
+      output: null,
+      errors: [{ messageId: 'noWhitespaceForLayout' }],
+    },
+    {
+      code: '<template>START&nbsp; FINISH</template>',
+      output: null,
+      errors: [{ messageId: 'noWhitespaceForLayout' }],
+    },
+    {
+      code: '<template>START &nbsp;FINISH</template>',
       output: null,
       errors: [{ messageId: 'noWhitespaceForLayout' }],
     },

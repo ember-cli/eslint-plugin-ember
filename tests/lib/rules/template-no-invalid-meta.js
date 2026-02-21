@@ -45,5 +45,62 @@ ruleTester.run('template-no-invalid-meta', rule, {
         },
       ],
     },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><meta http-equiv="refresh" content="1; url=http://www.example.com"></template>',
+      output: null,
+      errors: [{ messageId: 'metaRefreshRedirect' }],
+    },
+    {
+      code: '<template><meta http-equiv="refresh" content="71999"></template>',
+      output: null,
+      errors: [{ messageId: 'metaRefreshDelay' }],
+    },
+    {
+      code: '<template><meta name="viewport" content="user-scalable=no"></template>',
+      output: null,
+      errors: [{ messageId: 'viewportUserScalable' }],
+    },
+    {
+      code: '<template><meta name="viewport" content="user-scalable = no"></template>',
+      output: null,
+      errors: [{ messageId: 'viewportUserScalable' }],
+    },
+    {
+      code: '<template><meta name="viewport" content="user-scalable= no"></template>',
+      output: null,
+      errors: [{ messageId: 'viewportUserScalable' }],
+    },
+    {
+      code: '<template><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"></template>',
+      output: null,
+      errors: [{ messageId: 'viewportMaximumScale' }],
+    },
+    {
+      code: '<template><meta name="viewport"></template>',
+      output: null,
+      errors: [{ messageId: 'metaMissingContent' }],
+    },
+    {
+      code: '<template><meta property="og:type"></template>',
+      output: null,
+      errors: [{ messageId: 'metaMissingContent' }],
+    },
+    {
+      code: '<template><meta itemprop="type"></template>',
+      output: null,
+      errors: [{ messageId: 'metaMissingContent' }],
+    },
+    {
+      code: '<template><meta http-equiv="refresh"></template>',
+      output: null,
+      errors: [{ messageId: 'metaMissingContent' }],
+    },
+    {
+      code: '<template><meta content="72001"></template>',
+      output: null,
+      errors: [{ messageId: 'metaMissingIdentifier' }],
+    },
   ],
 });

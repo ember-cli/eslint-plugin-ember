@@ -34,6 +34,12 @@ ruleTester.run('template-require-lang-attribute', rule, {
         <body>Content</body>
       </html>
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template><html lang="en"></html></template>',
+    '<template><html lang="en-US"></html></template>',
+    '<template><html lang="DE-BW"></html></template>',
+    '<template><html lang={{lang}}></html></template>',
   ],
 
   invalid: [
@@ -50,6 +56,23 @@ ruleTester.run('template-require-lang-attribute', rule, {
           type: 'GlimmerElementNode',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><html></html></template>',
+      output: null,
+      errors: [{ message: 'The <html> element must have a lang attribute.' }],
+    },
+    {
+      code: '<template><html lang=""></html></template>',
+      output: null,
+      errors: [{ message: 'The <html> element must have a lang attribute.' }],
+    },
+    {
+      code: '<template><html lang="gibberish"></html></template>',
+      output: null,
+      errors: [{ message: 'The <html> element must have a lang attribute.' }],
     },
   ],
 });

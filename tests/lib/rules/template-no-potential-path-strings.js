@@ -32,6 +32,16 @@ ruleTester.run('template-no-potential-path-strings', rule, {
       `,
       output: null,
     },
+  
+    // Test cases ported from ember-template-lint
+    '<template><img src="foo.png"></template>',
+    '<template><img src={{picture}}></template>',
+    '<template><img src={{this.picture}}></template>',
+    '<template><img src={{@img}}></template>',
+    '<template><SomeComponent @foo={{@bar}} /></template>',
+    '<template><Ui::Demo @title="@my-org/my-package" /></template>',
+    '<template><Ui::Demo @title="@my-org\\my-package" /></template>',
+    '<template><Ui::Demo @title="@my-org|my-package" /></template>',
   ],
 
   invalid: [
@@ -68,6 +78,38 @@ ruleTester.run('template-no-potential-path-strings', rule, {
           messageId: 'noPotentialPathStrings',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><img src="this.picture"></template>',
+      output: null,
+      errors: [{ messageId: 'noPotentialPathStrings' }],
+    },
+    {
+      code: '<template><img src=this.picture></template>',
+      output: null,
+      errors: [{ messageId: 'noPotentialPathStrings' }],
+    },
+    {
+      code: '<template><img src="@img"></template>',
+      output: null,
+      errors: [{ messageId: 'noPotentialPathStrings' }],
+    },
+    {
+      code: '<template><img src=@img></template>',
+      output: null,
+      errors: [{ messageId: 'noPotentialPathStrings' }],
+    },
+    {
+      code: '<template><SomeComponent @foo=@bar /></template>',
+      output: null,
+      errors: [{ messageId: 'noPotentialPathStrings' }],
+    },
+    {
+      code: '<template><SomeComponent @foo=this.bar /></template>',
+      output: null,
+      errors: [{ messageId: 'noPotentialPathStrings' }],
     },
   ],
 });

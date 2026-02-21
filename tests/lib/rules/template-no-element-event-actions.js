@@ -32,6 +32,15 @@ ruleTester.run('template-no-element-event-actions', rule, {
       `,
       output: null,
     },
+  
+    // Test cases ported from ember-template-lint
+    '<template><button></button></template>',
+    '<template><button type="button" on={{action "myAction"}}></button></template>',
+    '<template><button type="button" onclick="myFunction()"></button></template>',
+    '<template><button type="button" {{action "myAction"}}></button></template>',
+    '<template><button type="button" value={{value}}></button></template>',
+    '<template>{{my-component onclick=(action "myAction") someProperty=true}}</template>',
+    '<template><SiteHeader @someFunction={{action "myAction"}} @user={{this.user}} /></template>',
   ],
 
   invalid: [
@@ -68,6 +77,23 @@ ruleTester.run('template-no-element-event-actions', rule, {
           messageId: 'noElementEventActions',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><button onclick={{action "myAction"}} ONFOCUS={{action "myAction"}} otherProperty=true></button></template>',
+      output: null,
+      errors: [{ messageId: 'noElementEventActions' }],
+    },
+    {
+      code: '<template><SiteHeader onclick={{action "myAction"}} @user={{this.user}} /></template>',
+      output: null,
+      errors: [{ messageId: 'noElementEventActions' }],
+    },
+    {
+      code: '<template><button type="button" onclick={{this.myAction}}></button></template>',
+      output: null,
+      errors: [{ messageId: 'noElementEventActions' }],
     },
   ],
 });

@@ -28,6 +28,13 @@ ruleTester.run('template-no-yield-only', rule, {
     `<template>
       <div></div>
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{yield (hash someProp=someValue)}}</template>',
+    '<template>{{field}}</template>',
+    '<template>{{#yield}}{{/yield}}</template>',
+    '<template><Yield/></template>',
+    '<template><yield/></template>',
   ],
 
   invalid: [
@@ -69,6 +76,15 @@ ruleTester.run('template-no-yield-only', rule, {
           type: 'GlimmerMustacheStatement',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: `<template>
+{{! some comment }}  {{yield}}
+     </template>`,
+      output: null,
+      errors: [{ message: 'Component should not only yield. Add wrapper element or additional functionality.' }],
     },
   ],
 });

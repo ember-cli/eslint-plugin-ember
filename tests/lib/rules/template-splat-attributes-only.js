@@ -10,10 +10,22 @@ ruleTester.run('template-splat-attributes-only', rule, {
   valid: [
     '<template><div ...attributes></div></template>',
     '<template><MyComponent ...attributes /></template>',
+  
+    // Test cases ported from ember-template-lint
+    '<template><div attributes></div></template>',
+    '<template><div arguments></div></template>',
+    '<template><div><div ...attributes></div></div></template>',
   ],
   invalid: [
     {
       code: '<template><div ...props></div></template>',
+      output: null,
+      errors: [{ messageId: 'onlyAttributes' }],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><div ...arguments></div></template>',
       output: null,
       errors: [{ messageId: 'onlyAttributes' }],
     },

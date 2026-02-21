@@ -28,6 +28,12 @@ ruleTester.run('template-no-shadowed-elements', rule, {
     `<template>
       <div>Content</div>
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{#foo-bar as |Baz|}}<Baz />{{/foo-bar}}</template>',
+    '<template><FooBar as |Baz|><Baz /></FooBar></template>',
+    '<template>{{#with foo=(component "blah-zorz") as |Div|}}<Div></Div>{{/with}}</template>',
+    '<template><Foo as |bar|><bar.baz /></Foo></template>',
   ],
 
   invalid: [
@@ -66,6 +72,13 @@ ruleTester.run('template-no-shadowed-elements', rule, {
           type: 'GlimmerElementNode',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><FooBar as |div|><div></div></FooBar></template>',
+      output: null,
+      errors: [{ message: 'Component name ' }],
     },
   ],
 });

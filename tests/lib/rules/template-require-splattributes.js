@@ -13,6 +13,9 @@ ruleTester.run('template-require-splattributes', rule, {
     '<template><div ...attributes /></template>',
     '<template><div><Foo ...attributes /></div></template>',
     '<template><div ...attributes></div><div></div></template>',
+  
+    // Test cases ported from ember-template-lint
+    '<template><div></div><div ...attributes></div><div></div></template>',
   ],
   invalid: [
     {
@@ -32,6 +35,20 @@ ruleTester.run('template-require-splattributes', rule, {
           message: 'The root element in this template should use `...attributes`',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><div></div><div></div></template>',
+      output: null,
+      errors: [{ message: 'The root element in this template should use `...attributes`' }],
+    },
+    {
+      code: `<template><div/>
+
+</template>`,
+      output: null,
+      errors: [{ message: 'The root element in this template should use `...attributes`' }],
     },
   ],
 });

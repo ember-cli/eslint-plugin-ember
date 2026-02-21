@@ -29,6 +29,17 @@ ruleTester.run('template-require-has-block-helper', rule, {
     `<template>
       <div>{{this.hasBlockData}}</div>
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{has-block}}</template>',
+    '<template>{{has-block-params}}</template>',
+    '<template>{{something-else}}</template>',
+    '<template>{{component test=(if (has-block) "true")}}</template>',
+    '<template>{{component test=(if (has-block-params) "true")}}</template>',
+    '<template><SomeComponent someProp={{has-block}} /></template>',
+    '<template><SomeComponent someProp={{has-block-params}} /></template>',
+    '<template>{{#if (has-block)}}{{/if}}</template>',
+    '<template>{{#if (has-block-params)}}{{/if}}</template>',
   ],
 
   invalid: [
@@ -71,6 +82,113 @@ ruleTester.run('template-require-has-block-helper', rule, {
           type: 'GlimmerPathExpression',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>{{hasBlockParams}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{if hasBlock "true" "false"}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{if hasBlockParams "true" "false"}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{if (hasBlock) "true" "false"}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{if (hasBlockParams) "true" "false"}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{if (hasBlock "inverse") "true" "false"}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{if (hasBlockParams "inverse") "true" "false"}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{component test=(if hasBlock "true")}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{component test=(if hasBlockParams "true")}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{#if hasBlock}}{{/if}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{#if hasBlockParams}}{{/if}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{#if (hasBlock)}}{{/if}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{#if (hasBlockParams)}}{{/if}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{#if (hasBlock "inverse")}}{{/if}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{#if (hasBlockParams "inverse")}}{{/if}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template><button name={{hasBlock}}></button></template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template><button name={{hasBlockParams}}></button></template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template><button name={{hasBlock "inverse"}}></button></template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template><button name={{hasBlockParams "inverse"}}></button></template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{#if (or isLoading hasLoadFailed hasBlock)}}...{{/if}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
+    },
+    {
+      code: '<template>{{#if (or isLoading hasLoadFailed hasBlockParams)}}...{{/if}}</template>',
+      output: null,
+      errors: [{ message: 'Use (has-block) helper instead of hasBlock property.' }],
     },
   ],
 });

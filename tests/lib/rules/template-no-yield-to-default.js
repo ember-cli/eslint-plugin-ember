@@ -25,6 +25,17 @@ ruleTester.run('template-no-yield-to-default', rule, {
     `<template>
       {{yield to="header"}}
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{yield to="title"}}</template>',
+    '<template>{{has-block}}</template>',
+    '<template>{{has-block "title"}}</template>',
+    '<template>{{has-block-params}}</template>',
+    '<template>{{has-block-params "title"}}</template>',
+    '<template>{{hasBlock}}</template>',
+    '<template>{{hasBlock "title"}}</template>',
+    '<template>{{hasBlockParams}}</template>',
+    '<template>{{hasBlockParams "title"}}</template>',
   ],
 
   invalid: [
@@ -70,6 +81,68 @@ ruleTester.run('template-no-yield-to-default', rule, {
           type: 'GlimmerMustacheStatement',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>{{has-block "default"}}</template>',
+      output: null,
+      errors: [{ messageId: 'noExplicitDefaultBlock' }],
+    },
+    {
+      code: '<template>{{has-block-params "default"}}</template>',
+      output: null,
+      errors: [{ messageId: 'noExplicitDefaultBlock' }],
+    },
+    {
+      code: '<template>{{hasBlock "default"}}</template>',
+      output: null,
+      errors: [{ messageId: 'noExplicitDefaultBlock' }],
+    },
+    {
+      code: '<template>{{hasBlockParams "default"}}</template>',
+      output: null,
+      errors: [{ messageId: 'noExplicitDefaultBlock' }],
+    },
+    {
+      code: '<template>{{if (has-block "default")}}</template>',
+      output: null,
+      errors: [{ messageId: 'noExplicitDefaultBlock' }],
+    },
+    {
+      code: '<template>{{#if (has-block "default")}}{{/if}}</template>',
+      output: null,
+      errors: [{ messageId: 'noExplicitDefaultBlock' }],
+    },
+    {
+      code: '<template>{{if (has-block-params "default")}}</template>',
+      output: null,
+      errors: [{ messageId: 'noExplicitDefaultBlock' }],
+    },
+    {
+      code: '<template>{{#if (has-block-params "default")}}{{/if}}</template>',
+      output: null,
+      errors: [{ messageId: 'noExplicitDefaultBlock' }],
+    },
+    {
+      code: '<template>{{if (hasBlock "default")}}</template>',
+      output: null,
+      errors: [{ messageId: 'noExplicitDefaultBlock' }],
+    },
+    {
+      code: '<template>{{#if (hasBlock "default")}}{{/if}}</template>',
+      output: null,
+      errors: [{ messageId: 'noExplicitDefaultBlock' }],
+    },
+    {
+      code: '<template>{{if (hasBlockParams "default")}}</template>',
+      output: null,
+      errors: [{ messageId: 'noExplicitDefaultBlock' }],
+    },
+    {
+      code: '<template>{{#if (hasBlockParams "default")}}{{/if}}</template>',
+      output: null,
+      errors: [{ messageId: 'noExplicitDefaultBlock' }],
     },
   ],
 });

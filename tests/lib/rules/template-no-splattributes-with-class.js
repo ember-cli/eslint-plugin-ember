@@ -33,5 +33,12 @@ ruleTester.run('template-no-splattributes-with-class', rule, {
       output: null,
       errors: [{ message: ERROR_MESSAGE }],
     },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><div class="foo" ...attributes class="bar">content</div></template>',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE }],
+    },
   ],
 });

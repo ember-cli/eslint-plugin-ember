@@ -12,6 +12,12 @@ ruleTester.run('template-no-yield-block-params-to-else-inverse', rule, {
     '<template>{{yield "some" "param"}}</template>',
     '<template>{{yield to="whatever"}}</template>',
     '<template>{{yield to=this.someValue}}</template>',
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{yield to=(get some this.map)}}</template>',
+    '<template>{{yield to="else"}}</template>',
+    '<template>{{yield to="inverse"}}</template>',
+    '<template>{{not-yield "some" "param" to="else"}}</template>',
   ],
   invalid: [
     {

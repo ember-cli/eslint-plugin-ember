@@ -28,6 +28,10 @@ ruleTester.run('template-no-debugger', rule, {
     `<template>
       <div data-test-debugger={{true}}></div>
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{foo}}</template>',
+    '<template>{{button}}</template>',
   ],
 
   invalid: [
@@ -70,6 +74,13 @@ ruleTester.run('template-no-debugger', rule, {
           type: 'GlimmerBlockStatement',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>{{#debugger}}Invalid!{{/debugger}}</template>',
+      output: null,
+      errors: [{ message: 'Unexpected debugger statement in template.' }],
     },
   ],
 });

@@ -28,6 +28,18 @@ ruleTester.run('template-no-action', rule, {
     `<template>
       {{@action}}
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{#let (fn this.foo bar) as |action|}}<Component @baz={{action}} />{{/let}}</template>',
+    '<template><MyScope as |action|><Component @baz={{action}} /></MyScope></template>',
+    '<template><button {{on "submit" @action}}>Click Me</button></template>',
+    '<template><button {{on "submit" this.action}}>Click Me</button></template>',
+    '<template><PButton @naked={{42}} /></template>',
+    '<template><PButton @naked={{true}} /></template>',
+    '<template><PButton @naked={{undefined}} /></template>',
+    '<template><PButton @naked={{null}} /></template>',
+    '<template><PButton @naked={{this}} /></template>',
+    '<template><PButton @naked={{"action"}} /></template>',
   ],
 
   invalid: [
@@ -56,6 +68,33 @@ ruleTester.run('template-no-action', rule, {
           type: 'GlimmerMustacheStatement',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><button onclick={{action "foo"}}></button></template>',
+      output: null,
+      errors: [{ message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' }],
+    },
+    {
+      code: '<template><button {{action "submit"}}>Submit</button></template>',
+      output: null,
+      errors: [{ message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' }],
+    },
+    {
+      code: '<template><FooBar @baz={{action "submit"}} /></template>',
+      output: null,
+      errors: [{ message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' }],
+    },
+    {
+      code: '<template>{{yield (action "foo")}}</template>',
+      output: null,
+      errors: [{ message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' }],
+    },
+    {
+      code: '<template>{{yield (action this.foo)}}</template>',
+      output: null,
+      errors: [{ message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' }],
     },
   ],
 });

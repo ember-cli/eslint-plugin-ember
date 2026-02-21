@@ -44,5 +44,162 @@ ruleTester.run('template-require-input-label', rule, {
       output: null,
       errors: [{ messageId: 'requireLabel' }],
     },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><div><input /></div></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><input /></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><input title="some title value" /></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><label><input></label></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><div>{{input}}</div></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><Input/></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><input aria-label="first label" aria-labelledby="second label"></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><input id="label-input" aria-label="second label"></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><label>Input label<input aria-label="Custom label"></label></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template>{{input type="button"}}</template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template>{{input type=myType}}</template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><input type="button"/></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><input type={{myType}}/></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><Input type="button"/></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><Input type={{myType}}/></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><div><textarea /></div></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><textarea /></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><textarea title="some title value" /></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><label><textarea /></label></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><div>{{textarea}}</div></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><Textarea /></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><textarea aria-label="first label" aria-labelledby="second label" /></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><textarea id="label-input" aria-label="second label" /></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><label>Textarea label<textarea aria-label="Custom label" /></label></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><div><select></select></div></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><select></select></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><select title="some title value" /></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><label><select></select></label></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><select aria-label="first label" aria-labelledby="second label" /></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><select id="label-input" aria-label="second label" /></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
+    {
+      code: '<template><label>Select label<select aria-label="Custom label" /></label></template>',
+      output: null,
+      errors: [{ messageId: 'requireLabel' }],
+    },
   ],
 });

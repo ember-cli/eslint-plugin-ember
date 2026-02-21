@@ -6,7 +6,12 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 ruleTester.run('template-no-obsolete-elements', rule, {
-  valid: ['<template><div></div></template>'],
+  valid: ['<template><div></div></template>'
+    // Test cases ported from ember-template-lint
+    `<template>{{#let (component 'whatever-here') as |plaintext|}}
+      <plaintext />
+    {{/let}}</template>`,
+  ],
   invalid: [
     {
       code: '<template><marquee></marquee></template>',

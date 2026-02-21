@@ -109,5 +109,12 @@ ruleTester.run('template-no-redundant-role', rule, {
         },
       ],
     },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><header role="banner" class="page-header"></header></template>',
+      output: null,
+      errors: [{ message: 'Use of redundant or invalid role: dialog on <dialog> detected.' }],
+    },
   ],
 });

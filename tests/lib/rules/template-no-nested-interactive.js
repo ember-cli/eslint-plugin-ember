@@ -44,6 +44,53 @@ ruleTester.run('template-no-nested-interactive', rule, {
         <button>Click</button>
       </div>
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template><button>button</button></template>',
+    '<template><button>button <strong>!!!</strong></button></template>',
+    '<template><a><button>button</button></a></template>',
+    '<template><a href="/">link</a></template>',
+    '<template><a href="/">link <strong>!!!</strong></a></template>',
+    '<template><button><input type="hidden"></button></template>',
+    '<template><div tabindex=-1><button>Click me!</button></div></template>',
+    '<template><div tabindex="1"><button></button></div></template>',
+    '<template><label><input></label></template>',
+    '<template><details><summary>Details</summary>Something small enough to escape casual notice.</details></template>',
+    '<template><details> <summary>Details</summary>Something small enough to escape casual notice.</details></template>',
+    `<template>
+    <ul role="menubar" aria-label="functions" id="appmenu">
+      <li role="menuitem" aria-haspopup="true">
+        File
+        <ul role="menu">
+          <li role="menuitem">New</li>
+          <li role="menuitem">Open</li>
+          <li role="menuitem">Print</li>
+        </ul>
+      </li>
+    </ul>
+    </template>`,
+    `<template>
+  <label> My input:
+    {{#if @select}}
+      <select></select>
+    {{else}}
+      <input type='text'>
+    {{/if}}
+  </label>
+    </template>`,
+    `<template>
+  <label> My input:
+    {{#if @select}}
+      {{#if @multiple}}
+        <select multiple></select>
+      {{else}}
+        <select></select>
+      {{/if}}
+    {{else}}
+      <input type='text'>
+    {{/if}}
+  </label>
+    </template>`,
   ],
 
   invalid: [
@@ -90,6 +137,88 @@ ruleTester.run('template-no-nested-interactive', rule, {
           <a href="#">Link</a>
         </div>
       </template>`,
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><details>Something small enough to escape casual notice.<summary>Details</summary></details></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><summary><a href="/">button</a></summary></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><a href="/">button<a href="/">!</a></a></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><a href="/">button<button>!</button></a></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><button>button<a href="/">!</a></button></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><button>button<button>!</button></button></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><button><input type="text"></button></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><button><details><p>!</p></details></button></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><button><embed type="video/quicktime" src="movie.mov" width="640" height="480"></button></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><button><iframe src="/frame.html" width="640" height="480"></iframe></button></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><button><select></select></button></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><button><textarea></textarea></button></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><button><div tabindex="1"></div></button></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><button><img usemap=""></button></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><object usemap=""><button></button></object></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><label><input><input></label></template>',
       output: null,
       errors: [{ messageId: 'nested' }],
     },

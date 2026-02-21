@@ -36,6 +36,32 @@ ruleTester.run('template-require-presentational-children', rule, {
         <li>Item</li>
       </ul>
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template><button></button></template>',
+    '<template><div></div></template>',
+    '<template><li role="tab">Tab title</li></template>',
+    '<template><li role="tab"><h3 role="presentation">Tab Title</h3></li></template>',
+    '<template><div role="button"><div><span></span></div></div></template>',
+    '<template><span role="checkbox"/></template>',
+    '<template><div role="article"><h2>Hello</h2></div></template>',
+    `<template>
+    <ul role="tablist">
+      <li role="presentation">
+        <a role="tab" href="#">Tab 1</a>
+      </li>
+    </ul>
+    </template>`,
+    `<template>
+    <svg role="img">
+      <title>Title here</title>
+      <circle cx="10" cy="10" r="10"></circle>
+    </svg></template>`,
+    `<template>
+      <MyButton role="tab">
+        <:default>Button text</:default>
+      </MyButton>
+    </template>`,
   ],
 
   invalid: [
@@ -68,6 +94,23 @@ ruleTester.run('template-require-presentational-children', rule, {
           type: 'GlimmerElementNode',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><div role="button"><h2>Test</h2></div></template>',
+      output: null,
+      errors: [{ message: 'Element <ul> has role=' }],
+    },
+    {
+      code: '<template><div role="button"><h2 role="presentation"><img /></h2></div></template>',
+      output: null,
+      errors: [{ message: 'Element <ul> has role=' }],
+    },
+    {
+      code: '<template><div role="button"><h2 role="presentation"><button>Test <img/></button></h2></div></template>',
+      output: null,
+      errors: [{ message: 'Element <ul> has role=' }],
     },
   ],
 });

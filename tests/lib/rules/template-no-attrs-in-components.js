@@ -15,13 +15,7 @@ ruleTester.run('template-no-attrs-in-components', rule, {
      class MyComponent extends Component {
        <template>{{this.args.name}}</template>
      }`,
-    // Bare attrs is not accessible without this, so it's allowed
-    '<template>{{attrs.value}}</template>',
     '<template>{{attrs}}</template>',
-    `import Component from '@glimmer/component';
-     class MyComponent extends Component {
-       <template>{{attrs.name}}</template>
-     }`,
   ],
   invalid: [
     {
@@ -40,6 +34,43 @@ ruleTester.run('template-no-attrs-in-components', rule, {
        class MyComponent extends Component {
          <template>{{this.attrs.name}}</template>
        }`,
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>{{attrs.foo}}</template>',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    {
+      code: '<template><div class={{attrs.foo}}></div></template>',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    {
+      code: '<template>{{#if attrs.foo}}bar{{/if}}</template>',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    {
+      code: '<template>{{bar foo=attrs.foo}}</template>',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    {
+      code: '<template>{{component attrs.foo}}</template>',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    {
+      code: '<template>{{bar/baz (hash foo=attrs.foo)}}</template>',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    {
+      code: '<template>{{attrs.foo}}</template>',
       output: null,
       errors: [{ messageId: 'noThisAttrs' }],
     },

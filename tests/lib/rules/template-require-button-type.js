@@ -28,6 +28,17 @@ ruleTester.run('template-require-button-type', rule, {
     `<template>
       <div>Not a button</div>
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template><button type="button" /></template>',
+    '<template><button type="button">label</button></template>',
+    '<template><button type="submit" /></template>',
+    '<template><button type="reset" /></template>',
+    '<template><button type="{{buttonType}}" /></template>',
+    '<template><button type={{buttonType}} /></template>',
+    '<template><div/></template>',
+    '<template><div></div></template>',
+    '<template><div type="randomType"></div></template>',
   ],
 
   invalid: [
@@ -94,6 +105,38 @@ ruleTester.run('template-require-button-type', rule, {
           type: 'GlimmerAttrNode',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><button></button></template>',
+      output: null,
+      errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
+    },
+    {
+      code: '<template><button>label</button></template>',
+      output: null,
+      errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
+    },
+    {
+      code: '<template><button type="" /></template>',
+      output: null,
+      errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
+    },
+    {
+      code: '<template><button type="foo" /></template>',
+      output: null,
+      errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
+    },
+    {
+      code: '<template><button type=42 /></template>',
+      output: null,
+      errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
+    },
+    {
+      code: '<template><form><button></button></form></template>',
+      output: null,
+      errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
     },
   ],
 });

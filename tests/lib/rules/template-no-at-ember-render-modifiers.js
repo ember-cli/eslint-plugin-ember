@@ -25,6 +25,14 @@ ruleTester.run('template-no-at-ember-render-modifiers', rule, {
     `<template>
       <MyComponent />
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template><div {{this.someModifier}}></div></template>',
+    '<template><div {{someModifier}}></div></template>',
+    '<template><div {{did-foo}}></div></template>',
+    '<template>{{did-insert}}</template>',
+    '<template>{{did-update}}</template>',
+    '<template>{{will-destroy}}</template>',
   ],
 
   invalid: [
@@ -66,6 +74,23 @@ ruleTester.run('template-no-at-ember-render-modifiers', rule, {
           type: 'GlimmerElementModifierStatement',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template><div {{did-insert}}></div></template>',
+      output: null,
+      errors: [{ message: 'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.' }],
+    },
+    {
+      code: '<template><div {{did-update}}></div></template>',
+      output: null,
+      errors: [{ message: 'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.' }],
+    },
+    {
+      code: '<template><div {{will-destroy}}></div></template>',
+      output: null,
+      errors: [{ message: 'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.' }],
     },
   ],
 });

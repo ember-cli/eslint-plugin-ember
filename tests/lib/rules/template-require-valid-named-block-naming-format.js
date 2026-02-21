@@ -22,6 +22,16 @@ ruleTester.run('template-require-valid-named-block-naming-format', rule, {
       output: null,
       options: ['kebab-case'],
     },
+  
+    // Test cases ported from ember-template-lint
+    '<template>{{if (has-block)}}</template>',
+    '<template>{{if (has-block "fooBar")}}</template>',
+    '<template>{{has-block-params}}</template>',
+    '<template>{{has-block-params "fooBar"}}</template>',
+    '<template>{{if (has-block-params)}}</template>',
+    '<template>{{if (has-block-params "fooBar")}}</template>',
+    '<template>camelCase</template>',
+    '<template>kebab-case</template>',
   ],
   invalid: [
     {
@@ -51,6 +61,23 @@ ruleTester.run('template-require-valid-named-block-naming-format', rule, {
           message: 'Named block should be in kebab-case format. Change "fooBar" to "foo-bar".',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: '<template>{{if (has-block "foo-bar")}}</template>',
+      output: null,
+      errors: [{ message: 'Named block should be in camelCase format. Change ' }],
+    },
+    {
+      code: '<template>{{has-block-params "foo-bar"}}</template>',
+      output: null,
+      errors: [{ message: 'Named block should be in camelCase format. Change ' }],
+    },
+    {
+      code: '<template>{{if (has-block-params "foo-bar")}}</template>',
+      output: null,
+      errors: [{ message: 'Named block should be in camelCase format. Change ' }],
     },
   ],
 });

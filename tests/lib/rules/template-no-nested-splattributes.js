@@ -11,6 +11,12 @@ ruleTester.run('template-no-nested-splattributes', rule, {
     // Note: In standalone gjs/gts templates, the concept of "top-level" is different.
     // These tests focus on the clear nested cases.
     '<template><div><p>No splattributes here</p></div></template>',
+  
+    // Test cases ported from ember-template-lint
+    '<template><div>...</div></template>',
+    '<template><div><div ...attributes>...</div></div></template>',
+    '<template><div ...attributes>...</div></template>',
+    '<template><div ...attributes>...</div><div ...attributes>...</div></template>',
   ],
 
   invalid: [
@@ -46,6 +52,20 @@ ruleTester.run('template-no-nested-splattributes', rule, {
           type: 'GlimmerAttrNode',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: `<template><div ...attributes>
+</div></template>`,
+      output: null,
+      errors: [{ message: 'Do not use ...attributes on nested elements. Only use it on the top-level element of a component.' }],
+    },
+    {
+      code: `<template><div ...attributes>
+</div></template>`,
+      output: null,
+      errors: [{ message: 'Do not use ...attributes on nested elements. Only use it on the top-level element of a component.' }],
     },
   ],
 });

@@ -33,6 +33,24 @@ ruleTester.run('template-no-multiple-empty-lines', rule, {
     `<template>
       <div>Content</div>
     </template>`,
+  
+    // Test cases ported from ember-template-lint
+    '<template><div>foo</div><div>bar</div></template>',
+    `<template><div>foo</div>
+<div>bar</div></template>`,
+    `<template><div>foo</div>r
+<div>bar</div></template>`,
+    `<template><div>foo</div>
+
+<div>bar</div></template>`,
+    `<template><div>foo</div>r
+r
+<div>bar</div></template>`,
+    `<template>
+<div>foo</div>
+
+<div>bar</div>
+</template>`,
   ],
 
   invalid: [
@@ -64,6 +82,26 @@ ruleTester.run('template-no-multiple-empty-lines', rule, {
           message: 'More than 1 blank line not allowed.',
         },
       ],
+    },
+  
+    // Test cases ported from ember-template-lint
+    {
+      code: `<template><div>foo</div>
+
+
+<div>bar</div></template>`,
+      output: null,
+      errors: [{ message: 'More than 1 blank line not allowed.' }],
+    },
+    {
+      code: `<template><div>foo</div>
+
+
+
+
+<div>bar</div></template>`,
+      output: null,
+      errors: [{ message: 'More than 1 blank line not allowed.' }],
     },
   ],
 });

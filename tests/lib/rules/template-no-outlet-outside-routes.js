@@ -11,7 +11,11 @@ const ruleTester = new RuleTester({
 });
 
 ruleTester.run('template-no-outlet-outside-routes', rule, {
-  valid: ['<template><div>Content</div></template>'],
+  valid: ['<template><div>Content</div></template>'
+    // Test cases ported from ember-template-lint
+    '<template>{{foo}}</template>',
+    '<template>{{button}}</template>',
+  ],
   invalid: [
     {
       code: '<template>{{outlet}}</template>',
