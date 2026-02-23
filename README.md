@@ -199,6 +199,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-capital-arguments](docs/rules/template-no-capital-arguments.md)                           | disallow capital arguments (use lowercase @arg instead of @Arg) |    |    |    |
 | [template-no-debugger](docs/rules/template-no-debugger.md)                                             | disallow {{debugger}} in templates                              |    |    |    |
 | [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                   | disallow element event actions (use {{on}} modifier instead)    |    |    |    |
+| [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                   | disallow tagName attribute on {{input}} helper                  |    |    |    |
 | [template-no-log](docs/rules/template-no-log.md)                                                       | disallow {{log}} in templates                                   |    |    |    |
 
 ### Components
