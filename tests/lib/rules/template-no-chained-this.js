@@ -34,14 +34,12 @@ ruleTester.run('template-no-chained-this', rule, {
     },
     {
       code: '<template><this.this.Component /></template>',
-      output: null,
+      output: '<template><this.Component /></template>',
       errors: [{ messageId: 'noChainedThis' }],
     },
-
-    // Test cases ported from ember-template-lint
     {
       code: '<template>{{#this.this.value}}woo{{/this.this.value}}</template>',
-      output: null,
+      output: '<template>{{#this.value}}woo{{/this.value}}</template>',
       errors: [{ messageId: 'noChainedThis' }],
     },
     {
