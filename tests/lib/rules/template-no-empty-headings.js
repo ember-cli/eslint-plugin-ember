@@ -12,8 +12,6 @@ ruleTester.run('template-no-empty-headings', rule, {
     '<template><h2>{{this.title}}</h2></template>',
     '<template><h3><span>Text</span></h3></template>',
     '<template><h4 hidden></h4></template>',
-
-    // Test cases ported from ember-template-lint
     '<template><h1>Accessible Heading</h1></template>',
     '<template><h1>Accessible&nbsp;Heading</h1></template>',
     '<template><h1 aria-hidden="true">Valid Heading</h1></template>',
@@ -52,10 +50,8 @@ ruleTester.run('template-no-empty-headings', rule, {
       output: null,
       errors: [{ messageId: 'emptyHeading' }],
     },
-
-    // Test cases ported from ember-template-lint
     {
-      code: `<template><h1> 
+      code: `<template><h1>
  &nbsp;</h1></template>`,
       output: null,
       errors: [{ messageId: 'emptyHeading' }],
@@ -66,7 +62,7 @@ ruleTester.run('template-no-empty-headings', rule, {
       errors: [{ messageId: 'emptyHeading' }],
     },
     {
-      code: `<template><h1><span> 
+      code: `<template><h1><span>
  &nbsp;</span></h1></template>`,
       output: null,
       errors: [{ messageId: 'emptyHeading' }],
