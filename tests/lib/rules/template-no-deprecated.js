@@ -38,6 +38,19 @@ ruleTester.run('template-no-deprecated', rule, {
 });
 
 // Block 2: TypeScript project -- full deprecation checking
+//
+// Unlike most rule tests, this block requires physical fixture files in
+// tests/lib/rules-preprocessor/template-no-deprecated/. Two reasons:
+//
+// 1. The tsconfig uses glob patterns to build its file list. The `filename`
+//    passed to RuleTester must physically exist so TypeScript includes it.
+//
+// 2. This rule only checks ImportBinding definitions. To detect @deprecated,
+//    TypeScript must resolve the import and read the JSDoc from the source
+//    file. Inline class/function definitions are not checked.
+//
+// Rules that don't use parserOptions.project, or whose logic doesn't depend
+// on TypeScript import resolution, can use any virtual filename.
 
 const PREPROCESSOR_DIR = path.join(__dirname, '../rules-preprocessor');
 
