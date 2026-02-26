@@ -8,7 +8,6 @@ exports[`recommended rules > gjs config has the right list 1`] = `
 
 exports[`recommended rules > gts config has the right list 1`] = `
 [
-  "template-no-deprecated",
   "template-no-let-reference",
 ]
 `;

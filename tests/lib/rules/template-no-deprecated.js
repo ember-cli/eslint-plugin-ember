@@ -6,7 +6,7 @@ const RuleTester = require('eslint').RuleTester;
 
 const FIXTURES_DIR = path.join(__dirname, '../rules-preprocessor/template-no-deprecated');
 
-// ─── Block 1: No TypeScript project — rule is a no-op ───────────────────────
+// Block 1: No TypeScript project -- rule is a no-op
 // When parserServices.program is absent, the rule returns {} and never reports.
 
 const ruleTester = new RuleTester({
@@ -37,7 +37,7 @@ ruleTester.run('template-no-deprecated', rule, {
   invalid: [],
 });
 
-// ─── Block 2: TypeScript project — full deprecation checking ─────────────────
+// Block 2: TypeScript project -- full deprecation checking
 
 const PREPROCESSOR_DIR = path.join(__dirname, '../rules-preprocessor');
 
