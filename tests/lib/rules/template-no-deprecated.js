@@ -17,13 +17,13 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-deprecated', rule, {
   valid: [
     // Non-deprecated component reference
-    `import SomeComponent from './some-component';\n<template><SomeComponent /></template>`,
+    'import SomeComponent from \'./some-component\';\n<template><SomeComponent /></template>',
     // Plain HTML tag -- never reported
-    `<template><div></div></template>`,
+    '<template><div></div></template>',
     // this.something -- not a scope reference
-    `<template>{{this.foo}}</template>`,
+    '<template>{{this.foo}}</template>',
     // Undefined reference -- no def, skip
-    `<template>{{undefinedThing}}</template>`,
+    '<template>{{undefinedThing}}</template>',
   ],
   invalid: [],
 });
