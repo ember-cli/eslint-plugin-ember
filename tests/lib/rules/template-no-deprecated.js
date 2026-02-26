@@ -17,7 +17,7 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-deprecated', rule, {
   valid: [
     // Non-deprecated component reference
-    'import SomeComponent from \'./some-component\';\n<template><SomeComponent /></template>',
+    "import SomeComponent from './some-component';\n<template><SomeComponent /></template>",
     // Plain HTML tag -- never reported
     '<template><div></div></template>',
     // this.something -- not a scope reference
