@@ -19,7 +19,7 @@ This rule checks if imported Glimmer components, helpers, or modifiers are marke
 | Block component         | `{{#DeprecatedBlock}}…{{/DeprecatedBlock}}` |
 | Modifier                | `<div {{deprecatedModifier}}>`              |
 
-**Not covered:** `<MyComp @deprecatedArg={{x}}>` — argument names are not scope-registered by the parser.
+**Not covered:** `<MyComp @deprecatedArg={{x}}>` — checking argument deprecations is not yet implemented.
 
 ## Examples
 
