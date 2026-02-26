@@ -8,7 +8,7 @@ This rule requires TypeScript (`parserServices.program` must be present). It is 
 
 ## Rule Details
 
-The rule resolves template references through ESLint's scope analysis: a `<Component>` or `{{helper}}` reference is traced back to its import declaration, then the TypeScript type checker inspects the exported symbol's JSDoc tags for `@deprecated`.
+This rule checks if imported Glimmer components, helpers, or modifiers are marked `@deprecated` in their JSDoc.
 
 **Covered syntax:**
 
@@ -19,7 +19,7 @@ The rule resolves template references through ESLint's scope analysis: a `<Compo
 | Block component         | `{{#DeprecatedBlock}}…{{/DeprecatedBlock}}` |
 | Modifier                | `<div {{deprecatedModifier}}>`              |
 
-**Not covered (see future work):** `<MyComp @deprecatedArg={{x}}>` — argument names are not scope-registered by the parser.
+**Not covered:** `<MyComp @deprecatedArg={{x}}>` — argument names are not scope-registered by the parser.
 
 ## Examples
 
