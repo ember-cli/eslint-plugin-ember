@@ -1,7 +1,5 @@
 # ember/template-no-deprecated
 
-💼 This rule is enabled in the ![gts logo](/docs/svgs/gts.svg) `recommended-gts` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
-
 <!-- end auto-generated rule header -->
 
 Disallows using Glimmer components, helpers, or modifiers that are marked `@deprecated` in their JSDoc.
@@ -14,12 +12,12 @@ The rule resolves template references through ESLint's scope analysis: a `<Compo
 
 **Covered syntax:**
 
-| Template syntax | Example |
-|---|---|
-| Component element | `<DeprecatedComponent />` |
-| Helper / value mustache | `{{deprecatedHelper}}` |
-| Block component | `{{#DeprecatedBlock}}…{{/DeprecatedBlock}}` |
-| Modifier | `<div {{deprecatedModifier}}>` |
+| Template syntax         | Example                                     |
+| ----------------------- | ------------------------------------------- |
+| Component element       | `<DeprecatedComponent />`                   |
+| Helper / value mustache | `{{deprecatedHelper}}`                      |
+| Block component         | `{{#DeprecatedBlock}}…{{/DeprecatedBlock}}` |
+| Modifier                | `<div {{deprecatedModifier}}>`              |
 
 **Not covered (see future work):** `<MyComp @deprecatedArg={{x}}>` — argument names are not scope-registered by the parser.
 

@@ -85,6 +85,7 @@ ruleTesterTyped.run('template-no-deprecated (with TS project)', rule, {
         import DeprecatedComponent from './deprecated-component';
         <template><DeprecatedComponent /></template>
       `,
+      output: null,
       errors: [{ messageId: 'deprecatedWithReason', type: 'GlimmerElementNodePart' }],
     },
     // Deprecated helper in mustache position
@@ -94,6 +95,7 @@ ruleTesterTyped.run('template-no-deprecated (with TS project)', rule, {
         import { deprecatedHelper } from './deprecated-helper';
         <template>{{deprecatedHelper}}</template>
       `,
+      output: null,
       errors: [{ messageId: 'deprecated', type: 'VarHead' }],
     },
     // Deprecated component in block position
@@ -103,6 +105,7 @@ ruleTesterTyped.run('template-no-deprecated (with TS project)', rule, {
         import DeprecatedComponent from './deprecated-component';
         <template>{{#DeprecatedComponent}}{{/DeprecatedComponent}}</template>
       `,
+      output: null,
       errors: [{ messageId: 'deprecatedWithReason', type: 'VarHead' }],
     },
   ],
