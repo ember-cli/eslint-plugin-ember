@@ -32,7 +32,9 @@ describe('rules setup is correct', function () {
     const files = readdirSync(filePath);
 
     expect(RULE_NAMES).toEqual(
-      files.filter((file) => !file.startsWith('.')).map((file) => file.replace('.js', ''))
+      files
+        .filter((file) => !file.startsWith('.') && file.endsWith('.js'))
+        .map((file) => file.replace('.js', ''))
     );
   });
 
