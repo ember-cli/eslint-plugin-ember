@@ -2,7 +2,7 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows using Glimmer components, helpers, or modifiers that are marked `@deprecated` in their JSDoc.
+Disallows using components, helpers, or modifiers that are marked `@deprecated` in their JSDoc.
 
 This rule requires TypeScript (`parserServices.program` must be present). It is a no-op in plain `.gjs` files because cross-file import deprecations require type information.
 
