@@ -136,7 +136,12 @@ ruleTesterTyped.run('template-no-deprecated (with TS project)', rule, {
         <template><ComponentWithArgs @oldArg='x' /></template>
       `,
       output: null,
-      errors: [{ messageId: 'deprecatedWithReason', data: { name: '@oldArg', reason: 'use newArg instead' } }],
+      errors: [
+        {
+          messageId: 'deprecatedWithReason',
+          data: { name: '@oldArg', reason: 'use newArg instead' },
+        },
+      ],
     },
     // Deprecated @arg without reason
     {
