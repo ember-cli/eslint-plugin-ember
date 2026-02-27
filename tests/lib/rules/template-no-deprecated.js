@@ -80,6 +80,22 @@ ruleTesterTyped.run('template-no-deprecated (with TS project)', rule, {
         <template>{{this.foo}}</template>
       `,
     },
+    // Non-deprecated @arg — no error
+    {
+      filename: path.join(FIXTURES_DIR, 'usage.gts'),
+      code: `
+        import ComponentWithArgs from './component-with-args';
+        <template><ComponentWithArgs @newArg='x' /></template>
+      `,
+    },
+    // @arg on a component with no typed Args — silently skip
+    {
+      filename: path.join(FIXTURES_DIR, 'usage.gts'),
+      code: `
+        import CurrentComponent from './current-component';
+        <template><CurrentComponent @anyArg='x' /></template>
+      `,
+    },
   ],
   invalid: [
     // Deprecated component in element position
@@ -111,6 +127,26 @@ ruleTesterTyped.run('template-no-deprecated (with TS project)', rule, {
       `,
       output: null,
       errors: [{ messageId: 'deprecatedWithReason', type: 'VarHead' }],
+    },
+    // Deprecated @arg with reason
+    {
+      filename: path.join(FIXTURES_DIR, 'usage.gts'),
+      code: `
+        import ComponentWithArgs from './component-with-args';
+        <template><ComponentWithArgs @oldArg='x' /></template>
+      `,
+      output: null,
+      errors: [{ messageId: 'deprecatedWithReason', data: { name: '@oldArg', reason: 'use newArg instead' } }],
+    },
+    // Deprecated @arg without reason
+    {
+      filename: path.join(FIXTURES_DIR, 'usage.gts'),
+      code: `
+        import ComponentWithArgs from './component-with-args';
+        <template><ComponentWithArgs @oldArgNoReason='x' /></template>
+      `,
+      output: null,
+      errors: [{ messageId: 'deprecated', data: { name: '@oldArgNoReason' } }],
     },
   ],
 });
