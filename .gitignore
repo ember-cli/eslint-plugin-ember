@@ -4,6 +4,7 @@ logs
 
 # Dependencies
 node_modules
+package-lock.json
 
 # Misc
 .eslintcache
