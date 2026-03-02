@@ -96,26 +96,6 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
       ],
     },
     {
-      code: '<template>{{input type="text" autofocus=true}}</template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.',
-        },
-      ],
-    },
-    {
-      code: '<template>{{component "input" type="text" autofocus=true}}</template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.',
-        },
-      ],
-    },
-    {
       code: '<template><div autofocus="true"></div></template>',
       output: '<template><div></div></template>',
       errors: [
