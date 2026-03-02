@@ -133,3 +133,37 @@ ruleTester.run('template-no-capital-arguments', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-capital-arguments (hbs)', rule, {
+  valid: [
+    '<Foo @name="bar" />',
+    '@foo',
+  ],
+  invalid: [
+    {
+      code: '<Foo @Name="bar" />',
+      output: null,
+      errors: [{ messageId: 'noCapitalArguments' }],
+    },
+    {
+      code: '<Foo @_ame="bar" />',
+      output: null,
+      errors: [{ messageId: 'noCapitalArguments' }],
+    },
+    {
+      code: '{{@Name}}',
+      output: null,
+      errors: [{ messageId: 'noCapitalArguments' }],
+    },
+    {
+      code: '{{@_Name}}',
+      output: null,
+      errors: [{ messageId: 'noCapitalArguments' }],
+    },
+  ],
+});

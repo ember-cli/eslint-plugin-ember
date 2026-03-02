@@ -121,3 +121,63 @@ ruleTester.run('template-no-action', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-action', rule, {
+  valid: [
+    '{{#let (fn this.foo bar) as |action|}}<Component @baz={{action}} />{{/let}}',
+    '<MyScope as |action|><Component @baz={{action}} /></MyScope>',
+    '<button {{on "submit" @action}}>Click Me</button>',
+    '<button {{on "submit" this.action}}>Click Me</button>',
+    '<PButton @naked={{42}} />',
+    '<PButton @naked={{true}} />',
+    '<PButton @naked={{undefined}} />',
+    '<PButton @naked={{null}} />',
+    '<PButton @naked={{this}} />',
+    '<PButton @naked={{"action"}} />',
+  ],
+  invalid: [
+    {
+      code: '<button onclick={{action "foo"}}></button>',
+      output: null,
+      errors: [
+        { message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' },
+      ],
+    },
+    {
+      code: '<button {{action "submit"}}>Submit</button>',
+      output: null,
+      errors: [
+        { message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' },
+      ],
+    },
+    {
+      code: '<FooBar @baz={{action "submit"}} />',
+      output: null,
+      errors: [
+        { message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' },
+      ],
+    },
+    {
+      code: '{{yield (action "foo")}}',
+      output: null,
+      errors: [
+        { message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' },
+      ],
+    },
+    {
+      code: '{{yield (action this.foo)}}',
+      output: null,
+      errors: [
+        { message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' },
+      ],
+    },
+  ],
+});

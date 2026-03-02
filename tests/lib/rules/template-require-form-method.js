@@ -100,3 +100,64 @@ ruleTester.run('template-require-form-method', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-require-form-method', rule, {
+  valid: [
+    '<form method="POST"></form>',
+    '<form method="post"></form>',
+    '<form method="GET"></form>',
+    '<form method="get"></form>',
+    '<form method="DIALOG"></form>',
+    '<form method="dialog"></form>',
+    '<form method="{{formMethod}}"></form>',
+    '<form method={{formMethod}}></form>',
+    '<div/>',
+    '<div></div>',
+    '<div method="randomType"></div>',
+  ],
+  invalid: [
+    {
+      code: '<form></form>',
+      output: null,
+      errors: [
+        { message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' },
+      ],
+    },
+    {
+      code: '<form method=""></form>',
+      output: null,
+      errors: [
+        { message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' },
+      ],
+    },
+    {
+      code: '<form method=42></form>',
+      output: null,
+      errors: [
+        { message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' },
+      ],
+    },
+    {
+      code: '<form method=" ge t "></form>',
+      output: null,
+      errors: [
+        { message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' },
+      ],
+    },
+    {
+      code: '<form method=" pos t "></form>',
+      output: null,
+      errors: [
+        { message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' },
+      ],
+    },
+  ],
+});

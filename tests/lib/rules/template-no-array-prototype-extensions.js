@@ -120,3 +120,106 @@ ruleTester.run('template-no-array-prototype-extensions', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-array-prototype-extensions (hbs)', rule, {
+  valid: [
+    "{{foo bar=(get this 'list.0' )}}",
+    "<Foo @bar={{get this 'list.0'}} />",
+    "{{get this 'list.0.foo'}}",
+    "{{get this 'firstObject'}}",
+    "{{get this 'lastObject.name'}}",
+    '{{foo bar @list}}',
+    '{{this.firstObject}}',
+    '{{this.lastObject.name}}',
+    '{{firstObject}}',
+    '{{lastObject}}',
+    '{{notfirstObject}}',
+    '{{@firstObject}}',
+    '{{@lastObject}}',
+    '{{@lastObject.name}}',
+    '{{foo bar this.firstObject}}',
+    '{{foo bar this.lastObject.name}}',
+    '{{foo bar @lastObject}}',
+    '{{foo bar @firstObject}}',
+    '{{foo bar @lastObject.name}}',
+    '{{foo bar @list.notfirstObject}}',
+    '{{foo bar @list.lastObjectV2}}',
+    'Just a regular text in the template bar.firstObject bar.lastObject.foo',
+    '<Foo foo="bar.firstObject.baz" />',
+    '<Foo foo="lastObject" />',
+    `<FooBar
+     @subHeaderText={{if
+      this.isFooBarV2Enabled
+      "firstObject"
+    }}
+  />`,
+    `<FooBar
+     @subHeaderText={{if
+      this.isFooBarV2Enabled
+      "hi.lastObject.name"
+    }}
+  />`,
+  ],
+  invalid: [
+    {
+      code: '{{foo bar=@list.lastObject.test}}',
+      output: null,
+      errors: [{ messageId: 'lastObject' }],
+    },
+    {
+      code: '{{this.list.lastObject}}',
+      output: null,
+      errors: [{ messageId: 'lastObject' }],
+    },
+    {
+      code: "<Foo @bar={{get this 'list.lastObject'}} />",
+      output: null,
+      errors: [{ messageId: 'lastObject' }],
+    },
+    {
+      code: '<div data-test={{eq this.list.firstObject.abc "def"}}>Hello</div>',
+      output: null,
+      errors: [{ messageId: 'firstObject' }],
+    },
+    {
+      code: '{{foo bar=this.list.firstObject}}',
+      output: null,
+      errors: [{ messageId: 'firstObject' }],
+    },
+    {
+      code: '{{this.list.firstObject}}',
+      output: null,
+      errors: [{ messageId: 'firstObject' }],
+    },
+    {
+      code: '{{this.list.firstObject.name}}',
+      output: null,
+      errors: [{ messageId: 'firstObject' }],
+    },
+    {
+      code: '<Foo @bar={{@list.firstObject}} />',
+      output: null,
+      errors: [{ messageId: 'firstObject' }],
+    },
+    {
+      code: '<Foo @bar={{this.list.firstObject.name.foo}} />',
+      output: null,
+      errors: [{ messageId: 'firstObject' }],
+    },
+    {
+      code: "<Foo @bar={{get this 'list.firstObject'}} />",
+      output: null,
+      errors: [{ messageId: 'firstObject' }],
+    },
+    {
+      code: "<Foo @bar={{get @list 'firstObject.name'}} />",
+      output: null,
+      errors: [{ messageId: 'firstObject' }],
+    },
+  ],
+});

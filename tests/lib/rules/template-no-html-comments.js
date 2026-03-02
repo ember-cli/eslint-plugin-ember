@@ -38,3 +38,23 @@ ruleTester.run('template-no-html-comments', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-html-comments', rule, {
+  valid: [
+    '{{!-- comment here --}}',
+    '{{!--comment here--}}',
+    '{{! template-lint-disable no-bare-strings }}',
+    '{{! template-lint-disable }}',
+    '{{! template-lint-disable no-html-comments }}<!-- lol -->',
+  ],
+  invalid: [
+  ],
+});

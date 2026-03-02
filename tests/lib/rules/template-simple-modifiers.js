@@ -42,3 +42,40 @@ ruleTester.run('template-simple-modifiers', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-simple-modifiers', rule, {
+  valid: [
+    '<div {{(modifier "track-interaction" @controlName)}}></div>',
+    '<div {{(modifier this.trackInteraction @controlName)}}></div>',
+    '<div {{(modifier @trackInteraction @controlName)}}></div>',
+    '<div {{(if @isActionVisible (modifier "track-interaction" eventName=myEventName eventBody=myEventbody))}}></div>',
+    '<div {{(my-modifier (unless this.hasBeenClicked "track-interaction") "click" customizeData=this.customizeClickData)}}></div>',
+    '<div {{my-modifier}}></div>',
+    '<MyComponent @people={{array "Tom Dale" "Yehuda Katz" this.myOtherPerson}} />',
+    '<div {{(if this.foo (modifier "foo-bar"))}}></div>',
+  ],
+  invalid: [
+    {
+      code: '<div {{(modifier (unless this.hasBeenClicked "track-interaction") "click" customizeData=this.customizeClickData)}}></div>',
+      output: null,
+      errors: [
+        { message: 'The modifier helper should have a string or a variable name containing the modifier name as a first argument.' },
+      ],
+    },
+    {
+      code: '<div {{(modifier)}}></div>',
+      output: null,
+      errors: [
+        { message: 'The modifier helper should have a string or a variable name containing the modifier name as a first argument.' },
+      ],
+    },
+  ],
+});

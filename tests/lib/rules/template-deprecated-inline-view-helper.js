@@ -64,3 +64,74 @@ ruleTester.run('template-deprecated-inline-view-helper', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-deprecated-inline-view-helper', rule, {
+  valid: [
+    '{{great-fishsticks}}',
+    '{{input placeholder=(t "email") value=email}}',
+    '{{title "CrossCheck Web" prepend=true separator=" | "}}',
+    '{{false}}',
+    '{{"foo"}}',
+    '{{42}}',
+    '{{null}}',
+    '{{undefined}}',
+    '{{has-block "view"}}',
+    '{{yield to="view"}}',
+    '{{#if (has-block "view")}}{{yield to="view"}}{{/if}}',
+    '{{this.view}}',
+    '{{@view}}',
+    '{{#let this.prop as |view|}} {{view}} {{/let}}',
+  ],
+  invalid: [
+    {
+      code: `{{view 'awful-fishsticks'}}`,
+      output: null,
+      errors: [
+        { message: 'The inline form of `view` is deprecated. Please use `Ember.Component` instead. See http://emberjs.com/deprecations/v1.x/#toc_ember-view' },
+      ],
+    },
+    {
+      code: '{{view.bad-fishsticks}}',
+      output: null,
+      errors: [
+        { message: 'The inline form of `view` is deprecated. Please use `Ember.Component` instead. See http://emberjs.com/deprecations/v1.x/#toc_ember-view' },
+      ],
+    },
+    {
+      code: '{{view.terrible.fishsticks}}',
+      output: null,
+      errors: [
+        { message: 'The inline form of `view` is deprecated. Please use `Ember.Component` instead. See http://emberjs.com/deprecations/v1.x/#toc_ember-view' },
+      ],
+    },
+    {
+      code: '{{foo-bar bab=good baz=view.qux.qaz boo=okay}}',
+      output: null,
+      errors: [
+        { message: 'The inline form of `view` is deprecated. Please use `Ember.Component` instead. See http://emberjs.com/deprecations/v1.x/#toc_ember-view' },
+      ],
+    },
+    {
+      code: '<div class="whatever-class" data-foo={{view.hallo}} sure=thing></div>',
+      output: null,
+      errors: [
+        { message: 'The inline form of `view` is deprecated. Please use `Ember.Component` instead. See http://emberjs.com/deprecations/v1.x/#toc_ember-view' },
+      ],
+    },
+    {
+      code: '{{#foo-bar derp=view.whoops thing=whatever}}{{/foo-bar}}',
+      output: null,
+      errors: [
+        { message: 'The inline form of `view` is deprecated. Please use `Ember.Component` instead. See http://emberjs.com/deprecations/v1.x/#toc_ember-view' },
+      ],
+    },
+  ],
+});

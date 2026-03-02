@@ -64,3 +64,28 @@ ruleTester.run('template-no-partial', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-partial', rule, {
+  valid: [
+    '{{foo}}',
+    '{{button}}',
+    '<Component @param={{"partial"}} />',
+  ],
+  invalid: [
+    {
+      code: '{{partial "foo"}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected partial usage. Partials are deprecated, use components instead.' },
+      ],
+    },
+  ],
+});

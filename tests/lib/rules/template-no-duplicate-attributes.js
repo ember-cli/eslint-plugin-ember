@@ -133,3 +133,45 @@ ruleTester.run('template-no-duplicate-attributes', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-duplicate-attributes (hbs)', rule, {
+  valid: [
+    '{{my-component firstName=firstName lastName=lastName}}',
+    '{{#my-component firstName=firstName  lastName=lastName as |fullName|}} {{fullName}}{{/my-component}}',
+    '<a class="btn">{{btnLabel}}</a>',
+    '{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age)}}',
+    '{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName) age=age)}}',
+  ],
+  invalid: [
+    {
+      code: '{{my-component firstName=firstName lastName=lastName firstName=firstName}}',
+      output: '{{my-component firstName=firstName lastName=lastName}}',
+      errors: [{ messageId: 'duplicateMustache', data: { name: 'firstName' } }],
+    },
+    {
+      code: '{{#my-component firstName=firstName  lastName=lastName firstName=firstName as |fullName|}} {{fullName}}{{/my-component}}',
+      output: '{{#my-component firstName=firstName  lastName=lastName as |fullName|}} {{fullName}}{{/my-component}}',
+      errors: [{ messageId: 'duplicateBlock', data: { name: 'firstName' } }],
+    },
+    {
+      code: '<a class="btn" class="btn">{{btnLabel}}</a>',
+      output: '<a class="btn">{{btnLabel}}</a>',
+      errors: [{ messageId: 'duplicateElement', data: { name: 'class' } }],
+    },
+    {
+      code: '{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age firstName=firstName)}}',
+      output: '{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age)}}',
+      errors: [{ messageId: 'duplicateSubExpr', data: { name: 'firstName' } }],
+    },
+    {
+      code: '{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName firstName=firstName) age=age)}}',
+      output: '{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName) age=age)}}',
+      errors: [{ messageId: 'duplicateSubExpr', data: { name: 'firstName' } }],
+    },
+  ],
+});

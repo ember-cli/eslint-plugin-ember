@@ -132,3 +132,150 @@ ruleTester.run('template-no-link-to-positional-params', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-link-to-positional-params', rule, {
+  valid: [
+    '{{#link-to route="about"}}About Us{{/link-to}}',
+    '{{#link-to route="post" model=@post}}Read {{@post.title}}...{{/link-to}}',
+    `{{#link-to route="post.comment" models=(array post comment)}}
+        Comment by {{comment.author.name}} on {{comment.date}}
+      {{/link-to}}`,
+    `{{#link-to route="posts" query=(hash direction="desc" showArchived=false)}}
+        Recent Posts
+      {{/link-to}}`,
+    '<LinkTo @route="about">About Us</LinkTo>',
+    '<LinkTo @route="post" @model={{@post}}>Read {{@post.title}}...</LinkTo>',
+    `<LinkTo @route="post.comment" @models={{array post comment}}>
+        Comment by {{comment.author.name}} on {{comment.date}}
+      </LinkTo>`,
+    `<LinkTo @route="posts" @query={{hash direction="desc" showArchived=false}}>
+        Recent Posts
+      </LinkTo>`,
+  ],
+  invalid: [
+    {
+      code: '{{link-to "About Us" "about"}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: '{{link-to "About Us" (if this.showNewAboutPage "about-us" "about")}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: '{{link-to (t "about") "about"}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: '{{link-to (t "about") this.aboutRoute}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: '{{link-to (t "about") this.aboutRoute "foo"}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: '{{link-to (t "about") this.aboutRoute "foo" "bar"}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: '{{link-to (t "about") this.aboutRoute "foo" "bar" (query-params foo="bar")}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: '{{#link-to (if this.showNewAboutPage "about-us" "about")}}About Us{{/link-to}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: '{{#link-to "about"}}About Us{{/link-to}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: '{{#link-to this.aboutRoute}}About Us{{/link-to}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: '{{#link-to this.aboutRoute "foo"}}About Us{{/link-to}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: '{{#link-to this.aboutRoute "foo" "bar"}}About Us{{/link-to}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: '{{#link-to this.aboutRoute "foo" "bar" (query-params foo="bar")}}About Us{{/link-to}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: '{{#link-to "post" @post}}Read {{@post.title}}...{{/link-to}}',
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: `{{#link-to "post.comment" @comment.post @comment}}
+        Comment by {{@comment.author.name}} on {{@comment.date}}
+      {{/link-to}}`,
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+    {
+      code: `{{#link-to "posts" (query-params direction="desc" showArchived=false)}}
+        Recent Posts
+      {{/link-to}}`,
+      output: null,
+      errors: [
+        { message: 'Positional params in LinkTo are deprecated. Use @route instead.' },
+      ],
+    },
+  ],
+});

@@ -49,3 +49,51 @@ ruleTester.run('template-no-forbidden-elements', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-forbidden-elements', rule, {
+  valid: [
+    '<header></header>',
+    '<div></div>',
+    '<footer></footer>',
+    '<p></p>',
+    '<head><meta charset="utf-8"></head>',
+  ],
+  invalid: [
+    {
+      code: '<html></html>',
+      output: null,
+      errors: [
+        { message: 'Use of forbidden element <html>' },
+      ],
+    },
+    {
+      code: '<style></style>',
+      output: null,
+      errors: [
+        { message: 'Use of forbidden element <style>' },
+      ],
+    },
+    {
+      code: '<meta charset="utf-8">',
+      output: null,
+      errors: [
+        { message: 'Use of forbidden element <meta>' },
+      ],
+    },
+    {
+      code: '<head><html></html></head>',
+      output: null,
+      errors: [
+        { message: 'Use of forbidden element <html>' },
+      ],
+    },
+  ],
+});

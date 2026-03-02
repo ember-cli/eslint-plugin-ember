@@ -85,3 +85,29 @@ ruleTester.run('template-no-shadowed-elements', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-shadowed-elements', rule, {
+  valid: [
+    '{{#foo-bar as |Baz|}}<Baz />{{/foo-bar}}',
+    '<FooBar as |Baz|><Baz /></FooBar>',
+    '{{#with foo=(component "blah-zorz") as |Div|}}<Div></Div>{{/with}}',
+    '<Foo as |bar|><bar.baz /></Foo>',
+  ],
+  invalid: [
+    {
+      code: '<FooBar as |div|><div></div></FooBar>',
+      output: null,
+      errors: [
+        { message: 'Component name "div" shadows HTML element <div>. Use a different name.' },
+      ],
+    },
+  ],
+});

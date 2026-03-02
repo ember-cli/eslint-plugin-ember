@@ -62,3 +62,63 @@ ruleTester.run('template-simple-unless', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-simple-unless', rule, {
+  valid: [
+    `{{#unless isRed}}I'm blue, da ba dee da ba daa{{/unless}}`,
+    `<div class="{{unless foo 'no-foo'}}"></div>`,
+    `<div class="{{if foo 'foo'}}"></div>`,
+    '{{unrelated-mustache-without-params}}',
+    '{{#if foo}}{{else}}{{/if}}',
+    '{{#if foo}}{{else}}{{#unless bar}}{{/unless}}{{/if}}',
+    '{{#if foo}}{{else}}{{unless bar someProperty}}{{/if}}',
+    '{{#unless (or foo bar)}}order whiskey{{/unless}}',
+    '{{#unless (eq (or foo bar) baz)}}order whiskey{{/unless}}',
+    '{{unless foo bar}}',
+  ],
+  invalid: [
+    {
+      code: `{{unless (if (or true))  'Please no'}}`,
+      output: null,
+      errors: [
+        { message: 'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0' },
+      ],
+    },
+    {
+      code: `{{unless (if true)  'Please no'}}`,
+      output: null,
+      errors: [
+        { message: 'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0' },
+      ],
+    },
+    {
+      code: `{{unless (and isBad isAwful)  'notBadAndAwful'}}`,
+      output: null,
+      errors: [
+        { message: 'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0' },
+      ],
+    },
+    {
+      code: '<img class={{unless (not condition) "some-class"}}>',
+      output: null,
+      errors: [
+        { message: 'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0' },
+      ],
+    },
+    {
+      code: '<img class={{unless (one condition) "some-class" "other-class"}}>',
+      output: null,
+      errors: [
+        { message: 'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0' },
+      ],
+    },
+  ],
+});

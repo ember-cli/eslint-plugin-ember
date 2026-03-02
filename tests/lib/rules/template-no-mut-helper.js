@@ -146,3 +146,143 @@ ruleTester.run('template-no-mut-helper', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-mut-helper', rule, {
+  valid: [
+    '<MyComponent @toggled={{this.showAggregatedLine}}/>',
+    '<MyComponent @toggle={{set this "isDropdownOpen"}}/>',
+    '<MyComponent @onFocusOut={{action "onFocusOutKeySkillsInput" value="target.value"}}/>',
+    '<MyComponent {{on "click" (set this "isDropdownOpen" false)}}/>',
+    '<MyComponent {{on "change" this.setContactUsSectionDescription}}/>',
+    '<MyComponent {{on "change" (fn this.setContactUsSectionDescription true)}}/>',
+    '<MyComponent {{on "change" (action "setContactUsSectionDescription")}}/>',
+    '<MyComponent {{on "change" (action "setContactUsSectionDescription" true)}}/>',
+    '<MyComponent {{action "setIsDropdownOpen" false}}/>',
+    '<MyComponent @dismissModal={{set this "isRequestExpiredModalOpen" false}}/>',
+    '<MyComponent onclick={{set this “expandVoluntarySelfIdHelpText” true}}/>',
+    '<MyComponent @click={{set this "isCardCollapsed" (if this.isCardCollapsed false true)}}/>',
+    '{{my-component click=(set this "isOpen" false)}}',
+    '{{my-component click=(set this "isLegalTextExpanded" (not this.isLegalTextExpanded))}}',
+    '{{my-component onVisibilityChange=(set this “isDropdownOpen”)}}',
+    '{{my-component click=(set this “expandVoluntarySelfIdHelpText” true)}}',
+    '{{my-component value=this.secondaryProfileHeadline}}',
+    '<div {{mutate this.isDropdownOpen}} class="muted mut">Non-helper substrings with mut in them should not violate this rule.</div>',
+  ],
+  invalid: [
+    {
+      code: '<MyComponent @toggled={{mut this.showAggregatedLine}}/>',
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+    {
+      code: '{{my-component value=(mut this.secondaryProfileHeadline)}}',
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+    {
+      code: '<MyComponent {{action (mut this.isDropdownOpen) false}}/>',
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+    {
+      code: '<MyComponent @dismissModal={{action (mut this.isRequestExpiredModalOpen) false}}/>',
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+    {
+      code: '<MyComponent @click={{action (mut this.isCardCollapsed) (if this.isCardCollapsed false true)}}/>',
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+    {
+      code: '<MyComponent onclick={{fn (mut this.expandVoluntarySelfIdHelpText) true}}/>',
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+    {
+      code: '<MyComponent @onVisibilityChange={{fn (mut this.isDropdownOpen)}}/>',
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+    {
+      code: '{{my-component click=(action (mut this.isOpen) false)}}',
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+    {
+      code: '{{my-component click=(action (mut this.isLegalTextExpanded) (not this.isLegalTextExpanded))}}',
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+    {
+      code: '{{my-component onVisibilityChange=(action (mut this.isDropdownOpen))}}',
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+    {
+      code: '{{my-component click=(fn (mut this.showManageEventsModal) true)}}',
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+    {
+      code: `<MyComponent
+          @onVisibilityChange={{action
+            (mut this.isDemographicsDropdownOpen)
+          }}
+        />`,
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+    {
+      code: `<MyComponent
+          @dismissModal={{action
+            (mut this.isNotificationsPostApprovalModalOpen)
+            false
+          }}
+        />`,
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+    {
+      code: '<MyComponent onchange={{action (mut this.contactUsSection.description) value="target.value"}}/>',
+      output: null,
+      errors: [
+        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
+      ],
+    },
+  ],
+});

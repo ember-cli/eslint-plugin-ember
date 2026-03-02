@@ -25,3 +25,34 @@ ruleTester.run('template-no-unbound', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-unbound', rule, {
+  valid: [
+    '{{foo}}',
+    '{{button}}',
+  ],
+  invalid: [
+    {
+      code: '{{unbound foo}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected unbound helper usage.' },
+      ],
+    },
+    {
+      code: '{{my-thing foo=(unbound foo)}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected unbound helper usage.' },
+      ],
+    },
+  ],
+});

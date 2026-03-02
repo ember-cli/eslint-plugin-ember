@@ -39,3 +39,41 @@ ruleTester.run('template-deprecated-render-helper', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-deprecated-render-helper', rule, {
+  valid: [
+    '{{valid-compoennt}}',
+    '{{input placeholder=(t "email") value=email}}',
+    '{{title "CrossCheck Web" prepent=true separator=" | "}}',
+    '{{hockey-player teamName="Boston Bruins"}}',
+    '{{false}}',
+    '{{"foo"}}',
+    '{{42}}',
+    '{{null}}',
+    '{{undefined}}',
+  ],
+  invalid: [
+    {
+      code: `{{render 'ken-griffey'}}`,
+      output: null,
+      errors: [
+        { message: 'The render helper is deprecated in favor of using components. See https://emberjs.com/deprecations/v2.x/#toc_code-render-code-helper' },
+      ],
+    },
+    {
+      code: `{{render 'baseball-player' pitcher}}`,
+      output: null,
+      errors: [
+        { message: 'The render helper is deprecated in favor of using components. See https://emberjs.com/deprecations/v2.x/#toc_code-render-code-helper' },
+      ],
+    },
+  ],
+});

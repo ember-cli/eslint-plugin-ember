@@ -41,3 +41,24 @@ ruleTester.run('template-require-strict-mode', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-require-strict-mode', rule, {
+  valid: [
+    '<template>hello</template>',
+    `import Component from '@glimmer/component';
+
+  export default class HelloComponent extends Component {
+    <template>hello</template>
+  }`,
+  ],
+  invalid: [
+  ],
+});

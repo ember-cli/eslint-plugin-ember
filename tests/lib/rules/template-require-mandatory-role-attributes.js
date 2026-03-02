@@ -83,3 +83,72 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-require-mandatory-role-attributes', rule, {
+  valid: [
+    '<div />',
+    '<div aria-disabled="true" />',
+    '<div role="complementary" />',
+    '<div role="combobox" aria-expanded="false" aria-controls="ctrlId" />',
+    '<div role="option" aria-selected={{false}} />',
+    '<FakeComponent />',
+    '<FakeComponent role="fakerole" />',
+    '<CustomComponent role="checkbox" aria-checked="false" />',
+    '<SomeComponent role={{this.role}} aria-notreal="bar" />',
+    '<OtherComponent @role={{@role}} aria-required={{this.required}} />',
+    '<FakeElement aria-disabled="true" />',
+    '{{some-component}}',
+    '{{some-component foo="true"}}',
+    '{{some-component role="heading" aria-level="2"}}',
+    '{{foo-component role="button"}}',
+    '{{foo-component role="unknown"}}',
+    '{{foo-component role=role}}',
+  ],
+  invalid: [
+    {
+      code: '<div role="combobox" aria-controls="someId" />',
+      output: null,
+      errors: [
+        { message: 'Role "combobox" requires ARIA attribute "aria-expanded" to be present.' },
+      ],
+    },
+    {
+      code: '<div role="option"  />',
+      output: null,
+      errors: [
+        { message: 'Role "option" requires ARIA attribute "aria-selected" to be present.' },
+      ],
+    },
+    {
+      code: '<CustomComponent role="checkbox" aria-required="true" />',
+      output: null,
+      errors: [
+        { message: 'Role "checkbox" requires ARIA attribute "aria-checked" to be present.' },
+      ],
+    },
+    {
+      code: '<SomeComponent role="scrollbar" @aria-now={{this.valuenow}} aria-controls={{some-id}} />',
+      output: null,
+      errors: [
+        { message: 'Role "scrollbar" requires ARIA attribute "aria-valuenow" to be present.' },
+        { message: 'Role "scrollbar" requires ARIA attribute "aria-valuemin" to be present.' },
+        { message: 'Role "scrollbar" requires ARIA attribute "aria-valuemax" to be present.' },
+      ],
+    },
+    {
+      code: '{{some-component role="heading"}}',
+      output: null,
+      errors: [
+        { message: 'Role "heading" requires ARIA attribute "aria-level" to be present.' },
+      ],
+    },
+  ],
+});

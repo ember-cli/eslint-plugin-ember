@@ -85,3 +85,28 @@ ruleTester.run('template-require-valid-named-block-naming-format', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-require-valid-named-block-naming-format', rule, {
+  valid: [
+    '{{yield}}',
+    '{{yield to="fooBar"}}',
+    '{{has-block}}',
+    '{{has-block "fooBar"}}',
+    '{{if (has-block)}}',
+    '{{if (has-block "fooBar")}}',
+    '{{has-block-params}}',
+    '{{has-block-params "fooBar"}}',
+    '{{if (has-block-params)}}',
+    '{{if (has-block-params "fooBar")}}',
+  ],
+  invalid: [
+  ],
+});

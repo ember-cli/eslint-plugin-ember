@@ -22,3 +22,23 @@ ruleTester.run('template-no-inline-styles', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-inline-styles', rule, {
+  valid: [
+    '<div></div>',
+    '<span></span>',
+    '<ul class="dummy"></ul>',
+    '<div style={{foo}}></div>',
+    '<div style={{html-safe (concat "background-image: url(" url ")")}}></div>',
+  ],
+  invalid: [
+  ],
+});

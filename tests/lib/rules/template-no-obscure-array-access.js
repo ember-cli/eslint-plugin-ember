@@ -75,3 +75,79 @@ ruleTester.run('template-no-obscure-array-access', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-obscure-array-access', rule, {
+  valid: [
+    `{{foo bar=(get this 'list.0' )}}`,
+    `<Foo @bar={{get this 'list.0'}}`,
+    `{{get this 'list.0'}}`,
+    '{{foo bar @list}}',
+    'Just a regular text in the template bar.[1] bar.1',
+    '<Foo foo="bar.[1]" />',
+    `<FooBar
+    @subHeaderText={{if
+      this.isFooBarV2Enabled
+      "foobar"
+    }}
+  />`,
+  ],
+  invalid: [
+    {
+      code: '<Foo @onClick={{fn this.func @foo.0.bar}} />',
+      output: null,
+      errors: [
+        { message: 'Unexpected obscure array access pattern "@foo.0.bar". Use computed properties or helpers instead.' },
+      ],
+    },
+    {
+      code: '{{foo bar=this.list.[0]}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected obscure array access pattern "this.list.[0]". Use computed properties or helpers instead.' },
+      ],
+    },
+    {
+      code: '{{foo bar=@list.[1]}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected obscure array access pattern "@list.[1]". Use computed properties or helpers instead.' },
+      ],
+    },
+    {
+      code: '{{this.list.[0]}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected obscure array access pattern "this.list.[0]". Use computed properties or helpers instead.' },
+      ],
+    },
+    {
+      code: '{{this.list.[0].name}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected obscure array access pattern "this.list.[0].name". Use computed properties or helpers instead.' },
+      ],
+    },
+    {
+      code: '<Foo @bar={{this.list.[0]}} />',
+      output: null,
+      errors: [
+        { message: 'Unexpected obscure array access pattern "this.list.[0]". Use computed properties or helpers instead.' },
+      ],
+    },
+    {
+      code: '<Foo @bar={{this.list.[0].name.[1].foo}} />',
+      output: null,
+      errors: [
+        { message: 'Unexpected obscure array access pattern "this.list.[0].name.[1].foo". Use computed properties or helpers instead.' },
+      ],
+    },
+  ],
+});

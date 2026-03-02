@@ -629,3 +629,721 @@ ruleTester.run('template-sort-invocations', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-sort-invocations', rule, {
+  valid: [
+    '',
+    `
+        <Ui::Button />
+
+        <Ui::Button>
+          Submit form
+        </Ui::Button>
+
+        {{ui/button}}
+
+        {{#ui/button}}
+          Submit form
+        {{/ui/button}}
+      `,
+    `
+        <Ui::Button
+          @label="Submit form"
+          @type="submit"
+          data-test-button
+          {{on "click" this.doSomething}}
+          ...attributes
+        />
+      `,
+    `
+        <Ui::Button
+          @isDisabled={{true}}
+          @label="Submit form"
+          @type="submit"
+          class="ui-button disabled"
+          data-cucumber-button="Submit form"
+          data-test-button
+          {{on "click" this.doSomething}}
+          ...attributes
+        />
+      `,
+    `
+        <Ui::Button
+          @isDisabled={{not this.enableSubmit}}
+          @label="Submit form"
+          @type="submit"
+          class={{local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          }}
+          data-cucumber-button="Submit form"
+          data-test-button
+          {{autofocus}}
+          {{on "click" @onSubmit}}
+          ...attributes
+        />
+      `,
+    `
+        <MyComponent
+          @description={{if
+            this.someCondition
+            (t
+              "my-component.description.version-1"
+              installedOn=this.installationDate
+              packageName="ember-source"
+              packageVersion="6.0.0"
+            )
+            (t
+              "my-component.description.version-2"
+              (hash
+                installedOn=this.installationDate
+                packageName="ember-source"
+                packageVersion="6.0.0"
+              )
+            )
+          }}
+          @title="Update history"
+        />
+      `,
+    `
+        <Ui::Button
+          {{!-- @glint-expect-error: this.enableSubmit has incorrect type --}}
+          @isDisabled={{not this.enableSubmit}}
+          @label="Submit form"
+          @type="submit"
+          class={{local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          }}
+          data-cucumber-button="Submit form"
+          data-test-button
+          {{autofocus}}
+          {{! @glint-expect-error: @onSubmit has incorrect type }}
+          {{on "click" @onSubmit}}
+          ...attributes
+        />
+      `,
+    `
+        <this.MyButton
+          @label="Submit form"
+          @type="submit"
+          data-test-button
+          {{on "click" this.doSomething}}
+          ...attributes
+        />
+      `,
+    `
+        {{component
+          "ui/button"
+          class=(local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          )
+          data-cucumber-button="Submit form"
+          data-test-button=""
+          isDisabled=(not this.enableSubmit)
+          label="Submit form"
+          onClick=@onSubmit
+          type="submit"
+        }}
+      `,
+    `
+        <button
+          class={{local this.styles "button" "disabled"}}
+          data-cucumber-button="Submit form"
+          data-test-button
+          disabled
+          type="submit"
+          {{autofocus}}
+          {{on "click" @onSubmit}}
+          ...attributes
+        >
+          Submit form
+        </button>
+
+        <div
+          class={{local
+            this.styles
+            "button"
+            (if this.isFocused "focused")
+          }}
+          role="button"
+          {{on "click" this.submitForm}}
+          {{on "click" this.trackEvent}}
+          {{on "mouseenter" (fn this.setFocus true)}}
+          {{on "mouseleave" (fn this.setFocus false)}}
+        >
+          Submit form
+        </div>
+      `,
+    `
+        <MyComponent
+        >
+          <div
+          >
+            <span class={{this.styles.highlight}}>
+            Hello world!
+            </span>
+          </div>
+        </MyComponent>
+      `,
+  ],
+  invalid: [
+    {
+      code: `
+        <Ui::Button
+          {{on "click" this.doSomething}}
+          @type="submit"
+          ...attributes
+          data-test-button
+          @label="Submit form"
+        />
+
+        <Ui::Button
+          {{on "click" this.doSomething}}
+          @type="submit"
+          ...attributes
+          data-test-button=""
+        >
+          Submit form
+        </Ui::Button>
+
+        {{ui/button
+          onclick=this.doSomething
+          type="submit"
+          data-test-button=""
+          label="Submit form"
+        }}
+
+        {{#ui/button
+          onclick=this.doSomething
+          type="submit"
+          data-test-button=""
+        }}
+          Submit form
+        {{/ui/button}}
+      `,
+      output: null,
+      errors: [
+        { message: '`...attributes` must appear after `data-test-button`' },
+      ],
+    },
+    {
+      code: `
+        <Ui::Button
+          data-cucumber-button="Submit form"
+          {{on "click" this.doSomething}}
+          @type="submit"
+          @isDisabled={{true}}
+          class="ui-button disabled"
+          ...attributes
+          data-test-button
+          @label="Submit form"
+        />
+
+        <Ui::Button
+          data-cucumber-button="Submit form"
+          {{on "click" this.doSomething}}
+          @type="submit"
+          @isDisabled={{true}}
+          class="ui-button disabled"
+          ...attributes
+          data-test-button=""
+        >
+          Submit form
+        </Ui::Button>
+
+        {{ui/button
+          data-cucumber-button="Submit form"
+          onclick=this.doSomething
+          type="submit"
+          isDisabled=true
+          class="ui-button disabled"
+          data-test-button=""
+          label="Submit form"
+        }}
+
+        {{#ui/button
+          data-cucumber-button="Submit form"
+          onclick=this.doSomething
+          type="submit"
+          isDisabled=true
+          class="ui-button disabled"
+          data-test-button=""
+        }}
+          Submit form
+        {{/ui/button}}
+      `,
+      output: null,
+      errors: [
+        { message: '`data-cucumber-button` must appear after `@type`' },
+      ],
+    },
+    {
+      code: `
+        <Ui::Button
+          data-cucumber-button="Submit form"
+          {{on "click" @onSubmit}}
+          @type="submit"
+          @isDisabled={{not this.enableSubmit}}
+          class={{local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          }}
+          ...attributes
+          data-test-button
+          @label="Submit form"
+          {{autofocus}}
+        />
+
+        <Ui::Button
+          data-cucumber-button="Submit form"
+          {{on "click" @onSubmit}}
+          @type="submit"
+          @isDisabled={{not this.enableSubmit}}
+          class={{local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          }}
+          ...attributes
+          data-test-button=""
+          {{autofocus}}
+        >
+          Submit form
+        </Ui::Button>
+
+        {{ui/button
+          data-cucumber-button="Submit form"
+          onclick=onSubmit
+          type="submit"
+          isDisabled=(not this.enableSubmit)
+          class=(local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          )
+          data-test-button=""
+          label="Submit form"
+        }}
+
+        {{#ui/button
+          data-cucumber-button="Submit form"
+          onclick=onSubmit
+          type="submit"
+          isDisabled=(not this.enableSubmit)
+          class=(local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          )
+          data-test-button=""
+        }}
+          Submit form
+        {{/ui/button}}
+      `,
+      output: null,
+      errors: [
+        { message: '`data-cucumber-button` must appear after `@type`' },
+      ],
+    },
+    {
+      code: `
+        <MyComponent
+          @title="Update history"
+          @description={{if
+            this.someCondition
+            (t
+              "my-component.description.version-1"
+              packageVersion="6.0.0"
+              packageName="ember-source"
+              installedOn=this.installationDate
+            )
+            (t
+              "my-component.description.version-2"
+              (hash
+                installedOn=this.installationDate
+                packageVersion="6.0.0"
+                packageName="ember-source"
+              )
+            )
+          }}
+        />
+
+        {{my-component
+          title="Update history"
+          description=(if
+            this.someCondition
+            (t
+              "my-component.description.version-1"
+              packageVersion="6.0.0"
+              packageName="ember-source"
+              installedOn=this.installationDate
+            )
+            (t
+              "my-component.description.version-2"
+              (hash
+                installedOn=this.installationDate
+                packageVersion="6.0.0"
+                packageName="ember-source"
+              )
+            )
+          )
+        }}
+      `,
+      output: null,
+      errors: [
+        { message: '`@title` must appear after `@description`' },
+      ],
+    },
+    {
+      code: `
+        <Ui::Button
+          data-cucumber-button="Submit form"
+          {{! @glint-expect-error: @onSubmit has incorrect type }}
+          {{on "click" @onSubmit}}
+          @type="submit"
+          {{!-- @glint-expect-error: this.enableSubmit has incorrect type --}}
+          @isDisabled={{not this.enableSubmit}}
+          class={{local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          }}
+          ...attributes
+          data-test-button
+          @label="Submit form"
+          {{autofocus}}
+        />
+      `,
+      output: null,
+      errors: [
+        { message: '`data-cucumber-button` must appear after `@type`' },
+      ],
+    },
+    {
+      code: `
+        <this.MyButton
+          {{on "click" this.doSomething}}
+          @type="submit"
+          ...attributes
+          data-test-button
+          @label="Submit form"
+        />
+
+        <this.MyButton
+          {{on "click" this.doSomething}}
+          @type="submit"
+          ...attributes
+          data-test-button
+        >
+          Submit form
+        </this.MyButton>
+      `,
+      output: null,
+      errors: [
+        { message: '`...attributes` must appear after `data-test-button`' },
+      ],
+    },
+    {
+      code: `
+        {{component "ui/button"}}
+
+        {{component "ui/button"
+          onClick=this.doSomething
+          type="submit"
+          data-test-button=""
+          label="Submit form"
+        }}
+
+        {{component "ui/button"
+          data-cucumber-button="Submit form"
+          onClick=this.doSomething
+          type="submit"
+          isDisabled=true
+          class="ui-button disabled"
+          data-test-button=""
+          label="Submit form"
+        }}
+
+        {{component "ui/button"
+          data-cucumber-button="Submit form"
+          onClick=@onSubmit
+          type="submit"
+          isDisabled=(not this.enableSubmit)
+          class=(local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          )
+          data-test-button=""
+          label="Submit form"
+        }}
+      `,
+      output: null,
+      errors: [
+        { message: '`type` must appear after `data-test-button`' },
+      ],
+    },
+    {
+      code: `
+        <button
+          data-cucumber-button="Submit form"
+          {{on "click" @onSubmit}}
+          type="submit"
+          disabled
+          class={{local this.styles "button" "disabled"}}
+          ...attributes
+          data-test-button
+          {{autofocus}}
+        >
+          Submit form
+        </button>
+
+        <div
+          role="button"
+          {{on "mouseleave" (fn this.setFocus false)}}
+          class={{local
+            this.styles
+            "button"
+            (if this.isFocused "focused")
+          }}
+          {{on "click" this.trackEvent}}
+          {{on "mouseenter" (fn this.setFocus true)}}
+          {{on "click" this.submitForm}}
+        >
+          Submit form
+        </div>
+      `,
+      output: null,
+      errors: [
+        { message: '`type` must appear after `disabled`' },
+      ],
+    },
+    {
+      code: `
+        {{#let (unique-id) as |formId|}}
+          <form
+            class={{this.styles.form}}
+            data-test-form={{if @title @title ""}}
+            aria-labelledby={{if @title (concat formId "-title")}}
+            aria-describedby={{if
+              @instructions
+              (concat formId "-instructions")
+            }}
+            {{autofocus}}
+            {{on "submit" this.submitForm}}
+          >
+            <Ui::Form::Information
+              @formId={{formId}}
+              @title={{@title}}
+              @instructions={{@instructions}}
+            />
+
+            <ContainerQuery
+              @features={{hash wide=(width min=480)}}
+              as |CQ|
+            >
+              {{yield
+                (hash
+                  Input=(component
+                    "ui/form/input"
+                    changeset=this.changeset
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                  Textarea=(component
+                    "ui/form/textarea"
+                    changeset=this.changeset
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                  Number=(component
+                    "ui/form/number"
+                    changeset=this.changeset
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                  Checkbox=(component
+                    "ui/form/checkbox"
+                    changeset=this.changeset
+                    isInline=true
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                  Select=(component
+                    "ui/form/select"
+                    changeset=this.changeset
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                )
+              }}
+            </ContainerQuery>
+
+            <div class={{this.styles.actions}}>
+              <button
+                type="submit"
+                data-test-button="Submit"
+                class={{this.styles.submit-button}}
+              >
+                {{t "components.ui.form.submit"}}
+              </button>
+            </div>
+          </form>
+        {{/let}}
+      `,
+      output: null,
+      errors: [
+        { message: '`data-test-form` must appear after `aria-labelledby`' },
+      ],
+    },
+    {
+      code: `
+        <iframe
+          class="full-screen"
+          data-test-id="my-iframe"
+          id={{@id}}
+          src={{this.url}}
+          {{did-insert this.doSomething1}}
+          {{on "load" this.doSomething2}}
+          ...attributes
+        ></iframe>
+
+        <iframe
+          {{did-insert this.doSomething1}}
+          {{on "load" this.doSomething2}}
+        ></iframe>
+
+        <iframe
+          ...attributes
+          {{did-insert this.doSomething1}}
+          {{on "load" this.doSomething2}}
+        ></iframe>
+
+        <iframe
+          {{did-insert this.doSomething1}}
+          {{on "load" this.doSomething2}}
+          ...attributes
+        ></iframe>
+
+        <iframe
+          class="full-screen"
+          data-test-id="my-iframe"
+          id={{@id}}
+          src={{this.url}}
+        ></iframe>
+
+        <iframe
+          class="full-screen"
+          data-test-id="my-iframe"
+          id={{@id}}
+          src={{this.url}}
+          ...attributes
+        ></iframe>
+
+        <iframe
+          class="full-screen"
+          data-test-id="my-iframe"
+          id={{@id}}
+          src={{this.url}}
+          ...attributes
+          {{did-insert this.doSomething1}}
+          {{on "load" this.doSomething2}}
+        ></iframe>
+      `,
+      output: null,
+      errors: [
+        { message: '`...attributes` must appear after `modifiers`' },
+      ],
+    },
+    {
+      code: `
+        <Ui::Page
+          @title={{"Your product"}}
+          {{! @glint-expect-error: Type 'string | null' is not assignable to type 'string'. }}
+          @routeName={{this.router.currentRouteName}}
+          as |Page|
+        >
+          {{outlet}}
+
+          {{#if this.someCondition1}}
+            <Page.Button @id="products.overview" @icon="rightarrow" @label="" />
+          {{else if this.someCondition2}}
+            <Page.Button @id="products.product" @icon="" @label="" />
+          {{else}}
+            <Page.Button
+              @id="products.product"
+              @icon=""
+              @label="
+              "
+            />
+          {{/if}}
+        </Ui::Page>
+      `,
+      output: null,
+      errors: [
+        { message: '`@title` must appear after `@routeName`' },
+      ],
+    },
+    {
+      code: `
+        <MyComponent
+          @parentContainerId={{concat "#" @parentId}}
+          @isOpen={{this.isOpen}}
+        />
+
+        <MyComponent
+          @style={{concat "." @type "1"}}
+          @isOpen={{this.isOpen}}
+        />
+
+        <MyComponent
+          @className={{concat "a" @typeA "b" @typeB "c" @typeC "d"}}
+          aria-describedby="1"
+        />
+
+        <input
+          type="tel"
+          local-class="input {{concat 'flag-' @country}}"
+        />
+
+        <MyComponent
+          @parentContainerId="#{{@parentId}}"
+          @isOpen={{this.isOpen}}
+        />
+
+        <MyComponent
+          @style=".{{@type}}1"
+          @isOpen={{this.isOpen}}
+        />
+
+        <MyComponent
+          aria-describedby="1"
+          @className="a{{@typeA}}b{{@typeB}}c{{@typeC}}d"
+        />
+
+        <input
+          type="tel"
+          local-class="input flag-{{@country}}"
+        />
+      `,
+      output: null,
+      errors: [
+        { message: '`@parentContainerId` must appear after `@isOpen`' },
+      ],
+    },
+  ],
+});

@@ -69,3 +69,45 @@ ruleTester.run('template-no-link-to-tagname', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-link-to-tagname', rule, {
+  valid: [
+    '<Foo @route="routeName" @tagName="button">Link text</Foo>',
+    '<LinkTo @route="routeName">Link text</LinkTo>',
+    '{{#link-to "routeName"}}Link text{{/link-to}}',
+    '{{#foo "routeName" tagName="button"}}Link text{{/foo}}',
+    '{{link-to "Link text" "routeName"}}',
+    '{{foo "Link text" "routeName" tagName="button"}}',
+  ],
+  invalid: [
+    {
+      code: '<LinkTo @route="routeName" @tagName="button">Link text</LinkTo>',
+      output: null,
+      errors: [
+        { message: 'tagName attribute on LinkTo is deprecated' },
+      ],
+    },
+    {
+      code: '{{#link-to "routeName" tagName="button"}}Link text{{/link-to}}',
+      output: null,
+      errors: [
+        { message: 'tagName attribute on LinkTo is deprecated' },
+      ],
+    },
+    {
+      code: '{{link-to "Link text" "routeName" tagName="button"}}',
+      output: null,
+      errors: [
+        { message: 'tagName attribute on LinkTo is deprecated' },
+      ],
+    },
+  ],
+});

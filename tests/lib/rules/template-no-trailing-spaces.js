@@ -128,3 +128,97 @@ test('it renders', async (assert) => {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-trailing-spaces', rule, {
+  valid: [
+    'test',
+    '   test',
+    `test
+`,
+    `
+`,
+    `  test
+`,
+    `import { hbs } from 'ember-cli-htmlbars';
+
+test('it renders', async (assert) => {
+  await render(hbs\`
+    <div class="parent">
+      <div class="child"></div>
+    </div>
+  \`);
+});`,
+  ],
+  invalid: [
+    {
+      code: 'test ',
+      output: 'test',
+      errors: [
+        { message: 'Trailing whitespace detected.' },
+      ],
+    },
+    {
+      code: `test 
+`,
+      output: `test
+`,
+      errors: [
+        { message: 'Trailing whitespace detected.' },
+      ],
+    },
+    {
+      code: `import { hbs } from 'ember-cli-htmlbars';
+
+test('it renders', async (assert) => {
+  await render(hbs\`  
+    <div class="parent">
+      <div class="child"></div>
+    </div>
+  \`);
+});`,
+      output: `import { hbs } from 'ember-cli-htmlbars';
+
+test('it renders', async (assert) => {
+  await render(hbs\`
+    <div class="parent">
+      <div class="child"></div>
+    </div>
+  \`);
+});`,
+      errors: [
+        { message: 'Trailing whitespace detected.' },
+      ],
+    },
+    {
+      code: `import { hbs } from 'ember-cli-htmlbars';
+
+test('it renders', async (assert) => {
+  await render(hbs\`
+    <div></div>
+  
+    <div></div>
+  \`);
+});`,
+      output: `import { hbs } from 'ember-cli-htmlbars';
+
+test('it renders', async (assert) => {
+  await render(hbs\`
+    <div></div>
+
+    <div></div>
+  \`);
+});`,
+      errors: [
+        { message: 'Trailing whitespace detected.' },
+      ],
+    },
+  ],
+});

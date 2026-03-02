@@ -73,3 +73,48 @@ ruleTester.run('template-no-attrs-in-components', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-attrs-in-components (hbs)', rule, {
+  valid: [
+    '<div></div>',
+    '{{foo}}',
+    '<div>{{foo.bar}}</div>',
+  ],
+  invalid: [
+    {
+      code: '{{attrs.foo}}',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    {
+      code: '<div class={{attrs.foo}}></div>',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    {
+      code: '{{#if attrs.foo}}bar{{/if}}',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    {
+      code: '{{bar foo=attrs.foo}}',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    {
+      code: '{{component attrs.foo}}',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+    {
+      code: '{{bar/baz (hash foo=attrs.foo)}}',
+      output: null,
+      errors: [{ messageId: 'noThisAttrs' }],
+    },
+  ],
+});

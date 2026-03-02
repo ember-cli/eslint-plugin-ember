@@ -33,3 +33,37 @@ ruleTester.run('template-no-with', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-with', rule, {
+  valid: [
+    '{{@with}}',
+    '{{this.with}}',
+    '{{with "foo" bar="baz"}}',
+    '{{#if @model.posts}}{{@model.posts}}{{/if}}',
+    '{{#let @model.posts as |blogPosts|}}{{blogPosts}}{{/let}}',
+  ],
+  invalid: [
+    {
+      code: '{{#with this.foo as |bar|}}{{bar}}{{/with}}',
+      output: null,
+      errors: [
+        { message: 'The use of the with helper has been deprecated. See https://deprecations.emberjs.com/v3.x/#toc_ember-glimmer-with-syntax' },
+      ],
+    },
+    {
+      code: '{{#with (hash firstName="John" lastName="Doe") as |user|}}{{user.firstName}} {{user.lastName}}{{/with}}',
+      output: null,
+      errors: [
+        { message: 'The use of the with helper has been deprecated. See https://deprecations.emberjs.com/v3.x/#toc_ember-glimmer-with-syntax' },
+      ],
+    },
+  ],
+});

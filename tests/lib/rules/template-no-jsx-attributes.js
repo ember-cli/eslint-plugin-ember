@@ -78,3 +78,65 @@ ruleTester.run('template-no-jsx-attributes', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-jsx-attributes', rule, {
+  valid: [
+    '<div></div>',
+    '<div class="foo"></div>',
+    '<div class></div>',
+    '<div autoplay></div>',
+    '<div contenteditable="true"></div>',
+  ],
+  invalid: [
+    {
+      code: '<div acceptCharset="utf-8"></div>',
+      output: '<div accept-charset="utf-8"></div>',
+      errors: [
+        { message: 'Incorrect html attribute name detected - "acceptCharset", is probably unintended. Attributes in HTML are kebeb case.' },
+      ],
+    },
+    {
+      code: '<div contentEditable="true"></div>',
+      output: '<div contenteditable="true"></div>',
+      errors: [
+        { message: 'Incorrect html attribute name detected - "contentEditable", is probably unintended. Attributes in HTML are kebeb case.' },
+      ],
+    },
+    {
+      code: '<div className></div>',
+      output: '<div class></div>',
+      errors: [
+        { message: `Attribute, className, does not assign the 'class' attribute as it would in JSX.  To assign the 'class' attribute, set the 'class' attribute, instead of 'className'. In HTML, all attributes are valid, but 'className' doesn't do anything.` },
+      ],
+    },
+    {
+      code: '<div className="foo"></div>',
+      output: '<div class="foo"></div>',
+      errors: [
+        { message: `Attribute, className, does not assign the 'class' attribute as it would in JSX.  To assign the 'class' attribute, set the 'class' attribute, instead of 'className'. In HTML, all attributes are valid, but 'className' doesn't do anything.` },
+      ],
+    },
+    {
+      code: '<div autoPlay></div>',
+      output: '<div autoplay></div>',
+      errors: [
+        { message: 'Incorrect html attribute name detected - "autoPlay", is probably unintended. Attributes in HTML are kebeb case.' },
+      ],
+    },
+    {
+      code: '<div contentEditable></div>',
+      output: '<div contenteditable></div>',
+      errors: [
+        { message: 'Incorrect html attribute name detected - "contentEditable", is probably unintended. Attributes in HTML are kebeb case.' },
+      ],
+    },
+  ],
+});

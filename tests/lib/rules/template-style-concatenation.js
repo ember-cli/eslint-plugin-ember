@@ -104,3 +104,52 @@ ruleTester.run('template-style-concatenation', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-style-concatenation', rule, {
+  valid: [
+    '<img>',
+    '<img style={{myStyle}}>',
+    '<img style={{background-image url}}>',
+    '<img style="background-image: url(/foo.png)"}}>',
+    '<img style={{html-safe (concat "background-image: url(" url ")")}}>',
+    '<img style={{html-safe (concat knownSafeStyle1 ";" knownSafeStyle2)}}>',
+  ],
+  invalid: [
+    {
+      code: '<img style="{{myStyle}}">',
+      output: null,
+      errors: [
+        { message: 'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.' },
+      ],
+    },
+    {
+      code: '<img style="background-image: {{url}}">',
+      output: null,
+      errors: [
+        { message: 'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.' },
+      ],
+    },
+    {
+      code: '<img style="{{background-image url}}">',
+      output: null,
+      errors: [
+        { message: 'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.' },
+      ],
+    },
+    {
+      code: '<img style={{concat knownSafeStyle1 ";" knownSafeStyle2}}>',
+      output: null,
+      errors: [
+        { message: 'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.' },
+      ],
+    },
+  ],
+});

@@ -121,3 +121,65 @@ ruleTester.run('template-require-media-caption', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-require-media-caption', rule, {
+  valid: [
+    '<video><track kind="captions" /></video>',
+    '<audio muted="true"></audio>',
+    '<video muted></video>',
+    '<audio muted={{this.muted}}></audio>',
+    '<video><track kind="captions" /><track kind="descriptions" /></video>',
+  ],
+  invalid: [
+    {
+      code: '<video></video>',
+      output: null,
+      errors: [
+        { message: 'Media elements (<video>) must have a <track> element with kind="captions".' },
+      ],
+    },
+    {
+      code: '<audio><track /></audio>',
+      output: null,
+      errors: [
+        { message: 'Media elements (<audio>) must have a <track> element with kind="captions".' },
+      ],
+    },
+    {
+      code: '<video><track kind="subtitles" /></video>',
+      output: null,
+      errors: [
+        { message: 'Media elements (<video>) must have a <track> element with kind="captions".' },
+      ],
+    },
+    {
+      code: '<audio muted="false"></audio>',
+      output: null,
+      errors: [
+        { message: 'Media elements (<audio>) must have a <track> element with kind="captions".' },
+      ],
+    },
+    {
+      code: '<audio muted="false"><track kind="descriptions" /></audio>',
+      output: null,
+      errors: [
+        { message: 'Media elements (<audio>) must have a <track> element with kind="captions".' },
+      ],
+    },
+    {
+      code: '<video muted=false></video>',
+      output: null,
+      errors: [
+        { message: 'Media elements (<video>) must have a <track> element with kind="captions".' },
+      ],
+    },
+  ],
+});

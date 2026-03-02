@@ -50,3 +50,54 @@ ruleTester.run('template-require-splattributes', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-require-splattributes', rule, {
+  valid: [
+    '<div ...attributes></div>',
+    '<Foo ...attributes></Foo>',
+    '<div ...attributes />',
+    '<div><Foo ...attributes /></div>',
+    '<div ...attributes></div><div></div>',
+    '<div></div><div ...attributes></div><div></div>',
+  ],
+  invalid: [
+    {
+      code: '<div></div>',
+      output: null,
+      errors: [
+        { message: 'The root element in this template should use `...attributes`' },
+      ],
+    },
+    {
+      code: '<Foo></Foo>',
+      output: null,
+      errors: [
+        { message: 'The root element in this template should use `...attributes`' },
+      ],
+    },
+    {
+      code: '<div></div><div></div>',
+      output: null,
+      errors: [
+        { message: 'At least one element in this template should use `...attributes`' },
+      ],
+    },
+    {
+      code: `<div/>
+
+`,
+      output: null,
+      errors: [
+        { message: 'The root element in this template should use `...attributes`' },
+      ],
+    },
+  ],
+});

@@ -43,3 +43,48 @@ ruleTester.run('template-no-unnecessary-curly-strings', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-unnecessary-curly-strings', rule, {
+  valid: [
+    '<FooBar class="btn" />',
+    '{{foo}}',
+    '{{(foo)}}',
+    '{{this.calculate 1 2 op="add"}}',
+    '{{get address part}}',
+    'foo',
+    '"foo"',
+    '<FooBar value=12345 />',
+    '<FooBar value=null />',
+    '<FooBar value=true />',
+    '<FooBar value=undefined />',
+    '<FooBar value={{12345}} />',
+    '<FooBar value={{null}} />',
+    '<FooBar value={{true}} />',
+    '<FooBar value={{undefined}} />',
+  ],
+  invalid: [
+    {
+      code: `<FooBar class={{"btn"}} @fooArg={{'barbaz'}} />`,
+      output: '<FooBar class="btn" @fooArg="barbaz" />',
+      errors: [
+        { message: 'Unnecessary curly braces in string.' },
+        { message: 'Unnecessary curly braces in string.' },
+      ],
+    },
+    {
+      code: '<FooBar class="btn">{{"Foo"}}</FooBar>',
+      output: '<FooBar class="btn">Foo</FooBar>',
+      errors: [
+        { message: 'Unnecessary curly braces in string.' },
+      ],
+    },
+  ],
+});

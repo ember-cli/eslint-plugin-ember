@@ -92,3 +92,83 @@ baz}}}</template>`,
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-unbalanced-curlies', rule, {
+  valid: [
+    '{foo}',
+    '{{foo}}',
+    '{{{foo}}}',
+    `{{{foo
+}}}`,
+    '\\{{foo}}',
+    '\\{{foo}}\\{{foo}}',
+    '\\{{foo}}{{foo}}',
+    `\\{{foo
+}}`,
+  ],
+  invalid: [
+    {
+      code: 'foo}}',
+      output: null,
+      errors: [
+        { message: 'Unbalanced mustache curlies detected. This may indicate a syntax error.' },
+      ],
+    },
+    {
+      code: '{foo}}',
+      output: null,
+      errors: [
+        { message: 'Unbalanced mustache curlies detected. This may indicate a syntax error.' },
+      ],
+    },
+    {
+      code: 'foo}}}',
+      output: null,
+      errors: [
+        { message: 'Unbalanced mustache curlies detected. This may indicate a syntax error.' },
+      ],
+    },
+    {
+      code: '{foo}}}',
+      output: null,
+      errors: [
+        { message: 'Unbalanced mustache curlies detected. This may indicate a syntax error.' },
+      ],
+    },
+    {
+      code: `{foo
+}}}`,
+      output: null,
+      errors: [
+        { message: 'Unbalanced mustache curlies detected. This may indicate a syntax error.' },
+      ],
+    },
+    {
+      code: `{foo
+}}}
+bar`,
+      output: null,
+      errors: [
+        { message: 'Unbalanced mustache curlies detected. This may indicate a syntax error.' },
+      ],
+    },
+    {
+      code: `{foo
+bar
+
+baz}}}`,
+      output: null,
+      errors: [
+        { message: 'Unbalanced mustache curlies detected. This may indicate a syntax error.' },
+      ],
+    },
+  ],
+});

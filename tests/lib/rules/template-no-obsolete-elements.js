@@ -20,3 +20,22 @@ ruleTester.run('template-no-obsolete-elements', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-obsolete-elements', rule, {
+  valid: [
+    '<div></div>',
+    `{{#let (component 'whatever-here') as |plaintext|}}
+      <plaintext />
+    {{/let}}`,
+  ],
+  invalid: [
+  ],
+});

@@ -132,3 +132,82 @@ ruleTester.run('template-no-positional-data-test-selectors', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-positional-data-test-selectors', rule, {
+  valid: [
+    `
+      {{#if data-test-foo}}
+      {{/if}}
+    `,
+    `
+      <div data-test-blah></div>
+    `,
+    `
+      <Foo data-test-derp />
+    `,
+    `
+      {{something data-test-lol=true}}
+    `,
+    `
+      {{#if dataSomething}}
+        <div> hello </div>
+      {{/if}}
+    `,
+    `
+      <div
+        data-test-msg-connections-typeahead-result={{true}}
+      >
+      </div>
+    `,
+    `
+      <div
+        data-test-msg-connections-typeahead-result="foo-bar"
+      >
+      </div>
+    `,
+    `
+      {{badge
+        data-test-profile-card-one-to-one-connection-distance=true
+        degreeText=(t "i18n_distance_v2" distance=recipientDistance)
+        degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
+      }}
+    `,
+    `
+      {{badge
+        data-test-profile-card-one-to-one-connection-distance="foo-bar"
+        degreeText=(t "i18n_distance_v2" distance=recipientDistance)
+        degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
+      }}
+    `,
+    `
+      <div
+        data-test-profile=true
+      >
+        hello
+      </div>
+    `,
+  ],
+  invalid: [
+    {
+      code: `
+        {{badge
+          data-test-profile-card-one-to-one-connection-distance
+          degreeText=(t "i18n_distance_v2" distance=recipientDistance)
+          degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
+        }}
+      `,
+      output: null,
+      errors: [
+        { message: 'Use named data-test attributes instead of positional data-test-* attributes.' },
+      ],
+    },
+  ],
+});

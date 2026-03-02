@@ -142,3 +142,112 @@ ruleTester.run('template-no-dynamic-subexpression-invocations', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-dynamic-subexpression-invocations', rule, {
+  valid: [
+    '{{something "here"}}',
+    '{{something}}',
+    '{{something here="goes"}}',
+    '<button onclick={{fn something "here"}}></button>',
+    '{{@thing "somearg"}}',
+    '<Foo @bar="asdf" />',
+    '<Foo @bar={{"asdf"}} />',
+    '<Foo @bar={{true}} />',
+    '<Foo @bar={{false}} />',
+    '<Foo @bar={{undefined}} />',
+    '<Foo @bar={{null}} />',
+    '<Foo @bar={{1}} />',
+    '{{1}}',
+    '{{true}}',
+    '{{null}}',
+    '{{undefined}}',
+    '{{"foo"}}',
+  ],
+  invalid: [
+    {
+      code: '<Foo bar="{{@thing "some-arg"}}" />',
+      output: null,
+      errors: [
+        { message: 'Do not use dynamic helper invocations. Use explicit helper names instead.' },
+      ],
+    },
+    {
+      code: '<Foo {{this.foo}} />',
+      output: null,
+      errors: [
+        { message: 'Do not use dynamic helper invocations. Use explicit helper names instead.' },
+      ],
+    },
+    {
+      code: '<Foo {{@foo}} />',
+      output: null,
+      errors: [
+        { message: 'Do not use dynamic helper invocations. Use explicit helper names instead.' },
+      ],
+    },
+    {
+      code: '<Foo {{foo.bar}} />',
+      output: null,
+      errors: [
+        { message: 'Do not use dynamic helper invocations. Use explicit helper names instead.' },
+      ],
+    },
+    {
+      code: '<button onclick={{@thing "some-arg"}}></button>',
+      output: null,
+      errors: [
+        { message: 'Do not use dynamic helper invocations. Use explicit helper names instead.' },
+      ],
+    },
+    {
+      code: '{{#let "whatever" as |thing|}}<button onclick={{thing "some-arg"}}></button>{{/let}}',
+      output: null,
+      errors: [
+        { message: 'Do not use dynamic helper invocations. Use explicit helper names instead.' },
+      ],
+    },
+    {
+      code: '<button onclick={{this.thing "some-arg"}}></button>',
+      output: null,
+      errors: [
+        { message: 'Do not use dynamic helper invocations. Use explicit helper names instead.' },
+      ],
+    },
+    {
+      code: '<button onclick={{lol.other.path "some-arg"}}></button>',
+      output: null,
+      errors: [
+        { message: 'Do not use dynamic helper invocations. Use explicit helper names instead.' },
+      ],
+    },
+    {
+      code: '{{if (this.foo) "true" "false"}}',
+      output: null,
+      errors: [
+        { message: 'Do not use dynamic helper invocations. Use explicit helper names instead.' },
+      ],
+    },
+    {
+      code: '<Foo @bar={{@thing "some-arg"}} />',
+      output: null,
+      errors: [
+        { message: 'Do not use dynamic helper invocations. Use explicit helper names instead.' },
+      ],
+    },
+    {
+      code: '<Foo onclick={{@thing "some-arg"}} />',
+      output: null,
+      errors: [
+        { message: 'Do not use dynamic helper invocations. Use explicit helper names instead.' },
+      ],
+    },
+  ],
+});

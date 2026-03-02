@@ -15,3 +15,4 @@ npm-debug.log
 # eslint-remote-tester
 eslint-remote-tester-results
 package-lock.json
+.tmp/

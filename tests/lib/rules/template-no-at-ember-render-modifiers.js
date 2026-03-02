@@ -107,3 +107,51 @@ ruleTester.run('template-no-at-ember-render-modifiers', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-at-ember-render-modifiers (hbs)', rule, {
+  valid: [
+    '<div {{this.someModifier}}></div>',
+    '<div {{someModifier}}></div>',
+    '<div {{did-foo}}></div>',
+    '{{did-insert}}',
+    '{{did-update}}',
+    '{{will-destroy}}',
+  ],
+  invalid: [
+    {
+      code: '<div {{did-insert}}></div>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
+        },
+      ],
+    },
+    {
+      code: '<div {{did-update}}></div>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
+        },
+      ],
+    },
+    {
+      code: '<div {{will-destroy}}></div>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
+        },
+      ],
+    },
+  ],
+});

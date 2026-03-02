@@ -275,3 +275,44 @@ ruleTester.run('template-no-restricted-invocations', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-restricted-invocations', rule, {
+  valid: [
+    '{{baz}}',
+    '{{baz foo=bar}}',
+    '{{baz foo=(baz)}}',
+    '{{#baz}}{{/baz}}',
+    '{{#baz foo=bar}}{{/baz}}',
+    '{{#baz foo=(baz)}}{{/baz}}',
+    '{{component}}',
+    '{{component "baz"}}',
+    '{{component "baz" foo=bar}}',
+    '{{component "baz" foo=(baz)}}',
+    '{{#component "baz"}}{{/component}}',
+    '{{#component "baz" foo=bar}}{{/component}}',
+    '{{#component "baz" foo=(baz)}}{{/component}}',
+    '{{yield (component "baz")}}',
+    '{{yield (component "baz" foo=bar)}}',
+    '{{yield (component "baz" foo=(baz))}}',
+    '{{yield (baz (baz (baz) bar))}}',
+    '{{yield (baz (baz (baz) (baz)))}}',
+    '{{yield (baz (baz (baz) foo=(baz)))}}',
+    '{{#baz as |foo|}}{{foo}}{{/baz}}',
+    '{{#with (component "blah") as |Foo|}} <Foo /> {{/with}}',
+    '{{other/foo-bar}}',
+    '{{nested-scope/other}}',
+    '<Random/>',
+    '<HelloWorld/>',
+    '<NestedScope::Random/>',
+  ],
+  invalid: [
+  ],
+});

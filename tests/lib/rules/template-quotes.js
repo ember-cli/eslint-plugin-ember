@@ -29,3 +29,35 @@ ruleTester.run('template-quotes', rule, {
 
   invalid: [],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-quotes', rule, {
+  valid: [
+    '{{component "test"}}',
+    '{{hello x="test"}}',
+    '<input type="checkbox">',
+  ],
+  invalid: [
+    {
+      code: `{{component 'one {{thing}} two'}}`,
+      output: '{{component "one {{thing}} two"}}',
+      errors: [
+        { message: 'you must use double quotes in templates' },
+      ],
+    },
+    {
+      code: `<img class='a "so-called" btn {{this.otherClass}}'>`,
+      output: null,
+      errors: [
+        { message: 'you must use double quotes in templates' },
+      ],
+    },
+  ],
+});

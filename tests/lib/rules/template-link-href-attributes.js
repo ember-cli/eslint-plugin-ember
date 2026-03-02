@@ -44,3 +44,31 @@ ruleTester.run('template-link-href-attributes', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-link-href-attributes', rule, {
+  valid: [
+    '<a href=""></a>',
+    '<a href="#"></a>',
+    '<a href="javascript:;"></a>',
+    '<a href="http://localhost"></a>',
+    '<a href={{link}}></a>',
+    '<a role="link" aria-disabled="true">valid</a>',
+  ],
+  invalid: [
+    {
+      code: '<a></a>',
+      output: null,
+      errors: [
+        { message: '<a> elements must have an href attribute. Use <button> for clickable elements that are not links.' },
+      ],
+    },
+  ],
+});

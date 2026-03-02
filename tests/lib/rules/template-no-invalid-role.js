@@ -158,3 +158,99 @@ ruleTester.run('template-no-invalid-role', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-invalid-role', rule, {
+  valid: [
+    '<div></div>',
+    '<div role="none"></div>',
+    '<div role="presentation"></div>',
+    '<img alt="" role="none">',
+    '<img role="none">',
+    '<img alt="" role="presentation">',
+    '<img role="presentation">',
+    '<span role="none"></span>',
+    '<span role="presentation"></span>',
+    '<svg role="none"></svg>',
+    '<svg role="presentation"></svg>',
+    '<li role="none"></li>',
+    '<li role="presentation"></li>',
+    '<custom-component role="none"></custom-component>',
+    '<AwesomeThing role="none"></AwesomeThing>',
+    '<AwesomeThing role="presentation"></AwesomeThing>',
+    '<table role="textbox"></table>',
+    '<div role="{{if this.inModal "dialog" "contentinfo" }}"></div>',
+  ],
+  invalid: [
+    {
+      code: '<ul role="presentation"></ul>',
+      output: null,
+      errors: [
+        { message: 'The role "presentation" should not be used on the semantic element <ul>.' },
+      ],
+    },
+    {
+      code: '<ol role="presentation"></ol>',
+      output: null,
+      errors: [
+        { message: 'The role "presentation" should not be used on the semantic element <ol>.' },
+      ],
+    },
+    {
+      code: '<table role="presentation"></table>',
+      output: null,
+      errors: [
+        { message: 'The role "presentation" should not be used on the semantic element <table>.' },
+      ],
+    },
+    {
+      code: '<table role="none"></table>',
+      output: null,
+      errors: [
+        { message: 'The role "none" should not be used on the semantic element <table>.' },
+      ],
+    },
+    {
+      code: '<button role="presentation"></button>',
+      output: null,
+      errors: [
+        { message: 'The role "presentation" should not be used on the semantic element <button>.' },
+      ],
+    },
+    {
+      code: '<button role="none"></button>',
+      output: null,
+      errors: [
+        { message: 'The role "none" should not be used on the semantic element <button>.' },
+      ],
+    },
+    {
+      code: '<label role="presentation"></label>',
+      output: null,
+      errors: [
+        { message: 'The role "presentation" should not be used on the semantic element <label>.' },
+      ],
+    },
+    {
+      code: '<label role="none"></label>',
+      output: null,
+      errors: [
+        { message: 'The role "none" should not be used on the semantic element <label>.' },
+      ],
+    },
+    {
+      code: '<div role="COMMAND INTERFACE"></div>',
+      output: null,
+      errors: [
+        { message: `Invalid ARIA role 'COMMAND INTERFACE'. Must be a valid ARIA role.` },
+      ],
+    },
+  ],
+});

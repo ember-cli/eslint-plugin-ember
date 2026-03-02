@@ -167,3 +167,34 @@ ruleTester.run('template-self-closing-void-elements', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-self-closing-void-elements', rule, {
+  valid: [
+    '<area>',
+    '<base>',
+    '<br>',
+    '<col>',
+    '<command>',
+    '<embed>',
+    '<hr>',
+    '<img>',
+    '<input>',
+    '<keygen>',
+    '<link>',
+    '<meta>',
+    '<param>',
+    '<source>',
+    '<track>',
+    '<wbr>',
+  ],
+  invalid: [
+  ],
+});

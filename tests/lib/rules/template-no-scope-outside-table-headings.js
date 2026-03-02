@@ -72,3 +72,62 @@ ruleTester.run('template-no-scope-outside-table-headings', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-scope-outside-table-headings', rule, {
+  valid: [
+    '<th scope="row">Some table heading></th>',
+    `
+    <table>
+      <th scope="col">Table header</th>
+      <td>Some data</td>
+    </table>
+    `,
+    '<CustomComponent scope />',
+    '<CustomComponent scope="row" />',
+    '<CustomComponent scope={{foo}} />',
+    '{{foo-component scope="row"}}',
+  ],
+  invalid: [
+    {
+      code: '<td scope="row"></td>',
+      output: null,
+      errors: [
+        { message: 'Unexpected scope attribute on <td>. Use only on <th> or <td>.' },
+      ],
+    },
+    {
+      code: '<td scope></td>',
+      output: null,
+      errors: [
+        { message: 'Unexpected scope attribute on <td>. Use only on <th> or <td>.' },
+      ],
+    },
+    {
+      code: '<a scope="row" />',
+      output: null,
+      errors: [
+        { message: 'Unexpected scope attribute on <a>. Use only on <th> or <td>.' },
+      ],
+    },
+    {
+      code: `
+<table>
+<th>Some header</th>
+<td scope="col">Some data</td>
+</table>
+`,
+      output: null,
+      errors: [
+        { message: 'Unexpected scope attribute on <td>. Use only on <th> or <td>.' },
+      ],
+    },
+  ],
+});

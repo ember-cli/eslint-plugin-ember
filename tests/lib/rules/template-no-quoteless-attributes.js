@@ -37,3 +37,41 @@ ruleTester.run('template-no-quoteless-attributes', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-quoteless-attributes', rule, {
+  valid: [
+    '<div data-foo="derp"></div>',
+    '<div data-foo="derp {{stuff}}"></div>',
+    '<div data-foo={{someValue}}></div>',
+    '<div data-foo={{true}}></div>',
+    '<div data-foo={{false}}></div>',
+    '<div data-foo={{5}}></div>',
+    '<SomeThing ...attributes />',
+    '<div></div>',
+    '<input disabled>',
+  ],
+  invalid: [
+    {
+      code: '<div data-foo=asdf></div>',
+      output: '<div data-foo="asdf"></div>',
+      errors: [
+        { message: 'Attribute data-foo should be either quoted or wrapped in mustaches' },
+      ],
+    },
+    {
+      code: '<SomeThing @blah=asdf />',
+      output: '<SomeThing @blah="asdf" />',
+      errors: [
+        { message: 'Argument @blah should be either quoted or wrapped in mustaches' },
+      ],
+    },
+  ],
+});

@@ -29,3 +29,22 @@ ruleTester.run('template-no-outlet-outside-routes', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-outlet-outside-routes', rule, {
+  valid: [
+    '{{foo}}',
+    '{{button}}',
+    '{{#outlet}}Why?!{{/outlet}}',
+    '{{#outlet}}Works because ambiguous{{/outlet}}',
+  ],
+  invalid: [
+  ],
+});

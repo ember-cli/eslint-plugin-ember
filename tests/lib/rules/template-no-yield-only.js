@@ -113,3 +113,24 @@ ruleTester.run('template-no-yield-only', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-yield-only', rule, {
+  valid: [
+    '{{yield (hash someProp=someValue)}}',
+    '{{field}}',
+    '{{#yield}}{{/yield}}',
+    '<Yield/>',
+    '<yield/>',
+    '{{! template-lint-disable no-yield-only }}{{yield}}',
+  ],
+  invalid: [
+  ],
+});

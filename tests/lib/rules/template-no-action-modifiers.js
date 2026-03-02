@@ -84,3 +84,48 @@ ruleTester.run('template-no-action-modifiers', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-action-modifiers (hbs)', rule, {
+  valid: [
+    '<button onclick={{action "foo"}}></button>',
+    '<a href="#" onclick={{action "foo"}}></a>',
+    '<div action></div>',
+    '{{foo-bar (action "foo")}}',
+    '{{foo-bar action}}',
+  ],
+  invalid: [
+    {
+      code: '<div {{action this.foo}}></div>',
+      output: null,
+      errors: [
+        { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
+      ],
+    },
+    {
+      code: '<div {{action this.foo bar baz}}></div>',
+      output: null,
+      errors: [
+        { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
+      ],
+    },
+    {
+      code: '<button {{action "foo"}}></button>',
+      output: null,
+      errors: [
+        { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
+      ],
+    },
+    {
+      code: '<a href="#" {{action "foo"}}></a>',
+      output: null,
+      errors: [
+        { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
+      ],
+    },
+  ],
+});

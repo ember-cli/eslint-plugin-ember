@@ -66,3 +66,103 @@ ruleTester.run('template-no-unused-block-params', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-unused-block-params', rule, {
+  valid: [
+    '{{cat}}',
+    '{{#each cats as |cat|}}{{cat}}{{/each}}',
+    '{{#each cats as |cat|}}{{partial "cat"}}{{/each}}',
+    '{{#each cats as |cat|}}{{cat.name}}{{/each}}',
+    '{{#each cats as |cat|}}{{meow cat}}{{/each}}',
+    '{{#each cats as |cat index|}}{{index}}{{/each}}',
+    '{{index}}: {{life}}',
+    `
+    <MyComponent @model={{this.model}} as |param|>
+      {{! template-lint-disable }}
+        <MyOtherComponent .... @param={{param}} />
+      {{! template-lint-enable }}
+    </MyComponent>
+    `,
+    `
+    <MyComponent @model={{this.model}} as |param|>
+      {{! template-lint-disable }}
+        {{foo-bar param}}
+      {{! template-lint-enable }}
+    </MyComponent>
+    `,
+    `
+    <MyComponent @model={{this.model}} as |param|>
+      {{! template-lint-disable }}
+        {{param}}
+      {{! template-lint-enable }}
+    </MyComponent>
+    `,
+    `
+    <MyComponent @model={{this.model}} as |param|>
+      {{! template-lint-disable }}
+        {{foo-bar prop=param}}
+      {{! template-lint-enable }}
+    </MyComponent>
+    `,
+    `
+    {{#my-component as |param|}}
+      {{! template-lint-disable }}
+        <MyOtherComponent .... @param={{param}} />
+      {{! template-lint-enable }}
+    {{/my-component}}
+    `,
+    `
+    {{#my-component as |param|}}
+      {{! template-lint-disable }}
+        {{foo-bar param}}
+      {{! template-lint-enable }}
+    {{/my-component}}
+    `,
+    `
+    {{#my-component as |param|}}
+      {{! template-lint-disable }}
+        {{param}}
+      {{! template-lint-enable }}
+    {{/my-component}}
+    `,
+    `
+    {{#my-component as |param bar baz|}}
+      {{! template-lint-disable }}
+        {{foo-bar prop=param}}
+      {{! template-lint-enable }}
+      {{bar}}
+      {{! template-lint-disable }}
+        {{foo-bar prop=baz}}
+      {{! template-lint-enable }}
+    {{/my-component}}
+    `,
+    '{{#each cats as |cat|}}{{#meow-meow cat as |cat|}}{{cat}}{{/meow-meow}}{{/each}}',
+    '{{#with (component "foo-bar") as |FooBar|}}<FooBar />{{/with}}',
+    '<BurgerMenu as |menu|><header>Something</header><menu.item>Text</menu.item></BurgerMenu>',
+    '{{#burger-menu as |menu|}}<header>Something</header>{{#menu.item}}Text{{/menu.item}}{{/burger-menu}}',
+  ],
+  invalid: [
+    {
+      code: '{{#each cats as |cat|}}Dogs{{/each}}',
+      output: null,
+      errors: [
+        { message: 'Block param "cat" is unused' },
+      ],
+    },
+    {
+      code: '{{#each cats as |cat index|}}{{cat}}{{/each}}',
+      output: null,
+      errors: [
+        { message: 'Block param "index" is unused' },
+      ],
+    },
+  ],
+});

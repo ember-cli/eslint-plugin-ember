@@ -20,3 +20,28 @@ ruleTester.run('template-no-input-block', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-input-block', rule, {
+  valid: [
+    '{{button}}',
+    '{{#x-button}}{{/x-button}}',
+    '{{input}}',
+  ],
+  invalid: [
+    {
+      code: '{{#input}}{{/input}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected block usage. The input helper may only be used inline.' },
+      ],
+    },
+  ],
+});

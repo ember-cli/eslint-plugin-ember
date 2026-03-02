@@ -98,3 +98,49 @@ ruleTester.run('template-no-arguments-for-html-elements', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-arguments-for-html-elements', rule, {
+  valid: [
+    '<Input @name=1 />',
+    `{{#let (component 'foo') as |bar|}} <bar @name="1" as |n|><n/></bar> {{/let}}`,
+    '<@externalComponent />',
+    `<MyComponent>
+    <:slot @name="Header"></:slot>
+  </MyComponent>`,
+    '<@foo.bar @name="2" />',
+    '<this.name @boo="bar"></this.name>',
+    '<@foo @name="2" />',
+    '<foo.some.name @name="1" />',
+  ],
+  invalid: [
+    {
+      code: '<div @value="1"></div>',
+      output: null,
+      errors: [
+        { message: '@arguments can only be used on components, not HTML elements. Use regular attributes instead.' },
+      ],
+    },
+    {
+      code: '<div @value></div>',
+      output: null,
+      errors: [
+        { message: '@arguments can only be used on components, not HTML elements. Use regular attributes instead.' },
+      ],
+    },
+    {
+      code: '<img @src="12">',
+      output: null,
+      errors: [
+        { message: '@arguments can only be used on components, not HTML elements. Use regular attributes instead.' },
+      ],
+    },
+  ],
+});

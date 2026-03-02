@@ -39,3 +39,40 @@ ruleTester.run('template-no-yield-block-params-to-else-inverse', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-yield-block-params-to-else-inverse', rule, {
+  valid: [
+    '{{yield}}',
+    '{{yield "some" "param"}}',
+    '{{yield to="whatever"}}',
+    '{{yield to=this.someValue}}',
+    '{{yield to=(get some this.map)}}',
+    '{{yield to="else"}}',
+    '{{yield to="inverse"}}',
+    '{{not-yield "some" "param" to="else"}}',
+  ],
+  invalid: [
+    {
+      code: '{{yield "some" "param" to="else"}}',
+      output: null,
+      errors: [
+        { message: 'Yielding block params to else/inverse block is not allowed' },
+      ],
+    },
+    {
+      code: '{{yield "some" "param" to="inverse"}}',
+      output: null,
+      errors: [
+        { message: 'Yielding block params to else/inverse block is not allowed' },
+      ],
+    },
+  ],
+});

@@ -190,3 +190,181 @@ ruleTester.run('template-require-has-block-helper', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-require-has-block-helper', rule, {
+  valid: [
+    '{{has-block}}',
+    '{{has-block-params}}',
+    '{{something-else}}',
+    '{{component test=(if (has-block) "true")}}',
+    '{{component test=(if (has-block-params) "true")}}',
+    '<SomeComponent someProp={{has-block}}',
+    '<SomeComponent someProp={{has-block-params}}',
+    '{{#if (has-block)}}{{/if}}',
+    '{{#if (has-block-params)}}{{/if}}',
+  ],
+  invalid: [
+    {
+      code: '{{hasBlock}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{hasBlockParams}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{if hasBlock "true" "false"}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{if hasBlockParams "true" "false"}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{if (hasBlock) "true" "false"}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{if (hasBlockParams) "true" "false"}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{if (hasBlock "inverse") "true" "false"}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{if (hasBlockParams "inverse") "true" "false"}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{component test=(if hasBlock "true")}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{component test=(if hasBlockParams "true")}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{#if hasBlock}}{{/if}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{#if hasBlockParams}}{{/if}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{#if (hasBlock)}}{{/if}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{#if (hasBlockParams)}}{{/if}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{#if (hasBlock "inverse")}}{{/if}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{#if (hasBlockParams "inverse")}}{{/if}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '<button name={{hasBlock}}></button>',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '<button name={{hasBlockParams}}></button>',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '<button name={{hasBlock "inverse"}}></button>',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '<button name={{hasBlockParams "inverse"}}></button>',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{#if (or isLoading hasLoadFailed hasBlock)}}...{{/if}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+    {
+      code: '{{#if (or isLoading hasLoadFailed hasBlockParams)}}...{{/if}}',
+      output: null,
+      errors: [
+        { message: 'Use (has-block) helper instead of hasBlock property.' },
+      ],
+    },
+  ],
+});

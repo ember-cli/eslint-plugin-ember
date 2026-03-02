@@ -94,3 +94,93 @@ ruleTester.run('template-no-index-component-invocation', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-index-component-invocation', rule, {
+  valid: [
+    '<Foo::Bar />',
+    '<Foo::IndexItem />',
+    '<Foo::MyIndex />',
+    '<Foo::MyIndex></Foo::MyIndex>',
+    '{{foo/index-item}}',
+    '{{foo/my-index}}',
+    '{{foo/bar}}',
+    '{{#foo/bar}}{{/foo/bar}}',
+    '{{component "foo/bar"}}',
+    '{{component "foo/my-index"}}',
+    '{{component "foo/index-item"}}',
+    '{{#component "foo/index-item"}}{{/component}}',
+  ],
+  invalid: [
+    {
+      code: '{{foo/index}}',
+      output: null,
+      errors: [
+        { message: 'Replace `{{foo/index ...` to `{{foo ...`' },
+      ],
+    },
+    {
+      code: '{{component "foo/index"}}',
+      output: null,
+      errors: [
+        { message: 'Replace `{{component "foo/index" ...` to `{{component "foo" ...`' },
+      ],
+    },
+    {
+      code: '{{#foo/index}}{{/foo/index}}',
+      output: null,
+      errors: [
+        { message: 'Replace `{{#foo/index ...` to `{{#foo ...`' },
+      ],
+    },
+    {
+      code: '{{#component "foo/index"}}{{/component}}',
+      output: null,
+      errors: [
+        { message: 'Replace `{{#component "foo/index" ...` to `{{#component "foo" ...`' },
+      ],
+    },
+    {
+      code: '{{foo/bar (component "foo/index")}}',
+      output: null,
+      errors: [
+        { message: 'Replace `(component "foo/index" ...` to `(component "foo" ...`' },
+      ],
+    },
+    {
+      code: '{{foo/bar name=(component "foo/index")}}',
+      output: null,
+      errors: [
+        { message: 'Replace `(component "foo/index" ...` to `(component "foo" ...`' },
+      ],
+    },
+    {
+      code: '<Foo::Index />',
+      output: null,
+      errors: [
+        { message: 'Replace `<Foo::Index ...` to `<Foo ...`' },
+      ],
+    },
+    {
+      code: '<Foo::Bar::Index />',
+      output: null,
+      errors: [
+        { message: 'Replace `<Foo::Bar::Index ...` to `<Foo::Bar ...`' },
+      ],
+    },
+    {
+      code: '<Foo::Index></Foo::Index>',
+      output: null,
+      errors: [
+        { message: 'Replace `<Foo::Index ...` to `<Foo ...`' },
+      ],
+    },
+  ],
+});

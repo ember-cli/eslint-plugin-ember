@@ -29,3 +29,29 @@ ruleTester.run('template-splat-attributes-only', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-splat-attributes-only', rule, {
+  valid: [
+    '<div ...attributes></div>',
+    '<div attributes></div>',
+    '<div arguments></div>',
+    '<div><div ...attributes></div></div>',
+  ],
+  invalid: [
+    {
+      code: '<div ...arguments></div>',
+      output: null,
+      errors: [
+        { message: 'Only `...attributes` can be applied to elements' },
+      ],
+    },
+  ],
+});

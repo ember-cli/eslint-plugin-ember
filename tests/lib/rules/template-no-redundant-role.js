@@ -122,3 +122,102 @@ ruleTester.run('template-no-redundant-role', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-redundant-role', rule, {
+  valid: [
+    '<a role="link" aria-disabled="true">valid</a>',
+    '<form role="search"></form>',
+    '<footer role={{this.foo}}></footer>',
+    '<footer role="{{this.stuff}}{{this.foo}}"></footer>',
+    '<nav role="navigation"></nav>',
+    '<ol role="list"></ol>',
+    '<ul role="list"></ul>',
+    '<input role="combobox">',
+    '<footer role={{this.bar}}></footer>',
+    '<nav class="navigation" role="navigation></nav>',
+    '<button role="link"></button>',
+    '<input type="checkbox" value="yes" checked />',
+    '<input type="range" />',
+    '<ul class="list" role="combobox"></ul>',
+  ],
+  invalid: [
+    {
+      code: '<header role="banner"></header>',
+      output: '<header></header>',
+      errors: [
+        { message: 'Use of redundant or invalid role: banner on <header> detected. If a landmark element is used, any role provided will either be redundant or incorrect.' },
+      ],
+    },
+    {
+      code: '<footer role="contentinfo"></footer>',
+      output: '<footer></footer>',
+      errors: [
+        { message: 'Use of redundant or invalid role: contentinfo on <footer> detected. If a landmark element is used, any role provided will either be redundant or incorrect.' },
+      ],
+    },
+    {
+      code: '<main role="main"></main>',
+      output: '<main></main>',
+      errors: [
+        { message: 'Use of redundant or invalid role: main on <main> detected. If a landmark element is used, any role provided will either be redundant or incorrect.' },
+      ],
+    },
+    {
+      code: '<aside role="complementary"></aside>',
+      output: '<aside></aside>',
+      errors: [
+        { message: 'Use of redundant or invalid role: complementary on <aside> detected. If a landmark element is used, any role provided will either be redundant or incorrect.' },
+      ],
+    },
+    {
+      code: '<form role="form"></form>',
+      output: '<form></form>',
+      errors: [
+        { message: 'Use of redundant or invalid role: form on <form> detected. If a landmark element is used, any role provided will either be redundant or incorrect.' },
+      ],
+    },
+    {
+      code: '<header role="banner" class="page-header"></header>',
+      output: '<header class="page-header"></header>',
+      errors: [
+        { message: 'Use of redundant or invalid role: banner on <header> detected. If a landmark element is used, any role provided will either be redundant or incorrect.' },
+      ],
+    },
+    {
+      code: '<button role="button"></button>',
+      output: '<button></button>',
+      errors: [
+        { message: 'Use of redundant or invalid role: button on <button> detected.' },
+      ],
+    },
+    {
+      code: '<input type="checkbox" name="agree" value="checkbox1" role="checkbox" />',
+      output: '<input type="checkbox" name="agree" value="checkbox1" />',
+      errors: [
+        { message: 'Use of redundant or invalid role: checkbox on <input> detected.' },
+      ],
+    },
+    {
+      code: '<table><th role="columnheader">Some heading</th><td>cell1</td></table>',
+      output: '<table><th>Some heading</th><td>cell1</td></table>',
+      errors: [
+        { message: 'Use of redundant or invalid role: columnheader on <th> detected.' },
+      ],
+    },
+    {
+      code: '<select name="color" id="color" role="listbox" multiple><option value="default-color">black</option></select>',
+      output: '<select name="color" id="color" multiple><option value="default-color">black</option></select>',
+      errors: [
+        { message: 'Use of redundant or invalid role: listbox on <select> detected.' },
+      ],
+    },
+  ],
+});

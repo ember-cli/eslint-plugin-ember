@@ -152,3 +152,167 @@ ruleTester.run('template-require-valid-alt-text', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-require-valid-alt-text', rule, {
+  valid: [
+    '<img alt="hullo">',
+    '<img alt={{foo}}>',
+    '<img alt="blah {{derp}}">',
+    '<img aria-hidden="true">',
+    '<img hidden>',
+    '<img alt="" role="none" src="zoey.jpg">',
+    '<img alt="" role="presentation" src="zoey.jpg">',
+    '<img alt="a stylized graphic of a female hamster" src="zoey.jpg">',
+    '<img alt="some-alt-name">',
+    '<img alt="name {{picture}}">',
+    '<img alt="{{picture}}">',
+    '<img alt="">',
+    '<img alt="" src="zoey.jpg">',
+    '<img alt="" role="none">',
+    '<img alt="" role="presentation">',
+    '<img alt>',
+    '<img alt role="none">',
+    '<img alt role="presentation">',
+    '<img alt src="zoey.jpg">',
+    '<img alt="logout">',
+    '<img alt="photography">',
+    '<img alt="picturesque">',
+    '<img alt="pilgrimage">',
+    '<img alt="spacers">',
+    '<img ...attributes>',
+    '<input type="image" alt="some-alt">',
+    '<input type="image" aria-labelledby="some-alt">',
+    '<input type="image" aria-label="some-alt">',
+    '<input type="image" hidden>',
+    '<input type="image" aria-hidden="true">',
+    '<object title="some-alt"></object>',
+    '<object role="presentation"></object>',
+    '<object role="none"></object>',
+    '<object hidden></object>',
+    '<object aria-hidden="true"></object>',
+    '<object aria-labelledby="some-alt"></object>',
+    '<object aria-label="some-alt"></object>',
+    '<object>some text</object>',
+    '<area alt="some-alt">',
+    '<area hidden>',
+    '<area aria-hidden="true">',
+    '<area aria-labelledby="some-alt">',
+    '<area aria-label="some-alt">',
+    '<img role={{unless this.altText "presentation"}} alt={{this.altText}}>',
+  ],
+  invalid: [
+    {
+      code: '<img>',
+      output: null,
+      errors: [
+        { message: 'All `<img>` tags must have an alt attribute.' },
+      ],
+    },
+    {
+      code: '<img src="zoey.jpg">',
+      output: null,
+      errors: [
+        { message: 'All `<img>` tags must have an alt attribute.' },
+      ],
+    },
+    {
+      code: '<img alt="path/to/zoey.jpg" src="path/to/zoey.jpg">',
+      output: null,
+      errors: [
+        { message: 'The alt text must not be the same as the image source.' },
+      ],
+    },
+    {
+      code: '<input type="image">',
+      output: null,
+      errors: [
+        { message: 'All <input> elements with type="image" must have a text alternative through the `alt`, `aria-label`, or `aria-labelledby` attribute.' },
+      ],
+    },
+    {
+      code: '<object></object>',
+      output: null,
+      errors: [
+        { message: 'Embedded <object> elements must have alternative text by providing inner text, aria-label or aria-labelledby attributes.' },
+      ],
+    },
+    {
+      code: '<object />',
+      output: null,
+      errors: [
+        { message: 'Embedded <object> elements must have alternative text by providing inner text, aria-label or aria-labelledby attributes.' },
+      ],
+    },
+    {
+      code: '<area>',
+      output: null,
+      errors: [
+        { message: 'Each area of an image map must have a text alternative through the `alt`, `aria-label`, or `aria-labelledby` attribute.' },
+      ],
+    },
+    {
+      code: '<img alt="picture">',
+      output: null,
+      errors: [
+        { message: 'Invalid alt attribute. Words such as `image`, `photo,` or `picture` are already announced by screen readers.' },
+      ],
+    },
+    {
+      code: '<img alt="photo">',
+      output: null,
+      errors: [
+        { message: 'Invalid alt attribute. Words such as `image`, `photo,` or `picture` are already announced by screen readers.' },
+      ],
+    },
+    {
+      code: '<img alt="image">',
+      output: null,
+      errors: [
+        { message: 'Invalid alt attribute. Words such as `image`, `photo,` or `picture` are already announced by screen readers.' },
+      ],
+    },
+    {
+      code: '<img alt="  IMAGE ">',
+      output: null,
+      errors: [
+        { message: 'Invalid alt attribute. Words such as `image`, `photo,` or `picture` are already announced by screen readers.' },
+      ],
+    },
+    {
+      code: '<img alt="  IMAGE {{picture}} {{word}} ">',
+      output: null,
+      errors: [
+        { message: 'Invalid alt attribute. Words such as `image`, `photo,` or `picture` are already announced by screen readers.' },
+      ],
+    },
+    {
+      code: '<img alt="52" src="b52.jpg">',
+      output: null,
+      errors: [
+        { message: 'A number is not valid alt text.' },
+      ],
+    },
+    {
+      code: '<img alt="not-null-alt" src="zoey.jpg" role="none">',
+      output: null,
+      errors: [
+        { message: 'The `alt` attribute should be empty if `<img>` has `role` of `none` or `presentation`.' },
+      ],
+    },
+    {
+      code: '<img alt="not-null-alt" src="zoey.jpg" role="presentation">',
+      output: null,
+      errors: [
+        { message: 'The `alt` attribute should be empty if `<img>` has `role` of `none` or `presentation`.' },
+      ],
+    },
+  ],
+});

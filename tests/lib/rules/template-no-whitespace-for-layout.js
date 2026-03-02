@@ -67,3 +67,58 @@ ruleTester.run('template-no-whitespace-for-layout', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-whitespace-for-layout', rule, {
+  valid: [
+    'Start to finish',
+    'Start&nbsp;to&nbsp;finish',
+    'Start<br>to<br>finish',
+    `<div>
+  example
+</div>`,
+    `<div
+  foo="bar"
+  baz="qux"
+>
+  example
+</div>`,
+  ],
+  invalid: [
+    {
+      code: 'START  FINISH',
+      output: null,
+      errors: [
+        { message: 'Unexpected use of whitespace for layout. Use CSS for spacing instead of multiple spaces.' },
+      ],
+    },
+    {
+      code: 'START&nbsp;&nbsp;FINISH',
+      output: null,
+      errors: [
+        { message: 'Unexpected use of whitespace for layout. Use CSS for spacing instead of multiple spaces.' },
+      ],
+    },
+    {
+      code: 'START&nbsp; FINISH',
+      output: null,
+      errors: [
+        { message: 'Unexpected use of whitespace for layout. Use CSS for spacing instead of multiple spaces.' },
+      ],
+    },
+    {
+      code: 'START &nbsp;FINISH',
+      output: null,
+      errors: [
+        { message: 'Unexpected use of whitespace for layout. Use CSS for spacing instead of multiple spaces.' },
+      ],
+    },
+  ],
+});

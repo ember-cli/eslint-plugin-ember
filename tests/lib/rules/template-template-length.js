@@ -57,3 +57,33 @@ and	his</template>`,
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-template-length', rule, {
+  valid: [
+    `testing this
+and
+this
+and	his`,
+    `testing
+this
+`,
+    `testing
+this
+and	his
+`,
+    `testing
+this
+andthis
+`,
+  ],
+  invalid: [
+  ],
+});

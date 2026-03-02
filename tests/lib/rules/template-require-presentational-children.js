@@ -112,3 +112,64 @@ ruleTester.run('template-require-presentational-children', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-require-presentational-children', rule, {
+  valid: [
+    '<button></button>',
+    '<div></div>',
+    '<li role="tab">Tab title</li>',
+    '<li role="tab"><h3 role="presentation">Tab Title</h3></li>',
+    '<div role="button"><div><span></span></div></div>',
+    '<span role="checkbox"/>',
+    '<div role="article"><h2>Hello</h2></div>',
+    `
+    <ul role="tablist">
+      <li role="presentation">
+        <a role="tab" href="#">Tab 1</a>
+      </li>
+    </ul>
+    `,
+    `
+    <svg role="img">
+      <title>Title here</title>
+      <circle cx="10" cy="10" r="10"></circle>
+    </svg>`,
+    `
+      <MyButton role="tab">
+        <:default>Button text</:default>
+      </MyButton>
+    `,
+    '<button><div>item1</div><custom-element>item2</custom-element></button>',
+  ],
+  invalid: [
+    {
+      code: '<div role="button"><h2>Test</h2></div>',
+      output: null,
+      errors: [
+        { message: 'Element <div> has role="button" but contains semantic child <h2>. Presentational elements should only contain presentational children.' },
+      ],
+    },
+    {
+      code: '<div role="button"><h2 role="presentation"><img /></h2></div>',
+      output: null,
+      errors: [
+        { message: 'Element <div> has role="button" but contains semantic child <img>. Presentational elements should only contain presentational children.' },
+      ],
+    },
+    {
+      code: '<div role="button"><h2 role="presentation"><button>Test <img/></button></h2></div>',
+      output: null,
+      errors: [
+        { message: 'Element <div> has role="button" but contains semantic child <button>. Presentational elements should only contain presentational children.' },
+      ],
+    },
+  ],
+});

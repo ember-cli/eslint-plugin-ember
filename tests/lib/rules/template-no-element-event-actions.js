@@ -93,3 +93,37 @@ ruleTester.run('template-no-element-event-actions', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-element-event-actions (hbs)', rule, {
+  valid: [
+    '<button></button>',
+    '<button type="button" on={{action "myAction"}}></button>',
+    '<button type="button" onclick="myFunction()"></button>',
+    '<button type="button" {{action "myAction"}}></button>',
+    '<button type="button" value={{value}}></button>',
+    '{{my-component onclick=(action "myAction") someProperty=true}}',
+    '<SiteHeader @someFunction={{action "myAction"}} @user={{this.user}} />',
+  ],
+  invalid: [
+    {
+      code: '<button onclick={{action "myAction"}} ONFOCUS={{action "myAction"}} otherProperty=true></button>',
+      output: null,
+      errors: [{ messageId: 'noElementEventActions' }, { messageId: 'noElementEventActions' }],
+    },
+    {
+      code: '<SiteHeader onclick={{action "myAction"}} @user={{this.user}} />',
+      output: null,
+      errors: [{ messageId: 'noElementEventActions' }],
+    },
+    {
+      code: '<button type="button" onclick={{this.myAction}}></button>',
+      output: null,
+      errors: [{ messageId: 'noElementEventActions' }],
+    },
+  ],
+});

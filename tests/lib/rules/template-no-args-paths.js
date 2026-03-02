@@ -66,3 +66,82 @@ ruleTester.run('template-no-args-paths', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-args-paths', rule, {
+  valid: [
+    '<div @foo={{cleanup this.args}}></div>',
+    '{{foo (name this.args)}}',
+    '{{foo name=this.args}}',
+    '{{foo name=(extract this.args)}}',
+    '<Foo @params={{this.args}} />',
+    '<Foo {{mod this.args}} />',
+    '<Foo {{mod items=this.args}} />',
+    '<Foo {{mod items=(extract this.args)}} />',
+  ],
+  invalid: [
+    {
+      code: '{{hello (format value=args.foo)}}',
+      output: null,
+      errors: [
+        { message: 'Do not use paths with @args, use @argName directly instead.' },
+      ],
+    },
+    {
+      code: '{{hello value=args.foo}}',
+      output: null,
+      errors: [
+        { message: 'Do not use paths with @args, use @argName directly instead.' },
+      ],
+    },
+    {
+      code: '{{hello (format args.foo.bar)}}',
+      output: null,
+      errors: [
+        { message: 'Do not use paths with @args, use @argName directly instead.' },
+      ],
+    },
+    {
+      code: '<br {{hello args.foo.bar}}>',
+      output: null,
+      errors: [
+        { message: 'Do not use paths with @args, use @argName directly instead.' },
+      ],
+    },
+    {
+      code: '{{hello args.foo.bar}}',
+      output: null,
+      errors: [
+        { message: 'Do not use paths with @args, use @argName directly instead.' },
+      ],
+    },
+    {
+      code: '{{args.foo.bar}}',
+      output: null,
+      errors: [
+        { message: 'Do not use paths with @args, use @argName directly instead.' },
+      ],
+    },
+    {
+      code: '{{args.foo}}',
+      output: null,
+      errors: [
+        { message: 'Do not use paths with @args, use @argName directly instead.' },
+      ],
+    },
+    {
+      code: '{{this.args.foo}}',
+      output: null,
+      errors: [
+        { message: 'Do not use paths with @args, use @argName directly instead.' },
+      ],
+    },
+  ],
+});

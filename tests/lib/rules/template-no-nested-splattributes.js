@@ -87,3 +87,22 @@ ruleTester.run('template-no-nested-splattributes', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-nested-splattributes', rule, {
+  valid: [
+    '<div>...</div>',
+    '<div><div ...attributes>...</div></div>',
+    '<div ...attributes>...</div>',
+    '<div ...attributes>...</div><div ...attributes>...</div>',
+  ],
+  invalid: [
+  ],
+});

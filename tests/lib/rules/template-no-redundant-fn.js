@@ -96,3 +96,45 @@ ruleTester.run('template-no-redundant-fn', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-redundant-fn', rule, {
+  valid: [
+    '<button {{on "click" this.handleClick}}>Click Me</button>',
+    '<button {{on "click" (fn this.handleClick "foo")}}>Click Me</button>',
+    '<SomeComponent @onClick={{this.handleClick}} />',
+    '<SomeComponent @onClick={{fn this.handleClick "foo"}} />',
+    '{{foo bar=this.handleClick}}>',
+    '{{foo bar=(fn this.handleClick "foo")}}>',
+  ],
+  invalid: [
+    {
+      code: '<button {{on "click" (fn this.handleClick)}}>Click Me</button>',
+      output: null,
+      errors: [
+        { message: 'Unnecessary use of (fn) helper. Pass the function directly instead: this.handleClick' },
+      ],
+    },
+    {
+      code: '<SomeComponent @onClick={{fn this.handleClick}} />',
+      output: null,
+      errors: [
+        { message: 'Unnecessary use of (fn) helper. Pass the function directly instead: this.handleClick' },
+      ],
+    },
+    {
+      code: '{{foo bar=(fn this.handleClick)}}>',
+      output: null,
+      errors: [
+        { message: 'Unnecessary use of (fn) helper. Pass the function directly instead: this.handleClick' },
+      ],
+    },
+  ],
+});

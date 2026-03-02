@@ -101,3 +101,50 @@ ruleTester.run('template-no-passed-in-event-handlers', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-passed-in-event-handlers', rule, {
+  valid: [
+    '<Foo />',
+    '<Foo @onClick={{this.handleClick}} />',
+    '<Foo @onclick={{this.handleClick}} />',
+    '<Foo @Click={{this.handleClick}} />',
+    '<Foo @touch={{this.handleClick}} />',
+    '<Foo @random="foo" />',
+    '<Foo @random={{true}} />',
+    '<Input @click={{this.handleClick}} />',
+    '<Textarea @click={{this.handleClick}} />',
+    '{{foo}}',
+    '{{foo onClick=this.handleClick}}',
+    '{{foo onclick=this.handleClick}}',
+    '{{foo Click=this.handleClick}}',
+    '{{foo touch=this.handleClick}}',
+    '{{foo random="foo"}}',
+    '{{foo random=true}}',
+    '{{input click=this.handleClick}}',
+    '{{textarea click=this.handleClick}}',
+  ],
+  invalid: [
+    {
+      code: '<Foo @keyPress={{this.handleClick}} />',
+      output: null,
+      errors: [
+        { message: 'Event handler "@keyPress" should not be passed as a component argument. Use the `on` modifier instead.' },
+      ],
+    },
+    {
+      code: '{{foo keyPress=this.handleClick}}',
+      output: null,
+      errors: [
+        { message: 'Event handler "@keyPress" should not be passed as a component argument. Use the `on` modifier instead.' },
+      ],
+    },
+  ],
+});

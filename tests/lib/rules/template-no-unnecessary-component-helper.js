@@ -78,3 +78,60 @@ ruleTester.run('template-no-unnecessary-component-helper', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-unnecessary-component-helper', rule, {
+  valid: [
+    '{{component SOME_COMPONENT_NAME}}',
+    '{{component SOME_COMPONENT_NAME SOME_ARG}}',
+    '{{component SOME_COMPONENT_NAME "Hello World"}}',
+    '{{my-component}}',
+    '{{my-component "Hello world"}}',
+    '{{my-component "Hello world" 123}}',
+    '{{#component SOME_COMPONENT_NAME}}{{/component}}',
+    '{{#component SOME_COMPONENT_NAME SOME_ARG}}{{/component}}',
+    '{{#component SOME_COMPONENT_NAME "Hello World"}}{{/component}}',
+    '{{#my-component}}{{/my-component}}',
+    '{{#my-component "Hello world"}}{{/my-component}}',
+    '{{#my-component "Hello world" 123}}{{/my-component}}',
+    '(component SOME_COMPONENT_NAME)',
+    '(component "my-component")',
+    '<Foo @bar={{component SOME_COMPONENT_NAME}} />',
+    '<Foo @bar={{component SOME_COMPONENT_NAME}}></Foo>',
+    '<Foo @arg="foo" />',
+    '<Foo class="foo" />',
+    '<Foo data-test-bar="foo" />',
+    '<Foo @arg={{if this.user.isAdmin "admin"}} />',
+  ],
+  invalid: [
+    {
+      code: '{{component "my-component-name" foo=123 bar=456}}',
+      output: '{{my-component-name foo=123 bar=456}}',
+      errors: [
+        { message: 'Unnecessary use of (component) helper. Use the component name directly.' },
+      ],
+    },
+    {
+      code: '{{#component "my-component-name" foo=123 bar=456}}{{/component}}',
+      output: null,
+      errors: [
+        { message: 'Unnecessary use of (component) helper. Use the component name directly.' },
+      ],
+    },
+    {
+      code: '<Foo @arg={{component "allowed-component"}}>{{component "forbidden-component"}}</Foo>',
+      output: '<Foo @arg={{allowed-component}}>{{forbidden-component}}</Foo>',
+      errors: [
+        { message: 'Unnecessary use of (component) helper. Use the component name directly.' },
+        { message: 'Unnecessary use of (component) helper. Use the component name directly.' },
+      ],
+    },
+  ],
+});

@@ -140,3 +140,75 @@ ruleTester.run('template-no-invalid-interactive', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-invalid-interactive', rule, {
+  valid: [
+    '<button {{action "foo"}}></button>',
+    '<canvas {{on "mousedown"}}></canvas>',
+    '<div role="button" {{action "foo"}}></div>',
+    '<div randomProperty={{myValue}}></div>',
+    '<li><button {{action "foo"}}></button></li>',
+    '<form {{action "foo" on="submit"}}></form>',
+    '<form onsubmit={{action "foo"}}></form>',
+    '<form onchange={{action "foo"}}></form>',
+    '<form {{action "foo" on="reset"}}></form>',
+    '<form {{action "foo" on="change"}}></form>',
+    '<form onreset={{action "foo"}}></form>',
+    '<img onerror={{action "foo"}}>',
+    '<img onload={{action "foo"}}>',
+    '<InputSearch @onInput={{action "foo"}} />',
+    '<InputSearch @onInput={{action "foo"}}></InputSearch>',
+    '{{#with (hash bar=(component "foo")) as |foo|}}<foo.bar @onInput={{action "foo"}}></foo.bar>{{/with}}',
+    '<form {{on "submit" this.send}}></form>',
+    '<form {{on "reset" this.reset}}></form>',
+    '<form {{on "change" this.change}}></form>',
+    '<div {{on "scroll" this.handleScroll}}></div>',
+    '<code {{on "copy" (action @onCopy)}}></code>',
+    '<img {{on "load" this.onLoad}} {{on "error" this.onError}}>',
+  ],
+  invalid: [
+    {
+      code: '<div onclick={{pipe-action "foo"}}></div>',
+      output: null,
+      errors: [
+        { message: 'Non-interactive element <div> should not have interactive handler "onclick".' },
+      ],
+    },
+    {
+      code: '<div onsubmit={{action "foo"}}></div>',
+      output: null,
+      errors: [
+        { message: 'Non-interactive element <div> should not have interactive handler "onsubmit".' },
+      ],
+    },
+    {
+      code: '<div randomAttribute={{action "foo"}}></div>',
+      output: null,
+      errors: [
+        { message: 'Non-interactive element <div> should not have interactive handler "randomattribute".' },
+      ],
+    },
+    {
+      code: '<form {{action "foo" on="click"}}></form>',
+      output: null,
+      errors: [
+        { message: 'Non-interactive element <form> should not have interactive handler "{{action}}".' },
+      ],
+    },
+    {
+      code: '<div {{action "foo" on="submit"}}></div>',
+      output: null,
+      errors: [
+        { message: 'Non-interactive element <div> should not have interactive handler "{{action}}".' },
+      ],
+    },
+  ],
+});

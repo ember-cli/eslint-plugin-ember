@@ -102,3 +102,107 @@ ruleTester.run('template-no-unsupported-role-attributes', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-unsupported-role-attributes', rule, {
+  valid: [
+    '<div role="button" aria-disabled="true"></div>',
+    '<div role="heading" aria-level="1" />',
+    '<span role="checkbox" aria-checked={{this.checked}}></span>',
+    '<CustomComponent role="banner" />',
+    '<div role="textbox" aria-required={{this.required}} aria-errormessage={{this.error}}></div>',
+    '<div role="heading" foo="true" />',
+    '<dialog />',
+    '<a href="#" aria-describedby=""></a>',
+    '<menu type="toolbar" aria-hidden="true" />',
+    '<a role="menuitem" aria-labelledby={{this.label}} />',
+    '<input type="image" aria-atomic />',
+    '<input type="submit" aria-disabled="true" />',
+    '<select aria-expanded="false" aria-controls="ctrlID" />',
+    '<div type="button" foo="true" />',
+    '{{some-component role="heading" aria-level="2"}}',
+    '{{other-component role=this.role aria-bogus="true"}}',
+    '<ItemCheckbox @model={{@model}} @checkable={{@checkable}} />',
+    '<some-custom-element />',
+    '<input type="password">',
+  ],
+  invalid: [
+    {
+      code: '<div role="link" href="#" aria-checked />',
+      output: null,
+      errors: [
+        { message: 'ARIA attribute "aria-checked" is not supported for role "link". Remove the attribute or change the role.' },
+      ],
+    },
+    {
+      code: '<CustomComponent role="listbox" aria-level="2" />',
+      output: null,
+      errors: [
+        { message: 'ARIA attribute "aria-level" is not supported for role "listbox". Remove the attribute or change the role.' },
+      ],
+    },
+    {
+      code: '<div role="option" aria-notreal="bogus" aria-selected="false" />',
+      output: null,
+      errors: [
+        { message: 'ARIA attribute "aria-notreal" is not supported for role "option". Remove the attribute or change the role.' },
+      ],
+    },
+    {
+      code: '<div role="combobox" aria-multiline="true" aria-expanded="false" aria-controls="someId" />',
+      output: null,
+      errors: [
+        { message: 'ARIA attribute "aria-multiline" is not supported for role "combobox". Remove the attribute or change the role.' },
+      ],
+    },
+    {
+      code: '<button type="submit" aria-valuetext="woosh"></button>',
+      output: null,
+      errors: [
+        { message: 'ARIA attribute "aria-valuetext" is not supported for role "button". Remove the attribute or change the role.' },
+      ],
+    },
+    {
+      code: '<menu type="toolbar" aria-expanded="true" />',
+      output: null,
+      errors: [
+        { message: 'ARIA attribute "aria-expanded" is not supported for role "list". Remove the attribute or change the role.' },
+      ],
+    },
+    {
+      code: '<a role="menuitem" aria-checked={{this.checked}} />',
+      output: null,
+      errors: [
+        { message: 'ARIA attribute "aria-checked" is not supported for role "menuitem". Remove the attribute or change the role.' },
+      ],
+    },
+    {
+      code: '<input type="button" aria-invalid="grammar" />',
+      output: null,
+      errors: [
+        { message: 'ARIA attribute "aria-invalid" is not supported for role "button". Remove the attribute or change the role.' },
+      ],
+    },
+    {
+      code: '<input type="email" aria-level={{this.level}} />',
+      output: null,
+      errors: [
+        { message: 'ARIA attribute "aria-level" is not supported for role "combobox". Remove the attribute or change the role.' },
+      ],
+    },
+    {
+      code: '{{foo-component role="button" aria-valuetext="blahblahblah"}}',
+      output: null,
+      errors: [
+        { message: 'ARIA attribute "aria-valuetext" is not supported for role "button". Remove the attribute or change the role.' },
+      ],
+    },
+  ],
+});

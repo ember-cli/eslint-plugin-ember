@@ -54,3 +54,35 @@ ruleTester.run('template-no-aria-unsupported-elements', rule, {
     },
   ],
 });
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-aria-unsupported-elements (hbs)', rule, {
+  valid: [
+    '<meta charset="UTF-8" />',
+    '<html lang="en"></html>',
+    '<script></script>',
+    '<div></div>',
+    '<div aria-foo="true"></div>',
+    '<div role="foo"></div>',
+  ],
+  invalid: [
+    {
+      code: '<meta charset="UTF-8" aria-hidden="false" />',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<html lang="en" role="application"></html>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<script aria-hidden="false"></script>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+  ],
+});

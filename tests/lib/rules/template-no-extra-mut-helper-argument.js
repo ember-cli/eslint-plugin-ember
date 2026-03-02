@@ -47,3 +47,44 @@ ruleTester.run('template-no-extra-mut-helper-argument', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-extra-mut-helper-argument', rule, {
+  valid: [
+    '{{my-component click=(action (mut isClicked))}}',
+    '{{my-component click=(action (mut isClicked) true)}}',
+    '{{my-component isClickedMutable=(mut isClicked)}}',
+    '<button {{action (mut isClicked)}}></button>',
+    '<button {{action (mut isClicked) true}}></button>',
+  ],
+  invalid: [
+    {
+      code: '{{my-component click=(action (mut isClicked true))}}',
+      output: null,
+      errors: [
+        { message: 'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(action (mut attr) value)`.' },
+      ],
+    },
+    {
+      code: '{{my-component isClickedMutable=(mut isClicked true)}}',
+      output: null,
+      errors: [
+        { message: 'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(action (mut attr) value)`.' },
+      ],
+    },
+    {
+      code: '<button {{action (mut isClicked true)}}></button>',
+      output: null,
+      errors: [
+        { message: 'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(action (mut attr) value)`.' },
+      ],
+    },
+  ],
+});

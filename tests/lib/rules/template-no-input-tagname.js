@@ -51,3 +51,63 @@ ruleTester.run('template-no-input-tagname', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-input-tagname', rule, {
+  valid: [
+    '{{input type="text"}}',
+    '{{component "input" type="text"}}',
+    '{{yield (component "input" type="text")}}',
+  ],
+  invalid: [
+    {
+      code: '{{input tagName="foo"}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected tagName usage on input helper.' },
+      ],
+    },
+    {
+      code: '{{input tagName=bar}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected tagName usage on input helper.' },
+      ],
+    },
+    {
+      code: '{{component "input" tagName="foo"}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected tagName usage on input helper.' },
+      ],
+    },
+    {
+      code: '{{component "input" tagName=bar}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected tagName usage on input helper.' },
+      ],
+    },
+    {
+      code: '{{yield (component "input" tagName="foo")}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected tagName usage on input helper.' },
+      ],
+    },
+    {
+      code: '{{yield (component "input" tagName=bar)}}',
+      output: null,
+      errors: [
+        { message: 'Unexpected tagName usage on input helper.' },
+      ],
+    },
+  ],
+});

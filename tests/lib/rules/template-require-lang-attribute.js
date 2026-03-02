@@ -74,3 +74,46 @@ ruleTester.run('template-require-lang-attribute', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-require-lang-attribute', rule, {
+  valid: [
+    '<html lang="en"></html>',
+    '<html lang="en-US"></html>',
+    '<html lang="DE-BW"></html>',
+    '<html lang={{lang}}></html>',
+    '<html lang="de"></html>',
+    '<html lang={{this.language}}></html>',
+    '<html lang={{this.blah}}></html>',
+  ],
+  invalid: [
+    {
+      code: '<html></html>',
+      output: null,
+      errors: [
+        { message: 'The <html> element must have a lang attribute.' },
+      ],
+    },
+    {
+      code: '<html lang=""></html>',
+      output: null,
+      errors: [
+        { message: 'The <html> element must have a non-empty lang attribute.' },
+      ],
+    },
+    {
+      code: '<html lang="gibberish"></html>',
+      output: null,
+      errors: [
+        { message: 'The <html> element has an invalid lang value "gibberish".' },
+      ],
+    },
+  ],
+});

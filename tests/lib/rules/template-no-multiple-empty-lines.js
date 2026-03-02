@@ -103,3 +103,46 @@ r
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-multiple-empty-lines', rule, {
+  valid: [
+    '<div>foo</div><div>bar</div>',
+    `<div>foo</div>
+<div>bar</div>`,
+    `<div>foo</div>
+<div>bar</div>`,
+    `<div>foo</div>
+
+<div>bar</div>`,
+    `<div>foo</div>
+
+<div>bar</div>`,
+    `
+<div>foo</div>
+
+<div>bar</div>
+`,
+  ],
+  invalid: [
+    {
+      code: `<div>foo</div>
+
+
+
+
+<div>bar</div>`,
+      output: null,
+      errors: [
+        { message: 'More than 1 blank line not allowed.' },
+      ],
+    },
+  ],
+});

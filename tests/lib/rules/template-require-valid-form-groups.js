@@ -65,3 +65,52 @@ ruleTester.run('template-require-valid-form-groups', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-require-valid-form-groups', rule, {
+  valid: [
+    `<fieldset>
+      <legend>Preferred Mascot Version</legend>
+      <div>
+        <label for="radio-001">Chicago Zoey</label>
+        <input id="radio-001" type="radio" name="prefMascot-Zoey" value="chicago zoey">
+      </div>
+    </fieldset>`,
+    `<div role="group" aria-labelledby="preferred-mascot-heading">
+      <div id="preferred-mascot-heading">Preferred Mascot Version</div>
+      <label for="radio-001">Chicago Zoey</label>
+      <input id="radio-001" type="radio" name="prefMascot-Zoey" value="chicago zoey">
+      <label for="radio-002">Chicago Tom</label>
+      <input id="radio-002" type="radio" name="prefMascot-Tom" value="chicago zoey">
+    </div>`,
+    `<div>
+      <label for="radio-001">Chicago Zoey</label>
+      <input id="radio-001" type="radio" name="prefMascot-Zoey" value="chicago zoey">
+    </div>`,
+  ],
+  invalid: [
+    {
+      code: '<div><input name="a1">Chicago Zoey<input name="a2">Chicago Tom</div>',
+      output: null,
+      errors: [
+        { message: 'Grouped form controls should have appropriate semantics such as fieldset and legend or WAI-ARIA labels' },
+        { message: 'Grouped form controls should have appropriate semantics such as fieldset and legend or WAI-ARIA labels' },
+      ],
+    },
+    {
+      code: '<div><input id="prefMascot-Zoey"><label for="prefMascot-Zoey" /><input id="prefMascot-tom"><label for="prefMascot-tom" /></div>',
+      output: null,
+      errors: [
+        { message: 'Grouped form controls should have appropriate semantics such as fieldset and legend or WAI-ARIA labels' },
+        { message: 'Grouped form controls should have appropriate semantics such as fieldset and legend or WAI-ARIA labels' },
+      ],
+    },
+  ],
+});

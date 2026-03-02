@@ -87,3 +87,77 @@ ruleTester.run('template-no-abstract-roles', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-abstract-roles (hbs)', rule, {
+  valid: [
+    '<img alt="" role="none" src="zoey.jpg">',
+    '<img alt="" role="presentation" src="zoey.jpg">',
+  ],
+  invalid: [
+    {
+      code: '<img role="command">',
+      output: null,
+      errors: [{ messageId: 'abstractRole' }],
+    },
+    {
+      code: '<img role="composite">',
+      output: null,
+      errors: [{ messageId: 'abstractRole' }],
+    },
+    {
+      code: '<input role="input">',
+      output: null,
+      errors: [{ messageId: 'abstractRole' }],
+    },
+    {
+      code: '<img role="landmark">',
+      output: null,
+      errors: [{ messageId: 'abstractRole' }],
+    },
+    {
+      code: '<input role="range">',
+      output: null,
+      errors: [{ messageId: 'abstractRole' }],
+    },
+    {
+      code: '<img role="roletype">',
+      output: null,
+      errors: [{ messageId: 'abstractRole' }],
+    },
+    {
+      code: '<img role="section">',
+      output: null,
+      errors: [{ messageId: 'abstractRole' }],
+    },
+    {
+      code: '<img role="sectionhead">',
+      output: null,
+      errors: [{ messageId: 'abstractRole' }],
+    },
+    {
+      code: '<select role="select"></select>',
+      output: null,
+      errors: [{ messageId: 'abstractRole' }],
+    },
+    {
+      code: '<div role="structure"></div>',
+      output: null,
+      errors: [{ messageId: 'abstractRole' }],
+    },
+    {
+      code: '<img role="widget">',
+      output: null,
+      errors: [{ messageId: 'abstractRole' }],
+    },
+    {
+      code: '<img role="window">',
+      output: null,
+      errors: [{ messageId: 'abstractRole' }],
+    },
+  ],
+});

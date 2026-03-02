@@ -62,3 +62,22 @@ ruleTester.run('template-no-model-argument-in-route-templates', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-model-argument-in-route-templates', rule, {
+  valid: [
+    '{{model}}',
+    '{{this.model}}',
+    '{{@modelythingy}}',
+    '{{@model}}',
+  ],
+  invalid: [
+  ],
+});
