@@ -86,8 +86,8 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '<template>{{foo}}</template>',
-      options: [{ disallow: ['foo'] }],
       output: null,
+      options: [{ disallow: ['foo'] }],
       errors: [
         {
           message: generateError('foo'),

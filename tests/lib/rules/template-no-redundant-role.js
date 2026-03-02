@@ -113,7 +113,12 @@ ruleTester.run('template-no-redundant-role', rule, {
     {
       code: '<template><header role="banner" class="page-header"></header></template>',
       output: '<template><header class="page-header"></header></template>',
-      errors: [{ message: 'Use of redundant or invalid role: banner on <header> detected. If a landmark element is used, any role provided will either be redundant or incorrect.' }],
+      errors: [
+        {
+          message:
+            'Use of redundant or invalid role: banner on <header> detected. If a landmark element is used, any role provided will either be redundant or incorrect.',
+        },
+      ],
     },
   ],
 });

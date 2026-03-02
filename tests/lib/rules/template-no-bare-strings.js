@@ -180,14 +180,14 @@ ruleTester.run('template-no-bare-strings', rule, {
       errors: [{ messageId: 'bareString' }, { messageId: 'bareString' }],
     },
     {
-      code: '<template><input placeholder="This is a placeholder" /></template>',
       filename: 'template.gjs',
+      code: '<template><input placeholder="This is a placeholder" /></template>',
       output: null,
       errors: [{ messageId: 'bareString' }],
     },
     {
-      code: '<template><img alt="This is alt text" /></template>',
       filename: 'template.gts',
+      code: '<template><img alt="This is alt text" /></template>',
       output: null,
       errors: [{ messageId: 'bareString' }],
     },

@@ -78,8 +78,7 @@ ruleTester.run('template-no-shadowed-elements', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Component name "div" shadows HTML element <div>. Use a different name.',
+          message: 'Component name "div" shadows HTML element <div>. Use a different name.',
           type: 'GlimmerElementNode',
         },
       ],

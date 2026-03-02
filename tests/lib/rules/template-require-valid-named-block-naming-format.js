@@ -65,17 +65,23 @@ ruleTester.run('template-require-valid-named-block-naming-format', rule, {
     {
       code: '<template>{{if (has-block "foo-bar")}}</template>',
       output: null,
-      errors: [{ message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".' }],
+      errors: [
+        { message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".' },
+      ],
     },
     {
       code: '<template>{{has-block-params "foo-bar"}}</template>',
       output: null,
-      errors: [{ message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".' }],
+      errors: [
+        { message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".' },
+      ],
     },
     {
       code: '<template>{{if (has-block-params "foo-bar")}}</template>',
       output: null,
-      errors: [{ message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".' }],
+      errors: [
+        { message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".' },
+      ],
     },
   ],
 });

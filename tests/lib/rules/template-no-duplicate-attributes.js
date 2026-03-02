@@ -110,7 +110,8 @@ ruleTester.run('template-no-duplicate-attributes', rule, {
     },
     {
       code: '<template>{{#my-component firstName=firstName lastName=lastName firstName=firstName as |fullName|}}{{/my-component}}</template>',
-      output: '<template>{{#my-component firstName=firstName lastName=lastName as |fullName|}}{{/my-component}}</template>',
+      output:
+        '<template>{{#my-component firstName=firstName lastName=lastName as |fullName|}}{{/my-component}}</template>',
       errors: [{ messageId: 'duplicateBlock', data: { name: 'firstName' } }],
     },
     {
@@ -120,12 +121,14 @@ ruleTester.run('template-no-duplicate-attributes', rule, {
     },
     {
       code: '<template>{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age firstName=firstName)}}</template>',
-      output: '<template>{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age)}}</template>',
+      output:
+        '<template>{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age)}}</template>',
       errors: [{ messageId: 'duplicateSubExpr', data: { name: 'firstName' } }],
     },
     {
       code: '<template>{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName firstName=firstName) age=age)}}</template>',
-      output: '<template>{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName) age=age)}}</template>',
+      output:
+        '<template>{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName) age=age)}}</template>',
       errors: [{ messageId: 'duplicateSubExpr', data: { name: 'firstName' } }],
     },
   ],

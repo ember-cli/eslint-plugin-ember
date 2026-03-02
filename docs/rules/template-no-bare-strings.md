@@ -93,7 +93,13 @@ module.exports = {
     'ember/template-no-bare-strings': [
       'error',
       {
-        globalAttributes: ['title', 'aria-label', 'aria-placeholder', 'aria-roledescription', 'aria-valuetext'],
+        globalAttributes: [
+          'title',
+          'aria-label',
+          'aria-placeholder',
+          'aria-roledescription',
+          'aria-valuetext',
+        ],
       },
     ],
   },

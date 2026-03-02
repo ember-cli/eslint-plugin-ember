@@ -59,12 +59,22 @@ ruleTester.run('template-no-jsx-attributes', rule, {
     {
       code: '<template><div autoPlay></div></template>',
       output: '<template><div autoplay></div></template>',
-      errors: [{ message: 'Incorrect html attribute name detected - "autoPlay", is probably unintended. Attributes in HTML are kebeb case.' }],
+      errors: [
+        {
+          message:
+            'Incorrect html attribute name detected - "autoPlay", is probably unintended. Attributes in HTML are kebeb case.',
+        },
+      ],
     },
     {
       code: '<template><div contentEditable></div></template>',
       output: '<template><div contenteditable></div></template>',
-      errors: [{ message: 'Incorrect html attribute name detected - "contentEditable", is probably unintended. Attributes in HTML are kebeb case.' }],
+      errors: [
+        {
+          message:
+            'Incorrect html attribute name detected - "contentEditable", is probably unintended. Attributes in HTML are kebeb case.',
+        },
+      ],
     },
   ],
 });

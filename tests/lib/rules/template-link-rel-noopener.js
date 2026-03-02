@@ -31,7 +31,8 @@ ruleTester.run('template-link-rel-noopener', rule, {
 
     {
       code: '<template><a href="/some/where" target="_blank"></a></template>',
-      output: '<template><a href="/some/where" target="_blank" rel="noopener noreferrer"></a></template>',
+      output:
+        '<template><a href="/some/where" target="_blank" rel="noopener noreferrer"></a></template>',
       errors: [{ messageId: 'missingRel' }],
     },
     {
