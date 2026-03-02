@@ -143,3 +143,87 @@ ruleTester.run('template-no-positive-tabindex', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-positive-tabindex (hbs)', rule, {
+  valid: [
+    '<button tabindex="0"></button>',
+    '<button tabindex="-1"></button>',
+    '<button tabindex={{-1}}>baz</button>',
+    '<button tabindex={{"-1"}}>baz</button>',
+    '<button tabindex="{{-1}}">baz</button>',
+    '<button tabindex="{{"-1"}}">baz</button>',
+    '<button tabindex="{{if this.show -1}}">baz</button>',
+    '<button tabindex="{{if this.show "-1" "0"}}">baz</button>',
+    '<button tabindex="{{if (not this.show) "-1" "0"}}">baz</button>',
+    '<button tabindex={{if this.show -1}}>baz</button>',
+    '<button tabindex={{if this.show "-1" "0"}}>baz</button>',
+    '<button tabindex={{if (not this.show) "-1" "0"}}>baz</button>',
+  ],
+  invalid: [
+    {
+      code: '<button tabindex={{someProperty}}></button>',
+      output: null,
+      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+    },
+    {
+      code: '<button tabindex="1"></button>',
+      output: null,
+      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+    },
+    {
+      code: '<button tabindex="text"></button>',
+      output: null,
+      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+    },
+    {
+      code: '<button tabindex={{true}}></button>',
+      output: null,
+      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+    },
+    {
+      code: '<button tabindex="{{false}}"></button>',
+      output: null,
+      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+    },
+    {
+      code: '<button tabindex="{{5}}"></button>',
+      output: null,
+      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+    },
+    {
+      code: '<button tabindex="{{if a 1 -1}}"></button>',
+      output: null,
+      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+    },
+    {
+      code: '<button tabindex="{{if a -1 1}}"></button>',
+      output: null,
+      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+    },
+    {
+      code: '<button tabindex="{{if a 1}}"></button>',
+      output: null,
+      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+    },
+    {
+      code: '<button tabindex="{{if (not a) 1}}"></button>',
+      output: null,
+      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+    },
+    {
+      code: '<button tabindex="{{unless a 1}}"></button>',
+      output: null,
+      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+    },
+    {
+      code: '<button tabindex="{{unless a -1 1}}"></button>',
+      output: null,
+      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+    },
+  ],
+});

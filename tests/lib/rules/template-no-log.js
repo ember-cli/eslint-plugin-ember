@@ -117,3 +117,57 @@ ruleTester.run('template-no-log', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-log (hbs)', rule, {
+  valid: [
+    '{{foo}}',
+    '{{button}}',
+    '{{#each this.logs as |log|}}{{log}}{{/each}}',
+    '{{#let this.log as |log|}}{{log}}{{/let}}',
+    '{{#let (component "my-log-component") as |log|}}{{#log}}message{{/log}}{{/let}}',
+    '<Logs @logs={{this.logs}} as |log|>{{log}}</Logs>',
+    '<Logs @logs={{this.logs}} as |log|><Log>{{log}}</Log></Logs>',
+  ],
+  invalid: [
+    {
+      code: '{{log}}',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '{{log "Logs are best for debugging!"}}',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '{{#log}}Arrgh!{{/log}}',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '{{#log "Foo"}}{{/log}}',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '{{#each this.messages as |message|}}{{log message}}{{/each}}',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '{{#let this.message as |message|}}{{log message}}{{/let}}',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+    {
+      code: '<Messages @messages={{this.messages}} as |message|>{{#log}}{{message}}{{/log}}</Messages>',
+      output: null,
+      errors: [{ message: 'Unexpected log statement in template.' }],
+    },
+  ],
+});

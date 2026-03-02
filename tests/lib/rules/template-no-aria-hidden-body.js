@@ -26,3 +26,28 @@ ruleTester.run('template-no-aria-hidden-body', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-aria-hidden-body (hbs)', rule, {
+  valid: [
+    '<body></body>',
+    '<body><h1>Hello world</h1></body>',
+    '<body><p aria-hidden="true">Some things are better left unsaid</p></body>',
+  ],
+  invalid: [
+    {
+      code: '<body aria-hidden="true"></body>',
+      output: '<body></body>',
+      errors: [{ messageId: 'noAriaHiddenBody' }],
+    },
+    {
+      code: '<body aria-hidden></body>',
+      output: '<body></body>',
+      errors: [{ messageId: 'noAriaHiddenBody' }],
+    },
+  ],
+});

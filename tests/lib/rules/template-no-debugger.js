@@ -82,3 +82,24 @@ ruleTester.run('template-no-debugger', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-debugger (hbs)', rule, {
+  valid: ['{{foo}}', '{{button}}'],
+  invalid: [
+    {
+      code: '{{debugger}}',
+      output: null,
+      errors: [{ message: 'Unexpected debugger statement in template.' }],
+    },
+    {
+      code: '{{#debugger}}Invalid!{{/debugger}}',
+      output: null,
+      errors: [{ message: 'Unexpected debugger statement in template.' }],
+    },
+  ],
+});

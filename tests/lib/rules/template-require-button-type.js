@@ -149,3 +149,54 @@ ruleTester.run('template-require-button-type', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-require-button-type (hbs)', rule, {
+  valid: [
+    '<button type="button" />',
+    '<button type="button">label</button>',
+    '<button type="submit" />',
+    '<button type="reset" />',
+    '<button type="{{buttonType}}" />',
+    '<button type={{buttonType}} />',
+    '<div/>',
+    '<div></div>',
+    '<div type="randomType"></div>',
+  ],
+  invalid: [
+    {
+      code: '<button/>',
+      output: '<button type="button" />',
+      errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
+    },
+    {
+      code: '<button>label</button>',
+      output: '<button type="button">label</button>',
+      errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
+    },
+    {
+      code: '<button type="" />',
+      output: '<button type="button" />',
+      errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
+    },
+    {
+      code: '<button type="foo" />',
+      output: '<button type="button" />',
+      errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
+    },
+    {
+      code: '<button type=42 />',
+      output: '<button type="button" />',
+      errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
+    },
+    {
+      code: '<form><button></button></form>',
+      output: '<form><button type="submit"></button></form>',
+      errors: [{ message: 'All `<button>` elements should have a valid `type` attribute' }],
+    },
+  ],
+});
