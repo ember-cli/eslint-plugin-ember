@@ -3,7 +3,7 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/avoid-leaking-state-in-ember-objects');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 // ------------------------------------------------------------------------------
 // Tests

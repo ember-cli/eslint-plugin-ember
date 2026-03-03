@@ -1,7 +1,7 @@
 'use strict';
 
 const rule = require('../../../lib/rules/no-component-lifecycle-hooks');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const { ERROR_MESSAGE_NO_COMPONENT_LIFECYCLE_HOOKS: ERROR_MESSAGE } = rule;
 

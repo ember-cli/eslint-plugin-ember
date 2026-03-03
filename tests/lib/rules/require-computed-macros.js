@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/require-computed-macros');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 const { addComputedImport } = require('../../helpers/test-case');
 
 const {

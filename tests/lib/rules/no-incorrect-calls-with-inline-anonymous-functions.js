@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/no-incorrect-calls-with-inline-anonymous-functions');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const { ERROR_MESSAGE } = rule;
 

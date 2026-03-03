@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/no-noop-setup-on-error-in-before');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 //------------------------------------------------------------------------------
 // Tests

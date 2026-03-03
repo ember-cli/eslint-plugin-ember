@@ -3,7 +3,7 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/routes-segments-snake-case');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 // ------------------------------------------------------------------------------
 // Tests

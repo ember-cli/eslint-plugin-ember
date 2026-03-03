@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/prefer-ember-test-helpers');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const ruleTester = new RuleTester({
   parserOptions: {

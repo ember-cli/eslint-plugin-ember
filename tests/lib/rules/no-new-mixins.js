@@ -3,7 +3,7 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/no-new-mixins');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 // ------------------------------------------------------------------------------
 // Tests

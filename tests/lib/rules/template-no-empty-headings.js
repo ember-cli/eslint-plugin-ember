@@ -1,5 +1,5 @@
 const rule = require('../../../lib/rules/template-no-empty-headings');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const ruleTester = new RuleTester({
   parser: require.resolve('ember-eslint-parser'),

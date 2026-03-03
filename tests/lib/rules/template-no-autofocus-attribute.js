@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/template-no-autofocus-attribute');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 //------------------------------------------------------------------------------
 // Tests
@@ -49,6 +49,8 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
       </template>`,
       errors: [
         {
+          message:
+            'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.',
           type: 'GlimmerAttrNode',
         },
       ],

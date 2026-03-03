@@ -3,7 +3,7 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/no-old-shims');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 // ------------------------------------------------------------------------------
 // Tests
@@ -45,7 +45,7 @@ eslintTester.run('no-old-shims', rule, {
     },
     {
       code: "import Sortable from 'ember-controllers/sortable';",
-      output: "import Sortable from 'ember-controllers/sortable';", // eslint-disable-line eslint-plugin/prefer-output-null
+      output: null,
       errors: [{ message: "Don't use import paths from ember-cli-shims" }],
     },
     {

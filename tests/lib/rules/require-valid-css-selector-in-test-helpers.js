@@ -1,5 +1,5 @@
 const rule = require('../../../lib/rules/require-valid-css-selector-in-test-helpers');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const ruleTester = new RuleTester({
   parserOptions: {

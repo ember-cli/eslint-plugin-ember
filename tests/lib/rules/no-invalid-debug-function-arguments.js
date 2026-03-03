@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/no-invalid-debug-function-arguments');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const { DEBUG_FUNCTIONS, ERROR_MESSAGE } = rule;
 

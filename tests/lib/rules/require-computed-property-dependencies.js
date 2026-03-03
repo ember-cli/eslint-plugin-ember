@@ -1,7 +1,7 @@
 'use strict';
 
 const rule = require('../../../lib/rules/require-computed-property-dependencies');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const { ERROR_MESSAGE_NON_STRING_VALUE } = rule;
 

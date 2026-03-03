@@ -5,7 +5,7 @@ const path = require('path');
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/use-ember-get-and-set');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 // ------------------------------------------------------------------------------
 // Tests

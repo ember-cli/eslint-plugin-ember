@@ -1,4 +1,4 @@
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 const rule = require('../../../lib/rules/no-settled-after-test-helper');
 
 const { ERROR_MESSAGE } = rule;

@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/no-capital-letters-in-routes');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 //------------------------------------------------------------------------------
 // Tests

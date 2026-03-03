@@ -1,7 +1,7 @@
 'use strict';
 
 const rule = require('../../../lib/rules/classic-decorator-hooks');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const {
   ERROR_MESSAGE_INIT_IN_NON_CLASSIC,

@@ -1,5 +1,5 @@
 const rule = require('../../../lib/rules/template-link-rel-noopener');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const ruleTester = new RuleTester({
   parser: require.resolve('ember-eslint-parser'),

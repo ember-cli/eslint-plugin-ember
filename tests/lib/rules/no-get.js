@@ -1,6 +1,6 @@
 const path = require('path');
 const rule = require('../../../lib/rules/no-get');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const { ERROR_MESSAGE_GET, ERROR_MESSAGE_GET_PROPERTIES } = rule;
 

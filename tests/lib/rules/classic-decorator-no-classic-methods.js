@@ -1,7 +1,7 @@
 'use strict';
 
 const rule = require('../../../lib/rules/classic-decorator-no-classic-methods');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const { disallowedMethodErrorMessage } = rule;
 

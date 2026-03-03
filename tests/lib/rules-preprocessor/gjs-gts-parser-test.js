@@ -8,11 +8,14 @@
  */
 
 const { ESLint } = require('eslint');
+const { version: eslintVersion } = require('eslint/package.json');
+const globals = require('globals');
 const plugin = require('../../../lib');
 const { writeFileSync, readFileSync } = require('node:fs');
 const { join } = require('node:path');
 
 const gjsGtsParser = require.resolve('ember-eslint-parser');
+const isESLint9OrLater = parseInt(eslintVersion.split('.')[0], 10) >= 9;
 
 /**
  * Helper function which creates ESLint instance with enabled/disabled autofix feature.
@@ -21,7 +24,62 @@ const gjsGtsParser = require.resolve('ember-eslint-parser');
  * @returns {ESLint} ESLint instance to execute in tests.
  */
 function initESLint(parser = gjsGtsParser) {
-  // tests must be run with ESLint 7+
+  if (isESLint9OrLater) {
+    // ESLint 9+ flat config
+    return new ESLint({
+      ignore: false,
+      overrideConfigFile: true, // Prevents loading default config
+      overrideConfig: [
+        {
+          files: ['**/*.js', '**/*.gjs', '**/*.gts'],
+          languageOptions: {
+            parser: require(parser),
+            parserOptions: {
+              ecmaVersion: 2022,
+              sourceType: 'module',
+            },
+            globals: {
+              ...globals.browser,
+            },
+          },
+          plugins: { ember: plugin },
+          rules: {
+            quotes: ['error', 'single'],
+            semi: ['error', 'always'],
+            'object-curly-spacing': ['error', 'always'],
+            'lines-between-class-members': 'error',
+            'no-undef': 'error',
+            'no-unused-vars': 'error',
+            'ember/no-get': 'off',
+            'ember/no-array-prototype-extensions': 'error',
+            'ember/no-unused-services': 'error',
+            'ember/no-empty-glimmer-component-classes': 'error',
+          },
+        },
+        {
+          files: ['**/*.gts'],
+          languageOptions: {
+            parser: require(gjsGtsParser),
+            parserOptions: {
+              project: './tsconfig.eslint.json',
+              tsconfigRootDir: __dirname,
+              extraFileExtensions: ['.gts'],
+            },
+          },
+          plugins: {
+            ember: plugin,
+            '@typescript-eslint': require('@typescript-eslint/eslint-plugin'),
+          },
+          rules: {
+            'no-trailing-spaces': 'error',
+            '@typescript-eslint/no-explicit-any': 'error',
+          },
+        },
+      ],
+    });
+  }
+
+  // ESLint 8 legacy config
   return new ESLint({
     ignore: false,
     useEslintrc: false,
@@ -167,10 +225,12 @@ const invalid = [
     }`,
     errors: [
       {
-        message:
-          'Parsing error: Unexpected token. A constructor, method, accessor, or property was expected.\n' +
-          'To lint Gjs/Gts files please follow the setup guide at https://github.com/ember-cli/eslint-plugin-ember#gtsgjs\n' +
-          'Note that this error can also happen if you have multiple versions of eslint-plugin-ember in your node_modules',
+        // ESLint 9+ doesn't include the extra context text in parsing error messages
+        message: isESLint9OrLater
+          ? 'Parsing error: Unexpected token. A constructor, method, accessor, or property was expected.'
+          : 'Parsing error: Unexpected token. A constructor, method, accessor, or property was expected.\n' +
+            'To lint Gjs/Gts files please follow the setup guide at https://github.com/ember-cli/eslint-plugin-ember#gtsgjs\n' +
+            'Note that this error can also happen if you have multiple versions of eslint-plugin-ember in your node_modules',
         line: 3,
         column: 6,
       },
@@ -522,7 +582,7 @@ describe('template-vars', () => {
             const expectedString = `${key}: ${expected[key]}`;
             const actualString = `${key}: ${error[key]}`;
 
-            expect(actualString).toStrictEqual(expectedString);
+            expect(actualString).toMatchObject(expectedString);
           }
         }
       });
@@ -559,7 +619,7 @@ describe('line/col numbers should be correct', () => {
     const resultErrors = results.flatMap((result) => result.messages);
     expect(resultErrors).toHaveLength(2);
 
-    expect(resultErrors[0]).toStrictEqual({
+    expect(resultErrors[0]).toMatchObject({
       column: 28,
       endColumn: 64,
       endLine: 13,
@@ -571,7 +631,7 @@ describe('line/col numbers should be correct', () => {
       severity: 2,
     });
 
-    expect(resultErrors[1]).toStrictEqual({
+    expect(resultErrors[1]).toMatchObject({
       column: 67,
       endColumn: 80,
       endLine: 13,
@@ -676,7 +736,7 @@ describe('multiple tokens in same file', () => {
     const resultErrors = results.flatMap((result) => result.messages);
     expect(resultErrors).toHaveLength(2);
 
-    expect(resultErrors[0]).toStrictEqual({
+    expect(resultErrors[0]).toMatchObject({
       column: 13,
       endColumn: 16,
       endLine: 5,
@@ -688,7 +748,7 @@ describe('multiple tokens in same file', () => {
       severity: 2,
     });
 
-    expect(resultErrors[1]).toStrictEqual({
+    expect(resultErrors[1]).toMatchObject({
       column: 13,
       endColumn: 18,
       endLine: 7,
@@ -713,7 +773,7 @@ describe('multiple tokens in same file', () => {
     const resultErrors = results.flatMap((result) => result.messages);
     expect(resultErrors).toHaveLength(2);
 
-    expect(resultErrors[0]).toStrictEqual({
+    expect(resultErrors[0]).toMatchObject({
       column: 13,
       endColumn: 17,
       endLine: 4,
@@ -725,7 +785,7 @@ describe('multiple tokens in same file', () => {
       severity: 2,
     });
 
-    expect(resultErrors[1]).toStrictEqual({
+    expect(resultErrors[1]).toMatchObject({
       column: 31,
       endColumn: 34,
       endLine: 4,
@@ -777,65 +837,125 @@ describe('multiple tokens in same file', () => {
   });
 
   it('lints while being type aware', async () => {
-    const eslint = new ESLint({
-      ignore: false,
-      useEslintrc: false,
-      plugins: { ember: plugin },
-      overrideConfig: {
-        root: true,
-        env: {
-          browser: true,
-        },
-        plugins: ['ember'],
-        extends: ['plugin:ember/recommended'],
-        overrides: [
+    let eslint;
+
+    if (isESLint9OrLater) {
+      // ESLint 9+ flat config
+      const tsParser = require('@typescript-eslint/parser');
+      const tsPlugin = require('@typescript-eslint/eslint-plugin');
+      const emberParser = require('ember-eslint-parser');
+      eslint = new ESLint({
+        ignore: false,
+        overrideConfigFile: true,
+        overrideConfig: [
           {
             files: ['**/*.gts'],
-            parser: 'ember-eslint-parser',
-            parserOptions: {
-              project: './tsconfig.eslint.json',
-              tsconfigRootDir: __dirname,
-              extraFileExtensions: ['.gts'],
+            languageOptions: {
+              parser: emberParser,
+              parserOptions: {
+                project: './tsconfig.eslint.json',
+                tsconfigRootDir: __dirname,
+                extraFileExtensions: ['.gts'],
+              },
+              globals: {
+                ...globals.browser,
+              },
             },
-            extends: [
-              'plugin:@typescript-eslint/recommended-requiring-type-checking',
-              'plugin:ember/recommended',
-            ],
+            plugins: { ember: plugin, '@typescript-eslint': tsPlugin },
             rules: {
+              quotes: ['error', 'single'],
+              semi: ['error', 'always'],
+              'object-curly-spacing': ['error', 'always'],
+              'lines-between-class-members': 'error',
+              'no-undef': 'error',
+              'no-unused-vars': 'error',
+              'ember/no-get': 'off',
+              'ember/no-array-prototype-extensions': 'error',
+              'ember/no-unused-services': 'error',
               'no-trailing-spaces': 'error',
               '@typescript-eslint/prefer-string-starts-ends-with': 'error',
             },
           },
           {
             files: ['**/*.ts'],
-            parser: '@typescript-eslint/parser',
-            parserOptions: {
-              project: './tsconfig.eslint.json',
-              tsconfigRootDir: __dirname,
-              extraFileExtensions: ['.gts'],
+            languageOptions: {
+              parser: tsParser,
+              parserOptions: {
+                project: './tsconfig.eslint.json',
+                tsconfigRootDir: __dirname,
+                extraFileExtensions: ['.gts'],
+              },
             },
-            extends: [
-              'plugin:@typescript-eslint/recommended-requiring-type-checking',
-              'plugin:ember/recommended',
-            ],
+            plugins: { ember: plugin, '@typescript-eslint': tsPlugin },
             rules: {
               'no-trailing-spaces': 'error',
+              '@typescript-eslint/prefer-string-starts-ends-with': 'error',
             },
           },
         ],
-        rules: {
-          quotes: ['error', 'single'],
-          semi: ['error', 'always'],
-          'object-curly-spacing': ['error', 'always'],
-          'lines-between-class-members': 'error',
-          'no-undef': 'error',
-          'no-unused-vars': 'error',
-          'ember/no-get': 'off',
-          'ember/no-array-prototype-extensions': 'error',
-          'ember/no-unused-services': 'error',
+      });
+    } else {
+      // ESLint 8 legacy config
+      eslint = new ESLint({
+        ignore: false,
+        useEslintrc: false,
+        plugins: { ember: plugin },
+        overrideConfig: {
+          root: true,
+          env: {
+            browser: true,
+          },
+          plugins: ['ember'],
+          extends: ['plugin:ember/recommended'],
+          overrides: [
+            {
+              files: ['**/*.gts'],
+              parser: 'ember-eslint-parser',
+              parserOptions: {
+                project: './tsconfig.eslint.json',
+                tsconfigRootDir: __dirname,
+                extraFileExtensions: ['.gts'],
+              },
+              extends: [
+                'plugin:@typescript-eslint/recommended-requiring-type-checking',
+                'plugin:ember/recommended',
+              ],
+              rules: {
+                'no-trailing-spaces': 'error',
+                '@typescript-eslint/prefer-string-starts-ends-with': 'error',
+              },
+            },
+            {
+              files: ['**/*.ts'],
+              parser: '@typescript-eslint/parser',
+              parserOptions: {
+                project: './tsconfig.eslint.json',
+                tsconfigRootDir: __dirname,
+                extraFileExtensions: ['.gts'],
+              },
+              extends: [
+                'plugin:@typescript-eslint/recommended-requiring-type-checking',
+                'plugin:ember/recommended',
+              ],
+              rules: {
+                'no-trailing-spaces': 'error',
+              },
+            },
+          ],
+          rules: {
+            quotes: ['error', 'single'],
+            semi: ['error', 'always'],
+            'object-curly-spacing': ['error', 'always'],
+            'lines-between-class-members': 'error',
+            'no-undef': 'error',
+            'no-unused-vars': 'error',
+            'ember/no-get': 'off',
+            'ember/no-array-prototype-extensions': 'error',
+            'ember/no-unused-services': 'error',
+          },
         },
-      },
-    });
+      });
+    }
 
     let results = await eslint.lintFiles(['**/*.gts', '**/*.ts']);
 

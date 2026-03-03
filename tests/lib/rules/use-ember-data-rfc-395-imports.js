@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/use-ember-data-rfc-395-imports');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const parserOptions = { ecmaVersion: 2022, sourceType: 'module' };
 

@@ -1,7 +1,7 @@
 'use strict';
 
 const rule = require('../../../lib/rules/no-restricted-property-modifications');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const ruleTester = new RuleTester({
   parserOptions: {

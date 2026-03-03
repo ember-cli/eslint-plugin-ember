@@ -1,7 +1,7 @@
 const rule = require('../../../lib/rules/no-legacy-test-waiters');
 
 const { ERROR_MESSAGE } = rule;
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const ruleTester = new RuleTester({
   parserOptions: {

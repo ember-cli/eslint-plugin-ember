@@ -2,7 +2,7 @@
 
 const path = require('node:path');
 const rule = require('../../../lib/rules/template-no-deprecated');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const FIXTURES_DIR = path.join(__dirname, '../rules-preprocessor/template-no-deprecated');
 

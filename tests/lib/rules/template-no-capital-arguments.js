@@ -1,4 +1,4 @@
-const { RuleTester } = require('eslint');
+const { RuleTester } = require('../../helpers/eslint-compat');
 const rule = require('../../../lib/rules/template-no-capital-arguments');
 
 const ruleTester = new RuleTester({

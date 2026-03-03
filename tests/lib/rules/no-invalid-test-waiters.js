@@ -3,7 +3,7 @@
 const rule = require('../../../lib/rules/no-invalid-test-waiters');
 
 const { MODULE_SCOPE_ERROR_MESSAGE, DIRECT_ASSIGNMENT_ERROR_MESSAGE } = rule;
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const ruleTester = new RuleTester({
   parserOptions: {

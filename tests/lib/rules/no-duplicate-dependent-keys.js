@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/no-duplicate-dependent-keys');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 const { addComputedImport } = require('../../helpers/test-case');
 
 //------------------------------------------------------------------------------

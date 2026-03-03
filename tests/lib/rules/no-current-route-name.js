@@ -1,7 +1,7 @@
 'use strict';
 
 const rule = require('../../../lib/rules/no-current-route-name');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const { ERROR_MESSAGE } = rule;
 

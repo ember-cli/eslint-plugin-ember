@@ -1,5 +1,5 @@
 const rule = require('../../../lib/rules/no-attrs-snapshot');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const { ERROR_MESSAGE } = rule;
 const eslintTester = new RuleTester({

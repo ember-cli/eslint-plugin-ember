@@ -1,5 +1,5 @@
 const rule = require('../../../lib/rules/no-test-import-export');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const ruleTester = new RuleTester({
   parserOptions: {

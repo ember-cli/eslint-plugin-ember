@@ -1,4 +1,4 @@
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 const rule = require('../../../lib/rules/no-restricted-service-injections');
 
 const { DEFAULT_ERROR_MESSAGE } = rule;

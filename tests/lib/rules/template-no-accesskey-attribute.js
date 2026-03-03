@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/template-no-accesskey-attribute');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 //------------------------------------------------------------------------------
 // Tests
@@ -49,6 +49,8 @@ ruleTester.run('template-no-accesskey-attribute', rule, {
       </template>`,
       errors: [
         {
+          message:
+            'No access key attribute allowed. Inconsistencies between keyboard shortcuts and keyboard commands used by screenreader and keyboard only users create accessibility complications.',
           type: 'GlimmerAttrNode',
         },
       ],

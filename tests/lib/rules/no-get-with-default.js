@@ -1,5 +1,5 @@
 const rule = require('../../../lib/rules/no-get-with-default');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const { ERROR_MESSAGE } = rule;
 const ruleTester = new RuleTester({

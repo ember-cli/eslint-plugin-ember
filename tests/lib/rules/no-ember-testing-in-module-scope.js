@@ -1,7 +1,7 @@
 'use strict';
 
 const rule = require('../../../lib/rules/no-ember-testing-in-module-scope');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const { ERROR_MESSAGES } = rule;
 const ruleTester = new RuleTester({

@@ -1,6 +1,6 @@
 const rule = require('../../../lib/rules/no-invalid-dependent-keys');
 const { addComputedImport } = require('../../helpers/test-case');
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 
 const {
   ERROR_MESSAGE_UNBALANCED_BRACES,

@@ -4,7 +4,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('../../helpers/eslint-compat');
 const rule = require('../../../lib/rules/no-replace-test-comments');
 
 const { ERROR_MESSAGE } = rule;
