@@ -8,6 +8,7 @@
  */
 
 const { ESLint } = require('eslint');
+// eslint-disable-next-line import/extensions
 const { version: eslintVersion } = require('eslint/package.json');
 const globals = require('globals');
 const plugin = require('../../../lib');
@@ -15,7 +16,7 @@ const { writeFileSync, readFileSync } = require('node:fs');
 const { join } = require('node:path');
 
 const gjsGtsParser = require.resolve('ember-eslint-parser');
-const isESLint9OrLater = parseInt(eslintVersion.split('.')[0], 10) >= 9;
+const isESLint9OrLater = Number.parseInt(eslintVersion.split('.')[0], 10) >= 9;
 
 /**
  * Helper function which creates ESLint instance with enabled/disabled autofix feature.
@@ -33,6 +34,7 @@ function initESLint(parser = gjsGtsParser) {
         {
           files: ['**/*.js', '**/*.gjs', '**/*.gts'],
           languageOptions: {
+            // eslint-disable-next-line import/no-dynamic-require
             parser: require(parser),
             parserOptions: {
               ecmaVersion: 2022,
@@ -59,6 +61,7 @@ function initESLint(parser = gjsGtsParser) {
         {
           files: ['**/*.gts'],
           languageOptions: {
+            // eslint-disable-next-line import/no-dynamic-require
             parser: require(gjsGtsParser),
             parserOptions: {
               project: './tsconfig.eslint.json',
@@ -68,6 +71,7 @@ function initESLint(parser = gjsGtsParser) {
           },
           plugins: {
             ember: plugin,
+            // eslint-disable-next-line n/no-extraneous-require
             '@typescript-eslint': require('@typescript-eslint/eslint-plugin'),
           },
           rules: {
@@ -842,6 +846,7 @@ describe('multiple tokens in same file', () => {
     if (isESLint9OrLater) {
       // ESLint 9+ flat config
       const tsParser = require('@typescript-eslint/parser');
+      // eslint-disable-next-line n/no-extraneous-require
       const tsPlugin = require('@typescript-eslint/eslint-plugin');
       const emberParser = require('ember-eslint-parser');
       eslint = new ESLint({

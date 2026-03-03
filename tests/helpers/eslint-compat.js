@@ -1,13 +1,14 @@
 'use strict';
 
 const { RuleTester } = require('eslint');
+// eslint-disable-next-line import/extensions
 const { version: eslintVersion } = require('eslint/package.json');
 const path = require('node:path');
 
 /**
  * Detect ESLint major version for compatibility handling
  */
-const eslintMajorVersion = parseInt(eslintVersion.split('.')[0], 10);
+const eslintMajorVersion = Number.parseInt(eslintVersion.split('.')[0], 10);
 const isESLint9OrLater = eslintMajorVersion >= 9;
 const isESLint10OrLater = eslintMajorVersion >= 10;
 
@@ -17,8 +18,10 @@ const parserCache = new Map();
 /**
  * Load parser module (with caching)
  */
+// eslint-disable-next-line import/no-dynamic-require
 function loadParser(parserPath) {
   if (!parserCache.has(parserPath)) {
+    // eslint-disable-next-line import/no-dynamic-require
     parserCache.set(parserPath, require(parserPath));
   }
   return parserCache.get(parserPath);
