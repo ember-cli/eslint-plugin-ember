@@ -66,5 +66,11 @@ jobs:
     - run: pnpm install
     - name: Install ESLint ${{ matrix.eslint-version }}
       run: pnpm add -D eslint@${{ matrix.eslint-version }} --ignore-workspace-root-check
+    - name: Install Babel 8 for ESLint 10
+      if: matrix.eslint-version == 10
+      run: |
+        pnpm add -D @babel/eslint-parser@8.0.0-rc.2 @babel/core@8.0.0-rc.2 @babel/plugin-proposal-decorators@8.0.0-rc.2 @babel/plugin-transform-class-properties --ignore-workspace-root-check
+        # Update .babelrc for Babel 8
+        echo '{"plugins": ["@babel/plugin-transform-class-properties", ["@babel/plugin-proposal-decorators", {"version": "2023-11"}]]}' > .babelrc
     - name: Test with ESLint ${{ matrix.eslint-version }}
       run: pnpm test
