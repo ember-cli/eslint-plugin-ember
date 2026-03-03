@@ -139,8 +139,10 @@ function normalizeErrorsForESLint10(errors) {
 
 /**
  * Convert test case config to flat config format
+ * @param {Object|string} testCase - The test case
+ * @param {boolean} isValid - Whether this is a valid test case (ESLint 10 doesn't allow 'output' in valid cases)
  */
-function convertTestCase(testCase) {
+function convertTestCase(testCase, isValid = false) {
   if (typeof testCase === 'string') {
     return testCase;
   }
@@ -150,6 +152,11 @@ function convertTestCase(testCase) {
   }
 
   const converted = { ...testCase };
+
+  // ESLint 10: Valid test cases cannot have 'output' property
+  if (isESLint10OrLater && isValid && 'output' in converted) {
+    delete converted.output;
+  }
 
   // Convert parser string paths to parser objects
   if (typeof testCase.parser === 'string') {
@@ -218,8 +225,8 @@ function runRule(tester, name, rule, tests) {
   }
 
   const convertedTests = {
-    valid: (tests.valid || []).map(convertTestCase),
-    invalid: (tests.invalid || []).map(convertTestCase),
+    valid: (tests.valid || []).map((tc) => convertTestCase(tc, true)),
+    invalid: (tests.invalid || []).map((tc) => convertTestCase(tc, false)),
   };
 
   return tester.run(name, rule, convertedTests);
@@ -239,8 +246,8 @@ class CompatRuleTester extends RuleTester {
     }
 
     const convertedTests = {
-      valid: (tests.valid || []).map(convertTestCase),
-      invalid: (tests.invalid || []).map(convertTestCase),
+      valid: (tests.valid || []).map((tc) => convertTestCase(tc, true)),
+      invalid: (tests.invalid || []).map((tc) => convertTestCase(tc, false)),
     };
 
     return super.run(name, rule, convertedTests);
