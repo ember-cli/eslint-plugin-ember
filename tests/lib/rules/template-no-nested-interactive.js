@@ -283,107 +283,77 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
     {
       code: '<details>Something small enough to escape casual notice.<summary>Details</summary></details>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <summary> inside <details>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <summary> inside <details>.' }],
     },
     {
       code: '<summary><a href="/">button</a></summary>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <a> inside <summary>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <a> inside <summary>.' }],
     },
     {
       code: '<a href="/">button<a href="/">!</a></a>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <a> inside <a>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <a> inside <a>.' }],
     },
     {
       code: '<a href="/">button<button>!</button></a>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <button> inside <a>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <button> inside <a>.' }],
     },
     {
       code: '<button>button<a href="/">!</a></button>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <a> inside <button>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <a> inside <button>.' }],
     },
     {
       code: '<button>button<button>!</button></button>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <button> inside <button>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <button> inside <button>.' }],
     },
     {
       code: '<button><input type="text"></button>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <input> inside <button>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <input> inside <button>.' }],
     },
     {
       code: '<button><details><p>!</p></details></button>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <details> inside <button>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <details> inside <button>.' }],
     },
     {
       code: '<button><embed type="video/quicktime" src="movie.mov" width="640" height="480"></button>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <embed> inside <button>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <embed> inside <button>.' }],
     },
     {
       code: '<button><iframe src="/frame.html" width="640" height="480"></iframe></button>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <iframe> inside <button>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <iframe> inside <button>.' }],
     },
     {
       code: '<button><select></select></button>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <select> inside <button>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <select> inside <button>.' }],
     },
     {
       code: '<button><textarea></textarea></button>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <textarea> inside <button>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <textarea> inside <button>.' }],
     },
     {
       code: '<button><div tabindex="1"></div></button>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <div> inside <button>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <div> inside <button>.' }],
     },
     {
       code: '<object usemap=""><button></button></object>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <button> inside <object>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <button> inside <object>.' }],
     },
     {
       code: '<label><input><input></label>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <input> inside <label>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <input> inside <label>.' }],
     },
   ],
 });

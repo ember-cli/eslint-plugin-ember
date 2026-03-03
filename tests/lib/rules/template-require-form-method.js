@@ -128,35 +128,50 @@ hbsRuleTester.run('template-require-form-method', rule, {
       code: '<form></form>',
       output: null,
       errors: [
-        { message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' },
+        {
+          message:
+            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
+        },
       ],
     },
     {
       code: '<form method=""></form>',
       output: null,
       errors: [
-        { message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' },
+        {
+          message:
+            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
+        },
       ],
     },
     {
       code: '<form method=42></form>',
       output: null,
       errors: [
-        { message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' },
+        {
+          message:
+            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
+        },
       ],
     },
     {
       code: '<form method=" ge t "></form>',
       output: null,
       errors: [
-        { message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' },
+        {
+          message:
+            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
+        },
       ],
     },
     {
       code: '<form method=" pos t "></form>',
       output: null,
       errors: [
-        { message: 'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`' },
+        {
+          message:
+            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
+        },
       ],
     },
   ],

@@ -102,7 +102,7 @@ hbsRuleTester.run('template-no-invalid-link-title', rule, {
     '<LinkTo>Read more about ways semantic HTML can make your code more accessible.</LinkTo>',
     '<LinkTo>{{foo}} more</LinkTo>',
     '<LinkTo @title="nice title">Something else</LinkTo>',
-    `<LinkTo title="great titles!">Whatever, don't judge me</LinkTo>`,
+    '<LinkTo title="great titles!">Whatever, don\'t judge me</LinkTo>',
     '<LinkTo title="Download the video">Download</LinkTo>',
     '<a href="https://myurl.com" title="New to Ember? Read the full tutorial for the best experience">Read the Tutorial</a>',
     '<a href="./whatever" title={{foo}}>Hello!</a>',
@@ -118,58 +118,42 @@ hbsRuleTester.run('template-no-invalid-link-title', rule, {
     {
       code: '<a href="https://myurl.com" title="read the tutorial">Read the Tutorial</a>',
       output: null,
-      errors: [
-        { message: 'Link title attribute should not be the same as link text or empty.' },
-      ],
+      errors: [{ message: 'Link title attribute should not be the same as link text or empty.' }],
     },
     {
       code: '<LinkTo title="quickstart">Quickstart</LinkTo>',
       output: null,
-      errors: [
-        { message: 'Link title attribute should not be the same as link text or empty.' },
-      ],
+      errors: [{ message: 'Link title attribute should not be the same as link text or empty.' }],
     },
     {
       code: '<LinkTo @title="foo" title="blah">derp</LinkTo>',
       output: null,
-      errors: [
-        { message: 'Link title attribute should not be the same as link text or empty.' },
-      ],
+      errors: [{ message: 'Link title attribute should not be the same as link text or empty.' }],
     },
     {
       code: '{{#link-to title="Do the things"}}Do the things{{/link-to}}',
       output: null,
-      errors: [
-        { message: 'Link title attribute should not be the same as link text or empty.' },
-      ],
+      errors: [{ message: 'Link title attribute should not be the same as link text or empty.' }],
     },
     {
       code: '<LinkTo @route="some.route" @title="Do the things">Do the things</LinkTo>',
       output: null,
-      errors: [
-        { message: 'Link title attribute should not be the same as link text or empty.' },
-      ],
+      errors: [{ message: 'Link title attribute should not be the same as link text or empty.' }],
     },
     {
       code: '<a href="https://myurl.com" title="Tutorial">Read the Tutorial</a>',
       output: null,
-      errors: [
-        { message: 'Link title attribute should not be the same as link text or empty.' },
-      ],
+      errors: [{ message: 'Link title attribute should not be the same as link text or empty.' }],
     },
     {
       code: '<LinkTo title="Tutorial">Read the Tutorial</LinkTo>',
       output: null,
-      errors: [
-        { message: 'Link title attribute should not be the same as link text or empty.' },
-      ],
+      errors: [{ message: 'Link title attribute should not be the same as link text or empty.' }],
     },
     {
       code: '{{#link-to title="Tutorial"}}Read the Tutorial{{/link-to}}',
       output: null,
-      errors: [
-        { message: 'Link title attribute should not be the same as link text or empty.' },
-      ],
+      errors: [{ message: 'Link title attribute should not be the same as link text or empty.' }],
     },
   ],
 });

@@ -313,6 +313,5 @@ hbsRuleTester.run('template-no-restricted-invocations', rule, {
     '<HelloWorld/>',
     '<NestedScope::Random/>',
   ],
-  invalid: [
-  ],
+  invalid: [],
 });

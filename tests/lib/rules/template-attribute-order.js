@@ -238,93 +238,67 @@ hbsRuleTester.run('template-attribute-order', rule, {
     {
       code: '<div {{in-viewport onEnter=this.loadMore viewportSpy=true}} {{did-update this.loadMore this.activeTab}}></div>',
       output: null,
-      errors: [
-        { message: 'Modifiers "did-update" is not alphabetized.' },
-      ],
+      errors: [{ message: 'Modifiers "did-update" is not alphabetized.' }],
     },
     {
       code: '<div b="1" aria-label="foo"></div>',
       output: null,
-      errors: [
-        { message: 'Attributes "aria-label" is not alphabetized.' },
-      ],
+      errors: [{ message: 'Attributes "aria-label" is not alphabetized.' }],
     },
     {
       code: '<MyComponent data-test-id="Hello" @name="World" />',
       output: null,
-      errors: [
-        { message: 'Arguments @name must go before attributes.' },
-      ],
+      errors: [{ message: 'Arguments @name must go before attributes.' }],
     },
     {
       code: '<div @foo="1" {{did-render this.ok}} aria-label="foo"></div>',
       output: null,
-      errors: [
-        { message: 'Attributes aria-label must go before modifiers.' },
-      ],
+      errors: [{ message: 'Attributes aria-label must go before modifiers.' }],
     },
     {
       code: '{{MyComponent something another b="1" a="2"}}',
       output: null,
-      errors: [
-        { message: '`a` must appear after `b`.' },
-      ],
+      errors: [{ message: '`a` must appear after `b`.' }],
     },
     {
       code: '<MyComponent @b="1" @a="2"></MyComponent>',
       output: null,
-      errors: [
-        { message: 'Arguments "a" is not alphabetized.' },
-      ],
+      errors: [{ message: 'Arguments "a" is not alphabetized.' }],
     },
     {
       code: '<MyComponent {{did-update (fn this.click @a) @b}} {{did-insert this.click}}></MyComponent>',
       output: null,
-      errors: [
-        { message: 'Modifiers "did-insert" is not alphabetized.' },
-      ],
+      errors: [{ message: 'Modifiers "did-insert" is not alphabetized.' }],
     },
     {
       code: '<div {{did-render this.someAction}} aria-label="button"></div>',
       output: null,
-      errors: [
-        { message: 'Attributes aria-label must go before modifiers.' },
-      ],
+      errors: [{ message: 'Attributes aria-label must go before modifiers.' }],
     },
     {
       code: '<MyComponent @value="5" data-test-foo @change={{this.foo}} local-class="foo" {{on "click" this.foo}} ...attributes as |sth|>content</MyComponent>',
       output: null,
-      errors: [
-        { message: 'Arguments @change must go before attributes.' },
-      ],
+      errors: [{ message: 'Arguments @change must go before attributes.' }],
     },
     {
       code: '<MyComponent @value="5" data-test-foo @change={{this.foo}} local-class="foo" {{on "click" this.foo}} as |sth|>content</MyComponent>',
       output: null,
-      errors: [
-        { message: 'Arguments @change must go before attributes.' },
-      ],
+      errors: [{ message: 'Arguments @change must go before attributes.' }],
     },
     {
       code: '{{my-component one two b=1 a=2}}',
       output: null,
-      errors: [
-        { message: '`a` must appear after `b`.' },
-      ],
+      errors: [{ message: '`a` must appear after `b`.' }],
     },
     {
       code: '<div {{did-update this.notok}} {{did-render this.ok}} aria-label="foo" @foo="1"></div>',
       output: null,
-      errors: [
-        { message: 'Arguments @foo must go before attributes.' },
-      ],
+      errors: [{ message: 'Arguments @foo must go before attributes.' }],
     },
     {
       code: '<Button @description="a" @block={{@b}} @dialogTitle="a" @dialogButton="b" @button="b" @alert="b" @alertDescription="d"></Button>',
       output: null,
-      errors: [
-        { message: 'Arguments "block" is not alphabetized.' },
-      ],
+      errors: [{ message: 'Arguments "block" is not alphabetized.' }],
     },
     {
       code: `<MyComponent
@@ -332,9 +306,7 @@ hbsRuleTester.run('template-attribute-order', rule, {
         @b="3"
       ></MyComponent>`,
       output: null,
-      errors: [
-        { message: 'Arguments "b" is not alphabetized.' },
-      ],
+      errors: [{ message: 'Arguments "b" is not alphabetized.' }],
     },
     {
       code: `<!-- hi --> <MyComponent
@@ -343,9 +315,7 @@ hbsRuleTester.run('template-attribute-order', rule, {
         @c="2"
       ></MyComponent>`,
       output: null,
-      errors: [
-        { message: 'Arguments @c must go before attributes.' },
-      ],
+      errors: [{ message: 'Arguments @c must go before attributes.' }],
     },
     {
       code: `{{MyComponent
@@ -353,9 +323,7 @@ hbsRuleTester.run('template-attribute-order', rule, {
         b="3"
       }}`,
       output: null,
-      errors: [
-        { message: '`b` must appear after `c`.' },
-      ],
+      errors: [{ message: '`b` must appear after `c`.' }],
     },
     {
       code: `<Input
@@ -363,23 +331,17 @@ hbsRuleTester.run('template-attribute-order', rule, {
       @checked={{@title.isVisible}}
     />`,
       output: null,
-      errors: [
-        { message: 'Arguments "checked" is not alphabetized.' },
-      ],
+      errors: [{ message: 'Arguments "checked" is not alphabetized.' }],
     },
     {
       code: '<div {{did-render this.someAction}} @a="1"></div>',
       output: null,
-      errors: [
-        { message: 'Arguments @a must go before modifiers.' },
-      ],
+      errors: [{ message: 'Arguments @a must go before modifiers.' }],
     },
     {
       code: '<Foo class="asd" @tagName="" />',
       output: null,
-      errors: [
-        { message: 'Arguments @tagName must go before attributes.' },
-      ],
+      errors: [{ message: 'Arguments @tagName must go before attributes.' }],
     },
     {
       code: `<Foo
@@ -389,9 +351,7 @@ hbsRuleTester.run('template-attribute-order', rule, {
       @foo={{1}}
     />`,
       output: null,
-      errors: [
-        { message: 'Arguments @foo must go before attributes.' },
-      ],
+      errors: [{ message: 'Arguments @foo must go before attributes.' }],
     },
     {
       code: `<Foo
@@ -405,16 +365,12 @@ hbsRuleTester.run('template-attribute-order', rule, {
         {{!-- trailing comment --}}
       />`,
       output: null,
-      errors: [
-        { message: 'Arguments @foo must go before attributes.' },
-      ],
+      errors: [{ message: 'Arguments @foo must go before attributes.' }],
     },
     {
       code: '<Link @b="b" @a="a">Foo</Link>',
       output: null,
-      errors: [
-        { message: 'Arguments "a" is not alphabetized.' },
-      ],
+      errors: [{ message: 'Arguments "a" is not alphabetized.' }],
     },
   ],
 });

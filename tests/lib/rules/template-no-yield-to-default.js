@@ -171,91 +171,130 @@ hbsRuleTester.run('template-no-yield-to-default', rule, {
       code: '{{yield to="default"}}',
       output: null,
       errors: [
-        { message: 'Do not use (yield to="default"). Use (yield) without the "to" argument instead.' },
+        {
+          message:
+            'Do not use (yield to="default"). Use (yield) without the "to" argument instead.',
+        },
       ],
     },
     {
       code: '{{has-block "default"}}',
       output: null,
       errors: [
-        { message: 'Do not pass "default" explicitly. The default block is used when no name is specified.' },
+        {
+          message:
+            'Do not pass "default" explicitly. The default block is used when no name is specified.',
+        },
       ],
     },
     {
       code: '{{has-block-params "default"}}',
       output: null,
       errors: [
-        { message: 'Do not pass "default" explicitly. The default block is used when no name is specified.' },
+        {
+          message:
+            'Do not pass "default" explicitly. The default block is used when no name is specified.',
+        },
       ],
     },
     {
       code: '{{hasBlock "default"}}',
       output: null,
       errors: [
-        { message: 'Do not pass "default" explicitly. The default block is used when no name is specified.' },
+        {
+          message:
+            'Do not pass "default" explicitly. The default block is used when no name is specified.',
+        },
       ],
     },
     {
       code: '{{hasBlockParams "default"}}',
       output: null,
       errors: [
-        { message: 'Do not pass "default" explicitly. The default block is used when no name is specified.' },
+        {
+          message:
+            'Do not pass "default" explicitly. The default block is used when no name is specified.',
+        },
       ],
     },
     {
       code: '{{if (has-block "default")}}',
       output: null,
       errors: [
-        { message: 'Do not pass "default" explicitly. The default block is used when no name is specified.' },
+        {
+          message:
+            'Do not pass "default" explicitly. The default block is used when no name is specified.',
+        },
       ],
     },
     {
       code: '{{#if (has-block "default")}}{{/if}}',
       output: null,
       errors: [
-        { message: 'Do not pass "default" explicitly. The default block is used when no name is specified.' },
+        {
+          message:
+            'Do not pass "default" explicitly. The default block is used when no name is specified.',
+        },
       ],
     },
     {
       code: '{{if (has-block-params "default")}}',
       output: null,
       errors: [
-        { message: 'Do not pass "default" explicitly. The default block is used when no name is specified.' },
+        {
+          message:
+            'Do not pass "default" explicitly. The default block is used when no name is specified.',
+        },
       ],
     },
     {
       code: '{{#if (has-block-params "default")}}{{/if}}',
       output: null,
       errors: [
-        { message: 'Do not pass "default" explicitly. The default block is used when no name is specified.' },
+        {
+          message:
+            'Do not pass "default" explicitly. The default block is used when no name is specified.',
+        },
       ],
     },
     {
       code: '{{if (hasBlock "default")}}',
       output: null,
       errors: [
-        { message: 'Do not pass "default" explicitly. The default block is used when no name is specified.' },
+        {
+          message:
+            'Do not pass "default" explicitly. The default block is used when no name is specified.',
+        },
       ],
     },
     {
       code: '{{#if (hasBlock "default")}}{{/if}}',
       output: null,
       errors: [
-        { message: 'Do not pass "default" explicitly. The default block is used when no name is specified.' },
+        {
+          message:
+            'Do not pass "default" explicitly. The default block is used when no name is specified.',
+        },
       ],
     },
     {
       code: '{{if (hasBlockParams "default")}}',
       output: null,
       errors: [
-        { message: 'Do not pass "default" explicitly. The default block is used when no name is specified.' },
+        {
+          message:
+            'Do not pass "default" explicitly. The default block is used when no name is specified.',
+        },
       ],
     },
     {
       code: '{{#if (hasBlockParams "default")}}{{/if}}',
       output: null,
       errors: [
-        { message: 'Do not pass "default" explicitly. The default block is used when no name is specified.' },
+        {
+          message:
+            'Do not pass "default" explicitly. The default block is used when no name is specified.',
+        },
       ],
     },
   ],

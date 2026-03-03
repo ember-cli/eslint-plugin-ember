@@ -90,58 +90,42 @@ hbsRuleTester.run('template-no-args-paths', rule, {
     {
       code: '{{hello (format value=args.foo)}}',
       output: null,
-      errors: [
-        { message: 'Do not use paths with @args, use @argName directly instead.' },
-      ],
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '{{hello value=args.foo}}',
       output: null,
-      errors: [
-        { message: 'Do not use paths with @args, use @argName directly instead.' },
-      ],
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '{{hello (format args.foo.bar)}}',
       output: null,
-      errors: [
-        { message: 'Do not use paths with @args, use @argName directly instead.' },
-      ],
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '<br {{hello args.foo.bar}}>',
       output: null,
-      errors: [
-        { message: 'Do not use paths with @args, use @argName directly instead.' },
-      ],
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '{{hello args.foo.bar}}',
       output: null,
-      errors: [
-        { message: 'Do not use paths with @args, use @argName directly instead.' },
-      ],
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '{{args.foo.bar}}',
       output: null,
-      errors: [
-        { message: 'Do not use paths with @args, use @argName directly instead.' },
-      ],
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '{{args.foo}}',
       output: null,
-      errors: [
-        { message: 'Do not use paths with @args, use @argName directly instead.' },
-      ],
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
     {
       code: '{{this.args.foo}}',
       output: null,
-      errors: [
-        { message: 'Do not use paths with @args, use @argName directly instead.' },
-      ],
+      errors: [{ message: 'Do not use paths with @args, use @argName directly instead.' }],
     },
   ],
 });

@@ -323,14 +323,20 @@ hbsRuleTester.run('template-require-context-role', rule, {
       code: '<div role="tablist"><div role="treeitem">Item One</div></div>',
       output: null,
       errors: [
-        { message: 'Role "treeitem" must be contained in an element with one of these roles: tree, group' },
+        {
+          message:
+            'Role "treeitem" must be contained in an element with one of these roles: tree, group',
+        },
       ],
     },
     {
       code: '<div><div role="columnheader">Item One</div></div>',
       output: null,
       errors: [
-        { message: 'Role "columnheader" must be contained in an element with one of these roles: row' },
+        {
+          message:
+            'Role "columnheader" must be contained in an element with one of these roles: row',
+        },
       ],
     },
     {
@@ -344,56 +350,79 @@ hbsRuleTester.run('template-require-context-role', rule, {
       code: '<div><div role="listitem">Item One</div></div>',
       output: null,
       errors: [
-        { message: 'Role "listitem" must be contained in an element with one of these roles: list, group, directory' },
+        {
+          message:
+            'Role "listitem" must be contained in an element with one of these roles: list, group, directory',
+        },
       ],
     },
     {
       code: '<div><div role="menuitem">Item One</div></div>',
       output: null,
       errors: [
-        { message: 'Role "menuitem" must be contained in an element with one of these roles: menu, menubar, group' },
+        {
+          message:
+            'Role "menuitem" must be contained in an element with one of these roles: menu, menubar, group',
+        },
       ],
     },
     {
       code: '<div><div role="menuitemcheckbox">Item One</div></div>',
       output: null,
       errors: [
-        { message: 'Role "menuitemcheckbox" must be contained in an element with one of these roles: menu, menubar, group' },
+        {
+          message:
+            'Role "menuitemcheckbox" must be contained in an element with one of these roles: menu, menubar, group',
+        },
       ],
     },
     {
       code: '<div><div role="menuitemradio">Item One</div></div>',
       output: null,
       errors: [
-        { message: 'Role "menuitemradio" must be contained in an element with one of these roles: menu, menubar, group' },
+        {
+          message:
+            'Role "menuitemradio" must be contained in an element with one of these roles: menu, menubar, group',
+        },
       ],
     },
     {
       code: '<div><div role="option">Item One</div></div>',
       output: null,
       errors: [
-        { message: 'Role "option" must be contained in an element with one of these roles: listbox, group' },
+        {
+          message:
+            'Role "option" must be contained in an element with one of these roles: listbox, group',
+        },
       ],
     },
     {
       code: '<div><div role="row">Item One</div></div>',
       output: null,
       errors: [
-        { message: 'Role "row" must be contained in an element with one of these roles: table, grid, treegrid, rowgroup' },
+        {
+          message:
+            'Role "row" must be contained in an element with one of these roles: table, grid, treegrid, rowgroup',
+        },
       ],
     },
     {
       code: '<div><div role="rowgroup">Item One</div></div>',
       output: null,
       errors: [
-        { message: 'Role "rowgroup" must be contained in an element with one of these roles: grid, table, treegrid' },
+        {
+          message:
+            'Role "rowgroup" must be contained in an element with one of these roles: grid, table, treegrid',
+        },
       ],
     },
     {
       code: '<div><div role="rowheader">Item One</div></div>',
       output: null,
       errors: [
-        { message: 'Role "rowheader" must be contained in an element with one of these roles: row' },
+        {
+          message: 'Role "rowheader" must be contained in an element with one of these roles: row',
+        },
       ],
     },
     {
@@ -407,21 +436,30 @@ hbsRuleTester.run('template-require-context-role', rule, {
       code: '<div><div role="treeitem">Item One</div></div>',
       output: null,
       errors: [
-        { message: 'Role "treeitem" must be contained in an element with one of these roles: tree, group' },
+        {
+          message:
+            'Role "treeitem" must be contained in an element with one of these roles: tree, group',
+        },
       ],
     },
     {
       code: '<div role="menu"><div><a role="menuitem">Item One</a></div></div>',
       output: null,
       errors: [
-        { message: 'Role "menuitem" must be contained in an element with one of these roles: menu, menubar, group' },
+        {
+          message:
+            'Role "menuitem" must be contained in an element with one of these roles: menu, menubar, group',
+        },
       ],
     },
     {
       code: '<div role="menu"><div role="button"><a role="menuitem">Item One</a></div></div>',
       output: null,
       errors: [
-        { message: 'Role "menuitem" must be contained in an element with one of these roles: menu, menubar, group' },
+        {
+          message:
+            'Role "menuitem" must be contained in an element with one of these roles: menu, menubar, group',
+        },
       ],
     },
   ],

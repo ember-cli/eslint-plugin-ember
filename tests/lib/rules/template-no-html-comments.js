@@ -55,6 +55,5 @@ hbsRuleTester.run('template-no-html-comments', rule, {
     '{{! template-lint-disable }}',
     '{{! template-lint-disable no-html-comments }}<!-- lol -->',
   ],
-  invalid: [
-  ],
+  invalid: [],
 });

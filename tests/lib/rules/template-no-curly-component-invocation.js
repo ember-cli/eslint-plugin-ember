@@ -124,19 +124,15 @@ function generateThisBlockError(name) {
   const prefix = name.startsWith('@') ? '@' : name.startsWith('this.') ? 'This.' : '';
   let angleBracketName;
   if (name.startsWith('@')) {
-    angleBracketName =
-      '@' +
-      parts[0]
-        .split('-')
-        .map((p, i) => (i === 0 ? p : p.charAt(0).toUpperCase() + p.slice(1)))
-        .join('');
+    angleBracketName = `@${parts[0]
+      .split('-')
+      .map((p, i) => (i === 0 ? p : p.charAt(0).toUpperCase() + p.slice(1)))
+      .join('')}`;
   } else if (name.startsWith('this.')) {
-    angleBracketName =
-      'This.' +
-      parts[0]
-        .split('-')
-        .map((p, i) => (i === 0 ? p : p.charAt(0).toUpperCase() + p.slice(1)))
-        .join('');
+    angleBracketName = `This.${parts[0]
+      .split('-')
+      .map((p, i) => (i === 0 ? p : p.charAt(0).toUpperCase() + p.slice(1)))
+      .join('')}`;
   } else {
     angleBracketName = parts
       .map((part) =>
@@ -237,10 +233,7 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     {
       code: '{{#foo-bar as |foo-baz|}}{{foo-baz}}{{/foo-bar}}',
       output: null,
-      errors: [
-        { message: generateBlockError('foo-bar') },
-        { message: generateError('foo-baz') },
-      ],
+      errors: [{ message: generateBlockError('foo-bar') }, { message: generateError('foo-baz') }],
     },
     {
       code: '{{#foo-bar as |foo-baz|}}{{#foo-baz as |foo-boo|}}{{foo-boo}}{{/foo-baz}}{{/foo-bar}}',
@@ -254,10 +247,7 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     {
       code: '{{#foo-bar as |foo-baz|}}{{foos-baz}}{{/foo-bar}}',
       output: null,
-      errors: [
-        { message: generateBlockError('foo-bar') },
-        { message: generateError('foos-baz') },
-      ],
+      errors: [{ message: generateBlockError('foo-bar') }, { message: generateError('foos-baz') }],
     },
     {
       code: '{{#this.foo-bar as |foo-baz|}}{{foos-baz}}{{/this.foo-bar}}',

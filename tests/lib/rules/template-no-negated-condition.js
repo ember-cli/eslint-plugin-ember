@@ -228,72 +228,57 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
     {
       code: '{{#if (not condition)}}<img>{{/if}}',
       output: null,
-      errors: [
-        { message: 'Change `if (not condition)` to `unless condition`.' },
-      ],
+      errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '{{#if (not (not condition))}}<img>{{/if}}',
       output: null,
-      errors: [
-        { message: 'Change `if (not condition)` to `unless condition`.' },
-      ],
+      errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '{{#if (not (not c1 c2))}}<img>{{/if}}',
       output: null,
-      errors: [
-        { message: 'Change `if (not condition)` to `unless condition`.' },
-      ],
+      errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '{{#if (not (eq c1 c2))}}<img>{{/if}}',
       output: null,
-      errors: [
-        { message: 'Change `if (not condition)` to `unless condition`.' },
-      ],
+      errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '{{#if (not condition)}}<img>{{else}}<input>{{/if}}',
       output: null,
       errors: [
-        { message: 'Change `{{if (not condition)}} ... {{else}} ... {{/if}}` to `{{if condition}} ... {{else}} ... {{/if}}`.' },
+        {
+          message:
+            'Change `{{if (not condition)}} ... {{else}} ... {{/if}}` to `{{if condition}} ... {{else}} ... {{/if}}`.',
+        },
       ],
     },
     {
       code: '{{#unless (not condition)}}<img>{{/unless}}',
       output: null,
-      errors: [
-        { message: 'Change `unless (not condition)` to `if condition`.' },
-      ],
+      errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{#unless (not (not condition))}}<img>{{/unless}}',
       output: null,
-      errors: [
-        { message: 'Change `unless (not condition)` to `if condition`.' },
-      ],
+      errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{#unless (not condition)}}<img>{{else}}<input>{{/unless}}',
       output: null,
-      errors: [
-        { message: 'Change `unless (not condition)` to `if condition`.' },
-      ],
+      errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{#unless (not (not-eq c1 c2))}}<img>{{else}}<input>{{/unless}}',
       output: null,
-      errors: [
-        { message: 'Change `unless (not condition)` to `if condition`.' },
-      ],
+      errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{#unless (not condition)}}<img>{{else if (not condition)}}<input>{{/unless}}',
       output: null,
-      errors: [
-        { message: 'Change `unless (not condition)` to `if condition`.' },
-      ],
+      errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{#unless (not (not condition))}}<img>{{else if (not (not condition))}}<input>{{/unless}}',
@@ -314,9 +299,7 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
     {
       code: '{{#unless (not condition)}}<img>{{else if (not condition)}}<input>{{else}}<hr>{{/unless}}',
       output: null,
-      errors: [
-        { message: 'Change `unless (not condition)` to `if condition`.' },
-      ],
+      errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{#unless (not condition)}}<img>{{else if (not (not c1 c2))}}<input>{{else}}<hr>{{/unless}}',
@@ -329,107 +312,97 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
     {
       code: '{{#if condition}}{{else}}{{! some comment }}{{#if (not condition)}}<img>{{/if}}{{/if}}',
       output: null,
-      errors: [
-        { message: 'Change `if (not condition)` to `unless condition`.' },
-      ],
+      errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '{{#if condition}}{{else}}{{#if (not condition)}}<img>{{/if}}{{/if}}',
       output: null,
-      errors: [
-        { message: 'Change `if (not condition)` to `unless condition`.' },
-      ],
+      errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '<img class={{if (not condition) "some-class"}}>',
       output: null,
-      errors: [
-        { message: 'Change `if (not condition)` to `unless condition`.' },
-      ],
+      errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '<img class={{if (not (gte c 10)) "some-class"}}>',
       output: null,
-      errors: [
-        { message: 'Change `if (not condition)` to `unless condition`.' },
-      ],
+      errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '<img class={{if (not condition) "some-class" "other-class"}}>',
       output: null,
       errors: [
-        { message: 'Change `{{if (not condition)}} ... {{else}} ... {{/if}}` to `{{if condition}} ... {{else}} ... {{/if}}`.' },
+        {
+          message:
+            'Change `{{if (not condition)}} ... {{else}} ... {{/if}}` to `{{if condition}} ... {{else}} ... {{/if}}`.',
+        },
       ],
     },
     {
       code: '<img class={{if (not (not condition)) "some-class" "other-class"}}>',
       output: null,
       errors: [
-        { message: 'Change `{{if (not condition)}} ... {{else}} ... {{/if}}` to `{{if condition}} ... {{else}} ... {{/if}}`.' },
+        {
+          message:
+            'Change `{{if (not condition)}} ... {{else}} ... {{/if}}` to `{{if condition}} ... {{else}} ... {{/if}}`.',
+        },
       ],
     },
     {
       code: '<img class={{unless (not condition) "some-class"}}>',
       output: null,
-      errors: [
-        { message: 'Change `unless (not condition)` to `if condition`.' },
-      ],
+      errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '<img class={{unless (not condition) "some-class" "other-class"}}>',
       output: null,
-      errors: [
-        { message: 'Change `unless (not condition)` to `if condition`.' },
-      ],
+      errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '<img class={{unless (not (not condition)) "some-class" "other-class"}}>',
       output: null,
-      errors: [
-        { message: 'Change `unless (not condition)` to `if condition`.' },
-      ],
+      errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{input class=(if (not condition) "some-class")}}',
       output: null,
-      errors: [
-        { message: 'Change `if (not condition)` to `unless condition`.' },
-      ],
+      errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '{{input class=(if (not condition) "some-class" "other-class")}}',
       output: null,
       errors: [
-        { message: 'Change `{{if (not condition)}} ... {{else}} ... {{/if}}` to `{{if condition}} ... {{else}} ... {{/if}}`.' },
+        {
+          message:
+            'Change `{{if (not condition)}} ... {{else}} ... {{/if}}` to `{{if condition}} ... {{else}} ... {{/if}}`.',
+        },
       ],
     },
     {
       code: '{{input class=(if (not (lte c 10)) "some-class" "other-class")}}',
       output: null,
       errors: [
-        { message: 'Change `{{if (not condition)}} ... {{else}} ... {{/if}}` to `{{if condition}} ... {{else}} ... {{/if}}`.' },
+        {
+          message:
+            'Change `{{if (not condition)}} ... {{else}} ... {{/if}}` to `{{if condition}} ... {{else}} ... {{/if}}`.',
+        },
       ],
     },
     {
       code: '{{input class=(unless (not condition) "some-class")}}',
       output: null,
-      errors: [
-        { message: 'Change `unless (not condition)` to `if condition`.' },
-      ],
+      errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{input class=(unless (not condition) "some-class" "other-class")}}',
       output: null,
-      errors: [
-        { message: 'Change `unless (not condition)` to `if condition`.' },
-      ],
+      errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{input class=(unless (not (not condition)) "some-class" "other-class")}}',
       output: null,
-      errors: [
-        { message: 'Change `unless (not condition)` to `if condition`.' },
-      ],
+      errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
   ],
 });

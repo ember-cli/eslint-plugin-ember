@@ -162,72 +162,52 @@ hbsRuleTester.run('template-no-nested-landmark', rule, {
     {
       code: '<main><main></main></main>',
       output: null,
-      errors: [
-        { message: 'Landmark elements should not be nested within other landmarks.' },
-      ],
+      errors: [{ message: 'Landmark elements should not be nested within other landmarks.' }],
     },
     {
       code: '<main><div><main></main></div></main>',
       output: null,
-      errors: [
-        { message: 'Landmark elements should not be nested within other landmarks.' },
-      ],
+      errors: [{ message: 'Landmark elements should not be nested within other landmarks.' }],
     },
     {
       code: '<div role="main"><main></main></div>',
       output: null,
-      errors: [
-        { message: 'Landmark elements should not be nested within other landmarks.' },
-      ],
+      errors: [{ message: 'Landmark elements should not be nested within other landmarks.' }],
     },
     {
       code: '<div role="main"><div><main></main></div></div>',
       output: null,
-      errors: [
-        { message: 'Landmark elements should not be nested within other landmarks.' },
-      ],
+      errors: [{ message: 'Landmark elements should not be nested within other landmarks.' }],
     },
     {
       code: '<main><div role="main"></div></main>',
       output: null,
-      errors: [
-        { message: 'Landmark elements should not be nested within other landmarks.' },
-      ],
+      errors: [{ message: 'Landmark elements should not be nested within other landmarks.' }],
     },
     {
       code: '<main><div><div role="main"></div></div></main>',
       output: null,
-      errors: [
-        { message: 'Landmark elements should not be nested within other landmarks.' },
-      ],
+      errors: [{ message: 'Landmark elements should not be nested within other landmarks.' }],
     },
     {
       code: '<nav><nav></nav></nav>',
       output: null,
-      errors: [
-        { message: 'Landmark elements should not be nested within other landmarks.' },
-      ],
+      errors: [{ message: 'Landmark elements should not be nested within other landmarks.' }],
     },
     {
       code: '<header><header></header></header>',
       output: null,
-      errors: [
-        { message: 'Landmark elements should not be nested within other landmarks.' },
-      ],
+      errors: [{ message: 'Landmark elements should not be nested within other landmarks.' }],
     },
     {
       code: '<header><div role="banner"></div></header>',
       output: null,
-      errors: [
-        { message: 'Landmark elements should not be nested within other landmarks.' },
-      ],
+      errors: [{ message: 'Landmark elements should not be nested within other landmarks.' }],
     },
     {
       code: '<div role="contentinfo"><footer></footer></div>',
       output: null,
-      errors: [
-        { message: 'Landmark elements should not be nested within other landmarks.' },
-      ],
+      errors: [{ message: 'Landmark elements should not be nested within other landmarks.' }],
     },
   ],
 });

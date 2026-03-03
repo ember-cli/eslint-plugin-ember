@@ -86,28 +86,40 @@ hbsRuleTester.run('template-require-aria-activedescendant-tabindex', rule, {
       code: '<input aria-activedescendant="option0" tabindex="-2" />',
       output: null,
       errors: [
-        { message: 'Elements with aria-activedescendant must have tabindex attribute to be keyboard accessible.' },
+        {
+          message:
+            'Elements with aria-activedescendant must have tabindex attribute to be keyboard accessible.',
+        },
       ],
     },
     {
       code: '<div aria-activedescendant={{bar}} />',
       output: null,
       errors: [
-        { message: 'Elements with aria-activedescendant must have tabindex attribute to be keyboard accessible.' },
+        {
+          message:
+            'Elements with aria-activedescendant must have tabindex attribute to be keyboard accessible.',
+        },
       ],
     },
     {
       code: '<div aria-activedescendant={{foo}} tabindex={{-1}}></div>',
       output: null,
       errors: [
-        { message: 'Elements with aria-activedescendant must have tabindex attribute to be keyboard accessible.' },
+        {
+          message:
+            'Elements with aria-activedescendant must have tabindex attribute to be keyboard accessible.',
+        },
       ],
     },
     {
       code: '<div aria-activedescendant="fixme" tabindex=-100></div>',
       output: null,
       errors: [
-        { message: 'Elements with aria-activedescendant must have tabindex attribute to be keyboard accessible.' },
+        {
+          message:
+            'Elements with aria-activedescendant must have tabindex attribute to be keyboard accessible.',
+        },
       ],
     },
   ],

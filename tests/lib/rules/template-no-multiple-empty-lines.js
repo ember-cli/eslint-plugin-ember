@@ -140,9 +140,7 @@ hbsRuleTester.run('template-no-multiple-empty-lines', rule, {
 
 <div>bar</div>`,
       output: null,
-      errors: [
-        { message: 'More than 1 blank line not allowed.' },
-      ],
+      errors: [{ message: 'More than 1 blank line not allowed.' }],
     },
   ],
 });

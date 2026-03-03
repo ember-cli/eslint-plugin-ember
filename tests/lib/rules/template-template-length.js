@@ -84,6 +84,5 @@ this
 andthis
 `,
   ],
-  invalid: [
-  ],
+  invalid: [],
 });

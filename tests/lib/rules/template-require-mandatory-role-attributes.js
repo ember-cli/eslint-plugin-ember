@@ -123,9 +123,7 @@ hbsRuleTester.run('template-require-mandatory-role-attributes', rule, {
     {
       code: '<div role="option"  />',
       output: null,
-      errors: [
-        { message: 'Role "option" requires ARIA attribute "aria-selected" to be present.' },
-      ],
+      errors: [{ message: 'Role "option" requires ARIA attribute "aria-selected" to be present.' }],
     },
     {
       code: '<CustomComponent role="checkbox" aria-required="true" />',
@@ -146,9 +144,7 @@ hbsRuleTester.run('template-require-mandatory-role-attributes', rule, {
     {
       code: '{{some-component role="heading"}}',
       output: null,
-      errors: [
-        { message: 'Role "heading" requires ARIA attribute "aria-level" to be present.' },
-      ],
+      errors: [{ message: 'Role "heading" requires ARIA attribute "aria-level" to be present.' }],
     },
   ],
 });

@@ -81,30 +81,22 @@ hbsRuleTester.run('template-link-rel-noopener', rule, {
     {
       code: '<a href="/some/where" target="_blank"></a>',
       output: '<a href="/some/where" target="_blank" rel="noopener noreferrer"></a>',
-      errors: [
-        { message: 'links with target="_blank" must have rel="noopener noreferrer"' },
-      ],
+      errors: [{ message: 'links with target="_blank" must have rel="noopener noreferrer"' }],
     },
     {
       code: '<a href="/some/where" target="_blank" rel="nofollow"></a>',
       output: null,
-      errors: [
-        { message: 'links with target="_blank" must have rel="noopener noreferrer"' },
-      ],
+      errors: [{ message: 'links with target="_blank" must have rel="noopener noreferrer"' }],
     },
     {
       code: '<a href="/some/where" target="_blank" rel="noopener"></a>',
       output: null,
-      errors: [
-        { message: 'links with target="_blank" must have rel="noopener noreferrer"' },
-      ],
+      errors: [{ message: 'links with target="_blank" must have rel="noopener noreferrer"' }],
     },
     {
       code: '<a href="/some/where" target="_blank" rel="noreferrer"></a>',
       output: null,
-      errors: [
-        { message: 'links with target="_blank" must have rel="noopener noreferrer"' },
-      ],
+      errors: [{ message: 'links with target="_blank" must have rel="noopener noreferrer"' }],
     },
   ],
 });

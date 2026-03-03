@@ -107,6 +107,5 @@ hbsRuleTester.run('template-require-valid-named-block-naming-format', rule, {
     '{{if (has-block-params)}}',
     '{{if (has-block-params "fooBar")}}',
   ],
-  invalid: [
-  ],
+  invalid: [],
 });

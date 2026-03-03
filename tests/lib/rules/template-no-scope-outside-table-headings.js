@@ -99,23 +99,17 @@ hbsRuleTester.run('template-no-scope-outside-table-headings', rule, {
     {
       code: '<td scope="row"></td>',
       output: null,
-      errors: [
-        { message: 'Unexpected scope attribute on <td>. Use only on <th> or <td>.' },
-      ],
+      errors: [{ message: 'Unexpected scope attribute on <td>. Use only on <th> or <td>.' }],
     },
     {
       code: '<td scope></td>',
       output: null,
-      errors: [
-        { message: 'Unexpected scope attribute on <td>. Use only on <th> or <td>.' },
-      ],
+      errors: [{ message: 'Unexpected scope attribute on <td>. Use only on <th> or <td>.' }],
     },
     {
       code: '<a scope="row" />',
       output: null,
-      errors: [
-        { message: 'Unexpected scope attribute on <a>. Use only on <th> or <td>.' },
-      ],
+      errors: [{ message: 'Unexpected scope attribute on <a>. Use only on <th> or <td>.' }],
     },
     {
       code: `
@@ -125,9 +119,7 @@ hbsRuleTester.run('template-no-scope-outside-table-headings', rule, {
 </table>
 `,
       output: null,
-      errors: [
-        { message: 'Unexpected scope attribute on <td>. Use only on <th> or <td>.' },
-      ],
+      errors: [{ message: 'Unexpected scope attribute on <td>. Use only on <th> or <td>.' }],
     },
   ],
 });

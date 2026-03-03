@@ -195,6 +195,5 @@ hbsRuleTester.run('template-self-closing-void-elements', rule, {
     '<track>',
     '<wbr>',
   ],
-  invalid: [
-  ],
+  invalid: [],
 });

@@ -63,28 +63,40 @@ hbsRuleTester.run('template-no-splattributes-with-class', rule, {
       code: '<div ...attributes class="foo">content</div>',
       output: null,
       errors: [
-        { message: 'Using `...attributes` with `class` attribute is not allowed. Use `...attributes` alone to allow class merging.' },
+        {
+          message:
+            'Using `...attributes` with `class` attribute is not allowed. Use `...attributes` alone to allow class merging.',
+        },
       ],
     },
     {
       code: '<div class="foo" ...attributes>content</div>',
       output: null,
       errors: [
-        { message: 'Using `...attributes` with `class` attribute is not allowed. Use `...attributes` alone to allow class merging.' },
+        {
+          message:
+            'Using `...attributes` with `class` attribute is not allowed. Use `...attributes` alone to allow class merging.',
+        },
       ],
     },
     {
       code: '<div ...attributes class={{foo}}>content</div>',
       output: null,
       errors: [
-        { message: 'Using `...attributes` with `class` attribute is not allowed. Use `...attributes` alone to allow class merging.' },
+        {
+          message:
+            'Using `...attributes` with `class` attribute is not allowed. Use `...attributes` alone to allow class merging.',
+        },
       ],
     },
     {
       code: '<div class="foo" ...attributes class="bar">content</div>',
       output: null,
       errors: [
-        { message: 'Using `...attributes` with `class` attribute is not allowed. Use `...attributes` alone to allow class merging.' },
+        {
+          message:
+            'Using `...attributes` with `class` attribute is not allowed. Use `...attributes` alone to allow class merging.',
+        },
       ],
     },
   ],

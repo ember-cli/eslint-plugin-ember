@@ -55,14 +55,20 @@ hbsRuleTester.run('template-no-with', rule, {
       code: '{{#with this.foo as |bar|}}{{bar}}{{/with}}',
       output: null,
       errors: [
-        { message: 'The use of the with helper has been deprecated. See https://deprecations.emberjs.com/v3.x/#toc_ember-glimmer-with-syntax' },
+        {
+          message:
+            'The use of the with helper has been deprecated. See https://deprecations.emberjs.com/v3.x/#toc_ember-glimmer-with-syntax',
+        },
       ],
     },
     {
       code: '{{#with (hash firstName="John" lastName="Doe") as |user|}}{{user.firstName}} {{user.lastName}}{{/with}}',
       output: null,
       errors: [
-        { message: 'The use of the with helper has been deprecated. See https://deprecations.emberjs.com/v3.x/#toc_ember-glimmer-with-syntax' },
+        {
+          message:
+            'The use of the with helper has been deprecated. See https://deprecations.emberjs.com/v3.x/#toc_ember-glimmer-with-syntax',
+        },
       ],
     },
   ],

@@ -67,19 +67,15 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-class-bindings', rule, {
-  valid: [
-    '<SomeThing />',
-    '{{lol-wat}}',
-    '{{true}}',
-    '{{"hehe"}}',
-  ],
+  valid: ['<SomeThing />', '{{lol-wat}}', '{{true}}', '{{"hehe"}}'],
   invalid: [
     {
       code: '{{some-thing classBinding="lol:wat"}}',
       output: null,
       errors: [
         {
-          message: 'Passing the `classBinding` property as an argument within templates is not allowed.',
+          message:
+            'Passing the `classBinding` property as an argument within templates is not allowed.',
         },
       ],
     },
@@ -88,7 +84,8 @@ hbsRuleTester.run('template-no-class-bindings', rule, {
       output: null,
       errors: [
         {
-          message: 'Passing the `@classBinding` property as an argument within templates is not allowed.',
+          message:
+            'Passing the `@classBinding` property as an argument within templates is not allowed.',
         },
       ],
     },
@@ -97,7 +94,8 @@ hbsRuleTester.run('template-no-class-bindings', rule, {
       output: null,
       errors: [
         {
-          message: 'Passing the `classNameBindings` property as an argument within templates is not allowed.',
+          message:
+            'Passing the `classNameBindings` property as an argument within templates is not allowed.',
         },
       ],
     },
@@ -106,7 +104,8 @@ hbsRuleTester.run('template-no-class-bindings', rule, {
       output: null,
       errors: [
         {
-          message: 'Passing the `@classNameBindings` property as an argument within templates is not allowed.',
+          message:
+            'Passing the `@classNameBindings` property as an argument within templates is not allowed.',
         },
       ],
     },

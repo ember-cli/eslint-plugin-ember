@@ -127,28 +127,40 @@ hbsRuleTester.run('template-style-concatenation', rule, {
       code: '<img style="{{myStyle}}">',
       output: null,
       errors: [
-        { message: 'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.' },
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+        },
       ],
     },
     {
       code: '<img style="background-image: {{url}}">',
       output: null,
       errors: [
-        { message: 'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.' },
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+        },
       ],
     },
     {
       code: '<img style="{{background-image url}}">',
       output: null,
       errors: [
-        { message: 'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.' },
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+        },
       ],
     },
     {
       code: '<img style={{concat knownSafeStyle1 ";" knownSafeStyle2}}>',
       output: null,
       errors: [
-        { message: 'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.' },
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+        },
       ],
     },
   ],

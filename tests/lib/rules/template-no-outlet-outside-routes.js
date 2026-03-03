@@ -45,6 +45,5 @@ hbsRuleTester.run('template-no-outlet-outside-routes', rule, {
     '{{#outlet}}Why?!{{/outlet}}',
     '{{#outlet}}Works because ambiguous{{/outlet}}',
   ],
-  invalid: [
-  ],
+  invalid: [],
 });

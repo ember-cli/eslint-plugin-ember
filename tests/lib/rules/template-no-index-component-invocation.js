@@ -122,65 +122,47 @@ hbsRuleTester.run('template-no-index-component-invocation', rule, {
     {
       code: '{{foo/index}}',
       output: null,
-      errors: [
-        { message: 'Replace `{{foo/index ...` to `{{foo ...`' },
-      ],
+      errors: [{ message: 'Replace `{{foo/index ...` to `{{foo ...`' }],
     },
     {
       code: '{{component "foo/index"}}',
       output: null,
-      errors: [
-        { message: 'Replace `{{component "foo/index" ...` to `{{component "foo" ...`' },
-      ],
+      errors: [{ message: 'Replace `{{component "foo/index" ...` to `{{component "foo" ...`' }],
     },
     {
       code: '{{#foo/index}}{{/foo/index}}',
       output: null,
-      errors: [
-        { message: 'Replace `{{#foo/index ...` to `{{#foo ...`' },
-      ],
+      errors: [{ message: 'Replace `{{#foo/index ...` to `{{#foo ...`' }],
     },
     {
       code: '{{#component "foo/index"}}{{/component}}',
       output: null,
-      errors: [
-        { message: 'Replace `{{#component "foo/index" ...` to `{{#component "foo" ...`' },
-      ],
+      errors: [{ message: 'Replace `{{#component "foo/index" ...` to `{{#component "foo" ...`' }],
     },
     {
       code: '{{foo/bar (component "foo/index")}}',
       output: null,
-      errors: [
-        { message: 'Replace `(component "foo/index" ...` to `(component "foo" ...`' },
-      ],
+      errors: [{ message: 'Replace `(component "foo/index" ...` to `(component "foo" ...`' }],
     },
     {
       code: '{{foo/bar name=(component "foo/index")}}',
       output: null,
-      errors: [
-        { message: 'Replace `(component "foo/index" ...` to `(component "foo" ...`' },
-      ],
+      errors: [{ message: 'Replace `(component "foo/index" ...` to `(component "foo" ...`' }],
     },
     {
       code: '<Foo::Index />',
       output: null,
-      errors: [
-        { message: 'Replace `<Foo::Index ...` to `<Foo ...`' },
-      ],
+      errors: [{ message: 'Replace `<Foo::Index ...` to `<Foo ...`' }],
     },
     {
       code: '<Foo::Bar::Index />',
       output: null,
-      errors: [
-        { message: 'Replace `<Foo::Bar::Index ...` to `<Foo::Bar ...`' },
-      ],
+      errors: [{ message: 'Replace `<Foo::Bar::Index ...` to `<Foo::Bar ...`' }],
     },
     {
       code: '<Foo::Index></Foo::Index>',
       output: null,
-      errors: [
-        { message: 'Replace `<Foo::Index ...` to `<Foo ...`' },
-      ],
+      errors: [{ message: 'Replace `<Foo::Index ...` to `<Foo ...`' }],
     },
   ],
 });

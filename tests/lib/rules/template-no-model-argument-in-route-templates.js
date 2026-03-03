@@ -72,12 +72,6 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-model-argument-in-route-templates', rule, {
-  valid: [
-    '{{model}}',
-    '{{this.model}}',
-    '{{@modelythingy}}',
-    '{{@model}}',
-  ],
-  invalid: [
-  ],
+  valid: ['{{model}}', '{{this.model}}', '{{@modelythingy}}', '{{@model}}'],
+  invalid: [],
 });

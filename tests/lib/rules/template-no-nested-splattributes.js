@@ -103,6 +103,5 @@ hbsRuleTester.run('template-no-nested-splattributes', rule, {
     '<div ...attributes>...</div>',
     '<div ...attributes>...</div><div ...attributes>...</div>',
   ],
-  invalid: [
-  ],
+  invalid: [],
 });

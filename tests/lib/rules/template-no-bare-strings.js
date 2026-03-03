@@ -250,23 +250,17 @@ hbsRuleTester.run('template-no-bare-strings', rule, {
     {
       code: '{{unless true "asd"}}',
       output: null,
-      errors: [
-        { message: 'Non-translated string used' },
-      ],
+      errors: [{ message: 'Non-translated string used' }],
     },
     {
       code: '{{unless @b "b"}}',
       output: null,
-      errors: [
-        { message: 'Non-translated string used' },
-      ],
+      errors: [{ message: 'Non-translated string used' }],
     },
     {
       code: '<div>{{concat "foo" "bar"}}</div>',
       output: null,
-      errors: [
-        { message: 'Non-translated string used' },
-      ],
+      errors: [{ message: 'Non-translated string used' }],
     },
     {
       code: '<div>{{unless true "Yes" "No"}}</div>',
@@ -287,103 +281,75 @@ hbsRuleTester.run('template-no-bare-strings', rule, {
     {
       code: '<p>{{"Hello!"}}</p>',
       output: null,
-      errors: [
-        { message: 'Non-translated string used' },
-      ],
+      errors: [{ message: 'Non-translated string used' }],
     },
     {
       code: `
  howdy`,
       output: null,
-      errors: [
-        { message: 'Non-translated string used' },
-      ],
+      errors: [{ message: 'Non-translated string used' }],
     },
     {
       code: `<div>
   1234
 </div>`,
       output: null,
-      errors: [
-        { message: 'Non-translated string used' },
-      ],
+      errors: [{ message: 'Non-translated string used' }],
     },
     {
       code: '<a title="hahaha trolol"></a>',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `title` attribute' },
-      ],
+      errors: [{ message: 'Non-translated string used in `title` attribute' }],
     },
     {
       code: '<input placeholder="trolol">',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `placeholder` attribute' },
-      ],
+      errors: [{ message: 'Non-translated string used in `placeholder` attribute' }],
     },
     {
       code: '<input placeholder="{{foo}}hahaha trolol">',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `placeholder` attribute' },
-      ],
+      errors: [{ message: 'Non-translated string used in `placeholder` attribute' }],
     },
     {
       code: '<Input placeholder="{{foo}}hahaha trolol" />',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `placeholder` attribute' },
-      ],
+      errors: [{ message: 'Non-translated string used in `placeholder` attribute' }],
     },
     {
       code: '<Textarea placeholder="{{foo}}hahaha trolol" />',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `placeholder` attribute' },
-      ],
+      errors: [{ message: 'Non-translated string used in `placeholder` attribute' }],
     },
     {
       code: '<Input @placeholder="{{foo}}hahaha trolol" />',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `@placeholder` argument' },
-      ],
+      errors: [{ message: 'Non-translated string used in `@placeholder` argument' }],
     },
     {
       code: '<Textarea @placeholder="{{foo}}hahaha trolol" />',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `@placeholder` argument' },
-      ],
+      errors: [{ message: 'Non-translated string used in `@placeholder` argument' }],
     },
     {
       code: '<div role="contentinfo" aria-label="Contact, Policies and Legal"></div>',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `aria-label` attribute' },
-      ],
+      errors: [{ message: 'Non-translated string used in `aria-label` attribute' }],
     },
     {
       code: '<div contenteditable role="searchbox" aria-placeholder="Search for things"></div>',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `aria-placeholder` attribute' },
-      ],
+      errors: [{ message: 'Non-translated string used in `aria-placeholder` attribute' }],
     },
     {
       code: '<div role="region" aria-roledescription="slide"></div>',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `aria-roledescription` attribute' },
-      ],
+      errors: [{ message: 'Non-translated string used in `aria-roledescription` attribute' }],
     },
     {
       code: '<div role="slider" aria-valuetext="Off" tabindex="0" aria-valuemin="0" aria-valuenow="0" aria-valuemax="3"></div>',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `aria-valuetext` attribute' },
-      ],
+      errors: [{ message: 'Non-translated string used in `aria-valuetext` attribute' }],
     },
     {
       code: `<div>Bady
@@ -398,9 +364,7 @@ hbsRuleTester.run('template-no-bare-strings', rule, {
     {
       code: '{{page-title "foo"}}',
       output: null,
-      errors: [
-        { message: 'Non-translated string used' },
-      ],
+      errors: [{ message: 'Non-translated string used' }],
     },
     {
       code: '{{page-title "foo" " - " "bar"}}',
@@ -421,23 +385,17 @@ hbsRuleTester.run('template-no-bare-strings', rule, {
     {
       code: '<input placeholder="hahaha">',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `placeholder` attribute' },
-      ],
+      errors: [{ message: 'Non-translated string used in `placeholder` attribute' }],
     },
     {
       code: '<template><input placeholder="This is a placeholder" /></template>',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `placeholder` attribute' },
-      ],
+      errors: [{ message: 'Non-translated string used in `placeholder` attribute' }],
     },
     {
       code: '<template><img alt="This is alt text" /></template>',
       output: null,
-      errors: [
-        { message: 'Non-translated string used in `alt` attribute' },
-      ],
+      errors: [{ message: 'Non-translated string used in `alt` attribute' }],
     },
   ],
 });

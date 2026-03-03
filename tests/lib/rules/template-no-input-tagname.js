@@ -70,44 +70,32 @@ hbsRuleTester.run('template-no-input-tagname', rule, {
     {
       code: '{{input tagName="foo"}}',
       output: null,
-      errors: [
-        { message: 'Unexpected tagName usage on input helper.' },
-      ],
+      errors: [{ message: 'Unexpected tagName usage on input helper.' }],
     },
     {
       code: '{{input tagName=bar}}',
       output: null,
-      errors: [
-        { message: 'Unexpected tagName usage on input helper.' },
-      ],
+      errors: [{ message: 'Unexpected tagName usage on input helper.' }],
     },
     {
       code: '{{component "input" tagName="foo"}}',
       output: null,
-      errors: [
-        { message: 'Unexpected tagName usage on input helper.' },
-      ],
+      errors: [{ message: 'Unexpected tagName usage on input helper.' }],
     },
     {
       code: '{{component "input" tagName=bar}}',
       output: null,
-      errors: [
-        { message: 'Unexpected tagName usage on input helper.' },
-      ],
+      errors: [{ message: 'Unexpected tagName usage on input helper.' }],
     },
     {
       code: '{{yield (component "input" tagName="foo")}}',
       output: null,
-      errors: [
-        { message: 'Unexpected tagName usage on input helper.' },
-      ],
+      errors: [{ message: 'Unexpected tagName usage on input helper.' }],
     },
     {
       code: '{{yield (component "input" tagName=bar)}}',
       output: null,
-      errors: [
-        { message: 'Unexpected tagName usage on input helper.' },
-      ],
+      errors: [{ message: 'Unexpected tagName usage on input helper.' }],
     },
   ],
 });

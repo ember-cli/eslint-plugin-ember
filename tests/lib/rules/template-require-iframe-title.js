@@ -84,9 +84,7 @@ hbsRuleTester.run('template-require-iframe-title', rule, {
     {
       code: '<iframe title="foo" /><iframe title="foo" />',
       output: null,
-      errors: [
-        { message: '<iframe> elements must have a unique title property.' },
-      ],
+      errors: [{ message: '<iframe> elements must have a unique title property.' }],
     },
     {
       code: '<iframe title="foo" /><iframe title="boo" /><iframe title="foo" /><iframe title="boo" />',
@@ -99,30 +97,22 @@ hbsRuleTester.run('template-require-iframe-title', rule, {
     {
       code: '<iframe src="12" />',
       output: null,
-      errors: [
-        { message: '<iframe> elements must have a unique title property.' },
-      ],
+      errors: [{ message: '<iframe> elements must have a unique title property.' }],
     },
     {
       code: '<iframe src="12" title={{false}} />',
       output: null,
-      errors: [
-        { message: '<iframe> elements must have a unique title property.' },
-      ],
+      errors: [{ message: '<iframe> elements must have a unique title property.' }],
     },
     {
       code: '<iframe src="12" title="{{false}}" />',
       output: null,
-      errors: [
-        { message: '<iframe> elements must have a unique title property.' },
-      ],
+      errors: [{ message: '<iframe> elements must have a unique title property.' }],
     },
     {
       code: '<iframe src="12" title="" />',
       output: null,
-      errors: [
-        { message: '<iframe> elements must have a unique title property.' },
-      ],
+      errors: [{ message: '<iframe> elements must have a unique title property.' }],
     },
   ],
 });

@@ -144,28 +144,40 @@ hbsRuleTester.run('template-no-invalid-link-text', rule, {
       code: '<a href="https://myurl.com">click here</a>',
       output: null,
       errors: [
-        { message: 'Link text "click here" is not descriptive. Use meaningful text that describes the link destination.' },
+        {
+          message:
+            'Link text "click here" is not descriptive. Use meaningful text that describes the link destination.',
+        },
       ],
     },
     {
       code: '<LinkTo>click here</LinkTo>',
       output: null,
       errors: [
-        { message: 'Link text "click here" is not descriptive. Use meaningful text that describes the link destination.' },
+        {
+          message:
+            'Link text "click here" is not descriptive. Use meaningful text that describes the link destination.',
+        },
       ],
     },
     {
       code: '{{#link-to}}click here{{/link-to}}',
       output: null,
       errors: [
-        { message: 'Link text "click here" is not descriptive. Use meaningful text that describes the link destination.' },
+        {
+          message:
+            'Link text "click here" is not descriptive. Use meaningful text that describes the link destination.',
+        },
       ],
     },
     {
       code: '<a href="https://myurl.com"> </a>',
       output: null,
       errors: [
-        { message: 'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.' },
+        {
+          message:
+            'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.',
+        },
       ],
     },
     {
@@ -173,35 +185,50 @@ hbsRuleTester.run('template-no-invalid-link-text', rule, {
 </a>`,
       output: null,
       errors: [
-        { message: 'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.' },
+        {
+          message:
+            'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.',
+        },
       ],
     },
     {
       code: '<a aria-labelledby="" href="https://myurl.com">Click here</a>',
       output: null,
       errors: [
-        { message: 'Link text "click here" is not descriptive. Use meaningful text that describes the link destination.' },
+        {
+          message:
+            'Link text "click here" is not descriptive. Use meaningful text that describes the link destination.',
+        },
       ],
     },
     {
       code: '<a aria-labelledby=" " href="https://myurl.com">Click here</a>',
       output: null,
       errors: [
-        { message: 'Link text "click here" is not descriptive. Use meaningful text that describes the link destination.' },
+        {
+          message:
+            'Link text "click here" is not descriptive. Use meaningful text that describes the link destination.',
+        },
       ],
     },
     {
       code: '<a aria-label="Click here" href="https://myurl.com">Click here</a>',
       output: null,
       errors: [
-        { message: 'Link text "click here" is not descriptive. Use meaningful text that describes the link destination.' },
+        {
+          message:
+            'Link text "click here" is not descriptive. Use meaningful text that describes the link destination.',
+        },
       ],
     },
     {
       code: '<LinkTo></LinkTo>',
       output: null,
       errors: [
-        { message: 'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.' },
+        {
+          message:
+            'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.',
+        },
       ],
     },
     {
@@ -209,14 +236,20 @@ hbsRuleTester.run('template-no-invalid-link-text', rule, {
 </LinkTo>`,
       output: null,
       errors: [
-        { message: 'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.' },
+        {
+          message:
+            'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.',
+        },
       ],
     },
     {
       code: '{{#link-to}}{{/link-to}}',
       output: null,
       errors: [
-        { message: 'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.' },
+        {
+          message:
+            'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.',
+        },
       ],
     },
     {
@@ -224,7 +257,10 @@ hbsRuleTester.run('template-no-invalid-link-text', rule, {
 {{/link-to}}`,
       output: null,
       errors: [
-        { message: 'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.' },
+        {
+          message:
+            'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.',
+        },
       ],
     },
   ],

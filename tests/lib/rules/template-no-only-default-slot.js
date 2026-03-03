@@ -77,14 +77,20 @@ hbsRuleTester.run('template-no-only-default-slot', rule, {
       code: '<MyComponent><:default>what</:default></MyComponent>',
       output: '<MyComponent>what</MyComponent>',
       errors: [
-        { message: 'Only default slot used — prefer direct block content without <:default> for clarity and simplicity.' },
+        {
+          message:
+            'Only default slot used — prefer direct block content without <:default> for clarity and simplicity.',
+        },
       ],
     },
     {
       code: '<MyComponent><:default></:default></MyComponent>',
       output: '<MyComponent></MyComponent>',
       errors: [
-        { message: 'Only default slot used — prefer direct block content without <:default> for clarity and simplicity.' },
+        {
+          message:
+            'Only default slot used — prefer direct block content without <:default> for clarity and simplicity.',
+        },
       ],
     },
   ],

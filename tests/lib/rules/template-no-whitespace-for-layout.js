@@ -96,28 +96,40 @@ hbsRuleTester.run('template-no-whitespace-for-layout', rule, {
       code: 'START  FINISH',
       output: null,
       errors: [
-        { message: 'Unexpected use of whitespace for layout. Use CSS for spacing instead of multiple spaces.' },
+        {
+          message:
+            'Unexpected use of whitespace for layout. Use CSS for spacing instead of multiple spaces.',
+        },
       ],
     },
     {
       code: 'START&nbsp;&nbsp;FINISH',
       output: null,
       errors: [
-        { message: 'Unexpected use of whitespace for layout. Use CSS for spacing instead of multiple spaces.' },
+        {
+          message:
+            'Unexpected use of whitespace for layout. Use CSS for spacing instead of multiple spaces.',
+        },
       ],
     },
     {
       code: 'START&nbsp; FINISH',
       output: null,
       errors: [
-        { message: 'Unexpected use of whitespace for layout. Use CSS for spacing instead of multiple spaces.' },
+        {
+          message:
+            'Unexpected use of whitespace for layout. Use CSS for spacing instead of multiple spaces.',
+        },
       ],
     },
     {
       code: 'START &nbsp;FINISH',
       output: null,
       errors: [
-        { message: 'Unexpected use of whitespace for layout. Use CSS for spacing instead of multiple spaces.' },
+        {
+          message:
+            'Unexpected use of whitespace for layout. Use CSS for spacing instead of multiple spaces.',
+        },
       ],
     },
   ],

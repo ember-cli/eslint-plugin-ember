@@ -148,35 +148,50 @@ hbsRuleTester.run('template-no-action', rule, {
       code: '<button onclick={{action "foo"}}></button>',
       output: null,
       errors: [
-        { message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' },
+        {
+          message:
+            'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
+        },
       ],
     },
     {
       code: '<button {{action "submit"}}>Submit</button>',
       output: null,
       errors: [
-        { message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' },
+        {
+          message:
+            'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
+        },
       ],
     },
     {
       code: '<FooBar @baz={{action "submit"}} />',
       output: null,
       errors: [
-        { message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' },
+        {
+          message:
+            'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
+        },
       ],
     },
     {
       code: '{{yield (action "foo")}}',
       output: null,
       errors: [
-        { message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' },
+        {
+          message:
+            'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
+        },
       ],
     },
     {
       code: '{{yield (action this.foo)}}',
       output: null,
       errors: [
-        { message: 'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.' },
+        {
+          message:
+            'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
+        },
       ],
     },
   ],

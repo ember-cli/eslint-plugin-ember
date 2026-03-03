@@ -67,7 +67,10 @@ hbsRuleTester.run('template-link-href-attributes', rule, {
       code: '<a></a>',
       output: null,
       errors: [
-        { message: '<a> elements must have an href attribute. Use <button> for clickable elements that are not links.' },
+        {
+          message:
+            '<a> elements must have an href attribute. Use <button> for clickable elements that are not links.',
+        },
       ],
     },
   ],

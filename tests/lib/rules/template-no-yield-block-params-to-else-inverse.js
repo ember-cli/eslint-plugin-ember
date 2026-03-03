@@ -63,16 +63,12 @@ hbsRuleTester.run('template-no-yield-block-params-to-else-inverse', rule, {
     {
       code: '{{yield "some" "param" to="else"}}',
       output: null,
-      errors: [
-        { message: 'Yielding block params to else/inverse block is not allowed' },
-      ],
+      errors: [{ message: 'Yielding block params to else/inverse block is not allowed' }],
     },
     {
       code: '{{yield "some" "param" to="inverse"}}',
       output: null,
-      errors: [
-        { message: 'Yielding block params to else/inverse block is not allowed' },
-      ],
+      errors: [{ message: 'Yielding block params to else/inverse block is not allowed' }],
     },
   ],
 });

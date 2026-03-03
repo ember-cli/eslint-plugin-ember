@@ -119,21 +119,30 @@ hbsRuleTester.run('template-no-redundant-fn', rule, {
       code: '<button {{on "click" (fn this.handleClick)}}>Click Me</button>',
       output: null,
       errors: [
-        { message: 'Unnecessary use of (fn) helper. Pass the function directly instead: this.handleClick' },
+        {
+          message:
+            'Unnecessary use of (fn) helper. Pass the function directly instead: this.handleClick',
+        },
       ],
     },
     {
       code: '<SomeComponent @onClick={{fn this.handleClick}} />',
       output: null,
       errors: [
-        { message: 'Unnecessary use of (fn) helper. Pass the function directly instead: this.handleClick' },
+        {
+          message:
+            'Unnecessary use of (fn) helper. Pass the function directly instead: this.handleClick',
+        },
       ],
     },
     {
       code: '{{foo bar=(fn this.handleClick)}}>',
       output: null,
       errors: [
-        { message: 'Unnecessary use of (fn) helper. Pass the function directly instead: this.handleClick' },
+        {
+          message:
+            'Unnecessary use of (fn) helper. Pass the function directly instead: this.handleClick',
+        },
       ],
     },
   ],

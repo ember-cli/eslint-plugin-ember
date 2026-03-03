@@ -151,78 +151,81 @@ hbsRuleTester.run('template-no-invalid-meta', rule, {
     {
       code: '<meta http-equiv="refresh" content="1; url=http://www.example.com">',
       output: null,
-      errors: [
-        { message: 'A meta redirect should not have a delay value greater than zero.' },
-      ],
+      errors: [{ message: 'A meta redirect should not have a delay value greater than zero.' }],
     },
     {
       code: '<meta http-equiv="refresh" content="71999">',
       output: null,
-      errors: [
-        { message: 'A meta refresh should have a delay greater than 72000 seconds.' },
-      ],
+      errors: [{ message: 'A meta refresh should have a delay greater than 72000 seconds.' }],
     },
     {
       code: '<meta name="viewport" content="user-scalable=no">',
       output: null,
-      errors: [
-        { message: 'A meta viewport should not restrict user-scalable.' },
-      ],
+      errors: [{ message: 'A meta viewport should not restrict user-scalable.' }],
     },
     {
       code: '<meta name="viewport" content="user-scalable = no">',
       output: null,
-      errors: [
-        { message: 'A meta viewport should not restrict user-scalable.' },
-      ],
+      errors: [{ message: 'A meta viewport should not restrict user-scalable.' }],
     },
     {
       code: '<meta name="viewport" content="user-scalable= no">',
       output: null,
-      errors: [
-        { message: 'A meta viewport should not restrict user-scalable.' },
-      ],
+      errors: [{ message: 'A meta viewport should not restrict user-scalable.' }],
     },
     {
       code: '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">',
       output: null,
-      errors: [
-        { message: 'A meta viewport should not set a maximum scale on content.' },
-      ],
+      errors: [{ message: 'A meta viewport should not set a maximum scale on content.' }],
     },
     {
       code: '<meta name="viewport">',
       output: null,
       errors: [
-        { message: 'A meta content attribute must be defined if the name, property, itemprop, or http-equiv attribute is defined.' },
+        {
+          message:
+            'A meta content attribute must be defined if the name, property, itemprop, or http-equiv attribute is defined.',
+        },
       ],
     },
     {
       code: '<meta property="og:type">',
       output: null,
       errors: [
-        { message: 'A meta content attribute must be defined if the name, property, itemprop, or http-equiv attribute is defined.' },
+        {
+          message:
+            'A meta content attribute must be defined if the name, property, itemprop, or http-equiv attribute is defined.',
+        },
       ],
     },
     {
       code: '<meta itemprop="type">',
       output: null,
       errors: [
-        { message: 'A meta content attribute must be defined if the name, property, itemprop, or http-equiv attribute is defined.' },
+        {
+          message:
+            'A meta content attribute must be defined if the name, property, itemprop, or http-equiv attribute is defined.',
+        },
       ],
     },
     {
       code: '<meta http-equiv="refresh">',
       output: null,
       errors: [
-        { message: 'A meta content attribute must be defined if the name, property, itemprop, or http-equiv attribute is defined.' },
+        {
+          message:
+            'A meta content attribute must be defined if the name, property, itemprop, or http-equiv attribute is defined.',
+        },
       ],
     },
     {
       code: '<meta content="72001">',
       output: null,
       errors: [
-        { message: 'A meta content attribute cannot be defined if the name, property, itemprop, nor the http-equiv attributes are defined.' },
+        {
+          message:
+            'A meta content attribute cannot be defined if the name, property, itemprop, nor the http-equiv attributes are defined.',
+        },
       ],
     },
   ],

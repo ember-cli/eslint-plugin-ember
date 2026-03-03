@@ -110,7 +110,7 @@ const hbsRuleTester = new RuleTester({
 hbsRuleTester.run('template-no-arguments-for-html-elements', rule, {
   valid: [
     '<Input @name=1 />',
-    `{{#let (component 'foo') as |bar|}} <bar @name="1" as |n|><n/></bar> {{/let}}`,
+    '{{#let (component \'foo\') as |bar|}} <bar @name="1" as |n|><n/></bar> {{/let}}',
     '<@externalComponent />',
     `<MyComponent>
     <:slot @name="Header"></:slot>
@@ -125,21 +125,30 @@ hbsRuleTester.run('template-no-arguments-for-html-elements', rule, {
       code: '<div @value="1"></div>',
       output: null,
       errors: [
-        { message: '@arguments can only be used on components, not HTML elements. Use regular attributes instead.' },
+        {
+          message:
+            '@arguments can only be used on components, not HTML elements. Use regular attributes instead.',
+        },
       ],
     },
     {
       code: '<div @value></div>',
       output: null,
       errors: [
-        { message: '@arguments can only be used on components, not HTML elements. Use regular attributes instead.' },
+        {
+          message:
+            '@arguments can only be used on components, not HTML elements. Use regular attributes instead.',
+        },
       ],
     },
     {
       code: '<img @src="12">',
       output: null,
       errors: [
-        { message: '@arguments can only be used on components, not HTML elements. Use regular attributes instead.' },
+        {
+          message:
+            '@arguments can only be used on components, not HTML elements. Use regular attributes instead.',
+        },
       ],
     },
   ],

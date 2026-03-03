@@ -213,9 +213,7 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
     {
       code: '<table role="none"></table>',
       output: null,
-      errors: [
-        { message: 'The role "none" should not be used on the semantic element <table>.' },
-      ],
+      errors: [{ message: 'The role "none" should not be used on the semantic element <table>.' }],
     },
     {
       code: '<button role="presentation"></button>',
@@ -227,9 +225,7 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
     {
       code: '<button role="none"></button>',
       output: null,
-      errors: [
-        { message: 'The role "none" should not be used on the semantic element <button>.' },
-      ],
+      errors: [{ message: 'The role "none" should not be used on the semantic element <button>.' }],
     },
     {
       code: '<label role="presentation"></label>',
@@ -241,16 +237,12 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
     {
       code: '<label role="none"></label>',
       output: null,
-      errors: [
-        { message: 'The role "none" should not be used on the semantic element <label>.' },
-      ],
+      errors: [{ message: 'The role "none" should not be used on the semantic element <label>.' }],
     },
     {
       code: '<div role="COMMAND INTERFACE"></div>',
       output: null,
-      errors: [
-        { message: `Invalid ARIA role 'COMMAND INTERFACE'. Must be a valid ARIA role.` },
-      ],
+      errors: [{ message: "Invalid ARIA role 'COMMAND INTERFACE'. Must be a valid ARIA role." }],
     },
   ],
 });

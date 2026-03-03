@@ -84,37 +84,27 @@ hbsRuleTester.run('template-no-unnecessary-curly-parens', rule, {
     {
       code: '<FooBar @x="{{index}}X{{(someHelper foo)}}" />',
       output: '<FooBar @x="{{index}}X{{someHelper foo}}" />',
-      errors: [
-        { message: 'Unnecessary parentheses enclosing statement.' },
-      ],
+      errors: [{ message: 'Unnecessary parentheses enclosing statement.' }],
     },
     {
       code: '<FooBar @x="{{index}}XY{{(someHelper foo)}}" />',
       output: '<FooBar @x="{{index}}XY{{someHelper foo}}" />',
-      errors: [
-        { message: 'Unnecessary parentheses enclosing statement.' },
-      ],
+      errors: [{ message: 'Unnecessary parentheses enclosing statement.' }],
     },
     {
       code: '<FooBar @x="{{index}}--{{(someHelper foo)}}" />',
       output: '<FooBar @x="{{index}}--{{someHelper foo}}" />',
-      errors: [
-        { message: 'Unnecessary parentheses enclosing statement.' },
-      ],
+      errors: [{ message: 'Unnecessary parentheses enclosing statement.' }],
     },
     {
       code: '{{(concat "a" "b")}}',
       output: '{{concat "a" "b"}}',
-      errors: [
-        { message: 'Unnecessary parentheses enclosing statement.' },
-      ],
+      errors: [{ message: 'Unnecessary parentheses enclosing statement.' }],
     },
     {
       code: '{{(helper a="b")}}',
       output: '{{helper a="b"}}',
-      errors: [
-        { message: 'Unnecessary parentheses enclosing statement.' },
-      ],
+      errors: [{ message: 'Unnecessary parentheses enclosing statement.' }],
     },
   ],
 });

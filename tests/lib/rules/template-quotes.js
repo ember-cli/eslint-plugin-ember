@@ -39,25 +39,17 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-quotes', rule, {
-  valid: [
-    '{{component "test"}}',
-    '{{hello x="test"}}',
-    '<input type="checkbox">',
-  ],
+  valid: ['{{component "test"}}', '{{hello x="test"}}', '<input type="checkbox">'],
   invalid: [
     {
-      code: `{{component 'one {{thing}} two'}}`,
+      code: "{{component 'one {{thing}} two'}}",
       output: '{{component "one {{thing}} two"}}',
-      errors: [
-        { message: 'you must use double quotes in templates' },
-      ],
+      errors: [{ message: 'you must use double quotes in templates' }],
     },
     {
-      code: `<img class='a "so-called" btn {{this.otherClass}}'>`,
+      code: '<img class=\'a "so-called" btn {{this.otherClass}}\'>',
       output: null,
-      errors: [
-        { message: 'you must use double quotes in templates' },
-      ],
+      errors: [{ message: 'you must use double quotes in templates' }],
     },
   ],
 });

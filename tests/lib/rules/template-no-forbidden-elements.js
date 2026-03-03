@@ -70,30 +70,22 @@ hbsRuleTester.run('template-no-forbidden-elements', rule, {
     {
       code: '<html></html>',
       output: null,
-      errors: [
-        { message: 'Use of forbidden element <html>' },
-      ],
+      errors: [{ message: 'Use of forbidden element <html>' }],
     },
     {
       code: '<style></style>',
       output: null,
-      errors: [
-        { message: 'Use of forbidden element <style>' },
-      ],
+      errors: [{ message: 'Use of forbidden element <style>' }],
     },
     {
       code: '<meta charset="utf-8">',
       output: null,
-      errors: [
-        { message: 'Use of forbidden element <meta>' },
-      ],
+      errors: [{ message: 'Use of forbidden element <meta>' }],
     },
     {
       code: '<head><html></html></head>',
       output: null,
-      errors: [
-        { message: 'Use of forbidden element <html>' },
-      ],
+      errors: [{ message: 'Use of forbidden element <html>' }],
     },
   ],
 });

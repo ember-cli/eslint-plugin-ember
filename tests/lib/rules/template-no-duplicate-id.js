@@ -348,7 +348,7 @@ hbsRuleTester.run('template-no-duplicate-id (hbs)', rule, {
     '<div id={{"id-00"}}></div><div id={{"id-01"}}></div>',
     '<div id={{this.foo}}></div><div id={{this.bar}}></div>',
     '{{foo id="id-00"}}{{foo id="id-01"}}',
-    '<div id="partA{{partB}}{{\"partC\"}}"></div><div id="{{\"partA\"}}{{\"partB\"}}partC"></div>',
+    '<div id="partA{{partB}}{{"partC"}}"></div><div id="{{"partA"}}{{"partB"}}partC"></div>',
     `{{#if this.foo}}
         <div id="id-00"></div>
       {{else}}
@@ -394,13 +394,11 @@ hbsRuleTester.run('template-no-duplicate-id (hbs)', rule, {
       {{else}}
         <div id={{this.divId00}}></div>
       {{/if}}`,
-    {
-      code: `{{#if this.foo}}
-        <div id="partA{{partB}}{{\"partC\"}}"></div>
+    `{{#if this.foo}}
+        <div id="partA{{partB}}{{"partC"}}"></div>
       {{else}}
-        <div id="partA{{partB}}{{\"partC\"}}"></div>
+        <div id="partA{{partB}}{{"partC"}}"></div>
       {{/if}}`,
-    },
     `{{#if this.foo}}
         {{#if this.other}}
           <div id="nested"></div>
@@ -442,12 +440,12 @@ hbsRuleTester.run('template-no-duplicate-id (hbs)', rule, {
       errors: [{ messageId: 'duplicate' }],
     },
     {
-      code: '<div id="id-00"></div><div id="id-{{\"00\"}}"></div>',
+      code: '<div id="id-00"></div><div id="id-{{"00"}}"></div>',
       output: null,
       errors: [{ messageId: 'duplicate' }],
     },
     {
-      code: '<div id="id-00"></div><div id="{{\"id\"}}-00"></div>',
+      code: '<div id="id-00"></div><div id="{{"id"}}-00"></div>',
       output: null,
       errors: [{ messageId: 'duplicate' }],
     },
@@ -472,12 +470,12 @@ hbsRuleTester.run('template-no-duplicate-id (hbs)', rule, {
       errors: [{ messageId: 'duplicate' }],
     },
     {
-      code: '<div id="id-{{\"00\"}}"></div>{{#foo elementId="id-00"}}{{/foo}}',
+      code: '<div id="id-{{"00"}}"></div>{{#foo elementId="id-00"}}{{/foo}}',
       output: null,
       errors: [{ messageId: 'duplicate' }],
     },
     {
-      code: '{{#foo elementId="id-00"}}{{/foo}}<div id="id-{{\"00\"}}"></div>',
+      code: '{{#foo elementId="id-00"}}{{/foo}}<div id="id-{{"00"}}"></div>',
       output: null,
       errors: [{ messageId: 'duplicate' }],
     },
@@ -502,7 +500,7 @@ hbsRuleTester.run('template-no-duplicate-id (hbs)', rule, {
       errors: [{ messageId: 'duplicate' }],
     },
     {
-      code: '<div id="partA{{partB}}{{\"partC\"}}"></div><div id="{{\"partA\"}}{{partB}}partC"></div>',
+      code: '<div id="partA{{partB}}{{"partC"}}"></div><div id="{{"partA"}}{{partB}}partC"></div>',
       output: null,
       errors: [{ messageId: 'duplicate' }],
     },

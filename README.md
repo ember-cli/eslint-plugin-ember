@@ -160,8 +160,6 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | ✅                               | `recommended`     |
 | ![gjs logo](/docs/svgs/gjs.svg) | `recommended-gjs` |
 | ![gts logo](/docs/svgs/gts.svg) | `recommended-gts` |
-|                                 | `strict-gjs`      |
-|                                 | `strict-gts`      |
 
 <!-- end auto-generated configs list -->
 
@@ -217,86 +215,86 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Best Practices
 
-| Name                                                                                                                   | Description                                                             | 💼 | 🔧 | 💡 |
-| :--------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------- | :- | :- | :- |
-| [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md)                             | disallow setting certain attributes on builtin components               |    |    |    |
-| [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                                             | disallow usage of {{action}} modifiers                                  |    |    |    |
-| [template-no-action-on-submit-button](docs/rules/template-no-action-on-submit-button.md)                               | disallow action attribute on submit buttons                             |    |    |    |
-| [template-no-ambiguous-glimmer-paths](docs/rules/template-no-ambiguous-glimmer-paths.md)                               | disallow ambiguous path in templates                                    |    |    |    |
-| [template-no-args-paths](docs/rules/template-no-args-paths.md)                                                         | disallow @args in paths                                                 |    |    |    |
-| [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md)                       | disallow @arguments on HTML elements                                    |    |    |    |
-| [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)                         | disallow usage of Ember Array prototype extensions                      |    |    |    |
-| [template-no-at-ember-render-modifiers](docs/rules/template-no-at-ember-render-modifiers.md)                           | disallow usage of @ember/render-modifiers                               |    |    |    |
-| [template-no-bare-strings](docs/rules/template-no-bare-strings.md)                                                     | disallow bare strings in templates (require translation/localization)   |    |    |    |
-| [template-no-bare-yield](docs/rules/template-no-bare-yield.md)                                                         | disallow {{yield}} without parameters outside of contextual components  |    |    |    |
-| [template-no-block-params](docs/rules/template-no-block-params.md)                                                     | disallow yielding/invoking a component block without parameters         |    |    |    |
-| [template-no-block-params-for-html-elements](docs/rules/template-no-block-params-for-html-elements.md)                 | disallow block params on HTML elements                                  |    |    |    |
-| [template-no-builtin-form-components](docs/rules/template-no-builtin-form-components.md)                               | disallow usage of built-in form components                              |    |    |    |
-| [template-no-capital-arguments](docs/rules/template-no-capital-arguments.md)                                           | disallow capital arguments (use lowercase @arg instead of @Arg)         |    |    |    |
-| [template-no-chained-this](docs/rules/template-no-chained-this.md)                                                     | disallow redundant `this.this` in templates                             |    | 🔧 |    |
-| [template-no-class-bindings](docs/rules/template-no-class-bindings.md)                                                 | disallow classBinding/classNameBindings in templates                    |    |    |    |
-| [template-no-curly-component-invocation](docs/rules/template-no-curly-component-invocation.md)                         | disallow curly component invocation, use angle bracket syntax instead   | ✅  |    |    |
-| [template-no-debugger](docs/rules/template-no-debugger.md)                                                             | disallow {{debugger}} in templates                                      |    |    |    |
-| [template-no-duplicate-attributes](docs/rules/template-no-duplicate-attributes.md)                                     | disallow duplicate attribute names in templates                         |    | 🔧 |    |
-| [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                                                     | disallow duplicate id attributes                                        |    |    |    |
-| [template-no-dynamic-subexpression-invocations](docs/rules/template-no-dynamic-subexpression-invocations.md)           | disallow dynamic subexpression invocations                              |    |    |    |
-| [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                                   | disallow element event actions (use {{on}} modifier instead)            |    |    |    |
-| [template-no-extra-mut-helpers](docs/rules/template-no-extra-mut-helpers.md)                                           | disallow unnecessary mut helpers                                        |    |    |    |
-| [template-no-forbidden-elements](docs/rules/template-no-forbidden-elements.md)                                         | disallow specific HTML elements                                         |    |    |    |
-| [template-no-html-comments](docs/rules/template-no-html-comments.md)                                                   | disallow HTML comments in templates                                     |    | 🔧 |    |
-| [template-no-implicit-this](docs/rules/template-no-implicit-this.md)                                                   | require explicit `this` in property access                              |    |    |    |
-| [template-no-index-component-invocation](docs/rules/template-no-index-component-invocation.md)                         | disallow index component invocations                                    | ✅  |    |    |
-| [template-no-inline-event-handlers](docs/rules/template-no-inline-event-handlers.md)                                   | disallow DOM event handler attributes                                   |    |    |    |
-| [template-no-inline-linkto](docs/rules/template-no-inline-linkto.md)                                                   | disallow inline form of LinkTo component                                |    |    |    |
-| [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                                   | disallow inline styles                                                  |    |    |    |
-| [template-no-input-block](docs/rules/template-no-input-block.md)                                                       | disallow block usage of {{input}} helper                                |    |    |    |
-| [template-no-input-placeholder](docs/rules/template-no-input-placeholder.md)                                           | disallow placeholder attribute on input elements                        |    |    |    |
-| [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                                   | disallow tagName attribute on {{input}} helper                          |    |    |    |
-| [template-no-invalid-meta](docs/rules/template-no-invalid-meta.md)                                                     | disallow invalid meta tags                                              |    |    |    |
-| [template-no-log](docs/rules/template-no-log.md)                                                                       | disallow {{log}} in templates                                           |    |    |    |
-| [template-no-model-argument-in-route-templates](docs/rules/template-no-model-argument-in-route-templates.md)           | disallow @model argument in route templates                             |    | 🔧 |    |
-| [template-no-multiple-empty-lines](docs/rules/template-no-multiple-empty-lines.md)                                     | disallow multiple consecutive empty lines in templates                  |    |    |    |
-| [template-no-mut-helper](docs/rules/template-no-mut-helper.md)                                                         | disallow usage of (mut) helper                                          |    |    |    |
-| [template-no-negated-comparison](docs/rules/template-no-negated-comparison.md)                                         | disallow negated comparisons in templates                               |    |    |    |
-| [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                                           | disallow negated conditions in if/unless                                |    |    |    |
-| [template-no-nested-splattributes](docs/rules/template-no-nested-splattributes.md)                                     | disallow nested ...attributes usage                                     |    |    |    |
-| [template-no-obscure-array-access](docs/rules/template-no-obscure-array-access.md)                                     | disallow obscure array access patterns like `objectPath.@each.property` |    |    |    |
-| [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                                           | disallow obsolete HTML elements                                         |    |    |    |
-| [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                                   | disallow {{outlet}} outside of route templates                          |    |    |    |
-| [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                                     | disallow usage of ember-page-title component                            |    |    |    |
-| [template-no-passed-in-event-handlers](docs/rules/template-no-passed-in-event-handlers.md)                             | disallow passing event handlers directly as component arguments         |    |    |    |
-| [template-no-positional-data-test-selectors](docs/rules/template-no-positional-data-test-selectors.md)                 | disallow positional data-test selectors                                 |    |    |    |
-| [template-no-potential-path-strings](docs/rules/template-no-potential-path-strings.md)                                 | disallow potential path strings in templates                            |    |    |    |
-| [template-no-redundant-fn](docs/rules/template-no-redundant-fn.md)                                                     | disallow unnecessary usage of (fn) helper                               |    |    |    |
-| [template-no-restricted-invocations](docs/rules/template-no-restricted-invocations.md)                                 | disallow certain components, helpers or modifiers from being used       |    |    |    |
-| [template-no-splattributes-with-class](docs/rules/template-no-splattributes-with-class.md)                             | disallow splattributes with class attribute                             | ✅  |    |    |
-| [template-no-this-in-template-only-components](docs/rules/template-no-this-in-template-only-components.md)             | disallow this in template-only components (gjs/gts)                     |    | 🔧 |    |
-| [template-no-trailing-spaces](docs/rules/template-no-trailing-spaces.md)                                               | disallow trailing whitespace at the end of lines in templates           |    | 🔧 |    |
-| [template-no-unavailable-this](docs/rules/template-no-unavailable-this.md)                                             | disallow `this` in templates that are not inside a class or function    |    |    |    |
-| [template-no-unnecessary-component-helper](docs/rules/template-no-unnecessary-component-helper.md)                     | disallow unnecessary component helper                                   |    | 🔧 |    |
-| [template-no-unnecessary-concat](docs/rules/template-no-unnecessary-concat.md)                                         | disallow unnecessary string concatenation                               |    | 🔧 |    |
-| [template-no-unnecessary-curly-parens](docs/rules/template-no-unnecessary-curly-parens.md)                             | disallow unnecessary parentheses enclosing statements in curlies        |    | 🔧 |    |
-| [template-no-unnecessary-service-injection-argument](docs/rules/template-no-unnecessary-service-injection-argument.md) | disallow unnecessary service injection argument                         |    |    |    |
-| [template-no-unused-block-params](docs/rules/template-no-unused-block-params.md)                                       | disallow unused block parameters in templates                           |    |    |    |
-| [template-no-valueless-arguments](docs/rules/template-no-valueless-arguments.md)                                       | disallow valueless named arguments                                      |    |    |    |
-| [template-no-whitespace-for-layout](docs/rules/template-no-whitespace-for-layout.md)                                   | disallow using whitespace for layout purposes                           |    |    |    |
-| [template-no-yield-block-params-to-else-inverse](docs/rules/template-no-yield-block-params-to-else-inverse.md)         | disallow yielding block params to else or inverse block                 | ✅  |    |    |
-| [template-no-yield-only](docs/rules/template-no-yield-only.md)                                                         | disallow components that only yield                                     |    |    |    |
-| [template-no-yield-to-default](docs/rules/template-no-yield-to-default.md)                                             | disallow yield to default block                                         |    |    |    |
-| [template-require-button-type](docs/rules/template-require-button-type.md)                                             | require button elements to have a valid type attribute                  |    | 🔧 |    |
-| [template-require-each-key](docs/rules/template-require-each-key.md)                                                   | require key attribute in {{#each}} loops                                |    |    |    |
-| [template-require-form-method](docs/rules/template-require-form-method.md)                                             | require form method attribute                                           |    |    |    |
-| [template-require-has-block-helper](docs/rules/template-require-has-block-helper.md)                                   | require (has-block) helper usage instead of hasBlock property           |    |    |    |
-| [template-require-iframe-src-attribute](docs/rules/template-require-iframe-src-attribute.md)                           | require iframe elements to have src attribute                           | ✅  |    |    |
-| [template-require-splattributes](docs/rules/template-require-splattributes.md)                                         | require splattributes usage in component templates                      | ✅  |    |    |
-| [template-require-strict-mode](docs/rules/template-require-strict-mode.md)                                             | require templates to be in strict mode                                  |    |    |    |
-| [template-require-valid-named-block-naming-format](docs/rules/template-require-valid-named-block-naming-format.md)     | require valid named block naming format                                 | ✅  |    |    |
-| [template-self-closing-void-elements](docs/rules/template-self-closing-void-elements.md)                               | require self-closing on void elements                                   |    | 🔧 |    |
-| [template-simple-modifiers](docs/rules/template-simple-modifiers.md)                                                   | require simple modifier syntax                                          | ✅  |    |    |
-| [template-simple-unless](docs/rules/template-simple-unless.md)                                                         | require simple conditions in unless blocks                              |    |    |    |
-| [template-sort-invocations](docs/rules/template-sort-invocations.md)                                                   | require sorted attributes and modifiers                                 |    |    |    |
-| [template-splat-attributes-only](docs/rules/template-splat-attributes-only.md)                                         | disallow ...spread other than ...attributes                             |    |    |    |
-| [template-style-concatenation](docs/rules/template-style-concatenation.md)                                             | disallow string concatenation in inline styles                          |    |    |    |
+| Name                                                                                                                   | Description                                                                  | 💼 | 🔧 | 💡 |
+| :--------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------- | :- | :- | :- |
+| [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md)                             | disallow setting certain attributes on builtin components                    |    |    |    |
+| [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                                             | disallow usage of {{action}} modifiers                                       |    |    |    |
+| [template-no-action-on-submit-button](docs/rules/template-no-action-on-submit-button.md)                               | disallow action attribute on submit buttons                                  |    |    |    |
+| [template-no-ambiguous-glimmer-paths](docs/rules/template-no-ambiguous-glimmer-paths.md)                               | disallow ambiguous path in templates                                         |    |    |    |
+| [template-no-args-paths](docs/rules/template-no-args-paths.md)                                                         | disallow @args in paths                                                      |    |    |    |
+| [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md)                       | disallow @arguments on HTML elements                                         |    |    |    |
+| [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)                         | disallow usage of Ember Array prototype extensions                           |    |    |    |
+| [template-no-at-ember-render-modifiers](docs/rules/template-no-at-ember-render-modifiers.md)                           | disallow usage of @ember/render-modifiers                                    |    |    |    |
+| [template-no-bare-strings](docs/rules/template-no-bare-strings.md)                                                     | disallow bare strings in templates (require translation/localization)        |    |    |    |
+| [template-no-bare-yield](docs/rules/template-no-bare-yield.md)                                                         | disallow {{yield}} without parameters outside of contextual components       |    |    |    |
+| [template-no-block-params](docs/rules/template-no-block-params.md)                                                     | disallow yielding/invoking a component block without parameters              |    |    |    |
+| [template-no-block-params-for-html-elements](docs/rules/template-no-block-params-for-html-elements.md)                 | disallow block params on HTML elements                                       |    |    |    |
+| [template-no-builtin-form-components](docs/rules/template-no-builtin-form-components.md)                               | disallow usage of built-in form components                                   |    |    |    |
+| [template-no-capital-arguments](docs/rules/template-no-capital-arguments.md)                                           | disallow capital arguments (use lowercase @arg instead of @Arg)              |    |    |    |
+| [template-no-chained-this](docs/rules/template-no-chained-this.md)                                                     | disallow redundant `this.this` in templates                                  |    | 🔧 |    |
+| [template-no-class-bindings](docs/rules/template-no-class-bindings.md)                                                 | disallow passing classBinding or classNameBindings as arguments in templates |    |    |    |
+| [template-no-curly-component-invocation](docs/rules/template-no-curly-component-invocation.md)                         | disallow curly component invocation, use angle bracket syntax instead        | ✅  |    |    |
+| [template-no-debugger](docs/rules/template-no-debugger.md)                                                             | disallow {{debugger}} in templates                                           |    |    |    |
+| [template-no-duplicate-attributes](docs/rules/template-no-duplicate-attributes.md)                                     | disallow duplicate attribute names in templates                              |    | 🔧 |    |
+| [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                                                     | disallow duplicate id attributes                                             |    |    |    |
+| [template-no-dynamic-subexpression-invocations](docs/rules/template-no-dynamic-subexpression-invocations.md)           | disallow dynamic subexpression invocations                                   |    |    |    |
+| [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                                   | disallow element event actions (use {{on}} modifier instead)                 |    |    |    |
+| [template-no-extra-mut-helpers](docs/rules/template-no-extra-mut-helpers.md)                                           | disallow unnecessary mut helpers                                             |    |    |    |
+| [template-no-forbidden-elements](docs/rules/template-no-forbidden-elements.md)                                         | disallow specific HTML elements                                              |    |    |    |
+| [template-no-html-comments](docs/rules/template-no-html-comments.md)                                                   | disallow HTML comments in templates                                          |    | 🔧 |    |
+| [template-no-implicit-this](docs/rules/template-no-implicit-this.md)                                                   | require explicit `this` in property access                                   |    |    |    |
+| [template-no-index-component-invocation](docs/rules/template-no-index-component-invocation.md)                         | disallow index component invocations                                         | ✅  |    |    |
+| [template-no-inline-event-handlers](docs/rules/template-no-inline-event-handlers.md)                                   | disallow DOM event handler attributes                                        |    |    |    |
+| [template-no-inline-linkto](docs/rules/template-no-inline-linkto.md)                                                   | disallow inline form of LinkTo component                                     |    |    |    |
+| [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                                   | disallow inline styles                                                       |    |    |    |
+| [template-no-input-block](docs/rules/template-no-input-block.md)                                                       | disallow block usage of {{input}} helper                                     |    |    |    |
+| [template-no-input-placeholder](docs/rules/template-no-input-placeholder.md)                                           | disallow placeholder attribute on input elements                             |    |    |    |
+| [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                                   | disallow tagName attribute on {{input}} helper                               |    |    |    |
+| [template-no-invalid-meta](docs/rules/template-no-invalid-meta.md)                                                     | disallow invalid meta tags                                                   |    |    |    |
+| [template-no-log](docs/rules/template-no-log.md)                                                                       | disallow {{log}} in templates                                                |    |    |    |
+| [template-no-model-argument-in-route-templates](docs/rules/template-no-model-argument-in-route-templates.md)           | disallow @model argument in route templates                                  |    | 🔧 |    |
+| [template-no-multiple-empty-lines](docs/rules/template-no-multiple-empty-lines.md)                                     | disallow multiple consecutive empty lines in templates                       |    |    |    |
+| [template-no-mut-helper](docs/rules/template-no-mut-helper.md)                                                         | disallow usage of (mut) helper                                               |    |    |    |
+| [template-no-negated-comparison](docs/rules/template-no-negated-comparison.md)                                         | disallow negated comparisons in templates                                    |    |    |    |
+| [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                                           | disallow negated conditions in if/unless                                     |    |    |    |
+| [template-no-nested-splattributes](docs/rules/template-no-nested-splattributes.md)                                     | disallow nested ...attributes usage                                          |    |    |    |
+| [template-no-obscure-array-access](docs/rules/template-no-obscure-array-access.md)                                     | disallow obscure array access patterns like `objectPath.@each.property`      |    |    |    |
+| [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                                           | disallow obsolete HTML elements                                              |    |    |    |
+| [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                                   | disallow {{outlet}} outside of route templates                               |    |    |    |
+| [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                                     | disallow usage of ember-page-title component                                 |    |    |    |
+| [template-no-passed-in-event-handlers](docs/rules/template-no-passed-in-event-handlers.md)                             | disallow passing event handlers directly as component arguments              |    |    |    |
+| [template-no-positional-data-test-selectors](docs/rules/template-no-positional-data-test-selectors.md)                 | disallow positional data-test selectors                                      |    |    |    |
+| [template-no-potential-path-strings](docs/rules/template-no-potential-path-strings.md)                                 | disallow potential path strings in templates                                 |    |    |    |
+| [template-no-redundant-fn](docs/rules/template-no-redundant-fn.md)                                                     | disallow unnecessary usage of (fn) helper                                    |    |    |    |
+| [template-no-restricted-invocations](docs/rules/template-no-restricted-invocations.md)                                 | disallow certain components, helpers or modifiers from being used            |    |    |    |
+| [template-no-splattributes-with-class](docs/rules/template-no-splattributes-with-class.md)                             | disallow splattributes with class attribute                                  | ✅  |    |    |
+| [template-no-this-in-template-only-components](docs/rules/template-no-this-in-template-only-components.md)             | disallow this in template-only components (gjs/gts)                          |    | 🔧 |    |
+| [template-no-trailing-spaces](docs/rules/template-no-trailing-spaces.md)                                               | disallow trailing whitespace at the end of lines in templates                |    | 🔧 |    |
+| [template-no-unavailable-this](docs/rules/template-no-unavailable-this.md)                                             | disallow `this` in templates that are not inside a class or function         |    |    |    |
+| [template-no-unnecessary-component-helper](docs/rules/template-no-unnecessary-component-helper.md)                     | disallow unnecessary component helper                                        |    | 🔧 |    |
+| [template-no-unnecessary-concat](docs/rules/template-no-unnecessary-concat.md)                                         | disallow unnecessary string concatenation                                    |    | 🔧 |    |
+| [template-no-unnecessary-curly-parens](docs/rules/template-no-unnecessary-curly-parens.md)                             | disallow unnecessary parentheses enclosing statements in curlies             |    | 🔧 |    |
+| [template-no-unnecessary-service-injection-argument](docs/rules/template-no-unnecessary-service-injection-argument.md) | disallow unnecessary service injection argument                              |    |    |    |
+| [template-no-unused-block-params](docs/rules/template-no-unused-block-params.md)                                       | disallow unused block parameters in templates                                |    |    |    |
+| [template-no-valueless-arguments](docs/rules/template-no-valueless-arguments.md)                                       | disallow valueless named arguments                                           |    |    |    |
+| [template-no-whitespace-for-layout](docs/rules/template-no-whitespace-for-layout.md)                                   | disallow using whitespace for layout purposes                                |    |    |    |
+| [template-no-yield-block-params-to-else-inverse](docs/rules/template-no-yield-block-params-to-else-inverse.md)         | disallow yielding block params to else or inverse block                      | ✅  |    |    |
+| [template-no-yield-only](docs/rules/template-no-yield-only.md)                                                         | disallow components that only yield                                          |    |    |    |
+| [template-no-yield-to-default](docs/rules/template-no-yield-to-default.md)                                             | disallow yield to default block                                              |    |    |    |
+| [template-require-button-type](docs/rules/template-require-button-type.md)                                             | require button elements to have a valid type attribute                       |    | 🔧 |    |
+| [template-require-each-key](docs/rules/template-require-each-key.md)                                                   | require key attribute in {{#each}} loops                                     |    |    |    |
+| [template-require-form-method](docs/rules/template-require-form-method.md)                                             | require form method attribute                                                |    |    |    |
+| [template-require-has-block-helper](docs/rules/template-require-has-block-helper.md)                                   | require (has-block) helper usage instead of hasBlock property                |    |    |    |
+| [template-require-iframe-src-attribute](docs/rules/template-require-iframe-src-attribute.md)                           | require iframe elements to have src attribute                                | ✅  |    |    |
+| [template-require-splattributes](docs/rules/template-require-splattributes.md)                                         | require splattributes usage in component templates                           | ✅  |    |    |
+| [template-require-strict-mode](docs/rules/template-require-strict-mode.md)                                             | require templates to be in strict mode                                       |    |    |    |
+| [template-require-valid-named-block-naming-format](docs/rules/template-require-valid-named-block-naming-format.md)     | require valid named block naming format                                      | ✅  |    |    |
+| [template-self-closing-void-elements](docs/rules/template-self-closing-void-elements.md)                               | require self-closing on void elements                                        |    | 🔧 |    |
+| [template-simple-modifiers](docs/rules/template-simple-modifiers.md)                                                   | require simple modifier syntax                                               | ✅  |    |    |
+| [template-simple-unless](docs/rules/template-simple-unless.md)                                                         | require simple conditions in unless blocks                                   |    |    |    |
+| [template-sort-invocations](docs/rules/template-sort-invocations.md)                                                   | require sorted attributes and modifiers                                      |    |    |    |
+| [template-splat-attributes-only](docs/rules/template-splat-attributes-only.md)                                         | disallow ...spread other than ...attributes                                  |    |    |    |
+| [template-style-concatenation](docs/rules/template-style-concatenation.md)                                             | disallow string concatenation in inline styles                               |    |    |    |
 
 ### Components
 

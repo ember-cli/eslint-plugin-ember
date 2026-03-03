@@ -155,7 +155,8 @@ hbsRuleTester.run('template-no-duplicate-attributes (hbs)', rule, {
     },
     {
       code: '{{#my-component firstName=firstName  lastName=lastName firstName=firstName as |fullName|}} {{fullName}}{{/my-component}}',
-      output: '{{#my-component firstName=firstName  lastName=lastName as |fullName|}} {{fullName}}{{/my-component}}',
+      output:
+        '{{#my-component firstName=firstName  lastName=lastName as |fullName|}} {{fullName}}{{/my-component}}',
       errors: [{ messageId: 'duplicateBlock', data: { name: 'firstName' } }],
     },
     {
@@ -170,7 +171,8 @@ hbsRuleTester.run('template-no-duplicate-attributes (hbs)', rule, {
     },
     {
       code: '{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName firstName=firstName) age=age)}}',
-      output: '{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName) age=age)}}',
+      output:
+        '{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName) age=age)}}',
       errors: [{ messageId: 'duplicateSubExpr', data: { name: 'firstName' } }],
     },
   ],

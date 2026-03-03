@@ -80,11 +80,7 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-attrs-in-components (hbs)', rule, {
-  valid: [
-    '<div></div>',
-    '{{foo}}',
-    '<div>{{foo.bar}}</div>',
-  ],
+  valid: ['<div></div>', '{{foo}}', '<div>{{foo.bar}}</div>'],
   invalid: [
     {
       code: '{{attrs.foo}}',

@@ -53,23 +53,17 @@ hbsRuleTester.run('template-no-valueless-arguments', rule, {
     {
       code: '<SomeComponent @valueless />',
       output: null,
-      errors: [
-        { message: 'Named arguments should have an explicitly assigned value.' },
-      ],
+      errors: [{ message: 'Named arguments should have an explicitly assigned value.' }],
     },
     {
       code: '<SomeComponent @valuelessByAccident{{this.canBeAModifier}} />',
       output: null,
-      errors: [
-        { message: 'Named arguments should have an explicitly assigned value.' },
-      ],
+      errors: [{ message: 'Named arguments should have an explicitly assigned value.' }],
     },
     {
       code: '<SomeComponent @valuelessByAccident{{@canBeAModifier}} />',
       output: null,
-      errors: [
-        { message: 'Named arguments should have an explicitly assigned value.' },
-      ],
+      errors: [{ message: 'Named arguments should have an explicitly assigned value.' }],
     },
   ],
 });

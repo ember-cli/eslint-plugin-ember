@@ -63,21 +63,30 @@ hbsRuleTester.run('template-no-this-in-template-only-components', rule, {
       code: '{{my-component action=(action this.myAction)}}',
       output: '{{my-component action=(action @myAction)}}',
       errors: [
-        { message: `Usage of 'this' in path 'this.myAction' is not allowed in a template-only component. Use '@myAction' if it is a named argument.` },
+        {
+          message:
+            "Usage of 'this' in path 'this.myAction' is not allowed in a template-only component. Use '@myAction' if it is a named argument.",
+        },
       ],
     },
     {
       code: '<MyComponent @prop={{can "edit" this.model}} />',
       output: '<MyComponent @prop={{can "edit" @model}} />',
       errors: [
-        { message: `Usage of 'this' in path 'this.model' is not allowed in a template-only component. Use '@model' if it is a named argument.` },
+        {
+          message:
+            "Usage of 'this' in path 'this.model' is not allowed in a template-only component. Use '@model' if it is a named argument.",
+        },
       ],
     },
     {
       code: '{{input id=(concat this.elementId "-username")}}',
       output: null,
       errors: [
-        { message: `Usage of 'this' in path 'this.elementId' is not allowed in a template-only component. Use '@elementId' if it is a named argument.` },
+        {
+          message:
+            "Usage of 'this' in path 'this.elementId' is not allowed in a template-only component. Use '@elementId' if it is a named argument.",
+        },
       ],
     },
   ],

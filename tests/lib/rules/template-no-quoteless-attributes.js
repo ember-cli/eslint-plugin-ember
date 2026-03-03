@@ -62,16 +62,12 @@ hbsRuleTester.run('template-no-quoteless-attributes', rule, {
     {
       code: '<div data-foo=asdf></div>',
       output: '<div data-foo="asdf"></div>',
-      errors: [
-        { message: 'Attribute data-foo should be either quoted or wrapped in mustaches' },
-      ],
+      errors: [{ message: 'Attribute data-foo should be either quoted or wrapped in mustaches' }],
     },
     {
       code: '<SomeThing @blah=asdf />',
       output: '<SomeThing @blah="asdf" />',
-      errors: [
-        { message: 'Argument @blah should be either quoted or wrapped in mustaches' },
-      ],
+      errors: [{ message: 'Argument @blah should be either quoted or wrapped in mustaches' }],
     },
   ],
 });

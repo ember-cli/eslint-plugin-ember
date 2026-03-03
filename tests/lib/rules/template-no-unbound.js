@@ -35,24 +35,17 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-unbound', rule, {
-  valid: [
-    '{{foo}}',
-    '{{button}}',
-  ],
+  valid: ['{{foo}}', '{{button}}'],
   invalid: [
     {
       code: '{{unbound foo}}',
       output: null,
-      errors: [
-        { message: 'Unexpected unbound helper usage.' },
-      ],
+      errors: [{ message: 'Unexpected unbound helper usage.' }],
     },
     {
       code: '{{my-thing foo=(unbound foo)}}',
       output: null,
-      errors: [
-        { message: 'Unexpected unbound helper usage.' },
-      ],
+      errors: [{ message: 'Unexpected unbound helper usage.' }],
     },
   ],
 });

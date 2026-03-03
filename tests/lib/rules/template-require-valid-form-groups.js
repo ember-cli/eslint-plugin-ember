@@ -100,16 +100,28 @@ hbsRuleTester.run('template-require-valid-form-groups', rule, {
       code: '<div><input name="a1">Chicago Zoey<input name="a2">Chicago Tom</div>',
       output: null,
       errors: [
-        { message: 'Grouped form controls should have appropriate semantics such as fieldset and legend or WAI-ARIA labels' },
-        { message: 'Grouped form controls should have appropriate semantics such as fieldset and legend or WAI-ARIA labels' },
+        {
+          message:
+            'Grouped form controls should have appropriate semantics such as fieldset and legend or WAI-ARIA labels',
+        },
+        {
+          message:
+            'Grouped form controls should have appropriate semantics such as fieldset and legend or WAI-ARIA labels',
+        },
       ],
     },
     {
       code: '<div><input id="prefMascot-Zoey"><label for="prefMascot-Zoey" /><input id="prefMascot-tom"><label for="prefMascot-tom" /></div>',
       output: null,
       errors: [
-        { message: 'Grouped form controls should have appropriate semantics such as fieldset and legend or WAI-ARIA labels' },
-        { message: 'Grouped form controls should have appropriate semantics such as fieldset and legend or WAI-ARIA labels' },
+        {
+          message:
+            'Grouped form controls should have appropriate semantics such as fieldset and legend or WAI-ARIA labels',
+        },
+        {
+          message:
+            'Grouped form controls should have appropriate semantics such as fieldset and legend or WAI-ARIA labels',
+        },
       ],
     },
   ],

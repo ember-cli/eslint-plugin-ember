@@ -180,79 +180,57 @@ hbsRuleTester.run('template-no-mut-helper', rule, {
     {
       code: '<MyComponent @toggled={{mut this.showAggregatedLine}}/>',
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
     {
       code: '{{my-component value=(mut this.secondaryProfileHeadline)}}',
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
     {
       code: '<MyComponent {{action (mut this.isDropdownOpen) false}}/>',
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
     {
       code: '<MyComponent @dismissModal={{action (mut this.isRequestExpiredModalOpen) false}}/>',
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
     {
       code: '<MyComponent @click={{action (mut this.isCardCollapsed) (if this.isCardCollapsed false true)}}/>',
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
     {
       code: '<MyComponent onclick={{fn (mut this.expandVoluntarySelfIdHelpText) true}}/>',
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
     {
       code: '<MyComponent @onVisibilityChange={{fn (mut this.isDropdownOpen)}}/>',
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
     {
       code: '{{my-component click=(action (mut this.isOpen) false)}}',
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
     {
       code: '{{my-component click=(action (mut this.isLegalTextExpanded) (not this.isLegalTextExpanded))}}',
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
     {
       code: '{{my-component onVisibilityChange=(action (mut this.isDropdownOpen))}}',
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
     {
       code: '{{my-component click=(fn (mut this.showManageEventsModal) true)}}',
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
     {
       code: `<MyComponent
@@ -261,9 +239,7 @@ hbsRuleTester.run('template-no-mut-helper', rule, {
           }}
         />`,
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
     {
       code: `<MyComponent
@@ -273,16 +249,12 @@ hbsRuleTester.run('template-no-mut-helper', rule, {
           }}
         />`,
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
     {
       code: '<MyComponent onchange={{action (mut this.contactUsSection.description) value="target.value"}}/>',
       output: null,
-      errors: [
-        { message: 'Do not use the (mut) helper. Use regular setters or actions instead.' },
-      ],
+      errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
   ],
 });

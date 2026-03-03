@@ -73,9 +73,9 @@ const hbsRuleTester = new RuleTester({
 
 hbsRuleTester.run('template-simple-unless', rule, {
   valid: [
-    `{{#unless isRed}}I'm blue, da ba dee da ba daa{{/unless}}`,
-    `<div class="{{unless foo 'no-foo'}}"></div>`,
-    `<div class="{{if foo 'foo'}}"></div>`,
+    "{{#unless isRed}}I'm blue, da ba dee da ba daa{{/unless}}",
+    '<div class="{{unless foo \'no-foo\'}}"></div>',
+    '<div class="{{if foo \'foo\'}}"></div>',
     '{{unrelated-mustache-without-params}}',
     '{{#if foo}}{{else}}{{/if}}',
     '{{#if foo}}{{else}}{{#unless bar}}{{/unless}}{{/if}}',
@@ -86,38 +86,53 @@ hbsRuleTester.run('template-simple-unless', rule, {
   ],
   invalid: [
     {
-      code: `{{unless (if (or true))  'Please no'}}`,
+      code: "{{unless (if (or true))  'Please no'}}",
       output: null,
       errors: [
-        { message: 'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0' },
+        {
+          message:
+            'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0',
+        },
       ],
     },
     {
-      code: `{{unless (if true)  'Please no'}}`,
+      code: "{{unless (if true)  'Please no'}}",
       output: null,
       errors: [
-        { message: 'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0' },
+        {
+          message:
+            'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0',
+        },
       ],
     },
     {
-      code: `{{unless (and isBad isAwful)  'notBadAndAwful'}}`,
+      code: "{{unless (and isBad isAwful)  'notBadAndAwful'}}",
       output: null,
       errors: [
-        { message: 'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0' },
+        {
+          message:
+            'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0',
+        },
       ],
     },
     {
       code: '<img class={{unless (not condition) "some-class"}}>',
       output: null,
       errors: [
-        { message: 'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0' },
+        {
+          message:
+            'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0',
+        },
       ],
     },
     {
       code: '<img class={{unless (one condition) "some-class" "other-class"}}>',
       output: null,
       errors: [
-        { message: 'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0' },
+        {
+          message:
+            'Using {{unless}} in combination with other helpers should be avoided. MaxHelpers: 0',
+        },
       ],
     },
   ],

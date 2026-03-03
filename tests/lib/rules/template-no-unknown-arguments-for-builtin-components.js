@@ -178,29 +178,31 @@ hbsRuleTester.run('template-no-unknown-arguments-for-builtin-components', rule, 
       code: '<Input @valuee={{this.content}} />',
       output: null,
       errors: [
-        { message: '"@valuee" is not a known argument for the <Input /> component. Did you mean "@value"?' },
+        {
+          message:
+            '"@valuee" is not a known argument for the <Input /> component. Did you mean "@value"?',
+        },
       ],
     },
     {
       code: '<Textarea @valuee={{this.content}} />',
       output: null,
       errors: [
-        { message: '"@valuee" is not a known argument for the <Textarea /> component. Did you mean "@value"?' },
+        {
+          message:
+            '"@valuee" is not a known argument for the <Textarea /> component. Did you mean "@value"?',
+        },
       ],
     },
     {
       code: '<LinkTo @route="foo" @valuee={{this.content}} />',
       output: null,
-      errors: [
-        { message: '"@valuee" is not a known argument for the <LinkTo /> component.' },
-      ],
+      errors: [{ message: '"@valuee" is not a known argument for the <LinkTo /> component.' }],
     },
     {
       code: '<LinkTo @route="foo" @madel={{this.content}} />',
       output: null,
-      errors: [
-        { message: '"@madel" is not a known argument for the <LinkTo /> component.' },
-      ],
+      errors: [{ message: '"@madel" is not a known argument for the <LinkTo /> component.' }],
     },
     {
       code: '<LinkTo @route="info" @model={{this.model}} @models={{this.models}} />',
@@ -213,79 +215,90 @@ hbsRuleTester.run('template-no-unknown-arguments-for-builtin-components', rule, 
     {
       code: '<LinkTo @route="info" @model={{this.model}} @tagName="button" />',
       output: null,
-      errors: [
-        { message: 'Passing the "@tagName" argument to <LinkTo /> is deprecated.' },
-      ],
+      errors: [{ message: 'Passing the "@tagName" argument to <LinkTo /> is deprecated.' }],
     },
     {
       code: '<LinkTo @route="info" @model={{this.model}} @elementId="superstar" />',
       output: null,
       errors: [
-        { message: `Passing the "@elementId" argument to <LinkTo /> is deprecated.
-Instead, please pass the attribute directly, i.e. "<LinkTo id={{...}} />" instead of "<LinkTo @elementId={{...}} />".` },
+        {
+          message: `Passing the "@elementId" argument to <LinkTo /> is deprecated.
+Instead, please pass the attribute directly, i.e. "<LinkTo id={{...}} />" instead of "<LinkTo @elementId={{...}} />".`,
+        },
       ],
     },
     {
       code: '<LinkTo @route="info" @model={{this.model}} @doubleClick={{action this.click}} />',
       output: null,
       errors: [
-        { message: `Passing the "@doubleClick" argument to <LinkTo /> is deprecated.
-Instead, please use the {{on}} modifier, i.e. "<LinkTo {{on "dblclick" ...}} />" instead of "<LinkTo @doubleClick={{...}} />".` },
+        {
+          message: `Passing the "@doubleClick" argument to <LinkTo /> is deprecated.
+Instead, please use the {{on}} modifier, i.e. "<LinkTo {{on "dblclick" ...}} />" instead of "<LinkTo @doubleClick={{...}} />".`,
+        },
       ],
     },
     {
       code: '<Input @value="1" @bubbles={{false}} />',
       output: null,
-      errors: [
-        { message: 'Passing the "@bubbles" argument to <Input /> is deprecated.' },
-      ],
+      errors: [{ message: 'Passing the "@bubbles" argument to <Input /> is deprecated.' }],
     },
     {
       code: '<Input @value="1" @elementId="42" @disabled="disabled" />',
       output: null,
       errors: [
-        { message: `Passing the "@elementId" argument to <Input /> is deprecated.
-Instead, please pass the attribute directly, i.e. "<Input id={{...}} />" instead of "<Input @elementId={{...}} />".` },
-        { message: `Passing the "@disabled" argument to <Input /> is deprecated.
-Instead, please pass the attribute directly, i.e. "<Input disabled={{...}} />" instead of "<Input @disabled={{...}} />".` },
+        {
+          message: `Passing the "@elementId" argument to <Input /> is deprecated.
+Instead, please pass the attribute directly, i.e. "<Input id={{...}} />" instead of "<Input @elementId={{...}} />".`,
+        },
+        {
+          message: `Passing the "@disabled" argument to <Input /> is deprecated.
+Instead, please pass the attribute directly, i.e. "<Input disabled={{...}} />" instead of "<Input @disabled={{...}} />".`,
+        },
       ],
     },
     {
       code: '<Input @value="1" @key-up={{ths.onKeyUp}} />',
       output: null,
       errors: [
-        { message: `Passing the "@key-up" argument to <Input /> is deprecated.
-Instead, please use the {{on}} modifier, i.e. "<Input {{on "keyup" ...}} />" instead of "<Input @key-up={{...}} />".` },
+        {
+          message: `Passing the "@key-up" argument to <Input /> is deprecated.
+Instead, please use the {{on}} modifier, i.e. "<Input {{on "keyup" ...}} />" instead of "<Input @key-up={{...}} />".`,
+        },
       ],
     },
     {
       code: '<Textarea @value="1" @bubbles={{false}} />',
       output: null,
-      errors: [
-        { message: 'Passing the "@bubbles" argument to <Textarea /> is deprecated.' },
-      ],
+      errors: [{ message: 'Passing the "@bubbles" argument to <Textarea /> is deprecated.' }],
     },
     {
       code: '<Textarea @value="1" @elementId="42" />',
       output: null,
       errors: [
-        { message: `Passing the "@elementId" argument to <Textarea /> is deprecated.
-Instead, please pass the attribute directly, i.e. "<Textarea id={{...}} />" instead of "<Textarea @elementId={{...}} />".` },
+        {
+          message: `Passing the "@elementId" argument to <Textarea /> is deprecated.
+Instead, please pass the attribute directly, i.e. "<Textarea id={{...}} />" instead of "<Textarea @elementId={{...}} />".`,
+        },
       ],
     },
     {
       code: '<Textarea @value="1" @key-up={{ths.onKeyUp}} />',
       output: null,
       errors: [
-        { message: `Passing the "@key-up" argument to <Textarea /> is deprecated.
-Instead, please use the {{on}} modifier, i.e. "<Textarea {{on "keyup" ...}} />" instead of "<Textarea @key-up={{...}} />".` },
+        {
+          message: `Passing the "@key-up" argument to <Textarea /> is deprecated.
+Instead, please use the {{on}} modifier, i.e. "<Textarea {{on "keyup" ...}} />" instead of "<Textarea @key-up={{...}} />".`,
+        },
       ],
     },
     {
       code: ' <LinkTo class="auk-search-results-list__item" @route={{@route}} @models={{this.models}} @random="test" @query={{@query}} ...attributes >Hello</LinkTo>',
       output: null,
       errors: [
-        { message: '"@random" is not a known argument for the <LinkTo /> component. Did you mean "@dragEnd"?' },
+        {
+          message:
+            '"@random" is not a known argument for the <LinkTo /> component. Did you mean "@dragEnd"?',
+        },
       ],
     },
   ],

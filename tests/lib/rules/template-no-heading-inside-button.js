@@ -95,58 +95,42 @@ hbsRuleTester.run('template-no-heading-inside-button', rule, {
     {
       code: '<button><h1>Page Title</h1></button>',
       output: null,
-      errors: [
-        { message: 'Buttons should not contain heading elements' },
-      ],
+      errors: [{ message: 'Buttons should not contain heading elements' }],
     },
     {
       code: '<button><h2>Heading Title</h2></button>',
       output: null,
-      errors: [
-        { message: 'Buttons should not contain heading elements' },
-      ],
+      errors: [{ message: 'Buttons should not contain heading elements' }],
     },
     {
       code: '<button><h3>Heading Title</h3></button>',
       output: null,
-      errors: [
-        { message: 'Buttons should not contain heading elements' },
-      ],
+      errors: [{ message: 'Buttons should not contain heading elements' }],
     },
     {
       code: '<button><h4>Heading Title</h4></button>',
       output: null,
-      errors: [
-        { message: 'Buttons should not contain heading elements' },
-      ],
+      errors: [{ message: 'Buttons should not contain heading elements' }],
     },
     {
       code: '<button><h5>Heading Title</h5></button>',
       output: null,
-      errors: [
-        { message: 'Buttons should not contain heading elements' },
-      ],
+      errors: [{ message: 'Buttons should not contain heading elements' }],
     },
     {
       code: '<button><div><h1>Heading Title</h1></div></button>',
       output: null,
-      errors: [
-        { message: 'Buttons should not contain heading elements' },
-      ],
+      errors: [{ message: 'Buttons should not contain heading elements' }],
     },
     {
       code: '<button><h6>Heading Title</h6></button>',
       output: null,
-      errors: [
-        { message: 'Buttons should not contain heading elements' },
-      ],
+      errors: [{ message: 'Buttons should not contain heading elements' }],
     },
     {
       code: '<div role="button"><h6>Heading in a div with a role of button</h6></div>',
       output: null,
-      errors: [
-        { message: 'Buttons should not contain heading elements' },
-      ],
+      errors: [{ message: 'Buttons should not contain heading elements' }],
     },
   ],
 });

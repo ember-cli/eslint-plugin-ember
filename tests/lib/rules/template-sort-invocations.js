@@ -835,9 +835,7 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         {{/ui/button}}
       `,
       output: null,
-      errors: [
-        { message: '`...attributes` must appear after `data-test-button`' },
-      ],
+      errors: [{ message: '`...attributes` must appear after `data-test-button`' }],
     },
     {
       code: `
@@ -886,9 +884,7 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         {{/ui/button}}
       `,
       output: null,
-      errors: [
-        { message: '`data-cucumber-button` must appear after `@type`' },
-      ],
+      errors: [{ message: '`data-cucumber-button` must appear after `@type`' }],
     },
     {
       code: `
@@ -955,9 +951,7 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         {{/ui/button}}
       `,
       output: null,
-      errors: [
-        { message: '`data-cucumber-button` must appear after `@type`' },
-      ],
+      errors: [{ message: '`data-cucumber-button` must appear after `@type`' }],
     },
     {
       code: `
@@ -1004,9 +998,7 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         }}
       `,
       output: null,
-      errors: [
-        { message: '`@title` must appear after `@description`' },
-      ],
+      errors: [{ message: '`@title` must appear after `@description`' }],
     },
     {
       code: `
@@ -1029,9 +1021,7 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         />
       `,
       output: null,
-      errors: [
-        { message: '`data-cucumber-button` must appear after `@type`' },
-      ],
+      errors: [{ message: '`data-cucumber-button` must appear after `@type`' }],
     },
     {
       code: `
@@ -1053,9 +1043,7 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         </this.MyButton>
       `,
       output: null,
-      errors: [
-        { message: '`...attributes` must appear after `data-test-button`' },
-      ],
+      errors: [{ message: '`...attributes` must appear after `data-test-button`' }],
     },
     {
       code: `
@@ -1093,9 +1081,7 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         }}
       `,
       output: null,
-      errors: [
-        { message: '`type` must appear after `data-test-button`' },
-      ],
+      errors: [{ message: '`type` must appear after `data-test-button`' }],
     },
     {
       code: `
@@ -1128,9 +1114,7 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         </div>
       `,
       output: null,
-      errors: [
-        { message: '`type` must appear after `disabled`' },
-      ],
+      errors: [{ message: '`type` must appear after `disabled`' }],
     },
     {
       code: `
@@ -1206,9 +1190,7 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         {{/let}}
       `,
       output: null,
-      errors: [
-        { message: '`data-test-form` must appear after `aria-labelledby`' },
-      ],
+      errors: [{ message: '`data-test-form` must appear after `aria-labelledby`' }],
     },
     {
       code: `
@@ -1265,9 +1247,7 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         ></iframe>
       `,
       output: null,
-      errors: [
-        { message: '`...attributes` must appear after `modifiers`' },
-      ],
+      errors: [{ message: '`...attributes` must appear after `modifiers`' }],
     },
     {
       code: `
@@ -1294,9 +1274,7 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         </Ui::Page>
       `,
       output: null,
-      errors: [
-        { message: '`@title` must appear after `@routeName`' },
-      ],
+      errors: [{ message: '`@title` must appear after `@routeName`' }],
     },
     {
       code: `
@@ -1341,9 +1319,7 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         />
       `,
       output: null,
-      errors: [
-        { message: '`@parentContainerId` must appear after `@isOpen`' },
-      ],
+      errors: [{ message: '`@parentContainerId` must appear after `@isOpen`' }],
     },
   ],
 });

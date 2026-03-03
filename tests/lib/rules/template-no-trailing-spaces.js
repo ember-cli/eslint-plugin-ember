@@ -161,18 +161,14 @@ test('it renders', async (assert) => {
     {
       code: 'test ',
       output: 'test',
-      errors: [
-        { message: 'Trailing whitespace detected.' },
-      ],
+      errors: [{ message: 'Trailing whitespace detected.' }],
     },
     {
       code: `test 
 `,
       output: `test
 `,
-      errors: [
-        { message: 'Trailing whitespace detected.' },
-      ],
+      errors: [{ message: 'Trailing whitespace detected.' }],
     },
     {
       code: `import { hbs } from 'ember-cli-htmlbars';
@@ -193,9 +189,7 @@ test('it renders', async (assert) => {
     </div>
   \`);
 });`,
-      errors: [
-        { message: 'Trailing whitespace detected.' },
-      ],
+      errors: [{ message: 'Trailing whitespace detected.' }],
     },
     {
       code: `import { hbs } from 'ember-cli-htmlbars';
@@ -216,9 +210,7 @@ test('it renders', async (assert) => {
     <div></div>
   \`);
 });`,
-      errors: [
-        { message: 'Trailing whitespace detected.' },
-      ],
+      errors: [{ message: 'Trailing whitespace detected.' }],
     },
   ],
 });

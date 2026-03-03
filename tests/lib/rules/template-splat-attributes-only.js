@@ -49,9 +49,7 @@ hbsRuleTester.run('template-splat-attributes-only', rule, {
     {
       code: '<div ...arguments></div>',
       output: null,
-      errors: [
-        { message: 'Only `...attributes` can be applied to elements' },
-      ],
+      errors: [{ message: 'Only `...attributes` can be applied to elements' }],
     },
   ],
 });

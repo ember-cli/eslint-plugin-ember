@@ -91,23 +91,17 @@ hbsRuleTester.run('template-no-link-to-tagname', rule, {
     {
       code: '<LinkTo @route="routeName" @tagName="button">Link text</LinkTo>',
       output: null,
-      errors: [
-        { message: 'tagName attribute on LinkTo is deprecated' },
-      ],
+      errors: [{ message: 'tagName attribute on LinkTo is deprecated' }],
     },
     {
       code: '{{#link-to "routeName" tagName="button"}}Link text{{/link-to}}',
       output: null,
-      errors: [
-        { message: 'tagName attribute on LinkTo is deprecated' },
-      ],
+      errors: [{ message: 'tagName attribute on LinkTo is deprecated' }],
     },
     {
       code: '{{link-to "Link text" "routeName" tagName="button"}}',
       output: null,
-      errors: [
-        { message: 'tagName attribute on LinkTo is deprecated' },
-      ],
+      errors: [{ message: 'tagName attribute on LinkTo is deprecated' }],
     },
   ],
 });

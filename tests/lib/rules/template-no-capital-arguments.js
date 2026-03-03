@@ -140,10 +140,7 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-capital-arguments (hbs)', rule, {
-  valid: [
-    '<Foo @name="bar" />',
-    '@foo',
-  ],
+  valid: ['<Foo @name="bar" />', '@foo'],
   invalid: [
     {
       code: '<Foo @Name="bar" />',

@@ -186,28 +186,39 @@ hbsRuleTester.run('template-no-invalid-interactive', rule, {
       code: '<div onsubmit={{action "foo"}}></div>',
       output: null,
       errors: [
-        { message: 'Non-interactive element <div> should not have interactive handler "onsubmit".' },
+        {
+          message: 'Non-interactive element <div> should not have interactive handler "onsubmit".',
+        },
       ],
     },
     {
       code: '<div randomAttribute={{action "foo"}}></div>',
       output: null,
       errors: [
-        { message: 'Non-interactive element <div> should not have interactive handler "randomattribute".' },
+        {
+          message:
+            'Non-interactive element <div> should not have interactive handler "randomattribute".',
+        },
       ],
     },
     {
       code: '<form {{action "foo" on="click"}}></form>',
       output: null,
       errors: [
-        { message: 'Non-interactive element <form> should not have interactive handler "{{action}}".' },
+        {
+          message:
+            'Non-interactive element <form> should not have interactive handler "{{action}}".',
+        },
       ],
     },
     {
       code: '<div {{action "foo" on="submit"}}></div>',
       output: null,
       errors: [
-        { message: 'Non-interactive element <div> should not have interactive handler "{{action}}".' },
+        {
+          message:
+            'Non-interactive element <div> should not have interactive handler "{{action}}".',
+        },
       ],
     },
   ],

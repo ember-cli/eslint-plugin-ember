@@ -30,18 +30,12 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-input-block', rule, {
-  valid: [
-    '{{button}}',
-    '{{#x-button}}{{/x-button}}',
-    '{{input}}',
-  ],
+  valid: ['{{button}}', '{{#x-button}}{{/x-button}}', '{{input}}'],
   invalid: [
     {
       code: '{{#input}}{{/input}}',
       output: null,
-      errors: [
-        { message: 'Unexpected block usage. The input helper may only be used inline.' },
-      ],
+      errors: [{ message: 'Unexpected block usage. The input helper may only be used inline.' }],
     },
   ],
 });

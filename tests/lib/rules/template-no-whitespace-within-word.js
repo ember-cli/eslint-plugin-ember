@@ -108,51 +108,37 @@ hbsRuleTester.run('template-no-whitespace-within-word', rule, {
     {
       code: 'W e l c o m e',
       output: null,
-      errors: [
-        { message: 'Excess whitespace in layout detected.' },
-      ],
+      errors: [{ message: 'Excess whitespace in layout detected.' }],
     },
     {
       code: 'W&nbsp;e&nbsp;l&nbsp;c&nbsp;o&nbsp;m&nbsp;e',
       output: null,
-      errors: [
-        { message: 'Excess whitespace in layout detected.' },
-      ],
+      errors: [{ message: 'Excess whitespace in layout detected.' }],
     },
     {
       code: 'Wel c o me',
       output: null,
-      errors: [
-        { message: 'Excess whitespace in layout detected.' },
-      ],
+      errors: [{ message: 'Excess whitespace in layout detected.' }],
     },
     {
       code: 'Wel&nbsp;c&emsp;o&nbsp;me',
       output: null,
-      errors: [
-        { message: 'Excess whitespace in layout detected.' },
-      ],
+      errors: [{ message: 'Excess whitespace in layout detected.' }],
     },
     {
       code: '<div>W e l c o m e</div>',
       output: null,
-      errors: [
-        { message: 'Excess whitespace in layout detected.' },
-      ],
+      errors: [{ message: 'Excess whitespace in layout detected.' }],
     },
     {
       code: '<div>Wel c o me</div>',
       output: null,
-      errors: [
-        { message: 'Excess whitespace in layout detected.' },
-      ],
+      errors: [{ message: 'Excess whitespace in layout detected.' }],
     },
     {
       code: 'A  B&nbsp;&nbsp; C ',
       output: null,
-      errors: [
-        { message: 'Excess whitespace in layout detected.' },
-      ],
+      errors: [{ message: 'Excess whitespace in layout detected.' }],
     },
   ],
 });

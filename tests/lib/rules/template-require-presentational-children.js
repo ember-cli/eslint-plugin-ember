@@ -154,21 +154,30 @@ hbsRuleTester.run('template-require-presentational-children', rule, {
       code: '<div role="button"><h2>Test</h2></div>',
       output: null,
       errors: [
-        { message: 'Element <div> has role="button" but contains semantic child <h2>. Presentational elements should only contain presentational children.' },
+        {
+          message:
+            'Element <div> has role="button" but contains semantic child <h2>. Presentational elements should only contain presentational children.',
+        },
       ],
     },
     {
       code: '<div role="button"><h2 role="presentation"><img /></h2></div>',
       output: null,
       errors: [
-        { message: 'Element <div> has role="button" but contains semantic child <img>. Presentational elements should only contain presentational children.' },
+        {
+          message:
+            'Element <div> has role="button" but contains semantic child <img>. Presentational elements should only contain presentational children.',
+        },
       ],
     },
     {
       code: '<div role="button"><h2 role="presentation"><button>Test <img/></button></h2></div>',
       output: null,
       errors: [
-        { message: 'Element <div> has role="button" but contains semantic child <button>. Presentational elements should only contain presentational children.' },
+        {
+          message:
+            'Element <div> has role="button" but contains semantic child <button>. Presentational elements should only contain presentational children.',
+        },
       ],
     },
   ],

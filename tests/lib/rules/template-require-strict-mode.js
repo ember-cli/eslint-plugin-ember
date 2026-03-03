@@ -59,6 +59,5 @@ hbsRuleTester.run('template-require-strict-mode', rule, {
     <template>hello</template>
   }`,
   ],
-  invalid: [
-  ],
+  invalid: [],
 });

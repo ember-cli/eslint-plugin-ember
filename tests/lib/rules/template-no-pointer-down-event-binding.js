@@ -74,12 +74,11 @@ const hbsRuleTester = new RuleTester({
 
 hbsRuleTester.run('template-no-pointer-down-event-binding', rule, {
   valid: [
-    `<div {{on 'mouseup' this.doSomething}}></div>`,
-    `<div {{action this.doSomething on='mouseup'}}></div>`,
+    "<div {{on 'mouseup' this.doSomething}}></div>",
+    "<div {{action this.doSomething on='mouseup'}}></div>",
     '<input type="text" onmouseup="myFunction()">',
     '{{my-component mouseDown=this.doSomething}}',
     '<MyComponent @mouseDown={{this.doSomething}} />',
   ],
-  invalid: [
-  ],
+  invalid: [],
 });

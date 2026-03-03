@@ -107,63 +107,86 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-implicit-this', rule, {
-  valid: [
-  ],
+  valid: [],
   invalid: [
     {
       code: '{{book}}',
       output: null,
       errors: [
-        { message: 'Ambiguous path "book" is not allowed. Use "@book" if it is a named argument or "this.book" if it is a property on the component.' },
+        {
+          message:
+            'Ambiguous path "book" is not allowed. Use "@book" if it is a named argument or "this.book" if it is a property on the component.',
+        },
       ],
     },
     {
       code: '{{book-details}}',
       output: null,
       errors: [
-        { message: 'Ambiguous path "book-details" is not allowed. Use "@book-details" if it is a named argument or "this.book-details" if it is a property on the component.' },
+        {
+          message:
+            'Ambiguous path "book-details" is not allowed. Use "@book-details" if it is a named argument or "this.book-details" if it is a property on the component.',
+        },
       ],
     },
     {
       code: '{{book.author}}',
       output: null,
       errors: [
-        { message: 'Ambiguous path "book.author" is not allowed. Use "@book.author" if it is a named argument or "this.book.author" if it is a property on the component.' },
+        {
+          message:
+            'Ambiguous path "book.author" is not allowed. Use "@book.author" if it is a named argument or "this.book.author" if it is a property on the component.',
+        },
       ],
     },
     {
       code: '{{helper book}}',
       output: null,
       errors: [
-        { message: 'Ambiguous path "book" is not allowed. Use "@book" if it is a named argument or "this.book" if it is a property on the component.' },
+        {
+          message:
+            'Ambiguous path "book" is not allowed. Use "@book" if it is a named argument or "this.book" if it is a property on the component.',
+        },
       ],
     },
     {
       code: '{{#helper book}}{{/helper}}',
       output: null,
       errors: [
-        { message: 'Ambiguous path "book" is not allowed. Use "@book" if it is a named argument or "this.book" if it is a property on the component.' },
+        {
+          message:
+            'Ambiguous path "book" is not allowed. Use "@book" if it is a named argument or "this.book" if it is a property on the component.',
+        },
       ],
     },
     {
       code: '<MyComponent @prop={{can.do}} />',
       output: null,
       errors: [
-        { message: 'Ambiguous path "can.do" is not allowed. Use "@can.do" if it is a named argument or "this.can.do" if it is a property on the component.' },
+        {
+          message:
+            'Ambiguous path "can.do" is not allowed. Use "@can.do" if it is a named argument or "this.can.do" if it is a property on the component.',
+        },
       ],
     },
     {
       code: '{{session.user.name}}',
       output: null,
       errors: [
-        { message: 'Ambiguous path "session.user.name" is not allowed. Use "@session.user.name" if it is a named argument or "this.session.user.name" if it is a property on the component.' },
+        {
+          message:
+            'Ambiguous path "session.user.name" is not allowed. Use "@session.user.name" if it is a named argument or "this.session.user.name" if it is a property on the component.',
+        },
       ],
     },
     {
       code: '<MyComponent @prop={{session.user.name}} />',
       output: null,
       errors: [
-        { message: 'Ambiguous path "session.user.name" is not allowed. Use "@session.user.name" if it is a named argument or "this.session.user.name" if it is a property on the component.' },
+        {
+          message:
+            'Ambiguous path "session.user.name" is not allowed. Use "@session.user.name" if it is a named argument or "this.session.user.name" if it is a property on the component.',
+        },
       ],
     },
     {
@@ -173,7 +196,10 @@ hbsRuleTester.run('template-no-implicit-this', rule, {
         export const SomeComponent = setComponentTemplate(hbs\`{{book}}\`, templateOnly());`,
       output: null,
       errors: [
-        { message: 'Ambiguous path "book" is not allowed. Use "@book" if it is a named argument or "this.book" if it is a property on the component.' },
+        {
+          message:
+            'Ambiguous path "book" is not allowed. Use "@book" if it is a named argument or "this.book" if it is a property on the component.',
+        },
       ],
     },
   ],

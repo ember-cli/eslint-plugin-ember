@@ -131,6 +131,5 @@ hbsRuleTester.run('template-no-yield-only', rule, {
     '<yield/>',
     '{{! template-lint-disable no-yield-only }}{{yield}}',
   ],
-  invalid: [
-  ],
+  invalid: [],
 });

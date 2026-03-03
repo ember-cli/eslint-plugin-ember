@@ -41,11 +41,7 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-unnecessary-concat', rule, {
-  valid: [
-    '<div class={{clazz}}></div>',
-    '<div class="first {{second}}"></div>',
-    '"{{foo}}"',
-  ],
+  valid: ['<div class={{clazz}}></div>', '<div class="first {{second}}"></div>', '"{{foo}}"'],
   invalid: [
     {
       code: '<div class="{{clazz}}"></div>',
@@ -59,7 +55,10 @@ hbsRuleTester.run('template-no-unnecessary-concat', rule, {
       output: '<img src={{url}} alt={{t "alternate-text"}}>',
       errors: [
         { message: 'Unnecessary string concatenation. Use {{url}} instead of "{{url}}".' },
-        { message: 'Unnecessary string concatenation. Use {{t "alternate-text"}} instead of "{{t "alternate-text"}}".' },
+        {
+          message:
+            'Unnecessary string concatenation. Use {{t "alternate-text"}} instead of "{{t "alternate-text"}}".',
+        },
       ],
     },
   ],

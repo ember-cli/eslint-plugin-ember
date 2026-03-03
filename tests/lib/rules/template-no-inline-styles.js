@@ -39,6 +39,5 @@ hbsRuleTester.run('template-no-inline-styles', rule, {
     '<div style={{foo}}></div>',
     '<div style={{html-safe (concat "background-image: url(" url ")")}}></div>',
   ],
-  invalid: [
-  ],
+  invalid: [],
 });

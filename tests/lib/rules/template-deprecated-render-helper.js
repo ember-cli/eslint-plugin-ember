@@ -62,17 +62,23 @@ hbsRuleTester.run('template-deprecated-render-helper', rule, {
   ],
   invalid: [
     {
-      code: `{{render 'ken-griffey'}}`,
+      code: "{{render 'ken-griffey'}}",
       output: null,
       errors: [
-        { message: 'The render helper is deprecated in favor of using components. See https://emberjs.com/deprecations/v2.x/#toc_code-render-code-helper' },
+        {
+          message:
+            'The render helper is deprecated in favor of using components. See https://emberjs.com/deprecations/v2.x/#toc_code-render-code-helper',
+        },
       ],
     },
     {
-      code: `{{render 'baseball-player' pitcher}}`,
+      code: "{{render 'baseball-player' pitcher}}",
       output: null,
       errors: [
-        { message: 'The render helper is deprecated in favor of using components. See https://emberjs.com/deprecations/v2.x/#toc_code-render-code-helper' },
+        {
+          message:
+            'The render helper is deprecated in favor of using components. See https://emberjs.com/deprecations/v2.x/#toc_code-render-code-helper',
+        },
       ],
     },
   ],

@@ -72,32 +72,24 @@ hbsRuleTester.run('template-require-splattributes', rule, {
     {
       code: '<div></div>',
       output: null,
-      errors: [
-        { message: 'The root element in this template should use `...attributes`' },
-      ],
+      errors: [{ message: 'The root element in this template should use `...attributes`' }],
     },
     {
       code: '<Foo></Foo>',
       output: null,
-      errors: [
-        { message: 'The root element in this template should use `...attributes`' },
-      ],
+      errors: [{ message: 'The root element in this template should use `...attributes`' }],
     },
     {
       code: '<div></div><div></div>',
       output: null,
-      errors: [
-        { message: 'At least one element in this template should use `...attributes`' },
-      ],
+      errors: [{ message: 'At least one element in this template should use `...attributes`' }],
     },
     {
       code: `<div/>
 
 `,
       output: null,
-      errors: [
-        { message: 'The root element in this template should use `...attributes`' },
-      ],
+      errors: [{ message: 'The root element in this template should use `...attributes`' }],
     },
   ],
 });

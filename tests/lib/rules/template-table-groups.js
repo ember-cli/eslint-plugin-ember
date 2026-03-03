@@ -543,9 +543,7 @@ hbsRuleTester.run('template-table-groups', rule, {
       </table>
       `,
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: `
@@ -562,9 +560,7 @@ hbsRuleTester.run('template-table-groups', rule, {
       </table>
       `,
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: `
@@ -576,9 +572,7 @@ hbsRuleTester.run('template-table-groups', rule, {
       </table>
       `,
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: `
@@ -591,9 +585,7 @@ hbsRuleTester.run('template-table-groups', rule, {
       </table>
       `,
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: `
@@ -606,9 +598,7 @@ hbsRuleTester.run('template-table-groups', rule, {
       </table>
       `,
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: `
@@ -619,9 +609,7 @@ hbsRuleTester.run('template-table-groups', rule, {
       </table>
       `,
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: `
@@ -632,85 +620,71 @@ hbsRuleTester.run('template-table-groups', rule, {
       </table>
       `,
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: '<table><tr><td>Foo</td></tr></table>',
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: '<table>{{some-component}}</table>',
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: '<table>{{#each foo as |bar|}}{{bar}}{{/each}}</table>',
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: '<table> whitespace<thead></thead></table>',
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: '<table>{{some-component tagName="div"}}</table>',
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: '<table>{{some-component otherProp="tbody"}}</table>',
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: '<table><SomeComponent @tagName="div" /></table>',
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: '<table><SomeComponent @otherProp="tbody" /></table>',
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: '<table>some text</table>',
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: '<table><tfoot /><thead /></table>',
       output: null,
       errors: [
-        { message: 'Tables must have table groups in the correct order (caption, colgroup, thead, tbody then tfoot).' },
+        {
+          message:
+            'Tables must have table groups in the correct order (caption, colgroup, thead, tbody then tfoot).',
+        },
       ],
     },
     {
       code: '<table><tbody /><caption /></table>',
       output: null,
       errors: [
-        { message: 'Tables must have table groups in the correct order (caption, colgroup, thead, tbody then tfoot).' },
+        {
+          message:
+            'Tables must have table groups in the correct order (caption, colgroup, thead, tbody then tfoot).',
+        },
       ],
     },
     {
@@ -722,7 +696,10 @@ hbsRuleTester.run('template-table-groups', rule, {
       `,
       output: null,
       errors: [
-        { message: 'Tables must have table groups in the correct order (caption, colgroup, thead, tbody then tfoot).' },
+        {
+          message:
+            'Tables must have table groups in the correct order (caption, colgroup, thead, tbody then tfoot).',
+        },
       ],
     },
     {
@@ -732,9 +709,7 @@ hbsRuleTester.run('template-table-groups', rule, {
       </table>
       `,
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: `
@@ -744,9 +719,7 @@ hbsRuleTester.run('template-table-groups', rule, {
       </table>
       `,
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: `
@@ -758,9 +731,7 @@ hbsRuleTester.run('template-table-groups', rule, {
       </table>
       `,
       output: null,
-      errors: [
-        { message: 'Tables must have a table group (thead, tbody or tfoot).' },
-      ],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },
     {
       code: `
@@ -772,7 +743,10 @@ hbsRuleTester.run('template-table-groups', rule, {
       `,
       output: null,
       errors: [
-        { message: 'Tables must have table groups in the correct order (caption, colgroup, thead, tbody then tfoot).' },
+        {
+          message:
+            'Tables must have table groups in the correct order (caption, colgroup, thead, tbody then tfoot).',
+        },
       ],
     },
   ],

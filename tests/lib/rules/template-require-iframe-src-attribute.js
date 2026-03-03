@@ -67,21 +67,30 @@ hbsRuleTester.run('template-require-iframe-src-attribute', rule, {
       code: '<iframe {{this.setFrameElement}}></iframe>',
       output: null,
       errors: [
-        { message: 'Security Risk: `<iframe>` must include a static `src` attribute. Otherwise, CSP `frame-src` is bypassed and `about:blank` inherits parent origin, creating an elevated-privilege frame.' },
+        {
+          message:
+            'Security Risk: `<iframe>` must include a static `src` attribute. Otherwise, CSP `frame-src` is bypassed and `about:blank` inherits parent origin, creating an elevated-privilege frame.',
+        },
       ],
     },
     {
       code: '<iframe></iframe>',
       output: null,
       errors: [
-        { message: 'Security Risk: `<iframe>` must include a static `src` attribute. Otherwise, CSP `frame-src` is bypassed and `about:blank` inherits parent origin, creating an elevated-privilege frame.' },
+        {
+          message:
+            'Security Risk: `<iframe>` must include a static `src` attribute. Otherwise, CSP `frame-src` is bypassed and `about:blank` inherits parent origin, creating an elevated-privilege frame.',
+        },
       ],
     },
     {
       code: '<iframe ...attributes id="foo"></iframe>',
       output: null,
       errors: [
-        { message: 'Security Risk: `<iframe>` must include a static `src` attribute. Otherwise, CSP `frame-src` is bypassed and `about:blank` inherits parent origin, creating an elevated-privilege frame.' },
+        {
+          message:
+            'Security Risk: `<iframe>` must include a static `src` attribute. Otherwise, CSP `frame-src` is bypassed and `about:blank` inherits parent origin, creating an elevated-privilege frame.',
+        },
       ],
     },
   ],

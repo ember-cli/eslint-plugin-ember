@@ -36,6 +36,5 @@ hbsRuleTester.run('template-no-obsolete-elements', rule, {
       <plaintext />
     {{/let}}`,
   ],
-  invalid: [
-  ],
+  invalid: [],
 });

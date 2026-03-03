@@ -261,226 +261,162 @@ hbsRuleTester.run('template-require-input-label', rule, {
     {
       code: '<my-label><input /></my-label>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<div><input /></div>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<input />',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<input title="some title value" />',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<label><input></label>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<div>{{input}}</div>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<Input/>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<input aria-label="first label" aria-labelledby="second label">',
       output: null,
-      errors: [
-        { message: 'Input element has multiple labelling mechanisms.' },
-      ],
+      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
     },
     {
       code: '<input id="label-input" aria-label="second label">',
       output: null,
-      errors: [
-        { message: 'Input element has multiple labelling mechanisms.' },
-      ],
+      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
     },
     {
       code: '<label>Input label<input aria-label="Custom label"></label>',
       output: null,
-      errors: [
-        { message: 'Input element has multiple labelling mechanisms.' },
-      ],
+      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
     },
     {
       code: '{{input type="button"}}',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '{{input type=myType}}',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<input type="button"/>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<input type={{myType}}/>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<Input type="button"/>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<Input type={{myType}}/>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<div><textarea /></div>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<textarea />',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<textarea title="some title value" />',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<label><textarea /></label>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<div>{{textarea}}</div>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<Textarea />',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<textarea aria-label="first label" aria-labelledby="second label" />',
       output: null,
-      errors: [
-        { message: 'Input element has multiple labelling mechanisms.' },
-      ],
+      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
     },
     {
       code: '<textarea id="label-input" aria-label="second label" />',
       output: null,
-      errors: [
-        { message: 'Input element has multiple labelling mechanisms.' },
-      ],
+      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
     },
     {
       code: '<label>Textarea label<textarea aria-label="Custom label" /></label>',
       output: null,
-      errors: [
-        { message: 'Input element has multiple labelling mechanisms.' },
-      ],
+      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
     },
     {
       code: '<div><select></select></div>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<select></select>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<select title="some title value" />',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<label><select></select></label>',
       output: null,
-      errors: [
-        { message: 'Input elements should have an associated label.' },
-      ],
+      errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {
       code: '<select aria-label="first label" aria-labelledby="second label" />',
       output: null,
-      errors: [
-        { message: 'Input element has multiple labelling mechanisms.' },
-      ],
+      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
     },
     {
       code: '<select id="label-input" aria-label="second label" />',
       output: null,
-      errors: [
-        { message: 'Input element has multiple labelling mechanisms.' },
-      ],
+      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
     },
     {
       code: '<label>Select label<select aria-label="Custom label" /></label>',
       output: null,
-      errors: [
-        { message: 'Input element has multiple labelling mechanisms.' },
-      ],
+      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
     },
   ],
 });

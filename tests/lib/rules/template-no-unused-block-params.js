@@ -153,16 +153,12 @@ hbsRuleTester.run('template-no-unused-block-params', rule, {
     {
       code: '{{#each cats as |cat|}}Dogs{{/each}}',
       output: null,
-      errors: [
-        { message: 'Block param "cat" is unused' },
-      ],
+      errors: [{ message: 'Block param "cat" is unused' }],
     },
     {
       code: '{{#each cats as |cat index|}}{{cat}}{{/each}}',
       output: null,
-      errors: [
-        { message: 'Block param "index" is unused' },
-      ],
+      errors: [{ message: 'Block param "index" is unused' }],
     },
   ],
 });

@@ -67,14 +67,20 @@ hbsRuleTester.run('template-simple-modifiers', rule, {
       code: '<div {{(modifier (unless this.hasBeenClicked "track-interaction") "click" customizeData=this.customizeClickData)}}></div>',
       output: null,
       errors: [
-        { message: 'The modifier helper should have a string or a variable name containing the modifier name as a first argument.' },
+        {
+          message:
+            'The modifier helper should have a string or a variable name containing the modifier name as a first argument.',
+        },
       ],
     },
     {
       code: '<div {{(modifier)}}></div>',
       output: null,
       errors: [
-        { message: 'The modifier helper should have a string or a variable name containing the modifier name as a first argument.' },
+        {
+          message:
+            'The modifier helper should have a string or a variable name containing the modifier name as a first argument.',
+        },
       ],
     },
   ],

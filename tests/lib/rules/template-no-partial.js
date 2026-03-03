@@ -74,11 +74,7 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-partial', rule, {
-  valid: [
-    '{{foo}}',
-    '{{button}}',
-    '<Component @param={{"partial"}} />',
-  ],
+  valid: ['{{foo}}', '{{button}}', '<Component @param={{"partial"}} />'],
   invalid: [
     {
       code: '{{partial "foo"}}',

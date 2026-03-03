@@ -139,35 +139,50 @@ hbsRuleTester.run('template-modifier-name-case', rule, {
       code: '<div {{didInsert}}></div>',
       output: '<div {{did-insert}}></div>',
       errors: [
-        { message: 'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.' },
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.',
+        },
       ],
     },
     {
       code: '<div class="monkey" {{didInsert "something" with="somethingElse"}}></div>',
       output: '<div class="monkey" {{did-insert "something" with="somethingElse"}}></div>',
       errors: [
-        { message: 'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.' },
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.',
+        },
       ],
     },
     {
       code: '<a href="#" onclick={{amazingActionThing "foo"}} {{doSomething}}></a>',
       output: '<a href="#" onclick={{amazingActionThing "foo"}} {{do-something}}></a>',
       errors: [
-        { message: 'Use dasherized names for modifier invocation. Please replace `doSomething` with `do-something`.' },
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `doSomething` with `do-something`.',
+        },
       ],
     },
     {
       code: '<div {{(modifier "fooBar")}}></div>',
       output: '<div {{(modifier "foo-bar")}}></div>',
       errors: [
-        { message: 'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.' },
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.',
+        },
       ],
     },
     {
       code: '<div {{(if this.foo (modifier "fooBar"))}}></div>',
       output: '<div {{(if this.foo (modifier "foo-bar"))}}></div>',
       errors: [
-        { message: 'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.' },
+        {
+          message:
+            'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.',
+        },
       ],
     },
   ],
