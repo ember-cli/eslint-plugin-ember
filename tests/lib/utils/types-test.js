@@ -115,7 +115,8 @@ describe('isObjectExpression', () => {
 });
 
 describe('isReturnStatement', () => {
-  const node = babelESLintParse('return').body[0];
+  // Wrap return in a function since bare 'return' is not valid outside functions
+  const node = babelESLintParse('function f() { return }').body[0].body.body[0];
 
   it('should check if node is a return statement', () => {
     expect(types.isReturnStatement(node)).toBeTruthy();

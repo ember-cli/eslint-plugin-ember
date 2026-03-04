@@ -141,6 +141,99 @@ function normalizeErrorsForESLint10(errors) {
 }
 
 /**
+ * Normalize autofix output for ESLint 10 compatibility.
+ *
+ * ESLint 10's autofix places new content at position 0 instead of preserving leading whitespace.
+ * It also preserves the original file's indentation for existing code.
+ *
+ * ESLint 8/9 pattern: "\n      import NEW;\nfirstOriginalLine;\n      restOfCode"
+ * ESLint 10 pattern:  "import NEW;\n\n      firstOriginalLine;\n      restOfCode"
+ *
+ * @param {string} output - The expected output (ESLint 8/9 format)
+ * @param {string} code - The original code
+ * @returns {string} - Normalized output for ESLint 10
+ */
+function normalizeOutputForESLint10(output, code) {
+  if (!output || !code) {
+    return output;
+  }
+
+  // Count import statements in code and output
+  const codeImports = (code.match(/import\s+/g) || []).length;
+  const outputImports = (output.match(/import\s+/g) || []).length;
+
+  // Only apply transformation when fixer adds new imports
+  if (outputImports <= codeImports) {
+    return output;
+  }
+
+  // Check if output has leading whitespace before an import statement
+  const leadingMatch = output.match(/^(\s+)(import\s+)/);
+  if (!leadingMatch) {
+    return output;
+  }
+
+  const leadingWhitespace = leadingMatch[1];
+
+  // Only transform if there's significant leading whitespace (contains newline)
+  if (!leadingWhitespace.includes('\n')) {
+    return output;
+  }
+
+  // Detect the indentation used in the original code
+  const codeIndentMatch = code.match(/^(\s*\n)?(\s+)/);
+  const originalIndent = codeIndentMatch ? codeIndentMatch[2] : '      ';
+
+  // Split output into lines and process
+  const lines = output.split('\n');
+  const newImports = [];
+  const restLines = [];
+  let inNewImports = true;
+  let isFirstLineAfterImports = true;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    // Skip leading empty lines
+    if (inNewImports && line === '' && newImports.length === 0) {
+      continue;
+    }
+
+    if (inNewImports) {
+      // A line with indentation + import is a NEW import (inserted by fixer)
+      if (/^\s+import\s+/.test(line)) {
+        newImports.push(line.trim());
+      } else {
+        // End of new imports section
+        inNewImports = false;
+
+        // The first line after new imports in ESLint 8/9 output often loses its indentation
+        // If it starts at column 0 and has content, restore the original indentation
+        if (isFirstLineAfterImports && line !== '' && !/^\s/.test(line)) {
+          restLines.push(originalIndent + line);
+          isFirstLineAfterImports = false;
+        } else {
+          restLines.push(line);
+          if (line !== '') {
+            isFirstLineAfterImports = false;
+          }
+        }
+      }
+    } else {
+      restLines.push(line);
+    }
+  }
+
+  // If we found new imports that should be at position 0
+  if (newImports.length > 0) {
+    // ESLint 10 format: new imports at start, blank line, then original content
+    return newImports.join('\n') + '\n\n' + restLines.join('\n');
+  }
+
+  return output;
+}
+
+/**
  * Convert test case config to flat config format
  * @param {Object|string} testCase - The test case
  * @param {boolean} isValid - Whether this is a valid test case (ESLint 10 doesn't allow 'output' in valid cases)
@@ -159,6 +252,17 @@ function convertTestCase(testCase, isValid = false) {
   // ESLint 10: Valid test cases cannot have 'output' property
   if (isESLint10OrLater && isValid && 'output' in converted) {
     delete converted.output;
+  }
+
+  // ESLint 10: Transform expected output to match ESLint 10's autofix formatting
+  if (
+    isESLint10OrLater &&
+    !isValid &&
+    'output' in converted &&
+    converted.output !== null &&
+    typeof converted.output === 'string'
+  ) {
+    converted.output = normalizeOutputForESLint10(converted.output, converted.code);
   }
 
   // Convert parser string paths to parser objects

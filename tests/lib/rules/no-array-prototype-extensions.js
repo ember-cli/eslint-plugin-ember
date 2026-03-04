@@ -148,8 +148,8 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'set_foo.clear();',
     'map_foo.clear();',
 
-    // super
-    'super.clear();',
+    // super (must be in class method context)
+    'class MyClass extends Base { myMethod() { super.clear(); } }',
 
     // Class property definition with non-array class.
     `class MyClass {
