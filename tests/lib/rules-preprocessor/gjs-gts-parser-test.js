@@ -16,7 +16,22 @@ const { writeFileSync, readFileSync } = require('node:fs');
 const { join } = require('node:path');
 
 const gjsGtsParser = require.resolve('ember-eslint-parser');
-const isESLint9OrLater = Number.parseInt(eslintVersion.split('.')[0], 10) >= 9;
+const eslintMajorVersion = Number.parseInt(eslintVersion.split('.')[0], 10);
+const isESLint9OrLater = eslintMajorVersion >= 9;
+const isESLint10OrLater = eslintMajorVersion >= 10;
+
+/**
+ * Helper to create expected error object, conditionally excluding nodeType for ESLint 10+
+ * @param {Object} error - Expected error properties
+ * @returns {Object} Error object with nodeType removed if ESLint 10+
+ */
+function expectedError(error) {
+  if (isESLint10OrLater) {
+    const { nodeType, ...rest } = error;
+    return rest;
+  }
+  return error;
+}
 
 /**
  * Helper function which creates ESLint instance with enabled/disabled autofix feature.
@@ -581,6 +596,10 @@ describe('template-vars', () => {
           const expected = errors[index];
 
           for (const key of Object.keys(expected)) {
+            // Skip nodeType comparison in ESLint 10+ (removed from error objects)
+            if (isESLint10OrLater && key === 'nodeType') {
+              continue;
+            }
             // Prefix with what key we are looking at so
             // that debugging is less painful
             const expectedString = `${key}: ${expected[key]}`;
@@ -623,29 +642,33 @@ describe('line/col numbers should be correct', () => {
     const resultErrors = results.flatMap((result) => result.messages);
     expect(resultErrors).toHaveLength(2);
 
-    expect(resultErrors[0]).toMatchObject({
-      column: 28,
-      endColumn: 64,
-      endLine: 13,
-      line: 13,
-      message: "Don't use Ember's array prototype extensions",
-      messageId: 'main',
-      nodeType: 'Literal',
-      ruleId: 'ember/no-array-prototype-extensions',
-      severity: 2,
-    });
+    expect(resultErrors[0]).toMatchObject(
+      expectedError({
+        column: 28,
+        endColumn: 64,
+        endLine: 13,
+        line: 13,
+        message: "Don't use Ember's array prototype extensions",
+        messageId: 'main',
+        nodeType: 'Literal',
+        ruleId: 'ember/no-array-prototype-extensions',
+        severity: 2,
+      })
+    );
 
-    expect(resultErrors[1]).toMatchObject({
-      column: 67,
-      endColumn: 80,
-      endLine: 13,
-      line: 13,
-      message: "Don't use Ember's array prototype extensions",
-      messageId: 'main',
-      nodeType: 'Literal',
-      ruleId: 'ember/no-array-prototype-extensions',
-      severity: 2,
-    });
+    expect(resultErrors[1]).toMatchObject(
+      expectedError({
+        column: 67,
+        endColumn: 80,
+        endLine: 13,
+        line: 13,
+        message: "Don't use Ember's array prototype extensions",
+        messageId: 'main',
+        nodeType: 'Literal',
+        ruleId: 'ember/no-array-prototype-extensions',
+        severity: 2,
+      })
+    );
   });
 });
 
@@ -740,29 +763,33 @@ describe('multiple tokens in same file', () => {
     const resultErrors = results.flatMap((result) => result.messages);
     expect(resultErrors).toHaveLength(2);
 
-    expect(resultErrors[0]).toMatchObject({
-      column: 13,
-      endColumn: 16,
-      endLine: 5,
-      line: 5,
-      message: "'two' is assigned a value but never used.",
-      messageId: 'unusedVar',
-      nodeType: 'Identifier',
-      ruleId: 'no-unused-vars',
-      severity: 2,
-    });
+    expect(resultErrors[0]).toMatchObject(
+      expectedError({
+        column: 13,
+        endColumn: 16,
+        endLine: 5,
+        line: 5,
+        message: "'two' is assigned a value but never used.",
+        messageId: 'unusedVar',
+        nodeType: 'Identifier',
+        ruleId: 'no-unused-vars',
+        severity: 2,
+      })
+    );
 
-    expect(resultErrors[1]).toMatchObject({
-      column: 13,
-      endColumn: 18,
-      endLine: 7,
-      line: 7,
-      message: "'three' is assigned a value but never used.",
-      messageId: 'unusedVar',
-      nodeType: 'Identifier',
-      ruleId: 'no-unused-vars',
-      severity: 2,
-    });
+    expect(resultErrors[1]).toMatchObject(
+      expectedError({
+        column: 13,
+        endColumn: 18,
+        endLine: 7,
+        line: 7,
+        message: "'three' is assigned a value but never used.",
+        messageId: 'unusedVar',
+        nodeType: 'Identifier',
+        ruleId: 'no-unused-vars',
+        severity: 2,
+      })
+    );
   });
 
   it('handles duplicate template tokens', async () => {
@@ -777,29 +804,33 @@ describe('multiple tokens in same file', () => {
     const resultErrors = results.flatMap((result) => result.messages);
     expect(resultErrors).toHaveLength(2);
 
-    expect(resultErrors[0]).toMatchObject({
-      column: 13,
-      endColumn: 17,
-      endLine: 4,
-      line: 4,
-      message: "'tmpl' is assigned a value but never used.",
-      messageId: 'unusedVar',
-      nodeType: 'Identifier',
-      ruleId: 'no-unused-vars',
-      severity: 2,
-    });
+    expect(resultErrors[0]).toMatchObject(
+      expectedError({
+        column: 13,
+        endColumn: 17,
+        endLine: 4,
+        line: 4,
+        message: "'tmpl' is assigned a value but never used.",
+        messageId: 'unusedVar',
+        nodeType: 'Identifier',
+        ruleId: 'no-unused-vars',
+        severity: 2,
+      })
+    );
 
-    expect(resultErrors[1]).toMatchObject({
-      column: 31,
-      endColumn: 34,
-      endLine: 4,
-      line: 4,
-      message: "'Bad' is not defined.",
-      messageId: 'undef',
-      nodeType: 'GlimmerElementNodePart',
-      ruleId: 'no-undef',
-      severity: 2,
-    });
+    expect(resultErrors[1]).toMatchObject(
+      expectedError({
+        column: 31,
+        endColumn: 34,
+        endLine: 4,
+        line: 4,
+        message: "'Bad' is not defined.",
+        messageId: 'undef',
+        nodeType: 'GlimmerElementNodePart',
+        ruleId: 'no-undef',
+        severity: 2,
+      })
+    );
   });
 
   it('correctly maps tokens after handlebars', async () => {
