@@ -57,6 +57,10 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Migration
+
+This rule includes a fixer in order to handle the migration for you automatically.
+
 ## References
 
 - [eslint-plugin-ember template-no-model-argument-in-route-templates](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-model-argument-in-route-templates.md)

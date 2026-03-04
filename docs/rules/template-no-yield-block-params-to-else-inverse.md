@@ -44,6 +44,17 @@ This rule **allows** the following:
 </template>
 ```
 
+## Migration
+
+We need to remove block params from highlighted yield's and update application logic to not consume it.
+
+In addition, we could use named blocks (slots) to provide values.
+
+## Related Rules
+
+- [no-yield-only](template-no-yield-only.md)
+- [no-yield-to-default](template-no-yield-to-default.md)
+
 ## References
 
 - [Ember.js Guides - Yielding](https://guides.emberjs.com/release/components/component-arguments-and-html-attributes/#toc_yielding-content)

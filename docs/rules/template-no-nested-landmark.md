@@ -21,6 +21,16 @@ Landmark elements include:
 - `<form>` (form)
 - Elements with landmark roles
 
+## List of elements & their corresponding roles
+
+- header (banner)
+- main (main)
+- aside (complementary)
+- form (form, search)
+- main (main)
+- nav (navigation)
+- footer (contentinfo)
+
 ## Examples
 
 Examples of **incorrect** code for this rule:

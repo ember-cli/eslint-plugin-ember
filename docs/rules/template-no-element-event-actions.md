@@ -44,6 +44,11 @@ Examples of **correct** code for this rule:
 | --------------------- | --------- | ------- | ----------------------------------------------------------------------------------------------------------------- |
 | `requireActionHelper` | `boolean` | `false` | When `true`, only flags events using `{{action ...}}`; when `false`, flags any dynamic value on event attributes. |
 
+## Related Rules
+
+* [no-action](template-no-action.md)
+* [no-action-modifiers](template-no-action-modifiers.md)
+
 ## References
 
 - [Ember Octane migration guide](https://guides.emberjs.com/release/upgrading/current-edition/action-on-and-fn/)

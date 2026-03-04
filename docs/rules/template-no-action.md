@@ -47,6 +47,12 @@ Examples of **correct** code for this rule:
 - Replace `(action "methodName")` with method references or `(fn this.methodName)`
 - Replace `<button onclick={{action ...}}>` with `<button {{on "click" ...}}>`
 
+## Related Rules
+
+* [no-action-modifiers](template-no-action-modifiers.md)
+* [no-element-event-actions](template-no-element-event-actions.md)
+* [no-mut-helper](template-no-mut-helper.md)
+
 ## References
 
 - [eslint-plugin-ember template-no-action](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-action.md)

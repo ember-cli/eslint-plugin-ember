@@ -76,6 +76,17 @@ This rule **allows** the following:
 </template>
 ```
 
+## Migration
+
+Convert attributes to kebab-case[^camelCaseNote]
+
+- `<div className="...">` -> `<div class="...">`
+- `<video autoPlay>` -> `<video auto-play>`
+- `<div contentEditable>` -> `<div content-editable>`
+- etc
+
+[^camelCaseNote]: keep in mind that `@args`, and `<:blocks>` should be js-compatible identifiers and be camelCase
+
 ## References
 
 - [HTML Attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes)

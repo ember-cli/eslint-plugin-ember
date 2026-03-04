@@ -66,6 +66,10 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Migration
+
+If violations are found, remediation should be planned to either add `role="presentation"` to the descendants as a quickfix. A better fix is to not use semantic descendants.
+
 ## References
 
 - [eslint-plugin-ember template-require-presentational-children](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-require-presentational-children.md)

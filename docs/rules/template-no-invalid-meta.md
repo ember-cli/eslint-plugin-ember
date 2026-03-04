@@ -18,6 +18,14 @@ This rule checks `<meta>` elements for the following issues:
 6. **Viewport `user-scalable=no`** — Disabling user scaling harms accessibility.
 7. **Viewport `maximum-scale`** — Setting a maximum scale restricts zooming.
 
+## Redirects & Refresh
+
+Sometimes a page automatically redirects to a different page. When this happens after a timed delay, it is an unexpected change of context that may interrupt the user. Redirects without timed delays are okay, but please consider a server-side method for redirecting instead (method will vary based on your server type).
+
+## Orientation Lock
+
+When content is presented with a restriction to a specific orientation, users must orient their devices to view the content in the orientation that the author imposed. Some users have their devices mounted in a fixed orientation (e.g. on the arm of a power wheelchair), and if the content cannot be viewed in that orientation it creates problems for the user.
+
 ## Examples
 
 ### Incorrect
@@ -97,6 +105,11 @@ Plain refresh delay must be greater than 72000.
   <meta http-equiv="refresh" content="0;url=https://example.com" />
 </template>
 ```
+
+## Migration
+
+- To fix, reduce the timed delay to zero, or use the appropriate server-side redirect method for your server type.
+- To fix orientation issues, remove references to `maximum-scale=1.0` and change `user-scalable=no` to `user-scalable=yes`.
 
 ## References
 

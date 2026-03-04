@@ -38,6 +38,16 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Migration
+
+- Remove the `tagName` overrides and, if you need it, adjust the styling of the
+  `<a>` elements to make them look like buttons
+
+## Related rules
+
+- [no-input-tagname](template-no-input-tagname.md)
+- [no-unknown-arguments-for-builtin-components](template-no-unknown-arguments-for-builtin-components.md)
+
 ## References
 
 - [eslint-plugin-ember template-no-link-to-tagname](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-link-to-tagname.md)

@@ -54,6 +54,15 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Migration
+
+If you have curlies in your code that you wish to show verbatim, but are flagged by this rule, you can formulate them as a handlebars expression:
+
+```hbs
+<p>This is a closing double curly: {{ '}}' }}</p>
+<p>This is a closing triple curly: {{ '}}}' }}</p>
+```
+
 ## References
 
 - [eslint-plugin-ember template-no-unbalanced-curlies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-unbalanced-curlies.md)

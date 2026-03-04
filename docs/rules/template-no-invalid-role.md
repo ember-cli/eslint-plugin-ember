@@ -64,6 +64,10 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Migration
+
+* If violations are found, remediation should be planned to replace the semantic HTML with the `div` element. Additional CSS will likely be required.
+
 ## Options
 
 | Name                    | Type      | Default | Description                                                   |

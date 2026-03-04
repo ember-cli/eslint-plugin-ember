@@ -51,6 +51,10 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Related Rules
+
+- [quotes](https://eslint.org/docs/rules/quotes) from eslint
+
 ## References
 
 - [eslint-plugin-ember template-quotes](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-quotes.md)

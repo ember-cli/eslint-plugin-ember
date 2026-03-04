@@ -47,6 +47,10 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Related rules
+
+- [eslint/max-lines](https://eslint.org/docs/rules/max-lines)
+
 ## References
 
 - [eslint-plugin-ember template-length](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-template-length.md)

@@ -20,6 +20,27 @@ Roles requiring context:
 - `row` → must be in `table`, `grid`, `treegrid`, or `rowgroup`
 - And more...
 
+## Roles to check
+
+Format: role | required context role
+
+* columnheader | row
+* gridcell | row
+* listitem | group or list
+* menuitem | group, menu, or menubar
+* menuitemcheckbox | menu or menubar
+* menuitemradio | group, menu, or menubar
+* option | listbox
+* row | grid, rowgroup, or treegrid
+* rowgroup | grid
+* rowheader | row
+* tab | tablist
+* treeitem | group or tree
+
+## `<* role><* role /></*>`
+
+The required context role defines the owning container where this role is allowed. If a role has a required context, authors MUST ensure that an element with the role is contained inside (or owned by) an element with the required context role. For example, an element with `role="listitem"` is only meaningful when contained inside (or owned by) an element with `role="list"`. You may place intermediate elements with `role="presentation"` or `role="none"` to remove their semantic meaning.
+
 ## Examples
 
 Examples of **incorrect** code for this rule:

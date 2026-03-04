@@ -36,6 +36,10 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Related Rules
+
+* [no-trailing-spaces](https://eslint.org/docs/rules/no-trailing-spaces) from eslint
+
 ## References
 
 - [eslint-plugin-ember template-no-trailing-spaces](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-trailing-spaces.md)

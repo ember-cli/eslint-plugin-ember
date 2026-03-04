@@ -79,6 +79,26 @@ This rule **allows** the following:
 </template>
 ```
 
+## Migration
+
+If you see this pattern:
+
+```hbs
+<SomeCard>
+  <:default>
+    Card Content
+  </:default>
+</SomeCard>
+```
+
+Just remove the `<:default>` wrapper:
+
+```hbs
+<SomeCard>
+  Card Content
+</SomeCard>
+```
+
 ## References
 
 - [Ember Guides - Named Blocks](https://guides.emberjs.com/release/components/block-content/#toc_named-blocks)

@@ -46,6 +46,10 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Migration
+
+Add the `lang` attribute to the `app/index.html` file in your Ember app. If you use an internationalization addon like `ember-intl`, note that this will not conflict with that addon.
+
 ## Options
 
 | Name             | Type      | Default | Description                                                                       |

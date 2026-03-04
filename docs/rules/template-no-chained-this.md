@@ -12,6 +12,16 @@ Using `this.this.*` in templates is almost always a typo or copy/paste mistake. 
 
 This rule disallows `this.this.*` patterns in templates (e.g., `{{this.this.foo}}` or `<this.this.Bar />`).
 
+## Motivation
+
+Templates are meant to clearly reference local properties, arguments (`@arg`), or component state via `this`. When you see `this.this.foo`, it's either:
+
+- A typo (e.g., copy/paste or incorrect refactor)
+- A misunderstanding of Glimmer component boundaries
+- A misuse of dynamic component invocation (e.g., `<this.this.foo />`)
+
+These patterns often go unnoticed but produce confusing or broken runtime behavior.
+
 ## Examples
 
 ### Incorrect ❌

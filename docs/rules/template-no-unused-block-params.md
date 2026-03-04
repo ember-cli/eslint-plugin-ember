@@ -48,6 +48,10 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Related rules
+
+* [eslint/no-unused-vars](https://eslint.org/docs/rules/no-unused-vars)
+
 ## References
 
 - [Ember Guides - Block Parameters](https://guides.emberjs.com/release/components/block-content/)

@@ -68,6 +68,10 @@ module.exports = {
 };
 ```
 
+## Related Rules
+
+* [ember/no-restricted-service-injections](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-restricted-service-injections.md)
+
 ## References
 
 - [emberjs.com - Deprecations](https://guides.emberjs.com/release/deprecations/)

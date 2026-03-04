@@ -38,6 +38,31 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Migration
+
+The migration path typically depends on what the render-modifier was used for, but if you need a custom modifier, the [`ember-modifier` README](https://github.com/ember-modifier/ember-modifier) covers everything you need to know for making custom modifiers.
+
+For example, if render modifiers were used for setup/teardown, the migration to `ember-modifier` could be the following:
+
+```js
+import Component from '@glimmer/component';
+import { modifier } from 'ember-modifier';
+
+export default class MyComponent extends Component {
+  myModifier = modifier((element) => {
+    let handleEvent = () => {};
+
+    element.addEventListener('eventName', handleEvent);
+
+    return () => element.removeEventListener('eventName', handelEvent);
+  });
+}
+```
+
+```hbs
+<div {{this.myModifier}}>
+```
+
 ## References
 
 - [eslint-plugin-ember template-no-at-ember-render-modifiers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-at-ember-render-modifiers.md)

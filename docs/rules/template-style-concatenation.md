@@ -68,6 +68,10 @@ Then in template:
 </template>
 ```
 
+## Related Rules
+
+* [no-inline-styles](template-no-inline-styles.md)
+
 ## References
 
 - [eslint-plugin-ember template-style-concatenation](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-style-concatenation.md)

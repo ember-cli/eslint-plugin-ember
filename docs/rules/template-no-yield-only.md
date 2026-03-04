@@ -35,6 +35,10 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Migration
+
+* delete all files that are flagged by this rule
+
 ## References
 
 - [eslint-plugin-ember template-no-yield-only](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-yield-only.md)

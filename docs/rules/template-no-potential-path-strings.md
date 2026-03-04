@@ -37,3 +37,15 @@ Examples of **correct** code for this rule:
   <div>{{this.foo.bar}}</div>
 </template>
 ```
+
+## Migration
+
+- Replace the surrounding `"` characters with `{{`/`}}`
+
+## Related Rules
+
+- [no-arguments-for-html-elements](template-no-arguments-for-html-elements.md)
+
+## References
+
+- [Component Arguments and HTML Attributes](https://guides.emberjs.com/release/components/component-arguments-and-html-attributes/)

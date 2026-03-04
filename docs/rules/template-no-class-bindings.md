@@ -30,6 +30,10 @@ This rule **allows** the following:
 <template><SomeThing /></template>
 ```
 
+## Migration
+
+- find in templates and remove `classBinding` and/or `classNameBindings`.
+
 ## References
 
 - [ember-template-lint no-class-bindings](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-class-bindings.md)

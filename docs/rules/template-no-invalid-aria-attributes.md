@@ -37,3 +37,7 @@ Examples of **correct** code for this rule:
   <div aria-describedby="description-id">Content</div>
 </template>
 ```
+
+## References
+
+- [Using ARIA, Roles, States, and Properties](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques)

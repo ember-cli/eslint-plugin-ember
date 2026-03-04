@@ -49,3 +49,11 @@ Examples of **correct** code for this rule:
 | `allowlist`  | `string[]` | `[]`    | Helper names allowed inside `{{unless}}`.                                   |
 | `denylist`   | `string[]` | `[]`    | Helper names explicitly denied inside `{{unless}}`.                         |
 | `maxHelpers` | `integer`  | `1`     | Maximum number of helpers allowed inside `{{unless}}` (`-1` for unlimited). |
+
+## Related Rules
+
+* [no-negated-condition](template-no-negated-condition.md)
+
+## References
+
+* [Wikipedia/boolean algebra](https://en.wikipedia.org/wiki/Boolean_algebra)

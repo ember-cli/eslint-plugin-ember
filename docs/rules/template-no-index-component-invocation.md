@@ -52,3 +52,12 @@ This rule **allows** the following:
 ```gjs
 <template>{{foo}}</template>
 ```
+
+## Migration
+
+* replace all `::Index>` to `>`
+* replace all `/index}}` to `}}`
+
+## References
+
+* [RFC #481](https://github.com/emberjs/rfcs/blob/master/text/0481-component-templates-co-location.md#high-level-design)

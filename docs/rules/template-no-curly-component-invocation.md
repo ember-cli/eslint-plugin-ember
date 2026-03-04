@@ -46,6 +46,10 @@ This rule **allows** the following:
 <template><Nested::Component /></template>
 ```
 
+## Migration
+
+- use <https://github.com/ember-codemods/ember-angle-brackets-codemod>
+
 ## Configuration
 
 This rule accepts an options object with the following properties:

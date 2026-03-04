@@ -60,6 +60,10 @@ This rule disallows using `...attributes` on nested elements within a template.
 </template>
 ```
 
+## Migration
+
+- Remove the inner `...attributes` declaration
+
 ## References
 
 - [Ember Guides - Splattributes](https://guides.emberjs.com/release/components/component-arguments-and-html-attributes/#toc_html-attributes)

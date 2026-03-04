@@ -40,6 +40,10 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Migration
+
+Use CSS to add letter-spacing to a word.
+
 ## References
 
 - [WCAG - Meaningful Sequence](https://www.w3.org/WAI/WCAG21/Understanding/meaningful-sequence.html)

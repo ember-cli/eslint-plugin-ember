@@ -10,6 +10,16 @@ Positive `tabindex` values disrupt the natural tab order of the page, making key
 
 This rule disallows positive integer values for the `tabindex` attribute. Only `0` (for naturally focusable elements) and `-1` (for programmatically focusable elements) are allowed.
 
+## `<* tabindex>`
+
+[MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) explains the motivation of this rule nicely:
+
+> Avoid using tabindex values greater than 0. Doing so makes it difficult for people who rely on assistive technology to navigate and operate page content. Instead, write the document with the elements in a logical sequence.
+
+This rule prevents usage of any `tabindex` values other than `0` and `-1`. It does allow for dynamic values (choosing which value to show based on some condition / helper / etc), but only if that inline `if` condition has static `0`/`-1` as the value.
+
+This rule takes no arguments.
+
 ## Examples
 
 Examples of **incorrect** code for this rule:

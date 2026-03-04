@@ -50,6 +50,13 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Migration
+
+To fix issues caused by using whitespace for layout, the following are recommended:
+
+* use the appropriate HTML markup to contain the information
+* use CSS to add padding or margins to the semantic HTML markup
+
 ## References
 
 - [eslint-plugin-ember template-no-whitespace-for-layout](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-whitespace-for-layout.md)
