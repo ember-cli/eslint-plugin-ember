@@ -2,6 +2,8 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 Disallows the use of `{{action}}` helper.
 
 The `{{action}}` helper is deprecated in favor of the `{{on}}` modifier and `{{fn}}` helper, which provide better performance and clearer intent.
@@ -10,36 +12,26 @@ The `{{action}}` helper is deprecated in favor of the `{{on}}` modifier and `{{f
 
 Examples of **incorrect** code for this rule:
 
-```gjs
-<template>
-  <button {{on "click" (action "save")}}>Save</button>
-</template>
+```hbs
+<button {{on 'click' (action 'save')}}>Save</button>
 ```
 
-```gjs
-<template>
-  {{action "doSomething"}}
-</template>
+```hbs
+{{action 'doSomething'}}
 ```
 
 Examples of **correct** code for this rule:
 
-```gjs
-<template>
-  <button {{on "click" this.save}}>Save</button>
-</template>
+```hbs
+<button {{on 'click' this.save}}>Save</button>
 ```
 
-```gjs
-<template>
-  <button {{on "click" (fn this.save "arg")}}>Save with arg</button>
-</template>
+```hbs
+<button {{on 'click' (fn this.save 'arg')}}>Save with arg</button>
 ```
 
-```gjs
-<template>
-  {{this.action}}
-</template>
+```hbs
+{{this.action}}
 ```
 
 ## Migration
@@ -49,9 +41,9 @@ Examples of **correct** code for this rule:
 
 ## Related Rules
 
-* [no-action-modifiers](template-no-action-modifiers.md)
-* [no-element-event-actions](template-no-element-event-actions.md)
-* [no-mut-helper](template-no-mut-helper.md)
+- [no-action-modifiers](template-no-action-modifiers.md)
+- [no-element-event-actions](template-no-element-event-actions.md)
+- [no-mut-helper](template-no-mut-helper.md)
 
 ## References
 

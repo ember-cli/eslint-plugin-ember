@@ -2,6 +2,8 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 Disallows the use of the `{{route-action}}` helper.
 
 The `route-action` helper from `ember-route-action-helper` is deprecated. Modern Ember applications should use the `{{fn}}` helper or closure actions instead.
@@ -14,56 +16,44 @@ This rule disallows the use of `{{route-action}}` in templates.
 
 Examples of **incorrect** code for this rule:
 
-```gjs
-<template>
-  {{route-action "save"}}
-</template>
+```hbs
+{{route-action 'save'}}
 ```
 
-```gjs
-<template>
-  <button {{on "click" (route-action "save")}}>Save</button>
-</template>
+```hbs
+<button {{on 'click' (route-action 'save')}}>Save</button>
 ```
 
-```gjs
-<template>
-  <Component @action={{route-action "update"}} />
-</template>
+```hbs
+<Component @action={{route-action 'update'}} />
 ```
 
 Examples of **correct** code for this rule:
 
-```gjs
-<template>
-  <button {{on "click" (fn this.save)}}>Save</button>
-</template>
+```hbs
+<button {{on 'click' (fn this.save)}}>Save</button>
 ```
 
-```gjs
-<template>
-  <button {{on "click" this.handleClick}}>Click</button>
-</template>
+```hbs
+<button {{on 'click' this.handleClick}}>Click</button>
 ```
 
-```gjs
-<template>
-  <Component @action={{this.handleAction}} />
-</template>
+```hbs
+<Component @action={{this.handleAction}} />
 ```
 
 ## Migration
 
 Replace:
 
-```gjs
-<button {{on "click" (route-action "save" model)}}>Save</button>
+```hbs
+<button {{on 'click' (route-action 'save' model)}}>Save</button>
 ```
 
 With:
 
-```gjs
-<button {{on "click" (fn this.save model)}}>Save</button>
+```hbs
+<button {{on 'click' (fn this.save model)}}>Save</button>
 ```
 
 ## References

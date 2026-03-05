@@ -2,7 +2,9 @@
 
 <!-- end auto-generated rule header -->
 
-> Disallow ambiguous path in templates
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
+Disallow ambiguous path in templates
 
 ## Rule Details
 
@@ -12,36 +14,26 @@ This rule requires explicit `this.` or `@` prefix for property access to avoid a
 
 Examples of **incorrect** code for this rule:
 
-```gjs
-<template>
-  {{user.name}}
-</template>
+```hbs
+{{user.name}}
 ```
 
-```gjs
-<template>
-  {{model.title}}
-</template>
+```hbs
+{{model.title}}
 ```
 
 Examples of **correct** code for this rule:
 
-```gjs
-<template>
-  {{this.user.name}}
-</template>
+```hbs
+{{this.user.name}}
 ```
 
-```gjs
-<template>
-  {{@model.title}}
-</template>
+```hbs
+{{@model.title}}
 ```
 
-```gjs
-<template>
-  {{MyComponent}}
-</template>
+```hbs
+{{MyComponent}}
 ```
 
 ## References

@@ -38,7 +38,7 @@ Examples of **correct** code for this rule:
 
 ## Related Rules
 
-* [no-trailing-spaces](https://eslint.org/docs/rules/no-trailing-spaces) from eslint
+- [no-trailing-spaces](https://eslint.org/docs/rules/no-trailing-spaces) from eslint
 
 ## References
 

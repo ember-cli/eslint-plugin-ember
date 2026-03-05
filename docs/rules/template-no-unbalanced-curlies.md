@@ -59,8 +59,8 @@ Examples of **correct** code for this rule:
 If you have curlies in your code that you wish to show verbatim, but are flagged by this rule, you can formulate them as a handlebars expression:
 
 ```hbs
-<p>This is a closing double curly: {{ '}}' }}</p>
-<p>This is a closing triple curly: {{ '}}}' }}</p>
+<p>This is a closing double curly: {{'}}'}}</p>
+<p>This is a closing triple curly: {{'}}}'}}</p>
 ```
 
 ## References

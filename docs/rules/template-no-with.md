@@ -2,82 +2,72 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 The use of `{{with}}` has been deprecated, you should replace it with either `{{let}}` or a combination of `{{let}}`, `{{if}}` and `{{else}}`.
 
 ## Examples
 
 This rule **forbids** the following:
 
-```gjs
-<template>
-  {{#with (hash name='Ben' age=4) as |person|}}
-    Hi
-    {{person.name}}, you are
-    {{person.age}}
-    years old.
-  {{/with}}
-</template>
+```hbs
+{{#with (hash name='Ben' age=4) as |person|}}
+  Hi
+  {{person.name}}, you are
+  {{person.age}}
+  years old.
+{{/with}}
 ```
 
-```gjs
-<template>
-  {{#with user.posts as |blogPosts|}}
+```hbs
+{{#with user.posts as |blogPosts|}}
+  There are
+  {{blogPosts.length}}
+  blog posts.
+{{/with}}
+```
+
+```hbs
+{{#with user.posts as |blogPosts|}}
+  There are
+  {{blogPosts.length}}
+  blog posts.
+{{else}}
+  There are no blog posts.
+{{/with}}
+```
+
+This rule **allows** the following:
+
+```hbs
+{{#let (hash name='Ben' age=4) as |person|}}
+  Hi
+  {{person.name}}, you are
+  {{person.age}}
+  years old.
+{{/let}}
+```
+
+```hbs
+{{#let user.posts as |blogPosts|}}
+  {{#if blogPosts.length}}
     There are
     {{blogPosts.length}}
     blog posts.
-  {{/with}}
-</template>
+  {{/if}}
+{{/let}}
 ```
 
-```gjs
-<template>
-  {{#with user.posts as |blogPosts|}}
+```hbs
+{{#let user.posts as |blogPosts|}}
+  {{#if blogPosts.length}}
     There are
     {{blogPosts.length}}
     blog posts.
   {{else}}
     There are no blog posts.
-  {{/with}}
-</template>
-```
-
-This rule **allows** the following:
-
-```gjs
-<template>
-  {{#let (hash name='Ben' age=4) as |person|}}
-    Hi
-    {{person.name}}, you are
-    {{person.age}}
-    years old.
-  {{/let}}
-</template>
-```
-
-```gjs
-<template>
-  {{#let user.posts as |blogPosts|}}
-    {{#if blogPosts.length}}
-      There are
-      {{blogPosts.length}}
-      blog posts.
-    {{/if}}
-  {{/let}}
-</template>
-```
-
-```gjs
-<template>
-  {{#let user.posts as |blogPosts|}}
-    {{#if blogPosts.length}}
-      There are
-      {{blogPosts.length}}
-      blog posts.
-    {{else}}
-      There are no blog posts.
-    {{/if}}
-  {{/let}}
-</template>
+  {{/if}}
+{{/let}}
 ```
 
 ## References

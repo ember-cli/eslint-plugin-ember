@@ -66,7 +66,7 @@ Examples of **correct** code for this rule:
 
 ## Migration
 
-* If violations are found, remediation should be planned to replace the semantic HTML with the `div` element. Additional CSS will likely be required.
+- If violations are found, remediation should be planned to replace the semantic HTML with the `div` element. Additional CSS will likely be required.
 
 ## Options
 

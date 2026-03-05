@@ -2,6 +2,8 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 Disallows the use of `{{partial}}` helper.
 
 Partials are deprecated in Ember.js and should be replaced with components for better maintainability and performance.
@@ -10,34 +12,26 @@ Partials are deprecated in Ember.js and should be replaced with components for b
 
 Examples of **incorrect** code for this rule:
 
-```gjs
-<template>
-  {{partial "user-info"}}
-</template>
+```hbs
+{{partial 'user-info'}}
 ```
 
-```gjs
-<template>
-  <div>
-    {{partial "header"}}
-  </div>
-</template>
+```hbs
+<div>
+  {{partial 'header'}}
+</div>
 ```
 
 Examples of **correct** code for this rule:
 
-```gjs
-<template>
-  <UserInfo />
-</template>
+```hbs
+<UserInfo />
 ```
 
-```gjs
-<template>
-  <div>
-    <Header />
-  </div>
-</template>
+```hbs
+<div>
+  <Header />
+</div>
 ```
 
 ## Migration

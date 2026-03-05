@@ -40,14 +40,14 @@ Examples of **correct** code for this rule:
 
 ## Migration
 
-* Check references section to get allowed arguments list.
-* If argument represents html attribute, remove `@` from name.
+- Check references section to get allowed arguments list.
+- If argument represents html attribute, remove `@` from name.
 
 ## Related Rules
 
-* [no-link-to-tagname](template-no-link-to-tagname.md)
-* [no-input-tagname](template-no-input-tagname.md)
-* [builtin-component-arguments](template-builtin-component-arguments.md)
+- [no-link-to-tagname](template-no-link-to-tagname.md)
+- [no-input-tagname](template-no-input-tagname.md)
+- [builtin-component-arguments](template-builtin-component-arguments.md)
 
 ## References
 

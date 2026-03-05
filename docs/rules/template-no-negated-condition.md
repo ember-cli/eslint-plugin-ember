@@ -44,8 +44,8 @@ Examples of **correct** code for this rule:
 
 ## Related Rules
 
-* [simple-unless](template-simple-unless.md)
+- [simple-unless](template-simple-unless.md)
 
 ## References
 
-* [no-negated-condition](https://eslint.org/docs/rules/no-negated-condition) from eslint
+- [no-negated-condition](https://eslint.org/docs/rules/no-negated-condition) from eslint

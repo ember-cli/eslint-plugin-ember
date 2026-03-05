@@ -57,13 +57,13 @@ When an iframe element doesn't have a `src` attribute, it defaults to `about:bla
 If you're dynamically setting the `src`, pre-populate the element with a secure initial `src` to ensure CSP applies:
 
 ```hbs
-<iframe src="about:blank" {{this.setFrameElement}}></iframe>
+<iframe src='about:blank' {{this.setFrameElement}}></iframe>
 ```
 
 Or, if you know the eventual value ahead of time:
 
 ```hbs
-<iframe src="/iframe-entry" {{this.setFrameElement}}></iframe>
+<iframe src='/iframe-entry' {{this.setFrameElement}}></iframe>
 ```
 
 ## Related Rules

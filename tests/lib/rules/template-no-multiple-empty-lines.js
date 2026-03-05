@@ -118,11 +118,6 @@ hbsRuleTester.run('template-no-multiple-empty-lines', rule, {
     `<div>foo</div>
 <div>bar</div>`,
     `<div>foo</div>
-<div>bar</div>`,
-    `<div>foo</div>
-
-<div>bar</div>`,
-    `<div>foo</div>
 
 <div>bar</div>`,
     `

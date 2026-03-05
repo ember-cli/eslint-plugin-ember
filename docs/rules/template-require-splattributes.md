@@ -46,13 +46,13 @@ Components that don't use `...attributes` cannot accept HTML attributes from the
 
 ## Migration
 
-* Add `...attributes` on at least one element or component invocation in the template (usually the root element)
-* Use `{{! template-lint-disable require-splattributes }}` where you explicitly don't want or need `...attributes`
+- Add `...attributes` on at least one element or component invocation in the template (usually the root element)
+- Use `{{! template-lint-disable require-splattributes }}` where you explicitly don't want or need `...attributes`
 
 ## Related Rules
 
-* [no-nested-splattributes](template-no-nested-splattributes.md)
-* [splat-attributes-only](template-splat-attributes-only.md)
+- [no-nested-splattributes](template-no-nested-splattributes.md)
+- [splat-attributes-only](template-splat-attributes-only.md)
 
 ## References
 

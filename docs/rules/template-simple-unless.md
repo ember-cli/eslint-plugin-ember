@@ -52,8 +52,8 @@ Examples of **correct** code for this rule:
 
 ## Related Rules
 
-* [no-negated-condition](template-no-negated-condition.md)
+- [no-negated-condition](template-no-negated-condition.md)
 
 ## References
 
-* [Wikipedia/boolean algebra](https://en.wikipedia.org/wiki/Boolean_algebra)
+- [Wikipedia/boolean algebra](https://en.wikipedia.org/wiki/Boolean_algebra)

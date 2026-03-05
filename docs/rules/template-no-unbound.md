@@ -2,6 +2,8 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 `{{unbound}}` is a legacy hold over from the days in which Ember's template engine was less performant. Its use today
 is vestigial, and it no longer offers performance benefits.
 
@@ -11,12 +13,12 @@ It is also a poor practice to use it for rendering only the initial value of a p
 
 This rule **forbids** the following:
 
-```gjs
-<template>{{unbound aVar}}</template>
+```hbs
+{{unbound aVar}}
 ```
 
-```gjs
-<template>{{some-component foo=(unbound aVar)}}</template>
+```hbs
+{{some-component foo=(unbound aVar)}}
 ```
 
 ## References

@@ -2,32 +2,34 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 Disallow passing `classBinding` or `classNameBindings` as arguments within templates. These are legacy Ember Classic patterns that should be replaced with modern approaches.
 
 ## Examples
 
 This rule **forbids** the following:
 
-```gjs
-<template><SomeThing @classBinding="isActive:active" /></template>
+```hbs
+<SomeThing @classBinding='isActive:active' />
 ```
 
-```gjs
-<template>{{some-thing classNameBindings="isActive:active:inactive"}}</template>
+```hbs
+{{some-thing classNameBindings='isActive:active:inactive'}}
 ```
 
-```gjs
-<template><SomeThing @classNameBindings="isActive:active:inactive" /></template>
+```hbs
+<SomeThing @classNameBindings='isActive:active:inactive' />
 ```
 
 This rule **allows** the following:
 
-```gjs
-<template><SomeThing class={{if this.isActive "active"}} /></template>
+```hbs
+<SomeThing class={{if this.isActive 'active'}} />
 ```
 
-```gjs
-<template><SomeThing /></template>
+```hbs
+<SomeThing />
 ```
 
 ## Migration

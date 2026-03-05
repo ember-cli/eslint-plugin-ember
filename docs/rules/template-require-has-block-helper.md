@@ -2,6 +2,8 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 Requires usage of the `(has-block)` helper instead of the `hasBlock` property.
 
 ## Rule Details
@@ -12,38 +14,30 @@ The `(has-block)` helper is the preferred way to check if a block was provided t
 
 Examples of **incorrect** code for this rule:
 
-```gjs
-<template>
-  {{#if hasBlock}}
-    {{yield}}
-  {{/if}}
-</template>
+```hbs
+{{#if hasBlock}}
+  {{yield}}
+{{/if}}
 ```
 
-```gjs
-<template>
-  {{#if this.hasBlock}}
-    {{yield}}
-  {{/if}}
-</template>
+```hbs
+{{#if this.hasBlock}}
+  {{yield}}
+{{/if}}
 ```
 
 Examples of **correct** code for this rule:
 
-```gjs
-<template>
-  {{#if (has-block)}}
-    {{yield}}
-  {{/if}}
-</template>
+```hbs
+{{#if (has-block)}}
+  {{yield}}
+{{/if}}
 ```
 
-```gjs
-<template>
-  {{#if (has-block "inverse")}}
-    {{yield to="inverse"}}
-  {{/if}}
-</template>
+```hbs
+{{#if (has-block 'inverse')}}
+  {{yield to='inverse'}}
+{{/if}}
 ```
 
 ## Migration

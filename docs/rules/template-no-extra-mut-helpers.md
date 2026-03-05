@@ -2,6 +2,8 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 Disallows unnecessary `mut` helpers.
 
 ## Rule Details
@@ -12,30 +14,22 @@ The `mut` helper is often unnecessary when passing simple values or properties. 
 
 Examples of **incorrect** code for this rule:
 
-```gjs
-<template>
-  <MyComponent @onChange={{mut this.value}} />
-</template>
+```hbs
+<MyComponent @onChange={{mut this.value}} />
 ```
 
-```gjs
-<template>
-  <Input @value={{mut this.text}} />
-</template>
+```hbs
+<Input @value={{mut this.text}} />
 ```
 
 Examples of **correct** code for this rule:
 
-```gjs
-<template>
-  <MyComponent @value={{this.value}} />
-</template>
+```hbs
+<MyComponent @value={{this.value}} />
 ```
 
-```gjs
-<template>
-  <Input @value={{this.text}} />
-</template>
+```hbs
+<Input @value={{this.text}} />
 ```
 
 ## References

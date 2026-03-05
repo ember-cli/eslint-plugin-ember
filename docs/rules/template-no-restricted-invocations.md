@@ -70,7 +70,7 @@ module.exports = {
 
 ## Related Rules
 
-* [ember/no-restricted-service-injections](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-restricted-service-injections.md)
+- [ember/no-restricted-service-injections](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-restricted-service-injections.md)
 
 ## References
 

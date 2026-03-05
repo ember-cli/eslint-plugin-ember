@@ -36,9 +36,9 @@ Examples of **correct** code for this rule:
 
 ## Migration
 
-* If the `title` attribute value is the same as or part of the link text, it's better to leave it out.
+- If the `title` attribute value is the same as or part of the link text, it's better to leave it out.
 
 ## References
 
-* [Supplementing link text with the title attribute](https://www.w3.org/TR/WCAG20-TECHS/H33.html)
-* [Understanding Link Purpose](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-refs.html)
+- [Supplementing link text with the title attribute](https://www.w3.org/TR/WCAG20-TECHS/H33.html)
+- [Understanding Link Purpose](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-refs.html)

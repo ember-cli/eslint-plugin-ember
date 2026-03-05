@@ -2,6 +2,8 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 Disallow usage of the `(mut)` helper.
 
 The `(mut)` helper was used in classic Ember to create two-way bindings. In modern Ember (Octane and beyond), this pattern is discouraged in favor of explicit one-way data flow with actions or setters.
@@ -13,7 +15,7 @@ This rule disallows using the `(mut)` helper in templates.
 ## Reasons to not use [the `mut` helper](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/each?anchor=mut)
 
 1. General problems in the programming model:
-   * The mut helper is non-intuitive to use, see, teach, and learn since it can either be a getter or a setter based on the context in which it’s used.
+   - The mut helper is non-intuitive to use, see, teach, and learn since it can either be a getter or a setter based on the context in which it’s used.
 
    Example:
 
@@ -27,20 +29,16 @@ This rule disallows using the `(mut)` helper in templates.
    {{/let}}
    ```
 
-   * The need for the [no-extra-mut-helper-argument](template-no-extra-mut-helper-argument.md) rule is further evidence that `mut` has a non-intuitive signature and frequently gets misused.
-   * The mut helper is usually only used as a pure setter, in which case there are other template helpers that are pure setters that could be used instead of mut (e.g. [ember-set-helper](https://github.com/pzuraq/ember-set-helper)).
-2. Incompatibility with Glimmer Component intentions:
+   - The need for the [no-extra-mut-helper-argument](template-no-extra-mut-helper-argument.md) rule is further evidence that `mut` has a non-intuitive signature and frequently gets misused.
+   - The mut helper is usually only used as a pure setter, in which case there are other template helpers that are pure setters that could be used instead of mut (e.g. [ember-set-helper](https://github.com/pzuraq/ember-set-helper)).
 
-   * The mut helper can re-introduce 2 way data binding into Glimmer Components on named arguments where a child can change a parent’s data, which goes against the Data Down Actions Up principle, goes against Glimmer Components’ intention to have immutable arguments, and is [discouraged by the Ember Core team](https://www.pzuraq.com/blog/on-mut-and-2-way-binding/).
+2. Incompatibility with Glimmer Component intentions:
+   - The mut helper can re-introduce 2 way data binding into Glimmer Components on named arguments where a child can change a parent’s data, which goes against the Data Down Actions Up principle, goes against Glimmer Components’ intention to have immutable arguments, and is [discouraged by the Ember Core team](https://www.pzuraq.com/blog/on-mut-and-2-way-binding/).
 
 Example:
 
 ```hbs
-<input
-  type="checkbox"
-  checked={{@checked}}
-  {{on "change" (fn (mut @checked) (not @checked))}}
-/>
+<input type='checkbox' checked={{@checked}} {{on 'change' (fn (mut @checked) (not @checked))}} />
 ```
 
 ## What this rule does
@@ -53,42 +51,30 @@ the lint violations.
 
 ### Incorrect ❌
 
-```gjs
-<template>
-  <Input @value={{this.name}} @onChange={{mut this.name}} />
-</template>
+```hbs
+<Input @value={{this.name}} @onChange={{mut this.name}} />
 ```
 
-```gjs
-<template>
-  {{input value=(mut this.name)}}
-</template>
+```hbs
+{{input value=(mut this.name)}}
 ```
 
-```gjs
-<template>
-  <CustomComponent @onChange={{mut this.value}} />
-</template>
+```hbs
+<CustomComponent @onChange={{mut this.value}} />
 ```
 
 ### Correct ✅
 
-```gjs
-<template>
-  <Input @value={{this.name}} @onChange={{this.updateName}} />
-</template>
+```hbs
+<Input @value={{this.name}} @onChange={{this.updateName}} />
 ```
 
-```gjs
-<template>
-  <Input @value={{this.name}} @onChange={{fn (mut this "name")}} />
-</template>
+```hbs
+<Input @value={{this.name}} @onChange={{fn (mut this 'name')}} />
 ```
 
-```gjs
-<template>
-  <CustomComponent @onChange={{this.handleChange}} />
-</template>
+```hbs
+<CustomComponent @onChange={{this.handleChange}} />
 ```
 
 ## Migration
@@ -98,34 +84,31 @@ the lint violations.
 Before:
 
 ```hbs
-<MyComponent
-  @closeDropdown={{action (mut this.setIsDropdownOpen) false}}
-/>
+<MyComponent @closeDropdown={{action (mut this.setIsDropdownOpen) false}} />
 ```
 
 After (Option 1 HBS):
 
 ```hbs
-<MyComponent
-  @closeDropdown={{action this.setIsDropdownOpen false}}
-/>
+<MyComponent @closeDropdown={{action this.setIsDropdownOpen false}} />
 ```
 
 After (Option 1 JS):
 
 ```js
-@action
-setIsDropdownOpen(isDropdownOpen) {
-  set(this, 'isDropdownOpen', isDropdownOpen);
+// in your component class
+class MyComponent extends Component {
+  @action
+  setIsDropdownOpen(isDropdownOpen) {
+    set(this, 'isDropdownOpen', isDropdownOpen);
+  }
 }
 ```
 
 After (Option 2):
 
 ```hbs
-<MyComponent
-  @closeDropdown={{set this "isDropdownOpen" false}}
-/>
+<MyComponent @closeDropdown={{set this 'isDropdownOpen' false}} />
 ```
 
 \
@@ -134,17 +117,13 @@ After (Option 2):
 Before:
 
 ```hbs
-<MyComponent
-  @isDropdownOpen={{mut this.isDropdownOpen}}
-/>
+<MyComponent @isDropdownOpen={{mut this.isDropdownOpen}} />
 ```
 
 After:
 
 ```hbs
-<MyComponent
-  @isDropdownOpen={{this.isDropdownOpen}}
-/>
+<MyComponent @isDropdownOpen={{this.isDropdownOpen}} />
 ```
 
 \
@@ -169,13 +148,16 @@ After HBS:
 After JS:
 
 ```js
-@tracked
-foo;
+// in your component class
+class MyComponent extends Component {
+  @tracked
+  foo;
 
-@action
-updateFoo(evt) {
-  this.foo = evt.target.value;
-  // or set(this, ‘foo’, evt.target.value); for legacy Ember code
+  @action
+  updateFoo(evt) {
+    this.foo = evt.target.value;
+    // or set(this, 'foo', evt.target.value); for legacy Ember code
+  }
 }
 ```
 
@@ -185,17 +167,13 @@ updateFoo(evt) {
 Before:
 
 ```hbs
-<Input
-  @value={{mut this.profile.description}}
-/>
+<Input @value={{mut this.profile.description}} />
 ```
 
 After:
 
 ```hbs
-<Input
-  @value={{this.profile.description}}
-/>
+<Input @value={{this.profile.description}} />
 ```
 
 ## Options

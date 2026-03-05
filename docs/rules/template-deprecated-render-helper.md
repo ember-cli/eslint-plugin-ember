@@ -2,20 +2,22 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 Disallows the {{render}} helper which is deprecated.
 
 ## Examples
 
 Incorrect:
 
-```gjs
-<template>{{render "user"}}</template>
+```hbs
+{{render 'user'}}
 ```
 
 Correct:
 
-```gjs
-<template><User /></template>
+```hbs
+<User />
 ```
 
 ## References

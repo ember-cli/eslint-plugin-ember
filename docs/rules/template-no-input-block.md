@@ -2,20 +2,22 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 Use of the block form of the handlebars `input` helper will result in an error at runtime.
 
 ## Examples
 
 This rule **forbids** the following:
 
-```gjs
-<template>{{#input}}Some Content{{/input}}</template>
+```hbs
+{{#input}}Some Content{{/input}}
 ```
 
 This rule **allows** the following:
 
-```gjs
-<template>{{input type='text' value=this.firstName disabled=this.entryNotAllowed size='50'}}</template>
+```hbs
+{{input type='text' value=this.firstName disabled=this.entryNotAllowed size='50'}}
 ```
 
 ## References

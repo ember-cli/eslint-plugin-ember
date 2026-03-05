@@ -2,20 +2,22 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 This rule prevents the usage of `this.attrs` property to access values passed to the component. Use `@arg` syntax instead.
 
 ## Examples
 
 This rule **forbids** the following:
 
-```gjs
-<template>{{this.attrs.foo}}</template>
+```hbs
+{{this.attrs.foo}}
 ```
 
 This rule **allows** the following:
 
-```gjs
-<template>{{@foo}}</template>
+```hbs
+{{@foo}}
 ```
 
 ## References

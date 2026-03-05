@@ -2,6 +2,8 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 Require explicit `this` for property access in templates to avoid ambiguity.
 
 ## Rule Details
@@ -23,41 +25,25 @@ class.
 
 Examples of **incorrect** code for this rule:
 
-```gjs
-<template>
-  {{property}}
-</template>
-
-<template>
-  {{someValue}}
-</template>
+```hbs
+{{property}}
+{{someValue}}
 ```
 
 Examples of **correct** code for this rule:
 
-```gjs
-<template>
-  {{this.property}}
-</template>
-
-<template>
-  {{@namedArg}}
-</template>
-
-<template>
-  {{yield}}
-</template>
-
-<template>
-  {{if this.condition "yes" "no"}}
-</template>
+```hbs
+{{this.property}}
+{{@namedArg}}
+{{yield}}
+{{if this.condition 'yes' 'no'}}
 ```
 
 ## Migration
 
-* use [ember-no-implicit-this-codemod](https://github.com/ember-codemods/ember-no-implicit-this-codemod)
-* [upgrade to Glimmer components](https://guides.emberjs.com/release/upgrading/current-edition/glimmer-components/), which don't allow ambiguous access
-  * classic components have [auto-reflection](https://github.com/emberjs/rfcs/blob/master/text/0276-named-args.md#motivation), and can use `this.myArgName` or `this.args.myArgNme` or `@myArgName` interchangeably
+- use [ember-no-implicit-this-codemod](https://github.com/ember-codemods/ember-no-implicit-this-codemod)
+- [upgrade to Glimmer components](https://guides.emberjs.com/release/upgrading/current-edition/glimmer-components/), which don't allow ambiguous access
+  - classic components have [auto-reflection](https://github.com/emberjs/rfcs/blob/master/text/0276-named-args.md#motivation), and can use `this.myArgName` or `this.args.myArgNme` or `@myArgName` interchangeably
 
 ## References
 

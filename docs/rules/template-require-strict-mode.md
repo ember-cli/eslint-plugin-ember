@@ -2,6 +2,8 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 Require templates to be in strict mode.
 
 Templates should use the strict mode syntax (template tag format) rather than loose template files. Strict mode templates (`.gjs` / `.gts` files) provide better integration with JavaScript and type checking.
@@ -10,22 +12,18 @@ Templates should use the strict mode syntax (template tag format) rather than lo
 
 This rule **forbids** the following:
 
-```gjs
-<template>
-  <div>
-    Hello World
-  </div>
-</template>
+```hbs
+<div>
+  Hello World
+</div>
 ```
 
 (in a `.hbs` file)
 
 This rule **allows** the following:
 
-```gjs
-<template>
-  Hello World
-</template>
+```hbs
+Hello World
 ```
 
 (in a `.gjs` or `.gts` file)

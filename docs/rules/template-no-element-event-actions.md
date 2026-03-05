@@ -46,8 +46,8 @@ Examples of **correct** code for this rule:
 
 ## Related Rules
 
-* [no-action](template-no-action.md)
-* [no-action-modifiers](template-no-action-modifiers.md)
+- [no-action](template-no-action.md)
+- [no-action-modifiers](template-no-action-modifiers.md)
 
 ## References
 

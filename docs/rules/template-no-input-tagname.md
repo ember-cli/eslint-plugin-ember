@@ -2,21 +2,21 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 `{{input tagName=x}}` will result in obtuse errors. Typically, the input will simply fail to render, whether used in block form or inline. The only valid `tagName` for the input helper is `input`. For `textarea`, `button`, and other input-like elements, you should instead create a new component or better use the DOM!
 
 ## Examples
 
 This rule **forbids** the following:
 
-```gjs
-<template>
-  {{input tagName='foo'}}
-  {{input tagName=X}}
-  {{component 'input' tagName='foo'}}
-  {{component 'input' tagName=X}}
-  {{yield (component 'input' tagName='foo')}}
-  {{yield (component 'input' tagName=X)}}
-</template>
+```hbs
+{{input tagName='foo'}}
+{{input tagName=X}}
+{{component 'input' tagName='foo'}}
+{{component 'input' tagName=X}}
+{{yield (component 'input' tagName='foo')}}
+{{yield (component 'input' tagName=X)}}
 ```
 
 ## Related rules

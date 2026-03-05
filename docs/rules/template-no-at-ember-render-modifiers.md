@@ -50,7 +50,7 @@ import { modifier } from 'ember-modifier';
 
 export default class MyComponent extends Component {
   myModifier = modifier((element) => {
-    let handleEvent = () => {};
+    const handleEvent = () => {};
 
     element.addEventListener('eventName', handleEvent);
 

@@ -4,6 +4,8 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 In Ember route templates, the model should be accessed via `this.model` in the controller or component, not as an `@model` argument. The `@model` argument pattern is more appropriate for components. This rule primarily targets `.hbs` files in the `templates/` directory.
 
 ## Rule Details
@@ -14,47 +16,35 @@ This rule disallows the use of `@model` argument in route templates (`.hbs` file
 
 Examples of **incorrect** code for this rule (in route templates):
 
-```gjs
-<template>
-  <!-- app/templates/index.hbs -->
-  {{@model}}
-</template>
+```hbs
+<!-- app/templates/index.hbs -->
+{{@model}}
 ```
 
-```gjs
-<template>
-  <!-- app/templates/users.hbs -->
-  {{@model.name}}
-</template>
+```hbs
+<!-- app/templates/users.hbs -->
+{{@model.name}}
 ```
 
-```gjs
-<template>
-  <!-- app/templates/posts/show.hbs -->
-  {{@model.id}}
-</template>
+```hbs
+<!-- app/templates/posts/show.hbs -->
+{{@model.id}}
 ```
 
 Examples of **correct** code for this rule:
 
-```gjs
-<template>
-  <!-- app/templates/index.hbs -->
-  {{this.model}}
-</template>
+```hbs
+<!-- app/templates/index.hbs -->
+{{this.model}}
 ```
 
-```gjs
+```hbs
 // app/components/user-card.gjs
-<template>
-  {{@model.name}}
-</template>
+{{@model.name}}
 ```
 
-```gjs
-<template>
-  {{this.model}}
-</template>
+```hbs
+{{this.model}}
 ```
 
 ## Migration

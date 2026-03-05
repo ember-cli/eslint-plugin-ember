@@ -4,6 +4,8 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 Disallow unnecessary usage of the `{{component}}` helper with static component names.
 
 ## Rule Details
@@ -14,30 +16,17 @@ This rule disallows using `{{component "component-name"}}` when you could use an
 
 Examples of **incorrect** code for this rule:
 
-```gjs
-<template>
-  {{component "my-component"}}
-</template>
-
-<template>
-  {{component "MyComponent" arg="value"}}
-</template>
+```hbs
+{{component 'my-component'}}
+{{component 'MyComponent' arg='value'}}
 ```
 
 Examples of **correct** code for this rule:
 
-```gjs
-<template>
-  <MyComponent />
-</template>
-
-<template>
-  {{component this.dynamicComponentName}}
-</template>
-
-<template>
-  {{component @componentName}}
-</template>
+```hbs
+<MyComponent />
+{{component this.dynamicComponentName}}
+{{component @componentName}}
 ```
 
 ## References

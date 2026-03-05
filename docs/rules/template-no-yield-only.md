@@ -37,7 +37,7 @@ Examples of **correct** code for this rule:
 
 ## Migration
 
-* delete all files that are flagged by this rule
+- delete all files that are flagged by this rule
 
 ## References
 

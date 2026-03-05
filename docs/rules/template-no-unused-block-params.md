@@ -50,7 +50,7 @@ Examples of **correct** code for this rule:
 
 ## Related rules
 
-* [eslint/no-unused-vars](https://eslint.org/docs/rules/no-unused-vars)
+- [eslint/no-unused-vars](https://eslint.org/docs/rules/no-unused-vars)
 
 ## References
 

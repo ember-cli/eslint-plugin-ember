@@ -2,6 +2,8 @@
 
 <!-- end auto-generated rule header -->
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 In Ember 1.12, support for invoking the inline View helper was deprecated.
 
 ## Rule Details
@@ -12,24 +14,20 @@ This rule flags `{{view}}` mustache or block statements that have hash pair argu
 
 This rule **forbids** the following:
 
-```gjs
-<template>
-  {{view 'this-is-bad' tagName="span"}}
+```hbs
+{{view 'this-is-bad' tagName='span'}}
 
-  {{#view tagName="span"}}content{{/view}}
-</template>
+{{#view tagName='span'}}content{{/view}}
 ```
 
 This rule **allows** the following:
 
-```gjs
-<template>
-  {{this-is-better}}
+```hbs
+{{this-is-better}}
 
-  {{qux-qaz this=good}}
+{{qux-qaz this=good}}
 
-  <div foo={{bar}}></div>
-</template>
+<div foo={{bar}}></div>
 ```
 
 ## References

@@ -70,7 +70,7 @@ Then in template:
 
 ## Related Rules
 
-* [no-inline-styles](template-no-inline-styles.md)
+- [no-inline-styles](template-no-inline-styles.md)
 
 ## References
 

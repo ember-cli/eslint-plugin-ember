@@ -24,18 +24,18 @@ Roles requiring context:
 
 Format: role | required context role
 
-* columnheader | row
-* gridcell | row
-* listitem | group or list
-* menuitem | group, menu, or menubar
-* menuitemcheckbox | menu or menubar
-* menuitemradio | group, menu, or menubar
-* option | listbox
-* row | grid, rowgroup, or treegrid
-* rowgroup | grid
-* rowheader | row
-* tab | tablist
-* treeitem | group or tree
+- columnheader | row
+- gridcell | row
+- listitem | group or list
+- menuitem | group, menu, or menubar
+- menuitemcheckbox | menu or menubar
+- menuitemradio | group, menu, or menubar
+- option | listbox
+- row | grid, rowgroup, or treegrid
+- rowgroup | grid
+- rowheader | row
+- tab | tablist
+- treeitem | group or tree
 
 ## `<* role><* role /></*>`
 

@@ -49,9 +49,10 @@ export default class MyComponent extends Component {
 ```
 
 ```hbs
-<form {{on "input" this.handleInput}}>
-  <label> Name
-    <input name="name">
+<form {{on 'input' this.handleInput}}>
+  <label>
+    Name
+    <input name='name' />
   </label>
 </form>
 ```
@@ -76,16 +77,12 @@ export default class MyComponent extends Component {
 ```
 
 ```hbs
-<input
-  type="text"
-  value={{this.name}}
-  {{on "input" this.updateName}}
-/>
+<input type='text' value={{this.name}} {{on 'input' this.updateName}} />
 ```
 
 ## Related Rules
 
-* [no-mut-helper](template-no-mut-helper.md)
+- [no-mut-helper](template-no-mut-helper.md)
 
 ## References
 

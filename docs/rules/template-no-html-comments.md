@@ -37,5 +37,5 @@ Examples of **correct** code for this rule:
 
 ## References
 
-* [Ember guides/template features](https://guides.emberjs.com/release/components/#toc_supported-features)
-* [Handlebars docs/comments](https://handlebarsjs.com/guide/#template-comments)
+- [Ember guides/template features](https://guides.emberjs.com/release/components/#toc_supported-features)
+- [Handlebars docs/comments](https://handlebarsjs.com/guide/#template-comments)

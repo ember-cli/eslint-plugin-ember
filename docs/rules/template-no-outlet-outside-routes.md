@@ -32,5 +32,5 @@ Examples of **correct** code for this rule:
 
 ## References
 
-* [Ember guides/routing](https://guides.emberjs.com/release/routing/rendering-a-template/)
-* [Ember api/outlet helper](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/outlet?anchor=outlet)
+- [Ember guides/routing](https://guides.emberjs.com/release/routing/rendering-a-template/)
+- [Ember api/outlet helper](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/outlet?anchor=outlet)
