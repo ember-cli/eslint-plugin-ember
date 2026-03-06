@@ -198,6 +198,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                             | disallow usage of {{action}} modifiers                          |    |    |    |
 | [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md)       | disallow @arguments on HTML elements                            |    |    |    |
 | [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)         | disallow usage of Ember Array prototype extensions              |    |    |    |
+| [template-no-block-params](docs/rules/template-no-block-params.md)                                     | disallow the use of block params (`as \|...\|`)                 |    |    |    |
 | [template-no-block-params-for-html-elements](docs/rules/template-no-block-params-for-html-elements.md) | disallow block params on HTML elements                          |    |    |    |
 | [template-no-capital-arguments](docs/rules/template-no-capital-arguments.md)                           | disallow capital arguments (use lowercase @arg instead of @Arg) |    |    |    |
 | [template-no-chained-this](docs/rules/template-no-chained-this.md)                                     | disallow redundant `this.this` in templates                     |    | 🔧 |    |
