@@ -1,7 +1,5 @@
 # ember/template-require-valid-named-block-naming-format
 
-💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
-
 <!-- end auto-generated rule header -->
 
 Require valid named block naming format.

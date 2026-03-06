@@ -1,7 +1,5 @@
 # ember/template-require-iframe-src-attribute
 
-💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
-
 <!-- end auto-generated rule header -->
 
 Require iframe elements to have a src attribute.

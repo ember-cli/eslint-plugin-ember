@@ -1,7 +1,5 @@
 # ember/template-no-splattributes-with-class
 
-💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
-
 <!-- end auto-generated rule header -->
 
 Disallow using `...attributes` with `class` attribute.
