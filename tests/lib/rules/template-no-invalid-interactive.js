@@ -173,6 +173,32 @@ hbsRuleTester.run('template-no-invalid-interactive', rule, {
     '<div {{on "scroll" this.handleScroll}}></div>',
     '<code {{on "copy" (action @onCopy)}}></code>',
     '<img {{on "load" this.onLoad}} {{on "error" this.onError}}>',
+    // additionalInteractiveTags config
+    {
+      code: '<div {{on "click" this.onClick}}></div>',
+      options: [{ additionalInteractiveTags: ['div'] }],
+    },
+    {
+      code: '<div {{action "foo"}}></div>',
+      options: [{ additionalInteractiveTags: ['div'] }],
+    },
+    {
+      code: '<div onclick={{action "foo"}}></div>',
+      options: [{ additionalInteractiveTags: ['div'] }],
+    },
+    {
+      code: '<img onerror={{action "foo"}}>',
+      options: [{ additionalInteractiveTags: ['img'] }],
+    },
+    // ignoredTags config
+    {
+      code: '<div {{on "click" this.actionName}}>...</div>',
+      options: [{ ignoredTags: ['div'] }],
+    },
+    {
+      code: '<div onclick={{action "foo"}}></div>',
+      options: [{ ignoredTags: ['div'] }],
+    },
   ],
   invalid: [
     {

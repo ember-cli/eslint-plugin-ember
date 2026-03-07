@@ -22,11 +22,7 @@ ruleTester.run('template-no-pointer-down-event-binding', rule, {
     `<template>
       <button {{on "keydown" this.handleKeyDown}}>Press</button>
     </template>`,
-    `<template>
-      <div {{on "mousedown" this.handleMouseDown}}>Content</div>
-    </template>`,
 
-    // Note: ETL's rule catches mousedown too, but this ESLint rule only catches pointerdown
     "<template><div {{on 'mouseup' this.doSomething}}></div></template>",
     "<template><div {{action this.doSomething on='mouseup'}}></div></template>",
     '<template><input type="text" onmouseup="myFunction()"></template>',
@@ -40,26 +36,34 @@ ruleTester.run('template-no-pointer-down-event-binding', rule, {
         <button {{on "pointerdown" this.handlePointerDown}}>Click</button>
       </template>`,
       output: null,
-      errors: [
-        {
-          message:
-            'Avoid pointer down events. Use click or keydown events instead for better accessibility.',
-          type: 'GlimmerElementModifierStatement',
-        },
-      ],
+      errors: [{ messageId: 'unexpected' }],
     },
     {
       code: `<template>
         <div onpointerdown={{this.handlePointerDown}}>Content</div>
       </template>`,
       output: null,
-      errors: [
-        {
-          message:
-            'Avoid pointer down events. Use click or keydown events instead for better accessibility.',
-          type: 'GlimmerAttrNode',
-        },
-      ],
+      errors: [{ messageId: 'unexpected' }],
+    },
+    {
+      code: '<template><div {{on "mousedown" this.doSomething}}></div></template>',
+      output: null,
+      errors: [{ messageId: 'unexpected' }],
+    },
+    {
+      code: '<template><div {{action this.doSomething on="mousedown"}}></div></template>',
+      output: null,
+      errors: [{ messageId: 'unexpected' }],
+    },
+    {
+      code: '<template><div {{action this.doSomething preventDefault=true on="mousedown"}}></div></template>',
+      output: null,
+      errors: [{ messageId: 'unexpected' }],
+    },
+    {
+      code: '<template><input type="text" onmousedown="myFunction()"></template>',
+      output: null,
+      errors: [{ messageId: 'unexpected' }],
     },
   ],
 });
@@ -80,5 +84,26 @@ hbsRuleTester.run('template-no-pointer-down-event-binding', rule, {
     '{{my-component mouseDown=this.doSomething}}',
     '<MyComponent @mouseDown={{this.doSomething}} />',
   ],
-  invalid: [],
+  invalid: [
+    {
+      code: '<div {{on "mousedown" this.doSomething}}></div>',
+      output: null,
+      errors: [{ messageId: 'unexpected' }],
+    },
+    {
+      code: '<div {{action this.doSomething on="mousedown"}}></div>',
+      output: null,
+      errors: [{ messageId: 'unexpected' }],
+    },
+    {
+      code: '<div {{action this.doSomething preventDefault=true on="mousedown"}}></div>',
+      output: null,
+      errors: [{ messageId: 'unexpected' }],
+    },
+    {
+      code: '<input type="text" onmousedown="myFunction()">',
+      output: null,
+      errors: [{ messageId: 'unexpected' }],
+    },
+  ],
 });

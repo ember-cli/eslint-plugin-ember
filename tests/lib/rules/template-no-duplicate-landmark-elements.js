@@ -94,6 +94,12 @@ hbsRuleTester.run('template-no-duplicate-landmark-elements (hbs)', rule, {
     '<form role="search"></form><form></form>',
     '<header></header><main></main><footer></footer>',
     '<img role="none"><img role="none">',
+    // Dynamic aria-label values are treated as unique (can't statically determine duplicates)
+    '<nav aria-label={{siteNavigation}}></nav><nav aria-label={{siteNavigation}}></nav>',
+    '<nav aria-label="primary navigation"></nav><nav aria-label={{this.something}}></nav>',
+    // header/footer inside sectioning elements lose their landmark role
+    "<main><header><h1>Main Page Header</h1></header><button commandfor='my-dialog'>Open Dialog</button></main><dialog id='my-dialog'><header><h1>Dialog Header</h1></header></dialog>",
+    "<main><header><h1>Main Page Header</h1></header><button commandfor='my-dialog'>Open Dialog</button></main><div popover id='my-dialog'><header><h1>Dialog Header</h1></header></div>",
   ],
   invalid: [
     {

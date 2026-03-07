@@ -92,6 +92,15 @@ hbsRuleTester.run('template-require-lang-attribute', rule, {
     '<html lang="de"></html>',
     '<html lang={{this.language}}></html>',
     '<html lang={{this.blah}}></html>',
+    // validateValues: false allows non-BCP47 values
+    {
+      code: '<html lang="hurrah"></html>',
+      options: [{ validateValues: false }],
+    },
+    {
+      code: '<html lang={{this.blah}}></html>',
+      options: [{ validateValues: false }],
+    },
   ],
   invalid: [
     {

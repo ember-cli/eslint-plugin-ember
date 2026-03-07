@@ -39,5 +39,32 @@ hbsRuleTester.run('template-no-inline-styles', rule, {
     '<div style={{foo}}></div>',
     '<div style={{html-safe (concat "background-image: url(" url ")")}}></div>',
   ],
-  invalid: [],
+  invalid: [
+    {
+      code: '<div style="width: 100px"></div>',
+      output: null,
+      errors: [{ messageId: 'noInlineStyles' }],
+    },
+    {
+      code: '<div style="{{foo}} {{bar}}"></div>',
+      output: null,
+      errors: [{ messageId: 'noInlineStyles' }],
+    },
+    {
+      code: '<div style=""></div>',
+      output: null,
+      errors: [{ messageId: 'noInlineStyles' }],
+    },
+    {
+      code: '<div style="color:blue;margin-left:30px;"></div>',
+      output: null,
+      errors: [{ messageId: 'noInlineStyles' }],
+    },
+    {
+      code: '<div style={{foo}}></div>',
+      output: null,
+      options: [{ allowDynamicStyles: false }],
+      errors: [{ messageId: 'noInlineStyles' }],
+    },
+  ],
 });

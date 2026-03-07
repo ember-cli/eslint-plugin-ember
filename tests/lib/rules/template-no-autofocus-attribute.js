@@ -206,5 +206,25 @@ hbsRuleTester.run('template-no-autofocus-attribute (hbs)', rule, {
         },
       ],
     },
+    {
+      code: '{{input type="text" autofocus=true}}',
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.',
+        },
+      ],
+    },
+    {
+      code: '{{component "input" type="text" autofocus=true}}',
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid using autofocus attribute. Autofocusing elements can cause usability issues for sighted and non-sighted users.',
+        },
+      ],
+    },
   ],
 });

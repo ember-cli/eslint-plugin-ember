@@ -196,10 +196,27 @@ hbsRuleTester.run('template-self-closing-void-elements', rule, {
     '<wbr>',
     // 'require' config — self-closing void elements are valid.
     { code: '<area/>', options: ['require'] },
+    { code: '<base/>', options: ['require'] },
     { code: '<br/>', options: ['require'] },
+    { code: '<col/>', options: ['require'] },
+    { code: '<command/>', options: ['require'] },
+    { code: '<embed/>', options: ['require'] },
     { code: '<hr/>', options: ['require'] },
     { code: '<img/>', options: ['require'] },
     { code: '<input/>', options: ['require'] },
+    { code: '<keygen/>', options: ['require'] },
+    { code: '<link/>', options: ['require'] },
+    { code: '<meta/>', options: ['require'] },
+    { code: '<param/>', options: ['require'] },
+    { code: '<source/>', options: ['require'] },
+    { code: '<track/>', options: ['require'] },
+    { code: '<wbr/>', options: ['require'] },
+    // Complex void element with attributes, modifiers, comments, and block params
+    'foo<wbr data-custom="50" {{my-modifier true "baz"}} {{!comment}} as |paramA paramB| >bar',
+    {
+      code: 'foo<wbr data-custom="50" {{my-modifier true "baz"}} {{!comment}} as |paramA paramB| />bar',
+      options: ['require'],
+    },
   ],
   invalid: [
     { code: '<area/>', output: null, errors: [{ messageId: 'redundantSelfClosing' }] },
@@ -311,6 +328,18 @@ hbsRuleTester.run('template-self-closing-void-elements', rule, {
     },
     {
       code: '<wbr>',
+      output: null,
+      options: ['require'],
+      errors: [{ messageId: 'requireSelfClosing' }],
+    },
+    // Complex void element with attributes, modifiers, comments, and block params
+    {
+      code: 'foo<wbr data-custom="50" {{my-modifier true "baz"}} {{!comment}} as |paramA paramB| />bar',
+      output: null,
+      errors: [{ messageId: 'redundantSelfClosing' }],
+    },
+    {
+      code: 'foo<wbr data-custom="50" {{my-modifier true "baz"}} {{!comment}} as |paramA paramB| >bar',
       output: null,
       options: ['require'],
       errors: [{ messageId: 'requireSelfClosing' }],

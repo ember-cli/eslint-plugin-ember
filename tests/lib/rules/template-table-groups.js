@@ -526,6 +526,58 @@ hbsRuleTester.run('template-table-groups', rule, {
           <tbody></tbody>
         </MyThing>
       `,
+    // allowed-*-components config tests
+    {
+      code: `
+      <table>
+        <Nested::MyCaption />
+        <Nested::MyColgroup />
+        <Nested::MyThead />
+        <Nested::MyTbody />
+        <Nested::MyTfoot />
+      </table>
+      `,
+      options: [
+        {
+          'allowed-caption-components': ['nested/my-caption'],
+          'allowed-colgroup-components': ['nested/my-colgroup'],
+          'allowed-thead-components': ['nested/my-thead'],
+          'allowed-tbody-components': ['nested/my-tbody'],
+          'allowed-tfoot-components': ['nested/my-tfoot'],
+        },
+      ],
+    },
+    {
+      code: `
+      <table>
+        <Nested::HeadOrFoot />
+        <Nested::Body />
+        <Nested::HeadOrFoot/>
+      </table>
+      `,
+      options: [
+        {
+          'allowed-thead-components': ['nested/head-or-foot'],
+          'allowed-tbody-components': ['nested/body'],
+          'allowed-tfoot-components': ['nested/head-or-foot'],
+        },
+      ],
+    },
+    {
+      code: `
+      <table>
+        <Nested::MyCaption />
+        <thead />
+        <Nested::MyCaption @tagName="tbody" />
+        <tfoot />
+      </table>
+      `,
+      options: [
+        {
+          'allowed-caption-components': ['nested/my-caption'],
+        },
+      ],
+    },
   ],
   invalid: [
     {
@@ -742,6 +794,62 @@ hbsRuleTester.run('template-table-groups', rule, {
       </table>
       `,
       output: null,
+      errors: [
+        {
+          message:
+            'Tables must have table groups in the correct order (caption, colgroup, thead, tbody then tfoot).',
+        },
+      ],
+    },
+    // Config: allowed-*-components invalid tests
+    {
+      code: `
+      <table>
+        <Nested::SomethingElse />
+      </table>
+      `,
+      output: null,
+      options: [{ 'allowed-caption-components': ['nested/allowed'] }],
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
+    },
+    {
+      code: `
+      <table>
+        <Nested::MyTfoot />
+        <Nested::MyThead />
+      </table>
+      `,
+      output: null,
+      options: [
+        {
+          'allowed-thead-components': ['nested/my-thead'],
+          'allowed-tfoot-components': ['nested/my-tfoot'],
+        },
+      ],
+      errors: [
+        {
+          message:
+            'Tables must have table groups in the correct order (caption, colgroup, thead, tbody then tfoot).',
+        },
+      ],
+    },
+    {
+      code: `
+      <table>
+        <Nested::HeadOrFoot />
+        <Nested::Body />
+        <Nested::HeadOrFoot/>
+        <Nested::Body />
+      </table>
+      `,
+      output: null,
+      options: [
+        {
+          'allowed-thead-components': ['nested/head-or-foot'],
+          'allowed-tbody-components': ['nested/body'],
+          'allowed-tfoot-components': ['nested/head-or-foot'],
+        },
+      ],
       errors: [
         {
           message:

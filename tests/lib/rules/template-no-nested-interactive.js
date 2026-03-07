@@ -278,6 +278,16 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
     {{/if}}
   </label>
     `,
+    // Config: ignoredTags
+    {
+      code: '<button><input></button>',
+      options: [{ ignoredTags: ['button'] }],
+    },
+    // Config: ignoreTabindex
+    {
+      code: '<button><div tabindex=-1></div></button>',
+      options: [{ ignoreTabindex: true }],
+    },
   ],
   invalid: [
     {
@@ -352,6 +362,24 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
     },
     {
       code: '<label><input><input></label>',
+      output: null,
+      errors: [{ message: 'Do not nest interactive element <input> inside <label>.' }],
+    },
+    // Config: additionalInteractiveTags
+    {
+      code: '<button><my-special-input></my-special-input></button>',
+      output: null,
+      options: [{ additionalInteractiveTags: ['my-special-input'] }],
+      errors: [{ message: 'Do not nest interactive element <my-special-input> inside <button>.' }],
+    },
+    // Label with multiple interactive children including tabindex
+    {
+      code: [
+        '<label for="foo">',
+        '  <div id="foo" tabindex=-1></div>',
+        '  <input>',
+        '</label>',
+      ].join('\n'),
       output: null,
       errors: [{ message: 'Do not nest interactive element <input> inside <label>.' }],
     },

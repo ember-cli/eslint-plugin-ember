@@ -23,7 +23,10 @@ ruleTester.run('template-simple-unless', rule, {
     '<template>{{#if foo}}{{else}}{{#unless bar}}{{/unless}}{{/if}}</template>',
     '<template>{{#if foo}}{{else}}{{unless bar someProperty}}{{/if}}</template>',
     '<template>{{#unless (or foo bar)}}order whiskey{{/unless}}</template>',
-    '<template>{{#unless (eq (or foo bar) baz)}}order whiskey{{/unless}}</template>',
+    {
+      code: '<template>{{#unless (eq (or foo bar) baz)}}order whiskey{{/unless}}</template>',
+      options: [{ maxHelpers: 2 }],
+    },
     '<template>{{#unless hamburger}}\\n  HOT DOG!\\n{{/unless}}</template>',
   ],
   invalid: [
@@ -43,21 +46,25 @@ ruleTester.run('template-simple-unless', rule, {
     {
       code: "<template>{{unless (if true)  'Please no'}}</template>",
       output: null,
+      options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: "<template>{{unless (and isBad isAwful)  'notBadAndAwful'}}</template>",
       output: null,
+      options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: '<template><img class={{unless (not condition) "some-class"}}></template>',
       output: null,
+      options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: '<template><img class={{unless (one condition) "some-class" "other-class"}}></template>',
       output: null,
+      options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
   ],
@@ -81,13 +88,28 @@ hbsRuleTester.run('template-simple-unless', rule, {
     '{{#if foo}}{{else}}{{#unless bar}}{{/unless}}{{/if}}',
     '{{#if foo}}{{else}}{{unless bar someProperty}}{{/if}}',
     '{{#unless (or foo bar)}}order whiskey{{/unless}}',
-    '{{#unless (eq (or foo bar) baz)}}order whiskey{{/unless}}',
+    {
+      code: '{{#unless (eq (or foo bar) baz)}}order whiskey{{/unless}}',
+      options: [{ maxHelpers: 2 }],
+    },
     '{{unless foo bar}}',
+    '{{unless (eq foo bar) baz}}',
+    '{{unless (and isBad isAwful) "notBadAndAwful"}}',
+    '<img class={{unless (not condition) "some-class"}}>',
+    '<img class={{unless (one condition) "some-class" "other-class"}}>',
     ['{{#unless hamburger}}', '  HOT DOG!', '{{/unless}}'].join('\n'),
-    // allowlist + maxHelpers (block form — inline unless always uses maxHelpers=0)
+    // allowlist + maxHelpers
+    {
+      code: '{{unless (eq foo bar) baz}}',
+      options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
+    },
     {
       code: '{{#unless (eq foo bar)}}baz{{/unless}}',
       options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
+    },
+    {
+      code: '{{unless (eq (not foo) bar) baz}}',
+      options: [{ allowlist: [], maxHelpers: 2 }],
     },
     {
       code: '{{#unless (eq (not foo) bar)}}baz{{/unless}}',
@@ -111,30 +133,35 @@ hbsRuleTester.run('template-simple-unless', rule, {
     },
   ],
   invalid: [
-    // default config: inline unless with helper
+    // inline unless with nested helpers (exceeds default maxHelpers=1)
     {
       code: "{{unless (if (or true))  'Please no'}}",
       output: null,
       errors: [{ messageId: 'withHelper' }],
     },
+    // inline unless with helper — maxHelpers: 0
     {
       code: "{{unless (if true)  'Please no'}}",
       output: null,
+      options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: "{{unless (and isBad isAwful)  'notBadAndAwful'}}",
       output: null,
+      options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: '<img class={{unless (not condition) "some-class"}}>',
       output: null,
+      options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: '<img class={{unless (one condition) "some-class" "other-class"}}>',
       output: null,
+      options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     // {{else}} block with {{unless}}

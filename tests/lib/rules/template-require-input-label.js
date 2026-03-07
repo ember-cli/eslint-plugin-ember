@@ -236,31 +236,78 @@ const hbsRuleTester = new RuleTester({
 
 hbsRuleTester.run('template-require-input-label', rule, {
   valid: [
+    // Label with text content wrapping input
+    '<label>LabelText<input /></label>',
+    '<label>LabelText<input id="foo" /></label>',
+    '<label><input />LabelText</label>',
+    '<label>LabelText<Input /></label>',
+    '<label><Input />LabelText</label>',
+    '<label>Label Text<div><input /></div></label>',
+    '<label>text<Input id="foo" /></label>',
+    '<label>text{{input id="foo"}}</label>',
+    '<label>Text here<Input /></label>',
+    '<label>Text here {{input}}</label>',
+
+    // Self-labelling attributes
     '<input id="probablyHasLabel" />',
     '<input aria-label={{labelText}} />',
     '<input aria-labelledby="someIdValue" />',
     '<div></div>',
     '<Input id="foo" />',
     '{{input id="foo"}}',
+
+    // ...attributes spread (can't determine labelling)
+    '<input ...attributes/>',
+    '<Input ...attributes />',
     '<input id="label-input" ...attributes>',
+
+    // Same logic for textareas
+    '<label>LabelText<textarea /></label>',
+    '<label><textarea />LabelText</label>',
+    '<label>LabelText<Textarea /></label>',
+    '<label><Textarea />LabelText</label>',
+    '<label>Label Text<div><textarea /></div></label>',
+    '<label>Text here<Textarea /></label>',
+    '<label>Text here {{textarea}}</label>',
     '<textarea id="probablyHasLabel" />',
     '<textarea aria-label={{labelText}} />',
     '<textarea aria-labelledby="someIdValue" />',
     '<Textarea id="foo" />',
     '{{textarea id="foo"}}',
+    '<textarea ...attributes/>',
+    '<Textarea ...attributes />',
     '<textarea id="label-input" ...attributes />',
+
+    // Same logic for selects
+    '<label>LabelText<select></select></label>',
+    '<label><select></select>LabelText</label>',
+    '<label>Label Text<div><select></select></div></label>',
     '<select id="probablyHasLabel" ></select>',
     '<select aria-label={{labelText}} ></select>',
     '<select aria-labelledby="someIdValue" ></select>',
+    '<select ...attributes></select>',
     '<select id="label-input" ...attributes ></select>',
+
+    // Hidden inputs
     '<input type="hidden"/>',
     '<Input type="hidden" />',
     '{{input type="hidden"}}',
+
+    // Custom label tags
+    {
+      code: '<CustomLabel><input /></CustomLabel>',
+      options: [{ labelTags: ['CustomLabel'] }],
+    },
+    {
+      code: '<web-label><input /></web-label>',
+      options: [{ labelTags: ['web-label'] }],
+    },
   ],
   invalid: [
     {
       code: '<my-label><input /></my-label>',
       output: null,
+      options: [{ labelTags: ['web-label'] }],
       errors: [{ message: 'Input elements should have an associated label.' }],
     },
     {

@@ -73,8 +73,9 @@ ruleTester.run('template-no-unnecessary-component-helper', rule, {
     },
     {
       code: '<template><Foo @arg={{component "allowed-component"}}>{{component "forbidden-component"}}</Foo></template>',
-      output: '<template><Foo @arg={{allowed-component}}>{{forbidden-component}}</Foo></template>',
-      errors: [{ messageId: 'noUnnecessaryComponent' }, { messageId: 'noUnnecessaryComponent' }],
+      output:
+        '<template><Foo @arg={{component "allowed-component"}}>{{forbidden-component}}</Foo></template>',
+      errors: [{ messageId: 'noUnnecessaryComponent' }],
     },
   ],
 });
@@ -109,6 +110,13 @@ hbsRuleTester.run('template-no-unnecessary-component-helper', rule, {
     '<Foo class="foo" />',
     '<Foo data-test-bar="foo" />',
     '<Foo @arg={{if this.user.isAdmin "admin"}} />',
+    // component helper in attribute values is safe (passing components as args)
+    '<Foo @bar={{component "my-component"}} />',
+    '<Foo @bar={{component "my-component"}}></Foo>',
+    '<Foo @arg={{if this.user.isAdmin (component "my-component")}} />',
+    // addon-scoped component names with @ are allowed
+    '{{component "addon-name@component-name"}}',
+    '{{#component "addon-name@component-name"}}{{/component}}',
   ],
   invalid: [
     {
@@ -127,9 +135,8 @@ hbsRuleTester.run('template-no-unnecessary-component-helper', rule, {
     },
     {
       code: '<Foo @arg={{component "allowed-component"}}>{{component "forbidden-component"}}</Foo>',
-      output: '<Foo @arg={{allowed-component}}>{{forbidden-component}}</Foo>',
+      output: '<Foo @arg={{component "allowed-component"}}>{{forbidden-component}}</Foo>',
       errors: [
-        { message: 'Unnecessary use of (component) helper. Use the component name directly.' },
         { message: 'Unnecessary use of (component) helper. Use the component name directly.' },
       ],
     },

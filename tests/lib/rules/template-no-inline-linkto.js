@@ -68,3 +68,50 @@ ruleTester.run('template-no-inline-linkto', rule, {
     },
   ],
 });
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-no-inline-linkto', rule, {
+  valid: [
+    // Block form of curly link-to is OK
+    "{{#link-to 'routeName' prop}}Link text{{/link-to}}",
+    "{{#link-to 'routeName'}}Link text{{/link-to}}",
+    // Angle bracket with content is OK
+    '<LinkTo @route="index">Home</LinkTo>',
+  ],
+  invalid: [
+    // Inline curly form is not allowed
+    {
+      code: "{{link-to 'Link text' 'routeName'}}",
+      output: null,
+      errors: [{ messageId: 'noInlineLinkTo' }],
+    },
+    {
+      code: "{{link-to 'Link text' 'routeName' one two}}",
+      output: null,
+      errors: [{ messageId: 'noInlineLinkTo' }],
+    },
+    {
+      code: "{{link-to (concat 'Hello' @username) 'routeName' one two}}",
+      output: null,
+      errors: [{ messageId: 'noInlineLinkTo' }],
+    },
+    {
+      code: "{{link-to 1234 'routeName' one two}}",
+      output: null,
+      errors: [{ messageId: 'noInlineLinkTo' }],
+    },
+    // Angle bracket with no content
+    {
+      code: '<LinkTo @route="index" />',
+      output: null,
+      errors: [{ messageId: 'noInlineLinkTo' }],
+    },
+  ],
+});

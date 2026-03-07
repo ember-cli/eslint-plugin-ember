@@ -83,6 +83,34 @@ and	his
 this
 andthis
 `,
+    // Config: max option
+    {
+      code: 'testing\nthis\n',
+      options: [{ max: 10 }],
+    },
+    // Config: min option
+    {
+      code: 'testing\nthis\nand\this\n',
+      options: [{ min: 1 }],
+    },
+    // Config: min + max options
+    {
+      code: 'testing\nthis\nandthis\n',
+      options: [{ min: 1, max: 5 }],
+    },
   ],
-  invalid: [],
+  invalid: [
+    {
+      code: 'testing\ntoo-short template\n',
+      output: null,
+      options: [{ min: 10 }],
+      errors: [{ message: 'Template length of 3 is smaller than 10' }],
+    },
+    {
+      code: 'test\nthis\nand\nthis\n',
+      output: null,
+      options: [{ max: 3 }],
+      errors: [{ message: 'Template length of 5 exceeds 3' }],
+    },
+  ],
 });
