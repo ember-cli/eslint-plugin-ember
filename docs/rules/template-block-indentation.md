@@ -36,10 +36,18 @@ Examples of **incorrect** code for this rule:
 </div>
 ```
 
+```hbs
+<div>
+  <p>{{t 'Stuff here!'}}</p>
+</div>
+```
+
 Examples of **correct** code for this rule:
 
 ```hbs
-{{#each foo as |bar|}}{{/each}}
+{{#each foo as |bar|}}
+  {{bar.name}}
+{{/each}}
 ```
 
 ```hbs
@@ -55,3 +63,6 @@ Examples of **correct** code for this rule:
 - Object:
   - `indentation` (integer, default `2`): Number of spaces to indent.
   - `ignoreComments` (boolean, default `false`): Skip indentation checking for comments.
+
+When no option is specified, the rule reads `indent_size` from .editorconfig (if present).
+If no .editorconfig is found, the default is `2` spaces.
