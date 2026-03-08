@@ -8,6 +8,8 @@ Disallows inline form of the LinkTo component.
 
 The inline form of `<LinkTo>` (self-closing without content) should be avoided. Use the block form instead to provide link text.
 
+This rule also disallows the curly `{{link-to}}` inline form (e.g., `{{link-to "text" "route"}}`). The block form `{{#link-to}}...{{/link-to}}` or `<LinkTo>` angle bracket syntax should be used instead.
+
 ## Examples
 
 Examples of **incorrect** code for this rule:
@@ -24,6 +26,18 @@ Examples of **incorrect** code for this rule:
 </template>
 ```
 
+```gjs
+<template>
+  {{link-to "Link text" "routeName"}}
+</template>
+```
+
+```gjs
+<template>
+  {{link-to "Link text" "routeName" prop1 prop2}}
+</template>
+```
+
 Examples of **correct** code for this rule:
 
 ```gjs
@@ -37,6 +51,12 @@ Examples of **correct** code for this rule:
   <LinkTo @route="about">
     About Us
   </LinkTo>
+</template>
+```
+
+```gjs
+<template>
+  {{#link-to "routeName" prop1 prop2}}Link text{{/link-to}}
 </template>
 ```
 

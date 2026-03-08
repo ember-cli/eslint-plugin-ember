@@ -2,56 +2,48 @@
 
 <!-- end auto-generated rule header -->
 
-Disallow `action` attribute on submit buttons.
+Disallow click action on submit buttons within a form.
 
-Using the `action` attribute on submit buttons is a common mistake. Instead, you should use the `{{on}}` modifier to handle click events, or handle form submission at the form level.
+In a `<form>`, all `<button>` elements with a `type="submit"` attribute (or no `type`, since buttons default to `type="submit"`) should not have any click action. The action should be on the `<form>` element instead of directly on the button.
 
 ## Rule Details
 
-This rule disallows using the `action` attribute on `<button>` elements (which default to type="submit") and `<input type="submit">` elements.
+This rule disallows:
+
+- Using `{{action}}` or `{{on "click"}}` modifiers on submit buttons inside a `<form>`.
+- Using the HTML `action` attribute on submit buttons or `<input type="submit">` elements.
 
 ## Examples
 
-### Incorrect ❌
+### Incorrect
 
-```gjs
-<template>
-  <button action="save">Save</button>
-</template>
+```hbs
+<form>
+  <button type='submit' {{on 'click' this.handleClick}} />
+  <button type='submit' {{action 'handleClick'}} />
+  <button {{on 'click' this.handleClick}} />
+  <button {{action 'handleClick'}} />
+</form>
 ```
 
-```gjs
-<template>
-  <button type="submit" action="submit">Submit</button>
-</template>
+### Correct
+
+```hbs
+<form>
+  <button type='button' {{on 'click' this.handleClick}} />
+  <button type='button' {{action 'handleClick'}} />
+  <button type='submit' />
+  <button />
+</form>
 ```
 
-```gjs
-<template>
-  <input type="submit" action="go" />
-</template>
-```
+Buttons outside a `<form>` are allowed to have click actions:
 
-### Correct ✅
-
-```gjs
-<template>
-  <button {{on "click" this.handleClick}}>Save</button>
-</template>
-```
-
-```gjs
-<template>
-  <button type="button" action="doSomething">Click</button>
-</template>
-```
-
-```gjs
-<template>
-  <form {{on "submit" this.handleSubmit}}>
-    <button type="submit">Submit</button>
-  </form>
-</template>
+```hbs
+<button type='submit' {{on 'click' this.handleClick}} />
+<button type='submit' {{action 'handleClick'}} />
+<button {{on 'click' this.handleClick}} />
+<button {{action 'handleClick'}} />
 ```
 
 ## Related Rules

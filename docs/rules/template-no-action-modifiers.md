@@ -42,6 +42,23 @@ This rule disallows using `{{action}}` as an element modifier.
 <form {{on 'submit' this.handleSubmit}}>Submit</form>
 ```
 
+## Configuration
+
+The following values are valid configuration:
+
+- boolean -- `true` for enabled / `false` for disabled
+- array -- an allowlist of element tag names, which will accept action modifiers
+
+For example, to allow action modifiers only on specific elements:
+
+```js
+module.exports = {
+  rules: {
+    'ember/template-no-action-modifiers': ['error', { allowlist: ['form'] }],
+  },
+};
+```
+
 ## Related Rules
 
 - [template-no-action](./template-no-action.md)

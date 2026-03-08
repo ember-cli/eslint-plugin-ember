@@ -794,6 +794,11 @@ hbsRuleTester.run('template-table-groups', rule, {
       </table>
       `,
       output: null,
+      options: [
+        {
+          'allowed-tbody-components': ['nested/my-tbody'],
+        },
+      ],
       errors: [
         {
           message:

@@ -6,11 +6,28 @@ Disallow potential path strings that should be dynamic values in templates.
 
 ## Rule Details
 
-This rule catches potential path strings in text nodes that should likely be dynamic values.
+It might happen sometimes that `{{` and `}}` are forgotten when invoking a component, and the string that is passed was actually supposed to be a property path or argument.
+
+This rule warns about attribute values and text content that look like they should be dynamic paths. Specifically, it catches:
+
+- **Attribute values** that start with `this.` or `@` (e.g. `<img src="this.picture">` or `<img src="@img">`)
+- **Text content** that contains path-like strings (e.g. `<div>this.propertyName</div>` or `<div>foo.bar</div>`)
 
 ## Examples
 
 Examples of **incorrect** code for this rule:
+
+```gjs
+<template>
+  <img src="this.picture">
+</template>
+```
+
+```gjs
+<template>
+  <img src="@img">
+</template>
+```
 
 ```gjs
 <template>
@@ -25,6 +42,18 @@ Examples of **incorrect** code for this rule:
 ```
 
 Examples of **correct** code for this rule:
+
+```gjs
+<template>
+  <img src={{this.picture}}>
+</template>
+```
+
+```gjs
+<template>
+  <img src={{@img}}>
+</template>
+```
 
 ```gjs
 <template>

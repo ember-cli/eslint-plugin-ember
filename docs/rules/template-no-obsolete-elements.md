@@ -33,7 +33,10 @@ This rule **forbids** the following:
   <nobr></nobr>
   <noembed></noembed>
   <noframes></noframes>
+  <param>
   <plaintext></plaintext>
+  <rb></rb>
+  <rtc></rtc>
   <s></s>
   <spacer></spacer>
   <strike></strike>

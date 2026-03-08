@@ -108,6 +108,16 @@ hbsRuleTester.run('template-no-element-event-actions (hbs)', rule, {
     '<button type="button" value={{value}}></button>',
     '{{my-component onclick=(action "myAction") someProperty=true}}',
     '<SiteHeader @someFunction={{action "myAction"}} @user={{this.user}} />',
+    // requireActionHelper: true — only flags {{action ...}}, so plain {{this.myAction}} is valid
+    {
+      code: '<button type="button" onclick={{this.myAction}}></button>',
+      options: [{ requireActionHelper: true }],
+    },
+    // requireActionHelper: false — plain string onclick is always valid
+    {
+      code: '<button type="button" onclick="myFunction()"></button>',
+      options: [{ requireActionHelper: false }],
+    },
   ],
   invalid: [
     {
@@ -123,6 +133,13 @@ hbsRuleTester.run('template-no-element-event-actions (hbs)', rule, {
     {
       code: '<button type="button" onclick={{this.myAction}}></button>',
       output: null,
+      errors: [{ messageId: 'noElementEventActions' }],
+    },
+    // requireActionHelper: false — {{this.myAction}} on event attr is still invalid
+    {
+      code: '<button type="button" onclick={{this.myAction}}></button>',
+      output: null,
+      options: [{ requireActionHelper: false }],
       errors: [{ messageId: 'noElementEventActions' }],
     },
   ],

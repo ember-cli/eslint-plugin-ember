@@ -122,6 +122,11 @@ hbsRuleTester.run('template-require-form-method', rule, {
     '<div/>',
     '<div></div>',
     '<div method="randomType"></div>',
+    // Config: allowedMethods
+    {
+      code: '<form method="GET"></form>',
+      options: [{ allowedMethods: ['get'] }],
+    },
   ],
   invalid: [
     {
@@ -171,6 +176,27 @@ hbsRuleTester.run('template-require-form-method', rule, {
         {
           message:
             'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
+        },
+      ],
+    },
+    // Config: allowedMethods
+    {
+      code: '<form method="POST"></form>',
+      output: null,
+      options: [{ allowedMethods: ['get'] }],
+      errors: [
+        {
+          message: 'All `<form>` elements should have `method` attribute with value of `GET`',
+        },
+      ],
+    },
+    {
+      code: '<form method="GET"></form>',
+      output: null,
+      options: [{ allowedMethods: ['POST'] }],
+      errors: [
+        {
+          message: 'All `<form>` elements should have `method` attribute with value of `POST`',
         },
       ],
     },

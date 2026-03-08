@@ -8,16 +8,26 @@ In Ember 1.12, support for invoking the inline View helper was deprecated.
 
 ## Rule Details
 
-This rule flags `{{view}}` mustache or block statements that have hash pair arguments (e.g., `{{view 'foo' key=value}}`). Simple `{{view.property}}` path expressions or other usages without hash pairs are not flagged.
+This rule flags:
+
+- `{{view}}` mustache or block statements that have params or hash pair arguments (e.g., `{{view 'foo'}}`, `{{view 'foo' key=value}}`).
+- `{{view.property}}` path expressions (e.g., `{{view.also-bad}}`).
+- Hash values referencing `view.*` paths (e.g., `please=view.stop`).
 
 ## Examples
 
 This rule **forbids** the following:
 
 ```hbs
-{{view 'this-is-bad' tagName='span'}}
+{{view 'this-is-bad'}}
 
-{{#view tagName='span'}}content{{/view}}
+{{view.also-bad}}
+
+{{qux-qaz please=view.stop}}
+
+{{#not-this please=view.stop}}{{/not-this}}
+
+<div foo={{view.bar}}></div>
 ```
 
 This rule **allows** the following:
@@ -26,6 +36,8 @@ This rule **allows** the following:
 {{this-is-better}}
 
 {{qux-qaz this=good}}
+
+{{#ok-this yay=nice}}{{/ok-this}}
 
 <div foo={{bar}}></div>
 ```

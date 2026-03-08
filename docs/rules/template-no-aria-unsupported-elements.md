@@ -10,14 +10,10 @@ Certain HTML elements do not support ARIA roles, states, and properties. This ru
 
 This rule disallows ARIA attributes on elements that do not support them, including:
 
-- `meta`
 - `html`
+- `meta`
 - `script`
 - `style`
-- `title`
-- `base`
-- `head`
-- `link`
 
 ## Examples
 

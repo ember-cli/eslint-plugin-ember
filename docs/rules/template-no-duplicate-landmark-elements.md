@@ -12,12 +12,13 @@ This rule ensures that when multiple landmark elements of the same type appear i
 
 Landmark elements checked:
 
-- `header`
-- `footer`
-- `main`
-- `nav`
-- `aside`
-- `section`
+- `header` (banner)
+- `footer` (contentinfo)
+- `main` (main)
+- `nav` (navigation)
+- `aside` (complementary)
+- `section` (region)
+- `form` (form, search)
 
 ## Examples
 

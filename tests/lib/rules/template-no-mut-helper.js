@@ -256,5 +256,17 @@ hbsRuleTester.run('template-no-mut-helper', rule, {
       output: null,
       errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
+    // Config: setterAlternative
+    {
+      code: '<MyComponent onchange={{action (mut this.val) value="target.value"}}/>',
+      output: null,
+      options: [{ setterAlternative: 'mySetter' }],
+      errors: [
+        {
+          message:
+            'Do not use the (mut) helper. Consider using a JS action or {{mySetter}} instead.',
+        },
+      ],
+    },
   ],
 });

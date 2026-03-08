@@ -138,6 +138,11 @@ hbsRuleTester.run('template-no-invalid-link-text', rule, {
     '<a href="https://myurl.com" hidden></a>',
     '<LinkTo aria-label={{t "some-translation"}}>A link with translation</LinkTo>',
     '<a href="#" aria-label={{this.anAriaLabel}}>A link with a variable as aria-label</a>',
+    // allowEmptyLinks: true — empty links are valid
+    {
+      code: '<a href="https://myurl.com"></a>',
+      options: [{ allowEmptyLinks: true }],
+    },
   ],
   invalid: [
     {
@@ -171,6 +176,16 @@ hbsRuleTester.run('template-no-invalid-link-text', rule, {
       ],
     },
     {
+      code: '<a href="https://myurl.com"></a>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.',
+        },
+      ],
+    },
+    {
       code: '<a href="https://myurl.com"> </a>',
       output: null,
       errors: [
@@ -181,7 +196,7 @@ hbsRuleTester.run('template-no-invalid-link-text', rule, {
       ],
     },
     {
-      code: `<a href="https://myurl.com"> &nbsp; 
+      code: `<a href="https://myurl.com"> &nbsp;
 </a>`,
       output: null,
       errors: [

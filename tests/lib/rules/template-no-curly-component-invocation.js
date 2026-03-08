@@ -196,6 +196,13 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     '{{svg-jar "status"}}',
     '{{t "some.translation.key"}}',
     '{{#animated-if condition}}foo{{/animated-if}}',
+    // Curly invocations with hash params or positional params are not flagged
+    // (the rule skips nodes with params/hash since angle bracket syntax doesn't support positional params)
+    '{{foo-bar bar=baz}}',
+    '{{link-to "bar" "foo"}}',
+    '{{#link-to "foo"}}bar{{/link-to}}',
+    '{{input type="text" value=this.model.name}}',
+    '{{textarea value=this.model.body}}',
     // Allow config
     {
       code: '{{aaa-bbb}}',

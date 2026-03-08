@@ -288,6 +288,11 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       code: '<button><div tabindex=-1></div></button>',
       options: [{ ignoreTabindex: true }],
     },
+    // Config: ignoreUsemap
+    {
+      code: '<button><img usemap=""></button>',
+      options: [{ ignoreUsemap: true }],
+    },
   ],
   invalid: [
     {
@@ -354,6 +359,11 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       code: '<button><div tabindex="1"></div></button>',
       output: null,
       errors: [{ message: 'Do not nest interactive element <div> inside <button>.' }],
+    },
+    {
+      code: '<button><img usemap=""></button>',
+      output: null,
+      errors: [{ message: 'Do not nest interactive element <img> inside <button>.' }],
     },
     {
       code: '<object usemap=""><button></button></object>',

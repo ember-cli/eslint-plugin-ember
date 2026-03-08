@@ -52,6 +52,26 @@ This rule disallows using `@arguments` on HTML elements. Use regular attributes 
 </template>
 ```
 
+Yielded components, named blocks, and path expressions are also allowed:
+
+```hbs
+{{#let (component 'bar') as |foo|}}
+  <foo @name='1' />
+{{/let}}
+```
+
+```hbs
+<foo.some.name @name='1' />
+<@foo @name='2' />
+<@foo.bar @name='2' />
+```
+
+```hbs
+<MyComponent>
+  <:slot @name='Header'></:slot>
+</MyComponent>
+```
+
 ## Related Rules
 
 - [template-no-block-params-for-html-elements](./template-no-block-params-for-html-elements.md)

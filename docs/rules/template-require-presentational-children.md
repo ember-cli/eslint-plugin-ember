@@ -66,6 +66,26 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+## Configuration
+
+The following values are valid configuration:
+
+- object -- An object with the following keys:
+  - `additionalNonSemanticTags` -- An array of additional tags that should be considered presentational (non-semantic). Elements matching these tags will not be flagged as semantic children violations.
+
+Example:
+
+```json
+{
+  "ember/template-require-presentational-children": [
+    "error",
+    {
+      "additionalNonSemanticTags": ["my-custom-element"]
+    }
+  ]
+}
+```
+
 ## Migration
 
 If violations are found, remediation should be planned to either add `role="presentation"` to the descendants as a quickfix. A better fix is to not use semantic descendants.

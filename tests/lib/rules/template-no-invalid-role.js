@@ -187,6 +187,11 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
     '<AwesomeThing role="presentation"></AwesomeThing>',
     '<table role="textbox"></table>',
     '<div role="{{if this.inModal "dialog" "contentinfo" }}"></div>',
+    // catchNonexistentRoles: false — non-existent roles are not flagged
+    {
+      code: '<div role="command interface"></div>',
+      options: [{ catchNonexistentRoles: false }],
+    },
   ],
   invalid: [
     {
@@ -238,6 +243,17 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
       code: '<label role="none"></label>',
       output: null,
       errors: [{ message: 'The role "none" should not be used on the semantic element <label>.' }],
+    },
+    {
+      code: '<div role="command interface"></div>',
+      output: null,
+      errors: [{ message: "Invalid ARIA role 'command interface'. Must be a valid ARIA role." }],
+    },
+    {
+      code: '<div role="command interface"></div>',
+      output: null,
+      options: [{ catchNonexistentRoles: true }],
+      errors: [{ message: "Invalid ARIA role 'command interface'. Must be a valid ARIA role." }],
     },
     {
       code: '<div role="COMMAND INTERFACE"></div>',

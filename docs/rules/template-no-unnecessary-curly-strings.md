@@ -4,13 +4,11 @@
 
 <!-- end auto-generated rule header -->
 
-Strings in attribute values need not be wrapped in curly braces (mustache expressions).
+Strings need not be wrapped in curly braces (mustache expressions).
 
 ## Rule Details
 
-This rule detects attribute values that use mustache expressions for simple string literals, which can be replaced with plain string attribute values.
-
-Note: This rule only checks **attribute values**, not text content.
+This rule detects unnecessary mustache expressions wrapping simple string literals. It checks both **attribute values** and **text content**.
 
 ## Examples
 
@@ -18,6 +16,10 @@ This rule **forbids** the following:
 
 ```gjs
 <template><FooBar class={{'btn'}} /></template>
+```
+
+```gjs
+<template><FooBar class="btn">{{"Hello"}}</FooBar></template>
 ```
 
 This rule **allows** the following:

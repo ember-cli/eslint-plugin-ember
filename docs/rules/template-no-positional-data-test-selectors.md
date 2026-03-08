@@ -26,7 +26,18 @@ Additionally, the nature of these "fake" local properties significantly confuses
 
 ## Examples
 
+This rule checks two things:
+
+1. **Curly component invocations** with positional `data-test-*` params (e.g. `{{badge data-test-profile-card}}`), which should use named arguments instead (e.g. `data-test-profile-card=true`).
+2. **HTML attribute values** that are purely numeric (e.g. `data-test-item="0"`), which should use descriptive names instead.
+
 Examples of **incorrect** code for this rule:
+
+```gjs
+<template>
+  {{badge data-test-profile-card}}
+</template>
+```
 
 ```gjs
 <template>
@@ -41,6 +52,12 @@ Examples of **incorrect** code for this rule:
 ```
 
 Examples of **correct** code for this rule:
+
+```gjs
+<template>
+  {{badge data-test-profile-card=true}}
+</template>
+```
 
 ```gjs
 <template>

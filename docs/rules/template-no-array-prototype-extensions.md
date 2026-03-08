@@ -12,8 +12,6 @@ This rule disallows using Ember Array prototype extensions in templates:
 
 - `firstObject`
 - `lastObject`
-- `@each`
-- `[]`
 
 ## Examples
 
@@ -28,12 +26,6 @@ This rule disallows using Ember Array prototype extensions in templates:
 ```gjs
 <template>
   {{this.users.lastObject}}
-</template>
-```
-
-```gjs
-<template>
-  {{this.data.@each}}
 </template>
 ```
 

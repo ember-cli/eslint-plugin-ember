@@ -2,11 +2,17 @@
 
 <!-- end auto-generated rule header -->
 
-Disallow obscure array access patterns like `objectPath.@each.property` or `objectPath.[].property` in templates.
+Disallow obscure array access patterns in templates.
 
 ## Rule Details
 
-This rule discourages the use of `@each` and `[]` property access patterns in templates, which can be obscure and difficult to understand. Instead, use computed properties, helpers, or explicit iteration.
+This rule discourages the use of obscure array access patterns in templates, including:
+
+- Numeric array index access like `{{list.[0]}}` or `{{list.[1].name}}`
+- `@each` property access like `{{items.@each.name}}`
+- `[]` property access like `{{items.[].property}}`
+
+Using obscure expressions like `{{list.[1].name}}` is discouraged. This rule recommends the use of Ember's `get` helper as an alternative for accessing array values.
 
 ## Examples
 
@@ -14,13 +20,19 @@ Examples of **incorrect** code for this rule:
 
 ```gjs
 <template>
-  {{items.@each.name}}
+  <Foo @bar={{@list.[0]}} />
 </template>
 ```
 
 ```gjs
 <template>
-  {{users.@each.isActive}}
+  {{@list.[1].name}}
+</template>
+```
+
+```gjs
+<template>
+  {{items.@each.name}}
 </template>
 ```
 
@@ -34,21 +46,21 @@ Examples of **correct** code for this rule:
 
 ```gjs
 <template>
+  <Foo @bar={{get @list '0'}} />
+</template>
+```
+
+```gjs
+<template>
+  {{get @list '1.name'}}
+</template>
+```
+
+```gjs
+<template>
   {{#each items as |item|}}
     {{item.name}}
   {{/each}}
-</template>
-```
-
-```gjs
-<template>
-  {{get items 0}}
-</template>
-```
-
-```gjs
-<template>
-  {{this.itemNames}}
 </template>
 ```
 
