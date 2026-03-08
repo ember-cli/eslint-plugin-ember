@@ -4,11 +4,11 @@
 
 Disallow nested `...attributes` usage.
 
-The `...attributes` syntax is used to pass HTML attributes to components. It should only be used on the top-level element of a component template, not on nested elements. Using it on nested elements can lead to unexpected behavior and makes it unclear which element receives the attributes.
+Having `...attributes` on multiple elements nested within each other in a component can cause unintended results. This rule prevents `...attributes` on an element if any of its parent elements already has `...attributes`.
 
 ## Rule Details
 
-This rule disallows using `...attributes` on nested elements within a template.
+This rule disallows `...attributes` on an element when an ancestor element already has `...attributes`.
 
 ## Examples
 
@@ -16,7 +16,7 @@ This rule disallows using `...attributes` on nested elements within a template.
 
 ```gjs
 <template>
-  <div>
+  <div ...attributes>
     <span ...attributes>Text</span>
   </div>
 </template>
@@ -24,19 +24,11 @@ This rule disallows using `...attributes` on nested elements within a template.
 
 ```gjs
 <template>
-  <section>
+  <section ...attributes>
     <div>
       <button ...attributes>Click</button>
     </div>
   </section>
-</template>
-```
-
-```gjs
-<template>
-  <div class="wrapper">
-    <input ...attributes />
-  </div>
 </template>
 ```
 
@@ -50,13 +42,16 @@ This rule disallows using `...attributes` on nested elements within a template.
 
 ```gjs
 <template>
-  <button ...attributes>Click</button>
+  <div ...attributes>
+    <span>Text</span>
+  </div>
 </template>
 ```
 
 ```gjs
 <template>
-  <MyComponent ...attributes />
+  <div ...attributes>first</div>
+  <div ...attributes>second</div>
 </template>
 ```
 

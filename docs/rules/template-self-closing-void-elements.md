@@ -4,11 +4,11 @@
 
 <!-- end auto-generated rule header -->
 
-Requires void elements to be self-closing.
+Disallow or require self-closing void elements.
 
 ## Rule Details
 
-Void elements (like `<img>`, `<br>`, `<input>`, etc.) should be self-closing for consistency and to match HTML5 conventions.
+Void elements (like `<img>`, `<br>`, `<input>`, etc.) cannot have child content. By default, this rule disallows redundant self-closing syntax (`/>`) on void elements since it's unnecessary in HTML.
 
 ## Config
 
@@ -19,27 +19,7 @@ This rule accepts a single option:
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
-
-```gjs
-<template>
-  <img src="foo.jpg">
-</template>
-```
-
-```gjs
-<template>
-  <br>
-</template>
-```
-
-```gjs
-<template>
-  <input type="text">
-</template>
-```
-
-Examples of **correct** code for this rule:
+Examples of **incorrect** code for this rule (with default config):
 
 ```gjs
 <template>
@@ -56,6 +36,26 @@ Examples of **correct** code for this rule:
 ```gjs
 <template>
   <input type="text" />
+</template>
+```
+
+Examples of **correct** code for this rule (with default config):
+
+```gjs
+<template>
+  <img src="foo.jpg">
+</template>
+```
+
+```gjs
+<template>
+  <br>
+</template>
+```
+
+```gjs
+<template>
+  <input type="text">
 </template>
 ```
 

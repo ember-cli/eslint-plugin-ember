@@ -34,7 +34,7 @@ Examples of **correct** code for this rule:
 
 ```gjs
 <template>
-  <Textarea @value={{this.text}} @rows="10" />
+  <Textarea @value={{this.text}} rows="10" />
 </template>
 ```
 

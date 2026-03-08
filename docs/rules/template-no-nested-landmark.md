@@ -2,13 +2,13 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows nested landmark elements.
+Disallows nesting landmark elements of the same type.
 
-Landmark elements should not be nested within other landmarks. This creates confusion for screen reader users navigating by landmarks.
+Landmark elements should not be nested within other landmarks of the same name. This creates confusion for screen reader users navigating by landmarks.
 
 ## Rule Details
 
-This rule disallows nesting landmark elements or roles within other landmark elements or roles.
+This rule disallows nesting landmark elements or roles within other landmark elements or roles of the same type.
 
 Landmark elements include:
 
@@ -38,7 +38,7 @@ Examples of **incorrect** code for this rule:
 ```gjs
 <template>
   <nav>
-    <main>Content</main>
+    <nav>Nested navigation</nav>
   </nav>
 </template>
 ```
@@ -46,15 +46,15 @@ Examples of **incorrect** code for this rule:
 ```gjs
 <template>
   <main>
-    <nav>Navigation</nav>
+    <main>Nested main</main>
   </main>
 </template>
 ```
 
 ```gjs
 <template>
-  <div role="main">
-    <div role="navigation">Nav</div>
+  <div role="navigation">
+    <nav>Nested nav</nav>
   </div>
 </template>
 ```
@@ -70,10 +70,9 @@ Examples of **correct** code for this rule:
 
 ```gjs
 <template>
-  <div>
-    <nav>Nav 1</nav>
-    <nav>Nav 2</nav>
-  </div>
+  <main>
+    <nav>Navigation inside main</nav>
+  </main>
 </template>
 ```
 

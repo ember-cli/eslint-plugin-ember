@@ -47,19 +47,25 @@ Examples of **incorrect** code for this rule:
 
 ```gjs
 <template>
-  <div role="listitem">Item</div>
+  <div>
+    <span role="listitem">Item</span>
+  </div>
 </template>
 ```
 
 ```gjs
 <template>
-  <div role="tab">Tab 1</div>
+  <div>
+    <span role="tab">Tab 1</span>
+  </div>
 </template>
 ```
 
 ```gjs
 <template>
-  <div role="menuitem">Item</div>
+  <div>
+    <span role="menuitem">Item</span>
+  </div>
 </template>
 ```
 

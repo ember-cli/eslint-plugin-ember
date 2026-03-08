@@ -14,14 +14,16 @@ Examples of **incorrect** code for this rule:
 
 ```gjs
 <template>
-  {{#unless (eq value 1)}}
-    Not one
+  {{#unless (or (eq a 1) (gt b 2))}}
+    Complex condition
   {{/unless}}
 </template>
+```
 
+```gjs
 <template>
-  {{#unless (or a b)}}
-    Neither
+  {{#unless (and isAdmin (not isBanned))}}
+    Not allowed
   {{/unless}}
 </template>
 ```
@@ -34,10 +36,20 @@ Examples of **correct** code for this rule:
     Visible
   {{/unless}}
 </template>
+```
 
+```gjs
 <template>
-  {{#if (not (eq value 1))}}
+  {{#unless (eq value 1)}}
     Not one
+  {{/unless}}
+</template>
+```
+
+```gjs
+<template>
+  {{#if (not (or a b))}}
+    Neither
   {{/if}}
 </template>
 ```

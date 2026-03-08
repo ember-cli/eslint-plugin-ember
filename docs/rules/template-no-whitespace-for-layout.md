@@ -2,11 +2,11 @@
 
 <!-- end auto-generated rule header -->
 
-Disallow using multiple consecutive spaces (3 or more) for layout purposes in templates. CSS should be used for spacing and layout instead.
+Disallow using multiple consecutive spaces for layout purposes in templates. CSS should be used for spacing and layout instead.
 
 ## Rule Details
 
-This rule discourages the use of multiple consecutive spaces (3 or more) for layout purposes in templates. CSS should be used for spacing and layout instead.
+This rule discourages the use of multiple consecutive spaces (2 or more) for layout purposes in templates. CSS should be used for spacing and layout instead.
 
 ## Examples
 
@@ -41,12 +41,6 @@ Examples of **correct** code for this rule:
 ```gjs
 <template>
   <div class="spaced-layout">Text with proper spacing</div>
-</template>
-```
-
-```gjs
-<template>
-  <div>Hello  World</div>
 </template>
 ```
 

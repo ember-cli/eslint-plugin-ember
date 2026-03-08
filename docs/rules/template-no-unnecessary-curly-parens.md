@@ -4,11 +4,11 @@
 
 <!-- end auto-generated rule header -->
 
-Disallow unnecessary curlies around simple values in templates. This is a stylistic rule that promotes cleaner template code. It only flags simple single identifiers without path separators or parameters.
+Disallow unnecessary parentheses enclosing statements in curlies. When invoking a helper with arguments, the outer parentheses around the entire expression are unnecessary.
 
 ## Rule Details
 
-This rule discourages the use of mustache curlies `{{}}` around simple single identifiers when they could potentially be expressed more simply.
+This rule flags `{{(helper args)}}` where the parentheses around the helper call can be removed, becoming `{{helper args}}`.
 
 ## Examples
 
@@ -16,19 +16,13 @@ Examples of **incorrect** code for this rule:
 
 ```gjs
 <template>
-  {{value}}
+  {{(concat "a" "b")}}
 </template>
 ```
 
 ```gjs
 <template>
-  {{name}}
-</template>
-```
-
-```gjs
-<template>
-  {{count}}
+  {{(helper a="b")}}
 </template>
 ```
 
@@ -36,13 +30,13 @@ Examples of **correct** code for this rule:
 
 ```gjs
 <template>
-  {{helper param}}
+  {{concat "a" "b"}}
 </template>
 ```
 
 ```gjs
 <template>
-  {{#if condition}}text{{/if}}
+  {{(foo)}}
 </template>
 ```
 

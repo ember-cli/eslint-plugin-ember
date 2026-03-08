@@ -13,8 +13,8 @@ This rule disallows text content in templates that isn't wrapped in a translatio
 The following are allowed:
 
 - Whitespace-only strings
-- Strings containing only numbers and punctuation
-- Strings in an allowlist (configurable)
+- Strings in the default allowlist (punctuation characters like `(`, `)`, `.`, `&`, etc.)
+- Strings in a custom allowlist (configurable)
 
 ## Examples
 
@@ -49,12 +49,6 @@ Examples of **correct** code for this rule:
 ```gjs
 <template>
   <button>{{@buttonText}}</button>
-</template>
-```
-
-```gjs
-<template>
-  <div>123</div>
 </template>
 ```
 

@@ -20,10 +20,6 @@ This rule **forbids** the following:
 <template><div {{onFocus}}></div></template>
 ```
 
-```gjs
-<template><div {{modifier 'didInsert'}}></div></template>
-```
-
 This rule **allows** the following:
 
 ```gjs
@@ -32,10 +28,6 @@ This rule **allows** the following:
 
 ```gjs
 <template><div {{on-focus}}></div></template>
-```
-
-```gjs
-<template><div {{modifier 'did-insert'}}></div></template>
 ```
 
 ## See Also

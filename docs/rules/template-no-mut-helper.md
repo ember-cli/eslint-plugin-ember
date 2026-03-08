@@ -70,7 +70,7 @@ the lint violations.
 ```
 
 ```hbs
-<Input @value={{this.name}} @onChange={{fn (mut this 'name')}} />
+<Input @value={{this.name}} @onChange={{fn this.updateName}} />
 ```
 
 ```hbs

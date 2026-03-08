@@ -10,7 +10,7 @@ The following two examples are _identical_ from the perspective of the browser:
 
 ```gjs
 <template>
-  <div data-foo="asdf"></div>
+  <div data-foo=asdf></div>
   <div data-foo="asdf"></div>
 </template>
 ```
@@ -32,7 +32,7 @@ This rule attempts to make this situation _slightly_ better by at least ensuring
 This rule **forbids** the following (note that `someValue` could have been intended either as a string or expression):
 
 ```gjs
-<template><div data-foo="someValue"></div></template>
+<template><div data-foo=someValue></div></template>
 ```
 
 This rule **allows** the following:

@@ -2,13 +2,13 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows pointer down event bindings.
+Disallows pointer down and mouse down event bindings.
 
-Pointer down events can cause accessibility issues because they don't work well with keyboard navigation. Use `click` or `keydown` events instead.
+Pointer down and mouse down events can cause accessibility issues because they don't work well with keyboard navigation. Use `click` or `keydown` events instead.
 
 ## Rule Details
 
-This rule disallows the use of `pointerdown` events in templates.
+This rule disallows the use of `pointerdown` and `mousedown` events in templates.
 
 ## Examples
 
@@ -26,6 +26,18 @@ Examples of **incorrect** code for this rule:
 </template>
 ```
 
+```gjs
+<template>
+  <div {{on "mousedown" this.handleMouseDown}}>Content</div>
+</template>
+```
+
+```gjs
+<template>
+  <div onmousedown={{this.handleMouseDown}}>Content</div>
+</template>
+```
+
 Examples of **correct** code for this rule:
 
 ```gjs
@@ -37,12 +49,6 @@ Examples of **correct** code for this rule:
 ```gjs
 <template>
   <button {{on "keydown" this.handleKeyDown}}>Press</button>
-</template>
-```
-
-```gjs
-<template>
-  <div {{on "mousedown" this.handleMouseDown}}>Content</div>
 </template>
 ```
 

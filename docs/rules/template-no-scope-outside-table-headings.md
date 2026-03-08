@@ -2,11 +2,11 @@
 
 <!-- end auto-generated rule header -->
 
-Disallow the `scope` attribute on elements other than `<th>` or `<td>` elements.
+Disallow the `scope` attribute on elements other than `<th>`.
 
 ## Rule Details
 
-The `scope` attribute is only valid on `<th>` and `<td>` elements within tables. Using it on other elements is invalid HTML and should be avoided.
+The `scope` attribute is only valid on `<th>` elements within tables. Using it on other elements (including `<td>`) is invalid HTML and should be avoided.
 
 ## Examples
 
@@ -40,7 +40,7 @@ Examples of **correct** code for this rule:
 
 ```gjs
 <template>
-  <td scope="row">Cell</td>
+  <th scope="row">Row header</th>
 </template>
 ```
 

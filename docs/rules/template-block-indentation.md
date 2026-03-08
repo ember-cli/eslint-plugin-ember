@@ -38,8 +38,7 @@ Examples of **incorrect** code for this rule:
 
 ```hbs
 <div>
-  <p>{{t 'Stuff here!'}}</p>
-</div>
+  <p>{{t 'Stuff here!'}}</p></div>
 ```
 
 Examples of **correct** code for this rule:

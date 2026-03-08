@@ -52,13 +52,13 @@ HTML element (> 80 characters):
 
 Examples of **correct** code for this rule:
 
-Non-block form:
+Non-block form (attributes on separate lines):
 
 ```hbs
 {{employee-details firstName=firstName lastName=lastName age=age avatarUrl=avatarUrl}}
 ```
 
-Block form:
+Block form (attributes on separate lines):
 
 ```hbs
 {{#employee-details
@@ -69,7 +69,7 @@ Block form:
 {{/employee-details}}
 ```
 
-HTML element:
+HTML element (attributes on separate lines):
 
 ```hbs
 <input disabled id='firstName' value={{firstName}} class='input-field first-name' type='text' />
