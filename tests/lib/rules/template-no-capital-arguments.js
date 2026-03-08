@@ -162,5 +162,45 @@ hbsRuleTester.run('template-no-capital-arguments (hbs)', rule, {
       output: null,
       errors: [{ messageId: 'noCapitalArguments' }],
     },
+    {
+      code: '{{@arguments}}',
+      output: null,
+      errors: [{ messageId: 'reservedArgument' }],
+    },
+    {
+      code: '{{@args}}',
+      output: null,
+      errors: [{ messageId: 'reservedArgument' }],
+    },
+    {
+      code: '{{@block}}',
+      output: null,
+      errors: [{ messageId: 'reservedArgument' }],
+    },
+    {
+      code: '{{@else}}',
+      output: null,
+      errors: [{ messageId: 'reservedArgument' }],
+    },
+    {
+      code: '<MyComponent @arguments={{42}} />',
+      output: null,
+      errors: [{ messageId: 'reservedArgument' }],
+    },
+    {
+      code: '<MyComponent @args={{42}} />',
+      output: null,
+      errors: [{ messageId: 'reservedArgument' }],
+    },
+    {
+      code: '<MyComponent @block={{42}} />',
+      output: null,
+      errors: [{ messageId: 'reservedArgument' }],
+    },
+    {
+      code: '<MyComponent @else={{42}} />',
+      output: null,
+      errors: [{ messageId: 'reservedArgument' }],
+    },
   ],
 });

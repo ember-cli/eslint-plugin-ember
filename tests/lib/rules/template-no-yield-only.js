@@ -129,7 +129,27 @@ hbsRuleTester.run('template-no-yield-only', rule, {
     '{{#yield}}{{/yield}}',
     '<Yield/>',
     '<yield/>',
-    '{{! template-lint-disable no-yield-only }}{{yield}}',
   ],
-  invalid: [],
+  invalid: [
+    {
+      code: '{{yield}}',
+      output: null,
+      errors: [{ messageId: 'noYieldOnly' }],
+    },
+    {
+      code: '     {{yield}}',
+      output: null,
+      errors: [{ messageId: 'noYieldOnly' }],
+    },
+    {
+      code: '\n  {{yield}}\n     ',
+      output: null,
+      errors: [{ messageId: 'noYieldOnly' }],
+    },
+    {
+      code: '\n{{! some comment }}  {{yield}}\n     ',
+      output: null,
+      errors: [{ messageId: 'noYieldOnly' }],
+    },
+  ],
 });

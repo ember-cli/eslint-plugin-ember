@@ -66,5 +66,10 @@ hbsRuleTester.run('template-no-inline-styles', rule, {
       options: [{ allowDynamicStyles: false }],
       errors: [{ messageId: 'noInlineStyles' }],
     },
+    {
+      code: '<div style></div>',
+      output: null,
+      errors: [{ messageId: 'noInlineStyles' }],
+    },
   ],
 });

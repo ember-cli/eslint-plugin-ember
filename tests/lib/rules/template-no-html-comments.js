@@ -53,7 +53,17 @@ hbsRuleTester.run('template-no-html-comments', rule, {
     '{{!--comment here--}}',
     '{{! template-lint-disable no-bare-strings }}',
     '{{! template-lint-disable }}',
-    '{{! template-lint-disable no-html-comments }}<!-- lol -->',
   ],
-  invalid: [],
+  invalid: [
+    {
+      code: '<!-- comment here -->',
+      output: '{{! comment here }}',
+      errors: [{ messageId: 'noHtmlComments' }],
+    },
+    {
+      code: '<!--comment here-->',
+      output: '{{!comment here}}',
+      errors: [{ messageId: 'noHtmlComments' }],
+    },
+  ],
 });

@@ -107,7 +107,41 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-implicit-this', rule, {
-  valid: [],
+  valid: [
+    // Built-in helpers/keywords
+    '{{yield}}',
+    '{{outlet}}',
+    '{{has-block}}',
+    '{{has-block-params}}',
+    '{{debugger}}',
+
+    // Named arguments
+    '{{@book}}',
+    '{{@book.author}}',
+
+    // Explicit this
+    '{{this.book}}',
+    '{{this.book.author}}',
+
+    // Helpers invoked with arguments
+    '{{helper argument=true}}',
+    '{{some-helper argument=true}}',
+
+    // PascalCase components
+    '<WelcomePage />',
+    '<MyComponent @prop={{@value}} />',
+    '{{MyComponent}}',
+
+    // Named arguments in various positions
+    '{{@book argument=true}}',
+    '{{helper argument=@book}}',
+    '{{#helper argument=@book}}{{/helper}}',
+
+    // Explicit this in various positions
+    '{{this.book argument=true}}',
+    '{{helper argument=this.book}}',
+    '{{#helper argument=this.book}}{{/helper}}',
+  ],
   invalid: [
     {
       code: '{{book}}',

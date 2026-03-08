@@ -147,6 +147,9 @@ hbsRuleTester.run('template-no-trailing-spaces', rule, {
 `,
     `  test
 `,
+    `{{#my-component}}
+  test
+{{/my-component}}`,
     `import { hbs } from 'ember-cli-htmlbars';
 
 test('it renders', async (assert) => {
@@ -210,6 +213,16 @@ test('it renders', async (assert) => {
     <div></div>
   \`);
 });`,
+      errors: [{ message: 'Trailing whitespace detected.' }],
+    },
+    {
+      code: 'test\n \n',
+      output: 'test\n\n',
+      errors: [{ message: 'Trailing whitespace detected.' }],
+    },
+    {
+      code: '{{#my-component}}\n  test \n{{/my-component}}',
+      output: '{{#my-component}}\n  test\n{{/my-component}}',
       errors: [{ message: 'Trailing whitespace detected.' }],
     },
   ],

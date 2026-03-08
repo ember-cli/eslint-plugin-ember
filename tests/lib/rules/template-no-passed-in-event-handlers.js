@@ -133,6 +133,16 @@ hbsRuleTester.run('template-no-passed-in-event-handlers', rule, {
   ],
   invalid: [
     {
+      code: '<Foo @click={{this.handleClick}} />',
+      output: null,
+      errors: [
+        {
+          message:
+            'Event handler "@click" should not be passed as a component argument. Use the `on` modifier instead.',
+        },
+      ],
+    },
+    {
       code: '<Foo @keyPress={{this.handleClick}} />',
       output: null,
       errors: [
@@ -143,12 +153,42 @@ hbsRuleTester.run('template-no-passed-in-event-handlers', rule, {
       ],
     },
     {
+      code: '<Foo @submit={{this.handleClick}} />',
+      output: null,
+      errors: [
+        {
+          message:
+            'Event handler "@submit" should not be passed as a component argument. Use the `on` modifier instead.',
+        },
+      ],
+    },
+    {
+      code: '{{foo click=this.handleClick}}',
+      output: null,
+      errors: [
+        {
+          message:
+            'Event handler "@click" should not be passed as a component argument. Use the `on` modifier instead.',
+        },
+      ],
+    },
+    {
       code: '{{foo keyPress=this.handleClick}}',
       output: null,
       errors: [
         {
           message:
             'Event handler "@keyPress" should not be passed as a component argument. Use the `on` modifier instead.',
+        },
+      ],
+    },
+    {
+      code: '{{foo submit=this.handleClick}}',
+      output: null,
+      errors: [
+        {
+          message:
+            'Event handler "@submit" should not be passed as a component argument. Use the `on` modifier instead.',
         },
       ],
     },

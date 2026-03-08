@@ -173,6 +173,11 @@ hbsRuleTester.run('template-no-invalid-interactive', rule, {
     '<div {{on "scroll" this.handleScroll}}></div>',
     '<code {{on "copy" (action @onCopy)}}></code>',
     '<img {{on "load" this.onLoad}} {{on "error" this.onError}}>',
+    '<select {{on "change" this.handleChange}}></select>',
+    '<details {{on "toggle" this.handleToggle}}></details>',
+    '<video {{on "pause" this.onPause}}></video>',
+    '<img {{action "foo" on="load"}}>',
+    '<img {{action "foo" on="error"}}>',
     // additionalInteractiveTags config
     {
       code: '<div {{on "click" this.onClick}}></div>',
@@ -201,6 +206,25 @@ hbsRuleTester.run('template-no-invalid-interactive', rule, {
     },
   ],
   invalid: [
+    {
+      code: '<div {{action "foo"}}></div>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Non-interactive element <div> should not have interactive handler "{{action}}".',
+        },
+      ],
+    },
+    {
+      code: '<div onclick={{action "foo"}}></div>',
+      output: null,
+      errors: [
+        {
+          message: 'Non-interactive element <div> should not have interactive handler "onclick".',
+        },
+      ],
+    },
     {
       code: '<div onclick={{pipe-action "foo"}}></div>',
       output: null,

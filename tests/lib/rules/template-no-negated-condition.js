@@ -232,6 +232,15 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
       code: '{{#if (not (eq c2))}}<img>{{/if}}',
       options: [{ simplifyHelpers: false }],
     },
+    // simplifyHelpers: false — if with nested fixable helpers is valid.
+    {
+      code: '<img class={{if (not (gte c 10)) "some-class"}}>',
+      options: [{ simplifyHelpers: false }],
+    },
+    {
+      code: '{{input class=(if (not (lte c 10)) "some-class" "other-class")}}',
+      options: [{ simplifyHelpers: false }],
+    },
   ],
   invalid: [
     {
@@ -412,6 +421,74 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
       code: '{{input class=(unless (not (not condition)) "some-class" "other-class")}}',
       output: null,
       errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
+    },
+
+    // ******************************************
+    // simplifyHelpers: true (explicit) — BlockStatement
+    // ******************************************
+    {
+      // if (not (not ...)) with simplifyHelpers: true
+      code: '{{#if (not (not condition))}}<img>{{/if}}',
+      output: null,
+      options: [{ simplifyHelpers: true }],
+      errors: [{ messageId: 'useUnless' }],
+    },
+    {
+      // if (not (eq ...)) with simplifyHelpers: true
+      code: '{{#if (not (eq c1 c2))}}<img>{{/if}}',
+      output: null,
+      options: [{ simplifyHelpers: true }],
+      errors: [{ messageId: 'useUnless' }],
+    },
+    {
+      // unless (not (not-eq ...)) else with simplifyHelpers: true
+      code: '{{#unless (not (not-eq c1 c2))}}<img>{{else}}<input>{{/unless}}',
+      output: null,
+      options: [{ simplifyHelpers: true }],
+      errors: [{ messageId: 'useIf' }],
+    },
+    {
+      // unless ... else if with fixable helpers — two errors with simplifyHelpers: true
+      code: '{{#unless (not (gt c 10))}}<img>{{else if (not (lt c 5))}}<input>{{/unless}}',
+      output: null,
+      options: [{ simplifyHelpers: true }],
+      errors: [{ messageId: 'useIf' }, { messageId: 'negatedHelper' }],
+    },
+    {
+      // unless ... else if ... else — two errors with simplifyHelpers: true
+      code: '{{#unless (not condition)}}<img>{{else if (not (not c1 c2))}}<input>{{else}}<hr>{{/unless}}',
+      output: null,
+      options: [{ simplifyHelpers: true }],
+      errors: [{ messageId: 'useIf' }, { messageId: 'negatedHelper' }],
+    },
+
+    // ******************************************
+    // simplifyHelpers: true (explicit) — MustacheStatement
+    // ******************************************
+    {
+      // if (not (gte ...)) with simplifyHelpers: true
+      code: '<img class={{if (not (gte c 10)) "some-class"}}>',
+      output: null,
+      options: [{ simplifyHelpers: true }],
+      errors: [{ messageId: 'useUnless' }],
+    },
+    {
+      // if (not (not ...)) else with simplifyHelpers: true
+      code: '<img class={{if (not (not condition)) "some-class" "other-class"}}>',
+      output: null,
+      options: [{ simplifyHelpers: true }],
+      errors: [{ messageId: 'flipIf' }],
+    },
+
+    // ******************************************
+    // simplifyHelpers: true (explicit) — SubExpression
+    // ******************************************
+    {
+      // if (not (lte ...)) else with simplifyHelpers: true
+      code: '{{input class=(if (not (lte c 10)) "some-class" "other-class")}}',
+      output: null,
+      options: [{ simplifyHelpers: true }],
+      errors: [{ messageId: 'flipIf' }],
     },
   ],
 });

@@ -83,7 +83,7 @@ hbsRuleTester.run('template-no-unused-block-params', rule, {
     '{{#each cats as |cat|}}{{cat.name}}{{/each}}',
     '{{#each cats as |cat|}}{{meow cat}}{{/each}}',
     '{{#each cats as |cat index|}}{{index}}{{/each}}',
-    '{{index}}: {{life}}',
+    '{{#each cats as |cat index|}}{{#each cat.lives as |life|}}{{index}}: {{life}}{{/each}}{{/each}}',
     `
     <MyComponent @model={{this.model}} as |param|>
       {{! template-lint-disable }}

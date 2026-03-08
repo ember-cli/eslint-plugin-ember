@@ -210,6 +210,11 @@ hbsRuleTester.run('template-no-redundant-role', rule, {
       ],
     },
     {
+      code: '<dialog role="dialog" />',
+      output: '<dialog />',
+      errors: [{ message: 'Use of redundant or invalid role: dialog on <dialog> detected.' }],
+    },
+    {
       code: '<button role="button"></button>',
       output: '<button></button>',
       errors: [{ message: 'Use of redundant or invalid role: button on <button> detected.' }],

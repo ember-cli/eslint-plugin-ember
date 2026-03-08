@@ -36,5 +36,46 @@ hbsRuleTester.run('template-no-obsolete-elements', rule, {
       <plaintext />
     {{/let}}`,
   ],
-  invalid: [],
+  invalid: [
+    {
+      code: '<acronym></acronym>',
+      output: null,
+      errors: [{ messageId: 'obsolete', data: { element: 'acronym' } }],
+    },
+    {
+      code: '<applet></applet>',
+      output: null,
+      errors: [{ messageId: 'obsolete', data: { element: 'applet' } }],
+    },
+    {
+      code: '<big></big>',
+      output: null,
+      errors: [{ messageId: 'obsolete', data: { element: 'big' } }],
+    },
+    {
+      code: '<center></center>',
+      output: null,
+      errors: [{ messageId: 'obsolete', data: { element: 'center' } }],
+    },
+    {
+      code: '<marquee></marquee>',
+      output: null,
+      errors: [{ messageId: 'obsolete', data: { element: 'marquee' } }],
+    },
+    {
+      code: '<s></s>',
+      output: null,
+      errors: [{ messageId: 'obsolete', data: { element: 's' } }],
+    },
+    {
+      code: '<tt></tt>',
+      output: null,
+      errors: [{ messageId: 'obsolete', data: { element: 'tt' } }],
+    },
+    {
+      code: '<xmp></xmp>',
+      output: null,
+      errors: [{ messageId: 'obsolete', data: { element: 'xmp' } }],
+    },
+  ],
 });
