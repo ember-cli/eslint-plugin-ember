@@ -103,5 +103,26 @@ hbsRuleTester.run('template-no-nested-splattributes', rule, {
     '<div ...attributes>...</div>',
     '<div ...attributes>...</div><div ...attributes>...</div>',
   ],
-  invalid: [],
+  invalid: [
+    {
+      code: '<div ...attributes>\n  <div ...attributes>\n    ...\n  </div>\n</div>\n',
+      output: null,
+      errors: [
+        {
+          message:
+            'Do not use ...attributes on nested elements. Only use it on the top-level element of a component.',
+        },
+      ],
+    },
+    {
+      code: '<div ...attributes>\n  <div>\n    <div ...attributes>\n    ...\n    </div>\n  </div>\n</div>\n',
+      output: null,
+      errors: [
+        {
+          message:
+            'Do not use ...attributes on nested elements. Only use it on the top-level element of a component.',
+        },
+      ],
+    },
+  ],
 });
