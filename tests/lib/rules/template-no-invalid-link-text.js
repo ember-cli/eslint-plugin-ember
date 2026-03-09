@@ -268,13 +268,24 @@ hbsRuleTester.run('template-no-invalid-link-text', rule, {
       ],
     },
     {
-      code: `{{#link-to}} &nbsp; 
+      code: `{{#link-to}} &nbsp;
 {{/link-to}}`,
       output: null,
       errors: [
         {
           message:
             'Link text "(empty)" is not descriptive. Use meaningful text that describes the link destination.',
+        },
+      ],
+    },
+    {
+      code: '<MyLink>click here</MyLink>',
+      output: null,
+      options: [{ linkComponents: ['MyLink'] }],
+      errors: [
+        {
+          message:
+            'Link text "click here" is not descriptive. Use meaningful text that describes the link destination.',
         },
       ],
     },

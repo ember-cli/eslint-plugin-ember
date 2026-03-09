@@ -29,7 +29,6 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
     '<template>{{#each items as |item|}}{{item}}{{/each}}</template>',
     '<template>{{#if someProperty}}yay{{/if}}</template>',
     '<template><FooBar /></template>',
-    '<template>{{#some-component foo="bar"}}foo{{/some-component}}</template>',
     {
       code: '<template>{{foo-bar}}</template>',
       options: [{ allow: ['foo-bar'] }],
@@ -81,6 +80,16 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
         {
           message:
             "You are using the component {{#foo-bar/baz/boo-foo}} with curly component syntax. You should use <FooBar::Baz::BooFoo> instead. If it is actually a helper you must manually add it to the 'no-curly-component-invocation' rule configuration, e.g. `'no-curly-component-invocation': { allow: ['foo-bar/baz/boo-foo'] }`.",
+        },
+      ],
+    },
+    {
+      code: '<template>{{#some-component foo="bar"}}foo{{/some-component}}</template>',
+      output: null,
+      errors: [
+        {
+          message:
+            "You are using the component {{#some-component}} with curly component syntax. You should use <SomeComponent> instead. If it is actually a helper you must manually add it to the 'no-curly-component-invocation' rule configuration, e.g. `'no-curly-component-invocation': { allow: ['some-component'] }`.",
         },
       ],
     },
@@ -196,13 +205,6 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     '{{svg-jar "status"}}',
     '{{t "some.translation.key"}}',
     '{{#animated-if condition}}foo{{/animated-if}}',
-    // Curly invocations with hash params or positional params are not flagged
-    // (the rule skips nodes with params/hash since angle bracket syntax doesn't support positional params)
-    '{{foo-bar bar=baz}}',
-    '{{link-to "bar" "foo"}}',
-    '{{#link-to "foo"}}bar{{/link-to}}',
-    '{{input type="text" value=this.model.name}}',
-    '{{textarea value=this.model.body}}',
     // Allow config
     {
       code: '{{aaa-bbb}}',
@@ -267,7 +269,10 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     {
       code: '{{#this.fooBar as |foo-baz|}}{{foos-baz}}{{/this.fooBar}}',
       output: null,
-      errors: [{ message: generateError('foos-baz') }],
+      errors: [
+        { message: generateBlockError('this.fooBar') },
+        { message: generateError('foos-baz') },
+      ],
     },
     {
       code: '{{#@foo-bar as |foo-baz|}}{{foos-baz}}{{/@foo-bar}}',
@@ -280,12 +285,42 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     {
       code: '{{#@fooBar as |foo-baz|}}{{foos-baz}}{{/@fooBar}}',
       output: null,
-      errors: [{ message: generateError('foos-baz') }],
+      errors: [{ message: generateBlockError('@fooBar') }, { message: generateError('foos-baz') }],
     },
     {
       code: '{{#let (component "foo") as |my-component|}}{{#my-component}}{{/my-component}}{{/let}}',
       output: null,
       errors: [{ message: generateBlockError('my-component') }],
+    },
+    // Curly component invocations with hash params
+    {
+      code: '{{foo-bar bar=baz}}',
+      output: null,
+      errors: [{ message: generateError('foo-bar') }],
+    },
+    // link-to with positional params
+    {
+      code: '{{link-to "bar" "foo"}}',
+      output: null,
+      errors: [{ message: generateError('link-to') }],
+    },
+    // block link-to with positional params
+    {
+      code: '{{#link-to "foo"}}bar{{/link-to}}',
+      output: null,
+      errors: [{ message: generateBlockError('link-to') }],
+    },
+    // input with hash params
+    {
+      code: '{{input type="text" value=this.model.name}}',
+      output: null,
+      errors: [{ message: generateError('input') }],
+    },
+    // textarea with hash params
+    {
+      code: '{{textarea value=this.model.body}}',
+      output: null,
+      errors: [{ message: generateError('textarea') }],
     },
     // Disallow config
     {

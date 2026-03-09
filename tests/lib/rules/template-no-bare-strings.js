@@ -225,6 +225,10 @@ hbsRuleTester.run('template-no-bare-strings', rule, {
     '<script> fdff sf sf <div> aaa </div> f </script>',
     '<style> fdff sf sf <div> aaa </div> f </style>',
     '<pre> fdff sf sf <div> aaa </div> f </pre>',
+    '<template> fdff sf sf f </template>',
+    '<template> fdff sf sf <div> aaa </div> f </template>',
+    '<template><input placeholder="This is a placeholder" /></template>',
+    '<template><img alt="This is alt text" /></template>',
     '<textarea> this is an input</textarea>',
     '<div placeholder="wat?"></div>',
     `<foo-bar>
@@ -437,16 +441,6 @@ hbsRuleTester.run('template-no-bare-strings', rule, {
       code: '<input placeholder="hahaha">',
       output: null,
       errors: [{ message: 'Non-translated string used in `placeholder` attribute' }],
-    },
-    {
-      code: '<template><input placeholder="This is a placeholder" /></template>',
-      output: null,
-      errors: [{ message: 'Non-translated string used in `placeholder` attribute' }],
-    },
-    {
-      code: '<template><img alt="This is alt text" /></template>',
-      output: null,
-      errors: [{ message: 'Non-translated string used in `alt` attribute' }],
     },
     // Custom globalAttributes config.
     {

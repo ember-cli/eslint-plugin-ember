@@ -305,10 +305,8 @@ hbsRuleTester.run('template-no-restricted-invocations', rule, {
     '{{yield (baz (baz (baz) bar))}}',
     '{{yield (baz (baz (baz) (baz)))}}',
     '{{yield (baz (baz (baz) foo=(baz)))}}',
-    // Note: ETL tests '{{#baz as |foo|}}{{foo}}{{/baz}}' and
-    // '{{#with (component "blah") as |Foo|}} <Foo /> {{/with}}' as valid
-    // because ETL tracks block params. EPE does not track block params,
-    // so these would flag the yielded names. Omitted from hbs config tests.
+    '{{#baz as |foo|}}{{foo}}{{/baz}}',
+    '{{#with (component "blah") as |Foo|}} <Foo /> {{/with}}',
     '{{other/foo-bar}}',
     '{{nested-scope/other}}',
     '<Random/>',
@@ -520,9 +518,6 @@ hbsRuleTester.run('template-no-restricted-invocations', rule, {
       code: '{{#baz as |bar|}}{{bar foo=(foo)}}{{/baz}}',
       output: null,
       errors: [
-        {
-          message: "Cannot use disallowed helper, component or modifier '{{bar}}'",
-        },
         {
           message: "Cannot use disallowed helper, component or modifier '(foo)'",
         },

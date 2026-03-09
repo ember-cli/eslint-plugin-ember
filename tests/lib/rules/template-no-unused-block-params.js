@@ -160,5 +160,17 @@ hbsRuleTester.run('template-no-unused-block-params', rule, {
       output: null,
       errors: [{ message: 'Block param "index" is unused' }],
     },
+    {
+      // Outer `index` is shadowed by inner `index`, so outer `index` is unused
+      code: '{{#each cats as |cat index|}}{{#each cat.lives as |life index|}}{{index}}: {{life}}{{/each}}{{/each}}',
+      output: null,
+      errors: [{ message: 'Block param "index" is unused' }],
+    },
+    {
+      // `partial` marks outer params as used, but inner `life` is unused
+      code: '{{#each cats as |cat index|}}{{partial "cat"}}{{#each cat.lives as |life|}}Life{{/each}}{{/each}}',
+      output: null,
+      errors: [{ message: 'Block param "life" is unused' }],
+    },
   ],
 });

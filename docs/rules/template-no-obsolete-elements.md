@@ -37,11 +37,9 @@ This rule **forbids** the following:
   <plaintext></plaintext>
   <rb></rb>
   <rtc></rtc>
-  <s></s>
   <spacer></spacer>
   <strike></strike>
   <tt></tt>
-  <u></u>
   <xmp></xmp>
 </template>
 ```

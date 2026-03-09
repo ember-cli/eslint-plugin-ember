@@ -526,7 +526,29 @@ hbsRuleTester.run('template-table-groups', rule, {
           <tbody></tbody>
         </MyThing>
       `,
-    // allowed-*-components config tests
+    '<table><tbody></tbody></table>',
+    // allowed-*-components config tests (curly-brace invocation)
+    {
+      code: `
+      <table>
+        {{nested/my-caption}}
+        {{nested/my-colgroup}}
+        {{nested/my-thead}}
+        {{nested/my-tbody}}
+        {{nested/my-tfoot}}
+      </table>
+      `,
+      options: [
+        {
+          'allowed-caption-components': ['nested/my-caption'],
+          'allowed-colgroup-components': ['nested/my-colgroup'],
+          'allowed-thead-components': ['nested/my-thead'],
+          'allowed-tbody-components': ['nested/my-tbody'],
+          'allowed-tfoot-components': ['nested/my-tfoot'],
+        },
+      ],
+    },
+    // allowed-*-components config tests (angle-bracket invocation)
     {
       code: `
       <table>
@@ -676,6 +698,11 @@ hbsRuleTester.run('template-table-groups', rule, {
     },
     {
       code: '<table><tr><td>Foo</td></tr></table>',
+      output: null,
+      errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
+    },
+    {
+      code: '<table><tr></tr><tbody><tr><td>Foo</td></tr></tbody></table>',
       output: null,
       errors: [{ message: 'Tables must have a table group (thead, tbody or tfoot).' }],
     },

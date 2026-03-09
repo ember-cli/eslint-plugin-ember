@@ -125,5 +125,19 @@ hbsRuleTester.run('template-require-lang-attribute', rule, {
       options: [{ validateValues: true }],
       errors: [{ message: 'The <html> element has an invalid lang value "gibberish".' }],
     },
+    // Config: validateValues false — missing lang still errors
+    {
+      code: '<html></html>',
+      output: null,
+      options: [{ validateValues: false }],
+      errors: [{ message: 'The <html> element must have a lang attribute.' }],
+    },
+    // Config: validateValues false — empty lang still errors
+    {
+      code: '<html lang=""></html>',
+      output: null,
+      options: [{ validateValues: false }],
+      errors: [{ message: 'The <html> element must have a non-empty lang attribute.' }],
+    },
   ],
 });

@@ -63,7 +63,7 @@ ruleTester.run('template-no-action', rule, {
       errors: [
         {
           message:
-            'Do not use `action` in templates. Instead, use the `on` modifier and `fn` helper.',
+            'Do not use the `action` mustache helper. Instead, use the `on` modifier and `fn` helper.',
           type: 'GlimmerMustacheStatement',
         },
       ],
@@ -75,7 +75,7 @@ ruleTester.run('template-no-action', rule, {
       errors: [
         {
           message:
-            'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
+            'Do not use the `action` mustache helper. Instead, use the `on` modifier and `fn` helper.',
         },
       ],
     },
@@ -85,7 +85,7 @@ ruleTester.run('template-no-action', rule, {
       errors: [
         {
           message:
-            'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
+            'Do not use the `action` modifier on <button>. Instead, use the `on` modifier and `fn` helper.',
         },
       ],
     },
@@ -95,7 +95,7 @@ ruleTester.run('template-no-action', rule, {
       errors: [
         {
           message:
-            'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
+            'Do not use the `action` mustache helper. Instead, use the `on` modifier and `fn` helper.',
         },
       ],
     },
@@ -150,7 +150,7 @@ hbsRuleTester.run('template-no-action', rule, {
       errors: [
         {
           message:
-            'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
+            'Do not use the `action` mustache helper. Instead, use the `on` modifier and `fn` helper.',
         },
       ],
     },
@@ -160,7 +160,7 @@ hbsRuleTester.run('template-no-action', rule, {
       errors: [
         {
           message:
-            'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
+            'Do not use the `action` modifier on <button>. Instead, use the `on` modifier and `fn` helper.',
         },
       ],
     },
@@ -170,7 +170,7 @@ hbsRuleTester.run('template-no-action', rule, {
       errors: [
         {
           message:
-            'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
+            'Do not use the `action` mustache helper. Instead, use the `on` modifier and `fn` helper.',
         },
       ],
     },

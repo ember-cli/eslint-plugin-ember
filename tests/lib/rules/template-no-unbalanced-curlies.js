@@ -170,5 +170,19 @@ baz}}}`,
         { message: 'Unbalanced mustache curlies detected. This may indicate a syntax error.' },
       ],
     },
+    {
+      code: '{foo\r\nbar\r\n\r\nbaz}}}',
+      output: null,
+      errors: [
+        { message: 'Unbalanced mustache curlies detected. This may indicate a syntax error.' },
+      ],
+    },
+    {
+      code: '{foo\rbar\r\rbaz}}}',
+      output: null,
+      errors: [
+        { message: 'Unbalanced mustache curlies detected. This may indicate a syntax error.' },
+      ],
+    },
   ],
 });

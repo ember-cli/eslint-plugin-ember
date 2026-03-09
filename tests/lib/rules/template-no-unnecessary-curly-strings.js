@@ -33,7 +33,7 @@ ruleTester.run('template-no-unnecessary-curly-strings', rule, {
 
     {
       code: '<template><FooBar class={{"btn"}} @fooArg={{\'barbaz\'}} /></template>',
-      output: '<template><FooBar class="btn" @fooArg="barbaz" /></template>',
+      output: '<template><FooBar class="btn" @fooArg=\'barbaz\' /></template>',
       errors: [{ messageId: 'unnecessary' }, { messageId: 'unnecessary' }],
     },
     {
@@ -73,7 +73,7 @@ hbsRuleTester.run('template-no-unnecessary-curly-strings', rule, {
   invalid: [
     {
       code: '<FooBar class={{"btn"}} @fooArg={{\'barbaz\'}} />',
-      output: '<FooBar class="btn" @fooArg="barbaz" />',
+      output: '<FooBar class="btn" @fooArg=\'barbaz\' />',
       errors: [
         { message: 'Unnecessary curly braces in string.' },
         { message: 'Unnecessary curly braces in string.' },

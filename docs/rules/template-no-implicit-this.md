@@ -109,6 +109,24 @@ Examples of **correct** code for this rule:
 {{if this.condition 'yes' 'no'}}
 ```
 
+## Options
+
+- object -- An object with the following keys:
+  - `allow` -- An array of string names to allow as implicit this. Paths that exactly match an entry in this list will not be flagged.
+
+Example:
+
+```json
+{
+  "ember/template-no-implicit-this": [
+    "error",
+    {
+      "allow": ["book-details"]
+    }
+  ]
+}
+```
+
 ## Migration
 
 - use [ember-no-implicit-this-codemod](https://github.com/ember-codemods/ember-no-implicit-this-codemod)

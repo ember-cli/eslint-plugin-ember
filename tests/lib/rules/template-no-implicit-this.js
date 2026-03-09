@@ -113,7 +113,17 @@ hbsRuleTester.run('template-no-implicit-this', rule, {
     '{{outlet}}',
     '{{has-block}}',
     '{{has-block-params}}',
+    '{{hasBlock}}',
+    '{{hasBlockParams}}',
     '{{debugger}}',
+    '{{array}}',
+    '{{concat}}',
+    '{{hash}}',
+    '{{log}}',
+    '{{input}}',
+    '{{textarea}}',
+    '{{query-params}}',
+    '{{unique-id}}',
 
     // Named arguments
     '{{@book}}',
@@ -126,6 +136,9 @@ hbsRuleTester.run('template-no-implicit-this', rule, {
     // Helpers invoked with arguments
     '{{helper argument=true}}',
     '{{some-helper argument=true}}',
+
+    // Helpers invoked with positional arguments (callee is not flagged)
+    '<MyComponent @prop={{can "edit" @model}} />',
 
     // PascalCase components
     '<WelcomePage />',
@@ -141,6 +154,12 @@ hbsRuleTester.run('template-no-implicit-this', rule, {
     '{{this.book argument=true}}',
     '{{helper argument=this.book}}',
     '{{#helper argument=this.book}}{{/helper}}',
+
+    // Allow config option
+    {
+      code: '{{book-details}}',
+      options: [{ allow: ['book-details'] }],
+    },
   ],
   invalid: [
     {
@@ -196,6 +215,18 @@ hbsRuleTester.run('template-no-implicit-this', rule, {
     {
       code: '<MyComponent @prop={{can.do}} />',
       output: null,
+      errors: [
+        {
+          message:
+            'Ambiguous path "can.do" is not allowed. Use "@can.do" if it is a named argument or "this.can.do" if it is a property on the component.',
+        },
+      ],
+    },
+    // allow: ['can'] should NOT allow 'can.do' (exact match only)
+    {
+      code: '<MyComponent @prop={{can.do}} />',
+      output: null,
+      options: [{ allow: ['can'] }],
       errors: [
         {
           message:

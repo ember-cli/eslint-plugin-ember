@@ -125,6 +125,16 @@ hbsRuleTester.run('template-no-multiple-empty-lines', rule, {
 
 <div>bar</div>
 `,
+    '<div>foo</div>\r\n<div>bar</div>',
+    '<div>foo</div>\r\n\r\n<div>bar</div>',
+    {
+      code: '<div>foo</div>\n\n\n<div>bar</div>',
+      options: [{ max: 2 }],
+    },
+    {
+      code: '<div>foo</div>\r\n\r\n\r\n<div>bar</div>',
+      options: [{ max: 2 }],
+    },
   ],
   invalid: [
     {
@@ -144,6 +154,12 @@ hbsRuleTester.run('template-no-multiple-empty-lines', rule, {
 <div>bar</div>`,
       output: null,
       errors: [{ message: 'More than 1 blank line not allowed.' }],
+    },
+    {
+      code: '<div>foo</div>\n\n\n\n\n<div>bar</div>',
+      output: null,
+      options: [{ max: 3 }],
+      errors: [{ message: 'More than 3 blank lines not allowed.' }],
     },
   ],
 });

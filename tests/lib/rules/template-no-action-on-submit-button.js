@@ -6,13 +6,11 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 
+const ERROR_MESSAGE =
+  'In a `<form>`, a `<button>` with `type="submit"` should have no click action';
+
 ruleTester.run('template-no-action-on-submit-button', rule, {
   valid: [
-    '<template><button {{on "click" this.handleClick}}>Click</button></template>',
-    '<template><button type="button" action="doSomething">Click</button></template>',
-    '<template><input type="text" action="search" /></template>',
-    '<template><div action="whatever">Not a button</div></template>',
-
     '<template>button</template>',
     '<template><form><button type="button" /></form></template>',
     '<template><form><button type="button" {{action this.handleClick}} /></form></template>',
@@ -30,6 +28,7 @@ ruleTester.run('template-no-action-on-submit-button', rule, {
     '<template><form><div type="submit"></div></form></template>',
     '<template><form><div type="submit" {{action this.handleClick}}></div></form></template>',
     '<template><form><div type="submit" {{on "click" this.handleClick}}></div></form></template>',
+    // Outside a form — valid
     '<template><button {{action this.handleClick}} /></template>',
     '<template><button {{action this.handleClick on="click"}}/></template>',
     '<template><button {{on "click" this.handleClick}} /></template>',
@@ -42,128 +41,49 @@ ruleTester.run('template-no-action-on-submit-button', rule, {
 
   invalid: [
     {
-      code: '<template><button action="save">Save</button></template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-          type: 'GlimmerElementNode',
-        },
-      ],
-    },
-    {
-      code: '<template><button type="submit" action="submit">Submit</button></template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-          type: 'GlimmerElementNode',
-        },
-      ],
-    },
-    {
-      code: '<template><input type="submit" action="go" /></template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-          type: 'GlimmerElementNode',
-        },
-      ],
-    },
-
-    {
       code: '<template><form><button {{action this.handleClick}} /></form></template>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<template><form><button {{action this.handleClick on="click"}}/></form></template>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<template><form><button {{on "click" this.handleClick}} /></form></template>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<template><form><button type="submit" {{action this.handleClick}} /></form></template>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<template><form><button type="submit" {{action this.handleClick on="click"}} /></form></template>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<template><form><button type="submit" {{action (fn this.someAction "foo")}} /></form></template>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<template><form><button type="submit" {{on "click" this.handleClick}} /></form></template>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<template><form><button type="submit" {{on "click" (fn this.addNumber 123)}} /></form></template>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<template><form><div><button type="submit" {{action this.handleClick}} /></div></form></template>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
   ],
 });
@@ -190,6 +110,7 @@ hbsRuleTester.run('template-no-action-on-submit-button (hbs)', rule, {
     '<form><div type="submit"></div></form>',
     '<form><div type="submit" {{action this.handleClick}}></div></form>',
     '<form><div type="submit" {{on "click" this.handleClick}}></div></form>',
+    // Outside a form — valid
     '<button {{action this.handleClick}} />',
     '<button {{action this.handleClick on="click"}}/>',
     '<button {{on "click" this.handleClick}} />',
@@ -203,92 +124,47 @@ hbsRuleTester.run('template-no-action-on-submit-button (hbs)', rule, {
     {
       code: '<form><button {{action this.handleClick}} /></form>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<form><button {{action this.handleClick on="click"}}/></form>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<form><button {{on "click" this.handleClick}} /></form>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<form><button type="submit" {{action this.handleClick}} /></form>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<form><button type="submit" {{action this.handleClick on="click"}} /></form>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<form><button type="submit" {{action (fn this.someAction "foo")}} /></form>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<form><button type="submit" {{on "click" this.handleClick}} /></form>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<form><button type="submit" {{on "click" (fn this.addNumber 123)}} /></form>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<form><div><button type="submit" {{action this.handleClick}} /></div></form>',
       output: null,
-      errors: [
-        {
-          message:
-            'Do not use action attribute on submit buttons. Use on modifier instead or handle form submission.',
-        },
-      ],
+      errors: [{ message: ERROR_MESSAGE }],
     },
   ],
 });

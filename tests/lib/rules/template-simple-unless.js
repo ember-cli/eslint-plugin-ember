@@ -131,6 +131,15 @@ hbsRuleTester.run('template-simple-unless', rule, {
       code: '{{#unless (eq (not foo) bar)}}baz{{/unless}}',
       options: [{ maxHelpers: -1, denylist: ['or'] }],
     },
+    // valid with ETL-style allowlist config: helpers in allowlist, count within maxHelpers
+    {
+      code: '{{#unless (or foo bar)}}order whiskey{{/unless}}',
+      options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
+    },
+    {
+      code: '{{#unless (eq (or foo bar) baz)}}order whiskey{{/unless}}',
+      options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
+    },
   ],
   invalid: [
     // inline unless with nested helpers (exceeds default maxHelpers=1)
@@ -325,6 +334,108 @@ hbsRuleTester.run('template-simple-unless', rule, {
       code: ['{{#unless (two three)}}', '  I think I am a brown stick', '{{/unless}}'].join('\n'),
       output: null,
       options: [{ denylist: ['two', 'four'], maxHelpers: -1 }],
+      errors: [{ messageId: 'withHelper' }],
+    },
+    // --- ETL-equivalent invalid cases with allowlist config ---
+    // allowlist violation: `if` not in allowlist (ETL bad case: {{unless (if (or true)) ...}})
+    {
+      code: "{{unless (if (or true))  'Please no'}}",
+      output: null,
+      options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
+      errors: [{ messageId: 'withHelper' }],
+    },
+    // allowlist violation: `if` not in allowlist (ETL bad case: {{unless (if true) ...}})
+    {
+      code: "{{unless (if true)  'Please no'}}",
+      output: null,
+      options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
+      errors: [{ messageId: 'withHelper' }],
+    },
+    // allowlist violation: `and` not in allowlist (ETL bad case: {{unless (and isBad isAwful) ...}})
+    {
+      code: "{{unless (and isBad isAwful)  'notBadAndAwful'}}",
+      output: null,
+      options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
+      errors: [{ messageId: 'withHelper' }],
+    },
+    // allowlist violation: `not` not in allowlist (ETL bad case: inline unless with not)
+    {
+      code: '<img class={{unless (not condition) "some-class"}}>',
+      output: null,
+      options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
+      errors: [{ messageId: 'withHelper' }],
+    },
+    // allowlist violation: `one` not in allowlist (ETL bad case: inline unless with one)
+    {
+      code: '<img class={{unless (one condition) "some-class" "other-class"}}>',
+      output: null,
+      options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
+      errors: [{ messageId: 'withHelper' }],
+    },
+    // maxHelpers exceeded with nested allowed helpers (ETL bad case: 3 helpers > maxHelpers 2)
+    {
+      code: [
+        '{{#unless (or (eq foo bar) (not-eq baz "beer"))}}',
+        '  MUCH HELPERS, VERY BAD',
+        '{{/unless}}',
+      ].join('\n'),
+      output: null,
+      options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
+      errors: [{ messageId: 'withHelper' }],
+    },
+    // allowlist violation with nested helpers (ETL bad case: allowlist=['test'], one not in allowlist)
+    {
+      code: [
+        '{{#unless (one (test power) two)}}',
+        '  I think I am a brown stick',
+        '{{/unless}}',
+      ].join('\n'),
+      output: null,
+      options: [{ allowlist: ['test'], maxHelpers: 1 }],
+      errors: [{ messageId: 'withHelper' }],
+    },
+    // maxHelpers exceeded with empty allowlist and nested helpers (ETL bad case: 3 helpers > maxHelpers 2)
+    {
+      code: [
+        '{{#unless (one (two three) (four five))}}',
+        '  I think I am a brown stick',
+        '{{/unless}}',
+      ].join('\n'),
+      output: null,
+      options: [{ allowlist: [], maxHelpers: 2 }],
+      errors: [{ messageId: 'withHelper' }],
+    },
+    // denylist with nested helpers (ETL bad case: denylist=['two'], two is in nested position)
+    {
+      code: [
+        '{{#unless (one (two three) (four five))}}',
+        '  I think I am a brown stick',
+        '{{/unless}}',
+      ].join('\n'),
+      output: null,
+      options: [{ denylist: ['two'], maxHelpers: -1 }],
+      errors: [{ messageId: 'withHelper' }],
+    },
+    // multi-item denylist with nested helpers (ETL bad case: denylist=['two','four'])
+    {
+      code: [
+        '{{#unless (one (two three) (four five))}}',
+        '  I think I am a brown stick',
+        '{{/unless}}',
+      ].join('\n'),
+      output: null,
+      options: [{ denylist: ['two', 'four'], maxHelpers: -1 }],
+      errors: [{ messageId: 'withHelper' }],
+    },
+    // denylist violation: `one` in denylist (ETL-style with denylist=['one'])
+    {
+      code: [
+        '{{#unless (one (two three) (four five))}}',
+        '  I think I am a brown stick',
+        '{{/unless}}',
+      ].join('\n'),
+      output: null,
+      options: [{ denylist: ['one'], maxHelpers: -1 }],
       errors: [{ messageId: 'withHelper' }],
     },
   ],

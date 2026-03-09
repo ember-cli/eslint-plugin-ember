@@ -16,6 +16,7 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-require-presentational-children', rule, {
   valid: [
+    // Case 1: Presentational role on specific parent elements (ESLint-specific additions)
     `<template>
       <ul>
         <li>Item</li>
@@ -37,6 +38,7 @@ ruleTester.run('template-require-presentational-children', rule, {
       </ul>
     </template>`,
 
+    // Case 2: ETL-matching tests
     '<template><button></button></template>',
     '<template><div></div></template>',
     '<template><li role="tab">Tab title</li></template>',
@@ -61,9 +63,14 @@ ruleTester.run('template-require-presentational-children', rule, {
         <:default>Button text</:default>
       </MyButton>
     </template>`,
+    {
+      code: '<template><button><div>item1</div><custom-element>item2</custom-element></button></template>',
+      options: [{ additionalNonSemanticTags: ['custom-element'] }],
+    },
   ],
 
   invalid: [
+    // Case 1: Presentational role on specific parent elements (ESLint-specific additions)
     {
       code: `<template>
         <ul role="presentation">
@@ -95,6 +102,7 @@ ruleTester.run('template-require-presentational-children', rule, {
       ],
     },
 
+    // Case 2: ETL-matching tests
     {
       code: '<template><div role="button"><h2>Test</h2></div></template>',
       output: null,
@@ -108,7 +116,7 @@ ruleTester.run('template-require-presentational-children', rule, {
     {
       code: '<template><div role="button"><h2 role="presentation"><button>Test <img/></button></h2></div></template>',
       output: null,
-      errors: [{ messageId: 'invalid' }],
+      errors: [{ messageId: 'invalid' }, { messageId: 'invalid' }],
     },
   ],
 });
@@ -147,7 +155,10 @@ hbsRuleTester.run('template-require-presentational-children', rule, {
         <:default>Button text</:default>
       </MyButton>
     `,
-    '<button><div>item1</div><custom-element>item2</custom-element></button>',
+    {
+      code: '<button><div>item1</div><custom-element>item2</custom-element></button>',
+      options: [{ additionalNonSemanticTags: ['custom-element'] }],
+    },
   ],
   invalid: [
     {
@@ -177,6 +188,10 @@ hbsRuleTester.run('template-require-presentational-children', rule, {
         {
           message:
             'Element <div> has role="button" but contains semantic child <button>. Presentational elements should only contain presentational children.',
+        },
+        {
+          message:
+            'Element <div> has role="button" but contains semantic child <img>. Presentational elements should only contain presentational children.',
         },
       ],
     },

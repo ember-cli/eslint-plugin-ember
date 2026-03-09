@@ -10,9 +10,12 @@ Multiple consecutive blank lines reduce readability and should be limited.
 
 This rule enforces a maximum number of consecutive empty lines (default: 1).
 
-## Config
+## Configuration
 
-This rule has no configuration options.
+The following values are valid configuration:
+
+- object -- An object with the following keys:
+  - `max` -- An integer specifying the maximum number of consecutive empty lines allowed. Defaults to `1`.
 
 ## Examples
 

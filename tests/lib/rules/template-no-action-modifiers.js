@@ -97,6 +97,11 @@ hbsRuleTester.run('template-no-action-modifiers (hbs)', rule, {
     '<div action></div>',
     '{{foo-bar (action "foo")}}',
     '{{foo-bar action}}',
+    // allowlist config
+    {
+      code: '<button {{action "foo"}}></button>',
+      options: [{ allowlist: ['button'] }],
+    },
   ],
   invalid: [
     {
@@ -123,6 +128,15 @@ hbsRuleTester.run('template-no-action-modifiers (hbs)', rule, {
     {
       code: '<a href="#" {{action "foo"}}></a>',
       output: null,
+      errors: [
+        { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
+      ],
+    },
+    // allowlist config
+    {
+      code: '<a href="#" {{action "foo"}}></a>',
+      output: null,
+      options: [{ allowlist: ['button'] }],
       errors: [
         { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
       ],
