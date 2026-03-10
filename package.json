@@ -61,6 +61,7 @@
   "dependencies": {
     "@ember-data/rfc395-data": "^0.0.4",
     "css-tree": "^3.0.1",
+    "editorconfig": "^3.0.2",
     "ember-eslint-parser": "^0.6.0",
     "ember-rfc176-data": "^0.3.18",
     "eslint-utils": "^3.0.0",
