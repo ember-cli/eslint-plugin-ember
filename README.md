@@ -386,6 +386,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [order-in-models](docs/rules/order-in-models.md)                             | enforce proper order of properties in models                   |    | 🔧 |    |
 | [order-in-routes](docs/rules/order-in-routes.md)                             | enforce proper order of properties in routes                   |    | 🔧 |    |
 | [template-attribute-order](docs/rules/template-attribute-order.md)           | enforce consistent ordering of attributes in template elements |    |    |    |
+| [template-linebreak-style](docs/rules/template-linebreak-style.md)           | enforce consistent linebreaks in templates                     |    | 🔧 |    |
 | [template-no-only-default-slot](docs/rules/template-no-only-default-slot.md) | disallow using only the default slot                           |    | 🔧 |    |
 
 ### Testing
