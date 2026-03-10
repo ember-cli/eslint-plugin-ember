@@ -266,6 +266,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [no-string-prototype-extensions](docs/rules/no-string-prototype-extensions.md)                   | disallow usage of `String` prototype extensions           | ✅  |    |    |
 | [template-no-action](docs/rules/template-no-action.md)                                           | disallow {{action}} helper                                |    |    |    |
 | [template-no-attrs-in-components](docs/rules/template-no-attrs-in-components.md)                 | disallow attrs in component templates                     |    |    |    |
+| [template-no-form-action](docs/rules/template-no-form-action.md)                                 | disallow usage of action attribute on form elements       |    |    |    |
 
 ### Ember Data
 
