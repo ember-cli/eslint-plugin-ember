@@ -214,6 +214,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-class-bindings](docs/rules/template-no-class-bindings.md)                                       | disallow passing classBinding or classNameBindings as arguments in templates |    |    |    |
 | [template-no-curly-component-invocation](docs/rules/template-no-curly-component-invocation.md)               | disallow curly component invocation, use angle bracket syntax instead        |    |    |    |
 | [template-no-debugger](docs/rules/template-no-debugger.md)                                                   | disallow {{debugger}} in templates                                           |    |    |    |
+| [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                                           | disallow duplicate id attributes                                             |    |    |    |
 | [template-no-dynamic-subexpression-invocations](docs/rules/template-no-dynamic-subexpression-invocations.md) | disallow dynamic subexpression invocations                                   |    |    |    |
 | [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                         | disallow element event actions (use {{on}} modifier instead)                 |    |    |    |
 | [template-no-forbidden-elements](docs/rules/template-no-forbidden-elements.md)                               | disallow specific HTML elements                                              |    |    |    |
