@@ -218,6 +218,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                                           | disallow duplicate id attributes                                             |    |    |    |
 | [template-no-dynamic-subexpression-invocations](docs/rules/template-no-dynamic-subexpression-invocations.md) | disallow dynamic subexpression invocations                                   |    |    |    |
 | [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                         | disallow element event actions (use {{on}} modifier instead)                 |    |    |    |
+| [template-no-extra-mut-helpers](docs/rules/template-no-extra-mut-helpers.md)                                 | disallow unnecessary mut helpers                                             |    |    |    |
 | [template-no-forbidden-elements](docs/rules/template-no-forbidden-elements.md)                               | disallow specific HTML elements                                              |    |    |    |
 | [template-no-html-comments](docs/rules/template-no-html-comments.md)                                         | disallow HTML comments in templates                                          |    | 🔧 |    |
 | [template-no-implicit-this](docs/rules/template-no-implicit-this.md)                                         | require explicit `this` in property access                                   |    |    |    |
