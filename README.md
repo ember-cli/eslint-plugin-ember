@@ -196,6 +196,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | :----------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- | :- | :- | :- |
 | [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md)             | disallow setting certain attributes on builtin components       |    |    |    |
 | [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                             | disallow usage of {{action}} modifiers                          |    |    |    |
+| [template-no-ambiguous-glimmer-paths](docs/rules/template-no-ambiguous-glimmer-paths.md)               | disallow ambiguous path in templates                            |    |    |    |
 | [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md)       | disallow @arguments on HTML elements                            |    |    |    |
 | [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)         | disallow usage of Ember Array prototype extensions              |    |    |    |
 | [template-no-block-params-for-html-elements](docs/rules/template-no-block-params-for-html-elements.md) | disallow block params on HTML elements                          |    |    |    |
