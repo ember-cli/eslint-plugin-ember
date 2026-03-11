@@ -33,6 +33,9 @@ ruleTester.run('template-no-trailing-spaces', rule, {
 {{/my-component}}</template>`,
     `<template>  test
 </template>`,
+
+    // JS code with trailing spaces outside <template> must NOT be flagged
+    'const foo = "bar";  \n\n<template><div>Hello</div></template>',
   ],
 
   invalid: [

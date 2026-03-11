@@ -50,6 +50,9 @@ r
 
 <div>bar</div>
 </template>`,
+
+    // Multiple empty lines in JS code outside <template> must NOT be flagged
+    'const foo = 1;\n\n\nconst bar = 2;\n\n<template><div>ok</div></template>',
   ],
 
   invalid: [
@@ -60,7 +63,11 @@ r
 
       <div>World</div>
     </template>`,
-      output: null,
+      output: `<template>
+      <div>Hello</div>
+
+      <div>World</div>
+    </template>`,
       errors: [
         {
           message: 'More than 1 blank line not allowed.',
@@ -75,7 +82,11 @@ r
 
       <div>Second</div>
     </template>`,
-      output: null,
+      output: `<template>
+      <div>First</div>
+
+      <div>Second</div>
+    </template>`,
       errors: [
         {
           message: 'More than 1 blank line not allowed.',
@@ -88,7 +99,9 @@ r
 
 
 <div>bar</div></template>`,
-      output: null,
+      output: `<template><div>foo</div>
+
+<div>bar</div></template>`,
       errors: [{ message: 'More than 1 blank line not allowed.' }],
     },
     {
@@ -98,7 +111,9 @@ r
 
 
 <div>bar</div></template>`,
-      output: null,
+      output: `<template><div>foo</div>
+
+<div>bar</div></template>`,
       errors: [{ message: 'More than 1 blank line not allowed.' }],
     },
   ],
@@ -142,7 +157,9 @@ hbsRuleTester.run('template-no-multiple-empty-lines', rule, {
 
 
 <div>bar</div>`,
-      output: null,
+      output: `<div>foo</div>
+
+<div>bar</div>`,
       errors: [{ message: 'More than 1 blank line not allowed.' }],
     },
     {
@@ -152,12 +169,14 @@ hbsRuleTester.run('template-no-multiple-empty-lines', rule, {
 
 
 <div>bar</div>`,
-      output: null,
+      output: `<div>foo</div>
+
+<div>bar</div>`,
       errors: [{ message: 'More than 1 blank line not allowed.' }],
     },
     {
       code: '<div>foo</div>\n\n\n\n\n<div>bar</div>',
-      output: null,
+      output: '<div>foo</div>\n\n\n\n<div>bar</div>',
       options: [{ max: 3 }],
       errors: [{ message: 'More than 3 blank lines not allowed.' }],
     },
