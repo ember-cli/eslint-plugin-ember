@@ -36,6 +36,11 @@ ruleTester.run('template-no-html-comments', rule, {
       output: '<template>{{!comment here}}</template>',
       errors: [{ messageId: 'noHtmlComments' }],
     },
+    {
+      code: '<template><!--\n    line one\n    line two\n  --></template>',
+      output: '<template>{{!\n    line one\n    line two\n  }}</template>',
+      errors: [{ messageId: 'noHtmlComments' }],
+    },
   ],
 });
 
