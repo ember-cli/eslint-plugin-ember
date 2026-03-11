@@ -203,6 +203,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-chained-this](docs/rules/template-no-chained-this.md)                                     | disallow redundant `this.this` in templates                     |    | 🔧 |    |
 | [template-no-debugger](docs/rules/template-no-debugger.md)                                             | disallow {{debugger}} in templates                              |    |    |    |
 | [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                   | disallow element event actions (use {{on}} modifier instead)    |    |    |    |
+| [template-no-html-comments](docs/rules/template-no-html-comments.md)                                   | disallow HTML comments in templates                             |    | 🔧 |    |
 | [template-no-inline-event-handlers](docs/rules/template-no-inline-event-handlers.md)                   | disallow DOM event handler attributes                           |    |    |    |
 | [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                   | disallow inline styles                                          |    |    |    |
 | [template-no-input-placeholder](docs/rules/template-no-input-placeholder.md)                           | disallow placeholder attribute on input elements                |    |    |    |
