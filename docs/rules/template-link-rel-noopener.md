@@ -18,14 +18,14 @@ thread in the opener. Also note that Firefox versions prior 52 do not implement 
 
 This rule **forbids** the following:
 
-```hbs
-<a href='https://i.seem.secure.com' target='_blank'>I'm a bait</a>
+```gjs
+<template><a href='https://i.seem.secure.com' target='_blank'>I'm a bait</a></template>
 ```
 
 This rule **allows** the following:
 
-```hbs
-<a href='https://i.seem.secure.com' target='_blank' rel='noopener noreferrer'>I'm a bait</a>
+```gjs
+<template><a href='https://i.seem.secure.com' target='_blank' rel='noopener noreferrer'>I'm a bait</a></template>
 ```
 
 ## References

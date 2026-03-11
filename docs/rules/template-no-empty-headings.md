@@ -11,7 +11,7 @@ Disallow headings (h1, h2, etc.) with no accessible text content.
 This rule **forbids** the following:
 
 ```gjs
-<template><h*></h*></template>
+<template><h1></h1></template>
 ```
 
 ```gjs
@@ -19,17 +19,17 @@ This rule **forbids** the following:
 ```
 
 ```gjs
-<template><h*><span aria-hidden='true'>Inaccessible text</span></h*></template>
+<template><h2><span aria-hidden='true'>Inaccessible text</span></h2></template>
 ```
 
 This rule **allows** the following:
 
 ```gjs
-<template><h*>Heading Content</h*></template>
+<template><h1>Heading Content</h1></template>
 ```
 
 ```gjs
-<template><h*><span>Text</span><h*></template>
+<template><h2><span>Text</span></h2></template>
 ```
 
 ```gjs
@@ -37,11 +37,11 @@ This rule **allows** the following:
 ```
 
 ```gjs
-<template><h* aria-hidden='true'>Heading Content</h*></template>
+<template><h3 aria-hidden='true'>Heading Content</h3></template>
 ```
 
 ```gjs
-<template><h* hidden>Heading Content</h*></template>
+<template><h1 hidden>Heading Content</h1></template>
 ```
 
 ## Migration

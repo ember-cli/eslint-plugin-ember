@@ -28,6 +28,9 @@ ruleTester.run('template-no-debugger', rule, {
     `<template>
       <div data-test-debugger={{true}}></div>
     </template>`,
+
+    '<template>{{foo}}</template>',
+    '<template>{{button}}</template>',
   ],
 
   invalid: [
@@ -70,6 +73,33 @@ ruleTester.run('template-no-debugger', rule, {
           type: 'GlimmerBlockStatement',
         },
       ],
+    },
+
+    {
+      code: '<template>{{#debugger}}Invalid!{{/debugger}}</template>',
+      output: null,
+      errors: [{ message: 'Unexpected debugger statement in template.' }],
+    },
+  ],
+});
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-debugger (hbs)', rule, {
+  valid: ['{{foo}}', '{{button}}'],
+  invalid: [
+    {
+      code: '{{debugger}}',
+      output: null,
+      errors: [{ message: 'Unexpected debugger statement in template.' }],
+    },
+    {
+      code: '{{#debugger}}Invalid!{{/debugger}}',
+      output: null,
+      errors: [{ message: 'Unexpected debugger statement in template.' }],
     },
   ],
 });

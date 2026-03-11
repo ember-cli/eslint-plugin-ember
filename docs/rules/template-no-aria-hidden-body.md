@@ -10,18 +10,18 @@ The aria-hidden attribute should never be present on the `<body>` element, as it
 
 This rule **forbids** the following:
 
-```hbs
-<body aria-hidden>
+```gjs
+<template><body aria-hidden></template>
 ```
 
-```hbs
-<body aria-hidden="true">
+```gjs
+<template><body aria-hidden="true"></template>
 ```
 
 This rule **allows** the following:
 
-```hbs
-<body>
+```gjs
+<template><body></template>
 ```
 
 ## References
