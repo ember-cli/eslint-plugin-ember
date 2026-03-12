@@ -381,16 +381,17 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Stylistic Issues
 
-| Name                                                                         | Description                                                    | 💼 | 🔧 | 💡 |
-| :--------------------------------------------------------------------------- | :------------------------------------------------------------- | :- | :- | :- |
-| [order-in-components](docs/rules/order-in-components.md)                     | enforce proper order of properties in components               |    | 🔧 |    |
-| [order-in-controllers](docs/rules/order-in-controllers.md)                   | enforce proper order of properties in controllers              |    | 🔧 |    |
-| [order-in-models](docs/rules/order-in-models.md)                             | enforce proper order of properties in models                   |    | 🔧 |    |
-| [order-in-routes](docs/rules/order-in-routes.md)                             | enforce proper order of properties in routes                   |    | 🔧 |    |
-| [template-attribute-order](docs/rules/template-attribute-order.md)           | enforce consistent ordering of attributes in template elements |    |    |    |
-| [template-eol-last](docs/rules/template-eol-last.md)                         | require or disallow newline at the end of template files       |    | 🔧 |    |
-| [template-linebreak-style](docs/rules/template-linebreak-style.md)           | enforce consistent linebreaks in templates                     |    | 🔧 |    |
-| [template-no-only-default-slot](docs/rules/template-no-only-default-slot.md) | disallow using only the default slot                           |    | 🔧 |    |
+| Name                                                                         | Description                                                            | 💼 | 🔧 | 💡 |
+| :--------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :- | :- | :- |
+| [order-in-components](docs/rules/order-in-components.md)                     | enforce proper order of properties in components                       |    | 🔧 |    |
+| [order-in-controllers](docs/rules/order-in-controllers.md)                   | enforce proper order of properties in controllers                      |    | 🔧 |    |
+| [order-in-models](docs/rules/order-in-models.md)                             | enforce proper order of properties in models                           |    | 🔧 |    |
+| [order-in-routes](docs/rules/order-in-routes.md)                             | enforce proper order of properties in routes                           |    | 🔧 |    |
+| [template-attribute-order](docs/rules/template-attribute-order.md)           | enforce consistent ordering of attributes in template elements         |    |    |    |
+| [template-block-indentation](docs/rules/template-block-indentation.md)       | enforce consistent indentation for block statements and their children |    |    |    |
+| [template-eol-last](docs/rules/template-eol-last.md)                         | require or disallow newline at the end of template files               |    | 🔧 |    |
+| [template-linebreak-style](docs/rules/template-linebreak-style.md)           | enforce consistent linebreaks in templates                             |    | 🔧 |    |
+| [template-no-only-default-slot](docs/rules/template-no-only-default-slot.md) | disallow using only the default slot                                   |    | 🔧 |    |
 
 ### Testing
 
