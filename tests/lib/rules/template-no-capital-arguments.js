@@ -18,7 +18,6 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
-      output: null,
     },
     {
       filename: 'my-component.gjs',
@@ -30,11 +29,23 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
-      output: null,
+    },
+    // @name in attribute position (lowercase) is valid
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Component from '@glimmer/component';
+        export default class MyComponent extends Component {
+          <template>
+            <Foo @name="bar" />
+          </template>
+        }
+      `,
     },
   ],
 
   invalid: [
+    // Capital path expression
     {
       filename: 'my-component.gjs',
       code: `
@@ -45,12 +56,7 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
-      output: null,
-      errors: [
-        {
-          messageId: 'noCapitalArguments',
-        },
-      ],
+      errors: [{ messageId: 'noCapitalArguments' }],
     },
     {
       filename: 'my-component.gjs',
@@ -62,12 +68,95 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
-      output: null,
-      errors: [
-        {
-          messageId: 'noCapitalArguments',
-        },
-      ],
+      errors: [{ messageId: 'noCapitalArguments' }],
+    },
+    // Capital attr node
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Component from '@glimmer/component';
+        export default class MyComponent extends Component {
+          <template>
+            <Foo @Name="bar" />
+          </template>
+        }
+      `,
+      errors: [{ messageId: 'noCapitalArguments' }],
+    },
+    // Underscore prefix
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Component from '@glimmer/component';
+        export default class MyComponent extends Component {
+          <template>
+            <div>{{@_Name}}</div>
+          </template>
+        }
+      `,
+      errors: [{ messageId: 'noCapitalArguments' }],
+    },
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Component from '@glimmer/component';
+        export default class MyComponent extends Component {
+          <template>
+            <Foo @_ame="bar" />
+          </template>
+        }
+      `,
+      errors: [{ messageId: 'noCapitalArguments' }],
+    },
+    // Reserved arguments in path expression
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Component from '@glimmer/component';
+        export default class MyComponent extends Component {
+          <template>
+            <div>{{@arguments}}</div>
+          </template>
+        }
+      `,
+      errors: [{ messageId: 'reservedArgument' }],
+    },
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Component from '@glimmer/component';
+        export default class MyComponent extends Component {
+          <template>
+            <div>{{@args}}</div>
+          </template>
+        }
+      `,
+      errors: [{ messageId: 'reservedArgument' }],
+    },
+    // Reserved arguments in attr position
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Component from '@glimmer/component';
+        export default class MyComponent extends Component {
+          <template>
+            <Foo @arguments={{42}} />
+          </template>
+        }
+      `,
+      errors: [{ messageId: 'reservedArgument' }],
+    },
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Component from '@glimmer/component';
+        export default class MyComponent extends Component {
+          <template>
+            <Foo @block={{42}} />
+          </template>
+        }
+      `,
+      errors: [{ messageId: 'reservedArgument' }],
     },
   ],
 });
