@@ -208,6 +208,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-input-placeholder](docs/rules/template-no-input-placeholder.md)                           | disallow placeholder attribute on input elements                |    |    |    |
 | [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                   | disallow tagName attribute on {{input}} helper                  |    |    |    |
 | [template-no-log](docs/rules/template-no-log.md)                                                       | disallow {{log}} in templates                                   |    |    |    |
+| [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                   | disallow {{outlet}} outside of route templates                  |    |    |    |
 | [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                     | disallow usage of ember-page-title component                    |    |    |    |
 
 ### Components
