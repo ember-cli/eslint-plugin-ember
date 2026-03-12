@@ -192,25 +192,26 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Best Practices
 
-| Name                                                                                                   | Description                                                     | 💼 | 🔧 | 💡 |
-| :----------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- | :- | :- | :- |
-| [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md)             | disallow setting certain attributes on builtin components       |    |    |    |
-| [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                             | disallow usage of {{action}} modifiers                          |    |    |    |
-| [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md)       | disallow @arguments on HTML elements                            |    |    |    |
-| [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)         | disallow usage of Ember Array prototype extensions              |    |    |    |
-| [template-no-block-params-for-html-elements](docs/rules/template-no-block-params-for-html-elements.md) | disallow block params on HTML elements                          |    |    |    |
-| [template-no-capital-arguments](docs/rules/template-no-capital-arguments.md)                           | disallow capital arguments (use lowercase @arg instead of @Arg) |    |    |    |
-| [template-no-chained-this](docs/rules/template-no-chained-this.md)                                     | disallow redundant `this.this` in templates                     |    | 🔧 |    |
-| [template-no-debugger](docs/rules/template-no-debugger.md)                                             | disallow {{debugger}} in templates                              |    |    |    |
-| [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                   | disallow element event actions (use {{on}} modifier instead)    |    |    |    |
-| [template-no-inline-event-handlers](docs/rules/template-no-inline-event-handlers.md)                   | disallow DOM event handler attributes                           |    |    |    |
-| [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                   | disallow inline styles                                          |    |    |    |
-| [template-no-input-placeholder](docs/rules/template-no-input-placeholder.md)                           | disallow placeholder attribute on input elements                |    |    |    |
-| [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                   | disallow tagName attribute on {{input}} helper                  |    |    |    |
-| [template-no-log](docs/rules/template-no-log.md)                                                       | disallow {{log}} in templates                                   |    |    |    |
-| [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                           | disallow obsolete HTML elements                                 |    |    |    |
-| [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                   | disallow {{outlet}} outside of route templates                  |    |    |    |
-| [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                     | disallow usage of ember-page-title component                    |    |    |    |
+| Name                                                                                                   | Description                                                             | 💼 | 🔧 | 💡 |
+| :----------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------- | :- | :- | :- |
+| [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md)             | disallow setting certain attributes on builtin components               |    |    |    |
+| [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                             | disallow usage of {{action}} modifiers                                  |    |    |    |
+| [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md)       | disallow @arguments on HTML elements                                    |    |    |    |
+| [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)         | disallow usage of Ember Array prototype extensions                      |    |    |    |
+| [template-no-block-params-for-html-elements](docs/rules/template-no-block-params-for-html-elements.md) | disallow block params on HTML elements                                  |    |    |    |
+| [template-no-capital-arguments](docs/rules/template-no-capital-arguments.md)                           | disallow capital arguments (use lowercase @arg instead of @Arg)         |    |    |    |
+| [template-no-chained-this](docs/rules/template-no-chained-this.md)                                     | disallow redundant `this.this` in templates                             |    | 🔧 |    |
+| [template-no-debugger](docs/rules/template-no-debugger.md)                                             | disallow {{debugger}} in templates                                      |    |    |    |
+| [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                   | disallow element event actions (use {{on}} modifier instead)            |    |    |    |
+| [template-no-inline-event-handlers](docs/rules/template-no-inline-event-handlers.md)                   | disallow DOM event handler attributes                                   |    |    |    |
+| [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                   | disallow inline styles                                                  |    |    |    |
+| [template-no-input-placeholder](docs/rules/template-no-input-placeholder.md)                           | disallow placeholder attribute on input elements                        |    |    |    |
+| [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                   | disallow tagName attribute on {{input}} helper                          |    |    |    |
+| [template-no-log](docs/rules/template-no-log.md)                                                       | disallow {{log}} in templates                                           |    |    |    |
+| [template-no-obscure-array-access](docs/rules/template-no-obscure-array-access.md)                     | disallow obscure array access patterns like `objectPath.@each.property` |    |    |    |
+| [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                           | disallow obsolete HTML elements                                         |    |    |    |
+| [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                   | disallow {{outlet}} outside of route templates                          |    |    |    |
+| [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                     | disallow usage of ember-page-title component                            |    |    |    |
 
 ### Components
 
