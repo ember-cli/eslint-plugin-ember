@@ -57,5 +57,31 @@ ruleTester.run('template-no-action', rule, {
         },
       ],
     },
+    {
+      code: `<template>
+        <button {{action "submit"}}>Submit</button>
+      </template>`,
+      output: null,
+      errors: [
+        {
+          message:
+            'Do not use `action` as an element modifier. Instead, use the `on` modifier and `fn` helper.',
+          type: 'GlimmerElementModifierStatement',
+        },
+      ],
+    },
+    {
+      code: `<template>
+        <input onclick={{action "foo"}}>
+      </template>`,
+      output: null,
+      errors: [
+        {
+          message:
+            'Do not use `action` in templates. Instead, use the `on` modifier and `fn` helper.',
+          type: 'GlimmerMustacheStatement',
+        },
+      ],
+    },
   ],
 });
