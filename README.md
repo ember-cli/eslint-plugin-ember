@@ -208,6 +208,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-chained-this](docs/rules/template-no-chained-this.md)                                           | disallow redundant `this.this` in templates                             |    | 🔧 |    |
 | [template-no-debugger](docs/rules/template-no-debugger.md)                                                   | disallow {{debugger}} in templates                                      |    |    |    |
 | [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                         | disallow element event actions (use {{on}} modifier instead)            |    |    |    |
+| [template-no-implicit-this](docs/rules/template-no-implicit-this.md)                                         | require explicit `this` in property access                              |    |    |    |
 | [template-no-inline-event-handlers](docs/rules/template-no-inline-event-handlers.md)                         | disallow DOM event handler attributes                                   |    |    |    |
 | [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                         | disallow inline styles                                                  |    |    |    |
 | [template-no-input-block](docs/rules/template-no-input-block.md)                                             | disallow block usage of {{input}} helper                                |    |    |    |
