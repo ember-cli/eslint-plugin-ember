@@ -210,6 +210,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-input-placeholder](docs/rules/template-no-input-placeholder.md)                           | disallow placeholder attribute on input elements                        |    |    |    |
 | [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                   | disallow tagName attribute on {{input}} helper                          |    |    |    |
 | [template-no-log](docs/rules/template-no-log.md)                                                       | disallow {{log}} in templates                                           |    |    |    |
+| [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                           | disallow negated conditions in if/unless                                |    |    |    |
 | [template-no-nested-splattributes](docs/rules/template-no-nested-splattributes.md)                     | disallow nested ...attributes usage                                     |    |    |    |
 | [template-no-obscure-array-access](docs/rules/template-no-obscure-array-access.md)                     | disallow obscure array access patterns like `objectPath.@each.property` |    |    |    |
 | [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                           | disallow obsolete HTML elements                                         |    |    |    |
