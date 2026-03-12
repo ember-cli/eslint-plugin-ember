@@ -29,9 +29,6 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
       code: `<template>
         <input type="text" autofocus />
       </template>`,
-      output: `<template>
-        <input type="text"/>
-      </template>`,
       errors: [
         {
           message:
@@ -44,11 +41,65 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
       code: `<template>
         <textarea autofocus></textarea>
       </template>`,
-      output: `<template>
-        <textarea></textarea>
+      errors: [
+        {
+          type: 'GlimmerAttrNode',
+        },
+      ],
+    },
+    {
+      code: `<template>
+        {{input type="text" autofocus=true}}
       </template>`,
       errors: [
         {
+          messageId: 'noAutofocus',
+          type: 'GlimmerHashPair',
+        },
+      ],
+    },
+    {
+      code: `<template>
+        {{component "input" type="text" autofocus=true}}
+      </template>`,
+      errors: [
+        {
+          messageId: 'noAutofocus',
+          type: 'GlimmerHashPair',
+        },
+      ],
+    },
+    {
+      code: `<template>
+        <div autofocus>
+        </div>
+      </template>`,
+      errors: [
+        {
+          messageId: 'noAutofocus',
+          type: 'GlimmerAttrNode',
+        },
+      ],
+    },
+    {
+      code: `<template>
+        <h1 autofocus>
+        </h1>
+      </template>`,
+      errors: [
+        {
+          messageId: 'noAutofocus',
+          type: 'GlimmerAttrNode',
+        },
+      ],
+    },
+    {
+      code: `<template>
+        <input autofocus="autofocus" />
+      </template>`,
+      errors: [
+        {
+          messageId: 'noAutofocus',
           type: 'GlimmerAttrNode',
         },
       ],
