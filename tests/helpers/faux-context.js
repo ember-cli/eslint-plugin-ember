@@ -14,6 +14,7 @@ class FauxContext {
     this.filename = filename;
     this.report = report;
     this.code = code;
+    this.sourceCode = new SourceCode(this.code, this.ast);
   }
 
   /**
@@ -22,14 +23,6 @@ class FauxContext {
    */
   getAncestors() {
     return [this.ast];
-  }
-
-  getFilename() {
-    return this.filename;
-  }
-
-  getSourceCode() {
-    return new SourceCode(this.code, this.ast);
   }
 }
 
