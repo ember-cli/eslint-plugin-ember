@@ -210,6 +210,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                         | disallow element event actions (use {{on}} modifier instead)            |    |    |    |
 | [template-no-inline-event-handlers](docs/rules/template-no-inline-event-handlers.md)                         | disallow DOM event handler attributes                                   |    |    |    |
 | [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                         | disallow inline styles                                                  |    |    |    |
+| [template-no-input-block](docs/rules/template-no-input-block.md)                                             | disallow block usage of {{input}} helper                                |    |    |    |
 | [template-no-input-placeholder](docs/rules/template-no-input-placeholder.md)                                 | disallow placeholder attribute on input elements                        |    |    |    |
 | [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                         | disallow tagName attribute on {{input}} helper                          |    |    |    |
 | [template-no-invalid-meta](docs/rules/template-no-invalid-meta.md)                                           | disallow invalid meta tags                                              |    |    |    |
