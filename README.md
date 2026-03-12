@@ -210,6 +210,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-input-placeholder](docs/rules/template-no-input-placeholder.md)                           | disallow placeholder attribute on input elements                        |    |    |    |
 | [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                   | disallow tagName attribute on {{input}} helper                          |    |    |    |
 | [template-no-log](docs/rules/template-no-log.md)                                                       | disallow {{log}} in templates                                           |    |    |    |
+| [template-no-multiple-empty-lines](docs/rules/template-no-multiple-empty-lines.md)                     | disallow multiple consecutive empty lines in templates                  |    |    |    |
 | [template-no-mut-helper](docs/rules/template-no-mut-helper.md)                                         | disallow usage of (mut) helper                                          |    |    |    |
 | [template-no-negated-comparison](docs/rules/template-no-negated-comparison.md)                         | disallow negated comparisons in templates                               |    |    |    |
 | [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                           | disallow negated conditions in if/unless                                |    |    |    |
