@@ -56,6 +56,16 @@ ruleTester.run('template-no-invalid-role', rule, {
     '<template><AwesomeThing role="presentation"></AwesomeThing></template>',
     '<template><table role="textbox"></table></template>',
     '<template><div role="{{if this.inModal "dialog" "contentinfo" }}"></div></template>',
+
+    // Missing VALID_ROLES entries: associationlistitemkey, associationlistitemvalue, cell
+    '<template><div role="associationlistitemkey">Key</div></template>',
+    '<template><div role="associationlistitemvalue">Value</div></template>',
+    '<template><td role="cell">Data</td></template>',
+
+    // Case-insensitive role matching
+    '<template><div role="Button">Click</div></template>',
+    '<template><div role="NAVIGATION">Nav</div></template>',
+    '<template><div role="ALERT">Alert</div></template>',
   ],
 
   invalid: [
@@ -156,6 +166,32 @@ ruleTester.run('template-no-invalid-role', rule, {
       output: null,
       errors: [{ message: "Invalid ARIA role 'COMMAND INTERFACE'. Must be a valid ARIA role." }],
     },
+
+    // Newly added SEMANTIC_ELEMENTS: presentation/none on iframe, video, audio
+    {
+      code: '<template><iframe role="presentation"></iframe></template>',
+      output: null,
+      errors: [
+        { message: 'The role "presentation" should not be used on the semantic element <iframe>.' },
+      ],
+    },
+    {
+      code: '<template><video role="none"></video></template>',
+      output: null,
+      errors: [{ message: 'The role "none" should not be used on the semantic element <video>.' }],
+    },
+    {
+      code: '<template><audio role="presentation"></audio></template>',
+      output: null,
+      errors: [
+        { message: 'The role "presentation" should not be used on the semantic element <audio>.' },
+      ],
+    },
+    {
+      code: '<template><embed role="none"></embed></template>',
+      output: null,
+      errors: [{ message: 'The role "none" should not be used on the semantic element <embed>.' }],
+    },
   ],
 });
 
@@ -187,6 +223,14 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
     '<AwesomeThing role="presentation"></AwesomeThing>',
     '<table role="textbox"></table>',
     '<div role="{{if this.inModal "dialog" "contentinfo" }}"></div>',
+    // Missing VALID_ROLES entries: associationlistitemkey, associationlistitemvalue, cell
+    '<div role="associationlistitemkey">Key</div>',
+    '<div role="associationlistitemvalue">Value</div>',
+    '<td role="cell">Data</td>',
+    // Case-insensitive role matching
+    '<div role="Button">Click</div>',
+    '<div role="NAVIGATION">Nav</div>',
+    '<div role="ALERT">Alert</div>',
     // catchNonexistentRoles: false — non-existent roles are not flagged
     {
       code: '<div role="command interface"></div>',
@@ -259,6 +303,31 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
       code: '<div role="COMMAND INTERFACE"></div>',
       output: null,
       errors: [{ message: "Invalid ARIA role 'COMMAND INTERFACE'. Must be a valid ARIA role." }],
+    },
+    // Newly added SEMANTIC_ELEMENTS: presentation/none on iframe, video, audio, embed
+    {
+      code: '<iframe role="presentation"></iframe>',
+      output: null,
+      errors: [
+        { message: 'The role "presentation" should not be used on the semantic element <iframe>.' },
+      ],
+    },
+    {
+      code: '<video role="none"></video>',
+      output: null,
+      errors: [{ message: 'The role "none" should not be used on the semantic element <video>.' }],
+    },
+    {
+      code: '<audio role="presentation"></audio>',
+      output: null,
+      errors: [
+        { message: 'The role "presentation" should not be used on the semantic element <audio>.' },
+      ],
+    },
+    {
+      code: '<embed role="none"></embed>',
+      output: null,
+      errors: [{ message: 'The role "none" should not be used on the semantic element <embed>.' }],
     },
   ],
 });
