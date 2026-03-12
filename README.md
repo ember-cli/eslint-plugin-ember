@@ -189,6 +189,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-empty-headings](docs/rules/template-no-empty-headings.md)                       | disallow empty heading elements                                                  |    |    |    |
 | [template-no-heading-inside-button](docs/rules/template-no-heading-inside-button.md)         | disallow heading elements inside button elements                                 |    |    |    |
 | [template-no-invalid-interactive](docs/rules/template-no-invalid-interactive.md)             | disallow non-interactive elements with interactive handlers                      |    |    |    |
+| [template-no-nested-interactive](docs/rules/template-no-nested-interactive.md)               | disallow nested interactive elements                                             |    |    |    |
 | [template-no-nested-landmark](docs/rules/template-no-nested-landmark.md)                     | disallow nested landmark elements                                                |    |    |    |
 
 ### Best Practices
