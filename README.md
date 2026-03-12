@@ -322,6 +322,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [no-runloop](docs/rules/no-runloop.md)                                                                                 | disallow usage of `@ember/runloop` functions                                                                                  | ✅  |    |    |
 | [require-fetch-import](docs/rules/require-fetch-import.md)                                                             | enforce explicit import for `fetch()`                                                                                         |    |    |    |
 
+### Possible Errors
+
+| Name                                                                   | Description                             | 💼 | 🔧 | 💡 |
+| :--------------------------------------------------------------------- | :-------------------------------------- | :- | :- | :- |
+| [template-no-jsx-attributes](docs/rules/template-no-jsx-attributes.md) | disallow JSX-style camelCase attributes |    | 🔧 |    |
+
 ### Routes
 
 | Name                                                                               | Description                                                                              | 💼 | 🔧 | 💡 |
