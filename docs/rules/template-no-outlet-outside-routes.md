@@ -34,3 +34,4 @@ Examples of **correct** code for this rule:
 
 - [Ember guides/routing](https://guides.emberjs.com/release/routing/rendering-a-template/)
 - [Ember api/outlet helper](https://api.emberjs.com/ember/release/classes/Ember.Templates.helpers/methods/outlet?anchor=outlet)
+- [ember-template-lint no-outlet-outside-routes](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-outlet-outside-routes.md)
