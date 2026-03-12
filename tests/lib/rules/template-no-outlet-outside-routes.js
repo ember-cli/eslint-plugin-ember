@@ -25,6 +25,11 @@ ruleTester.run('template-no-outlet-outside-routes', rule, {
       filename: 'app/routes/foo.gts',
       code: '<template>{{outlet}}</template>',
     },
+    // Block form in GJS route templates — outlet is allowed
+    {
+      filename: 'app/routes/foo.gjs',
+      code: '<template>{{#outlet}}content{{/outlet}}</template>',
+    },
   ],
   invalid: [
     // Co-located component (explicit filename)
@@ -43,6 +48,13 @@ ruleTester.run('template-no-outlet-outside-routes', rule, {
     {
       filename: 'app/components/my-component.gjs',
       code: '<template><div>{{outlet}}</div></template>',
+      output: null,
+      errors: [{ messageId: 'noOutletOutsideRoutes' }],
+    },
+    // Block form in component
+    {
+      filename: 'app/components/my-component.gjs',
+      code: '<template>{{#outlet}}content{{/outlet}}</template>',
       output: null,
       errors: [{ messageId: 'noOutletOutsideRoutes' }],
     },
@@ -117,6 +129,13 @@ hbsRuleTester.run('template-no-outlet-outside-routes', rule, {
     {
       filename: 'app/components/foo/layout.hbs',
       code: '<div>{{outlet}}</div>',
+      output: null,
+      errors: [{ messageId: 'noOutletOutsideRoutes' }],
+    },
+    // Block form in component template
+    {
+      filename: 'app/components/foo/layout.hbs',
+      code: '{{#outlet}}content{{/outlet}}',
       output: null,
       errors: [{ messageId: 'noOutletOutsideRoutes' }],
     },
