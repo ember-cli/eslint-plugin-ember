@@ -2,110 +2,186 @@
 // Requirements
 //------------------------------------------------------------------------------
 
+const editorConfigUtil = require('../../../lib/utils/editorconfig');
 const rule = require('../../../lib/rules/template-linebreak-style');
 const RuleTester = require('eslint').RuleTester;
 
 //------------------------------------------------------------------------------
 // Tests
+//
+// All tests are wrapped in a describe so beforeAll/afterAll can install a spy
+// on editorConfigUtil.resolveEditorConfig before any rule invocation. This
+// prevents the project's own .editorconfig from influencing test outcomes.
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({
-  parser: require.resolve('ember-eslint-parser'),
-  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
-});
+describe('template-linebreak-style', () => {
+  beforeAll(() => {
+    vi.spyOn(editorConfigUtil, 'resolveEditorConfig').mockReturnValue({});
+  });
 
-ruleTester.run('template-linebreak-style', rule, {
-  valid: [
-    // default 'unix' — LF only
-    '<template>\n<div>test</div>\n</template>',
-  ],
+  afterAll(() => {
+    vi.restoreAllMocks();
+  });
 
-  invalid: [
-    {
-      code: '<template>\r\n<div>test</div>\r\n</template>',
-      output: '<template>\n<div>test</div>\n</template>',
-      options: ['unix'],
-      errors: [{ messageId: 'wrongLinebreak' }, { messageId: 'wrongLinebreak' }],
-    },
-  ],
-});
+  const ruleTester = new RuleTester({
+    parser: require.resolve('ember-eslint-parser'),
+    parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+  });
 
-const hbsRuleTester = new RuleTester({
-  parser: require.resolve('ember-eslint-parser/hbs'),
-  parserOptions: {
-    ecmaVersion: 2022,
-    sourceType: 'module',
-  },
-});
+  ruleTester.run('template-linebreak-style', rule, {
+    valid: [
+      // default 'unix' — LF only
+      '<template>\n<div>test</div>\n</template>',
+    ],
 
-hbsRuleTester.run('template-linebreak-style', rule, {
-  valid: [
-    // default 'unix' — all LF
-    'testing this',
-    'testing \n this',
-    { code: 'testing\nthis', options: ['unix'] },
-    // windows — all CRLF
-    { code: 'testing\r\nthis', options: ['windows'] },
-    // no linebreaks at all
-    'single line no linebreaks',
-  ],
+    invalid: [
+      {
+        code: '<template>\r\n<div>test</div>\r\n</template>',
+        output: '<template>\n<div>test</div>\n</template>',
+        options: ['unix'],
+        errors: [{ messageId: 'wrongLinebreak' }, { messageId: 'wrongLinebreak' }],
+      },
+    ],
+  });
 
-  invalid: [
-    // default 'unix' — mixed linebreaks, first is LF so CRLF is wrong
-    {
-      code: 'something\ngoes\r\n',
-      output: 'something\ngoes\n',
-      options: ['unix'],
-      errors: [{ messageId: 'wrongLinebreak' }],
+  const hbsRuleTester = new RuleTester({
+    parser: require.resolve('ember-eslint-parser/hbs'),
+    parserOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
     },
-    // unix — CRLF standalone
-    {
-      code: '\r\n',
-      output: '\n',
-      options: ['unix'],
-      errors: [{ messageId: 'wrongLinebreak' }],
-    },
-    // unix — CRLF in block mustache
-    {
-      code: '{{#if test}}\r\n{{/if}}',
-      output: '{{#if test}}\n{{/if}}',
-      options: ['unix'],
-      errors: [{ messageId: 'wrongLinebreak' }],
-    },
-    // unix — CRLF between mustaches
-    {
-      code: '{{blah}}\r\n{{blah}}',
-      output: '{{blah}}\n{{blah}}',
-      options: ['unix'],
-      errors: [{ messageId: 'wrongLinebreak' }],
-    },
-    // unix — CRLF trailing
-    {
-      code: '{{blah}}\r\n',
-      output: '{{blah}}\n',
-      options: ['unix'],
-      errors: [{ messageId: 'wrongLinebreak' }],
-    },
-    // unix — CRLF in attribute value
-    {
-      code: '{{blah arg="\r\n"}}',
-      output: '{{blah arg="\n"}}',
-      options: ['unix'],
-      errors: [{ messageId: 'wrongLinebreak' }],
-    },
-    // unix — CRLF in element attribute
-    {
-      code: '<blah arg="\r\n" />',
-      output: '<blah arg="\n" />',
-      options: ['unix'],
-      errors: [{ messageId: 'wrongLinebreak' }],
-    },
-    // windows — LF is wrong
-    {
-      code: '\n',
-      output: '\r\n',
-      options: ['windows'],
-      errors: [{ messageId: 'wrongLinebreak' }],
-    },
-  ],
+  });
+
+  hbsRuleTester.run('template-linebreak-style', rule, {
+    valid: [
+      // default 'unix' — all LF
+      'testing this',
+      'testing \n this',
+      { code: 'testing\nthis', options: ['unix'] },
+      // windows — all CRLF
+      { code: 'testing\r\nthis', options: ['windows'] },
+      // no linebreaks at all
+      'single line no linebreaks',
+    ],
+
+    invalid: [
+      // default 'unix' — mixed linebreaks, first is LF so CRLF is wrong
+      {
+        code: 'something\ngoes\r\n',
+        output: 'something\ngoes\n',
+        options: ['unix'],
+        errors: [{ messageId: 'wrongLinebreak' }],
+      },
+      // unix — CRLF standalone
+      {
+        code: '\r\n',
+        output: '\n',
+        options: ['unix'],
+        errors: [{ messageId: 'wrongLinebreak' }],
+      },
+      // unix — CRLF in block mustache
+      {
+        code: '{{#if test}}\r\n{{/if}}',
+        output: '{{#if test}}\n{{/if}}',
+        options: ['unix'],
+        errors: [{ messageId: 'wrongLinebreak' }],
+      },
+      // unix — CRLF between mustaches
+      {
+        code: '{{blah}}\r\n{{blah}}',
+        output: '{{blah}}\n{{blah}}',
+        options: ['unix'],
+        errors: [{ messageId: 'wrongLinebreak' }],
+      },
+      // unix — CRLF trailing
+      {
+        code: '{{blah}}\r\n',
+        output: '{{blah}}\n',
+        options: ['unix'],
+        errors: [{ messageId: 'wrongLinebreak' }],
+      },
+      // unix — CRLF in attribute value
+      {
+        code: '{{blah arg="\r\n"}}',
+        output: '{{blah arg="\n"}}',
+        options: ['unix'],
+        errors: [{ messageId: 'wrongLinebreak' }],
+      },
+      // unix — CRLF in element attribute
+      {
+        code: '<blah arg="\r\n" />',
+        output: '<blah arg="\n" />',
+        options: ['unix'],
+        errors: [{ messageId: 'wrongLinebreak' }],
+      },
+      // windows — LF is wrong
+      {
+        code: '\n',
+        output: '\r\n',
+        options: ['windows'],
+        errors: [{ messageId: 'wrongLinebreak' }],
+      },
+    ],
+  });
+
+  //------------------------------------------------------------------------------
+  // EditorConfig integration tests
+  //------------------------------------------------------------------------------
+
+  describe('editorconfig integration', () => {
+    const hbsRuleTesterEditorConfig = new RuleTester({
+      parser: require.resolve('ember-eslint-parser/hbs'),
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+    });
+
+    afterEach(() => {
+      editorConfigUtil.resolveEditorConfig.mockReturnValue({});
+    });
+
+    describe('end_of_line: crlf overrides rule option', () => {
+      beforeEach(() => {
+        editorConfigUtil.resolveEditorConfig.mockReturnValue({ end_of_line: 'crlf' });
+      });
+
+      hbsRuleTesterEditorConfig.run('template-linebreak-style', rule, {
+        valid: [
+          // editorconfig crlf wins even when rule option says unix
+          { code: 'testing\r\nthis', options: ['unix'] },
+          // editorconfig crlf matches windows option too
+          { code: 'testing\r\nthis', options: ['windows'] },
+        ],
+        invalid: [
+          // LF is wrong when editorconfig says crlf
+          {
+            code: 'testing\nthis',
+            output: 'testing\r\nthis',
+            options: ['unix'],
+            errors: [{ messageId: 'wrongLinebreak' }],
+          },
+        ],
+      });
+    });
+
+    describe('end_of_line: lf overrides rule option', () => {
+      beforeEach(() => {
+        editorConfigUtil.resolveEditorConfig.mockReturnValue({ end_of_line: 'lf' });
+      });
+
+      hbsRuleTesterEditorConfig.run('template-linebreak-style', rule, {
+        valid: [
+          // editorconfig lf wins even when rule option says windows
+          { code: 'testing\nthis', options: ['windows'] },
+        ],
+        invalid: [
+          // CRLF is wrong when editorconfig says lf
+          {
+            code: 'testing\r\nthis',
+            output: 'testing\nthis',
+            options: ['windows'],
+            errors: [{ messageId: 'wrongLinebreak' }],
+          },
+        ],
+      });
+    });
+  });
 });
