@@ -57,6 +57,7 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
       code: `<template>
         {{input type="text" autofocus=true}}
       </template>`,
+      output: null,
       errors: [
         {
           messageId: 'noAutofocus',
@@ -68,6 +69,7 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
       code: `<template>
         {{component "input" type="text" autofocus=true}}
       </template>`,
+      output: null,
       errors: [
         {
           messageId: 'noAutofocus',
