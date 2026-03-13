@@ -53,5 +53,75 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
         },
       ],
     },
+    {
+      code: `<template>
+        {{input type="text" autofocus=true}}
+      </template>`,
+      output: null,
+      errors: [
+        {
+          messageId: 'noAutofocus',
+          type: 'GlimmerHashPair',
+        },
+      ],
+    },
+    {
+      code: `<template>
+        {{component "input" type="text" autofocus=true}}
+      </template>`,
+      output: null,
+      errors: [
+        {
+          messageId: 'noAutofocus',
+          type: 'GlimmerHashPair',
+        },
+      ],
+    },
+    {
+      code: `<template>
+        <div autofocus>
+        </div>
+      </template>`,
+      output: `<template>
+        <div>
+        </div>
+      </template>`,
+      errors: [
+        {
+          messageId: 'noAutofocus',
+          type: 'GlimmerAttrNode',
+        },
+      ],
+    },
+    {
+      code: `<template>
+        <h1 autofocus>
+        </h1>
+      </template>`,
+      output: `<template>
+        <h1>
+        </h1>
+      </template>`,
+      errors: [
+        {
+          messageId: 'noAutofocus',
+          type: 'GlimmerAttrNode',
+        },
+      ],
+    },
+    {
+      code: `<template>
+        <input autofocus="autofocus" />
+      </template>`,
+      output: `<template>
+        <input />
+      </template>`,
+      errors: [
+        {
+          messageId: 'noAutofocus',
+          type: 'GlimmerAttrNode',
+        },
+      ],
+    },
   ],
 });
