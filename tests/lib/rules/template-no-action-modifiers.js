@@ -18,6 +18,11 @@ ruleTester.run('template-no-action-modifiers', rule, {
       code: '<template><button {{action "save"}}>Save</button></template>',
       options: [{ allowlist: ['button'] }],
     },
+    // Array shorthand config format (matching ember-template-lint)
+    {
+      code: '<template><button {{action "save"}}>Save</button></template>',
+      options: [['button']],
+    },
   ],
 
   invalid: [
