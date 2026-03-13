@@ -42,6 +42,18 @@ ruleTester.run('template-no-capital-arguments', rule, {
         }
       `,
     },
+    // Nested lowercase path is valid
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Component from '@glimmer/component';
+        export default class MyComponent extends Component {
+          <template>
+            <div>{{@arg.nested}}</div>
+          </template>
+        }
+      `,
+    },
   ],
 
   invalid: [
@@ -78,6 +90,19 @@ ruleTester.run('template-no-capital-arguments', rule, {
         export default class MyComponent extends Component {
           <template>
             <Foo @Name="bar" />
+          </template>
+        }
+      `,
+      errors: [{ messageId: 'noCapitalArguments' }],
+    },
+    // Nested capital path
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Component from '@glimmer/component';
+        export default class MyComponent extends Component {
+          <template>
+            <div>{{@Arg.nested}}</div>
           </template>
         }
       `,
