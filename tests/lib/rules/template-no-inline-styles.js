@@ -21,5 +21,16 @@ ruleTester.run('template-no-inline-styles', rule, {
       output: null,
       errors: [{ messageId: 'noInlineStyles' }],
     },
+    {
+      code: '<template><div style="color:blue;margin-left:30px;"></div></template>',
+      output: null,
+      errors: [{ messageId: 'noInlineStyles' }],
+    },
+    {
+      // ConcatStatement should be invalid even with allowDynamicStyles (default true)
+      code: '<template><div style="{{foo}} bar"></div></template>',
+      output: null,
+      errors: [{ messageId: 'noInlineStyles' }],
+    },
   ],
 });
