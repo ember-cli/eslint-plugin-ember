@@ -42,8 +42,7 @@ ruleTester.run('template-no-at-ember-render-modifiers', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
+          messageId: 'noRenderModifier',
           type: 'GlimmerElementModifierStatement',
         },
       ],
@@ -55,8 +54,7 @@ ruleTester.run('template-no-at-ember-render-modifiers', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
+          messageId: 'noRenderModifier',
           type: 'GlimmerElementModifierStatement',
         },
       ],
@@ -68,8 +66,7 @@ ruleTester.run('template-no-at-ember-render-modifiers', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
+          messageId: 'noRenderModifier',
           type: 'GlimmerElementModifierStatement',
         },
       ],
@@ -78,32 +75,17 @@ ruleTester.run('template-no-at-ember-render-modifiers', rule, {
     {
       code: '<template><div {{did-insert}}></div></template>',
       output: null,
-      errors: [
-        {
-          message:
-            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
-        },
-      ],
+      errors: [{ messageId: 'noRenderModifier' }],
     },
     {
       code: '<template><div {{did-update}}></div></template>',
       output: null,
-      errors: [
-        {
-          message:
-            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
-        },
-      ],
+      errors: [{ messageId: 'noRenderModifier' }],
     },
     {
       code: '<template><div {{will-destroy}}></div></template>',
       output: null,
-      errors: [
-        {
-          message:
-            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
-        },
-      ],
+      errors: [{ messageId: 'noRenderModifier' }],
     },
   ],
 });
@@ -126,32 +108,17 @@ hbsRuleTester.run('template-no-at-ember-render-modifiers (hbs)', rule, {
     {
       code: '<div {{did-insert}}></div>',
       output: null,
-      errors: [
-        {
-          message:
-            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
-        },
-      ],
+      errors: [{ messageId: 'noRenderModifier' }],
     },
     {
       code: '<div {{did-update}}></div>',
       output: null,
-      errors: [
-        {
-          message:
-            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
-        },
-      ],
+      errors: [{ messageId: 'noRenderModifier' }],
     },
     {
       code: '<div {{will-destroy}}></div>',
       output: null,
-      errors: [
-        {
-          message:
-            'Avoid using @ember/render-modifiers. Use (did-insert), (did-update), or (will-destroy) from ember-render-helpers instead.',
-        },
-      ],
+      errors: [{ messageId: 'noRenderModifier' }],
     },
   ],
 });
