@@ -62,12 +62,20 @@ This rule disallows using `{{action}}` as an element modifier.
 
 The option can be passed as an array (shorthand) or an object:
 
-```js
-// shorthand
-'ember/template-no-action-modifiers': ['error', ['button']]
+Shorthand:
 
-// object form
-'ember/template-no-action-modifiers': ['error', { allowlist: ['button'] }]
+```json
+{
+  "ember/template-no-action-modifiers": ["error", ["button"]]
+}
+```
+
+Object form:
+
+```json
+{
+  "ember/template-no-action-modifiers": ["error", { "allowlist": ["button"] }]
+}
 ```
 
 ## Related Rules
