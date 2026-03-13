@@ -990,3 +990,49 @@ gjsRuleTester.run('template-attribute-indentation', rule, {
     },
   ],
 });
+
+// ---- Closing tag tests ----
+
+hbsRuleTester.run('template-attribute-indentation (closing tag)', rule, {
+  valid: [
+    // Closing tag correctly aligned with opening tag, after text content
+    {
+      code: ['<div', '  class="foo"', '>', '  content', '</div>'].join('\n'),
+      options: [{ 'process-elements': true }],
+    },
+    // Closing tag correctly aligned, after element child
+    {
+      code: ['<div', '  class="foo"', '>', '  <span>text</span>', '</div>'].join('\n'),
+      options: [{ 'process-elements': true }],
+    },
+    // Short element — canApplyRule returns false (single-line, under maxLength)
+    {
+      code: '<div class="foo">content</div>',
+      options: [{ 'process-elements': true }],
+    },
+  ],
+
+  invalid: [
+    // Closing tag indented too far (wrong column)
+    {
+      code: ['<div', '  class="foo"', '>', '  content', '  </div>'].join('\n'),
+      output: null,
+      options: [{ 'process-elements': true }],
+      errors: [{ messageId: 'incorrectClosingTag' }],
+    },
+    // Closing tag on same line as content (wrong column)
+    {
+      code: ['<MyComponent', '  @arg="val"', '>text</MyComponent>'].join('\n'),
+      output: null,
+      options: [{ 'process-elements': true }],
+      errors: [{ messageId: 'incorrectClosingTag' }],
+    },
+    // Closing tag indented when it should be at column 0
+    {
+      code: ['<MyComponent', '  @arg="val"', '>', '  text', '    </MyComponent>'].join('\n'),
+      output: null,
+      options: [{ 'process-elements': true }],
+      errors: [{ messageId: 'incorrectClosingTag' }],
+    },
+  ],
+});
