@@ -292,6 +292,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [no-old-shims](docs/rules/no-old-shims.md)                                                       | disallow usage of old shims for modules                   | ✅  | 🔧 |    |
 | [no-string-prototype-extensions](docs/rules/no-string-prototype-extensions.md)                   | disallow usage of `String` prototype extensions           | ✅  |    |    |
 | [template-deprecated-inline-view-helper](docs/rules/template-deprecated-inline-view-helper.md)   | disallow inline {{view}} helper                           |    | 🔧 |    |
+| [template-deprecated-render-helper](docs/rules/template-deprecated-render-helper.md)             | disallow {{render}} helper                                |    | 🔧 |    |
 | [template-no-action](docs/rules/template-no-action.md)                                           | disallow {{action}} helper                                |    |    |    |
 | [template-no-attrs-in-components](docs/rules/template-no-attrs-in-components.md)                 | disallow attrs in component templates                     |    |    |    |
 | [template-no-link-to-positional-params](docs/rules/template-no-link-to-positional-params.md)     | disallow positional params in LinkTo component            |    |    |    |
