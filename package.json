@@ -26,7 +26,8 @@
     "./recommended": {
       "import": "./lib/recommended.mjs"
     },
-    "./configs/*": "./lib/config/*.js"
+    "./configs/*": "./lib/config/*.js",
+    "./utils/*": "./lib/utils/*.js"
   },
   "main": "./lib/index.js",
   "directories": {
