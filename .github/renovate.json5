@@ -1,0 +1,7 @@
+// Docs:
+// https://docs.renovatebot.com/configuration-options/
+{
+  "extends": [
+    "github>NullVoxPopuli/renovate:npm.json5"
+  ]
+}
