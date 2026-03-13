@@ -115,8 +115,14 @@ ruleTester.run('template-no-duplicate-id', rule, {
     </template>`,
   ],
   invalid: [
+    // blockParams on an element must not isolate static IDs from outer scope
     {
-      code: '<template><div id="foo"></div><div id="foo"></div></template>',
+      code: `<template>
+      <MyComponent as |foo|>
+        <div id="shared-id"></div>
+      </MyComponent>
+      <div id="shared-id"></div>
+    </template>`,
       output: null,
       errors: [{ messageId: 'duplicate' }],
     },
@@ -263,7 +269,7 @@ ruleTester.run('template-no-duplicate-id', rule, {
       {{/if}}
     </template>`,
       output: null,
-      errors: [{ messageId: 'duplicate' }],
+      errors: [{ messageId: 'duplicate' }, { messageId: 'duplicate' }],
     },
     {
       code: `<template>
@@ -419,6 +425,15 @@ hbsRuleTester.run('template-no-duplicate-id (hbs)', rule, {
       </MyComponent>`,
   ],
   invalid: [
+    // blockParams on an element must not isolate static IDs from outer scope
+    {
+      code: `<MyComponent as |foo|>
+        <div id="shared-id"></div>
+      </MyComponent>
+      <div id="shared-id"></div>`,
+      output: null,
+      errors: [{ messageId: 'duplicate' }],
+    },
     {
       code: '<div id="id-00"></div><div id="id-00"></div>',
       output: null,
@@ -555,7 +570,7 @@ hbsRuleTester.run('template-no-duplicate-id (hbs)', rule, {
         <div id={{this.divId00}}></div>
       {{/if}}`,
       output: null,
-      errors: [{ messageId: 'duplicate' }],
+      errors: [{ messageId: 'duplicate' }, { messageId: 'duplicate' }],
     },
     {
       code: `{{#if this.foo}}
