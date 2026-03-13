@@ -2,7 +2,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/template-no-down-event-binding');
+const rule = require('../../../lib/rules/template-no-pointer-down-event-binding');
 const RuleTester = require('eslint').RuleTester;
 
 //------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 
-ruleTester.run('template-no-down-event-binding', rule, {
+ruleTester.run('template-no-pointer-down-event-binding', rule, {
   valid: [
     '<template><button {{on "click" this.handleClick}}>Click</button></template>',
     '<template><button {{on "keydown" this.handleKeyDown}}>Press</button></template>',
@@ -88,7 +88,7 @@ const hbsRuleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 
-hbsRuleTester.run('template-no-down-event-binding', rule, {
+hbsRuleTester.run('template-no-pointer-down-event-binding', rule, {
   valid: [
     '<div {{on "mouseup" this.doSomething}}></div>',
     '<div {{action this.doSomething on="mouseup"}}></div>',

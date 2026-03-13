@@ -1,4 +1,4 @@
-# ember/template-no-down-event-binding
+# ember/template-no-pointer-down-event-binding
 
 <!-- end auto-generated rule header -->
 
