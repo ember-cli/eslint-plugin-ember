@@ -29,85 +29,62 @@ ruleTester.run('template-modifier-name-case', rule, {
     {
       code: '<template><div {{didInsert}}></div></template>',
       output: '<template><div {{did-insert}}></div></template>',
-      errors: [
-        {
-          message:
-            'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.',
-        },
-      ],
+      errors: [{ messageId: 'dasherized' }],
     },
     {
       code: '<template><div {{doSomething}}></div></template>',
       output: '<template><div {{do-something}}></div></template>',
-      errors: [
-        {
-          message:
-            'Use dasherized names for modifier invocation. Please replace `doSomething` with `do-something`.',
-        },
-      ],
+      errors: [{ messageId: 'dasherized' }],
     },
     {
       code: '<template><div {{fooBar}}></div></template>',
       output: '<template><div {{foo-bar}}></div></template>',
-      errors: [
-        {
-          message:
-            'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.',
-        },
-      ],
+      errors: [{ messageId: 'dasherized' }],
+    },
+    // PascalCase: index-0 guard prevents leading dash
+    {
+      code: '<template><div {{FooBar}}></div></template>',
+      output: '<template><div {{foo-bar}}></div></template>',
+      errors: [{ messageId: 'dasherized' }],
+    },
+    {
+      code: '<template><div {{XFoo}}></div></template>',
+      output: '<template><div {{x-foo}}></div></template>',
+      errors: [{ messageId: 'dasherized' }],
+    },
+    // Namespaced :: → /
+    {
+      code: '<template><div {{Foo::barBaz}}></div></template>',
+      output: '<template><div {{foo/bar-baz}}></div></template>',
+      errors: [{ messageId: 'dasherized' }],
     },
     {
       code: '<template><div {{(modifier "didInsert")}}></div></template>',
       output: '<template><div {{(modifier "did-insert")}}></div></template>',
-      errors: [
-        {
-          message:
-            'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.',
-        },
-      ],
+      errors: [{ messageId: 'dasherized' }],
     },
 
     {
       code: '<template><div class="monkey" {{didInsert "something" with="somethingElse"}}></div></template>',
       output:
         '<template><div class="monkey" {{did-insert "something" with="somethingElse"}}></div></template>',
-      errors: [
-        {
-          message:
-            'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.',
-        },
-      ],
+      errors: [{ messageId: 'dasherized' }],
     },
     {
       code: '<template><a href="#" onclick={{amazingActionThing "foo"}} {{doSomething}}></a></template>',
       output:
         '<template><a href="#" onclick={{amazingActionThing "foo"}} {{do-something}}></a></template>',
-      errors: [
-        {
-          message:
-            'Use dasherized names for modifier invocation. Please replace `doSomething` with `do-something`.',
-        },
-      ],
+      errors: [{ messageId: 'dasherized' }],
     },
     {
       code: '<template><div {{(modifier "fooBar")}}></div></template>',
       output: '<template><div {{(modifier "foo-bar")}}></div></template>',
-      errors: [
-        {
-          message:
-            'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.',
-        },
-      ],
+      errors: [{ messageId: 'dasherized' }],
     },
     {
       code: '<template><div {{(if this.foo (modifier "fooBar"))}}></div></template>',
       output: '<template><div {{(if this.foo (modifier "foo-bar"))}}></div></template>',
-      errors: [
-        {
-          message:
-            'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.',
-        },
-      ],
+      errors: [{ messageId: 'dasherized' }],
     },
   ],
 });
@@ -138,52 +115,33 @@ hbsRuleTester.run('template-modifier-name-case', rule, {
     {
       code: '<div {{didInsert}}></div>',
       output: '<div {{did-insert}}></div>',
-      errors: [
-        {
-          message:
-            'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.',
-        },
-      ],
+      errors: [{ messageId: 'dasherized' }],
     },
     {
       code: '<div class="monkey" {{didInsert "something" with="somethingElse"}}></div>',
       output: '<div class="monkey" {{did-insert "something" with="somethingElse"}}></div>',
-      errors: [
-        {
-          message:
-            'Use dasherized names for modifier invocation. Please replace `didInsert` with `did-insert`.',
-        },
-      ],
+      errors: [{ messageId: 'dasherized' }],
+    },
+    // PascalCase: index-0 guard prevents leading dash
+    {
+      code: '<div {{FooBar}}></div>',
+      output: '<div {{foo-bar}}></div>',
+      errors: [{ messageId: 'dasherized' }],
     },
     {
       code: '<a href="#" onclick={{amazingActionThing "foo"}} {{doSomething}}></a>',
       output: '<a href="#" onclick={{amazingActionThing "foo"}} {{do-something}}></a>',
-      errors: [
-        {
-          message:
-            'Use dasherized names for modifier invocation. Please replace `doSomething` with `do-something`.',
-        },
-      ],
+      errors: [{ messageId: 'dasherized' }],
     },
     {
       code: '<div {{(modifier "fooBar")}}></div>',
       output: '<div {{(modifier "foo-bar")}}></div>',
-      errors: [
-        {
-          message:
-            'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.',
-        },
-      ],
+      errors: [{ messageId: 'dasherized' }],
     },
     {
       code: '<div {{(if this.foo (modifier "fooBar"))}}></div>',
       output: '<div {{(if this.foo (modifier "foo-bar"))}}></div>',
-      errors: [
-        {
-          message:
-            'Use dasherized names for modifier invocation. Please replace `fooBar` with `foo-bar`.',
-        },
-      ],
+      errors: [{ messageId: 'dasherized' }],
     },
   ],
 });
