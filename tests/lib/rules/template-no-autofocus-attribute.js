@@ -29,6 +29,9 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
       code: `<template>
         <input type="text" autofocus />
       </template>`,
+      output: `<template>
+        <input type="text"/>
+      </template>`,
       errors: [
         {
           message:
@@ -40,6 +43,9 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
     {
       code: `<template>
         <textarea autofocus></textarea>
+      </template>`,
+      output: `<template>
+        <textarea></textarea>
       </template>`,
       errors: [
         {
