@@ -188,7 +188,7 @@ ruleTester.run('template-no-invalid-role', rule, {
       ],
     },
     {
-      code: '<template><embed role="none"></embed></template>',
+      code: '<template><embed role="none"></template>',
       output: null,
       errors: [{ message: 'The role "none" should not be used on the semantic element <embed>.' }],
     },
@@ -325,7 +325,7 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
       ],
     },
     {
-      code: '<embed role="none"></embed>',
+      code: '<embed role="none">',
       output: null,
       errors: [{ message: 'The role "none" should not be used on the semantic element <embed>.' }],
     },
