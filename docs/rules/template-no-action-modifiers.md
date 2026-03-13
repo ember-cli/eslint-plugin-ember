@@ -54,6 +54,30 @@ This rule disallows using `{{action}}` as an element modifier.
 </template>
 ```
 
+## Options
+
+| Name        | Type       | Default | Description                                                              |
+| ----------- | ---------- | ------- | ------------------------------------------------------------------------ |
+| `allowlist` | `string[]` | `[]`    | List of element tag names where `{{action}}` modifiers should be allowed |
+
+The option can be passed as an array (shorthand) or an object:
+
+Shorthand:
+
+```json
+{
+  "ember/template-no-action-modifiers": ["error", ["button"]]
+}
+```
+
+Object form:
+
+```json
+{
+  "ember/template-no-action-modifiers": ["error", { "allowlist": ["button"] }]
+}
+```
+
 ## Related Rules
 
 - [template-no-action](./template-no-action.md)
