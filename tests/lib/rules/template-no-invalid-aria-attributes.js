@@ -171,52 +171,52 @@ hbsRuleTester.run('template-no-invalid-aria-attributes', rule, {
     {
       code: '<span role="checkbox" aria-checked="bad-value" tabindex="0" aria-label="Forget me"></span>',
       output: null,
-      errors: [{ message: 'Invalid value for ARIA attribute aria-checked.' }],
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
     },
     {
       code: '<button type="submit" disabled="true" aria-disabled="123">Submit</button>',
       output: null,
-      errors: [{ message: 'Invalid value for ARIA attribute aria-disabled.' }],
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
     },
     {
       code: '<input type="text" disabled="true" aria-errormessage="false" />',
       output: null,
-      errors: [{ message: 'Invalid value for ARIA attribute aria-errormessage.' }],
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
     },
     {
       code: '<button type="submit" aria-describedby="blah false">Continue at your own risk</button>',
       output: null,
-      errors: [{ message: 'Invalid value for ARIA attribute aria-describedby.' }],
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
     },
     {
       code: '<div role="heading" aria-level="bogus">Inaccessible heading</div>',
       output: null,
-      errors: [{ message: 'Invalid value for ARIA attribute aria-level.' }],
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
     },
     {
       code: '<div role="heading" aria-level="true">Another inaccessible heading</div>',
       output: null,
-      errors: [{ message: 'Invalid value for ARIA attribute aria-level.' }],
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
     },
     {
       code: '<div role="slider" aria-valuenow=(2*2)  aria-valuemax="100" aria-valuemin="30">Broken slider</div>',
       output: null,
-      errors: [{ message: 'Invalid value for ARIA attribute aria-valuenow.' }],
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
     },
     {
       code: '<div role="region" aria-live="no-such-value">Inaccessible live region</div>',
       output: null,
-      errors: [{ message: 'Invalid value for ARIA attribute aria-live.' }],
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
     },
     {
       code: '<div role="region" aria-live="polite" aria-relevant="additions errors">Inaccessible live region</div>',
       output: null,
-      errors: [{ message: 'Invalid value for ARIA attribute aria-relevant.' }],
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
     },
     {
       code: '<input type="text" aria-required="undefined" />',
       output: null,
-      errors: [{ message: 'Invalid value for ARIA attribute aria-required.' }],
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
     },
   ],
 });
