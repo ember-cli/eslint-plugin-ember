@@ -68,6 +68,7 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
+      output: null,
       errors: [{ messageId: 'noCapitalArguments' }],
     },
     {
@@ -80,6 +81,7 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
+      output: null,
       errors: [{ messageId: 'noCapitalArguments' }],
     },
     // Capital attr node
@@ -93,6 +95,7 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
+      output: null,
       errors: [{ messageId: 'noCapitalArguments' }],
     },
     // Nested capital path
@@ -106,6 +109,7 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
+      output: null,
       errors: [{ messageId: 'noCapitalArguments' }],
     },
     // Underscore prefix
@@ -119,6 +123,7 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
+      output: null,
       errors: [{ messageId: 'noCapitalArguments' }],
     },
     {
@@ -131,6 +136,7 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
+      output: null,
       errors: [{ messageId: 'noCapitalArguments' }],
     },
     // Reserved arguments in path expression
@@ -144,6 +150,7 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
+      output: null,
       errors: [{ messageId: 'reservedArgument' }],
     },
     {
@@ -156,6 +163,7 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
+      output: null,
       errors: [{ messageId: 'reservedArgument' }],
     },
     // Reserved arguments in attr position
@@ -169,6 +177,7 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
+      output: null,
       errors: [{ messageId: 'reservedArgument' }],
     },
     {
@@ -181,6 +190,7 @@ ruleTester.run('template-no-capital-arguments', rule, {
           </template>
         }
       `,
+      output: null,
       errors: [{ messageId: 'reservedArgument' }],
     },
   ],
