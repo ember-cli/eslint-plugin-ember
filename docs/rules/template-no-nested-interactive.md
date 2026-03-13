@@ -105,6 +105,7 @@ Examples of **correct** code for this rule:
 | `ignoredTags`               | `string[]` | `[]`    | Tag names to skip checking.                                 |
 | `ignoreTabindex`            | `boolean`  | `false` | If `true`, `tabindex` does not make an element interactive. |
 | `ignoreUsemap`              | `boolean`  | `false` | If `true`, `usemap` does not make an element interactive.   |
+| `ignoreUsemapAttribute`     | `boolean`  | `false` | Alias for `ignoreUsemap` (original ember-template-lint name). |
 
 ## References
 
