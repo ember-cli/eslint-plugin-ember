@@ -24,6 +24,8 @@ ruleTester.run('template-deprecated-inline-view-helper', rule, {
     '<template>{{this.view}}</template>',
     '<template>{{@view}}</template>',
     '<template>{{#let this.prop as |view|}} {{view}} {{/let}}</template>',
+    // isLocal: view is a block param, view.name should not be flagged
+    '<template>{{#each items as |view|}} {{view.name}} {{/each}}</template>',
   ],
   invalid: [
     {
@@ -31,35 +33,35 @@ ruleTester.run('template-deprecated-inline-view-helper', rule, {
       output: null,
       errors: [{ messageId: 'deprecated' }],
     },
-
     {
       code: "<template>{{view 'awful-fishsticks'}}</template>",
-      output: null,
+      output: '<template>{{awful-fishsticks}}</template>',
       errors: [{ messageId: 'deprecated' }],
     },
     {
       code: '<template>{{view.bad-fishsticks}}</template>',
-      output: null,
+      output: '<template>{{bad-fishsticks}}</template>',
       errors: [{ messageId: 'deprecated' }],
     },
     {
       code: '<template>{{view.terrible.fishsticks}}</template>',
-      output: null,
+      output: '<template>{{terrible.fishsticks}}</template>',
       errors: [{ messageId: 'deprecated' }],
     },
     {
       code: '<template>{{foo-bar bab=good baz=view.qux.qaz boo=okay}}</template>',
-      output: null,
+      output: '<template>{{foo-bar bab=good baz=qux.qaz boo=okay}}</template>',
       errors: [{ messageId: 'deprecated' }],
     },
     {
       code: '<template><div class="whatever-class" data-foo={{view.hallo}} sure=thing></div></template>',
-      output: null,
+      output:
+        '<template><div class="whatever-class" data-foo={{hallo}} sure=thing></div></template>',
       errors: [{ messageId: 'deprecated' }],
     },
     {
       code: '<template>{{#foo-bar derp=view.whoops thing=whatever}}{{/foo-bar}}</template>',
-      output: null,
+      output: '<template>{{#foo-bar derp=whoops thing=whatever}}{{/foo-bar}}</template>',
       errors: [{ messageId: 'deprecated' }],
     },
   ],
@@ -89,11 +91,13 @@ hbsRuleTester.run('template-deprecated-inline-view-helper', rule, {
     '{{this.view}}',
     '{{@view}}',
     '{{#let this.prop as |view|}} {{view}} {{/let}}',
+    // isLocal: view is a block param, view.name should not be flagged
+    '{{#each items as |view|}} {{view.name}} {{/each}}',
   ],
   invalid: [
     {
       code: "{{view 'awful-fishsticks'}}",
-      output: null,
+      output: '{{awful-fishsticks}}',
       errors: [
         {
           message:
@@ -103,7 +107,7 @@ hbsRuleTester.run('template-deprecated-inline-view-helper', rule, {
     },
     {
       code: '{{view.bad-fishsticks}}',
-      output: null,
+      output: '{{bad-fishsticks}}',
       errors: [
         {
           message:
@@ -113,7 +117,7 @@ hbsRuleTester.run('template-deprecated-inline-view-helper', rule, {
     },
     {
       code: '{{view.terrible.fishsticks}}',
-      output: null,
+      output: '{{terrible.fishsticks}}',
       errors: [
         {
           message:
@@ -123,7 +127,7 @@ hbsRuleTester.run('template-deprecated-inline-view-helper', rule, {
     },
     {
       code: '{{foo-bar bab=good baz=view.qux.qaz boo=okay}}',
-      output: null,
+      output: '{{foo-bar bab=good baz=qux.qaz boo=okay}}',
       errors: [
         {
           message:
@@ -133,7 +137,7 @@ hbsRuleTester.run('template-deprecated-inline-view-helper', rule, {
     },
     {
       code: '<div class="whatever-class" data-foo={{view.hallo}} sure=thing></div>',
-      output: null,
+      output: '<div class="whatever-class" data-foo={{hallo}} sure=thing></div>',
       errors: [
         {
           message:
@@ -143,7 +147,7 @@ hbsRuleTester.run('template-deprecated-inline-view-helper', rule, {
     },
     {
       code: '{{#foo-bar derp=view.whoops thing=whatever}}{{/foo-bar}}',
-      output: null,
+      output: '{{#foo-bar derp=whoops thing=whatever}}{{/foo-bar}}',
       errors: [
         {
           message:
