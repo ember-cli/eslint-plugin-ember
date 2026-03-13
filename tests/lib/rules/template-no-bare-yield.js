@@ -12,23 +12,69 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-bare-yield', rule, {
   valid: [
-    // yield with params inside a class
-    `import Component from '@glimmer/component';
-     class MyComponent extends Component {
-       <template>{{yield this}}</template>
-     }`,
-    // yield with params inside a function
-    `function myComponent() {
-       return <template>{{yield this}}</template>;
-     }`,
-    '<template>{{yield @model}}</template>',
-    '<template><div>Content</div></template>',
-    // yield this at module level is allowed by this rule (template-no-unavailable-this handles the `this` part)
+    // yield with params is fine
     '<template>{{yield this}}</template>',
+    '<template>{{yield @model}}</template>',
+    '<template>{{yield (hash someProp=someValue)}}</template>',
+    // yield is not the only content
+    '<template>{{yield}}<div>Content</div></template>',
+    '<template><div>Content</div>{{yield}}</template>',
+    // no yield at all
+    '<template><div>Content</div></template>',
   ],
   invalid: [
     {
       code: '<template>{{yield}}</template>',
+      output: null,
+      errors: [{ messageId: 'noBareYield' }],
+    },
+    {
+      // whitespace around yield doesn't count as other content
+      code: '<template>  {{yield}}  </template>',
+      output: null,
+      errors: [{ messageId: 'noBareYield' }],
+    },
+    {
+      // comments don't count as other content
+      code: '<template>{{! a comment }}{{yield}}</template>',
+      output: null,
+      errors: [{ messageId: 'noBareYield' }],
+    },
+  ],
+});
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+hbsRuleTester.run('template-no-bare-yield', rule, {
+  valid: [
+    '{{yield (hash someProp=someValue)}}',
+    '{{yield this}}',
+    // yield with other content
+    '{{yield}}<div>Content</div>',
+  ],
+  invalid: [
+    {
+      code: '{{yield}}',
+      output: null,
+      errors: [{ messageId: 'noBareYield' }],
+    },
+    {
+      // whitespace around yield doesn't count as other content
+      code: '     {{yield}}',
+      output: null,
+      errors: [{ messageId: 'noBareYield' }],
+    },
+    {
+      code: '\n  {{yield}}\n     ',
+      output: null,
+      errors: [{ messageId: 'noBareYield' }],
+    },
+    {
+      // comments don't count as other content
+      code: '\n{{! some comment }}  {{yield}}\n     ',
       output: null,
       errors: [{ messageId: 'noBareYield' }],
     },
