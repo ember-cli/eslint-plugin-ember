@@ -37,7 +37,8 @@ ruleTester.run('template-link-rel-noopener', rule, {
     // rel="nofollow" — present but wrong values
     {
       code: '<template><a href="/" target="_blank" rel="nofollow">Link</a></template>',
-      output: '<template><a href="/" target="_blank" rel="nofollow noopener noreferrer">Link</a></template>',
+      output:
+        '<template><a href="/" target="_blank" rel="nofollow noopener noreferrer">Link</a></template>',
       errors: [{ messageId: 'missingRel' }],
     },
   ],
