@@ -2,13 +2,13 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows mouse down and touch start event bindings.
+Disallows pointer down event bindings (`mousedown`, `pointerdown`).
 
-Mouse down and touch start events can cause accessibility issues because they don't work well with keyboard navigation. Use `click` or `keydown` events instead.
+Pointer down events fire before the user releases the pointer, which can cause accessibility issues — actions triggered on down events don't allow users to cancel by moving the pointer away before releasing. Bind to the corresponding pointer up event instead.
 
 ## Rule Details
 
-This rule disallows the use of `mousedown` and `touchstart` events in templates.
+This rule disallows the use of `mousedown`, `onmousedown`, `pointerdown`, and `onpointerdown` events in templates, whether via `{{on}}`, `{{action on=...}}`, or HTML attributes.
 
 ## Examples
 
@@ -22,7 +22,7 @@ Examples of **incorrect** code for this rule:
 
 ```gjs
 <template>
-  <div {{on "touchstart" this.handleTouchStart}}>Content</div>
+  <div {{on "pointerdown" this.handlePointerDown}}>Content</div>
 </template>
 ```
 
@@ -32,23 +32,29 @@ Examples of **incorrect** code for this rule:
 </template>
 ```
 
+```gjs
+<template>
+  <div {{action this.handler on="mousedown"}}></div>
+</template>
+```
+
 Examples of **correct** code for this rule:
 
 ```gjs
 <template>
+  <button {{on "mouseup" this.handleMouseUp}}>Click</button>
+</template>
+```
+
+```gjs
+<template>
+  <div {{on "pointerup" this.handlePointerUp}}>Content</div>
+</template>
+```
+
+```gjs
+<template>
   <button {{on "click" this.handleClick}}>Click</button>
-</template>
-```
-
-```gjs
-<template>
-  <button {{on "keydown" this.handleKeyDown}}>Press</button>
-</template>
-```
-
-```gjs
-<template>
-  <div {{on "mouseup" this.handleMouseUp}}>Content</div>
 </template>
 ```
 
@@ -63,16 +69,17 @@ Replace:
 With:
 
 ```gjs
-<button {{on "click" this.action}}>
+<button {{on "mouseup" this.action}}>
 ```
 
-Or for keyboard support:
+Or use the more modern pointer event:
 
 ```gjs
-<button {{on "click" this.action}} {{on "keydown" this.handleKey}}>
+<button {{on "pointerup" this.action}}>
 ```
 
 ## References
 
-- [eslint-plugin-ember template-no-down-event-binding](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-down-event-binding.md)
-- [MDN - Mouse events](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent)
+- [ember-template-lint no-pointer-down-event-binding](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-pointer-down-event-binding.md)
+- [MDN - Pointer events](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events)
+- [MDN - mousedown event](https://developer.mozilla.org/en-US/docs/Web/API/Element/mousedown_event)
