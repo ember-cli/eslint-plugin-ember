@@ -37,6 +37,24 @@ ruleTester.run('template-no-bare-strings', rule, {
     '<template><pre> fdff sf sf <div> aaa </div> f </pre></template>',
     '<template><textarea> this is an input</textarea></template>',
     '<template><div placeholder="wat?"></div></template>',
+    // In GJS/GTS (strict mode), Input/Textarea could be custom components —
+    // not checked to avoid false positives, matching ember-template-lint behavior.
+    {
+      filename: 'template.gjs',
+      code: '<template><Input placeholder="This is a placeholder" /></template>',
+    },
+    {
+      filename: 'template.gjs',
+      code: '<template><Textarea placeholder="This is a placeholder" /></template>',
+    },
+    {
+      filename: 'template.gjs',
+      code: '<template><Input @placeholder="This is a placeholder" /></template>',
+    },
+    {
+      filename: 'template.gts',
+      code: '<template><Textarea @placeholder="This is a placeholder" /></template>',
+    },
     `<template><foo-bar>
 </foo-bar></template>`,
     '<template><div data-test-foo-bar></div></template>',
