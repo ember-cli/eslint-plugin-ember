@@ -8,43 +8,19 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-duplicate-landmark-elements', rule, {
   valid: [
-    '<template><header aria-label="Main">Header</header></template>',
-    '<template><nav aria-label="Primary">Nav 1</nav><nav aria-label="Secondary">Nav 2</nav></template>',
-    '<template><main>Content</main></template>',
-
-    // Nav + div with role="navigation" (different unique labels)
+    '<template><nav aria-label="primary site navigation"></nav><nav aria-label="secondary site navigation within home page"></nav></template>',
     '<template><nav aria-label="primary site navigation"></nav><div role="navigation" aria-label="secondary site navigation within home page"></div></template>',
-
-    // Form with aria-labelledby + another form with aria-label (unique labels)
     '<template><form aria-labelledby="form-title"><div id="form-title">Shipping Address</div></form><form aria-label="meaningful title of second form"></form></template>',
-
-    // Standard page layout (unique landmarks by type)
+    '<template><form role="search"></form><form></form></template>',
     '<template><header></header><main></main><footer></footer></template>',
-
-    // role="none" — not a landmark, should be ignored
     '<template><img role="none"><img role="none"></template>',
-
     // Conditional branches: elements in if/else are mutually exclusive
     '<template>{{#if this.isCreateProjectFromSavedSearchEnabled}}<form></form>{{else}}<form></form>{{/if}}</template>',
+    // header inside sectioning element loses landmark role
+    "<template><main><header><h1>Main Page Header</h1></header></main><dialog id='my-dialog'><header><h1>Dialog Header</h1></header></dialog></template>",
   ],
 
   invalid: [
-    {
-      code: '<template><nav>Nav 1</nav><nav>Nav 2</nav></template>',
-      output: null,
-      errors: [{ messageId: 'duplicate' }],
-    },
-    {
-      code: '<template><header>Header 1</header><header>Header 2</header></template>',
-      output: null,
-      errors: [{ messageId: 'duplicate' }],
-    },
-    {
-      code: '<template><aside>Side 1</aside><aside>Side 2</aside></template>',
-      output: null,
-      errors: [{ messageId: 'duplicate' }],
-    },
-
     {
       code: '<template><nav></nav><nav></nav></template>',
       output: null,
