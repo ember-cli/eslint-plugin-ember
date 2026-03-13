@@ -80,6 +80,10 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
         <div autofocus>
         </div>
       </template>`,
+      output: `<template>
+        <div>
+        </div>
+      </template>`,
       errors: [
         {
           messageId: 'noAutofocus',
@@ -92,6 +96,10 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
         <h1 autofocus>
         </h1>
       </template>`,
+      output: `<template>
+        <h1>
+        </h1>
+      </template>`,
       errors: [
         {
           messageId: 'noAutofocus',
@@ -102,6 +110,9 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
     {
       code: `<template>
         <input autofocus="autofocus" />
+      </template>`,
+      output: `<template>
+        <input />
       </template>`,
       errors: [
         {
