@@ -1,5 +1,7 @@
 # ember/template-no-args-paths
 
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
 <!-- end auto-generated rule header -->
 
 Arguments that are passed to components are prefixed with the `@` symbol in Angle bracket syntax.
