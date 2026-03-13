@@ -211,6 +211,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-bare-strings](docs/rules/template-no-bare-strings.md)                                           | disallow bare strings in templates (require translation/localization)        |    |    |    |
 | [template-no-bare-yield](docs/rules/template-no-bare-yield.md)                                               | disallow templates whose only meaningful content is a bare {{yield}}         |    |    |    |
 | [template-no-block-params-for-html-elements](docs/rules/template-no-block-params-for-html-elements.md)       | disallow block params on HTML elements                                       |    |    |    |
+| [template-no-builtin-form-components](docs/rules/template-no-builtin-form-components.md)                     | disallow usage of built-in form components                                   |    |    |    |
 | [template-no-capital-arguments](docs/rules/template-no-capital-arguments.md)                                 | disallow capital arguments (use lowercase @arg instead of @Arg)              |    |    |    |
 | [template-no-chained-this](docs/rules/template-no-chained-this.md)                                           | disallow redundant `this.this` in templates                                  |    | 🔧 |    |
 | [template-no-class-bindings](docs/rules/template-no-class-bindings.md)                                       | disallow passing classBinding or classNameBindings as arguments in templates |    |    |    |
