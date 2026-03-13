@@ -218,7 +218,6 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                                           | disallow duplicate id attributes                                             |    |    |    |
 | [template-no-dynamic-subexpression-invocations](docs/rules/template-no-dynamic-subexpression-invocations.md) | disallow dynamic subexpression invocations                                   |    |    |    |
 | [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                         | disallow element event actions (use {{on}} modifier instead)                 |    |    |    |
-| [template-no-extra-mut-helpers](docs/rules/template-no-extra-mut-helpers.md)                                 | disallow unnecessary mut helpers                                             |    |    |    |
 | [template-no-forbidden-elements](docs/rules/template-no-forbidden-elements.md)                               | disallow specific HTML elements                                              |    |    |    |
 | [template-no-html-comments](docs/rules/template-no-html-comments.md)                                         | disallow HTML comments in templates                                          |    | 🔧 |    |
 | [template-no-implicit-this](docs/rules/template-no-implicit-this.md)                                         | require explicit `this` in property access                                   |    |    |    |
@@ -233,7 +232,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-log](docs/rules/template-no-log.md)                                                             | disallow {{log}} in templates                                                |    |    |    |
 | [template-no-model-argument-in-route-templates](docs/rules/template-no-model-argument-in-route-templates.md) | disallow @model argument in route templates                                  |    | 🔧 |    |
 | [template-no-multiple-empty-lines](docs/rules/template-no-multiple-empty-lines.md)                           | disallow multiple consecutive empty lines in templates                       |    |    |    |
-| [template-no-mut-helper](docs/rules/template-no-mut-helper.md)                                               | disallow usage of (mut) helper                                               |    |    |    |
+| [template-no-mut-helper](docs/rules/template-no-mut-helper.md)                                               | disallow use of the mut helper                                               |    |    |    |
 | [template-no-negated-comparison](docs/rules/template-no-negated-comparison.md)                               | disallow negated comparisons in templates                                    |    |    |    |
 | [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                                 | disallow negated conditions in if/unless                                     |    |    |    |
 | [template-no-nested-splattributes](docs/rules/template-no-nested-splattributes.md)                           | disallow nested ...attributes usage                                          |    |    |    |
