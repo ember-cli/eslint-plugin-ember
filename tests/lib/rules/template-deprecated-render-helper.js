@@ -23,18 +23,17 @@ ruleTester.run('template-deprecated-render-helper', rule, {
   invalid: [
     {
       code: '<template>{{render "user"}}</template>',
-      output: null,
+      output: '<template>{{user}}</template>',
       errors: [{ messageId: 'deprecated' }],
     },
-
     {
       code: "<template>{{render 'ken-griffey'}}</template>",
-      output: null,
+      output: '<template>{{ken-griffey}}</template>',
       errors: [{ messageId: 'deprecated' }],
     },
     {
       code: "<template>{{render 'baseball-player' pitcher}}</template>",
-      output: null,
+      output: '<template>{{baseball-player model=pitcher}}</template>',
       errors: [{ messageId: 'deprecated' }],
     },
   ],
@@ -63,23 +62,13 @@ hbsRuleTester.run('template-deprecated-render-helper', rule, {
   invalid: [
     {
       code: "{{render 'ken-griffey'}}",
-      output: null,
-      errors: [
-        {
-          message:
-            'The render helper is deprecated in favor of using components. See https://emberjs.com/deprecations/v2.x/#toc_code-render-code-helper',
-        },
-      ],
+      output: '{{ken-griffey}}',
+      errors: [{ messageId: 'deprecated' }],
     },
     {
       code: "{{render 'baseball-player' pitcher}}",
-      output: null,
-      errors: [
-        {
-          message:
-            'The render helper is deprecated in favor of using components. See https://emberjs.com/deprecations/v2.x/#toc_code-render-code-helper',
-        },
-      ],
+      output: '{{baseball-player model=pitcher}}',
+      errors: [{ messageId: 'deprecated' }],
     },
   ],
 });
