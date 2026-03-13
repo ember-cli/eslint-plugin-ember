@@ -211,6 +211,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-debugger](docs/rules/template-no-debugger.md)                                                   | disallow {{debugger}} in templates                                           |    |    |    |
 | [template-no-dynamic-subexpression-invocations](docs/rules/template-no-dynamic-subexpression-invocations.md) | disallow dynamic subexpression invocations                                   |    |    |    |
 | [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                         | disallow element event actions (use {{on}} modifier instead)                 |    |    |    |
+| [template-no-html-comments](docs/rules/template-no-html-comments.md)                                         | disallow HTML comments in templates                                          |    | 🔧 |    |
 | [template-no-implicit-this](docs/rules/template-no-implicit-this.md)                                         | require explicit `this` in property access                                   |    |    |    |
 | [template-no-index-component-invocation](docs/rules/template-no-index-component-invocation.md)               | disallow index component invocations                                         |    |    |    |
 | [template-no-inline-event-handlers](docs/rules/template-no-inline-event-handlers.md)                         | disallow DOM event handler attributes                                        |    |    |    |
