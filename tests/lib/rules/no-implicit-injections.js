@@ -879,5 +879,29 @@ actions: {
         { messageId: 'main', data: { serviceName: 'flash-messages' }, type: 'MemberExpression' },
       ],
     },
+
+    // Should not crash when .extend() has a mixin as first arg (#2239)
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+
+      export default Route.extend(SomeMixin, {
+        model() {
+          return this.store.findAll('rental');
+        }
+      });`,
+      output: `
+      import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+
+      export default Route.extend(SomeMixin, {
+        store: service('store'),
+model() {
+          return this.store.findAll('rental');
+        }
+      });`,
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
+    },
   ],
 });
