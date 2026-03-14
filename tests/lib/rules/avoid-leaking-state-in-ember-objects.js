@@ -57,6 +57,16 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
     'import EmberObject from "@ember/object"; export default class MyNativeClassComponentWithAMixin extends EmberObject.extend(MyMixin) { someArrayField = []; }',
     { code: 'export default Foo.extend({ someProp: [] });', options: [['someProp']] }, // With options.
     { code: 'export default Foo.extend({ someProp: [], actions: {} });', options: [['someProp']] }, // With options and known Ember property.
+
+    // TypeScript type assertions should be unwrapped
+    {
+      code: 'export default Foo.extend({ someProp: undefined as string | undefined });',
+      parser: require.resolve('@typescript-eslint/parser'),
+    },
+    {
+      code: 'export default Foo.extend({ someProp: inject() as unknown as Store });',
+      parser: require.resolve('@typescript-eslint/parser'),
+    },
   ],
   invalid: [
     {
