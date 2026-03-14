@@ -40,10 +40,7 @@ ruleTester.run('template-attribute-order', rule, {
     {
       code: '<template><div name="x" id="y" class="z"></div></template>',
       output: '<template><div id="y" name="x" class="z"></div></template>',
-      errors: [
-        { messageId: 'wrongOrder' },
-        { messageId: 'wrongOrder' },
-      ],
+      errors: [{ messageId: 'wrongOrder' }, { messageId: 'wrongOrder' }],
     },
     // Unknown attributes go last
     {
