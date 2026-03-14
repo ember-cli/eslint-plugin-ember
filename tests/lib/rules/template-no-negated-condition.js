@@ -74,7 +74,7 @@ ruleTester.run('template-no-negated-condition', rule, {
     },
     {
       code: '<template>{{#if (not (not c1 c2))}}<img>{{/if}}</template>',
-      output: '<template>{{#if c1}}<img>{{/if}}</template>',
+      output: '<template>{{#if (or c1 c2)}}<img>{{/if}}</template>',
       errors: [{ messageId: 'negatedHelper' }],
     },
     {
@@ -263,7 +263,7 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
     },
     {
       code: '{{#if (not (not c1 c2))}}<img>{{/if}}',
-      output: '{{#if c1}}<img>{{/if}}',
+      output: '{{#if (or c1 c2)}}<img>{{/if}}',
       errors: [{ message: 'Simplify unnecessary negation of helper.' }],
     },
     {
