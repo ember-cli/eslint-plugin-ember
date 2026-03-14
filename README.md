@@ -51,7 +51,7 @@ module.exports = {
 
 lint files having `First-Class Component Templates` (fcct)
 
-learn more [here](https://github.com/ember-template-imports/ember-template-imports)
+learn more at [ember-template-imports](https://github.com/ember-template-imports/ember-template-imports)
 
 > [!NOTE]
 > special care should be used when setting up parsers, since they cannot be overwritten. thus they should be used in override only and specific to file types
