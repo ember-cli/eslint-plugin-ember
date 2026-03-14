@@ -1034,5 +1034,12 @@ hbsRuleTester.run('template-attribute-indentation (closing tag)', rule, {
       options: [{ 'process-elements': true }],
       errors: [{ messageId: 'incorrectClosingTag' }],
     },
+    // Closing tag on same line as opening tag attributes (too early)
+    {
+      code: ['<div', '  class="foo"', '>content</div>'].join('\n'),
+      output: null,
+      options: [{ 'process-elements': true }],
+      errors: [{ messageId: 'incorrectClosingTag' }],
+    },
   ],
 });
