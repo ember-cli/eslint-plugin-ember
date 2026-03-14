@@ -63,108 +63,112 @@ ruleTester.run('template-no-negated-condition', rule, {
   invalid: [
     {
       code: '<template>{{#if (not isValid)}}No{{/if}}</template>',
-      output: null,
+      output: '<template>{{#unless isValid}}No{{/unless}}</template>',
       errors: [{ messageId: 'useUnless' }],
     },
 
     {
       code: '<template>{{#if (not condition)}}<img>{{/if}}</template>',
-      output: null,
+      output: '<template>{{#unless condition}}<img>{{/unless}}</template>',
       errors: [{ messageId: 'useUnless' }],
     },
     {
       code: '<template>{{#if (not (not c1 c2))}}<img>{{/if}}</template>',
-      output: null,
+      output: '<template>{{#if c1}}<img>{{/if}}</template>',
       errors: [{ messageId: 'negatedHelper' }],
     },
     {
       code: '<template>{{#if (not condition)}}<img>{{else}}<input>{{/if}}</template>',
-      output: null,
+      output: '<template>{{#if condition}}<input>{{else}}<img>{{/if}}</template>',
       errors: [{ messageId: 'flipIf' }],
     },
     {
       code: '<template>{{#unless (not condition)}}<img>{{/unless}}</template>',
-      output: null,
+      output: '<template>{{#if condition}}<img>{{/if}}</template>',
       errors: [{ messageId: 'useIf' }],
     },
     {
       code: '<template>{{#unless (not (not condition))}}<img>{{/unless}}</template>',
-      output: null,
+      output: '<template>{{#unless condition}}<img>{{/unless}}</template>',
       errors: [{ messageId: 'negatedHelper' }],
     },
     {
       code: '<template>{{#unless (not condition)}}<img>{{else}}<input>{{/unless}}</template>',
-      output: null,
+      output: '<template>{{#if condition}}<img>{{else}}<input>{{/if}}</template>',
       errors: [{ messageId: 'useIf' }],
     },
     {
       code: '<template>{{#unless (not condition)}}<img>{{else if (not condition)}}<input>{{/unless}}</template>',
-      output: null,
+      output:
+        '<template>{{#if condition}}<img>{{else if (not condition)}}<input>{{/if}}</template>',
       errors: [{ messageId: 'useIf' }],
     },
     {
       code: '<template>{{#unless (not condition)}}<img>{{else if (not condition)}}<input>{{else}}<hr>{{/unless}}</template>',
-      output: null,
+      output:
+        '<template>{{#if condition}}<img>{{else if (not condition)}}<input>{{else}}<hr>{{/if}}</template>',
       errors: [{ messageId: 'useIf' }],
     },
     {
       code: '<template>{{#if condition}}{{else}}{{! some comment }}{{#if (not condition)}}<img>{{/if}}{{/if}}</template>',
-      output: null,
+      output:
+        '<template>{{#if condition}}{{else}}{{! some comment }}{{#unless condition}}<img>{{/unless}}{{/if}}</template>',
       errors: [{ messageId: 'useUnless' }],
     },
     {
       code: '<template>{{#if condition}}{{else}}{{#if (not condition)}}<img>{{/if}}{{/if}}</template>',
-      output: null,
+      output:
+        '<template>{{#if condition}}{{else}}{{#unless condition}}<img>{{/unless}}{{/if}}</template>',
       errors: [{ messageId: 'useUnless' }],
     },
     {
       code: '<template><img class={{if (not condition) "some-class"}}></template>',
-      output: null,
+      output: '<template><img class={{unless condition "some-class"}}></template>',
       errors: [{ messageId: 'useUnless' }],
     },
     {
       code: '<template><img class={{if (not condition) "some-class" "other-class"}}></template>',
-      output: null,
+      output: '<template><img class={{if condition "other-class" "some-class"}}></template>',
       errors: [{ messageId: 'flipIf' }],
     },
     {
       code: '<template><img class={{unless (not condition) "some-class"}}></template>',
-      output: null,
+      output: '<template><img class={{if condition "some-class"}}></template>',
       errors: [{ messageId: 'useIf' }],
     },
     {
       code: '<template><img class={{unless (not condition) "some-class" "other-class"}}></template>',
-      output: null,
+      output: '<template><img class={{if condition "some-class" "other-class"}}></template>',
       errors: [{ messageId: 'useIf' }],
     },
     {
       code: '<template><img class={{unless (not (not condition)) "some-class" "other-class"}}></template>',
-      output: null,
+      output: '<template><img class={{unless condition "some-class" "other-class"}}></template>',
       errors: [{ messageId: 'negatedHelper' }],
     },
     {
       code: '<template>{{input class=(if (not condition) "some-class")}}</template>',
-      output: null,
+      output: '<template>{{input class=(unless condition "some-class")}}</template>',
       errors: [{ messageId: 'useUnless' }],
     },
     {
       code: '<template>{{input class=(if (not condition) "some-class" "other-class")}}</template>',
-      output: null,
+      output: '<template>{{input class=(if condition "other-class" "some-class")}}</template>',
       errors: [{ messageId: 'flipIf' }],
     },
     {
       code: '<template>{{input class=(unless (not condition) "some-class")}}</template>',
-      output: null,
+      output: '<template>{{input class=(if condition "some-class")}}</template>',
       errors: [{ messageId: 'useIf' }],
     },
     {
       code: '<template>{{input class=(unless (not condition) "some-class" "other-class")}}</template>',
-      output: null,
+      output: '<template>{{input class=(if condition "some-class" "other-class")}}</template>',
       errors: [{ messageId: 'useIf' }],
     },
     {
       code: '<template>{{input class=(unless (not (not condition)) "some-class" "other-class")}}</template>',
-      output: null,
+      output: '<template>{{input class=(unless condition "some-class" "other-class")}}</template>',
       errors: [{ messageId: 'negatedHelper' }],
     },
   ],
@@ -232,7 +236,7 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
       code: '{{#if (not (eq c2))}}<img>{{/if}}',
       options: [{ simplifyHelpers: false }],
     },
-    // simplifyHelpers: false — if with nested fixable helpers is valid.
+    // simplifyHelpers: false -- if with nested fixable helpers is valid.
     {
       code: '<img class={{if (not (gte c 10)) "some-class"}}>',
       options: [{ simplifyHelpers: false }],
@@ -245,27 +249,27 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
   invalid: [
     {
       code: '{{#if (not condition)}}<img>{{/if}}',
-      output: null,
+      output: '{{#unless condition}}<img>{{/unless}}',
       errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '{{#if (not (not condition))}}<img>{{/if}}',
-      output: null,
+      output: '{{#if condition}}<img>{{/if}}',
       errors: [{ message: 'Simplify unnecessary negation of helper.' }],
     },
     {
       code: '{{#if (not (not c1 c2))}}<img>{{/if}}',
-      output: null,
+      output: '{{#if c1}}<img>{{/if}}',
       errors: [{ message: 'Simplify unnecessary negation of helper.' }],
     },
     {
       code: '{{#if (not (eq c1 c2))}}<img>{{/if}}',
-      output: null,
+      output: '{{#if (not-eq c1 c2)}}<img>{{/if}}',
       errors: [{ message: 'Simplify unnecessary negation of helper.' }],
     },
     {
       code: '{{#if (not condition)}}<img>{{else}}<input>{{/if}}',
-      output: null,
+      output: '{{#if condition}}<input>{{else}}<img>{{/if}}',
       errors: [
         {
           message:
@@ -275,32 +279,32 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
     },
     {
       code: '{{#unless (not condition)}}<img>{{/unless}}',
-      output: null,
+      output: '{{#if condition}}<img>{{/if}}',
       errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{#unless (not (not condition))}}<img>{{/unless}}',
-      output: null,
+      output: '{{#unless condition}}<img>{{/unless}}',
       errors: [{ message: 'Simplify unnecessary negation of helper.' }],
     },
     {
       code: '{{#unless (not condition)}}<img>{{else}}<input>{{/unless}}',
-      output: null,
+      output: '{{#if condition}}<img>{{else}}<input>{{/if}}',
       errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{#unless (not (not-eq c1 c2))}}<img>{{else}}<input>{{/unless}}',
-      output: null,
+      output: '{{#unless (eq c1 c2)}}<img>{{else}}<input>{{/unless}}',
       errors: [{ message: 'Simplify unnecessary negation of helper.' }],
     },
     {
       code: '{{#unless (not condition)}}<img>{{else if (not condition)}}<input>{{/unless}}',
-      output: null,
+      output: '{{#if condition}}<img>{{else if (not condition)}}<input>{{/if}}',
       errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{#unless (not (not condition))}}<img>{{else if (not (not condition))}}<input>{{/unless}}',
-      output: null,
+      output: '{{#unless condition}}<img>{{else if (not (not condition))}}<input>{{/unless}}',
       errors: [
         { message: 'Simplify unnecessary negation of helper.' },
         { message: 'Simplify unnecessary negation of helper.' },
@@ -308,7 +312,7 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
     },
     {
       code: '{{#unless (not (gt c 10))}}<img>{{else if (not (lt c 5))}}<input>{{/unless}}',
-      output: null,
+      output: '{{#unless (lte c 10)}}<img>{{else if (not (lt c 5))}}<input>{{/unless}}',
       errors: [
         { message: 'Simplify unnecessary negation of helper.' },
         { message: 'Simplify unnecessary negation of helper.' },
@@ -316,12 +320,12 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
     },
     {
       code: '{{#unless (not condition)}}<img>{{else if (not condition)}}<input>{{else}}<hr>{{/unless}}',
-      output: null,
+      output: '{{#if condition}}<img>{{else if (not condition)}}<input>{{else}}<hr>{{/if}}',
       errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{#unless (not condition)}}<img>{{else if (not (not c1 c2))}}<input>{{else}}<hr>{{/unless}}',
-      output: null,
+      output: '{{#if condition}}<img>{{else if (not (not c1 c2))}}<input>{{else}}<hr>{{/if}}',
       errors: [
         { message: 'Change `unless (not condition)` to `if condition`.' },
         { message: 'Simplify unnecessary negation of helper.' },
@@ -329,27 +333,28 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
     },
     {
       code: '{{#if condition}}{{else}}{{! some comment }}{{#if (not condition)}}<img>{{/if}}{{/if}}',
-      output: null,
+      output:
+        '{{#if condition}}{{else}}{{! some comment }}{{#unless condition}}<img>{{/unless}}{{/if}}',
       errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '{{#if condition}}{{else}}{{#if (not condition)}}<img>{{/if}}{{/if}}',
-      output: null,
+      output: '{{#if condition}}{{else}}{{#unless condition}}<img>{{/unless}}{{/if}}',
       errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '<img class={{if (not condition) "some-class"}}>',
-      output: null,
+      output: '<img class={{unless condition "some-class"}}>',
       errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '<img class={{if (not (gte c 10)) "some-class"}}>',
-      output: null,
+      output: '<img class={{if (lt c 10) "some-class"}}>',
       errors: [{ message: 'Simplify unnecessary negation of helper.' }],
     },
     {
       code: '<img class={{if (not condition) "some-class" "other-class"}}>',
-      output: null,
+      output: '<img class={{if condition "other-class" "some-class"}}>',
       errors: [
         {
           message:
@@ -359,32 +364,32 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
     },
     {
       code: '<img class={{if (not (not condition)) "some-class" "other-class"}}>',
-      output: null,
+      output: '<img class={{if condition "some-class" "other-class"}}>',
       errors: [{ message: 'Simplify unnecessary negation of helper.' }],
     },
     {
       code: '<img class={{unless (not condition) "some-class"}}>',
-      output: null,
+      output: '<img class={{if condition "some-class"}}>',
       errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '<img class={{unless (not condition) "some-class" "other-class"}}>',
-      output: null,
+      output: '<img class={{if condition "some-class" "other-class"}}>',
       errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '<img class={{unless (not (not condition)) "some-class" "other-class"}}>',
-      output: null,
+      output: '<img class={{unless condition "some-class" "other-class"}}>',
       errors: [{ message: 'Simplify unnecessary negation of helper.' }],
     },
     {
       code: '{{input class=(if (not condition) "some-class")}}',
-      output: null,
+      output: '{{input class=(unless condition "some-class")}}',
       errors: [{ message: 'Change `if (not condition)` to `unless condition`.' }],
     },
     {
       code: '{{input class=(if (not condition) "some-class" "other-class")}}',
-      output: null,
+      output: '{{input class=(if condition "other-class" "some-class")}}',
       errors: [
         {
           message:
@@ -394,89 +399,89 @@ hbsRuleTester.run('template-no-negated-condition', rule, {
     },
     {
       code: '{{input class=(if (not (lte c 10)) "some-class" "other-class")}}',
-      output: null,
+      output: '{{input class=(if (gt c 10) "some-class" "other-class")}}',
       errors: [{ message: 'Simplify unnecessary negation of helper.' }],
     },
     {
       code: '{{input class=(unless (not condition) "some-class")}}',
-      output: null,
+      output: '{{input class=(if condition "some-class")}}',
       errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{input class=(unless (not condition) "some-class" "other-class")}}',
-      output: null,
+      output: '{{input class=(if condition "some-class" "other-class")}}',
       errors: [{ message: 'Change `unless (not condition)` to `if condition`.' }],
     },
     {
       code: '{{input class=(unless (not (not condition)) "some-class" "other-class")}}',
-      output: null,
+      output: '{{input class=(unless condition "some-class" "other-class")}}',
       errors: [{ message: 'Simplify unnecessary negation of helper.' }],
     },
 
     // ******************************************
-    // simplifyHelpers: true (explicit) — BlockStatement
+    // simplifyHelpers: true (explicit) -- BlockStatement
     // ******************************************
     {
       // if (not (not ...)) with simplifyHelpers: true
       code: '{{#if (not (not condition))}}<img>{{/if}}',
-      output: null,
+      output: '{{#if condition}}<img>{{/if}}',
       options: [{ simplifyHelpers: true }],
       errors: [{ messageId: 'negatedHelper' }],
     },
     {
       // if (not (eq ...)) with simplifyHelpers: true
       code: '{{#if (not (eq c1 c2))}}<img>{{/if}}',
-      output: null,
+      output: '{{#if (not-eq c1 c2)}}<img>{{/if}}',
       options: [{ simplifyHelpers: true }],
       errors: [{ messageId: 'negatedHelper' }],
     },
     {
       // unless (not (not-eq ...)) else with simplifyHelpers: true
       code: '{{#unless (not (not-eq c1 c2))}}<img>{{else}}<input>{{/unless}}',
-      output: null,
+      output: '{{#unless (eq c1 c2)}}<img>{{else}}<input>{{/unless}}',
       options: [{ simplifyHelpers: true }],
       errors: [{ messageId: 'negatedHelper' }],
     },
     {
-      // unless ... else if with fixable helpers — two errors with simplifyHelpers: true
+      // unless ... else if with fixable helpers -- two errors with simplifyHelpers: true
       code: '{{#unless (not (gt c 10))}}<img>{{else if (not (lt c 5))}}<input>{{/unless}}',
-      output: null,
+      output: '{{#unless (lte c 10)}}<img>{{else if (not (lt c 5))}}<input>{{/unless}}',
       options: [{ simplifyHelpers: true }],
       errors: [{ messageId: 'negatedHelper' }, { messageId: 'negatedHelper' }],
     },
     {
-      // unless ... else if ... else — two errors with simplifyHelpers: true
+      // unless ... else if ... else -- two errors with simplifyHelpers: true
       code: '{{#unless (not condition)}}<img>{{else if (not (not c1 c2))}}<input>{{else}}<hr>{{/unless}}',
-      output: null,
+      output: '{{#if condition}}<img>{{else if (not (not c1 c2))}}<input>{{else}}<hr>{{/if}}',
       options: [{ simplifyHelpers: true }],
       errors: [{ messageId: 'useIf' }, { messageId: 'negatedHelper' }],
     },
 
     // ******************************************
-    // simplifyHelpers: true (explicit) — MustacheStatement
+    // simplifyHelpers: true (explicit) -- MustacheStatement
     // ******************************************
     {
       // if (not (gte ...)) with simplifyHelpers: true
       code: '<img class={{if (not (gte c 10)) "some-class"}}>',
-      output: null,
+      output: '<img class={{if (lt c 10) "some-class"}}>',
       options: [{ simplifyHelpers: true }],
       errors: [{ messageId: 'negatedHelper' }],
     },
     {
       // if (not (not ...)) else with simplifyHelpers: true
       code: '<img class={{if (not (not condition)) "some-class" "other-class"}}>',
-      output: null,
+      output: '<img class={{if condition "some-class" "other-class"}}>',
       options: [{ simplifyHelpers: true }],
       errors: [{ messageId: 'negatedHelper' }],
     },
 
     // ******************************************
-    // simplifyHelpers: true (explicit) — SubExpression
+    // simplifyHelpers: true (explicit) -- SubExpression
     // ******************************************
     {
       // if (not (lte ...)) else with simplifyHelpers: true
       code: '{{input class=(if (not (lte c 10)) "some-class" "other-class")}}',
-      output: null,
+      output: '{{input class=(if (gt c 10) "some-class" "other-class")}}',
       options: [{ simplifyHelpers: true }],
       errors: [{ messageId: 'negatedHelper' }],
     },
