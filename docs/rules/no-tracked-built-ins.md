@@ -17,13 +17,13 @@ This rule detects imports from `tracked-built-ins` and provides an autofix to co
 The following mappings are applied:
 
 | Old (`tracked-built-ins`) | New (`@ember/reactive`) |
-|--------------------------|------------------------|
-| `TrackedArray` | `trackedArray` |
-| `TrackedObject` | `trackedObject` |
-| `TrackedMap` | `trackedMap` |
-| `TrackedSet` | `trackedSet` |
-| `TrackedWeakMap` | `trackedWeakMap` |
-| `TrackedWeakSet` | `trackedWeakSet` |
+| ------------------------- | ----------------------- |
+| `TrackedArray`            | `trackedArray`          |
+| `TrackedObject`           | `trackedObject`         |
+| `TrackedMap`              | `trackedMap`            |
+| `TrackedSet`              | `trackedSet`            |
+| `TrackedWeakMap`          | `trackedWeakMap`        |
+| `TrackedWeakSet`          | `trackedWeakSet`        |
 
 Additionally, `new` expressions using these imports are automatically converted to direct function calls.
 
