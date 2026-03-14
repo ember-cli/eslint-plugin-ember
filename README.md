@@ -234,7 +234,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-invalid-meta](docs/rules/template-no-invalid-meta.md)                                           | disallow invalid meta tags                                                   |    |    |    |
 | [template-no-log](docs/rules/template-no-log.md)                                                             | disallow {{log}} in templates                                                |    |    |    |
 | [template-no-model-argument-in-route-templates](docs/rules/template-no-model-argument-in-route-templates.md) | disallow @model argument in route templates                                  |    | 🔧 |    |
-| [template-no-multiple-empty-lines](docs/rules/template-no-multiple-empty-lines.md)                           | disallow multiple consecutive empty lines in templates                       |    |    |    |
+| [template-no-multiple-empty-lines](docs/rules/template-no-multiple-empty-lines.md)                           | disallow multiple consecutive empty lines in templates                       |    | 🔧 |    |
 | [template-no-mut-helper](docs/rules/template-no-mut-helper.md)                                               | disallow usage of (mut) helper                                               |    |    |    |
 | [template-no-negated-comparison](docs/rules/template-no-negated-comparison.md)                               | disallow negated comparisons in templates                                    |    |    |    |
 | [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                                 | disallow negated conditions in if/unless                                     |    | 🔧 |    |
