@@ -123,6 +123,18 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
     "import EmberObject from '@ember/object';",
     "import { run } from '@ember/runloop';",
     "import { run as renamedRun } from '@ember/runloop';",
+
+    // File with both native class and .extend() should not flag computed import
+    `
+      import { computed } from '@ember/object';
+      import Component from '@ember/component';
+
+      class Helper {}
+
+      export default Component.extend({
+        fullName: computed('firstName', 'lastName', function() {})
+      });
+    `,
   ],
   invalid: [
     {
