@@ -26,6 +26,10 @@ ruleTester.run('template-deprecated-inline-view-helper', rule, {
     '<template>{{#let this.prop as |view|}} {{view}} {{/let}}</template>',
     // isLocal: view is a block param, view.name should not be flagged
     '<template>{{#each items as |view|}} {{view.name}} {{/each}}</template>',
+    // yield with view hash pair should not be flagged
+    '<template>{{yield hash=view.foo}}</template>',
+    // hash pair with key "to" should not be flagged
+    '<template>{{some-component to=view.foo}}</template>',
   ],
   invalid: [
     {
@@ -51,6 +55,11 @@ ruleTester.run('template-deprecated-inline-view-helper', rule, {
     {
       code: '<template>{{foo-bar bab=good baz=view.qux.qaz boo=okay}}</template>',
       output: '<template>{{foo-bar bab=good baz=qux.qaz boo=okay}}</template>',
+      errors: [{ messageId: 'deprecated' }],
+    },
+    {
+      code: '<template><div class={{view.something}}></div></template>',
+      output: '<template><div class={{something}}></div></template>',
       errors: [{ messageId: 'deprecated' }],
     },
     {
@@ -93,6 +102,10 @@ hbsRuleTester.run('template-deprecated-inline-view-helper', rule, {
     '{{#let this.prop as |view|}} {{view}} {{/let}}',
     // isLocal: view is a block param, view.name should not be flagged
     '{{#each items as |view|}} {{view.name}} {{/each}}',
+    // yield with view hash pair should not be flagged
+    '{{yield hash=view.foo}}',
+    // hash pair with key "to" should not be flagged
+    '{{some-component to=view.foo}}',
   ],
   invalid: [
     {
@@ -128,6 +141,16 @@ hbsRuleTester.run('template-deprecated-inline-view-helper', rule, {
     {
       code: '{{foo-bar bab=good baz=view.qux.qaz boo=okay}}',
       output: '{{foo-bar bab=good baz=qux.qaz boo=okay}}',
+      errors: [
+        {
+          message:
+            'The inline form of `view` is deprecated. Please use `Ember.Component` instead. See http://emberjs.com/deprecations/v1.x/#toc_ember-view',
+        },
+      ],
+    },
+    {
+      code: '<div class={{view.something}}></div>',
+      output: '<div class={{something}}></div>',
       errors: [
         {
           message:
