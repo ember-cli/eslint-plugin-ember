@@ -79,6 +79,15 @@ ruleTester.run('no-empty-glimmer-component-classes', rule, {
       `,
       parser: require.resolve('@typescript-eslint/parser'),
     },
+    // TypeScript declare class should not be flagged
+    {
+      code: `
+        import Component from '@glimmer/component';
+
+        declare class MyComponent extends Component<Sig> {}
+      `,
+      parser: require.resolve('@typescript-eslint/parser'),
+    },
   ],
   invalid: [
     {
