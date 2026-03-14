@@ -14,3 +14,6 @@ npm-debug.log
 
 # eslint-remote-tester
 eslint-remote-tester-results
+
+# Lock file (project uses pnpm)
+package-lock.json
