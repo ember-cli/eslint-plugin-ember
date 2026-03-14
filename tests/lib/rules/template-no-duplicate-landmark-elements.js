@@ -18,6 +18,10 @@ ruleTester.run('template-no-duplicate-landmark-elements', rule, {
     '<template>{{#if this.isCreateProjectFromSavedSearchEnabled}}<form></form>{{else}}<form></form>{{/if}}</template>',
     // header inside sectioning element loses landmark role
     "<template><main><header><h1>Main Page Header</h1></header></main><dialog id='my-dialog'><header><h1>Dialog Header</h1></header></dialog></template>",
+    // Landmarks inside dialog are in a separate scope
+    '<template><nav></nav><dialog><nav></nav></dialog></template>',
+    // Dynamic role values — can't determine role statically
+    '<template><div role={{this.role}}></div><div role={{this.role}}></div></template>',
   ],
 
   invalid: [
@@ -81,6 +85,14 @@ hbsRuleTester.run('template-no-duplicate-landmark-elements (hbs)', rule, {
     "<main><header><h1>Main Page Header</h1></header><button commandfor='my-dialog'>Open Dialog</button></main><div popover id='my-dialog'><header><h1>Dialog Header</h1></header></div>",
     // Conditional branches: elements in if/else are mutually exclusive
     '{{#if this.isCreateProjectFromSavedSearchEnabled}}<form></form>{{else}}<form></form>{{/if}}',
+    // Landmarks inside dialog are in a separate scope
+    '<nav></nav><dialog><nav></nav></dialog>',
+    // Landmarks inside popover element are in a separate scope
+    '<nav></nav><div popover><nav></nav></div>',
+    // Dynamic role values — can't determine role statically
+    '<div role={{this.role}}></div><div role={{this.role}}></div>',
+    // Each blocks: landmarks in each body are scoped
+    '{{#each this.items as |item|}}<nav aria-label={{item.label}}></nav>{{/each}}',
   ],
   invalid: [
     {
