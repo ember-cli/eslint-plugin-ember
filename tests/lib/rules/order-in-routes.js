@@ -57,6 +57,14 @@ eslintTester.run('order-in-routes', rule, {
         _customAction2: function() {},
         tSomeTask: task(function* () {})
       });`,
+    `import {service} from '@ember/service';
+      export default Route.extend({
+        currentUser: service(),
+        queryParams: {},
+        customProp: "test",
+        model() {},
+        actions: {},
+      });`,
     `export default Route.extend({
         levelOfHappiness: computed("attitude", "health", () => {
         }),
