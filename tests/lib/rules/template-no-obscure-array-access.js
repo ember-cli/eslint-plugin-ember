@@ -40,37 +40,37 @@ ruleTester.run('template-no-obscure-array-access', rule, {
 
     {
       code: '<template><Foo @onClick={{fn this.func @foo.0.bar}} /></template>',
-      output: null,
+      output: '<template><Foo @onClick={{fn this.func (get @foo "0.bar")}} /></template>',
       errors: [{ messageId: 'noObscureArrayAccess' }],
     },
     {
       code: '<template>{{foo bar=this.list.[0]}}</template>',
-      output: null,
+      output: '<template>{{foo bar=(get this.list "0")}}</template>',
       errors: [{ messageId: 'noObscureArrayAccess' }],
     },
     {
       code: '<template>{{foo bar=@list.[1]}}</template>',
-      output: null,
+      output: '<template>{{foo bar=(get @list "1")}}</template>',
       errors: [{ messageId: 'noObscureArrayAccess' }],
     },
     {
       code: '<template>{{this.list.[0]}}</template>',
-      output: null,
+      output: '<template>{{get this.list "0"}}</template>',
       errors: [{ messageId: 'noObscureArrayAccess' }],
     },
     {
       code: '<template>{{this.list.[0].name}}</template>',
-      output: null,
+      output: '<template>{{get this.list "0.name"}}</template>',
       errors: [{ messageId: 'noObscureArrayAccess' }],
     },
     {
       code: '<template><Foo @bar={{this.list.[0]}} /></template>',
-      output: null,
+      output: '<template><Foo @bar={{get this.list "0"}} /></template>',
       errors: [{ messageId: 'noObscureArrayAccess' }],
     },
     {
       code: '<template><Foo @bar={{this.list.[0].name.[1].foo}} /></template>',
-      output: null,
+      output: '<template><Foo @bar={{get this.list "0.name.1.foo"}} /></template>',
       errors: [{ messageId: 'noObscureArrayAccess' }],
     },
   ],
@@ -102,7 +102,7 @@ hbsRuleTester.run('template-no-obscure-array-access', rule, {
   invalid: [
     {
       code: '<Foo @onClick={{fn this.func @foo.0.bar}} />',
-      output: null,
+      output: '<Foo @onClick={{fn this.func (get @foo "0.bar")}} />',
       errors: [
         {
           message:
@@ -112,7 +112,7 @@ hbsRuleTester.run('template-no-obscure-array-access', rule, {
     },
     {
       code: '{{foo bar=this.list.[0]}}',
-      output: null,
+      output: '{{foo bar=(get this.list "0")}}',
       errors: [
         {
           message:
@@ -122,7 +122,7 @@ hbsRuleTester.run('template-no-obscure-array-access', rule, {
     },
     {
       code: '{{foo bar=@list.[1]}}',
-      output: null,
+      output: '{{foo bar=(get @list "1")}}',
       errors: [
         {
           message:
@@ -132,7 +132,7 @@ hbsRuleTester.run('template-no-obscure-array-access', rule, {
     },
     {
       code: '{{this.list.[0]}}',
-      output: null,
+      output: '{{get this.list "0"}}',
       errors: [
         {
           message:
@@ -142,7 +142,7 @@ hbsRuleTester.run('template-no-obscure-array-access', rule, {
     },
     {
       code: '{{this.list.[0].name}}',
-      output: null,
+      output: '{{get this.list "0.name"}}',
       errors: [
         {
           message:
@@ -152,7 +152,7 @@ hbsRuleTester.run('template-no-obscure-array-access', rule, {
     },
     {
       code: '<Foo @bar={{this.list.[0]}} />',
-      output: null,
+      output: '<Foo @bar={{get this.list "0"}} />',
       errors: [
         {
           message:
@@ -162,7 +162,7 @@ hbsRuleTester.run('template-no-obscure-array-access', rule, {
     },
     {
       code: '<Foo @bar={{this.list.[0].name.[1].foo}} />',
-      output: null,
+      output: '<Foo @bar={{get this.list "0.name.1.foo"}} />',
       errors: [
         {
           message:
