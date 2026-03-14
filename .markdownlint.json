@@ -1,5 +1,6 @@
 {
   "line-length": false,
+  "table-column-style": false,
   "ul-style": {
     "style": "dash"
   }

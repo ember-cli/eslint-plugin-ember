@@ -80,7 +80,7 @@ If you would like to specify ordering for a property type that is not listed, yo
 
 ### Additional Properties
 
-You can find the full list of properties [here](../../lib/utils/property-order.js#L10).
+You can find the full list of properties [in property-order.js](../../lib/utils/property-order.js#L10).
 
 ## Description
 
