@@ -36,6 +36,9 @@ ruleTester.run('no-deeply-nested-dependent-keys-with-each', rule, {
     "import { computed } from '@ember/object'; computed('foo.@each.bar', function() {})",
     "import { computed } from '@ember/object'; computed('foo.@each.{bar,baz}', function() {})",
 
+    // Comma-separated keys in single string should be split
+    "import { computed } from '@ember/object'; computed('foo.@each.bar,baz.@each.zot', function() {})",
+
     // Not Ember's `computed` function:
     "otherClass.computed('foo.@each.bar.baz', function() {})",
     "otherClass.myFunction('foo.@each.bar.baz', function() {})",
