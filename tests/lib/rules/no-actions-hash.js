@@ -69,6 +69,17 @@ ruleTester.run('no-actions-hash', rule, {
     'Route.extend({ ...foo });',
     'Route.extend(Evented, { ...foo });',
     'Route.extend(...foo);',
+
+    // TypeScript declare property (value is null)
+    {
+      code: `
+        import Component from '@ember/component';
+        export default class MyComponent extends Component {
+          declare actions: SomeType;
+        }
+      `,
+      parser: require.resolve('@typescript-eslint/parser'),
+    },
   ],
 
   invalid: [
