@@ -28,6 +28,9 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
     '<template>{{true}}</template>',
     '<template>{{foo bar}}</template>',
     '<template>{{#each items as |item|}}{{item}}{{/each}}</template>',
+    // ElementNode block params should be recognized as local variables
+    '<template><Foo as |bar|>{{bar}}</Foo></template>',
+    '<template><Foo as |bar|>{{bar.baz}}</Foo></template>',
     '<template>{{#if someProperty}}yay{{/if}}</template>',
     '<template><FooBar /></template>',
     {
@@ -200,6 +203,9 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     // Built-in helpers / keywords (always valid)
     '{{#each items as |item|}}{{item}}{{/each}}',
     '{{#each items as |item|}}{{item.foo}}{{/each}}',
+    // ElementNode block params should be recognized as local variables
+    '<Foo as |bar|>{{bar}}</Foo>',
+    '<Foo as |bar|>{{bar.baz}}</Foo>',
     '{{42}}',
     '{{true}}',
     '{{undefined}}',
