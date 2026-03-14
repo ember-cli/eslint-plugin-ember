@@ -160,6 +160,13 @@ ruleTester.run('require-computed-macros', rule, {
       errors: [{ message: ERROR_MESSAGE_READS, type: 'MethodDefinition' }],
     },
 
+    // READS - self-referential (no autofix)
+    {
+      code: "({ storeIds: computed('storeIds', function() { return this.storeIds; }) })",
+      output: null,
+      errors: [{ message: ERROR_MESSAGE_READS, type: 'CallExpression' }],
+    },
+
     // AND
     {
       code: 'computed(function() { return this.x && this.y; })',
