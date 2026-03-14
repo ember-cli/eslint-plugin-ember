@@ -206,7 +206,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-action-on-submit-button](docs/rules/template-no-action-on-submit-button.md)                     | disallow action attribute on submit buttons                                  |    |    |    |
 | [template-no-args-paths](docs/rules/template-no-args-paths.md)                                               | disallow args.foo paths in templates, use @foo instead                       |    | 🔧 |    |
 | [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md)             | disallow @arguments on HTML elements                                         |    |    |    |
-| [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)               | disallow usage of Ember Array prototype extensions                           |    |    |    |
+| [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)               | disallow usage of Ember Array prototype extensions                           |    | 🔧 |    |
 | [template-no-at-ember-render-modifiers](docs/rules/template-no-at-ember-render-modifiers.md)                 | disallow usage of @ember/render-modifiers                                    |    |    |    |
 | [template-no-bare-strings](docs/rules/template-no-bare-strings.md)                                           | disallow bare strings in templates (require translation/localization)        |    |    |    |
 | [template-no-bare-yield](docs/rules/template-no-bare-yield.md)                                               | disallow templates whose only meaningful content is a bare {{yield}}         |    |    |    |
