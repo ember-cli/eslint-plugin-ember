@@ -239,7 +239,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-negated-comparison](docs/rules/template-no-negated-comparison.md)                               | disallow negated comparisons in templates                                    |    |    |    |
 | [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                                 | disallow negated conditions in if/unless                                     |    | 🔧 |    |
 | [template-no-nested-splattributes](docs/rules/template-no-nested-splattributes.md)                           | disallow nested ...attributes usage                                          |    |    |    |
-| [template-no-obscure-array-access](docs/rules/template-no-obscure-array-access.md)                           | disallow obscure array access patterns like `objectPath.@each.property`      |    | 🔧 |    |
+| [template-no-obscure-array-access](docs/rules/template-no-obscure-array-access.md)                           | disallow obscure array access patterns like `objectPath.@each.property`      |    |    |    |
 | [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                                 | disallow obsolete HTML elements                                              |    |    |    |
 | [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                         | disallow {{outlet}} outside of route templates                               |    |    |    |
 | [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                           | disallow usage of ember-page-title component                                 |    |    |    |
