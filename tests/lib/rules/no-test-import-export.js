@@ -64,6 +64,11 @@ ruleTester.run('no-test-import-export', rule, {
       filename: 'app/components/student-test.js',
       code: 'export function setup() {}',
     },
+    // A tests/ folder inside app/ is not a real test directory
+    {
+      filename: 'app/components/tests/foo-test.js',
+      code: 'export function setup() {}',
+    },
   ],
   invalid: [
     {
