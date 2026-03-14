@@ -442,6 +442,45 @@ session: service(),
       ],
     },
 
+    // Legacy .extend with mixin as first argument should not crash
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import { inject as service } from '@ember/service';
+
+      export default Route.extend(MyMixin, {
+        session: service(),
+
+        beforeModel() {
+          if (!this.session.isAuthenticated) {
+            this.transitionTo('login');
+          }
+        }
+      })`,
+      output: `
+      import Route from '@ember/routing/route';
+      import { inject as service } from '@ember/service';
+
+      export default Route.extend(MyMixin, {
+        router: service('router'),
+session: service(),
+
+        beforeModel() {
+          if (!this.session.isAuthenticated) {
+            this.router.transitionTo('login');
+          }
+        }
+      })`,
+      errors: [
+        {
+          messageId: 'main',
+          data: { methodUsed: 'transitionTo', desiredMethod: 'transitionTo', moduleType: 'Route' },
+          type: 'MemberExpression',
+        },
+      ],
+    },
+
     // Basic lint error in routes
     {
       filename: 'routes/index.js',
