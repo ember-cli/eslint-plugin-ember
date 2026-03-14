@@ -2,8 +2,19 @@
 // Requirements
 //------------------------------------------------------------------------------
 
+const path = require('node:path');
 const rule = require('../../../lib/rules/template-missing-invokable');
 const RuleTester = require('eslint').RuleTester;
+
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+// A filename inside a fixture project that has ember-truth-helpers installed.
+const filenameInProjectWithTruthHelpers = path.join(
+  __dirname,
+  '../../fixtures/projects/has-ember-truth-helpers/test.gjs'
+);
 
 //------------------------------------------------------------------------------
 // Tests
@@ -68,8 +79,30 @@ ruleTester.run('template-missing-invokable', rule, {
   ],
 
   invalid: [
-    // Subexpression invocations
+    // Subexpression invocations — no auto-fix when package is not in project deps
     {
+      code: `
+      <template>
+        {{#if (eq 1 1)}}
+          They're equal
+        {{/if}}
+      </template>
+      `,
+      output: null,
+      options: [
+        {
+          invokables: {
+            eq: ['eq', 'ember-truth-helpers'],
+          },
+        },
+      ],
+
+      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
+    },
+
+    // Subexpression invocations — auto-fix when package IS in project deps
+    {
+      filename: filenameInProjectWithTruthHelpers,
       code: `
       <template>
         {{#if (eq 1 1)}}
@@ -96,19 +129,14 @@ ruleTester.run('template-missing-invokable', rule, {
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
 
-    // Mustache Invocations
+    // Mustache Invocations — no auto-fix when package is not in project deps
     {
       code: `
       <template>
         {{eq 1 1}}
       </template>
     `,
-      output: `import { eq } from 'ember-truth-helpers';
-
-      <template>
-        {{eq 1 1}}
-      </template>
-    `,
+      output: null,
       options: [
         {
           invokables: {
@@ -119,6 +147,7 @@ ruleTester.run('template-missing-invokable', rule, {
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
     {
+      filename: filenameInProjectWithTruthHelpers,
       code: `
       import MyComponent from 'somewhere';
       <template>
@@ -142,7 +171,7 @@ ruleTester.run('template-missing-invokable', rule, {
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
 
-    // Modifier Inovcations
+    // Modifier Invocations — built-in package always auto-fixes
     {
       code: `
         function doSomething() {}
@@ -167,8 +196,9 @@ ruleTester.run('template-missing-invokable', rule, {
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
 
-    // Multiple copies of a fixable invocation
+    // Multiple copies of a fixable invocation — with package installed
     {
+      filename: filenameInProjectWithTruthHelpers,
       code: `
         let other = <template>
           {{#if (eq 3 3) }}
@@ -216,8 +246,9 @@ ruleTester.run('template-missing-invokable', rule, {
       ],
     },
 
-    // Auto-fix with a default export
+    // Auto-fix with a default export — package installed
     {
+      filename: filenameInProjectWithTruthHelpers,
       code: `
       <template>
         {{#if (eq 1 1)}}

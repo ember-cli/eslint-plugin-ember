@@ -1,0 +1,6 @@
+{
+  "name": "has-ember-truth-helpers",
+  "dependencies": {
+    "ember-truth-helpers": "*"
+  }
+}
