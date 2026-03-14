@@ -316,15 +316,16 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Ember Object
 
-| Name                                                                                       | Description                                                                    | 💼 | 🔧 | 💡 |
-| :----------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- | :- | :- | :- |
-| [avoid-leaking-state-in-ember-objects](docs/rules/avoid-leaking-state-in-ember-objects.md) | disallow state leakage                                                         | ✅  |    |    |
-| [no-get](docs/rules/no-get.md)                                                             | require using ES5 getters instead of Ember's `get` / `getProperties` functions | ✅  | 🔧 |    |
-| [no-get-with-default](docs/rules/no-get-with-default.md)                                   | disallow usage of the Ember's `getWithDefault` function                        | ✅  | 🔧 |    |
-| [no-proxies](docs/rules/no-proxies.md)                                                     | disallow using array or object proxies                                         |    |    |    |
-| [no-try-invoke](docs/rules/no-try-invoke.md)                                               | disallow usage of the Ember's `tryInvoke` util                                 | ✅  |    |    |
-| [require-super-in-lifecycle-hooks](docs/rules/require-super-in-lifecycle-hooks.md)         | require super to be called in lifecycle hooks                                  | ✅  | 🔧 |    |
-| [use-ember-get-and-set](docs/rules/use-ember-get-and-set.md)                               | enforce usage of `Ember.get` and `Ember.set`                                   |    | 🔧 |    |
+| Name                                                                                       | Description                                                                            | 💼 | 🔧 | 💡 |
+| :----------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- | :- | :- | :- |
+| [avoid-leaking-state-in-ember-objects](docs/rules/avoid-leaking-state-in-ember-objects.md) | disallow state leakage                                                                 | ✅  |    |    |
+| [no-get](docs/rules/no-get.md)                                                             | require using ES5 getters instead of Ember's `get` / `getProperties` functions         | ✅  | 🔧 |    |
+| [no-get-with-default](docs/rules/no-get-with-default.md)                                   | disallow usage of the Ember's `getWithDefault` function                                | ✅  | 🔧 |    |
+| [no-modifier-argument-destructuring](docs/rules/no-modifier-argument-destructuring.md)     | disallow destructuring of modifier arguments to avoid consuming tracked data too early |    |    |    |
+| [no-proxies](docs/rules/no-proxies.md)                                                     | disallow using array or object proxies                                                 |    |    |    |
+| [no-try-invoke](docs/rules/no-try-invoke.md)                                               | disallow usage of the Ember's `tryInvoke` util                                         | ✅  |    |    |
+| [require-super-in-lifecycle-hooks](docs/rules/require-super-in-lifecycle-hooks.md)         | require super to be called in lifecycle hooks                                          | ✅  | 🔧 |    |
+| [use-ember-get-and-set](docs/rules/use-ember-get-and-set.md)                               | enforce usage of `Ember.get` and `Ember.set`                                           |    | 🔧 |    |
 
 ### Ember Octane
 
