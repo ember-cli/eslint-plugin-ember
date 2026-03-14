@@ -22,9 +22,9 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-tracked-built-ins', rule, {
   valid: [
-    // Already using @ember/reactive
-    "import { trackedArray } from '@ember/reactive';",
-    "import { trackedObject, trackedMap } from '@ember/reactive';",
+    // Already using @ember/reactive/collections
+    "import { trackedArray } from '@ember/reactive/collections';",
+    "import { trackedObject, trackedMap } from '@ember/reactive/collections';",
 
     // Not tracked-built-ins
     "import { something } from 'other-package';",
@@ -38,14 +38,14 @@ ruleTester.run('no-tracked-built-ins', rule, {
     // Single named import
     {
       code: "import { TrackedArray } from 'tracked-built-ins';",
-      output: "import { trackedArray } from '@ember/reactive';",
+      output: "import { trackedArray } from '@ember/reactive/collections';",
       errors: [{ message: ERROR_MESSAGE_IMPORT, type: 'ImportDeclaration' }],
     },
 
     // Multiple named imports
     {
       code: "import { TrackedArray, TrackedObject } from 'tracked-built-ins';",
-      output: "import { trackedArray, trackedObject } from '@ember/reactive';",
+      output: "import { trackedArray, trackedObject } from '@ember/reactive/collections';",
       errors: [{ message: ERROR_MESSAGE_IMPORT, type: 'ImportDeclaration' }],
     },
 
@@ -53,14 +53,14 @@ ruleTester.run('no-tracked-built-ins', rule, {
     {
       code: "import { TrackedArray, TrackedObject, TrackedMap, TrackedSet, TrackedWeakMap, TrackedWeakSet } from 'tracked-built-ins';",
       output:
-        "import { trackedArray, trackedObject, trackedMap, trackedSet, trackedWeakMap, trackedWeakSet } from '@ember/reactive';",
+        "import { trackedArray, trackedObject, trackedMap, trackedSet, trackedWeakMap, trackedWeakSet } from '@ember/reactive/collections';",
       errors: [{ message: ERROR_MESSAGE_IMPORT, type: 'ImportDeclaration' }],
     },
 
     // Aliased import
     {
       code: "import { TrackedArray as TA } from 'tracked-built-ins';",
-      output: "import { trackedArray as TA } from '@ember/reactive';",
+      output: "import { trackedArray as TA } from '@ember/reactive/collections';",
       errors: [{ message: ERROR_MESSAGE_IMPORT, type: 'ImportDeclaration' }],
     },
 
@@ -82,13 +82,13 @@ ruleTester.run('no-tracked-built-ins', rule, {
     {
       code: `import { TrackedArray } from 'tracked-built-ins';
 const arr = new TrackedArray([1, 2, 3]);`,
-      output: `import { trackedArray } from '@ember/reactive';
+      output: `import { trackedArray } from '@ember/reactive/collections';
 const arr = trackedArray([1, 2, 3]);`,
       errors: [
         { message: ERROR_MESSAGE_IMPORT, type: 'ImportDeclaration' },
         {
           message:
-            'Use `trackedArray(...)` instead of `new TrackedArray(...)`. The `@ember/reactive` utilities do not use `new`.',
+            'Use `trackedArray(...)` instead of `new TrackedArray(...)`. The `@ember/reactive/collections` utilities do not use `new`.',
           type: 'NewExpression',
         },
       ],
@@ -98,13 +98,13 @@ const arr = trackedArray([1, 2, 3]);`,
     {
       code: `import { TrackedObject } from 'tracked-built-ins';
 const obj = new TrackedObject({ a: 1 });`,
-      output: `import { trackedObject } from '@ember/reactive';
+      output: `import { trackedObject } from '@ember/reactive/collections';
 const obj = trackedObject({ a: 1 });`,
       errors: [
         { message: ERROR_MESSAGE_IMPORT, type: 'ImportDeclaration' },
         {
           message:
-            'Use `trackedObject(...)` instead of `new TrackedObject(...)`. The `@ember/reactive` utilities do not use `new`.',
+            'Use `trackedObject(...)` instead of `new TrackedObject(...)`. The `@ember/reactive/collections` utilities do not use `new`.',
           type: 'NewExpression',
         },
       ],
@@ -114,13 +114,13 @@ const obj = trackedObject({ a: 1 });`,
     {
       code: `import { TrackedMap } from 'tracked-built-ins';
 const map = new TrackedMap();`,
-      output: `import { trackedMap } from '@ember/reactive';
+      output: `import { trackedMap } from '@ember/reactive/collections';
 const map = trackedMap();`,
       errors: [
         { message: ERROR_MESSAGE_IMPORT, type: 'ImportDeclaration' },
         {
           message:
-            'Use `trackedMap(...)` instead of `new TrackedMap(...)`. The `@ember/reactive` utilities do not use `new`.',
+            'Use `trackedMap(...)` instead of `new TrackedMap(...)`. The `@ember/reactive/collections` utilities do not use `new`.',
           type: 'NewExpression',
         },
       ],
@@ -130,13 +130,13 @@ const map = trackedMap();`,
     {
       code: `import { TrackedArray as TA } from 'tracked-built-ins';
 const arr = new TA([1, 2, 3]);`,
-      output: `import { trackedArray as TA } from '@ember/reactive';
+      output: `import { trackedArray as TA } from '@ember/reactive/collections';
 const arr = TA([1, 2, 3]);`,
       errors: [
         { message: ERROR_MESSAGE_IMPORT, type: 'ImportDeclaration' },
         {
           message:
-            'Use `trackedArray(...)` instead of `new TA(...)`. The `@ember/reactive` utilities do not use `new`.',
+            'Use `trackedArray(...)` instead of `new TA(...)`. The `@ember/reactive/collections` utilities do not use `new`.',
           type: 'NewExpression',
         },
       ],
@@ -147,19 +147,19 @@ const arr = TA([1, 2, 3]);`,
       code: `import { TrackedArray, TrackedMap } from 'tracked-built-ins';
 const arr = new TrackedArray();
 const map = new TrackedMap();`,
-      output: `import { trackedArray, trackedMap } from '@ember/reactive';
+      output: `import { trackedArray, trackedMap } from '@ember/reactive/collections';
 const arr = trackedArray();
 const map = trackedMap();`,
       errors: [
         { message: ERROR_MESSAGE_IMPORT, type: 'ImportDeclaration' },
         {
           message:
-            'Use `trackedArray(...)` instead of `new TrackedArray(...)`. The `@ember/reactive` utilities do not use `new`.',
+            'Use `trackedArray(...)` instead of `new TrackedArray(...)`. The `@ember/reactive/collections` utilities do not use `new`.',
           type: 'NewExpression',
         },
         {
           message:
-            'Use `trackedMap(...)` instead of `new TrackedMap(...)`. The `@ember/reactive` utilities do not use `new`.',
+            'Use `trackedMap(...)` instead of `new TrackedMap(...)`. The `@ember/reactive/collections` utilities do not use `new`.',
           type: 'NewExpression',
         },
       ],

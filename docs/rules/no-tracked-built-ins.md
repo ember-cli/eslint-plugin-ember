@@ -4,26 +4,26 @@
 
 <!-- end auto-generated rule header -->
 
-Enforce usage of `@ember/reactive` imports instead of `tracked-built-ins`.
+Enforce usage of `@ember/reactive/collections` imports instead of `tracked-built-ins`.
 
 ## Context
 
-Per [RFC #1068](https://github.com/emberjs/rfcs/pull/1068), the tracked collection utilities from the `tracked-built-ins` package are being moved into the framework as `@ember/reactive`. The new API also changes from class constructors (`new TrackedArray(...)`) to factory functions (`trackedArray(...)`).
+Per [RFC #1068](https://github.com/emberjs/rfcs/pull/1068), the tracked collection utilities from the `tracked-built-ins` package are being moved into the framework as `@ember/reactive/collections`. The new API also changes from class constructors (`new TrackedArray(...)`) to factory functions (`trackedArray(...)`).
 
 ## Rule Details
 
-This rule detects imports from `tracked-built-ins` and provides an autofix to convert them to `@ember/reactive` with the new function-based API.
+This rule detects imports from `tracked-built-ins` and provides an autofix to convert them to `@ember/reactive/collections` with the new function-based API.
 
 The following mappings are applied:
 
-| Old (`tracked-built-ins`) | New (`@ember/reactive`) |
-| ------------------------- | ----------------------- |
-| `TrackedArray`            | `trackedArray`          |
-| `TrackedObject`           | `trackedObject`         |
-| `TrackedMap`              | `trackedMap`            |
-| `TrackedSet`              | `trackedSet`            |
-| `TrackedWeakMap`          | `trackedWeakMap`        |
-| `TrackedWeakSet`          | `trackedWeakSet`        |
+| Old (`tracked-built-ins`) | New (`@ember/reactive/collections`) |
+| ------------------------- | ----------------------------------- |
+| `TrackedArray`            | `trackedArray`                      |
+| `TrackedObject`           | `trackedObject`                     |
+| `TrackedMap`              | `trackedMap`                        |
+| `TrackedSet`              | `trackedSet`                        |
+| `TrackedWeakMap`          | `trackedWeakMap`                    |
+| `TrackedWeakSet`          | `trackedWeakSet`                    |
 
 Additionally, `new` expressions using these imports are automatically converted to direct function calls.
 
@@ -47,13 +47,13 @@ const map = new TrackedMap();
 Examples of **correct** code for this rule:
 
 ```js
-import { trackedArray } from '@ember/reactive';
+import { trackedArray } from '@ember/reactive/collections';
 
 const arr = trackedArray([1, 2, 3]);
 ```
 
 ```js
-import { trackedObject, trackedMap } from '@ember/reactive';
+import { trackedObject, trackedMap } from '@ember/reactive/collections';
 
 const obj = trackedObject({ a: 1 });
 const map = trackedMap();
@@ -63,7 +63,7 @@ const map = trackedMap();
 
 This rule provides automatic fixes via `--fix`. Running ESLint with the `--fix` flag will:
 
-1. Replace `import { TrackedArray } from 'tracked-built-ins'` with `import { trackedArray } from '@ember/reactive'`
+1. Replace `import { TrackedArray } from 'tracked-built-ins'` with `import { trackedArray } from '@ember/reactive/collections'`
 2. Replace `new TrackedArray(...)` with `trackedArray(...)`
 
 ## References
