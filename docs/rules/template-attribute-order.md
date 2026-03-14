@@ -1,5 +1,7 @@
 # ember/template-attribute-order
 
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
 <!-- end auto-generated rule header -->
 
 Enforces a consistent ordering of attributes in template elements. This helps improve readability and maintainability of templates.
