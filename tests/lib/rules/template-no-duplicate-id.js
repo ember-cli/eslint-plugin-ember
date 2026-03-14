@@ -113,6 +113,14 @@ ruleTester.run('template-no-duplicate-id', rule, {
         <Input id={{inputProperties.id}} />
       </MyComponent>
     </template>`,
+    // IDs in different branches of {{#each}} should not conflict
+    `<template>
+      {{#each items as |item|}}
+        <div id="x"></div>
+      {{else}}
+        <div id="x"></div>
+      {{/each}}
+    </template>`,
   ],
   invalid: [
     // blockParams on an element must not isolate static IDs from outer scope
@@ -423,6 +431,12 @@ hbsRuleTester.run('template-no-duplicate-id (hbs)', rule, {
       <MyComponent as |inputProperties|>
         <Input id={{inputProperties.id}} />
       </MyComponent>`,
+    // IDs in different branches of {{#each}} should not conflict
+    `{{#each items as |item|}}
+        <div id="x"></div>
+      {{else}}
+        <div id="x"></div>
+      {{/each}}`,
   ],
   invalid: [
     // blockParams on an element must not isolate static IDs from outer scope
