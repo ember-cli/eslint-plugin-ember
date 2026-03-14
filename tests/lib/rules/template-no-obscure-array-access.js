@@ -73,6 +73,27 @@ ruleTester.run('template-no-obscure-array-access', rule, {
       output: '<template><Foo @bar={{get this.list "0.name.1.foo"}} /></template>',
       errors: [{ messageId: 'noObscureArrayAccess' }],
     },
+    // Regression: ember-template-lint#2926 — multi-line must NOT duplicate lines
+    {
+      code: `<template><Component
+  title="<error>"
+  id={{@model.0.id}}
+  as |value|
+></Component></template>`,
+      output: `<template><Component
+  title="<error>"
+  id={{get @model "0.id"}}
+  as |value|
+></Component></template>`,
+      errors: [{ messageId: 'noObscureArrayAccess' }],
+    },
+    // Regression: ember-template-lint#2924 — must NOT eat preceding params
+    {
+      code: '<template><Button @onClick={{fn this.myFunc @row.0.sha256}}>Button</Button></template>',
+      output:
+        '<template><Button @onClick={{fn this.myFunc (get @row "0.sha256")}}>Button</Button></template>',
+      errors: [{ messageId: 'noObscureArrayAccess' }],
+    },
   ],
 });
 
