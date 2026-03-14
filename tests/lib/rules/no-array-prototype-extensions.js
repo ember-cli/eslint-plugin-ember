@@ -253,6 +253,10 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'this.server.schema.devices.findBy()',
     'this.server.schema.users.findBy({ foo: "bar" })',
     'this.server.schema.devices.findBy({ foo: "bar" })',
+    'server.schema.users.findBy({ email: "tony@stark.tech" })',
+    'schema.users.findBy({ email: "tony@stark.tech" })',
+    'server.users.findBy({ email: "tony@stark.tech" })',
+    'server.db.users.findBy({ email: "tony@stark.tech" })',
   ],
   invalid: [
     {
