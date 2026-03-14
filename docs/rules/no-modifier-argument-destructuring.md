@@ -1,4 +1,6 @@
-# no-modifier-argument-destructuring
+# ember/no-modifier-argument-destructuring
+
+<!-- end auto-generated rule header -->
 
 Disallow destructuring of `modifier` arguments to avoid consuming tracked data too early.
 
