@@ -237,7 +237,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-multiple-empty-lines](docs/rules/template-no-multiple-empty-lines.md)                           | disallow multiple consecutive empty lines in templates                       |    |    |    |
 | [template-no-mut-helper](docs/rules/template-no-mut-helper.md)                                               | disallow usage of (mut) helper                                               |    |    |    |
 | [template-no-negated-comparison](docs/rules/template-no-negated-comparison.md)                               | disallow negated comparisons in templates                                    |    |    |    |
-| [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                                 | disallow negated conditions in if/unless                                     |    |    |    |
+| [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                                 | disallow negated conditions in if/unless                                     |    | 🔧 |    |
 | [template-no-nested-splattributes](docs/rules/template-no-nested-splattributes.md)                           | disallow nested ...attributes usage                                          |    |    |    |
 | [template-no-obscure-array-access](docs/rules/template-no-obscure-array-access.md)                           | disallow obscure array access patterns like `objectPath.@each.property`      |    | 🔧 |    |
 | [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                                 | disallow obsolete HTML elements                                              |    |    |    |
