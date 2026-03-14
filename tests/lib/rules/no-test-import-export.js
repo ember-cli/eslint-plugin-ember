@@ -54,6 +54,10 @@ ruleTester.run('no-test-import-export', rule, {
       filename: 'my-app-name/tests/helpers/nested/foo.js',
       code: "import setupApplicationTest from '../setup-application-test';",
     },
+
+    // Package imports ending in -test should not be flagged
+    "import { expectTypeOf } from '@glint/type-test';",
+    "import something from 'some-package-test';",
   ],
   invalid: [
     {
