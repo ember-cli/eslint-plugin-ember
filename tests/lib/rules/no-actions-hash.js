@@ -80,6 +80,16 @@ ruleTester.run('no-actions-hash', rule, {
       `,
       parser: require.resolve('@typescript-eslint/parser'),
     },
+    // TypeScript definite assignment (value is also null)
+    {
+      code: `
+        import Component from '@ember/component';
+        export default class MyComponent extends Component {
+          actions!: SomeType;
+        }
+      `,
+      parser: require.resolve('@typescript-eslint/parser'),
+    },
   ],
 
   invalid: [
