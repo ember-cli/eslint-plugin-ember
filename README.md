@@ -406,7 +406,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [order-in-routes](docs/rules/order-in-routes.md)                               | enforce proper order of properties in routes                                   |    | 🔧 |    |
 | [template-attribute-indentation](docs/rules/template-attribute-indentation.md) | enforce proper indentation of attributes and arguments in multi-line templates |    |    |    |
 | [template-attribute-order](docs/rules/template-attribute-order.md)             | enforce consistent ordering of attributes in template elements                 |    | 🔧 |    |
-| [template-block-indentation](docs/rules/template-block-indentation.md)         | enforce consistent indentation for block statements and their children         |    |    |    |
+| [template-block-indentation](docs/rules/template-block-indentation.md)         | enforce consistent indentation for block statements and their children         |    | 🔧 |    |
 | [template-eol-last](docs/rules/template-eol-last.md)                           | require or disallow newline at the end of template files                       |    | 🔧 |    |
 | [template-linebreak-style](docs/rules/template-linebreak-style.md)             | enforce consistent linebreaks in templates                                     |    | 🔧 |    |
 | [template-modifier-name-case](docs/rules/template-modifier-name-case.md)       | require dasherized names for modifiers                                         |    | 🔧 |    |

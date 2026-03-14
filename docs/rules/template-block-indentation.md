@@ -1,5 +1,7 @@
 # ember/template-block-indentation
 
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
 <!-- end auto-generated rule header -->
 
 Migrated from [ember-template-lint/block-indentation](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/block-indentation.md).

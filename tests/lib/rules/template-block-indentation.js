@@ -314,48 +314,55 @@ describe('template-block-indentation', () => {
       // Incorrect end indentation
       {
         code: ['{{#if foo}}', '  bar', '  {{/if}}'].join('\n'),
-        output: null,
+
+        output: '{{#if foo}}\n  bar\n{{/if}}',
         errors: [{ messageId: 'incorrectEnd' }],
       },
 
       // Incorrect child indentation - missing indent
       {
         code: ['<div>', '<p>{{t "greeting"}}</p>', '</div>'].join('\n'),
-        output: null,
+
+        output: '<div>\n  <p>{{t "greeting"}}</p>\n</div>',
         errors: [{ messageId: 'incorrectChild' }],
       },
 
       // Incorrect child indentation - too much
       {
         code: ['<div>', '    <p>{{t "greeting"}}</p>', '</div>'].join('\n'),
-        output: null,
+
+        output: '<div>\n  <p>{{t "greeting"}}</p>\n</div>',
         errors: [{ messageId: 'incorrectChild' }],
       },
 
       // Incorrect end indentation for element
       {
         code: ['<div>', '  <p>content</p>', '  </div>'].join('\n'),
-        output: null,
+
+        output: '<div>\n  <p>content</p>\n</div>',
         errors: [{ messageId: 'incorrectEnd' }],
       },
 
       // Incorrect else indentation
       {
         code: ['{{#if foo}}', '  bar', '  {{else}}', '  baz', '{{/if}}'].join('\n'),
-        output: null,
+
+        output: '{{#if foo}}\n  bar\n{{else}}\n  baz\n{{/if}}',
         errors: [{ messageId: 'incorrectElse' }],
       },
 
       // Incorrect indentation with 4-space config
       {
         code: ['<div>', '  <p>Hello</p>', '</div>'].join('\n'),
-        output: null,
+
+        output: '<div>\n    <p>Hello</p>\n</div>',
         options: [4],
         errors: [{ messageId: 'incorrectChild' }],
       },
       {
         code: ['<div>', '  <p>Hi!</p>', '</div>'].join('\n'),
-        output: null,
+
+        output: '<div>\n    <p>Hi!</p>\n</div>',
         options: [4],
         errors: [{ messageId: 'incorrectChild' }],
       },
@@ -363,14 +370,16 @@ describe('template-block-indentation', () => {
       // Multiple errors - wrong children and end
       {
         code: ['<div>', 'foo', '  </div>'].join('\n'),
-        output: null,
+
+        output: '<div>\n  foo\n</div>',
         errors: [{ messageId: 'incorrectChild' }, { messageId: 'incorrectEnd' }],
       },
 
       // Nested indentation error
       {
         code: ['{{#if foo}}', '  {{#if bar}}', '  baz', '  {{/if}}', '{{/if}}'].join('\n'),
-        output: null,
+
+        output: '{{#if foo}}\n  {{#if bar}}\n    baz\n  {{/if}}\n{{/if}}',
         errors: [{ messageId: 'incorrectChild' }],
       },
 
@@ -379,6 +388,7 @@ describe('template-block-indentation', () => {
       // Closing tag on same line as content but wrong indent
       {
         code: '<div>\n  <p>Stuff goes here</p></div>',
+
         output: null,
         errors: [{ messageId: 'incorrectEnd' }],
       },
@@ -386,14 +396,16 @@ describe('template-block-indentation', () => {
       // Child not indented in element
       {
         code: '<div>\n<p>Stuff goes here</p>\n</div>',
-        output: null,
+
+        output: '<div>\n  <p>Stuff goes here</p>\n</div>',
         errors: [{ messageId: 'incorrectChild' }],
       },
 
       // Child not indented in block
       {
         code: '{{#if}}\n<p>Stuff goes here</p>\n{{/if}}',
-        output: null,
+
+        output: '{{#if}}\n  <p>Stuff goes here</p>\n{{/if}}',
         errors: [{ messageId: 'incorrectChild' }],
       },
 
@@ -407,42 +419,50 @@ describe('template-block-indentation', () => {
           '    {{/if}}',
           '{{/if}}',
         ].join('\n'),
-        output: null,
+
+        output:
+          '{{#if isMorning}}\n{{else}}\n  {{#if something}}\n    Good night\n  {{/if}}\n{{/if}}',
         errors: [{ messageId: 'incorrectEnd' }],
       },
 
       // Mixed indent - some children correct, some not
       {
         code: '<div>\n  {{foo}}\n{{bar}}\n</div>',
-        output: null,
+
+        output: '<div>\n  {{foo}}\n  {{bar}}\n</div>',
         errors: [{ messageId: 'incorrectChild' }],
       },
 
       // Text child not indented
       {
         code: '<div>\n  Foo:\n{{bar}}\n</div>',
-        output: null,
+
+        output: '<div>\n  Foo:\n  {{bar}}\n</div>',
         errors: [{ messageId: 'incorrectChild' }],
       },
 
       // Closing block ends at wrong column when preceded by content on same line
       {
         code: '<div>\n  <span>Foo</span>{{#some-thing}}\n  {{/some-thing}}\n</div>',
-        output: null,
+
+        output:
+          '<div>\n  <span>Foo</span>{{#some-thing}}\n                  {{/some-thing}}\n</div>',
         errors: [{ messageId: 'incorrectEnd' }],
       },
 
       // Element closing tag at wrong indent when preceded by content
       {
         code: '{{#if foo}}\n  {{foo}} <p>\n            Bar\n  </p>\n{{/if}}',
-        output: null,
+
+        output: '{{#if foo}}\n  {{foo}} <p>\n            Bar\n          </p>\n{{/if}}',
         errors: [{ messageId: 'incorrectEnd' }],
       },
 
       // Else block indentation error
       {
         code: ['{{#if foo}}', '  {{else}}', '{{/if}}'].join('\n'),
-        output: null,
+
+        output: '{{#if foo}}\n{{else}}\n{{/if}}',
         errors: [{ messageId: 'incorrectElse' }],
       },
 
@@ -456,14 +476,16 @@ describe('template-block-indentation', () => {
           '  {{/if~}}',
           '  {{/if}}',
         ].join('\n'),
-        output: null,
+
+        output: '{{#if foo}}\n{{else if bar}}\n{{else}}\n  {{#if baz}}\n  {{/if~}}\n{{/if}}',
         errors: [{ messageId: 'incorrectEnd' }],
       },
 
       // Each with wrong else indent
       {
         code: ['{{#each foo as |bar|}}', '  {{else}}', '{{/each}}'].join('\n'),
-        output: null,
+
+        output: '{{#each foo as |bar|}}\n{{else}}\n{{/each}}',
         errors: [{ messageId: 'incorrectElse' }],
       },
 
@@ -478,13 +500,16 @@ describe('template-block-indentation', () => {
           '    Good afternoon',
           '{{/if}}',
         ].join('\n'),
-        output: null,
+
+        output:
+          '{{#if isMorning}}\n  Good morning\n{{else if isAfternoon~}}\n  Good afternoon\n{{/if}}',
         errors: [{ messageId: 'incorrectChild' }],
       },
 
       // Inline else with wrong position
       {
         code: ['{{#if foo}}foo{{else}}', '  bar', '{{/if}}'].join('\n'),
+
         output: null,
         errors: [{ messageId: 'incorrectChild' }, { messageId: 'incorrectElse' }],
       },
@@ -497,14 +522,17 @@ describe('template-block-indentation', () => {
           '   {{foobar.baz}}',
           '{{/foo}}',
         ].join('\n'),
-        output: null,
+
+        output:
+          '{{#foo bar as |foobar|}}\n  {{#foobar.baz}}{{/foobar.baz}}\n  {{foobar.baz}}\n{{/foo}}',
         errors: [{ messageId: 'incorrectChild' }, { messageId: 'incorrectChild' }],
       },
 
       // ignoreComments: true still catches non-comment child errors
       {
         code: ['<div>', 'test{{! Comment }}', '</div>'].join('\n'),
-        output: null,
+
+        output: '<div>\n  test{{! Comment }}\n</div>',
         options: [{ ignoreComments: true }],
         errors: [{ messageId: 'incorrectChild' }],
       },
@@ -558,7 +586,8 @@ describe('template-block-indentation', () => {
       // Incorrect child indentation in GJS
       {
         code: ['<template>', '<div>', '<p>Hello</p>', '</div>', '</template>'].join('\n'),
-        output: null,
+
+        output: '<template>\n<div>\n  <p>Hello</p>\n</div>\n</template>',
         errors: [{ messageId: 'incorrectChild' }],
       },
 
@@ -573,7 +602,9 @@ describe('template-block-indentation', () => {
           '  {{/if}}',
           '</template>',
         ].join('\n'),
-        output: null,
+
+        output:
+          '<template>\n  {{#if foo}}\n    {{foo}}\n  {{else if bar}}\n      {{bar}}\n  {{/if}}\n</template>',
         errors: [{ messageId: 'incorrectElse' }, { messageId: 'incorrectChild' }],
       },
 
@@ -590,7 +621,9 @@ describe('template-block-indentation', () => {
           '  {{/if}}',
           '</template>',
         ].join('\n'),
-        output: null,
+
+        output:
+          '<template>\n  {{#if a}}\n    {{#if foo}}\n      {{foo}}\n    {{else if bar}}\n        {{bar}}\n    {{/if}}\n  {{/if}}\n</template>',
         errors: [{ messageId: 'incorrectElse' }, { messageId: 'incorrectChild' }],
       },
     ],
@@ -624,7 +657,8 @@ describe('template-block-indentation', () => {
           // 2-space indent is wrong when editorconfig says indent_size=4
           {
             code: ['<div>', '  <p>Hi!</p>', '</div>'].join('\n'),
-            output: null,
+
+            output: '<div>\n    <p>Hi!</p>\n</div>',
             errors: [{ messageId: 'incorrectChild' }],
           },
         ],
@@ -648,7 +682,8 @@ describe('template-block-indentation', () => {
           // 4-space indent is wrong when explicit option says 2
           {
             code: ['<div>', '    <p>Hi!</p>', '</div>'].join('\n'),
-            output: null,
+
+            output: '<div>\n  <p>Hi!</p>\n</div>',
             options: [2],
             errors: [{ messageId: 'incorrectChild' }],
           },
