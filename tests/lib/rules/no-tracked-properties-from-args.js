@@ -81,6 +81,14 @@ ruleTester.run('no-tracked-properties-from-args', rule, {
         someProperty = this.someMethod();
       }
     `,
+    // Should not crash on method calls with non-string arguments
+    `
+      import { tracked } from '@glimmer/tracking';
+
+      class Test {
+        @tracked test = this.array.indexOf(1);
+      }
+    `,
   ],
   invalid: [
     {
