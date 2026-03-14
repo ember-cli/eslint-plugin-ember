@@ -18,7 +18,6 @@ ruleTester.run('template-no-action-modifiers', rule, {
       code: '<template><button {{action "save"}}>Save</button></template>',
       options: [{ allowlist: ['button'] }],
     },
-    // Array shorthand config format (matching ember-template-lint)
     {
       code: '<template><button {{action "save"}}>Save</button></template>',
       options: [['button']],
@@ -27,34 +26,40 @@ ruleTester.run('template-no-action-modifiers', rule, {
 
   invalid: [
     {
+      // String literal first param — no autofix
       code: '<template><button {{action "save"}}>Save</button></template>',
       output: null,
-      errors: [
-        {
-          message: 'Do not use action modifiers. Use on modifier with a function instead.',
-          type: 'GlimmerElementModifierStatement',
-        },
-      ],
+      errors: [{ messageId: 'noActionModifier' }],
     },
     {
       code: '<template><div {{action "onClick"}}>Click me</div></template>',
       output: null,
-      errors: [
-        {
-          message: 'Do not use action modifiers. Use on modifier with a function instead.',
-          type: 'GlimmerElementModifierStatement',
-        },
-      ],
+      errors: [{ messageId: 'noActionModifier' }],
     },
     {
       code: '<template><form {{action "submit" on="submit"}}>Submit</form></template>',
       output: null,
-      errors: [
-        {
-          message: 'Do not use action modifiers. Use on modifier with a function instead.',
-          type: 'GlimmerElementModifierStatement',
-        },
-      ],
+      errors: [{ messageId: 'noActionModifier' }],
+    },
+    {
+      // Path expression — autofix: {{action this.handleClick}} → {{on "click" this.handleClick}}
+      code: '<template><button {{action this.handleClick}}>Save</button></template>',
+      output: '<template><button {{on "click" this.handleClick}}>Save</button></template>',
+      errors: [{ messageId: 'noActionModifier' }],
+    },
+    {
+      // Path with args — autofix wraps in (fn ...)
+      code: '<template><button {{action this.handleClick "arg1"}}>Save</button></template>',
+      output:
+        '<template><button {{on "click" (fn this.handleClick "arg1")}}>Save</button></template>',
+      errors: [{ messageId: 'noActionModifier' }],
+    },
+    {
+      // Path with multiple args
+      code: '<template><button {{action this.handleClick "arg1" "arg2"}}>Save</button></template>',
+      output:
+        '<template><button {{on "click" (fn this.handleClick "arg1" "arg2")}}>Save</button></template>',
+      errors: [{ messageId: 'noActionModifier' }],
     },
   ],
 });
