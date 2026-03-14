@@ -47,6 +47,31 @@ ruleTester.run('template-no-array-prototype-extensions', rule, {
       output: '<template>{{get @model "items.0.name"}}</template>',
       errors: [{ messageId: 'firstObject' }],
     },
+    // firstObject — in hash argument context
+    {
+      code: '<template>{{foo bar=this.list.firstObject}}</template>',
+      output: '<template>{{foo bar=(get this.list "0")}}</template>',
+      errors: [{ messageId: 'firstObject' }],
+    },
+    // firstObject — @arg prefix path
+    {
+      code: '<template><Foo @bar={{@list.firstObject}} /></template>',
+      output: '<template><Foo @bar={{get @list "0"}} /></template>',
+      errors: [{ messageId: 'firstObject' }],
+    },
+    // firstObject — deeper path with trailing properties
+    {
+      code: '<template><Foo @bar={{this.list.firstObject.name.foo}} /></template>',
+      output: '<template><Foo @bar={{get this.list "0.name.foo"}} /></template>',
+      errors: [{ messageId: 'firstObject' }],
+    },
+    // firstObject — subexpression param context
+    {
+      code: '<template><div data-test={{eq this.list.firstObject.abc "def"}}>Hello</div></template>',
+      output:
+        '<template><div data-test={{eq (get this.list "0.abc") "def"}}>Hello</div></template>',
+      errors: [{ messageId: 'firstObject' }],
+    },
     // lastObject — no fix available
     {
       code: '<template>{{this.users.lastObject}}</template>',
