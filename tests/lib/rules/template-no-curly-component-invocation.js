@@ -66,7 +66,7 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '<template>{{#foo-bar}}content{{/foo-bar}}</template>',
-      output: null,
+      output: '<template><FooBar>content</FooBar></template>',
       errors: [
         {
           message:
@@ -76,7 +76,7 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '<template>{{#foo-bar}}{{/foo-bar}}</template>',
-      output: null,
+      output: '<template><FooBar></FooBar></template>',
       errors: [
         {
           message:
@@ -86,7 +86,7 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '<template>{{#foo-bar/baz/boo-foo}}block{{/foo-bar/baz/boo-foo}}</template>',
-      output: null,
+      output: '<template><FooBar::Baz::BooFoo>block</FooBar::Baz::BooFoo></template>',
       errors: [
         {
           message:
@@ -96,7 +96,7 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '<template>{{#some-component foo="bar"}}foo{{/some-component}}</template>',
-      output: null,
+      output: '<template><SomeComponent @foo="bar">foo</SomeComponent></template>',
       errors: [
         {
           message:
@@ -296,17 +296,17 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '{{#foo-bar}}{{/foo-bar}}',
-      output: null,
+      output: '<FooBar></FooBar>',
       errors: [{ message: generateBlockError('foo-bar') }],
     },
     {
       code: '{{#foo-bar as |foo-baz|}}{{foo-baz}}{{/foo-bar}}',
-      output: null,
+      output: '<FooBar as |foo-baz|>{{foo-baz}}</FooBar>',
       errors: [{ message: generateBlockError('foo-bar') }, { message: generateError('foo-baz') }],
     },
     {
       code: '{{#foo-bar as |foo-baz|}}{{#foo-baz as |foo-boo|}}{{foo-boo}}{{/foo-baz}}{{/foo-bar}}',
-      output: null,
+      output: '<FooBar as |foo-baz|>{{#foo-baz as |foo-boo|}}{{foo-boo}}{{/foo-baz}}</FooBar>',
       errors: [
         { message: generateBlockError('foo-bar') },
         { message: generateBlockError('foo-baz') },
@@ -315,12 +315,12 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '{{#foo-bar as |foo-baz|}}{{foos-baz}}{{/foo-bar}}',
-      output: null,
+      output: '<FooBar as |foo-baz|>{{foos-baz}}</FooBar>',
       errors: [{ message: generateBlockError('foo-bar') }, { message: generateError('foos-baz') }],
     },
     {
       code: '{{#this.foo-bar as |foo-baz|}}{{foos-baz}}{{/this.foo-bar}}',
-      output: null,
+      output: '<This.fooBar as |foo-baz|>{{foos-baz}}</This.fooBar>',
       errors: [
         { message: generateThisBlockError('this.foo-bar') },
         { message: generateError('foos-baz') },
@@ -328,7 +328,7 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '{{#this.fooBar as |foo-baz|}}{{foos-baz}}{{/this.fooBar}}',
-      output: null,
+      output: '<This.fooBar as |foo-baz|>{{foos-baz}}</This.fooBar>',
       errors: [
         { message: generateBlockError('this.fooBar') },
         { message: generateError('foos-baz') },
@@ -336,7 +336,7 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '{{#@foo-bar as |foo-baz|}}{{foos-baz}}{{/@foo-bar}}',
-      output: null,
+      output: '<@fooBar as |foo-baz|>{{foos-baz}}</@fooBar>',
       errors: [
         { message: generateThisBlockError('@foo-bar') },
         { message: generateError('foos-baz') },
@@ -344,12 +344,12 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '{{#@fooBar as |foo-baz|}}{{foos-baz}}{{/@fooBar}}',
-      output: null,
+      output: '<@fooBar as |foo-baz|>{{foos-baz}}</@fooBar>',
       errors: [{ message: generateBlockError('@fooBar') }, { message: generateError('foos-baz') }],
     },
     {
       code: '{{#let (component "foo") as |my-component|}}{{#my-component}}{{/my-component}}{{/let}}',
-      output: null,
+      output: '{{#let (component "foo") as |my-component|}}<MyComponent></MyComponent>{{/let}}',
       errors: [{ message: generateBlockError('my-component') }],
     },
     // Curly component invocations with hash params

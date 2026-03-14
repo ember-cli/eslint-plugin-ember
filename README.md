@@ -215,7 +215,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-capital-arguments](docs/rules/template-no-capital-arguments.md)                                 | disallow capital arguments (use lowercase @arg instead of @Arg)              |    |    |    |
 | [template-no-chained-this](docs/rules/template-no-chained-this.md)                                           | disallow redundant `this.this` in templates                                  |    | 🔧 |    |
 | [template-no-class-bindings](docs/rules/template-no-class-bindings.md)                                       | disallow passing classBinding or classNameBindings as arguments in templates |    |    |    |
-| [template-no-curly-component-invocation](docs/rules/template-no-curly-component-invocation.md)               | disallow curly component invocation, use angle bracket syntax instead        |    |    |    |
+| [template-no-curly-component-invocation](docs/rules/template-no-curly-component-invocation.md)               | disallow curly component invocation, use angle bracket syntax instead        |    | 🔧 |    |
 | [template-no-debugger](docs/rules/template-no-debugger.md)                                                   | disallow {{debugger}} in templates                                           |    |    |    |
 | [template-no-duplicate-attributes](docs/rules/template-no-duplicate-attributes.md)                           | disallow duplicate attribute names in templates                              |    | 🔧 |    |
 | [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                                           | disallow duplicate id attributes                                             |    |    |    |
