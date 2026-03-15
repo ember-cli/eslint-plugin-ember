@@ -1,0 +1,7 @@
+# Unlabeled Changes
+
+* `eslint-plugin-ember`
+  * [#2557](https://github.com/ember-cli/eslint-plugin-ember/pull/2557) Upgrade ember-eslint-parser to 0.8.0 ([@Copilot](https://github.com/apps/copilot-swe-agent))
+
+
+*Cannot plan release until the above changes are labeled*.
