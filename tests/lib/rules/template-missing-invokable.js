@@ -2,19 +2,8 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-const path = require('node:path');
 const rule = require('../../../lib/rules/template-missing-invokable');
 const RuleTester = require('eslint').RuleTester;
-
-//------------------------------------------------------------------------------
-// Helpers
-//------------------------------------------------------------------------------
-
-// A filename inside a fixture project that has ember-truth-helpers installed.
-const filenameInProjectWithTruthHelpers = path.join(
-  __dirname,
-  '../../fixtures/projects/has-ember-truth-helpers/test.gjs'
-);
 
 //------------------------------------------------------------------------------
 // Tests
@@ -76,33 +65,25 @@ ruleTester.run('template-missing-invokable', rule, {
       <button {{on "click" doSomething}}>Go</button>
     </template>
   `,
+
+    // Built-in invokables are not reported when already imported
+    `
+      import { fn } from '@ember/helper';
+      <template>
+        {{fn myFunc 1}}
+      </template>
+    `,
+    `
+      import { LinkTo } from '@ember/routing';
+      <template>
+        <LinkTo @route="index">Home</LinkTo>
+      </template>
+    `,
   ],
 
   invalid: [
-    // Subexpression invocations — no auto-fix when package is not in project deps
+    // Subexpression invocations — always auto-fixes when invokable is configured
     {
-      code: `
-      <template>
-        {{#if (eq 1 1)}}
-          They're equal
-        {{/if}}
-      </template>
-      `,
-      output: null,
-      options: [
-        {
-          invokables: {
-            eq: ['eq', 'ember-truth-helpers'],
-          },
-        },
-      ],
-
-      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
-    },
-
-    // Subexpression invocations — auto-fix when package IS in project deps
-    {
-      filename: filenameInProjectWithTruthHelpers,
       code: `
       <template>
         {{#if (eq 1 1)}}
@@ -129,25 +110,8 @@ ruleTester.run('template-missing-invokable', rule, {
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
 
-    // Mustache Invocations — no auto-fix when package is not in project deps
+    // Mustache Invocations — always auto-fixes when invokable is configured
     {
-      code: `
-      <template>
-        {{eq 1 1}}
-      </template>
-    `,
-      output: null,
-      options: [
-        {
-          invokables: {
-            eq: ['eq', 'ember-truth-helpers'],
-          },
-        },
-      ],
-      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
-    },
-    {
-      filename: filenameInProjectWithTruthHelpers,
       code: `
       import MyComponent from 'somewhere';
       <template>
@@ -171,7 +135,7 @@ ruleTester.run('template-missing-invokable', rule, {
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
 
-    // Modifier Invocations — built-in package always auto-fixes
+    // Modifier Invocations — always auto-fixes when invokable is configured
     {
       code: `
         function doSomething() {}
@@ -196,9 +160,8 @@ ruleTester.run('template-missing-invokable', rule, {
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
 
-    // Multiple copies of a fixable invocation — with package installed
+    // Multiple copies of a fixable invocation
     {
-      filename: filenameInProjectWithTruthHelpers,
       code: `
         let other = <template>
           {{#if (eq 3 3) }}
@@ -246,9 +209,8 @@ ruleTester.run('template-missing-invokable', rule, {
       ],
     },
 
-    // Auto-fix with a default export — package installed
+    // Auto-fix with a default export
     {
-      filename: filenameInProjectWithTruthHelpers,
       code: `
       <template>
         {{#if (eq 1 1)}}
@@ -272,6 +234,97 @@ ruleTester.run('template-missing-invokable', rule, {
         },
       ],
 
+      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
+    },
+
+    // Built-in: fn — auto-fixes without any user config
+    {
+      code: `
+      <template>
+        {{fn myFunc 1}}
+      </template>
+      `,
+      output: `import { fn } from '@ember/helper';
+
+      <template>
+        {{fn myFunc 1}}
+      </template>
+      `,
+      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
+    },
+
+    // Built-in: hash — auto-fixes without any user config
+    {
+      code: `
+      <template>
+        <MyComp @opts={{hash a=1}} />
+      </template>
+      `,
+      output: `import { hash } from '@ember/helper';
+
+      <template>
+        <MyComp @opts={{hash a=1}} />
+      </template>
+      `,
+      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
+    },
+
+    // Built-in: on modifier — auto-fixes without any user config
+    {
+      code: `
+        function doSomething() {}
+        <template>
+          <button {{on "click" doSomething}}>Go</button>
+        </template>
+      `,
+      output: `import { on } from '@ember/modifier';
+
+        function doSomething() {}
+        <template>
+          <button {{on "click" doSomething}}>Go</button>
+        </template>
+      `,
+      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
+    },
+
+    // Built-in: LinkTo — auto-fixes without any user config
+    {
+      code: `
+      <template>
+        <LinkTo @route="index">Home</LinkTo>
+      </template>
+      `,
+      output: `import { LinkTo } from '@ember/routing';
+
+      <template>
+        <LinkTo @route="index">Home</LinkTo>
+      </template>
+      `,
+      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
+    },
+
+    // User config overrides a built-in
+    {
+      code: `
+        function doSomething() {}
+        <template>
+          <button {{on "click" doSomething}}>Go</button>
+        </template>
+      `,
+      output: `import { on } from 'my-custom-modifier-package';
+
+        function doSomething() {}
+        <template>
+          <button {{on "click" doSomething}}>Go</button>
+        </template>
+      `,
+      options: [
+        {
+          invokables: {
+            on: ['on', 'my-custom-modifier-package'],
+          },
+        },
+      ],
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
   ],
