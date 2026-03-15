@@ -113,6 +113,27 @@ ruleTester.run('template-missing-invokable', rule, {
     // Mustache Invocations — always auto-fixes when invokable is configured
     {
       code: `
+      <template>
+        {{eq 1 1}}
+      </template>
+    `,
+      output: `import { eq } from 'ember-truth-helpers';
+
+      <template>
+        {{eq 1 1}}
+      </template>
+    `,
+      options: [
+        {
+          invokables: {
+            eq: ['eq', 'ember-truth-helpers'],
+          },
+        },
+      ],
+      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
+    },
+    {
+      code: `
       import MyComponent from 'somewhere';
       <template>
         <MyComponent @flag={{eq 1 1}} />
