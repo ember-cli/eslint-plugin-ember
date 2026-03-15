@@ -65,10 +65,24 @@ ruleTester.run('template-missing-invokable', rule, {
       <button {{on "click" doSomething}}>Go</button>
     </template>
   `,
+
+    // Built-in invokables are not reported when already imported
+    `
+      import { fn } from '@ember/helper';
+      <template>
+        {{fn myFunc 1}}
+      </template>
+    `,
+    `
+      import { LinkTo } from '@ember/routing';
+      <template>
+        <LinkTo @route="index">Home</LinkTo>
+      </template>
+    `,
   ],
 
   invalid: [
-    // Subexpression invocations
+    // Subexpression invocations — always auto-fixes when invokable is configured
     {
       code: `
       <template>
@@ -96,7 +110,7 @@ ruleTester.run('template-missing-invokable', rule, {
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
 
-    // Mustache Invocations
+    // Mustache Invocations — always auto-fixes when invokable is configured
     {
       code: `
       <template>
@@ -142,7 +156,7 @@ ruleTester.run('template-missing-invokable', rule, {
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
 
-    // Modifier Inovcations
+    // Modifier Invocations — always auto-fixes when invokable is configured
     {
       code: `
         function doSomething() {}
@@ -241,6 +255,97 @@ ruleTester.run('template-missing-invokable', rule, {
         },
       ],
 
+      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
+    },
+
+    // Built-in: fn — auto-fixes without any user config
+    {
+      code: `
+      <template>
+        {{fn myFunc 1}}
+      </template>
+      `,
+      output: `import { fn } from '@ember/helper';
+
+      <template>
+        {{fn myFunc 1}}
+      </template>
+      `,
+      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
+    },
+
+    // Built-in: hash — auto-fixes without any user config
+    {
+      code: `
+      <template>
+        <MyComp @opts={{hash a=1}} />
+      </template>
+      `,
+      output: `import { hash } from '@ember/helper';
+
+      <template>
+        <MyComp @opts={{hash a=1}} />
+      </template>
+      `,
+      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
+    },
+
+    // Built-in: on modifier — auto-fixes without any user config
+    {
+      code: `
+        function doSomething() {}
+        <template>
+          <button {{on "click" doSomething}}>Go</button>
+        </template>
+      `,
+      output: `import { on } from '@ember/modifier';
+
+        function doSomething() {}
+        <template>
+          <button {{on "click" doSomething}}>Go</button>
+        </template>
+      `,
+      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
+    },
+
+    // Built-in: LinkTo — auto-fixes without any user config
+    {
+      code: `
+      <template>
+        <LinkTo @route="index">Home</LinkTo>
+      </template>
+      `,
+      output: `import { LinkTo } from '@ember/routing';
+
+      <template>
+        <LinkTo @route="index">Home</LinkTo>
+      </template>
+      `,
+      errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
+    },
+
+    // User config overrides a built-in
+    {
+      code: `
+        function doSomething() {}
+        <template>
+          <button {{on "click" doSomething}}>Go</button>
+        </template>
+      `,
+      output: `import { on } from 'my-custom-modifier-package';
+
+        function doSomething() {}
+        <template>
+          <button {{on "click" doSomething}}>Go</button>
+        </template>
+      `,
+      options: [
+        {
+          invokables: {
+            on: ['on', 'my-custom-modifier-package'],
+          },
+        },
+      ],
       errors: [{ type: 'GlimmerPathExpression', message: rule.meta.messages['missing-invokable'] }],
     },
   ],
