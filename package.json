@@ -111,7 +111,7 @@
   },
   "peerDependencies": {
     "@typescript-eslint/parser": "*",
-    "eslint": ">= 8"
+    "eslint": ">= 8.40.0"
   },
   "peerDependenciesMeta": {
     "@typescript-eslint/parser": {

@@ -8,7 +8,7 @@
 
 ## ❗️Requirements
 
-- [ESLint](https://eslint.org/) `>= 8`
+- [ESLint](https://eslint.org/) `>= 8.40.0`
 - [Node.js](https://nodejs.org/) `>= 20.19`
 
 ## 🚀 Usage
