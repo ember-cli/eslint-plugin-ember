@@ -302,138 +302,233 @@ describe('determinePropertyType', () => {
       );
     });
   });
+});
 
-  describe('native classes', () => {
-    it('should determine service-type props', () => {
-      const context = new FauxContext(
-        `import {inject as service} from '@ember/service';
-        class MyController extends Controller {
-          @service currentUser;
-        }`
-      );
-      const importInjectName = context.ast.body[0].specifiers[0].local.name;
-      const node = context.ast.body[1].body.body[0];
-      expect(
-        propertyOrder.determinePropertyType(node, 'controller', [], undefined, importInjectName)
-      ).toBe('service');
-    });
+describe('determinePropertyTypeInNativeClass', () => {
+  it('should determine service-type props', () => {
+    const context = new FauxContext(
+      `import {inject as service} from '@ember/service';
+      class MyController extends Controller {
+        @service currentUser;
+      }`
+    );
+    const importInjectName = context.ast.body[0].specifiers[0].local.name;
+    const node = context.ast.body[1].body.body[0];
+    expect(
+      propertyOrder.determinePropertyTypeInNativeClass(
+        node,
+        'controller',
+        [],
+        undefined,
+        importInjectName
+      )
+    ).toBe('service');
+  });
+  it('should determine controller-type props', () => {
+    const context = new FauxContext(
+      `import {inject as controller} from '@ember/controller';
+      class MyController extends Controller {
+        @controller application;
+      }`
+    );
+    const importControllerName = context.ast.body[0].specifiers[0].local.name;
+    const node = context.ast.body[1].body.body[0];
+    expect(
+      propertyOrder.determinePropertyTypeInNativeClass(
+        node,
+        'controller',
+        [],
+        undefined,
+        undefined,
+        undefined,
+        importControllerName
+      )
+    ).toBe('controller');
+  });
 
-    it('should determine controller-type props', () => {
-      const context = new FauxContext(
-        `import {inject as controller} from '@ember/controller';
-        class MyController extends Controller {
-          @controller application;
+  it('should determine constructor-type props', () => {
+    const context = new FauxContext(
+      `class MyController extends Controller {
+          constructor() {}
         }`
-      );
-      const importControllerName = context.ast.body[0].specifiers[0].local.name;
-      const node = context.ast.body[1].body.body[0];
-      expect(
-        propertyOrder.determinePropertyType(
-          node,
-          'controller',
-          [],
-          undefined,
-          undefined,
-          undefined,
-          importControllerName
-        )
-      ).toBe('controller');
-    });
+    );
+    const node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'controller')).toBe(
+      'constructor'
+    );
+  });
 
-    it('should determine init-type props', () => {
-      const context = new FauxContext(
-        `class MyController extends Controller {
-          init() {}
+  it('should determine component lifecycle hooks', () => {
+    const context = new FauxContext(
+      `class MyComponent extends Component {
+          willDestroy() {}
         }`
-      );
-      const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller')).toBe('init');
-    });
+    );
+    const node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'component', [])).toBe(
+      'willDestroy'
+    );
+  });
 
-    it('should determine query-params', () => {
-      const context = new FauxContext(
-        `class MyController extends Controller {
-          queryParams = [];
-        }`
-      );
-      const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'controller')).toBe('query-params');
-    });
+  it('should determine query-params', () => {
+    const context = new FauxContext(
+      `class MyController extends Controller {
+        queryParams = [];
+      }`
+    );
+    const node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'controller')).toBe(
+      'query-params'
+    );
+  });
+  it('should determine attributes', () => {
+    const context = new FauxContext(
+      `class MyModel extends Model {
+        @attr someAttr;
+      }`
+    );
+    const node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'model')).toBe('attribute');
+  });
+  it('should determine relationships', () => {
+    const context = new FauxContext(
+      `class MyModel extends Model {
+        @hasMany('otherModel') someRelationship;
+      }`
+    );
+    const node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'model')).toBe('relationship');
+  });
 
-    it('should determine attributes', () => {
-      const context = new FauxContext(
-        `class MyModel extends Model {
-          @attr someAttr;
-        }`
-      );
-      const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'model')).toBe('attribute');
-    });
+  it('should determine single-line accessor', () => {
+    const context = new FauxContext(
+      `class MyComponent extends Component {
+            get myProp() {};
+          }`
+    );
+    const node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'component', [])).toBe(
+      'single-line-accessor'
+    );
+  });
 
-    it('should determine relationships', () => {
-      const context = new FauxContext(
-        `class MyModel extends Model {
-          @hasMany('otherModel') someRelationship;
+  it('should determine multi-line accessor', () => {
+    const context = new FauxContext(
+      `class MyComponent extends Component {
+          get myProp() {
+              console.log('bar');
+          };
         }`
-      );
-      const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'model')).toBe('relationship');
-    });
+    );
+    const node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'component', [])).toBe(
+      'multi-line-accessor'
+    );
+  });
 
-    it('should determine observer-type props', () => {
-      const context = new FauxContext(
-        `import {observer} from '@ember/object';
-        class MyController extends Controller {
-          @observer someObvs;
-        }`
-      );
-      const importObserverName = context.ast.body[0].specifiers[0].local.name;
-      const node = context.ast.body[1].body.body[0];
-      expect(
-        propertyOrder.determinePropertyType(
-          node,
-          'controller',
-          [],
-          undefined,
-          undefined,
-          importObserverName
-        )
-      ).toBe('observer');
-    });
+  it('should determine single-line functions', () => {
+    const context = new FauxContext(
+      `class MyComponent extends Component {
+        @computed get myProp() {};
+      }`
+    );
+    const node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'component', [])).toBe(
+      'single-line-accessor'
+    );
+  });
 
-    it('should determine single-line functions', () => {
-      const context = new FauxContext(
-        `class MyComponent extends Component {
-          foo() {}
-        }`
-      );
-      const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'component')).toBe('single-line-function');
-    });
+  it('should determine multi-line functions', () => {
+    const context = new FauxContext(
+      `class MyComponent extends Component {
+        @computed
+        get myProp() {
+            console.log('bar');
+        };
+      }`
+    );
+    const node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'component', [])).toBe(
+      'multi-line-accessor'
+    );
+  });
 
-    it('should determine multi-line functions', () => {
-      const context = new FauxContext(
-        `class MyComponent extends Component {
-          foo(bar) {
-            console.log(bar)
-          }
-        }`
-      );
-      const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'component', [])).toBe(
-        'multi-line-function'
-      );
-    });
+  it('should determine actions', () => {
+    const context = new FauxContext(
+      `import {action} from '@ember/object';
+      class MyComponent extends Component {
+        @action fooAction() {};
+      }`
+    );
+    const node = context.ast.body[1].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'component')).toBe('action');
+  });
 
-    it('should determine properties', () => {
-      const context = new FauxContext(
-        `class MyComponent extends Component {
-          foo = "boo";
-        }`
-      );
-      const node = context.ast.body[0].body.body[0];
-      expect(propertyOrder.determinePropertyType(node, 'component', [])).toBe('property');
-    });
+  it('should determine empty methods', () => {
+    const context = new FauxContext(
+      `class MyComponent extends Component {
+        foo() {}
+      }`
+    );
+    const node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'component', [])).toBe(
+      'empty-method'
+    );
+  });
+
+  it('should determine methods', () => {
+    let context = new FauxContext(
+      `class MyComponent extends Component {
+        foo(bar) {
+          console.log(bar)
+        }
+      }`
+    );
+    let node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'component', [])).toBe('method');
+
+    context = new FauxContext(
+      `class MyComponent extends Component {
+        fooTask = task(async () => {
+          console.log('foo');
+        })
+      }`
+    );
+    node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'component', [])).toBe('method');
+
+    context = new FauxContext(
+      `class trackedMyComponent extends Component {
+        @task
+        fooTask2() {
+          console.log('foo');
+        }
+      }`
+    );
+    node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'component', [])).toBe('method');
+  });
+
+  it('should determine properties', () => {
+    let context = new FauxContext(
+      `class MyComponent extends Component {
+        foo = "boo";
+      }`
+    );
+    let node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'component', [])).toBe(
+      'property'
+    );
+
+    context = new FauxContext(
+      `class MyComponent extends Component {
+        foo;
+      }`
+    );
+    node = context.ast.body[0].body.body[0];
+    expect(propertyOrder.determinePropertyTypeInNativeClass(node, 'component', [])).toBe(
+      'property'
+    );
   });
 });
 
