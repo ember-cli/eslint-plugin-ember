@@ -448,6 +448,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 | Name                                                                                         | Description                                                | 💼 | 🔧 | 💡 |
 | :------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :- | :- | :- |
+| [template-no-quoteless-attributes](docs/rules/template-no-quoteless-attributes.md)           | require quotes on all attribute values                     |    | 🔧 |    |
 | [template-no-unnecessary-curly-strings](docs/rules/template-no-unnecessary-curly-strings.md) | disallow unnecessary curly braces in string interpolations |    | 🔧 |    |
 
 ### Stylistic Issues
