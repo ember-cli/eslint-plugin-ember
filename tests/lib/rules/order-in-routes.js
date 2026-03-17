@@ -10,7 +10,13 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+    babelOptions: {
+      configFile: require.resolve('../../../.babelrc'),
+    },
+  },
   parser: require.resolve('@babel/eslint-parser'),
 });
 
@@ -170,6 +176,56 @@ eslintTester.run('order-in-routes', rule, {
       ],
       parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
     },
+    `import Route from '@ember/routing/route';
+      import { inject as service } from '@ember/service';
+      export default class UserRoute extends Route {
+        @service currentUser;
+        queryParams = {};
+        customProp = 'test';
+        beforeModel() {}
+        model() {}
+      }`,
+    {
+      code: `import Route from '@ember/routing/route';
+        import { inject as service } from '@ember/service';
+        export default class UserRoute extends Route {
+          model() {}
+          beforeModel() {}
+          @service currentUser;
+        }`,
+      options: [
+        {
+          order: ['model', 'lifecycle-hook', 'service'],
+        },
+      ],
+    },
+    {
+      code: `import Route from '@ember/routing/route';
+        import { inject as service } from '@ember/service';
+        export default class UserRoute extends Route {
+          deactivate() {}
+          setupController() {}
+          beforeModel() {}
+          @service currentUser;
+          model() {}
+        }`,
+      options: [
+        {
+          order: [['deactivate', 'setupController', 'beforeModel'], 'service', 'model'],
+        },
+      ],
+    },
+    // spacing/indentation is intentionally not validated by this rule;
+    // only member ordering should matter.
+    `import Route from '@ember/routing/route';
+      import { inject as service } from '@ember/service';
+      export default class UserRoute extends Route {
+            @service currentUser;
+        queryParams = {};
+                 customProp = 'test';
+
+           beforeModel() {}
+      }`,
   ],
   invalid: [
     {
@@ -790,6 +846,109 @@ eslintTester.run('order-in-routes', rule, {
           message:
             'The "aMethod" method should be above the "customProp" custom property on line 2',
           line: 3,
+        },
+      ],
+    },
+    {
+      code: `import Route from '@ember/routing/route';
+        import { inject as service } from '@ember/service';
+        export default class UserRoute extends Route {
+          queryParams = {};
+          @service currentUser;
+          customProp = 'test';
+          beforeModel() {}
+          model() {}
+        }`,
+      output: `import Route from '@ember/routing/route';
+        import { inject as service } from '@ember/service';
+        export default class UserRoute extends Route {
+          @service currentUser;
+          queryParams = {};
+          customProp = 'test';
+          beforeModel() {}
+          model() {}
+        }`,
+      errors: [
+        {
+          message:
+            'The "currentUser" service injection should be above the inherited "queryParams" property on line 4',
+          line: 5,
+        },
+      ],
+    },
+    {
+      code: `import Route from '@ember/routing/route';
+        export default class UserRoute extends Route {
+          customProp = 'test';
+          queryParams = {};
+          model() {}
+          beforeModel() {}
+        }`,
+      output: `import Route from '@ember/routing/route';
+        export default class UserRoute extends Route {
+          queryParams = {};
+          customProp = 'test';
+          model() {}
+          beforeModel() {}
+        }`,
+      errors: [
+        {
+          message:
+            'The inherited "queryParams" property should be above the "customProp" property on line 3',
+          line: 4,
+        },
+        {
+          message: 'The "beforeModel" lifecycle hook should be above the "model" hook on line 5',
+          line: 6,
+        },
+      ],
+    },
+    {
+      code: `import Route from '@ember/routing/route';
+        export default class UserRoute extends Route {
+          customProp = 'test';
+          model() {}
+          beforeModel() {}
+        }`,
+      output: `import Route from '@ember/routing/route';
+        export default class UserRoute extends Route {
+          customProp = 'test';
+          beforeModel() {}
+        model() {}
+          }`,
+      errors: [
+        {
+          message: 'The "beforeModel" lifecycle hook should be above the "model" hook on line 4',
+          line: 5,
+        },
+      ],
+    },
+    {
+      code: `import Route from '@ember/routing/route';
+        import { inject as service } from '@ember/service';
+        export default class UserRoute extends Route {
+          model() {}
+          beforeModel() {}
+          @service currentUser;
+          queryParams = {};
+        }`,
+      output: `import Route from '@ember/routing/route';
+        import { inject as service } from '@ember/service';
+        export default class UserRoute extends Route {
+          @service currentUser;
+          model() {}
+          beforeModel() {}
+          queryParams = {};
+        }`,
+      options: [
+        {
+          order: ['service', 'model', 'lifecycle-hook', 'inherited-property'],
+        },
+      ],
+      errors: [
+        {
+          message: 'The "currentUser" service injection should be above the "model" hook on line 4',
+          line: 6,
         },
       ],
     },
