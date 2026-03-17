@@ -53,53 +53,6 @@ ruleTester.run('template-builtin-component-arguments', rule, {
   ],
 });
 
-// HBS tests — loose mode, always checks by tag name
-const hbsRuleTester = new RuleTester({
-  parser: require.resolve('ember-eslint-parser/hbs'),
-  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
-});
-
-hbsRuleTester.run('template-builtin-component-arguments (hbs)', rule, {
-  valid: [
-    '<input type="text" size="10" />',
-    '<Input @type="text" size="10" />',
-    '<Input @type="checkbox" @checked={{true}} />',
-    '<Textarea @value="Tomster" />',
-  ],
-  invalid: [
-    {
-      code: '<Input type="text" size="10" />',
-      output: null,
-      errors: [
-        {
-          message:
-            'Setting the `type` attribute on the builtin <Input> component is not allowed. Did you mean `@type`?',
-        },
-      ],
-    },
-    {
-      code: '<Input @type="checkbox" checked />',
-      output: null,
-      errors: [
-        {
-          message:
-            'Setting the `checked` attribute on the builtin <Input> component is not allowed. Did you mean `@checked`?',
-        },
-      ],
-    },
-    {
-      code: '<Textarea value="Tomster" />',
-      output: null,
-      errors: [
-        {
-          message:
-            'Setting the `value` attribute on the builtin <Textarea> component is not allowed. Did you mean `@value`?',
-        },
-      ],
-    },
-  ],
-});
-
 const hbsRuleTester = new RuleTester({
   parser: require.resolve('ember-eslint-parser/hbs'),
   parserOptions: { ecmaVersion: 2022, sourceType: 'module' },

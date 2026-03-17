@@ -129,46 +129,6 @@ ruleTester.run('template-no-array-prototype-extensions', rule, {
       output: null,
       errors: [{ messageId: 'lastObject' }],
     },
-    {
-      code: '<template><div data-test={{eq this.list.firstObject.abc "def"}}>Hello</div></template>',
-      output: null,
-      errors: [{ messageId: 'firstObject' }],
-    },
-    {
-      code: '<template>{{foo bar=this.list.firstObject}}</template>',
-      output: null,
-      errors: [{ messageId: 'firstObject' }],
-    },
-    {
-      code: '<template>{{this.list.firstObject}}</template>',
-      output: null,
-      errors: [{ messageId: 'firstObject' }],
-    },
-    {
-      code: '<template>{{this.list.firstObject.name}}</template>',
-      output: null,
-      errors: [{ messageId: 'firstObject' }],
-    },
-    {
-      code: '<template><Foo @bar={{@list.firstObject}} /></template>',
-      output: null,
-      errors: [{ messageId: 'firstObject' }],
-    },
-    {
-      code: '<template><Foo @bar={{this.list.firstObject.name.foo}} /></template>',
-      output: null,
-      errors: [{ messageId: 'firstObject' }],
-    },
-    {
-      code: "<template><Foo @bar={{get this 'list.firstObject'}} /></template>",
-      output: null,
-      errors: [{ messageId: 'firstObject' }],
-    },
-    {
-      code: "<template><Foo @bar={{get @list 'firstObject.name'}} /></template>",
-      output: null,
-      errors: [{ messageId: 'firstObject' }],
-    },
   ],
 });
 
@@ -234,42 +194,42 @@ hbsRuleTester.run('template-no-array-prototype-extensions (hbs)', rule, {
     },
     {
       code: '<div data-test={{eq this.list.firstObject.abc "def"}}>Hello</div>',
-      output: null,
+      output: '<div data-test={{eq (get this.list "0.abc") "def"}}>Hello</div>',
       errors: [{ messageId: 'firstObject' }],
     },
     {
       code: '{{foo bar=this.list.firstObject}}',
-      output: null,
+      output: '{{foo bar=(get this.list "0")}}',
       errors: [{ messageId: 'firstObject' }],
     },
     {
       code: '{{this.list.firstObject}}',
-      output: null,
+      output: '{{get this.list "0"}}',
       errors: [{ messageId: 'firstObject' }],
     },
     {
       code: '{{this.list.firstObject.name}}',
-      output: null,
+      output: '{{get this.list "0.name"}}',
       errors: [{ messageId: 'firstObject' }],
     },
     {
       code: '<Foo @bar={{@list.firstObject}} />',
-      output: null,
+      output: '<Foo @bar={{get @list "0"}} />',
       errors: [{ messageId: 'firstObject' }],
     },
     {
       code: '<Foo @bar={{this.list.firstObject.name.foo}} />',
-      output: null,
+      output: '<Foo @bar={{get this.list "0.name.foo"}} />',
       errors: [{ messageId: 'firstObject' }],
     },
     {
       code: "<Foo @bar={{get this 'list.firstObject'}} />",
-      output: null,
+      output: "<Foo @bar={{get this 'list.0'}} />",
       errors: [{ messageId: 'firstObject' }],
     },
     {
       code: "<Foo @bar={{get @list 'firstObject.name'}} />",
-      output: null,
+      output: "<Foo @bar={{get @list '0.name'}} />",
       errors: [{ messageId: 'firstObject' }],
     },
   ],

@@ -218,12 +218,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | Name                                                                                                               | Description                                                                  | 💼 | 🔧 | 💡 |
 | :----------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------- | :- | :- | :- |
 | [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md)                         | disallow setting certain attributes on builtin components                    |    |    |    |
-| [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                                         | disallow usage of {{action}} modifiers                                       |    |    |    |
+| [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                                         | disallow usage of {{action}} modifiers                                       |    | 🔧 |    |
 | [template-no-action-on-submit-button](docs/rules/template-no-action-on-submit-button.md)                           | disallow action attribute on submit buttons                                  |    |    |    |
 | [template-no-ambiguous-glimmer-paths](docs/rules/template-no-ambiguous-glimmer-paths.md)                           | disallow ambiguous path in templates                                         |    |    |    |
 | [template-no-args-paths](docs/rules/template-no-args-paths.md)                                                     | disallow @args in paths                                                      |    |    |    |
 | [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md)                   | disallow @arguments on HTML elements                                         |    |    |    |
-| [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)                     | disallow usage of Ember Array prototype extensions                           |    |    |    |
+| [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)                     | disallow usage of Ember Array prototype extensions                           |    | 🔧 |    |
 | [template-no-at-ember-render-modifiers](docs/rules/template-no-at-ember-render-modifiers.md)                       | disallow usage of @ember/render-modifiers                                    |    |    |    |
 | [template-no-bare-strings](docs/rules/template-no-bare-strings.md)                                                 | disallow bare strings in templates (require translation/localization)        |    |    |    |
 | [template-no-bare-yield](docs/rules/template-no-bare-yield.md)                                                     | disallow {{yield}} without parameters outside of contextual components       |    |    |    |
@@ -244,7 +244,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-implicit-this](docs/rules/template-no-implicit-this.md)                                               | require explicit `this` in property access                                   |    |    |    |
 | [template-no-index-component-invocation](docs/rules/template-no-index-component-invocation.md)                     | disallow index component invocations                                         |    |    |    |
 | [template-no-inline-event-handlers](docs/rules/template-no-inline-event-handlers.md)                               | disallow DOM event handler attributes                                        |    |    |    |
-| [template-no-inline-linkto](docs/rules/template-no-inline-linkto.md)                                               | disallow inline form of LinkTo component                                     |    |    |    |
+| [template-no-inline-linkto](docs/rules/template-no-inline-linkto.md)                                               | disallow inline form of LinkTo component                                     |    | 🔧 |    |
 | [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                               | disallow inline styles                                                       |    |    |    |
 | [template-no-input-block](docs/rules/template-no-input-block.md)                                                   | disallow block usage of {{input}} helper                                     |    |    |    |
 | [template-no-input-placeholder](docs/rules/template-no-input-placeholder.md)                                       | disallow placeholder attribute on input elements                             |    |    |    |
@@ -252,7 +252,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-invalid-meta](docs/rules/template-no-invalid-meta.md)                                                 | disallow invalid meta tags                                                   |    |    |    |
 | [template-no-log](docs/rules/template-no-log.md)                                                                   | disallow {{log}} in templates                                                |    |    |    |
 | [template-no-model-argument-in-route-templates](docs/rules/template-no-model-argument-in-route-templates.md)       | disallow @model argument in route templates                                  |    | 🔧 |    |
-| [template-no-multiple-empty-lines](docs/rules/template-no-multiple-empty-lines.md)                                 | disallow multiple consecutive empty lines in templates                       |    |    |    |
+| [template-no-multiple-empty-lines](docs/rules/template-no-multiple-empty-lines.md)                                 | disallow multiple consecutive empty lines in templates                       |    | 🔧 |    |
 | [template-no-mut-helper](docs/rules/template-no-mut-helper.md)                                                     | disallow usage of (mut) helper                                               |    |    |    |
 | [template-no-negated-comparison](docs/rules/template-no-negated-comparison.md)                                     | disallow negated comparisons in templates                                    |    |    |    |
 | [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                                       | disallow negated conditions in if/unless                                     |    |    |    |
@@ -475,7 +475,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [order-in-models](docs/rules/order-in-models.md)                               | enforce proper order of properties in models                                   |    | 🔧 |    |
 | [order-in-routes](docs/rules/order-in-routes.md)                               | enforce proper order of properties in routes                                   |    | 🔧 |    |
 | [template-attribute-indentation](docs/rules/template-attribute-indentation.md) | enforce proper indentation of attributes and arguments in multi-line templates |    |    |    |
-| [template-attribute-order](docs/rules/template-attribute-order.md)             | enforce consistent ordering of attributes in template elements                 |    |    |    |
+| [template-attribute-order](docs/rules/template-attribute-order.md)             | enforce consistent ordering of attributes in template elements                 |    | 🔧 |    |
 | [template-block-indentation](docs/rules/template-block-indentation.md)         | enforce consistent indentation for block statements and their children         |    |    |    |
 | [template-eol-last](docs/rules/template-eol-last.md)                           | require or disallow newline at the end of template files                       |    | 🔧 |    |
 | [template-linebreak-style](docs/rules/template-linebreak-style.md)             | enforce consistent linebreaks in templates                                     |    | 🔧 |    |

@@ -62,14 +62,14 @@ ruleTester.run('template-no-action-modifiers', rule, {
 
     {
       code: '<template><div {{action this.foo}}></div></template>',
-      output: null,
+      output: '<template><div {{on "click" this.foo}}></div></template>',
       errors: [
         { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
       ],
     },
     {
       code: '<template><div {{action this.foo bar baz}}></div></template>',
-      output: null,
+      output: '<template><div {{on "click" (fn this.foo bar baz)}}></div></template>',
       errors: [
         { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
       ],
@@ -112,14 +112,14 @@ hbsRuleTester.run('template-no-action-modifiers (hbs)', rule, {
   invalid: [
     {
       code: '<div {{action this.foo}}></div>',
-      output: null,
+      output: '<div {{on "click" this.foo}}></div>',
       errors: [
         { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
       ],
     },
     {
       code: '<div {{action this.foo bar baz}}></div>',
-      output: null,
+      output: '<div {{on "click" (fn this.foo bar baz)}}></div>',
       errors: [
         { message: 'Do not use action modifiers. Use on modifier with a function instead.' },
       ],
