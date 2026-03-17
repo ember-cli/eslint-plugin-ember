@@ -261,6 +261,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                                 | disallow usage of ember-page-title component                                 |    |    |    |
 | [template-no-positional-data-test-selectors](docs/rules/template-no-positional-data-test-selectors.md)             | disallow positional data-test-* params in curly invocations                  |    |    |    |
 | [template-no-potential-path-strings](docs/rules/template-no-potential-path-strings.md)                             | disallow potential path strings in attribute values                          |    |    |    |
+| [template-no-restricted-invocations](docs/rules/template-no-restricted-invocations.md)                             | disallow certain components, helpers or modifiers from being used            |    |    |    |
 | [template-no-splattributes-with-class](docs/rules/template-no-splattributes-with-class.md)                         | disallow splattributes with class attribute                                  |    |    |    |
 | [template-no-this-in-template-only-components](docs/rules/template-no-this-in-template-only-components.md)         | disallow this in template-only components (gjs/gts)                          |    | 🔧 |    |
 | [template-no-trailing-spaces](docs/rules/template-no-trailing-spaces.md)                                           | disallow trailing whitespace at the end of lines in templates                |    | 🔧 |    |
