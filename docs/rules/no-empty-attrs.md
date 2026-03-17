@@ -35,9 +35,3 @@ export default Model.extend({
 ```
 
 In case you need a custom behavior, it's good to write your own [transform](https://api.emberjs.com/ember-data/release/classes/Transform).
-
-## Help Wanted
-
-| Issue                                      | Link                                                                |
-| :----------------------------------------- | :------------------------------------------------------------------ |
-| ❌ Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |
