@@ -1545,6 +1545,16 @@ describe('isRouteLifecycleHook', () => {
     node = getProperty('test = { deactivate() {} }');
     expect(emberUtils.isRouteLifecycleHook(node)).toBeTruthy();
   });
+
+  it('should not crash when class field has no initializer', () => {
+    const classField = {
+      key: { name: 'beforeModel' },
+      value: null,
+    };
+
+    expect(() => emberUtils.isRouteLifecycleHook(classField)).not.toThrow();
+    expect(emberUtils.isRouteLifecycleHook(classField)).toBeFalsy();
+  });
 });
 
 describe('isActionsProp', () => {
