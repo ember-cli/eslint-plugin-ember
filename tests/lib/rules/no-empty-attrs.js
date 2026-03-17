@@ -10,7 +10,14 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+  parser: require.resolve('@babel/eslint-parser'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+    babelOptions: {
+      configFile: require.resolve('../../../.babelrc'),
+    },
+  },
 });
 
 const message = 'Supply proper attribute type';
@@ -31,6 +38,10 @@ eslintTester.run('no-empty-attrs', rule, {
           return attr.underscore();
         }),
       });`,
+    `import Model, { attr } from '@ember-data/model';
+      export default class UserModel extends Model {
+        @attr('string') name;
+      }`,
   ],
   invalid: [
     {
@@ -97,6 +108,30 @@ eslintTester.run('no-empty-attrs', rule, {
       code: 'export default CustomModel.extend({name: attr()});',
       output: null,
       errors: [{ message, line: 1 }],
+    },
+    {
+      code: `import Model, { attr } from '@ember-data/model';
+        export default class UserModel extends Model {
+          @attr() name;
+        }`,
+      output: null,
+      errors: [{ message, line: 3 }],
+    },
+    {
+      code: `import Model, { attr } from '@ember-data/model';
+        export default class UserModel extends Model {
+          @attr name;
+        }`,
+      output: null,
+      errors: [{ message, line: 3 }],
+    },
+    {
+      code: `import Model, { attr } from '@ember-data/model';
+        export default (class UserModel extends Model {
+          @attr name;
+        });`,
+      output: null,
+      errors: [{ message, line: 3 }],
     },
   ],
 });

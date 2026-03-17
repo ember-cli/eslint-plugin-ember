@@ -51,6 +51,8 @@ You should write code grouped and ordered in this way:
 4. Multiline computed properties
 5. Other structures (custom methods etc.)
 
+This rule checks ordering only; it does not enforce indentation or other whitespace formatting.
+
 ## Examples
 
 ```js
@@ -85,9 +87,3 @@ export default Model.extend({
   shape: attr('string'),
 });
 ```
-
-## Help Wanted
-
-| Issue                                      | Link                                                                |
-| :----------------------------------------- | :------------------------------------------------------------------ |
-| ❌ Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |

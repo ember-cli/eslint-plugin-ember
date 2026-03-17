@@ -51,6 +51,79 @@ describe('isDSModel', () => {
   });
 });
 
+describe('isEmberDataModel', () => {
+  it('detects Model imported from @ember-data/model in native classes', () => {
+    const context = new FauxContext(`
+      import Model from '@ember-data/model';
+      class UserModel extends Model {}
+    `);
+    const node = context.ast.body[1];
+
+    expect(emberUtils.isEmberDataModel(context, node)).toBeTruthy();
+  });
+
+  it('detects Model imported from ember-data/model in native classes', () => {
+    const context = new FauxContext(`
+      import Model from 'ember-data/model';
+      class UserModel extends Model {}
+    `);
+    const node = context.ast.body[1];
+
+    expect(emberUtils.isEmberDataModel(context, node)).toBeTruthy();
+  });
+
+  it('detects native classes with mixin extension syntax', () => {
+    const context = new FauxContext(`
+      import Model from '@ember-data/model';
+      class UserModel extends Model.extend(SoftDeleteMixin) {}
+    `);
+    const node = context.ast.body[1];
+
+    expect(emberUtils.isEmberDataModel(context, node)).toBeTruthy();
+  });
+
+  it('detects model class expressions', () => {
+    const context = new FauxContext(`
+      import Model from '@ember-data/model';
+      const UserModel = class extends Model {};
+    `);
+    const node = context.ast.body[1].declarations[0].init;
+
+    expect(emberUtils.isEmberDataModel(context, node)).toBeTruthy();
+  });
+
+  it('does not detect native classes when import path is incorrect', () => {
+    const context = new FauxContext(`
+      import Model from '@somewhere-else/model';
+      class UserModel extends Model {}
+    `);
+    const node = context.ast.body[1];
+
+    expect(emberUtils.isEmberDataModel(context, node)).toBeFalsy();
+  });
+
+  it('detects model class by file path when import source is unknown', () => {
+    const context = new FauxContext(
+      `
+      class UserModel extends LocalModel {}
+    `,
+      'example-app/models/path/to/user.js'
+    );
+    const node = context.ast.body[0];
+
+    expect(emberUtils.isEmberDataModel(context, node)).toBeTruthy();
+  });
+
+  it('throws when called on wrong type of node', () => {
+    const context = new FauxContext('const x = 123;');
+    const node = context.ast.body[0];
+
+    expect(() => emberUtils.isEmberDataModel(context, node)).toThrow(
+      'Function should only be called on a `ClassDeclaration`/`ClassExpression` (native class)'
+    );
+  });
+});
+
 describe('isModuleByFilePath', () => {
   it('should check if current file is a component', () => {
     const filePath = 'example-app/components/path/to/some-component.js';
