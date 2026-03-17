@@ -72,4 +72,4 @@ Examples of **correct** code for this rule:
 
 - [WebAIM: Link Text and Appearance](https://webaim.org/techniques/hypertext/link_text)
 - [WCAG 2.4.4: Link Purpose (In Context)](https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-in-context.html)
-- [eslint-plugin-ember template-no-invalid-link-text](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-invalid-link-text.md)
+- [ember-template-lint: no-invalid-link-text](https://github.com/ember-template-lint/ember-template-lint/blob/main/docs/rule/no-invalid-link-text.md)
