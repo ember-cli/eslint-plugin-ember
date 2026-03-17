@@ -191,6 +191,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-heading-inside-button](docs/rules/template-no-heading-inside-button.md)             | disallow heading elements inside button elements                                 |    |    |    |
 | [template-no-invalid-aria-attributes](docs/rules/template-no-invalid-aria-attributes.md)         | disallow invalid aria-* attributes                                               |    |    |    |
 | [template-no-invalid-interactive](docs/rules/template-no-invalid-interactive.md)                 | disallow non-interactive elements with interactive handlers                      |    |    |    |
+| [template-no-invalid-link-text](docs/rules/template-no-invalid-link-text.md)                     | disallow invalid or uninformative link text content                              |    |    |    |
 | [template-no-invalid-link-title](docs/rules/template-no-invalid-link-title.md)                   | disallow invalid title attributes on link elements                               |    |    |    |
 | [template-no-invalid-role](docs/rules/template-no-invalid-role.md)                               | disallow invalid ARIA roles                                                      |    |    |    |
 | [template-no-nested-interactive](docs/rules/template-no-nested-interactive.md)                   | disallow nested interactive elements                                             |    |    |    |
