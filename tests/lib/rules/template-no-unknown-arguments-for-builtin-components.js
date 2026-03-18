@@ -184,6 +184,31 @@ ruleTester.run('template-no-unknown-arguments-for-builtin-components', rule, {
       output: null,
       errors: [{ messageId: 'unknownArgument' }],
     },
+
+    // Missing required arguments
+    {
+      code: '<template><LinkTo /></template>',
+      output: null,
+      errors: [{ messageId: 'requiredArgument' }],
+    },
+    {
+      code: '<template><LinkTo @disabled={{true}} /></template>',
+      output: null,
+      errors: [{ messageId: 'requiredArgument' }],
+    },
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Component from '@glimmer/component';
+        export default class MyComponent extends Component {
+          <template>
+            <LinkTo @replace={{true}}>Home</LinkTo>
+          </template>
+        }
+      `,
+      output: null,
+      errors: [{ messageId: 'requiredArgument' }],
+    },
   ],
 });
 
@@ -330,6 +355,38 @@ Instead, please use the {{on}} modifier, i.e. "<Textarea {{on "keyup" ...}} />" 
         {
           message:
             '"@random" is not a known argument for the <LinkTo /> component. Did you mean "@dragEnd"?',
+        },
+      ],
+    },
+
+    // Missing required arguments
+    {
+      code: '<LinkTo />',
+      output: null,
+      errors: [
+        {
+          message:
+            'Arguments "@route" or "@query" or "@model" or "@models" is required for <LinkTo /> component.',
+        },
+      ],
+    },
+    {
+      code: '<LinkTo @disabled={{true}} />',
+      output: null,
+      errors: [
+        {
+          message:
+            'Arguments "@route" or "@query" or "@model" or "@models" is required for <LinkTo /> component.',
+        },
+      ],
+    },
+    {
+      code: '<LinkTo @replace={{true}}>Home</LinkTo>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Arguments "@route" or "@query" or "@model" or "@models" is required for <LinkTo /> component.',
         },
       ],
     },
