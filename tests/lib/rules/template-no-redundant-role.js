@@ -142,7 +142,7 @@ hbsRuleTester.run('template-no-redundant-role', rule, {
     '<ul role="list"></ul>',
     '<input role="combobox">',
     '<footer role={{this.bar}}></footer>',
-    '<nav class="navigation" role="navigation></nav>',
+    '<nav class="navigation" role="navigation"></nav>',
     '<button role="link"></button>',
     '<input type="checkbox" value="yes" checked />',
     '<input type="range" />',
