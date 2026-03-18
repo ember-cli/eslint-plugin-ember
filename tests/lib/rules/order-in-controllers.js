@@ -10,7 +10,13 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const eslintTester = new RuleTester({
-  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+    babelOptions: {
+      configFile: require.resolve('../../../.babelrc'),
+    },
+  },
   parser: require.resolve('@babel/eslint-parser'),
 });
 
@@ -146,6 +152,51 @@ eslintTester.run('order-in-controllers', rule, {
       ],
       parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
     },
+    `import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+      export default class UserController extends Controller {
+        @service currentUser;
+        queryParams = [];
+        customProp = 'test';
+        actions() {}
+      }`,
+    {
+      code: `import Controller from '@ember/controller';
+        import { inject as service } from '@ember/service';
+        export default class UserController extends Controller {
+          queryParams = [];
+          @service currentUser;
+          actions() {}
+        }`,
+      options: [
+        {
+          order: ['query-params', 'service', 'single-line-function'],
+        },
+      ],
+    },
+    {
+      code: `import Controller from '@ember/controller';
+        import { inject as service } from '@ember/service';
+        export default class UserController extends Controller {
+          @service currentUser;
+          queryParams = [];
+          customProp = 'test';
+        }`,
+      options: [
+        {
+          order: [['service', 'query-params'], 'property'],
+        },
+      ],
+    },
+    // spacing/indentation is intentionally not validated by this rule;
+    // only member ordering should matter.
+    `import Controller from '@ember/controller';
+      import { inject as service } from '@ember/service';
+      export default class UserController extends Controller {
+            @service currentUser;
+        queryParams = [];
+                 customProp = 'test';
+      }`,
   ],
   invalid: [
     {
@@ -521,6 +572,77 @@ eslintTester.run('order-in-controllers', rule, {
           message:
             'The "aMethod" method should be above the "customProp" custom property on line 2',
           line: 3,
+        },
+      ],
+    },
+    {
+      code: `import Controller from '@ember/controller';
+        import { inject as service } from '@ember/service';
+        export default class UserController extends Controller {
+          queryParams = [];
+          @service currentUser;
+          customProp = 'test';
+        }`,
+      output: `import Controller from '@ember/controller';
+        import { inject as service } from '@ember/service';
+        export default class UserController extends Controller {
+          @service currentUser;
+          queryParams = [];
+          customProp = 'test';
+        }`,
+      errors: [
+        {
+          message:
+            'The "currentUser" service injection should be above the "queryParams" property on line 4',
+          line: 5,
+        },
+      ],
+    },
+    {
+      code: `import Controller from '@ember/controller';
+        export default class UserController extends Controller {
+          customProp = 'test';
+          queryParams = [];
+          actions() {}
+        }`,
+      output: `import Controller from '@ember/controller';
+        export default class UserController extends Controller {
+          queryParams = [];
+          customProp = 'test';
+          actions() {}
+        }`,
+      errors: [
+        {
+          message: 'The "queryParams" property should be above the "customProp" property on line 3',
+          line: 4,
+        },
+      ],
+    },
+    {
+      code: `import Controller from '@ember/controller';
+        import { inject as service } from '@ember/service';
+        export default class UserController extends Controller {
+          @service currentUser;
+          queryParams = [];
+          actions() {}
+        }`,
+      output: `import Controller from '@ember/controller';
+        import { inject as service } from '@ember/service';
+        export default class UserController extends Controller {
+          queryParams = [];
+          @service currentUser;
+          actions() {}
+        }`,
+      options: [
+        {
+          order: ['query-params', 'service', 'single-line-function'],
+        },
+      ],
+      errors: [
+        {
+          message:
+            'The "queryParams" property should be above the "currentUser" service injection on line 4',
+          line: 5,
         },
       ],
     },
