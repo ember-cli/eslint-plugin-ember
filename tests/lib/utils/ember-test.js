@@ -1696,6 +1696,8 @@ describe('isFunctionExpression', () => {
       test: () => {}
     }`);
     expect(emberUtils.isFunctionExpression(property.value)).toBeTruthy();
+
+    expect(emberUtils.isFunctionExpression(null)).toBeFalsy();
   });
 });
 

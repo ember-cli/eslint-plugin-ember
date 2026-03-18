@@ -125,8 +125,4 @@ export default Controller.extend({
 });
 ```
 
-## Help Wanted
-
-| Issue                                      | Link                                                                |
-| :----------------------------------------- | :------------------------------------------------------------------ |
-| ❌ Missing native JavaScript class support | [#560](https://github.com/ember-cli/eslint-plugin-ember/issues/560) |
+This rule checks ordering only; it does not enforce indentation or other whitespace formatting.
