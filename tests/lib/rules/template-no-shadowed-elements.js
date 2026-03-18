@@ -26,6 +26,18 @@ ruleTester.run('template-no-shadowed-elements', rule, {
       <CustomForm />
     </template>`,
     `<template>
+      <Form>Content</Form>
+    </template>`,
+    `<template>
+      <Input @type="text" />
+    </template>`,
+    `<template>
+      <Select @options={{this.options}} />
+    </template>`,
+    `<template>
+      <Textarea @value={{this.text}} />
+    </template>`,
+    `<template>
       <div>Content</div>
     </template>`,
 
@@ -36,43 +48,6 @@ ruleTester.run('template-no-shadowed-elements', rule, {
   ],
 
   invalid: [
-    {
-      code: `<template>
-        <Form>Content</Form>
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message: 'Component name "form" shadows HTML element <form>. Use a different name.',
-          type: 'GlimmerElementNode',
-        },
-      ],
-    },
-    {
-      code: `<template>
-        <Input @type="text" />
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message: 'Component name "input" shadows HTML element <input>. Use a different name.',
-          type: 'GlimmerElementNode',
-        },
-      ],
-    },
-    {
-      code: `<template>
-        <Select @options={{this.options}} />
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message: 'Component name "select" shadows HTML element <select>. Use a different name.',
-          type: 'GlimmerElementNode',
-        },
-      ],
-    },
-
     {
       code: '<template><FooBar as |div|><div></div></FooBar></template>',
       output: null,
