@@ -255,6 +255,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                                       | disallow obsolete HTML elements                                              |    |    |    |
 | [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                               | disallow {{outlet}} outside of route templates                               |    |    |    |
 | [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                                 | disallow usage of ember-page-title component                                 |    |    |    |
+| [template-no-unused-block-params](docs/rules/template-no-unused-block-params.md)                                   | disallow unused block parameters in templates                                |    |    |    |
 | [template-no-valueless-arguments](docs/rules/template-no-valueless-arguments.md)                                   | disallow valueless named arguments                                           |    |    |    |
 | [template-no-whitespace-for-layout](docs/rules/template-no-whitespace-for-layout.md)                               | disallow using whitespace for layout purposes                                |    |    |    |
 | [template-no-yield-block-params-to-else-inverse](docs/rules/template-no-yield-block-params-to-else-inverse.md)     | disallow yielding block params to else or inverse block                      |    |    |    |
