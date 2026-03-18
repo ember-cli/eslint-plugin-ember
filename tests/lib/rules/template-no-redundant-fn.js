@@ -35,6 +35,15 @@ ruleTester.run('template-no-redundant-fn', rule, {
     '<template><SomeComponent @onClick={{fn this.handleClick "foo"}} /></template>',
     '<template>{{foo bar=this.handleClick}}></template>',
     '<template>{{foo bar=(fn this.handleClick "foo")}}></template>',
+
+    // `fn` is imported from a local module — not Ember's built-in helper.
+    // Should NOT be flagged even with a single argument.
+    `
+      import { fn } from './my-utils';
+      <template>
+        <button {{on "click" (fn this.handleClick)}}>Click</button>
+      </template>
+    `,
   ],
 
   invalid: [
