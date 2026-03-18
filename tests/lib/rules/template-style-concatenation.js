@@ -1,0 +1,167 @@
+//------------------------------------------------------------------------------
+// Requirements
+//------------------------------------------------------------------------------
+
+const rule = require('../../../lib/rules/template-style-concatenation');
+const RuleTester = require('eslint').RuleTester;
+
+//------------------------------------------------------------------------------
+// Tests
+//------------------------------------------------------------------------------
+
+const ruleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser'),
+  parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+});
+
+ruleTester.run('template-style-concatenation', rule, {
+  valid: [
+    `<template>
+      <div style="color: red;">Content</div>
+    </template>`,
+    `<template>
+      <div style={{this.computedStyle}}>Content</div>
+    </template>`,
+    `<template>
+      <div style={{html-safe this.styleString}}>Content</div>
+    </template>`,
+
+    '<template><img></template>',
+    '<template><img style={{myStyle}}></template>',
+    '<template><img style={{background-image url}}></template>',
+    '<template><img style="background-image: url(/foo.png)"}}></template>',
+    '<template><img style={{html-safe (concat "background-image: url(" url ")")}}></template>',
+    '<template><img style={{html-safe (concat knownSafeStyle1 ";" knownSafeStyle2)}}></template>',
+  ],
+
+  invalid: [
+    {
+      code: `<template>
+        <div style="color: {{this.color}};">Content</div>
+      </template>`,
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+          type: 'GlimmerAttrNode',
+        },
+      ],
+    },
+    {
+      code: `<template>
+        <div style={{concat "width: " this.width "px;"}}>Content</div>
+      </template>`,
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+          type: 'GlimmerAttrNode',
+        },
+      ],
+    },
+
+    {
+      code: '<template><img style="{{myStyle}}"></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+        },
+      ],
+    },
+    {
+      code: '<template><img style="background-image: {{url}}"></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+        },
+      ],
+    },
+    {
+      code: '<template><img style="{{background-image url}}"></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+        },
+      ],
+    },
+    {
+      code: '<template><img style={{concat knownSafeStyle1 ";" knownSafeStyle2}}></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+        },
+      ],
+    },
+  ],
+});
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsRuleTester.run('template-style-concatenation', rule, {
+  valid: [
+    '<img>',
+    '<img style={{myStyle}}>',
+    '<img style={{background-image url}}>',
+    '<img style="background-image: url(/foo.png)"}}>',
+    '<img style={{html-safe (concat "background-image: url(" url ")")}}>',
+    '<img style={{html-safe (concat knownSafeStyle1 ";" knownSafeStyle2)}}>',
+  ],
+  invalid: [
+    {
+      code: '<img style="{{myStyle}}">',
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+        },
+      ],
+    },
+    {
+      code: '<img style="background-image: {{url}}">',
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+        },
+      ],
+    },
+    {
+      code: '<img style="{{background-image url}}">',
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+        },
+      ],
+    },
+    {
+      code: '<img style={{concat knownSafeStyle1 ";" knownSafeStyle2}}>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Avoid string concatenation in style attributes. Use a computed property with htmlSafe instead.',
+        },
+      ],
+    },
+  ],
+});
