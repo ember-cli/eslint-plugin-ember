@@ -427,6 +427,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | Name                                                                   | Description                                                     | 💼 | 🔧 | 💡 |
 | :--------------------------------------------------------------------- | :-------------------------------------------------------------- | :- | :- | :- |
 | [template-link-rel-noopener](docs/rules/template-link-rel-noopener.md) | require rel="noopener noreferrer" on links with target="_blank" |    | 🔧 |    |
+| [template-no-triple-curlies](docs/rules/template-no-triple-curlies.md) | disallow usage of triple curly brackets (unescaped variables)   |    |    |    |
 
 ### Services
 
