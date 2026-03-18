@@ -434,9 +434,10 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Style
 
-| Name                                                                                         | Description                                                | 💼 | 🔧 | 💡 |
-| :------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :- | :- | :- |
-| [template-no-unnecessary-curly-strings](docs/rules/template-no-unnecessary-curly-strings.md) | disallow unnecessary curly braces in string interpolations |    | 🔧 |    |
+| Name                                                                                                         | Description                                                | 💼 | 🔧 | 💡 |
+| :----------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :- | :- | :- |
+| [template-no-unnecessary-curly-in-string-attrs](docs/rules/template-no-unnecessary-curly-in-string-attrs.md) | disallow unnecessary curly braces in attributes            |    |    |    |
+| [template-no-unnecessary-curly-strings](docs/rules/template-no-unnecessary-curly-strings.md)                 | disallow unnecessary curly braces in string interpolations |    | 🔧 |    |
 
 ### Stylistic Issues
 
