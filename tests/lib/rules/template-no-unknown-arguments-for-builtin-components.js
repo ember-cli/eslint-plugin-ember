@@ -39,6 +39,38 @@ ruleTester.run('template-no-unknown-arguments-for-builtin-components', rule, {
     '<template><LinkTo @query={{hash foo=bar}} /></template>',
     '<template><LinkTo @model={{this.model}} /></template>',
     '<template><LinkTo @models={{array comment.photo comment}} /></template>',
+
+    // Custom component imported with the same name as a built-in — should NOT be flagged
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Input from './my-custom-input';
+        <template><Input @unknownArg="x" /></template>
+      `,
+    },
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Textarea from './my-custom-textarea';
+        <template><Textarea @customProp={{this.val}} /></template>
+      `,
+    },
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import LinkTo from './my-custom-link';
+        <template><LinkTo @anythingGoes="yes" /></template>
+      `,
+    },
+    {
+      filename: 'my-component.gjs',
+      code: `
+        import Input from './my-custom-input';
+        export default class MyComponent {
+          <template><Input @customArg="value" @anotherArg={{this.foo}} /></template>
+        }
+      `,
+    },
   ],
 
   invalid: [
