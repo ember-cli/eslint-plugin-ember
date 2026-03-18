@@ -245,6 +245,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                                 | disallow obsolete HTML elements                                              |    |    |    |
 | [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                         | disallow {{outlet}} outside of route templates                               |    |    |    |
 | [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                           | disallow usage of ember-page-title component                                 |    |    |    |
+| [template-simple-modifiers](docs/rules/template-simple-modifiers.md)                                         | require simple modifier syntax                                               |    |    |    |
 | [template-simple-unless](docs/rules/template-simple-unless.md)                                               | require simple conditions in unless blocks                                   |    |    |    |
 | [template-splat-attributes-only](docs/rules/template-splat-attributes-only.md)                               | disallow ...spread other than ...attributes                                  |    |    |    |
 | [template-style-concatenation](docs/rules/template-style-concatenation.md)                                   | disallow string concatenation in inline styles                               |    |    |    |
