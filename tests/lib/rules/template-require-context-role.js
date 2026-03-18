@@ -64,6 +64,7 @@ ruleTester.run('template-require-context-role', rule, {
     '<template><div role="list">{{#each someList as |item|}}{{list-item item=item}}{{/each}}</div></template>',
     '<template><div role="list">{{#each someList as |item|}}<ListItem @item={{item}} />{{/each}}</div></template>',
     '<template><div role="list">{{#if this.show}}{{#each someList as |item|}}<ListItem @item={{item}} />{{/each}}{{/if}}</div></template>',
+    '<template><div role="row"><div role="cell">One</div></div></template>',
     '<template><div role="table"><div role="row"><div role="cell">One</div></div></div></template>',
     `<template><typeahead.list role="list">
       <:content as |items|>
@@ -87,7 +88,7 @@ ruleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "listitem" must be contained in an element with one of these roles: list, group, directory',
+            'Role "listitem" must be contained in an element with one of these roles: group, list',
           type: 'GlimmerElementNode',
         },
       ],
@@ -116,7 +117,7 @@ ruleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "menuitem" must be contained in an element with one of these roles: menu, menubar, group',
+            'Role "menuitem" must be contained in an element with one of these roles: group, menu, menubar',
           type: 'GlimmerElementNode',
         },
       ],
@@ -128,7 +129,7 @@ ruleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "treeitem" must be contained in an element with one of these roles: tree, group',
+            'Role "treeitem" must be contained in an element with one of these roles: group, tree',
         },
       ],
     },
@@ -155,7 +156,7 @@ ruleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "listitem" must be contained in an element with one of these roles: list, group, directory',
+            'Role "listitem" must be contained in an element with one of these roles: group, list',
         },
       ],
     },
@@ -165,7 +166,7 @@ ruleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "menuitem" must be contained in an element with one of these roles: menu, menubar, group',
+            'Role "menuitem" must be contained in an element with one of these roles: group, menu, menubar',
         },
       ],
     },
@@ -175,7 +176,7 @@ ruleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "menuitemcheckbox" must be contained in an element with one of these roles: menu, menubar, group',
+            'Role "menuitemcheckbox" must be contained in an element with one of these roles: menu, menubar',
         },
       ],
     },
@@ -185,7 +186,7 @@ ruleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "menuitemradio" must be contained in an element with one of these roles: menu, menubar, group',
+            'Role "menuitemradio" must be contained in an element with one of these roles: group, menu, menubar',
         },
       ],
     },
@@ -195,7 +196,7 @@ ruleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "option" must be contained in an element with one of these roles: listbox, group',
+            'Role "option" must be contained in an element with one of these roles: listbox',
         },
       ],
     },
@@ -205,7 +206,7 @@ ruleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "row" must be contained in an element with one of these roles: table, grid, treegrid, rowgroup',
+            'Role "row" must be contained in an element with one of these roles: grid, rowgroup, table, treegrid',
         },
       ],
     },
@@ -224,7 +225,7 @@ ruleTester.run('template-require-context-role', rule, {
       output: null,
       errors: [
         {
-          message: 'Role "rowheader" must be contained in an element with one of these roles: row',
+          message: 'Role "rowheader" must be contained in an element with one of these roles: grid, row',
         },
       ],
     },
@@ -241,7 +242,16 @@ ruleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "treeitem" must be contained in an element with one of these roles: tree, group',
+            'Role "treeitem" must be contained in an element with one of these roles: group, tree',
+        },
+      ],
+    },
+    {
+      code: '<template><div><div role="cell">Item One</div></div></template>',
+      output: null,
+      errors: [
+        {
+          message: 'Role "cell" must be contained in an element with one of these roles: row',
         },
       ],
     },
@@ -251,7 +261,7 @@ ruleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "menuitem" must be contained in an element with one of these roles: menu, menubar, group',
+            'Role "menuitem" must be contained in an element with one of these roles: group, menu, menubar',
         },
       ],
     },
@@ -261,7 +271,7 @@ ruleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "menuitem" must be contained in an element with one of these roles: menu, menubar, group',
+            'Role "menuitem" must be contained in an element with one of these roles: group, menu, menubar',
         },
       ],
     },
@@ -307,6 +317,7 @@ hbsRuleTester.run('template-require-context-role', rule, {
     '<div role="list">{{#each someList as |item|}}{{list-item item=item}}{{/each}}</div>',
     '<div role="list">{{#each someList as |item|}}<ListItem @item={{item}} />{{/each}}</div>',
     '<div role="list">{{#if this.show}}{{#each someList as |item|}}<ListItem @item={{item}} />{{/each}}{{/if}}</div>',
+    '<div role="row"><div role="cell">One</div></div>',
     '<div role="table"><div role="row"><div role="cell">One</div></div></div>',
     `<typeahead.list role="list">
       <:content as |items|>
@@ -325,7 +336,7 @@ hbsRuleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "treeitem" must be contained in an element with one of these roles: tree, group',
+            'Role "treeitem" must be contained in an element with one of these roles: group, tree',
         },
       ],
     },
@@ -352,7 +363,7 @@ hbsRuleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "listitem" must be contained in an element with one of these roles: list, group, directory',
+            'Role "listitem" must be contained in an element with one of these roles: group, list',
         },
       ],
     },
@@ -362,7 +373,7 @@ hbsRuleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "menuitem" must be contained in an element with one of these roles: menu, menubar, group',
+            'Role "menuitem" must be contained in an element with one of these roles: group, menu, menubar',
         },
       ],
     },
@@ -372,7 +383,7 @@ hbsRuleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "menuitemcheckbox" must be contained in an element with one of these roles: menu, menubar, group',
+            'Role "menuitemcheckbox" must be contained in an element with one of these roles: menu, menubar',
         },
       ],
     },
@@ -382,7 +393,7 @@ hbsRuleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "menuitemradio" must be contained in an element with one of these roles: menu, menubar, group',
+            'Role "menuitemradio" must be contained in an element with one of these roles: group, menu, menubar',
         },
       ],
     },
@@ -392,7 +403,7 @@ hbsRuleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "option" must be contained in an element with one of these roles: listbox, group',
+            'Role "option" must be contained in an element with one of these roles: listbox',
         },
       ],
     },
@@ -402,7 +413,7 @@ hbsRuleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "row" must be contained in an element with one of these roles: table, grid, treegrid, rowgroup',
+            'Role "row" must be contained in an element with one of these roles: grid, rowgroup, table, treegrid',
         },
       ],
     },
@@ -421,7 +432,7 @@ hbsRuleTester.run('template-require-context-role', rule, {
       output: null,
       errors: [
         {
-          message: 'Role "rowheader" must be contained in an element with one of these roles: row',
+          message: 'Role "rowheader" must be contained in an element with one of these roles: grid, row',
         },
       ],
     },
@@ -438,7 +449,16 @@ hbsRuleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "treeitem" must be contained in an element with one of these roles: tree, group',
+            'Role "treeitem" must be contained in an element with one of these roles: group, tree',
+        },
+      ],
+    },
+    {
+      code: '<div><div role="cell">Item One</div></div>',
+      output: null,
+      errors: [
+        {
+          message: 'Role "cell" must be contained in an element with one of these roles: row',
         },
       ],
     },
@@ -448,7 +468,7 @@ hbsRuleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "menuitem" must be contained in an element with one of these roles: menu, menubar, group',
+            'Role "menuitem" must be contained in an element with one of these roles: group, menu, menubar',
         },
       ],
     },
@@ -458,7 +478,7 @@ hbsRuleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message:
-            'Role "menuitem" must be contained in an element with one of these roles: menu, menubar, group',
+            'Role "menuitem" must be contained in an element with one of these roles: group, menu, menubar',
         },
       ],
     },
