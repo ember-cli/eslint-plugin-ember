@@ -141,7 +141,12 @@ ruleTester.run('template-sort-invocations', rule, {
         {{/ui/button}}
       </template>`,
       output: null,
-      errors: [{ messageId: 'attributeOrder' }],
+      errors: [
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'hashPairOrder' },
+        { messageId: 'hashPairOrder' },
+      ],
     },
     {
       code: `<template>
@@ -190,7 +195,12 @@ ruleTester.run('template-sort-invocations', rule, {
         {{/ui/button}}
       </template>`,
       output: null,
-      errors: [{ messageId: 'attributeOrder' }],
+      errors: [
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'hashPairOrder' },
+        { messageId: 'hashPairOrder' },
+      ],
     },
     {
       code: `<template>
@@ -257,7 +267,14 @@ ruleTester.run('template-sort-invocations', rule, {
         {{/ui/button}}
       </template>`,
       output: null,
-      errors: [{ messageId: 'attributeOrder' }],
+      errors: [
+        { messageId: 'attributeOrder' },
+        { messageId: 'modifierOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'modifierOrder' },
+        { messageId: 'hashPairOrder' },
+        { messageId: 'hashPairOrder' },
+      ],
     },
     {
       code: `<template>
@@ -304,7 +321,14 @@ ruleTester.run('template-sort-invocations', rule, {
         }}
       </template>`,
       output: null,
-      errors: [{ messageId: 'attributeOrder' }],
+      errors: [
+        { messageId: 'attributeOrder' },
+        { messageId: 'hashPairOrder' },
+        { messageId: 'hashPairOrder' },
+        { messageId: 'hashPairOrder' },
+        { messageId: 'hashPairOrder' },
+        { messageId: 'hashPairOrder' },
+      ],
     },
     {
       code: `<template>
@@ -327,7 +351,10 @@ ruleTester.run('template-sort-invocations', rule, {
         />
       </template>`,
       output: null,
-      errors: [{ messageId: 'attributeOrder' }],
+      errors: [
+        { messageId: 'attributeOrder' },
+        { messageId: 'modifierOrder' },
+      ],
     },
     {
       code: `<template>
@@ -349,7 +376,10 @@ ruleTester.run('template-sort-invocations', rule, {
         </this.MyButton>
       </template>`,
       output: null,
-      errors: [{ messageId: 'attributeOrder' }],
+      errors: [
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+      ],
     },
     {
       code: `<template>
@@ -387,7 +417,11 @@ ruleTester.run('template-sort-invocations', rule, {
         }}
       </template>`,
       output: null,
-      errors: [{ messageId: 'attributeOrder' }],
+      errors: [
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+      ],
     },
     {
       code: `<template>
@@ -420,7 +454,12 @@ ruleTester.run('template-sort-invocations', rule, {
         </div>
       </template>`,
       output: null,
-      errors: [{ messageId: 'attributeOrder' }],
+      errors: [
+        { messageId: 'modifierOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'modifierOrder' },
+      ],
     },
     {
       code: `<template>
@@ -496,7 +535,12 @@ ruleTester.run('template-sort-invocations', rule, {
         {{/let}}
       </template>`,
       output: null,
-      errors: [{ messageId: 'attributeOrder' }],
+      errors: [
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'hashPairOrder' },
+        { messageId: 'attributeOrder' },
+      ],
     },
     {
       code: `<template>
@@ -553,7 +597,10 @@ ruleTester.run('template-sort-invocations', rule, {
         ></iframe>
       </template>`,
       output: null,
-      errors: [{ messageId: 'attributeOrder' }],
+      errors: [
+        { messageId: 'attributeOrder' },
+        { messageId: 'splattributesOrder' },
+      ],
     },
     {
       code: `<template>
@@ -580,7 +627,12 @@ ruleTester.run('template-sort-invocations', rule, {
         </Ui::Page>
       </template>`,
       output: null,
-      errors: [{ messageId: 'attributeOrder' }],
+      errors: [
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+      ],
     },
     {
       code: `<template>
@@ -625,7 +677,15 @@ ruleTester.run('template-sort-invocations', rule, {
         />
       </template>`,
       output: null,
-      errors: [{ messageId: 'attributeOrder' }],
+      errors: [
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+        { messageId: 'attributeOrder' },
+      ],
     },
   ],
 });
@@ -835,7 +895,12 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         {{/ui/button}}
       `,
       output: null,
-      errors: [{ message: '`...attributes` must appear after `data-test-button`' }],
+      errors: [
+        { message: '`...attributes` must appear after `data-test-button`' },
+        { message: '`...attributes` must appear after `data-test-button`' },
+        { message: '`type` must appear after `data-test-button`' },
+        { message: '`type` must appear after `data-test-button`' },
+      ],
     },
     {
       code: `
@@ -884,7 +949,12 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         {{/ui/button}}
       `,
       output: null,
-      errors: [{ message: '`data-cucumber-button` must appear after `@type`' }],
+      errors: [
+        { message: '`data-cucumber-button` must appear after `@type`' },
+        { message: '`data-cucumber-button` must appear after `@type`' },
+        { message: '`type` must appear after `isDisabled`' },
+        { message: '`type` must appear after `isDisabled`' },
+      ],
     },
     {
       code: `
@@ -951,7 +1021,14 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         {{/ui/button}}
       `,
       output: null,
-      errors: [{ message: '`data-cucumber-button` must appear after `@type`' }],
+      errors: [
+        { message: '`data-cucumber-button` must appear after `@type`' },
+        { message: '`{{on}}` must appear after `{{autofocus}}`' },
+        { message: '`data-cucumber-button` must appear after `@type`' },
+        { message: '`{{on}}` must appear after `{{autofocus}}`' },
+        { message: '`type` must appear after `isDisabled`' },
+        { message: '`type` must appear after `isDisabled`' },
+      ],
     },
     {
       code: `
@@ -998,7 +1075,14 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         }}
       `,
       output: null,
-      errors: [{ message: '`@title` must appear after `@description`' }],
+      errors: [
+        { message: '`@title` must appear after `@description`' },
+        { message: '`packageVersion` must appear after `packageName`' },
+        { message: '`packageVersion` must appear after `packageName`' },
+        { message: '`title` must appear after `description`' },
+        { message: '`packageVersion` must appear after `packageName`' },
+        { message: '`packageVersion` must appear after `packageName`' },
+      ],
     },
     {
       code: `
@@ -1021,7 +1105,10 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         />
       `,
       output: null,
-      errors: [{ message: '`data-cucumber-button` must appear after `@type`' }],
+      errors: [
+        { message: '`data-cucumber-button` must appear after `@type`' },
+        { message: '`{{on}}` must appear after `{{autofocus}}`' },
+      ],
     },
     {
       code: `
@@ -1043,7 +1130,10 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         </this.MyButton>
       `,
       output: null,
-      errors: [{ message: '`...attributes` must appear after `data-test-button`' }],
+      errors: [
+        { message: '`...attributes` must appear after `data-test-button`' },
+        { message: '`...attributes` must appear after `data-test-button`' },
+      ],
     },
     {
       code: `
@@ -1081,7 +1171,11 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         }}
       `,
       output: null,
-      errors: [{ message: '`type` must appear after `data-test-button`' }],
+      errors: [
+        { message: '`type` must appear after `data-test-button`' },
+        { message: '`type` must appear after `isDisabled`' },
+        { message: '`type` must appear after `isDisabled`' },
+      ],
     },
     {
       code: `
@@ -1114,7 +1208,12 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         </div>
       `,
       output: null,
-      errors: [{ message: '`type` must appear after `disabled`' }],
+      errors: [
+        { message: '`{{on}}` must appear after `{{autofocus}}`' },
+        { message: '`type` must appear after `disabled`' },
+        { message: '`role` must appear after `class`' },
+        { message: '`{{on}}` must appear after `{{on}}`' },
+      ],
     },
     {
       code: `
@@ -1190,7 +1289,12 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         {{/let}}
       `,
       output: null,
-      errors: [{ message: '`data-test-form` must appear after `aria-labelledby`' }],
+      errors: [
+        { message: '`data-test-form` must appear after `aria-labelledby`' },
+        { message: '`@title` must appear after `@instructions`' },
+        { message: '`Textarea` must appear after `Number`' },
+        { message: '`type` must appear after `data-test-button`' },
+      ],
     },
     {
       code: `
@@ -1247,7 +1351,10 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         ></iframe>
       `,
       output: null,
-      errors: [{ message: '`...attributes` must appear after `modifiers`' }],
+      errors: [
+        { message: '`...attributes` must appear after `modifiers`' },
+        { message: '`...attributes` must appear after modifiers' },
+      ],
     },
     {
       code: `
@@ -1274,7 +1381,12 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         </Ui::Page>
       `,
       output: null,
-      errors: [{ message: '`@title` must appear after `@routeName`' }],
+      errors: [
+        { message: '`@title` must appear after `@routeName`' },
+        { message: '`@id` must appear after `@icon`' },
+        { message: '`@id` must appear after `@icon`' },
+        { message: '`@id` must appear after `@icon`' },
+      ],
     },
     {
       code: `
@@ -1319,7 +1431,15 @@ hbsRuleTester.run('template-sort-invocations', rule, {
         />
       `,
       output: null,
-      errors: [{ message: '`@parentContainerId` must appear after `@isOpen`' }],
+      errors: [
+        { message: '`@parentContainerId` must appear after `@isOpen`' },
+        { message: '`@style` must appear after `@isOpen`' },
+        { message: '`type` must appear after `local-class`' },
+        { message: '`@parentContainerId` must appear after `@isOpen`' },
+        { message: '`@style` must appear after `@isOpen`' },
+        { message: '`aria-describedby` must appear after `@className`' },
+        { message: '`type` must appear after `local-class`' },
+      ],
     },
   ],
 });
