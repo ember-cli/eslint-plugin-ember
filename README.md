@@ -414,6 +414,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-linebreak-style](docs/rules/template-linebreak-style.md)             | enforce consistent linebreaks in templates                                     |    | 🔧 |    |
 | [template-modifier-name-case](docs/rules/template-modifier-name-case.md)       | require dasherized names for modifiers                                         |    | 🔧 |    |
 | [template-no-only-default-slot](docs/rules/template-no-only-default-slot.md)   | disallow using only the default slot                                           |    | 🔧 |    |
+| [template-template-length](docs/rules/template-template-length.md)             | enforce template size constraints                                              |    |    |    |
 
 ### Testing
 
