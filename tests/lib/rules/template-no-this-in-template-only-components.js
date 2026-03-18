@@ -12,6 +12,9 @@ ruleTester.run('template-no-this-in-template-only-components', rule, {
     '<template><WelcomePage /></template>',
     '<template><MyComponent @prop={{can "edit" @model}} /></template>',
     '<template>{{my-component model=model}}</template>',
+    // Class components should not be flagged (not template-only)
+    'class MyComponent extends Component { <template>{{this.foo}}</template> }',
+    'class MyComponent extends Component { <template>{{this.bar}} {{this.baz}}</template> }',
   ],
   invalid: [
     {
