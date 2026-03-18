@@ -66,6 +66,51 @@ ruleTester.run('template-no-restricted-invocations', rule, {
     '<template><Random/></template>',
     '<template><HelloWorld/></template>',
     '<template><NestedScope::Random/></template>',
+
+    // JS-scope variables (imports, const, let) should be exempt — same as block params.
+    {
+      code: `
+        import foo from './foo';
+        <template>{{foo}}</template>
+      `,
+      options: [['foo', 'bar']],
+    },
+    {
+      code: `
+        import Foo from './foo';
+        <template><Foo /></template>
+      `,
+      options: [['foo', 'bar']],
+    },
+    {
+      code: `
+        const foo = () => {};
+        <template>{{foo}}</template>
+      `,
+      options: [['foo', 'bar']],
+    },
+    {
+      code: `
+        import foo from './foo';
+        <template>{{foo "hello"}}</template>
+      `,
+      options: [['foo', 'bar']],
+    },
+    {
+      code: `
+        import bar from './bar';
+        <template>{{bar}}</template>
+      `,
+      options: [['foo', 'bar']],
+    },
+    {
+      code: `
+        import foo from './foo';
+        import bar from './bar';
+        <template>{{foo}}{{bar}}</template>
+      `,
+      options: [['foo', 'bar']],
+    },
   ],
   invalid: [
     {
