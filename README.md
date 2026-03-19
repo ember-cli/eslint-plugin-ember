@@ -197,6 +197,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-nested-interactive](docs/rules/template-no-nested-interactive.md)                   | disallow nested interactive elements                                             |    |    |    |
 | [template-no-nested-landmark](docs/rules/template-no-nested-landmark.md)                         | disallow nested landmark elements                                                |    |    |    |
 | [template-no-pointer-down-event-binding](docs/rules/template-no-pointer-down-event-binding.md)   | disallow pointer down event bindings                                             |    |    |    |
+| [template-require-valid-alt-text](docs/rules/template-require-valid-alt-text.md)                 | require valid alt text for images and other elements                             |    |    |    |
 | [template-require-valid-form-groups](docs/rules/template-require-valid-form-groups.md)           | require grouped form controls to have fieldset/legend or WAI-ARIA group labeling |    |    |    |
 | [template-table-groups](docs/rules/template-table-groups.md)                                     | require table elements to use table grouping elements                            |    |    |    |
 
