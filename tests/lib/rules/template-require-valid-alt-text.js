@@ -212,17 +212,17 @@ hbsRuleTester.run('template-require-valid-alt-text', rule, {
     {
       code: '<img>',
       output: null,
-      errors: [{ message: 'All `<img>` tags must have an alt attribute.' }],
+      errors: [{ message: 'All `<img>` tags must have an alt attribute' }],
     },
     {
       code: '<img src="zoey.jpg">',
       output: null,
-      errors: [{ message: 'All `<img>` tags must have an alt attribute.' }],
+      errors: [{ message: 'All `<img>` tags must have an alt attribute' }],
     },
     {
       code: '<img alt="path/to/zoey.jpg" src="path/to/zoey.jpg">',
       output: null,
-      errors: [{ message: 'The alt text must not be the same as the image source.' }],
+      errors: [{ message: 'The alt text must not be the same as the image source' }],
     },
     {
       code: '<input type="image">',
@@ -317,7 +317,7 @@ hbsRuleTester.run('template-require-valid-alt-text', rule, {
     {
       code: '<img alt="52" src="b52.jpg">',
       output: null,
-      errors: [{ message: 'A number is not valid alt text.' }],
+      errors: [{ message: 'A number is not valid alt text' }],
     },
     {
       code: '<img alt="not-null-alt" src="zoey.jpg" role="none">',
@@ -325,7 +325,7 @@ hbsRuleTester.run('template-require-valid-alt-text', rule, {
       errors: [
         {
           message:
-            'The `alt` attribute should be empty if `<img>` has `role` of `none` or `presentation`.',
+            'The `alt` attribute should be empty if `<img>` has `role` of `none` or `presentation`',
         },
       ],
     },
@@ -335,7 +335,7 @@ hbsRuleTester.run('template-require-valid-alt-text', rule, {
       errors: [
         {
           message:
-            'The `alt` attribute should be empty if `<img>` has `role` of `none` or `presentation`.',
+            'The `alt` attribute should be empty if `<img>` has `role` of `none` or `presentation`',
         },
       ],
     },
