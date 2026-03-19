@@ -12,6 +12,10 @@ ruleTester.run('template-require-strict-mode', rule, {
       filename: 'hello.gjs',
       code: '<template>hello</template>',
     },
+    {
+      filename: 'hello.gts',
+      code: '<template>hello</template>',
+    },
   ],
   invalid: [
     {
@@ -25,7 +29,6 @@ ruleTester.run('template-require-strict-mode', rule, {
         },
       ],
     },
-
     {
       filename: 'hello.hbs',
       code: `<template><div>
@@ -51,13 +54,17 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-require-strict-mode', rule, {
-  valid: [
-    '<template>hello</template>',
-    `import Component from '@glimmer/component';
-
-  export default class HelloComponent extends Component {
-    <template>hello</template>
-  }`,
+  valid: [],
+  invalid: [
+    {
+      code: '<div>hello</div>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Templates are required to be in strict mode. Consider refactoring to template tag format.',
+        },
+      ],
+    },
   ],
-  invalid: [],
 });

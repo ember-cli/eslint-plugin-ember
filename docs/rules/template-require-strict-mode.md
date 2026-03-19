@@ -6,37 +6,52 @@
 
 Require templates to be in strict mode.
 
-Templates should use the strict mode syntax (template tag format) rather than loose template files. Strict mode templates (`.gjs` / `.gts` files) provide better integration with JavaScript and type checking.
+Ember's Polaris edition component authoring format is template tag, which makes
+templates follow "strict mode" semantics.
+
+This rule requires all templates to use strict mode (template tag). Effectively this
+means you may only have template content in `.gjs`/`.gts` files, not in `.hbs` or
+`.js`/`.ts`.
 
 ## Examples
 
 This rule **forbids** the following:
 
 ```hbs
-<div>
-  Hello World
-</div>
+// button.hbs
+<button>{{yield}}</button>
 ```
 
-(in a `.hbs` file)
+```js
+// button-test.js
+import { hbs } from 'ember-cli-htmlbars';
+
+test('it renders', async (assert) => {
+  await render(hbs`<Button>Ok</Button>`);
+  // ...
+});
+```
 
 This rule **allows** the following:
 
-```hbs
-Hello World
+```gjs
+// button.gjs
+<template>
+  <button>{{yield}}</button>
+</template>
 ```
 
-(in a `.gjs` or `.gts` file)
+```gjs
+// button-test.gjs
+import { Button } from 'ember-awesome-button';
 
-## Why?
-
-Strict mode templates provide:
-
-- Better integration with JavaScript tooling
-- Type safety in TypeScript projects
-- Clearer component boundaries
-- Easier refactoring and navigation
+test('it renders', async (assert) => {
+  await render(<template><Button>Ok</Button></template>);
+  // ..
+});
+```
 
 ## References
 
-- [Ember.js Guides - Template Syntax](https://guides.emberjs.com/release/templates/syntax/)
+- [Template Tag Guide](https://guides.emberjs.com/release/components/template-tag-format/)
+- [Strict Mode RFC](https://rfcs.emberjs.com/id/0496-handlebars-strict-mode/)
