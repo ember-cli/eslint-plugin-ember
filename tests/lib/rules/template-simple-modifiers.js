@@ -9,6 +9,7 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-simple-modifiers', rule, {
   valid: [
     '<template><div {{(modifier "track-interaction" @controlName)}}></div></template>',
+    '<template><div {{(modifier trackInteraction @controlName)}}></div></template>',
     '<template><div {{(modifier this.trackInteraction @controlName)}}></div></template>',
     '<template><div {{my-modifier}}></div></template>',
 
@@ -54,6 +55,7 @@ const hbsRuleTester = new RuleTester({
 hbsRuleTester.run('template-simple-modifiers', rule, {
   valid: [
     '<div {{(modifier "track-interaction" @controlName)}}></div>',
+    '<div {{(modifier trackInteraction @controlName)}}></div>',
     '<div {{(modifier this.trackInteraction @controlName)}}></div>',
     '<div {{(modifier @trackInteraction @controlName)}}></div>',
     '<div {{(if @isActionVisible (modifier "track-interaction" eventName=myEventName eventBody=myEventbody))}}></div>',
