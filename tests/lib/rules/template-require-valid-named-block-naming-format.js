@@ -14,6 +14,10 @@ ruleTester.run('template-require-valid-named-block-naming-format', rule, {
     '<template>{{has-block "fooBar"}}</template>',
     {
       code: '<template>{{yield to="foo-bar"}}</template>',
+      options: [false],
+    },
+    {
+      code: '<template>{{yield to="foo-bar"}}</template>',
       output: null,
       options: ['kebab-case'],
     },
@@ -35,52 +39,64 @@ ruleTester.run('template-require-valid-named-block-naming-format', rule, {
   invalid: [
     {
       code: '<template>{{yield to="foo-bar"}}</template>',
-      output: null,
+      output: '<template>{{yield to="fooBar"}}</template>',
       errors: [
         {
-          message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".',
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
         },
       ],
     },
     {
       code: '<template>{{has-block "foo-bar"}}</template>',
-      output: null,
+      output: '<template>{{has-block "fooBar"}}</template>',
       errors: [
         {
-          message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".',
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
         },
       ],
     },
     {
       code: '<template>{{yield to="fooBar"}}</template>',
-      output: null,
+      output: '<template>{{yield to="foo-bar"}}</template>',
       options: ['kebab-case'],
       errors: [
         {
-          message: 'Named block should be in kebab-case format. Change "fooBar" to "foo-bar".',
+          message:
+            'Named blocks are required to use the "kebab-case" naming format. Please change "fooBar" to "foo-bar".',
         },
       ],
     },
 
     {
       code: '<template>{{if (has-block "foo-bar")}}</template>',
-      output: null,
+      output: '<template>{{if (has-block "fooBar")}}</template>',
       errors: [
-        { message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".' },
+        {
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
+        },
       ],
     },
     {
       code: '<template>{{has-block-params "foo-bar"}}</template>',
-      output: null,
+      output: '<template>{{has-block-params "fooBar"}}</template>',
       errors: [
-        { message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".' },
+        {
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
+        },
       ],
     },
     {
       code: '<template>{{if (has-block-params "foo-bar")}}</template>',
-      output: null,
+      output: '<template>{{if (has-block-params "fooBar")}}</template>',
       errors: [
-        { message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".' },
+        {
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
+        },
       ],
     },
   ],
@@ -101,6 +117,7 @@ hbsRuleTester.run('template-require-valid-named-block-naming-format', rule, {
     '{{yield to="fooBar"}}',
     '{{has-block}}',
     '{{has-block "fooBar"}}',
+    { code: '{{yield to="foo-bar"}}', options: [false] },
     '{{if (has-block)}}',
     '{{if (has-block "fooBar")}}',
     '{{has-block-params}}',
@@ -156,46 +173,51 @@ hbsRuleTester.run('template-require-valid-named-block-naming-format', rule, {
     // Default config (camelCase).
     {
       code: '{{yield to="foo-bar"}}',
-      output: null,
+      output: '{{yield to="fooBar"}}',
       errors: [
         {
-          message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".',
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
         },
       ],
     },
     {
       code: '{{has-block "foo-bar"}}',
-      output: null,
+      output: '{{has-block "fooBar"}}',
       errors: [
         {
-          message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".',
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
         },
       ],
     },
     {
       code: '{{if (has-block "foo-bar")}}',
-      output: null,
+      output: '{{if (has-block "fooBar")}}',
       errors: [
         {
-          message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".',
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
         },
       ],
     },
     {
       code: '{{has-block-params "foo-bar"}}',
-      output: null,
+      output: '{{has-block-params "fooBar"}}',
       errors: [
         {
-          message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".',
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
         },
       ],
     },
     {
       code: '{{if (has-block-params "foo-bar")}}',
-      output: null,
+      output: '{{if (has-block-params "fooBar")}}',
       errors: [
         {
-          message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".',
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
         },
       ],
     },
@@ -203,51 +225,56 @@ hbsRuleTester.run('template-require-valid-named-block-naming-format', rule, {
     // Explicit config: camelCase.
     {
       code: '{{yield to="foo-bar"}}',
-      output: null,
+      output: '{{yield to="fooBar"}}',
       options: ['camelCase'],
       errors: [
         {
-          message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".',
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
         },
       ],
     },
     {
       code: '{{has-block "foo-bar"}}',
-      output: null,
+      output: '{{has-block "fooBar"}}',
       options: ['camelCase'],
       errors: [
         {
-          message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".',
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
         },
       ],
     },
     {
       code: '{{if (has-block "foo-bar")}}',
-      output: null,
+      output: '{{if (has-block "fooBar")}}',
       options: ['camelCase'],
       errors: [
         {
-          message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".',
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
         },
       ],
     },
     {
       code: '{{has-block-params "foo-bar"}}',
-      output: null,
+      output: '{{has-block-params "fooBar"}}',
       options: ['camelCase'],
       errors: [
         {
-          message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".',
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
         },
       ],
     },
     {
       code: '{{if (has-block-params "foo-bar")}}',
-      output: null,
+      output: '{{if (has-block-params "fooBar")}}',
       options: ['camelCase'],
       errors: [
         {
-          message: 'Named block should be in camelCase format. Change "foo-bar" to "fooBar".',
+          message:
+            'Named blocks are required to use the "camelCase" naming format. Please change "foo-bar" to "fooBar".',
         },
       ],
     },
@@ -255,51 +282,56 @@ hbsRuleTester.run('template-require-valid-named-block-naming-format', rule, {
     // Explicit config: kebab-case.
     {
       code: '{{yield to="fooBar"}}',
-      output: null,
+      output: '{{yield to="foo-bar"}}',
       options: ['kebab-case'],
       errors: [
         {
-          message: 'Named block should be in kebab-case format. Change "fooBar" to "foo-bar".',
+          message:
+            'Named blocks are required to use the "kebab-case" naming format. Please change "fooBar" to "foo-bar".',
         },
       ],
     },
     {
       code: '{{has-block "fooBar"}}',
-      output: null,
+      output: '{{has-block "foo-bar"}}',
       options: ['kebab-case'],
       errors: [
         {
-          message: 'Named block should be in kebab-case format. Change "fooBar" to "foo-bar".',
+          message:
+            'Named blocks are required to use the "kebab-case" naming format. Please change "fooBar" to "foo-bar".',
         },
       ],
     },
     {
       code: '{{if (has-block "fooBar")}}',
-      output: null,
+      output: '{{if (has-block "foo-bar")}}',
       options: ['kebab-case'],
       errors: [
         {
-          message: 'Named block should be in kebab-case format. Change "fooBar" to "foo-bar".',
+          message:
+            'Named blocks are required to use the "kebab-case" naming format. Please change "fooBar" to "foo-bar".',
         },
       ],
     },
     {
       code: '{{has-block-params "fooBar"}}',
-      output: null,
+      output: '{{has-block-params "foo-bar"}}',
       options: ['kebab-case'],
       errors: [
         {
-          message: 'Named block should be in kebab-case format. Change "fooBar" to "foo-bar".',
+          message:
+            'Named blocks are required to use the "kebab-case" naming format. Please change "fooBar" to "foo-bar".',
         },
       ],
     },
     {
       code: '{{if (has-block-params "fooBar")}}',
-      output: null,
+      output: '{{if (has-block-params "foo-bar")}}',
       options: ['kebab-case'],
       errors: [
         {
-          message: 'Named block should be in kebab-case format. Change "fooBar" to "foo-bar".',
+          message:
+            'Named blocks are required to use the "kebab-case" naming format. Please change "fooBar" to "foo-bar".',
         },
       ],
     },
