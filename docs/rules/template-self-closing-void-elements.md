@@ -6,59 +6,41 @@
 
 Disallow or require self-closing void elements.
 
-## Rule Details
-
-Void elements (like `<img>`, `<br>`, `<input>`, etc.) cannot have child content. By default, this rule disallows redundant self-closing syntax (`/>`) on void elements since it's unnecessary in HTML.
-
-## Config
-
-This rule accepts a single option:
-
-- `true` (default) — disallow self-closing void elements (e.g., `<br />` → `<br>`)
-- `"require"` — require self-closing void elements (e.g., `<br>` → `<br />`)
+HTML has no self-closing tags. The HTML5 parser will ignore a self-closing marker on
+[void elements](https://html.spec.whatwg.org/#void-elements) (elements that should not
+have a closing tag), but it is unnecessary and can be confusing when mixed with
+SVG/XML-like syntax.
 
 ## Examples
 
-Examples of **incorrect** code for this rule (with default config):
+This rule **forbids** the following:
 
 ```gjs
 <template>
-  <img src="foo.jpg" />
+  <img src="http://emberjs.com/images/ember-logo.svg" alt="ember" />
+  <hr />
 </template>
 ```
+
+This rule **allows** the following:
 
 ```gjs
 <template>
-  <br />
+  <img src="http://emberjs.com/images/ember-logo.svg" alt="ember">
+  <hr>
 </template>
 ```
 
-```gjs
-<template>
-  <input type="text" />
-</template>
-```
+There may be cases where a self-closing tag is preferred for void elements. In those
+cases, pass the string `"require"` to require the self-closing form instead.
 
-Examples of **correct** code for this rule (with default config):
+## Configuration
 
-```gjs
-<template>
-  <img src="foo.jpg">
-</template>
-```
+The following values are valid configuration:
 
-```gjs
-<template>
-  <br>
-</template>
-```
-
-```gjs
-<template>
-  <input type="text">
-</template>
-```
+- boolean -- `true` for enabled / `false` for disabled
+- string -- `"require"` to mandate the use of self-closing tags
 
 ## References
 
-- [eslint-plugin-ember template-self-closing-void-elements](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-self-closing-void-elements.md)
+- [HTML spec/void elements](https://html.spec.whatwg.org/#void-elements)
