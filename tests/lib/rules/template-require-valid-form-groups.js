@@ -15,6 +15,19 @@ ruleTester.run('template-require-valid-form-groups', rule, {
           <label for="radio-001">Chicago Zoey</label>
           <input id="radio-001" type="radio" name="prefMascot-Zoey" value="chicago zoey" />
         </div>
+        <div>
+          <label for="radio-002">Office Hours Tomster</label>
+          <input
+            id="radio-002"
+            type="radio"
+            name="prefMascot-OfficeHoursTomster"
+            value="office hours tomster"
+          />
+        </div>
+        <div>
+          <label for="radio-003">A11y Zoey</label>
+          <input id="radio-003" type="radio" name="prefMascot-Zoey" value="a11y zoey" />
+        </div>
       </fieldset>
     </template>`,
     `<template>
@@ -22,8 +35,15 @@ ruleTester.run('template-require-valid-form-groups', rule, {
         <div id="preferred-mascot-heading">Preferred Mascot Version</div>
         <label for="radio-001">Chicago Zoey</label>
         <input id="radio-001" type="radio" name="prefMascot-Zoey" value="chicago zoey" />
-        <label for="radio-002">Chicago Tom</label>
-        <input id="radio-002" type="radio" name="prefMascot-Tom" value="chicago zoey" />
+        <label for="radio-002">Office Hours Tomster</label>
+        <input
+          id="radio-002"
+          type="radio"
+          name="prefMascot-OfficeHoursTomster"
+          value="office hours tomster"
+        />
+        <label for="radio-003">A11y Zoey</label>
+        <input id="radio-003" type="radio" name="prefMascot-Zoey" value="a11y zoey" />
       </div>
     </template>`,
     `<template>
@@ -39,13 +59,23 @@ ruleTester.run('template-require-valid-form-groups', rule, {
         <label for="radio-001">Chicago Zoey</label>
         <input id="radio-001" type="radio" name="prefMascot-Zoey" value="chicago zoey">
       </div>
+      <div>
+        <label for="radio-002">Office Hours Tomster</label>
+        <input id="radio-002" type="radio" name="prefMascot-OfficeHoursTomster" value="office hours tomster">
+      </div>
+      <div>
+        <label for="radio-003">A11y Zoey</label>
+        <input id="radio-003" type="radio" name="prefMascot-Zoey" value="a11y zoey">
+      </div>
     </fieldset></template>`,
     `<template><div role="group" aria-labelledby="preferred-mascot-heading">
       <div id="preferred-mascot-heading">Preferred Mascot Version</div>
       <label for="radio-001">Chicago Zoey</label>
       <input id="radio-001" type="radio" name="prefMascot-Zoey" value="chicago zoey">
-      <label for="radio-002">Chicago Tom</label>
-      <input id="radio-002" type="radio" name="prefMascot-Tom" value="chicago zoey">
+      <label for="radio-002">Office Hours Tomster</label>
+      <input id="radio-002" type="radio" name="prefMascot-OfficeHoursTomster" value="office hours tomster">
+      <label for="radio-003">A11y Zoey</label>
+      <input id="radio-003" type="radio" name="prefMascot-Zoey" value="a11y zoey">
     </div></template>`,
     `<template><div>
       <label for="radio-001">Chicago Zoey</label>
@@ -82,13 +112,23 @@ hbsRuleTester.run('template-require-valid-form-groups', rule, {
         <label for="radio-001">Chicago Zoey</label>
         <input id="radio-001" type="radio" name="prefMascot-Zoey" value="chicago zoey">
       </div>
+      <div>
+        <label for="radio-002">Office Hours Tomster</label>
+        <input id="radio-002" type="radio" name="prefMascot-OfficeHoursTomster" value="office hours tomster">
+      </div>
+      <div>
+        <label for="radio-003">A11y Zoey</label>
+        <input id="radio-003" type="radio" name="prefMascot-Zoey" value="a11y zoey">
+      </div>
     </fieldset>`,
     `<div role="group" aria-labelledby="preferred-mascot-heading">
       <div id="preferred-mascot-heading">Preferred Mascot Version</div>
       <label for="radio-001">Chicago Zoey</label>
       <input id="radio-001" type="radio" name="prefMascot-Zoey" value="chicago zoey">
-      <label for="radio-002">Chicago Tom</label>
-      <input id="radio-002" type="radio" name="prefMascot-Tom" value="chicago zoey">
+      <label for="radio-002">Office Hours Tomster</label>
+      <input id="radio-002" type="radio" name="prefMascot-OfficeHoursTomster" value="office hours tomster">
+      <label for="radio-003">A11y Zoey</label>
+      <input id="radio-003" type="radio" name="prefMascot-Zoey" value="a11y zoey">
     </div>`,
     `<div>
       <label for="radio-001">Chicago Zoey</label>
