@@ -4,7 +4,22 @@
 
 Require splattributes usage in component templates.
 
-Ember components should accept and forward HTML attributes to their underlying elements. This is done using the `...attributes` spread syntax.
+Splattributes (`...attributes`) make it possible to use attributes on component
+invocations (e.g. `<SomeComponent class="blue">`). Forgetting to add
+`...attributes` however makes it impossible to apply attributes like `class` to
+a component.
+
+This rule warns about templates that don't have `...attributes` in them.
+
+Please note that this rule is only useful for Glimmer components or tagless
+(`tagName: ''`) classic components, because regular classic components have
+this functionality built into the root element, which is not part of their
+templates.
+
+This rule also should not be used for route/controller templates, because those
+don't support `...attributes`. Instead of unconditionally enabling this rule in
+your config, you might want to consider using overrides to only enable it for
+component templates.
 
 ## Examples
 
@@ -12,14 +27,17 @@ This rule **forbids** the following:
 
 ```gjs
 <template>
-  <div></div>
+  <div>
+    component content
+  </div>
 </template>
 ```
 
 ```gjs
 <template>
-  <div></div>
-  <div></div>
+  <SomeOtherComponent>
+    component content
+  </SomeOtherComponent>
 </template>
 ```
 
@@ -27,20 +45,34 @@ This rule **allows** the following:
 
 ```gjs
 <template>
-  <div ...attributes></div>
+  <div ...attributes>
+    component content
+  </div>
 </template>
 ```
 
 ```gjs
 <template>
-  <div ...attributes></div>
-  <div></div>
+  <div class="foo">
+    <SomeOtherComponent ...attributes />
+  </div>
 </template>
 ```
 
-## Why?
-
-Components that don't use `...attributes` cannot accept HTML attributes from their consumers, limiting the flexibility and reusability of components. The `...attributes` syntax ensures that consumers can pass attributes like `class`, `id`, `aria-*`, and others to your component.
+```js
+module.exports = {
+  extends: 'recommended',
+  rules: {
+    // ...
+  },
+  overrides: [
+    {
+      files: ['app/components/**/*.hbs'],
+      rules: { 'require-splattributes': 'error' },
+    },
+  ],
+};
+```
 
 ## Migration
 
@@ -54,4 +86,4 @@ Components that don't use `...attributes` cannot accept HTML attributes from the
 
 ## References
 
-- [Ember.js Guides - Splattributes](https://guides.emberjs.com/release/components/component-arguments-and-html-attributes/#toc_html-attributes)
+- [Splattributes](https://guides.emberjs.com/release/components/component-arguments-and-html-attributes/#toc_html-attributes) in the Ember.js guides

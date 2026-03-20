@@ -39,7 +39,7 @@ ruleTester.run('template-require-splattributes', rule, {
     {
       code: '<template><div></div><div></div></template>',
       output: null,
-      errors: [{ message: 'The root element in this template should use `...attributes`' }],
+      errors: [{ message: 'At least one element in this template should use `...attributes`' }],
     },
     {
       code: `<template><div/>
