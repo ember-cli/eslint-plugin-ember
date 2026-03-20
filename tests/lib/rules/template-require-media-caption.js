@@ -45,7 +45,7 @@ ruleTester.run('template-require-media-caption', rule, {
       output: null,
       errors: [
         {
-          message: 'Media elements (<video>) must have a <track> element with kind="captions".',
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
           type: 'GlimmerElementNode',
         },
       ],
@@ -57,7 +57,7 @@ ruleTester.run('template-require-media-caption', rule, {
       output: null,
       errors: [
         {
-          message: 'Media elements (<audio>) must have a <track> element with kind="captions".',
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
           type: 'GlimmerElementNode',
         },
       ],
@@ -71,7 +71,7 @@ ruleTester.run('template-require-media-caption', rule, {
       output: null,
       errors: [
         {
-          message: 'Media elements (<video>) must have a <track> element with kind="captions".',
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
           type: 'GlimmerElementNode',
         },
       ],
@@ -81,42 +81,54 @@ ruleTester.run('template-require-media-caption', rule, {
       code: '<template><video></video></template>',
       output: null,
       errors: [
-        { message: 'Media elements (<video>) must have a <track> element with kind="captions".' },
+        {
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
+        },
       ],
     },
     {
       code: '<template><audio><track /></audio></template>',
       output: null,
       errors: [
-        { message: 'Media elements (<audio>) must have a <track> element with kind="captions".' },
+        {
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
+        },
       ],
     },
     {
       code: '<template><video><track kind="subtitles" /></video></template>',
       output: null,
       errors: [
-        { message: 'Media elements (<video>) must have a <track> element with kind="captions".' },
+        {
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
+        },
       ],
     },
     {
       code: '<template><audio muted="false"></audio></template>',
       output: null,
       errors: [
-        { message: 'Media elements (<audio>) must have a <track> element with kind="captions".' },
+        {
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
+        },
       ],
     },
     {
       code: '<template><audio muted="false"><track kind="descriptions" /></audio></template>',
       output: null,
       errors: [
-        { message: 'Media elements (<audio>) must have a <track> element with kind="captions".' },
+        {
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
+        },
       ],
     },
     {
       code: '<template><video muted=false></video></template>',
       output: null,
       errors: [
-        { message: 'Media elements (<video>) must have a <track> element with kind="captions".' },
+        {
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
+        },
       ],
     },
   ],
@@ -143,42 +155,54 @@ hbsRuleTester.run('template-require-media-caption', rule, {
       code: '<video></video>',
       output: null,
       errors: [
-        { message: 'Media elements (<video>) must have a <track> element with kind="captions".' },
+        {
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
+        },
       ],
     },
     {
       code: '<audio><track /></audio>',
       output: null,
       errors: [
-        { message: 'Media elements (<audio>) must have a <track> element with kind="captions".' },
+        {
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
+        },
       ],
     },
     {
       code: '<video><track kind="subtitles" /></video>',
       output: null,
       errors: [
-        { message: 'Media elements (<video>) must have a <track> element with kind="captions".' },
+        {
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
+        },
       ],
     },
     {
       code: '<audio muted="false"></audio>',
       output: null,
       errors: [
-        { message: 'Media elements (<audio>) must have a <track> element with kind="captions".' },
+        {
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
+        },
       ],
     },
     {
       code: '<audio muted="false"><track kind="descriptions" /></audio>',
       output: null,
       errors: [
-        { message: 'Media elements (<audio>) must have a <track> element with kind="captions".' },
+        {
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
+        },
       ],
     },
     {
       code: '<video muted=false></video>',
       output: null,
       errors: [
-        { message: 'Media elements (<video>) must have a <track> element with kind="captions".' },
+        {
+          message: 'Media elements such as <audio> and <video> must have a <track> for captions.',
+        },
       ],
     },
   ],

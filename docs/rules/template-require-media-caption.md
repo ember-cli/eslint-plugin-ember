@@ -2,58 +2,62 @@
 
 <!-- end auto-generated rule header -->
 
-Requires that audio and video elements have captions.
+Captions provide a text version of the spoken and non-spoken audio information
+for media. They are essential for making audio and video content accessible for
+users who are deaf as well as those for whom the media is unavailable (similar
+to `alt` text on an image when it is unable to load).
 
-Captions are essential for deaf or hard-of-hearing users to understand media content. All `<audio>` and `<video>` elements should include a `<track>` element with `kind="captions"`.
-
-## Rule Details
-
-This rule requires that `<audio>` and `<video>` elements have a child `<track>` element with `kind="captions"`.
+Captions should contain all relevant information needed to help users
+understand the media content, which may include a transcription of the dialogue
+and descriptions of meaningful sound effects. They are synchronized with the
+media to allow users access to the portion of the content conveyed via the
+audio track. Note that when audio or video components include the `muted`
+attribute, however, captions are _not_ necessary.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```gjs
 <template>
-  <video src="movie.mp4"></video>
+  <audio></audio>
 </template>
 ```
 
 ```gjs
 <template>
-  <audio src="audio.mp3"></audio>
+  <video><track /></video>
 </template>
 ```
 
 ```gjs
 <template>
-  <video>
-    <track kind="subtitles" src="subs.vtt" />
-  </video>
+  <video><track kind="descriptions" /></video>
 </template>
 ```
 
-Examples of **correct** code for this rule:
+This rule **allows** the following:
 
 ```gjs
 <template>
-  <video>
-    <track kind="captions" src="captions.vtt" />
-  </video>
+  <audio><track kind="captions"></audio>
 </template>
 ```
 
 ```gjs
 <template>
-  <audio>
-    <track kind="captions" src="captions.vtt" />
-  </audio>
+  <video muted="true"></video>
+</template>
+```
+
+```gjs
+<template>
+  <video><track kind="captions" /><track kind="descriptions" /></video>
 </template>
 ```
 
 ## References
 
-- [eslint-plugin-ember template-require-media-caption](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-require-media-caption.md)
-- [WCAG 2.1 - Captions (Prerecorded)](https://www.w3.org/WAI/WCAG21/Understanding/captions-prerecorded.html)
-- [MDN - track element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track)
+- [Captions*Subtitles * Web Accessibility Initiative (WAI) \_ W3C](https://www.w3.org/WAI/media/av/captions/)
+- [Understanding Success Criterion 1.2.2: Captions (Prerecorded)](https://www.w3.org/WAI/WCAG21/Understanding/captions-prerecorded.html)
+- [media-has-caption - eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/media-has-caption.md)
