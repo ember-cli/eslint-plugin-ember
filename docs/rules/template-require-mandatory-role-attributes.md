@@ -2,76 +2,36 @@
 
 <!-- end auto-generated rule header -->
 
-Requires mandatory ARIA attributes for specific ARIA roles.
+Elements with ARIA roles must also include all required attributes for that
+role. This ensures that a given element possesses the necessary states and
+properties to behave consistently with user expectations for other elements
+with the same ARIA role.
 
-Certain ARIA roles require specific attributes to be present for the role to be properly communicated to assistive technologies. This rule ensures these mandatory attributes are provided.
-
-## Rule Details
-
-This rule checks that elements with ARIA roles include all required ARIA attributes for that role.
-
-Required attributes by role:
-
-- `checkbox`: requires `aria-checked`
-- `radio`: requires `aria-checked`
-- `slider`: requires `aria-valuenow`, `aria-valuemin`, `aria-valuemax`
-- `spinbutton`: requires `aria-valuenow`, `aria-valuemin`, `aria-valuemax`
-- `switch`: requires `aria-checked`
-- `scrollbar`: requires `aria-valuenow`, `aria-valuemin`, `aria-valuemax`, `aria-controls`
-- `option`: requires `aria-selected`
-- `tab`: requires `aria-selected`
-- `combobox`: requires `aria-expanded`
+This rule enforces that elements with an ARIA role also declare all required
+ARIA attributes for that role.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```gjs
 <template>
-  <div role="checkbox">Accept</div>
+  <div role="option" />
+  <CustomComponent role="checkbox" aria-required="true" />
+  {{some-component role="heading"}}
 </template>
 ```
 
-```gjs
-<template>
-  <div role="slider">Volume</div>
-</template>
-```
+This rule **allows** the following:
 
 ```gjs
 <template>
-  <div role="switch">Dark Mode</div>
-</template>
-```
-
-Examples of **correct** code for this rule:
-
-```gjs
-<template>
-  <div role="checkbox" aria-checked="false">Accept</div>
-</template>
-```
-
-```gjs
-<template>
-  <div
-    role="slider"
-    aria-valuenow="50"
-    aria-valuemin="0"
-    aria-valuemax="100"
-  >
-    Volume
-  </div>
-</template>
-```
-
-```gjs
-<template>
-  <div role="switch" aria-checked="true">Dark Mode</div>
+  <div role="option" aria-selected="false" />
+  <CustomComponent role="checkbox" aria-required="true" aria-checked="false" />
+  {{some-component role="heading" aria-level="2"}}
 </template>
 ```
 
 ## References
 
-- [ARIA Roles - Required States and Properties](https://www.w3.org/TR/wai-aria-1.2/#role_definitions)
-- [eslint-plugin-ember template-require-mandatory-role-attributes](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-require-mandatory-role-attributes.md)
+- [WAI-ARIA Roles - Accessibility \_ MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles)
