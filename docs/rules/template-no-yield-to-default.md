@@ -2,15 +2,13 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows yielding to the "default" block explicitly.
+The `yield` keyword can be used for invoking blocks passed into a component. The `to` named argument specifies which of the blocks to yield too. Specifying `{{yield to="default"}}` is unnecessary, as that is the default behavior. Likewise, `{{has-block}}` and `{{has-block-params}}` also defaults to checking the "default" block.
 
-## Rule Details
-
-Using `{{yield to="default"}}` is unnecessary. Simply use `{{yield}}` instead.
+This rule disallow yield to named blocks with the name "default".
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```gjs
 <template>
@@ -18,7 +16,19 @@ Examples of **incorrect** code for this rule:
 </template>
 ```
 
-Examples of **correct** code for this rule:
+```gjs
+<template>
+  {{has-block "default"}}
+</template>
+```
+
+```gjs
+<template>
+  {{has-block-params "default"}}
+</template>
+```
+
+This rule **allows** the following:
 
 ```gjs
 <template>
@@ -28,10 +38,14 @@ Examples of **correct** code for this rule:
 
 ```gjs
 <template>
-  {{yield to="inverse"}}
+  {{has-block}}
+</template>
+```
+
+```gjs
+<template>
+  {{has-block-params}}
 </template>
 ```
 
 ## References
-
-- [eslint-plugin-ember template-no-yield-to-default](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-yield-to-default.md)
