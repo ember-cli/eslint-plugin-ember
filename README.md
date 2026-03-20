@@ -254,6 +254,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                                       | disallow obsolete HTML elements                                              |    |    |    |
 | [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                               | disallow {{outlet}} outside of route templates                               |    |    |    |
 | [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                                 | disallow usage of ember-page-title component                                 |    |    |    |
+| [template-no-yield-only](docs/rules/template-no-yield-only.md)                                                     | disallow components that only yield                                          |    |    |    |
 | [template-no-yield-to-default](docs/rules/template-no-yield-to-default.md)                                         | disallow yield to default block                                              |    |    |    |
 | [template-require-button-type](docs/rules/template-require-button-type.md)                                         | require button elements to have a valid type attribute                       |    | 🔧 |    |
 | [template-require-each-key](docs/rules/template-require-each-key.md)                                               | require key attribute in {{#each}} loops                                     |    | 🔧 |    |
