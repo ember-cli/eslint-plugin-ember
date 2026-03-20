@@ -1,10 +1,14 @@
 # ember/template-require-iframe-src-attribute
 
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
 <!-- end auto-generated rule header -->
 
-Require iframe elements to have a src attribute.
+Omitting the `src` attribute from an `<iframe>` element can silently bypass your Content Security Policy's `frame-src` directive.
 
-For security reasons, iframe elements should always have a static `src` attribute. Without it, CSP `frame-src` is bypassed and the iframe inherits the parent origin, creating a security risk.
+When an `<iframe>` has no `src` (or an empty `src`), it implicitly loads `about:blank`. This document inherits the origin of the parent page, allowing the iframe to operate under the same-origin policy. Later dynamically setting `src` (e.g., via JavaScript) does not re-validate against `frame-src`, which exposes an **elevation-of-privilege vector**.
+
+This rule ensures that all `<iframe>` elements specify a `src` attribute explicitly in the markup, even if it is a placeholder like `"about:blank"` or a safe data URL.
 
 ## 🚨 Why this matters
 
@@ -36,7 +40,7 @@ This rule **allows** the following:
 
 ```gjs
 <template>
-  <iframe src='/safe-path'></iframe>
+  <iframe src='/safe-path' {{this.setFrameElement}}></iframe>
 </template>
 ```
 
@@ -46,22 +50,28 @@ This rule **allows** the following:
 </template>
 ```
 
-## Why?
-
-When an iframe element doesn't have a `src` attribute, it defaults to `about:blank`. Without an explicit `src` attribute, the iframe inherits the origin of the parent document, creating a security vulnerability where scripts could potentially access the parent's context.
+```gjs
+<template>
+  <iframe src=''></iframe>
+</template>
+```
 
 ## Migration
 
 If you're dynamically setting the `src`, pre-populate the element with a secure initial `src` to ensure CSP applies:
 
-```hbs
-<iframe src='about:blank' {{this.setFrameElement}}></iframe>
+```gjs
+<template>
+  <iframe src='about:blank' {{this.setFrameElement}}></iframe>
+</template>
 ```
 
 Or, if you know the eventual value ahead of time:
 
-```hbs
-<iframe src='/iframe-entry' {{this.setFrameElement}}></iframe>
+```gjs
+<template>
+  <iframe src='/iframe-entry' {{this.setFrameElement}}></iframe>
+</template>
 ```
 
 ## Related Rules
@@ -70,5 +80,5 @@ Or, if you know the eventual value ahead of time:
 
 ## References
 
-- [MDN - iframe element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)
-- [OWASP - Clickjacking Prevention](https://owasp.org/www-community/attacks/Clickjacking)
+- [CSP `frame-src` bypass via missing `src`](https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-src)
+- [MDN on `<iframe>` `src`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-src)
