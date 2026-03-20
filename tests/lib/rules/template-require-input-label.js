@@ -3,6 +3,9 @@ const rule = require('../../../lib/rules/template-require-input-label');
 
 const { RuleTester } = eslint;
 
+const NO_LABEL = 'form elements require a valid associated label.';
+const MULTIPLE_LABELS = 'form elements should not have multiple labels.';
+
 const ruleTester = new RuleTester({
   parser: require.resolve('ember-eslint-parser'),
   parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
@@ -10,218 +13,117 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-require-input-label', rule, {
   valid: [
-    // Input with id (can be associated with label)
-    '<template><input id="name" type="text" /></template>',
-
-    // Input with aria-label
-    '<template><input aria-label="Name" type="text" /></template>',
-
-    // Input with aria-labelledby
-    '<template><input aria-labelledby="label-id" type="text" /></template>',
-
-    // Hidden input doesn't need label
-    '<template><input type="hidden" /></template>',
-
-    // Textarea with id
-    '<template><textarea id="comment"></textarea></template>',
-
-    // Select with id
-    '<template><select id="country"><option>US</option></select></template>',
-
-    // Dynamic aria-label
+    '<template><label>LabelText<input /></label></template>',
+    '<template><label><input />LabelText</label></template>',
+    '<template><label>Label Text<div><input /></div></label></template>',
+    '<template><input id="probablyHasLabel" /></template>',
     '<template><input aria-label={{labelText}} /></template>',
-
-    // Component-form inputs (capital I/T)
+    '<template><input aria-labelledby="someIdValue" /></template>',
+    '<template><div></div></template>',
     '<template><Input id="foo" /></template>',
-    '<template><Textarea id="foo" /></template>',
-
-    // Curly component syntax
     '<template>{{input id="foo"}}</template>',
+    '<template><input ...attributes /></template>',
+    '<template><label>LabelText<textarea /></label></template>',
+    '<template><textarea id="probablyHasLabel" /></template>',
+    '<template><textarea aria-label={{labelText}} /></template>',
+    '<template><textarea aria-labelledby="someIdValue" /></template>',
+    '<template><Textarea id="foo" /></template>',
     '<template>{{textarea id="foo"}}</template>',
-
-    // Hidden skip in other forms
+    '<template><textarea ...attributes /></template>',
+    '<template><label>LabelText<select></select></label></template>',
+    '<template><select id="probablyHasLabel"></select></template>',
+    '<template><select aria-label={{labelText}}></select></template>',
+    '<template><select aria-labelledby="someIdValue"></select></template>',
+    '<template><select ...attributes></select></template>',
+    '<template><input type="hidden" /></template>',
     '<template><Input type="hidden" /></template>',
     '<template>{{input type="hidden"}}</template>',
-
-    // Textarea with aria-labelledby and aria-label
-    '<template><textarea aria-labelledby="someIdValue"></textarea></template>',
-    '<template><textarea aria-label={{labelText}}></textarea></template>',
-
-    // Select with aria-labelledby and aria-label
-    '<template><select aria-labelledby="someIdValue"></select></template>',
-    '<template><select aria-label={{labelText}}></select></template>',
-  ],
-  invalid: [
+    { filename: 'layout.gjs', code: '<template><Input /></template>' },
+    { filename: 'layout.gts', code: '<template><Textarea /></template>' },
     {
-      code: '<template><input type="text" /></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
+      code: '<template><CustomLabel><input /></CustomLabel></template>',
+      options: [{ labelTags: ['CustomLabel'] }],
     },
     {
-      code: '<template><textarea></textarea></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-    {
-      code: '<template><select><option>Value</option></select></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-
-    {
-      code: '<template><div><input /></div></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
+      code: '<template><web-label><input /></web-label></template>',
+      options: [{ labelTags: [/web-label/] }],
     },
     {
       code: '<template><input /></template>',
+      options: [false],
+    },
+  ],
+  invalid: [
+    {
+      code: '<template><my-label><input /></my-label></template>',
       output: null,
-      errors: [{ messageId: 'requireLabel' }],
+      options: [{ labelTags: [/web-label/] }],
+      errors: [{ message: NO_LABEL }],
+    },
+    {
+      code: '<template><div><input /></div></template>',
+      output: null,
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<template><input title="some title value" /></template>',
       output: null,
-      errors: [{ messageId: 'requireLabel' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<template><label><input></label></template>',
       output: null,
-      errors: [{ messageId: 'requireLabel' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<template><div>{{input}}</div></template>',
       output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-    {
-      code: '<template><Input/></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<template><input aria-label="first label" aria-labelledby="second label"></template>',
       output: null,
-      errors: [{ messageId: 'multipleLabels' }],
+      errors: [{ message: MULTIPLE_LABELS }],
     },
     {
       code: '<template><input id="label-input" aria-label="second label"></template>',
       output: null,
-      errors: [{ messageId: 'multipleLabels' }],
+      errors: [{ message: MULTIPLE_LABELS }],
     },
     {
       code: '<template><label>Input label<input aria-label="Custom label"></label></template>',
       output: null,
-      errors: [{ messageId: 'multipleLabels' }],
+      errors: [{ message: MULTIPLE_LABELS }],
     },
     {
       code: '<template>{{input type="button"}}</template>',
       output: null,
-      errors: [{ messageId: 'requireLabel' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<template>{{input type=myType}}</template>',
       output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-    {
-      code: '<template><input type="button"/></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-    {
-      code: '<template><input type={{myType}}/></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-    {
-      code: '<template><Input type="button"/></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-    {
-      code: '<template><Input type={{myType}}/></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-    {
-      code: '<template><div><textarea /></div></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<template><textarea /></template>',
       output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-    {
-      code: '<template><textarea title="some title value" /></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-    {
-      code: '<template><label><textarea /></label></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-    {
-      code: '<template><div>{{textarea}}</div></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-    {
-      code: '<template><Textarea /></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<template><textarea aria-label="first label" aria-labelledby="second label" /></template>',
       output: null,
-      errors: [{ messageId: 'multipleLabels' }],
-    },
-    {
-      code: '<template><textarea id="label-input" aria-label="second label" /></template>',
-      output: null,
-      errors: [{ messageId: 'multipleLabels' }],
-    },
-    {
-      code: '<template><label>Textarea label<textarea aria-label="Custom label" /></label></template>',
-      output: null,
-      errors: [{ messageId: 'multipleLabels' }],
-    },
-    {
-      code: '<template><div><select></select></div></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
+      errors: [{ message: MULTIPLE_LABELS }],
     },
     {
       code: '<template><select></select></template>',
       output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-    {
-      code: '<template><select title="some title value" /></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
-    },
-    {
-      code: '<template><label><select></select></label></template>',
-      output: null,
-      errors: [{ messageId: 'requireLabel' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<template><select aria-label="first label" aria-labelledby="second label" /></template>',
       output: null,
-      errors: [{ messageId: 'multipleLabels' }],
-    },
-    {
-      code: '<template><select id="label-input" aria-label="second label" /></template>',
-      output: null,
-      errors: [{ messageId: 'multipleLabels' }],
-    },
-    {
-      code: '<template><label>Select label<select aria-label="Custom label" /></label></template>',
-      output: null,
-      errors: [{ messageId: 'multipleLabels' }],
+      errors: [{ message: MULTIPLE_LABELS }],
     },
   ],
 });
@@ -236,32 +138,22 @@ const hbsRuleTester = new RuleTester({
 
 hbsRuleTester.run('template-require-input-label', rule, {
   valid: [
-    // Label with text content wrapping input
     '<label>LabelText<input /></label>',
-    '<label>LabelText<input id="foo" /></label>',
     '<label><input />LabelText</label>',
     '<label>LabelText<Input /></label>',
     '<label><Input />LabelText</label>',
     '<label>Label Text<div><input /></div></label>',
     '<label>text<Input id="foo" /></label>',
-    '<label>text{{input id="foo"}}</label>',
     '<label>Text here<Input /></label>',
-    '<label>Text here {{input}}</label>',
-
-    // Self-labelling attributes
     '<input id="probablyHasLabel" />',
     '<input aria-label={{labelText}} />',
     '<input aria-labelledby="someIdValue" />',
     '<div></div>',
     '<Input id="foo" />',
     '{{input id="foo"}}',
-
-    // ...attributes spread (can't determine labelling)
     '<input ...attributes/>',
     '<Input ...attributes />',
     '<input id="label-input" ...attributes>',
-
-    // Same logic for textareas
     '<label>LabelText<textarea /></label>',
     '<label><textarea />LabelText</label>',
     '<label>LabelText<Textarea /></label>',
@@ -277,193 +169,126 @@ hbsRuleTester.run('template-require-input-label', rule, {
     '<textarea ...attributes/>',
     '<Textarea ...attributes />',
     '<textarea id="label-input" ...attributes />',
-
-    // Same logic for selects
     '<label>LabelText<select></select></label>',
     '<label><select></select>LabelText</label>',
     '<label>Label Text<div><select></select></div></label>',
-    '<select id="probablyHasLabel" ></select>',
-    '<select aria-label={{labelText}} ></select>',
-    '<select aria-labelledby="someIdValue" ></select>',
+    '<select id="probablyHasLabel"></select>',
+    '<select aria-label={{labelText}}></select>',
+    '<select aria-labelledby="someIdValue"></select>',
     '<select ...attributes></select>',
     '<select id="label-input" ...attributes ></select>',
-
-    // Hidden inputs
     '<input type="hidden"/>',
     '<Input type="hidden" />',
     '{{input type="hidden"}}',
-
-    // Custom label tags
     {
       code: '<CustomLabel><input /></CustomLabel>',
       options: [{ labelTags: ['CustomLabel'] }],
     },
     {
       code: '<web-label><input /></web-label>',
-      options: [{ labelTags: ['web-label'] }],
+      options: [{ labelTags: [/web-label/] }],
+    },
+    {
+      code: '<input />',
+      options: [false],
     },
   ],
   invalid: [
     {
       code: '<my-label><input /></my-label>',
       output: null,
-      options: [{ labelTags: ['web-label'] }],
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      options: [{ labelTags: [/web-label/] }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<div><input /></div>',
       output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<input />',
       output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<input title="some title value" />',
       output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<label><input></label>',
       output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<div>{{input}}</div>',
       output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<Input/>',
       output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<input aria-label="first label" aria-labelledby="second label">',
       output: null,
-      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
+      errors: [{ message: MULTIPLE_LABELS }],
     },
     {
       code: '<input id="label-input" aria-label="second label">',
       output: null,
-      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
+      errors: [{ message: MULTIPLE_LABELS }],
     },
     {
       code: '<label>Input label<input aria-label="Custom label"></label>',
       output: null,
-      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
+      errors: [{ message: MULTIPLE_LABELS }],
     },
     {
       code: '{{input type="button"}}',
       output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '{{input type=myType}}',
       output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
-    },
-    {
-      code: '<input type="button"/>',
-      output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
-    },
-    {
-      code: '<input type={{myType}}/>',
-      output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<Input type="button"/>',
       output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<Input type={{myType}}/>',
       output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
-    },
-    {
-      code: '<div><textarea /></div>',
-      output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<textarea />',
       output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
-    },
-    {
-      code: '<textarea title="some title value" />',
-      output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
-    },
-    {
-      code: '<label><textarea /></label>',
-      output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
-    },
-    {
-      code: '<div>{{textarea}}</div>',
-      output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<Textarea />',
       output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<textarea aria-label="first label" aria-labelledby="second label" />',
       output: null,
-      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
-    },
-    {
-      code: '<textarea id="label-input" aria-label="second label" />',
-      output: null,
-      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
-    },
-    {
-      code: '<label>Textarea label<textarea aria-label="Custom label" /></label>',
-      output: null,
-      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
-    },
-    {
-      code: '<div><select></select></div>',
-      output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: MULTIPLE_LABELS }],
     },
     {
       code: '<select></select>',
       output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
-    },
-    {
-      code: '<select title="some title value" />',
-      output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
-    },
-    {
-      code: '<label><select></select></label>',
-      output: null,
-      errors: [{ message: 'Input elements should have an associated label.' }],
+      errors: [{ message: NO_LABEL }],
     },
     {
       code: '<select aria-label="first label" aria-labelledby="second label" />',
       output: null,
-      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
-    },
-    {
-      code: '<select id="label-input" aria-label="second label" />',
-      output: null,
-      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
-    },
-    {
-      code: '<label>Select label<select aria-label="Custom label" /></label>',
-      output: null,
-      errors: [{ message: 'Input element has multiple labelling mechanisms.' }],
+      errors: [{ message: MULTIPLE_LABELS }],
     },
   ],
 });

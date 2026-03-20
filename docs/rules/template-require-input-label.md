@@ -2,48 +2,101 @@
 
 <!-- end auto-generated rule header -->
 
-Require form input elements to have an associated label for accessibility.
+Users with assistive technology need user-input form elements to have
+associated labels.
 
-## Rule Details
+The rule applies to the following HTML tags:
 
-This rule enforces that input, textarea, and select elements have a way to be labeled, either through an `id` attribute (which can be referenced by a `<label for="...">`) or through `aria-label` or `aria-labelledby` attributes.
+- `<input>`
+- `<textarea>`
+- `<select>`
+
+The rule also applies to the following ember components:
+
+- `<Textarea />`
+- `<Input />`
+- `{{textarea}}`
+- `{{input}}`
+
+The label is **essential** for users. Leaving it out will cause **three**
+different WCAG criteria to fail:
+
+- [1.3.1, Info and Relationships](https://www.w3.org/WAI/WCAG21/Understanding/info-and-relationships.html)
+- [3.3.2, Labels or Instructions](https://www.w3.org/WAI/WCAG21/Understanding/labels-or-instructions.html)
+- [4.1.2, Name, Role, Value](https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html)
+
+It is also associated with this common failure:
+
+- [#68: Failure of Success Criterion 4.1.2 due to a user interface control not having a programmatically determined name](https://www.w3.org/WAI/WCAG21/Techniques/failures/F68)
+
+This rule checks to see if the input is contained by a label element. If it is
+not, it checks to see if the input has any of these three attributes: `id`,
+`aria-label`, or `aria-labelledby`. While the `id` element on the input is not
+a concrete indicator of the presence of an associated `<label>` element with a
+`for` attribute, it is a good indicator that one likely exists.
+
+This rule does not allow an input to use a `title` attribute for a valid label.
+This is because implementation by browsers is unreliable and incomplete.
+
+This rule is unable to determine if a valid label is present if `...attributes`
+is used, and must allow it to pass. However, developers are encouraged to write
+tests to ensure that a valid label is present for each input element present.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```gjs
 <template>
-  <input type="text" />
-</template>
-
-<template>
-  <textarea></textarea>
-</template>
-
-<template>
-  <select>
-    <option>Option 1</option>
-  </select>
+  <div><input /></div>
 </template>
 ```
 
-Examples of **correct** code for this rule:
+```gjs
+<template>
+  <input title="some label text" />
+</template>
+```
 
 ```gjs
 <template>
-  <label for="name">Name:</label>
-  <input id="name" type="text" />
+  <textarea />
 </template>
+```
 
+This rule **allows** the following:
+
+```gjs
 <template>
-  <input aria-label="Name" type="text" />
+  <label>Some Label Text<input /></label>
 </template>
+```
 
+```gjs
 <template>
-  <input aria-labelledby="name-label" type="text" />
+  <input id="someId" />
 </template>
+```
 
+```gjs
+<template>
+  <input aria-label="Label Text Here" />
+</template>
+```
+
+```gjs
+<template>
+  <input aria-labelledby="someButtonId" />
+</template>
+```
+
+```gjs
+<template>
+  <input ...attributes />
+</template>
+```
+
+```gjs
 <template>
   <input type="hidden" />
 </template>
@@ -55,13 +108,19 @@ Examples of **correct** code for this rule:
 - another option is to add an aria-label to the input element.
 - wrapping the input element in a label element is also allowed; however this is less flexible for styling purposes, so use with awareness.
 
-## Options
+## Configuration
 
-| Name        | Type       | Default | Description                                                          |
-| ----------- | ---------- | ------- | -------------------------------------------------------------------- |
-| `labelTags` | `string[]` | `[]`    | Additional tag names to treat as label elements (besides `<label>`). |
+- boolean - `true` to enable / `false` to disable
+- object -- An object with the following keys:
+  - `labelTags` -- An array of component names for that may be used as label replacements (in addition to the HTML `label` tag)
 
 ## References
 
-- [WCAG 2.1 - Labels or Instructions](https://www.w3.org/WAI/WCAG21/Understanding/labels-or-instructions.html)
-- [MDN - aria-label](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label)
+- [Understanding Success Criterion 1.3.1: Info and Relationships](https://www.w3.org/WAI/WCAG21/Understanding/info-and-relationships)
+- [Understanding Success Criterion 3.3.2: Labels or Instructions](https://www.w3.org/WAI/WCAG21/Understanding/labels-or-instructions.html)
+- [Understanding Success Criterion 4.1.2: Name, Role, Value](https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html)
+- [Using label elements to associate text labels and form controls](https://www.w3.org/WAI/WCAG21/Techniques/html/H44.html)
+- [Using aria-labelledby to provide a name for user interface controls](https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA16)
+- [Using aria-label to provide an invisible label where a visible label cannot be used](https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14.html)
+- [Failure due to a user interface control not having a programmatically determined name](https://www.w3.org/WAI/WCAG21/Techniques/failures/F68)
+- [Failure due to visually formatting a set of phone number fields but not including a text label](https://www.w3.org/WAI/WCAG21/Techniques/failures/F82)
