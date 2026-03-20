@@ -1,55 +1,43 @@
 # ember/template-require-aria-activedescendant-tabindex
 
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
 <!-- end auto-generated rule header -->
 
-Requires elements with `aria-activedescendant` to be tabbable (have tabindex attribute).
+This rule requires all non-interactive HTML elements using the `aria-activedescendant` attribute to declare a `tabindex` of zero.
 
-When using `aria-activedescendant` to manage focus within a composite widget, the element with this attribute must be focusable. This is achieved by adding a `tabindex` attribute.
+The `aria-activedescendant` attribute identifies the active descendant element of a composite widget, textbox, group, or application with document focus. This attribute is placed on the container element of the input control, and its value is set to the ID of the active child element. This allows screen readers to communicate information about the currently active element as if it has focus, while actual focus of the DOM remains on the container element.
 
-## Rule Details
-
-This rule ensures that any element with the `aria-activedescendant` attribute also has a `tabindex` attribute, making it keyboard accessible.
+Elements with `aria-activedescendant` must have a `tabindex` of zero in order to support keyboard navigation. Besides interactive elements, which are inherently keyboard-focusable, elements using the `aria-activedescendant` attribute must declare a `tabIndex` of zero with the `tabIndex` attribute.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```gjs
 <template>
-  <div aria-activedescendant="item-1">
-    <div id="item-1">Item 1</div>
-  </div>
+  <div aria-activedescendant='some-id'></div>
+  <div aria-activedescendant='some-id' tabindex='-1'></div>
+  <input aria-activedescendant={{some-id}} tabindex='-1' />
 </template>
 ```
 
-```gjs
-<template>
-  <ul aria-activedescendant="option-1">
-    <li id="option-1">Option 1</li>
-  </ul>
-</template>
-```
-
-Examples of **correct** code for this rule:
+This rule **allows** the following:
 
 ```gjs
 <template>
-  <div aria-activedescendant="item-1" tabindex="0">
-    <div id="item-1">Item 1</div>
-  </div>
-</template>
-```
-
-```gjs
-<template>
-  <ul aria-activedescendant="option-1" tabindex="-1">
-    <li id="option-1">Option 1</li>
-  </ul>
+  <CustomComponent />
+  <CustomComponent aria-activedescendant={{some-id}} />
+  <CustomComponent aria-activedescendant={{some-id}} tabindex={{0}} />
+  <div aria-activedescendant='some-id' tabindex='0'></div>
+  <input />
+  <input aria-activedescendant={{some-id}} />
+  <input aria-activedescendant={{some-id}} tabindex={{0}} />
 </template>
 ```
 
 ## References
 
-- [ARIA: aria-activedescendant](https://www.w3.org/TR/wai-aria-1.2/#aria-activedescendant)
-- [Managing Focus with aria-activedescendant](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#kbd_focus_activedescendant)
-- [eslint-plugin-ember template-require-aria-activedescendant-tabindex](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-require-aria-activedescendant-tabindex.md)
+- [MDN, Using the aria-activedescendant attribute(property)](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-activedescendant_attribute)
+- [WAI-aria: aria-activedescendant(property](https://www.digitala11y.com/aria-activedescendant-properties/)
+- [aria-activedescendant-has-tabindex - eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/aria-activedescendant-has-tabindex.md)
