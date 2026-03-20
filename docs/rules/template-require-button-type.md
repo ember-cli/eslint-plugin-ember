@@ -4,55 +4,35 @@
 
 <!-- end auto-generated rule header -->
 
-Requires button elements to have a valid `type` attribute.
+This rule requires all `<button>` elements to have a valid `type` attribute.
 
-The default behavior of buttons in forms is to submit the form. This can lead to unexpected behavior if not explicitly set. This rule ensures that all `<button>` elements have a `type` attribute with a valid value.
-
-## Rule Details
-
-This rule requires all `<button>` elements to have a `type` attribute set to one of: `"button"`, `"submit"`, or `"reset"`.
+By default, the `type` attribute of `<button>` elements is `submit`. This can
+be very confusing, when a button component is developed in isolation without
+`type="button"`, and when inside a `<form>` element it suddenly starts to
+submit the form.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```gjs
 <template>
-  <button>Click me</button>
+  <button>Hello World!</button>
+  <button type=''>Hello World!</button>
+  <button type='invalid'>Hello World!</button>
 </template>
 ```
+
+This rule **allows** the following:
 
 ```gjs
 <template>
-  <button type="invalid">Click</button>
+  <button type='button'>Hello World!</button>
+  <button type='submit'>Hello World!</button>
+  <button type='reset'>Hello World!</button>
 </template>
 ```
-
-Examples of **correct** code for this rule:
-
-```gjs
-<template>
-  <button type="button">Click me</button>
-</template>
-```
-
-```gjs
-<template>
-  <button type="submit">Submit Form</button>
-</template>
-```
-
-```gjs
-<template>
-  <button type="reset">Reset Form</button>
-</template>
-```
-
-## When Not To Use It
-
-If you are certain about button behaviors in your application and don't want to enforce explicit types, you may disable this rule.
 
 ## References
 
-- [eslint-plugin-ember template-require-button-type](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-require-button-type.md)
-- [MDN button type attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type)
+- [HTML spec - the button element](https://html.spec.whatwg.org/multipage/form-elements.html#attr-button-type)
