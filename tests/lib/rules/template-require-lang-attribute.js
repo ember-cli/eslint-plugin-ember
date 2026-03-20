@@ -1,13 +1,7 @@
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/template-require-lang-attribute');
 const RuleTester = require('eslint').RuleTester;
 
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
+const ERROR_MESSAGE = 'The `<html>` element must have the `lang` attribute with a valid value';
 
 const ruleTester = new RuleTester({
   parser: require.resolve('ember-eslint-parser'),
@@ -16,61 +10,73 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-require-lang-attribute', rule, {
   valid: [
-    `<template>
-      <html lang="en">
-        <body>Content</body>
-      </html>
-    </template>`,
-    `<template>
-      <html lang="es">
-        <body>Contenido</body>
-      </html>
-    </template>`,
-    `<template>
-      <div>No html element</div>
-    </template>`,
-    `<template>
-      <html lang={{this.locale}}>
-        <body>Content</body>
-      </html>
-    </template>`,
-
     '<template><html lang="en"></html></template>',
     '<template><html lang="en-US"></html></template>',
     '<template><html lang="DE-BW"></html></template>',
     '<template><html lang={{lang}}></html></template>',
+    {
+      code: '<template><html lang="de"></html></template>',
+      options: [true],
+    },
+    {
+      code: '<template><html lang={{this.language}}></html></template>',
+      options: [true],
+    },
+    {
+      code: '<template><html lang="hurrah"></html></template>',
+      options: [{ validateValues: false }],
+    },
+    {
+      code: '<template><html lang={{this.blah}}></html></template>',
+      options: [{ validateValues: false }],
+    },
   ],
 
   invalid: [
     {
-      code: `<template>
-        <html>
-          <body>Content</body>
-        </html>
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message: 'The <html> element must have a lang attribute.',
-          type: 'GlimmerElementNode',
-        },
-      ],
-    },
-
-    {
       code: '<template><html></html></template>',
       output: null,
-      errors: [{ message: 'The <html> element must have a lang attribute.' }],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<template><html lang=""></html></template>',
       output: null,
-      errors: [{ message: 'The <html> element must have a non-empty lang attribute.' }],
+      errors: [{ message: ERROR_MESSAGE }],
+    },
+    {
+      code: '<template><html></html></template>',
+      output: null,
+      options: [true],
+      errors: [{ message: ERROR_MESSAGE }],
+    },
+    {
+      code: '<template><html lang=""></html></template>',
+      output: null,
+      options: [true],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<template><html lang="gibberish"></html></template>',
       output: null,
-      errors: [{ message: 'The <html> element has an invalid lang value "gibberish".' }],
+      errors: [{ message: ERROR_MESSAGE }],
+    },
+    {
+      code: '<template><html lang="gibberish"></html></template>',
+      output: null,
+      options: [{ validateValues: true }],
+      errors: [{ message: ERROR_MESSAGE }],
+    },
+    {
+      code: '<template><html></html></template>',
+      output: null,
+      options: [{ validateValues: false }],
+      errors: [{ message: ERROR_MESSAGE }],
+    },
+    {
+      code: '<template><html lang=""></html></template>',
+      output: null,
+      options: [{ validateValues: false }],
+      errors: [{ message: ERROR_MESSAGE }],
     },
   ],
 });
@@ -89,10 +95,14 @@ hbsRuleTester.run('template-require-lang-attribute', rule, {
     '<html lang="en-US"></html>',
     '<html lang="DE-BW"></html>',
     '<html lang={{lang}}></html>',
-    '<html lang="de"></html>',
-    '<html lang={{this.language}}></html>',
-    '<html lang={{this.blah}}></html>',
-    // validateValues: false allows non-BCP47 values
+    {
+      code: '<html lang="de"></html>',
+      options: [true],
+    },
+    {
+      code: '<html lang={{this.language}}></html>',
+      options: [true],
+    },
     {
       code: '<html lang="hurrah"></html>',
       options: [{ validateValues: false }],
@@ -106,38 +116,47 @@ hbsRuleTester.run('template-require-lang-attribute', rule, {
     {
       code: '<html></html>',
       output: null,
-      errors: [{ message: 'The <html> element must have a lang attribute.' }],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<html lang=""></html>',
       output: null,
-      errors: [{ message: 'The <html> element must have a non-empty lang attribute.' }],
+      errors: [{ message: ERROR_MESSAGE }],
+    },
+    {
+      code: '<html></html>',
+      output: null,
+      options: [true],
+      errors: [{ message: ERROR_MESSAGE }],
+    },
+    {
+      code: '<html lang=""></html>',
+      output: null,
+      options: [true],
+      errors: [{ message: ERROR_MESSAGE }],
     },
     {
       code: '<html lang="gibberish"></html>',
       output: null,
-      errors: [{ message: 'The <html> element has an invalid lang value "gibberish".' }],
+      errors: [{ message: ERROR_MESSAGE }],
     },
-    // Config: validateValues explicitly true
     {
       code: '<html lang="gibberish"></html>',
       output: null,
       options: [{ validateValues: true }],
-      errors: [{ message: 'The <html> element has an invalid lang value "gibberish".' }],
+      errors: [{ message: ERROR_MESSAGE }],
     },
-    // Config: validateValues false — missing lang still errors
     {
       code: '<html></html>',
       output: null,
       options: [{ validateValues: false }],
-      errors: [{ message: 'The <html> element must have a lang attribute.' }],
+      errors: [{ message: ERROR_MESSAGE }],
     },
-    // Config: validateValues false — empty lang still errors
     {
       code: '<html lang=""></html>',
       output: null,
       options: [{ validateValues: false }],
-      errors: [{ message: 'The <html> element must have a non-empty lang attribute.' }],
+      errors: [{ message: ERROR_MESSAGE }],
     },
   ],
 });
