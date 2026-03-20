@@ -253,6 +253,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                                       | disallow obsolete HTML elements                                              |    |    |    |
 | [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                               | disallow {{outlet}} outside of route templates                               |    |    |    |
 | [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                                 | disallow usage of ember-page-title component                                 |    |    |    |
+| [template-require-button-type](docs/rules/template-require-button-type.md)                                         | require button elements to have a valid type attribute                       |    | 🔧 |    |
 | [template-require-each-key](docs/rules/template-require-each-key.md)                                               | require key attribute in {{#each}} loops                                     |    | 🔧 |    |
 | [template-require-form-method](docs/rules/template-require-form-method.md)                                         | require form method attribute                                                |    | 🔧 |    |
 | [template-require-has-block-helper](docs/rules/template-require-has-block-helper.md)                               | require (has-block) helper usage instead of hasBlock property                |    | 🔧 |    |
