@@ -1,117 +1,57 @@
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/template-no-yield-only');
 const RuleTester = require('eslint').RuleTester;
 
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
+const validHbs = [
+  '{{yield (hash someProp=someValue)}}',
+  '{{field}}',
+  '{{#yield}}{{/yield}}',
+  '<Yield/>',
+  '<yield/>',
+];
 
-const ruleTester = new RuleTester({
+const invalidHbs = [
+  {
+    code: '{{yield}}',
+    output: null,
+    errors: [{ messageId: 'noYieldOnly' }],
+  },
+  {
+    code: '     {{yield}}',
+    output: null,
+    errors: [{ messageId: 'noYieldOnly' }],
+  },
+  {
+    code: '\n  {{yield}}\n     ',
+    output: null,
+    errors: [{ messageId: 'noYieldOnly' }],
+  },
+  {
+    code: '\n{{! some comment }}  {{yield}}\n     ',
+    output: null,
+    errors: [{ messageId: 'noYieldOnly' }],
+  },
+];
+
+function wrapTemplate(entry) {
+  if (typeof entry === 'string') {
+    return `<template>${entry}</template>`;
+  }
+
+  return {
+    ...entry,
+    code: `<template>${entry.code}</template>`,
+    output: entry.output ? `<template>${entry.output}</template>` : entry.output,
+  };
+}
+
+const gjsRuleTester = new RuleTester({
   parser: require.resolve('ember-eslint-parser'),
   parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 
-ruleTester.run('template-no-yield-only', rule, {
-  valid: [
-    `<template>
-      <div>
-        {{yield}}
-      </div>
-    </template>`,
-    `<template>
-      {{this.something}}
-      {{yield}}
-    </template>`,
-    `<template>
-      <div></div>
-    </template>`,
-
-    '<template>{{yield (hash someProp=someValue)}}</template>',
-    '<template>{{field}}</template>',
-    '<template>{{#yield}}{{/yield}}</template>',
-    '<template><Yield/></template>',
-    '<template><yield/></template>',
-  ],
-
-  invalid: [
-    {
-      code: `<template>
-        {{yield}}
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message:
-            'Component should not only yield. Add wrapper element or additional functionality.',
-          type: 'GlimmerMustacheStatement',
-        },
-      ],
-    },
-    {
-      code: `<template>
-  
-        {{yield}}
-  
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message:
-            'Component should not only yield. Add wrapper element or additional functionality.',
-          type: 'GlimmerMustacheStatement',
-        },
-      ],
-    },
-    {
-      code: '<template>{{yield}}</template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'Component should not only yield. Add wrapper element or additional functionality.',
-          type: 'GlimmerMustacheStatement',
-        },
-      ],
-    },
-
-    {
-      code: '<template>     {{yield}}</template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'Component should not only yield. Add wrapper element or additional functionality.',
-        },
-      ],
-    },
-    {
-      code: `<template>
-  {{yield}}
-     </template>`,
-      output: null,
-      errors: [
-        {
-          message:
-            'Component should not only yield. Add wrapper element or additional functionality.',
-        },
-      ],
-    },
-    {
-      code: `<template>
-{{! some comment }}  {{yield}}
-     </template>`,
-      output: null,
-      errors: [
-        {
-          message:
-            'Component should not only yield. Add wrapper element or additional functionality.',
-        },
-      ],
-    },
-  ],
+gjsRuleTester.run('template-no-yield-only', rule, {
+  valid: validHbs.filter((entry) => !entry.includes('template-lint-disable')).map(wrapTemplate),
+  invalid: invalidHbs.map(wrapTemplate),
 });
 
 const hbsRuleTester = new RuleTester({
@@ -123,33 +63,6 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-yield-only', rule, {
-  valid: [
-    '{{yield (hash someProp=someValue)}}',
-    '{{field}}',
-    '{{#yield}}{{/yield}}',
-    '<Yield/>',
-    '<yield/>',
-  ],
-  invalid: [
-    {
-      code: '{{yield}}',
-      output: null,
-      errors: [{ messageId: 'noYieldOnly' }],
-    },
-    {
-      code: '     {{yield}}',
-      output: null,
-      errors: [{ messageId: 'noYieldOnly' }],
-    },
-    {
-      code: '\n  {{yield}}\n     ',
-      output: null,
-      errors: [{ messageId: 'noYieldOnly' }],
-    },
-    {
-      code: '\n{{! some comment }}  {{yield}}\n     ',
-      output: null,
-      errors: [{ messageId: 'noYieldOnly' }],
-    },
-  ],
+  valid: validHbs,
+  invalid: invalidHbs,
 });

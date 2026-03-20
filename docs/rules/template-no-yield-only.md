@@ -2,15 +2,15 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows components that only yield without any wrapper or additional functionality.
+Templates that only contain a single `{{yield}}` instruction are not required
+and increase the total template payload size.
 
-## Rule Details
-
-Components should provide some structure or functionality beyond just yielding. If a component only yields, it adds unnecessary indirection.
+This rule warns about templates that only contain a single `{{yield}}`
+instruction.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```gjs
 <template>
@@ -18,20 +18,25 @@ Examples of **incorrect** code for this rule:
 </template>
 ```
 
-Examples of **correct** code for this rule:
+```gjs
+<template>
+
+   {{yield}}
+
+</template>
+```
+
+This rule **allows** the following:
 
 ```gjs
 <template>
-  <div class="wrapper">
-    {{yield}}
-  </div>
+  {{yield something}}
 </template>
 ```
 
 ```gjs
 <template>
-  {{this.setup}}
-  {{yield}}
+  <div>{{yield}}</div>
 </template>
 ```
 
@@ -41,4 +46,4 @@ Examples of **correct** code for this rule:
 
 ## References
 
-- [eslint-plugin-ember template-no-yield-only](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-yield-only.md)
+- <https://github.com/ember-template-lint/ember-template-lint/issues/29>
