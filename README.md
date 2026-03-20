@@ -197,6 +197,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-nested-interactive](docs/rules/template-no-nested-interactive.md)                         | disallow nested interactive elements                                             |    |    |    |
 | [template-no-nested-landmark](docs/rules/template-no-nested-landmark.md)                               | disallow nested landmark elements                                                |    |    |    |
 | [template-no-pointer-down-event-binding](docs/rules/template-no-pointer-down-event-binding.md)         | disallow pointer down event bindings                                             |    |    |    |
+| [template-require-lang-attribute](docs/rules/template-require-lang-attribute.md)                       | require lang attribute on html element                                           |    |    |    |
 | [template-require-mandatory-role-attributes](docs/rules/template-require-mandatory-role-attributes.md) | require mandatory ARIA attributes for ARIA roles                                 |    |    |    |
 | [template-require-media-caption](docs/rules/template-require-media-caption.md)                         | require captions for audio and video elements                                    |    |    |    |
 | [template-require-presentational-children](docs/rules/template-require-presentational-children.md)     | require presentational elements to only contain presentational children          |    |    |    |
