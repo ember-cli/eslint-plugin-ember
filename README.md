@@ -178,30 +178,31 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Accessibility
 
-| Name                                                                                               | Description                                                                      | 💼 | 🔧 | 💡 |
-| :------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- | :- | :- | :- |
-| [template-link-href-attributes](docs/rules/template-link-href-attributes.md)                       | require href attribute on link elements                                          |    |    |    |
-| [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)                             | disallow abstract ARIA roles                                                     |    |    |    |
-| [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md)                   | disallow accesskey attribute                                                     |    | 🔧 |    |
-| [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)                         | disallow aria-hidden on body element                                             |    | 🔧 |    |
-| [template-no-aria-unsupported-elements](docs/rules/template-no-aria-unsupported-elements.md)       | disallow ARIA roles, states, and properties on elements that do not support them |    |    |    |
-| [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md)                   | disallow autofocus attribute                                                     |    | 🔧 |    |
-| [template-no-duplicate-landmark-elements](docs/rules/template-no-duplicate-landmark-elements.md)   | disallow duplicate landmark elements without unique labels                       |    |    |    |
-| [template-no-empty-headings](docs/rules/template-no-empty-headings.md)                             | disallow empty heading elements                                                  |    |    |    |
-| [template-no-heading-inside-button](docs/rules/template-no-heading-inside-button.md)               | disallow heading elements inside button elements                                 |    |    |    |
-| [template-no-invalid-aria-attributes](docs/rules/template-no-invalid-aria-attributes.md)           | disallow invalid aria-* attributes                                               |    |    |    |
-| [template-no-invalid-interactive](docs/rules/template-no-invalid-interactive.md)                   | disallow non-interactive elements with interactive handlers                      |    |    |    |
-| [template-no-invalid-link-text](docs/rules/template-no-invalid-link-text.md)                       | disallow invalid or uninformative link text content                              |    |    |    |
-| [template-no-invalid-link-title](docs/rules/template-no-invalid-link-title.md)                     | disallow invalid title attributes on link elements                               |    |    |    |
-| [template-no-invalid-role](docs/rules/template-no-invalid-role.md)                                 | disallow invalid ARIA roles                                                      |    |    |    |
-| [template-no-nested-interactive](docs/rules/template-no-nested-interactive.md)                     | disallow nested interactive elements                                             |    |    |    |
-| [template-no-nested-landmark](docs/rules/template-no-nested-landmark.md)                           | disallow nested landmark elements                                                |    |    |    |
-| [template-no-pointer-down-event-binding](docs/rules/template-no-pointer-down-event-binding.md)     | disallow pointer down event bindings                                             |    |    |    |
-| [template-require-media-caption](docs/rules/template-require-media-caption.md)                     | require captions for audio and video elements                                    |    |    |    |
-| [template-require-presentational-children](docs/rules/template-require-presentational-children.md) | require presentational elements to only contain presentational children          |    |    |    |
-| [template-require-valid-alt-text](docs/rules/template-require-valid-alt-text.md)                   | require valid alt text for images and other elements                             |    |    |    |
-| [template-require-valid-form-groups](docs/rules/template-require-valid-form-groups.md)             | require grouped form controls to have fieldset/legend or WAI-ARIA group labeling |    |    |    |
-| [template-table-groups](docs/rules/template-table-groups.md)                                       | require table elements to use table grouping elements                            |    |    |    |
+| Name                                                                                                   | Description                                                                      | 💼 | 🔧 | 💡 |
+| :----------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- | :- | :- | :- |
+| [template-link-href-attributes](docs/rules/template-link-href-attributes.md)                           | require href attribute on link elements                                          |    |    |    |
+| [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)                                 | disallow abstract ARIA roles                                                     |    |    |    |
+| [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md)                       | disallow accesskey attribute                                                     |    | 🔧 |    |
+| [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)                             | disallow aria-hidden on body element                                             |    | 🔧 |    |
+| [template-no-aria-unsupported-elements](docs/rules/template-no-aria-unsupported-elements.md)           | disallow ARIA roles, states, and properties on elements that do not support them |    |    |    |
+| [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md)                       | disallow autofocus attribute                                                     |    | 🔧 |    |
+| [template-no-duplicate-landmark-elements](docs/rules/template-no-duplicate-landmark-elements.md)       | disallow duplicate landmark elements without unique labels                       |    |    |    |
+| [template-no-empty-headings](docs/rules/template-no-empty-headings.md)                                 | disallow empty heading elements                                                  |    |    |    |
+| [template-no-heading-inside-button](docs/rules/template-no-heading-inside-button.md)                   | disallow heading elements inside button elements                                 |    |    |    |
+| [template-no-invalid-aria-attributes](docs/rules/template-no-invalid-aria-attributes.md)               | disallow invalid aria-* attributes                                               |    |    |    |
+| [template-no-invalid-interactive](docs/rules/template-no-invalid-interactive.md)                       | disallow non-interactive elements with interactive handlers                      |    |    |    |
+| [template-no-invalid-link-text](docs/rules/template-no-invalid-link-text.md)                           | disallow invalid or uninformative link text content                              |    |    |    |
+| [template-no-invalid-link-title](docs/rules/template-no-invalid-link-title.md)                         | disallow invalid title attributes on link elements                               |    |    |    |
+| [template-no-invalid-role](docs/rules/template-no-invalid-role.md)                                     | disallow invalid ARIA roles                                                      |    |    |    |
+| [template-no-nested-interactive](docs/rules/template-no-nested-interactive.md)                         | disallow nested interactive elements                                             |    |    |    |
+| [template-no-nested-landmark](docs/rules/template-no-nested-landmark.md)                               | disallow nested landmark elements                                                |    |    |    |
+| [template-no-pointer-down-event-binding](docs/rules/template-no-pointer-down-event-binding.md)         | disallow pointer down event bindings                                             |    |    |    |
+| [template-require-mandatory-role-attributes](docs/rules/template-require-mandatory-role-attributes.md) | require mandatory ARIA attributes for ARIA roles                                 |    |    |    |
+| [template-require-media-caption](docs/rules/template-require-media-caption.md)                         | require captions for audio and video elements                                    |    |    |    |
+| [template-require-presentational-children](docs/rules/template-require-presentational-children.md)     | require presentational elements to only contain presentational children          |    |    |    |
+| [template-require-valid-alt-text](docs/rules/template-require-valid-alt-text.md)                       | require valid alt text for images and other elements                             |    |    |    |
+| [template-require-valid-form-groups](docs/rules/template-require-valid-form-groups.md)                 | require grouped form controls to have fieldset/legend or WAI-ARIA group labeling |    |    |    |
+| [template-table-groups](docs/rules/template-table-groups.md)                                           | require table elements to use table grouping elements                            |    |    |    |
 
 ### Best Practices
 
