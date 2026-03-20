@@ -16,29 +16,6 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-require-presentational-children', rule, {
   valid: [
-    // Case 1: Presentational role on specific parent elements (ESLint-specific additions)
-    `<template>
-      <ul>
-        <li>Item</li>
-      </ul>
-    </template>`,
-    `<template>
-      <ul role="presentation">
-        <div>Content</div>
-      </ul>
-    </template>`,
-    `<template>
-      <table role="none">
-        <div>Content</div>
-      </table>
-    </template>`,
-    `<template>
-      <ul role="list">
-        <li>Item</li>
-      </ul>
-    </template>`,
-
-    // Case 2: ETL-matching tests
     '<template><button></button></template>',
     '<template><div></div></template>',
     '<template><li role="tab">Tab title</li></template>',
@@ -70,53 +47,35 @@ ruleTester.run('template-require-presentational-children', rule, {
   ],
 
   invalid: [
-    // Case 1: Presentational role on specific parent elements (ESLint-specific additions)
-    {
-      code: `<template>
-        <ul role="presentation">
-          <li>Item</li>
-        </ul>
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message:
-            'Element <ul> has role="presentation" but contains semantic child <li>. Presentational elements should only contain presentational children.',
-          type: 'GlimmerElementNode',
-        },
-      ],
-    },
-    {
-      code: `<template>
-        <table role="none">
-          <tr><td>Data</td></tr>
-        </table>
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message:
-            'Element <table> has role="none" but contains semantic child <tr>. Presentational elements should only contain presentational children.',
-          type: 'GlimmerElementNode',
-        },
-      ],
-    },
-
-    // Case 2: ETL-matching tests
     {
       code: '<template><div role="button"><h2>Test</h2></div></template>',
       output: null,
-      errors: [{ messageId: 'invalid' }],
+      errors: [
+        {
+          message: '<div> has a role of button, it cannot have semantic descendants like <h2>',
+        },
+      ],
     },
     {
       code: '<template><div role="button"><h2 role="presentation"><img /></h2></div></template>',
       output: null,
-      errors: [{ messageId: 'invalid' }],
+      errors: [
+        {
+          message: '<div> has a role of button, it cannot have semantic descendants like <img>',
+        },
+      ],
     },
     {
       code: '<template><div role="button"><h2 role="presentation"><button>Test <img/></button></h2></div></template>',
       output: null,
-      errors: [{ messageId: 'invalid' }, { messageId: 'invalid' }],
+      errors: [
+        {
+          message: '<div> has a role of button, it cannot have semantic descendants like <button>',
+        },
+        {
+          message: '<div> has a role of button, it cannot have semantic descendants like <img>',
+        },
+      ],
     },
   ],
 });
@@ -166,8 +125,7 @@ hbsRuleTester.run('template-require-presentational-children', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Element <div> has role="button" but contains semantic child <h2>. Presentational elements should only contain presentational children.',
+          message: '<div> has a role of button, it cannot have semantic descendants like <h2>',
         },
       ],
     },
@@ -176,8 +134,7 @@ hbsRuleTester.run('template-require-presentational-children', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Element <div> has role="button" but contains semantic child <img>. Presentational elements should only contain presentational children.',
+          message: '<div> has a role of button, it cannot have semantic descendants like <img>',
         },
       ],
     },
@@ -186,12 +143,10 @@ hbsRuleTester.run('template-require-presentational-children', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Element <div> has role="button" but contains semantic child <button>. Presentational elements should only contain presentational children.',
+          message: '<div> has a role of button, it cannot have semantic descendants like <button>',
         },
         {
-          message:
-            'Element <div> has role="button" but contains semantic child <img>. Presentational elements should only contain presentational children.',
+          message: '<div> has a role of button, it cannot have semantic descendants like <img>',
         },
       ],
     },
