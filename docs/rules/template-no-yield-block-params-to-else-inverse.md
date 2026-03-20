@@ -2,7 +2,7 @@
 
 <!-- end auto-generated rule header -->
 
-Disallow yielding block params to else or inverse blocks.
+Yielding to else block is mainly useful for supporting curly invocation syntax. However, the else block in curly invocation syntax does not support consuming block params.
 
 Yielding block params (positional arguments) to `else` or `inverse` blocks doesn't work as expected. The params are not available in the inverse block.
 
@@ -27,17 +27,7 @@ This rule **allows** the following:
 ```gjs
 <template>
   {{yield}}
-</template>
-```
-
-```gjs
-<template>
-  {{yield 'some' 'param'}}
-</template>
-```
-
-```gjs
-<template>
+  {{yield to='else'}}
   {{yield to='inverse'}}
 </template>
 ```
@@ -48,11 +38,11 @@ We need to remove block params from highlighted yield's and update application l
 
 In addition, we could use named blocks (slots) to provide values.
 
+## References
+
+- [Ember Guides – Block content](https://guides.emberjs.com/v5.5.0/components/block-content/)
+
 ## Related Rules
 
 - [no-yield-only](template-no-yield-only.md)
 - [no-yield-to-default](template-no-yield-to-default.md)
-
-## References
-
-- [Ember.js Guides - Yielding](https://guides.emberjs.com/release/components/component-arguments-and-html-attributes/#toc_yielding-content)
