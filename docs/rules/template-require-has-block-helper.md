@@ -1,54 +1,67 @@
 # ember/template-require-has-block-helper
 
-> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 
-Requires usage of the `(has-block)` helper instead of the `hasBlock` property.
+In Ember 3.26 the properties `hasBlock` and `hasBlockParams` were deprecated. Their replacement is to use `has-block` and `has-block-params` helpers instead.
 
-## Rule Details
+This rule prevents the usage of `hasBlock` and `hasBlockParams` and suggests using `has-block` or `has-block-params` instead.
 
-The `(has-block)` helper is the preferred way to check if a block was provided to a component.
+For more information about this deprecation you can view the [RFC](https://github.com/emberjs/rfcs/blob/master/text/0689-deprecate-has-block.md) or its entry on the [Deprecations page](https://deprecations.emberjs.com/v3.x/#toc_has-block-and-has-block-params).
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
-```hbs
-{{#if hasBlock}}
-  {{yield}}
-{{/if}}
+```gjs
+<template>
+  {{hasBlock}}
+  {{#if hasBlock}}
+
+  {{/if}}
+</template>
 ```
 
-```hbs
-{{#if this.hasBlock}}
-  {{yield}}
-{{/if}}
+```gjs
+<template>
+  {{hasBlockParams}}
+  {{#if hasBlockParams}}
+
+  {{/if}}
+</template>
 ```
 
-Examples of **correct** code for this rule:
+This rule **allows** the following:
 
-```hbs
-{{#if (has-block)}}
-  {{yield}}
-{{/if}}
+```gjs
+<template>
+  {{has-block}}
+  {{#if (has-block)}}
+
+  {{/if}}
+</template>
 ```
 
-```hbs
-{{#if (has-block 'inverse')}}
-  {{yield to='inverse'}}
-{{/if}}
+```gjs
+<template>
+  {{has-block-params}}
+  {{#if (has-block-params)}}
+
+  {{/if}}
+</template>
 ```
 
 ## Migration
 
-- `{{hasBlock}}`-> `{{has-block}}
-- `{{hasBlockParams}}`-> `{{has-block-params}}
-- `{{#if hasBlock}} {{/if}}`-> `{{#if (has-block)}} {{/if}}`
-- `{{#if (hasBlock "inverse")}} {{/if}}`-> `{{#if (has-block "inverse")}} {{/if}}`
-- `{{#if hasBlockParams}} {{/if}}`-> `{{#if (has-block-params)}} {{/if}}`
-- `{{#if (hasBlockParams "inverse")}} {{/if}}`-> `{{#if (has-block-params "inverse")}} {{/if}}`
+- `{{hasBlock}}` -> `{{has-block}}`
+- `{{hasBlockParams}}` -> `{{has-block-params}}`
+- `{{#if hasBlock}} {{/if}}` -> `{{#if (has-block)}} {{/if}}`
+- `{{#if (hasBlock "inverse")}} {{/if}}` -> `{{#if (has-block "inverse")}} {{/if}}`
+- `{{#if hasBlockParams}} {{/if}}` -> `{{#if (has-block-params)}} {{/if}}`
+- `{{#if (hasBlockParams "inverse")}} {{/if}}` -> `{{#if (has-block-params "inverse")}} {{/if}}`
 
 ## References
 
-- [eslint-plugin-ember template-require-has-block-helper](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-require-has-block-helper.md)
+- [RFC](https://github.com/emberjs/rfcs/blob/master/text/0689-deprecate-has-block.md)
+- [Deprecation information](https://deprecations.emberjs.com/v3.x/#toc_has-block-and-has-block-params)
