@@ -1,104 +1,91 @@
 const rule = require('../../../lib/rules/template-require-form-method');
 const RuleTester = require('eslint').RuleTester;
 
-const ruleTester = new RuleTester({
+const DEFAULT_ERROR =
+  'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`';
+
+const validHbs = [
+  {
+    options: [{ allowedMethods: ['get'] }],
+    code: '<form method="GET"></form>',
+  },
+  '<form method="POST"></form>',
+  '<form method="post"></form>',
+  '<form method="GET"></form>',
+  '<form method="get"></form>',
+  '<form method="DIALOG"></form>',
+  '<form method="dialog"></form>',
+  '<form method="{{formMethod}}"></form>',
+  '<form method={{formMethod}}></form>',
+  '<div/>',
+  '<div></div>',
+  '<div method="randomType"></div>',
+];
+
+const invalidHbs = [
+  {
+    options: [{ allowedMethods: ['get'] }],
+    code: '<form method="POST"></form>',
+    output: '<form method="GET"></form>',
+    errors: [
+      { message: 'All `<form>` elements should have `method` attribute with value of `GET`' },
+    ],
+  },
+  {
+    options: [{ allowedMethods: ['POST'] }],
+    code: '<form method="GET"></form>',
+    output: '<form method="POST"></form>',
+    errors: [
+      { message: 'All `<form>` elements should have `method` attribute with value of `POST`' },
+    ],
+  },
+  {
+    code: '<form></form>',
+    output: '<form method="POST"></form>',
+    errors: [{ message: DEFAULT_ERROR }],
+  },
+  {
+    code: '<form method=""></form>',
+    output: '<form method="POST"></form>',
+    errors: [{ message: DEFAULT_ERROR }],
+  },
+  {
+    code: '<form method=42></form>',
+    output: '<form method="POST"></form>',
+    errors: [{ message: DEFAULT_ERROR }],
+  },
+  {
+    code: '<form method=" ge t "></form>',
+    output: '<form method="POST"></form>',
+    errors: [{ message: DEFAULT_ERROR }],
+  },
+  {
+    code: '<form method=" pos t "></form>',
+    output: '<form method="POST"></form>',
+    errors: [{ message: DEFAULT_ERROR }],
+  },
+];
+
+function wrapTemplate(entry) {
+  if (typeof entry === 'string') {
+    return `<template>${entry}</template>`;
+  }
+
+  return {
+    ...entry,
+    code: `<template>${entry.code}</template>`,
+    output: entry.output ? `<template>${entry.output}</template>` : entry.output,
+  };
+}
+
+const gjsRuleTester = new RuleTester({
   parser: require.resolve('ember-eslint-parser'),
   parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 
-ruleTester.run('template-require-form-method', rule, {
-  valid: [
-    '<template><form method="POST"></form></template>',
-    '<template><form method="post"></form></template>',
-    '<template><form method="GET"></form></template>',
-    '<template><form method="get"></form></template>',
-    '<template><form method="DIALOG"></form></template>',
-    '<template><form method="dialog"></form></template>',
-    '<template><form method="{{formMethod}}"></form></template>',
-    '<template><form method={{formMethod}}></form></template>',
-    '<template><div method="randomType"></div></template>',
-    {
-      code: '<template><form method="GET"></form></template>',
-      output: null,
-      options: [{ allowedMethods: ['get'] }],
-    },
-
-    '<template><div/></template>',
-    '<template><div></div></template>',
-  ],
-  invalid: [
-    {
-      code: '<template><form></form></template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
-        },
-      ],
-    },
-    {
-      code: '<template><form method="POST"></form></template>',
-      output: null,
-      options: [{ allowedMethods: ['GET'] }],
-      errors: [
-        {
-          message: 'All `<form>` elements should have `method` attribute with value of `GET`',
-        },
-      ],
-    },
-    {
-      code: '<template><form method="GET"></form></template>',
-      output: null,
-      options: [{ allowedMethods: ['POST'] }],
-      errors: [
-        {
-          message: 'All `<form>` elements should have `method` attribute with value of `POST`',
-        },
-      ],
-    },
-
-    {
-      code: '<template><form method=""></form></template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
-        },
-      ],
-    },
-    {
-      code: '<template><form method=42></form></template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
-        },
-      ],
-    },
-    {
-      code: '<template><form method=" ge t "></form></template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
-        },
-      ],
-    },
-    {
-      code: '<template><form method=" pos t "></form></template>',
-      output: null,
-      errors: [
-        {
-          message:
-            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
-        },
-      ],
-    },
-  ],
+gjsRuleTester.run('template-require-form-method', rule, {
+  valid: validHbs.map(wrapTemplate),
+  invalid: invalidHbs.map(wrapTemplate),
 });
 
 const hbsRuleTester = new RuleTester({
@@ -110,95 +97,6 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-require-form-method', rule, {
-  valid: [
-    '<form method="POST"></form>',
-    '<form method="post"></form>',
-    '<form method="GET"></form>',
-    '<form method="get"></form>',
-    '<form method="DIALOG"></form>',
-    '<form method="dialog"></form>',
-    '<form method="{{formMethod}}"></form>',
-    '<form method={{formMethod}}></form>',
-    '<div/>',
-    '<div></div>',
-    '<div method="randomType"></div>',
-    // Config: allowedMethods
-    {
-      code: '<form method="GET"></form>',
-      options: [{ allowedMethods: ['get'] }],
-    },
-  ],
-  invalid: [
-    {
-      code: '<form></form>',
-      output: null,
-      errors: [
-        {
-          message:
-            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
-        },
-      ],
-    },
-    {
-      code: '<form method=""></form>',
-      output: null,
-      errors: [
-        {
-          message:
-            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
-        },
-      ],
-    },
-    {
-      code: '<form method=42></form>',
-      output: null,
-      errors: [
-        {
-          message:
-            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
-        },
-      ],
-    },
-    {
-      code: '<form method=" ge t "></form>',
-      output: null,
-      errors: [
-        {
-          message:
-            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
-        },
-      ],
-    },
-    {
-      code: '<form method=" pos t "></form>',
-      output: null,
-      errors: [
-        {
-          message:
-            'All `<form>` elements should have `method` attribute with value of `POST,GET,DIALOG`',
-        },
-      ],
-    },
-    // Config: allowedMethods
-    {
-      code: '<form method="POST"></form>',
-      output: null,
-      options: [{ allowedMethods: ['get'] }],
-      errors: [
-        {
-          message: 'All `<form>` elements should have `method` attribute with value of `GET`',
-        },
-      ],
-    },
-    {
-      code: '<form method="GET"></form>',
-      output: null,
-      options: [{ allowedMethods: ['POST'] }],
-      errors: [
-        {
-          message: 'All `<form>` elements should have `method` attribute with value of `POST`',
-        },
-      ],
-    },
-  ],
+  valid: validHbs,
+  invalid: invalidHbs,
 });

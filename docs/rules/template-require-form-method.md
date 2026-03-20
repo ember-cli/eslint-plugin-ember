@@ -1,10 +1,23 @@
 # ember/template-require-form-method
 
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
 <!-- end auto-generated rule header -->
 
-Require form elements to have a method attribute.
+This rule requires all `<form>` elements to have `method` attribute with `POST`, `GET` or `DIALOG` value.
 
-Form elements should explicitly specify the HTTP method they use. This improves code clarity and helps catch potential issues.
+By default `form` elements without `method` attribute are submitted as `GET` requests.
+In usual applications `submit` event listeners are attached to `form` elements and `event.preventDefault()` is called to avoid form submission.
+
+However in case of failure to prevent default action, form submission as `GET` request can leak sensitive end-user information.
+
+Example uses of `GET` requests:
+
+- non-secure data
+- bookmarking the submission result
+- data search query strings
+
+**Caution** - this rules does not check for `formmethod` attribute on `form` elements themselves.
 
 ## Examples
 
@@ -12,13 +25,9 @@ This rule **forbids** the following:
 
 ```gjs
 <template>
-  <form></form>
-</template>
-```
-
-```gjs
-<template>
-  <form method='DELETE'></form>
+  <form>Hello world!</form>
+  <form method=''></form>
+  <form method='random'>Hello world!</form>
 </template>
 ```
 
@@ -26,46 +35,21 @@ This rule **allows** the following:
 
 ```gjs
 <template>
-  <form method='POST'></form>
-</template>
-```
-
-```gjs
-<template>
-  <form method='GET'></form>
-</template>
-```
-
-```gjs
-<template>
-  <form method='DIALOG'></form>
-</template>
-```
-
-```gjs
-<template>
-  <form method='{{dynamicMethod}}'></form>
+  <form method='post'>Hello world!</form>
+  <form method='get'>Hello world!</form>
+  <form method='dialog'>Hello world!</form>
 </template>
 ```
 
 ## Configuration
 
-- `allowedMethods` (default: `['POST', 'GET', 'DIALOG']`) - Array of allowed form method values
+The following values are valid configuration:
 
-```js
-// .eslintrc.js
-module.exports = {
-  rules: {
-    'ember/template-require-form-method': [
-      'error',
-      {
-        allowedMethods: ['POST', 'GET'],
-      },
-    ],
-  },
-};
-```
+- boolean - `true` to enable / `false` to disable
+- object -- An object with the following keys:
+  - `allowedMethods` -- An array of allowed form `method` attribute values, default: `['POST', 'GET', 'DIALOG']`
 
 ## References
 
-- [HTML Spec - Form Method Attribute](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-method)
+- [MDN - form method attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attr-method)
+- [HTML spec - form method attribute](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-method)
