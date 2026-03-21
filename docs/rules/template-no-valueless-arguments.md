@@ -13,13 +13,13 @@ This rule **forbids** the following:
 ```
 
 ```gjs
-<template><SomeComponent @valuelessByAccident {{@canBeAModifier}} /></template>
+<template><SomeComponent @valuelessByAccident{{@canBeAModifier}} /></template>
 ```
 
 This rule **allows** the following:
 
 ```gjs
-<template><Editor @defaultText='' /></template>
+<template><Editor @defaultText="" /></template>
 ```
 
 ## Migration
