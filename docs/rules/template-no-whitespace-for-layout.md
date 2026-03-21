@@ -2,45 +2,34 @@
 
 <!-- end auto-generated rule header -->
 
-Disallow using multiple consecutive spaces for layout purposes in templates. CSS should be used for spacing and layout instead.
+Formatting of text through the use of multiple whitespace is entirely visual, and therefore is incompatible with screen-reading assistive technology tools.
 
-## Rule Details
-
-This rule discourages the use of multiple consecutive spaces (2 or more) for layout purposes in templates. CSS should be used for spacing and layout instead.
+The rule applies to the content of Handlebars AST TextNodes, and performs a RegExp search for two consecutive white space characters that might indicate the use of whitespace used for layout.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```gjs
 <template>
-  <div>Hello   World</div>
+  Mon.&nbsp;&nbsp;&nbsp;&nbsp;Eggs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tomato soup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;House salad<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bacon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hamburger&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fried chicken<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Toast&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Onion rings&nbsp;&nbsp;&nbsp;&nbsp;Green beans<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cookie&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mashed potatoes
+</template>
+```
+
+This rule **allows** the following:
+
+```gjs
+<template>
+  <p>Start to finish</p>
 </template>
 ```
 
 ```gjs
 <template>
-  <div>Text    with    spaces</div>
-</template>
-```
-
-```gjs
-<template>
-  <div>Multiple     spaces</div>
-</template>
-```
-
-Examples of **correct** code for this rule:
-
-```gjs
-<template>
-  <div>Hello World</div>
-</template>
-```
-
-```gjs
-<template>
-  <div class="spaced-layout">Text with proper spacing</div>
+  <p>Start&nbsp;to&nbsp;Finish</p>
 </template>
 ```
 
@@ -53,4 +42,5 @@ To fix issues caused by using whitespace for layout, the following are recommend
 
 ## References
 
-- [eslint-plugin-ember template-no-whitespace-for-layout](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-whitespace-for-layout.md)
+- [F33: Using white space characters to create multiple columns in plain text content](https://www.w3.org/TR/WCAG20-TECHS/failures.html#F33)
+- [F34: Using white space characters to format tables in plain text content](https://www.w3.org/TR/WCAG20-TECHS/failures.html#F34)
