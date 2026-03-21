@@ -6,13 +6,9 @@
 
 Disallow unnecessary parentheses enclosing statements in curlies. When invoking a helper with arguments, the outer parentheses around the entire expression are unnecessary.
 
-## Rule Details
-
-This rule flags `{{(helper args)}}` where the parentheses around the helper call can be removed, becoming `{{helper args}}`.
-
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```gjs
 <template>
@@ -26,26 +22,17 @@ Examples of **incorrect** code for this rule:
 </template>
 ```
 
-Examples of **correct** code for this rule:
+This rule **allows** the following:
 
 ```gjs
 <template>
-  {{concat "a" "b"}}
-</template>
-```
-
-```gjs
-<template>
+  {{foo}}
   {{(foo)}}
-</template>
-```
-
-```gjs
-<template>
-  {{this.property}}
+  {{concat "a" "b"}}
+  {{concat (capitalize "foo") "-bar"}}
 </template>
 ```
 
 ## References
 
-- [eslint-plugin-ember template-no-unnecessary-curly-parens](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-unnecessary-curly-parens.md)
+- Ember's [Helper Functions](https://guides.emberjs.com/release/components/helper-functions/) guide
