@@ -4,8 +4,6 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows redundant role attributes on semantic HTML elements.
-
 The rule checks for redundancy between any semantic HTML element with a default/implicit ARIA role and the role provided.
 
 For example, if a landmark element is used, any role provided will either be redundant or incorrect. This rule ensures that no role attribute is placed on any of the landmark elements, with the following exceptions:
@@ -18,56 +16,51 @@ For example, if a landmark element is used, any role provided will either be red
 
 This rule **forbids** the following:
 
-```gjs
-<template><header role='banner'></header></template>
+```hbs
+<header role='banner'></header>
 ```
 
-```gjs
-<template><main role='main'></main></template>
+```hbs
+<main role='main'></main>
 ```
 
-```gjs
-<template><aside role='complementary'></aside></template>
+```hbs
+<aside role='complementary'></aside>
 ```
 
-```gjs
-<template><footer role='contentinfo'></footer></template>
+```hbs
+<footer role='contentinfo'></footer>
 ```
 
-```gjs
-<template><form role='form'></form></template>
+```hbs
+<form role='form'></form>
 ```
 
 This rule **allows** the following:
 
-```gjs
-<template><form role='search'></form></template>
+```hbs
+<form role='search'></form>
 ```
 
-```gjs
-<template><nav role='navigation'></nav></template>
+```hbs
+<nav role='navigation'></nav>
 ```
 
-```gjs
-<template><input role='combobox' /></template>
+```hbs
+<input role='combobox' />
 ```
 
 ## Configuration
 
-This rule accepts an options object with the following properties:
+- boolean -- if `true`, default configuration is applied
 
-- `checkAllHTMLElements` (default: `true`) - When set to `true`, checks all HTML elements for redundant roles. When `false`, only checks landmark elements.
-
-```js
-// .eslintrc.js
-module.exports = {
-  rules: {
-    'ember/template-no-redundant-role': ['error', { checkAllHTMLElements: false }],
-  },
-};
-```
+- object -- containing the following property:
+  - boolean -- `checkAllHTMLElements` -- if `true`, the rule checks for redundancy between any semantic HTML element with a default/implicit ARIA role and the role provided, instead of just landmark roles (default: `true`)
 
 ## References
 
-- [ARIA Roles](https://www.w3.org/TR/wai-aria-1.2/#role_definitions)
-- [HTML ARIA](https://www.w3.org/TR/html-aria/)
+- [Landmark Roles (WAI-ARIA spec)](https://www.w3.org/WAI/PF/aria/roles#landmark_roles)
+- [Using ARIA landmarks to identify regions of a page](https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11)
+- [Document conformance requirements for use of ARIA attributes in HTML](https://www.w3.org/TR/html-aria/#docconformance)
+- [ARIA Spec, ARIA Adds Nothing to Default Semantics of Most HTML Elements](https://www.w3.org/TR/using-aria/#aria-does-nothing)
+- [Disabling a link](https://www.scottohara.me/blog/2021/05/28/disabled-links.html)

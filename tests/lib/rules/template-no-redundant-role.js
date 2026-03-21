@@ -146,6 +146,14 @@ hbsRuleTester.run('template-no-redundant-role', rule, {
     '<button role="link"></button>',
     '<input type="checkbox" value="yes" checked />',
     '<input type="range" />',
+    {
+      code: '<body role="document"></body>',
+      options: [{ checkAllHTMLElements: false }],
+    },
+    {
+      code: '<dialog role="dialog" />',
+      options: [{ checkAllHTMLElements: false }],
+    },
     '<ul class="list" role="combobox"></ul>',
   ],
   invalid: [
@@ -234,6 +242,28 @@ hbsRuleTester.run('template-no-redundant-role', rule, {
       output:
         '<select name="color" id="color" multiple><option value="default-color">black</option></select>',
       errors: [{ message: 'Use of redundant or invalid role: listbox on <select> detected.' }],
+    },
+    {
+      code: '<main role="main"></main>',
+      output: '<main></main>',
+      options: [{ checkAllHTMLElements: false }],
+      errors: [
+        {
+          message:
+            'Use of redundant or invalid role: main on <main> detected. If a landmark element is used, any role provided will either be redundant or incorrect.',
+        },
+      ],
+    },
+    {
+      code: '<aside role="complementary"></aside>',
+      output: '<aside></aside>',
+      options: [{ checkAllHTMLElements: false }],
+      errors: [
+        {
+          message:
+            'Use of redundant or invalid role: complementary on <aside> detected. If a landmark element is used, any role provided will either be redundant or incorrect.',
+        },
+      ],
     },
   ],
 });
