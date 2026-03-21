@@ -4,31 +4,30 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows trailing whitespace at the end of lines.
-
-Trailing whitespace is unnecessary and can cause issues with version control systems, where it may be flagged as changes.
-
-## Rule Details
-
-This rule detects and removes trailing spaces or tabs at the end of lines.
+Disallow trailing whitespace at the end of lines.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+In examples below, `•` represents a trailing space character.
 
-```gjs
-<template>
-  <div>Hello</div>
-</template>
+This rule **forbids** the following:
+
+```hbs
+<div>test</div>••
+•••••
 ```
 
 ```gjs
 <template>
-  <div>Hello</div>
+  <div>Hello</div>••
 </template>
 ```
 
-Examples of **correct** code for this rule:
+This rule **allows** the following:
+
+```hbs
+<div>test</div>
+```
 
 ```gjs
 <template>
@@ -42,4 +41,4 @@ Examples of **correct** code for this rule:
 
 ## References
 
-- [eslint-plugin-ember template-no-trailing-spaces](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-trailing-spaces.md)
+- [git/formatting and whitespace](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_formatting_and_whitespace)

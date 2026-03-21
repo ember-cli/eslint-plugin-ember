@@ -144,15 +144,9 @@ hbsRuleTester.run('template-no-trailing-spaces', rule, {
   valid: [
     'test',
     '   test',
-    `test
-`,
-    `
-`,
-    `  test
-`,
-    `{{#my-component}}
-  test
-{{/my-component}}`,
+    'test\n',
+    'test\n' + '\n',
+    '{{#my-component}}\n' + '  test\n' + '{{/my-component}}',
     `import { hbs } from 'ember-cli-htmlbars';
 
 test('it renders', async (assert) => {
@@ -177,48 +171,6 @@ test('it renders', async (assert) => {
       errors: [{ message: 'Trailing whitespace detected.' }],
     },
     {
-      code: `import { hbs } from 'ember-cli-htmlbars';
-
-test('it renders', async (assert) => {
-  await render(hbs\`  
-    <div class="parent">
-      <div class="child"></div>
-    </div>
-  \`);
-});`,
-      output: `import { hbs } from 'ember-cli-htmlbars';
-
-test('it renders', async (assert) => {
-  await render(hbs\`
-    <div class="parent">
-      <div class="child"></div>
-    </div>
-  \`);
-});`,
-      errors: [{ message: 'Trailing whitespace detected.' }],
-    },
-    {
-      code: `import { hbs } from 'ember-cli-htmlbars';
-
-test('it renders', async (assert) => {
-  await render(hbs\`
-    <div></div>
-  
-    <div></div>
-  \`);
-});`,
-      output: `import { hbs } from 'ember-cli-htmlbars';
-
-test('it renders', async (assert) => {
-  await render(hbs\`
-    <div></div>
-
-    <div></div>
-  \`);
-});`,
-      errors: [{ message: 'Trailing whitespace detected.' }],
-    },
-    {
       code: 'test\n \n',
       output: 'test\n\n',
       errors: [{ message: 'Trailing whitespace detected.' }],
@@ -226,6 +178,16 @@ test('it renders', async (assert) => {
     {
       code: '{{#my-component}}\n  test \n{{/my-component}}',
       output: '{{#my-component}}\n  test\n{{/my-component}}',
+      errors: [{ message: 'Trailing whitespace detected.' }],
+    },
+    {
+      code: "import { hbs } from 'ember-cli-htmlbars';\n\ntest('it renders', async (assert) => {\n  await render(hbs`  \n    <div class=\"parent\">\n      <div class=\"child\"></div>\n    </div>\n  `);\n});",
+      output: "import { hbs } from 'ember-cli-htmlbars';\n\ntest('it renders', async (assert) => {\n  await render(hbs`\n    <div class=\"parent\">\n      <div class=\"child\"></div>\n    </div>\n  `);\n});",
+      errors: [{ message: 'Trailing whitespace detected.' }],
+    },
+    {
+      code: "import { hbs } from 'ember-cli-htmlbars';\n\ntest('it renders', async (assert) => {\n  await render(hbs`\n    <div></div>\n  \n    <div></div>\n  `);\n});",
+      output: "import { hbs } from 'ember-cli-htmlbars';\n\ntest('it renders', async (assert) => {\n  await render(hbs`\n    <div></div>\n\n    <div></div>\n  `);\n});",
       errors: [{ message: 'Trailing whitespace detected.' }],
     },
   ],
