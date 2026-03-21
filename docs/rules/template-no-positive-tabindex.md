@@ -2,14 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows positive `tabindex` values.
-
-Positive `tabindex` values disrupt the natural tab order of the page, making keyboard navigation confusing for users. This is especially problematic for users who rely on keyboard navigation, such as those with motor disabilities.
-
-## Rule Details
-
-This rule disallows positive integer values for the `tabindex` attribute. Only `0` (for naturally focusable elements) and `-1` (for programmatically focusable elements) are allowed.
-
 ## `<* tabindex>`
 
 [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) explains the motivation of this rule nicely:
@@ -22,46 +14,29 @@ This rule takes no arguments.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **allows** the following:
 
-```gjs
-<template>
-  <div tabindex="1">Content</div>
-</template>
+```hbs
+<span tabindex='0'>foo</span>
+<span tabindex='-1'>bar</span>
+<span tabindex={{0}}>baz</span>
+<button tabindex={{if this.isHidden '-1'}}>baz</button>
+<div role='tab' tabindex={{if this.isHidden '-1' '0'}}>baz</div>
 ```
 
-```gjs
-<template>
-  <button tabindex="2">Click</button>
-</template>
+This rule **forbids** the following:
+
+```hbs
+<span tabindex='5'>foo</span>
+<span tabindex='3'>bar</span>
+<span tabindex={{dynamicValue}}>zoo</span>
+<span tabindex='1'>baz</span>
+<span tabindex='2'>never really sure what goes after baz</span>
 ```
-
-Examples of **correct** code for this rule:
-
-```gjs
-<template>
-  <div tabindex="0">Content</div>
-</template>
-```
-
-```gjs
-<template>
-  <div tabindex="-1">Content</div>
-</template>
-```
-
-```gjs
-<template>
-  <button>Click</button>
-</template>
-```
-
-## When Not To Use It
-
-This rule should generally always be enabled for accessibility. However, if you have a specific use case where positive tabindex values are necessary and well-tested, you may disable it.
 
 ## References
 
-- [eslint-plugin-ember template-no-positive-tabindex](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-positive-tabindex.md)
-- [MDN tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex)
-- [WebAIM: Keyboard Accessibility](https://webaim.org/techniques/keyboard/tabindex)
+1. [AX_FOCUS_03](https://github.com/GoogleChrome/accessibility-developer-tools/wiki/Audit-Rules#ax_focus_03)
+1. [w3.org/TR/wai-aria-practices/#kbd_general_between](https://www.w3.org/TR/wai-aria-practices/#kbd_general_between)
+1. [w3.org/TR/2009/WD-wai-aria-practices-20090224/#focus_tabindex](https://www.w3.org/TR/2009/WD-wai-aria-practices-20090224/#focus_tabindex)
+1. [MDN: tabindex documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex)

@@ -16,19 +16,6 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-positive-tabindex', rule, {
   valid: [
-    `<template>
-      <div tabindex="0">Content</div>
-    </template>`,
-    `<template>
-      <div tabindex="-1">Content</div>
-    </template>`,
-    `<template>
-      <button>Click</button>
-    </template>`,
-    `<template>
-      <div>No tabindex</div>
-    </template>`,
-
     '<template><button tabindex="0"></button></template>',
     '<template><button tabindex="-1"></button></template>',
     '<template><button tabindex={{-1}}>baz</button></template>',
@@ -45,46 +32,9 @@ ruleTester.run('template-no-positive-tabindex', rule, {
 
   invalid: [
     {
-      code: `<template>
-        <div tabindex="1">Content</div>
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message: 'Avoid positive integer values for tabindex.',
-          type: 'GlimmerAttrNode',
-        },
-      ],
-    },
-    {
-      code: `<template>
-        <div tabindex="5">Content</div>
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message: 'Avoid positive integer values for tabindex.',
-          type: 'GlimmerAttrNode',
-        },
-      ],
-    },
-    {
-      code: `<template>
-        <button tabindex="2">Click</button>
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message: 'Avoid positive integer values for tabindex.',
-          type: 'GlimmerAttrNode',
-        },
-      ],
-    },
-
-    {
       code: '<template><button tabindex={{someProperty}}></button></template>',
       output: null,
-      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+      errors: [{ message: 'Tabindex values must be negative numeric.' }],
     },
     {
       code: '<template><button tabindex="1"></button></template>',
@@ -94,17 +44,17 @@ ruleTester.run('template-no-positive-tabindex', rule, {
     {
       code: '<template><button tabindex="text"></button></template>',
       output: null,
-      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+      errors: [{ message: 'Tabindex values must be negative numeric.' }],
     },
     {
       code: '<template><button tabindex={{true}}></button></template>',
       output: null,
-      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+      errors: [{ message: 'Tabindex values must be negative numeric.' }],
     },
     {
       code: '<template><button tabindex="{{false}}"></button></template>',
       output: null,
-      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+      errors: [{ message: 'Tabindex values must be negative numeric.' }],
     },
     {
       code: '<template><button tabindex="{{5}}"></button></template>',
@@ -149,7 +99,7 @@ const hbsRuleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
 });
 
-hbsRuleTester.run('template-no-positive-tabindex (hbs)', rule, {
+hbsRuleTester.run('template-no-positive-tabindex', rule, {
   valid: [
     '<button tabindex="0"></button>',
     '<button tabindex="-1"></button>',
@@ -168,7 +118,7 @@ hbsRuleTester.run('template-no-positive-tabindex (hbs)', rule, {
     {
       code: '<button tabindex={{someProperty}}></button>',
       output: null,
-      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+      errors: [{ message: 'Tabindex values must be negative numeric.' }],
     },
     {
       code: '<button tabindex="1"></button>',
@@ -178,17 +128,17 @@ hbsRuleTester.run('template-no-positive-tabindex (hbs)', rule, {
     {
       code: '<button tabindex="text"></button>',
       output: null,
-      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+      errors: [{ message: 'Tabindex values must be negative numeric.' }],
     },
     {
       code: '<button tabindex={{true}}></button>',
       output: null,
-      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+      errors: [{ message: 'Tabindex values must be negative numeric.' }],
     },
     {
       code: '<button tabindex="{{false}}"></button>',
       output: null,
-      errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+      errors: [{ message: 'Tabindex values must be negative numeric.' }],
     },
     {
       code: '<button tabindex="{{5}}"></button>',
