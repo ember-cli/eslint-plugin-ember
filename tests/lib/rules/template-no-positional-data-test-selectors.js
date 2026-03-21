@@ -17,16 +17,6 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-positional-data-test-selectors', rule, {
   valid: [
     `<template>
-      <div data-test-user-card></div>
-    </template>`,
-    `<template>
-      <div data-test-item="my-item"></div>
-    </template>`,
-    `<template>
-      <button data-test-button></button>
-    </template>`,
-
-    `<template>
       {{#if data-test-foo}}
       {{/if}}
     </template>`,
@@ -82,43 +72,6 @@ ruleTester.run('template-no-positional-data-test-selectors', rule, {
   invalid: [
     {
       code: `<template>
-        <div data-test-item="0"></div>
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message: 'Use named data-test attributes instead of positional data-test-* attributes.',
-          type: 'GlimmerAttrNode',
-        },
-      ],
-    },
-    {
-      code: `<template>
-        <div data-test-card="1"></div>
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message: 'Use named data-test attributes instead of positional data-test-* attributes.',
-          type: 'GlimmerAttrNode',
-        },
-      ],
-    },
-    {
-      code: `<template>
-        <button data-test-button="123"></button>
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message: 'Use named data-test attributes instead of positional data-test-* attributes.',
-          type: 'GlimmerAttrNode',
-        },
-      ],
-    },
-
-    {
-      code: `<template>
         {{badge
           data-test-profile-card-one-to-one-connection-distance
           degreeText=(t "i18n_distance_v2" distance=recipientDistance)
@@ -127,7 +80,10 @@ ruleTester.run('template-no-positional-data-test-selectors', rule, {
       </template>`,
       output: null,
       errors: [
-        { message: 'Use named data-test attributes instead of positional data-test-* attributes.' },
+        {
+          message:
+            'Passing a `data-test-*` positional param to a curly invocation should be avoided.',
+        },
       ],
     },
   ],
@@ -206,7 +162,10 @@ hbsRuleTester.run('template-no-positional-data-test-selectors', rule, {
       `,
       output: null,
       errors: [
-        { message: 'Use named data-test attributes instead of positional data-test-* attributes.' },
+        {
+          message:
+            'Passing a `data-test-*` positional param to a curly invocation should be avoided.',
+        },
       ],
     },
   ],

@@ -2,12 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows positional data-test selectors.
-
-## Rule Details
-
-Data-test selectors should use descriptive names rather than positional indices for better maintainability and clarity.
-
 ## Motivation
 
 [ember-test-selectors](https://github.com/simplabs/ember-test-selectors) is a very popular library that enables better element selectors for testing.
@@ -26,51 +20,20 @@ Additionally, the nature of these "fake" local properties significantly confuses
 
 ## Examples
 
-This rule checks two things:
+This rule forbids the following:
 
-1. **Curly component invocations** with positional `data-test-*` params (e.g. `{{badge data-test-profile-card}}`), which should use named arguments instead (e.g. `data-test-profile-card=true`).
-2. **HTML attribute values** that are purely numeric (e.g. `data-test-item="0"`), which should use descriptive names instead.
-
-Examples of **incorrect** code for this rule:
-
-```gjs
-<template>
-  {{badge data-test-profile-card}}
-</template>
+```hbs
+{{foo-bar data-test-blah}}
+{{#foo-bar data-test-blah}}{{/foo-bar}}
 ```
 
-```gjs
-<template>
-  <div data-test-item="0"></div>
-</template>
-```
+And suggests using the following instead:
 
-```gjs
-<template>
-  <div data-test-card="1"></div>
-</template>
-```
-
-Examples of **correct** code for this rule:
-
-```gjs
-<template>
-  {{badge data-test-profile-card=true}}
-</template>
-```
-
-```gjs
-<template>
-  <div data-test-user-card></div>
-</template>
-```
-
-```gjs
-<template>
-  <div data-test-item="my-item"></div>
-</template>
+```hbs
+{{foo-bar data-test-blah=true}}
+{{#foo-bar data-test-blah=true}}{{/foo-bar}}
 ```
 
 ## References
 
-- [eslint-plugin-ember template-no-positional-data-test-selectors](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-positional-data-test-selectors.md)
+- [ember-test-selectors#d47f73d](https://github.com/simplabs/ember-test-selectors/commit/d47f73d76b3ccbc9f0be5df3b897afd08b1636a6)
