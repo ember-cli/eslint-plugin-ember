@@ -6,16 +6,12 @@
 
 Strings need not be wrapped in curly braces (mustache expressions).
 
-## Rule Details
-
-This rule detects unnecessary mustache expressions wrapping simple string literals. It checks both **attribute values** and **text content**.
-
 ## Examples
 
 This rule **forbids** the following:
 
 ```gjs
-<template><FooBar class={{'btn'}} /></template>
+<template><FooBar class={{"btn"}} /></template>
 ```
 
 ```gjs
@@ -25,11 +21,11 @@ This rule **forbids** the following:
 This rule **allows** the following:
 
 ```gjs
-<template><FooBar class='btn' /></template>
+<template><FooBar class="btn" /></template>
 ```
 
 ```gjs
-<template><FooBar class='btn'>Hello</FooBar></template>
+<template><FooBar class="btn">Hello</FooBar></template>
 ```
 
 ## References
