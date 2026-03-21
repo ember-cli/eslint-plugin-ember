@@ -340,6 +340,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-attrs-in-components](docs/rules/template-no-attrs-in-components.md)                 | disallow attrs in component templates                     |    |    |    |
 | [template-no-link-to-positional-params](docs/rules/template-no-link-to-positional-params.md)     | disallow positional params in LinkTo component            |    |    |    |
 | [template-no-link-to-tagname](docs/rules/template-no-link-to-tagname.md)                         | disallow tagName attribute on LinkTo component            |    |    |    |
+| [template-no-unbound](docs/rules/template-no-unbound.md)                                         | disallow {{unbound}} helper                               |    |    |    |
 | [template-no-with](docs/rules/template-no-with.md)                                               | disallow {{with}} helper                                  |    |    |    |
 
 ### Ember Data
