@@ -15,9 +15,7 @@ This rule **forbids** the following:
 ```gjs
 <template>
   <span class="{{if errors.length 'text-danger' 'text-grey'}}">
-
   <img src="{{customSrc}}" alt="{{customAlt}}">
-
   <label for="{{concat elementId "-date"}}">
 </template>
 ```
@@ -27,9 +25,7 @@ This rule **allows** the following:
 ```gjs
 <template>
   <span class={{if errors.length 'text-danger' 'text-grey'}}>
-
   <img src={{customSrc}} alt={{customAlt}}>
-
   <label for={{concat elementId "-date"}}>
 </template>
 ```
