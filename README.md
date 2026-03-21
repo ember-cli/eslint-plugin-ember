@@ -431,6 +431,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [no-unnecessary-service-injection-argument](docs/rules/no-unnecessary-service-injection-argument.md) | disallow unnecessary argument when injecting services             |    | 🔧 |    |
 | [no-unused-services](docs/rules/no-unused-services.md)                                               | disallow unused service injections (see rule doc for limitations) |    |    | 💡 |
 
+### Style
+
+| Name                                                                                         | Description                                                | 💼 | 🔧 | 💡 |
+| :------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :- | :- | :- |
+| [template-no-unnecessary-curly-strings](docs/rules/template-no-unnecessary-curly-strings.md) | disallow unnecessary curly braces in string interpolations |    | 🔧 |    |
+
 ### Stylistic Issues
 
 | Name                                                                           | Description                                                                    | 💼 | 🔧 | 💡 |
