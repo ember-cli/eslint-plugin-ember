@@ -4,7 +4,7 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows the use of the `{{route-action}}` helper.
+This rule disallows the usage of `route-action`.
 
 [ember-route-action-helper](https://github.com/DockYard/ember-route-action-helper) was a popular addon used to add actions to a route without creating a separate controller. Given the changes in Ember since ember-route-action-helper was a widely used pattern, controllers are now encouraged and we want to discourage the use of route-action.
 
@@ -12,7 +12,7 @@ Most route actions should either be sent to the controller first or encapsulated
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```hbs
 <CustomComponent @onUpdate={{route-action 'updateFoo'}} />
@@ -30,15 +30,19 @@ Examples of **incorrect** code for this rule:
 {{custom-component onUpdate=(route-action 'updateFoo' 'bar')}}
 ```
 
-```hbs
-{{route-action 'save'}}
+With the given route:
+
+```js
+// app/routes/foo.js
+export default class extends Route {
+  @action
+  updateFoo(baz) {
+    // ...
+  }
+}
 ```
 
-```hbs
-<button {{on 'click' (route-action 'save')}}>Save</button>
-```
-
-Examples of **correct** code for this rule:
+This rule **allows** the following:
 
 ```hbs
 <CustomComponent @onUpdate={{this.updateFoo}} />
@@ -56,12 +60,16 @@ Examples of **correct** code for this rule:
 {{custom-component onUpdate=(fn this.updateFoo 'bar')}}
 ```
 
-```hbs
-<button {{on 'click' (fn this.save)}}>Save</button>
-```
+With the given controller:
 
-```hbs
-<button {{on 'click' this.handleClick}}>Click</button>
+```js
+// app/controllers/foo.js
+export default class extends Controller {
+  @action
+  updateFoo(baz) {
+    // ...
+  }
+}
 ```
 
 ## Migration
@@ -141,4 +149,3 @@ export default class extends Controller {
 - [ember-route-action-helper](https://github.com/DockYard/ember-route-action-helper)
 - [Ember guides/Controllers](https://guides.emberjs.com/release/routing/controllers/)
 - [Ember Best Practices: What are controllers good for?](https://dockyard.com/blog/2017/06/16/ember-best-practices-what-are-controllers-good-for)
-- [Ember.js Guides - Actions](https://guides.emberjs.com/release/components/component-state-and-actions/)
