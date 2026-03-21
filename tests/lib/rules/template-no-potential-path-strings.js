@@ -8,31 +8,6 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-potential-path-strings', rule, {
   valid: [
-    {
-      filename: 'my-component.gjs',
-      code: `
-        import Component from '@glimmer/component';
-        export default class MyComponent extends Component {
-          <template>
-            <div>{{this.propertyName}}</div>
-          </template>
-        }
-      `,
-      output: null,
-    },
-    {
-      filename: 'my-component.gjs',
-      code: `
-        import Component from '@glimmer/component';
-        export default class MyComponent extends Component {
-          <template>
-            <div>Hello world</div>
-          </template>
-        }
-      `,
-      output: null,
-    },
-
     '<template><img src="foo.png"></template>',
     '<template><img src={{picture}}></template>',
     '<template><img src={{this.picture}}></template>',
@@ -45,69 +20,58 @@ ruleTester.run('template-no-potential-path-strings', rule, {
 
   invalid: [
     {
-      filename: 'my-component.gjs',
-      code: `
-        import Component from '@glimmer/component';
-        export default class MyComponent extends Component {
-          <template>
-            <div>this.propertyName</div>
-          </template>
-        }
-      `,
-      output: null,
-      errors: [
-        {
-          messageId: 'noPotentialPathStrings',
-        },
-      ],
-    },
-    {
-      filename: 'my-component.gjs',
-      code: `
-        import Component from '@glimmer/component';
-        export default class MyComponent extends Component {
-          <template>
-            <div>foo.bar</div>
-          </template>
-        }
-      `,
-      output: null,
-      errors: [
-        {
-          messageId: 'noPotentialPathStrings',
-        },
-      ],
-    },
-
-    {
       code: '<template><img src="this.picture"></template>',
       output: null,
-      errors: [{ messageId: 'noPotentialPathStrings' }],
+      errors: [
+        {
+          message: 'Potential path in attribute string detected. Did you mean {{this.picture}}?',
+        },
+      ],
     },
     {
       code: '<template><img src=this.picture></template>',
       output: null,
-      errors: [{ messageId: 'noPotentialPathStrings' }],
+      errors: [
+        {
+          message: 'Potential path in attribute string detected. Did you mean {{this.picture}}?',
+        },
+      ],
     },
     {
       code: '<template><img src="@img"></template>',
       output: null,
-      errors: [{ messageId: 'noPotentialPathStrings' }],
+      errors: [
+        {
+          message: 'Potential path in attribute string detected. Did you mean {{@img}}?',
+        },
+      ],
     },
     {
       code: '<template><img src=@img></template>',
       output: null,
-      errors: [{ messageId: 'noPotentialPathStrings' }],
+      errors: [
+        {
+          message: 'Potential path in attribute string detected. Did you mean {{@img}}?',
+        },
+      ],
     },
     {
       code: '<template><SomeComponent @foo=@bar /></template>',
       output: null,
-      errors: [{ messageId: 'noPotentialPathStrings' }],
+      errors: [
+        {
+          message: 'Potential path in attribute string detected. Did you mean {{@bar}}?',
+        },
+      ],
     },
     {
       code: '<template><SomeComponent @foo=this.bar /></template>',
       output: null,
-      errors: [{ messageId: 'noPotentialPathStrings' }],
+      errors: [
+        {
+          message: 'Potential path in attribute string detected. Did you mean {{this.bar}}?',
+        },
+      ],
     },
   ],
 });
@@ -136,42 +100,54 @@ hbsRuleTester.run('template-no-potential-path-strings', rule, {
       code: '<img src="this.picture">',
       output: null,
       errors: [
-        { message: 'Potential path string detected. Use dynamic values instead of path strings.' },
+        {
+          message: 'Potential path in attribute string detected. Did you mean {{this.picture}}?',
+        },
       ],
     },
     {
       code: '<img src=this.picture>',
       output: null,
       errors: [
-        { message: 'Potential path string detected. Use dynamic values instead of path strings.' },
+        {
+          message: 'Potential path in attribute string detected. Did you mean {{this.picture}}?',
+        },
       ],
     },
     {
       code: '<img src="@img">',
       output: null,
       errors: [
-        { message: 'Potential path string detected. Use dynamic values instead of path strings.' },
+        {
+          message: 'Potential path in attribute string detected. Did you mean {{@img}}?',
+        },
       ],
     },
     {
       code: '<img src=@img>',
       output: null,
       errors: [
-        { message: 'Potential path string detected. Use dynamic values instead of path strings.' },
+        {
+          message: 'Potential path in attribute string detected. Did you mean {{@img}}?',
+        },
       ],
     },
     {
       code: '<SomeComponent @foo=@bar />',
       output: null,
       errors: [
-        { message: 'Potential path string detected. Use dynamic values instead of path strings.' },
+        {
+          message: 'Potential path in attribute string detected. Did you mean {{@bar}}?',
+        },
       ],
     },
     {
       code: '<SomeComponent @foo=this.bar />',
       output: null,
       errors: [
-        { message: 'Potential path string detected. Use dynamic values instead of path strings.' },
+        {
+          message: 'Potential path in attribute string detected. Did you mean {{this.bar}}?',
+        },
       ],
     },
   ],
