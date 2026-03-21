@@ -2,49 +2,47 @@
 
 <!-- end auto-generated rule header -->
 
-Disallow unused block parameters in templates.
-
-## Rule Details
-
-This rule reports block parameters that are declared but never used within the block.
+This rule forbids unused block parameters except when they are needed to access a later parameter.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following (unused parameters):
 
 ```gjs
 <template>
-  {{#each items as |item|}}
-    Hello
-  {{/each}}
-</template>
-
-<template>
-  {{#each items as |item index|}}
-    {{item.name}}
+  {{#each users as |user index|}}
+    {{user.name}}
   {{/each}}
 </template>
 ```
 
-Examples of **correct** code for this rule:
+This rule **allows** the following:
+
+Allowed (used parameters):
 
 ```gjs
 <template>
-  {{#each items as |item|}}
-    {{item.name}}
+  {{#each users as |user|}}
+    {{user.name}}
   {{/each}}
 </template>
+```
 
+```gjs
 <template>
-  {{#each items as |item index|}}
-    {{index}}: {{item.name}}
+  {{#each users as |user index|}}
+    {{index}} {{user.name}}
   {{/each}}
 </template>
+```
 
+Allowed (later parameter used):
+
+```gjs
 <template>
-  {{#let user as |u|}}
-    {{u.name}}
-  {{/let}}
+  {{#each users as |user index|}}
+    {{index}}
+  {{/each}}
 </template>
 ```
 
@@ -54,4 +52,6 @@ Examples of **correct** code for this rule:
 
 ## References
 
-- [Ember Guides - Block Parameters](https://guides.emberjs.com/release/components/block-content/)
+- [Ember guides/block content](https://guides.emberjs.com/release/components/block-content/)
+- [rfcs/angle bracket invocation](https://emberjs.github.io/rfcs/0311-angle-bracket-invocation.html)
+- [rfcs/named blocks](https://emberjs.github.io/rfcs/0226-named-blocks.html)
