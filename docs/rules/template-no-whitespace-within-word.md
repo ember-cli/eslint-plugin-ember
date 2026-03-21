@@ -2,43 +2,55 @@
 
 <!-- end auto-generated rule header -->
 
-Disallow excess whitespace within words (e.g. "W e l c o m e").
+In practice, the predominant issue raised by inline whitespace styling is that the resultant text "formatting" is entirely visual in nature; the ability to discern the correct manner in which to read the text, and therefore, to correctly comprehend its meaning, is restricted to sighted users.
 
-## Rule Details
+Using in-line whitespace word formatting produces results that are explicitly mentioned in [WCAG's list of common sources of web accessibility failures](https://www.w3.org/TR/WCAG20-TECHS/failures.html). Specifically, this common whitespace-within-word-induced web accessibility issue fails to successfully achieve [WCAG Success Criterion 1.3.2: Meaningful Sequence](https://www.w3.org/TR/UNDERSTANDING-WCAG20/content-structure-separation-sequence.html).
 
-This rule detects text content where letters are separated by whitespace or whitespace HTML entities, producing a "spaced out" word effect like `W e l c o m e`. This pattern is an accessibility concern because screen readers will read each letter individually instead of reading the word.
-
-The rule checks `GlimmerTextNode` content (excluding text inside attributes and `<style>` elements) for patterns matching alternating whitespace and letter characters.
+The `template-no-whitespace-within-word` rule operates on the assumption that artificially-spaced English words in rendered text content contain, at a minimum, two word characters fencepost-delimited by three whitespace characters (`space-char-space-char-space`) so it should be avoided.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```gjs
 <template>
-  <span>W e l c o m e</span>
+  W e l c o m e
 </template>
 ```
+
+`W`**`&nbsp;`**`e`**`&nbsp;`**`l`**`&nbsp;`**`c`**`&nbsp;`**`o`**`&nbsp;`**`m`**`&nbsp;`**`e`
+
+`Wel c o me`
+
+`Wel`**`&nbsp;`**`c`**`&emsp;`**`o`**`&nbsp;`**`me`
 
 ```gjs
 <template>
-  <h1>H&nbsp;E&nbsp;L&nbsp;L&nbsp;O</h1>
+  <div>W e l c o m e</div>
+
+  <div>Wel c o me</div>
 </template>
 ```
 
-Examples of **correct** code for this rule:
+This rule **allows** the following:
+
+`Welcome`
+
+`Yes`**`&nbsp;`**`I`**`&nbsp;`**`am`
+
+`It is possible to get some examples of in-word emph a sis past this rule.`
+
+`However, I do not want a rule that flags annoying false positives for correctly-used single-character words.`
 
 ```gjs
 <template>
-  <span>Welcome</span>
+  <div>Welcome</div>
+
+  <div>Yes&nbsp;I am.</div>
 </template>
 ```
 
-```gjs
-<template>
-  <h1>Hello World</h1>
-</template>
-```
+This rule uses the heuristic of letter, whitespace character, letter, whitespace character, letter which makes it a good candidate for most use cases, but not ideal for some languages (such as Japanese).
 
 ## Migration
 
@@ -46,4 +58,6 @@ Use CSS to add letter-spacing to a word.
 
 ## References
 
-- [WCAG - Meaningful Sequence](https://www.w3.org/WAI/WCAG21/Understanding/meaningful-sequence.html)
+- [F32: Using white space characters to create multiple columns in plain text content](https://www.w3.org/TR/WCAG20-TECHS/failures.html#F32)
+- [WCAG Success Criterion 1.3.2: Meaningful Sequence](https://www.w3.org/TR/UNDERSTANDING-WCAG20/content-structure-separation-sequence.html)
+- [C8: Using CSS letter-spacing to control spacing within a word](https://www.w3.org/WAI/WCAG21/Techniques/css/C8)
