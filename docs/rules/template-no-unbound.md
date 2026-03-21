@@ -13,12 +13,16 @@ It is also a poor practice to use it for rendering only the initial value of a p
 
 This rule **forbids** the following:
 
-```hbs
-{{unbound aVar}}
+```gjs
+<template>
+  {{unbound aVar}}
+</template>
 ```
 
-```hbs
-{{some-component foo=(unbound aVar)}}
+```gjs
+<template>
+  {{some-component foo=(unbound aVar)}}
+</template>
 ```
 
 ## References
