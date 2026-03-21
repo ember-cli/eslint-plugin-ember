@@ -1,59 +1,35 @@
 # ember/template-no-unsupported-role-attributes
 
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
 <!-- end auto-generated rule header -->
 
-Disallows ARIA attributes that are not supported by the element's role.
+Many ARIA states and properties are only available to elements with particular roles. This ensures that the appropriate information gets exposed to a browser's accessibility API for the given element.
 
-Different ARIA roles support different sets of ARIA attributes. Using unsupported attributes can cause confusion and doesn't provide the intended accessibility benefits.
-
-## Rule Details
-
-This rule checks elements with specific ARIA roles and ensures they only use supported ARIA attributes for that role.
+This rule disallows the use of ARIA properties unsupported by an element's defined role. An element's role may either be explicitly set by the `role` attribute, or it may be implicitly defined through the use of HTML elements with inherent roles. For example, `<input type="checkbox"` has the implicit role of `checkbox`.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```gjs
 <template>
-  <div role="button" aria-checked="true">Button</div>
+  <div role="link" href="#" aria-checked />
+  <input type="checkbox" aria-invalid="grammar" />
+  <CustomComponent role="listbox" aria-level="2" />
 </template>
 ```
 
-```gjs
-<template>
-  <div role="checkbox" aria-pressed="false">Checkbox</div>
-</template>
-```
+This rule **allows** the following:
 
 ```gjs
 <template>
-  <div role="tab" aria-valuenow="1">Tab</div>
-</template>
-```
-
-Examples of **correct** code for this rule:
-
-```gjs
-<template>
-  <div role="button" aria-pressed="true">Toggle Button</div>
-</template>
-```
-
-```gjs
-<template>
-  <div role="checkbox" aria-checked="false">Accept Terms</div>
-</template>
-```
-
-```gjs
-<template>
-  <div role="tab" aria-selected="true">Home Tab</div>
+  <div role="heading" aria-level="1" />
+  <input type="image" aria-atomic />
+  <CustomComponent role="textbox" aria-required="true" />
 </template>
 ```
 
 ## References
 
-- [ARIA Roles](https://www.w3.org/TR/wai-aria-1.2/#role_definitions)
-- [ARIA States and Properties](https://www.w3.org/TR/wai-aria-1.2/#state_prop_def)
-- [eslint-plugin-ember template-no-unsupported-role-attributes](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-unsupported-role-attributes.md)
+- [Using ARIA, Roles, States, and Properties](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques)
