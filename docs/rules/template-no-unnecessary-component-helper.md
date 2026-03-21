@@ -6,30 +6,47 @@
 
 <!-- end auto-generated rule header -->
 
-Disallow unnecessary usage of the `{{component}}` helper with static component names.
-
-## Rule Details
-
-This rule disallows using `{{component "component-name"}}` when you could use angle bracket invocation instead.
+The `component` template helper can be used to dynamically pick the component being rendered based on the provided property. But if the component name is passed as a string because it's already known, then the component should be invoked directly, instead of using the `component` helper.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
-```hbs
-{{component 'my-component'}}
-{{component 'MyComponent' arg='value'}}
+```gjs
+<template>
+  {{component "my-component"}}
+</template>
 ```
 
-Examples of **correct** code for this rule:
+This rule **allows** the following:
 
-```hbs
-<MyComponent />
-{{component this.dynamicComponentName}}
-{{component @componentName}}
+```gjs
+<template>
+  {{component SOME_COMPONENT_NAME}}
+</template>
+```
+
+```gjs
+<template>
+  {{!-- the `component` helper is needed to invoke this --}}
+  {{component "addon-name@component-name"}}
+</template>
+```
+
+```gjs
+<template>
+  {{my-component}}
+</template>
+```
+
+```gjs
+<template>
+  {{my-component close=(component "link-to" "index")}}
+  <MyComponent @close={{component "link-to" "index"}} />
+</template>
 ```
 
 ## References
 
-- [Ember Guides - Components](https://guides.emberjs.com/release/components/)
-- [RFC #311 - Angle Bracket Invocation](https://github.com/emberjs/rfcs/blob/master/text/0311-angle-bracket-invocation.md)
+- [component helper guide](https://guides.emberjs.com/release/components/defining-a-component/#toc_dynamically-rendering-a-component)
+- [component helper spec](https://www.emberjs.com/api/ember/release/classes/Ember.Templates.helpers/methods/component?anchor=component)
