@@ -2,61 +2,26 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows usage of triple curly brackets (unescaped output) in templates.
-
-Triple curly brackets (`{{{ }}}`) render unescaped HTML, which can lead to XSS (Cross-Site Scripting) vulnerabilities if user input is not properly sanitized.
-
-## Rule Details
-
-This rule disallows the use of triple curly brackets for unescaped output. If you need to render HTML, use the `htmlSafe` helper or `SafeString` API with proper sanitization.
+Usage of triple curly braces to allow raw HTML to be injected into the DOM is a large vector for exploits of your application (especially when the raw HTML is user-controllable). Instead of using `{{{foo}}}`, you should use appropriate helpers or computed properties that return a `SafeString` (via `Ember.String.htmlSafe` generally) and ensure that user-supplied data is properly escaped.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```gjs
 <template>
-  {{{this.content}}}
+  {{{foo}}}
 </template>
 ```
+
+This rule **allows** the following:
 
 ```gjs
 <template>
-  <div>
-    {{{@htmlContent}}}
-  </div>
+  {{foo}}
 </template>
 ```
-
-Examples of **correct** code for this rule:
-
-```gjs
-<template>
-  {{this.content}}
-</template>
-```
-
-```gjs
-<template>
-  {{htmlSafe this.sanitizedContent}}
-</template>
-```
-
-```gjs
-<template>
-  <div>{{@text}}</div>
-</template>
-```
-
-## When Not To Use It
-
-If you are certain that the content being rendered is already sanitized and safe, you may disable this rule. However, this is generally discouraged for security reasons.
-
-## Related Rules
-
-- [no-html-safe](./no-html-safe.md) from eslint-plugin-ember
 
 ## References
 
-- [eslint-plugin-ember template-no-triple-curlies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-triple-curlies.md)
-- [Ember.js Security Guide](https://guides.emberjs.com/release/security/)
+- See the [documentation](https://api.emberjs.com/ember/release/functions/@ember%2Ftemplate/htmlSafe) for Ember's `htmlSafe` function
