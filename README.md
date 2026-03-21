@@ -405,11 +405,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 ### Possible Errors
 
-| Name                                                                                         | Description                                               | 💼 | 🔧 | 💡 |
-| :------------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :- | :- | :- |
-| [template-no-extra-mut-helper-argument](docs/rules/template-no-extra-mut-helper-argument.md) | disallow passing more than one argument to the mut helper |    |    |    |
-| [template-no-jsx-attributes](docs/rules/template-no-jsx-attributes.md)                       | disallow JSX-style camelCase attributes                   |    | 🔧 |    |
-| [template-no-unbalanced-curlies](docs/rules/template-no-unbalanced-curlies.md)               | disallow unbalanced mustache curlies                      |    |    |    |
+| Name                                                                                         | Description                                                       | 💼 | 🔧 | 💡 |
+| :------------------------------------------------------------------------------------------- | :---------------------------------------------------------------- | :- | :- | :- |
+| [template-no-extra-mut-helper-argument](docs/rules/template-no-extra-mut-helper-argument.md) | disallow passing more than one argument to the mut helper         |    |    |    |
+| [template-no-jsx-attributes](docs/rules/template-no-jsx-attributes.md)                       | disallow JSX-style camelCase attributes                           |    | 🔧 |    |
+| [template-no-shadowed-elements](docs/rules/template-no-shadowed-elements.md)                 | disallow ambiguity with block param names shadowing HTML elements |    |    |    |
+| [template-no-unbalanced-curlies](docs/rules/template-no-unbalanced-curlies.md)               | disallow unbalanced mustache curlies                              |    |    |    |
 
 ### Routes
 
