@@ -8,17 +8,17 @@ In HTML, all attribute values are considered strings, regardless of whether they
 
 The following two examples are _identical_ from the perspective of the browser:
 
-```gjs
-<template>
-  <div data-foo=asdf></div>
-  <div data-foo="asdf"></div>
-</template>
+<!-- prettier-ignore -->
+```html
+<div data-foo=asdf></div>
+<div data-foo="asdf"></div>
 ```
 
 This fact makes the following HTML very confusing:
 
-```gjs
-<template><input disabled="false" /></template>
+<!-- prettier-ignore -->
+```html
+<input disabled=false>
 ```
 
 In this case, the simple _presence_ of the `disabled` attribute means that the `<input>` is disabled and setting the value to `false` doesn't do the obvious thing.
@@ -31,18 +31,19 @@ This rule attempts to make this situation _slightly_ better by at least ensuring
 
 This rule **forbids** the following (note that `someValue` could have been intended either as a string or expression):
 
-```gjs
-<template><div data-foo=someValue></div></template>
+<!-- prettier-ignore -->
+```html
+<div data-foo=someValue></div>
 ```
 
 This rule **allows** the following:
 
-```gjs
-<template><div data-foo="someValue"></div></template>
+```html
+<div data-foo="someValue"></div>
 ```
 
-```gjs
-<template><div data-foo={{someValue}}></div></template>
+```hbs
+<div data-foo={{someValue}}></div>
 ```
 
 ## References
