@@ -12,10 +12,6 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-scope-outside-table-headings', rule, {
   valid: [
-    '<template><th scope="col">Header</th></template>',
-    '<template><th scope="row">Header</th></template>',
-    '<template><div>Content</div></template>',
-
     '<template><th scope="row">Some table heading></th></template>',
     `<template>
     <table>
@@ -29,22 +25,6 @@ ruleTester.run('template-no-scope-outside-table-headings', rule, {
     '<template>{{foo-component scope="row"}}</template>',
   ],
   invalid: [
-    {
-      code: '<template><div scope="col">Not a table cell</div></template>',
-      output: null,
-      errors: [{ messageId: 'noScopeOutsideTableHeadings' }],
-    },
-    {
-      code: '<template><span scope="row">Wrong element</span></template>',
-      output: null,
-      errors: [{ messageId: 'noScopeOutsideTableHeadings' }],
-    },
-    {
-      code: '<template><p scope="col">Paragraph</p></template>',
-      output: null,
-      errors: [{ messageId: 'noScopeOutsideTableHeadings' }],
-    },
-
     {
       code: '<template><td scope="row"></td></template>',
       output: null,

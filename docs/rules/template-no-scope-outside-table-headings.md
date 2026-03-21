@@ -2,55 +2,27 @@
 
 <!-- end auto-generated rule header -->
 
-Disallow the `scope` attribute on elements other than `<th>`.
+The scope attribute is used on `<th>` elements to clarify the relationship between a table's header cells and data cells for screen readers. Scope is set to "row" or "col" for header cells that refer to a given row or column. For header cells that reference multiple rows or columns, set the scope attribute to "rowgroup" and "colgroup" and define the range for the rows or columns.
 
-## Rule Details
-
-The `scope` attribute is only valid on `<th>` elements within tables. Using it on other elements (including `<td>`) is invalid HTML and should be avoided.
+This rule disallows the use of the scope attribute on HTML elements other than the `<th>` element.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
-```gjs
-<template>
-  <div scope="col">Not a table cell</div>
-</template>
+```hbs
+<a scope='col'></a>
+<table scope='rowgroup'></table>
 ```
 
-```gjs
-<template>
-  <span scope="row">Wrong element</span>
-</template>
-```
+This rule **allows** the following:
 
-```gjs
-<template>
-  <p scope="col">Paragraph</p>
-</template>
-```
-
-Examples of **correct** code for this rule:
-
-```gjs
-<template>
-  <th scope="col">Header</th>
-</template>
-```
-
-```gjs
-<template>
-  <th scope="row">Row header</th>
-</template>
-```
-
-```gjs
-<template>
-  <div>Content without scope</div>
-</template>
+```hbs
+<th scope='row'>A header cell</th>
+<CustomHeader scope={{foo}} />
 ```
 
 ## References
 
-- [eslint-plugin-ember template-no-scope-outside-table-headings](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-scope-outside-table-headings.md)
-- [MDN: scope attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope)
+- [HTML \<th\> scope Attribute](https://www.w3schools.com/tags/att_th_scope.asp)
+- [scope - eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/scope.md)
