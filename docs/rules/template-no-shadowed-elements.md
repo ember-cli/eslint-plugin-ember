@@ -2,88 +2,46 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows usage patterns where component or block param names shadow built-in HTML elements, creating ambiguity.
-
-## Rule Details
-
-This rule prevents two kinds of shadowing:
-
-1. **PascalCase components that shadow HTML elements** -- In `.gjs`/`.gts` files, a component like `<Form>` shadows the built-in `<form>` element. Use a more descriptive name instead.
-2. **Block params that shadow HTML elements** -- When a yielded block param has the same name as an HTML element (e.g. `as |div|`), using `<div>` inside that block is ambiguous. Use a different block param name instead.
+This rule prevents ambiguity in situations where a yielded block param which starts with a lower case letter is also used within the block itself as an element name.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
-```gjs
-<template>
-  <Form>Content</Form>
-</template>
+```hbs
+<FooBar as |div|>
+  <div></div>
+</FooBar>
 ```
 
-```gjs
-<template>
-  <Input @type="text" />
-</template>
+This rule **allows** the following:
+
+```hbs
+{{#foo-bar as |Baz|}}
+  <Baz />
+{{/foo-bar}}
 ```
 
-```gjs
-<template>
-  <Select @options={{this.options}} />
-</template>
+```hbs
+<FooBar as |Baz|>
+  <Baz />
+</FooBar>
 ```
 
-```gjs
-<template>
-  <FooBar as |div|>
-    <div></div>
-  </FooBar>
-</template>
+```hbs
+{{#with foo=(component 'blah-zorz') as |Div|}}
+  <Div />
+{{/with}}
 ```
 
-Examples of **correct** code for this rule:
-
-```gjs
-<template>
-  <CustomForm>Content</CustomForm>
-</template>
-```
-
-```gjs
-<template>
-  <TextInput @type="text" />
-</template>
-```
-
-```gjs
-<template>
-  <SelectBox @options={{this.options}} />
-</template>
-```
-
-```gjs
-<template>
-  <form>Regular HTML form</form>
-</template>
-```
-
-```gjs
-<template>
-  <FooBar as |Baz|>
-    <Baz />
-  </FooBar>
-</template>
-```
-
-```gjs
-<template>
-  <Foo as |bar|>
-    <bar.baz />
-  </Foo>
-</template>
+```hbs
+<Foo as |bar|>
+  <bar.baz />
+</Foo>
 ```
 
 ## References
 
-- [eslint-plugin-ember template-no-shadowed-elements](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-shadowed-elements.md)
 - [Ember guides/block content](https://guides.emberjs.com/release/components/block-content/)
+- [rfcs/angle bracket invocation](https://emberjs.github.io/rfcs/0311-angle-bracket-invocation.html)
+- [rfcs/named blocks](https://emberjs.github.io/rfcs/0226-named-blocks.html)

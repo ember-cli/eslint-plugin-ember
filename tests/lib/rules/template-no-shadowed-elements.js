@@ -16,31 +16,8 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-shadowed-elements', rule, {
   valid: [
-    `<template>
-      <MyButton>Click</MyButton>
-    </template>`,
-    `<template>
-      <MyComponent />
-    </template>`,
-    `<template>
-      <CustomForm />
-    </template>`,
-    `<template>
-      <Form>Content</Form>
-    </template>`,
-    `<template>
-      <Input @type="text" />
-    </template>`,
-    `<template>
-      <Select @options={{this.options}} />
-    </template>`,
-    `<template>
-      <Textarea @value={{this.text}} />
-    </template>`,
-    `<template>
-      <div>Content</div>
-    </template>`,
-
+    '<template><div>content</div></template>',
+    '<template><form><input /></form></template>',
     '<template>{{#foo-bar as |Baz|}}<Baz />{{/foo-bar}}</template>',
     '<template><FooBar as |Baz|><Baz /></FooBar></template>',
     '<template>{{#with foo=(component "blah-zorz") as |Div|}}<Div></Div>{{/with}}</template>',
@@ -71,6 +48,8 @@ const hbsRuleTester = new RuleTester({
 
 hbsRuleTester.run('template-no-shadowed-elements', rule, {
   valid: [
+    '<div>content</div>',
+    '<form><input /></form>',
     '{{#foo-bar as |Baz|}}<Baz />{{/foo-bar}}',
     '<FooBar as |Baz|><Baz /></FooBar>',
     '{{#with foo=(component "blah-zorz") as |Div|}}<Div></Div>{{/with}}',
