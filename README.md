@@ -256,6 +256,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                                       | disallow obsolete HTML elements                                              |    |    |    |
 | [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                               | disallow {{outlet}} outside of route templates                               |    |    |    |
 | [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                                 | disallow usage of ember-page-title component                                 |    |    |    |
+| [template-no-trailing-spaces](docs/rules/template-no-trailing-spaces.md)                                           | disallow trailing whitespace at the end of lines in templates                |    | 🔧 |    |
 | [template-no-unavailable-this](docs/rules/template-no-unavailable-this.md)                                         | disallow `this` in templates that are not inside a class or function         |    |    |    |
 | [template-no-unnecessary-component-helper](docs/rules/template-no-unnecessary-component-helper.md)                 | disallow unnecessary component helper                                        |    | 🔧 |    |
 | [template-no-unnecessary-concat](docs/rules/template-no-unnecessary-concat.md)                                     | disallow unnecessary string concatenation                                    |    | 🔧 |    |
