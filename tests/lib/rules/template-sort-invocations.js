@@ -351,10 +351,7 @@ ruleTester.run('template-sort-invocations', rule, {
         />
       </template>`,
       output: null,
-      errors: [
-        { messageId: 'attributeOrder' },
-        { messageId: 'modifierOrder' },
-      ],
+      errors: [{ messageId: 'attributeOrder' }, { messageId: 'modifierOrder' }],
     },
     {
       code: `<template>
@@ -376,10 +373,7 @@ ruleTester.run('template-sort-invocations', rule, {
         </this.MyButton>
       </template>`,
       output: null,
-      errors: [
-        { messageId: 'attributeOrder' },
-        { messageId: 'attributeOrder' },
-      ],
+      errors: [{ messageId: 'attributeOrder' }, { messageId: 'attributeOrder' }],
     },
     {
       code: `<template>
@@ -597,10 +591,7 @@ ruleTester.run('template-sort-invocations', rule, {
         ></iframe>
       </template>`,
       output: null,
-      errors: [
-        { messageId: 'attributeOrder' },
-        { messageId: 'splattributesOrder' },
-      ],
+      errors: [{ messageId: 'attributeOrder' }, { messageId: 'splattributesOrder' }],
     },
     {
       code: `<template>

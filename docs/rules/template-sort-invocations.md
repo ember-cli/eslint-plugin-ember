@@ -2,10 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-Require sorted attributes and modifiers.
-
-Component attributes and modifiers should be sorted in a consistent order for better readability and maintainability.
-
 ## Why use it?
 
 The rule helps you standardize templates:
@@ -20,30 +16,51 @@ By sorting things that are order-independent, you can more easily refactor code.
 >
 > The `--fix` option for this rule doesn't preserve formatting. You can use `prettier`, [`prettier-plugin-ember-hbs-tag`](https://github.com/ijlee2/prettier-plugin-ember-hbs-tag), and [`prettier-plugin-ember-template-tag`](https://github.com/ember-tooling/prettier-plugin-ember-template-tag) to format templates in `*.hbs`, `hbs` tags, and `<template>` tags, respectively.
 
-## Sorting Order
-
-1. Argument attributes (starting with `@`)
-2. Regular attributes
-3. `...attributes` splattributes
-4. Modifiers
-
-Within each category, attributes are sorted alphabetically.
-
 ## Examples
 
-This rule **allows** the following:
+### Components
 
-```gjs
-<template>
-  <Button
-    @isDisabled={{true}}
-    @label='Submit'
-    class='button'
-    {{on 'click' @onClick}}
-    ...attributes
-  />
-</template>
+When invoking a component, list things in the following order:
+
+1. Arguments
+2. Attributes
+3. Modifiers
+4. Splattributes
+
+The order clearly shows how the component is customized more and more. Things are alphabetized within each group.
+
+```hbs
+<Ui::Button
+  @label='Submit form'
+  @type='submit'
+  data-test-button
+  {{on 'click' this.doSomething}}
+  ...attributes
+/>
 ```
+
+> [!NOTE]
+>
+> In rare cases, the order of [`...attributes`](https://guides.emberjs.com/release/components/component-arguments-and-html-attributes/#toc_html-attributes) can matter. Similarly, the order can matter when an [ARIA attribute has multiple values](https://github.com/ijlee2/ember-container-query/issues/38#issuecomment-647017665).
+>
+> Disable the rule per instance in either case.
+
+### Helpers
+
+When invoking a helper, list the named arguments in alphabetical order.
+
+```hbs
+{{t
+  'my-component.description'
+  installedOn=this.installationDate
+  packageName='ember-source'
+  packageVersion='6.0.0'
+}}
+```
+
+### Modifiers
+
+Similarly to helpers, list the named arguments in alphabetical order.
 
 ## Limitations
 
@@ -64,4 +81,4 @@ To better meet your needs, consider creating a plugin for `ember-template-lint`.
 
 ## References
 
-- [Ember.js Guides - Component Syntax](https://guides.emberjs.com/release/components/component-syntax-and-arguments/)
+Source code and tests were copied from [`ember-codemod-sort-invocations`](https://github.com/ijlee2/ember-codemod-sort-invocations).
