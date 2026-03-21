@@ -2,55 +2,44 @@
 
 <!-- end auto-generated rule header -->
 
-Disallow unbalanced mustache curlies in templates.
+Normally, the compiler will find stray curlies and throw a syntax error. However, it won't be able to catch every case.
 
-## Rule Details
+For example, these are all syntax errors:
 
-This rule detects unbalanced opening `{{` and closing `}}` mustache braces in templates, which typically indicates a syntax error or typo.
+```gjs
+<template>
+  {{ x }
+  {{ x }}}
+  {{{ x }
+  {{{ x }}
+</template>
+```
+
+Whereas these are not:
+
+```gjs
+<template>
+  { x }}
+  { x }
+  }
+  }}
+  }}}
+  }}}}... (any number of closing curlies past one)
+</template>
+```
+
+This rule focuses on closing double `}}` and triple `}}}` curlies with no matching opening curlies.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
 ```gjs
 <template>
-  {{value}
-</template>
-```
-
-```gjs
-<template>
-  {{{value}}
-</template>
-```
-
-```gjs
-<template>
-  {{#if condition}}
-    {{value}
-  {{/if}}
-</template>
-```
-
-Examples of **correct** code for this rule:
-
-```gjs
-<template>
-  {{value}}
-</template>
-```
-
-```gjs
-<template>
-  {{#if condition}}
-    {{value}}
-  {{/if}}
-</template>
-```
-
-```gjs
-<template>
-  {{helper param1 param2}}
+  foo}}
+  {foo}}
+  foo}}}
+  {foo}}}
 </template>
 ```
 
@@ -58,11 +47,13 @@ Examples of **correct** code for this rule:
 
 If you have curlies in your code that you wish to show verbatim, but are flagged by this rule, you can formulate them as a handlebars expression:
 
-```hbs
-<p>This is a closing double curly: {{'}}'}}</p>
-<p>This is a closing triple curly: {{'}}}'}}</p>
+```gjs
+<template>
+  <p>This is a closing double curly: {{ '}}' }}</p>
+  <p>This is a closing triple curly: {{ '}}}' }}</p>
+</template>
 ```
 
 ## References
 
-- [eslint-plugin-ember template-no-unbalanced-curlies](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-unbalanced-curlies.md)
+- [Handlebars docs/expressions](https://handlebarsjs.com/guide/expressions.html)
