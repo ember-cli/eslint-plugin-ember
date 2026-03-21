@@ -13,8 +13,7 @@ In examples below, `•` represents a trailing space character.
 This rule **forbids** the following:
 
 ```hbs
-<div>test</div>••
-•••••
+<div>test</div>•• •••••
 ```
 
 ```gjs
