@@ -886,3 +886,152 @@ describe('multiple tokens in same file', () => {
     expect(resultErrors[2].message).toBe("Use 'String#startsWith' method instead.");
   });
 });
+
+describe('supports template-lint-disable directive', () => {
+  it('disables all rules on the next line with mustache comment', async () => {
+    const eslint = initESLint();
+    const code = `
+    <template>
+      <div>
+        {{! template-lint-disable }}
+        {{test}}
+      </div>
+    </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    // {{test}} would normally trigger no-undef, but should be suppressed
+    expect(resultErrors).toHaveLength(0);
+  });
+
+  it('disables all rules on the next line with mustache block comment', async () => {
+    const eslint = initESLint();
+    const code = `
+    <template>
+      <div>
+        {{!-- template-lint-disable --}}
+        {{test}}
+      </div>
+    </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(0);
+  });
+
+  it('disables all rules on the next line with HTML comment', async () => {
+    const eslint = initESLint();
+    const code = `
+    <template>
+      <div>
+        <!-- template-lint-disable -->
+        {{test}}
+      </div>
+    </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(0);
+  });
+
+  it('disables a specific rule by eslint rule name', async () => {
+    const eslint = initESLint();
+    const code = `
+    <template>
+      <div>
+        {{! template-lint-disable no-undef }}
+        {{test}}
+        {{other}}
+      </div>
+    </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    // {{test}} on line after disable should be suppressed
+    // {{other}} on the line after that should NOT be suppressed
+    expect(resultErrors).toHaveLength(1);
+    expect(resultErrors[0].message).toBe("'other' is not defined.");
+  });
+
+  it('only disables the next line, not subsequent lines', async () => {
+    const eslint = initESLint();
+    const code = `
+    <template>
+      <div>
+        {{! template-lint-disable }}
+        {{test}}
+        {{other}}
+      </div>
+    </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    // {{test}} suppressed, {{other}} NOT suppressed
+    expect(resultErrors).toHaveLength(1);
+    expect(resultErrors[0].message).toBe("'other' is not defined.");
+  });
+
+  it('does not suppress unrelated rules when a specific rule is named', async () => {
+    const eslint = initESLint();
+    const code = `
+    <template>
+      <div>
+        {{! template-lint-disable ember/template-no-bare-strings }}
+        {{test}}
+      </div>
+    </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    // no-undef should still fire since we only disabled template-no-bare-strings
+    expect(resultErrors).toHaveLength(1);
+    expect(resultErrors[0].ruleId).toBe('no-undef');
+  });
+
+  it('supports template-lint rule name format (maps to ember/ prefix)', async () => {
+    const eslint = initESLint();
+    const code = `
+    <template>
+      <div>
+        {{! template-lint-disable no-undef }}
+        {{test}}
+      </div>
+    </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(0);
+  });
+
+  it('supports multiple rule names', async () => {
+    const eslint = initESLint();
+    const code = `
+    <template>
+      <div>
+        {{! template-lint-disable no-undef quotes }}
+        {{test}}
+      </div>
+    </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(0);
+  });
+
+  it('works with multiple disable comments in the same file', async () => {
+    const eslint = initESLint();
+    const code = `
+    <template>
+      <div>
+        {{! template-lint-disable }}
+        {{test}}
+        {{! template-lint-disable }}
+        {{other}}
+      </div>
+    </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(0);
+  });
+});
