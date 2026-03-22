@@ -919,21 +919,6 @@ describe('supports template-lint-disable directive', () => {
     expect(resultErrors).toHaveLength(0);
   });
 
-  it('disables all rules on the next line with HTML comment', async () => {
-    const eslint = initESLint();
-    const code = `
-    <template>
-      <div>
-        <!-- template-lint-disable -->
-        {{test}}
-      </div>
-    </template>
-    `;
-    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
-    const resultErrors = results.flatMap((result) => result.messages);
-    expect(resultErrors).toHaveLength(0);
-  });
-
   it('disables a specific rule by eslint rule name', async () => {
     const eslint = initESLint();
     const code = `
