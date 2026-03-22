@@ -2,40 +2,40 @@
 
 <!-- end auto-generated rule header -->
 
-Disallow unknown arguments for built-in Ember components.
+The builtin components `LinkTo`, `Input`, `Textarea` has list of allowed arguments, and some argument names may be mistyped, this rule trying to highlight possible typos, checking for unknown arguments, also, some components has conflicted and required arguments, rule addressing this behavior.
 
-## Rule Details
-
-This rule checks that only known arguments are used with built-in Ember components like `<Input>`, `<Textarea>`, and `<LinkTo>`.
+This rule warns about `unknown`, `required` and `conflicted` arguments for `LinkTo`, `Input`, `Textarea` components.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
-```gjs
-<template>
-  <Input @unknownArg="value" />
-</template>
+```hbs
+<LinkTo @unsupportedArgument='foo'> some link with unknown argument</LinkTo>
+<LinkTo @route='info' @model='a' @models='b'> info </LinkTo>
+<LinkTo @models='b'> info </LinkTo>
 ```
 
-```gjs
-<template>
-  <Textarea @invalidProp={{this.value}} />
-</template>
+```hbs
+<Input @foo='bar' />
 ```
 
-Examples of **correct** code for this rule:
-
-```gjs
-<template>
-  <Input @type="text" @value={{this.value}} />
-</template>
+```hbs
+<Textarea @foo='bar' />
 ```
 
-```gjs
-<template>
-  <Textarea @value={{this.text}} rows="10" />
-</template>
+This rule **allows** the following:
+
+```hbs
+<LinkTo @route='readme'> readme </LinkTo>
+```
+
+```hbs
+<Input @value='someValue' />
+```
+
+```hbs
+<Textarea @value='someValue' />
 ```
 
 ## Migration
@@ -51,4 +51,4 @@ Examples of **correct** code for this rule:
 
 ## References
 
-- [Ember Built-in Components](https://api.emberjs.com/ember/release/classes/Ember.Templates.components)
+- [Reduce API Surface of Built-In Components](https://github.com/emberjs/rfcs/blob/master/text/0707-modernize-built-in-components-2.md#summary)
