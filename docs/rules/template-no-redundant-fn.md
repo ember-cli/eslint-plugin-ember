@@ -2,64 +2,29 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows unnecessary usage of the `{{fn}}` helper.
+The `fn` helper can be used to bind arguments to another function. Using it without any arguments is redundant because then the inner function could just be used directly.
 
-When `{{fn}}` is used with only a function reference and no arguments to curry, it's redundant. You can pass the function directly.
-
-## Rule Details
-
-This rule detects when `{{fn}}` is called with only one argument (the function itself) and no curried arguments.
+This rule is looking for `fn` helper usages that don't provide any additional arguments to the inner function and warns about them.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
-```gjs
-<template>
-  <button {{on "click" (fn this.handleClick)}}>Click</button>
-</template>
+```hbs
+<button {{on 'click' (fn this.handleClick)}}>Click Me</button>
 ```
 
-```gjs
-<template>
-  <Component @action={{fn this.save}} />
-</template>
+This rule **allows** the following:
+
+```hbs
+<button {{on 'click' this.handleClick}}>Click Me</button>
 ```
 
-Examples of **correct** code for this rule:
-
-```gjs
-<template>
-  <button {{on "click" this.handleClick}}>Click</button>
-</template>
-```
-
-```gjs
-<template>
-  <button {{on "click" (fn this.handleClick arg)}}>Click</button>
-</template>
-```
-
-```gjs
-<template>
-  <Component @action={{this.save}} />
-</template>
-```
-
-## Migration
-
-Replace:
-
-```gjs
-<button {{on "click" (fn this.action)}}>
-```
-
-With:
-
-```gjs
-<button {{on "click" this.action}}>
+```hbs
+<button {{on 'click' (fn this.handleClick 'foo')}}>Click Me</button>
 ```
 
 ## References
 
-- [eslint-plugin-ember template-no-redundant-fn](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-redundant-fn.md)
+- [Ember Guides](https://guides.emberjs.com/release/components/component-state-and-actions/#toc_passing-arguments-to-actions)
+- [`fn` API documentation](https://api.emberjs.com/ember/3.20/classes/Ember.Templates.helpers/methods/fn?anchor=fn)
