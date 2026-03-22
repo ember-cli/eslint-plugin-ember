@@ -1046,4 +1046,3 @@ describe('supports template-lint-disable directive', () => {
     expect(resultErrors).toHaveLength(0);
   });
 });
-
