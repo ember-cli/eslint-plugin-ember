@@ -63,6 +63,16 @@ hbsRuleTester.run('template-no-this-in-template-only-components', rule, {
   ],
   invalid: [
     {
+      code: '{{my-component model=this.model}}',
+      output: '{{my-component model=@model}}',
+      errors: [
+        {
+          message:
+            "Usage of 'this' in path 'this.model' is not allowed in a template-only component. Use '@model' if it is a named argument.",
+        },
+      ],
+    },
+    {
       code: '{{my-component action=(action this.myAction)}}',
       output: '{{my-component action=(action @myAction)}}',
       errors: [

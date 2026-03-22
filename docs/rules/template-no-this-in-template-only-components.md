@@ -4,30 +4,20 @@
 
 <!-- end auto-generated rule header -->
 
-There is no `this` context in template-tag (`<template>`) components that don't extend a class.
-
-## Rule Details
-
-In gjs/gts files with `<template>` tags, this rule flags all `this.*` path expressions and suggests converting them to named arguments (`@*`). The auto-fix replaces `this.foo` with `@foo` (except for built-in component properties like `elementId`, `tagName`, `ariaRole`, `class`, `classNames`, `classNameBindings`, `attributeBindings`, and `isVisible`, which are reported but not auto-fixed).
+There is no `this` context in template-only components.
 
 ## Examples
 
-This rule **forbids** the following:
+This rule **forbids** `this` in template-only components:
 
-```gjs
-<template><h1>Hello {{this.name}}!</h1></template>
-```
-
-This rule **allows** the following:
-
-```gjs
-<template><h1>Hello {{@name}}!</h1></template>
+```hbs
+<h1>Hello {{this.name}}!</h1>
 ```
 
 The `--fix` option will convert to named arguments:
 
-```gjs
-<template><h1>Hello {{@name}}!</h1></template>
+```hbs
+<h1>Hello {{@name}}!</h1>
 ```
 
 ## Migration
