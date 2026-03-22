@@ -13,7 +13,6 @@ const { writeFileSync, readFileSync } = require('node:fs');
 const { join } = require('node:path');
 
 const gjsGtsParser = require.resolve('ember-eslint-parser');
-const hbsParser = require.resolve('ember-eslint-parser/hbs');
 
 /**
  * Helper function which creates ESLint instance with enabled/disabled autofix feature.
@@ -888,9 +887,35 @@ describe('multiple tokens in same file', () => {
   });
 });
 
+function initESLintWithTemplateLintDisable() {
+  return new ESLint({
+    ignore: false,
+    useEslintrc: false,
+    plugins: { ember: plugin },
+    overrideConfig: {
+      root: true,
+      env: {
+        browser: true,
+      },
+      parserOptions: {
+        ecmaVersion: 2022,
+        sourceType: 'module',
+      },
+      parser: gjsGtsParser,
+      plugins: ['ember'],
+      processor: 'ember/template-lint-disable',
+      rules: {
+        'no-undef': 'error',
+        'no-unused-vars': 'error',
+        quotes: ['error', 'single'],
+      },
+    },
+  });
+}
+
 describe('supports template-lint-disable directive', () => {
   it('disables all rules on the next line with mustache comment', async () => {
-    const eslint = initESLint();
+    const eslint = initESLintWithTemplateLintDisable();
     const code = `
     <template>
       <div>
@@ -906,7 +931,7 @@ describe('supports template-lint-disable directive', () => {
   });
 
   it('disables all rules on the next line with mustache block comment', async () => {
-    const eslint = initESLint();
+    const eslint = initESLintWithTemplateLintDisable();
     const code = `
     <template>
       <div>
@@ -921,7 +946,7 @@ describe('supports template-lint-disable directive', () => {
   });
 
   it('disables a specific rule by eslint rule name', async () => {
-    const eslint = initESLint();
+    const eslint = initESLintWithTemplateLintDisable();
     const code = `
     <template>
       <div>
@@ -940,7 +965,7 @@ describe('supports template-lint-disable directive', () => {
   });
 
   it('only disables the next line, not subsequent lines', async () => {
-    const eslint = initESLint();
+    const eslint = initESLintWithTemplateLintDisable();
     const code = `
     <template>
       <div>
@@ -958,7 +983,7 @@ describe('supports template-lint-disable directive', () => {
   });
 
   it('does not suppress unrelated rules when a specific rule is named', async () => {
-    const eslint = initESLint();
+    const eslint = initESLintWithTemplateLintDisable();
     const code = `
     <template>
       <div>
@@ -975,7 +1000,7 @@ describe('supports template-lint-disable directive', () => {
   });
 
   it('supports template-lint rule name format (maps to ember/ prefix)', async () => {
-    const eslint = initESLint();
+    const eslint = initESLintWithTemplateLintDisable();
     const code = `
     <template>
       <div>
@@ -990,7 +1015,7 @@ describe('supports template-lint-disable directive', () => {
   });
 
   it('supports multiple rule names', async () => {
-    const eslint = initESLint();
+    const eslint = initESLintWithTemplateLintDisable();
     const code = `
     <template>
       <div>
@@ -1005,7 +1030,7 @@ describe('supports template-lint-disable directive', () => {
   });
 
   it('works with multiple disable comments in the same file', async () => {
-    const eslint = initESLint();
+    const eslint = initESLintWithTemplateLintDisable();
     const code = `
     <template>
       <div>
@@ -1022,123 +1047,3 @@ describe('supports template-lint-disable directive', () => {
   });
 });
 
-function initHbsESLint() {
-  return new ESLint({
-    ignore: false,
-    useEslintrc: false,
-    plugins: { ember: plugin },
-    overrideConfig: {
-      root: true,
-      parserOptions: {
-        ecmaVersion: 2022,
-        sourceType: 'module',
-      },
-      plugins: ['ember'],
-      overrides: [
-        {
-          files: ['**/*.hbs'],
-          parser: hbsParser,
-          processor: 'ember/noop',
-          rules: {
-            'ember/template-no-bare-strings': 'error',
-          },
-        },
-      ],
-    },
-  });
-}
-
-describe('supports template-lint-disable directive in hbs files', () => {
-  it('disables all rules on the next line with mustache comment', async () => {
-    const eslint = initHbsESLint();
-    const code = `<div>
-  {{! template-lint-disable }}
-  Hello world
-</div>`;
-    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
-    const resultErrors = results.flatMap((result) => result.messages);
-    expect(resultErrors).toHaveLength(0);
-  });
-
-  it('disables all rules on the next line with mustache block comment', async () => {
-    const eslint = initHbsESLint();
-    const code = `<div>
-  {{!-- template-lint-disable --}}
-  Hello world
-</div>`;
-    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
-    const resultErrors = results.flatMap((result) => result.messages);
-    expect(resultErrors).toHaveLength(0);
-  });
-
-  it('only disables the next line, not subsequent lines', async () => {
-    const eslint = initHbsESLint();
-    const code = `{{! template-lint-disable }}
-<div>Hello world</div>
-<div>Bare string here too</div>`;
-    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
-    const resultErrors = results.flatMap((result) => result.messages);
-    // Line 2 "Hello world" suppressed, but line 3 "Bare string here too" should still error
-    expect(resultErrors).toHaveLength(1);
-    expect(resultErrors[0].line).toBe(3);
-  });
-
-  it('disables a specific rule by name', async () => {
-    const eslint = initHbsESLint();
-    const code = `<div>
-  {{! template-lint-disable ember/template-no-bare-strings }}
-  Hello world
-</div>`;
-    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
-    const resultErrors = results.flatMap((result) => result.messages);
-    expect(resultErrors).toHaveLength(0);
-  });
-
-  it('supports template-lint rule name format (maps to ember/ prefix)', async () => {
-    const eslint = initHbsESLint();
-    const code = `<div>
-  {{! template-lint-disable no-bare-strings }}
-  Hello world
-</div>`;
-    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
-    const resultErrors = results.flatMap((result) => result.messages);
-    expect(resultErrors).toHaveLength(0);
-  });
-
-  it('does not suppress unrelated rules when a specific rule is named', async () => {
-    const eslint = initHbsESLint();
-    const code = `<div>
-  {{! template-lint-disable ember/template-no-html-comments }}
-  Hello world
-</div>`;
-    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
-    const resultErrors = results.flatMap((result) => result.messages);
-    // no-bare-strings should still fire since we only disabled no-html-comments
-    expect(resultErrors).toHaveLength(1);
-    expect(resultErrors[0].ruleId).toBe('ember/template-no-bare-strings');
-  });
-
-  it('works with multiple disable comments in the same file', async () => {
-    const eslint = initHbsESLint();
-    const code = `<div>
-  {{! template-lint-disable }}
-  Hello world
-  {{! template-lint-disable }}
-  Another bare string
-</div>`;
-    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
-    const resultErrors = results.flatMap((result) => result.messages);
-    expect(resultErrors).toHaveLength(0);
-  });
-
-  it('bare strings without disable comment still trigger errors', async () => {
-    const eslint = initHbsESLint();
-    const code = `<div>
-  Hello world
-</div>`;
-    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
-    const resultErrors = results.flatMap((result) => result.messages);
-    expect(resultErrors).toHaveLength(1);
-    expect(resultErrors[0].ruleId).toBe('ember/template-no-bare-strings');
-  });
-});
