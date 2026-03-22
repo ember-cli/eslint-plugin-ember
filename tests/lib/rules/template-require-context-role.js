@@ -195,8 +195,7 @@ ruleTester.run('template-require-context-role', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Role "option" must be contained in an element with one of these roles: listbox',
+          message: 'Role "option" must be contained in an element with one of these roles: listbox',
         },
       ],
     },
@@ -225,7 +224,8 @@ ruleTester.run('template-require-context-role', rule, {
       output: null,
       errors: [
         {
-          message: 'Role "rowheader" must be contained in an element with one of these roles: grid, row',
+          message:
+            'Role "rowheader" must be contained in an element with one of these roles: grid, row',
         },
       ],
     },
@@ -402,8 +402,7 @@ hbsRuleTester.run('template-require-context-role', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Role "option" must be contained in an element with one of these roles: listbox',
+          message: 'Role "option" must be contained in an element with one of these roles: listbox',
         },
       ],
     },
@@ -432,7 +431,8 @@ hbsRuleTester.run('template-require-context-role', rule, {
       output: null,
       errors: [
         {
-          message: 'Role "rowheader" must be contained in an element with one of these roles: grid, row',
+          message:
+            'Role "rowheader" must be contained in an element with one of these roles: grid, row',
         },
       ],
     },
