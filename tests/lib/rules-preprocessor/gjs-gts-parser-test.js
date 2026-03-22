@@ -1022,33 +1022,33 @@ describe('supports template-lint-disable directive', () => {
   });
 });
 
-describe('supports template-lint-disable directive in hbs files', () => {
-  function initHbsESLint() {
-    return new ESLint({
-      ignore: false,
-      useEslintrc: false,
-      plugins: { ember: plugin },
-      overrideConfig: {
-        root: true,
-        parserOptions: {
-          ecmaVersion: 2022,
-          sourceType: 'module',
-        },
-        plugins: ['ember'],
-        overrides: [
-          {
-            files: ['**/*.hbs'],
-            parser: hbsParser,
-            processor: 'ember/noop',
-            rules: {
-              'ember/template-no-bare-strings': 'error',
-            },
-          },
-        ],
+function initHbsESLint() {
+  return new ESLint({
+    ignore: false,
+    useEslintrc: false,
+    plugins: { ember: plugin },
+    overrideConfig: {
+      root: true,
+      parserOptions: {
+        ecmaVersion: 2022,
+        sourceType: 'module',
       },
-    });
-  }
+      plugins: ['ember'],
+      overrides: [
+        {
+          files: ['**/*.hbs'],
+          parser: hbsParser,
+          processor: 'ember/noop',
+          rules: {
+            'ember/template-no-bare-strings': 'error',
+          },
+        },
+      ],
+    },
+  });
+}
 
+describe('supports template-lint-disable directive in hbs files', () => {
   it('disables all rules on the next line with mustache comment', async () => {
     const eslint = initHbsESLint();
     const code = `<div>
