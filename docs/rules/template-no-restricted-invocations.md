@@ -6,7 +6,7 @@ Disallow certain components, helpers or modifiers from being used.
 
 Use cases include:
 
-- You bring in some addon with helpers or components, but your team deems one or many not suitable and wants to guard against their usage
+- You bring in some addon like ember-composable-helpers, but your team deems one or many of the helpers not suitable and wants to guard against their usage
 - You want to discourage use of a deprecated component
 
 ## Examples
@@ -14,59 +14,31 @@ Use cases include:
 Given a config of:
 
 ```json
-{ "template-no-restricted-invocations": ["foo-bar"] }
+["foo-bar"]
 ```
 
 This rule **forbids** the following:
 
-```gjs
-<template>{{foo-bar}}</template>
+```hbs
+{{foo-bar}}
 ```
 
-```gjs
-<template>{{#foo-bar}}{{/foo-bar}}</template>
+```hbs
+{{#foo-bar}}{{/foo-bar}}
 ```
 
-```gjs
-<template><FooBar /></template>
-```
-
-This rule **allows** the following:
-
-```gjs
-<template>{{baz}}</template>
-```
-
-```gjs
-<template><Baz /></template>
+```hbs
+<FooBar />
 ```
 
 ## Configuration
 
 One of these:
 
-- `string[]` - helpers or components to disallow (using kebab-case names like `nested-scope/component-name`)
-- `object[]` - with the following keys:
-  - `names` - `string[]` - helpers or components to disallow
-  - `message` - `string` - custom error message to report for violations
-
-```js
-// .eslintrc.js
-module.exports = {
-  rules: {
-    'ember/template-no-restricted-invocations': [
-      'error',
-      [
-        'foo-bar',
-        {
-          names: ['deprecated-component'],
-          message: 'Use new-component instead',
-        },
-      ],
-    ],
-  },
-};
-```
+- string[] - helpers or components to disallow (using kebab-case names like `nested-scope/component-name`)
+- object[] - with the following keys:
+  - `names` - string[] - helpers or components to disallow (using kebab-case names like `nested-scope/component-name`)
+  - `message` - string - custom error message to report for violations (typically a deprecation notice / explanation of why not to use it and a recommended replacement)
 
 ## Related Rules
 
@@ -74,4 +46,4 @@ module.exports = {
 
 ## References
 
-- [emberjs.com - Deprecations](https://guides.emberjs.com/release/deprecations/)
+- [ember-cli-deprecation-workflow](https://github.com/mixonic/ember-cli-deprecation-workflow)
