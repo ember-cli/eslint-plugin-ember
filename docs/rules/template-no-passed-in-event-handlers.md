@@ -2,97 +2,68 @@
 
 <!-- end auto-generated rule header -->
 
-Disallows passing Ember event handler names directly as component arguments.
+It is possible to pass e.g. `@click` to an Ember component to override the default `click` event handler. For tagless components this will trigger an assertion though and can't be used as legitimate API, and for Glimmer components it will not work out of the box, like in Ember components, either.
 
-Passing Ember DOM event names as component arguments (e.g., `@click`, `@submit`, `@keyDown`) is discouraged. Use the `{{on}}` modifier on the element instead for explicit event binding.
-
-## Rule Details
-
-This rule detects component arguments whose name (without the `@` prefix) matches an Ember DOM event name. Only PascalCase component invocations are checked (built-in `Input` and `Textarea` are excluded).
-
-The checked event names are:
-
-`touchStart`, `touchMove`, `touchEnd`, `touchCancel`, `keyDown`, `keyUp`, `keyPress`, `mouseDown`, `mouseUp`, `contextMenu`, `click`, `doubleClick`, `mouseMove`, `mouseEnter`, `mouseLeave`, `focusIn`, `focusOut`, `submit`, `change`, `input`, `dragStart`, `drag`, `dragEnter`, `dragLeave`, `dragOver`, `dragEnd`, `drop`
+This rule scans potential component invocations for these patterns and flags them as issues.
 
 ## Examples
 
-Examples of **incorrect** code for this rule:
+This rule **forbids** the following:
 
-```gjs
-<template>
-  <MyComponent @click={{this.handleClick}} />
-</template>
+```hbs
+<Foo @click={{this.handleClick}} />
 ```
 
-```gjs
-<template>
-  <MyComponent @submit={{this.handleSubmit}} />
-</template>
+```hbs
+<Foo @keyPress={{this.handleClick}} />
 ```
 
-```gjs
-<template>
-  <CustomButton @mouseEnter={{this.handleHover}} />
-</template>
+```hbs
+{{foo click=this.handleClick}}
 ```
 
-Examples of **correct** code for this rule:
+This rule **allows** the following:
 
-```gjs
-<template>
-  <MyComponent @action={{this.handleAction}} />
-</template>
+```hbs
+<Foo @onClick={{this.handleClick}} />
 ```
 
-```gjs
-<template>
-  <button {{on "click" this.handleClick}}>Click</button>
-</template>
+```hbs
+<Foo @myCustomClickHandler={{this.handleClick}} />
 ```
 
-```gjs
-<template>
-  <MyComponent @value={{this.value}} @onChange={{this.updateValue}} />
-</template>
+```hbs
+<Foo @onKeyPress={{this.handleClick}} />
 ```
 
-## Options
+```hbs
+{{foo onClick=this.handleClick}}
+```
 
-| Name     | Type     | Default | Description                                                                                        |
-| -------- | -------- | ------- | -------------------------------------------------------------------------------------------------- |
-| `ignore` | `object` | `{}`    | Per-component exceptions. Keys are component names, values are arrays of argument names to ignore. |
+## Configuration
 
-```js
-module.exports = {
-  rules: {
-    'ember/template-no-passed-in-event-handlers': [
-      'error',
+- boolean - `true` to enable / `false` to disable
+  - object -- An object with the following keys:
+    - `ignore` -- An object with the following keys/values:
+      - key: string -- The name of the element or mustache statement to ignore event handlers for
+      - value: array -- Event handler names. Event handler names should exclude the @ when specifying those intended for named arguments. This rule will ensure both non-named arguments and named arguments are both ignored appropriately.
+
+      eg.
+
+      Given the following configuration:
+
+      ```json
       {
-        ignore: {
-          MyComponent: ['@click', '@submit'],
-        },
-      },
-    ],
-  },
-};
-```
+        "ignore": {
+          "MyButton": ["click"]
+        }
+      }
+      ```
 
 ## Migration
 
-Replace:
-
-```gjs
-<MyComponent @click={{this.handleClick}} />
-```
-
-With:
-
-```gjs
-<MyComponent>
-  <button {{on "click" this.handleClick}}>Click</button>
-</MyComponent>
-```
+- create explicit component APIs for these events (e.g. `@click` -> `@onClick`)
 
 ## References
 
-- [eslint-plugin-ember template-no-passed-in-event-handlers](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-passed-in-event-handlers.md)
+- <https://api.emberjs.com/ember/release/classes/Component#event-handler-methods>

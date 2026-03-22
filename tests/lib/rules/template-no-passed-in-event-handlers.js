@@ -123,29 +123,29 @@ ruleTester.run('template-no-passed-in-event-handlers', rule, {
     // ignore option — only ignores specified component (angle bracket)
     {
       code: '<template><Bar @click={{this.handleClick}} /></template>',
-      options: [{ ignore: { Foo: ['@click'] } }],
       output: null,
+      options: [{ ignore: { Foo: ['@click'] } }],
       errors: [{ messageId: 'unexpected' }],
     },
     // ignore option — only ignores specified attrs (angle bracket)
     {
       code: '<template><Foo @submit={{this.handleSubmit}} /></template>',
-      options: [{ ignore: { Foo: ['@click'] } }],
       output: null,
+      options: [{ ignore: { Foo: ['@click'] } }],
       errors: [{ messageId: 'unexpected' }],
     },
     // ignore option — only ignores specified component (curly)
     {
       code: '<template>{{bar click=this.handleClick}}</template>',
-      options: [{ ignore: { foo: ['click'] } }],
       output: null,
+      options: [{ ignore: { foo: ['click'] } }],
       errors: [{ messageId: 'unexpected' }],
     },
     // ignore option — only ignores specified attrs (curly)
     {
       code: '<template>{{foo submit=this.handleSubmit}}</template>',
-      options: [{ ignore: { foo: ['click'] } }],
       output: null,
+      options: [{ ignore: { foo: ['click'] } }],
       errors: [{ messageId: 'unexpected' }],
     },
   ],
@@ -265,29 +265,29 @@ hbsRuleTester.run('template-no-passed-in-event-handlers', rule, {
     // ignore option — only ignores specified component (angle bracket)
     {
       code: '<Bar @click={{this.handleClick}} />',
-      options: [{ ignore: { Foo: ['@click'] } }],
       output: null,
+      options: [{ ignore: { Foo: ['@click'] } }],
       errors: [{ messageId: 'unexpected' }],
     },
     // ignore option — only ignores specified attrs (angle bracket)
     {
       code: '<Foo @submit={{this.handleSubmit}} />',
-      options: [{ ignore: { Foo: ['@click'] } }],
       output: null,
+      options: [{ ignore: { Foo: ['@click'] } }],
       errors: [{ messageId: 'unexpected' }],
     },
     // ignore option — only ignores specified component (curly)
     {
       code: '{{bar click=this.handleClick}}',
-      options: [{ ignore: { foo: ['click'] } }],
       output: null,
+      options: [{ ignore: { foo: ['click'] } }],
       errors: [{ messageId: 'unexpected' }],
     },
     // ignore option — only ignores specified attrs (curly)
     {
       code: '{{foo submit=this.handleSubmit}}',
-      options: [{ ignore: { foo: ['click'] } }],
       output: null,
+      options: [{ ignore: { foo: ['click'] } }],
       errors: [{ messageId: 'unexpected' }],
     },
   ],
