@@ -51,7 +51,9 @@ ruleTester.run('template-no-redundant-fn', rule, {
       code: `<template>
         <button {{on "click" (fn this.handleClick)}}>Click</button>
       </template>`,
-      output: null,
+      output: `<template>
+        <button {{on "click" this.handleClick}}>Click</button>
+      </template>`,
       errors: [
         {
           message:
@@ -64,7 +66,9 @@ ruleTester.run('template-no-redundant-fn', rule, {
       code: `<template>
         <Component @action={{fn this.save}} />
       </template>`,
-      output: null,
+      output: `<template>
+        <Component @action={{this.save}} />
+      </template>`,
       errors: [
         {
           message: 'Unnecessary use of (fn) helper. Pass the function directly instead: this.save',
@@ -75,7 +79,7 @@ ruleTester.run('template-no-redundant-fn', rule, {
 
     {
       code: '<template><button {{on "click" (fn this.handleClick)}}>Click Me</button></template>',
-      output: null,
+      output: '<template><button {{on "click" this.handleClick}}>Click Me</button></template>',
       errors: [
         {
           message:
@@ -85,7 +89,7 @@ ruleTester.run('template-no-redundant-fn', rule, {
     },
     {
       code: '<template><SomeComponent @onClick={{fn this.handleClick}} /></template>',
-      output: null,
+      output: '<template><SomeComponent @onClick={{this.handleClick}} /></template>',
       errors: [
         {
           message:
@@ -95,7 +99,7 @@ ruleTester.run('template-no-redundant-fn', rule, {
     },
     {
       code: '<template>{{foo bar=(fn this.handleClick)}}></template>',
-      output: null,
+      output: '<template>{{foo bar=this.handleClick}}></template>',
       errors: [
         {
           message:
@@ -126,7 +130,7 @@ hbsRuleTester.run('template-no-redundant-fn', rule, {
   invalid: [
     {
       code: '<button {{on "click" (fn this.handleClick)}}>Click Me</button>',
-      output: null,
+      output: '<button {{on "click" this.handleClick}}>Click Me</button>',
       errors: [
         {
           message:
@@ -136,7 +140,7 @@ hbsRuleTester.run('template-no-redundant-fn', rule, {
     },
     {
       code: '<SomeComponent @onClick={{fn this.handleClick}} />',
-      output: null,
+      output: '<SomeComponent @onClick={{this.handleClick}} />',
       errors: [
         {
           message:
@@ -146,7 +150,7 @@ hbsRuleTester.run('template-no-redundant-fn', rule, {
     },
     {
       code: '{{foo bar=(fn this.handleClick)}}>',
-      output: null,
+      output: '{{foo bar=this.handleClick}}>',
       errors: [
         {
           message:
