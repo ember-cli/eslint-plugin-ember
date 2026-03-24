@@ -37,6 +37,9 @@
     "lib"
   ],
   "scripts": {
+    "bench": "./scripts/run-bench.sh tests/lint.bench.mjs",
+    "bench:compare": "node scripts/bench-compare.mjs",
+    "bench:summary": "./scripts/local-bench-summary.sh",
     "format": "prettier . --write",
     "lint": "npm-run-all --continue-on-error --aggregate-output --parallel \"lint:!(fix)\"",
     "lint:docs": "markdownlint \"**/*.md\"",
@@ -51,9 +54,6 @@
     "lint:package-json-sorting:fix": "sort-package-json package.json",
     "lint:prettier": "prettier . --check",
     "lint:remote": "eslint-remote-tester",
-    "bench": "./scripts/run-bench.sh tests/lint.bench.mjs",
-    "bench:compare": "node scripts/bench-compare.mjs",
-    "bench:summary": "./scripts/local-bench-summary.sh",
     "start": "pnpm test:watch",
     "test": "vitest run",
     "test:coverage": "vitest --coverage",
