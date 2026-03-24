@@ -778,6 +778,7 @@ describe('multiple tokens in same file', () => {
 
   it('lints while being type aware', async () => {
     const eslint = new ESLint({
+      cwd: __dirname,
       ignore: false,
       useEslintrc: false,
       plugins: { ember: plugin },

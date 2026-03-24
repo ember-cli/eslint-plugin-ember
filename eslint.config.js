@@ -239,6 +239,8 @@ module.exports = [
       'lib/recommended-rules-gjs.js',
       'lib/recommended-rules-gts.js',
       'tests/__snapshots__/',
+      'tests/bench/',
+      'tests/lint.bench.mjs',
 
       // # Contains <template> in js markdown
       'docs/rules/no-empty-glimmer-component-classes.md',

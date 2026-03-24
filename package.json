@@ -37,6 +37,9 @@
     "lib"
   ],
   "scripts": {
+    "bench": "./scripts/run-bench.sh tests/lint.bench.mjs",
+    "bench:compare": "node scripts/bench-compare.mjs",
+    "bench:summary": "./scripts/local-bench-summary.sh",
     "format": "prettier . --write",
     "lint": "npm-run-all --continue-on-error --aggregate-output --parallel \"lint:!(fix)\"",
     "lint:docs": "markdownlint \"**/*.md\"",
@@ -99,6 +102,7 @@
     "jquery": "^3.7.1",
     "jsdom": "^24.0.0",
     "markdownlint-cli": "^0.48.0",
+    "mitata": "^1.0.34",
     "npm-package-json-lint": "^7.0.0",
     "npm-run-all2": "^5.0.0",
     "prettier": "^3.0.3",
