@@ -283,7 +283,7 @@ const invalid = [
         line: 3,
         message: "'notUsed' is defined but never used.",
         messageId: 'unusedVar',
-        nodeType: 'BlockParam',
+        nodeType: 'GlimmerBlockParam',
         ruleId: 'no-unused-vars',
         severity: 2,
       },
