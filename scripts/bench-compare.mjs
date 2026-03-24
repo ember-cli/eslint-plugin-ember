@@ -83,7 +83,7 @@ try {
 
   // Copy package manifests and source (use resolved SHA for reliability)
   run(
-    `git archive ${BASE_REF} -- package.json pnpm-lock.yaml lib/ | tar -x -C "${CONTROL_DIR}"`
+    `git archive ${BASE_REF} -- package.json pnpm-lock.yaml .npmrc lib/ | tar -x -C "${CONTROL_DIR}"`
   );
 
   // ── 2. Install dependencies in control dir ───────────────────────────────
