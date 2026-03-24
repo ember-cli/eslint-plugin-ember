@@ -88,10 +88,18 @@ try {
 
   // ── 2. Install dependencies in control dir ───────────────────────────────
   console.error(`\n📦  Installing dependencies for control (${BASE_BRANCH})…\n`);
-  run('pnpm install --frozen-lockfile', {
-    cwd: CONTROL_DIR,
-    stdio: ['inherit', 'pipe', 'inherit'],
-  });
+  try {
+    run('pnpm install --frozen-lockfile', {
+      cwd: CONTROL_DIR,
+      stdio: ['inherit', 'pipe', 'inherit'],
+    });
+  } catch {
+    console.error('⚠️  Frozen install failed, retrying without --frozen-lockfile…\n');
+    run('pnpm install --no-frozen-lockfile', {
+      cwd: CONTROL_DIR,
+      stdio: ['inherit', 'pipe', 'inherit'],
+    });
+  }
 
   // ── 3. Run mitata bench with --control-dir ───────────────────────────────
   console.error(`\n🏎️  Running benchmarks (experiment vs control)…\n`);
