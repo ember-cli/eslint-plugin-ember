@@ -76,7 +76,7 @@ export default class ProjectDashboardComponent extends Component {
       result = result.filter(
         (p) =>
           p.name.toLowerCase().includes(q) ||
-          (p.description && p.description.toLowerCase().includes(q)),
+          (p.description && p.description.toLowerCase().includes(q))
       );
     }
 
@@ -134,7 +134,7 @@ export default class ProjectDashboardComponent extends Component {
       result = result.filter(
         (t) =>
           t.title.toLowerCase().includes(q) ||
-          (t.description && t.description.toLowerCase().includes(q)),
+          (t.description && t.description.toLowerCase().includes(q))
       );
     }
 
@@ -183,7 +183,7 @@ export default class ProjectDashboardComponent extends Component {
 
   get overdueTasks() {
     return this.filteredTasks.filter(
-      (t) => t.dueDate && new Date(t.dueDate) < new Date() && t.status !== 'done',
+      (t) => t.dueDate && new Date(t.dueDate) < new Date() && t.status !== 'done'
     );
   }
 
@@ -196,7 +196,7 @@ export default class ProjectDashboardComponent extends Component {
           t.dueDate &&
           new Date(t.dueDate) >= new Date() &&
           new Date(t.dueDate) <= nextWeek &&
-          t.status !== 'done',
+          t.status !== 'done'
       )
       .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
   }
@@ -205,17 +205,13 @@ export default class ProjectDashboardComponent extends Component {
 
   get projectMembers() {
     if (!this.selectedProject) return this.users;
-    return this.users.filter((u) =>
-      this.selectedProject.memberIds.includes(u.id),
-    );
+    return this.users.filter((u) => this.selectedProject.memberIds.includes(u.id));
   }
 
   get taskAssignmentMap() {
     const map = {};
     for (const user of this.projectMembers) {
-      map[user.id] = this.currentProjectTasks.filter(
-        (t) => t.assigneeId === user.id,
-      );
+      map[user.id] = this.currentProjectTasks.filter((t) => t.assigneeId === user.id);
     }
     return map;
   }
@@ -896,7 +892,7 @@ export default class ProjectDashboardComponent extends Component {
         exportedBy: this.session.currentUser.name,
       },
       null,
-      2,
+      2
     );
   }
 
@@ -930,7 +926,9 @@ export default class ProjectDashboardComponent extends Component {
         this.tasks = [...this.tasks, task];
       }
 
-      this.notify.success(`Imported project "${data.project.name}" with ${data.tasks.length} tasks`);
+      this.notify.success(
+        `Imported project "${data.project.name}" with ${data.tasks.length} tasks`
+      );
     } catch (error) {
       this.notify.error('Failed to import project data');
     }

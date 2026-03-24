@@ -38,14 +38,12 @@ export default class TodoListComponent extends Component {
       result = result.filter(
         (item) =>
           item.label.toLowerCase().includes(q) ||
-          (item.notes && item.notes.toLowerCase().includes(q)),
+          (item.notes && item.notes.toLowerCase().includes(q))
       );
     }
 
     if (this.selectedCategory) {
-      result = result.filter(
-        (item) => item.category === this.selectedCategory,
-      );
+      result = result.filter((item) => item.category === this.selectedCategory);
     }
 
     switch (this.filter) {
@@ -57,7 +55,7 @@ export default class TodoListComponent extends Component {
         return result.filter((item) => item.priority === 'high');
       case 'overdue':
         return result.filter(
-          (item) => item.dueDate && new Date(item.dueDate) < new Date() && !item.done,
+          (item) => item.dueDate && new Date(item.dueDate) < new Date() && !item.done
         );
       default:
         return result;
@@ -116,7 +114,7 @@ export default class TodoListComponent extends Component {
 
   get overdueCount() {
     return this.items.filter(
-      (item) => item.dueDate && new Date(item.dueDate) < new Date() && !item.done,
+      (item) => item.dueDate && new Date(item.dueDate) < new Date() && !item.done
     ).length;
   }
 

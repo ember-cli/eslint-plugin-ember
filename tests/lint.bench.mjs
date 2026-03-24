@@ -84,7 +84,7 @@ function buildConfigs(pluginPath, parserPath) {
 
 const experimentConfigs = buildConfigs(
   resolve(fileURLToPath(import.meta.url), '../../lib/index.js'),
-  'ember-eslint-parser',
+  'ember-eslint-parser'
 );
 
 // ---------------------------------------------------------------------------
@@ -192,17 +192,20 @@ for (const { type, ext } of FILE_TYPES) {
       boxplot(() => {
         summary(() => {
           bench(`${type} ${size} (control)`, () => {
-            for (let i = 0; i < iters; i++) doNotOptimize(ctrl.linter.verify(code, ctrl.config, { filename }));
+            for (let i = 0; i < iters; i++)
+              doNotOptimize(ctrl.linter.verify(code, ctrl.config, { filename }));
           });
           bench(`${type} ${size} (experiment)`, () => {
-            for (let i = 0; i < iters; i++) doNotOptimize(expLinter.verify(code, expConfig, { filename }));
+            for (let i = 0; i < iters; i++)
+              doNotOptimize(expLinter.verify(code, expConfig, { filename }));
           });
         });
       });
     } else {
       // Standalone mode — just benchmark the local plugin
       bench(`${type} ${size}`, () => {
-        for (let i = 0; i < iters; i++) doNotOptimize(expLinter.verify(code, expConfig, { filename }));
+        for (let i = 0; i < iters; i++)
+          doNotOptimize(expLinter.verify(code, expConfig, { filename }));
       });
     }
   }
