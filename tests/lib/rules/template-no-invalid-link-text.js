@@ -53,6 +53,29 @@ ruleTester.run('template-no-invalid-link-text', rule, {
       filename: 'test.gjs',
       code: "import { LinkTo } from '@ember/routing'; <template><LinkTo aria-label={{t 'some-translation'}}>A link with translation</LinkTo></template>",
     },
+    {
+      filename: 'test.gjs',
+      code: '<template><a href="/play">{{if game.inProgress "Continue" "Start"}}</a></template>',
+    },
+    {
+      filename: 'test.gjs',
+      code: `
+        import { LinkTo } from '@ember/routing';
+        <template>
+          <LinkTo>
+            {{#if game.inProgress}}
+              Continue
+            {{else}}
+              Start
+            {{/if}}
+          </LinkTo>
+        </template>
+      `,
+    },
+    {
+      filename: 'test.gjs',
+      code: `<template><a href="/play">{{#if game.inProgress}}Continue{{else}}Start{{/if}}</a></template>`,
+    },
   ],
 
   invalid: [
