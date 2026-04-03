@@ -12,6 +12,21 @@ const validHbs = [
   '{{#each cats as |cat index|}}{{index}}{{/each}}',
   '{{#each cats as |cat index|}}{{#each cat.lives as |life|}}{{index}}: {{life}}{{/each}}{{/each}}',
   `
+  {{#each cats as |cat|}}
+    <div data-cat-name={{cat.name}}></div>
+  {{/each}}
+  `,
+  `
+  {{#each cats as |cat|}}
+    <div class="cat {{cat.name}}"></div>
+  {{/each}}
+  `,
+  `
+  {{#each cats as |cat|}}
+    <div class="cat {{if (isFavorite cat.name favoriteCatNames) 'favorite'}}"></div>
+  {{/each}}
+  `,
+  `
     <MyComponent @model={{this.model}} as |param|>
       {{! template-lint-disable }}
         <MyOtherComponent .... @param={{param}} />
