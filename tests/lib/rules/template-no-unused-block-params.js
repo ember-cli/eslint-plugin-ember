@@ -114,12 +114,12 @@ const invalidHbs = [
     errors: [{ messageId: 'unusedBlockParam', data: { param: 'life' } }],
   },
   {
-    code: `{{#each cats as |cat|}}plain cat text{{/each}}`,
+    code: '{{#each cats as |cat|}}plain cat text{{/each}}',
     output: null,
     errors: [{ messageId: 'unusedBlockParam', data: { param: 'cat' } }],
   },
   {
-    code: `{{#each cats as |cat|}}{{a.different.cat}}{{/each}}`,
+    code: '{{#each cats as |cat|}}{{a.different.cat}}{{/each}}',
     output: null,
     errors: [{ messageId: 'unusedBlockParam', data: { param: 'cat' } }],
   },
