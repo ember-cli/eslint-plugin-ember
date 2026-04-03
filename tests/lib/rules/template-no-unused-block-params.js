@@ -118,6 +118,11 @@ const invalidHbs = [
     output: null,
     errors: [{ messageId: 'unusedBlockParam', data: { param: 'cat' } }],
   },
+  {
+    code: `{{#each cats as |cat|}}{{a.different.cat}}{{/each}}`,
+    output: null,
+    errors: [{ messageId: 'unusedBlockParam', data: { param: 'cat' } }],
+  },
 ];
 
 function wrapTemplate(entry) {
