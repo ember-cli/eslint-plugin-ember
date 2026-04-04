@@ -12,6 +12,21 @@ const validHbs = [
   '{{#each cats as |cat index|}}{{index}}{{/each}}',
   '{{#each cats as |cat index|}}{{#each cat.lives as |life|}}{{index}}: {{life}}{{/each}}{{/each}}',
   `
+  {{#each cats as |cat|}}
+    <div data-cat-name={{cat.name}}></div>
+  {{/each}}
+  `,
+  `
+  {{#each cats as |cat|}}
+    <div class="cat {{cat.name}}"></div>
+  {{/each}}
+  `,
+  `
+  {{#each cats as |cat|}}
+    <div class="cat {{if (isFavorite cat.name favoriteCatNames) 'favorite'}}"></div>
+  {{/each}}
+  `,
+  `
     <MyComponent @model={{this.model}} as |param|>
       {{! template-lint-disable }}
         <MyOtherComponent .... @param={{param}} />
@@ -97,6 +112,16 @@ const invalidHbs = [
     code: '{{#each cats as |cat index|}}{{partial "cat"}}{{#each cat.lives as |life|}}Life{{/each}}{{/each}}',
     output: null,
     errors: [{ messageId: 'unusedBlockParam', data: { param: 'life' } }],
+  },
+  {
+    code: '{{#each cats as |cat|}}plain cat text{{/each}}',
+    output: null,
+    errors: [{ messageId: 'unusedBlockParam', data: { param: 'cat' } }],
+  },
+  {
+    code: '{{#each cats as |cat|}}{{a.different.cat}}{{/each}}',
+    output: null,
+    errors: [{ messageId: 'unusedBlockParam', data: { param: 'cat' } }],
   },
 ];
 
