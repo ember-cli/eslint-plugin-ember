@@ -74,7 +74,7 @@ ruleTester.run('template-no-invalid-link-text', rule, {
     },
     {
       filename: 'test.gjs',
-      code: `<template><a href="/play">{{#if game.inProgress}}Continue{{else}}Start{{/if}}</a></template>`,
+      code: '<template><a href="/play">{{#if game.inProgress}}Continue{{else}}Start{{/if}}</a></template>',
     },
   ],
 
