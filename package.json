@@ -106,7 +106,7 @@
     "npm-package-json-lint": "^7.0.0",
     "npm-run-all2": "^5.0.0",
     "prettier": "^3.0.3",
-    "release-plan": "^0.17.0",
+    "release-plan": "^0.18.0",
     "sort-package-json": "^2.6.0",
     "typescript": "^5.2.2",
     "typescript-eslint": "^8.7.0",
