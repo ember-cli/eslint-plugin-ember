@@ -38,7 +38,7 @@ ruleTester.run('template-sort-invocations', rule, {
     // Unsorted attributes (regular before @arg)
     {
       code: '<template><Button class="button" @label="Submit" /></template>',
-      output: null,
+      output: '<template><Button @label="Submit" class="button" /></template>',
       errors: [
         {
           messageId: 'attributeOrder',
@@ -50,7 +50,7 @@ ruleTester.run('template-sort-invocations', rule, {
     // Unsorted regular attributes
     {
       code: '<template><div id="bar" class="foo" /></template>',
-      output: null,
+      output: '<template><div class="foo" id="bar" /></template>',
       errors: [
         {
           messageId: 'attributeOrder',
@@ -62,7 +62,8 @@ ruleTester.run('template-sort-invocations', rule, {
     // Unsorted modifiers
     {
       code: '<template><button {{on "focus" this.handleFocus}} {{on "click" this.handleClick}} /></template>',
-      output: null,
+      output:
+        '<template><button {{on "click" this.handleClick}} {{on "focus" this.handleFocus}} /></template>',
       errors: [
         {
           messageId: 'modifierOrder',
@@ -74,7 +75,8 @@ ruleTester.run('template-sort-invocations', rule, {
     // ...attributes before modifiers
     {
       code: '<template><Button @label="Submit" ...attributes {{on "click" this.handleClick}} /></template>',
-      output: null,
+      output:
+        '<template><Button @label="Submit" {{on "click" this.handleClick}} ...attributes /></template>',
       errors: [
         {
           messageId: 'splattributesOrder',
@@ -85,7 +87,7 @@ ruleTester.run('template-sort-invocations', rule, {
     // Unsorted hash pairs
     {
       code: '<template>{{component type="submit" name="button"}}</template>',
-      output: null,
+      output: '<template>{{component name="button" type="submit"}}</template>',
       errors: [
         {
           messageId: 'hashPairOrder',
@@ -97,7 +99,7 @@ ruleTester.run('template-sort-invocations', rule, {
     // Unsorted hash in block
     {
       code: '<template>{{#let b="2" a="1" as |x y|}}{{x}}{{y}}{{/let}}</template>',
-      output: null,
+      output: '<template>{{#let a="1" b="2" as |x y|}}{{x}}{{y}}{{/let}}</template>',
       errors: [
         {
           messageId: 'hashPairOrder',
@@ -140,7 +142,39 @@ ruleTester.run('template-sort-invocations', rule, {
           Submit form
         {{/ui/button}}
       </template>`,
-      output: null,
+      output: `<template>
+        <Ui::Button
+          {{on "click" this.doSomething}}
+          @type="submit"
+          data-test-button
+          ...attributes
+          @label="Submit form"
+        />
+
+        <Ui::Button
+          {{on "click" this.doSomething}}
+          @type="submit"
+          data-test-button=""
+          ...attributes
+        >
+          Submit form
+        </Ui::Button>
+
+        {{ui/button
+          onclick=this.doSomething
+          data-test-button=""
+          type="submit"
+          label="Submit form"
+        }}
+
+        {{#ui/button
+          onclick=this.doSomething
+          data-test-button=""
+          type="submit"
+        }}
+          Submit form
+        {{/ui/button}}
+      </template>`,
       errors: [
         { messageId: 'attributeOrder' },
         { messageId: 'attributeOrder' },
@@ -194,7 +228,51 @@ ruleTester.run('template-sort-invocations', rule, {
           Submit form
         {{/ui/button}}
       </template>`,
-      output: null,
+      output: `<template>
+        <Ui::Button
+          @type="submit"
+          {{on "click" this.doSomething}}
+          data-cucumber-button="Submit form"
+          @isDisabled={{true}}
+          class="ui-button disabled"
+          ...attributes
+          data-test-button
+          @label="Submit form"
+        />
+
+        <Ui::Button
+          @type="submit"
+          {{on "click" this.doSomething}}
+          data-cucumber-button="Submit form"
+          @isDisabled={{true}}
+          class="ui-button disabled"
+          ...attributes
+          data-test-button=""
+        >
+          Submit form
+        </Ui::Button>
+
+        {{ui/button
+          data-cucumber-button="Submit form"
+          onclick=this.doSomething
+          isDisabled=true
+          type="submit"
+          class="ui-button disabled"
+          data-test-button=""
+          label="Submit form"
+        }}
+
+        {{#ui/button
+          data-cucumber-button="Submit form"
+          onclick=this.doSomething
+          isDisabled=true
+          type="submit"
+          class="ui-button disabled"
+          data-test-button=""
+        }}
+          Submit form
+        {{/ui/button}}
+      </template>`,
       errors: [
         { messageId: 'attributeOrder' },
         { messageId: 'attributeOrder' },
@@ -266,7 +344,69 @@ ruleTester.run('template-sort-invocations', rule, {
           Submit form
         {{/ui/button}}
       </template>`,
-      output: null,
+      output: `<template>
+        <Ui::Button
+          @type="submit"
+          {{on "click" @onSubmit}}
+          data-cucumber-button="Submit form"
+          @isDisabled={{not this.enableSubmit}}
+          class={{local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          }}
+          ...attributes
+          data-test-button
+          @label="Submit form"
+          {{autofocus}}
+        />
+
+        <Ui::Button
+          @type="submit"
+          {{on "click" @onSubmit}}
+          data-cucumber-button="Submit form"
+          @isDisabled={{not this.enableSubmit}}
+          class={{local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          }}
+          ...attributes
+          data-test-button=""
+          {{autofocus}}
+        >
+          Submit form
+        </Ui::Button>
+
+        {{ui/button
+          data-cucumber-button="Submit form"
+          onclick=onSubmit
+          isDisabled=(not this.enableSubmit)
+          type="submit"
+          class=(local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          )
+          data-test-button=""
+          label="Submit form"
+        }}
+
+        {{#ui/button
+          data-cucumber-button="Submit form"
+          onclick=onSubmit
+          isDisabled=(not this.enableSubmit)
+          type="submit"
+          class=(local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          )
+          data-test-button=""
+        }}
+          Submit form
+        {{/ui/button}}
+      </template>`,
       errors: [
         { messageId: 'attributeOrder' },
         { messageId: 'modifierOrder' },
@@ -320,7 +460,49 @@ ruleTester.run('template-sort-invocations', rule, {
           )
         }}
       </template>`,
-      output: null,
+      output: `<template>
+        <MyComponent
+          @description={{if
+            this.someCondition
+            (t
+              "my-component.description.version-1"
+              packageVersion="6.0.0"
+              packageName="ember-source"
+              installedOn=this.installationDate
+            )
+            (t
+              "my-component.description.version-2"
+              (hash
+                installedOn=this.installationDate
+                packageVersion="6.0.0"
+                packageName="ember-source"
+              )
+            )
+          }}
+          @title="Update history"
+        />
+
+        {{my-component
+          description=(if
+            this.someCondition
+            (t
+              "my-component.description.version-1"
+              packageVersion="6.0.0"
+              packageName="ember-source"
+              installedOn=this.installationDate
+            )
+            (t
+              "my-component.description.version-2"
+              (hash
+                installedOn=this.installationDate
+                packageVersion="6.0.0"
+                packageName="ember-source"
+              )
+            )
+          )
+          title="Update history"
+        }}
+      </template>`,
       errors: [
         { messageId: 'attributeOrder' },
         { messageId: 'hashPairOrder' },
@@ -350,7 +532,25 @@ ruleTester.run('template-sort-invocations', rule, {
           {{autofocus}}
         />
       </template>`,
-      output: null,
+      output: `<template>
+        <Ui::Button
+          @type="submit"
+          {{! @glint-expect-error: @onSubmit has incorrect type }}
+          {{on "click" @onSubmit}}
+          data-cucumber-button="Submit form"
+          {{!-- @glint-expect-error: this.enableSubmit has incorrect type --}}
+          @isDisabled={{not this.enableSubmit}}
+          class={{local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          }}
+          ...attributes
+          data-test-button
+          @label="Submit form"
+          {{autofocus}}
+        />
+      </template>`,
       errors: [{ messageId: 'attributeOrder' }, { messageId: 'modifierOrder' }],
     },
     {
@@ -372,7 +572,24 @@ ruleTester.run('template-sort-invocations', rule, {
           Submit form
         </this.MyButton>
       </template>`,
-      output: null,
+      output: `<template>
+        <this.MyButton
+          {{on "click" this.doSomething}}
+          @type="submit"
+          data-test-button
+          ...attributes
+          @label="Submit form"
+        />
+
+        <this.MyButton
+          {{on "click" this.doSomething}}
+          @type="submit"
+          data-test-button
+          ...attributes
+        >
+          Submit form
+        </this.MyButton>
+      </template>`,
       errors: [{ messageId: 'attributeOrder' }, { messageId: 'attributeOrder' }],
     },
     {
@@ -410,7 +627,40 @@ ruleTester.run('template-sort-invocations', rule, {
           label="Submit form"
         }}
       </template>`,
-      output: null,
+      output: `<template>
+        {{component "ui/button"}}
+
+        {{component "ui/button"
+          onClick=this.doSomething
+          data-test-button=""
+          type="submit"
+          label="Submit form"
+        }}
+
+        {{component "ui/button"
+          data-cucumber-button="Submit form"
+          onClick=this.doSomething
+          isDisabled=true
+          type="submit"
+          class="ui-button disabled"
+          data-test-button=""
+          label="Submit form"
+        }}
+
+        {{component "ui/button"
+          data-cucumber-button="Submit form"
+          onClick=@onSubmit
+          isDisabled=(not this.enableSubmit)
+          type="submit"
+          class=(local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          )
+          data-test-button=""
+          label="Submit form"
+        }}
+      </template>`,
       errors: [
         { messageId: 'attributeOrder' },
         { messageId: 'attributeOrder' },
@@ -447,7 +697,35 @@ ruleTester.run('template-sort-invocations', rule, {
           Submit form
         </div>
       </template>`,
-      output: null,
+      output: `<template>
+        <button
+          data-cucumber-button="Submit form"
+          {{autofocus}}
+          type="submit"
+          disabled
+          class={{local this.styles "button" "disabled"}}
+          ...attributes
+          data-test-button
+          {{on "click" @onSubmit}}
+        >
+          Submit form
+        </button>
+
+        <div
+          class={{local
+            this.styles
+            "button"
+            (if this.isFocused "focused")
+          }}
+          {{on "mouseleave" (fn this.setFocus false)}}
+          role="button"
+          {{on "click" this.trackEvent}}
+          {{on "mouseenter" (fn this.setFocus true)}}
+          {{on "click" this.submitForm}}
+        >
+          Submit form
+        </div>
+      </template>`,
       errors: [
         { messageId: 'modifierOrder' },
         { messageId: 'attributeOrder' },
@@ -528,7 +806,78 @@ ruleTester.run('template-sort-invocations', rule, {
           </form>
         {{/let}}
       </template>`,
-      output: null,
+      output: `<template>
+        {{#let (unique-id) as |formId|}}
+          <form
+            class={{this.styles.form}}
+            aria-labelledby={{if @title (concat formId "-title")}}
+            data-test-form={{if @title @title ""}}
+            aria-describedby={{if
+              @instructions
+              (concat formId "-instructions")
+            }}
+            {{autofocus}}
+            {{on "submit" this.submitForm}}
+          >
+            <Ui::Form::Information
+              @formId={{formId}}
+              @instructions={{@instructions}}
+              @title={{@title}}
+            />
+
+            <ContainerQuery
+              @features={{hash wide=(width min=480)}}
+              as |CQ|
+            >
+              {{yield
+                (hash
+                  Input=(component
+                    "ui/form/input"
+                    changeset=this.changeset
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                  Number=(component
+                    "ui/form/number"
+                    changeset=this.changeset
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                  Textarea=(component
+                    "ui/form/textarea"
+                    changeset=this.changeset
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                  Checkbox=(component
+                    "ui/form/checkbox"
+                    changeset=this.changeset
+                    isInline=true
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                  Select=(component
+                    "ui/form/select"
+                    changeset=this.changeset
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                )
+              }}
+            </ContainerQuery>
+
+            <div class={{this.styles.actions}}>
+              <button
+                data-test-button="Submit"
+                type="submit"
+                class={{this.styles.submit-button}}
+              >
+                {{t "components.ui.form.submit"}}
+              </button>
+            </div>
+          </form>
+        {{/let}}
+      </template>`,
       errors: [
         { messageId: 'attributeOrder' },
         { messageId: 'attributeOrder' },
@@ -590,7 +939,59 @@ ruleTester.run('template-sort-invocations', rule, {
           {{on "load" this.doSomething2}}
         ></iframe>
       </template>`,
-      output: null,
+      output: `<template>
+        <iframe
+          class="full-screen"
+          data-test-id="my-iframe"
+          id={{@id}}
+          src={{this.url}}
+          {{did-insert this.doSomething1}}
+          {{on "load" this.doSomething2}}
+          ...attributes
+        ></iframe>
+
+        <iframe
+          {{did-insert this.doSomething1}}
+          {{on "load" this.doSomething2}}
+        ></iframe>
+
+        <iframe
+          {{did-insert this.doSomething1}}
+          ...attributes
+          {{on "load" this.doSomething2}}
+        ></iframe>
+
+        <iframe
+          {{did-insert this.doSomething1}}
+          {{on "load" this.doSomething2}}
+          ...attributes
+        ></iframe>
+
+        <iframe
+          class="full-screen"
+          data-test-id="my-iframe"
+          id={{@id}}
+          src={{this.url}}
+        ></iframe>
+
+        <iframe
+          class="full-screen"
+          data-test-id="my-iframe"
+          id={{@id}}
+          src={{this.url}}
+          ...attributes
+        ></iframe>
+
+        <iframe
+          class="full-screen"
+          data-test-id="my-iframe"
+          id={{@id}}
+          src={{this.url}}
+          {{did-insert this.doSomething1}}
+          ...attributes
+          {{on "load" this.doSomething2}}
+        ></iframe>
+      </template>`,
       errors: [{ messageId: 'attributeOrder' }, { messageId: 'splattributesOrder' }],
     },
     {
@@ -617,7 +1018,29 @@ ruleTester.run('template-sort-invocations', rule, {
           {{/if}}
         </Ui::Page>
       </template>`,
-      output: null,
+      output: `<template>
+        <Ui::Page
+          @routeName={{this.router.currentRouteName}}
+          {{! @glint-expect-error: Type 'string | null' is not assignable to type 'string'. }}
+          @title={{"Your product"}}
+          as |Page|
+        >
+          {{outlet}}
+
+          {{#if this.someCondition1}}
+            <Page.Button @icon="rightarrow" @id="products.overview" @label="" />
+          {{else if this.someCondition2}}
+            <Page.Button @icon="" @id="products.product" @label="" />
+          {{else}}
+            <Page.Button
+              @icon=""
+              @id="products.product"
+              @label="
+              "
+            />
+          {{/if}}
+        </Ui::Page>
+      </template>`,
       errors: [
         { messageId: 'attributeOrder' },
         { messageId: 'attributeOrder' },
@@ -667,7 +1090,47 @@ ruleTester.run('template-sort-invocations', rule, {
           local-class="input flag-{{@country}}"
         />
       </template>`,
-      output: null,
+      output: `<template>
+        <MyComponent
+          @isOpen={{this.isOpen}}
+          @parentContainerId={{concat "#" @parentId}}
+        />
+
+        <MyComponent
+          @isOpen={{this.isOpen}}
+          @style={{concat "." @type "1"}}
+        />
+
+        <MyComponent
+          @className={{concat "a" @typeA "b" @typeB "c" @typeC "d"}}
+          aria-describedby="1"
+        />
+
+        <input
+          local-class="input {{concat 'flag-' @country}}"
+          type="tel"
+        />
+
+        <MyComponent
+          @isOpen={{this.isOpen}}
+          @parentContainerId="#{{@parentId}}"
+        />
+
+        <MyComponent
+          @isOpen={{this.isOpen}}
+          @style=".{{@type}}1"
+        />
+
+        <MyComponent
+          @className="a{{@typeA}}b{{@typeB}}c{{@typeC}}d"
+          aria-describedby="1"
+        />
+
+        <input
+          local-class="input flag-{{@country}}"
+          type="tel"
+        />
+      </template>`,
       errors: [
         { messageId: 'attributeOrder' },
         { messageId: 'attributeOrder' },
@@ -885,7 +1348,39 @@ hbsRuleTester.run('template-sort-invocations', rule, {
           Submit form
         {{/ui/button}}
       `,
-      output: null,
+      output: `
+        <Ui::Button
+          {{on "click" this.doSomething}}
+          @type="submit"
+          data-test-button
+          ...attributes
+          @label="Submit form"
+        />
+
+        <Ui::Button
+          {{on "click" this.doSomething}}
+          @type="submit"
+          data-test-button=""
+          ...attributes
+        >
+          Submit form
+        </Ui::Button>
+
+        {{ui/button
+          onclick=this.doSomething
+          data-test-button=""
+          type="submit"
+          label="Submit form"
+        }}
+
+        {{#ui/button
+          onclick=this.doSomething
+          data-test-button=""
+          type="submit"
+        }}
+          Submit form
+        {{/ui/button}}
+      `,
       errors: [
         { message: '`...attributes` must appear after `data-test-button`' },
         { message: '`...attributes` must appear after `data-test-button`' },
@@ -939,7 +1434,51 @@ hbsRuleTester.run('template-sort-invocations', rule, {
           Submit form
         {{/ui/button}}
       `,
-      output: null,
+      output: `
+        <Ui::Button
+          @type="submit"
+          {{on "click" this.doSomething}}
+          data-cucumber-button="Submit form"
+          @isDisabled={{true}}
+          class="ui-button disabled"
+          ...attributes
+          data-test-button
+          @label="Submit form"
+        />
+
+        <Ui::Button
+          @type="submit"
+          {{on "click" this.doSomething}}
+          data-cucumber-button="Submit form"
+          @isDisabled={{true}}
+          class="ui-button disabled"
+          ...attributes
+          data-test-button=""
+        >
+          Submit form
+        </Ui::Button>
+
+        {{ui/button
+          data-cucumber-button="Submit form"
+          onclick=this.doSomething
+          isDisabled=true
+          type="submit"
+          class="ui-button disabled"
+          data-test-button=""
+          label="Submit form"
+        }}
+
+        {{#ui/button
+          data-cucumber-button="Submit form"
+          onclick=this.doSomething
+          isDisabled=true
+          type="submit"
+          class="ui-button disabled"
+          data-test-button=""
+        }}
+          Submit form
+        {{/ui/button}}
+      `,
       errors: [
         { message: '`data-cucumber-button` must appear after `@type`' },
         { message: '`data-cucumber-button` must appear after `@type`' },
@@ -1011,7 +1550,69 @@ hbsRuleTester.run('template-sort-invocations', rule, {
           Submit form
         {{/ui/button}}
       `,
-      output: null,
+      output: `
+        <Ui::Button
+          @type="submit"
+          {{on "click" @onSubmit}}
+          data-cucumber-button="Submit form"
+          @isDisabled={{not this.enableSubmit}}
+          class={{local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          }}
+          ...attributes
+          data-test-button
+          @label="Submit form"
+          {{autofocus}}
+        />
+
+        <Ui::Button
+          @type="submit"
+          {{on "click" @onSubmit}}
+          data-cucumber-button="Submit form"
+          @isDisabled={{not this.enableSubmit}}
+          class={{local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          }}
+          ...attributes
+          data-test-button=""
+          {{autofocus}}
+        >
+          Submit form
+        </Ui::Button>
+
+        {{ui/button
+          data-cucumber-button="Submit form"
+          onclick=onSubmit
+          isDisabled=(not this.enableSubmit)
+          type="submit"
+          class=(local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          )
+          data-test-button=""
+          label="Submit form"
+        }}
+
+        {{#ui/button
+          data-cucumber-button="Submit form"
+          onclick=onSubmit
+          isDisabled=(not this.enableSubmit)
+          type="submit"
+          class=(local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          )
+          data-test-button=""
+        }}
+          Submit form
+        {{/ui/button}}
+      `,
       errors: [
         { message: '`data-cucumber-button` must appear after `@type`' },
         { message: '`{{on}}` must appear after `{{autofocus}}`' },
@@ -1065,7 +1666,49 @@ hbsRuleTester.run('template-sort-invocations', rule, {
           )
         }}
       `,
-      output: null,
+      output: `
+        <MyComponent
+          @description={{if
+            this.someCondition
+            (t
+              "my-component.description.version-1"
+              packageVersion="6.0.0"
+              packageName="ember-source"
+              installedOn=this.installationDate
+            )
+            (t
+              "my-component.description.version-2"
+              (hash
+                installedOn=this.installationDate
+                packageVersion="6.0.0"
+                packageName="ember-source"
+              )
+            )
+          }}
+          @title="Update history"
+        />
+
+        {{my-component
+          description=(if
+            this.someCondition
+            (t
+              "my-component.description.version-1"
+              packageVersion="6.0.0"
+              packageName="ember-source"
+              installedOn=this.installationDate
+            )
+            (t
+              "my-component.description.version-2"
+              (hash
+                installedOn=this.installationDate
+                packageVersion="6.0.0"
+                packageName="ember-source"
+              )
+            )
+          )
+          title="Update history"
+        }}
+      `,
       errors: [
         { message: '`@title` must appear after `@description`' },
         { message: '`packageVersion` must appear after `packageName`' },
@@ -1095,7 +1738,25 @@ hbsRuleTester.run('template-sort-invocations', rule, {
           {{autofocus}}
         />
       `,
-      output: null,
+      output: `
+        <Ui::Button
+          @type="submit"
+          {{! @glint-expect-error: @onSubmit has incorrect type }}
+          {{on "click" @onSubmit}}
+          data-cucumber-button="Submit form"
+          {{!-- @glint-expect-error: this.enableSubmit has incorrect type --}}
+          @isDisabled={{not this.enableSubmit}}
+          class={{local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          }}
+          ...attributes
+          data-test-button
+          @label="Submit form"
+          {{autofocus}}
+        />
+      `,
       errors: [
         { message: '`data-cucumber-button` must appear after `@type`' },
         { message: '`{{on}}` must appear after `{{autofocus}}`' },
@@ -1120,7 +1781,24 @@ hbsRuleTester.run('template-sort-invocations', rule, {
           Submit form
         </this.MyButton>
       `,
-      output: null,
+      output: `
+        <this.MyButton
+          {{on "click" this.doSomething}}
+          @type="submit"
+          data-test-button
+          ...attributes
+          @label="Submit form"
+        />
+
+        <this.MyButton
+          {{on "click" this.doSomething}}
+          @type="submit"
+          data-test-button
+          ...attributes
+        >
+          Submit form
+        </this.MyButton>
+      `,
       errors: [
         { message: '`...attributes` must appear after `data-test-button`' },
         { message: '`...attributes` must appear after `data-test-button`' },
@@ -1161,7 +1839,40 @@ hbsRuleTester.run('template-sort-invocations', rule, {
           label="Submit form"
         }}
       `,
-      output: null,
+      output: `
+        {{component "ui/button"}}
+
+        {{component "ui/button"
+          onClick=this.doSomething
+          data-test-button=""
+          type="submit"
+          label="Submit form"
+        }}
+
+        {{component "ui/button"
+          data-cucumber-button="Submit form"
+          onClick=this.doSomething
+          isDisabled=true
+          type="submit"
+          class="ui-button disabled"
+          data-test-button=""
+          label="Submit form"
+        }}
+
+        {{component "ui/button"
+          data-cucumber-button="Submit form"
+          onClick=@onSubmit
+          isDisabled=(not this.enableSubmit)
+          type="submit"
+          class=(local
+            this.styles
+            "button"
+            (unless this.enableSubmit "disabled")
+          )
+          data-test-button=""
+          label="Submit form"
+        }}
+      `,
       errors: [
         { message: '`type` must appear after `data-test-button`' },
         { message: '`type` must appear after `isDisabled`' },
@@ -1198,7 +1909,35 @@ hbsRuleTester.run('template-sort-invocations', rule, {
           Submit form
         </div>
       `,
-      output: null,
+      output: `
+        <button
+          data-cucumber-button="Submit form"
+          {{autofocus}}
+          type="submit"
+          disabled
+          class={{local this.styles "button" "disabled"}}
+          ...attributes
+          data-test-button
+          {{on "click" @onSubmit}}
+        >
+          Submit form
+        </button>
+
+        <div
+          class={{local
+            this.styles
+            "button"
+            (if this.isFocused "focused")
+          }}
+          {{on "mouseleave" (fn this.setFocus false)}}
+          role="button"
+          {{on "click" this.trackEvent}}
+          {{on "mouseenter" (fn this.setFocus true)}}
+          {{on "click" this.submitForm}}
+        >
+          Submit form
+        </div>
+      `,
       errors: [
         { message: '`{{on}}` must appear after `{{autofocus}}`' },
         { message: '`type` must appear after `disabled`' },
@@ -1279,7 +2018,78 @@ hbsRuleTester.run('template-sort-invocations', rule, {
           </form>
         {{/let}}
       `,
-      output: null,
+      output: `
+        {{#let (unique-id) as |formId|}}
+          <form
+            class={{this.styles.form}}
+            aria-labelledby={{if @title (concat formId "-title")}}
+            data-test-form={{if @title @title ""}}
+            aria-describedby={{if
+              @instructions
+              (concat formId "-instructions")
+            }}
+            {{autofocus}}
+            {{on "submit" this.submitForm}}
+          >
+            <Ui::Form::Information
+              @formId={{formId}}
+              @instructions={{@instructions}}
+              @title={{@title}}
+            />
+
+            <ContainerQuery
+              @features={{hash wide=(width min=480)}}
+              as |CQ|
+            >
+              {{yield
+                (hash
+                  Input=(component
+                    "ui/form/input"
+                    changeset=this.changeset
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                  Number=(component
+                    "ui/form/number"
+                    changeset=this.changeset
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                  Textarea=(component
+                    "ui/form/textarea"
+                    changeset=this.changeset
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                  Checkbox=(component
+                    "ui/form/checkbox"
+                    changeset=this.changeset
+                    isInline=true
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                  Select=(component
+                    "ui/form/select"
+                    changeset=this.changeset
+                    isWide=CQ.features.wide
+                    onUpdate=this.updateChangeset
+                  )
+                )
+              }}
+            </ContainerQuery>
+
+            <div class={{this.styles.actions}}>
+              <button
+                data-test-button="Submit"
+                type="submit"
+                class={{this.styles.submit-button}}
+              >
+                {{t "components.ui.form.submit"}}
+              </button>
+            </div>
+          </form>
+        {{/let}}
+      `,
       errors: [
         { message: '`data-test-form` must appear after `aria-labelledby`' },
         { message: '`@title` must appear after `@instructions`' },
@@ -1341,7 +2151,59 @@ hbsRuleTester.run('template-sort-invocations', rule, {
           {{on "load" this.doSomething2}}
         ></iframe>
       `,
-      output: null,
+      output: `
+        <iframe
+          class="full-screen"
+          data-test-id="my-iframe"
+          id={{@id}}
+          src={{this.url}}
+          {{did-insert this.doSomething1}}
+          {{on "load" this.doSomething2}}
+          ...attributes
+        ></iframe>
+
+        <iframe
+          {{did-insert this.doSomething1}}
+          {{on "load" this.doSomething2}}
+        ></iframe>
+
+        <iframe
+          {{did-insert this.doSomething1}}
+          ...attributes
+          {{on "load" this.doSomething2}}
+        ></iframe>
+
+        <iframe
+          {{did-insert this.doSomething1}}
+          {{on "load" this.doSomething2}}
+          ...attributes
+        ></iframe>
+
+        <iframe
+          class="full-screen"
+          data-test-id="my-iframe"
+          id={{@id}}
+          src={{this.url}}
+        ></iframe>
+
+        <iframe
+          class="full-screen"
+          data-test-id="my-iframe"
+          id={{@id}}
+          src={{this.url}}
+          ...attributes
+        ></iframe>
+
+        <iframe
+          class="full-screen"
+          data-test-id="my-iframe"
+          id={{@id}}
+          src={{this.url}}
+          {{did-insert this.doSomething1}}
+          ...attributes
+          {{on "load" this.doSomething2}}
+        ></iframe>
+      `,
       errors: [
         { message: '`...attributes` must appear after `modifiers`' },
         { message: '`...attributes` must appear after modifiers' },
@@ -1371,7 +2233,29 @@ hbsRuleTester.run('template-sort-invocations', rule, {
           {{/if}}
         </Ui::Page>
       `,
-      output: null,
+      output: `
+        <Ui::Page
+          @routeName={{this.router.currentRouteName}}
+          {{! @glint-expect-error: Type 'string | null' is not assignable to type 'string'. }}
+          @title={{"Your product"}}
+          as |Page|
+        >
+          {{outlet}}
+
+          {{#if this.someCondition1}}
+            <Page.Button @icon="rightarrow" @id="products.overview" @label="" />
+          {{else if this.someCondition2}}
+            <Page.Button @icon="" @id="products.product" @label="" />
+          {{else}}
+            <Page.Button
+              @icon=""
+              @id="products.product"
+              @label="
+              "
+            />
+          {{/if}}
+        </Ui::Page>
+      `,
       errors: [
         { message: '`@title` must appear after `@routeName`' },
         { message: '`@id` must appear after `@icon`' },
@@ -1421,7 +2305,47 @@ hbsRuleTester.run('template-sort-invocations', rule, {
           local-class="input flag-{{@country}}"
         />
       `,
-      output: null,
+      output: `
+        <MyComponent
+          @isOpen={{this.isOpen}}
+          @parentContainerId={{concat "#" @parentId}}
+        />
+
+        <MyComponent
+          @isOpen={{this.isOpen}}
+          @style={{concat "." @type "1"}}
+        />
+
+        <MyComponent
+          @className={{concat "a" @typeA "b" @typeB "c" @typeC "d"}}
+          aria-describedby="1"
+        />
+
+        <input
+          local-class="input {{concat 'flag-' @country}}"
+          type="tel"
+        />
+
+        <MyComponent
+          @isOpen={{this.isOpen}}
+          @parentContainerId="#{{@parentId}}"
+        />
+
+        <MyComponent
+          @isOpen={{this.isOpen}}
+          @style=".{{@type}}1"
+        />
+
+        <MyComponent
+          @className="a{{@typeA}}b{{@typeB}}c{{@typeC}}d"
+          aria-describedby="1"
+        />
+
+        <input
+          local-class="input flag-{{@country}}"
+          type="tel"
+        />
+      `,
       errors: [
         { message: '`@parentContainerId` must appear after `@isOpen`' },
         { message: '`@style` must appear after `@isOpen`' },

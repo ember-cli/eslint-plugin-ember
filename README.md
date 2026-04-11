@@ -284,7 +284,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-self-closing-void-elements](docs/rules/template-self-closing-void-elements.md)                           | require self-closing on void elements                                        |    | 🔧 |    |
 | [template-simple-modifiers](docs/rules/template-simple-modifiers.md)                                               | require simple modifier syntax                                               |    |    |    |
 | [template-simple-unless](docs/rules/template-simple-unless.md)                                                     | require simple conditions in unless blocks                                   |    |    |    |
-| [template-sort-invocations](docs/rules/template-sort-invocations.md)                                               | require sorted attributes and modifiers                                      |    |    |    |
+| [template-sort-invocations](docs/rules/template-sort-invocations.md)                                               | require sorted attributes and modifiers                                      |    | 🔧 |    |
 | [template-splat-attributes-only](docs/rules/template-splat-attributes-only.md)                                     | disallow ...spread other than ...attributes                                  |    |    |    |
 | [template-style-concatenation](docs/rules/template-style-concatenation.md)                                         | disallow string concatenation in inline styles                               |    |    |    |
 
