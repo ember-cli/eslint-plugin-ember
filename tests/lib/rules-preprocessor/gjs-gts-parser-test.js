@@ -999,7 +999,7 @@ describe('supports template-lint-disable directive', () => {
     expect(resultErrors[0].ruleId).toBe('no-undef');
   });
 
-  it('supports template-lint rule name format (maps to ember/ prefix)', async () => {
+  it('disables a rule matched by exact ESLint rule ID', async () => {
     const eslint = initESLintWithTemplateLintDisable();
     const code = `
     <template>
