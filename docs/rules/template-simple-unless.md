@@ -1,5 +1,7 @@
 # ember/template-simple-unless
 
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
 <!-- end auto-generated rule header -->
 
 Require simple conditions in `{{#unless}}` blocks. Complex expressions should use `{{#if}}` with negation instead.
