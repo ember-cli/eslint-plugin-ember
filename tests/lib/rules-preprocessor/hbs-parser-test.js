@@ -160,6 +160,21 @@ describe('supports template-lint-disable directive in hbs files', () => {
     expect(resultErrors).toHaveLength(0);
   });
 
+  it('eslint-disable/eslint-enable ranges work in hbs templates', async () => {
+    const eslint = initHbsESLint();
+    const code = `{{! eslint-disable ember/template-no-bare-strings }}
+Hello world
+Another bare string
+{{! eslint-enable ember/template-no-bare-strings }}
+This should error`;
+    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    // Lines 2-3 are inside the eslint-disable range — suppressed
+    // "This should error" after eslint-enable triggers the rule
+    expect(resultErrors).toHaveLength(1);
+    expect(resultErrors[0].ruleId).toBe('ember/template-no-bare-strings');
+  });
+
   it('parses @-scoped rule names without breaking the regex', async () => {
     const eslint = initHbsESLint();
     const code = `<div>

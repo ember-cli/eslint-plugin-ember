@@ -157,7 +157,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 For users migrating from `ember-template-lint`, this plugin provides an opt-in `template-lint-disable` processor that recognizes `{{! template-lint-disable }}` comments. This can be useful for suppressing lint errors in `.hbs` files or in gjs/gts templates using familiar ember-template-lint syntax.
 
-To enable it, set the processor in your ESLint config:
+To enable it, set the processor and parser in your ESLint config:
 
 ```js
 // eslint.config.js (flat config)
@@ -166,6 +166,7 @@ const ember = require('eslint-plugin-ember');
 module.exports = [
   {
     files: ['**/*.hbs'],
+    parser: 'ember-eslint-parser/hbs',
     plugins: { ember },
     processor: 'ember/template-lint-disable',
     // ...
@@ -179,6 +180,7 @@ module.exports = {
   overrides: [
     {
       files: ['**/*.hbs'],
+      parser: 'ember-eslint-parser/hbs',
       plugins: ['ember'],
       processor: 'ember/template-lint-disable',
       // ...
@@ -206,6 +208,15 @@ Rule names can be specified as:
 
 > [!NOTE]
 > Unlike `ember-template-lint`, this directive only suppresses the **next line** (and the comment line itself). It does not disable rules for the rest of the scope. `template-lint-enable`, `template-lint-disable-next-line`, and `template-lint-disable-tree` are not supported.
+
+To suppress a range of lines, use standard ESLint directives instead — these work natively in mustache comments:
+
+```hbs
+{{! eslint-disable ember/template-no-bare-strings }}
+Hello world
+Another bare string
+{{! eslint-enable ember/template-no-bare-strings }}
+```
 
 ## 🧰 Configurations
 
