@@ -202,6 +202,7 @@ Hello world
 ```
 
 Rule names can be specified as:
+
 - Template-lint names: `no-bare-strings` (maps to `ember/template-no-bare-strings`)
 - Plugin-qualified names: `template-no-bare-strings` (maps to `ember/template-no-bare-strings`)
 - Full ESLint rule IDs: `ember/template-no-bare-strings`, `no-undef`
