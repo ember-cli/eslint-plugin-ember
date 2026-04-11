@@ -90,6 +90,12 @@ const validHbs = [
   '{{#with (component "foo-bar") as |FooBar|}}<FooBar />{{/with}}',
   '<BurgerMenu as |menu|><header>Something</header><menu.item>Text</menu.item></BurgerMenu>',
   '{{#burger-menu as |menu|}}<header>Something</header>{{#menu.item}}Text{{/menu.item}}{{/burger-menu}}',
+  '<MyComponent as |item|>{{item}}</MyComponent>',
+  // Outer `item` is used via @value (outer scope); inner `as |item|` shadows
+  // outer in <Inner>'s children.
+  '<Outer as |item|><Inner @value={{item}} as |item|>{{item}}</Inner></Outer>',
+  '<MyComponent as |handler|><button {{on "click" handler}}>X</button></MyComponent>',
+  '{{#let this.fn as |handler|}}<button {{on "click" handler}}>X</button>{{/let}}',
 ];
 
 const invalidHbs = [
@@ -122,6 +128,23 @@ const invalidHbs = [
     code: '{{#each cats as |cat|}}{{a.different.cat}}{{/each}}',
     output: null,
     errors: [{ messageId: 'unusedBlockParam', data: { param: 'cat' } }],
+  },
+  {
+    code: '<MyComponent as |item unused|>{{item}}</MyComponent>',
+    output: null,
+    errors: [{ messageId: 'unusedBlockParam', data: { param: 'unused' } }],
+  },
+  {
+    code: '<MyComponent as |unused|>content</MyComponent>',
+    output: null,
+    errors: [{ messageId: 'unusedBlockParam', data: { param: 'unused' } }],
+  },
+  // The outer `item` is only "used" inside <Inner> where it is shadowed by
+  // the inner `as |item|`, so the outer should be reported as unused.
+  {
+    code: '<Outer as |item|><Inner as |item|>{{item}}</Inner></Outer>',
+    output: null,
+    errors: [{ messageId: 'unusedBlockParam', data: { param: 'item' } }],
   },
 ];
 
