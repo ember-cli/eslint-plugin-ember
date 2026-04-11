@@ -127,7 +127,7 @@ describe('supports template-lint-disable directive in hbs files', () => {
     expect(resultErrors[0].message).not.toContain('To lint Gjs/Gts files');
   });
 
-  it('suppresses errors on the comment line itself (like eslint-disable-line)', async () => {
+  it('suppresses errors on the comment line itself', async () => {
     const eslint = initHbsESLint();
     const code = `Hello {{! template-lint-disable }}`;
     const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
