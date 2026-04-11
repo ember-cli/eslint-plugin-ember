@@ -160,6 +160,21 @@ describe('supports template-lint-disable directive in hbs files', () => {
     expect(resultErrors).toHaveLength(0);
   });
 
+  it('eslint-disable-next-line works in hbs templates', async () => {
+    const eslint = initHbsESLint();
+    const code = `<div>
+  {{! eslint-disable-next-line ember/template-no-bare-strings }}
+  <span>Hello world</span>
+  <span>Still bare</span>
+</div>`;
+    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    // "Hello world" on the next line is suppressed, "Still bare" still errors
+    expect(resultErrors).toHaveLength(1);
+    expect(resultErrors[0].ruleId).toBe('ember/template-no-bare-strings');
+    expect(resultErrors[0].line).toBe(4);
+  });
+
   it('eslint-disable/eslint-enable ranges work in hbs templates', async () => {
     const eslint = initHbsESLint();
     const code = `{{! eslint-disable ember/template-no-bare-strings }}

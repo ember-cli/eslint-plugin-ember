@@ -209,9 +209,14 @@ Rule names can be specified as:
 > [!NOTE]
 > Unlike `ember-template-lint`, this directive only suppresses the **next line** (and the comment line itself). It does not disable rules for the rest of the scope. `template-lint-enable`, `template-lint-disable-next-line`, and `template-lint-disable-tree` are not supported.
 
-To suppress a range of lines, use standard ESLint directives instead — these work natively in mustache comments:
+Standard ESLint directives also work natively in mustache comments and can be used alongside `template-lint-disable`:
 
 ```hbs
+{{! suppress a single line }}
+{{! eslint-disable-next-line ember/template-no-bare-strings }}
+<span>Hello world</span>
+
+{{! suppress a range of lines }}
 {{! eslint-disable ember/template-no-bare-strings }}
 Hello world
 Another bare string
