@@ -123,5 +123,30 @@ describe('supports template-lint-disable directive in hbs files', () => {
     const resultErrors = results.flatMap((result) => result.messages);
     expect(resultErrors).toHaveLength(1);
     expect(resultErrors[0].ruleId).toBe('ember/template-no-bare-strings');
+    // Verify error message is not corrupted with gjs/gts setup instructions
+    expect(resultErrors[0].message).not.toContain('To lint Gjs/Gts files');
+  });
+
+  it('suppresses errors on the comment line itself (like eslint-disable-line)', async () => {
+    const eslint = initHbsESLint();
+    const code = `Hello {{! template-lint-disable }}`;
+    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    // "Hello" is on the same line as the disable comment — suppressed
+    expect(resultErrors).toHaveLength(0);
+  });
+
+  it('supports @-scoped plugin rule names', async () => {
+    const eslint = initHbsESLint();
+    const code = `<div>
+  {{! template-lint-disable @ember/template-no-bare-strings }}
+  Hello world
+</div>`;
+    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    // @ember/template-no-bare-strings won't match ember/template-no-bare-strings,
+    // so the error should still fire (tests that @ is parsed, not swallowed)
+    expect(resultErrors).toHaveLength(1);
+    expect(resultErrors[0].ruleId).toBe('ember/template-no-bare-strings');
   });
 });
