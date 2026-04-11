@@ -5,7 +5,7 @@ export default defineConfig({
     globals: true,
     setupFiles: [],
     include: ['**/tests/**/*.js'],
-    exclude: ['tests/helpers/**', 'tests/bench/**', 'node_modules'],
+    exclude: ['tests/helpers/**', 'tests/bench/**', 'tests/fixtures/**', 'node_modules'],
     sequence: {
       hooks: 'list',
     },
