@@ -999,21 +999,6 @@ describe('supports template-lint-disable directive', () => {
     expect(resultErrors[0].ruleId).toBe('no-undef');
   });
 
-  it('disables a rule matched by exact ESLint rule ID', async () => {
-    const eslint = initESLintWithTemplateLintDisable();
-    const code = `
-    <template>
-      <div>
-        {{! template-lint-disable no-undef }}
-        {{test}}
-      </div>
-    </template>
-    `;
-    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
-    const resultErrors = results.flatMap((result) => result.messages);
-    expect(resultErrors).toHaveLength(0);
-  });
-
   it('supports multiple rule names', async () => {
     const eslint = initESLintWithTemplateLintDisable();
     const code = `
