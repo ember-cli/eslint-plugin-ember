@@ -1030,4 +1030,23 @@ describe('supports template-lint-disable directive', () => {
     const resultErrors = results.flatMap((result) => result.messages);
     expect(resultErrors).toHaveLength(0);
   });
+
+  it('eslint-disable/eslint-enable range works in gjs templates', async () => {
+    const eslint = initESLintWithTemplateLintDisable();
+    const code = `
+    <template>
+      <div>
+        {{! eslint-disable no-undef }}
+        {{test}}
+        {{other}}
+        {{! eslint-enable no-undef }}
+        {{shouldError}}
+      </div>
+    </template>
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.gjs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(1);
+    expect(resultErrors[0].message).toBe("'shouldError' is not defined.");
+  });
 });
