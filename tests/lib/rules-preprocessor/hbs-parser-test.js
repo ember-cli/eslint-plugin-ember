@@ -129,10 +129,34 @@ describe('supports template-lint-disable directive in hbs files', () => {
 
   it('suppresses errors on the comment line itself', async () => {
     const eslint = initHbsESLint();
-    const code = `Hello {{! template-lint-disable }}`;
+    const code = 'Hello {{! template-lint-disable }}';
     const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
     const resultErrors = results.flatMap((result) => result.messages);
     // "Hello" is on the same line as the disable comment — suppressed
+    expect(resultErrors).toHaveLength(0);
+  });
+
+  it('does not match template-lint-disable-next-line (different directive)', async () => {
+    const eslint = initHbsESLint();
+    const code = `<div>
+  {{! template-lint-disable-next-line }}
+  Hello world
+</div>`;
+    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    // template-lint-disable-next-line is NOT a recognized directive — error should fire
+    expect(resultErrors).toHaveLength(1);
+    expect(resultErrors[0].ruleId).toBe('ember/template-no-bare-strings');
+  });
+
+  it('matches template-no-bare-strings middle form (ember/ prefix mapping)', async () => {
+    const eslint = initHbsESLint();
+    const code = `<div>
+  {{! template-lint-disable template-no-bare-strings }}
+  Hello world
+</div>`;
+    const results = await eslint.lintText(code, { filePath: 'my-template.hbs' });
+    const resultErrors = results.flatMap((result) => result.messages);
     expect(resultErrors).toHaveLength(0);
   });
 
