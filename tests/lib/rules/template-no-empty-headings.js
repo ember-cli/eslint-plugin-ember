@@ -38,6 +38,11 @@ ruleTester.run('template-no-empty-headings', rule, {
     '<template><h2><div><span>{{@title}}</span></div></h2></template>',
     '<template><h2><span>Some text{{@title}}</span></h2></template>',
     '<template><h2><span><div></div>{{@title}}</span></h2></template>',
+
+    // Non-PascalCase component forms count as accessible content
+    '<template><h1><this.Heading /></h1></template>',
+    '<template><h2><@heading /></h2></template>',
+    '<template><h3><ns.Heading /></h3></template>',
   ],
   invalid: [
     {
