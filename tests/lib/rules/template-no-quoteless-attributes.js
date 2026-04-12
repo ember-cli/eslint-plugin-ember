@@ -17,6 +17,7 @@ ruleTester.run('template-no-quoteless-attributes', rule, {
     '<template><SomeThing ...attributes /></template>',
     '<template><div></div></template>',
     '<template><input disabled></template>',
+    '<template><div data-x="foo=bar"></div></template>',
   ],
   invalid: [
     {
@@ -57,6 +58,7 @@ hbsRuleTester.run('template-no-quoteless-attributes', rule, {
     '<SomeThing ...attributes />',
     '<div></div>',
     '<input disabled>',
+    '<div data-x="foo=bar"></div>',
   ],
   invalid: [
     {

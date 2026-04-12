@@ -1,5 +1,7 @@
 # ember/template-no-redundant-fn
 
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
 <!-- end auto-generated rule header -->
 
 The `fn` helper can be used to bind arguments to another function. Using it without any arguments is redundant because then the inner function could just be used directly.

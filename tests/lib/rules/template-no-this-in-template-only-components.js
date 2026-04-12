@@ -1,5 +1,11 @@
+const path = require('node:path');
 const rule = require('../../../lib/rules/template-no-this-in-template-only-components');
 const RuleTester = require('eslint').RuleTester;
+
+const FIXTURES = path.resolve(
+  __dirname,
+  '../../fixtures/template-no-this-in-template-only-components'
+);
 
 const ruleTester = new RuleTester({
   parser: require.resolve('ember-eslint-parser'),
@@ -101,6 +107,81 @@ hbsRuleTester.run('template-no-this-in-template-only-components', rule, {
             "Usage of 'this' in path 'this.elementId' is not allowed in a template-only component. Use '@elementId' if it is a named argument.",
         },
       ],
+    },
+  ],
+});
+
+// Test .hbs files with explicit filenames to verify filesystem-based detection.
+// Route templates (app/templates/ but not app/templates/components/) should be skipped.
+const hbsFilenameTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+  },
+});
+
+hbsFilenameTester.run('template-no-this-in-template-only-components (hbs filenames)', rule, {
+  valid: [
+    // Route templates should never be flagged (they always have a controller context)
+    {
+      filename: 'app/templates/application.hbs',
+      code: '{{this.foo}}',
+    },
+    // Nested route template path
+    {
+      filename: 'app/templates/posts/show.hbs',
+      code: '{{this.foo}}',
+    },
+    // Co-located component with a real .js companion class on disk
+    {
+      filename: path.join(FIXTURES, 'app/components/with-class.hbs'),
+      code: '{{this.foo}}',
+    },
+    // Co-located component with a real .ts companion class on disk
+    {
+      filename: path.join(FIXTURES, 'app/components/with-ts-class.hbs'),
+      code: '{{this.foo}}',
+    },
+    // Classic structure with a real .js companion class at app/components/<name>.js
+    {
+      filename: path.join(FIXTURES, 'app/templates/components/classic-with-class.hbs'),
+      code: '{{this.foo}}',
+    },
+    // Files outside any app/addon directory: cannot determine layout, don't flag
+    {
+      filename: '/some/random/path/foo.hbs',
+      code: '{{this.foo}}',
+    },
+  ],
+  invalid: [
+    // Template-only .hbs component (no companion file on disk — the path doesn't exist)
+    {
+      filename: 'app/components/nonexistent-test-component.hbs',
+      code: '{{this.foo}}',
+      output: '{{@foo}}',
+      errors: [{ messageId: 'noThis' }],
+    },
+    // Classic structure template-only component (no companion file on disk)
+    {
+      filename: 'app/templates/components/nonexistent-test-component.hbs',
+      code: '{{this.bar}}',
+      output: '{{@bar}}',
+      errors: [{ messageId: 'noThis' }],
+    },
+    // addon/components: same logic should apply
+    {
+      filename: 'addon/components/nonexistent-test-component.hbs',
+      code: '{{this.foo}}',
+      output: '{{@foo}}',
+      errors: [{ messageId: 'noThis' }],
+    },
+    // Built-in property (elementId) is not auto-fixable even when companion is missing
+    {
+      filename: 'app/components/nonexistent-test-component.hbs',
+      code: '{{this.elementId}}',
+      output: null,
+      errors: [{ messageId: 'noThis' }],
     },
   ],
 });

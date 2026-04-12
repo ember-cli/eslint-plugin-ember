@@ -256,12 +256,12 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                               | disallow {{outlet}} outside of route templates                               |    |    |    |
 | [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                                 | disallow usage of ember-page-title component                                 |    |    |    |
 | [template-no-passed-in-event-handlers](docs/rules/template-no-passed-in-event-handlers.md)                         | disallow passing event handlers directly as component arguments              |    |    |    |
-| [template-no-positional-data-test-selectors](docs/rules/template-no-positional-data-test-selectors.md)             | disallow positional data-test-* params in curly invocations                  |    |    |    |
+| [template-no-positional-data-test-selectors](docs/rules/template-no-positional-data-test-selectors.md)             | disallow positional data-test-* params in curly invocations                  |    | 🔧 |    |
 | [template-no-potential-path-strings](docs/rules/template-no-potential-path-strings.md)                             | disallow potential path strings in attribute values                          |    |    |    |
-| [template-no-redundant-fn](docs/rules/template-no-redundant-fn.md)                                                 | disallow unnecessary usage of (fn) helper                                    |    |    |    |
+| [template-no-redundant-fn](docs/rules/template-no-redundant-fn.md)                                                 | disallow unnecessary usage of (fn) helper                                    |    | 🔧 |    |
 | [template-no-restricted-invocations](docs/rules/template-no-restricted-invocations.md)                             | disallow certain components, helpers or modifiers from being used            |    |    |    |
 | [template-no-splattributes-with-class](docs/rules/template-no-splattributes-with-class.md)                         | disallow splattributes with class attribute                                  |    |    |    |
-| [template-no-this-in-template-only-components](docs/rules/template-no-this-in-template-only-components.md)         | disallow this in template-only components (gjs/gts)                          |    | 🔧 |    |
+| [template-no-this-in-template-only-components](docs/rules/template-no-this-in-template-only-components.md)         | disallow this in template-only components                                    |    | 🔧 |    |
 | [template-no-trailing-spaces](docs/rules/template-no-trailing-spaces.md)                                           | disallow trailing whitespace at the end of lines in templates                |    | 🔧 |    |
 | [template-no-unavailable-this](docs/rules/template-no-unavailable-this.md)                                         | disallow `this` in templates that are not inside a class or function         |    |    |    |
 | [template-no-unnecessary-component-helper](docs/rules/template-no-unnecessary-component-helper.md)                 | disallow unnecessary component helper                                        |    | 🔧 |    |
@@ -284,7 +284,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-self-closing-void-elements](docs/rules/template-self-closing-void-elements.md)                           | require self-closing on void elements                                        |    | 🔧 |    |
 | [template-simple-modifiers](docs/rules/template-simple-modifiers.md)                                               | require simple modifier syntax                                               |    |    |    |
 | [template-simple-unless](docs/rules/template-simple-unless.md)                                                     | require simple conditions in unless blocks                                   |    | 🔧 |    |
-| [template-sort-invocations](docs/rules/template-sort-invocations.md)                                               | require sorted attributes and modifiers                                      |    |    |    |
+| [template-sort-invocations](docs/rules/template-sort-invocations.md)                                               | require sorted attributes and modifiers                                      |    | 🔧 |    |
 | [template-splat-attributes-only](docs/rules/template-splat-attributes-only.md)                                     | disallow ...spread other than ...attributes                                  |    |    |    |
 | [template-style-concatenation](docs/rules/template-style-concatenation.md)                                         | disallow string concatenation in inline styles                               |    |    |    |
 
