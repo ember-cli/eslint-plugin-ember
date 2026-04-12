@@ -47,5 +47,10 @@ ruleTester.run('template-no-chained-this', rule, {
       output: '<template>{{component this.dynamicComponent}}</template>',
       errors: [{ messageId: 'noChainedThis' }],
     },
+    {
+      code: '<template><this.this.Component>content</this.this.Component></template>',
+      output: '<template><this.Component>content</this.Component></template>',
+      errors: [{ messageId: 'noChainedThis' }],
+    },
   ],
 });
