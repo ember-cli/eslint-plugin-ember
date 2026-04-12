@@ -61,5 +61,17 @@ ruleTester.run('template-no-action-modifiers', rule, {
         '<template><button {{on "click" (fn this.handleClick "arg1" "arg2")}}>Save</button></template>',
       errors: [{ messageId: 'noActionModifier' }],
     },
+    {
+      // Path expression with hash pair (on="click") — no autofix to avoid leaving behind stale hash
+      code: '<template><button {{action this.handleClick on="click"}}>Save</button></template>',
+      output: null,
+      errors: [{ messageId: 'noActionModifier' }],
+    },
+    {
+      // Path expression with hash pair (on="submit") — no autofix
+      code: '<template><form {{action this.handleSubmit on="submit"}}>Submit</form></template>',
+      output: null,
+      errors: [{ messageId: 'noActionModifier' }],
+    },
   ],
 });
