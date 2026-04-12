@@ -26,12 +26,6 @@ This rule disallows invoking helpers dynamically using `this` or `@` properties.
 </template>
 ```
 
-```gjs
-<template>
-  {{this.formatter this.data}}
-</template>
-```
-
 ### Correct ✅
 
 ```gjs
@@ -49,6 +43,13 @@ This rule disallows invoking helpers dynamically using `this` or `@` properties.
 ```gjs
 <template>
   {{this.formattedData}}
+</template>
+```
+
+```gjs
+{{! Body-position dynamic helpers are allowed }}
+<template>
+  {{this.formatter this.data}}
 </template>
 ```
 
