@@ -23,9 +23,28 @@ ruleTester.run('template-no-implicit-this', rule, {
     '<template>{{outlet}}</template>',
     '<template>{{has-block}}</template>',
 
-    // Helpers with params
-    '<template>{{if condition "yes" "no"}}</template>',
-    '<template>{{each items}}</template>',
+    // Named-argument control-flow helpers not flagged
+    '<template>{{if @condition "yes" "no"}}</template>',
+    '<template>{{each @items}}</template>',
+
+    // SubExpression, modifier, block callees not flagged
+    '<template>{{echo (my-helper @arg)}}</template>',
+    '<template><div {{my-modifier @arg}}></div></template>',
+    '<template>{{#my-component}}{{/my-component}}</template>',
+
+    // Bare {{this}} is not ambiguous
+    '<template>{{this}}</template>',
+
+    // Block params in nested scopes
+    '<template>{{#each @items as |item|}}{{item.name}}{{/each}}</template>',
+
+    // JS scope bindings (imports, const, let, params) are valid references in GJS/GTS
+    `const condition = false;
+     export default <template>{{if condition "yes" "no"}}</template>;`,
+    `import helper from './my-helper';
+     export default <template>{{helper}}</template>;`,
+    `const items = [1, 2, 3];
+     export default <template>{{#each items as |item|}}{{item}}{{/each}}</template>;`,
 
     // Components (PascalCase)
     '<template>{{MyComponent}}</template>',
@@ -49,6 +68,12 @@ ruleTester.run('template-no-implicit-this', rule, {
 
     {
       code: '<template>{{book}}</template>',
+      output: null,
+      errors: [{ messageId: 'noImplicitThis' }],
+    },
+    // Control-flow helper args with no JS binding are still ambiguous
+    {
+      code: '<template>{{if condition "yes" "no"}}</template>',
       output: null,
       errors: [{ messageId: 'noImplicitThis' }],
     },
@@ -130,6 +155,7 @@ hbsRuleTester.run('template-no-implicit-this', rule, {
     '{{@book.author}}',
 
     // Explicit this
+    '{{this}}',
     '{{this.book}}',
     '{{this.book.author}}',
 
@@ -139,6 +165,24 @@ hbsRuleTester.run('template-no-implicit-this', rule, {
 
     // Helpers invoked with positional arguments (callee is not flagged)
     '<MyComponent @prop={{can "edit" @model}} />',
+
+    // SubExpression callees should not be flagged
+    '{{echo (my-helper @arg)}}',
+    '{{echo (some-util "value")}}',
+
+    // ElementModifierStatement callees should not be flagged
+    '<div {{my-modifier @arg}}></div>',
+    '<div {{some-modifier "value"}}></div>',
+
+    // BlockStatement callees should not be flagged
+    '{{#my-component}}{{/my-component}}',
+    '{{#some-layout title="Hi"}}content{{/some-layout}}',
+
+    // Block params should be recognized in nested scopes
+    '{{#each @items as |item|}}{{item.name}}{{/each}}',
+    '{{#each @items as |item|}}{{item}}{{/each}}',
+    '{{#let @foo as |bar|}}{{bar.baz}}{{/let}}',
+    '{{#each @items as |item|}}{{#each item.children as |child|}}{{child.name}}{{/each}}{{/each}}',
 
     // PascalCase components
     '<WelcomePage />',
