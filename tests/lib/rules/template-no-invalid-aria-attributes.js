@@ -116,6 +116,11 @@ ruleTester.run('template-no-invalid-aria-attributes', rule, {
       output: null,
       errors: [{ messageId: 'invalidAriaAttributeValue' }],
     },
+    {
+      code: '<template><div aria-label="true"></div></template>',
+      output: null,
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
+    },
   ],
 });
 
