@@ -78,7 +78,13 @@ ruleTester.run('template-no-positional-data-test-selectors', rule, {
           degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
         }}
       </template>`,
-      output: null,
+      output: `<template>
+        {{badge
+          data-test-profile-card-one-to-one-connection-distance=true
+          degreeText=(t "i18n_distance_v2" distance=recipientDistance)
+          degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
+        }}
+      </template>`,
       errors: [
         {
           message:
@@ -160,7 +166,13 @@ hbsRuleTester.run('template-no-positional-data-test-selectors', rule, {
           degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
         }}
       `,
-      output: null,
+      output: `
+        {{badge
+          data-test-profile-card-one-to-one-connection-distance=true
+          degreeText=(t "i18n_distance_v2" distance=recipientDistance)
+          degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
+        }}
+      `,
       errors: [
         {
           message:
