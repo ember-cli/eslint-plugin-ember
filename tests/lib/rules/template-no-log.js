@@ -44,6 +44,11 @@ ruleTester.run('template-no-log', rule, {
     `<template>
       <Logs @logs={{this.logs}} as |log|><Log>{{log}}</Log></Logs>
     </template>`,
+    // GJS/GTS: imported JS bindings are not flagged
+    `import log from './my-log';
+export default <template>{{log "hi"}}</template>;`,
+    `import log from '@company/logger';
+export default <template>{{log this.message}}</template>;`,
   ],
 
   invalid: [
