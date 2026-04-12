@@ -177,5 +177,22 @@ hbsRuleTester.run('template-no-multiple-empty-lines', rule, {
       options: [{ max: 3 }],
       errors: [{ message: 'More than 3 blank lines not allowed.' }],
     },
+    // loc fix: the excess empty line (line 3) is reported at the correct location
+    {
+      code: '<div>foo</div>\n\n\n<div>bar</div>',
+      output: '<div>foo</div>\n\n<div>bar</div>',
+      errors: [{ message: 'More than 1 blank line not allowed.', line: 3, endLine: 4 }],
+    },
+    // Trailing empty lines
+    {
+      code: '<div>foo</div>\n\n\n',
+      output: '<div>foo</div>\n\n',
+      errors: [{ message: 'More than 1 blank line not allowed.' }],
+    },
+    {
+      code: '<div>foo</div>\n\n\n\n\n',
+      output: '<div>foo</div>\n\n',
+      errors: [{ message: 'More than 1 blank line not allowed.' }],
+    },
   ],
 });
