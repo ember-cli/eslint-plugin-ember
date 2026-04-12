@@ -91,7 +91,30 @@ const gjsRuleTester = new RuleTester({
 
 gjsRuleTester.run('template-no-unnecessary-component-helper', rule, {
   valid: validGjs,
-  invalid: invalidHbs.map(wrapTemplate),
+  invalid: [
+    ...invalidHbs.map(wrapTemplate),
+    // GJS/GTS: autofix is skipped when the component name isn't a valid JS
+    // identifier. The error is still reported so the user sees the issue.
+    {
+      filename: 'test.gjs',
+      code: '<template>{{component "my-component-name" foo=123}}</template>',
+      output: null,
+      errors: [{ messageId: 'noUnnecessaryComponent' }],
+    },
+    {
+      filename: 'test.gts',
+      code: '<template>{{#component "my-component-name"}}content{{/component}}</template>',
+      output: null,
+      errors: [{ messageId: 'noUnnecessaryComponent' }],
+    },
+    // GJS/GTS: valid JS identifier → autofix still applies
+    {
+      filename: 'test.gjs',
+      code: '<template>{{component "myComponent" foo=123}}</template>',
+      output: '<template>{{myComponent foo=123}}</template>',
+      errors: [{ messageId: 'noUnnecessaryComponent' }],
+    },
+  ],
 });
 
 const hbsRuleTester = new RuleTester({
