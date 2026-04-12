@@ -11,12 +11,21 @@ ruleTester.run('template-no-obsolete-elements', rule, {
     `<template>{{#let (component 'whatever-here') as |plaintext|}}
       <plaintext />
     {{/let}}</template>`,
+    // Element-level block params (<Comp as |...|>) are now tracked
+    '<template><Comp as |plaintext|><plaintext /></Comp></template>',
+    '<template><Outer as |marquee|><marquee /></Outer></template>',
   ],
   invalid: [
     {
       code: '<template><marquee></marquee></template>',
       output: null,
       errors: [{ messageId: 'obsolete' }],
+    },
+    // Element's own block params must not shadow its own tag name.
+    {
+      code: '<template><marquee as |marquee|></marquee></template>',
+      output: null,
+      errors: [{ messageId: 'obsolete', data: { element: 'marquee' } }],
     },
   ],
 });
