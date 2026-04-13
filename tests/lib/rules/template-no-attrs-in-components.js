@@ -8,40 +8,87 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-attrs-in-components', rule, {
   valid: [
-    '<template>{{@value}}</template>',
-    '<template>{{this.value}}</template>',
-    // Class component with normal this access
-    `import Component from '@glimmer/component';
-     class MyComponent extends Component {
-       <template>{{this.args.name}}</template>
-     }`,
-    // Bare attrs is not accessible without this, so it's allowed
-    '<template>{{attrs.value}}</template>',
-    '<template>{{attrs}}</template>',
-    `import Component from '@glimmer/component';
-     class MyComponent extends Component {
-       <template>{{attrs.name}}</template>
-     }`,
+    // Not a component template path: nothing is flagged, regardless of content.
+    {
+      code: '<template>{{@value}}</template>',
+      filename: 'app/templates/application.hbs',
+    },
+    {
+      code: '<template>{{this.value}}</template>',
+      filename: 'app/templates/application.hbs',
+    },
+    // `this.attrs.*` is not a real Ember API, but it is NOT what this rule
+    // targets — upstream only flags bare `attrs.*`. So outside of a component
+    // template, `this.attrs.*` should not be flagged.
+    {
+      code: '<template>{{this.attrs.foo}}</template>',
+      filename: 'app/templates/application.hbs',
+    },
+    // Even `attrs.*` itself is only flagged inside component templates.
+    {
+      code: '<template>{{attrs.value}}</template>',
+      filename: 'app/templates/application.hbs',
+    },
+    // Inside a component template, non-attrs paths are fine.
+    {
+      code: '<template>{{@value}}</template>',
+      filename: 'app/templates/components/foo.hbs',
+    },
+    {
+      code: '<template>{{this.value}}</template>',
+      filename: 'app/templates/components/foo.hbs',
+    },
+    // Upstream does NOT flag `this.attrs.*`; only bare `attrs.*`.
+    {
+      code: '<template>{{this.attrs.foo}}</template>',
+      filename: 'app/templates/components/foo.hbs',
+    },
+    // Pod-style components path matches the gate, but no `attrs` usage.
+    {
+      code: '<template>{{@value}}</template>',
+      filename: 'app/components/foo/template.hbs',
+    },
+    // `-components/` path gate, no `attrs` usage.
+    {
+      code: '<template>{{@value}}</template>',
+      filename: 'app/ui-components/foo.hbs',
+    },
   ],
   invalid: [
+    // Bare `attrs.*` inside `templates/components/` — flagged.
     {
-      code: '<template>{{this.attrs.value}}</template>',
+      code: '<template>{{attrs.foo}}</template>',
+      filename: 'app/templates/components/foo.hbs',
       output: null,
-      errors: [{ messageId: 'noThisAttrs' }],
+      errors: [{ messageId: 'noAttrs' }],
     },
+    // Bare `attrs` (no dotted tail) inside `templates/components/` — flagged.
     {
-      code: '<template>{{this.attrs}}</template>',
+      code: '<template>{{attrs}}</template>',
+      filename: 'app/templates/components/foo.hbs',
       output: null,
-      errors: [{ messageId: 'noThisAttrs' }],
+      errors: [{ messageId: 'noAttrs' }],
     },
-    // Class component using this.attrs
+    // Pod-style path `components/*/template` — flagged.
     {
-      code: `import Component from '@glimmer/component';
-       class MyComponent extends Component {
-         <template>{{this.attrs.name}}</template>
-       }`,
+      code: '<template>{{attrs.name}}</template>',
+      filename: 'app/components/foo/template.hbs',
       output: null,
-      errors: [{ messageId: 'noThisAttrs' }],
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    // `ui/components` path — flagged.
+    {
+      code: '<template>{{attrs.name}}</template>',
+      filename: 'app/ui/components/foo.hbs',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    // `-components/` path — flagged.
+    {
+      code: '<template>{{attrs.name}}</template>',
+      filename: 'app/ui-components/foo.hbs',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
     },
   ],
 });
