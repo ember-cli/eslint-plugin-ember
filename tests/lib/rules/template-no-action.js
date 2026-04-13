@@ -70,7 +70,7 @@ ruleTester.run('template-no-action', rule, {
       errors: [
         {
           message:
-            'Do not use \`action\` as (action ...) — deprecated in Ember 5.9, removed in 6.0. Use the \`fn\` helper instead.',
+            'Do not use `action` as (action ...) — deprecated in Ember 5.9, removed in 6.0. Use the `fn` helper instead.',
           type: 'GlimmerSubExpression',
         },
       ],
