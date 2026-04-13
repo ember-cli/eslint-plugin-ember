@@ -135,52 +135,69 @@ ruleTester.run('template-no-unknown-arguments-for-builtin-components', rule, {
       errors: [{ messageId: 'conflictArgument' }, { messageId: 'conflictArgument' }],
     },
     {
+      // Deprecated argument without a replacement attribute — autofixed by removal.
       code: '<template><LinkTo @route="info" @model={{this.model}} @tagName="button" /></template>',
-      output: null,
+      output: '<template><LinkTo @route="info" @model={{this.model}} /></template>',
       errors: [{ messageId: 'unknownArgument' }],
     },
     {
+      // Deprecated argument with replacement — autofixed by renaming to the HTML attribute.
       code: '<template><LinkTo @route="info" @model={{this.model}} @elementId="superstar" /></template>',
-      output: null,
+      output: '<template><LinkTo @route="info" @model={{this.model}} id="superstar" /></template>',
       errors: [{ messageId: 'unknownArgument' }],
     },
     {
+      // Deprecated event with a helper invocation value — migrated to an `{{on}}` modifier with the helper as a sub-expression.
       code: '<template><LinkTo @route="info" @model={{this.model}} @doubleClick={{action this.click}} /></template>',
-      output: null,
+      output:
+        '<template><LinkTo @route="info" @model={{this.model}} {{on "dblclick" (action this.click)}} /></template>',
       errors: [{ messageId: 'unknownArgument' }],
     },
     {
+      // Deprecated argument without a replacement attribute — autofixed by removal.
       code: '<template><Input @value="1" @bubbles={{false}} /></template>',
-      output: null,
+      output: '<template><Input @value="1" /></template>',
       errors: [{ messageId: 'unknownArgument' }],
     },
     {
+      // Two deprecated arguments on Input — both renamed to HTML attributes.
       code: '<template><Input @value="1" @elementId="42" @disabled="disabled" /></template>',
-      output: null,
+      output: '<template><Input @value="1" id="42" disabled="disabled" /></template>',
       errors: [{ messageId: 'unknownArgument' }, { messageId: 'unknownArgument' }],
     },
     {
+      // Deprecated event with a simple path value — migrated to an `{{on}}` modifier.
       code: '<template><Input @value="1" @key-up={{ths.onKeyUp}} /></template>',
-      output: null,
+      output: '<template><Input @value="1" {{on "keyup" ths.onKeyUp}} /></template>',
       errors: [{ messageId: 'unknownArgument' }],
     },
     {
+      // Deprecated argument without a replacement attribute — autofixed by removal.
       code: '<template><Textarea @value="1" @bubbles={{false}} /></template>',
-      output: null,
+      output: '<template><Textarea @value="1" /></template>',
       errors: [{ messageId: 'unknownArgument' }],
     },
     {
+      // Deprecated argument with replacement — autofixed by renaming to the HTML attribute.
       code: '<template><Textarea @value="1" @elementId="42" /></template>',
-      output: null,
+      output: '<template><Textarea @value="1" id="42" /></template>',
       errors: [{ messageId: 'unknownArgument' }],
     },
     {
+      // Deprecated event with a simple path value — migrated to an `{{on}}` modifier.
       code: '<template><Textarea @value="1" @key-up={{ths.onKeyUp}} /></template>',
+      output: '<template><Textarea @value="1" {{on "keyup" ths.onKeyUp}} /></template>',
+      errors: [{ messageId: 'unknownArgument' }],
+    },
+    {
+      // Truly unknown/typo argument — not autofixed.
+      code: '<template> <LinkTo class="auk-search-results-list__item" @route={{@route}} @models={{this.models}} @random="test" @query={{@query}} ...attributes >Hello</LinkTo></template>',
       output: null,
       errors: [{ messageId: 'unknownArgument' }],
     },
     {
-      code: '<template> <LinkTo class="auk-search-results-list__item" @route={{@route}} @models={{this.models}} @random="test" @query={{@query}} ...attributes >Hello</LinkTo></template>',
+      // Deprecated event with a string-literal value — cannot migrate to `{{on}}`, so no autofix.
+      code: '<template><Input @value="1" @click="noop" /></template>',
       output: null,
       errors: [{ messageId: 'unknownArgument' }],
     },
@@ -271,12 +288,12 @@ hbsRuleTester.run('template-no-unknown-arguments-for-builtin-components', rule, 
     },
     {
       code: '<LinkTo @route="info" @model={{this.model}} @tagName="button" />',
-      output: null,
+      output: '<LinkTo @route="info" @model={{this.model}} />',
       errors: [{ message: 'Passing the "@tagName" argument to <LinkTo /> is deprecated.' }],
     },
     {
       code: '<LinkTo @route="info" @model={{this.model}} @elementId="superstar" />',
-      output: null,
+      output: '<LinkTo @route="info" @model={{this.model}} id="superstar" />',
       errors: [
         {
           message: `Passing the "@elementId" argument to <LinkTo /> is deprecated.
@@ -286,7 +303,8 @@ Instead, please pass the attribute directly, i.e. "<LinkTo id={{...}} />" instea
     },
     {
       code: '<LinkTo @route="info" @model={{this.model}} @doubleClick={{action this.click}} />',
-      output: null,
+      output:
+        '<LinkTo @route="info" @model={{this.model}} {{on "dblclick" (action this.click)}} />',
       errors: [
         {
           message: `Passing the "@doubleClick" argument to <LinkTo /> is deprecated.
@@ -296,12 +314,12 @@ Instead, please use the {{on}} modifier, i.e. "<LinkTo {{on "dblclick" ...}} />"
     },
     {
       code: '<Input @value="1" @bubbles={{false}} />',
-      output: null,
+      output: '<Input @value="1" />',
       errors: [{ message: 'Passing the "@bubbles" argument to <Input /> is deprecated.' }],
     },
     {
       code: '<Input @value="1" @elementId="42" @disabled="disabled" />',
-      output: null,
+      output: '<Input @value="1" id="42" disabled="disabled" />',
       errors: [
         {
           message: `Passing the "@elementId" argument to <Input /> is deprecated.
@@ -315,7 +333,7 @@ Instead, please pass the attribute directly, i.e. "<Input disabled={{...}} />" i
     },
     {
       code: '<Input @value="1" @key-up={{ths.onKeyUp}} />',
-      output: null,
+      output: '<Input @value="1" {{on "keyup" ths.onKeyUp}} />',
       errors: [
         {
           message: `Passing the "@key-up" argument to <Input /> is deprecated.
@@ -325,12 +343,12 @@ Instead, please use the {{on}} modifier, i.e. "<Input {{on "keyup" ...}} />" ins
     },
     {
       code: '<Textarea @value="1" @bubbles={{false}} />',
-      output: null,
+      output: '<Textarea @value="1" />',
       errors: [{ message: 'Passing the "@bubbles" argument to <Textarea /> is deprecated.' }],
     },
     {
       code: '<Textarea @value="1" @elementId="42" />',
-      output: null,
+      output: '<Textarea @value="1" id="42" />',
       errors: [
         {
           message: `Passing the "@elementId" argument to <Textarea /> is deprecated.
@@ -340,7 +358,7 @@ Instead, please pass the attribute directly, i.e. "<Textarea id={{...}} />" inst
     },
     {
       code: '<Textarea @value="1" @key-up={{ths.onKeyUp}} />',
-      output: null,
+      output: '<Textarea @value="1" {{on "keyup" ths.onKeyUp}} />',
       errors: [
         {
           message: `Passing the "@key-up" argument to <Textarea /> is deprecated.
