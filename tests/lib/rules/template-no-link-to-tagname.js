@@ -10,7 +10,7 @@ ruleTester.run('template-no-link-to-tagname', rule, {
   valid: [
     {
       filename: 'test.gjs',
-      code: '<template><LinkTo @route="index">Home</LinkTo></template>',
+      code: "import { LinkTo } from '@ember/routing';\n<template><LinkTo @route=\"index\">Home</LinkTo></template>",
       output: null,
     },
     {
@@ -24,6 +24,24 @@ ruleTester.run('template-no-link-to-tagname', rule, {
       output: null,
     },
 
+    // User-authored LinkTo component (no @ember/routing import) — should NOT be flagged
+    {
+      filename: 'test.gjs',
+      code: '<template><LinkTo @tagName="button">Home</LinkTo></template>',
+      output: null,
+    },
+    {
+      filename: 'test.gts',
+      code: '<template><LinkTo @tagName="button">Home</LinkTo></template>',
+      output: null,
+    },
+
+    // Bare tagName (without @) is just an HTML attribute, not flagged
+    {
+      filename: 'test.gjs',
+      code: "import { LinkTo } from '@ember/routing';\n<template><LinkTo @route=\"index\" tagName=\"button\">Home</LinkTo></template>",
+      output: null,
+    },
     '<template><Foo @route="routeName" @tagName="button">Link text</Foo></template>',
     '<template><LinkTo @route="routeName">Link text</LinkTo></template>',
     '<template>{{#link-to "routeName"}}Link text{{/link-to}}</template>',
@@ -35,19 +53,26 @@ ruleTester.run('template-no-link-to-tagname', rule, {
   invalid: [
     {
       filename: 'test.gjs',
-      code: '<template><LinkTo @route="index" tagName="button">Home</LinkTo></template>',
+      code: "import { LinkTo } from '@ember/routing';\n<template><LinkTo @route=\"about\" @tagName=\"span\">About</LinkTo></template>",
       output: null,
       errors: [{ messageId: 'noLinkToTagname' }],
     },
     {
+      filename: 'test.gts',
+      code: "import { LinkTo } from '@ember/routing';\n<template><LinkTo @route=\"about\" @tagName=\"span\">About</LinkTo></template>",
+      output: null,
+      errors: [{ messageId: 'noLinkToTagname' }],
+    },
+    // Renamed import
+    {
       filename: 'test.gjs',
-      code: '<template><LinkTo @route="about" @tagName="span">About</LinkTo></template>',
+      code: "import { LinkTo as Link } from '@ember/routing';\n<template><Link @tagName=\"button\">x</Link></template>",
       output: null,
       errors: [{ messageId: 'noLinkToTagname' }],
     },
     {
-      filename: 'test.gjs',
-      code: '<template><link-to @route="contact" tagName="div">Contact</link-to></template>',
+      filename: 'test.gts',
+      code: "import { LinkTo as Link } from '@ember/routing';\n<template><Link @route=\"index\" @tagName=\"button\">x</Link></template>",
       output: null,
       errors: [{ messageId: 'noLinkToTagname' }],
     },
@@ -80,6 +105,8 @@ const hbsRuleTester = new RuleTester({
 
 hbsRuleTester.run('template-no-link-to-tagname', rule, {
   valid: [
+    // Bare tagName (without @) is just an HTML attribute, not flagged
+    '<LinkTo @route="index" tagName="button">Home</LinkTo>',
     '<Foo @route="routeName" @tagName="button">Link text</Foo>',
     '<LinkTo @route="routeName">Link text</LinkTo>',
     '{{#link-to "routeName"}}Link text{{/link-to}}',
@@ -90,6 +117,11 @@ hbsRuleTester.run('template-no-link-to-tagname', rule, {
   invalid: [
     {
       code: '<LinkTo @route="routeName" @tagName="button">Link text</LinkTo>',
+      output: null,
+      errors: [{ message: 'tagName attribute on LinkTo is deprecated' }],
+    },
+    {
+      code: '<link-to @route="contact" @tagName="div">Contact</link-to>',
       output: null,
       errors: [{ message: 'tagName attribute on LinkTo is deprecated' }],
     },
