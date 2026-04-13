@@ -1,5 +1,7 @@
 # ember/template-no-attrs-in-components
 
+> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
+
 <!-- end auto-generated rule header -->
 
 This rule prevents the usage of `this.attrs` property to access values passed to the component. Use `@arg` syntax instead.
