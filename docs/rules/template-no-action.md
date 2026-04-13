@@ -42,6 +42,25 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+```gjs
+import action from './my-action-helper';
+<template>
+  {{action this.handleClick}}
+</template>
+```
+
+```gjs
+<template>
+  {{#each items as |action|}}
+    <button {{action this.handleClick}}>x</button>
+  {{/each}}
+</template>
+```
+
+## Strict-mode behavior
+
+`action` is an ambient strict-mode keyword in Ember (registered in `STRICT_MODE_KEYWORDS`), so `{{action this.x}}` works in `.gjs`/`.gts` templates without an explicit import. The rule still flags those uses to discourage the deprecated keyword — but skips reports when `action` resolves to a JS-scope binding (an import or local declaration) or a template block param.
+
 ## Migration
 
 - Replace `(action "methodName")` with method references or `(fn this.methodName)`
