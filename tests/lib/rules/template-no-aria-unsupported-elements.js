@@ -11,11 +11,11 @@ ruleTester.run('template-no-aria-unsupported-elements', rule, {
     '<template><div role="button" aria-label="Submit"></div></template>',
     '<template><button aria-pressed="true">Toggle</button></template>',
     '<template><input aria-label="Username"></template>',
-    // These elements are not in the unsupported set (only html, meta, script, style are)
-    '<template><title aria-label="Page Title"></title></template>',
-    '<template><head role="banner"></head></template>',
-    '<template><base aria-hidden="true"></template>',
-    '<template><link aria-label="Stylesheet"></template>',
+    // No ARIA attributes — these are fine
+    '<template><title>Page Title</title></template>',
+    '<template><head></head></template>',
+    '<template><base href="/"></template>',
+    '<template><link rel="stylesheet" href="style.css"></template>',
   ],
 
   invalid: [
@@ -36,6 +36,26 @@ ruleTester.run('template-no-aria-unsupported-elements', rule, {
     },
     {
       code: '<template><html role="application"></html></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<template><title aria-label="Page Title"></title></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<template><head role="banner"></head></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<template><base aria-hidden="true"></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<template><link aria-label="Stylesheet"></template>',
       output: null,
       errors: [{ messageId: 'unsupported' }],
     },
