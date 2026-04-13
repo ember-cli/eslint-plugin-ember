@@ -26,13 +26,13 @@ ruleTester.run('template-no-input-tagname', rule, {
   invalid: [
     {
       filename: 'test.gjs',
-      code: "import { Input } from '@ember/component';\n<template><Input @tagName=\"button\" /></template>",
+      code: 'import { Input } from \'@ember/component\';\n<template><Input @tagName="button" /></template>',
       output: null,
       errors: [{ messageId: 'unexpected' }],
     },
     {
       filename: 'test.gts',
-      code: "import { Input as Field } from '@ember/component';\n<template><Field @tagName=\"span\" /></template>",
+      code: 'import { Input as Field } from \'@ember/component\';\n<template><Field @tagName="span" /></template>',
       output: null,
       errors: [{ messageId: 'unexpected' }],
     },
