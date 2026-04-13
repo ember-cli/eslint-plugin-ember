@@ -14,6 +14,7 @@ ruleTester.run('template-require-lang-attribute', rule, {
     '<template><html lang="en-US"></html></template>',
     '<template><html lang="DE-BW"></html></template>',
     '<template><html lang="zh-Hant-HK"></html></template>',
+    '<template><html lang="yue-Hans"></html></template>',
     '<template><html lang={{lang}}></html></template>',
     {
       code: '<template><html lang="de"></html></template>',
@@ -104,6 +105,7 @@ hbsRuleTester.run('template-require-lang-attribute', rule, {
     '<html lang="en-US"></html>',
     '<html lang="DE-BW"></html>',
     '<html lang="zh-Hant-HK"></html>',
+    '<html lang="yue-Hans"></html>',
     '<html lang={{lang}}></html>',
     {
       code: '<html lang="de"></html>',
