@@ -34,7 +34,7 @@ const validHbs = [
     options: [false],
   },
   {
-    code: "{{component 'test'}} <input type=\"checkbox\">",
+    code: '{{component \'test\'}} <input type="checkbox">',
     options: [false],
   },
 ];
