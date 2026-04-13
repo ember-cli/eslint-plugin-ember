@@ -29,6 +29,8 @@ ruleTester.run('template-no-dynamic-subexpression-invocations', rule, {
     '<template>{{null}}</template>',
     '<template>{{undefined}}</template>',
     '<template>{{"foo"}}</template>',
+    // MustacheStatements in body context are not flagged (only attr context is)
+    '<template>{{this.formatter this.data}}</template>',
   ],
 
   invalid: [
@@ -49,16 +51,6 @@ ruleTester.run('template-no-dynamic-subexpression-invocations', rule, {
         {
           message: 'Do not use dynamic helper invocations. Use explicit helper names instead.',
           type: 'GlimmerSubExpression',
-        },
-      ],
-    },
-    {
-      code: '<template>{{this.formatter this.data}}</template>',
-      output: null,
-      errors: [
-        {
-          message: 'Do not use dynamic helper invocations. Use explicit helper names instead.',
-          type: 'GlimmerMustacheStatement',
         },
       ],
     },
