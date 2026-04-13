@@ -18,6 +18,8 @@ const validHbs = [
 >
   example
 </div>`,
+  '<div class="foo  bar"></div>',
+  '<div class="min-h-dvh bg-gray-200  "></div>',
 ];
 
 const invalidHbs = [
