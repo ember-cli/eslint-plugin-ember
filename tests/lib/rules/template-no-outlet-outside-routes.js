@@ -30,6 +30,17 @@ ruleTester.run('template-no-outlet-outside-routes', rule, {
       filename: 'app/routes/foo.gjs',
       code: '<template>{{#outlet}}content{{/outlet}}</template>',
     },
+    // GJS/GTS: imported JS bindings are not flagged
+    {
+      filename: 'app/components/my-component.gjs',
+      code: `import outlet from './my-outlet';
+export default <template>{{outlet}}</template>;`,
+    },
+    {
+      filename: 'app/components/my-component.gts',
+      code: `import outlet from '@company/ui';
+export default <template>{{outlet}}</template>;`,
+    },
   ],
   invalid: [
     // Co-located component (explicit filename)
