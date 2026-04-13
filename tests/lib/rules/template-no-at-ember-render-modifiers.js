@@ -45,6 +45,12 @@ ruleTester.run('template-no-at-ember-render-modifiers', rule, {
       code: `import didInsert from './my-lib';
         <template><div {{didInsert this.setup}}></div></template>`,
     },
+    // Root-package import of an unknown named export is not a render modifier
+    {
+      filename: 'test.gjs',
+      code: `import { somethingElse } from '@ember/render-modifiers';
+        <template><div {{somethingElse this.setup}}></div></template>`,
+    },
   ],
 
   invalid: [
@@ -128,6 +134,37 @@ ruleTester.run('template-no-at-ember-render-modifiers', rule, {
       filename: 'test.gjs',
       code: `import myInsert from '@ember/render-modifiers/modifiers/did-insert';
         <template><div {{myInsert this.setup}}></div></template>`,
+      output: null,
+      errors: [{ messageId: 'noRenderModifier' }],
+    },
+
+    // Root-package named imports — all three modifiers
+    {
+      filename: 'test.gjs',
+      code: `import { didInsert } from '@ember/render-modifiers';
+        <template><div {{didInsert this.setup}}></div></template>`,
+      output: null,
+      errors: [{ messageId: 'noRenderModifier' }],
+    },
+    {
+      filename: 'test.gjs',
+      code: `import { didUpdate } from '@ember/render-modifiers';
+        <template><div {{didUpdate this.update}}></div></template>`,
+      output: null,
+      errors: [{ messageId: 'noRenderModifier' }],
+    },
+    {
+      filename: 'test.gjs',
+      code: `import { willDestroy } from '@ember/render-modifiers';
+        <template><div {{willDestroy this.cleanup}}></div></template>`,
+      output: null,
+      errors: [{ messageId: 'noRenderModifier' }],
+    },
+    // Aliased root-package import still flags
+    {
+      filename: 'test.gjs',
+      code: `import { didInsert as myModifier } from '@ember/render-modifiers';
+        <template><div {{myModifier this.setup}}></div></template>`,
       output: null,
       errors: [{ messageId: 'noRenderModifier' }],
     },
