@@ -1,7 +1,5 @@
 # ember/template-no-unbound
 
-> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
-
 <!-- end auto-generated rule header -->
 
 `{{unbound}}` is a legacy hold over from the days in which Ember's template engine was less performant. Its use today
