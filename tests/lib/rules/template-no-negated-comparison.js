@@ -29,26 +29,18 @@ ruleTester.run('template-no-negated-comparison', rule, {
     `<template>
       <div></div>
     </template>`,
+    // `ne` is not a standard Ember/ember-truth-helpers helper; the rule must not flag it.
+    `<template>
+      {{#if (ne this.a this.b)}}
+        Not equal
+      {{/if}}
+    </template>`,
   ],
 
   invalid: [
     {
       code: `<template>
         {{#if (not-eq this.value 5)}}
-          Not equal
-        {{/if}}
-      </template>`,
-      output: null,
-      errors: [
-        {
-          message: 'Use positive comparison operators instead of negated ones.',
-          type: 'GlimmerSubExpression',
-        },
-      ],
-    },
-    {
-      code: `<template>
-        {{#if (ne this.a this.b)}}
           Not equal
         {{/if}}
       </template>`,

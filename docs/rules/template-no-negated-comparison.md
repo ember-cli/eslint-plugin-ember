@@ -2,11 +2,15 @@
 
 <!-- end auto-generated rule header -->
 
+> **Note**: This rule is NOT a port of upstream `ember-template-lint`'s `no-negated-condition`.
+> Upstream's rule prefers `not-eq` over `if/else`; this rule bans `not-eq` (and similar) entirely.
+> These are opposite goals.
+
 Disallows negated comparison operators in templates.
 
 ## Rule Details
 
-Use positive comparison operators with `{{unless}}` instead of negated comparison operators like `not-eq` or `ne`.
+Use positive comparison operators with `{{unless}}` instead of negated comparison operators like `not-eq`.
 
 ## Examples
 
@@ -15,14 +19,6 @@ Examples of **incorrect** code for this rule:
 ```gjs
 <template>
   {{#if (not-eq this.value 5)}}
-    Not equal
-  {{/if}}
-</template>
-```
-
-```gjs
-<template>
-  {{#if (ne this.a this.b)}}
     Not equal
   {{/if}}
 </template>
