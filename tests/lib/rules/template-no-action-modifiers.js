@@ -62,14 +62,20 @@ ruleTester.run('template-no-action-modifiers', rule, {
       errors: [{ messageId: 'noActionModifier' }],
     },
     {
-      // Path expression with hash pair (on="click") — no autofix to avoid leaving behind stale hash
+      // Path expression with on="click" hash — autofix reads event from hash and drops it
       code: '<template><button {{action this.handleClick on="click"}}>Save</button></template>',
-      output: null,
+      output: '<template><button {{on "click" this.handleClick}}>Save</button></template>',
       errors: [{ messageId: 'noActionModifier' }],
     },
     {
-      // Path expression with hash pair (on="submit") — no autofix
+      // Path expression with on="submit" hash — autofix reads event from hash and drops it
       code: '<template><form {{action this.handleSubmit on="submit"}}>Submit</form></template>',
+      output: '<template><form {{on "submit" this.handleSubmit}}>Submit</form></template>',
+      errors: [{ messageId: 'noActionModifier' }],
+    },
+    {
+      // Non-`on` hash pair present — no autofix (can't safely translate other hash pairs)
+      code: '<template><button {{action this.handleClick bubbles=false}}>Save</button></template>',
       output: null,
       errors: [{ messageId: 'noActionModifier' }],
     },
