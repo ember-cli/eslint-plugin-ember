@@ -10,7 +10,7 @@ ruleTester.run('template-no-link-to-tagname', rule, {
   valid: [
     {
       filename: 'test.gjs',
-      code: "import { LinkTo } from '@ember/routing';\n<template><LinkTo @route=\"index\">Home</LinkTo></template>",
+      code: 'import { LinkTo } from \'@ember/routing\';\n<template><LinkTo @route="index">Home</LinkTo></template>',
       output: null,
     },
     {
@@ -39,7 +39,7 @@ ruleTester.run('template-no-link-to-tagname', rule, {
     // Bare tagName (without @) is just an HTML attribute, not flagged
     {
       filename: 'test.gjs',
-      code: "import { LinkTo } from '@ember/routing';\n<template><LinkTo @route=\"index\" tagName=\"button\">Home</LinkTo></template>",
+      code: 'import { LinkTo } from \'@ember/routing\';\n<template><LinkTo @route="index" tagName="button">Home</LinkTo></template>',
       output: null,
     },
     '<template><Foo @route="routeName" @tagName="button">Link text</Foo></template>',
@@ -53,26 +53,26 @@ ruleTester.run('template-no-link-to-tagname', rule, {
   invalid: [
     {
       filename: 'test.gjs',
-      code: "import { LinkTo } from '@ember/routing';\n<template><LinkTo @route=\"about\" @tagName=\"span\">About</LinkTo></template>",
+      code: 'import { LinkTo } from \'@ember/routing\';\n<template><LinkTo @route="about" @tagName="span">About</LinkTo></template>',
       output: null,
       errors: [{ messageId: 'noLinkToTagname' }],
     },
     {
       filename: 'test.gts',
-      code: "import { LinkTo } from '@ember/routing';\n<template><LinkTo @route=\"about\" @tagName=\"span\">About</LinkTo></template>",
+      code: 'import { LinkTo } from \'@ember/routing\';\n<template><LinkTo @route="about" @tagName="span">About</LinkTo></template>',
       output: null,
       errors: [{ messageId: 'noLinkToTagname' }],
     },
     // Renamed import
     {
       filename: 'test.gjs',
-      code: "import { LinkTo as Link } from '@ember/routing';\n<template><Link @tagName=\"button\">x</Link></template>",
+      code: 'import { LinkTo as Link } from \'@ember/routing\';\n<template><Link @tagName="button">x</Link></template>',
       output: null,
       errors: [{ messageId: 'noLinkToTagname' }],
     },
     {
       filename: 'test.gts',
-      code: "import { LinkTo as Link } from '@ember/routing';\n<template><Link @route=\"index\" @tagName=\"button\">x</Link></template>",
+      code: 'import { LinkTo as Link } from \'@ember/routing\';\n<template><Link @route="index" @tagName="button">x</Link></template>',
       output: null,
       errors: [{ messageId: 'noLinkToTagname' }],
     },
