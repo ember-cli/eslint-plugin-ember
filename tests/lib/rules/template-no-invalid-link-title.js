@@ -12,6 +12,19 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-invalid-link-title', rule, {
   valid: [
+    // In GJS/GTS, <LinkTo> is only a router link if explicitly imported.
+    // Without an import, it's a user-authored component and the rule shouldn't fire.
+    {
+      filename: 'test.gjs',
+      code: '<template><LinkTo title="x">x</LinkTo></template>',
+    },
+    // With the import, the rule correctly treats it as the router LinkTo.
+    {
+      filename: 'test.gjs',
+      code: `import { LinkTo } from '@ember/routing';
+        <template><LinkTo title="More about page">Page</LinkTo></template>`,
+    },
+
     '<template><a href="/page" title="More information about page">Page</a></template>',
     '<template><a href="/page">Page</a></template>',
     '<template><a href="/page" title={{dynamic}}>Page</a></template>',
@@ -33,6 +46,14 @@ ruleTester.run('template-no-invalid-link-title', rule, {
     </template>`,
   ],
   invalid: [
+    // Imported <LinkTo> in GJS/GTS: rule still applies
+    {
+      filename: 'test.gjs',
+      code: `import { LinkTo } from '@ember/routing';
+        <template><LinkTo title="quickstart">Quickstart</LinkTo></template>`,
+      output: null,
+      errors: [{ messageId: 'noInvalidLinkTitle' }],
+    },
     {
       code: '<template><a href="/page" title="">Page</a></template>',
       output: null,
