@@ -166,7 +166,15 @@ const gjsRuleTester = new RuleTester({
 });
 
 gjsRuleTester.run('template-require-has-block-helper', rule, {
-  valid: validHbs.map(wrapTemplate),
+  valid: [
+    ...validHbs.map(wrapTemplate),
+    // GJS/GTS: an imported/local hasBlock binding is a user's own reference,
+    // not the Glimmer built-in — rewriting to `has-block` would change semantics.
+    `import hasBlock from './my-has-block';
+     export default <template>{{hasBlock}}</template>;`,
+    `const hasBlockParams = () => true;
+     export default <template>{{hasBlockParams}}</template>;`,
+  ],
   invalid: invalidHbs.map((test) => ({
     code: wrapTemplate(test.code),
     output: wrapTemplate(test.output),
