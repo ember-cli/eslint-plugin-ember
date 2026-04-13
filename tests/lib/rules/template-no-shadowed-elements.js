@@ -35,6 +35,18 @@ ruleTester.run('template-no-shadowed-elements', rule, {
         },
       ],
     },
+    // Upstream flags any lowercase local block-param invocation, not just
+    // names present in a static html-tags list.
+    {
+      code: '<template><FooBar as |foo|><foo></foo></FooBar></template>',
+      output: null,
+      errors: [
+        {
+          message: 'Component name "foo" shadows HTML element <foo>. Use a different name.',
+          type: 'GlimmerElementNode',
+        },
+      ],
+    },
   ],
 });
 
@@ -61,6 +73,15 @@ hbsRuleTester.run('template-no-shadowed-elements', rule, {
       output: null,
       errors: [
         { message: 'Component name "div" shadows HTML element <div>. Use a different name.' },
+      ],
+    },
+    // Upstream flags any lowercase local block-param invocation, not just
+    // names present in a static html-tags list.
+    {
+      code: '<FooBar as |foo|><foo></foo></FooBar>',
+      output: null,
+      errors: [
+        { message: 'Component name "foo" shadows HTML element <foo>. Use a different name.' },
       ],
     },
   ],
