@@ -9,17 +9,22 @@ const validHbs = [
     options: [{ allowedMethods: ['get'] }],
     code: '<form method="GET"></form>',
   },
-  '<form method="POST"></form>',
-  '<form method="post"></form>',
-  '<form method="GET"></form>',
-  '<form method="get"></form>',
-  '<form method="DIALOG"></form>',
-  '<form method="dialog"></form>',
-  '<form method="{{formMethod}}"></form>',
-  '<form method={{formMethod}}></form>',
-  '<div/>',
-  '<div></div>',
-  '<div method="randomType"></div>',
+  // Default behavior: when no options are provided, the rule is disabled
+  // (matching upstream ember-template-lint). A bare <form> should NOT error.
+  '<form></form>',
+  '<form method="NOT_A_VALID_METHOD"></form>',
+  { options: [true], code: '<form method="POST"></form>' },
+  { options: [true], code: '<form method="post"></form>' },
+  { options: [true], code: '<form method="GET"></form>' },
+  { options: [true], code: '<form method="get"></form>' },
+  { options: [true], code: '<form method="DIALOG"></form>' },
+  { options: [true], code: '<form method="dialog"></form>' },
+  { options: [true], code: '<form method="{{formMethod}}"></form>' },
+  { options: [true], code: '<form method={{formMethod}}></form>' },
+  { options: [true], code: '<div/>' },
+  { options: [true], code: '<div></div>' },
+  { options: [true], code: '<div method="randomType"></div>' },
+  { options: [false], code: '<form></form>' },
 ];
 
 const invalidHbs = [
@@ -40,26 +45,31 @@ const invalidHbs = [
     ],
   },
   {
+    options: [true],
     code: '<form></form>',
     output: '<form method="POST"></form>',
     errors: [{ message: DEFAULT_ERROR }],
   },
   {
+    options: [true],
     code: '<form method=""></form>',
     output: '<form method="POST"></form>',
     errors: [{ message: DEFAULT_ERROR }],
   },
   {
+    options: [true],
     code: '<form method=42></form>',
     output: '<form method="POST"></form>',
     errors: [{ message: DEFAULT_ERROR }],
   },
   {
+    options: [true],
     code: '<form method=" ge t "></form>',
     output: '<form method="POST"></form>',
     errors: [{ message: DEFAULT_ERROR }],
   },
   {
+    options: [true],
     code: '<form method=" pos t "></form>',
     output: '<form method="POST"></form>',
     errors: [{ message: DEFAULT_ERROR }],
@@ -99,4 +109,29 @@ const hbsRuleTester = new RuleTester({
 hbsRuleTester.run('template-require-form-method', rule, {
   valid: validHbs,
   invalid: invalidHbs,
+});
+
+// Upstream-aligned error-surfacing tests. parseConfig should throw on an
+// invalid `allowedMethods` entry rather than silently disabling the rule.
+describe('template-require-form-method invalid configuration', () => {
+  const { Linter } = require('eslint');
+
+  function lintWith(options) {
+    const linter = new Linter();
+    linter.defineParser('ember-eslint-parser/hbs', require('ember-eslint-parser/hbs'));
+    linter.defineRule('template-require-form-method', rule);
+    return linter.verify('<form method="POST"></form>', {
+      parser: 'ember-eslint-parser/hbs',
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+      rules: { 'template-require-form-method': ['error', options] },
+    });
+  }
+
+  test('throws on unknown method in allowedMethods', () => {
+    expect(() => lintWith({ allowedMethods: ['PATCH'] })).toThrow(/invalid configuration/);
+  });
+
+  test('throws on mixed valid/invalid method list', () => {
+    expect(() => lintWith({ allowedMethods: ['GET', 'BOGUS'] })).toThrow(/invalid configuration/);
+  });
 });
