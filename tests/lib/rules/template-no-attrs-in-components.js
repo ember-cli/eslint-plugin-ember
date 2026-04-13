@@ -10,83 +10,83 @@ ruleTester.run('template-no-attrs-in-components', rule, {
   valid: [
     // Not a component template path: nothing is flagged, regardless of content.
     {
-      code: '<template>{{@value}}</template>',
       filename: 'app/templates/application.hbs',
+      code: '<template>{{@value}}</template>',
     },
     {
-      code: '<template>{{this.value}}</template>',
       filename: 'app/templates/application.hbs',
+      code: '<template>{{this.value}}</template>',
     },
     // `this.attrs.*` is not a real Ember API, but it is NOT what this rule
     // targets — upstream only flags bare `attrs.*`. So outside of a component
     // template, `this.attrs.*` should not be flagged.
     {
-      code: '<template>{{this.attrs.foo}}</template>',
       filename: 'app/templates/application.hbs',
+      code: '<template>{{this.attrs.foo}}</template>',
     },
     // Even `attrs.*` itself is only flagged inside component templates.
     {
-      code: '<template>{{attrs.value}}</template>',
       filename: 'app/templates/application.hbs',
+      code: '<template>{{attrs.value}}</template>',
     },
     // Inside a component template, non-attrs paths are fine.
     {
-      code: '<template>{{@value}}</template>',
       filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{@value}}</template>',
     },
     {
-      code: '<template>{{this.value}}</template>',
       filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{this.value}}</template>',
     },
     // Upstream does NOT flag `this.attrs.*`; only bare `attrs.*`.
     {
-      code: '<template>{{this.attrs.foo}}</template>',
       filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{this.attrs.foo}}</template>',
     },
     // Pod-style components path matches the gate, but no `attrs` usage.
     {
-      code: '<template>{{@value}}</template>',
       filename: 'app/components/foo/template.hbs',
+      code: '<template>{{@value}}</template>',
     },
     // `-components/` path gate, no `attrs` usage.
     {
-      code: '<template>{{@value}}</template>',
       filename: 'app/ui-components/foo.hbs',
+      code: '<template>{{@value}}</template>',
     },
   ],
   invalid: [
     // Bare `attrs.*` inside `templates/components/` — flagged.
     {
-      code: '<template>{{attrs.foo}}</template>',
       filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{attrs.foo}}</template>',
       output: null,
       errors: [{ messageId: 'noAttrs' }],
     },
     // Bare `attrs` (no dotted tail) inside `templates/components/` — flagged.
     {
-      code: '<template>{{attrs}}</template>',
       filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{attrs}}</template>',
       output: null,
       errors: [{ messageId: 'noAttrs' }],
     },
     // Pod-style path `components/*/template` — flagged.
     {
-      code: '<template>{{attrs.name}}</template>',
       filename: 'app/components/foo/template.hbs',
+      code: '<template>{{attrs.name}}</template>',
       output: null,
       errors: [{ messageId: 'noAttrs' }],
     },
     // `ui/components` path — flagged.
     {
-      code: '<template>{{attrs.name}}</template>',
       filename: 'app/ui/components/foo.hbs',
+      code: '<template>{{attrs.name}}</template>',
       output: null,
       errors: [{ messageId: 'noAttrs' }],
     },
     // `-components/` path — flagged.
     {
-      code: '<template>{{attrs.name}}</template>',
       filename: 'app/ui-components/foo.hbs',
+      code: '<template>{{attrs.name}}</template>',
       output: null,
       errors: [{ messageId: 'noAttrs' }],
     },
