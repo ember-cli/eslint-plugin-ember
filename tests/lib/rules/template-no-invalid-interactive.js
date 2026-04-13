@@ -13,9 +13,10 @@ ruleTester.run('template-no-invalid-interactive', rule, {
       code: '<template><button onclick={{this.handleClick}}>Click</button></template>',
       output: null,
     },
+    // <a> with href is interactive
     {
       filename: 'test.gjs',
-      code: '<template><a onclick={{this.handleClick}}>Link</a></template>',
+      code: '<template><a href="/about" onclick={{this.handleClick}}>Link</a></template>',
       output: null,
     },
     {
@@ -62,6 +63,26 @@ ruleTester.run('template-no-invalid-interactive', rule, {
     '<template><video {{on "pause" this.onPause}}></video></template>',
     '<template><img {{action "foo" on="load"}}></template>',
     '<template><img {{action "foo" on="error"}}></template>',
+
+    // <summary> is natively interactive
+    '<template><summary onclick={{this.toggle}}>Details</summary></template>',
+
+    // ARIA widget roles: scrollbar, tooltip, treeitem
+    '<template><div role="scrollbar" onclick={{this.scroll}}>Scroll</div></template>',
+    '<template><div role="tooltip" onclick={{this.show}}>Tip</div></template>',
+    '<template><div role="treeitem" onclick={{this.select}}>Node</div></template>',
+
+    // audio/video with controls are interactive
+    '<template><audio controls onclick={{this.play}}></audio></template>',
+    '<template><video controls onclick={{this.play}}></video></template>',
+
+    // usemap only makes img/object interactive
+    '<template><img usemap="#map" onclick={{this.click}}></template>',
+
+    // Component invocations are skipped (not HTML elements)
+    '<template><@someComponent onclick={{this.click}} /></template>',
+    '<template><this.myComponent onclick={{this.click}} /></template>',
+    '<template><ns.SomeWidget onclick={{this.click}} /></template>',
   ],
 
   invalid: [
@@ -139,6 +160,30 @@ ruleTester.run('template-no-invalid-interactive', rule, {
       code: '<template><div {{action "foo" on="submit"}}></div></template>',
       output: null,
       errors: [{ messageId: 'noInvalidInteractive' }],
+    },
+    {
+      // usemap on non-img/object does NOT make the element interactive
+      code: '<template><div usemap="#map" onclick={{this.click}}>Content</div></template>',
+      output: null,
+      errors: [{ messageId: 'noInvalidInteractive' }],
+    },
+    {
+      // audio/video without controls is NOT interactive
+      code: '<template><audio onclick={{this.play}}></audio></template>',
+      output: null,
+      errors: [{ messageId: 'noInvalidInteractive' }],
+    },
+    {
+      // <a> without href is NOT interactive
+      filename: 'test.gjs',
+      code: '<template><a onclick={{this.handleClick}}>Link</a></template>',
+      output: null,
+      errors: [
+        {
+          messageId: 'noInvalidInteractive',
+          data: { tagName: 'a', handler: 'onclick' },
+        },
+      ],
     },
   ],
 });
