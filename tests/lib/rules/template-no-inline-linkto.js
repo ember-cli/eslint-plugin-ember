@@ -27,6 +27,30 @@ ruleTester.run('template-no-inline-linkto', rule, {
     `<template>
       <div></div>
     </template>`,
+
+    // GJS/GTS: without an `@ember/routing` import, `<LinkTo>` is a
+    // user-authored component — flagging it would corrupt the user's intent.
+    {
+      filename: 'test.gjs',
+      code: '<template><LinkTo @route="index" /></template>',
+    },
+    {
+      filename: 'test.gts',
+      code: '<template><LinkTo /></template>',
+    },
+
+    // GJS/GTS with the canonical `@ember/routing` import: still allow when
+    // the LinkTo has children (block form).
+    {
+      filename: 'test.gjs',
+      code: 'import { LinkTo } from \'@ember/routing\';\n<template><LinkTo @route="index">Home</LinkTo></template>',
+    },
+
+    // Renamed import: also allowed when the renamed LinkTo has children.
+    {
+      filename: 'test.gjs',
+      code: 'import { LinkTo as Link } from \'@ember/routing\';\n<template><Link @route="index">Home</Link></template>',
+    },
   ],
 
   invalid: [
@@ -65,6 +89,29 @@ ruleTester.run('template-no-inline-linkto', rule, {
           type: 'GlimmerElementNode',
         },
       ],
+    },
+
+    // GJS/GTS with `@ember/routing` import: childless LinkTo is flagged.
+    {
+      filename: 'test.gjs',
+      code: 'import { LinkTo } from \'@ember/routing\';\n<template><LinkTo @route="index" /></template>',
+      output: null,
+      errors: [{ messageId: 'noInlineLinkTo', type: 'GlimmerElementNode' }],
+    },
+    {
+      filename: 'test.gts',
+      code: 'import { LinkTo } from \'@ember/routing\';\n<template><LinkTo @route="contact"></LinkTo></template>',
+      output: null,
+      errors: [{ messageId: 'noInlineLinkTo', type: 'GlimmerElementNode' }],
+    },
+
+    // Renamed import: childless `<Link>` is flagged because it resolves to
+    // the framework `LinkTo`.
+    {
+      filename: 'test.gjs',
+      code: 'import { LinkTo as Link } from \'@ember/routing\';\n<template><Link @route="index" /></template>',
+      output: null,
+      errors: [{ messageId: 'noInlineLinkTo', type: 'GlimmerElementNode' }],
     },
   ],
 });
