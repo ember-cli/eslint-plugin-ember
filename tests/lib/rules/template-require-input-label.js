@@ -38,8 +38,19 @@ ruleTester.run('template-require-input-label', rule, {
     '<template><input type="hidden" /></template>',
     '<template><Input type="hidden" /></template>',
     '<template>{{input type="hidden"}}</template>',
+    // In GJS/GTS with no @ember/component import, <Input>/<Textarea> are
+    // user-authored components — do not treat them as the built-in.
     { filename: 'layout.gjs', code: '<template><Input /></template>' },
     { filename: 'layout.gts', code: '<template><Textarea /></template>' },
+    // In GJS/GTS, {{input}} / {{textarea}} are user-imported bindings, not
+    // the classic Ember helpers — skip the mustache-form check.
+    { filename: 'layout.gjs', code: '<template>{{input}}</template>' },
+    { filename: 'layout.gts', code: '<template>{{textarea}}</template>' },
+    // Built-in <Input> imported from @ember/component, wrapped in a label.
+    {
+      filename: 'layout.gjs',
+      code: "import { Input } from '@ember/component';\n<template><label>Name <Input /></label></template>",
+    },
     {
       code: '<template><CustomLabel><input /></CustomLabel></template>',
       options: [{ labelTags: ['CustomLabel'] }],
@@ -124,6 +135,20 @@ ruleTester.run('template-require-input-label', rule, {
       code: '<template><select aria-label="first label" aria-labelledby="second label" /></template>',
       output: null,
       errors: [{ message: MULTIPLE_LABELS }],
+    },
+    // Built-in <Input> imported from @ember/component in GJS → flagged.
+    {
+      filename: 'layout.gjs',
+      code: "import { Input } from '@ember/component';\n<template><Input /></template>",
+      output: null,
+      errors: [{ message: NO_LABEL }],
+    },
+    // Renamed import of <Textarea> from @ember/component in GTS → flagged.
+    {
+      filename: 'layout.gts',
+      code: "import { Textarea as TA } from '@ember/component';\n<template><TA /></template>",
+      output: null,
+      errors: [{ message: NO_LABEL }],
     },
   ],
 });
