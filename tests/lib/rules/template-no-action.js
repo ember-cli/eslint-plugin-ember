@@ -70,7 +70,7 @@ ruleTester.run('template-no-action', rule, {
       errors: [
         {
           message:
-            'Do not use `action` as (action ...). Instead, use the `on` modifier and `fn` helper.',
+            'Do not use \`action\` as (action ...) — deprecated in Ember 5.9, removed in 6.0. Use the \`fn\` helper instead.',
           type: 'GlimmerSubExpression',
         },
       ],
@@ -83,7 +83,7 @@ ruleTester.run('template-no-action', rule, {
       errors: [
         {
           message:
-            'Do not use `action` in templates. Instead, use the `on` modifier and `fn` helper.',
+            'Do not use `action` in templates — deprecated in Ember 5.9, removed in 6.0. Use the `on` modifier and `fn` helper instead.',
           type: 'GlimmerMustacheStatement',
         },
       ],
@@ -96,7 +96,7 @@ ruleTester.run('template-no-action', rule, {
       errors: [
         {
           message:
-            'Do not use `action` as an element modifier. Instead, use the `on` modifier and `fn` helper.',
+            'Do not use `action` as an element modifier — deprecated in Ember 5.9, removed in 6.0. Use the `on` modifier instead.',
           type: 'GlimmerElementModifierStatement',
         },
       ],
@@ -109,7 +109,7 @@ ruleTester.run('template-no-action', rule, {
       errors: [
         {
           message:
-            'Do not use `action` in templates. Instead, use the `on` modifier and `fn` helper.',
+            'Do not use `action` in templates — deprecated in Ember 5.9, removed in 6.0. Use the `on` modifier and `fn` helper instead.',
           type: 'GlimmerMustacheStatement',
         },
       ],
