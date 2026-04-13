@@ -118,22 +118,22 @@ hbsRuleTester.run('template-no-link-to-tagname', rule, {
     {
       code: '<LinkTo @route="routeName" @tagName="button">Link text</LinkTo>',
       output: null,
-      errors: [{ message: 'tagName attribute on LinkTo is deprecated' }],
+      errors: [{ message: '@tagName on <LinkTo> is not supported (removed in Ember 4.0). <LinkTo> always renders an <a> element.' }],
     },
     {
       code: '<link-to @route="contact" @tagName="div">Contact</link-to>',
       output: null,
-      errors: [{ message: 'tagName attribute on LinkTo is deprecated' }],
+      errors: [{ message: '@tagName on <LinkTo> is not supported (removed in Ember 4.0). <LinkTo> always renders an <a> element.' }],
     },
     {
       code: '{{#link-to "routeName" tagName="button"}}Link text{{/link-to}}',
       output: null,
-      errors: [{ message: 'tagName attribute on LinkTo is deprecated' }],
+      errors: [{ message: '@tagName on <LinkTo> is not supported (removed in Ember 4.0). <LinkTo> always renders an <a> element.' }],
     },
     {
       code: '{{link-to "Link text" "routeName" tagName="button"}}',
       output: null,
-      errors: [{ message: 'tagName attribute on LinkTo is deprecated' }],
+      errors: [{ message: '@tagName on <LinkTo> is not supported (removed in Ember 4.0). <LinkTo> always renders an <a> element.' }],
     },
   ],
 });
