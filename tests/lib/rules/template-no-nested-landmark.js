@@ -42,6 +42,11 @@ ruleTester.run('template-no-nested-landmark', rule, {
     '<template><div role="banner"><nav></nav></div></template>',
     '<template><header><div role="navigation"></div></header></template>',
     '<template><div role="banner"><div role="navigation"></div></div></template>',
+
+    // `<section>` is not a landmark element per upstream, so nested sections are allowed.
+    '<template><section><section>Content</section></section></template>',
+    // `role="region"` is not a landmark role per upstream, so nested regions are allowed.
+    '<template><div role="region"><div role="region">Content</div></div></template>',
   ],
 
   invalid: [
