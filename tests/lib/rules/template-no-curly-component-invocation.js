@@ -47,6 +47,18 @@ ruleTester.run('template-no-curly-component-invocation', rule, {
       code: '<template>{{foo-bar}}</template>',
       options: [{ allow: ['foo-bar'] }],
     },
+
+    // GJS/GTS: JS scope bindings (imports, const) used as curly invocations
+    // are explicit by name. Converting to <Foo> would reference an unbound
+    // identifier, so skip both single-word and named-args forms.
+    `import fooBar from './foo-bar';
+     export default <template>{{fooBar}}</template>;`,
+    `import fooBar from './foo-bar';
+     export default <template>{{fooBar arg=1}}</template>;`,
+    `import fooBar from './foo-bar';
+     export default <template>{{#fooBar}}content{{/fooBar}}</template>;`,
+    `const someHelper = () => 'x';
+     export default <template>{{someHelper}}</template>;`,
   ],
   invalid: [
     {
@@ -140,42 +152,19 @@ const hbsRuleTester = new RuleTester({
   },
 });
 
-function generateBlockError(name) {
-  const parts = name.split('/');
-  const angleBracketName = parts
-    .map((part) => {
-      return part
-        .split('-')
-        .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
-        .join('');
-    })
-    .join('::');
-  return `You are using the component {{#${name}}} with curly component syntax. You should use <${angleBracketName}> instead. If it is actually a helper you must manually add it to the 'no-curly-component-invocation' rule configuration, e.g. \`'no-curly-component-invocation': { allow: ['${name}'] }\`.`;
-}
-
-function generateThisBlockError(name) {
-  const displayName = name.replace(/^(this\.|@)/, '');
-  const parts = displayName.split('/');
-  const prefix = name.startsWith('@') ? '@' : name.startsWith('this.') ? 'This.' : '';
+function generateBlockError(name, isLocal) {
   let angleBracketName;
-  if (name.startsWith('@')) {
-    angleBracketName = `@${parts[0]
-      .split('-')
-      .map((p, i) => (i === 0 ? p : p.charAt(0).toUpperCase() + p.slice(1)))
-      .join('')}`;
-  } else if (name.startsWith('this.')) {
-    angleBracketName = `This.${parts[0]
-      .split('-')
-      .map((p, i) => (i === 0 ? p : p.charAt(0).toUpperCase() + p.slice(1)))
-      .join('')}`;
+  if (name.startsWith('@') || name.startsWith('this.') || isLocal) {
+    angleBracketName = name;
   } else {
+    const parts = name.split('/');
     angleBracketName = parts
-      .map((part) =>
-        part
+      .map((part) => {
+        return part
           .split('-')
           .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
-          .join('')
-      )
+          .join('');
+      })
       .join('::');
   }
   return `You are using the component {{#${name}}} with curly component syntax. You should use <${angleBracketName}> instead. If it is actually a helper you must manually add it to the 'no-curly-component-invocation' rule configuration, e.g. \`'no-curly-component-invocation': { allow: ['${name}'] }\`.`;
@@ -315,7 +304,7 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
       output: '<FooBar as |foo-baz|>{{#foo-baz as |foo-boo|}}{{foo-boo}}{{/foo-baz}}</FooBar>',
       errors: [
         { message: generateBlockError('foo-bar') },
-        { message: generateBlockError('foo-baz') },
+        { message: generateBlockError('foo-baz', true) },
         { message: generateError('foo-boo') },
       ],
     },
@@ -326,15 +315,15 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '{{#this.foo-bar as |foo-baz|}}{{foos-baz}}{{/this.foo-bar}}',
-      output: '<This.fooBar as |foo-baz|>{{foos-baz}}</This.fooBar>',
+      output: '<this.foo-bar as |foo-baz|>{{foos-baz}}</this.foo-bar>',
       errors: [
-        { message: generateThisBlockError('this.foo-bar') },
+        { message: generateBlockError('this.foo-bar') },
         { message: generateError('foos-baz') },
       ],
     },
     {
       code: '{{#this.fooBar as |foo-baz|}}{{foos-baz}}{{/this.fooBar}}',
-      output: '<This.fooBar as |foo-baz|>{{foos-baz}}</This.fooBar>',
+      output: '<this.fooBar as |foo-baz|>{{foos-baz}}</this.fooBar>',
       errors: [
         { message: generateBlockError('this.fooBar') },
         { message: generateError('foos-baz') },
@@ -342,11 +331,8 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '{{#@foo-bar as |foo-baz|}}{{foos-baz}}{{/@foo-bar}}',
-      output: '<@fooBar as |foo-baz|>{{foos-baz}}</@fooBar>',
-      errors: [
-        { message: generateThisBlockError('@foo-bar') },
-        { message: generateError('foos-baz') },
-      ],
+      output: '<@foo-bar as |foo-baz|>{{foos-baz}}</@foo-bar>',
+      errors: [{ message: generateBlockError('@foo-bar') }, { message: generateError('foos-baz') }],
     },
     {
       code: '{{#@fooBar as |foo-baz|}}{{foos-baz}}{{/@fooBar}}',
@@ -355,8 +341,8 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
     },
     {
       code: '{{#let (component "foo") as |my-component|}}{{#my-component}}{{/my-component}}{{/let}}',
-      output: '{{#let (component "foo") as |my-component|}}<MyComponent></MyComponent>{{/let}}',
-      errors: [{ message: generateBlockError('my-component') }],
+      output: '{{#let (component "foo") as |my-component|}}<my-component></my-component>{{/let}}',
+      errors: [{ message: generateBlockError('my-component', true) }],
     },
     // Curly component invocations with hash params
     {
