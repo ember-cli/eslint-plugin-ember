@@ -204,6 +204,11 @@ hbsRuleTester.run('template-no-implicit-this', rule, {
       code: '{{book-details}}',
       options: [{ allow: ['book-details'] }],
     },
+    // Allow config option — regex pattern
+    {
+      code: '{{data-test-foo}}',
+      options: [{ allow: [/^data-test-.+/] }],
+    },
   ],
   invalid: [
     {
