@@ -9,7 +9,6 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-invalid-link-text', rule, {
   valid: [
     // Link with component child — content is opaque, can't validate.
-    // Mirrors upstream no-invalid-link-text.js L53-56 ("do not flag when link contains additional dynamic (non-text) children").
     { filename: 'test.gjs', code: '<template><a href="/x"><MyComponent /></a></template>' },
     { filename: 'test.gjs', code: '<template><a href="/x">prefix <MyComponent /></a></template>' },
 

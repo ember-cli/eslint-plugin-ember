@@ -28,7 +28,6 @@ const validHbs = [
     code: '<input type=\'checkbox\'> {{hello "test" x="test"}}',
     options: [{ curlies: 'double', html: 'single' }],
   },
-  // `false` as the root config disables the rule (matches upstream).
   {
     code: "{{component \"test\"}} {{hello x='test'}} <input type='checkbox'>",
     options: [false],
