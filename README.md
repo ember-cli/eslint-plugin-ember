@@ -418,7 +418,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-scope-outside-table-headings](docs/rules/template-no-scope-outside-table-headings.md)                         | disallow scope attribute outside th elements                      |    |    |    |
 | [template-no-shadowed-elements](docs/rules/template-no-shadowed-elements.md)                                               | disallow ambiguity with block param names shadowing HTML elements |    |    |    |
 | [template-no-unbalanced-curlies](docs/rules/template-no-unbalanced-curlies.md)                                             | disallow unbalanced mustache curlies                              |    |    |    |
-| [template-no-unknown-arguments-for-builtin-components](docs/rules/template-no-unknown-arguments-for-builtin-components.md) | disallow unknown arguments for built-in components                |    |    |    |
+| [template-no-unknown-arguments-for-builtin-components](docs/rules/template-no-unknown-arguments-for-builtin-components.md) | disallow unknown arguments for built-in components                |    | 🔧 |    |
 
 ### Routes
 
