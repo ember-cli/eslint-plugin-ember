@@ -18,7 +18,7 @@ ruleTester.run('template-no-attrs-in-components', rule, {
       code: '<template>{{this.value}}</template>',
     },
     // `this.attrs.*` is not a real Ember API, but it is NOT what this rule
-    // targets — upstream only flags bare `attrs.*`. So outside of a component
+    // targets — only bare `attrs.*` is flagged. So outside of a component
     // template, `this.attrs.*` should not be flagged.
     {
       filename: 'app/templates/application.hbs',
@@ -38,7 +38,7 @@ ruleTester.run('template-no-attrs-in-components', rule, {
       filename: 'app/templates/components/foo.hbs',
       code: '<template>{{this.value}}</template>',
     },
-    // Upstream does NOT flag `this.attrs.*`; only bare `attrs.*`.
+    // This rule does NOT flag `this.attrs.*`; only bare `attrs.*`.
     {
       filename: 'app/templates/components/foo.hbs',
       code: '<template>{{this.attrs.foo}}</template>',
