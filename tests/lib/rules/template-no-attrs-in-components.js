@@ -46,6 +46,11 @@ ruleTester.run('template-no-attrs-in-components', rule, {
       filename: 'app/ui-components/foo.hbs',
       code: '<template>{{@value}}</template>',
     },
+    // Octane co-located template — non-attrs path is fine.
+    {
+      filename: 'app/components/foo.hbs',
+      code: '<template>{{@value}}</template>',
+    },
   ],
   invalid: [
     // Bare `attrs.*` inside `templates/components/` — flagged.
@@ -87,6 +92,34 @@ ruleTester.run('template-no-attrs-in-components', rule, {
     {
       filename: 'app/templates/components/foo.hbs',
       code: '<template>{{this.attrs.foo}}</template>',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    // attrs in attribute value position.
+    {
+      filename: 'app/templates/components/foo.hbs',
+      code: '<template><div class={{attrs.foo}}></div></template>',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    // attrs in block helper condition.
+    {
+      filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{#if attrs.foo}}bar{{/if}}</template>',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    // attrs as hash pair value.
+    {
+      filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{bar foo=attrs.foo}}</template>',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    // Octane co-located template (app/components/foo.hbs) — flagged.
+    {
+      filename: 'app/components/foo.hbs',
+      code: '<template>{{attrs.foo}}</template>',
       output: null,
       errors: [{ messageId: 'noAttrs' }],
     },
