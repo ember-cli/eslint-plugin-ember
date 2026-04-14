@@ -24,6 +24,11 @@ ruleTester.run('template-no-model-argument-in-route-templates', rule, {
       filename: 'app/components/user-card.gjs',
       code: '<template>{{@model}}</template>',
     },
+    // Partial templates (basename starts with '-') are skipped.
+    {
+      filename: 'app/templates/-partial.hbs',
+      code: '<template>{{@model.foo}}</template>',
+    },
 
     '<template>{{model}}</template>',
     '<template>{{@modelythingy}}</template>',
@@ -60,6 +65,19 @@ ruleTester.run('template-no-model-argument-in-route-templates', rule, {
       output: '<template>{{this.model.foo.bar}}</template>',
       errors: [{ messageId: 'noModelArgumentInRouteTemplates' }],
     },
+    // .gjs route templates are also linted (not gated to .hbs).
+    {
+      filename: 'app/routes/posts.gjs',
+      code: '<template>{{@model.foo}}</template>',
+      output: '<template>{{this.model.foo}}</template>',
+      errors: [{ messageId: 'noModelArgumentInRouteTemplates' }],
+    },
+    // Unknown path defaults to lint (matches upstream).
+    {
+      code: '<template>{{@model.foo}}</template>',
+      output: '<template>{{this.model.foo}}</template>',
+      errors: [{ messageId: 'noModelArgumentInRouteTemplates' }],
+    },
   ],
 });
 
@@ -72,6 +90,27 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-model-argument-in-route-templates', rule, {
-  valid: ['{{model}}', '{{this.model}}', '{{@modelythingy}}', '{{@model}}'],
-  invalid: [],
+  valid: [
+    '{{model}}',
+    '{{this.model}}',
+    '{{@modelythingy}}',
+    // Component templates are not routes.
+    {
+      filename: 'app/components/user-card.hbs',
+      code: '{{@model}}',
+    },
+    // Partials (basename starts with '-') are not routes.
+    {
+      filename: 'app/templates/-partial.hbs',
+      code: '{{@model.foo}}',
+    },
+  ],
+  invalid: [
+    // Unknown path defaults to lint.
+    {
+      code: '{{@model}}',
+      output: '{{this.model}}',
+      errors: [{ messageId: 'noModelArgumentInRouteTemplates' }],
+    },
+  ],
 });
