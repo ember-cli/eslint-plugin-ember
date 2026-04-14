@@ -34,6 +34,8 @@ ruleTester.run('template-require-media-caption', rule, {
     '<template><audio muted="true"></audio></template>',
     '<template><video muted></video></template>',
     '<template><audio muted={{this.muted}}></audio></template>',
+    '<template><video muted="{{isMuted}}"><source src="movie.mp4" /></video></template>',
+    '<template><audio muted="{{this.isMuted}}"></audio></template>',
     '<template><video><track kind="captions" /><track kind="descriptions" /></video></template>',
   ],
 
@@ -148,6 +150,8 @@ hbsRuleTester.run('template-require-media-caption', rule, {
     '<audio muted="true"></audio>',
     '<video muted></video>',
     '<audio muted={{this.muted}}></audio>',
+    '<video muted="{{isMuted}}"><source src="movie.mp4" /></video>',
+    '<audio muted="{{this.isMuted}}"></audio>',
     '<video><track kind="captions" /><track kind="descriptions" /></video>',
   ],
   invalid: [
