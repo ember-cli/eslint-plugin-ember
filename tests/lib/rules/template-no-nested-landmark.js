@@ -43,9 +43,13 @@ ruleTester.run('template-no-nested-landmark', rule, {
     '<template><header><div role="navigation"></div></header></template>',
     '<template><div role="banner"><div role="navigation"></div></div></template>',
 
-    // `<section>` is not a landmark element per upstream, so nested sections are allowed.
+    // `<section>` only gets the `region` landmark role when it has an accessible name
+    // (aria-label/aria-labelledby/title). Without one it has the generic role — see
+    // https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/section.
+    // This rule does not inspect accessible names, so unnamed sections are excluded.
     '<template><section><section>Content</section></section></template>',
-    // `role="region"` is not a landmark role per upstream, so nested regions are allowed.
+    // `role="region"` is the landmark role a named `<section>` gets. Nesting it is
+    // excluded for the same reason: the rule cannot verify an accessible name is present.
     '<template><div role="region"><div role="region">Content</div></div></template>',
   ],
 
