@@ -38,6 +38,3 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
-## References
-
-- [eslint-plugin-ember template-no-negated-condition](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/template-no-negated-condition.md)
