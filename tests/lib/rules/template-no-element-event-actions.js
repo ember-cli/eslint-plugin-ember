@@ -36,15 +36,15 @@ ruleTester.run('template-no-element-event-actions', rule, {
     {
       filename: 'my-component.gjs',
       code: '<template><button type="button" onclick={{this.myAction}}></button></template>',
-      options: [{ requireActionHelper: true }],
       output: null,
+      options: [{ requireActionHelper: true }],
     },
     // requireActionHelper: false — string event handler is not flagged
     {
       filename: 'my-component.gjs',
       code: '<template><button type="button" onclick="myFunction()"></button></template>',
-      options: [{ requireActionHelper: false }],
       output: null,
+      options: [{ requireActionHelper: false }],
     },
   ],
 
@@ -87,16 +87,16 @@ ruleTester.run('template-no-element-event-actions', rule, {
     {
       filename: 'my-component.gjs',
       code: '<template><button type="button" onclick={{this.myAction}}></button></template>',
-      options: [{ requireActionHelper: false }],
       output: null,
+      options: [{ requireActionHelper: false }],
       errors: [{ messageId: 'noElementEventActions' }],
     },
     // requireActionHelper: true — only {{action ...}} mustaches are flagged
     {
       filename: 'my-component.gjs',
       code: '<template><button onclick={{action "myAction"}}></button></template>',
-      options: [{ requireActionHelper: true }],
       output: null,
+      options: [{ requireActionHelper: true }],
       errors: [{ messageId: 'noElementEventActions' }],
     },
   ],
@@ -137,14 +137,14 @@ hbsRuleTester.run('template-no-element-event-actions (hbs)', rule, {
     },
     {
       code: '<button type="button" onclick={{this.myAction}}></button>',
-      options: [{ requireActionHelper: false }],
       output: null,
+      options: [{ requireActionHelper: false }],
       errors: [{ messageId: 'noElementEventActions' }],
     },
     {
       code: '<button onclick={{action "myAction"}}></button>',
-      options: [{ requireActionHelper: true }],
       output: null,
+      options: [{ requireActionHelper: true }],
       errors: [{ messageId: 'noElementEventActions' }],
     },
   ],
