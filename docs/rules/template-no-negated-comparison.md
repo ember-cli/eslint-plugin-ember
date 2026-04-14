@@ -2,10 +2,6 @@
 
 <!-- end auto-generated rule header -->
 
-> **Note**: This rule is NOT a port of `ember-template-lint`'s `no-negated-condition`.
-> That rule prefers `not-eq` over `if/else`; this rule bans `not-eq` (and similar) entirely.
-> These are opposite goals.
-
 Disallows negated comparison operators in templates.
 
 ## Rule Details
