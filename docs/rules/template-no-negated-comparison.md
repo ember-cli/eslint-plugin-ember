@@ -37,4 +37,3 @@ Examples of **correct** code for this rule:
   {{/if}}
 </template>
 ```
-
