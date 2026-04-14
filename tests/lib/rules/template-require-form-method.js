@@ -9,8 +9,8 @@ const validHbs = [
     options: [{ allowedMethods: ['get'] }],
     code: '<form method="GET"></form>',
   },
-  // Default behavior: when no options are provided, the rule is disabled
-  // (matching upstream ember-template-lint). A bare <form> should NOT error.
+  // Default behavior: when no options are provided, the rule is disabled.
+  // A bare <form> should NOT error.
   '<form></form>',
   '<form method="NOT_A_VALID_METHOD"></form>',
   { options: [true], code: '<form method="POST"></form>' },
@@ -111,8 +111,8 @@ hbsRuleTester.run('template-require-form-method', rule, {
   invalid: invalidHbs,
 });
 
-// Upstream-aligned error-surfacing tests. parseConfig should throw on an
-// invalid `allowedMethods` entry rather than silently disabling the rule.
+// parseConfig should throw on an invalid `allowedMethods` entry so that
+// misconfiguration is surfaced immediately rather than silently ignored.
 describe('template-require-form-method invalid configuration', () => {
   const { Linter } = require('eslint');
 
