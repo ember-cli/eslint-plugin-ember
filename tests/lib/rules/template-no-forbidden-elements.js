@@ -15,6 +15,11 @@ ruleTester.run('template-no-forbidden-elements', rule, {
     '<template><footer></footer></template>',
     '<template><p></p></template>',
     '<template><head><meta charset="utf-8"></head></template>',
+    // <meta> is allowed in app/templates/head.hbs without a wrapping <head>
+    {
+      code: '<template><meta charset="utf-8"></template>',
+      filename: 'app/templates/head.hbs',
+    },
   ],
   invalid: [
     {
