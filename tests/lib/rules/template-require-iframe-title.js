@@ -32,7 +32,7 @@ ruleTester.run('template-require-iframe-title', rule, {
     },
 
     {
-      // Upstream reports BOTH occurrences with a shared `#N` index.
+      // Both occurrences are reported with a shared `#N` index.
       code: '<template><iframe title="foo" /><iframe title="foo" /></template>',
       output: null,
       errors: [
@@ -44,7 +44,7 @@ ruleTester.run('template-require-iframe-title', rule, {
       ],
     },
     {
-      // Three duplicates → upstream re-reports the first occurrence on every
+      // Three duplicates → the first occurrence is re-reported on every
       // collision, so iframe #1 is flagged twice (once per later collision)
       // and iframes #2 and #3 are each flagged once. ESLint sorts by source
       // location, so the two first-occurrence reports (same location) come
@@ -136,7 +136,7 @@ hbsRuleTester.run('template-require-iframe-title', rule, {
       ],
     },
     {
-      // Three duplicates: upstream re-reports the first occurrence on every
+      // Three duplicates: the first occurrence is re-reported on every
       // collision, so iframe #1 is flagged twice and each later iframe once.
       code: '<iframe title="foo" /><iframe title="foo" /><iframe title="foo" />',
       output: null,
