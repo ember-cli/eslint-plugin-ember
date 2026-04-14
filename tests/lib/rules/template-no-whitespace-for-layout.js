@@ -18,8 +18,10 @@ const validHbs = [
 >
   example
 </div>`,
+  // Attribute values with consecutive spaces must not be flagged (false positive,
+  // cf. ember-template-lint#2899) — the rule targets element body text only.
   '<div class="foo  bar"></div>',
-  '<div class="min-h-dvh bg-gray-200  "></div>',
+  '<div style="margin: 0;  padding: 0"></div>',
 ];
 
 const invalidHbs = [
