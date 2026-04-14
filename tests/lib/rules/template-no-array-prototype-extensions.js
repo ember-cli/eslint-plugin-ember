@@ -17,6 +17,10 @@ ruleTester.run('template-no-array-prototype-extensions', rule, {
     // get helper with firstObject/lastObject as a direct top-level property (not an extension)
     "<template>{{get this 'firstObject'}}</template>",
     "<template>{{get this 'lastObject.name'}}</template>",
+    // Plain text nodes are not flagged
+    '<template>Just a regular text in the template bar.firstObject bar.lastObject.foo</template>',
+    // String-literal HTML attributes are not flagged
+    '<template><Foo foo="bar.firstObject.baz" /></template>',
   ],
 
   invalid: [
@@ -104,6 +108,12 @@ ruleTester.run('template-no-array-prototype-extensions', rule, {
       code: "<template><Foo @bar={{get @list 'firstObject.name'}} /></template>",
       output: "<template><Foo @bar={{get @list '0.name'}} /></template>",
       errors: [{ messageId: 'firstObject' }],
+    },
+    // lastObject — in named hash argument
+    {
+      code: '<template>{{foo bar=@list.lastObject.test}}</template>',
+      output: null,
+      errors: [{ messageId: 'lastObject' }],
     },
   ],
 });
