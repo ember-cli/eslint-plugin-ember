@@ -40,7 +40,7 @@ ruleTester.run('template-no-passed-in-event-handlers', rule, {
     '<template><my-button @click={{this.handleClick}} /></template>',
     '<template><custom-el @submit={{this.handleSubmit}} /></template>',
 
-    // mouseMove/mouseEnter/mouseLeave are NOT in upstream's event list
+    // mouseMove/mouseEnter/mouseLeave are not Ember classic-event aliases
     '<template><Foo @mouseMove={{this.handleMove}} /></template>',
     '<template><Foo @mouseEnter={{this.handleEnter}} /></template>',
     '<template><Foo @mouseLeave={{this.handleLeave}} /></template>',
