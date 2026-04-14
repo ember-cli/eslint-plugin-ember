@@ -17,5 +17,10 @@ ruleTester.run('template-no-aria-hidden-body', rule, {
       output: '<template><body></body></template>',
       errors: [{ messageId: 'noAriaHiddenBody' }],
     },
+    {
+      code: '<template><body aria-hidden></body></template>',
+      output: '<template><body></body></template>',
+      errors: [{ messageId: 'noAriaHiddenBody' }],
+    },
   ],
 });

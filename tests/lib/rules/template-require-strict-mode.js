@@ -16,6 +16,13 @@ ruleTester.run('template-require-strict-mode', rule, {
       filename: 'hello.gts',
       code: '<template>hello</template>',
     },
+    {
+      filename: 'hello.gjs',
+      code: `import Component from '@glimmer/component';
+export default class HelloComponent extends Component {
+  <template>hello</template>
+}`,
+    },
   ],
   invalid: [
     {

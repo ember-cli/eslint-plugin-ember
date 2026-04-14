@@ -66,6 +66,11 @@ ruleTester.run('template-no-invalid-role', rule, {
     '<template><div role="Button">Click</div></template>',
     '<template><div role="NAVIGATION">Nav</div></template>',
     '<template><div role="ALERT">Alert</div></template>',
+    // catchNonexistentRoles: false — non-existent roles are not flagged
+    {
+      code: '<template><div role="command interface"></div></template>',
+      options: [{ catchNonexistentRoles: false }],
+    },
   ],
 
   invalid: [
@@ -165,6 +170,12 @@ ruleTester.run('template-no-invalid-role', rule, {
       code: '<template><div role="COMMAND INTERFACE"></div></template>',
       output: null,
       errors: [{ message: "Invalid ARIA role 'COMMAND INTERFACE'. Must be a valid ARIA role." }],
+    },
+    {
+      code: '<template><div role="command interface"></div></template>',
+      output: null,
+      options: [{ catchNonexistentRoles: true }],
+      errors: [{ message: "Invalid ARIA role 'command interface'. Must be a valid ARIA role." }],
     },
 
     // Newly added SEMANTIC_ELEMENTS: presentation/none on iframe, video, audio

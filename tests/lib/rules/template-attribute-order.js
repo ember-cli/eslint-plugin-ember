@@ -18,6 +18,11 @@ ruleTester.run('template-attribute-order', rule, {
     '<template><div aria-label="x" aria-hidden="true"></div></template>',
     // Correct full order
     '<template><input class="x" id="y" role="r" aria-label="l" data-test-foo="1" type="text" name="n" value="v" placeholder="p" disabled></template>',
+    // Custom order config: id before class is valid when order is ['id', 'class']
+    {
+      code: '<template><div id="bar" class="foo"></div></template>',
+      options: [{ order: ['id', 'class'] }],
+    },
   ],
 
   invalid: [
@@ -58,6 +63,20 @@ ruleTester.run('template-attribute-order', rule, {
     {
       code: '<template><div\n  name="x"\n  class="y"\n></div></template>',
       output: '<template><div\n  class="y"\n  name="x"\n></div></template>',
+      errors: [{ messageId: 'wrongOrder' }],
+    },
+    // Custom order: id before class
+    {
+      code: '<template><div class="foo" id="bar"></div></template>',
+      output: '<template><div id="bar" class="foo"></div></template>',
+      options: [{ order: ['id', 'class'] }],
+      errors: [{ messageId: 'wrongOrder' }],
+    },
+    // Custom order: role, class
+    {
+      code: '<template><div class="btn" role="button"></div></template>',
+      output: '<template><div role="button" class="btn"></div></template>',
+      options: [{ order: ['role', 'class'] }],
       errors: [{ messageId: 'wrongOrder' }],
     },
   ],

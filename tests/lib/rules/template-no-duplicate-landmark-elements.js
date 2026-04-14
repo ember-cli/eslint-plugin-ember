@@ -20,6 +20,8 @@ ruleTester.run('template-no-duplicate-landmark-elements', rule, {
     "<template><main><header><h1>Main Page Header</h1></header></main><dialog id='my-dialog'><header><h1>Dialog Header</h1></header></dialog></template>",
     // Landmarks inside dialog are in a separate scope
     '<template><nav></nav><dialog><nav></nav></dialog></template>',
+    // Landmarks inside popover element are in a separate scope
+    '<template><nav></nav><div popover><nav></nav></div></template>',
     // Dynamic role values — can't determine role statically
     '<template><div role={{this.role}}></div><div role={{this.role}}></div></template>',
     // Dynamic aria-label on one landmark — can't infer whether it duplicates a sibling
