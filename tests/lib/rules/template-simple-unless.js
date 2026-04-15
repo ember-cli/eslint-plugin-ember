@@ -32,40 +32,47 @@ ruleTester.run('template-simple-unless', rule, {
   invalid: [
     {
       code: '<template>{{#unless (eq value 1)}}Not one{{/unless}}</template>',
-      output: null,
+      output: '<template>{{#if (not (eq value 1))}}Not one{{/if}}</template>',
       options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: '<template>{{#unless (or a b)}}Neither{{/unless}}</template>',
-      output: null,
+      output: '<template>{{#if (not (or a b))}}Neither{{/if}}</template>',
       options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
 
     {
       code: "<template>{{unless (if true)  'Please no'}}</template>",
-      output: null,
+      output: "<template>{{if (not (if true))  'Please no'}}</template>",
       options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: "<template>{{unless (and isBad isAwful)  'notBadAndAwful'}}</template>",
-      output: null,
+      output: "<template>{{if (not (and isBad isAwful))  'notBadAndAwful'}}</template>",
       options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: '<template><img class={{unless (not condition) "some-class"}}></template>',
-      output: null,
+      output: '<template><img class={{if condition "some-class"}}></template>',
       options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: '<template><img class={{unless (one condition) "some-class" "other-class"}}></template>',
-      output: null,
+      output:
+        '<template><img class={{if (not (one condition)) "some-class" "other-class"}}></template>',
       options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
+    },
+    // followingElseBlock: simple body/inverse swap with `unless` -> `if`
+    {
+      code: '<template>{{#unless show}}A{{else}}B{{/unless}}</template>',
+      output: '<template>{{#if show}}B{{else}}A{{/if}}</template>',
+      errors: [{ messageId: 'followingElseBlock' }],
     },
   ],
 });
@@ -145,35 +152,35 @@ hbsRuleTester.run('template-simple-unless', rule, {
     // inline unless with nested helpers (exceeds default maxHelpers=1)
     {
       code: "{{unless (if (or true))  'Please no'}}",
-      output: null,
+      output: "{{if (not (if (or true)))  'Please no'}}",
       errors: [{ messageId: 'withHelper' }],
     },
     // inline unless with helper — maxHelpers: 0
     {
       code: "{{unless (if true)  'Please no'}}",
-      output: null,
+      output: "{{if (not (if true))  'Please no'}}",
       options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: "{{unless (and isBad isAwful)  'notBadAndAwful'}}",
-      output: null,
+      output: "{{if (not (and isBad isAwful))  'notBadAndAwful'}}",
       options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: '<img class={{unless (not condition) "some-class"}}>',
-      output: null,
+      output: '<img class={{if condition "some-class"}}>',
       options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: '<img class={{unless (one condition) "some-class" "other-class"}}>',
-      output: null,
+      output: '<img class={{if (not (one condition)) "some-class" "other-class"}}>',
       options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
-    // {{else}} block with {{unless}}
+    // {{else}} block with {{unless}} — fixable
     {
       code: [
         '{{#unless bandwagoner}}',
@@ -182,12 +189,14 @@ hbsRuleTester.run('template-simple-unless', rule, {
         '  Go Seahawks!',
         '{{/unless}}',
       ].join('\n'),
-      output: null,
+      output: ['{{#if bandwagoner}}', '  Go Seahawks!', '{{else}}', '  Go Niners!', '{{/if}}'].join(
+        '\n'
+      ),
       errors: [{ messageId: 'followingElseBlock' }],
     },
     {
       code: ['{{#unless bandwagoner}}', 'Test1', '{{else}}', 'Test2', '{{/unless}}'].join('\n'),
-      output: null,
+      output: ['{{#if bandwagoner}}', 'Test2', '{{else}}', 'Test1', '{{/if}}'].join('\n'),
       errors: [{ messageId: 'followingElseBlock' }],
     },
     {
@@ -198,7 +207,13 @@ hbsRuleTester.run('template-simple-unless', rule, {
         '  {{/my-component}}',
         '{{/unless}}',
       ].join('\n'),
-      output: null,
+      output: [
+        '{{#if bandwagoner}}',
+        '  {{#my-component}}',
+        '  {{/my-component}}',
+        '{{else}}',
+        '{{/if}}',
+      ].join('\n'),
       errors: [{ messageId: 'followingElseBlock' }],
     },
     // {{else if}} with {{unless}}
@@ -252,7 +267,9 @@ hbsRuleTester.run('template-simple-unless', rule, {
       code: ['{{#unless (and isFruit isYellow)}}', '  I am a green celery!', '{{/unless}}'].join(
         '\n'
       ),
-      output: null,
+      output: ['{{#if (not (and isFruit isYellow))}}', '  I am a green celery!', '{{/if}}'].join(
+        '\n'
+      ),
       options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
       errors: [{ messageId: 'withHelper' }],
     },
@@ -262,13 +279,15 @@ hbsRuleTester.run('template-simple-unless', rule, {
         '  I think I am a brown stick',
         '{{/unless}}',
       ].join('\n'),
-      output: null,
+      output: ['{{#if (or isBrown isSticky)}}', '  I think I am a brown stick', '{{/if}}'].join(
+        '\n'
+      ),
       options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: ['{{#unless (not isBrown)}}', '  I think I am a brown', '{{/unless}}'].join('\n'),
-      output: null,
+      output: ['{{#if isBrown}}', '  I think I am a brown', '{{/if}}'].join('\n'),
       options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
       errors: [{ messageId: 'withHelper' }],
     },
@@ -280,7 +299,13 @@ hbsRuleTester.run('template-simple-unless', rule, {
         '  Not a brown stick',
         '{{/unless}}',
       ].join('\n'),
-      output: null,
+      output: [
+        '{{#if isSticky}}',
+        '  Not a brown stick',
+        '{{else}}',
+        '  I think I am a brown stick',
+        '{{/if}}',
+      ].join('\n'),
       errors: [{ messageId: 'followingElseBlock' }],
     },
     // maxHelpers exceeded (top-level params only)
@@ -290,7 +315,11 @@ hbsRuleTester.run('template-simple-unless', rule, {
         '  MUCH HELPERS, VERY BAD',
         '{{/unless}}',
       ].join('\n'),
-      output: null,
+      output: [
+        '{{#if (not (or foo bar)) (eq baz beer) (not-eq x y)}}',
+        '  MUCH HELPERS, VERY BAD',
+        '{{/if}}',
+      ].join('\n'),
       options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
       errors: [{ messageId: 'withHelper' }],
     },
@@ -301,14 +330,18 @@ hbsRuleTester.run('template-simple-unless', rule, {
         '  I think I am a brown stick',
         '{{/unless}}',
       ].join('\n'),
-      output: null,
+      output: [
+        '{{#if (not (concat "blue" "red"))}}',
+        '  I think I am a brown stick',
+        '{{/if}}',
+      ].join('\n'),
       options: [{ maxHelpers: 0 }],
       errors: [{ messageId: 'withHelper' }],
     },
     // allowlist — helper not in allowlist
     {
       code: ['{{#unless (one foo bar)}}', '  I think I am a brown stick', '{{/unless}}'].join('\n'),
-      output: null,
+      output: ['{{#if (not (one foo bar))}}', '  I think I am a brown stick', '{{/if}}'].join('\n'),
       options: [{ allowlist: ['test'], maxHelpers: 1 }],
       errors: [{ messageId: 'withHelper' }],
     },
@@ -319,20 +352,24 @@ hbsRuleTester.run('template-simple-unless', rule, {
         '  I think I am a brown stick',
         '{{/unless}}',
       ].join('\n'),
-      output: null,
+      output: [
+        '{{#if (not (one foo)) (two bar) (three baz)}}',
+        '  I think I am a brown stick',
+        '{{/if}}',
+      ].join('\n'),
       options: [{ maxHelpers: 2 }],
       errors: [{ messageId: 'withHelper' }],
     },
     // denylist — helper in denylist
     {
       code: ['{{#unless (two three)}}', '  I think I am a brown stick', '{{/unless}}'].join('\n'),
-      output: null,
+      output: ['{{#if (not (two three))}}', '  I think I am a brown stick', '{{/if}}'].join('\n'),
       options: [{ denylist: ['two'], maxHelpers: -1 }],
       errors: [{ messageId: 'withHelper' }],
     },
     {
       code: ['{{#unless (two three)}}', '  I think I am a brown stick', '{{/unless}}'].join('\n'),
-      output: null,
+      output: ['{{#if (not (two three))}}', '  I think I am a brown stick', '{{/if}}'].join('\n'),
       options: [{ denylist: ['two', 'four'], maxHelpers: -1 }],
       errors: [{ messageId: 'withHelper' }],
     },
@@ -340,35 +377,35 @@ hbsRuleTester.run('template-simple-unless', rule, {
     // allowlist violation: `if` not in allowlist (ETL bad case: {{unless (if (or true)) ...}})
     {
       code: "{{unless (if (or true))  'Please no'}}",
-      output: null,
+      output: "{{if (not (if (or true)))  'Please no'}}",
       options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
       errors: [{ messageId: 'withHelper' }],
     },
     // allowlist violation: `if` not in allowlist (ETL bad case: {{unless (if true) ...}})
     {
       code: "{{unless (if true)  'Please no'}}",
-      output: null,
+      output: "{{if (not (if true))  'Please no'}}",
       options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
       errors: [{ messageId: 'withHelper' }],
     },
     // allowlist violation: `and` not in allowlist (ETL bad case: {{unless (and isBad isAwful) ...}})
     {
       code: "{{unless (and isBad isAwful)  'notBadAndAwful'}}",
-      output: null,
+      output: "{{if (not (and isBad isAwful))  'notBadAndAwful'}}",
       options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
       errors: [{ messageId: 'withHelper' }],
     },
     // allowlist violation: `not` not in allowlist (ETL bad case: inline unless with not)
     {
       code: '<img class={{unless (not condition) "some-class"}}>',
-      output: null,
+      output: '<img class={{if condition "some-class"}}>',
       options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
       errors: [{ messageId: 'withHelper' }],
     },
     // allowlist violation: `one` not in allowlist (ETL bad case: inline unless with one)
     {
       code: '<img class={{unless (one condition) "some-class" "other-class"}}>',
-      output: null,
+      output: '<img class={{if (not (one condition)) "some-class" "other-class"}}>',
       options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
       errors: [{ messageId: 'withHelper' }],
     },
@@ -379,7 +416,11 @@ hbsRuleTester.run('template-simple-unless', rule, {
         '  MUCH HELPERS, VERY BAD',
         '{{/unless}}',
       ].join('\n'),
-      output: null,
+      output: [
+        '{{#if (not (or (eq foo bar) (not-eq baz "beer")))}}',
+        '  MUCH HELPERS, VERY BAD',
+        '{{/if}}',
+      ].join('\n'),
       options: [{ allowlist: ['or', 'eq', 'not-eq'], maxHelpers: 2 }],
       errors: [{ messageId: 'withHelper' }],
     },
@@ -390,7 +431,11 @@ hbsRuleTester.run('template-simple-unless', rule, {
         '  I think I am a brown stick',
         '{{/unless}}',
       ].join('\n'),
-      output: null,
+      output: [
+        '{{#if (not (one (test power) two))}}',
+        '  I think I am a brown stick',
+        '{{/if}}',
+      ].join('\n'),
       options: [{ allowlist: ['test'], maxHelpers: 1 }],
       errors: [{ messageId: 'withHelper' }],
     },
@@ -401,7 +446,11 @@ hbsRuleTester.run('template-simple-unless', rule, {
         '  I think I am a brown stick',
         '{{/unless}}',
       ].join('\n'),
-      output: null,
+      output: [
+        '{{#if (not (one (two three) (four five)))}}',
+        '  I think I am a brown stick',
+        '{{/if}}',
+      ].join('\n'),
       options: [{ allowlist: [], maxHelpers: 2 }],
       errors: [{ messageId: 'withHelper' }],
     },
@@ -412,7 +461,11 @@ hbsRuleTester.run('template-simple-unless', rule, {
         '  I think I am a brown stick',
         '{{/unless}}',
       ].join('\n'),
-      output: null,
+      output: [
+        '{{#if (not (one (two three) (four five)))}}',
+        '  I think I am a brown stick',
+        '{{/if}}',
+      ].join('\n'),
       options: [{ denylist: ['two'], maxHelpers: -1 }],
       errors: [{ messageId: 'withHelper' }],
     },
@@ -423,7 +476,11 @@ hbsRuleTester.run('template-simple-unless', rule, {
         '  I think I am a brown stick',
         '{{/unless}}',
       ].join('\n'),
-      output: null,
+      output: [
+        '{{#if (not (one (two three) (four five)))}}',
+        '  I think I am a brown stick',
+        '{{/if}}',
+      ].join('\n'),
       options: [{ denylist: ['two', 'four'], maxHelpers: -1 }],
       errors: [{ messageId: 'withHelper' }],
     },
@@ -434,7 +491,11 @@ hbsRuleTester.run('template-simple-unless', rule, {
         '  I think I am a brown stick',
         '{{/unless}}',
       ].join('\n'),
-      output: null,
+      output: [
+        '{{#if (not (one (two three) (four five)))}}',
+        '  I think I am a brown stick',
+        '{{/if}}',
+      ].join('\n'),
       options: [{ denylist: ['one'], maxHelpers: -1 }],
       errors: [{ messageId: 'withHelper' }],
     },

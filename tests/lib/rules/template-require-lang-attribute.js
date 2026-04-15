@@ -13,6 +13,8 @@ ruleTester.run('template-require-lang-attribute', rule, {
     '<template><html lang="en"></html></template>',
     '<template><html lang="en-US"></html></template>',
     '<template><html lang="DE-BW"></html></template>',
+    '<template><html lang="zh-Hant-HK"></html></template>',
+    '<template><html lang="yue-Hans"></html></template>',
     '<template><html lang={{lang}}></html></template>',
     {
       code: '<template><html lang="de"></html></template>',
@@ -67,6 +69,14 @@ ruleTester.run('template-require-lang-attribute', rule, {
       errors: [{ message: ERROR_MESSAGE }],
     },
     {
+      // Invalid region subtag: "xx" is not a registered ISO 3166 / BCP 47
+      // region code. Prior to the country-codes port, the rule only
+      // validated the primary subtag and incorrectly accepted this value.
+      code: '<template><html lang="en-XX"></html></template>',
+      output: null,
+      errors: [{ message: ERROR_MESSAGE }],
+    },
+    {
       code: '<template><html></html></template>',
       output: null,
       options: [{ validateValues: false }],
@@ -94,6 +104,8 @@ hbsRuleTester.run('template-require-lang-attribute', rule, {
     '<html lang="en"></html>',
     '<html lang="en-US"></html>',
     '<html lang="DE-BW"></html>',
+    '<html lang="zh-Hant-HK"></html>',
+    '<html lang="yue-Hans"></html>',
     '<html lang={{lang}}></html>',
     {
       code: '<html lang="de"></html>',
@@ -144,6 +156,14 @@ hbsRuleTester.run('template-require-lang-attribute', rule, {
       code: '<html lang="gibberish"></html>',
       output: null,
       options: [{ validateValues: true }],
+      errors: [{ message: ERROR_MESSAGE }],
+    },
+    {
+      // Invalid region subtag: "xx" is not a registered ISO 3166 / BCP 47
+      // region code. Prior to the country-codes port, the rule only
+      // validated the primary subtag and incorrectly accepted this value.
+      code: '<html lang="en-XX"></html>',
+      output: null,
       errors: [{ message: ERROR_MESSAGE }],
     },
     {

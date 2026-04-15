@@ -249,7 +249,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-model-argument-in-route-templates](docs/rules/template-no-model-argument-in-route-templates.md)       | disallow @model argument in route templates                                  |    | 🔧 |    |
 | [template-no-multiple-empty-lines](docs/rules/template-no-multiple-empty-lines.md)                                 | disallow multiple consecutive empty lines in templates                       |    | 🔧 |    |
 | [template-no-mut-helper](docs/rules/template-no-mut-helper.md)                                                     | disallow usage of (mut) helper                                               |    |    |    |
-| [template-no-negated-comparison](docs/rules/template-no-negated-comparison.md)                                     | disallow negated comparisons in templates                                    |    |    |    |
+| [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                                       | disallow negated conditions in if/unless                                     |    | 🔧 |    |
 | [template-no-nested-splattributes](docs/rules/template-no-nested-splattributes.md)                                 | disallow nested ...attributes usage                                          |    |    |    |
 | [template-no-obscure-array-access](docs/rules/template-no-obscure-array-access.md)                                 | disallow obscure array access patterns like `objectPath.@each.property`      |    | 🔧 |    |
 | [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                                       | disallow obsolete HTML elements                                              |    |    |    |
@@ -283,7 +283,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-require-valid-named-block-naming-format](docs/rules/template-require-valid-named-block-naming-format.md) | require valid named block naming format                                      |    | 🔧 |    |
 | [template-self-closing-void-elements](docs/rules/template-self-closing-void-elements.md)                           | require self-closing on void elements                                        |    | 🔧 |    |
 | [template-simple-modifiers](docs/rules/template-simple-modifiers.md)                                               | require simple modifier syntax                                               |    |    |    |
-| [template-simple-unless](docs/rules/template-simple-unless.md)                                                     | require simple conditions in unless blocks                                   |    |    |    |
+| [template-simple-unless](docs/rules/template-simple-unless.md)                                                     | require simple conditions in unless blocks                                   |    | 🔧 |    |
 | [template-sort-invocations](docs/rules/template-sort-invocations.md)                                               | require sorted attributes and modifiers                                      |    | 🔧 |    |
 | [template-splat-attributes-only](docs/rules/template-splat-attributes-only.md)                                     | disallow ...spread other than ...attributes                                  |    |    |    |
 | [template-style-concatenation](docs/rules/template-style-concatenation.md)                                         | disallow string concatenation in inline styles                               |    |    |    |
@@ -418,7 +418,7 @@ rules in templates can be disabled with eslint directives with mustache or html 
 | [template-no-scope-outside-table-headings](docs/rules/template-no-scope-outside-table-headings.md)                         | disallow scope attribute outside th elements                      |    |    |    |
 | [template-no-shadowed-elements](docs/rules/template-no-shadowed-elements.md)                                               | disallow ambiguity with block param names shadowing HTML elements |    |    |    |
 | [template-no-unbalanced-curlies](docs/rules/template-no-unbalanced-curlies.md)                                             | disallow unbalanced mustache curlies                              |    |    |    |
-| [template-no-unknown-arguments-for-builtin-components](docs/rules/template-no-unknown-arguments-for-builtin-components.md) | disallow unknown arguments for built-in components                |    |    |    |
+| [template-no-unknown-arguments-for-builtin-components](docs/rules/template-no-unknown-arguments-for-builtin-components.md) | disallow unknown arguments for built-in components                |    | 🔧 |    |
 
 ### Routes
 

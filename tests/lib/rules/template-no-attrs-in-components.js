@@ -8,40 +8,120 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-attrs-in-components', rule, {
   valid: [
-    '<template>{{@value}}</template>',
-    '<template>{{this.value}}</template>',
-    // Class component with normal this access
-    `import Component from '@glimmer/component';
-     class MyComponent extends Component {
-       <template>{{this.args.name}}</template>
-     }`,
-    // Bare attrs is not accessible without this, so it's allowed
-    '<template>{{attrs.value}}</template>',
-    '<template>{{attrs}}</template>',
-    `import Component from '@glimmer/component';
-     class MyComponent extends Component {
-       <template>{{attrs.name}}</template>
-     }`,
+    // Not a component template path: nothing is flagged, regardless of content.
+    {
+      filename: 'app/templates/application.hbs',
+      code: '<template>{{@value}}</template>',
+    },
+    {
+      filename: 'app/templates/application.hbs',
+      code: '<template>{{this.value}}</template>',
+    },
+    // `this.attrs.*` outside a component template — not flagged (path gate).
+    {
+      filename: 'app/templates/application.hbs',
+      code: '<template>{{this.attrs.foo}}</template>',
+    },
+    // Even `attrs.*` itself is only flagged inside component templates.
+    {
+      filename: 'app/templates/application.hbs',
+      code: '<template>{{attrs.value}}</template>',
+    },
+    // Inside a component template, non-attrs paths are fine.
+    {
+      filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{@value}}</template>',
+    },
+    {
+      filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{this.value}}</template>',
+    },
+    // Pod-style components path matches the gate, but no `attrs` usage.
+    {
+      filename: 'app/components/foo/template.hbs',
+      code: '<template>{{@value}}</template>',
+    },
+    // `-components/` path gate, no `attrs` usage.
+    {
+      filename: 'app/ui-components/foo.hbs',
+      code: '<template>{{@value}}</template>',
+    },
+    // Octane co-located template — non-attrs path is fine.
+    {
+      filename: 'app/components/foo.hbs',
+      code: '<template>{{@value}}</template>',
+    },
   ],
   invalid: [
+    // Bare `attrs.*` inside `templates/components/` — flagged.
     {
-      code: '<template>{{this.attrs.value}}</template>',
+      filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{attrs.foo}}</template>',
       output: null,
-      errors: [{ messageId: 'noThisAttrs' }],
+      errors: [{ messageId: 'noAttrs' }],
     },
+    // Bare `attrs` (no dotted tail) inside `templates/components/` — flagged.
     {
-      code: '<template>{{this.attrs}}</template>',
+      filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{attrs}}</template>',
       output: null,
-      errors: [{ messageId: 'noThisAttrs' }],
+      errors: [{ messageId: 'noAttrs' }],
     },
-    // Class component using this.attrs
+    // Pod-style path `components/*/template` — flagged.
     {
-      code: `import Component from '@glimmer/component';
-       class MyComponent extends Component {
-         <template>{{this.attrs.name}}</template>
-       }`,
+      filename: 'app/components/foo/template.hbs',
+      code: '<template>{{attrs.name}}</template>',
       output: null,
-      errors: [{ messageId: 'noThisAttrs' }],
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    // `ui/components` path — flagged.
+    {
+      filename: 'app/ui/components/foo.hbs',
+      code: '<template>{{attrs.name}}</template>',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    // `-components/` path — flagged.
+    {
+      filename: 'app/ui-components/foo.hbs',
+      code: '<template>{{attrs.name}}</template>',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    // `this.attrs.*` inside a component template — flagged (real @ember/component API).
+    {
+      filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{this.attrs.foo}}</template>',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    // attrs in attribute value position.
+    {
+      filename: 'app/templates/components/foo.hbs',
+      code: '<template><div class={{attrs.foo}}></div></template>',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    // attrs in block helper condition.
+    {
+      filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{#if attrs.foo}}bar{{/if}}</template>',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    // attrs as hash pair value.
+    {
+      filename: 'app/templates/components/foo.hbs',
+      code: '<template>{{bar foo=attrs.foo}}</template>',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
+    },
+    // Octane co-located template (app/components/foo.hbs) — flagged.
+    {
+      filename: 'app/components/foo.hbs',
+      code: '<template>{{attrs.foo}}</template>',
+      output: null,
+      errors: [{ messageId: 'noAttrs' }],
     },
   ],
 });

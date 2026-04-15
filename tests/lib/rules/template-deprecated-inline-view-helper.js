@@ -30,6 +30,15 @@ ruleTester.run('template-deprecated-inline-view-helper', rule, {
     '<template>{{yield hash=view.foo}}</template>',
     // hash pair with key "to" should not be flagged
     '<template>{{some-component to=view.foo}}</template>',
+    // Rule is HBS-only: `view` in GJS/GTS may be a legitimate imported JS binding
+    {
+      filename: 'test.gjs',
+      code: "<template>{{view 'awful-fishsticks'}}</template>",
+    },
+    {
+      filename: 'test.gts',
+      code: '<template>{{view.bad-fishsticks}}</template>',
+    },
   ],
   invalid: [
     {

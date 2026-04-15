@@ -89,7 +89,7 @@ ruleTester.run('template-require-context-role', rule, {
         {
           message:
             'Role "listitem" must be contained in an element with one of these roles: group, list',
-          type: 'GlimmerElementNode',
+          type: 'GlimmerAttrNode',
         },
       ],
     },
@@ -103,7 +103,7 @@ ruleTester.run('template-require-context-role', rule, {
       errors: [
         {
           message: 'Role "tab" must be contained in an element with one of these roles: tablist',
-          type: 'GlimmerElementNode',
+          type: 'GlimmerAttrNode',
         },
       ],
     },
@@ -118,7 +118,7 @@ ruleTester.run('template-require-context-role', rule, {
         {
           message:
             'Role "menuitem" must be contained in an element with one of these roles: group, menu, menubar',
-          type: 'GlimmerElementNode',
+          type: 'GlimmerAttrNode',
         },
       ],
     },
@@ -272,6 +272,18 @@ ruleTester.run('template-require-context-role', rule, {
         {
           message:
             'Role "menuitem" must be contained in an element with one of these roles: group, menu, menubar',
+        },
+      ],
+    },
+    {
+      // aria-hidden on a non-immediate ancestor must NOT suppress the rule
+      // (upstream only honors aria-hidden on the immediate parent)
+      code: '<template><div aria-hidden="true"><div><div role="listitem">Item</div></div></div></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Role "listitem" must be contained in an element with one of these roles: group, list',
         },
       ],
     },
@@ -479,6 +491,17 @@ hbsRuleTester.run('template-require-context-role', rule, {
         {
           message:
             'Role "menuitem" must be contained in an element with one of these roles: group, menu, menubar',
+        },
+      ],
+    },
+    {
+      // aria-hidden on a non-immediate ancestor must NOT suppress the rule
+      code: '<div aria-hidden="true"><div><div role="listitem">Item</div></div></div>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Role "listitem" must be contained in an element with one of these roles: group, list',
         },
       ],
     },

@@ -11,6 +11,28 @@ ruleTester.run('template-no-input-block', rule, {
     '<template>{{button}}</template>',
     '<template>{{#x-button}}{{/x-button}}</template>',
     '<template>{{input}}</template>',
+
+    // GJS/GTS: the classic `{{input}}` helper is HBS-only — `input` is not
+    // an ambient strict-mode keyword. Any `{{#input}}` in strict mode is a
+    // user-imported binding (or an unbound name that the strict-mode
+    // compiler will reject on its own); flagging here would corrupt the
+    // user's intent for the imported case.
+    {
+      filename: 'test.gjs',
+      code: '<template>{{#input}}content{{/input}}</template>',
+    },
+    {
+      filename: 'test.gts',
+      code: '<template>{{#input}}content{{/input}}</template>',
+    },
+    {
+      filename: 'test.gjs',
+      code: "import input from './my-input';\n<template>{{#input}}content{{/input}}</template>",
+    },
+    {
+      filename: 'test.gjs',
+      code: "import input from './my-input';\n<template>{{#input value=this.foo}}{{/input}}</template>",
+    },
   ],
   invalid: [
     {

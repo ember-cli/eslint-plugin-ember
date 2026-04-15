@@ -13,6 +13,15 @@ ruleTester.run('template-no-class-bindings', rule, {
     '<template>{{true}}</template>',
     '<template>{{"hehe"}}</template>',
     '<template><div class="foo"></div></template>',
+    // Rule is HBS-only: @classBinding in GJS/GTS may be a legitimate component argument
+    {
+      filename: 'test.gjs',
+      code: '<template><SomeThing @classBinding="lol:wat" /></template>',
+    },
+    {
+      filename: 'test.gts',
+      code: '<template>{{some-thing classNameBindings="lol:foo:bar"}}</template>',
+    },
   ],
   invalid: [
     {

@@ -144,6 +144,43 @@ ruleTester.run('template-no-mut-helper', rule, {
       output: null,
       errors: [{ message: 'Do not use the (mut) helper. Use regular setters or actions instead.' }],
     },
+    // `mut` is a strict-mode ambient keyword — no import needed in .gjs strict
+    // mode templates.
+    {
+      code: '<template>{{mut foo bar}}</template>',
+      output: null,
+      errors: [
+        {
+          message: 'Do not use the (mut) helper. Use regular setters or actions instead.',
+          type: 'GlimmerMustacheStatement',
+        },
+      ],
+    },
+    // Config: setterAlternative should produce exactly one `{{...}}` wrapping
+    // around the user-supplied expression — even when the user accidentally
+    // included the braces themselves.
+    {
+      code: '<template><MyComponent onchange={{action (mut this.val) value="target.value"}}/></template>',
+      output: null,
+      options: [{ setterAlternative: '(set this.foo)' }],
+      errors: [
+        {
+          message:
+            'Do not use the (mut) helper. Consider using a JS action or {{(set this.foo)}} instead.',
+        },
+      ],
+    },
+    {
+      code: '<template><MyComponent onchange={{action (mut this.val) value="target.value"}}/></template>',
+      output: null,
+      options: [{ setterAlternative: '{{(set this.foo)}}' }],
+      errors: [
+        {
+          message:
+            'Do not use the (mut) helper. Consider using a JS action or {{(set this.foo)}} instead.',
+        },
+      ],
+    },
   ],
 });
 

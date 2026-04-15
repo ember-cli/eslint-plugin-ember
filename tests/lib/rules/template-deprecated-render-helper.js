@@ -19,6 +19,15 @@ ruleTester.run('template-deprecated-render-helper', rule, {
     '<template>{{42}}</template>',
     '<template>{{null}}</template>',
     '<template>{{undefined}}</template>',
+    // Rule is HBS-only: `render` in GJS/GTS is a JS binding, not the classic helper
+    {
+      filename: 'test.gjs',
+      code: '<template>{{render "user"}}</template>',
+    },
+    {
+      filename: 'test.gts',
+      code: '<template>{{render "user"}}</template>',
+    },
   ],
   invalid: [
     {

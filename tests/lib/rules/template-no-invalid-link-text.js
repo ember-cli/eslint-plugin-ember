@@ -8,6 +8,11 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-invalid-link-text', rule, {
   valid: [
+    // Link with component child — content is opaque, can't validate.
+    // Mirrors upstream no-invalid-link-text.js L53-56 ("do not flag when link contains additional dynamic (non-text) children").
+    { filename: 'test.gjs', code: '<template><a href="/x"><MyComponent /></a></template>' },
+    { filename: 'test.gjs', code: '<template><a href="/x">prefix <MyComponent /></a></template>' },
+
     { filename: 'test.gjs', code: '<template><a href="/about">About Us</a></template>' },
     {
       filename: 'test.gjs',
@@ -150,13 +155,6 @@ ruleTester.run('template-no-invalid-link-text', rule, {
       errors: [{ messageId: 'invalidText' }],
     },
     {
-      // Nested element content
-      filename: 'test.gjs',
-      code: '<template><a href="/page"><span>click here</span></a></template>',
-      output: null,
-      errors: [{ messageId: 'invalidText' }],
-    },
-    {
       // aria-label with disallowed text overrides content check
       filename: 'test.gjs',
       code: 'import { LinkTo } from \'@ember/routing\'; <template><LinkTo aria-label="click here">About Us</LinkTo></template>',
@@ -274,12 +272,6 @@ hbsRuleTester.run('template-no-invalid-link-text (hbs)', rule, {
     {
       code: `{{#link-to}} &nbsp;
 {{/link-to}}`,
-      output: null,
-      errors: [{ messageId: 'invalidText' }],
-    },
-    {
-      // nested element content — text is in a child element
-      code: '<a href="/page"><span>click here</span></a>',
       output: null,
       errors: [{ messageId: 'invalidText' }],
     },

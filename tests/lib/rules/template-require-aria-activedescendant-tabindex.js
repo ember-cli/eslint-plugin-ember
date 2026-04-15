@@ -36,6 +36,16 @@ const invalidHbs = [
     output: '<div aria-activedescendant="fixme" tabindex="0"></div>',
     errors: [{ message: ERROR_MESSAGE }],
   },
+  {
+    code: '<a aria-activedescendant="x"></a>',
+    output: '<a aria-activedescendant="x" tabindex="0"></a>',
+    errors: [{ message: ERROR_MESSAGE }],
+  },
+  {
+    code: '<button aria-activedescendant="x" tabindex="-1"></button>',
+    output: '<button aria-activedescendant="x" tabindex="0"></button>',
+    errors: [{ message: ERROR_MESSAGE }],
+  },
 ];
 
 function wrapTemplate(entry) {

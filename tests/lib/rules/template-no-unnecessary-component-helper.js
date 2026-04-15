@@ -91,7 +91,32 @@ const gjsRuleTester = new RuleTester({
 
 gjsRuleTester.run('template-no-unnecessary-component-helper', rule, {
   valid: validGjs,
-  invalid: invalidHbs.map(wrapTemplate),
+  invalid: [
+    ...invalidHbs.map(wrapTemplate),
+    // GJS/GTS: kebab-case names can't be valid JS identifiers — report with
+    // a dedicated message suggesting the PascalCase form and import.
+    // Full migration (including adding the import) is best handled by
+    // ember-codemods/angle-brackets-codemod.
+    {
+      filename: 'test.gjs',
+      code: '<template>{{component "my-component-name" foo=123}}</template>',
+      output: null,
+      errors: [{ messageId: 'noUnnecessaryComponentKebab' }],
+    },
+    {
+      filename: 'test.gts',
+      code: '<template>{{#component "my-component-name"}}content{{/component}}</template>',
+      output: null,
+      errors: [{ messageId: 'noUnnecessaryComponentKebab' }],
+    },
+    // GJS/GTS: valid JS identifier → autofix still applies
+    {
+      filename: 'test.gjs',
+      code: '<template>{{component "myComponent" foo=123}}</template>',
+      output: '<template>{{myComponent foo=123}}</template>',
+      errors: [{ messageId: 'noUnnecessaryComponent' }],
+    },
+  ],
 });
 
 const hbsRuleTester = new RuleTester({

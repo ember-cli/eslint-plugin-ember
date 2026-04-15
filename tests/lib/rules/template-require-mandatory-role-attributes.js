@@ -61,6 +61,20 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
       output: null,
       errors: [{ message: 'The attribute aria-level is required by the role heading' }],
     },
+    {
+      code: '<template>{{foo role="slider"}}</template>',
+      output: null,
+      errors: [
+        {
+          message: 'The attribute aria-valuenow is required by the role slider',
+        },
+      ],
+    },
+    {
+      code: '<template>{{foo role="checkbox"}}</template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role checkbox' }],
+    },
   ],
 });
 
@@ -117,6 +131,20 @@ hbsRuleTester.run('template-require-mandatory-role-attributes', rule, {
       code: '{{some-component role="heading"}}',
       output: null,
       errors: [{ message: 'The attribute aria-level is required by the role heading' }],
+    },
+    {
+      code: '{{foo role="slider"}}',
+      output: null,
+      errors: [
+        {
+          message: 'The attribute aria-valuenow is required by the role slider',
+        },
+      ],
+    },
+    {
+      code: '{{foo role="checkbox"}}',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role checkbox' }],
     },
   ],
 });
