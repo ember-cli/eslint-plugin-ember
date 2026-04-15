@@ -9,17 +9,21 @@ const validHbs = [
     options: [{ allowedMethods: ['get'] }],
     code: '<form method="GET"></form>',
   },
+  // No options → default-enabled with POST,GET,DIALOG.
+  '<form method="POST"></form>',
+  '<form method="post"></form>',
+  '<form method="GET"></form>',
+  '<form method="get"></form>',
+  '<form method="DIALOG"></form>',
+  '<form method="dialog"></form>',
+  '<form method="{{formMethod}}"></form>',
+  '<form method={{formMethod}}></form>',
+  '<div/>',
+  '<div></div>',
+  '<div method="randomType"></div>',
+  // Explicit `true` behaves identically to no options.
   { options: [true], code: '<form method="POST"></form>' },
-  { options: [true], code: '<form method="post"></form>' },
-  { options: [true], code: '<form method="GET"></form>' },
-  { options: [true], code: '<form method="get"></form>' },
-  { options: [true], code: '<form method="DIALOG"></form>' },
-  { options: [true], code: '<form method="dialog"></form>' },
-  { options: [true], code: '<form method="{{formMethod}}"></form>' },
-  { options: [true], code: '<form method={{formMethod}}></form>' },
-  { options: [true], code: '<div/>' },
-  { options: [true], code: '<div></div>' },
-  { options: [true], code: '<div method="randomType"></div>' },
+  // Explicit `false` disables the rule.
   { options: [false], code: '<form></form>' },
 ];
 
