@@ -13,6 +13,13 @@ ruleTester.run('template-no-arguments-for-html-elements', rule, {
     '<template><MyComponent @title="Hello" @onClick={{this.handler}} /></template>',
     '<template><CustomButton @disabled={{true}} /></template>',
     '<template><input value={{this.value}} /></template>',
+    // Custom elements aren't in the html-tags/svg-tags allowlists, so they're
+    // not flagged. Accepted false negative — web component namespace is open.
+    '<template><my-element @foo="x" /></template>',
+    // Namespaced/path component invocations aren't in the allowlists either.
+    '<template><NS.Foo @bar="baz" /></template>',
+    // Named blocks (colon-prefixed) aren't in the allowlists either.
+    '<template><Thing><:slot @item="x">content</:slot></Thing></template>',
     `let div = <template>{{@greeting}}</template>
 
 <template>
@@ -45,6 +52,30 @@ ruleTester.run('template-no-arguments-for-html-elements', rule, {
     },
     {
       code: '<template><span @data={{this.info}}>Text</span></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            '@arguments can only be used on components, not HTML elements. Use regular attributes instead.',
+          type: 'GlimmerAttrNode',
+        },
+      ],
+    },
+    {
+      // SVG element — in svg-tags allowlist.
+      code: '<template><circle @r="5" /></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            '@arguments can only be used on components, not HTML elements. Use regular attributes instead.',
+          type: 'GlimmerAttrNode',
+        },
+      ],
+    },
+    {
+      // MathML element — in mathml-tag-names allowlist.
+      code: '<template><mfrac @numerator="x" /></template>',
       output: null,
       errors: [
         {

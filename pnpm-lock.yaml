@@ -44,12 +44,18 @@ importers:
       lodash.kebabcase:
         specifier: ^4.1.1
         version: 4.1.1
+      mathml-tag-names:
+        specifier: ^4.0.0
+        version: 4.0.0
       requireindex:
         specifier: ^1.2.0
         version: 1.2.0
       snake-case:
         specifier: ^3.0.3
         version: 3.0.4
+      svg-tags:
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       '@babel/core':
         specifier: ^7.25.9
