@@ -41,6 +41,9 @@ importers:
       lodash.kebabcase:
         specifier: ^4.1.1
         version: 4.1.1
+      mathml-tag-names:
+        specifier: ^4.0.0
+        version: 4.0.0
       requireindex:
         specifier: ^1.2.0
         version: 1.2.0

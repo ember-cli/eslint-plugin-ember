@@ -55,5 +55,27 @@ ruleTester.run('template-no-block-params-for-html-elements', rule, {
         },
       ],
     },
+    {
+      // SVG element — in svg-tags allowlist.
+      code: '<template><circle as |r|>{{r}}</circle></template>',
+      output: null,
+      errors: [
+        {
+          message: 'Block params can only be used with components, not HTML elements.',
+          type: 'GlimmerElementNode',
+        },
+      ],
+    },
+    {
+      // MathML element — in mathml-tag-names allowlist.
+      code: '<template><mfrac as |num|>{{num}}</mfrac></template>',
+      output: null,
+      errors: [
+        {
+          message: 'Block params can only be used with components, not HTML elements.',
+          type: 'GlimmerElementNode',
+        },
+      ],
+    },
   ],
 });
