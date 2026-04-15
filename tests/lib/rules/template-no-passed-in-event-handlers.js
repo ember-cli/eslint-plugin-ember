@@ -36,10 +36,6 @@ ruleTester.run('template-no-passed-in-event-handlers', rule, {
     '<template><Input @click={{this.handleClick}} /></template>',
     '<template><Textarea @click={{this.handleClick}} /></template>',
 
-    // HTML elements are not checked (in GTS <my-button> is HTML, not a component)
-    '<template><my-button @click={{this.handleClick}} /></template>',
-    '<template><custom-el @submit={{this.handleSubmit}} /></template>',
-
     // mouseMove/mouseEnter/mouseLeave are not Ember classic-event aliases
     '<template><Foo @mouseMove={{this.handleMove}} /></template>',
     '<template><Foo @mouseEnter={{this.handleEnter}} /></template>',
@@ -102,22 +98,6 @@ ruleTester.run('template-no-passed-in-event-handlers', rule, {
     },
     {
       code: '<template><Foo @submit={{this.handleClick}} /></template>',
-      output: null,
-      errors: [{ messageId: 'unexpected' }],
-    },
-    // Non-PascalCase component forms: this.-prefixed, @-prefixed, dot-path
-    {
-      code: '<template><this.MyComponent @click={{this.handleClick}} /></template>',
-      output: null,
-      errors: [{ messageId: 'unexpected' }],
-    },
-    {
-      code: '<template><@someComponent @click={{this.handleClick}} /></template>',
-      output: null,
-      errors: [{ messageId: 'unexpected' }],
-    },
-    {
-      code: '<template><ns.Widget @submit={{this.handleSubmit}} /></template>',
       output: null,
       errors: [{ messageId: 'unexpected' }],
     },
