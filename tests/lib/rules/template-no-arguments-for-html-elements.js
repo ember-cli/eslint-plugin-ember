@@ -61,5 +61,29 @@ ruleTester.run('template-no-arguments-for-html-elements', rule, {
         },
       ],
     },
+    {
+      // SVG element — in svg-tags allowlist.
+      code: '<template><circle @r="5" /></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            '@arguments can only be used on components, not HTML elements. Use regular attributes instead.',
+          type: 'GlimmerAttrNode',
+        },
+      ],
+    },
+    {
+      // MathML element — in mathml-tag-names allowlist.
+      code: '<template><mfrac @numerator="x" /></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            '@arguments can only be used on components, not HTML elements. Use regular attributes instead.',
+          type: 'GlimmerAttrNode',
+        },
+      ],
+    },
   ],
 });
