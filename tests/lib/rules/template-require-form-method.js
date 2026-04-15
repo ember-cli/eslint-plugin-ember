@@ -9,10 +9,6 @@ const validHbs = [
     options: [{ allowedMethods: ['get'] }],
     code: '<form method="GET"></form>',
   },
-  // Default behavior: when no options are provided, the rule is disabled.
-  // A bare <form> should NOT error.
-  '<form></form>',
-  '<form method="NOT_A_VALID_METHOD"></form>',
   { options: [true], code: '<form method="POST"></form>' },
   { options: [true], code: '<form method="post"></form>' },
   { options: [true], code: '<form method="GET"></form>' },
@@ -28,6 +24,17 @@ const validHbs = [
 ];
 
 const invalidHbs = [
+  // Default-enabled: no options → rule active with POST,GET,DIALOG.
+  {
+    code: '<form></form>',
+    output: '<form method="POST"></form>',
+    errors: [{ message: DEFAULT_ERROR }],
+  },
+  {
+    code: '<form method="NOT_A_VALID_METHOD"></form>',
+    output: '<form method="POST"></form>',
+    errors: [{ message: DEFAULT_ERROR }],
+  },
   {
     options: [{ allowedMethods: ['get'] }],
     code: '<form method="POST"></form>',
