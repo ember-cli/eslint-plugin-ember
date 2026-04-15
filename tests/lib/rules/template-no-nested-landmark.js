@@ -42,6 +42,15 @@ ruleTester.run('template-no-nested-landmark', rule, {
     '<template><div role="banner"><nav></nav></div></template>',
     '<template><header><div role="navigation"></div></header></template>',
     '<template><div role="banner"><div role="navigation"></div></div></template>',
+
+    // `<section>` only gets the `region` landmark role when it has an accessible name
+    // (aria-label/aria-labelledby/title). Without one it has the generic role — see
+    // https://www.w3.org/TR/html-aam-1.0/#el-section
+    // This rule does not inspect accessible names, so unnamed sections are excluded.
+    '<template><section><section>Content</section></section></template>',
+    // `role="region"` is the landmark role a named `<section>` gets. Nesting it is
+    // excluded for the same reason: the rule cannot verify an accessible name is present.
+    '<template><div role="region"><div role="region">Content</div></div></template>',
   ],
 
   invalid: [
