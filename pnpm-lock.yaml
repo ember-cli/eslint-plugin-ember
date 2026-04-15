@@ -47,6 +47,9 @@ importers:
       snake-case:
         specifier: ^3.0.3
         version: 3.0.4
+      svg-tags:
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       '@babel/core':
         specifier: ^7.25.9

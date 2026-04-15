@@ -17,6 +17,11 @@ ruleTester.run('template-no-block-params-for-html-elements', rule, {
     '<template><MyComponent as |item|>{{item.name}}</MyComponent></template>',
     '<template>{{#each this.items as |item|}}<li>{{item}}</li>{{/each}}</template>',
     '<template><button>Click</button></template>',
+    // Custom elements aren't in the html-tags/svg-tags allowlists, so they're
+    // not flagged. Accepted false negative — web component namespace is open.
+    '<template><my-element as |x|>{{x}}</my-element></template>',
+    // Namespaced/path component invocations aren't in the allowlists either.
+    '<template><NS.Foo as |x|>{{x}}</NS.Foo></template>',
   ],
 
   invalid: [
