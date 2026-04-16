@@ -35,6 +35,11 @@ ruleTester.run('template-no-passed-in-event-handlers', rule, {
     '<template><Foo @random={{true}} /></template>',
     '<template><Input @click={{this.handleClick}} /></template>',
     '<template><Textarea @click={{this.handleClick}} /></template>',
+
+    // mouseMove/mouseEnter/mouseLeave are not Ember classic-event aliases
+    '<template><Foo @mouseMove={{this.handleMove}} /></template>',
+    '<template><Foo @mouseEnter={{this.handleEnter}} /></template>',
+    '<template><Foo @mouseLeave={{this.handleLeave}} /></template>',
     '<template>{{foo}}</template>',
     '<template>{{foo onClick=this.handleClick}}</template>',
     '<template>{{foo onclick=this.handleClick}}</template>',
@@ -48,11 +53,11 @@ ruleTester.run('template-no-passed-in-event-handlers', rule, {
     // ignore option — angle bracket invocation
     {
       code: '<template><Foo @click={{this.handleClick}} /></template>',
-      options: [{ ignore: { Foo: ['@click'] } }],
+      options: [{ ignore: { Foo: ['click'] } }],
     },
     {
       code: '<template><Foo @click={{this.handleClick}} @submit={{this.handleSubmit}} /></template>',
-      options: [{ ignore: { Foo: ['@click', '@submit'] } }],
+      options: [{ ignore: { Foo: ['click', 'submit'] } }],
     },
 
     // ignore option — curly invocation
@@ -81,14 +86,6 @@ ruleTester.run('template-no-passed-in-event-handlers', rule, {
       output: null,
       errors: [{ messageId: 'unexpected' }],
     },
-    {
-      code: `<template>
-        <CustomButton @mouseEnter={{this.handleHover}} />
-      </template>`,
-      output: null,
-      errors: [{ messageId: 'unexpected' }],
-    },
-
     {
       code: '<template><Foo @click={{this.handleClick}} /></template>',
       output: null,
@@ -124,14 +121,14 @@ ruleTester.run('template-no-passed-in-event-handlers', rule, {
     {
       code: '<template><Bar @click={{this.handleClick}} /></template>',
       output: null,
-      options: [{ ignore: { Foo: ['@click'] } }],
+      options: [{ ignore: { Foo: ['click'] } }],
       errors: [{ messageId: 'unexpected' }],
     },
     // ignore option — only ignores specified attrs (angle bracket)
     {
       code: '<template><Foo @submit={{this.handleSubmit}} /></template>',
       output: null,
-      options: [{ ignore: { Foo: ['@click'] } }],
+      options: [{ ignore: { Foo: ['click'] } }],
       errors: [{ messageId: 'unexpected' }],
     },
     // ignore option — only ignores specified component (curly)
@@ -183,11 +180,11 @@ hbsRuleTester.run('template-no-passed-in-event-handlers', rule, {
     // ignore option — angle bracket invocation
     {
       code: '<Foo @click={{this.handleClick}} />',
-      options: [{ ignore: { Foo: ['@click'] } }],
+      options: [{ ignore: { Foo: ['click'] } }],
     },
     {
       code: '<Foo @click={{this.handleClick}} @submit={{this.handleSubmit}} />',
-      options: [{ ignore: { Foo: ['@click', '@submit'] } }],
+      options: [{ ignore: { Foo: ['click', 'submit'] } }],
     },
 
     // ignore option — curly invocation
@@ -266,14 +263,14 @@ hbsRuleTester.run('template-no-passed-in-event-handlers', rule, {
     {
       code: '<Bar @click={{this.handleClick}} />',
       output: null,
-      options: [{ ignore: { Foo: ['@click'] } }],
+      options: [{ ignore: { Foo: ['click'] } }],
       errors: [{ messageId: 'unexpected' }],
     },
     // ignore option — only ignores specified attrs (angle bracket)
     {
       code: '<Foo @submit={{this.handleSubmit}} />',
       output: null,
-      options: [{ ignore: { Foo: ['@click'] } }],
+      options: [{ ignore: { Foo: ['click'] } }],
       errors: [{ messageId: 'unexpected' }],
     },
     // ignore option — only ignores specified component (curly)
