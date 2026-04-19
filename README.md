@@ -150,6 +150,80 @@ rules in templates can be disabled with eslint directives with mustache or html 
 </template>
 ```
 
+### template-lint-disable (experimental)
+
+> [!WARNING]
+> This processor is experimental and not yet covered by semver guarantees. The API may change in future releases.
+
+For users migrating from `ember-template-lint`, this plugin provides an opt-in `template-lint-disable` processor that recognizes `{{! template-lint-disable }}` comments. This can be useful for suppressing lint errors in `.hbs` files or in gjs/gts templates using familiar ember-template-lint syntax.
+
+To enable it, set the processor and parser in your ESLint config:
+
+```js
+// eslint.config.js (flat config)
+const ember = require('eslint-plugin-ember');
+
+module.exports = [
+  {
+    files: ['**/*.hbs'],
+    parser: 'ember-eslint-parser/hbs',
+    plugins: { ember },
+    processor: 'ember/template-lint-disable',
+    // ...
+  },
+];
+```
+
+```js
+// .eslintrc.js (legacy config)
+module.exports = {
+  overrides: [
+    {
+      files: ['**/*.hbs'],
+      parser: 'ember-eslint-parser/hbs',
+      plugins: ['ember'],
+      processor: 'ember/template-lint-disable',
+      // ...
+    },
+  ],
+};
+```
+
+Usage:
+
+```hbs
+{{! suppress all rules on the next line }}
+{{! template-lint-disable }}
+Hello world
+
+{{! suppress a specific rule }}
+{{!-- template-lint-disable no-bare-strings --}}
+Hello world
+```
+
+Rule names can be specified as:
+
+- Template-lint names: `no-bare-strings` (maps to `ember/template-no-bare-strings`)
+- Plugin-qualified names: `template-no-bare-strings` (maps to `ember/template-no-bare-strings`)
+- Full ESLint rule IDs: `ember/template-no-bare-strings`, `no-undef`
+
+> [!NOTE]
+> Unlike `ember-template-lint`, this directive only suppresses the **next line** (and the comment line itself). It does not disable rules for the rest of the scope. `template-lint-enable`, `template-lint-disable-next-line`, and `template-lint-disable-tree` are not supported.
+
+Standard ESLint directives also work natively in mustache comments and can be used alongside `template-lint-disable`:
+
+```hbs
+{{! suppress a single line }}
+{{! eslint-disable-next-line ember/template-no-bare-strings }}
+<span>Hello world</span>
+
+{{! suppress a range of lines }}
+{{! eslint-disable ember/template-no-bare-strings }}
+Hello world
+Another bare string
+{{! eslint-enable ember/template-no-bare-strings }}
+```
+
 ## 🧰 Configurations
 
 <!-- begin auto-generated configs list -->
