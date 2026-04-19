@@ -17,6 +17,11 @@ ruleTester.run('template-no-block-params-for-html-elements', rule, {
     '<template><MyComponent as |item|>{{item.name}}</MyComponent></template>',
     '<template>{{#each this.items as |item|}}<li>{{item}}</li>{{/each}}</template>',
     '<template><button>Click</button></template>',
+    // Custom elements aren't in the html-tags/svg-tags allowlists, so they're
+    // not flagged. Accepted false negative — web component namespace is open.
+    '<template><my-element as |x|>{{x}}</my-element></template>',
+    // Namespaced/path component invocations aren't in the allowlists either.
+    '<template><NS.Foo as |x|>{{x}}</NS.Foo></template>',
   ],
 
   invalid: [
@@ -42,6 +47,28 @@ ruleTester.run('template-no-block-params-for-html-elements', rule, {
     },
     {
       code: '<template><ul as |items|><li>{{items}}</li></ul></template>',
+      output: null,
+      errors: [
+        {
+          message: 'Block params can only be used with components, not HTML elements.',
+          type: 'GlimmerElementNode',
+        },
+      ],
+    },
+    {
+      // SVG element — in svg-tags allowlist.
+      code: '<template><circle as |r|>{{r}}</circle></template>',
+      output: null,
+      errors: [
+        {
+          message: 'Block params can only be used with components, not HTML elements.',
+          type: 'GlimmerElementNode',
+        },
+      ],
+    },
+    {
+      // MathML element — in mathml-tag-names allowlist.
+      code: '<template><mfrac as |num|>{{num}}</mfrac></template>',
       output: null,
       errors: [
         {
