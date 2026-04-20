@@ -8,7 +8,6 @@ const ruleTester = new RuleTester({
 ruleTester.run('template-no-inline-styles', rule, {
   valid: [
     '<template><div class="foo"></div></template>',
-    // Test cases ported from ember-template-lint
     '<template><div></div></template>',
     '<template><span></span></template>',
     '<template><ul class="dummy"></ul></template>',

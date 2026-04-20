@@ -72,7 +72,6 @@ ruleTester.run('template-no-model-argument-in-route-templates', rule, {
       output: '<template>{{this.model.foo}}</template>',
       errors: [{ messageId: 'noModelArgumentInRouteTemplates' }],
     },
-    // Unknown path defaults to lint (matches upstream).
     {
       code: '<template>{{@model.foo}}</template>',
       output: '<template>{{this.model.foo}}</template>',

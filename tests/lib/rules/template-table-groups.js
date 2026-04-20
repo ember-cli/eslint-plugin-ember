@@ -145,7 +145,6 @@ ruleTester.run('template-table-groups', rule, {
     '<template><table><!-- this --></table></template>',
     '<template><table>{{! or this }}</table></template>',
     '<template><table> </table></template>',
-    // Empty <table></table> matches upstream (ember-template-lint) behavior of not flagging.
     '<template><table></table></template>',
     '<template><table> <caption>Foo</caption></table></template>',
     '<template><table><colgroup><col style="background-color: red"></colgroup></table></template>',
