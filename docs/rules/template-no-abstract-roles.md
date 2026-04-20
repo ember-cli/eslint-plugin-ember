@@ -1,5 +1,7 @@
 # ember/template-no-abstract-roles
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 The HTML attribute `role` must never have the following values:

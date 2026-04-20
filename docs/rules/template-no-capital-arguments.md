@@ -1,5 +1,7 @@
 # ember/template-no-capital-arguments
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Disallow capital letters in argument names. Use lowercase argument names (e.g., `@arg` instead of `@Arg`).

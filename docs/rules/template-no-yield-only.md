@@ -1,5 +1,7 @@
 # ember/template-no-yield-only
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Templates that only contain a single `{{yield}}` instruction are not required

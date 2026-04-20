@@ -1,5 +1,7 @@
 # ember/template-no-action-on-submit-button
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Disallow click action on submit buttons within a form.

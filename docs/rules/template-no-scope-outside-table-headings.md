@@ -1,5 +1,7 @@
 # ember/template-no-scope-outside-table-headings
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 The scope attribute is used on `<th>` elements to clarify the relationship between a table's header cells and data cells for screen readers. Scope is set to "row" or "col" for header cells that refer to a given row or column. For header cells that reference multiple rows or columns, set the scope attribute to "rowgroup" and "colgroup" and define the range for the rows or columns.

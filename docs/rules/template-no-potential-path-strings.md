@@ -1,5 +1,7 @@
 # ember/template-no-potential-path-strings
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 It might happen sometimes that `{{` and `}}` are forgotten when invoking a component, and the string that is passed was actually supposed to be a property path or argument.

@@ -1,5 +1,7 @@
 # ember/template-no-duplicate-landmark-elements
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 If multiple landmark elements of the same type are found on a page, they must each have a unique label (provided by `aria-label` or `aria-labelledby`).

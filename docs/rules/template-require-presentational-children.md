@@ -1,5 +1,7 @@
 # ember/template-require-presentational-children
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 There are roles that require all children to be presentational. This rule checks

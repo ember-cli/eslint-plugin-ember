@@ -1,5 +1,7 @@
 # ember/template-no-whitespace-within-word
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 In practice, the predominant issue raised by inline whitespace styling is that the resultant text "formatting" is entirely visual in nature; the ability to discern the correct manner in which to read the text, and therefore, to correctly comprehend its meaning, is restricted to sighted users.

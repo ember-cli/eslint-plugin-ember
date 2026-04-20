@@ -1,5 +1,7 @@
 # ember/template-no-passed-in-event-handlers
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 It is possible to pass e.g. `@click` to an Ember component to override the default `click` event handler. For tagless components this will trigger an assertion though and can't be used as legitimate API, and for Glimmer components it will not work out of the box, like in Ember components, either.

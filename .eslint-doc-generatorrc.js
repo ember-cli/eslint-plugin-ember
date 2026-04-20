@@ -10,6 +10,7 @@ module.exports = {
   configEmoji: [
     ['recommended-gjs', '![gjs logo](/docs/svgs/gjs.svg)'],
     ['recommended-gts', '![gts logo](/docs/svgs/gts.svg)'],
+    ['template-lint-migration', '📋'],
   ],
   ruleDocSectionInclude: ['Examples'],
   ruleDocTitleFormat: 'prefix-name',

@@ -1,5 +1,7 @@
 # ember/template-require-media-caption
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Captions provide a text version of the spoken and non-spoken audio information
