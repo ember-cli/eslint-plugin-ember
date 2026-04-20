@@ -277,6 +277,11 @@ hbsRuleTester.run('template-no-curly-component-invocation', rule, {
       code: '{{#each items as |disallowed|}}{{disallowed}}{{/each}}',
       options: [{ disallow: ['disallowed'], noImplicitThis: false }],
     },
+    // requireDash: true — single-word names with named args are not flagged (not obviously a component)
+    {
+      code: '{{foo bar=baz}}',
+      options: [{ requireDash: true }],
+    },
   ],
   invalid: [
     {

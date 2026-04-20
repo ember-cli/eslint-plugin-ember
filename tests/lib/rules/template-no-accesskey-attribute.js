@@ -53,5 +53,23 @@ ruleTester.run('template-no-accesskey-attribute', rule, {
         },
       ],
     },
+    // Boolean attribute (no value)
+    {
+      code: '<template><button accesskey></button></template>',
+      output: '<template><button></button></template>',
+      errors: [{ messageId: 'noAccesskey' }],
+    },
+    // Dynamic mustache value
+    {
+      code: '<template><button accesskey={{someKey}}></button></template>',
+      output: '<template><button></button></template>',
+      errors: [{ messageId: 'noAccesskey' }],
+    },
+    // Concat string attribute
+    {
+      code: '<template><button accesskey="{{someKey}}"></button></template>',
+      output: '<template><button></button></template>',
+      errors: [{ messageId: 'noAccesskey' }],
+    },
   ],
 });

@@ -82,6 +82,30 @@ ruleTester.run('template-no-invalid-interactive', rule, {
     '<template><@someComponent onclick={{this.click}} /></template>',
     '<template><this.myComponent onclick={{this.click}} /></template>',
     '<template><ns.SomeWidget onclick={{this.click}} /></template>',
+
+    // additionalInteractiveTags: tags listed are treated as interactive
+    {
+      code: '<template><div {{on "click" this.onClick}}></div></template>',
+      options: [{ additionalInteractiveTags: ['div'] }],
+    },
+    {
+      code: '<template><div {{action "foo"}}></div></template>',
+      options: [{ additionalInteractiveTags: ['div'] }],
+    },
+    {
+      code: '<template><div onclick={{action "foo"}}></div></template>',
+      options: [{ additionalInteractiveTags: ['div'] }],
+    },
+
+    // ignoredTags: tags listed are skipped entirely
+    {
+      code: '<template><div {{on "click" this.actionName}}>...</div></template>',
+      options: [{ ignoredTags: ['div'] }],
+    },
+    {
+      code: '<template><div onclick={{action "foo"}}></div></template>',
+      options: [{ ignoredTags: ['div'] }],
+    },
   ],
 
   invalid: [

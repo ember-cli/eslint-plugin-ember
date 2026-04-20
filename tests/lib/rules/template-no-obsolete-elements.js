@@ -21,6 +21,46 @@ ruleTester.run('template-no-obsolete-elements', rule, {
       output: null,
       errors: [{ messageId: 'obsolete' }],
     },
+    {
+      code: '<template><big></big></template>',
+      output: null,
+      errors: [{ messageId: 'obsolete' }],
+    },
+    {
+      code: '<template><blink></blink></template>',
+      output: null,
+      errors: [{ messageId: 'obsolete' }],
+    },
+    {
+      code: '<template><center></center></template>',
+      output: null,
+      errors: [{ messageId: 'obsolete' }],
+    },
+    {
+      code: '<template><font></font></template>',
+      output: null,
+      errors: [{ messageId: 'obsolete' }],
+    },
+    {
+      code: '<template><frame></frame></template>',
+      output: null,
+      errors: [{ messageId: 'obsolete' }],
+    },
+    {
+      code: '<template><frameset></frameset></template>',
+      output: null,
+      errors: [{ messageId: 'obsolete' }],
+    },
+    {
+      code: '<template><strike></strike></template>',
+      output: null,
+      errors: [{ messageId: 'obsolete' }],
+    },
+    {
+      code: '<template><tt></tt></template>',
+      output: null,
+      errors: [{ messageId: 'obsolete' }],
+    },
     // Element's own block params must not shadow its own tag name.
     {
       code: '<template><marquee as |marquee|></marquee></template>',

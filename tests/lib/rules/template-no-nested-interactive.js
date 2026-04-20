@@ -54,6 +54,11 @@ ruleTester.run('template-no-nested-interactive', rule, {
     '<template><div tabindex=-1><button>Click me!</button></div></template>',
     '<template><div tabindex="1"><button></button></div></template>',
     '<template><label><input></label></template>',
+    // Config: ignoreUsemapAttribute (alias for ignoreUsemap)
+    {
+      code: '<template><button><img usemap=""></button></template>',
+      options: [{ ignoreUsemapAttribute: true }],
+    },
     '<template><details><summary>Details</summary>Something small enough to escape casual notice.</details></template>',
     '<template><details> <summary>Details</summary>Something small enough to escape casual notice.</details></template>',
     `<template>
@@ -292,6 +297,11 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
     {
       code: '<button><img usemap=""></button>',
       options: [{ ignoreUsemap: true }],
+    },
+    // Config: ignoreUsemapAttribute (alias for ignoreUsemap)
+    {
+      code: '<button><img usemap=""></button>',
+      options: [{ ignoreUsemapAttribute: true }],
     },
   ],
   invalid: [

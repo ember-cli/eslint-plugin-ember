@@ -14,6 +14,13 @@ ruleTester.run('template-no-array-prototype-extensions', rule, {
     '<template>{{@items}}</template>',
     '<template>{{firstObject}}</template>',
     '<template>{{length}}</template>',
+    // get helper with firstObject/lastObject as a direct top-level property (not an extension)
+    "<template>{{get this 'firstObject'}}</template>",
+    "<template>{{get this 'lastObject.name'}}</template>",
+    // Plain text nodes are not flagged
+    '<template>Just a regular text in the template bar.firstObject bar.lastObject.foo</template>',
+    // String-literal HTML attributes are not flagged
+    '<template><Foo foo="bar.firstObject.baz" /></template>',
   ],
 
   invalid: [
@@ -81,6 +88,30 @@ ruleTester.run('template-no-array-prototype-extensions', rule, {
     // lastObject — deeper path, no fix
     {
       code: '<template>{{this.users.lastObject.name}}</template>',
+      output: null,
+      errors: [{ messageId: 'lastObject' }],
+    },
+    // lastObject — in get helper string literal, no fix
+    {
+      code: "<template><Foo @bar={{get this 'list.lastObject'}} /></template>",
+      output: null,
+      errors: [{ messageId: 'lastObject' }],
+    },
+    // firstObject — get helper with `this` as object and string literal path
+    {
+      code: "<template><Foo @bar={{get this 'list.firstObject'}} /></template>",
+      output: "<template><Foo @bar={{get this 'list.0'}} /></template>",
+      errors: [{ messageId: 'firstObject' }],
+    },
+    // firstObject — get helper with @arg as object and firstObject at start of string path
+    {
+      code: "<template><Foo @bar={{get @list 'firstObject.name'}} /></template>",
+      output: "<template><Foo @bar={{get @list '0.name'}} /></template>",
+      errors: [{ messageId: 'firstObject' }],
+    },
+    // lastObject — in named hash argument
+    {
+      code: '<template>{{foo bar=@list.lastObject.test}}</template>',
       output: null,
       errors: [{ messageId: 'lastObject' }],
     },
