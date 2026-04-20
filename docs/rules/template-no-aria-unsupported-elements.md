@@ -1,5 +1,7 @@
 # ember/template-no-aria-unsupported-elements
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Disallows using ARIA roles, states, and properties on elements that do not support them.

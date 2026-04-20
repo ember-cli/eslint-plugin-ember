@@ -1,5 +1,7 @@
 # ember/template-no-input-tagname
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 `{{input tagName=x}}` will result in obtuse errors. Typically, the input will simply fail to render, whether used in block form or inline. The only valid `tagName` for the input helper is `input`. For `textarea`, `button`, and other input-like elements, you should instead create a new component or better use the DOM!

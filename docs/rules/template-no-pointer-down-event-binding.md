@@ -1,5 +1,7 @@
 # ember/template-no-pointer-down-event-binding
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Disallows pointer down event bindings (`mousedown`, `pointerdown`).

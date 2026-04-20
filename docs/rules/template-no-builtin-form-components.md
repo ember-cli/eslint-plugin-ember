@@ -1,5 +1,7 @@
 # ember/template-no-builtin-form-components
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Disallow usage of Ember's built-in `<Input>` and `<Textarea>` components. These components use two-way binding to mutate values, which is considered an anti-pattern. Use native HTML `<input>` and `<textarea>` elements instead.

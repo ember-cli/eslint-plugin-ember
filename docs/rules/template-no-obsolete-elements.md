@@ -1,5 +1,7 @@
 # ember/template-no-obsolete-elements
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Some elements are entirely obsolete and must not be used by authors.

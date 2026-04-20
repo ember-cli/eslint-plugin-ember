@@ -1,5 +1,7 @@
 # ember/template-no-duplicate-id
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Valid HTML requires that `id` attribute values are unique.

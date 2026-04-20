@@ -6,6 +6,7 @@ const base = require('../lib/config-legacy/base');
 const recommended = require('../lib/config-legacy/recommended');
 const recommendedGjs = require('../lib/config-legacy/recommended-gjs');
 const recommendedGts = require('../lib/config-legacy/recommended-gts');
+const templateLintMigration = require('../lib/config-legacy/template-lint-migration');
 
 describe('plugin exports', () => {
   describe('utils', () => {
@@ -21,6 +22,7 @@ describe('plugin exports', () => {
         recommended,
         'recommended-gjs': recommendedGjs,
         'recommended-gts': recommendedGts,
+        'template-lint-migration': templateLintMigration,
       });
     });
   });

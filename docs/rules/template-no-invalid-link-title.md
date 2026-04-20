@@ -1,5 +1,7 @@
 # ember/template-no-invalid-link-title
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Disallow invalid `title` attributes on link elements. The title should not be empty or the same as the link text.

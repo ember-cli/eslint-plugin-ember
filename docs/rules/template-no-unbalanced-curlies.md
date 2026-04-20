@@ -1,5 +1,7 @@
 # ember/template-no-unbalanced-curlies
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Normally, the compiler will find stray curlies and throw a syntax error. However, it won't be able to catch every case.

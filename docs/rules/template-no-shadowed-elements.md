@@ -1,5 +1,7 @@
 # ember/template-no-shadowed-elements
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 This rule prevents ambiguity in situations where a yielded block param which starts with a lower case letter is also used within the block itself as an element name.

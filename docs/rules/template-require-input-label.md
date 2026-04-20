@@ -1,5 +1,7 @@
 # ember/template-require-input-label
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Users with assistive technology need user-input form elements to have

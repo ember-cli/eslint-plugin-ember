@@ -1,5 +1,7 @@
 # ember/template-require-lang-attribute
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 A missing or invalid `lang` attribute can cause an application to fail legal

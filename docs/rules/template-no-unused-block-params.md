@@ -1,5 +1,7 @@
 # ember/template-no-unused-block-params
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 This rule forbids unused block parameters except when they are needed to access a later parameter.

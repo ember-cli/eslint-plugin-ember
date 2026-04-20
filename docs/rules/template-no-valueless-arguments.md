@@ -1,5 +1,7 @@
 # ember/template-no-valueless-arguments
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Similar to HTML attributes, component arguments will default to an empty string when they are not explicitly assigned a value. This behavior isn't documented anywhere so depending on it isn't recommended and usually the result of a user-error. Since it _is_ valid syntax, accidental use of this behavior can be hard to detect and cause confusing bugs.

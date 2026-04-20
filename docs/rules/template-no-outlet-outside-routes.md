@@ -1,5 +1,7 @@
 # ember/template-no-outlet-outside-routes
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Disallow `{{outlet}}` outside of route templates. The `outlet` helper should only be used in route templates to render nested routes.

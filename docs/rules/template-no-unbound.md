@@ -1,5 +1,7 @@
 # ember/template-no-unbound
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 `{{unbound}}` is a legacy hold over from the days in which Ember's template engine was less performant. Its use today

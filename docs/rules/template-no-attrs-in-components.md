@@ -1,5 +1,7 @@
 # ember/template-no-attrs-in-components
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 This rule prevents the usage of `this.attrs` property to access values passed to the component. Use `@arg` syntax instead.

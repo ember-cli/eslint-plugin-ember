@@ -1,5 +1,7 @@
 # ember/template-splat-attributes-only
 
+💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 It is easy to introduce typos when typing out `...attributes` or to use e.g.
