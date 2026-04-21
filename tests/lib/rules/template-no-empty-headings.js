@@ -44,16 +44,8 @@ ruleTester.run('template-no-empty-headings', rule, {
     '<template><h2><@heading /></h2></template>',
     '<template><h3><ns.Heading /></h3></template>',
 
-    // aria-hidden as a boolean / valueless / empty / mustache attribute — all
-    // should exempt the heading (aligns with jsx-a11y / vue-a11y treatment of
-    // boolean HTML attributes).
-    '<template><h1 aria-hidden></h1></template>',
-    '<template><h1 aria-hidden=""></h1></template>',
     '<template><h1 aria-hidden={{true}}></h1></template>',
     '<template><h1 aria-hidden="true">Visible to sighted only</h1></template>',
-
-    // HTML attribute values are ASCII case-insensitive — "TRUE" / "True" /
-    // {{"TRUE"}} / {{"True"}} all count as truthy.
     '<template><h1 aria-hidden="TRUE"></h1></template>',
     '<template><h1 aria-hidden="True"></h1></template>',
     '<template><h1 aria-hidden={{"TRUE"}}></h1></template>',
@@ -148,7 +140,19 @@ ruleTester.run('template-no-empty-headings', rule, {
       errors: [{ messageId: 'emptyHeading' }],
     },
 
-    // Falsy mustache aria-hidden values do not exempt the heading.
+    // Valueless / empty aria-hidden resolves to the default `undefined` per
+    // WAI-ARIA §6.6 — the element is NOT hidden, so an otherwise-empty heading
+    // still flags.
+    {
+      code: '<template><h1 aria-hidden></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    {
+      code: '<template><h1 aria-hidden=""></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
     {
       code: '<template><h1 aria-hidden={{false}}></h1></template>',
       output: null,
