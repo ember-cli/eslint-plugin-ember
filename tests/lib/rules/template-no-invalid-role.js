@@ -71,6 +71,20 @@ ruleTester.run('template-no-invalid-role', rule, {
       code: '<template><div role="command interface"></div></template>',
       options: [{ catchNonexistentRoles: false }],
     },
+
+    // DPUB-ARIA (doc-*) and Graphics-ARIA (graphics-*) are in the WAI-ARIA
+    // ecosystem via aria-query; previously flagged because our hand-maintained
+    // VALID_ROLES didn't include them.
+    '<template><div role="doc-abstract">Abstract</div></template>',
+    '<template><section role="doc-chapter"></section></template>',
+    '<template><svg role="graphics-document"></svg></template>',
+    '<template><svg role="graphics-object"></svg></template>',
+
+    // Whitespace-separated role fallback list — ARIA 1.2 §5.4. Each token
+    // must individually be valid.
+    '<template><div role="tabpanel row"></div></template>',
+    '<template><svg role="graphics-document document"></svg></template>',
+    '<template><section role="doc-appendix doc-bibliography"></section></template>',
   ],
 
   invalid: [
@@ -164,18 +178,18 @@ ruleTester.run('template-no-invalid-role', rule, {
     {
       code: '<template><div role="command interface"></div></template>',
       output: null,
-      errors: [{ message: "Invalid ARIA role 'command interface'. Must be a valid ARIA role." }],
+      errors: [{ message: "Invalid ARIA role 'command'. Must be a valid ARIA role." }],
     },
     {
       code: '<template><div role="COMMAND INTERFACE"></div></template>',
       output: null,
-      errors: [{ message: "Invalid ARIA role 'COMMAND INTERFACE'. Must be a valid ARIA role." }],
+      errors: [{ message: "Invalid ARIA role 'command'. Must be a valid ARIA role." }],
     },
     {
       code: '<template><div role="command interface"></div></template>',
       output: null,
       options: [{ catchNonexistentRoles: true }],
-      errors: [{ message: "Invalid ARIA role 'command interface'. Must be a valid ARIA role." }],
+      errors: [{ message: "Invalid ARIA role 'command'. Must be a valid ARIA role." }],
     },
 
     // Newly added SEMANTIC_ELEMENTS: presentation/none on iframe, video, audio
@@ -247,6 +261,16 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
       code: '<div role="command interface"></div>',
       options: [{ catchNonexistentRoles: false }],
     },
+
+    // DPUB-ARIA (doc-*) and Graphics-ARIA (graphics-*) roles.
+    '<div role="doc-abstract">Abstract</div>',
+    '<section role="doc-chapter"></section>',
+    '<svg role="graphics-document"></svg>',
+
+    // Whitespace-separated role fallback list.
+    '<div role="tabpanel row"></div>',
+    '<svg role="graphics-document document"></svg>',
+    '<section role="doc-appendix doc-bibliography"></section>',
   ],
   invalid: [
     {
@@ -302,18 +326,18 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
     {
       code: '<div role="command interface"></div>',
       output: null,
-      errors: [{ message: "Invalid ARIA role 'command interface'. Must be a valid ARIA role." }],
+      errors: [{ message: "Invalid ARIA role 'command'. Must be a valid ARIA role." }],
     },
     {
       code: '<div role="command interface"></div>',
       output: null,
       options: [{ catchNonexistentRoles: true }],
-      errors: [{ message: "Invalid ARIA role 'command interface'. Must be a valid ARIA role." }],
+      errors: [{ message: "Invalid ARIA role 'command'. Must be a valid ARIA role." }],
     },
     {
       code: '<div role="COMMAND INTERFACE"></div>',
       output: null,
-      errors: [{ message: "Invalid ARIA role 'COMMAND INTERFACE'. Must be a valid ARIA role." }],
+      errors: [{ message: "Invalid ARIA role 'command'. Must be a valid ARIA role." }],
     },
     // Newly added SEMANTIC_ELEMENTS: presentation/none on iframe, video, audio, embed
     {
