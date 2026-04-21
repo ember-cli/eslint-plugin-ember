@@ -40,6 +40,16 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+HTML custom elements (tags with a hyphen that start lowercase) are skipped —
+their accessibility contracts are defined by the component author and cannot
+be validated against the ARIA spec:
+
+```gjs
+<template>
+  <my-widget aria-bogus="x" />
+</template>
+```
+
 ## References
 
 - [Using ARIA, Roles, States, and Properties](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques)
