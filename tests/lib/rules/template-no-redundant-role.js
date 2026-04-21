@@ -48,6 +48,10 @@ ruleTester.run('template-no-redundant-role', rule, {
       options: [{ checkAllHTMLElements: false }],
     },
     '<template><input role="combobox"></template>',
+    // <select multiple> has implicit role listbox, so combobox is not redundant.
+    '<template><select role="combobox" multiple></select></template>',
+    // <select size="5"> (size > 1) has implicit role listbox.
+    '<template><select role="combobox" size="5"></select></template>',
   ],
   invalid: [
     {
@@ -155,6 +159,12 @@ hbsRuleTester.run('template-no-redundant-role', rule, {
       options: [{ checkAllHTMLElements: false }],
     },
     '<ul class="list" role="combobox"></ul>',
+    // <select> with `multiple` has implicit role "listbox", so role="combobox"
+    // is not redundant (it disagrees with the implicit role, but that is for
+    // other rules to catch — this rule only flags redundancy).
+    '<select role="combobox" multiple></select>',
+    // <select size="5"> (size > 1) has implicit role "listbox", same reasoning.
+    '<select role="combobox" size="5"></select>',
   ],
   invalid: [
     {
@@ -246,6 +256,18 @@ hbsRuleTester.run('template-no-redundant-role', rule, {
     {
       // <select> without `multiple` or `size` defaults to role "combobox".
       code: '<select role="combobox"></select>',
+      output: '<select></select>',
+      errors: [{ message: 'Use of redundant or invalid role: combobox on <select> detected.' }],
+    },
+    {
+      // size="1" still defaults to combobox (only size > 1 flips to listbox).
+      code: '<select role="combobox" size="1"></select>',
+      output: '<select size="1"></select>',
+      errors: [{ message: 'Use of redundant or invalid role: combobox on <select> detected.' }],
+    },
+    {
+      // Case-insensitive match on <select>, combined with the implicit-role check.
+      code: '<select role="COMBOBOX"></select>',
       output: '<select></select>',
       errors: [{ message: 'Use of redundant or invalid role: combobox on <select> detected.' }],
     },
