@@ -35,8 +35,8 @@ ruleTester.run('template-require-presentational-children', rule, {
       <title>Title here</title>
       <circle cx="10" cy="10" r="10"></circle>
     </svg></template>`,
-    // SKIPPED_TAGS: <svg> is always skipped, even when its role has childrenPresentational
-    // (graphics-symbol is such a role via Graphics-ARIA; this covers the new aria-query-derived set).
+    // SKIPPED_TAGS: <svg> is always skipped, even when its role has
+    // childrenPresentational (e.g. graphics-symbol via Graphics-ARIA).
     `<template>
     <svg role="graphics-symbol">
       <circle cx="10" cy="10" r="10"></circle>
@@ -83,7 +83,7 @@ ruleTester.run('template-require-presentational-children', rule, {
         },
       ],
     },
-    // doc-pagebreak: DPUB-ARIA role with childrenPresentational; now included via aria-query.
+    // doc-pagebreak: DPUB-ARIA role with childrenPresentational.
     {
       code: '<template><div role="doc-pagebreak"><h2>pg</h2></div></template>',
       output: null,
@@ -137,8 +137,8 @@ hbsRuleTester.run('template-require-presentational-children', rule, {
       <title>Title here</title>
       <circle cx="10" cy="10" r="10"></circle>
     </svg>`,
-    // SKIPPED_TAGS: <svg> is always skipped, even when its role has childrenPresentational
-    // (graphics-symbol is such a role via Graphics-ARIA; this covers the new aria-query-derived set).
+    // SKIPPED_TAGS: <svg> is always skipped, even when its role has
+    // childrenPresentational (e.g. graphics-symbol via Graphics-ARIA).
     `
     <svg role="graphics-symbol">
       <circle cx="10" cy="10" r="10"></circle>
@@ -184,7 +184,7 @@ hbsRuleTester.run('template-require-presentational-children', rule, {
         },
       ],
     },
-    // doc-pagebreak: DPUB-ARIA role with childrenPresentational; now included via aria-query.
+    // doc-pagebreak: DPUB-ARIA role with childrenPresentational.
     {
       code: '<div role="doc-pagebreak"><h2>pg</h2></div>',
       output: null,
