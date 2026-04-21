@@ -21,6 +21,19 @@ const validHbs = [
   '<ItemCheckbox @model={{@model}} @checkable={{@checkable}} />',
   '<some-custom-element />',
   '<input type="password">',
+
+  // <input type="password"> has no implicit role per aria-query (it's intentionally
+  // not mapped so that screen readers don't announce typed content). No role →
+  // no aria-supported-props check.
+  '<input type="password" aria-describedby="hint" />',
+  '<input type="password" aria-required="true" />',
+
+  // <input type="text"> without a list attribute is a textbox — aria-required,
+  // aria-readonly, aria-placeholder are all supported.
+  '<input type="text" aria-required="true" />',
+  '<input type="email" aria-readonly="true" />',
+  '<input type="tel" aria-required="true" />',
+  '<input type="url" aria-placeholder="https://…" />',
 ];
 
 const invalidHbs = [
@@ -80,8 +93,21 @@ const invalidHbs = [
     ],
   },
   {
+    // <input type="email"> without a `list` attribute → implicit role "textbox"
+    // (per aria-query / HTML-AAM). With a `list` attribute it would be "combobox".
     code: '<input type="email" aria-level={{this.level}} />',
     output: '<input type="email" />',
+    errors: [
+      {
+        message:
+          'The attribute aria-level is not supported by the element input with the implicit role of textbox',
+      },
+    ],
+  },
+  {
+    // With a `list` attribute, <input type="email"> becomes a combobox.
+    code: '<input type="email" list="x" aria-level={{this.level}} />',
+    output: '<input type="email" list="x" />',
     errors: [
       {
         message:
