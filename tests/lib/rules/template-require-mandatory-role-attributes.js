@@ -45,16 +45,17 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
     '<template>{{input type="Checkbox" role="switch"}}</template>',
     '<template>{{input type="range" role="slider"}}</template>',
 
-    // Documented divergences from jsx-a11y / vue-a11y / angular-eslint:
-    // - Space-separated role tokens: peers split on whitespace and require
-    //   attrs for each token. We pass the whole string to aria-query, so
-    //   `role="combobox listbox"` lookup misses → no flag. (Case below.)
-    // - Case-folding role values: peers lowercase before lookup; we don't.
-    //   `role="COMBOBOX"` similarly misses lookup → no flag.
-    // - Unknown role: all plugins skip — parity, captured for completeness.
-    '<template><div role="combobox listbox" /></template>',
-    '<template><div role="COMBOBOX" /></template>',
-    '<template><div role="SLIDER" /></template>',
+    // Case-insensitive role matching — ARIA role tokens compare as ASCII-case-insensitive.
+    '<template><div role="COMBOBOX" aria-expanded="false" aria-controls="ctrl" /></template>',
+    // Role fallback list — primary role's required attributes are satisfied.
+    '<template><div role="combobox listbox" aria-expanded="false" aria-controls="ctrl" /></template>',
+    // Abstract roles (ARIA §5.3) are skipped per §4.1 fallback semantics —
+    // `widget` isn't an authoring role, so the UA walks past it to the next
+    // recognised token. Here `button` has no required attrs → valid.
+    '<template><div role="widget button" /></template>',
+    // Abstract role followed by a concrete role that IS satisfied.
+    '<template><div role="command slider" aria-valuenow="0" /></template>',
+    // Unknown roles are skipped — rule only checks required attrs for known roles.
     '<template><div role="foobar" /></template>',
   ],
 
@@ -159,6 +160,38 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
       code: '<template><input type="radio" role="menuitemradio" /></template>',
       output: null,
       errors: [{ message: 'The attribute aria-checked is required by the role menuitemradio' }],
+    },
+    // Case-insensitivity surfaces previously-unflagged mistakes.
+    {
+      code: '<template><div role="COMBOBOX"></div></template>',
+      output: null,
+      errors: [
+        {
+          message: 'The attributes aria-controls, aria-expanded are required by the role combobox',
+        },
+      ],
+    },
+    // Role-fallback list: when the primary role is missing required props, flag it.
+    {
+      code: '<template><div role="combobox listbox"></div></template>',
+      output: null,
+      errors: [
+        {
+          message: 'The attributes aria-controls, aria-expanded are required by the role combobox',
+        },
+      ],
+    },
+    // Abstract role (`widget`) followed by a concrete role that's missing
+    // required attrs — UA skips the abstract, lands on `slider`, which
+    // requires aria-valuenow.
+    {
+      code: '<template><div role="widget slider"></div></template>',
+      output: null,
+      errors: [
+        {
+          message: 'The attribute aria-valuenow is required by the role slider',
+        },
+      ],
     },
   ],
 });
