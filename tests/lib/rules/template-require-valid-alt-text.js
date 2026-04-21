@@ -59,6 +59,53 @@ ruleTester.run('template-require-valid-alt-text', rule, {
     '<template><img role={{unless this.altText "presentation"}} alt={{this.altText}}></template>',
   ],
   invalid: [
+    // Empty-string aria-label / aria-labelledby / alt provides no accessible
+    // name. These must flag (previously accepted by a presence-only check).
+    {
+      code: '<template><input type="image" aria-label="" /></template>',
+      output: null,
+      errors: [{ messageId: 'inputImage' }],
+    },
+    {
+      code: '<template><input type="image" aria-labelledby="" /></template>',
+      output: null,
+      errors: [{ messageId: 'inputImage' }],
+    },
+    {
+      code: '<template><input type="image" alt="" /></template>',
+      output: null,
+      errors: [{ messageId: 'inputImage' }],
+    },
+    {
+      code: '<template><object aria-label=""></object></template>',
+      output: null,
+      errors: [{ messageId: 'objectMissing' }],
+    },
+    {
+      code: '<template><object aria-labelledby=""></object></template>',
+      output: null,
+      errors: [{ messageId: 'objectMissing' }],
+    },
+    {
+      code: '<template><object title=""></object></template>',
+      output: null,
+      errors: [{ messageId: 'objectMissing' }],
+    },
+    {
+      code: '<template><area aria-label=""></template>',
+      output: null,
+      errors: [{ messageId: 'areaMissing' }],
+    },
+    {
+      code: '<template><area aria-labelledby=""></template>',
+      output: null,
+      errors: [{ messageId: 'areaMissing' }],
+    },
+    {
+      code: '<template><area alt=""></template>',
+      output: null,
+      errors: [{ messageId: 'areaMissing' }],
+    },
     {
       code: '<template><img src="/test.jpg" /></template>',
       output: null,
