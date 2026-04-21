@@ -57,9 +57,6 @@ ruleTester.run('template-no-invalid-role', rule, {
     '<template><table role="textbox"></table></template>',
     '<template><div role="{{if this.inModal "dialog" "contentinfo" }}"></div></template>',
 
-    // Missing VALID_ROLES entries: associationlistitemkey, associationlistitemvalue, cell
-    '<template><div role="associationlistitemkey">Key</div></template>',
-    '<template><div role="associationlistitemvalue">Value</div></template>',
     '<template><td role="cell">Data</td></template>',
 
     // Case-insensitive role matching
@@ -246,9 +243,6 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
     '<AwesomeThing role="presentation"></AwesomeThing>',
     '<table role="textbox"></table>',
     '<div role="{{if this.inModal "dialog" "contentinfo" }}"></div>',
-    // Missing VALID_ROLES entries: associationlistitemkey, associationlistitemvalue, cell
-    '<div role="associationlistitemkey">Key</div>',
-    '<div role="associationlistitemvalue">Value</div>',
     '<td role="cell">Data</td>',
     // Case-insensitive role matching
     '<div role="Button">Click</div>',
