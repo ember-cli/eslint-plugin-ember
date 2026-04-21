@@ -22,21 +22,14 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
     `<template>
       <button>Click me</button>
     </template>`,
-    // Value-aware: explicit falsy values opt out (jsx-a11y parity).
-    `<template>
-      <input autofocus="false" />
-    </template>`,
+    // Mustache boolean-literal forms render NO attribute when the literal
+    // is false — these are the statically-known opt-outs that align with
+    // HTML boolean-attribute semantics.
     `<template>
       <input autofocus={{false}} />
     </template>`,
     `<template>
-      <input autofocus={{"false"}} />
-    </template>`,
-    `<template>
       {{input autofocus=false}}
-    </template>`,
-    `<template>
-      {{input autofocus="false"}}
     </template>`,
     // Dialog exception (MDN): autofocus on <dialog> is recommended.
     `<template>
@@ -231,6 +224,35 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
           type: 'GlimmerAttrNode',
         },
       ],
+    },
+
+    // Per HTML boolean-attribute semantics, the string "false" / mustache
+    // string "false" / hash-pair string "false" are all TRUTHY. Only the
+    // mustache boolean-literal {{false}} renders no attribute.
+    {
+      code: `<template>
+        <input autofocus="false" />
+      </template>`,
+      output: `<template>
+        <input />
+      </template>`,
+      errors: [{ messageId: 'noAutofocus', type: 'GlimmerAttrNode' }],
+    },
+    {
+      code: `<template>
+        <input autofocus={{"false"}} />
+      </template>`,
+      output: `<template>
+        <input />
+      </template>`,
+      errors: [{ messageId: 'noAutofocus', type: 'GlimmerAttrNode' }],
+    },
+    {
+      code: `<template>
+        {{input autofocus="false"}}
+      </template>`,
+      output: null,
+      errors: [{ messageId: 'noAutofocus' }],
     },
   ],
 });
