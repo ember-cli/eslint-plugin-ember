@@ -43,6 +43,12 @@ ruleTester.run('template-no-empty-headings', rule, {
     '<template><h1><this.Heading /></h1></template>',
     '<template><h2><@heading /></h2></template>',
     '<template><h3><ns.Heading /></h3></template>',
+
+    // Custom elements (hyphenated lowercase) aren't in the html-tags / svg-tags /
+    // mathml-tag-names allowlists — treated as opaque, assume content. Matches
+    // the accepted-false-negative convention established in #2689.
+    '<template><h1><my-widget /></h1></template>',
+    '<template><h2><x-foo>text</x-foo></h2></template>',
   ],
   invalid: [
     {
