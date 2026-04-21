@@ -147,5 +147,17 @@ ruleTester.run('template-no-empty-headings', rule, {
       output: null,
       errors: [{ messageId: 'emptyHeading' }],
     },
+
+    // Falsy mustache aria-hidden values do not exempt the heading.
+    {
+      code: '<template><h1 aria-hidden={{false}}></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    {
+      code: '<template><h1 aria-hidden={{"false"}}></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
   ],
 });
