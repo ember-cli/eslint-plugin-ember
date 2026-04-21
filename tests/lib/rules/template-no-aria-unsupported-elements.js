@@ -30,7 +30,6 @@ ruleTester.run('template-no-aria-unsupported-elements', rule, {
       errors: [{ messageId: 'unsupported' }],
     },
 
-    // Newly covered by aria-query's dom.reserved list.
     {
       code: '<template><col role="presentation" /></template>',
       output: null,
