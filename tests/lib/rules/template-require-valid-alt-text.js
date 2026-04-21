@@ -60,7 +60,7 @@ ruleTester.run('template-require-valid-alt-text', rule, {
   ],
   invalid: [
     // Empty-string aria-label / aria-labelledby / alt provides no accessible
-    // name. These must flag (previously accepted by a presence-only check).
+    // name, so these must flag.
     {
       code: '<template><input type="image" aria-label="" /></template>',
       output: null,
