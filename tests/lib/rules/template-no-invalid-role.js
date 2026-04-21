@@ -72,9 +72,7 @@ ruleTester.run('template-no-invalid-role', rule, {
       options: [{ catchNonexistentRoles: false }],
     },
 
-    // DPUB-ARIA (doc-*) and Graphics-ARIA (graphics-*) are in the WAI-ARIA
-    // ecosystem via aria-query; previously flagged because our hand-maintained
-    // VALID_ROLES didn't include them.
+    // DPUB-ARIA (doc-*) and Graphics-ARIA (graphics-*) are valid per aria-query.
     '<template><div role="doc-abstract">Abstract</div></template>',
     '<template><section role="doc-chapter"></section></template>',
     '<template><svg role="graphics-document"></svg></template>',
