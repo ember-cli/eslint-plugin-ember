@@ -161,7 +161,7 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
       output: null,
       errors: [{ message: 'The attribute aria-checked is required by the role menuitemradio' }],
     },
-    // Case-insensitivity surfaces previously-unflagged mistakes.
+    // Case-insensitive role matching — uppercase role missing required props is flagged.
     {
       code: '<template><div role="COMBOBOX"></div></template>',
       output: null,
