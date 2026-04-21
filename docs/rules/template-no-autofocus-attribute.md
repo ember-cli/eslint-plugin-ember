@@ -40,6 +40,28 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+Explicit opt-out via a falsy value is allowed (parity with
+[`jsx-a11y/no-autofocus`](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/no-autofocus.md)):
+
+```gjs
+<template>
+  <input autofocus="false" />
+  <input autofocus={{false}} />
+</template>
+```
+
+`<dialog>` and its descendants are exempt. A dialog is expected to focus its
+initial element on open, per
+[MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog):
+
+```gjs
+<template>
+  <dialog>
+    <button autofocus>Close</button>
+  </dialog>
+</template>
+```
+
 ## When Not To Use It
 
 If you need to autofocus for specific accessibility or UX requirements and have thoroughly tested with assistive technologies, you may disable this rule for those specific cases.
