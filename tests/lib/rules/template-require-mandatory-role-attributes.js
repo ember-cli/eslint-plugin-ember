@@ -25,6 +25,25 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
     '<template>{{foo-component role="button"}}</template>',
     '<template>{{foo-component role="unknown"}}</template>',
     '<template>{{foo-component role=role}}</template>',
+
+    // Semantic inputs supply required ARIA state natively. Exempt pairings
+    // are looked up via axobject-query's elementAXObjects + AXObjectRoles.
+
+    // checkbox/switch: aria-checked supplied via native `checked` state.
+    '<template><input type="checkbox" role="switch" /></template>',
+    '<template><input type="checkbox" role="checkbox" /></template>',
+    '<template><input type="radio" role="radio" /></template>',
+    '<template><input type="Checkbox" role="switch" /></template>',
+    '<template><input type="CHECKBOX" role="switch" /></template>',
+
+    // slider: aria-valuenow supplied via native `value` (axobject-query SliderRole).
+    '<template><input type="range" role="slider" /></template>',
+
+    // Classic Ember {{input type=... role=...}} helper renders a native
+    // <input>; same axobject-query lookup applies.
+    '<template>{{input type="checkbox" role="switch"}}</template>',
+    '<template>{{input type="Checkbox" role="switch"}}</template>',
+    '<template>{{input type="range" role="slider"}}</template>',
   ],
 
   invalid: [
@@ -75,6 +94,60 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
       output: null,
       errors: [{ message: 'The attribute aria-checked is required by the role checkbox' }],
     },
+
+    // Undocumented {input type, role} pairings are NOT exempted.
+    {
+      code: '<template><input type="checkbox" role="radio" /></template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role radio' }],
+    },
+    // {{input}} helper with off-whitelist role is flagged too.
+    {
+      code: '<template>{{input type="text" role="switch"}}</template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role switch' }],
+    },
+    {
+      code: '<template>{{input type="checkbox" role="radio"}}</template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role radio' }],
+    },
+    {
+      code: '<template><input type="radio" role="switch" /></template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role switch' }],
+    },
+    {
+      code: '<template><input type="radio" role="checkbox" /></template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role checkbox' }],
+    },
+    {
+      code: '<template><input type="text" role="switch" /></template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role switch' }],
+    },
+    {
+      // No `type` attribute; defaults to text.
+      code: '<template><input role="switch" /></template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role switch' }],
+    },
+
+    // menuitemcheckbox / menuitemradio on <input> are NOT exempted —
+    // axobject-query's MenuItemCheckBoxRole / MenuItemRadioRole lists only
+    // an ARIA concept, no HTML concept for <input>. Flagged for missing
+    // aria-checked.
+    {
+      code: '<template><input type="checkbox" role="menuitemcheckbox" /></template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role menuitemcheckbox' }],
+    },
+    {
+      code: '<template><input type="radio" role="menuitemradio" /></template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role menuitemradio' }],
+    },
   ],
 });
 
@@ -105,6 +178,20 @@ hbsRuleTester.run('template-require-mandatory-role-attributes', rule, {
     '{{foo-component role="button"}}',
     '{{foo-component role="unknown"}}',
     '{{foo-component role=role}}',
+
+    // Semantic inputs supply required ARIA state natively (via axobject-query
+    // elementAXObjects lookup).
+    '<input type="checkbox" role="switch" />',
+    '<input type="radio" role="radio" />',
+    '<input type="checkbox" role="checkbox" />',
+    '<input type="Checkbox" role="switch" />',
+    '<input type="CHECKBOX" role="switch" />',
+    '<input type="range" role="slider" />',
+
+    // Classic Ember {{input}} helper renders a native <input>; same lookup.
+    '{{input type="checkbox" role="switch"}}',
+    '{{input type="Checkbox" role="switch"}}',
+    '{{input type="range" role="slider"}}',
   ],
   invalid: [
     {
@@ -145,6 +232,58 @@ hbsRuleTester.run('template-require-mandatory-role-attributes', rule, {
       code: '{{foo role="checkbox"}}',
       output: null,
       errors: [{ message: 'The attribute aria-checked is required by the role checkbox' }],
+    },
+
+    // Undocumented {input type, role} pairings are NOT exempted.
+    {
+      code: '<input type="checkbox" role="radio" />',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role radio' }],
+    },
+    {
+      code: '<input type="radio" role="switch" />',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role switch' }],
+    },
+    {
+      code: '<input type="radio" role="checkbox" />',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role checkbox' }],
+    },
+    {
+      code: '<input type="text" role="switch" />',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role switch' }],
+    },
+    {
+      // No `type` attribute; defaults to text.
+      code: '<input role="switch" />',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role switch' }],
+    },
+
+    // {{input}} helper with off-whitelist role is flagged too.
+    {
+      code: '{{input type="text" role="switch"}}',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role switch' }],
+    },
+    {
+      code: '{{input type="checkbox" role="radio"}}',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role radio' }],
+    },
+
+    // menuitemcheckbox / menuitemradio on <input> are NOT exempted.
+    {
+      code: '<input type="checkbox" role="menuitemcheckbox" />',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role menuitemcheckbox' }],
+    },
+    {
+      code: '<input type="radio" role="menuitemradio" />',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role menuitemradio' }],
     },
   ],
 });
