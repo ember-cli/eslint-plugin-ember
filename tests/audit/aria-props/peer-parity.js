@@ -370,7 +370,6 @@ ruleTester.run('audit:aria-props (gts)', rule, {
         },
       ],
     },
-
   ],
 });
 
