@@ -31,6 +31,10 @@ ruleTester.run('template-require-media-caption', rule, {
     </template>`,
 
     '<template><video><track kind="captions" /></video></template>',
+    // HTML enumerated attribute values are case-insensitive, so "Captions" is
+    // the same as "captions" for the track element. Matches jsx-a11y/vue-a11y.
+    '<template><video><track kind="Captions" /></video></template>',
+    '<template><video><track kind="CAPTIONS" /></video></template>',
     '<template><audio muted="true"></audio></template>',
     '<template><video muted></video></template>',
     '<template><audio muted={{this.muted}}></audio></template>',
