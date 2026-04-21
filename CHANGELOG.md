@@ -1,5 +1,20 @@
 # Changelog
 
+## Release (2026-04-21)
+
+* eslint-plugin-ember 13.1.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2715](https://github.com/ember-cli/eslint-plugin-ember/pull/2715) feat: re-export hbs parser and document HBS flat-config setup ([@johanrd](https://github.com/johanrd))
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2713](https://github.com/ember-cli/eslint-plugin-ember/pull/2713) BUGFIX: false positive: interactive flow content inside <details> ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2026-04-20)
 
 * eslint-plugin-ember 13.0.0 (major)
