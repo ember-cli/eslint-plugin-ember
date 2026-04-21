@@ -29,5 +29,37 @@ ruleTester.run('template-no-aria-unsupported-elements', rule, {
       output: null,
       errors: [{ messageId: 'unsupported' }],
     },
+
+    // Newly covered by aria-query's dom.reserved list.
+    {
+      code: '<template><col role="presentation" /></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<template><colgroup aria-label="x" /></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<template><noscript aria-hidden="true" /></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<template><picture aria-label="x" /></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<template><source aria-label="x" /></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
+    {
+      code: '<template><track aria-label="x" /></template>',
+      output: null,
+      errors: [{ messageId: 'unsupported' }],
+    },
   ],
 });
