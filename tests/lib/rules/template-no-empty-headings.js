@@ -43,6 +43,14 @@ ruleTester.run('template-no-empty-headings', rule, {
     '<template><h1><this.Heading /></h1></template>',
     '<template><h2><@heading /></h2></template>',
     '<template><h3><ns.Heading /></h3></template>',
+
+    // aria-hidden as a boolean / valueless / empty / mustache attribute — all
+    // should exempt the heading (aligns with jsx-a11y / vue-a11y treatment of
+    // boolean HTML attributes).
+    '<template><h1 aria-hidden></h1></template>',
+    '<template><h1 aria-hidden=""></h1></template>',
+    '<template><h1 aria-hidden={{true}}></h1></template>',
+    '<template><h1 aria-hidden="true">Visible to sighted only</h1></template>',
   ],
   invalid: [
     {
