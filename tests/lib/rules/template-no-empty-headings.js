@@ -44,6 +44,10 @@ ruleTester.run('template-no-empty-headings', rule, {
     '<template><h2><@heading /></h2></template>',
     '<template><h3><ns.Heading /></h3></template>',
 
+    // aria-hidden variants — exempt from empty-heading check (fewer-false-
+    // positives policy; see PR body for the four ecosystem positions).
+    '<template><h1 aria-hidden></h1></template>',
+    '<template><h1 aria-hidden=""></h1></template>',
     '<template><h1 aria-hidden={{true}}></h1></template>',
     '<template><h1 aria-hidden="true">Visible to sighted only</h1></template>',
     '<template><h1 aria-hidden="TRUE"></h1></template>',
@@ -140,16 +144,10 @@ ruleTester.run('template-no-empty-headings', rule, {
       errors: [{ messageId: 'emptyHeading' }],
     },
 
-    // Valueless / empty aria-hidden resolves to the default `undefined` per
-    // WAI-ARIA §6.6 — the element is NOT hidden, so an otherwise-empty heading
-    // still flags.
+    // Explicit falsy aria-hidden does NOT exempt the empty-heading check —
+    // this is the unambiguous opt-out, no ecosystem position disagrees.
     {
-      code: '<template><h1 aria-hidden></h1></template>',
-      output: null,
-      errors: [{ messageId: 'emptyHeading' }],
-    },
-    {
-      code: '<template><h1 aria-hidden=""></h1></template>',
+      code: '<template><h1 aria-hidden="false"></h1></template>',
       output: null,
       errors: [{ messageId: 'emptyHeading' }],
     },
