@@ -78,7 +78,8 @@ ruleTester.run('audit:role-supports-aria-props (gts)', rule, {
     },
     {
       code: '<template><div role="combobox" aria-multiline="true" aria-expanded="false" aria-controls="x" /></template>',
-      output: '<template><div role="combobox" aria-expanded="false" aria-controls="x" /></template>',
+      output:
+        '<template><div role="combobox" aria-expanded="false" aria-controls="x" /></template>',
       errors: [{ messageId: 'unsupportedExplicit' }],
     },
     {
