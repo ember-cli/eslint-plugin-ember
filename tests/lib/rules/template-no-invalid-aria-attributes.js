@@ -33,12 +33,26 @@ ruleTester.run('template-no-invalid-aria-attributes', rule, {
     '<template><div role="textbox" aria-sort={{if this.hasCustomSort "other" "ascending"}}></div></template>',
     '<template><div role="combobox" aria-expanded="undefined"></div></template>',
     '<template><button aria-label={{if @isNew (t "actions.add") (t "actions.edit")}}></button></template>',
+
+    // Custom elements (tags with a hyphen, starting lowercase) are skipped —
+    // their a11y contracts are defined by the component author, not ESLint.
+    // Matches angular-eslint's `valid-aria` behavior.
+    '<template><my-widget aria-bogus="x" /></template>',
+    '<template><app-test aria-expanded="notABool" /></template>',
+    '<template><x-foo aria-x="text" /></template>',
   ],
   invalid: [
     {
       code: '<template><div aria-fake="value">Content</div></template>',
       output: null,
       errors: [{ messageId: 'noInvalidAriaAttribute', data: { attribute: 'aria-fake' } }],
+    },
+    // Control: native tag still flags the same bogus attribute that is
+    // permitted above on a custom element.
+    {
+      code: '<template><div aria-bogus="x" /></template>',
+      output: null,
+      errors: [{ messageId: 'noInvalidAriaAttribute', data: { attribute: 'aria-bogus' } }],
     },
     {
       code: '<template><div aria-invalid-attr="value">Content</div></template>',
@@ -151,12 +165,24 @@ hbsRuleTester.run('template-no-invalid-aria-attributes', rule, {
     '<div role="textbox" aria-sort={{if this.hasCustomSort "other" "ascending"}}></div>',
     '<div role="combobox" aria-expanded="undefined"></div>',
     '<button aria-label={{if @isNew (t "actions.add") (t "actions.edit")}}></button>',
+
+    // Custom elements (tags with a hyphen, starting lowercase) are skipped.
+    '<my-widget aria-bogus="x" />',
+    '<app-test aria-expanded="notABool" />',
+    '<x-foo aria-x="text" />',
   ],
   invalid: [
     {
       code: '<input aria-text="inaccessible text" />',
       output: null,
       errors: [{ message: 'Invalid ARIA attribute: aria-text' }],
+    },
+    // Control: native tag still flags the same bogus attribute that is
+    // permitted above on a custom element.
+    {
+      code: '<div aria-bogus="x" />',
+      output: null,
+      errors: [{ message: 'Invalid ARIA attribute: aria-bogus' }],
     },
     {
       code: '<div role="slider" aria-valuenow={{this.foo}} aria-valuemax={{this.bar}} aria-value-min={{this.baz}} />',
