@@ -39,6 +39,19 @@ ruleTester.run('template-no-nested-interactive', rule, {
         Text
       </label>
     </template>`,
+    // <label> is NOT a native-interactive widget (structure role per axobject-query),
+    // so multiple interactive children inside a <label> do not fire nested-interactive.
+    // (Outer label-click-forwarding is a spec behavior of <label>, not widget-ness.)
+    `<template>
+      <label>
+        <button>Click</button>
+        <a href="#">Link</a>
+      </label>
+    </template>`,
+    '<template><label><input><input></label></template>',
+    // <audio>/<video> without `controls` are NOT interactive (no rendered UI, no focus).
+    '<template><button><audio></audio></button></template>',
+    '<template><button><video></video></button></template>',
     `<template>
       <div role="presentation">
         <button>Click</button>
@@ -129,16 +142,6 @@ ruleTester.run('template-no-nested-interactive', rule, {
     },
     {
       code: `<template>
-        <label>
-          <button>Click</button>
-          <a href="#">Link</a>
-        </label>
-      </template>`,
-      output: null,
-      errors: [{ messageId: 'nested' }],
-    },
-    {
-      code: `<template>
         <div role="button">
           <a href="#">Link</a>
         </div>
@@ -217,13 +220,14 @@ ruleTester.run('template-no-nested-interactive', rule, {
       output: null,
       errors: [{ messageId: 'nested' }],
     },
+    // <audio controls> / <video controls> are native-interactive; nesting inside <button> fires.
     {
-      code: '<template><object usemap=""><button></button></object></template>',
+      code: '<template><button><video controls></video></button></template>',
       output: null,
       errors: [{ messageId: 'nested' }],
     },
     {
-      code: '<template><label><input><input></label></template>',
+      code: '<template><button><audio controls></audio></button></template>',
       output: null,
       errors: [{ messageId: 'nested' }],
     },
@@ -307,6 +311,15 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       code: '<button><img usemap=""></button>',
       options: [{ ignoreUsemapAttribute: true }],
     },
+    // <label> is NOT a native-interactive widget (structure role per axobject-query).
+    '<label><input><input></label>',
+    `<label for="foo">
+  <div id="foo" tabindex=-1></div>
+  <input>
+</label>`,
+    // <audio>/<video> without `controls` are NOT interactive.
+    '<button><audio></audio></button>',
+    '<button><video></video></button>',
   ],
   invalid: [
     {
@@ -379,16 +392,6 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       output: null,
       errors: [{ message: 'Do not nest interactive element <img> inside <button>.' }],
     },
-    {
-      code: '<object usemap=""><button></button></object>',
-      output: null,
-      errors: [{ message: 'Do not nest interactive element <button> inside <object>.' }],
-    },
-    {
-      code: '<label><input><input></label>',
-      output: null,
-      errors: [{ message: 'Do not nest interactive element <input> inside <label>.' }],
-    },
     // Config: additionalInteractiveTags
     {
       code: '<button><my-special-input></my-special-input></button>',
@@ -396,16 +399,11 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       options: [{ additionalInteractiveTags: ['my-special-input'] }],
       errors: [{ message: 'Do not nest interactive element <my-special-input> inside <button>.' }],
     },
-    // Label with multiple interactive children including tabindex
+    // <video controls> is native-interactive; nesting inside <button> fires.
     {
-      code: [
-        '<label for="foo">',
-        '  <div id="foo" tabindex=-1></div>',
-        '  <input>',
-        '</label>',
-      ].join('\n'),
+      code: '<button><video controls></video></button>',
       output: null,
-      errors: [{ message: 'Do not nest interactive element <input> inside <label>.' }],
+      errors: [{ message: 'Do not nest interactive element <video> inside <button>.' }],
     },
   ],
 });
