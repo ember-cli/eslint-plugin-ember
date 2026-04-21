@@ -51,6 +51,13 @@ ruleTester.run('template-no-empty-headings', rule, {
     '<template><h1 aria-hidden=""></h1></template>',
     '<template><h1 aria-hidden={{true}}></h1></template>',
     '<template><h1 aria-hidden="true">Visible to sighted only</h1></template>',
+
+    // HTML attribute values are ASCII case-insensitive — "TRUE" / "True" /
+    // {{"TRUE"}} / {{"True"}} all count as truthy.
+    '<template><h1 aria-hidden="TRUE"></h1></template>',
+    '<template><h1 aria-hidden="True"></h1></template>',
+    '<template><h1 aria-hidden={{"TRUE"}}></h1></template>',
+    '<template><h1 aria-hidden={{"True"}}></h1></template>',
   ],
   invalid: [
     {
