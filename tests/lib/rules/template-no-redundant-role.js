@@ -244,6 +244,18 @@ hbsRuleTester.run('template-no-redundant-role', rule, {
       errors: [{ message: 'Use of redundant or invalid role: listbox on <select> detected.' }],
     },
     {
+      // <select> without `multiple` or `size` defaults to role "combobox".
+      code: '<select role="combobox"></select>',
+      output: '<select></select>',
+      errors: [{ message: 'Use of redundant or invalid role: combobox on <select> detected.' }],
+    },
+    {
+      // Case-insensitive matching — ARIA role tokens compare as ASCII-case-insensitive.
+      code: '<body role="DOCUMENT"></body>',
+      output: '<body></body>',
+      errors: [{ message: 'Use of redundant or invalid role: document on <body> detected.' }],
+    },
+    {
       code: '<main role="main"></main>',
       output: '<main></main>',
       options: [{ checkAllHTMLElements: false }],
