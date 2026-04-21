@@ -61,6 +61,12 @@ ruleTester.run('template-no-empty-headings', rule, {
     // still resolve to "true".
     '<template><h1 aria-hidden={{" true "}}></h1></template>',
     '<template><h1 aria-hidden=" true "></h1></template>',
+
+    // Custom elements (hyphenated lowercase) aren't in the html-tags / svg-tags /
+    // mathml-tag-names allowlists — treated as opaque, assume content. Matches
+    // the accepted-false-negative convention established in #2689.
+    '<template><h1><my-widget /></h1></template>',
+    '<template><h2><x-foo>text</x-foo></h2></template>',
   ],
   invalid: [
     {

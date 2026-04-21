@@ -106,6 +106,11 @@ ruleTester.run('template-no-invalid-interactive', rule, {
       code: '<template><div onclick={{action "foo"}}></div></template>',
       options: [{ ignoredTags: ['div'] }],
     },
+
+    // Custom elements (hyphenated lowercase) — accepted false negative per #2689.
+    // Their a11y contract is author-defined; ESLint can't introspect.
+    '<template><my-element onclick={{this.handler}}></my-element></template>',
+    '<template><x-foo {{on "click" this.handler}}></x-foo></template>',
   ],
 
   invalid: [
