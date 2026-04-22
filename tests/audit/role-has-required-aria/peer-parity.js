@@ -128,13 +128,13 @@ ruleTester.run('audit:role-has-required-aria (gts)', rule, {
       errors: [{ messageId: 'missingAttributes' }],
     },
 
-    // === DIVERGENCE — undocumented input+role pairings ===
-    // Pairings NOT on our whitelist remain flagged. jsx-a11y/angular defer to
-    //   axobject-query's `elementAXObjects`, which covers a larger set; we only
-    //   recognize the documented five pairings. Example mismatches:
-    //     - input[type=checkbox] role=radio      → we flag, jsx-a11y/angular don't
-    //     - input[type=radio]    role=switch     → we flag, peer behavior varies
-    //   These remain invalid (missing aria-checked) in our rule.
+    // === Pairings NOT exempt — axobject-query does not list them ===
+    // Semantic-role exemption is driven by axobject-query's `elementAXObjects`
+    // + `AXObjectRoles` maps — see `isSemanticRoleElement()` in the rule
+    // source. Pairings the AX-tree data does not list (such as
+    // `input[type=checkbox] role=radio` or `input[type=radio] role=switch`)
+    // fall through to the normal required-attribute check and are flagged
+    // for missing `aria-checked`.
     {
       code: '<template><input type="checkbox" role="radio" /></template>',
       output: null,
@@ -145,8 +145,9 @@ ruleTester.run('audit:role-has-required-aria (gts)', rule, {
       output: null,
       errors: [{ messageId: 'missingAttributes' }],
     },
-    // Bare `<input role="switch">` (no `type`) — not on our whitelist, stays
-    //   flagged. The input's default `type=text` does not expose aria-checked.
+    // Bare `<input role="switch">` (no `type`) has no exempt pairing either —
+    // the element defaults to `type=text`, which axobject-query does not map
+    // to the switch role.
     {
       code: '<template><input role="switch" /></template>',
       output: null,
