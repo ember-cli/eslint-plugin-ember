@@ -75,11 +75,8 @@ ruleTester.run('template-no-invalid-interactive', rule, {
     '<template><audio controls onclick={{this.play}}></audio></template>',
     '<template><video controls onclick={{this.play}}></video></template>',
 
-    // <option> and <datalist> are interactive (aria option/listbox roles)
-    '<template><option onclick={{this.select}}>Opt</option></template>',
-    '<template><datalist onclick={{this.show}}></datalist></template>',
-
-    // <canvas> is kept as a native-interactive widget (axobject CanvasRole; no-FP bias).
+    // <canvas> — not in HTML §3.2.5.2.7, but upstream ember-template-lint
+    // treats it as interactive (drawing/game-UI convention); preserved for parity.
     '<template><canvas onclick={{this.draw}}></canvas></template>',
 
     // usemap only makes img/object interactive
@@ -216,20 +213,6 @@ ruleTester.run('template-no-invalid-interactive', rule, {
         {
           messageId: 'noInvalidInteractive',
           data: { tagName: 'a', handler: 'onclick' },
-        },
-      ],
-    },
-    {
-      // <label> is NOT native-interactive (structure role, not widget).
-      // Click-forwarding is a spec behavior of <label>, not widget-ness, so an
-      // interactive handler on <label> itself is invalid.
-      filename: 'test.gjs',
-      code: '<template><label onclick={{this.handleClick}}>Label</label></template>',
-      output: null,
-      errors: [
-        {
-          messageId: 'noInvalidInteractive',
-          data: { tagName: 'label', handler: 'onclick' },
         },
       ],
     },

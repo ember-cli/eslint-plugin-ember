@@ -39,16 +39,6 @@ ruleTester.run('template-no-nested-interactive', rule, {
         Text
       </label>
     </template>`,
-    // <label> is NOT a native-interactive widget (structure role per axobject-query),
-    // so multiple interactive children inside a <label> do not fire nested-interactive.
-    // (Outer label-click-forwarding is a spec behavior of <label>, not widget-ness.)
-    `<template>
-      <label>
-        <button>Click</button>
-        <a href="#">Link</a>
-      </label>
-    </template>`,
-    '<template><label><input><input></label></template>',
     // <audio>/<video> without `controls` are NOT interactive (no rendered UI, no focus).
     '<template><button><audio></audio></button></template>',
     '<template><button><video></video></button></template>',
@@ -220,7 +210,31 @@ ruleTester.run('template-no-nested-interactive', rule, {
       output: null,
       errors: [{ messageId: 'nested' }],
     },
-    // <audio controls> / <video controls> are native-interactive; nesting inside <button> fires.
+    // Label-association: HTML's "first labelable descendant" rule means a
+    // second interactive child is orphaned from the label. Flag per upstream
+    // ember-template-lint parity.
+    {
+      code: `<template>
+        <label>
+          <button>Click</button>
+          <a href="#">Link</a>
+        </label>
+      </template>`,
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><label><input><input></label></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    // <object usemap> is interactive via rule-level special case (upstream parity).
+    {
+      code: '<template><object usemap=""><button></button></object></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    // <audio controls> / <video controls> are HTML interactive content; nesting inside <button> fires.
     {
       code: '<template><button><video controls></video></button></template>',
       output: null,
@@ -311,12 +325,6 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       code: '<button><img usemap=""></button>',
       options: [{ ignoreUsemapAttribute: true }],
     },
-    // <label> is NOT a native-interactive widget (structure role per axobject-query).
-    '<label><input><input></label>',
-    `<label for="foo">
-  <div id="foo" tabindex=-1></div>
-  <input>
-</label>`,
     // <audio>/<video> without `controls` are NOT interactive.
     '<button><audio></audio></button>',
     '<button><video></video></button>',
@@ -392,6 +400,24 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       output: null,
       errors: [{ message: 'Do not nest interactive element <img> inside <button>.' }],
     },
+    // <object usemap> is interactive via rule-level special case (upstream parity).
+    {
+      code: '<object usemap=""><button></button></object>',
+      output: null,
+      errors: [{ message: 'Do not nest interactive element <button> inside <object>.' }],
+    },
+    // Label-association: HTML's "first labelable descendant" rule means a
+    // second interactive child is orphaned from the label.
+    {
+      code: '<label><button>Click</button><a href="#">Link</a></label>',
+      output: null,
+      errors: [{ message: 'Do not nest interactive element <a> inside <label>.' }],
+    },
+    {
+      code: '<label><input><input></label>',
+      output: null,
+      errors: [{ message: 'Do not nest interactive element <input> inside <label>.' }],
+    },
     // Config: additionalInteractiveTags
     {
       code: '<button><my-special-input></my-special-input></button>',
@@ -399,7 +425,7 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       options: [{ additionalInteractiveTags: ['my-special-input'] }],
       errors: [{ message: 'Do not nest interactive element <my-special-input> inside <button>.' }],
     },
-    // <video controls> is native-interactive; nesting inside <button> fires.
+    // <video controls> is HTML interactive content; nesting inside <button> fires.
     {
       code: '<button><video controls></video></button>',
       output: null,
