@@ -44,8 +44,8 @@ ruleTester.run('template-no-empty-headings', rule, {
     '<template><h2><@heading /></h2></template>',
     '<template><h3><ns.Heading /></h3></template>',
 
-    // aria-hidden variants — exempt from empty-heading check (fewer-false-
-    // positives policy; see PR body for the four ecosystem positions).
+    // aria-hidden variants are exempt from the empty-heading check to avoid
+    // false positives when headings are intentionally hidden from assistive tech.
     '<template><h1 aria-hidden></h1></template>',
     '<template><h1 aria-hidden=""></h1></template>',
     '<template><h1 aria-hidden={{true}}></h1></template>',
