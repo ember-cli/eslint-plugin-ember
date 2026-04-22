@@ -106,6 +106,22 @@ ruleTester.run('template-require-valid-alt-text', rule, {
       output: null,
       errors: [{ messageId: 'areaMissing' }],
     },
+    // Whitespace-only values are not valid accessible names per ACCNAME 1.2 §4.3.2 step 2D.
+    {
+      code: '<template><input type="image" aria-label=" " /></template>',
+      output: null,
+      errors: [{ messageId: 'inputImage' }],
+    },
+    {
+      code: '<template><object aria-labelledby="\n\t" ></object></template>',
+      output: null,
+      errors: [{ messageId: 'objectMissing' }],
+    },
+    {
+      code: '<template><area href="/" title=" " /></template>',
+      output: null,
+      errors: [{ messageId: 'areaMissing' }],
+    },
     {
       code: '<template><img src="/test.jpg" /></template>',
       output: null,
