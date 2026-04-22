@@ -53,6 +53,18 @@ describe('isHtmlInteractiveContent', () => {
         isHtmlInteractiveContent(makeNode('input', { type: 'hidden' }), getTextAttrValue)
       ).toBe(false);
     });
+
+    it('is NOT interactive when type="HIDDEN" (case-insensitive)', () => {
+      expect(
+        isHtmlInteractiveContent(makeNode('input', { type: 'HIDDEN' }), getTextAttrValue)
+      ).toBe(false);
+    });
+
+    it('is NOT interactive when type=" hidden " (whitespace-trimmed)', () => {
+      expect(
+        isHtmlInteractiveContent(makeNode('input', { type: ' hidden ' }), getTextAttrValue)
+      ).toBe(false);
+    });
   });
 
   describe('<a>', () => {
