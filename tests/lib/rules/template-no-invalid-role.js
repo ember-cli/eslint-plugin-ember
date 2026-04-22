@@ -80,6 +80,14 @@ ruleTester.run('template-no-invalid-role', rule, {
     '<template><div role="tabpanel row"></div></template>',
     '<template><svg role="graphics-document document"></svg></template>',
     '<template><section role="doc-appendix doc-bibliography"></section></template>',
+
+    // ARIA 1.3 draft roles — not in aria-query 5.3.2 but spec-blessed, so
+    // the rule accepts them via the inline allowlist.
+    '<template><div role="associationlist"></div></template>',
+    '<template><div role="associationlistitemkey"></div></template>',
+    '<template><div role="associationlistitemvalue"></div></template>',
+    '<template><div role="comment"></div></template>',
+    '<template><div role="suggestion"></div></template>',
   ],
 
   invalid: [
@@ -263,6 +271,14 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
     '<div role="tabpanel row"></div>',
     '<svg role="graphics-document document"></svg>',
     '<section role="doc-appendix doc-bibliography"></section>',
+
+    // ARIA 1.3 draft roles — not in aria-query 5.3.2 but spec-blessed, so
+    // the rule accepts them via the inline allowlist.
+    '<div role="associationlist"></div>',
+    '<div role="associationlistitemkey"></div>',
+    '<div role="associationlistitemvalue"></div>',
+    '<div role="comment"></div>',
+    '<div role="suggestion"></div>',
   ],
   invalid: [
     {
