@@ -58,7 +58,7 @@ This rule treats valueless / empty-string `aria-hidden` (`<h1 aria-hidden>` or `
 
 We lean toward fewer false positives here: if the author wrote `aria-hidden` at all, they signaled an intent to hide, and flagging the empty heading on top of what is already a malformed `aria-hidden` usage layers a second-order complaint on a first-order problem. Axe-core and the W3C ACT rules consistently treat this shape as INCOMPLETE (needs manual review) rather than a definitive failure, which is consistent with leaning away from a hard flag here.
 
-For rules that ask the _opposite_ question ("is this element authoritatively hidden?"), the spec-literal reading applies — see e.g. `template-no-aria-hidden-on-focusable` and `template-anchor-has-content`, which treat valueless `aria-hidden` as **not** hidden. This split is applied per-rule, picking the interpretation that produces the fewest false positives for each specific check.
+For rules that ask the _opposite_ question ("is this element authoritatively hidden?"), the spec-literal reading applies, and valueless `aria-hidden` should be treated as **not** hidden. This split is applied per-rule, picking the interpretation that produces the fewest false positives for each specific check.
 
 Unambiguous forms always follow the spec:
 
