@@ -1,14 +1,18 @@
-// Audit fixture — peer-plugin parity for `ember/template-no-redundant-role`.
+// Audit fixture — translates peer-plugin test cases into assertions against
+// our rule (`ember/template-no-redundant-role`). Runs as part of the default
+// Vitest suite (via the `tests/**/*.js` include glob) and serves double-duty:
+// (1) auditable record of peer-parity divergences, (2) regression coverage
+// pinning CURRENT behavior. Each case encodes what OUR rule does today;
+// divergences from upstream plugins are annotated as `DIVERGENCE —`.
+// Peer-only constructs that can't be translated to Ember templates (JSX
+// spread props, Vue v-bind, Angular `$event`, undefined-handler expression
+// analysis) are marked `AUDIT-SKIP`.
 //
 // Source files (context/ checkouts):
 //   - eslint-plugin-jsx-a11y-main/src/rules/no-redundant-roles.js
 //   - eslint-plugin-jsx-a11y-main/__tests__/src/rules/no-redundant-roles-test.js
 //   - eslint-plugin-vuejs-accessibility-main/src/rules/no-redundant-roles.ts
 //   - eslint-plugin-lit-a11y/lib/rules/no-redundant-role.js
-//
-// These tests are NOT part of the main suite and do not run in CI. They encode
-// the CURRENT behavior of our rule. Each divergence from an upstream plugin is
-// annotated as "DIVERGENCE —".
 
 'use strict';
 
