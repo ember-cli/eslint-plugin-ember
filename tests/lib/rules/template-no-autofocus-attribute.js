@@ -48,6 +48,20 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
         </div>
       </dialog>
     </template>`,
+    // Dialog exception also applies to the mustache form of the `<Input>`
+    // helper (`{{input autofocus=true}}`) — whether direct child or nested.
+    `<template>
+      <dialog>
+        {{input autofocus=true}}
+      </dialog>
+    </template>`,
+    `<template>
+      <dialog>
+        <div>
+          {{input autofocus=true}}
+        </div>
+      </dialog>
+    </template>`,
   ],
 
   invalid: [
