@@ -62,4 +62,8 @@ Un-documented pairings (e.g. `<input type="checkbox" role="menuitemcheckbox">` �
 
 - [WAI-ARIA Roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles)
 - [WAI-ARIA APG — Switch pattern](https://www.w3.org/WAI/ARIA/apg/patterns/switch/)
-- [axobject-query](https://github.com/A11yance/axobject-query) — AX-tree data source for the exemption lookup
+- [HTML-AAM — `<input type="checkbox">` → `checkbox` role mapping](https://www.w3.org/TR/html-aam-1.1/#el-input-checkbox)
+  — primary-spec source: the native element's accessibility mapping supplies
+  the required ARIA state via the `checked` IDL attribute, which is what
+  axobject-query encodes.
+- [axobject-query](https://github.com/A11yance/axobject-query) — AX-tree data source for the exemption lookup (secondary, encodes HTML-AAM)
