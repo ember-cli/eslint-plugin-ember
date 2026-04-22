@@ -190,6 +190,7 @@ hbsRuleTester.run('template-no-invalid-aria-attributes', rule, {
 
     // aria-pressed is tristate WITHOUT allowundefined; valid values:
     '<button aria-pressed="true">Toggle</button>',
+    '<button aria-pressed="false">Toggle</button>',
     '<button aria-pressed="mixed">Toggle</button>',
 
     '<button aria-label={{if @isNew (t "actions.add") (t "actions.edit")}}></button>',
