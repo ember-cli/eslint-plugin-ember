@@ -56,7 +56,7 @@ Exempt pairings include (non-exhaustive):
 | `<input type="text">`     | `textbox`            | no required ARIA                                 |
 | `<input type="search">`   | `searchbox`          | no required ARIA                                 |
 
-Un-documented pairings (e.g. `<input type="checkbox" role="menuitemcheckbox">` — axobject-query does not list this) remain flagged.
+Undocumented pairings (e.g. `<input type="checkbox" role="menuitemcheckbox">` — axobject-query does not list this) remain flagged.
 
 ## References
 

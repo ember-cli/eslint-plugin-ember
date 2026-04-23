@@ -197,8 +197,10 @@ hbsRuleTester.run('audit:role-has-required-aria (hbs)', rule, {
       output: null,
       errors: [{ messageId: 'missingAttributes' }],
     },
-    // DIVERGENCE: pairings NOT in our input+role whitelist stay flagged.
-    //   jsx-a11y/angular recognize more pairings via axobject-query.
+    // Pairings NOT recognized by axobject-query's elementAXObjects remain
+    //   flagged. Our rule (and jsx-a11y/angular) share the same authority
+    //   here; the examples below are genuinely undocumented concept-chain
+    //   pairings, not divergences.
     {
       code: '<input type="checkbox" role="radio" />',
       output: null,
