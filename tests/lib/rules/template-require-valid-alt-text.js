@@ -117,8 +117,11 @@ ruleTester.run('template-require-valid-alt-text', rule, {
       output: null,
       errors: [{ messageId: 'objectMissing' }],
     },
+    // <area>: title is NOT one of the accepted fallbacks per ACCNAME.
+    // Only alt / aria-label / aria-labelledby contribute. A whitespace-only
+    // aria-label should be flagged.
     {
-      code: '<template><area href="/" title=" " /></template>',
+      code: '<template><area href="/" aria-label=" " /></template>',
       output: null,
       errors: [{ messageId: 'areaMissing' }],
     },
@@ -319,6 +322,38 @@ hbsRuleTester.run('template-require-valid-alt-text', rule, {
     },
     {
       code: '<area>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Each area of an image map must have a text alternative through the `alt`, `aria-label`, or `aria-labelledby` attribute.',
+        },
+      ],
+    },
+    // HBS parity: empty / whitespace-only accessible-name fallbacks
+    // should be flagged, mirroring the GTS cases above.
+    {
+      code: '<input type="image" aria-label=" " />',
+      output: null,
+      errors: [
+        {
+          message:
+            'All <input> elements with type="image" must have a text alternative through the `alt`, `aria-label`, or `aria-labelledby` attribute.',
+        },
+      ],
+    },
+    {
+      code: '<object aria-labelledby="\n\t" ></object>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Embedded <object> elements must have alternative text by providing inner text, aria-label or aria-labelledby attributes.',
+        },
+      ],
+    },
+    {
+      code: '<area href="/" aria-label=" " />',
       output: null,
       errors: [
         {
