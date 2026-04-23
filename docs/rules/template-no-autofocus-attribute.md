@@ -40,13 +40,16 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
-Explicit opt-out via a falsy value is allowed (parity with
-[`jsx-a11y/no-autofocus`](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/no-autofocus.md)):
+Explicit opt-out via a mustache boolean `false` is allowed — this is the
+only form that statically guarantees no rendered `autofocus` attribute
+(Glimmer VM normalizes `{{false}}` to attribute removal). The string
+`autofocus="false"` is still flagged per HTML boolean-attribute semantics
+(any attribute presence, including the string `"false"`, enables autofocus).
 
 ```gjs
 <template>
-  <input autofocus="false" />
   <input autofocus={{false}} />
+  {{!-- element syntax: the mustache-boolean form --}}
 </template>
 ```
 
