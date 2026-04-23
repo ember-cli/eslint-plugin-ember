@@ -78,6 +78,29 @@ ruleTester.run('template-no-nested-interactive', rule, {
       </li>
     </ul>
     </template>`,
+
+    // Mixed menu-item variants — `menuitemcheckbox` and `menuitemradio`
+    // nested alongside plain `menuitem` follow the same APG Menu Button
+    // pattern. Should not flag as nested-interactive.
+    `<template>
+    <ul role="menu" aria-label="options">
+      <li role="menuitemcheckbox" aria-checked="false">Show hidden</li>
+      <li role="menuitemradio" aria-checked="true">Sort by name</li>
+      <li role="menuitemradio" aria-checked="false">Sort by date</li>
+    </ul>
+    </template>`,
+    // Submenu attached to a menuitemcheckbox (APG permits this).
+    `<template>
+    <ul role="menu">
+      <li role="menuitemcheckbox" aria-haspopup="true" aria-checked="false">
+        Advanced
+        <ul role="menu">
+          <li role="menuitem">Inspect</li>
+          <li role="menuitem">Export</li>
+        </ul>
+      </li>
+    </ul>
+    </template>`,
     `<template>
   <label> My input:
     {{#if @select}}
