@@ -24,9 +24,13 @@ const validHbs = [
 
   // <input type="password"> has no implicit role per aria-query (it's intentionally
   // not mapped so that screen readers don't announce typed content). No role →
-  // no aria-supported-props check.
+  // no aria-supported-props check. Pin this with attributes that would be REJECTED
+  // on a textbox (aria-checked, aria-selected): if the rule mis-classified password
+  // as a textbox fallback, these would flag.
   '<input type="password" aria-describedby="hint" />',
   '<input type="password" aria-required="true" />',
+  '<input type="password" aria-checked="false" />',
+  '<input type="password" aria-selected="true" />',
 
   // <input type="text"> without a list attribute is a textbox — aria-required,
   // aria-readonly, aria-placeholder are all supported.
