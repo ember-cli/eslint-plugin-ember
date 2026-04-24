@@ -173,8 +173,8 @@ ruleTester.run('template-no-invalid-role', rule, {
     // intercept the check via the invalid-role path.
     {
       code: '<template><ul role="xxyxyz presentation"></ul></template>',
-      options: [{ catchNonexistentRoles: false }],
       output: null,
+      options: [{ catchNonexistentRoles: false }],
       errors: [
         { message: 'The role "presentation" should not be used on the semantic element <ul>.' },
       ],
