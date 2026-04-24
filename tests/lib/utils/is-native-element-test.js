@@ -2,10 +2,12 @@
 
 const { isNativeElement, ELEMENT_TAGS } = require('../../../lib/utils/is-native-element');
 
-// Tests exercise the list-lookup path only. Scope-based shadowing is covered
-// by the rule-level test suites (see tests/lib/rules/template-no-block-params-
-// for-html-elements.js and siblings) because it requires a real ESLint
-// SourceCode / scope manager that's only built up by the rule tester.
+// Tests cover both the list-lookup path (no sourceCode) and scope-shadowing
+// detection via lightweight sourceCode stubs. Rule-level suites exercise
+// shadowing against a real ESLint scope manager built by ember-eslint-parser
+// (see tests/lib/rules/template-no-block-params-for-html-elements.js and
+// siblings); these unit tests verify the shadowing branch in isolation with
+// a minimal stub of the `getScope`/`variables`/`upper` surface it touches.
 
 // Stub a minimal ESLint-shaped sourceCode object. The real one uses scope
 // managers produced by ember-eslint-parser; for unit-level coverage we mock
