@@ -52,6 +52,11 @@ ruleTester.run('template-no-redundant-role', rule, {
     '<template><select role="combobox" multiple></select></template>',
     // <select size="5"> (size > 1) has implicit role listbox.
     '<template><select role="combobox" size="5"></select></template>',
+    // Default <select> (no `multiple`, `size` absent or <= 1) has implicit
+    // role "combobox" — an explicit `role="listbox"` overrides to listbox
+    // and is NOT redundant.
+    '<template><select role="listbox"></select></template>',
+    '<template><select role="listbox" size="1"></select></template>',
 
     // Role-fallback: first recognised token wins. `role="tab button"` on
     // <button> resolves to `tab` (non-redundant — button's implicit is
@@ -185,6 +190,11 @@ hbsRuleTester.run('template-no-redundant-role', rule, {
     '<select role="combobox" multiple></select>',
     // <select size="5"> (size > 1) has implicit role "listbox", same reasoning.
     '<select role="combobox" size="5"></select>',
+    // Default <select> (no `multiple`, `size` absent or <= 1) has implicit
+    // role "combobox" — explicit role="listbox" overrides to listbox and is
+    // NOT redundant.
+    '<select role="listbox"></select>',
+    '<select role="listbox" size="1"></select>',
   ],
   invalid: [
     {
