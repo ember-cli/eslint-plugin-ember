@@ -52,18 +52,11 @@ If violations are found, remediation should be planned to ensure text content is
 
 ## Notes on `aria-hidden` semantics
 
-This rule treats valueless / empty-string `aria-hidden` (`<h1 aria-hidden>` or `<h1 aria-hidden="">`) as exempting the heading from the empty-content check — those forms count as "hidden" for this rule.
+This rule follows [WAI-ARIA 1.2 §`aria-hidden`](https://www.w3.org/TR/wai-aria-1.2/#aria-hidden) verbatim: only an explicit truthy value hides the element. Ambiguous shapes — valueless `aria-hidden`, empty string, and mustache literals that resolve to an empty / whitespace-only string — all resolve to the default `undefined` and do NOT exempt the heading from the empty-content check.
 
-**This is a deliberate deviation from [WAI-ARIA 1.2 §`aria-hidden`](https://www.w3.org/TR/wai-aria-1.2/#aria-hidden)**, which resolves valueless / empty-string `aria-hidden` to the default value `undefined` — not `true` — and therefore does not hide the element per spec. The spec-literal reading would say "valueless `aria-hidden` doesn't hide, so the empty heading is still a violation."
-
-We lean toward fewer false positives here: if the author wrote `aria-hidden` at all, they signaled an intent to hide, and flagging the empty heading on top of what is already a malformed `aria-hidden` usage layers a second-order complaint on a first-order problem. Axe-core and the W3C ACT rules consistently treat this shape as INCOMPLETE (needs manual review) rather than a definitive failure, which is consistent with leaning away from a hard flag here.
-
-For rules that ask the _opposite_ question ("is this element authoritatively hidden?"), the spec-literal reading applies, and valueless `aria-hidden` should be treated as **not** hidden. This split is applied per-rule, picking the interpretation that produces the fewest false positives for each specific check.
-
-Unambiguous forms always follow the spec:
-
-- `aria-hidden="true"` / `aria-hidden={{true}}` / `aria-hidden={{"true"}}` (any case) → hidden, exempts the heading.
-- `aria-hidden="false"` / `aria-hidden={{false}}` / `aria-hidden={{"false"}}` → not hidden, the empty-content check still applies.
+- `aria-hidden="true"` / `aria-hidden={{true}}` / `aria-hidden={{"true"}}` (any case, whitespace-trimmed) → hidden, exempts the heading.
+- `aria-hidden="false"` / `aria-hidden={{false}}` / `aria-hidden={{"false"}}` → not hidden, the empty-content check applies.
+- `<h1 aria-hidden>` / `aria-hidden=""` / `aria-hidden={{""}}` / `aria-hidden={{" "}}` → spec-default `undefined`, the empty-content check applies.
 
 ## References
 

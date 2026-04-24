@@ -44,10 +44,8 @@ ruleTester.run('template-no-empty-headings', rule, {
     '<template><h2><@heading /></h2></template>',
     '<template><h3><ns.Heading /></h3></template>',
 
-    // aria-hidden variants are exempt from the empty-heading check to avoid
-    // false positives when headings are intentionally hidden from assistive tech.
-    '<template><h1 aria-hidden></h1></template>',
-    '<template><h1 aria-hidden=""></h1></template>',
+    // Explicit "true" exempts the empty-heading check — author has
+    // signalled the heading is intentionally hidden from assistive tech.
     '<template><h1 aria-hidden={{true}}></h1></template>',
     '<template><h1 aria-hidden="true">Visible to sighted only</h1></template>',
     '<template><h1 aria-hidden="TRUE"></h1></template>',
@@ -167,6 +165,36 @@ ruleTester.run('template-no-empty-headings', rule, {
     },
     {
       code: '<template><h1 aria-hidden={{"false"}}></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    // Per WAI-ARIA 1.2 §6.6 aria-hidden value table: valueless /
+    // empty-string `aria-hidden` resolves to the default `undefined`,
+    // not `true`. Empty headings with these forms still flag.
+    {
+      code: '<template><h1 aria-hidden></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    {
+      code: '<template><h1 aria-hidden=""></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    // Mustache / concat forms that resolve to an empty / whitespace-only
+    // string — same spec-aligned treatment.
+    {
+      code: '<template><h1 aria-hidden={{""}}></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    {
+      code: '<template><h1 aria-hidden="{{""}}"></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    {
+      code: '<template><h1 aria-hidden={{" "}}></h1></template>',
       output: null,
       errors: [{ messageId: 'emptyHeading' }],
     },
