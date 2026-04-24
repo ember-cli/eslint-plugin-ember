@@ -67,9 +67,9 @@ ruleTester.run('template-no-autofocus-attribute', rule, {
     // we can't know whether the prop forwards to a native <input autofocus>
     // or is used for something else. Narrow to {{input}} / {{component
     // "input"}} which deterministically render native inputs.
-    `<template>{{my-wrapper autofocus=true}}</template>`,
-    `<template>{{some-component autofocus=true name="foo"}}</template>`,
-    `<template>{{component "some-other-helper" autofocus=true}}</template>`,
+    '<template>{{my-wrapper autofocus=true}}</template>',
+    '<template>{{some-component autofocus=true name="foo"}}</template>',
+    '<template>{{component "some-other-helper" autofocus=true}}</template>',
   ],
 
   invalid: [
