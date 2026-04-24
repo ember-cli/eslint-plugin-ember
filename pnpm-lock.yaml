@@ -21,8 +21,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       ember-eslint-parser:
-        specifier: ^0.11.0
-        version: 0.11.0(@typescript-eslint/parser@8.58.2(eslint@8.57.1)(typescript@5.9.3))(typescript@5.9.3)
+        specifier: ^0.10.0
+        version: 0.10.0(@typescript-eslint/parser@8.58.2(eslint@8.57.1)(typescript@5.9.3))(typescript@5.9.3)
       ember-rfc176-data:
         specifier: ^0.3.18
         version: 0.3.18
@@ -1175,12 +1175,6 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4 <6.1.0'
 
-  '@typescript-eslint/tsconfig-utils@8.59.0':
-    resolution: {integrity: sha512-91Sbl3s4Kb3SybliIY6muFBmHVv+pYXfybC4Oolp3dvk8BvIE3wOPc+403CWIT7mJNkfQRGtdqghzs2+Z91Tqg==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-    peerDependencies:
-      typescript: '>=4.8.4 <6.1.0'
-
   '@typescript-eslint/type-utils@8.58.2':
     resolution: {integrity: sha512-Z7EloNR/B389FvabdGeTo2XMs4W9TjtPiO9DAsmT0yom0bwlPyRjkJ1uCdW1DvrrrYP50AJZ9Xc3sByZA9+dcg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -1739,8 +1733,8 @@ packages:
   electron-to-chromium@1.5.340:
     resolution: {integrity: sha512-908qahOGocRMinT2nM3ajCEM99H4iPdv84eagPP3FfZy/1ZGeOy2CZYzjhms81ckOPCXPlW7LkY4XpxD8r1DrA==}
 
-  ember-eslint-parser@0.11.0:
-    resolution: {integrity: sha512-c/Rin7rfkb/auLp8oclVamHbMtGx/uKUfK9Aggpk97u8kaLm/5e4kCDSPaFrn9AQ4P+jnBiTw/Mr0nT9oR72Ug==}
+  ember-eslint-parser@0.10.0:
+    resolution: {integrity: sha512-oq37TDYDBqR4fTGhJy/Yecw5VHlPJrSCd26KkwCKlhzAHMCzac+/HSln99COihKei2mMaaob17IrV3I9XL83YQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@typescript-eslint/parser': '*'
@@ -1748,8 +1742,8 @@ packages:
       '@typescript-eslint/parser':
         optional: true
 
-  ember-estree@0.6.2:
-    resolution: {integrity: sha512-CeKa6FZ95jp6de+vjhmv2XmOGBB2V95iiH7RqI2av1nU0m1XhFZEG8npoEciklQqPEzFO5OXS41b0mGvXBsJCA==}
+  ember-estree@0.4.2:
+    resolution: {integrity: sha512-Runf+IVY+hUhlk0QwwljhPYj0/kjza5CCRp/Hlfdk9MawKSxXQqR0WX4f2rChXAGbDIzK7JVopVaet5oIZr8tg==}
 
   ember-rfc176-data@0.3.18:
     resolution: {integrity: sha512-JtuLoYGSjay1W3MQAxt3eINWXNYYQliK90tLwtb8aeCuQK8zKGCRbBodVIrkcTqshULMnRuTOS6t1P7oQk3g6Q==}
@@ -4203,6 +4197,9 @@ packages:
     resolution: {integrity: sha512-YnOmtSbv4MTf7RGJMK0FvZ+KD8OEe/J5BNnR0GHhD8J/XcG/Qvxgszm0Un6FTHWW4uHlTgP0IztiXQnGyIR45g==}
     engines: {node: '>=8'}
 
+  zimmerframe@1.1.4:
+    resolution: {integrity: sha512-B58NGBEoc8Y9MWWCQGl/gq9xBCe4IiKM0a2x7GZdQKOW5Exr8S1W24J6OgM1njK8xCRGvAJIL/MxXHf6SkmQKQ==}
+
 snapshots:
 
   '@ampproject/remapping@2.3.0':
@@ -5071,10 +5068,6 @@ snapshots:
     dependencies:
       typescript: 5.9.3
 
-  '@typescript-eslint/tsconfig-utils@8.59.0(typescript@5.9.3)':
-    dependencies:
-      typescript: 5.9.3
-
   '@typescript-eslint/type-utils@8.58.2(eslint@8.57.1)(typescript@5.9.3)':
     dependencies:
       '@typescript-eslint/types': 8.58.2
@@ -5669,12 +5662,12 @@ snapshots:
 
   electron-to-chromium@1.5.340: {}
 
-  ember-eslint-parser@0.11.0(@typescript-eslint/parser@8.58.2(eslint@8.57.1)(typescript@5.9.3))(typescript@5.9.3):
+  ember-eslint-parser@0.10.0(@typescript-eslint/parser@8.58.2(eslint@8.57.1)(typescript@5.9.3))(typescript@5.9.3):
     dependencies:
       '@glimmer/syntax': 0.95.0
-      '@typescript-eslint/tsconfig-utils': 8.59.0(typescript@5.9.3)
+      '@typescript-eslint/tsconfig-utils': 8.58.2(typescript@5.9.3)
       content-tag: 4.1.1
-      ember-estree: 0.6.2
+      ember-estree: 0.4.2
       eslint-scope: 9.1.2
       html-tags: 5.1.0
       mathml-tag-names: 4.0.0
@@ -5686,12 +5679,13 @@ snapshots:
       - '@emnapi/runtime'
       - typescript
 
-  ember-estree@0.6.2:
+  ember-estree@0.4.2:
     dependencies:
       '@glimmer/env': 0.1.7
       '@glimmer/syntax': 0.95.0
       content-tag: 4.1.1
       oxc-parser: 0.119.0
+      zimmerframe: 1.1.4
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -8555,3 +8549,5 @@ snapshots:
   yoga-layout-prebuilt@1.10.0:
     dependencies:
       '@types/yoga-layout': 1.9.2
+
+  zimmerframe@1.1.4: {}
