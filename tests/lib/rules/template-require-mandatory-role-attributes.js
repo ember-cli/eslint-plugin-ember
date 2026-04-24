@@ -198,8 +198,8 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
     // The semantic-role exemption must NOT apply — we can't prove the
     // imported identifier renders a native <input>. Flag the missing ARIA.
     {
-      code: '<template>{{input type="checkbox" role="switch"}}</template>',
       filename: 'component.gjs',
+      code: '<template>{{input type="checkbox" role="switch"}}</template>',
       output: null,
       errors: [
         {
@@ -208,8 +208,8 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
       ],
     },
     {
-      code: '<template>{{input type="range" role="slider"}}</template>',
       filename: 'component.gts',
+      code: '<template>{{input type="range" role="slider"}}</template>',
       output: null,
       errors: [
         {
