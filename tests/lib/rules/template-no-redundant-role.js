@@ -57,6 +57,10 @@ ruleTester.run('template-no-redundant-role', rule, {
     // and is NOT redundant.
     '<template><select role="listbox"></select></template>',
     '<template><select role="listbox" size="1"></select></template>',
+    // Dynamic `multiple={{...}}` — can't determine implicit role statically,
+    // so neither `role="combobox"` nor `role="listbox"` is flagged.
+    '<template><select role="combobox" multiple={{this.isMulti}}></select></template>',
+    '<template><select role="listbox" multiple={{this.isMulti}}></select></template>',
 
     // Role-fallback: first recognised token wins. `role="tab button"` on
     // <button> resolves to `tab` (non-redundant — button's implicit is
