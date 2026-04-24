@@ -50,6 +50,9 @@ only form that statically guarantees no rendered `autofocus` attribute
 <template>
   <input autofocus={{false}} />
   {{!-- element syntax: the mustache-boolean form --}}
+
+  {{input autofocus=false}}
+  {{!-- mustache syntax: the hash-pair form --}}
 </template>
 ```
 
