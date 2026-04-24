@@ -193,6 +193,30 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
         },
       ],
     },
+    // Strict-mode {{input}} is a scope binding, not Ember's classic helper
+    // (which doesn't exist as a strict-mode export from @ember/component).
+    // The semantic-role exemption must NOT apply — we can't prove the
+    // imported identifier renders a native <input>. Flag the missing ARIA.
+    {
+      code: '<template>{{input type="checkbox" role="switch"}}</template>',
+      filename: 'component.gjs',
+      output: null,
+      errors: [
+        {
+          message: 'The attribute aria-checked is required by the role switch',
+        },
+      ],
+    },
+    {
+      code: '<template>{{input type="range" role="slider"}}</template>',
+      filename: 'component.gts',
+      output: null,
+      errors: [
+        {
+          message: 'The attribute aria-valuenow is required by the role slider',
+        },
+      ],
+    },
   ],
 });
 
