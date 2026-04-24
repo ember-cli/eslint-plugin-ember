@@ -1,5 +1,5 @@
 // Audit fixture — translates peer-plugin test cases into assertions against
-// our rule (`ember/template-no-invalid-role` + `ember/template-no-abstract-roles`).
+// our rule (`ember/template-no-invalid-role`).
 // Runs as part of the default Vitest suite (via the `tests/**/*.js` include
 // glob) and serves double-duty: (1) auditable record of peer-parity
 // divergences, (2) regression coverage pinning CURRENT behavior. Each case
