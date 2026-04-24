@@ -6,8 +6,9 @@
 // OUR rule does today; divergences from upstream plugins are annotated as
 // `DIVERGENCE —`. Peer-only constructs that can't be translated to Ember
 // templates (JSX spread props, Vue v-bind, Angular `$event`, undefined-handler
-// expression analysis) are marked `AUDIT-SKIP`.
-// See docs/audit-a11y-behavior.md for the summary of divergences.
+// expression analysis) are marked `AUDIT-SKIP`. Divergences are also captured
+// in PR descriptions / commit messages; grepping the repo for `DIVERGENCE —`
+// surfaces the full list.
 //
 // Source files:
 //   - context/eslint-plugin-jsx-a11y-main/__tests__/src/rules/alt-text-test.js
