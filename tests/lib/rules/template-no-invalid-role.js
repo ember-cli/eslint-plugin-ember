@@ -81,6 +81,12 @@ ruleTester.run('template-no-invalid-role', rule, {
     '<template><svg role="graphics-document document"></svg></template>',
     '<template><section role="doc-appendix doc-bibliography"></section></template>',
 
+    // Role-fallback: `presentation`/`none` in a non-first position does NOT
+    // flag on a semantic element — UAs pick the first recognised role per
+    // §4.1. Here `button` resolves, `presentation` is an unused fallback.
+    '<template><ul role="list presentation"></ul></template>',
+    '<template><table role="grid none"></table></template>',
+
     // ARIA 1.3 draft roles — not in aria-query 5.3.2 but spec-blessed, so
     // the rule accepts them via the inline allowlist.
     '<template><div role="associationlist"></div></template>',
@@ -159,6 +165,18 @@ ruleTester.run('template-no-invalid-role', rule, {
       output: null,
       errors: [
         { message: 'The role "presentation" should not be used on the semantic element <button>.' },
+      ],
+    },
+    // Role-fallback: unknown leading token is skipped per §4.1, so the
+    // first RECOGNISED role is `presentation` → flag on semantic element.
+    // Uses catchNonexistentRoles: false so the unknown `xxyxyz` doesn't
+    // intercept the check via the invalid-role path.
+    {
+      code: '<template><ul role="xxyxyz presentation"></ul></template>',
+      options: [{ catchNonexistentRoles: false }],
+      output: null,
+      errors: [
+        { message: 'The role "presentation" should not be used on the semantic element <ul>.' },
       ],
     },
     {
