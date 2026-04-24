@@ -7,6 +7,18 @@ const { isNativeElement, ELEMENT_TAGS } = require('../../../lib/utils/is-native-
 // for-html-elements.js and siblings) because it requires a real ESLint
 // SourceCode / scope manager that's only built up by the rule tester.
 
+// Stub a minimal ESLint-shaped sourceCode object. The real one uses scope
+// managers produced by ember-eslint-parser; for unit-level coverage we mock
+// just the surface `isNativeElement` touches: `getScope(parent)` returning
+// an object with `variables` (bindings) and `upper` (parent scope).
+function stubSourceCode(scopeByParent) {
+  return {
+    getScope(parent) {
+      return scopeByParent.get(parent) || { variables: [], upper: null };
+    },
+  };
+}
+
 describe('isNativeElement — list-only behavior (no sourceCode)', () => {
   it('returns true for lowercase HTML tag names', () => {
     expect(isNativeElement({ tag: 'div' })).toBe(true);
@@ -80,18 +92,9 @@ describe('isNativeElement — list-only behavior (no sourceCode)', () => {
 });
 
 describe('isNativeElement — scope-shadowing (with sourceCode stubs)', () => {
-  // Stub a minimal ESLint-shaped sourceCode object. The real one uses
-  // scope managers produced by ember-eslint-parser; for unit-level coverage
-  // we mock just the surface `isNativeElement` touches: `getScope(parent)`
-  // returning an object with `variables` (bindings) and `upper` (parent
-  // scope). Rule-level integration tests cover the real parser's shape.
-  function stubSourceCode(scopeByParent) {
-    return {
-      getScope(parent) {
-        return scopeByParent.get(parent) || { variables: [], upper: null };
-      },
-    };
-  }
+  // Rule-level integration tests (tests/lib/rules/...) cover the real
+  // parser's shape; here we mock the minimal surface `isNativeElement`
+  // touches via `stubSourceCode` above.
 
   it('treats a tag as shadowed when its name matches an actual binding', () => {
     const parent = { type: 'Template' };
