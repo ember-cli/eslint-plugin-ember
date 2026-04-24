@@ -88,6 +88,19 @@ ruleTester.run('template-no-redundant-role', rule, {
       ],
     },
     {
+      // Valueless `<select size>` — per HTML boolean-attr semantics, the
+      // attribute value is an empty string; Number('') is 0; 0 is NOT > 1,
+      // so the implicit role stays combobox. `role="combobox"` is therefore
+      // redundant and must be flagged.
+      code: '<template><select role="combobox" size></select></template>',
+      output: '<template><select size></select></template>',
+      errors: [
+        {
+          message: 'Use of redundant or invalid role: combobox on <select> detected.',
+        },
+      ],
+    },
+    {
       // Role-fallback: unknown leading token is skipped per ARIA §4.1.
       // `role="xxyxyz button"` resolves to `button`, which IS redundant on
       // <button>. Autofix drops the whole role attribute — the implicit
