@@ -57,6 +57,9 @@ ruleTester.run('template-require-valid-alt-text', rule, {
     '<template><area aria-labelledby="some-alt"></template>',
     '<template><area aria-label="some-alt"></template>',
     '<template><img role={{unless this.altText "presentation"}} alt={{this.altText}}></template>',
+    // Mustache-string-literal forms resolve to their static value — a
+    // non-empty literal supplies an accessible name the same as a text node.
+    '<template><input type="image" aria-label={{"valid"}} /></template>',
   ],
   invalid: [
     // Empty-string aria-label / aria-labelledby / alt provides no accessible
@@ -124,6 +127,18 @@ ruleTester.run('template-require-valid-alt-text', rule, {
       code: '<template><area href="/" aria-label=" " /></template>',
       output: null,
       errors: [{ messageId: 'areaMissing' }],
+    },
+    // Mustache-string-literal forms that resolve to an empty string are
+    // treated the same as the text-node empty value — no accessible name.
+    {
+      code: '<template><input type="image" aria-label={{""}} /></template>',
+      output: null,
+      errors: [{ messageId: 'inputImage' }],
+    },
+    {
+      code: '<template><input type="image" aria-label="{{""}}" /></template>',
+      output: null,
+      errors: [{ messageId: 'inputImage' }],
     },
     {
       code: '<template><img src="/test.jpg" /></template>',
