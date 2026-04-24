@@ -95,7 +95,7 @@ ruleTester.run('audit:aria-role (gts)', rule, {
     // === DIVERGENCE — empty role string ===
     // jsx-a11y: INVALID — `<div role="" />` flagged.
     // vue-a11y: INVALID — same.
-    // Our rule: early-return on empty/whitespace role (line 229 of rule). NO FLAG.
+    // Our rule: early-return on empty/whitespace role. NO FLAG.
     // So this case reflects OUR (non-flagging) behavior with an explicit note.
     // (No invalid assertion possible here — we'd need to move this to valid,
     //  or fix the rule to flag.)

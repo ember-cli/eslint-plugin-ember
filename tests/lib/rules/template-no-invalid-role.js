@@ -204,7 +204,9 @@ ruleTester.run('template-no-invalid-role', rule, {
     {
       code: '<template><div role="COMMAND INTERFACE"></div></template>',
       output: null,
-      errors: [{ message: "Invalid ARIA role 'command'. Must be a valid ARIA role." }],
+      // Validation is case-insensitive, but the error message echoes the
+      // author-provided token verbatim so authors see their own text.
+      errors: [{ message: "Invalid ARIA role 'COMMAND'. Must be a valid ARIA role." }],
     },
     {
       code: '<template><div role="command interface"></div></template>',
@@ -363,7 +365,9 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
     {
       code: '<div role="COMMAND INTERFACE"></div>',
       output: null,
-      errors: [{ message: "Invalid ARIA role 'command'. Must be a valid ARIA role." }],
+      // Validation is case-insensitive, but the error message echoes the
+      // author-provided token verbatim so authors see their own text.
+      errors: [{ message: "Invalid ARIA role 'COMMAND'. Must be a valid ARIA role." }],
     },
     // Newly added SEMANTIC_ELEMENTS: presentation/none on iframe, video, audio, embed
     {
