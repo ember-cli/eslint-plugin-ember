@@ -52,6 +52,11 @@ ruleTester.run('template-no-redundant-role', rule, {
     '<template><select role="combobox" multiple></select></template>',
     // <select size="5"> (size > 1) has implicit role listbox.
     '<template><select role="combobox" size="5"></select></template>',
+
+    // Role-fallback: first recognised token wins. `role="tab button"` on
+    // <button> resolves to `tab` (non-redundant — button's implicit is
+    // `button`, not `tab`). WAI-ARIA §4.1 fallback-list semantics.
+    '<template><button role="tab button"></button></template>',
   ],
   invalid: [
     {
@@ -70,6 +75,21 @@ ruleTester.run('template-no-redundant-role', rule, {
         {
           message:
             'Use of redundant or invalid role: banner on <header> detected. If a landmark element is used, any role provided will either be redundant or incorrect.',
+        },
+      ],
+    },
+    {
+      // Role-fallback: unknown leading token is skipped per ARIA §4.1.
+      // `role="xxyxyz button"` resolves to `button`, which IS redundant on
+      // <button>. Autofix drops the whole role attribute — the implicit
+      // `button` role is preserved natively, so runtime semantics are
+      // unchanged. Authors who wanted the `xxyxyz` fallback for some
+      // reason can opt out via eslint-disable.
+      code: '<template><button role="xxyxyz button"></button></template>',
+      output: '<template><button></button></template>',
+      errors: [
+        {
+          message: 'Use of redundant or invalid role: button on <button> detected.',
         },
       ],
     },
