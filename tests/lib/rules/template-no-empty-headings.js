@@ -54,6 +54,15 @@ ruleTester.run('template-no-empty-headings', rule, {
     '<template><h1 aria-hidden="True"></h1></template>',
     '<template><h1 aria-hidden={{"TRUE"}}></h1></template>',
     '<template><h1 aria-hidden={{"True"}}></h1></template>',
+    // Quoted-mustache (GlimmerConcatStatement) forms — `aria-hidden="{{true}}"`
+    // resolves the same as `aria-hidden={{true}}`. Pin these so future
+    // refactors don't regress concat handling.
+    '<template><h1 aria-hidden="{{true}}"></h1></template>',
+    '<template><h1 aria-hidden="{{"true"}}"></h1></template>',
+    // Whitespace normalization — incidental surrounding whitespace should
+    // still resolve to "true".
+    '<template><h1 aria-hidden={{" true "}}></h1></template>',
+    '<template><h1 aria-hidden=" true "></h1></template>',
   ],
   invalid: [
     {
