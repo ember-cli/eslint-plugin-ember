@@ -79,6 +79,65 @@ describe('isNativeElement — list-only behavior (no sourceCode)', () => {
   });
 });
 
+describe('isNativeElement — scope-shadowing (with sourceCode stubs)', () => {
+  // Stub a minimal ESLint-shaped sourceCode object. The real one uses
+  // scope managers produced by ember-eslint-parser; for unit-level coverage
+  // we mock just the surface `isNativeElement` touches: `getScope(parent)`
+  // returning an object with `variables` (bindings) and `upper` (parent
+  // scope). Rule-level integration tests cover the real parser's shape.
+  function stubSourceCode(scopeByParent) {
+    return {
+      getScope(parent) {
+        return scopeByParent.get(parent) || { variables: [], upper: null };
+      },
+    };
+  }
+
+  it('treats a tag as shadowed when its name matches an actual binding', () => {
+    const parent = { type: 'Template' };
+    const node = { tag: 'div', parent, parts: [{ name: 'div' }] };
+    const scope = { variables: [{ name: 'div' }], upper: null };
+    const sourceCode = stubSourceCode(new Map([[parent, scope]]));
+    expect(isNativeElement(node, sourceCode)).toBe(false);
+  });
+
+  it('walks up the scope chain for outer-scope bindings', () => {
+    const parent = { type: 'Template' };
+    const outer = { variables: [{ name: 'div' }], upper: null };
+    const inner = { variables: [], upper: outer };
+    const node = { tag: 'div', parent, parts: [{ name: 'div' }] };
+    const sourceCode = stubSourceCode(new Map([[parent, inner]]));
+    expect(isNativeElement(node, sourceCode)).toBe(false);
+  });
+
+  it('does NOT treat a tag as shadowed when the matching name is only a reference (e.g. `{{div}}` helper call)', () => {
+    // Regression for the class of false positive Copilot flagged: a mustache
+    // helper invocation like `{{div}}` populates `scope.references` with a
+    // `div` entry but does not create a binding. The tag `<div>` must still
+    // be treated as native HTML.
+    const parent = { type: 'Template' };
+    const node = { tag: 'div', parent, parts: [{ name: 'div' }] };
+    const scope = {
+      variables: [],
+      references: [{ identifier: { name: 'div' } }], // helper-call reference
+      upper: null,
+    };
+    const sourceCode = stubSourceCode(new Map([[parent, scope]]));
+    expect(isNativeElement(node, sourceCode)).toBe(true);
+  });
+
+  it('skips the scope check when sourceCode is not provided (list-only fallback)', () => {
+    const node = { tag: 'div', parent: { type: 'Template' }, parts: [{ name: 'div' }] };
+    expect(isNativeElement(node)).toBe(true);
+  });
+
+  it('skips the scope check when the node has no parent (detached)', () => {
+    const node = { tag: 'div', parent: null, parts: [{ name: 'div' }] };
+    const sourceCode = stubSourceCode(new Map());
+    expect(isNativeElement(node, sourceCode)).toBe(true);
+  });
+});
+
 describe('ELEMENT_TAGS', () => {
   it('includes all HTML, SVG, and MathML tag names', () => {
     // Contract check — the set must be non-empty and must contain at least
