@@ -30,6 +30,16 @@ const invalidHbs = [
     output: null,
     errors: [{ messageId: 'noYieldOnly' }],
   },
+  {
+    code: '{{!-- long-form comment --}}{{yield}}',
+    output: null,
+    errors: [{ messageId: 'noYieldOnly' }],
+  },
+  {
+    code: '<!-- html comment -->{{yield}}',
+    output: null,
+    errors: [{ messageId: 'noYieldOnly' }],
+  },
 ];
 
 function wrapTemplate(entry) {
