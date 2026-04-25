@@ -87,6 +87,17 @@ ruleTester.run('template-no-redundant-role', rule, {
         },
       ],
     },
+    // Non-landmark same-role redundancy — covered by jsx-a11y / vue-a11y too.
+    {
+      code: '<template><button role="button"></button></template>',
+      output: '<template><button></button></template>',
+      errors: [{ message: 'Use of redundant or invalid role: button on <button> detected.' }],
+    },
+    {
+      code: '<template><img role="img" /></template>',
+      output: '<template><img /></template>',
+      errors: [{ message: 'Use of redundant or invalid role: img on <img> detected.' }],
+    },
     {
       // Valueless `<select size>` — per HTML boolean-attr semantics, the
       // attribute value is an empty string; Number('') is 0; 0 is NOT > 1,
