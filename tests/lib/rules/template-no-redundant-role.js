@@ -48,6 +48,24 @@ ruleTester.run('template-no-redundant-role', rule, {
       options: [{ checkAllHTMLElements: false }],
     },
     '<template><input role="combobox"></template>',
+    // <select multiple> has implicit role listbox, so combobox is not redundant.
+    '<template><select role="combobox" multiple></select></template>',
+    // <select size="5"> (size > 1) has implicit role listbox.
+    '<template><select role="combobox" size="5"></select></template>',
+    // Default <select> (no `multiple`, `size` absent or <= 1) has implicit
+    // role "combobox" — an explicit `role="listbox"` overrides to listbox
+    // and is NOT redundant.
+    '<template><select role="listbox"></select></template>',
+    '<template><select role="listbox" size="1"></select></template>',
+    // Dynamic `multiple={{...}}` — can't determine implicit role statically,
+    // so neither `role="combobox"` nor `role="listbox"` is flagged.
+    '<template><select role="combobox" multiple={{this.isMulti}}></select></template>',
+    '<template><select role="listbox" multiple={{this.isMulti}}></select></template>',
+
+    // Role-fallback: first recognised token wins. `role="tab button"` on
+    // <button> resolves to `tab` (non-redundant — button's implicit is
+    // `button`, not `tab`). WAI-ARIA §4.1 fallback-list semantics.
+    '<template><button role="tab button"></button></template>',
   ],
   invalid: [
     {
@@ -66,6 +84,45 @@ ruleTester.run('template-no-redundant-role', rule, {
         {
           message:
             'Use of redundant or invalid role: banner on <header> detected. If a landmark element is used, any role provided will either be redundant or incorrect.',
+        },
+      ],
+    },
+    // Non-landmark same-role redundancy — covered by jsx-a11y / vue-a11y too.
+    {
+      code: '<template><button role="button"></button></template>',
+      output: '<template><button></button></template>',
+      errors: [{ message: 'Use of redundant or invalid role: button on <button> detected.' }],
+    },
+    {
+      code: '<template><img role="img" /></template>',
+      output: '<template><img /></template>',
+      errors: [{ message: 'Use of redundant or invalid role: img on <img> detected.' }],
+    },
+    {
+      // Valueless `<select size>` — per HTML boolean-attr semantics, the
+      // attribute value is an empty string; Number('') is 0; 0 is NOT > 1,
+      // so the implicit role stays combobox. `role="combobox"` is therefore
+      // redundant and must be flagged.
+      code: '<template><select role="combobox" size></select></template>',
+      output: '<template><select size></select></template>',
+      errors: [
+        {
+          message: 'Use of redundant or invalid role: combobox on <select> detected.',
+        },
+      ],
+    },
+    {
+      // Role-fallback: unknown leading token is skipped per ARIA §4.1.
+      // `role="xxyxyz button"` resolves to `button`, which IS redundant on
+      // <button>. Autofix drops the whole role attribute — the implicit
+      // `button` role is preserved natively, so runtime semantics are
+      // unchanged. Authors who wanted the `xxyxyz` fallback for some
+      // reason can opt out via eslint-disable.
+      code: '<template><button role="xxyxyz button"></button></template>',
+      output: '<template><button></button></template>',
+      errors: [
+        {
+          message: 'Use of redundant or invalid role: button on <button> detected.',
         },
       ],
     },
@@ -155,6 +212,17 @@ hbsRuleTester.run('template-no-redundant-role', rule, {
       options: [{ checkAllHTMLElements: false }],
     },
     '<ul class="list" role="combobox"></ul>',
+    // <select> with `multiple` has implicit role "listbox", so role="combobox"
+    // is not redundant (it disagrees with the implicit role, but that is for
+    // other rules to catch — this rule only flags redundancy).
+    '<select role="combobox" multiple></select>',
+    // <select size="5"> (size > 1) has implicit role "listbox", same reasoning.
+    '<select role="combobox" size="5"></select>',
+    // Default <select> (no `multiple`, `size` absent or <= 1) has implicit
+    // role "combobox" — explicit role="listbox" overrides to listbox and is
+    // NOT redundant.
+    '<select role="listbox"></select>',
+    '<select role="listbox" size="1"></select>',
   ],
   invalid: [
     {
@@ -242,6 +310,30 @@ hbsRuleTester.run('template-no-redundant-role', rule, {
       output:
         '<select name="color" id="color" multiple><option value="default-color">black</option></select>',
       errors: [{ message: 'Use of redundant or invalid role: listbox on <select> detected.' }],
+    },
+    {
+      // <select> without `multiple` or `size` defaults to role "combobox".
+      code: '<select role="combobox"></select>',
+      output: '<select></select>',
+      errors: [{ message: 'Use of redundant or invalid role: combobox on <select> detected.' }],
+    },
+    {
+      // size="1" still defaults to combobox (only size > 1 flips to listbox).
+      code: '<select role="combobox" size="1"></select>',
+      output: '<select size="1"></select>',
+      errors: [{ message: 'Use of redundant or invalid role: combobox on <select> detected.' }],
+    },
+    {
+      // Case-insensitive match on <select>, combined with the implicit-role check.
+      code: '<select role="COMBOBOX"></select>',
+      output: '<select></select>',
+      errors: [{ message: 'Use of redundant or invalid role: combobox on <select> detected.' }],
+    },
+    {
+      // Case-insensitive matching — ARIA role tokens compare as ASCII-case-insensitive.
+      code: '<body role="DOCUMENT"></body>',
+      output: '<body></body>',
+      errors: [{ message: 'Use of redundant or invalid role: document on <body> detected.' }],
     },
     {
       code: '<main role="main"></main>',
