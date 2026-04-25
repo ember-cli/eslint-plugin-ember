@@ -1,22 +1,22 @@
 {
   "solution": {
     "eslint-plugin-ember": {
-      "impact": "minor",
-      "oldVersion": "13.0.0",
-      "newVersion": "13.1.0",
+      "impact": "patch",
+      "oldVersion": "13.1.0",
+      "newVersion": "13.1.1",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
         },
         {
           "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-04-21)\n\n* eslint-plugin-ember 13.1.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2715](https://github.com/ember-cli/eslint-plugin-ember/pull/2715) feat: re-export hbs parser and document HBS flat-config setup ([@johanrd](https://github.com/johanrd))\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2713](https://github.com/ember-cli/eslint-plugin-ember/pull/2713) BUGFIX: false positive: interactive flow content inside <details> ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- [@johanrd](https://github.com/johanrd)\n"
+  "description": "## Release (2026-04-25)\n\n* eslint-plugin-ember 13.1.1 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2735](https://github.com/ember-cli/eslint-plugin-ember/pull/2735) Update ember-eslint-parser to 0.11 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#2736](https://github.com/ember-cli/eslint-plugin-ember/pull/2736) fix: ignore comment + whitespace nodes in template-no-yield-only ([@johanrd](https://github.com/johanrd))\n  * [#2722](https://github.com/ember-cli/eslint-plugin-ember/pull/2722) refactor(template-require-presentational-children): source role list from aria-query ([@johanrd](https://github.com/johanrd))\n  * [#2719](https://github.com/ember-cli/eslint-plugin-ember/pull/2719) BUGFIX: template-no-aria-unsupported-elements — source the reserved-element list from aria-query ([@johanrd](https://github.com/johanrd))\n  * [#2718](https://github.com/ember-cli/eslint-plugin-ember/pull/2718) BUGFIX: template-require-media-caption — compare kind=\"captions\" case-insensitively ([@johanrd](https://github.com/johanrd))\n  * [#2714](https://github.com/ember-cli/eslint-plugin-ember/pull/2714) BUGFIX: accept tabindex=\"-1\" in template-require-aria-activedescendant-tabindex ([@johanrd](https://github.com/johanrd))\n\n#### :house: Internal\n* `eslint-plugin-ember`\n  * [#2733](https://github.com/ember-cli/eslint-plugin-ember/pull/2733) test: cover {{! eslint-disable-* }} directives inside <template> in .gts ([@johanrd](https://github.com/johanrd))\n  * [#2721](https://github.com/ember-cli/eslint-plugin-ember/pull/2721) refactor(template-no-abstract-roles): source abstract-role list from aria-query ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 2\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n- [@johanrd](https://github.com/johanrd)\n"
 }
