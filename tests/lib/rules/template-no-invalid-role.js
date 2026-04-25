@@ -94,9 +94,22 @@ ruleTester.run('template-no-invalid-role', rule, {
     '<template><div role="associationlistitemvalue"></div></template>',
     '<template><div role="comment"></div></template>',
     '<template><div role="suggestion"></div></template>',
+
+    // Documented divergence — empty role string. jsx-a11y / vue-a11y flag
+    // it; our rule early-returns on empty/whitespace role values, so we
+    // don't. Pin our current behavior.
+    '<template><div role=""></div></template>',
   ],
 
   invalid: [
+    // Common authoring confusion — `datepicker` looks like it could be a
+    // role (it's a UI concept) but isn't in the ARIA registry. Same lookup
+    // path as `role="invalid"`, exercised here for the more likely typo.
+    {
+      code: '<template><div role="datepicker"></div></template>',
+      output: null,
+      errors: [{ messageId: 'invalid' }],
+    },
     {
       code: `<template>
         <div role="invalid">Content</div>
