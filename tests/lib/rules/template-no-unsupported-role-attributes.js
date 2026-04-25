@@ -124,6 +124,30 @@ const invalidHbs = [
     output: '{{foo-component role="button"}}',
     errors: [{ message: 'The attribute aria-valuetext is not supported by the role button' }],
   },
+  // Documented divergence with jsx-a11y on implicit role for <body>.
+  // jsx-a11y resolves <body> to role "document"; aria-query (which our rule
+  // uses) resolves to "generic". aria-expanded is unsupported by either, so
+  // both plugins flag — only the role-name in the message differs.
+  {
+    code: '<body aria-expanded="true"></body>',
+    output: '<body></body>',
+    errors: [
+      {
+        message:
+          'The attribute aria-expanded is not supported by the element body with the implicit role of generic',
+      },
+    ],
+  },
+  // Documented divergence — <a> WITHOUT href, with a non-global aria attr.
+  // jsx-a11y treats href-less <a> as having no implicit role and accepts the
+  // attribute under the global aria set (VALID). Our rule resolves the
+  // implicit role to "generic" via aria-query, where aria-checked is not
+  // supported, so we flag. Acknowledged false-positive vs jsx-a11y.
+  {
+    code: '<a aria-checked />',
+    output: '<a />',
+    errors: [{ messageId: 'unsupportedImplicit' }],
+  },
 ];
 
 function wrapTemplate(entry) {
