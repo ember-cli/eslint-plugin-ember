@@ -57,9 +57,6 @@ ruleTester.run('template-no-invalid-role', rule, {
     '<template><table role="textbox"></table></template>',
     '<template><div role="{{if this.inModal "dialog" "contentinfo" }}"></div></template>',
 
-    // Missing VALID_ROLES entries: associationlistitemkey, associationlistitemvalue, cell
-    '<template><div role="associationlistitemkey">Key</div></template>',
-    '<template><div role="associationlistitemvalue">Value</div></template>',
     '<template><td role="cell">Data</td></template>',
 
     // Case-insensitive role matching
@@ -71,9 +68,56 @@ ruleTester.run('template-no-invalid-role', rule, {
       code: '<template><div role="command interface"></div></template>',
       options: [{ catchNonexistentRoles: false }],
     },
+
+    // DPUB-ARIA (doc-*) and Graphics-ARIA (graphics-*) are valid per aria-query.
+    '<template><div role="doc-abstract">Abstract</div></template>',
+    '<template><section role="doc-chapter"></section></template>',
+    '<template><svg role="graphics-document"></svg></template>',
+    '<template><svg role="graphics-object"></svg></template>',
+
+    // Whitespace-separated role fallback list — ARIA 1.2 §5.4. Each token
+    // must individually be valid.
+    '<template><div role="tabpanel row"></div></template>',
+    '<template><svg role="graphics-document document"></svg></template>',
+    '<template><section role="doc-appendix doc-bibliography"></section></template>',
+
+    // Role-fallback: `presentation`/`none` in a non-first position does NOT
+    // flag on a semantic element — UAs pick the first recognised role per
+    // §4.1. Here `button` resolves, `presentation` is an unused fallback.
+    '<template><ul role="list presentation"></ul></template>',
+    '<template><table role="grid none"></table></template>',
+
+    // ARIA 1.3 draft roles — not in aria-query 5.3.2 but spec-blessed, so
+    // the rule accepts them via the inline allowlist.
+    '<template><div role="associationlist"></div></template>',
+    '<template><div role="associationlistitemkey"></div></template>',
+    '<template><div role="associationlistitemvalue"></div></template>',
+    '<template><div role="comment"></div></template>',
+    '<template><div role="suggestion"></div></template>',
   ],
 
   invalid: [
+    // Common authoring confusion — `datepicker` looks like it could be a
+    // role (it's a UI concept) but isn't in the ARIA registry. Same lookup
+    // path as `role="invalid"`, exercised here for the more likely typo.
+    {
+      code: '<template><div role="datepicker"></div></template>',
+      output: null,
+      errors: [{ messageId: 'invalid' }],
+    },
+    // Empty / whitespace-only role attribute supplies no recognized role
+    // token — flag as an authoring mistake. Aligns with jsx-a11y and
+    // vue-a11y (both flag).
+    {
+      code: '<template><div role=""></div></template>',
+      output: null,
+      errors: [{ messageId: 'invalid' }],
+    },
+    {
+      code: '<template><div role="   "></div></template>',
+      output: null,
+      errors: [{ messageId: 'invalid' }],
+    },
     {
       code: `<template>
         <div role="invalid">Content</div>
@@ -144,6 +188,18 @@ ruleTester.run('template-no-invalid-role', rule, {
         { message: 'The role "presentation" should not be used on the semantic element <button>.' },
       ],
     },
+    // Role-fallback: unknown leading token is skipped per §4.1, so the
+    // first RECOGNISED role is `presentation` → flag on semantic element.
+    // Uses catchNonexistentRoles: false so the unknown `xxyxyz` doesn't
+    // intercept the check via the invalid-role path.
+    {
+      code: '<template><ul role="xxyxyz presentation"></ul></template>',
+      output: null,
+      options: [{ catchNonexistentRoles: false }],
+      errors: [
+        { message: 'The role "presentation" should not be used on the semantic element <ul>.' },
+      ],
+    },
     {
       code: '<template><button role="none"></button></template>',
       output: null,
@@ -164,18 +220,20 @@ ruleTester.run('template-no-invalid-role', rule, {
     {
       code: '<template><div role="command interface"></div></template>',
       output: null,
-      errors: [{ message: "Invalid ARIA role 'command interface'. Must be a valid ARIA role." }],
+      errors: [{ message: "Invalid ARIA role 'command'. Must be a valid ARIA role." }],
     },
     {
       code: '<template><div role="COMMAND INTERFACE"></div></template>',
       output: null,
-      errors: [{ message: "Invalid ARIA role 'COMMAND INTERFACE'. Must be a valid ARIA role." }],
+      // Validation is case-insensitive, but the error message echoes the
+      // author-provided token verbatim so authors see their own text.
+      errors: [{ message: "Invalid ARIA role 'COMMAND'. Must be a valid ARIA role." }],
     },
     {
       code: '<template><div role="command interface"></div></template>',
       output: null,
       options: [{ catchNonexistentRoles: true }],
-      errors: [{ message: "Invalid ARIA role 'command interface'. Must be a valid ARIA role." }],
+      errors: [{ message: "Invalid ARIA role 'command'. Must be a valid ARIA role." }],
     },
 
     // Newly added SEMANTIC_ELEMENTS: presentation/none on iframe, video, audio
@@ -234,9 +292,6 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
     '<AwesomeThing role="presentation"></AwesomeThing>',
     '<table role="textbox"></table>',
     '<div role="{{if this.inModal "dialog" "contentinfo" }}"></div>',
-    // Missing VALID_ROLES entries: associationlistitemkey, associationlistitemvalue, cell
-    '<div role="associationlistitemkey">Key</div>',
-    '<div role="associationlistitemvalue">Value</div>',
     '<td role="cell">Data</td>',
     // Case-insensitive role matching
     '<div role="Button">Click</div>',
@@ -247,6 +302,24 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
       code: '<div role="command interface"></div>',
       options: [{ catchNonexistentRoles: false }],
     },
+
+    // DPUB-ARIA (doc-*) and Graphics-ARIA (graphics-*) roles.
+    '<div role="doc-abstract">Abstract</div>',
+    '<section role="doc-chapter"></section>',
+    '<svg role="graphics-document"></svg>',
+
+    // Whitespace-separated role fallback list.
+    '<div role="tabpanel row"></div>',
+    '<svg role="graphics-document document"></svg>',
+    '<section role="doc-appendix doc-bibliography"></section>',
+
+    // ARIA 1.3 draft roles — not in aria-query 5.3.2 but spec-blessed, so
+    // the rule accepts them via the inline allowlist.
+    '<div role="associationlist"></div>',
+    '<div role="associationlistitemkey"></div>',
+    '<div role="associationlistitemvalue"></div>',
+    '<div role="comment"></div>',
+    '<div role="suggestion"></div>',
   ],
   invalid: [
     {
@@ -302,18 +375,20 @@ hbsRuleTester.run('template-no-invalid-role', rule, {
     {
       code: '<div role="command interface"></div>',
       output: null,
-      errors: [{ message: "Invalid ARIA role 'command interface'. Must be a valid ARIA role." }],
+      errors: [{ message: "Invalid ARIA role 'command'. Must be a valid ARIA role." }],
     },
     {
       code: '<div role="command interface"></div>',
       output: null,
       options: [{ catchNonexistentRoles: true }],
-      errors: [{ message: "Invalid ARIA role 'command interface'. Must be a valid ARIA role." }],
+      errors: [{ message: "Invalid ARIA role 'command'. Must be a valid ARIA role." }],
     },
     {
       code: '<div role="COMMAND INTERFACE"></div>',
       output: null,
-      errors: [{ message: "Invalid ARIA role 'COMMAND INTERFACE'. Must be a valid ARIA role." }],
+      // Validation is case-insensitive, but the error message echoes the
+      // author-provided token verbatim so authors see their own text.
+      errors: [{ message: "Invalid ARIA role 'COMMAND'. Must be a valid ARIA role." }],
     },
     // Newly added SEMANTIC_ELEMENTS: presentation/none on iframe, video, audio, embed
     {
