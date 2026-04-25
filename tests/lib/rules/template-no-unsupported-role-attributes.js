@@ -21,6 +21,23 @@ const validHbs = [
   '<ItemCheckbox @model={{@model}} @checkable={{@checkable}} />',
   '<some-custom-element />',
   '<input type="password">',
+
+  // <input type="password"> has no implicit role per aria-query (it's intentionally
+  // not mapped so that screen readers don't announce typed content). No role →
+  // no aria-supported-props check. Pin this with attributes that would be REJECTED
+  // on a textbox (aria-checked, aria-selected): if the rule mis-classified password
+  // as a textbox fallback, these would flag.
+  '<input type="password" aria-describedby="hint" />',
+  '<input type="password" aria-required="true" />',
+  '<input type="password" aria-checked="false" />',
+  '<input type="password" aria-selected="true" />',
+
+  // <input type="text"> without a list attribute is a textbox — aria-required,
+  // aria-readonly, aria-placeholder are all supported.
+  '<input type="text" aria-required="true" />',
+  '<input type="email" aria-readonly="true" />',
+  '<input type="tel" aria-required="true" />',
+  '<input type="url" aria-placeholder="https://…" />',
 ];
 
 const invalidHbs = [
@@ -80,8 +97,21 @@ const invalidHbs = [
     ],
   },
   {
+    // <input type="email"> without a `list` attribute → implicit role "textbox"
+    // (per aria-query / HTML-AAM). With a `list` attribute it would be "combobox".
     code: '<input type="email" aria-level={{this.level}} />',
     output: '<input type="email" />',
+    errors: [
+      {
+        message:
+          'The attribute aria-level is not supported by the element input with the implicit role of textbox',
+      },
+    ],
+  },
+  {
+    // With a `list` attribute, <input type="email"> becomes a combobox.
+    code: '<input type="email" list="x" aria-level={{this.level}} />',
+    output: '<input type="email" list="x" />',
     errors: [
       {
         message:
@@ -93,6 +123,34 @@ const invalidHbs = [
     code: '{{foo-component role="button" aria-valuetext="blahblahblah"}}',
     output: '{{foo-component role="button"}}',
     errors: [{ message: 'The attribute aria-valuetext is not supported by the role button' }],
+  },
+  // Documented divergence with jsx-a11y on implicit role for <body>.
+  // jsx-a11y resolves <body> to role "document"; aria-query (which our rule
+  // uses) resolves to "generic". aria-expanded is unsupported by either, so
+  // both plugins flag — only the role-name in the message differs.
+  {
+    code: '<body aria-expanded="true"></body>',
+    output: '<body></body>',
+    errors: [
+      {
+        message:
+          'The attribute aria-expanded is not supported by the element body with the implicit role of generic',
+      },
+    ],
+  },
+  // <a> without href — implicit role is `generic` per HTML-AAM 1.2 §3.5.3
+  // (https://www.w3.org/TR/html-aam/#el-a-no-href). aria-checked is not
+  // supported on `generic`, so we flag. vue-a11y reaches the same conclusion
+  // (it walks aria-query the same way). jsx-a11y's `getImplicitRoleForAnchor`
+  // returns `''` for href-less <a>, which makes its role-supports-aria-props
+  // rule early-return and silently allow any aria-* attribute — its own
+  // source comments this as "This actually isn't true - should fix in future
+  // release." We're spec-current; jsx-a11y is spec-stale (legacy ARIA 1.1
+  // mental model).
+  {
+    code: '<a aria-checked />',
+    output: '<a />',
+    errors: [{ messageId: 'unsupportedImplicit' }],
   },
 ];
 
