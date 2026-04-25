@@ -74,6 +74,18 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
       output: null,
       errors: [{ message: 'The attribute aria-selected is required by the role option' }],
     },
+    // Plain widget roles missing all required attrs — basic coverage that
+    // peer plugins (jsx-a11y / vue-a11y / angular-eslint) also flag.
+    {
+      code: '<template><div role="slider" /></template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-valuenow is required by the role slider' }],
+    },
+    {
+      code: '<template><div role="checkbox" /></template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-checked is required by the role checkbox' }],
+    },
     {
       code: '<template><CustomComponent role="checkbox" aria-required="true" /></template>',
       output: null,
