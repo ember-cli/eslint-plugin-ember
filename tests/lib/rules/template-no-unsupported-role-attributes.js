@@ -138,11 +138,15 @@ const invalidHbs = [
       },
     ],
   },
-  // Documented divergence — <a> WITHOUT href, with a non-global aria attr.
-  // jsx-a11y treats href-less <a> as having no implicit role and accepts the
-  // attribute under the global aria set (VALID). Our rule resolves the
-  // implicit role to "generic" via aria-query, where aria-checked is not
-  // supported, so we flag. Acknowledged false-positive vs jsx-a11y.
+  // <a> without href — implicit role is `generic` per HTML-AAM 1.2 §3.5.3
+  // (https://www.w3.org/TR/html-aam/#el-a-no-href). aria-checked is not
+  // supported on `generic`, so we flag. vue-a11y reaches the same conclusion
+  // (it walks aria-query the same way). jsx-a11y's `getImplicitRoleForAnchor`
+  // returns `''` for href-less <a>, which makes its role-supports-aria-props
+  // rule early-return and silently allow any aria-* attribute — its own
+  // source comments this as "This actually isn't true - should fix in future
+  // release." We're spec-current; jsx-a11y is spec-stale (legacy ARIA 1.1
+  // mental model).
   {
     code: '<a aria-checked />',
     output: '<a />',
