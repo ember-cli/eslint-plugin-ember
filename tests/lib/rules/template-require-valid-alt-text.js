@@ -12,6 +12,9 @@ ruleTester.run('template-require-valid-alt-text', rule, {
     '<template><img alt="Company branding" src="/logo.png" /></template>',
     '<template><img alt="" src="/decorative.png" /></template>',
     '<template><img hidden alt="" /></template>',
+    // Whitespace-only alt — pin our current behavior. Peer plugins
+    // (jsx-a11y) accept this; we don't trim before considering "empty alt".
+    '<template><img alt=" " /></template>',
 
     '<template><img alt="hullo"></template>',
     '<template><img alt={{foo}}></template>',
@@ -57,8 +60,89 @@ ruleTester.run('template-require-valid-alt-text', rule, {
     '<template><area aria-labelledby="some-alt"></template>',
     '<template><area aria-label="some-alt"></template>',
     '<template><img role={{unless this.altText "presentation"}} alt={{this.altText}}></template>',
+    // Mustache-string-literal forms resolve to their static value — a
+    // non-empty literal supplies an accessible name the same as a text node.
+    '<template><input type="image" aria-label={{"valid"}} /></template>',
   ],
   invalid: [
+    // Empty-string aria-label / aria-labelledby / alt provides no accessible
+    // name, so these must flag.
+    {
+      code: '<template><input type="image" aria-label="" /></template>',
+      output: null,
+      errors: [{ messageId: 'inputImage' }],
+    },
+    {
+      code: '<template><input type="image" aria-labelledby="" /></template>',
+      output: null,
+      errors: [{ messageId: 'inputImage' }],
+    },
+    {
+      code: '<template><input type="image" alt="" /></template>',
+      output: null,
+      errors: [{ messageId: 'inputImage' }],
+    },
+    {
+      code: '<template><object aria-label=""></object></template>',
+      output: null,
+      errors: [{ messageId: 'objectMissing' }],
+    },
+    {
+      code: '<template><object aria-labelledby=""></object></template>',
+      output: null,
+      errors: [{ messageId: 'objectMissing' }],
+    },
+    {
+      code: '<template><object title=""></object></template>',
+      output: null,
+      errors: [{ messageId: 'objectMissing' }],
+    },
+    {
+      code: '<template><area aria-label=""></template>',
+      output: null,
+      errors: [{ messageId: 'areaMissing' }],
+    },
+    {
+      code: '<template><area aria-labelledby=""></template>',
+      output: null,
+      errors: [{ messageId: 'areaMissing' }],
+    },
+    {
+      code: '<template><area alt=""></template>',
+      output: null,
+      errors: [{ messageId: 'areaMissing' }],
+    },
+    // Whitespace-only values are not valid accessible names per ACCNAME 1.2 §4.3.2 step 2D.
+    {
+      code: '<template><input type="image" aria-label=" " /></template>',
+      output: null,
+      errors: [{ messageId: 'inputImage' }],
+    },
+    {
+      code: '<template><object aria-labelledby="\n\t" ></object></template>',
+      output: null,
+      errors: [{ messageId: 'objectMissing' }],
+    },
+    // <area>: title is NOT one of the accepted fallbacks per ACCNAME.
+    // Only alt / aria-label / aria-labelledby contribute. A whitespace-only
+    // aria-label should be flagged.
+    {
+      code: '<template><area href="/" aria-label=" " /></template>',
+      output: null,
+      errors: [{ messageId: 'areaMissing' }],
+    },
+    // Mustache-string-literal forms that resolve to an empty string are
+    // treated the same as the text-node empty value — no accessible name.
+    {
+      code: '<template><input type="image" aria-label={{""}} /></template>',
+      output: null,
+      errors: [{ messageId: 'inputImage' }],
+    },
+    {
+      code: '<template><input type="image" aria-label="{{""}}" /></template>',
+      output: null,
+      errors: [{ messageId: 'inputImage' }],
+    },
     {
       code: '<template><img src="/test.jpg" /></template>',
       output: null,
@@ -256,6 +340,38 @@ hbsRuleTester.run('template-require-valid-alt-text', rule, {
     },
     {
       code: '<area>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Each area of an image map must have a text alternative through the `alt`, `aria-label`, or `aria-labelledby` attribute.',
+        },
+      ],
+    },
+    // HBS parity: empty / whitespace-only accessible-name fallbacks
+    // should be flagged, mirroring the GTS cases above.
+    {
+      code: '<input type="image" aria-label=" " />',
+      output: null,
+      errors: [
+        {
+          message:
+            'All <input> elements with type="image" must have a text alternative through the `alt`, `aria-label`, or `aria-labelledby` attribute.',
+        },
+      ],
+    },
+    {
+      code: '<object aria-labelledby="\n\t" ></object>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Embedded <object> elements must have alternative text by providing inner text, aria-label or aria-labelledby attributes.',
+        },
+      ],
+    },
+    {
+      code: '<area href="/" aria-label=" " />',
       output: null,
       errors: [
         {
