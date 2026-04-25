@@ -38,27 +38,6 @@ This rule **forbids** the following:
 </template>
 ```
 
-Whitespace-only `title` (`"   "`) is flagged by default as an
-authoring-hygiene check: HTML and ACCNAME technically permit it (step 2I
-doesn't trim), but a whitespace-only accessible name is useless in
-practice. Suppress this specific strictness via
-`allowWhitespaceOnlyTitle: true` if your codebase needs it.
-
-## Configuration
-
-- `allowWhitespaceOnlyTitle` (`boolean`, default `false`): when `true`,
-  `<iframe title="   ">` is accepted. Empty-string `title=""` and
-  non-string mustache literals (`{{null}}`, `{{undefined}}`, `{{42}}`) are
-  still flagged.
-
-```js
-module.exports = {
-  rules: {
-    'ember/template-require-iframe-title': ['error', { allowWhitespaceOnlyTitle: true }],
-  },
-};
-```
-
 ## References
 
 - [WCAG SC 4.1.2 — Name, Role, Value](https://www.w3.org/TR/UNDERSTANDING-WCAG20/ensure-compat-rsv.html)

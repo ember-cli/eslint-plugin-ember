@@ -21,11 +21,6 @@ ruleTester.run('template-require-iframe-title', rule, {
     // literals supply an accessible name the same as a text node.
     '<template><iframe title={{"My frame"}} /></template>',
     '<template><iframe title="foo" /><iframe title="bar" /></template>',
-    // allowWhitespaceOnlyTitle: true — whitespace-only accepted.
-    {
-      code: '<template><iframe title="   " /></template>',
-      options: [{ allowWhitespaceOnlyTitle: true }],
-    },
   ],
   invalid: [
     {
@@ -165,14 +160,6 @@ ruleTester.run('template-require-iframe-title', rule, {
       output: null,
       errors: [{ messageId: 'emptyTitle' }],
     },
-    // Empty-string title is flagged even with allowWhitespaceOnlyTitle: true
-    // (an empty string is not a whitespace string).
-    {
-      code: '<template><iframe title="" /></template>',
-      output: null,
-      options: [{ allowWhitespaceOnlyTitle: true }],
-      errors: [{ messageId: 'emptyTitle' }],
-    },
   ],
 });
 
@@ -191,11 +178,6 @@ hbsRuleTester.run('template-require-iframe-title', rule, {
     '<iframe title="" aria-hidden />',
     '<iframe title="" hidden />',
     '<iframe title="foo" /><iframe title="bar" />',
-    // allowWhitespaceOnlyTitle: true — whitespace-only accepted in HBS too.
-    {
-      code: '<iframe title="   " />',
-      options: [{ allowWhitespaceOnlyTitle: true }],
-    },
   ],
   invalid: [
     {
