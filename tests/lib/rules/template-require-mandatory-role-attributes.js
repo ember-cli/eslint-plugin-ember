@@ -44,6 +44,18 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
     '<template>{{input type="checkbox" role="switch"}}</template>',
     '<template>{{input type="Checkbox" role="switch"}}</template>',
     '<template>{{input type="range" role="slider"}}</template>',
+
+    // Documented divergences from jsx-a11y / vue-a11y / angular-eslint:
+    // - Space-separated role tokens: peers split on whitespace and require
+    //   attrs for each token. We pass the whole string to aria-query, so
+    //   `role="combobox listbox"` lookup misses → no flag. (Case below.)
+    // - Case-folding role values: peers lowercase before lookup; we don't.
+    //   `role="COMBOBOX"` similarly misses lookup → no flag.
+    // - Unknown role: all plugins skip — parity, captured for completeness.
+    '<template><div role="combobox listbox" /></template>',
+    '<template><div role="COMBOBOX" /></template>',
+    '<template><div role="SLIDER" /></template>',
+    '<template><div role="foobar" /></template>',
   ],
 
   invalid: [
