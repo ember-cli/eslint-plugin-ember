@@ -168,7 +168,8 @@ ruleTester.run('template-no-empty-headings', rule, {
       output: null,
       errors: [{ messageId: 'emptyHeading' }],
     },
-    // Per WAI-ARIA 1.2 §6.6 aria-hidden value table: valueless /
+    // Per the WAI-ARIA 1.2 `aria-hidden` value table
+    // (https://www.w3.org/TR/wai-aria-1.2/#aria-hidden): valueless /
     // empty-string `aria-hidden` resolves to the default `undefined`,
     // not `true`. Empty headings with these forms still flag.
     {
