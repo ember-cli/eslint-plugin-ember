@@ -17,6 +17,9 @@ ruleTester.run('template-require-iframe-title', rule, {
     '<template><iframe title={{someValue}} /></template>',
     '<template><iframe title="" aria-hidden /></template>',
     '<template><iframe title="" hidden /></template>',
+    // Mustache string literals resolve to their static value — non-empty
+    // literals supply an accessible name the same as a text node.
+    '<template><iframe title={{"My frame"}} /></template>',
     '<template><iframe title="foo" /><iframe title="bar" /></template>',
   ],
   invalid: [
@@ -27,6 +30,20 @@ ruleTester.run('template-require-iframe-title', rule, {
     },
     {
       code: '<template><iframe title=""></iframe></template>',
+      output: null,
+      errors: [{ messageId: 'emptyTitle' }],
+    },
+    // Empty string-literal mustaches and concat-with-empty-string-literal
+    // resolve to "" via the static-attr-value handling and are flagged the
+    // same as the text-node empty case. Closes a bypass jsx-a11y already
+    // catches via getLiteralPropValue.
+    {
+      code: '<template><iframe title={{""}} /></template>',
+      output: null,
+      errors: [{ messageId: 'emptyTitle' }],
+    },
+    {
+      code: '<template><iframe title="{{""}}" /></template>',
       output: null,
       errors: [{ messageId: 'emptyTitle' }],
     },
@@ -92,15 +109,54 @@ ruleTester.run('template-require-iframe-title', rule, {
     {
       code: '<template><iframe src="12" title={{false}} /></template>',
       output: null,
-      errors: [{ messageId: 'dynamicFalseTitle' }],
+      errors: [{ messageId: 'invalidTitleLiteral', data: { literalType: 'boolean' } }],
     },
     {
       code: '<template><iframe src="12" title="{{false}}" /></template>',
       output: null,
-      errors: [{ messageId: 'dynamicFalseTitle' }],
+      errors: [{ messageId: 'invalidTitleLiteral', data: { literalType: 'boolean' } }],
     },
     {
       code: '<template><iframe src="12" title="" /></template>',
+      output: null,
+      errors: [{ messageId: 'emptyTitle' }],
+    },
+
+    // Mustache literals that don't coerce to a useful accessible name.
+    {
+      code: '<template><iframe title={{null}} /></template>',
+      output: null,
+      errors: [{ messageId: 'invalidTitleLiteral', data: { literalType: 'null' } }],
+    },
+    {
+      code: '<template><iframe title={{undefined}} /></template>',
+      output: null,
+      errors: [{ messageId: 'invalidTitleLiteral', data: { literalType: 'undefined' } }],
+    },
+    {
+      code: '<template><iframe title={{42}} /></template>',
+      output: null,
+      errors: [{ messageId: 'invalidTitleLiteral', data: { literalType: 'number' } }],
+    },
+    {
+      code: '<template><iframe title="{{null}}" /></template>',
+      output: null,
+      errors: [{ messageId: 'invalidTitleLiteral', data: { literalType: 'null' } }],
+    },
+    {
+      code: '<template><iframe title="{{undefined}}" /></template>',
+      output: null,
+      errors: [{ messageId: 'invalidTitleLiteral', data: { literalType: 'undefined' } }],
+    },
+    {
+      code: '<template><iframe title="{{42}}" /></template>',
+      output: null,
+      errors: [{ messageId: 'invalidTitleLiteral', data: { literalType: 'number' } }],
+    },
+
+    // Whitespace-only title is flagged by default (authoring hygiene).
+    {
+      code: '<template><iframe title="   " /></template>',
       output: null,
       errors: [{ messageId: 'emptyTitle' }],
     },
@@ -177,17 +233,70 @@ hbsRuleTester.run('template-require-iframe-title', rule, {
     {
       code: '<iframe src="12" title={{false}} />',
       output: null,
-      errors: [{ message: '<iframe> elements must have a unique title property.' }],
+      errors: [
+        {
+          message:
+            '<iframe title> must be a non-empty string. Got boolean literal, which does not describe the frame contents.',
+        },
+      ],
     },
     {
       code: '<iframe src="12" title="{{false}}" />',
       output: null,
-      errors: [{ message: '<iframe> elements must have a unique title property.' }],
+      errors: [
+        {
+          message:
+            '<iframe title> must be a non-empty string. Got boolean literal, which does not describe the frame contents.',
+        },
+      ],
     },
     {
       code: '<iframe src="12" title="" />',
       output: null,
       errors: [{ message: '<iframe> elements must have a unique title property.' }],
+    },
+
+    // hbs parity with gjs for the other non-string mustache literals
+    // (boolean true / null / undefined / number).
+    {
+      code: '<iframe title={{true}} />',
+      output: null,
+      errors: [
+        {
+          message:
+            '<iframe title> must be a non-empty string. Got boolean literal, which does not describe the frame contents.',
+        },
+      ],
+    },
+    {
+      code: '<iframe title={{null}} />',
+      output: null,
+      errors: [
+        {
+          message:
+            '<iframe title> must be a non-empty string. Got null literal, which does not describe the frame contents.',
+        },
+      ],
+    },
+    {
+      code: '<iframe title={{undefined}} />',
+      output: null,
+      errors: [
+        {
+          message:
+            '<iframe title> must be a non-empty string. Got undefined literal, which does not describe the frame contents.',
+        },
+      ],
+    },
+    {
+      code: '<iframe title={{42}} />',
+      output: null,
+      errors: [
+        {
+          message:
+            '<iframe title> must be a non-empty string. Got number literal, which does not describe the frame contents.',
+        },
+      ],
     },
   ],
 });

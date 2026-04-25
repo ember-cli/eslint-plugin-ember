@@ -61,6 +61,8 @@ ruleTester.run('template-no-nested-interactive', rule, {
     },
     '<template><details><summary>Details</summary>Something small enough to escape casual notice.</details></template>',
     '<template><details> <summary>Details</summary>Something small enough to escape casual notice.</details></template>',
+    '<template><details><summary>Advanced</summary><label for="x">Field</label><input id="x" /></details></template>',
+    '<template><details><summary>More</summary><div><button type="button">Action</button></div></details></template>',
     `<template>
     <ul role="menubar" aria-label="functions" id="appmenu">
       <li role="menuitem" aria-haspopup="true">
@@ -249,6 +251,8 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
     '<label><input></label>',
     '<details><summary>Details</summary>Something small enough to escape casual notice.</details>',
     '<details> <summary>Details</summary>Something small enough to escape casual notice.</details>',
+    '<details><summary>Advanced</summary><label for="x">Field</label><input id="x" /></details>',
+    '<details><summary>More</summary><div><button type="button">Action</button></div></details>',
     `
     <ul role="menubar" aria-label="functions" id="appmenu">
       <li role="menuitem" aria-haspopup="true">
