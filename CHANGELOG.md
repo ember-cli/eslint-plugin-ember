@@ -2,6 +2,23 @@
 
 ## Release (2026-04-25)
 
+* eslint-plugin-ember 13.1.2 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2745](https://github.com/ember-cli/eslint-plugin-ember/pull/2745) chore: upgrade ember-eslint-parser from 0.11.0 to 0.11.1 ([@Copilot](https://github.com/apps/copilot-swe-agent))
+  * [#2743](https://github.com/ember-cli/eslint-plugin-ember/pull/2743) fix: template-no-autofocus-attribute — value-aware + <dialog> exception ([@johanrd](https://github.com/johanrd))
+  * [#2731](https://github.com/ember-cli/eslint-plugin-ember/pull/2731) BUGFIX: template-require-iframe-title — flag title={{null|undefined|number}} ([@johanrd](https://github.com/johanrd))
+  * [#2725](https://github.com/ember-cli/eslint-plugin-ember/pull/2725) fix(template-require-mandatory-role-attributes): use axobject-query for semantic-role exemptions ([@johanrd](https://github.com/johanrd))
+  * [#2717](https://github.com/ember-cli/eslint-plugin-ember/pull/2717) BUGFIX: template-no-empty-headings — recognize boolean aria-hidden ([@johanrd](https://github.com/johanrd))
+  * [#2723](https://github.com/ember-cli/eslint-plugin-ember/pull/2723) fix(template-no-invalid-aria-attributes): absorb allowundefined handling into validateByType ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 2
+- Copilot [Bot] ([@copilot-swe-agent](https://github.com/apps/copilot-swe-agent))
+- [@johanrd](https://github.com/johanrd)
+
+## Release (2026-04-25)
+
 * eslint-plugin-ember 13.1.1 (patch)
 
 #### :bug: Bug Fix
