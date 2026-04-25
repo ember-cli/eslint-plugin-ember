@@ -174,6 +174,36 @@ export default [
 
 `template-lint-migration` mirrors the ember-template-lint `recommended` preset.
 
+### Linting `.hbs` files
+
+ESLint flat config only picks up `.hbs` files when a `files` glob names them. Add a dedicated block so they route to the Handlebars parser:
+
+```js
+// eslint.config.mjs
+import { hbsParser, plugin as emberPlugin } from 'eslint-plugin-ember/recommended';
+
+export default [
+  // ...other blocks...
+  {
+    files: ['app/**/*.hbs'],
+    languageOptions: { parser: hbsParser },
+    plugins: { ember: emberPlugin },
+    rules: {
+      'ember/template-no-bare-strings': 'error',
+      // ...other template rules...
+    },
+  },
+];
+```
+
+Make sure no earlier `@typescript-eslint/parser` block's `files` glob reaches `.hbs` — narrow it to `['**/*.{js,ts,gjs,gts}']` (or similar). Flat config merges rules across every matching block, so even if our HBS block overrides the parser, type-info rules from a matching TS block still layer on and fail with errors like:
+
+> Parsing error: `…` was not found by the project service because the extension for the file (`.hbs`) is non-standard.
+
+or
+
+> Error while loading rule `@typescript-eslint/await-thenable`: You have used a rule which requires type information.
+
 ### Replacing `template-lint-disable` comments
 
 Inline disable directives need to be rewritten to ESLint's syntax, prefixed with `ember/template-`. For now, only two scopes are supported: the next line, or the rest of the file. For example, replace:

@@ -1,5 +1,42 @@
 # Changelog
 
+## Release (2026-04-25)
+
+* eslint-plugin-ember 13.1.1 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2735](https://github.com/ember-cli/eslint-plugin-ember/pull/2735) Update ember-eslint-parser to 0.11 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2736](https://github.com/ember-cli/eslint-plugin-ember/pull/2736) fix: ignore comment + whitespace nodes in template-no-yield-only ([@johanrd](https://github.com/johanrd))
+  * [#2722](https://github.com/ember-cli/eslint-plugin-ember/pull/2722) refactor(template-require-presentational-children): source role list from aria-query ([@johanrd](https://github.com/johanrd))
+  * [#2719](https://github.com/ember-cli/eslint-plugin-ember/pull/2719) BUGFIX: template-no-aria-unsupported-elements — source the reserved-element list from aria-query ([@johanrd](https://github.com/johanrd))
+  * [#2718](https://github.com/ember-cli/eslint-plugin-ember/pull/2718) BUGFIX: template-require-media-caption — compare kind="captions" case-insensitively ([@johanrd](https://github.com/johanrd))
+  * [#2714](https://github.com/ember-cli/eslint-plugin-ember/pull/2714) BUGFIX: accept tabindex="-1" in template-require-aria-activedescendant-tabindex ([@johanrd](https://github.com/johanrd))
+
+#### :house: Internal
+* `eslint-plugin-ember`
+  * [#2733](https://github.com/ember-cli/eslint-plugin-ember/pull/2733) test: cover {{! eslint-disable-* }} directives inside <template> in .gts ([@johanrd](https://github.com/johanrd))
+  * [#2721](https://github.com/ember-cli/eslint-plugin-ember/pull/2721) refactor(template-no-abstract-roles): source abstract-role list from aria-query ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 2
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+- [@johanrd](https://github.com/johanrd)
+
+## Release (2026-04-21)
+
+* eslint-plugin-ember 13.1.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2715](https://github.com/ember-cli/eslint-plugin-ember/pull/2715) feat: re-export hbs parser and document HBS flat-config setup ([@johanrd](https://github.com/johanrd))
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2713](https://github.com/ember-cli/eslint-plugin-ember/pull/2713) BUGFIX: false positive: interactive flow content inside <details> ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2026-04-20)
 
 * eslint-plugin-ember 13.0.0 (major)

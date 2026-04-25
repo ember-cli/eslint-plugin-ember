@@ -50,6 +50,14 @@ This rule **allows** the following:
 
 If violations are found, remediation should be planned to ensure text content is present and visible and/or screen-reader accessible. Setting `aria-hidden="false"` or removing `hidden` attributes from the element(s) containing heading text may serve as a quickfix.
 
+## Notes on `aria-hidden` semantics
+
+This rule follows [WAI-ARIA 1.2 §`aria-hidden`](https://www.w3.org/TR/wai-aria-1.2/#aria-hidden) verbatim: only an explicit truthy value hides the element. Ambiguous shapes — valueless `aria-hidden`, empty string, and mustache literals that resolve to an empty / whitespace-only string — all resolve to the default `undefined` and do NOT exempt the heading from the empty-content check.
+
+- `aria-hidden="true"` / `aria-hidden={{true}}` / `aria-hidden={{"true"}}` (any case, whitespace-trimmed) → hidden, exempts the heading.
+- `aria-hidden="false"` / `aria-hidden={{false}}` / `aria-hidden={{"false"}}` → not hidden, the empty-content check applies.
+- `<h1 aria-hidden>` / `aria-hidden=""` / `aria-hidden={{""}}` / `aria-hidden={{" "}}` → spec-default `undefined`, the empty-content check applies.
+
 ## References
 
 - [WCAG SC 2.4.6 Headings and Labels](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-descriptive.html)

@@ -13,6 +13,12 @@ const validHbs = [
   '<CustomComponent aria-activedescendant="choice1" />',
   '<CustomComponent aria-activedescendant="option1" tabIndex="-1" />',
   '<CustomComponent aria-activedescendant={{foo}} tabindex={{bar}} />',
+  // tabindex="-1" is focusable-but-not-tabbable — the canonical pattern for
+  // composite widgets that manage focus via roving focus / aria-activedescendant.
+  // See W3C APG — https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#kbd_focus_activedescendant
+  '<div aria-activedescendant="option0" tabindex="-1"></div>',
+  '<div aria-activedescendant={{foo}} tabindex={{-1}}></div>',
+  '<button aria-activedescendant="x" tabindex="-1"></button>',
 ];
 
 const invalidHbs = [
@@ -27,11 +33,6 @@ const invalidHbs = [
     errors: [{ message: ERROR_MESSAGE }],
   },
   {
-    code: '<div aria-activedescendant={{foo}} tabindex={{-1}}></div>',
-    output: '<div aria-activedescendant={{foo}} tabindex="0"></div>',
-    errors: [{ message: ERROR_MESSAGE }],
-  },
-  {
     code: '<div aria-activedescendant="fixme" tabindex=-100></div>',
     output: '<div aria-activedescendant="fixme" tabindex="0"></div>',
     errors: [{ message: ERROR_MESSAGE }],
@@ -39,11 +40,6 @@ const invalidHbs = [
   {
     code: '<a aria-activedescendant="x"></a>',
     output: '<a aria-activedescendant="x" tabindex="0"></a>',
-    errors: [{ message: ERROR_MESSAGE }],
-  },
-  {
-    code: '<button aria-activedescendant="x" tabindex="-1"></button>',
-    output: '<button aria-activedescendant="x" tabindex="0"></button>',
     errors: [{ message: ERROR_MESSAGE }],
   },
 ];

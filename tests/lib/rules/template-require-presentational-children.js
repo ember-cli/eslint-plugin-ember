@@ -35,6 +35,12 @@ ruleTester.run('template-require-presentational-children', rule, {
       <title>Title here</title>
       <circle cx="10" cy="10" r="10"></circle>
     </svg></template>`,
+    // SKIPPED_TAGS: <svg> is always skipped, even when its role has
+    // childrenPresentational (e.g. graphics-symbol via Graphics-ARIA).
+    `<template>
+    <svg role="graphics-symbol">
+      <circle cx="10" cy="10" r="10"></circle>
+    </svg></template>`,
     `<template>
       <MyButton role="tab">
         <:default>Button text</:default>
@@ -77,6 +83,28 @@ ruleTester.run('template-require-presentational-children', rule, {
         },
       ],
     },
+    // doc-pagebreak: DPUB-ARIA role with childrenPresentational.
+    {
+      code: '<template><div role="doc-pagebreak"><h2>pg</h2></div></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            '<div> has a role of doc-pagebreak, it cannot have semantic descendants like <h2>',
+        },
+      ],
+    },
+    // graphics-symbol: Graphics-ARIA role with childrenPresentational; flags on non-svg host.
+    {
+      code: '<template><div role="graphics-symbol"><text>X</text></div></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            '<div> has a role of graphics-symbol, it cannot have semantic descendants like <text>',
+        },
+      ],
+    },
   ],
 });
 
@@ -107,6 +135,12 @@ hbsRuleTester.run('template-require-presentational-children', rule, {
     `
     <svg role="img">
       <title>Title here</title>
+      <circle cx="10" cy="10" r="10"></circle>
+    </svg>`,
+    // SKIPPED_TAGS: <svg> is always skipped, even when its role has
+    // childrenPresentational (e.g. graphics-symbol via Graphics-ARIA).
+    `
+    <svg role="graphics-symbol">
       <circle cx="10" cy="10" r="10"></circle>
     </svg>`,
     `
@@ -147,6 +181,28 @@ hbsRuleTester.run('template-require-presentational-children', rule, {
         },
         {
           message: '<div> has a role of button, it cannot have semantic descendants like <img>',
+        },
+      ],
+    },
+    // doc-pagebreak: DPUB-ARIA role with childrenPresentational.
+    {
+      code: '<div role="doc-pagebreak"><h2>pg</h2></div>',
+      output: null,
+      errors: [
+        {
+          message:
+            '<div> has a role of doc-pagebreak, it cannot have semantic descendants like <h2>',
+        },
+      ],
+    },
+    // graphics-symbol: Graphics-ARIA role with childrenPresentational; flags on non-svg host.
+    {
+      code: '<div role="graphics-symbol"><text>X</text></div>',
+      output: null,
+      errors: [
+        {
+          message:
+            '<div> has a role of graphics-symbol, it cannot have semantic descendants like <text>',
         },
       ],
     },

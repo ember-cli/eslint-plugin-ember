@@ -31,7 +31,24 @@ ruleTester.run('template-no-invalid-aria-attributes', rule, {
     '<template><CustomComponent @ariaRequired={{this.ariaRequired}} aria-errormessage="errorId" /></template>',
     '<template><button type="submit" aria-disabled={{this.isDisabled}}>Submit</button></template>',
     '<template><div role="textbox" aria-sort={{if this.hasCustomSort "other" "ascending"}}></div></template>',
+    // Boolean-type attributes with allowundefined: true per aria-query — the
+    // string "undefined" is spec-valid (WAI-ARIA 1.2 value tables for these
+    // attrs list true/false/undefined). All 4 share the same code path.
     '<template><div role="combobox" aria-expanded="undefined"></div></template>',
+    '<template><div aria-hidden="undefined"></div></template>',
+    '<template><div aria-grabbed="undefined" draggable="true"></div></template>',
+    '<template><div role="option" aria-selected="undefined"></div></template>',
+
+    // Token-type aria-orientation lists "undefined" in its values array;
+    // passes the natural token check (no special-casing needed).
+    '<template><div role="slider" aria-orientation="undefined"></div></template>',
+    '<template><div role="slider" aria-orientation="horizontal"></div></template>',
+
+    // aria-pressed is tristate WITHOUT allowundefined — string "undefined"
+    // is NOT accepted. Explicit valid values still work.
+    '<template><button aria-pressed="true">Toggle</button></template>',
+    '<template><button aria-pressed="false">Toggle</button></template>',
+    '<template><button aria-pressed="mixed">Toggle</button></template>',
     '<template><button aria-label={{if @isNew (t "actions.add") (t "actions.edit")}}></button></template>',
   ],
   invalid: [
@@ -121,6 +138,18 @@ ruleTester.run('template-no-invalid-aria-attributes', rule, {
       output: null,
       errors: [{ messageId: 'invalidAriaAttributeValue' }],
     },
+    {
+      code: '<template><div role="slider" aria-orientation="sideways"></div></template>',
+      output: null,
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
+    },
+    // aria-pressed is tristate WITHOUT allowundefined — string "undefined"
+    // is spec-invalid here (aria-query doesn't mark it allowundefined).
+    {
+      code: '<template><button aria-pressed="undefined">Toggle</button></template>',
+      output: null,
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
+    },
   ],
 });
 
@@ -149,7 +178,21 @@ hbsRuleTester.run('template-no-invalid-aria-attributes', rule, {
     '<CustomComponent @ariaRequired={{this.ariaRequired}} aria-errormessage="errorId" />',
     '<button type="submit" aria-disabled={{this.isDisabled}}>Submit</button>',
     '<div role="textbox" aria-sort={{if this.hasCustomSort "other" "ascending"}}></div>',
+    // Boolean-type attrs with allowundefined (spec-valid "undefined" literal):
     '<div role="combobox" aria-expanded="undefined"></div>',
+    '<div aria-hidden="undefined"></div>',
+    '<div aria-grabbed="undefined" draggable="true"></div>',
+    '<div role="option" aria-selected="undefined"></div>',
+
+    // Token-type aria-orientation — "undefined" passes via values list:
+    '<div role="slider" aria-orientation="undefined"></div>',
+    '<div role="slider" aria-orientation="horizontal"></div>',
+
+    // aria-pressed is tristate WITHOUT allowundefined; valid values:
+    '<button aria-pressed="true">Toggle</button>',
+    '<button aria-pressed="false">Toggle</button>',
+    '<button aria-pressed="mixed">Toggle</button>',
+
     '<button aria-label={{if @isNew (t "actions.add") (t "actions.edit")}}></button>',
   ],
   invalid: [
@@ -220,6 +263,17 @@ hbsRuleTester.run('template-no-invalid-aria-attributes', rule, {
     },
     {
       code: '<input type="text" aria-required="undefined" />',
+      output: null,
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
+    },
+    {
+      code: '<div role="slider" aria-orientation="sideways"></div>',
+      output: null,
+      errors: [{ messageId: 'invalidAriaAttributeValue' }],
+    },
+    // aria-pressed has no allowundefined — "undefined" is spec-invalid here.
+    {
+      code: '<button aria-pressed="undefined">Toggle</button>',
       output: null,
       errors: [{ messageId: 'invalidAriaAttributeValue' }],
     },
