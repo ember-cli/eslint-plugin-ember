@@ -6,9 +6,11 @@
 
 ## `<iframe>`
 
-`<iframe>` elements must have a unique title property to indicate its content to the user.
-
-This rule takes no arguments.
+`<iframe>` elements must have a unique title property so assistive
+technology can convey their content to the user. The normative
+requirement is [WCAG SC 4.1.2 (Name, Role, Value)](https://www.w3.org/TR/UNDERSTANDING-WCAG20/ensure-compat-rsv.html);
+the `title` attribute is _one sufficient technique_ for meeting it
+(sufficient technique [H64](https://www.w3.org/WAI/WCAG21/Techniques/html/H64)).
 
 ## Examples
 
@@ -27,12 +29,42 @@ This rule **forbids** the following:
 <template>
   <iframe />
   <iframe title='' />
+  <iframe title='   ' />
+  <iframe title={{null}} />
+  <iframe title={{undefined}} />
+  <iframe title={{true}} />
+  <iframe title={{false}} />
+  <iframe title={{42}} />
 </template>
+```
+
+Whitespace-only `title` (`"   "`) is flagged by default as an
+authoring-hygiene check: HTML and ACCNAME technically permit it (step 2I
+doesn't trim), but a whitespace-only accessible name is useless in
+practice. Suppress this specific strictness via
+`allowWhitespaceOnlyTitle: true` if your codebase needs it.
+
+## Configuration
+
+- `allowWhitespaceOnlyTitle` (`boolean`, default `false`): when `true`,
+  `<iframe title="   ">` is accepted. Empty-string `title=""` and
+  non-string mustache literals (`{{null}}`, `{{undefined}}`, `{{42}}`) are
+  still flagged.
+
+```js
+module.exports = {
+  rules: {
+    'ember/template-require-iframe-title': ['error', { allowWhitespaceOnlyTitle: true }],
+  },
+};
 ```
 
 ## References
 
-- [Deque University](https://dequeuniversity.com/rules/axe/1.1/frame-title)
-- [Technique H65: Using the title attribute of the frame and iframe elements](https://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140408/H64)
-- [WCAG Success Criterion 2.4.1 - Bypass Blocks](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-skip.html)
-- [WCAG Success Criterion 4.1.2 - Name, Role, Value](https://www.w3.org/TR/UNDERSTANDING-WCAG20/ensure-compat-rsv.html)
+- [WCAG SC 4.1.2 — Name, Role, Value](https://www.w3.org/TR/UNDERSTANDING-WCAG20/ensure-compat-rsv.html)
+  — the normative requirement.
+- [WCAG Technique H64 — Using the title attribute of the iframe element](https://www.w3.org/WAI/WCAG21/Techniques/html/H64)
+  — a sufficient technique for SC 4.1.2, not itself normative.
+- [WCAG Success Criterion 2.4.1 — Bypass Blocks](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-skip.html)
+- [ACCNAME 1.2 — accessible-name computation](https://www.w3.org/TR/accname-1.2/)
+- [axe-core rule `frame-title`](https://dequeuniversity.com/rules/axe/4.10/frame-title)
