@@ -2,17 +2,21 @@
   "solution": {
     "eslint-plugin-ember": {
       "impact": "patch",
-      "oldVersion": "13.1.1",
-      "newVersion": "13.1.2",
+      "oldVersion": "13.1.2",
+      "newVersion": "13.1.3",
       "tagName": "latest",
       "constraints": [
         {
           "impact": "patch",
           "reason": "Appears in changelog section :bug: Bug Fix"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-04-25)\n\n* eslint-plugin-ember 13.1.2 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2745](https://github.com/ember-cli/eslint-plugin-ember/pull/2745) chore: upgrade ember-eslint-parser from 0.11.0 to 0.11.1 ([@Copilot](https://github.com/apps/copilot-swe-agent))\n  * [#2743](https://github.com/ember-cli/eslint-plugin-ember/pull/2743) fix: template-no-autofocus-attribute — value-aware + <dialog> exception ([@johanrd](https://github.com/johanrd))\n  * [#2731](https://github.com/ember-cli/eslint-plugin-ember/pull/2731) BUGFIX: template-require-iframe-title — flag title={{null|undefined|number}} ([@johanrd](https://github.com/johanrd))\n  * [#2725](https://github.com/ember-cli/eslint-plugin-ember/pull/2725) fix(template-require-mandatory-role-attributes): use axobject-query for semantic-role exemptions ([@johanrd](https://github.com/johanrd))\n  * [#2717](https://github.com/ember-cli/eslint-plugin-ember/pull/2717) BUGFIX: template-no-empty-headings — recognize boolean aria-hidden ([@johanrd](https://github.com/johanrd))\n  * [#2723](https://github.com/ember-cli/eslint-plugin-ember/pull/2723) fix(template-no-invalid-aria-attributes): absorb allowundefined handling into validateByType ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 2\n- Copilot [Bot] ([@copilot-swe-agent](https://github.com/apps/copilot-swe-agent))\n- [@johanrd](https://github.com/johanrd)\n"
+  "description": "## Release (2026-04-25)\n\n* eslint-plugin-ember 13.1.3 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2730](https://github.com/ember-cli/eslint-plugin-ember/pull/2730) BUGFIX: template-require-valid-alt-text — reject empty-string aria-label/labelledby/alt on <input type=image>, <object>, <area> ([@johanrd](https://github.com/johanrd))\n  * [#2729](https://github.com/ember-cli/eslint-plugin-ember/pull/2729) BUGFIX: template-no-invalid-role — support DPUB/Graphics-ARIA and role-fallback lists ([@johanrd](https://github.com/johanrd))\n  * [#2726](https://github.com/ember-cli/eslint-plugin-ember/pull/2726) BUGFIX: template-no-unsupported-role-attributes — honor aria-query attribute constraints ([@johanrd](https://github.com/johanrd))\n  * [#2727](https://github.com/ember-cli/eslint-plugin-ember/pull/2727) BUGFIX: template-no-redundant-role — case-insensitive match + <select>→combobox ([@johanrd](https://github.com/johanrd))\n\n#### :house: Internal\n* `eslint-plugin-ember`\n  * [#2746](https://github.com/ember-cli/eslint-plugin-ember/pull/2746) refactor: extract isNativeElement util (fix component-vs-HTML-tag misclassification) ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- [@johanrd](https://github.com/johanrd)\n"
 }

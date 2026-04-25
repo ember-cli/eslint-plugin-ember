@@ -2,6 +2,24 @@
 
 ## Release (2026-04-25)
 
+* eslint-plugin-ember 13.1.3 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2730](https://github.com/ember-cli/eslint-plugin-ember/pull/2730) BUGFIX: template-require-valid-alt-text — reject empty-string aria-label/labelledby/alt on <input type=image>, <object>, <area> ([@johanrd](https://github.com/johanrd))
+  * [#2729](https://github.com/ember-cli/eslint-plugin-ember/pull/2729) BUGFIX: template-no-invalid-role — support DPUB/Graphics-ARIA and role-fallback lists ([@johanrd](https://github.com/johanrd))
+  * [#2726](https://github.com/ember-cli/eslint-plugin-ember/pull/2726) BUGFIX: template-no-unsupported-role-attributes — honor aria-query attribute constraints ([@johanrd](https://github.com/johanrd))
+  * [#2727](https://github.com/ember-cli/eslint-plugin-ember/pull/2727) BUGFIX: template-no-redundant-role — case-insensitive match + <select>→combobox ([@johanrd](https://github.com/johanrd))
+
+#### :house: Internal
+* `eslint-plugin-ember`
+  * [#2746](https://github.com/ember-cli/eslint-plugin-ember/pull/2746) refactor: extract isNativeElement util (fix component-vs-HTML-tag misclassification) ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- [@johanrd](https://github.com/johanrd)
+
+## Release (2026-04-25)
+
 * eslint-plugin-ember 13.1.2 (patch)
 
 #### :bug: Bug Fix
