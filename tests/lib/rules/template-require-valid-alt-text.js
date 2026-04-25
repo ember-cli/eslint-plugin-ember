@@ -12,6 +12,9 @@ ruleTester.run('template-require-valid-alt-text', rule, {
     '<template><img alt="Company branding" src="/logo.png" /></template>',
     '<template><img alt="" src="/decorative.png" /></template>',
     '<template><img hidden alt="" /></template>',
+    // Whitespace-only alt — pin our current behavior. Peer plugins
+    // (jsx-a11y) accept this; we don't trim before considering "empty alt".
+    '<template><img alt=" " /></template>',
 
     '<template><img alt="hullo"></template>',
     '<template><img alt={{foo}}></template>',
