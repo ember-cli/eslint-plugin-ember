@@ -40,6 +40,34 @@ Examples of **correct** code for this rule:
 </template>
 ```
 
+Explicit opt-out via a mustache boolean `false` is allowed — this is the
+only form that statically guarantees no rendered `autofocus` attribute
+(Glimmer VM normalizes `{{false}}` to attribute removal). The string
+`autofocus="false"` is still flagged per HTML boolean-attribute semantics
+(any attribute presence, including the string `"false"`, enables autofocus).
+
+```gjs
+<template>
+  <input autofocus={{false}} />
+  {{!-- element syntax: the mustache-boolean form --}}
+
+  {{input autofocus=false}}
+  {{!-- mustache syntax: the hash-pair form --}}
+</template>
+```
+
+`<dialog>` and its descendants are exempt. A dialog is expected to focus its
+initial element on open, per
+[MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog):
+
+```gjs
+<template>
+  <dialog>
+    <button autofocus>Close</button>
+  </dialog>
+</template>
+```
+
 ## When Not To Use It
 
 If you need to autofocus for specific accessibility or UX requirements and have thoroughly tested with assistive technologies, you may disable this rule for those specific cases.
