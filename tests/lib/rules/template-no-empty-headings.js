@@ -43,6 +43,24 @@ ruleTester.run('template-no-empty-headings', rule, {
     '<template><h1><this.Heading /></h1></template>',
     '<template><h2><@heading /></h2></template>',
     '<template><h3><ns.Heading /></h3></template>',
+
+    // Explicit "true" exempts the empty-heading check — author has
+    // signalled the heading is intentionally hidden from assistive tech.
+    '<template><h1 aria-hidden={{true}}></h1></template>',
+    '<template><h1 aria-hidden="true">Visible to sighted only</h1></template>',
+    '<template><h1 aria-hidden="TRUE"></h1></template>',
+    '<template><h1 aria-hidden="True"></h1></template>',
+    '<template><h1 aria-hidden={{"TRUE"}}></h1></template>',
+    '<template><h1 aria-hidden={{"True"}}></h1></template>',
+    // Quoted-mustache (GlimmerConcatStatement) forms — `aria-hidden="{{true}}"`
+    // resolves the same as `aria-hidden={{true}}`. Pin these so future
+    // refactors don't regress concat handling.
+    '<template><h1 aria-hidden="{{true}}"></h1></template>',
+    '<template><h1 aria-hidden="{{"true"}}"></h1></template>',
+    // Whitespace normalization — incidental surrounding whitespace should
+    // still resolve to "true".
+    '<template><h1 aria-hidden={{" true "}}></h1></template>',
+    '<template><h1 aria-hidden=" true "></h1></template>',
   ],
   invalid: [
     {
@@ -129,6 +147,55 @@ ruleTester.run('template-no-empty-headings', rule, {
     },
     {
       code: '<template><div role="heading" aria-level="1"><span hidden>Inaccessible text</span></div></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+
+    // Explicit falsy aria-hidden does NOT exempt the empty-heading check —
+    // this is the unambiguous opt-out, no ecosystem position disagrees.
+    {
+      code: '<template><h1 aria-hidden="false"></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    {
+      code: '<template><h1 aria-hidden={{false}}></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    {
+      code: '<template><h1 aria-hidden={{"false"}}></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    // Per the WAI-ARIA 1.2 `aria-hidden` value table
+    // (https://www.w3.org/TR/wai-aria-1.2/#aria-hidden): valueless /
+    // empty-string `aria-hidden` resolves to the default `undefined`,
+    // not `true`. Empty headings with these forms still flag.
+    {
+      code: '<template><h1 aria-hidden></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    {
+      code: '<template><h1 aria-hidden=""></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    // Mustache / concat forms that resolve to an empty / whitespace-only
+    // string — same spec-aligned treatment.
+    {
+      code: '<template><h1 aria-hidden={{""}}></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    {
+      code: '<template><h1 aria-hidden="{{""}}"></h1></template>',
+      output: null,
+      errors: [{ messageId: 'emptyHeading' }],
+    },
+    {
+      code: '<template><h1 aria-hidden={{" "}}></h1></template>',
       output: null,
       errors: [{ messageId: 'emptyHeading' }],
     },
