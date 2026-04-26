@@ -268,6 +268,12 @@ ruleTester.run('template-no-nested-interactive', rule, {
       output: null,
       errors: [{ messageId: 'nested' }],
     },
+    // <canvas> is interactive (drawing/game-UI convention); nesting fires even with tabindex.
+    {
+      code: '<template><canvas tabindex="0"><button>Click</button></canvas></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
   ],
 });
 
@@ -453,6 +459,12 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       code: '<button><video controls></video></button>',
       output: null,
       errors: [{ message: 'Do not nest interactive element <video> inside <button>.' }],
+    },
+    // <canvas> is interactive (drawing/game-UI convention); nesting fires even with tabindex.
+    {
+      code: '<canvas tabindex="0"><button>Click</button></canvas>',
+      output: null,
+      errors: [{ message: 'Do not nest interactive element <button> inside <canvas>.' }],
     },
   ],
 });

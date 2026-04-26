@@ -15,7 +15,9 @@ This rule disallows nesting interactive elements inside other interactive elemen
 Interactive elements include:
 
 - `<a>` (only when it has an `href` attribute)
+- `<audio>` (only when it has a `controls` attribute)
 - `<button>`
+- `<canvas>` (drawing/game-UI convention; not in the HTML spec's interactive-content category)
 - `<details>`
 - `<embed>`
 - `<iframe>`
@@ -24,6 +26,7 @@ Interactive elements include:
 - `<select>`
 - `<summary>`
 - `<textarea>`
+- `<video>` (only when it has a `controls` attribute)
 - Elements with interactive ARIA roles (e.g., `role="button"`, `role="link"`)
 - Elements with `tabindex` (unless `ignoreTabindex` is enabled)
 - Elements with `contenteditable` (except `contenteditable="false"`)
@@ -32,8 +35,9 @@ Interactive elements include:
 Special cases:
 
 - `<label>` may contain **one** interactive child (e.g., `<label><input /></label>` is fine, but `<label><input /><button>x</button></label>` is not)
-- `<summary>` as the first child of `<details>` is allowed
-- Nested `role="menuitem"` elements are allowed (menu/sub-menu pattern)
+- `<summary>` as the first child of `<details>` is allowed; other interactive content after `<summary>` (in the disclosed panel) is also allowed
+- Canonical ARIA composite-widget hierarchies are allowed (e.g., `role="option"` inside `role="listbox"`, `role="tab"` inside `role="tablist"`, `role="row"` inside `role="grid"`, `role="radio"` inside `role="radiogroup"`). Derived from the ARIA `requiredOwnedElements` relationship.
+- Nested `role="menuitem"` / `role="menuitemcheckbox"` / `role="menuitemradio"` elements are allowed (menu/sub-menu pattern)
 
 ## Examples
 
