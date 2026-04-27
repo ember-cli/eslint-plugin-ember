@@ -47,14 +47,14 @@ When the role attribute explicitly declares a role that the native element alrea
 
 Exempt pairings include (non-exhaustive):
 
-| Element                   | Role                 | Required ARIA state supplied by                  |
-| ------------------------- | -------------------- | ------------------------------------------------ |
-| `<input type="checkbox">` | `checkbox`, `switch` | native `checked` state                           |
-| `<input type="radio">`    | `radio`              | native `checked` state                           |
-| `<input type="range">`    | `slider`             | native `value` / `min` / `max`                   |
-| `<input type="number">`   | `spinbutton`         | native `value` (spinbutton has no required ARIA) |
-| `<input type="text">`     | `textbox`            | no required ARIA                                 |
-| `<input type="search">`   | `searchbox`          | no required ARIA                                 |
+| Element                   | Role                 | Required ARIA state supplied by                                                                           |
+| ------------------------- | -------------------- | --------------------------------------------------------------------------------------------------------- |
+| `<input type="checkbox">` | `checkbox`, `switch` | native `checked` state                                                                                    |
+| `<input type="radio">`    | `radio`              | native `checked` state                                                                                    |
+| `<input type="range">`    | `slider`             | native `value` / `min` / `max`                                                                            |
+| `<input type="number">`   | `spinbutton`         | native `value` / `min` / `max` (spinbutton's required `aria-valuenow` is derived from the native `value`) |
+| `<input type="text">`     | `textbox`            | no required ARIA                                                                                          |
+| `<input type="search">`   | `searchbox`          | no required ARIA                                                                                          |
 
 Undocumented pairings (e.g. `<input type="checkbox" role="menuitemcheckbox">` — axobject-query does not list this) remain flagged.
 
