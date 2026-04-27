@@ -66,14 +66,20 @@ ruleTester.run('template-no-invalid-interactive', rule, {
     // <summary> is natively interactive
     '<template><summary onclick={{this.toggle}}>Details</summary></template>',
 
-    // ARIA widget roles: scrollbar, tooltip, treeitem
+    // ARIA widget roles: scrollbar, treeitem (+ many others from the shared
+    // interactive-roles util). tooltip is intentionally NOT in the widget
+    // set (per WAI-ARIA 1.2 §5.3.3 it's a document-structure role) and so
+    // handlers on `role="tooltip"` should be flagged — see invalid cases.
     '<template><div role="scrollbar" onclick={{this.scroll}}>Scroll</div></template>',
-    '<template><div role="tooltip" onclick={{this.show}}>Tip</div></template>',
     '<template><div role="treeitem" onclick={{this.select}}>Node</div></template>',
 
     // audio/video with controls are interactive
     '<template><audio controls onclick={{this.play}}></audio></template>',
     '<template><video controls onclick={{this.play}}></video></template>',
+
+    // <canvas> — not in HTML §3.2.5.2.7, but upstream ember-template-lint
+    // treats it as interactive (drawing/game-UI convention); preserved for parity.
+    '<template><canvas onclick={{this.draw}}></canvas></template>',
 
     // usemap only makes img/object interactive
     '<template><img usemap="#map" onclick={{this.click}}></template>',
@@ -209,6 +215,19 @@ ruleTester.run('template-no-invalid-interactive', rule, {
         {
           messageId: 'noInvalidInteractive',
           data: { tagName: 'a', handler: 'onclick' },
+        },
+      ],
+    },
+    {
+      // role="tooltip" is document-structure per WAI-ARIA 1.2 §5.3.3 — NOT
+      // a widget, so a handler on it is as invalid as a handler on a bare div.
+      filename: 'test.gjs',
+      code: '<template><div role="tooltip" onclick={{this.show}}>Tip</div></template>',
+      output: null,
+      errors: [
+        {
+          messageId: 'noInvalidInteractive',
+          data: { tagName: 'div', handler: 'onclick' },
         },
       ],
     },

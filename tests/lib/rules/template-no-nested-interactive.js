@@ -39,6 +39,9 @@ ruleTester.run('template-no-nested-interactive', rule, {
         Text
       </label>
     </template>`,
+    // <audio>/<video> without `controls` are NOT interactive (no rendered UI, no focus).
+    '<template><button><audio></audio></button></template>',
+    '<template><button><video></video></button></template>',
     `<template>
       <div role="presentation">
         <button>Click</button>
@@ -71,6 +74,29 @@ ruleTester.run('template-no-nested-interactive', rule, {
           <li role="menuitem">New</li>
           <li role="menuitem">Open</li>
           <li role="menuitem">Print</li>
+        </ul>
+      </li>
+    </ul>
+    </template>`,
+
+    // Mixed menu-item variants — `menuitemcheckbox` and `menuitemradio`
+    // nested alongside plain `menuitem` follow the same APG Menu Button
+    // pattern. Should not flag as nested-interactive.
+    `<template>
+    <ul role="menu" aria-label="options">
+      <li role="menuitemcheckbox" aria-checked="false">Show hidden</li>
+      <li role="menuitemradio" aria-checked="true">Sort by name</li>
+      <li role="menuitemradio" aria-checked="false">Sort by date</li>
+    </ul>
+    </template>`,
+    // Submenu attached to a menuitemcheckbox (APG permits this).
+    `<template>
+    <ul role="menu">
+      <li role="menuitemcheckbox" aria-haspopup="true" aria-checked="false">
+        Advanced
+        <ul role="menu">
+          <li role="menuitem">Inspect</li>
+          <li role="menuitem">Export</li>
         </ul>
       </li>
     </ul>
@@ -123,16 +149,6 @@ ruleTester.run('template-no-nested-interactive', rule, {
         <button>
           <input type="text" />
         </button>
-      </template>`,
-      output: null,
-      errors: [{ messageId: 'nested' }],
-    },
-    {
-      code: `<template>
-        <label>
-          <button>Click</button>
-          <a href="#">Link</a>
-        </label>
       </template>`,
       output: null,
       errors: [{ messageId: 'nested' }],
@@ -217,13 +233,44 @@ ruleTester.run('template-no-nested-interactive', rule, {
       output: null,
       errors: [{ messageId: 'nested' }],
     },
+    // Label-association: HTML's "first labelable descendant" rule means a
+    // second interactive child is orphaned from the label. Flag per upstream
+    // ember-template-lint parity.
     {
-      code: '<template><object usemap=""><button></button></object></template>',
+      code: `<template>
+        <label>
+          <button>Click</button>
+          <a href="#">Link</a>
+        </label>
+      </template>`,
       output: null,
       errors: [{ messageId: 'nested' }],
     },
     {
       code: '<template><label><input><input></label></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    // <object usemap> is interactive via rule-level special case (upstream parity).
+    {
+      code: '<template><object usemap=""><button></button></object></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    // <audio controls> / <video controls> are HTML interactive content; nesting inside <button> fires.
+    {
+      code: '<template><button><video controls></video></button></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    {
+      code: '<template><button><audio controls></audio></button></template>',
+      output: null,
+      errors: [{ messageId: 'nested' }],
+    },
+    // <canvas> is interactive (drawing/game-UI convention); nesting fires even with tabindex.
+    {
+      code: '<template><canvas tabindex="0"><button>Click</button></canvas></template>',
       output: null,
       errors: [{ messageId: 'nested' }],
     },
@@ -307,6 +354,9 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       code: '<button><img usemap=""></button>',
       options: [{ ignoreUsemapAttribute: true }],
     },
+    // <audio>/<video> without `controls` are NOT interactive.
+    '<button><audio></audio></button>',
+    '<button><video></video></button>',
   ],
   invalid: [
     {
@@ -379,10 +429,18 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       output: null,
       errors: [{ message: 'Do not nest interactive element <img> inside <button>.' }],
     },
+    // <object usemap> is interactive via rule-level special case (upstream parity).
     {
       code: '<object usemap=""><button></button></object>',
       output: null,
       errors: [{ message: 'Do not nest interactive element <button> inside <object>.' }],
+    },
+    // Label-association: HTML's "first labelable descendant" rule means a
+    // second interactive child is orphaned from the label.
+    {
+      code: '<label><button>Click</button><a href="#">Link</a></label>',
+      output: null,
+      errors: [{ message: 'Do not nest interactive element <a> inside <label>.' }],
     },
     {
       code: '<label><input><input></label>',
@@ -396,16 +454,17 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       options: [{ additionalInteractiveTags: ['my-special-input'] }],
       errors: [{ message: 'Do not nest interactive element <my-special-input> inside <button>.' }],
     },
-    // Label with multiple interactive children including tabindex
+    // <video controls> is HTML interactive content; nesting inside <button> fires.
     {
-      code: [
-        '<label for="foo">',
-        '  <div id="foo" tabindex=-1></div>',
-        '  <input>',
-        '</label>',
-      ].join('\n'),
+      code: '<button><video controls></video></button>',
       output: null,
-      errors: [{ message: 'Do not nest interactive element <input> inside <label>.' }],
+      errors: [{ message: 'Do not nest interactive element <video> inside <button>.' }],
+    },
+    // <canvas> is interactive (drawing/game-UI convention); nesting fires even with tabindex.
+    {
+      code: '<canvas tabindex="0"><button>Click</button></canvas>',
+      output: null,
+      errors: [{ message: 'Do not nest interactive element <button> inside <canvas>.' }],
     },
   ],
 });
