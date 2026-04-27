@@ -491,14 +491,15 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 
 ### Possible Errors
 
-| Name                                                                                                                       | Description                                                       | 💼 | 🔧 | 💡 |
-| :------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------- | :- | :- | :- |
-| [template-no-extra-mut-helper-argument](docs/rules/template-no-extra-mut-helper-argument.md)                               | disallow passing more than one argument to the mut helper         | 📋 |    |    |
-| [template-no-jsx-attributes](docs/rules/template-no-jsx-attributes.md)                                                     | disallow JSX-style camelCase attributes                           |    | 🔧 |    |
-| [template-no-scope-outside-table-headings](docs/rules/template-no-scope-outside-table-headings.md)                         | disallow scope attribute outside th elements                      | 📋 |    |    |
-| [template-no-shadowed-elements](docs/rules/template-no-shadowed-elements.md)                                               | disallow ambiguity with block param names shadowing HTML elements | 📋 |    |    |
-| [template-no-unbalanced-curlies](docs/rules/template-no-unbalanced-curlies.md)                                             | disallow unbalanced mustache curlies                              | 📋 |    |    |
-| [template-no-unknown-arguments-for-builtin-components](docs/rules/template-no-unknown-arguments-for-builtin-components.md) | disallow unknown arguments for built-in components                | 📋 | 🔧 |    |
+| Name                                                                                                                       | Description                                                              | 💼 | 🔧 | 💡 |
+| :------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------- | :- | :- | :- |
+| [template-no-extra-mut-helper-argument](docs/rules/template-no-extra-mut-helper-argument.md)                               | disallow passing more than one argument to the mut helper                | 📋 |    |    |
+| [template-no-jsx-attributes](docs/rules/template-no-jsx-attributes.md)                                                     | disallow JSX-style camelCase attributes                                  |    | 🔧 |    |
+| [template-no-scope-outside-table-headings](docs/rules/template-no-scope-outside-table-headings.md)                         | disallow scope attribute outside th elements                             | 📋 |    |    |
+| [template-no-shadowed-elements](docs/rules/template-no-shadowed-elements.md)                                               | disallow ambiguity with block param names shadowing HTML elements        | 📋 |    |    |
+| [template-no-unbalanced-curlies](docs/rules/template-no-unbalanced-curlies.md)                                             | disallow unbalanced mustache curlies                                     | 📋 |    |    |
+| [template-no-unknown-arguments-for-builtin-components](docs/rules/template-no-unknown-arguments-for-builtin-components.md) | disallow unknown arguments for built-in components                       | 📋 | 🔧 |    |
+| [template-valid-autocomplete](docs/rules/template-valid-autocomplete.md)                                                   | require autocomplete attribute values to match the HTML autofill grammar |    |    |    |
 
 ### Routes
 
