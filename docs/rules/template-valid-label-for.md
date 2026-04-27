@@ -1,5 +1,6 @@
 # ember/template-valid-label-for
 
+<!-- begin auto-generated rule header -->
 <!-- end auto-generated rule header -->
 
 This rule validates that `<label for="x">` references a labelable form
