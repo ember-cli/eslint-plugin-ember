@@ -19,6 +19,8 @@ const validHbs = [
   '<form><input type="submit" name="a" /><input type="image" name="a" src="/x.png" /></form>',
   '<form><button name="a" value="save">Save</button><input type="image" name="a" src="/x.png" /></form>',
   '<form><input type="image" name="a" src="/a.png" /><input type="image" name="a" src="/b.png" /></form>',
+  // Valueless `type` on <button> defaults to 'submit' per HTML §4.10.9.
+  '<form><button type name="a">S</button><button type name="a">P</button></form>',
   // Non-submitting types (button, reset) don't contribute to form data; their
   // `name` is skipped entirely, so any combination is fine.
   '<form><button type="reset" name="r">1</button><button type="reset" name="r">2</button></form>',
