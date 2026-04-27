@@ -24,6 +24,9 @@ const validHbs = [
   '<input pattern="\\d+" />',
   '<input type />',
   '<input maxlength="100" size="20" readonly />',
+  // Attribute name case — HTML attributes are case-insensitive; rule normalizes.
+  '<input type="text" MAXLENGTH="5" />',
+  '<input type="text" Pattern="\\d+" />',
   // Not an input — rule doesn't apply.
   '<textarea maxlength="10"></textarea>',
   // Empty/whitespace/unknown type values fall back to the Text state per HTML
@@ -62,6 +65,11 @@ const invalidHbs = [
   {
     code: '<input type="TEXT" accept="image/*" />',
     errors: [{ message: err('accept', 'text') }],
+  },
+  // Uppercase attribute name — normalized before restriction lookup.
+  {
+    code: '<input type="number" PATTERN="x" />',
+    errors: [{ message: err('PATTERN', 'number') }],
   },
   // Text-state fallback — <input> with missing/valueless/empty/unknown type
   // is the Text state per HTML spec. Attributes incompatible with text are
