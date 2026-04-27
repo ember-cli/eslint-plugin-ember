@@ -16,6 +16,8 @@ const validHbs = [
   // Quoted-mustache (GlimmerConcatStatement) opt-out/unknown forms.
   '<audio autoplay="{{false}}"></audio>',
   '<audio autoplay="{{shouldPlay}}"></audio>',
+  // ConcatStatement with a dynamic path part and static suffix — unknown at lint time, skip.
+  '<audio autoplay="{{this.flag}}-suffix"></audio>',
   // PascalCase component — not an HTML element
   '<AutoPlayer autoplay />',
   // <video muted autoplay> is out of WCAG SC 1.4.2 scope (ACT rule aaa1bf).
@@ -54,7 +56,14 @@ const invalidHbs = [
   { code: '<audio autoplay="{{\'true\'}}"></audio>', errors: [{ message: ERROR_AUDIO }] },
 ];
 
-const additionalElementsValid = ['<audio autoplay={{false}}></audio>', '<div></div>'];
+// Plain valid cases that need no option — kept as named constants for reuse.
+const noOptionValid = ['<audio autoplay={{false}}></audio>', '<div></div>'];
+
+// Valid cases that explicitly exercise the `additionalElements` option.
+const additionalElementsValid = [
+  // Custom element listed in additionalElements but without autoplay — no report.
+  { code: '<custom-player src="a.mp4"></custom-player>', options: [{ additionalElements: ['custom-player'] }] },
+];
 
 // Opt-in `additionalElements` configured but the element doesn't carry
 // autoplay — pins that the option wiring doesn't over-flag on its own.
@@ -102,7 +111,11 @@ const gjsRuleTester = new RuleTester({
 gjsRuleTester.run('template-no-autoplay', rule, {
   valid: [
     ...gjsValid,
-    ...additionalElementsValid.map((code) => `<template>${code}</template>`),
+    ...noOptionValid.map((code) => `<template>${code}</template>`),
+    ...additionalElementsValid.map(({ code, options }) => ({
+      code: `<template>${code}</template>`,
+      options,
+    })),
     ...additionalElementsOptionValid.map(({ code, options }) => ({
       code: `<template>${code}</template>`,
       options,
@@ -124,6 +137,6 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-autoplay', rule, {
-  valid: [...validHbs, ...additionalElementsValid, ...additionalElementsOptionValid],
+  valid: [...validHbs, ...noOptionValid, ...additionalElementsValid, ...additionalElementsOptionValid],
   invalid: [...invalidHbs, ...additionalElementsInvalid],
 });

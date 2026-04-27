@@ -1,5 +1,6 @@
 # ember/template-no-autoplay
 
+<!-- begin auto-generated rule header -->
 <!-- end auto-generated rule header -->
 
 This rule disallows the `autoplay` attribute on `<audio>` elements, and on
