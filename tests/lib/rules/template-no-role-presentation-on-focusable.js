@@ -67,6 +67,10 @@ ruleTester.run('template-no-role-presentation-on-focusable', rule, {
     // Disabled form controls are not keyboard-focusable (HTML §4.10.18.5).
     '<template><button disabled role="presentation">Click</button></template>',
     '<template><input type="text" disabled role="presentation" /></template>',
+    // Bare-mustache falsy on tabindex (rows t6, t7) — Glimmer omits at runtime,
+    // element isn't focusable from tabindex, so role="presentation" is fine.
+    '<template><div tabindex={{false}} role="presentation"></div></template>',
+    '<template><div tabindex={{null}} role="none"></div></template>',
 
     // Non-focusable wrapper with role="presentation" around a focusable child —
     // the rule only checks the element that carries the role, not its subtree.
@@ -81,6 +85,18 @@ ruleTester.run('template-no-role-presentation-on-focusable', rule, {
   invalid: [
     {
       code: '<template><button role="presentation">Click</button></template>',
+      output: null,
+      errors: [{ messageId: 'invalidPresentation' }],
+    },
+    // Bare-mustache falsy on disabled (rows d3, d6) — Glimmer omits the
+    // attribute, button stays focusable, role="presentation" is invalid.
+    {
+      code: '<template><button disabled={{false}} role="presentation">Click</button></template>',
+      output: null,
+      errors: [{ messageId: 'invalidPresentation' }],
+    },
+    {
+      code: '<template><button disabled={{null}} role="presentation">Click</button></template>',
       output: null,
       errors: [{ messageId: 'invalidPresentation' }],
     },
