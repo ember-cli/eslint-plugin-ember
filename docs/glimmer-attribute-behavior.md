@@ -146,20 +146,25 @@ Rule authors who classify attribute values must consume the reference table abov
 
 ### Recommended pattern
 
-A shared utility — `lib/utils/glimmer-attr-presence.js` (forthcoming) — encodes this table once. Rule authors should consume it rather than re-implementing the AST walk:
+The shared utility [`lib/utils/glimmer-attr-presence.js`](../lib/utils/glimmer-attr-presence.js) encodes the verdict table once. Rule authors should consume it rather than re-implementing the AST walk:
 
 ```js
-// Sketch of the API surface — actual implementation tracked separately.
 const { classifyAttribute } = require('../utils/glimmer-attr-presence');
 
-const result = classifyAttribute(attr, {
-  kind: 'boolean-coerced' /* or 'plain-string' / 'numeric' */,
-});
-// result.kind: 'absent' | 'omitted-bare-falsy' | 'static' | 'present-unknown'
-// result.value: string | null  (only present when kind === 'static')
+const attr = node.attributes?.find((a) => a.name === 'aria-hidden');
+const { presence, value } = classifyAttribute(attr);
+// presence: 'absent' | 'present' | 'unknown'
+// value:    string | null
+//
+// kind is inferred from attr.name (boolean / aria / numeric / plain-string).
+// Override with options.kind when needed: classifyAttribute(attr, { kind: 'aria' }).
+
+if (presence === 'present' && value === 'true') {
+  // hidden — covers h3, h7, h12, h14 in one branch.
+}
 ```
 
-Until the utility lands, follow the AST-shape table above directly and cite the specific row IDs in code comments where the classification logic lives.
+The utility maps every row in the reference table above to a single `(presence, value)` pair, including the surprising cases (`{{"false"}}` is JS-truthy, `aria-hidden={{true}}` renders empty per h5, concat is never falsy, etc.). Cite the doc row IDs from code comments where you call it so reviewers can confirm the lint truth without re-reading the AST.
 
 ## To reproduce the reference table
 
