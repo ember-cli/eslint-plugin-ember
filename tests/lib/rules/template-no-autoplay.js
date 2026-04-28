@@ -68,7 +68,10 @@ const noOptionValid = ['<audio autoplay={{false}}></audio>', '<div></div>'];
 // Valid cases that explicitly exercise the `additionalElements` option.
 const additionalElementsValid = [
   // Custom element listed in additionalElements but without autoplay — no report.
-  { code: '<custom-player src="a.mp4"></custom-player>', options: [{ additionalElements: ['custom-player'] }] },
+  {
+    code: '<custom-player src="a.mp4"></custom-player>',
+    options: [{ additionalElements: ['custom-player'] }],
+  },
 ];
 
 // Opt-in `additionalElements` configured but the element doesn't carry
@@ -143,6 +146,11 @@ const hbsRuleTester = new RuleTester({
 });
 
 hbsRuleTester.run('template-no-autoplay', rule, {
-  valid: [...validHbs, ...noOptionValid, ...additionalElementsValid, ...additionalElementsOptionValid],
+  valid: [
+    ...validHbs,
+    ...noOptionValid,
+    ...additionalElementsValid,
+    ...additionalElementsOptionValid,
+  ],
   invalid: [...invalidHbs, ...additionalElementsInvalid],
 });
