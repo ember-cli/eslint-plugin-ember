@@ -38,9 +38,6 @@ const validHbs = [
   '<form><button type={{this.kind}} name="a">x</button><input type="text" name="a" /></form>',
   // Same name but in different forms — fine.
   '<form><input name="a" /></form><form><input name="a" /></form>',
-  // Disabled control is ignored — it does not contribute to form data.
-  '<form><input name="a" /><input name="a" disabled /></form>',
-  '<form><input name="a" /><input name="a" disabled="disabled" /></form>',
   // No name attribute — skip.
   '<form><input /><input /></form>',
   // Empty name — skip.
@@ -85,10 +82,16 @@ const invalidHbs = [
     code: '<form><input type="text" name="a" /><input type="image" name="a" src="/x.png" /></form>',
     errors: [{ message: err('a') }],
   },
-  // `disabled={{false}}` renders no `disabled` attribute at runtime
-  // (Glimmer VM normalizes boolean false to attribute removal) — the
-  // control IS enabled and contributes to form data, so the duplicate
-  // name collides with the enabled sibling.
+  // Disabled controls are still flagged — disabled state is dynamic and the
+  // duplicate name is a structural problem regardless.
+  {
+    code: '<form><input name="a" /><input name="a" disabled /></form>',
+    errors: [{ message: err('a') }],
+  },
+  {
+    code: '<form><input name="a" /><input name="a" disabled="disabled" /></form>',
+    errors: [{ message: err('a') }],
+  },
   {
     code: '<form><input name="a" /><input name="a" disabled={{false}} /></form>',
     errors: [{ message: err('a') }],
