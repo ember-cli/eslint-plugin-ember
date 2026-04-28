@@ -145,6 +145,15 @@ ruleTester.run('template-anchor-has-content', rule, {
       output: null,
       errors: [{ messageId: 'anchorHasContent' }],
     },
+    // hidden={{false}} is the bare-mustache boolean-false case — Glimmer omits
+    // the attribute at runtime (per docs/glimmer-attribute-behavior.md), so
+    // the anchor is rendered and visible; an empty body still needs a name.
+    {
+      filename: 'test.gjs',
+      code: '<template><a href="/x" hidden={{false}}></a></template>',
+      output: null,
+      errors: [{ messageId: 'anchorHasContent' }],
+    },
     // Empty anchor.
     {
       filename: 'test.gjs',
