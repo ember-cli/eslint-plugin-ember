@@ -253,7 +253,7 @@ After rendering, paste this into the devtools console:
     lines.push(`\n==== ${label} ====`);
     for (let i = 1; i <= count; i++) {
       const id = prefix + i;
-      const el = document.getElementById(id);
+      const el = document.querySelector(`#${id}`);
       if (!el) {
         lines.push(`${id}: (NOT FOUND)`);
         continue;
