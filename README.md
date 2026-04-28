@@ -494,6 +494,7 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 
 | Name                                                                                                                       | Description                                                       | 💼 | 🔧 | 💡 |
 | :------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------- | :- | :- | :- |
+| [template-no-duplicate-form-names](docs/rules/template-no-duplicate-form-names.md)                                         | disallow duplicate form control names within the same form        |    |    |    |
 | [template-no-extra-mut-helper-argument](docs/rules/template-no-extra-mut-helper-argument.md)                               | disallow passing more than one argument to the mut helper         | 📋 |    |    |
 | [template-no-jsx-attributes](docs/rules/template-no-jsx-attributes.md)                                                     | disallow JSX-style camelCase attributes                           |    | 🔧 |    |
 | [template-no-scope-outside-table-headings](docs/rules/template-no-scope-outside-table-headings.md)                         | disallow scope attribute outside th elements                      | 📋 |    |    |
