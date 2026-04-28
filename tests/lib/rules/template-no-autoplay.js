@@ -18,6 +18,12 @@ const validHbs = [
   '<audio autoplay="{{shouldPlay}}"></audio>',
   // ConcatStatement with a dynamic path part and static suffix — unknown at lint time, skip.
   '<audio autoplay="{{this.flag}}-suffix"></audio>',
+  // Mixed static+dynamic concat — dynamic mustache part makes it unknown at lint time, skip.
+  '<audio autoplay="foo{{this.bar}}"></audio>',
+  // GlimmerConcatStatement with single `{{false}}` part on muted — treated as falsy (muted on).
+  '<video autoplay muted="{{false}}"></video>',
+  // Dynamic muted via concat — unknown at lint time, skip.
+  '<video autoplay muted="{{this.isMuted}}"></video>',
   // PascalCase component — not an HTML element
   '<AutoPlayer autoplay />',
   // <video muted autoplay> is out of WCAG SC 1.4.2 scope (ACT rule aaa1bf).
