@@ -10,33 +10,36 @@ const validHbs = [
   '<audio src="a.mp3"></audio>',
   '<video src="a.mp4" controls></video>',
   '<div autoplay></div>',
+  // Bare-mustache dynamic path — unknown at lint time, skip.
   '<audio autoplay={{this.shouldAutoplay}}></audio>',
+  // Bare `{{false}}` is the only literal form that makes Glimmer omit the
+  // attribute (see docs/glimmer-attribute-behavior.md).
   '<video autoplay={{false}}></video>',
-  '<audio autoplay={{"false"}}></audio>',
-  // Quoted-mustache (GlimmerConcatStatement) opt-out/unknown forms.
-  '<audio autoplay="{{false}}"></audio>',
+  // Concat with a dynamic part — unknown at lint time, skip.
   '<audio autoplay="{{shouldPlay}}"></audio>',
-  // ConcatStatement with a dynamic path part and static suffix — unknown at lint time, skip.
   '<audio autoplay="{{this.flag}}-suffix"></audio>',
-  // Mixed static+dynamic concat — dynamic mustache part makes it unknown at lint time, skip.
   '<audio autoplay="foo{{this.bar}}"></audio>',
-  // GlimmerConcatStatement with single `{{false}}` part on muted — treated as falsy (muted on).
-  '<video autoplay muted="{{false}}"></video>',
-  // Dynamic muted via concat — unknown at lint time, skip.
-  '<video autoplay muted="{{this.isMuted}}"></video>',
-  // PascalCase component — not an HTML element
+  // PascalCase component — not an HTML element.
   '<AutoPlayer autoplay />',
   // <video muted autoplay> is out of WCAG SC 1.4.2 scope (ACT rule aaa1bf).
+  // Per docs/glimmer-attribute-behavior.md, every form below sets the muted
+  // IDL property to true — including bare-string `{{"false"}}` and concat
+  // `"{{false}}"` (verified: <video muted="{{false}}"> → videoEl.muted ===
+  // true) — so the muted-autoplay exemption applies.
   '<video autoplay muted></video>',
   '<video autoplay muted loop playsinline></video>',
   '<video autoplay muted=""></video>',
   '<video autoplay muted="muted"></video>',
-  // Boolean-attribute semantics: `muted="false"` is still muted=on, so this
-  // is still within the <video muted autoplay> exemption.
   '<video autoplay muted="false"></video>',
   '<video autoplay muted={{true}}></video>',
-  // Unknown mustache for `muted` → skip (false positives > false negatives).
+  '<video autoplay muted={{"false"}}></video>',
+  '<video autoplay muted={{"true"}}></video>',
+  '<video autoplay muted="{{false}}"></video>',
+  '<video autoplay muted="{{true}}"></video>',
+  // Dynamic muted — unknown at lint time, skip (false positives > false
+  // negatives).
   '<video autoplay muted={{this.isMuted}}></video>',
+  '<video autoplay muted="{{this.isMuted}}"></video>',
 ];
 
 const invalidHbs = [
@@ -44,21 +47,24 @@ const invalidHbs = [
   { code: '<video autoplay></video>', errors: [{ message: ERROR_VIDEO }] },
   { code: '<audio autoplay=""></audio>', errors: [{ message: ERROR_AUDIO }] },
   { code: '<audio autoplay="autoplay"></audio>', errors: [{ message: ERROR_AUDIO }] },
-  // HTML boolean-attribute semantics: the string "false" is still attribute
-  // presence, so `autoplay="false"` counts as autoplay=on.
+  // HTML boolean-attribute presence — even `autoplay="false"` is autoplay=on.
   { code: '<audio autoplay="false"></audio>', errors: [{ message: ERROR_AUDIO }] },
   { code: '<video autoplay="false"></video>', errors: [{ message: ERROR_VIDEO }] },
-  // Same boolean-attribute semantics for `muted`: `muted="false"` still
-  // evaluates as muted, so `<video autoplay muted="false">` is an exempt
-  // muted-autoplay case — but `<audio>` has no muted exception.
+  // <audio> has no muted exception, so `autoplay muted="…"` still flags.
   { code: '<audio autoplay muted="false"></audio>', errors: [{ message: ERROR_AUDIO }] },
-  { code: '<video autoplay={{true}}></video>', errors: [{ message: ERROR_VIDEO }] },
-  // muted exception is <video>-only: <audio muted autoplay> is still flagged.
   { code: '<audio autoplay muted></audio>', errors: [{ message: ERROR_AUDIO }] },
-  // muted present but statically falsy — autoplay still flagged on <video>.
+  // Bare boolean true autoplay → IDL set, plays.
+  { code: '<video autoplay={{true}}></video>', errors: [{ message: ERROR_VIDEO }] },
+  // muted bare `{{false}}` is the only literal form that omits the attribute,
+  // so this is genuinely muted-off → no exemption (see
+  // docs/glimmer-attribute-behavior.md).
   { code: '<video autoplay muted={{false}}></video>', errors: [{ message: ERROR_VIDEO }] },
-  { code: '<video autoplay muted={{"false"}}></video>', errors: [{ message: ERROR_VIDEO }] },
-  // Quoted-mustache concat with a static string-literal part → truthy.
+  // Per docs/glimmer-attribute-behavior.md, bare-mustache string `"false"` is
+  // JS-truthy and concat with literals always sets the IDL property — so
+  // these are autoplay=on, regardless of what the literal value suggests.
+  { code: '<audio autoplay={{"false"}}></audio>', errors: [{ message: ERROR_AUDIO }] },
+  { code: '<audio autoplay="{{false}}"></audio>', errors: [{ message: ERROR_AUDIO }] },
+  { code: '<audio autoplay="{{\'false\'}}"></audio>', errors: [{ message: ERROR_AUDIO }] },
   { code: '<audio autoplay="{{\'true\'}}"></audio>', errors: [{ message: ERROR_AUDIO }] },
 ];
 
