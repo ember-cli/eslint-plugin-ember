@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2026-04-28)
+
+* eslint-plugin-ember 13.2.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2763](https://github.com/ember-cli/eslint-plugin-ember/pull/2763) feat: add template-require-input-type ([@johanrd](https://github.com/johanrd))
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2766](https://github.com/ember-cli/eslint-plugin-ember/pull/2766) Update parser ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2026-04-27)
 
 * eslint-plugin-ember 13.1.4 (patch)
