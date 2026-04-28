@@ -56,6 +56,14 @@ ruleTester.run('template-no-nested-interactive', rule, {
     '<template><button><input type="hidden"></button></template>',
     '<template><div tabindex=-1><button>Click me!</button></div></template>',
     '<template><div tabindex="1"><button></button></div></template>',
+    // Bare-mustache falsy literals on tabindex omit the attribute at runtime
+    // (doc rows t6, t7) — the wrapping element is NOT interactive, so nesting
+    // a button inside is valid. AST-presence-only check would have flagged.
+    '<template><button><div tabindex={{false}}></div></button></template>',
+    '<template><button><div tabindex={{null}}></div></button></template>',
+    '<template><button><div tabindex={{undefined}}></div></button></template>',
+    // Dynamic tabindex — runtime value is unknown; conservative skip.
+    '<template><button><div tabindex={{this.idx}}></div></button></template>',
     '<template><label><input></label></template>',
     // Config: ignoreUsemapAttribute (alias for ignoreUsemap)
     {
@@ -295,6 +303,10 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
     '<button><input type="hidden"></button>',
     '<div tabindex=-1><button>Click me!</button></div>',
     '<div tabindex="1"><button></button></div>',
+    // Bare-mustache falsy literals omit the attribute at runtime (t6, t7).
+    '<button><div tabindex={{false}}></div></button>',
+    '<button><div tabindex={{null}}></div></button>',
+    '<button><div tabindex={{this.idx}}></div></button>',
     '<label><input></label>',
     '<details><summary>Details</summary>Something small enough to escape casual notice.</details>',
     '<details> <summary>Details</summary>Something small enough to escape casual notice.</details>',
