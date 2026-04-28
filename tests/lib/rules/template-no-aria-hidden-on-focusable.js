@@ -47,6 +47,14 @@ ruleTester.run('template-no-aria-hidden-on-focusable', rule, {
     '<template><button disabled aria-hidden="true">Click me</button></template>',
     '<template><input disabled aria-hidden="true" /></template>',
 
+    // Bare-mustache falsy on tabindex (rows t6, t7) — Glimmer omits the
+    // attribute at runtime, so the element is NOT focusable from tabindex
+    // and aria-hidden isn't trapping anything. AST-presence check would
+    // have false-positive flagged these.
+    '<template><div tabindex={{false}} aria-hidden="true"></div></template>',
+    '<template><div tabindex={{null}} aria-hidden="true"></div></template>',
+    '<template><div tabindex={{undefined}} aria-hidden="true"></div></template>',
+
     // Components — we don't know if they render a focusable element.
     '<template><CustomBtn aria-hidden="true" /></template>',
 
@@ -145,6 +153,17 @@ ruleTester.run('template-no-aria-hidden-on-focusable', rule, {
     // `disabled={{"false"}}` would NOT omit; those keep the button disabled.)
     {
       code: '<template><button aria-hidden="true" disabled={{false}}>click</button></template>',
+      output: null,
+      errors: [{ messageId: 'noAriaHiddenOnFocusable' }],
+    },
+    // Same shape with bare-mustache null/undefined — also omitted (rows d6 + cross-attr observation).
+    {
+      code: '<template><button aria-hidden="true" disabled={{null}}>click</button></template>',
+      output: null,
+      errors: [{ messageId: 'noAriaHiddenOnFocusable' }],
+    },
+    {
+      code: '<template><button aria-hidden="true" disabled={{undefined}}>click</button></template>',
       output: null,
       errors: [{ messageId: 'noAriaHiddenOnFocusable' }],
     },
