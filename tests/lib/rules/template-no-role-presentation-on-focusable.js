@@ -97,9 +97,12 @@ ruleTester.run('template-no-role-presentation-on-focusable', rule, {
       output: null,
       errors: [{ messageId: 'invalidPresentation' }],
     },
-    // tabindex="-1" on an inherently-focusable element still accepts programmatic
-    // focus (focus() works; the element stays in the a11y tree). Rule flags it.
-    // vuejs-accessibility treats tabindex="-1" as "removed from tab order = not focusable" — we disagree.
+    // tabindex="-1" makes an element a programmatic focus target per HTML §6.6.3
+    // ("focusable but not sequentially focusable") — focus() works and the
+    // element remains in the a11y tree, so WAI-ARIA's Presentational Roles
+    // Conflict Resolution kicks in and the UA exposes the implicit role anyway.
+    // Rule flags the author-side anti-pattern. jsx-a11y / vue-a11y exempt
+    // tabindex="-1"; we follow the spec.
     {
       code: '<template><button tabindex="-1" role="presentation">Press</button></template>',
       output: null,
