@@ -19,6 +19,10 @@ ruleTester.run('template-require-input-label', rule, {
     '<template><input id="probablyHasLabel" /></template>',
     '<template><input aria-label={{labelText}} /></template>',
     '<template><input aria-labelledby="someIdValue" /></template>',
+    // https://github.com/ember-template-lint/ember-template-lint/issues/3388
+    // id alone does not establish a labeling relationship — a <label for> is
+    // needed and cannot be verified statically. Only aria-label should count.
+    '<template><input id="hello" aria-label="hello" /></template>',
     '<template><div></div></template>',
     '<template><Input id="foo" /></template>',
     '<template>{{input id="foo"}}</template>',
@@ -65,6 +69,13 @@ ruleTester.run('template-require-input-label', rule, {
     },
   ],
   invalid: [
+    // https://github.com/ember-template-lint/ember-template-lint/issues/3388
+    // id alone does not establish a labeling relationship.
+    {
+      code: '<template><input id="hello" /></template>',
+      output: null,
+      errors: [{ message: NO_LABEL }],
+    },
     {
       code: '<template><my-label><input /></my-label></template>',
       output: null,
