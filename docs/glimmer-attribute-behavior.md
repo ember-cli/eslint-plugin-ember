@@ -59,27 +59,64 @@ Same boolean-coercion behavior as `muted` for the bare-mustache form, but `disab
 
 ### `<div>` + `aria-hidden` — ARIA string attribute
 
-ARIA attributes are string-valued, but Glimmer's bare-mustache form applies the same falsy-coercion as for boolean HTML attributes (omit on `false`/`null`/`undefined`). Bare-string and concat forms render the value literally — concat does **not** coerce to a boolean here. The "At runtime (per ARIA spec)" column derives whether the element is hidden from assistive tech: `aria-hidden="true"` is hidden; `aria-hidden="false"` is visible; `aria-hidden=""` (and the implied default) is contested.
+ARIA attributes are string-valued, but Glimmer's bare-mustache form applies the same falsy-coercion as for boolean HTML attributes (omit on `false`/`null`/`undefined`). Bare-string and concat forms render the value literally — concat does **not** coerce to a boolean here. The "At runtime (per ARIA spec)" column derives whether the element is hidden from assistive tech: `aria-hidden="true"` is hidden; `aria-hidden="false"` is visible; `aria-hidden=""` reads as **visible** because it's an invalid enumerated value and falls back to the default state ("undefined" per [WAI-ARIA 1.2 §6.6 aria-hidden](https://www.w3.org/TR/wai-aria-1.2/#aria-hidden) — "The default value is undefined, which means the element is not hidden from the accessibility API").
 
-| ID  | Source                                  | outerHTML                         | IDL `ariaHidden` | hasAttr | At runtime (ARIA)                              |
-| --- | --------------------------------------- | --------------------------------- | ---------------- | ------- | ---------------------------------------------- |
-| h1  | `<div aria-hidden></div>`               | `<div aria-hidden=""></div>`      | `""`             | `true`  | **contested** (empty value)                    |
-| h2  | `<div aria-hidden=""></div>`            | `<div aria-hidden=""></div>`      | `""`             | `true`  | **contested**                                  |
-| h3  | `<div aria-hidden="true"></div>`        | `<div aria-hidden="true"></div>`  | `"true"`         | `true`  | **hidden**                                     |
-| h4  | `<div aria-hidden="false"></div>`       | `<div aria-hidden="false"></div>` | `"false"`        | `true`  | **visible**                                    |
-| h5  | `<div aria-hidden={{true}}></div>`      | `<div aria-hidden=""></div>`      | `""`             | `true`  | **contested** (rendered empty, _not_ `"true"`) |
-| h6  | `<div aria-hidden={{false}}></div>`     | `<div></div>`                     | `null`           | `false` | **visible** (default)                          |
-| h7  | `<div aria-hidden={{"true"}}></div>`    | `<div aria-hidden="true"></div>`  | `"true"`         | `true`  | **hidden**                                     |
-| h8  | `<div aria-hidden={{"false"}}></div>`   | `<div aria-hidden="false"></div>` | `"false"`        | `true`  | **visible**                                    |
-| h9  | `<div aria-hidden={{null}}></div>`      | `<div></div>`                     | `null`           | `false` | **visible**                                    |
-| h10 | `<div aria-hidden={{undefined}}></div>` | `<div></div>`                     | `null`           | `false` | **visible**                                    |
-| h11 | `<div aria-hidden={{""}}></div>`        | `<div aria-hidden=""></div>`      | `""`             | `true`  | **contested**                                  |
-| h12 | `<div aria-hidden="{{true}}"></div>`    | `<div aria-hidden="true"></div>`  | `"true"`         | `true`  | **hidden**                                     |
-| h13 | `<div aria-hidden="{{false}}"></div>`   | `<div aria-hidden="false"></div>` | `"false"`        | `true`  | **visible**                                    |
-| h14 | `<div aria-hidden="{{'true'}}"></div>`  | `<div aria-hidden="true"></div>`  | `"true"`         | `true`  | **hidden**                                     |
-| h15 | `<div aria-hidden="{{'false'}}"></div>` | `<div aria-hidden="false"></div>` | `"false"`        | `true`  | **visible**                                    |
+| ID  | Source                                  | outerHTML                         | IDL `ariaHidden` | hasAttr | At runtime (ARIA)                                              |
+| --- | --------------------------------------- | --------------------------------- | ---------------- | ------- | -------------------------------------------------------------- |
+| h1  | `<div aria-hidden></div>`               | `<div aria-hidden=""></div>`      | `""`             | `true`  | **visible** (empty value falls back to default per spec)       |
+| h2  | `<div aria-hidden=""></div>`            | `<div aria-hidden=""></div>`      | `""`             | `true`  | **visible** (invalid empty → default)                          |
+| h3  | `<div aria-hidden="true"></div>`        | `<div aria-hidden="true"></div>`  | `"true"`         | `true`  | **hidden**                                                     |
+| h4  | `<div aria-hidden="false"></div>`       | `<div aria-hidden="false"></div>` | `"false"`        | `true`  | **visible**                                                    |
+| h5  | `<div aria-hidden={{true}}></div>`      | `<div aria-hidden=""></div>`      | `""`             | `true`  | **visible** (rendered empty — see Glimmer-coercion note below) |
+| h6  | `<div aria-hidden={{false}}></div>`     | `<div></div>`                     | `null`           | `false` | **visible** (default — attribute omitted)                      |
+| h7  | `<div aria-hidden={{"true"}}></div>`    | `<div aria-hidden="true"></div>`  | `"true"`         | `true`  | **hidden**                                                     |
+| h8  | `<div aria-hidden={{"false"}}></div>`   | `<div aria-hidden="false"></div>` | `"false"`        | `true`  | **visible**                                                    |
+| h9  | `<div aria-hidden={{null}}></div>`      | `<div></div>`                     | `null`           | `false` | **visible**                                                    |
+| h10 | `<div aria-hidden={{undefined}}></div>` | `<div></div>`                     | `null`           | `false` | **visible**                                                    |
+| h11 | `<div aria-hidden={{""}}></div>`        | `<div aria-hidden=""></div>`      | `""`             | `true`  | **visible** (invalid empty → default)                          |
+| h12 | `<div aria-hidden="{{true}}"></div>`    | `<div aria-hidden="true"></div>`  | `"true"`         | `true`  | **hidden**                                                     |
+| h13 | `<div aria-hidden="{{false}}"></div>`   | `<div aria-hidden="false"></div>` | `"false"`        | `true`  | **visible**                                                    |
+| h14 | `<div aria-hidden="{{'true'}}"></div>`  | `<div aria-hidden="true"></div>`  | `"true"`         | `true`  | **hidden**                                                     |
+| h15 | `<div aria-hidden="{{'false'}}"></div>` | `<div aria-hidden="false"></div>` | `"false"`        | `true`  | **visible**                                                    |
 
-**Lint truth for `aria-hidden`:** the rule depends on the value, not just presence. Notable differences from boolean attrs: bare `{{true}}` renders as `aria-hidden=""` (contested, not `"true"`); concat `="{{false}}"` renders as `aria-hidden="false"` (visible — _not_ IDL-coerced like boolean attrs).
+**Lint truth for `aria-hidden`:** the rule depends on the value, not just presence. Notable differences from boolean attrs: bare `{{true}}` renders as `aria-hidden=""` (per ARIA §6.6 → visible, NOT hidden); concat `="{{false}}"` renders as `aria-hidden="false"` (visible — _not_ IDL-coerced like boolean attrs).
+
+> **Glimmer coercion note (h5):** `<div aria-hidden={{true}}>` renders `aria-hidden=""`, not `aria-hidden="true"`. Glimmer appears to apply its boolean-HTML-attribute coercion (`true` → present-with-empty-value) to ARIA attributes, where the spec wants the literal string `"true"`. Per ARIA §6.6 the rendered empty value is invalid and falls back to the default, so the element is **visible** — opposite of what the author wrote. Rules that interpret `{{true}}` as author-intent-to-hide are making an explicit policy choice against the spec verdict; if you take that choice, document it and don't conflate it with the spec-true `h7`/`h12`/`h14` cases.
+
+#### Verifying the "visible" verdict empirically
+
+The "At runtime (ARIA)" column above is derived from the spec. To verify what your browser + AT actually do for each row, the cleanest empirical path is the **DevTools Accessibility panel**:
+
+1. Render the section-B fragment from the reproduction template (each `h*` element gets a stable id).
+2. Open DevTools → Accessibility tab (Chrome: Elements panel sidebar; Firefox: separate "Accessibility" tab).
+3. Select each `h*` element. The panel shows whether it's exposed to AT:
+   - **Exposed** with a computed role → element is in the accessibility tree → "visible".
+   - **"Ignored"** with reason "aria-hidden=true" → element removed from AT tree → "hidden".
+4. Confirm h1, h2, h5, h11 are exposed (matching spec), and h3, h7, h12, h14 are ignored due to aria-hidden.
+
+A scriptable approximation that doesn't require the DevTools panel — implements the spec's aria-hidden rule directly in JS:
+
+```js
+function isAriaHiddenPerSpec(el) {
+  for (let cur = el; cur instanceof Element; cur = cur.parentElement) {
+    // Per WAI-ARIA §6.6: only the literal string "true" hides; everything
+    // else (including "" / "false" / missing) leaves the element visible.
+    if (cur.getAttribute('aria-hidden') === 'true') return true;
+  }
+  return false;
+}
+
+for (let i = 1; i <= 15; i++) {
+  const id = `h${i}`;
+  const el = document.getElementById(id);
+  if (!el) continue;
+  console.log(
+    `${id} attrValue=${JSON.stringify(el.getAttribute('aria-hidden'))} hidden=${isAriaHiddenPerSpec(el)}`
+  );
+}
+```
+
+This encodes the spec rule rather than introspecting browser-internal AX tree state, but for the simple aria-hidden cases here the two converge — modern Chrome / Firefox / Safari all implement §6.6 as written. If a browser diverges (e.g. treats empty value as hidden), the DevTools panel check above will surface it.
 
 ### `<div>` + `tabindex` — numeric attribute
 
@@ -142,7 +179,7 @@ Rule authors who classify attribute values must consume the reference table abov
 3. **Don't treat single-mustache concat as the inner literal.** `attr="{{X}}"` is **never** falsy. For boolean HTML attrs the IDL property is set true regardless of `X`'s literal value (m14 verified: `<video muted="{{false}}">` → `videoEl.muted === true`). For ARIA/string attrs the rendered HTML is the stringified value (h13: `aria-hidden="{{false}}"` → `aria-hidden="false"`, visible per ARIA spec).
 4. **Don't apply boolean-coercion to plain string attrs.** `autocomplete`, `name`, `id`, `for`, `href`, `role`, `type`, `method`, `lang`, `title`, `alt` etc. do **not** falsy-coerce. Bare `{{false}}` on these renders the literal `"false"`. Plain-string attrs are documented under `i1`–`i5`; the falsy-coercion list (cross-attribute observations) covers HTML boolean attrs, ARIA attrs, and numeric attrs only.
 5. **`role` is plain string, not ARIA-coerced.** Despite living in the ARIA family conceptually, `role` is a plain string DOM attribute — bare `role={{false}}` renders `role="false"` (analogous to i4), not omitted.
-6. **`{{true}}` for `aria-hidden` (h5) renders `aria-hidden=""` — contested per ARIA spec, _not_ `aria-hidden="true"`.** Rules deciding "is this hidden?" should be explicit about which interpretation they take. Don't conflate h5 with h7 (`{{"true"}}` → renders the string `"true"`, hidden).
+6. **`{{true}}` for `aria-hidden` (h5) renders `aria-hidden=""` — visible per [ARIA §6.6](https://www.w3.org/TR/wai-aria-1.2/#aria-hidden) (invalid empty value falls back to the default), _not_ `aria-hidden="true"`.** Glimmer's boolean-HTML-attr coercion produces the empty value where the spec wants the literal string `"true"`. Rules that interpret author-intent (`{{true}}` → "hide") are making an explicit policy choice against the spec verdict; document it and don't conflate h5 with h7 / h12 / h14 (which render the literal `"true"` and are spec-hidden).
 
 ### Recommended pattern
 
