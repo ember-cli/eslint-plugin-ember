@@ -225,18 +225,17 @@ When you discover a new edge case:
 
 1. Render the source form in an Ember dev app and capture both `outerHTML` and (where relevant) the IDL property.
 2. Add a row to the appropriate table above with verified-only data. Mark assumptions explicitly with "(assumed)" or "(unverified)".
-3. Cite the date and Ember/Glimmer version of the verification in the commit message.
+3. Cite the date and `ember-source` version of the verification in the commit message.
 4. If the new finding contradicts an existing rule's classification, open an issue or PR fixing the rule and link this doc.
 
 ## Verification metadata
 
 - **Date verified:** 2026-04-28
-- **Ember/Glimmer version:** _TODO — fill in `ember-source` version from the dev app where t1–t4 were tested._
+- **Ember version:** `ember-source` 6.12 (Glimmer VM is merged into the main Ember repo, no separate version)
 - **Verified by:** [@johanrd](https://github.com/johanrd) (rendering app, devtools inspection)
 - **Methodology:** rendered template fragments, inspected `outerHTML` for HTML serialization and JS property access for IDL state
 
 ## Related
 
-- The Glimmer VM source for attribute rendering: <https://github.com/glimmerjs/glimmer-vm>
 - HTML spec on boolean attributes and reflection: <https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes>
 - ARIA `aria-hidden` semantics: <https://www.w3.org/TR/wai-aria-1.2/#aria-hidden>
