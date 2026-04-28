@@ -85,21 +85,14 @@ ARIA attributes are string-valued, but Glimmer's bare-mustache form applies the 
 
 #### Verifying the "visible" verdict empirically
 
-The "At runtime (ARIA)" column above is derived from the spec. The cleanest empirical confirmation is `Element.computedRole` (WAI-ARIA Reflection — Chrome 135+, Safari 18.4+, Firefox under flag):
+The "At runtime (ARIA)" column above is derived from the spec. There is no clean cross-browser JS API to read AX-tree exposure directly — `Element.computedRole` returns the element's _role_ regardless of aria-hidden, so it is **not** a visibility check (verified: `document.querySelector('#h3').computedRole === 'generic'` even though h3 is `aria-hidden="true"` and not exposed). The cleanest browser-authoritative check is the **DevTools Accessibility panel**:
 
-```js
-// In Chrome's console, after rendering the section-B fragment:
-document.querySelector('#h5').computedRole;
-// → "generic"   (verified empirically — element IS in the AX tree, so visible)
-//
-// For comparison, h3 (`aria-hidden="true"`) returns null:
-document.querySelector('#h3').computedRole;
-// → null        (element omitted from AX tree, so hidden)
-```
-
-`null` means the element isn't exposed to assistive tech (hidden); a string role means it is exposed (visible). This is the browser's actual computed verdict — no spec-derivation needed.
-
-If `computedRole` isn't available in your browser, the **DevTools Accessibility panel** is the equivalent manual path: select each element, check whether it's "Exposed" with a role or "Ignored" due to `aria-hidden=true`.
+1. Render the section-B fragment from the reproduction template (each `h*` element gets a stable id).
+2. Open DevTools → Accessibility tab (Chrome: Elements panel sidebar; Firefox: separate "Accessibility" tab).
+3. Select each `h*` element. The panel shows whether it's exposed to AT:
+   - **Exposed** with a computed role → element is in the accessibility tree → "visible".
+   - **"Ignored"** with reason "aria-hidden=true" → element removed from AT tree → "hidden".
+4. Confirm h1, h2, h5, h11 are exposed (matching spec), and h3, h7, h12, h14 are ignored due to aria-hidden.
 
 A scriptable fallback that works everywhere — encodes the spec's aria-hidden rule directly:
 
