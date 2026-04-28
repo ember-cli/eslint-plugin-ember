@@ -132,6 +132,22 @@ ruleTester.run('template-no-aria-hidden-on-focusable', rule, {
       output: null,
       errors: [{ messageId: 'noAriaHiddenOnFocusable' }],
     },
+    // GlimmerConcatStatement form. Per docs/glimmer-attribute-behavior.md,
+    // `aria-hidden="{{true}}"` renders as `aria-hidden="true"`.
+    {
+      code: '<template><button aria-hidden="{{true}}"></button></template>',
+      output: null,
+      errors: [{ messageId: 'noAriaHiddenOnFocusable' }],
+    },
+    // disabled={{false}} is the bare-mustache boolean-false case — Glimmer
+    // omits the attribute at runtime, so the button stays focusable and
+    // aria-hidden="true" traps it. (`disabled="{{false}}"` and
+    // `disabled={{"false"}}` would NOT omit; those keep the button disabled.)
+    {
+      code: '<template><button aria-hidden="true" disabled={{false}}>click</button></template>',
+      output: null,
+      errors: [{ messageId: 'noAriaHiddenOnFocusable' }],
+    },
     {
       code: '<template><button aria-hidden="TRUE"></button></template>',
       output: null,

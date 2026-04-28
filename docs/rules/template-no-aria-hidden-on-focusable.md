@@ -55,6 +55,11 @@ check skips these branches to avoid false positives. If a component renders a
 focusable element beneath an `aria-hidden` ancestor, the keyboard trap still
 exists at runtime; this rule can't detect it.
 
+Custom elements (hyphenated tags like `<my-widget>`) are similarly skipped: we
+can't know whether their shadow DOM defines a focusable region. If
+`<my-widget aria-hidden="true">` renders a focusable element internally, the
+trap still exists at runtime — this rule can't detect it.
+
 Dynamic content inside `{{...}}` mustache statements is similarly not inspected.
 
 ## References

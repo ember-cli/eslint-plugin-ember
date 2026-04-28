@@ -89,6 +89,14 @@ describe('isHtmlInteractiveContent', () => {
     it('is NOT interactive without usemap', () => {
       expect(isHtmlInteractiveContent(makeNode('img'), getTextAttrValue)).toBe(false);
     });
+
+    it('is NOT interactive when usemap is present but { ignoreUsemap: true }', () => {
+      expect(
+        isHtmlInteractiveContent(makeNode('img', { usemap: '#m' }), getTextAttrValue, {
+          ignoreUsemap: true,
+        })
+      ).toBe(false);
+    });
   });
 
   describe('<audio> / <video>', () => {
