@@ -173,7 +173,7 @@ const invalidHbs = [
     errors: [
       {
         message:
-          '`"shipping"` and `"billing"` are mutually exclusive and each may appear at most once',
+          'autocomplete can contain at most one hint token (`shipping` or `billing`)',
       },
     ],
   },
