@@ -172,8 +172,7 @@ const invalidHbs = [
     code: '<input type="text" autocomplete="shipping billing street-address" />',
     errors: [
       {
-        message:
-          'autocomplete can contain at most one hint token (`shipping` or `billing`)',
+        message: 'autocomplete can contain at most one hint token (`shipping` or `billing`)',
       },
     ],
   },
