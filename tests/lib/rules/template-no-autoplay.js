@@ -20,8 +20,6 @@ const validHbs = [
   '<audio autoplay="{{this.flag}}-suffix"></audio>',
   // Mixed static+dynamic concat — dynamic mustache part makes it unknown at lint time, skip.
   '<audio autoplay="foo{{this.bar}}"></audio>',
-  // GlimmerConcatStatement with single `{{false}}` part on muted — treated as falsy (muted on).
-  '<video autoplay muted="{{false}}"></video>',
   // Dynamic muted via concat — unknown at lint time, skip.
   '<video autoplay muted="{{this.isMuted}}"></video>',
   // PascalCase component — not an HTML element
@@ -56,8 +54,11 @@ const invalidHbs = [
   // muted exception is <video>-only: <audio muted autoplay> is still flagged.
   { code: '<audio autoplay muted></audio>', errors: [{ message: ERROR_AUDIO }] },
   // muted present but statically falsy — autoplay still flagged on <video>.
+  // Both bare `{{false}}` and concat `"{{false}}"` cause Glimmer to omit the
+  // attribute at render time (verified empirically), so muted is genuinely off.
   { code: '<video autoplay muted={{false}}></video>', errors: [{ message: ERROR_VIDEO }] },
   { code: '<video autoplay muted={{"false"}}></video>', errors: [{ message: ERROR_VIDEO }] },
+  { code: '<video autoplay muted="{{false}}"></video>', errors: [{ message: ERROR_VIDEO }] },
   // Quoted-mustache concat with a static string-literal part → truthy.
   { code: '<audio autoplay="{{\'true\'}}"></audio>', errors: [{ message: ERROR_AUDIO }] },
 ];
