@@ -119,6 +119,48 @@ A regular string attribute. Glimmer's bare-mustache **does not** apply falsy-coe
 - **Concat-mustache forks by attribute kind.** For HTML boolean attrs (`muted`, `disabled`), any concat — including `"{{false}}"`, `"{{'false'}}"`, `"x{{false}}"` — sets the IDL property to `true`, regardless of the literal value inside. For ARIA / string attrs (`aria-hidden`, `autocomplete`), concat renders the stringified value as the attribute value (no boolean coercion); `aria-hidden="{{false}}"` becomes `aria-hidden="false"` (visible).
 - **Concat is never falsy.** Across all attribute kinds tested, no concat form produces an absent attribute. Rules treating `attr="{{false}}"` as "off" are wrong for boolean attrs (it's IDL-true) and wrong for string attrs (the rendered value is `"false"`, attribute present).
 
+## Reading attribute values in rules
+
+Rule authors who classify attribute values must consume the reference table above through one of these AST shapes — each maps to a known rendering verdict:
+
+| AST shape                                                                                                                                                                      | Source examples                                               | Verdict                                                                                                                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `attr.value === null` (no value)                                                                                                                                               | `<input disabled />`                                          | Attribute is **present** with empty value (rendered as `attr=""`) — see d1, h1                                                                                                                                                                                       |
+| `attr.value.type === 'GlimmerTextNode'`                                                                                                                                        | `attr="literal text"`                                         | Attribute is **present** with the literal `chars` string — see m1–m4, h2–h4, d1, t-static, i1                                                                                                                                                                        |
+| `attr.value.type === 'GlimmerMustacheStatement'` with `path.type === 'GlimmerBooleanLiteral'` and `path.value === true`                                                        | `attr={{true}}`                                               | **Reflecting boolean attrs**: present (e.g., `disabled=""`). **Non-reflecting boolean attrs** (`muted`, `autoplay`, etc.): IDL property set true, HTML attribute omitted. **ARIA string attrs**: present as `attr=""`. **Numeric attrs**: untested. — see m5, d2, h5 |
+| `attr.value.type === 'GlimmerMustacheStatement'` with `path.type === 'GlimmerBooleanLiteral'` and `path.value === false` (or `GlimmerNullLiteral` / `GlimmerUndefinedLiteral`) | `attr={{false}}` / `{{null}}` / `{{undefined}}`               | Attribute is **omitted** at runtime — see m6, m9, m10, d3, d6, h6, h9, h10, t6, t7. **Exception:** plain string attrs (e.g., `autocomplete`) do _not_ falsy-coerce; bare `{{false}}` renders as `attr="false"` (i4).                                                 |
+| `attr.value.type === 'GlimmerMustacheStatement'` with `path.type === 'GlimmerStringLiteral'`                                                                                   | `attr={{"value"}}`                                            | Attribute is **present** with the literal `path.value` string — see m7, m8, h7, h8, d4, d5, i2                                                                                                                                                                       |
+| `attr.value.type === 'GlimmerMustacheStatement'` with `path.type === 'GlimmerNumberLiteral'` (verified for `tabindex` only)                                                    | `attr={{0}}`                                                  | **Numeric attrs**: present with stringified number (t1, t2, t3). **`muted={{0}}` is in the falsy-omit set** (m12); not yet tested for other kinds.                                                                                                                   |
+| `attr.value.type === 'GlimmerMustacheStatement'` with dynamic path                                                                                                             | `attr={{this.x}}`                                             | **Unknown** at lint time.                                                                                                                                                                                                                                            |
+| `attr.value.type === 'GlimmerConcatStatement'` with all-literal parts                                                                                                          | `attr="{{X}}"` (single literal-mustache) / `attr="text{{X}}"` | **Boolean HTML attrs** (`muted`, `disabled`, etc.): IDL true regardless of inner literal — m13–m19, d7–d10. **ARIA / string attrs** (`aria-hidden`, `autocomplete`): renders the stringified value literally — h12–h15, i3, i5.                                      |
+| `attr.value.type === 'GlimmerConcatStatement'` with any dynamic part                                                                                                           | `attr="{{this.x}}"` / `attr="x{{this.y}}"`                    | **Concat is never falsy** — present at runtime, but the value is generally **unknown** at lint time.                                                                                                                                                                 |
+
+### Common mistakes to avoid
+
+1. **Don't use `findAttr(node, 'foo')` (AST-presence) as a proxy for "attribute set at runtime."** It's wrong for bare `{{false}}` / `{{null}}` / `{{undefined}}` on boolean-coerced attrs (m6/m9/m10/d3/d6/h6/h9/h10/t6/t7) — those forms still create an `AttrNode` in the AST but are omitted at runtime.
+2. **Don't lump `BooleanLiteral(false)` with `StringLiteral("false")`.** Bare `{{"false"}}` is a JS-truthy string; it renders the literal `"false"` value (i4, h8, d4, m8). Treating them together as "off" is the most common audit footgun in this codebase.
+3. **Don't treat single-mustache concat as the inner literal.** `attr="{{X}}"` is **never** falsy. For boolean HTML attrs the IDL property is set true regardless of `X`'s literal value (m14 verified: `<video muted="{{false}}">` → `videoEl.muted === true`). For ARIA/string attrs the rendered HTML is the stringified value (h13: `aria-hidden="{{false}}"` → `aria-hidden="false"`, visible per ARIA spec).
+4. **Don't apply boolean-coercion to plain string attrs.** `autocomplete`, `name`, `id`, `for`, `href`, `role`, `type`, `method`, `lang`, `title`, `alt` etc. do **not** falsy-coerce. Bare `{{false}}` on these renders the literal `"false"`. Plain-string attrs are documented under `i1`–`i5`; the falsy-coercion list (cross-attribute observations) covers HTML boolean attrs, ARIA attrs, and numeric attrs only.
+5. **`role` is plain string, not ARIA-coerced.** Despite living in the ARIA family conceptually, `role` is a plain string DOM attribute — bare `role={{false}}` renders `role="false"` (analogous to i4), not omitted.
+6. **`{{true}}` for `aria-hidden` (h5) renders `aria-hidden=""` — contested per ARIA spec, _not_ `aria-hidden="true"`.** Rules deciding "is this hidden?" should be explicit about which interpretation they take. Don't conflate h5 with h7 (`{{"true"}}` → renders the string `"true"`, hidden).
+
+### Recommended pattern
+
+A shared utility — `lib/utils/glimmer-attr-presence.js` (forthcoming) — encodes this table once. Rule authors should consume it rather than re-implementing the AST walk:
+
+```js
+// Sketch of the API surface — actual implementation tracked separately.
+const { classifyAttribute } = require('../utils/glimmer-attr-presence');
+
+const result = classifyAttribute(attr, {
+  kind: 'boolean-coerced' /* or 'plain-string' / 'numeric' */,
+});
+// result.kind: 'absent' | 'omitted-bare-falsy' | 'static' | 'present-unknown'
+// result.value: string | null  (only present when kind === 'static')
+```
+
+Until the utility lands, follow the AST-shape table above directly and cite the specific row IDs in code comments where the classification logic lives.
+
 ## To reproduce the reference table
 
 Every cell above was populated by rendering the template below in an Ember dev app and running the bundled JS console snippet to print each test case's `outerHTML` and IDL state. To re-verify (or extend with new attributes):
