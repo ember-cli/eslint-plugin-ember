@@ -23,6 +23,19 @@ ruleTester.run('template-no-role-presentation-on-focusable', rule, {
     // <input type="hidden"> isn't focusable.
     '<template><input type="hidden" role="presentation" /></template>',
 
+    // <datalist> is a hidden data provider (display:none in UA stylesheets);
+    // its options surface inside the associated input's UA popup, not on the
+    // datalist element itself — it's not a focusable area.
+    '<template><datalist role="presentation"></datalist></template>',
+
+    // <details> itself is not a focusable area per HTML §6.6.3 — its first
+    // <summary> child is the disclosure focus target. role="presentation" on
+    // the details element does not trigger the spec's conflict resolution.
+    '<template><details role="presentation"><summary>Title</summary></details></template>',
+
+    // <option> is not its own focusable area; focus stays on the host <select>.
+    '<template><option role="presentation">Foo</option></template>',
+
     // <a> without href isn't focusable.
     '<template><a role="presentation">Not a link</a></template>',
 
