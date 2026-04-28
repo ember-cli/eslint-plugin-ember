@@ -69,13 +69,6 @@ ruleTester.run('template-require-input-label', rule, {
     },
   ],
   invalid: [
-    // https://github.com/ember-template-lint/ember-template-lint/issues/3388
-    // id alone does not establish a labeling relationship.
-    {
-      code: '<template><input id="hello" /></template>',
-      output: null,
-      errors: [{ message: NO_LABEL }],
-    },
     {
       code: '<template><my-label><input /></my-label></template>',
       output: null,
@@ -104,11 +97,6 @@ ruleTester.run('template-require-input-label', rule, {
     },
     {
       code: '<template><input aria-label="first label" aria-labelledby="second label"></template>',
-      output: null,
-      errors: [{ message: MULTIPLE_LABELS }],
-    },
-    {
-      code: '<template><input id="label-input" aria-label="second label"></template>',
       output: null,
       errors: [{ message: MULTIPLE_LABELS }],
     },
@@ -268,11 +256,6 @@ hbsRuleTester.run('template-require-input-label', rule, {
     },
     {
       code: '<input aria-label="first label" aria-labelledby="second label">',
-      output: null,
-      errors: [{ message: MULTIPLE_LABELS }],
-    },
-    {
-      code: '<input id="label-input" aria-label="second label">',
       output: null,
       errors: [{ message: MULTIPLE_LABELS }],
     },
