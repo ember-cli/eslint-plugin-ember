@@ -115,6 +115,7 @@ This rule **allows** the following:
 - boolean - `true` to enable / `false` to disable
 - object -- An object with the following keys:
   - `labelTags` -- An array of component names for that may be used as label replacements (in addition to the HTML `label` tag)
+  - `checkLabelFor` -- Boolean (default `false`). When `true`, an input with only an `id` attribute (no `aria-label`/`aria-labelledby`/wrapping `<label>`) is verified by looking for a sibling `<label for="X">` with a matching value in the same template. Inputs with no matching label are flagged. Both `id` and `for` must be static strings to be cross-referenced; dynamic values (e.g. `id={{this.fieldId}}` or the common `(unique-id)` helper pattern) fall back to the default skip behaviour. **This option may produce false positives** in apps where labels and form controls live in separate component templates — leave it disabled in that case.
 
 ## References
 
