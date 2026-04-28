@@ -1,11 +1,6 @@
 'use strict';
 
-const {
-  classifyAttribute,
-  inferAttrKind,
-  BOOLEAN_HTML_ATTRS,
-  NUMERIC_ATTRS,
-} = require('../../../lib/utils/glimmer-attr-presence');
+const { classifyAttribute, inferAttrKind } = require('../../../lib/utils/glimmer-attr-presence');
 
 // Helpers to build minimal AttrNode-shaped objects for tests.
 function attr(name, value) {
@@ -60,6 +55,14 @@ describe('inferAttrKind', () => {
     expect(inferAttrKind('id')).toBe('plain-string');
     expect(inferAttrKind('for')).toBe('plain-string');
     expect(inferAttrKind('type')).toBe('plain-string');
+  });
+
+  it('is case-insensitive (HTML attribute names are case-insensitive)', () => {
+    expect(inferAttrKind('Disabled')).toBe('boolean');
+    expect(inferAttrKind('MUTED')).toBe('boolean');
+    expect(inferAttrKind('TabIndex')).toBe('numeric');
+    expect(inferAttrKind('ARIA-Hidden')).toBe('aria');
+    expect(inferAttrKind('Aria-Label')).toBe('aria');
   });
 });
 
@@ -146,7 +149,7 @@ describe('classifyAttribute', () => {
       });
     });
 
-    it('{{true}} on boolean / numeric / plain-string → present "true"', () => {
+    it('{{true}} on boolean → present "true" (verified m5, d2)', () => {
       expect(classifyAttribute(attr('disabled', bareMustache(boolLit(true))))).toEqual({
         presence: 'present',
         value: 'true',
@@ -154,6 +157,17 @@ describe('classifyAttribute', () => {
       expect(classifyAttribute(attr('muted', bareMustache(boolLit(true))))).toEqual({
         presence: 'present',
         value: 'true',
+      });
+    });
+
+    it('{{true}} on numeric / plain-string → unknown (untested in doc)', () => {
+      expect(classifyAttribute(attr('tabindex', bareMustache(boolLit(true))))).toEqual({
+        presence: 'unknown',
+        value: null,
+      });
+      expect(classifyAttribute(attr('autocomplete', bareMustache(boolLit(true))))).toEqual({
+        presence: 'unknown',
+        value: null,
       });
     });
   });
@@ -282,14 +296,25 @@ describe('classifyAttribute', () => {
   });
 
   describe('GlimmerConcatStatement (concat-mustache)', () => {
-    it('"{{false}}" on boolean attr → present (concat sets IDL true regardless; doc row m14)', () => {
+    it('"{{false}}" on boolean attr → present "true" (concat sets IDL true regardless; doc row m14)', () => {
       // Per doc m14, <video muted="{{false}}"> sets IDL muted=true.
-      // Conceptual presence is true; the resolved string is "false" but
-      // semantically the attribute is "on" for boolean kind.
+      // Surface canonical "true" rather than the inner literal so callers
+      // checking `value === 'false'` for "off" don't get the wrong answer.
       expect(classifyAttribute(attr('muted', concat([bareMustache(boolLit(false))])))).toEqual({
         presence: 'present',
-        value: 'false',
+        value: 'true',
       });
+      expect(classifyAttribute(attr('disabled', concat([bareMustache(boolLit(false))])))).toEqual({
+        presence: 'present',
+        value: 'true',
+      });
+      expect(classifyAttribute(attr('muted', concat([bareMustache(stringLit('false'))])))).toEqual({
+        presence: 'present',
+        value: 'true',
+      });
+      expect(
+        classifyAttribute(attr('muted', concat([textNode('x'), bareMustache(boolLit(false))])))
+      ).toEqual({ presence: 'present', value: 'true' });
     });
 
     it('"{{false}}" on aria attr → present "false" (doc row h13, visible)', () => {
@@ -360,22 +385,5 @@ describe('classifyAttribute', () => {
         value: null,
       });
     });
-  });
-});
-
-describe('exported sets', () => {
-  it('BOOLEAN_HTML_ATTRS contains the standard HTML boolean attributes', () => {
-    expect(BOOLEAN_HTML_ATTRS.has('disabled')).toBe(true);
-    expect(BOOLEAN_HTML_ATTRS.has('muted')).toBe(true);
-    expect(BOOLEAN_HTML_ATTRS.has('controls')).toBe(true);
-    expect(BOOLEAN_HTML_ATTRS.has('autoplay')).toBe(true);
-    expect(BOOLEAN_HTML_ATTRS.has('hidden')).toBe(true);
-    // Non-boolean attrs should not appear:
-    expect(BOOLEAN_HTML_ATTRS.has('id')).toBe(false);
-    expect(BOOLEAN_HTML_ATTRS.has('role')).toBe(false);
-  });
-
-  it('NUMERIC_ATTRS contains tabindex', () => {
-    expect(NUMERIC_ATTRS.has('tabindex')).toBe(true);
   });
 });
