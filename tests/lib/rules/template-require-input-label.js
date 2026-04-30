@@ -19,6 +19,12 @@ ruleTester.run('template-require-input-label', rule, {
     '<template><input id="probablyHasLabel" /></template>',
     '<template><input aria-label={{labelText}} /></template>',
     '<template><input aria-labelledby="someIdValue" /></template>',
+    // https://github.com/ember-template-lint/ember-template-lint/issues/3388
+    // id alone does not establish a labeling relationship — a <label for> is
+    // needed and cannot be verified statically. Only aria-label/labelledby
+    // should count.
+    '<template><input id="hello" aria-label="hello" /></template>',
+    '<template><input id="hello" aria-labelledby="someIdValue" /></template>',
     '<template><div></div></template>',
     '<template><Input id="foo" /></template>',
     '<template>{{input id="foo"}}</template>',
@@ -97,12 +103,14 @@ ruleTester.run('template-require-input-label', rule, {
       errors: [{ message: MULTIPLE_LABELS }],
     },
     {
-      code: '<template><input id="label-input" aria-label="second label"></template>',
+      code: '<template><label>Input label<input aria-label="Custom label"></label></template>',
       output: null,
       errors: [{ message: MULTIPLE_LABELS }],
     },
     {
-      code: '<template><label>Input label<input aria-label="Custom label"></label></template>',
+      // id is irrelevant for labelling here — wrapping <label> + aria-label is
+      // still multiple labels.
+      code: '<template><label>Input label<input id="foo" aria-label="Custom label"></label></template>',
       output: null,
       errors: [{ message: MULTIPLE_LABELS }],
     },
@@ -173,6 +181,9 @@ hbsRuleTester.run('template-require-input-label', rule, {
     '<input id="probablyHasLabel" />',
     '<input aria-label={{labelText}} />',
     '<input aria-labelledby="someIdValue" />',
+    // https://github.com/ember-template-lint/ember-template-lint/issues/3388
+    '<input id="hello" aria-label="hello" />',
+    '<input id="hello" aria-labelledby="someIdValue" />',
     '<div></div>',
     '<Input id="foo" />',
     '{{input id="foo"}}',
@@ -261,12 +272,12 @@ hbsRuleTester.run('template-require-input-label', rule, {
       errors: [{ message: MULTIPLE_LABELS }],
     },
     {
-      code: '<input id="label-input" aria-label="second label">',
+      code: '<label>Input label<input aria-label="Custom label"></label>',
       output: null,
       errors: [{ message: MULTIPLE_LABELS }],
     },
     {
-      code: '<label>Input label<input aria-label="Custom label"></label>',
+      code: '<label>Input label<input id="foo" aria-label="Custom label"></label>',
       output: null,
       errors: [{ message: MULTIPLE_LABELS }],
     },
