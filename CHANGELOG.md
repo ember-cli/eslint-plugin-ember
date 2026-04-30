@@ -1,5 +1,22 @@
 # Changelog
 
+## Release (2026-04-30)
+
+* eslint-plugin-ember 13.2.1 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2767](https://github.com/ember-cli/eslint-plugin-ember/pull/2767) fix(require-input-label): don't count id as extra label when aria-label/labelledby present ([@johanrd](https://github.com/johanrd))
+  * [#2772](https://github.com/ember-cli/eslint-plugin-ember/pull/2772) fix(template-no-nested-interactive): More useful error message ([@johanrd](https://github.com/johanrd))
+
+#### :house: Internal
+* `eslint-plugin-ember`
+  * [#2758](https://github.com/ember-cli/eslint-plugin-ember/pull/2758) refactor: extract landmark-roles util (preserving deliberate per-rule region exclusion) ([@johanrd](https://github.com/johanrd))
+  * [#2753](https://github.com/ember-cli/eslint-plugin-ember/pull/2753) test(no-nested-interactive): add composite-widget hierarchy valid cases ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- Johan Røed ([@johanrd](https://github.com/johanrd))
+
 ## Release (2026-04-28)
 
 * eslint-plugin-ember 13.2.0 (minor)
