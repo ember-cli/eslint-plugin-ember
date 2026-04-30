@@ -117,6 +117,40 @@ ruleTester.run('template-no-invalid-interactive', rule, {
     // Their a11y contract is author-defined; ESLint can't introspect.
     '<template><my-element onclick={{this.handler}}></my-element></template>',
     '<template><x-foo {{on "click" this.handler}}></x-foo></template>',
+
+    // Non-interactive escape hatches:
+    //  - role="presentation" / role="none" (author-declared decorative);
+    //  - aria-hidden in any plausibly-"hide" form.
+    // Valueless/empty aria-hidden is contested in the ecosystem (see PR body
+    // for the four positions); we lean fewer-false-positives and treat it as
+    // an escape hatch. Explicit aria-hidden="false" / {{false}} still flags.
+    '<template><div role="presentation" onclick={{this.h}}></div></template>',
+    '<template><div role="none" onclick={{this.h}}></div></template>',
+    '<template><div role="presentation" {{on "click" this.h}}></div></template>',
+    '<template><div role="none" {{action "foo"}}></div></template>',
+    '<template><div aria-hidden onclick={{this.h}}></div></template>',
+    '<template><div aria-hidden="" onclick={{this.h}}></div></template>',
+    '<template><div aria-hidden="true" onclick={{this.h}}></div></template>',
+    '<template><div aria-hidden="TRUE" onclick={{this.h}}></div></template>',
+    '<template><div aria-hidden={{true}} onclick={{this.h}}></div></template>',
+    '<template><div aria-hidden={{"true"}} onclick={{this.h}}></div></template>',
+    '<template><div aria-hidden="true" {{on "click" this.h}}></div></template>',
+    // Case-insensitive / whitespace tolerance on role values.
+    '<template><div role="  Presentation  " onclick={{this.h}}></div></template>',
+    '<template><div role="NONE" onclick={{this.h}}></div></template>',
+
+    // DIVERGENCE from jsx-a11y no-static: <a tabindex="0"> without href — jsx-a11y
+    // still flags it because the anchor has no href. Our rule treats any tabindex
+    // value as making the element interactive, so this is valid.
+    '<template><a tabindex="0" onclick={{this.h}}>L</a></template>',
+
+    // Non-disallowed handlers — onmouseenter / onmouseleave / oncontextmenu /
+    // ondrag* are NOT in DISALLOWED_DOM_EVENTS. Aligns with jsx-a11y recommended;
+    // diverges from jsx-a11y strict (which flags these on non-interactive elements).
+    '<template><div onmouseenter={{this.h}}></div></template>',
+    '<template><div onmouseleave={{this.h}}></div></template>',
+    '<template><div oncontextmenu={{this.h}}></div></template>',
+    '<template><div ondrag={{this.h}}></div></template>',
   ],
 
   invalid: [
@@ -219,17 +253,77 @@ ruleTester.run('template-no-invalid-interactive', rule, {
       ],
     },
     {
-      // role="tooltip" is document-structure per WAI-ARIA 1.2 §5.3.3 — NOT
-      // a widget, so a handler on it is as invalid as a handler on a bare div.
-      filename: 'test.gjs',
-      code: '<template><div role="tooltip" onclick={{this.show}}>Tip</div></template>',
+      // aria-hidden="false" is opt-in to exposure — rule still flags non-interactive + handler.
+      code: '<template><div aria-hidden="false" onclick={{this.h}}></div></template>',
       output: null,
-      errors: [
-        {
-          messageId: 'noInvalidInteractive',
-          data: { tagName: 'div', handler: 'onclick' },
-        },
-      ],
+      errors: [{ messageId: 'noInvalidInteractive' }],
+    },
+    {
+      code: '<template><div aria-hidden={{false}} onclick={{this.h}}></div></template>',
+      output: null,
+      errors: [{ messageId: 'noInvalidInteractive' }],
+    },
+    {
+      // `role="note"` is neither presentation/none nor an interactive role.
+      code: '<template><div role="note" onclick={{this.h}}></div></template>',
+      output: null,
+      errors: [{ messageId: 'noInvalidInteractive' }],
+    },
+    {
+      // DIVERGENCE from jsx-a11y no-static: aria-label on section makes it VALID
+      // in jsx-a11y's no-static rule (treated as interactive-signal), but our rule
+      // determines interactivity from element type / role alone, not aria-label.
+      code: '<template><section onclick={{this.h}} aria-label="Nav area"></section></template>',
+      output: null,
+      errors: [{ messageId: 'noInvalidInteractive' }],
+    },
+    {
+      // DIVERGENCE from jsx-a11y: menuitem and datalist are in jsx-a11y's
+      // alwaysInteractive set but not in our NATIVE_INTERACTIVE_ELEMENTS — flagged.
+      code: '<template><menuitem onclick={{this.h}}></menuitem></template>',
+      output: null,
+      errors: [{ messageId: 'noInvalidInteractive' }],
+    },
+    {
+      code: '<template><datalist onclick={{this.h}}></datalist></template>',
+      output: null,
+      errors: [{ messageId: 'noInvalidInteractive' }],
+    },
+    {
+      // DIVERGENCE from jsx-a11y: <input type="hidden"> is VALID in jsx-a11y
+      // (treated as interactive). Our rule explicitly excludes hidden inputs from
+      // native-interactive — no user-facing surface, so the handler is invalid.
+      code: '<template><input type="hidden" onclick={{this.h}} /></template>',
+      output: null,
+      errors: [{ messageId: 'noInvalidInteractive' }],
+    },
+  ],
+});
+
+const hbsRuleTester = new RuleTester({
+  parser: require.resolve('ember-eslint-parser/hbs'),
+});
+
+hbsRuleTester.run('template-no-invalid-interactive', rule, {
+  valid: [
+    // Escape hatches: role="presentation" / aria-hidden suppresses the check.
+    '<div role="presentation" onclick={{this.h}}></div>',
+    '<div role="none" {{on "click" this.h}}></div>',
+    '<div aria-hidden="true" onclick={{this.h}}></div>',
+    '<div aria-hidden {{on "click" this.h}}></div>',
+  ],
+  invalid: [
+    {
+      // role="note" is not presentation/none and not interactive — still flags.
+      code: '<div role="note" onclick={{this.h}}></div>',
+      output: null,
+      errors: [{ messageId: 'noInvalidInteractive' }],
+    },
+    {
+      // aria-hidden="false" opts in to exposure — handler still flagged.
+      code: '<div aria-hidden="false" onclick={{this.h}}></div>',
+      output: null,
+      errors: [{ messageId: 'noInvalidInteractive' }],
     },
   ],
 });
