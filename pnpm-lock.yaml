@@ -38,6 +38,9 @@ importers:
       html-tags:
         specifier: ^3.3.1
         version: 3.3.1
+      html-void-elements:
+        specifier: ^3.0.0
+        version: 3.0.0
       language-tags:
         specifier: ^1.0.9
         version: 1.0.9
@@ -50,6 +53,9 @@ importers:
       mathml-tag-names:
         specifier: ^4.0.0
         version: 4.0.0
+      property-information:
+        specifier: ^7.1.0
+        version: 7.1.0
       requireindex:
         specifier: ^1.2.0
         version: 1.2.0
@@ -2313,6 +2319,9 @@ packages:
     resolution: {integrity: sha512-n6l5uca7/y5joxZ3LUePhzmBFUJ+U2YWzhMa8XUTecSeSlQiZdF5XAd/Q3/WUl0VsXgUwWi8I7CNIwdI5WN1SQ==}
     engines: {node: '>=20.10'}
 
+  html-void-elements@3.0.0:
+    resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
+
   http-cache-semantics@4.2.0:
     resolution: {integrity: sha512-dTxcvPXqPvXBQpq5dUr6mEMJX4oIEFv6bwom3FDwKRDsuIjjJGANqhBuoAn9c1RQJIdAKav33ED65E2ys+87QQ==}
 
@@ -3393,6 +3402,9 @@ packages:
   promise-retry@2.0.1:
     resolution: {integrity: sha512-y+WKFlBR8BGXnsNlIHFGPZmyDf3DFMoLhaflAnyZgV6rG6xu+JwesTo2Q9R6XwYmtmwAFCkAk3e35jEdoeh/3g==}
     engines: {node: '>=10'}
+
+  property-information@7.1.0:
+    resolution: {integrity: sha512-TwEZ+X+yCJmYfL7TPUOcvBZ4QfoT5YenQiJuX//0th53DE6w0xxLEtfK3iyryQFddXuvkIk51EEgrJQ0WJkOmQ==}
 
   proto-list@1.2.4:
     resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
@@ -6447,6 +6459,8 @@ snapshots:
 
   html-tags@5.1.0: {}
 
+  html-void-elements@3.0.0: {}
+
   http-cache-semantics@4.2.0: {}
 
   http-proxy-agent@4.0.1:
@@ -7692,6 +7706,8 @@ snapshots:
     dependencies:
       err-code: 2.0.3
       retry: 0.12.0
+
+  property-information@7.1.0: {}
 
   proto-list@1.2.4: {}
 
