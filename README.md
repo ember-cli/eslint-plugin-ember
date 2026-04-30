@@ -358,6 +358,7 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 | [template-require-form-method](docs/rules/template-require-form-method.md)                                         | require form method attribute                                                |    | 🔧 |    |
 | [template-require-has-block-helper](docs/rules/template-require-has-block-helper.md)                               | require (has-block) helper usage instead of hasBlock property                | 📋 | 🔧 |    |
 | [template-require-iframe-src-attribute](docs/rules/template-require-iframe-src-attribute.md)                       | require iframe elements to have src attribute                                |    | 🔧 |    |
+| [template-require-input-type](docs/rules/template-require-input-type.md)                                           | require input elements to have a valid type attribute                        |    | 🔧 |    |
 | [template-require-splattributes](docs/rules/template-require-splattributes.md)                                     | require splattributes usage in component templates                           |    |    |    |
 | [template-require-strict-mode](docs/rules/template-require-strict-mode.md)                                         | require templates to be in strict mode                                       |    |    |    |
 | [template-require-valid-named-block-naming-format](docs/rules/template-require-valid-named-block-naming-format.md) | require valid named block naming format                                      | 📋 | 🔧 |    |

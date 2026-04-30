@@ -39,6 +39,18 @@ ruleTester.run('template-no-nested-interactive', rule, {
         Text
       </label>
     </template>`,
+    // Canonical ARIA composite-widget hierarchies — driven by aria-query's
+    // `requiredOwnedElements` (see lib/utils/interactive-roles.js). These are
+    // WAI-ARIA APG patterns and must not be flagged.
+    '<template><div role="listbox"><div role="option">A</div><div role="option">B</div></div></template>',
+    '<template><div role="tablist"><div role="tab">Tab 1</div><div role="tab">Tab 2</div></div></template>',
+    '<template><div role="tree"><div role="treeitem">Node</div></div></template>',
+    '<template><div role="grid"><div role="row"><div role="gridcell">Cell</div></div></div></template>',
+    '<template><div role="grid"><div role="row"><div role="rowheader">Header</div></div></div></template>',
+    '<template><div role="grid"><div role="row"><div role="columnheader">Header</div></div></div></template>',
+    '<template><div role="treegrid"><div role="row"><div role="gridcell">Cell</div></div></div></template>',
+    '<template><div role="radiogroup"><div role="radio">Opt 1</div></div></template>',
+
     // <audio>/<video> without `controls` are NOT interactive (no rendered UI, no focus).
     '<template><button><audio></audio></button></template>',
     '<template><button><video></video></button></template>',
@@ -369,6 +381,16 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
     // <audio>/<video> without `controls` are NOT interactive.
     '<button><audio></audio></button>',
     '<button><video></video></button>',
+
+    // Canonical ARIA composite-widget hierarchies.
+    '<div role="listbox"><div role="option">A</div><div role="option">B</div></div>',
+    '<div role="tablist"><div role="tab">Tab 1</div><div role="tab">Tab 2</div></div>',
+    '<div role="tree"><div role="treeitem">Node</div></div>',
+    '<div role="grid"><div role="row"><div role="gridcell">Cell</div></div></div>',
+    '<div role="grid"><div role="row"><div role="rowheader">Header</div></div></div>',
+    '<div role="grid"><div role="row"><div role="columnheader">Header</div></div></div>',
+    '<div role="treegrid"><div role="row"><div role="gridcell">Cell</div></div></div>',
+    '<div role="radiogroup"><div role="radio">Opt 1</div></div>',
   ],
   invalid: [
     {

@@ -66,6 +66,17 @@ ruleTester.run('template-no-redundant-role', rule, {
     // <button> resolves to `tab` (non-redundant — button's implicit is
     // `button`, not `tab`). WAI-ARIA §4.1 fallback-list semantics.
     '<template><button role="tab button"></button></template>',
+    // `region` is a landmark role, but <div> has no implicit role — role="region"
+    // on a <div> is not redundant.
+    '<template><div role="region"></div></template>',
+    {
+      code: '<template><div role="region"></div></template>',
+      options: [{ checkAllHTMLElements: false }],
+    },
+    // Per #2694: <section> has implicit role `generic` when unnamed and
+    // `region` when it has an accessible name. role="region" on <section> is
+    // therefore not unconditionally redundant — #38 aligns with this.
+    '<template><section role="region" aria-label="Quick facts">...</section></template>',
   ],
   invalid: [
     {
@@ -223,6 +234,10 @@ hbsRuleTester.run('template-no-redundant-role', rule, {
     // NOT redundant.
     '<select role="listbox"></select>',
     '<select role="listbox" size="1"></select>',
+    // Per #2694: <section> has implicit role `generic` when unnamed and
+    // `region` when it has an accessible name. role="region" on <section> is
+    // therefore not unconditionally redundant — #38 aligns with this.
+    '<section role="region" aria-label="Quick facts">...</section>',
   ],
   invalid: [
     {

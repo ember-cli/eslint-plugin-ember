@@ -1,5 +1,38 @@
 # Changelog
 
+## Release (2026-04-28)
+
+* eslint-plugin-ember 13.2.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2763](https://github.com/ember-cli/eslint-plugin-ember/pull/2763) feat: add template-require-input-type ([@johanrd](https://github.com/johanrd))
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2766](https://github.com/ember-cli/eslint-plugin-ember/pull/2766) Update parser ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+- [@johanrd](https://github.com/johanrd)
+
+## Release (2026-04-27)
+
+* eslint-plugin-ember 13.1.4 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2752](https://github.com/ember-cli/eslint-plugin-ember/pull/2752) Update ember-eslint-parser to 0.11.2 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2728](https://github.com/ember-cli/eslint-plugin-ember/pull/2728) BUGFIX: template-require-mandatory-role-attributes — lowercase role + split whitespace role lists ([@johanrd](https://github.com/johanrd))
+
+#### :house: Internal
+* `eslint-plugin-ember`
+  * [#2748](https://github.com/ember-cli/eslint-plugin-ember/pull/2748) refactor: extract `html-interactive-content` util (HTML §3.2.5.2.7 authority) ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 2
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2026-04-25)
 
 * eslint-plugin-ember 13.1.3 (patch)
