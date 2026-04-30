@@ -274,6 +274,18 @@ ruleTester.run('template-no-nested-interactive', rule, {
       output: null,
       errors: [{ messageId: 'nested' }],
     },
+    // Error message surfaces the attribute that makes a <div> parent interactive
+    // (regression test for the original report against `<div role="menu">`).
+    {
+      code: '<template><div role="menu"><input type="search"></div></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Do not nest interactive element <input> inside <div role="menu">.',
+        },
+      ],
+    },
   ],
 });
 
@@ -422,7 +434,9 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
     {
       code: '<button><div tabindex="1"></div></button>',
       output: null,
-      errors: [{ message: 'Do not nest interactive element <div> inside <button>.' }],
+      errors: [
+        { message: 'Do not nest interactive element <div tabindex="1"> inside <button>.' },
+      ],
     },
     {
       code: '<button><img usemap=""></button>',
@@ -465,6 +479,59 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       code: '<canvas tabindex="0"><button>Click</button></canvas>',
       output: null,
       errors: [{ message: 'Do not nest interactive element <button> inside <canvas>.' }],
+    },
+    // Error message surfaces the attribute that makes a <div> parent interactive,
+    // so authors can see *why* the rule fired without inspecting the rule source.
+    {
+      code: '<div role="menu"><input type="search"></div>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Do not nest interactive element <input> inside <div role="menu">.',
+        },
+      ],
+    },
+    {
+      code: '<div role="menu"><button type="button">Delete</button></div>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Do not nest interactive element <button> inside <div role="menu">.',
+        },
+      ],
+    },
+    {
+      code: '<div contenteditable><button>Edit</button></div>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Do not nest interactive element <button> inside <div contenteditable>.',
+        },
+      ],
+    },
+    {
+      code: '<div contenteditable="plaintext-only"><button>Edit</button></div>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Do not nest interactive element <button> inside <div contenteditable="plaintext-only">.',
+        },
+      ],
+    },
+    // Child-side enrichment: a <div role="button"> child surfaces its role too.
+    {
+      code: '<button><div role="button">Inner</div></button>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Do not nest interactive element <div role="button"> inside <button>.',
+        },
+      ],
     },
   ],
 });
