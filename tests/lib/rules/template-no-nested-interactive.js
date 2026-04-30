@@ -293,8 +293,7 @@ ruleTester.run('template-no-nested-interactive', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Do not nest interactive element <input> inside <div role="menu">.',
+          message: 'Do not nest interactive element <input> inside <div role="menu">.',
         },
       ],
     },
@@ -456,9 +455,7 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
     {
       code: '<button><div tabindex="1"></div></button>',
       output: null,
-      errors: [
-        { message: 'Do not nest interactive element <div tabindex="1"> inside <button>.' },
-      ],
+      errors: [{ message: 'Do not nest interactive element <div tabindex="1"> inside <button>.' }],
     },
     {
       code: '<button><img usemap=""></button>',
@@ -509,8 +506,7 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Do not nest interactive element <input> inside <div role="menu">.',
+          message: 'Do not nest interactive element <input> inside <div role="menu">.',
         },
       ],
     },
@@ -519,8 +515,7 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Do not nest interactive element <button> inside <div role="menu">.',
+          message: 'Do not nest interactive element <button> inside <div role="menu">.',
         },
       ],
     },
@@ -529,8 +524,7 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Do not nest interactive element <button> inside <div contenteditable>.',
+          message: 'Do not nest interactive element <button> inside <div contenteditable>.',
         },
       ],
     },
@@ -550,8 +544,7 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
       output: null,
       errors: [
         {
-          message:
-            'Do not nest interactive element <div role="button"> inside <button>.',
+          message: 'Do not nest interactive element <div role="button"> inside <button>.',
         },
       ],
     },
