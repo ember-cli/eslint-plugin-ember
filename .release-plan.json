@@ -1,22 +1,8 @@
 {
   "solution": {
     "eslint-plugin-ember": {
-      "impact": "patch",
-      "oldVersion": "13.2.0",
-      "newVersion": "13.2.1",
-      "tagName": "latest",
-      "constraints": [
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
-        }
-      ],
-      "pkgJSONPath": "./package.json"
+      "oldVersion": "13.2.1"
     }
   },
-  "description": "## Release (2026-04-30)\n\n* eslint-plugin-ember 13.2.1 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2767](https://github.com/ember-cli/eslint-plugin-ember/pull/2767) fix(require-input-label): don't count id as extra label when aria-label/labelledby present ([@johanrd](https://github.com/johanrd))\n  * [#2772](https://github.com/ember-cli/eslint-plugin-ember/pull/2772) fix(template-no-nested-interactive): More useful error message ([@johanrd](https://github.com/johanrd))\n\n#### :house: Internal\n* `eslint-plugin-ember`\n  * [#2758](https://github.com/ember-cli/eslint-plugin-ember/pull/2758) refactor: extract landmark-roles util (preserving deliberate per-rule region exclusion) ([@johanrd](https://github.com/johanrd))\n  * [#2753](https://github.com/ember-cli/eslint-plugin-ember/pull/2753) test(no-nested-interactive): add composite-widget hierarchy valid cases ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- Johan Røed ([@johanrd](https://github.com/johanrd))\n"
+  "description": "\n\n\n\n"
 }
