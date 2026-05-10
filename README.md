@@ -290,6 +290,7 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 | [template-require-valid-alt-text](docs/rules/template-require-valid-alt-text.md)                                 | require valid alt text for images and other elements                             | 📋 |    |    |
 | [template-require-valid-form-groups](docs/rules/template-require-valid-form-groups.md)                           | require grouped form controls to have fieldset/legend or WAI-ARIA group labeling |    |    |    |
 | [template-table-groups](docs/rules/template-table-groups.md)                                                     | require table elements to use table grouping elements                            | 📋 |    |    |
+| [template-valid-label-for](docs/rules/template-valid-label-for.md)                                               | require `<label for>` to point at a labelable form control                       |    |    |    |
 
 ### Best Practices
 
