@@ -262,6 +262,7 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 | [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)                                           | disallow abstract ARIA roles                                                     | 📋 |    |    |
 | [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md)                                 | disallow accesskey attribute                                                     | 📋 | 🔧 |    |
 | [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)                                       | disallow aria-hidden on body element                                             | 📋 | 🔧 |    |
+| [template-no-aria-hidden-on-focusable](docs/rules/template-no-aria-hidden-on-focusable.md)                       | disallow aria-hidden="true" on focusable elements                                |    |    |    |
 | [template-no-aria-unsupported-elements](docs/rules/template-no-aria-unsupported-elements.md)                     | disallow ARIA roles, states, and properties on elements that do not support them | 📋 |    |    |
 | [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md)                                 | disallow autofocus attribute                                                     | 📋 | 🔧 |    |
 | [template-no-duplicate-landmark-elements](docs/rules/template-no-duplicate-landmark-elements.md)                 | disallow duplicate landmark elements without unique labels                       | 📋 |    |    |
@@ -583,6 +584,8 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 If you have any suggestions, ideas, or problems, feel free to [create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new), but first please make sure your question does not repeat [previous ones](https://github.com/ember-cli/eslint-plugin-ember/issues).
 
 ### Creating a New Rule
+
+If your rule inspects template attribute values (e.g. mustache forms like `attr={{X}}` or `attr="{{X}}"`), read [docs/glimmer-attribute-behavior.md](docs/glimmer-attribute-behavior.md) first — Glimmer's actual rendering behavior is non-obvious for several common forms, and the doc has the empirically-verified table.
 
 - [Create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new) with a description of the proposed rule
 - Create files for the [new rule](https://eslint.org/docs/developer-guide/working-with-rules):
