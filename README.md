@@ -584,6 +584,8 @@ If you have any suggestions, ideas, or problems, feel free to [create an issue](
 
 ### Creating a New Rule
 
+If your rule inspects template attribute values (e.g. mustache forms like `attr={{X}}` or `attr="{{X}}"`), read [docs/glimmer-attribute-behavior.md](docs/glimmer-attribute-behavior.md) first — Glimmer's actual rendering behavior is non-obvious for several common forms, and the doc has the empirically-verified table.
+
 - [Create an issue](https://github.com/ember-cli/eslint-plugin-ember/issues/new) with a description of the proposed rule
 - Create files for the [new rule](https://eslint.org/docs/developer-guide/working-with-rules):
   - `lib/rules/new-rule.js` (implementation, see [no-proxies](lib/rules/no-proxies.js) for an example)
