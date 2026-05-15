@@ -50,6 +50,14 @@ r
 
 <div>bar</div>
 </template>`,
+    // Plain JS files have no <template> tags — multiple blank lines in
+    // surrounding code (or inside unrelated template literals) must not be
+    // flagged.
+    'const a = 1;\n\n\n\nconst b = 2;\n',
+    "import Foo from 'foo';\n\n\n\n\nconst html = `<div></div>\n\n\n\n<div></div>`;\n",
+    // Blank lines surrounding a <template> in .gjs (outside the template body)
+    // are unrelated to template formatting and must not be flagged either.
+    "import Component from '@glimmer/component';\n\n\n\nexport default class Foo extends Component {\n  <template>Hi</template>\n}\n",
   ],
 
   invalid: [
