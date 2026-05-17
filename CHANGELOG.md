@@ -1,5 +1,22 @@
 # Changelog
 
+## Release (2026-05-17)
+
+* eslint-plugin-ember 13.3.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2782](https://github.com/ember-cli/eslint-plugin-ember/pull/2782) Upgrade ember-eslint-parser to ^0.12.0 ([@Copilot](https://github.com/apps/copilot-swe-agent))
+  * [#2780](https://github.com/ember-cli/eslint-plugin-ember/pull/2780) feat: introduce `template-no-template-lint-directives` rule ([@davidtaylorhq](https://github.com/davidtaylorhq))
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2781](https://github.com/ember-cli/eslint-plugin-ember/pull/2781) fix: scope of template-no-multiple-empty-lines rule ([@davidtaylorhq](https://github.com/davidtaylorhq))
+
+#### Committers: 2
+- Copilot [Bot] ([@copilot-swe-agent](https://github.com/apps/copilot-swe-agent))
+- David Taylor ([@davidtaylorhq](https://github.com/davidtaylorhq))
+
 ## Release (2026-04-30)
 
 * eslint-plugin-ember 13.2.1 (patch)
