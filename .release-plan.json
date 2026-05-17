@@ -1,22 +1,22 @@
 {
   "solution": {
     "eslint-plugin-ember": {
-      "impact": "patch",
-      "oldVersion": "13.2.0",
-      "newVersion": "13.2.1",
+      "impact": "minor",
+      "oldVersion": "13.2.1",
+      "newVersion": "13.3.0",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
         },
         {
           "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-04-30)\n\n* eslint-plugin-ember 13.2.1 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2767](https://github.com/ember-cli/eslint-plugin-ember/pull/2767) fix(require-input-label): don't count id as extra label when aria-label/labelledby present ([@johanrd](https://github.com/johanrd))\n  * [#2772](https://github.com/ember-cli/eslint-plugin-ember/pull/2772) fix(template-no-nested-interactive): More useful error message ([@johanrd](https://github.com/johanrd))\n\n#### :house: Internal\n* `eslint-plugin-ember`\n  * [#2758](https://github.com/ember-cli/eslint-plugin-ember/pull/2758) refactor: extract landmark-roles util (preserving deliberate per-rule region exclusion) ([@johanrd](https://github.com/johanrd))\n  * [#2753](https://github.com/ember-cli/eslint-plugin-ember/pull/2753) test(no-nested-interactive): add composite-widget hierarchy valid cases ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- Johan Røed ([@johanrd](https://github.com/johanrd))\n"
+  "description": "## Release (2026-05-17)\n\n* eslint-plugin-ember 13.3.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2782](https://github.com/ember-cli/eslint-plugin-ember/pull/2782) Upgrade ember-eslint-parser to ^0.12.0 ([@Copilot](https://github.com/apps/copilot-swe-agent))\n  * [#2780](https://github.com/ember-cli/eslint-plugin-ember/pull/2780) feat: introduce `template-no-template-lint-directives` rule ([@davidtaylorhq](https://github.com/davidtaylorhq))\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2781](https://github.com/ember-cli/eslint-plugin-ember/pull/2781) fix: scope of template-no-multiple-empty-lines rule ([@davidtaylorhq](https://github.com/davidtaylorhq))\n\n#### Committers: 2\n- Copilot [Bot] ([@copilot-swe-agent](https://github.com/apps/copilot-swe-agent))\n- David Taylor ([@davidtaylorhq](https://github.com/davidtaylorhq))\n"
 }
