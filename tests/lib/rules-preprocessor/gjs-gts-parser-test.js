@@ -184,8 +184,8 @@ const invalid = [
     }`,
     errors: [
       {
-        message: `Parsing error: × Expected ';', got 'MyComponent'
-   ╭─[1:1]
+        message: `Parsing error: × Expected ';', got 'ident'
+   ╭─[2:1]
  1 │ import Component from '@glimmer/component';
  2 │     export default classsss MyComponent extends Component {
    ·                             ───────────
