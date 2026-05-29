@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-05-29)
+
+* eslint-plugin-ember 13.3.2 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2793](https://github.com/ember-cli/eslint-plugin-ember/pull/2793) Upgrade ember-eslint-parser to 0.13 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-05-28)
 
 * eslint-plugin-ember 13.3.1 (patch)
