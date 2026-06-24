@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-06-24)
+
+* eslint-plugin-ember 13.4.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2809](https://github.com/ember-cli/eslint-plugin-ember/pull/2809) fix(deps): bump `ember-eslint-parser` to `^0.14.0` ([@davidtaylorhq](https://github.com/davidtaylorhq))
+
+#### Committers: 1
+- David Taylor ([@davidtaylorhq](https://github.com/davidtaylorhq))
+
 ## Release (2026-05-29)
 
 * eslint-plugin-ember 13.3.2 (patch)

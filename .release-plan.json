@@ -1,18 +1,18 @@
 {
   "solution": {
     "eslint-plugin-ember": {
-      "impact": "patch",
-      "oldVersion": "13.3.1",
-      "newVersion": "13.3.2",
+      "impact": "minor",
+      "oldVersion": "13.3.2",
+      "newVersion": "13.4.0",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-05-29)\n\n* eslint-plugin-ember 13.3.2 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2793](https://github.com/ember-cli/eslint-plugin-ember/pull/2793) Upgrade ember-eslint-parser to 0.13 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2026-06-24)\n\n* eslint-plugin-ember 13.4.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2809](https://github.com/ember-cli/eslint-plugin-ember/pull/2809) fix(deps): bump `ember-eslint-parser` to `^0.14.0` ([@davidtaylorhq](https://github.com/davidtaylorhq))\n\n#### Committers: 1\n- David Taylor ([@davidtaylorhq](https://github.com/davidtaylorhq))\n"
 }
