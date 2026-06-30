@@ -8,7 +8,12 @@ In `.gjs`/`.gts` tests, the `<template>` tag has access to the surrounding scope
 
 ## Rule Details
 
-This rule disallows calls to `this.set`, `this.get`, `this.setProperties`, and `this.getProperties` in `.gjs` and `.gts` test files. It does not flag these calls in `.js`/`.ts` tests, and it does not flag the standalone `set`/`get`/`setProperties`/`getProperties` functions imported from `@ember/object`.
+This rule disallows the following in `.gjs` and `.gts` test files:
+
+- `this.set(...)`, `this.get(...)`, `this.setProperties(...)`, `this.getProperties(...)` (including the computed `this["set"](...)` form).
+- Calls to `set`, `get`, `setProperties`, and `getProperties` when imported from `@ember/object` (including aliased imports).
+
+It does not flag these calls in `.js`/`.ts` tests, or in non-test files.
 
 ## Examples
 
@@ -36,6 +41,14 @@ test('it sets many', function (assert) {
 ```gjs
 test('it reads many', function (assert) {
   const { name, age } = this.getProperties('name', 'age');
+});
+```
+
+```gjs
+import { set } from '@ember/object';
+
+test('it sets', function (assert) {
+  set(obj, 'name', 'Zoey');
 });
 ```
 
