@@ -2,14 +2,12 @@
 
 exports[`recommended rules > gjs config has the right list 1`] = `
 [
-  "no-test-this-set-get",
   "template-no-let-reference",
 ]
 `;
 
 exports[`recommended rules > gts config has the right list 1`] = `
 [
-  "no-test-this-set-get",
   "template-no-let-reference",
 ]
 `;

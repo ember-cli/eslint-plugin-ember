@@ -1,7 +1,5 @@
 # ember/no-test-this-set-get
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): ![gjs logo](/docs/svgs/gjs.svg) `recommended-gjs`, ![gts logo](/docs/svgs/gts.svg) `recommended-gts`.
-
 <!-- end auto-generated rule header -->
 
 In `.gjs`/`.gts` tests, the `<template>` tag has access to the surrounding scope, so any value used by a test's template can be a local variable (optionally tracked) instead of being assigned to the test context (`this`). As a result, the legacy `this.set`, `this.get`, `this.setProperties`, and `this.getProperties` helpers are no longer recommended in template-tag tests.
