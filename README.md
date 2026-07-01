@@ -413,29 +413,30 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 
 ### Deprecations
 
-| Name                                                                                             | Description                                               | 💼 | 🔧 | 💡 |
-| :----------------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :- | :- | :- |
-| [closure-actions](docs/rules/closure-actions.md)                                                 | enforce usage of closure actions                          | ✅  |    |    |
-| [new-module-imports](docs/rules/new-module-imports.md)                                           | enforce using "New Module Imports" from Ember RFC #176    | ✅  |    |    |
-| [no-array-prototype-extensions](docs/rules/no-array-prototype-extensions.md)                     | disallow usage of Ember's `Array` prototype extensions    |    | 🔧 |    |
-| [no-at-ember-render-modifiers](docs/rules/no-at-ember-render-modifiers.md)                       | disallow importing from @ember/render-modifiers           | ✅  |    |    |
-| [no-deprecated-router-transition-methods](docs/rules/no-deprecated-router-transition-methods.md) | enforce usage of router service transition methods        | ✅  | 🔧 |    |
-| [no-function-prototype-extensions](docs/rules/no-function-prototype-extensions.md)               | disallow usage of Ember's `function` prototype extensions | ✅  |    |    |
-| [no-implicit-injections](docs/rules/no-implicit-injections.md)                                   | enforce usage of implicit service injections              | ✅  | 🔧 |    |
-| [no-mixins](docs/rules/no-mixins.md)                                                             | disallow the usage of mixins                              | ✅  |    |    |
-| [no-new-mixins](docs/rules/no-new-mixins.md)                                                     | disallow the creation of new mixins                       | ✅  |    |    |
-| [no-observers](docs/rules/no-observers.md)                                                       | disallow usage of observers                               | ✅  |    |    |
-| [no-old-shims](docs/rules/no-old-shims.md)                                                       | disallow usage of old shims for modules                   | ✅  | 🔧 |    |
-| [no-string-prototype-extensions](docs/rules/no-string-prototype-extensions.md)                   | disallow usage of `String` prototype extensions           | ✅  |    |    |
-| [template-deprecated-inline-view-helper](docs/rules/template-deprecated-inline-view-helper.md)   | disallow inline {{view}} helper                           | 📋 | 🔧 |    |
-| [template-deprecated-render-helper](docs/rules/template-deprecated-render-helper.md)             | disallow {{render}} helper                                | 📋 | 🔧 |    |
-| [template-no-action](docs/rules/template-no-action.md)                                           | disallow {{action}} helper                                | 📋 |    |    |
-| [template-no-attrs-in-components](docs/rules/template-no-attrs-in-components.md)                 | disallow attrs in component templates                     | 📋 |    |    |
-| [template-no-link-to-positional-params](docs/rules/template-no-link-to-positional-params.md)     | disallow positional params in LinkTo component            | 📋 |    |    |
-| [template-no-link-to-tagname](docs/rules/template-no-link-to-tagname.md)                         | disallow tagName attribute on LinkTo component            | 📋 |    |    |
-| [template-no-route-action](docs/rules/template-no-route-action.md)                               | disallow usage of route-action helper                     | 📋 |    |    |
-| [template-no-unbound](docs/rules/template-no-unbound.md)                                         | disallow {{unbound}} helper                               | 📋 |    |    |
-| [template-no-with](docs/rules/template-no-with.md)                                               | disallow {{with}} helper                                  | 📋 |    |    |
+| Name                                                                                             | Description                                                           | 💼 | 🔧 | 💡 |
+| :----------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------- | :- | :- | :- |
+| [closure-actions](docs/rules/closure-actions.md)                                                 | enforce usage of closure actions                                      | ✅  |    |    |
+| [new-module-imports](docs/rules/new-module-imports.md)                                           | enforce using "New Module Imports" from Ember RFC #176                | ✅  |    |    |
+| [no-array-prototype-extensions](docs/rules/no-array-prototype-extensions.md)                     | disallow usage of Ember's `Array` prototype extensions                |    | 🔧 |    |
+| [no-at-ember-render-modifiers](docs/rules/no-at-ember-render-modifiers.md)                       | disallow importing from @ember/render-modifiers                       | ✅  |    |    |
+| [no-deprecated-router-transition-methods](docs/rules/no-deprecated-router-transition-methods.md) | enforce usage of router service transition methods                    | ✅  | 🔧 |    |
+| [no-function-prototype-extensions](docs/rules/no-function-prototype-extensions.md)               | disallow usage of Ember's `function` prototype extensions             | ✅  |    |    |
+| [no-implicit-injections](docs/rules/no-implicit-injections.md)                                   | enforce usage of implicit service injections                          | ✅  | 🔧 |    |
+| [no-legacy-helper-imports](docs/rules/no-legacy-helper-imports.md)                               | disallow legacy helper/modifier imports superseded by Ember built-ins |    | 🔧 |    |
+| [no-mixins](docs/rules/no-mixins.md)                                                             | disallow the usage of mixins                                          | ✅  |    |    |
+| [no-new-mixins](docs/rules/no-new-mixins.md)                                                     | disallow the creation of new mixins                                   | ✅  |    |    |
+| [no-observers](docs/rules/no-observers.md)                                                       | disallow usage of observers                                           | ✅  |    |    |
+| [no-old-shims](docs/rules/no-old-shims.md)                                                       | disallow usage of old shims for modules                               | ✅  | 🔧 |    |
+| [no-string-prototype-extensions](docs/rules/no-string-prototype-extensions.md)                   | disallow usage of `String` prototype extensions                       | ✅  |    |    |
+| [template-deprecated-inline-view-helper](docs/rules/template-deprecated-inline-view-helper.md)   | disallow inline {{view}} helper                                       | 📋 | 🔧 |    |
+| [template-deprecated-render-helper](docs/rules/template-deprecated-render-helper.md)             | disallow {{render}} helper                                            | 📋 | 🔧 |    |
+| [template-no-action](docs/rules/template-no-action.md)                                           | disallow {{action}} helper                                            | 📋 |    |    |
+| [template-no-attrs-in-components](docs/rules/template-no-attrs-in-components.md)                 | disallow attrs in component templates                                 | 📋 |    |    |
+| [template-no-link-to-positional-params](docs/rules/template-no-link-to-positional-params.md)     | disallow positional params in LinkTo component                        | 📋 |    |    |
+| [template-no-link-to-tagname](docs/rules/template-no-link-to-tagname.md)                         | disallow tagName attribute on LinkTo component                        | 📋 |    |    |
+| [template-no-route-action](docs/rules/template-no-route-action.md)                               | disallow usage of route-action helper                                 | 📋 |    |    |
+| [template-no-unbound](docs/rules/template-no-unbound.md)                                         | disallow {{unbound}} helper                                           | 📋 |    |    |
+| [template-no-with](docs/rules/template-no-with.md)                                               | disallow {{with}} helper                                              | 📋 |    |    |
 
 ### Ember Data
 
