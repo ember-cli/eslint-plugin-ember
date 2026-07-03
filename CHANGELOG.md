@@ -1,5 +1,20 @@
 # Changelog
 
+## Release (2026-07-03)
+
+* eslint-plugin-ember 13.4.1 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2821](https://github.com/ember-cli/eslint-plugin-ember/pull/2821) Upgrade ember-eslint-parser to ^0.14.2 ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### :house: Internal
+* `eslint-plugin-ember`
+  * [#2822](https://github.com/ember-cli/eslint-plugin-ember/pull/2822) Raise vitest testTimeout to absorb per-file parser init ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### Committers: 1
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
 ## Release (2026-06-24)
 
 * eslint-plugin-ember 13.4.0 (minor)
