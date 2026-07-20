@@ -1,5 +1,18 @@
 # Changelog
 
+## Release (2026-07-20)
+
+* eslint-plugin-ember 13.5.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2818](https://github.com/ember-cli/eslint-plugin-ember/pull/2818) Add `no-legacy-computed` rule to disallow `computed` and computed macros ([@Copilot](https://github.com/apps/copilot-swe-agent))
+  * [#2820](https://github.com/ember-cli/eslint-plugin-ember/pull/2820) Add `no-legacy-helper-imports` rule for Ember 7.1+ with safe autofix ([@Copilot](https://github.com/apps/copilot-swe-agent))
+  * [#2816](https://github.com/ember-cli/eslint-plugin-ember/pull/2816) Add `no-test-this-set-get` rule for gjs/gts tests ([@Copilot](https://github.com/apps/copilot-swe-agent))
+
+#### Committers: 1
+- Copilot [Bot] ([@copilot-swe-agent](https://github.com/apps/copilot-swe-agent))
+
 ## Release (2026-07-03)
 
 * eslint-plugin-ember 13.4.1 (patch)
