@@ -1,22 +1,18 @@
 {
   "solution": {
     "eslint-plugin-ember": {
-      "impact": "patch",
-      "oldVersion": "13.4.0",
-      "newVersion": "13.4.1",
+      "impact": "minor",
+      "oldVersion": "13.4.1",
+      "newVersion": "13.5.0",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-07-03)\n\n* eslint-plugin-ember 13.4.1 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2821](https://github.com/ember-cli/eslint-plugin-ember/pull/2821) Upgrade ember-eslint-parser to ^0.14.2 ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### :house: Internal\n* `eslint-plugin-ember`\n  * [#2822](https://github.com/ember-cli/eslint-plugin-ember/pull/2822) Raise vitest testTimeout to absorb per-file parser init ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### Committers: 1\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n"
+  "description": "## Release (2026-07-20)\n\n* eslint-plugin-ember 13.5.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2818](https://github.com/ember-cli/eslint-plugin-ember/pull/2818) Add `no-legacy-computed` rule to disallow `computed` and computed macros ([@Copilot](https://github.com/apps/copilot-swe-agent))\n  * [#2820](https://github.com/ember-cli/eslint-plugin-ember/pull/2820) Add `no-legacy-helper-imports` rule for Ember 7.1+ with safe autofix ([@Copilot](https://github.com/apps/copilot-swe-agent))\n  * [#2816](https://github.com/ember-cli/eslint-plugin-ember/pull/2816) Add `no-test-this-set-get` rule for gjs/gts tests ([@Copilot](https://github.com/apps/copilot-swe-agent))\n\n#### Committers: 1\n- Copilot [Bot] ([@copilot-swe-agent](https://github.com/apps/copilot-swe-agent))\n"
 }
