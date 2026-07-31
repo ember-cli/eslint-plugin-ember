@@ -206,7 +206,7 @@ or
 
 ### Replacing `template-lint-disable` comments
 
-Inline disable directives need to be rewritten to ESLint's syntax, prefixed with `ember/template-`. For now, only two scopes are supported: the next line, or the rest of the file. For example, replace:
+Inline disable directives need to be rewritten to ESLint's syntax, prefixed with `ember/template-`. ESLint's own scopes are the next line and the rest of the file, but an `eslint-disable` / `eslint-enable` pair delimits an arbitrary region, so every template-lint scope has an exact equivalent. For example, replace:
 
 ```hbs
 {{!template-lint-disable no-invalid-role}}
@@ -218,7 +218,15 @@ with:
 {{!eslint-disable-next-line ember/template-no-invalid-role}}
 ```
 
-The [`template-no-template-lint-directives`](docs/rules/template-no-template-lint-directives.md) rule (enabled by the `template-lint-migration` config) does this rewrite for you: run `eslint --fix` once and it converts every `template-lint-disable` / `template-lint-enable` comment in your templates.
+or, to cover a region rather than one line, bracket it:
+
+```hbs
+{{!eslint-disable ember/template-no-invalid-role}}
+<div role='range'></div>
+{{!eslint-enable ember/template-no-invalid-role}}
+```
+
+The [`template-no-template-lint-directives`](docs/rules/template-no-template-lint-directives.md) rule (enabled by the `template-lint-migration` config) does this rewrite for you: run `eslint --fix` once and it converts every `template-lint-disable` / `template-lint-enable` comment in your templates, including the element-scoped and `-tree` forms, preserving each directive's original scope.
 
 To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-level directive in the JS region — it applies to the `<template>` contents as well:
 
