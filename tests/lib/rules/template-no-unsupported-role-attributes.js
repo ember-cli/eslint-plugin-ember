@@ -32,6 +32,15 @@ const validHbs = [
   '<input type="password" aria-checked="false" />',
   '<input type="password" aria-selected="true" />',
 
+  // A dynamic `role` makes the element's role unknowable at lint time, so no
+  // aria-* attribute can be judged against it. Falling back to the implicit
+  // role here would flag attributes that are valid for the role the expression
+  // actually resolves to.
+  '<div role={{this.role}} aria-modal="true"></div>',
+  '<div role="{{this.role}}" aria-modal="true"></div>',
+  '<div role={{if @useCase "dialog"}} aria-modal={{if @useCase "true"}}></div>',
+  '<span role={{@role}} aria-level="2"></span>',
+
   // <input type="text"> without a list attribute is a textbox — aria-required,
   // aria-readonly, aria-placeholder are all supported.
   '<input type="text" aria-required="true" />',
