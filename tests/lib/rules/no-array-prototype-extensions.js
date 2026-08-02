@@ -51,6 +51,8 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'Promise.reject("some reason");',
     'reject();',
     'this.reject();',
+    'const resolvers = Promise.withResolvers(); resolvers.reject();',
+    'const resolvers = window.Promise.withResolvers(); resolvers.reject();',
 
     // Promise.any()
     'Promise.any();',
