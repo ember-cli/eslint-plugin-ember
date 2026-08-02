@@ -44,6 +44,37 @@ ruleTester.run('template-no-template-lint-directives', rule, {
       output: '<template>{{! eslint-enable ember/template-no-log }}{{log "x"}}</template>',
       errors: [{ messageId: 'convert' }],
     },
+    // ember-template-lint unquotes each rule name (single or double quotes),
+    // so quoted names are live directives in migrating codebases and must
+    // convert to bare eslint rule names.
+    {
+      code: '<template>{{! template-lint-disable "no-log" }}{{log "x"}}</template>',
+      output: '<template>{{! eslint-disable ember/template-no-log }}{{log "x"}}</template>',
+      errors: [{ messageId: 'convert' }],
+    },
+    {
+      code: '<template>{{! template-lint-disable \'no-log\' }}{{log "x"}}</template>',
+      output: '<template>{{! eslint-disable ember/template-no-log }}{{log "x"}}</template>',
+      errors: [{ messageId: 'convert' }],
+    },
+    {
+      code: '<template>{{! template-lint-disable "no-log" no-debugger }}{{log "x"}}</template>',
+      output:
+        '<template>{{! eslint-disable ember/template-no-log, ember/template-no-debugger }}{{log "x"}}</template>',
+      errors: [{ messageId: 'convert' }],
+    },
+    {
+      code: '<template>{{! template-lint-enable "no-log" }}{{log "x"}}</template>',
+      output: '<template>{{! eslint-enable ember/template-no-log }}{{log "x"}}</template>',
+      errors: [{ messageId: 'convert' }],
+    },
+    // Mismatched or lone quotes are not a quoted name — upstream's unquote
+    // only strips when the first and last character are the same quote.
+    {
+      code: '<template>{{! template-lint-disable "no-log\' }}{{log "x"}}</template>',
+      output: '<template>{{! eslint-disable ember/template-"no-log\' }}{{log "x"}}</template>',
+      errors: [{ messageId: 'convert' }],
+    },
     // Directive inside an element's opening tag is lifted to before the
     // element so the eslint-disable scope covers the line where the
     // violation is reported.
