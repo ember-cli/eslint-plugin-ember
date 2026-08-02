@@ -32,6 +32,15 @@ This rule **allows** the following:
 </template>
 ```
 
+An element whose `role` is a dynamic expression is skipped: its role is not
+knowable at lint time, so no ARIA attribute on it can be judged against a role.
+
+```gjs
+<template>
+  <div role={{if @useCase "dialog"}} aria-modal={{if @useCase "true"}}></div>
+</template>
+```
+
 ## References
 
 - [Using ARIA, Roles, States, and Properties](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques)
