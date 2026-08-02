@@ -1,5 +1,24 @@
 # Changelog
 
+## Release (2026-08-02)
+
+* eslint-plugin-ember 13.5.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2818](https://github.com/ember-cli/eslint-plugin-ember/pull/2818) Add `no-legacy-computed` rule to disallow `computed` and computed macros ([@Copilot](https://github.com/apps/copilot-swe-agent))
+  * [#2820](https://github.com/ember-cli/eslint-plugin-ember/pull/2820) Add `no-legacy-helper-imports` rule for Ember 7.1+ with safe autofix ([@Copilot](https://github.com/apps/copilot-swe-agent))
+  * [#2816](https://github.com/ember-cli/eslint-plugin-ember/pull/2816) Add `no-test-this-set-get` rule for gjs/gts tests ([@Copilot](https://github.com/apps/copilot-swe-agent))
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2831](https://github.com/ember-cli/eslint-plugin-ember/pull/2831) fix(template-no-unsupported-role-attributes): skip elements with a dynamic role ([@johanrd](https://github.com/johanrd))
+  * [#2832](https://github.com/ember-cli/eslint-plugin-ember/pull/2832) fix(template-no-template-lint-directives): unquote rule names when converting ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 2
+- Copilot [Bot] ([@copilot-swe-agent](https://github.com/apps/copilot-swe-agent))
+- Johan Røed ([@johanrd](https://github.com/johanrd))
+
 ## Release (2026-07-03)
 
 * eslint-plugin-ember 13.4.1 (patch)
