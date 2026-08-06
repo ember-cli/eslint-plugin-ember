@@ -663,6 +663,50 @@ ruleTester.run('no-get', rule, {
         },
       ],
     },
+    {
+      // handle ember's Array prototype extensions for `firstObject`
+      code: "foo.get('firstObject');",
+      output: 'foo[0];',
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // handle ember's Array prototype extensions for `firstObject`
+      code: "foo.get('lastObject');",
+      output: 'foo[foo.length - 1];',
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // handle ember's Array prototype extensions for `firstObject`
+      code: "this.get('foo.firstObject.bar');",
+      output: 'this.foo[0].bar;',
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      // handle ember's Array prototype extensions for `firstObject`
+      code: "this.get('foo.lastObject.bar');",
+      output: 'this.foo[this.foo.length - 1].bar;',
+      errors: [
+        {
+          message: ERROR_MESSAGE_GET,
+          type: 'CallExpression',
+        },
+      ],
+    },
 
     {
       code: `
