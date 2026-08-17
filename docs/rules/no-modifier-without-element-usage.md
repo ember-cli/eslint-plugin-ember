@@ -4,18 +4,13 @@
 
 Disallow modifiers that never use their element.
 
-A modifier exists to give an element behavior that only the DOM node can provide: event listeners, focus, measurement, or handing the node to a third-party library. A modifier that ignores its element is an effect keyed to render timing, which brings back the problems of `{{did-insert}}` and `{{did-update}}`: extra renders, render loops, and behavior that no longer lives next to the data it depends on.
+A modifier exists to give an element behavior that only the DOM node can provide: event listeners, focus, measurement, or handing the node to a third-party library. A modifier that ignores its element has historically caused infinite render loops, and lead to confusion.
 
 ## Rule Details
 
 This rule reports a modifier whose element is never referenced.
 
-Both modifier styles are checked:
-
-- function modifiers created with `modifier()` from `ember-modifier`, where the element is the first parameter of the callback
-- class modifiers extending the `ember-modifier` default export or `ClassBasedModifier`, where the element is the first parameter of `modify()` or, in the legacy hook API, `this.element`
-
-Any reference counts as usage, including destructuring the element and passing it to another function. A modifier with no element parameter at all is reported.
+Both modifier function and class styles from `ember-modifier` are checked.
 
 ## Examples
 
