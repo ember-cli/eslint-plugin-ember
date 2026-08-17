@@ -45,6 +45,18 @@ ruleTester.run('template-no-extra-mut-helper-argument', rule, {
         },
       ],
     },
+    // `mut` is an ambient strict-mode keyword, so this reports in gjs/gts as well
+    {
+      filename: 'test.gjs',
+      code: '<template>{{yield (mut @a @b)}}</template>',
+      output: null,
+      errors: [
+        {
+          message:
+            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(action (mut attr) value)`.',
+        },
+      ],
+    },
   ],
 });
 
