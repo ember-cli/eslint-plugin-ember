@@ -2,8 +2,6 @@
 
 💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
 
-> **HBS Only**: This rule applies to classic `.hbs` template files only (loose mode). It is not relevant for `gjs`/`gts` files (strict mode), where these patterns cannot occur.
-
 <!-- end auto-generated rule header -->
 
 Disallow passing `classBinding` or `classNameBindings` as arguments within templates. These are legacy Ember Classic patterns that should be replaced with modern approaches.
