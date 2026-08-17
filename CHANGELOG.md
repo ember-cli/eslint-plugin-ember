@@ -1,5 +1,24 @@
 # Changelog
 
+## Release (2026-08-17)
+
+* eslint-plugin-ember 13.6.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2839](https://github.com/ember-cli/eslint-plugin-ember/pull/2839) Add no-modifier-without-element-usage rule ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2844](https://github.com/ember-cli/eslint-plugin-ember/pull/2844) template-no-class-bindings applies to strict mode ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2837](https://github.com/ember-cli/eslint-plugin-ember/pull/2837) fix(no-array-prototype-extensions): handle Promise.withResolvers ([@Guflly](https://github.com/Guflly))
+  * [#2841](https://github.com/ember-cli/eslint-plugin-ember/pull/2841) template-no-extra-mut-helper-argument: applies to strict mode, and stop recommending (action) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2842](https://github.com/ember-cli/eslint-plugin-ember/pull/2842) template-no-unnecessary-component-helper is not hbs-only ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- Guflly ([@Guflly](https://github.com/Guflly))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-08-02)
 
 * eslint-plugin-ember 13.5.0 (minor)
