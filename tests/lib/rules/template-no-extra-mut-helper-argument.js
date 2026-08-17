@@ -8,20 +8,20 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-extra-mut-helper-argument', rule, {
   valid: [
-    '<template>{{my-component click=(action (mut isClicked))}}</template>',
-    '<template>{{my-component click=(action (mut isClicked) true)}}</template>',
+    '<template>{{my-component click=(fn (mut isClicked))}}</template>',
+    '<template>{{my-component click=(fn (mut isClicked) true)}}</template>',
     '<template>{{my-component isClickedMutable=(mut isClicked)}}</template>',
-    '<template><button {{action (mut isClicked)}}></button></template>',
-    '<template><button {{action (mut isClicked) true}}></button></template>',
+    '<template><button {{on "click" (fn (mut isClicked))}}></button></template>',
+    '<template><button {{on "click" (fn (mut isClicked) true)}}></button></template>',
   ],
   invalid: [
     {
-      code: '<template>{{my-component click=(action (mut isClicked true))}}</template>',
+      code: '<template>{{my-component click=(fn (mut isClicked true))}}</template>',
       output: null,
       errors: [
         {
           message:
-            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(action (mut attr) value)`.',
+            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(fn (mut attr) value)`.',
         },
       ],
     },
@@ -31,17 +31,17 @@ ruleTester.run('template-no-extra-mut-helper-argument', rule, {
       errors: [
         {
           message:
-            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(action (mut attr) value)`.',
+            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(fn (mut attr) value)`.',
         },
       ],
     },
     {
-      code: '<template><button {{action (mut isClicked true)}}></button></template>',
+      code: '<template><button {{on "click" (fn (mut isClicked true))}}></button></template>',
       output: null,
       errors: [
         {
           message:
-            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(action (mut attr) value)`.',
+            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(fn (mut attr) value)`.',
         },
       ],
     },
@@ -53,7 +53,7 @@ ruleTester.run('template-no-extra-mut-helper-argument', rule, {
       errors: [
         {
           message:
-            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(action (mut attr) value)`.',
+            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(fn (mut attr) value)`.',
         },
       ],
     },
@@ -70,20 +70,20 @@ const hbsRuleTester = new RuleTester({
 
 hbsRuleTester.run('template-no-extra-mut-helper-argument', rule, {
   valid: [
-    '{{my-component click=(action (mut isClicked))}}',
-    '{{my-component click=(action (mut isClicked) true)}}',
+    '{{my-component click=(fn (mut isClicked))}}',
+    '{{my-component click=(fn (mut isClicked) true)}}',
     '{{my-component isClickedMutable=(mut isClicked)}}',
-    '<button {{action (mut isClicked)}}></button>',
-    '<button {{action (mut isClicked) true}}></button>',
+    '<button {{on "click" (fn (mut isClicked))}}></button>',
+    '<button {{on "click" (fn (mut isClicked) true)}}></button>',
   ],
   invalid: [
     {
-      code: '{{my-component click=(action (mut isClicked true))}}',
+      code: '{{my-component click=(fn (mut isClicked true))}}',
       output: null,
       errors: [
         {
           message:
-            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(action (mut attr) value)`.',
+            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(fn (mut attr) value)`.',
         },
       ],
     },
@@ -93,17 +93,17 @@ hbsRuleTester.run('template-no-extra-mut-helper-argument', rule, {
       errors: [
         {
           message:
-            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(action (mut attr) value)`.',
+            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(fn (mut attr) value)`.',
         },
       ],
     },
     {
-      code: '<button {{action (mut isClicked true)}}></button>',
+      code: '<button {{on "click" (fn (mut isClicked true))}}></button>',
       output: null,
       errors: [
         {
           message:
-            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(action (mut attr) value)`.',
+            'The handlebars `mut(attr)` helper should only have one argument passed to it. To pass a value, use: `(fn (mut attr) value)`.',
         },
       ],
     },

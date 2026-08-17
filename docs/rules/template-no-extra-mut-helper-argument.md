@@ -13,13 +13,13 @@ A common mistake when using the Ember handlebars template `mut(attr)` helper is 
 This rule **forbids** the following:
 
 ```hbs
-{{my-component click=(action (mut isClicked true))}}
+{{my-component click=(fn (mut isClicked true))}}
 ```
 
 This rule **allows** the following:
 
 ```hbs
-{{my-component click=(action (mut isClicked) true)}}
+{{my-component click=(fn (mut isClicked) true)}}
 ```
 
 ## Related Rules
