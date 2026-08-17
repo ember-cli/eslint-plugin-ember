@@ -65,6 +65,11 @@ function initESLint(parser = gjsGtsParser) {
         'ember/no-get': 'off',
         'ember/no-array-prototype-extensions': 'error',
         'ember/no-unused-services': 'error',
+        // These fixtures exercise the preprocessor, not the template rules that
+        // `recommended` enables for gjs/gts.
+        'ember/template-no-html-comments': 'off',
+        'ember/template-no-invalid-interactive': 'off',
+        'ember/template-no-unused-block-params': 'off',
       },
     },
   });

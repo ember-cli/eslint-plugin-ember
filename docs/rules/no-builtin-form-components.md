@@ -1,5 +1,7 @@
 # ember/no-builtin-form-components
 
+💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 This rule disallows the use of Ember's built-in form components (`Input` and `Textarea`) from `@ember/component` and encourages using native HTML elements instead.
