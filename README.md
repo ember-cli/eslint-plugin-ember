@@ -297,6 +297,7 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 
 | Name                                                                                                               | Description                                                                          | 💼 | 🔧 | 💡 |
 | :----------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------- | :- | :- | :- |
+| [no-modifier-without-element-usage](docs/rules/no-modifier-without-element-usage.md)                               | disallow modifiers that never use their element                                      |    |    |    |
 | [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md)                         | disallow setting certain attributes on builtin components                            | 📋 |    |    |
 | [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                                         | disallow usage of {{action}} modifiers                                               |    | 🔧 |    |
 | [template-no-action-on-submit-button](docs/rules/template-no-action-on-submit-button.md)                           | disallow action attribute on submit buttons                                          | 📋 |    |    |
