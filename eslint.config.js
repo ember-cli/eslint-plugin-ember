@@ -194,6 +194,7 @@ module.exports = [
       'n/no-unsupported-features/es-syntax': 'off',
       'no-console': 'off',
       'no-undef': 'off',
+      'no-param-reassign': 'off',
       'no-unused-expressions': 'off',
       'no-unused-labels': 'off',
       'no-unused-vars': 'off',
