@@ -72,6 +72,9 @@ importers:
       '@babel/plugin-proposal-decorators':
         specifier: ^7.23.2
         version: 7.29.7(@babel/core@7.29.7)
+      '@eslint-community/eslint-plugin-eslint-comments':
+        specifier: ^3.2.0
+        version: 3.2.1(eslint@8.57.1)
       '@eslint/compat':
         specifier: ^2.0.1
         version: 2.1.0(eslint@8.57.1)
@@ -99,9 +102,6 @@ importers:
       eslint-doc-generator:
         specifier: ^2.1.2
         version: 2.4.0(eslint@8.57.1)(prettier@3.8.4)(typescript@5.9.3)
-      eslint-plugin-eslint-comments:
-        specifier: ^3.2.0
-        version: 3.2.0(eslint@8.57.1)
       eslint-plugin-eslint-plugin:
         specifier: ^5.1.1
         version: 5.5.1(eslint@8.57.1)
@@ -507,6 +507,12 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@eslint-community/eslint-plugin-eslint-comments@3.2.1':
+    resolution: {integrity: sha512-/HZbjIGaVO2zLlWX3gRgiHmKRVvvqrC0zVu3eXnIj1ORxoyfGSj50l0PfDfqihyZAqrDYzSMdJesXzFjvAoiLQ==}
+    engines: {node: '>=6.5.0'}
+    peerDependencies:
+      eslint: '>=4.19.1'
 
   '@eslint-community/eslint-utils@4.9.1':
     resolution: {integrity: sha512-phrYmNiYppR7znFEdqgfWHXR6NCkZEK7hwWDHZUjit/2/U0r6XvkDl0SYnoM51Hq7FhCGdLDT6zxCCOY1hexsQ==}
@@ -1980,12 +1986,6 @@ packages:
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=8'
-
-  eslint-plugin-eslint-comments@3.2.0:
-    resolution: {integrity: sha512-0jkOl0hfojIHHmEHgmNdqv4fmh7300NdpA9FFpF7zaoLvB/QeXOGNLIo86oAveJFrfB1p05kC8hpEMHM8DwWVQ==}
-    engines: {node: '>=6.5.0'}
-    peerDependencies:
-      eslint: '>=4.19.1'
 
   eslint-plugin-eslint-plugin@5.5.1:
     resolution: {integrity: sha512-9AmfZzcQ7QHwpzfAQpZ7xdtwHYViylmlnruCH0aV64/tuoH3igGXg91vr0e6ShLf/mrAYGqLw5LZ/gOxJeRXnw==}
@@ -4646,6 +4646,12 @@ snapshots:
   '@esbuild/win32-x64@0.27.7':
     optional: true
 
+  '@eslint-community/eslint-plugin-eslint-comments@3.2.1(eslint@8.57.1)':
+    dependencies:
+      escape-string-regexp: 1.0.5
+      eslint: 8.57.1
+      ignore: 5.3.2
+
   '@eslint-community/eslint-utils@4.9.1(eslint@8.57.1)':
     dependencies:
       eslint: 8.57.1
@@ -6131,12 +6137,6 @@ snapshots:
       '@eslint-community/regexpp': 4.12.2
       eslint: 8.57.1
       eslint-compat-utils: 0.5.1(eslint@8.57.1)
-
-  eslint-plugin-eslint-comments@3.2.0(eslint@8.57.1):
-    dependencies:
-      escape-string-regexp: 1.0.5
-      eslint: 8.57.1
-      ignore: 5.3.2
 
   eslint-plugin-eslint-plugin@5.5.1(eslint@8.57.1):
     dependencies:
