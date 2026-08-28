@@ -69,6 +69,45 @@ ruleTester.run('template-require-input-label', rule, {
       code: '<template><input /></template>',
       options: [false],
     },
+    // checkLabelFor: label before input
+    {
+      code: '<template><label for="email">Email</label><input id="email" /></template>',
+      options: [{ checkLabelFor: true }],
+    },
+    // checkLabelFor: label after input (forward reference resolved at Program:exit)
+    {
+      code: '<template><input id="email" /><label for="email">Email</label></template>',
+      options: [{ checkLabelFor: true }],
+    },
+    // checkLabelFor: input also has aria-label — not id-only, so not checked
+    {
+      code: '<template><input id="email" aria-label="Email" /></template>',
+      options: [{ checkLabelFor: true }],
+    },
+    // checkLabelFor: dynamic id — can't match statically, falls back to skip
+    {
+      code: '<template><input id={{this.fieldId}} /></template>',
+      options: [{ checkLabelFor: true }],
+    },
+    // checkLabelFor: the common Ember `(unique-id)` pattern uses dynamic
+    // bindings on both sides — both for= and id= are dynamic, so neither is
+    // collected, and the input falls back to the skip-if-id-present branch.
+    // We deliberately don't resolve the {{#let}} binding symbolically.
+    {
+      code: '<template>{{#let (unique-id) as |myId|}}<label for={{myId}}>Name</label><input id={{myId}} />{{/let}}</template>',
+      options: [{ checkLabelFor: true }],
+    },
+    // checkLabelFor: combined with labelTags — a CustomLabel wrapper still
+    // satisfies the label requirement (same as without checkLabelFor).
+    {
+      code: '<template><CustomLabel><input id="email" /></CustomLabel></template>',
+      options: [{ labelTags: ['CustomLabel'], checkLabelFor: true }],
+    },
+    // checkLabelFor: mustache string-literal for= collected correctly
+    {
+      code: '<template><label for={{"email"}}>Email</label><input id="email" /></template>',
+      options: [{ checkLabelFor: true }],
+    },
   ],
   invalid: [
     {
@@ -158,6 +197,27 @@ ruleTester.run('template-require-input-label', rule, {
       output: null,
       errors: [{ message: NO_LABEL }],
     },
+    // checkLabelFor: id with no matching <label for> in the same template
+    {
+      code: '<template><input id="email" /></template>',
+      output: null,
+      options: [{ checkLabelFor: true }],
+      errors: [{ message: NO_LABEL }],
+    },
+    // checkLabelFor: id with a mismatched for= (typo)
+    {
+      code: '<template><label for="emal">Email</label><input id="email" /></template>',
+      output: null,
+      options: [{ checkLabelFor: true }],
+      errors: [{ message: NO_LABEL }],
+    },
+    // checkLabelFor: two inputs, only one has a matching label
+    {
+      code: '<template><label for="name">Name</label><input id="name" /><input id="email" /></template>',
+      output: null,
+      options: [{ checkLabelFor: true }],
+      errors: [{ message: NO_LABEL }],
+    },
   ],
 });
 
@@ -227,6 +287,25 @@ hbsRuleTester.run('template-require-input-label', rule, {
     {
       code: '<input />',
       options: [false],
+    },
+    // checkLabelFor: label before/after input within the same .hbs file
+    {
+      code: '<label for="email">Email</label><input id="email" />',
+      options: [{ checkLabelFor: true }],
+    },
+    {
+      code: '<input id="email" /><label for="email">Email</label>',
+      options: [{ checkLabelFor: true }],
+    },
+    // checkLabelFor: id with aria-label is not deferred
+    {
+      code: '<input id="email" aria-label="Email" />',
+      options: [{ checkLabelFor: true }],
+    },
+    // checkLabelFor: dynamic id falls back to skip
+    {
+      code: '<input id={{this.fieldId}} />',
+      options: [{ checkLabelFor: true }],
     },
   ],
   invalid: [
@@ -325,6 +404,20 @@ hbsRuleTester.run('template-require-input-label', rule, {
       code: '<select aria-label="first label" aria-labelledby="second label" />',
       output: null,
       errors: [{ message: MULTIPLE_LABELS }],
+    },
+    // checkLabelFor: id with no matching <label for> in the same .hbs file
+    {
+      code: '<input id="email" />',
+      output: null,
+      options: [{ checkLabelFor: true }],
+      errors: [{ message: NO_LABEL }],
+    },
+    // checkLabelFor: typo in for= attribute
+    {
+      code: '<label for="emal">Email</label><input id="email" />',
+      output: null,
+      options: [{ checkLabelFor: true }],
+      errors: [{ message: NO_LABEL }],
     },
   ],
 });
