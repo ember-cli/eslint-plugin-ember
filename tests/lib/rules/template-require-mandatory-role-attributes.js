@@ -12,7 +12,15 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
     '<template><div aria-disabled="true" /></template>',
     '<template><div role="complementary" /></template>',
     '<template><div role="combobox" aria-expanded="false" aria-controls="ctrlId" /></template>',
-    '<template><div role="option" aria-selected={{false}} /></template>',
+    // Static aria-selected satisfies role="option"'s required ARIA. Both empty-
+    // value and any literal value are recognized — what matters is that the
+    // attribute is rendered at runtime.
+    '<template><div role="option" aria-selected="true" /></template>',
+    '<template><div role="option" aria-selected="false" /></template>',
+    // Bare-mustache string-literal role (i2 analog) renders `role="option"`
+    // and is now recognized as a static role token. The required aria-selected
+    // is satisfied by its static text value.
+    '<template><div role={{"option"}} aria-selected="true" /></template>',
     '<template><FakeComponent /></template>',
     '<template><FakeComponent role="fakerole" /></template>',
     '<template><CustomComponent role="checkbox" aria-checked="false" /></template>',
@@ -71,6 +79,29 @@ ruleTester.run('template-require-mandatory-role-attributes', rule, {
     },
     {
       code: '<template><div role="option"  /></template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-selected is required by the role option' }],
+    },
+    // Bare-mustache falsy aria attribute (h6) — Glimmer omits the attribute at
+    // runtime, so the required-ARIA check should NOT consider it satisfied.
+    // Previously this case was silently treated as valid (encoded as a passing
+    // fixture) because the rule counted AST attribute names, not runtime
+    // presence. Per docs/glimmer-attribute-behavior.md cross-attribute
+    // observations, aria-* is in the falsy-coercion list.
+    {
+      code: '<template><div role="option" aria-selected={{false}} /></template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-selected is required by the role option' }],
+    },
+    {
+      code: '<template><div role="option" aria-selected={{null}} /></template>',
+      output: null,
+      errors: [{ message: 'The attribute aria-selected is required by the role option' }],
+    },
+    // Bare-mustache string-literal role (i2 analog) — now recognized; missing
+    // aria-selected is correctly flagged.
+    {
+      code: '<template><div role={{"option"}} /></template>',
       output: null,
       errors: [{ message: 'The attribute aria-selected is required by the role option' }],
     },
@@ -246,7 +277,10 @@ hbsRuleTester.run('template-require-mandatory-role-attributes', rule, {
     '<div aria-disabled="true" />',
     '<div role="complementary" />',
     '<div role="combobox" aria-expanded="false" aria-controls="ctrlId" />',
-    '<div role="option" aria-selected={{false}} />',
+    '<div role="option" aria-selected="true" />',
+    '<div role="option" aria-selected="false" />',
+    // i2 analog: bare-mustache string-literal role renders `role="option"`.
+    '<div role={{"option"}} aria-selected="true" />',
     '<FakeComponent />',
     '<FakeComponent role="fakerole" />',
     '<CustomComponent role="checkbox" aria-checked="false" />',
@@ -282,6 +316,23 @@ hbsRuleTester.run('template-require-mandatory-role-attributes', rule, {
     },
     {
       code: '<div role="option"  />',
+      output: null,
+      errors: [{ message: 'The attribute aria-selected is required by the role option' }],
+    },
+    // Bare-mustache falsy aria attribute (h6, h9) — Glimmer omits at runtime.
+    {
+      code: '<div role="option" aria-selected={{false}} />',
+      output: null,
+      errors: [{ message: 'The attribute aria-selected is required by the role option' }],
+    },
+    {
+      code: '<div role="option" aria-selected={{null}} />',
+      output: null,
+      errors: [{ message: 'The attribute aria-selected is required by the role option' }],
+    },
+    // Bare-mustache string-literal role (i2 analog) — now recognized.
+    {
+      code: '<div role={{"option"}} />',
       output: null,
       errors: [{ message: 'The attribute aria-selected is required by the role option' }],
     },
