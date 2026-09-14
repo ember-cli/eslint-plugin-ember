@@ -1,7 +1,5 @@
 # ember/no-volatile-computed-properties
 
-💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
-
 <!-- end auto-generated rule header -->
 
 Volatile computed properties are deprecated as of Ember 3.9.

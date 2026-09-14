@@ -7,11 +7,7 @@ const END_HEADER_MARKER = '<!-- end auto-generated rule header -->';
 
 /** @type {import('eslint-doc-generator').GenerateOptions} */
 module.exports = {
-  configEmoji: [
-    ['recommended-gjs', '![gjs logo](/docs/svgs/gjs.svg)'],
-    ['recommended-gts', '![gts logo](/docs/svgs/gts.svg)'],
-    ['template-lint-migration', '📋'],
-  ],
+  configEmoji: [['template-lint-migration', '📋']],
   ruleDocSectionInclude: ['Examples'],
   ruleDocTitleFormat: 'prefix-name',
   ruleListSplit: 'meta.docs.category',

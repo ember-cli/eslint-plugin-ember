@@ -1,5 +1,7 @@
 # ember/no-modifier-without-element-usage
 
+💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Disallow modifiers that never use their element.
