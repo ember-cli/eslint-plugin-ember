@@ -15,9 +15,30 @@ The fixer:
 - replaces `template-lint-disable` / `template-lint-enable` with `eslint-disable` / `eslint-enable`;
 - prefixes each rule name with `ember/template-` (the namespace the rules are published under in this plugin);
 - joins multiple rule names with `,` (ESLint's directive syntax) instead of whitespace (template-lint's syntax);
-- when the directive appears inside an element's opening tag (between attributes), lifts it to its own line just before the element. ESLint scopes line-based directives from the line they appear on, and the violation typically lives on the element's start line, so leaving the directive inside the attribute list would put it after the violation it's meant to cover.
+- converts an element-scoped directive into an `eslint-disable` / `eslint-enable` pair bracketing that element (see below).
 
-The `-tree` suffix on a directive (e.g. `template-lint-disable-tree`) does **not** match this rule. ESLint has no equivalent of template-lint's subtree-scoped directives, so they need manual handling rather than a mechanical conversion.
+### Preserving scope
+
+`template-lint-disable` means different things depending on where it sits, and a
+conversion that ignores that either hides violations or floods a migration with
+noise. ESLint has no element scope, but an `eslint-disable` / `eslint-enable`
+pair delimits an arbitrary region, which reproduces every template-lint scope
+exactly:
+
+| `template-lint-disable` placement  | scope                                           | conversion                                                              |
+| ---------------------------------- | ----------------------------------------------- | ----------------------------------------------------------------------- |
+| standing alone                     | comment → end of template                       | `eslint-disable` (rest of file)                                         |
+| paired with `template-lint-enable` | between the two                                 | `eslint-disable` … `eslint-enable`                                      |
+| inside an element's opening tag    | that element's opening tag, not its descendants | `eslint-disable` before the element, `eslint-enable` as its first child |
+| with the `-tree` suffix            | that element and its descendants                | `eslint-disable` before the element, `eslint-enable` after it           |
+
+The closing comment is inserted without a surrounding newline. `{{! }}` comments
+compile away and leave no trace in the DOM, but a newline would add a whitespace
+text node, which can change inline layout.
+
+To suppress a rule across a whole file, use a file-level ESLint directive — in
+`.gjs`/`.gts` a `/* eslint-disable ember/template-… */` in the JS region also
+covers the `<template>` contents.
 
 ## Examples
 
@@ -38,7 +59,15 @@ Examples of **incorrect** code for this rule:
   class='example'
   {{! template-lint-disable no-invalid-interactive }}
   {{on 'click' this.click}}
-></div>
+><span>hi</span></div>
+```
+
+```hbs
+<div
+  class='example'
+  {{! template-lint-disable-tree no-invalid-interactive }}
+  {{on 'click' this.click}}
+><span>hi</span></div>
 ```
 
 Examples of **correct** code for this rule (i.e. what the autofix produces):
@@ -53,9 +82,23 @@ Examples of **correct** code for this rule (i.e. what the autofix produces):
 {{foo bar=baz}}
 ```
 
+The element-scoped form closes its region as the element's first child, leaving
+descendants linted:
+
 ```hbs
 {{! eslint-disable ember/template-no-invalid-interactive }}
-<div class='example' {{on 'click' this.click}}></div>
+<div
+  class='example'
+  {{on 'click' this.click}}
+>{{! eslint-enable ember/template-no-invalid-interactive }}<span>hi</span></div>
+```
+
+`-tree` closes it after the element, covering the subtree:
+
+```hbs
+{{! eslint-disable ember/template-no-invalid-interactive }}
+<div class='example' {{on 'click' this.click}}><span>hi</span></div>
+{{! eslint-enable ember/template-no-invalid-interactive }}
 ```
 
 ## When Not To Use It
