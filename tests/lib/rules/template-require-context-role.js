@@ -56,6 +56,14 @@ ruleTester.run('template-require-context-role', rule, {
     '<template><div role="rowgroup"><div role="row">Item One</div></div></template>',
     '<template><div role="treegrid"><div role="row">Item One</div></div></template>',
     '<template><div aria-hidden="true" role="tablist"><div role="treeitem">Item One</div></div></template>',
+    // Mustache forms that render `aria-hidden="true"` at runtime (doc rows
+    // h7, h12, h14) — were previously false-positive flagged because the
+    // rule only matched the static text node. classifyAttribute resolves
+    // each form to value="true" and the parent is correctly recognized as
+    // hidden, suppressing the missing-context check.
+    '<template><div aria-hidden={{"true"}} role="tablist"><div role="treeitem">Item</div></div></template>',
+    '<template><div aria-hidden="{{true}}" role="tablist"><div role="treeitem">Item</div></div></template>',
+    '<template><div aria-hidden="{{\'true\'}}" role="tablist"><div role="treeitem">Item</div></div></template>',
     '<template><div role="grid"><div role="rowgroup">Item One</div></div></template>',
     '<template><div role="row"><div role="rowheader">Item One</div></div></template>',
     '<template><div role="tablist"><div role="tab">Item One</div></div></template>',
@@ -321,6 +329,10 @@ hbsRuleTester.run('template-require-context-role', rule, {
     '<div role="rowgroup"><div role="row">Item One</div></div>',
     '<div role="treegrid"><div role="row">Item One</div></div>',
     '<div aria-hidden="true" role="tablist"><div role="treeitem">Item One</div></div>',
+    // Mustache forms that render `aria-hidden="true"` at runtime (doc rows h7, h12, h14)
+    '<div aria-hidden={{"true"}} role="tablist"><div role="treeitem">Item</div></div>',
+    '<div aria-hidden="{{true}}" role="tablist"><div role="treeitem">Item</div></div>',
+    '<div aria-hidden="{{\'true\'}}" role="tablist"><div role="treeitem">Item</div></div>',
     '<div role="grid"><div role="rowgroup">Item One</div></div>',
     '<div role="row"><div role="rowheader">Item One</div></div>',
     '<div role="tablist"><div role="tab">Item One</div></div>',
