@@ -177,3 +177,147 @@ hbsRuleTester.run('template-no-positive-tabindex', rule, {
     },
   ],
 });
+
+// Type-aware checking of dynamic values. The filename must physically exist
+// so the tsconfig includes it in the TypeScript program.
+
+const path = require('node:path');
+
+const PREPROCESSOR_DIR = path.join(__dirname, '../rules-preprocessor');
+const FIXTURE = path.join(PREPROCESSOR_DIR, 'template-no-positive-tabindex/usage.gts');
+
+const ruleTesterTyped = new RuleTester({
+  parser: require.resolve('ember-eslint-parser'),
+  parserOptions: {
+    project: path.join(PREPROCESSOR_DIR, 'tsconfig.eslint.json'),
+    tsconfigRootDir: PREPROCESSOR_DIR,
+    ecmaVersion: 2022,
+    sourceType: 'module',
+    extraFileExtensions: ['.gts'],
+  },
+});
+
+ruleTesterTyped.run('template-no-positive-tabindex (with TS project)', rule, {
+  valid: [
+    {
+      filename: FIXTURE,
+      code: `export default class Foo {
+  tabIndex: 0 | -1 = 0;
+  <template><div tabindex={{this.tabIndex}}></div></template>
+}`,
+    },
+    {
+      filename: FIXTURE,
+      code: `export default class Foo {
+  get tabIndex(): -1 | '0' | undefined { return undefined; }
+  <template><div tabindex="{{this.tabIndex}}"></div></template>
+}`,
+    },
+    {
+      filename: FIXTURE,
+      code: `export default class Foo {
+  state = { tabIndex: -1 as const };
+  <template><div tabindex={{this.state.tabIndex}}></div></template>
+}`,
+    },
+    {
+      filename: FIXTURE,
+      code: `import ComponentBase from './component-stub';
+export default class Foo extends ComponentBase<{ Args: { tabIndex: 0 | -1 } }> {
+  <template><div tabindex={{@tabIndex}}></div></template>
+}`,
+    },
+    {
+      filename: FIXTURE,
+      code: `import { safeTabindex } from './tabindex';
+<template><div tabindex={{safeTabindex}}></div></template>`,
+    },
+    {
+      filename: FIXTURE,
+      code: `export const Foo = class {
+  tabIndex: 0 | -1 = 0;
+  <template><div tabindex={{this.tabIndex}}></div></template>
+};`,
+    },
+    {
+      filename: FIXTURE,
+      code: `const tabIndex = -1;
+<template><div tabindex={{tabIndex}}></div></template>`,
+    },
+    {
+      filename: FIXTURE,
+      code: `export default class Foo {
+  tabIndex = -1 as const;
+  <template><div tabindex={{if this.show this.tabIndex 0}}></div></template>
+}`,
+    },
+  ],
+  invalid: [
+    {
+      filename: FIXTURE,
+      code: `export default class Foo {
+  tabIndex = 0;
+  <template><div tabindex={{this.tabIndex}}></div></template>
+}`,
+      output: null,
+      errors: [{ messageId: 'mustBeNegativeNumeric' }],
+    },
+    {
+      filename: FIXTURE,
+      code: `export default class Foo {
+  tabIndex: 0 | 1 = 0;
+  <template><div tabindex={{this.tabIndex}}></div></template>
+}`,
+      output: null,
+      errors: [{ messageId: 'positive' }],
+    },
+    {
+      filename: FIXTURE,
+      code: `export default class Foo {
+  tabIndex: 0 | -1 | boolean = 0;
+  <template><div tabindex={{this.tabIndex}}></div></template>
+}`,
+      output: null,
+      errors: [{ messageId: 'mustBeNegativeNumeric' }],
+    },
+    {
+      filename: FIXTURE,
+      code: `import ComponentBase from './component-stub';
+export default class Foo extends ComponentBase<{ Args: { tabIndex: number } }> {
+  <template><div tabindex={{@tabIndex}}></div></template>
+}`,
+      output: null,
+      errors: [{ messageId: 'mustBeNegativeNumeric' }],
+    },
+    {
+      filename: FIXTURE,
+      code: `import { positiveTabindex } from './tabindex';
+<template><div tabindex={{positiveTabindex}}></div></template>`,
+      output: null,
+      errors: [{ messageId: 'positive' }],
+    },
+    {
+      filename: FIXTURE,
+      code: '<template>{{#each this.items as |item|}}<div tabindex={{item}}></div>{{/each}}</template>',
+      output: null,
+      errors: [{ messageId: 'mustBeNegativeNumeric' }],
+    },
+    {
+      filename: FIXTURE,
+      code: `export default class Foo {
+  <template><div tabindex={{this.missing}}></div></template>
+}`,
+      output: null,
+      errors: [{ messageId: 'mustBeNegativeNumeric' }],
+    },
+    {
+      filename: FIXTURE,
+      code: `export default class Foo {
+  tabIndex = 2 as const;
+  <template><div tabindex={{if this.show this.tabIndex 0}}></div></template>
+}`,
+      output: null,
+      errors: [{ messageId: 'positive' }],
+    },
+  ],
+});
