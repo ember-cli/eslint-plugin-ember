@@ -24,8 +24,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       ember-eslint-parser:
-        specifier: ^0.14.2
-        version: 0.14.2(@babel/eslint-parser@7.29.7(@babel/core@7.29.7)(eslint@8.57.1))(@typescript-eslint/parser@8.62.0(eslint@8.57.1)(typescript@5.9.3))(typescript@5.9.3)
+        specifier: ^0.14.7
+        version: 0.14.7(@babel/eslint-parser@7.29.7(@babel/core@7.29.7)(eslint@8.57.1))(@typescript-eslint/parser@8.62.0(eslint@8.57.1)(typescript@5.9.3))(typescript@5.9.3)
       ember-rfc176-data:
         specifier: ^0.3.18
         version: 0.3.18
@@ -1823,8 +1823,8 @@ packages:
   electron-to-chromium@1.5.376:
     resolution: {integrity: sha512-cUVA7/RvbFTEuw/i3obUwDTRIXojaxkResf+ibByPFxjc6XK3VNtcQXV0NSbAlJ0FMjcJGgftVVB4Qo184EXvA==}
 
-  ember-eslint-parser@0.14.2:
-    resolution: {integrity: sha512-7hHPr4VbM/KGXXtJiIMthVhHsa38CQzsY2dWOgT0L1FmZ2es59Up651pYLTUUC5A4k2a04PkMeV8BPuB9KZBiQ==}
+  ember-eslint-parser@0.14.7:
+    resolution: {integrity: sha512-nX56tbFbL9/PsWYFVdmqVKh0CtEjWGa82RQYtmn1OzfQ1/jK47uUdDftveo+kB6zxf/K7VwTc1rvzdhNX/qVqA==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@babel/eslint-parser': ^7.28.6 || ^8.0.0
@@ -5895,7 +5895,7 @@ snapshots:
 
   electron-to-chromium@1.5.376: {}
 
-  ember-eslint-parser@0.14.2(@babel/eslint-parser@7.29.7(@babel/core@7.29.7)(eslint@8.57.1))(@typescript-eslint/parser@8.62.0(eslint@8.57.1)(typescript@5.9.3))(typescript@5.9.3):
+  ember-eslint-parser@0.14.7(@babel/eslint-parser@7.29.7(@babel/core@7.29.7)(eslint@8.57.1))(@typescript-eslint/parser@8.62.0(eslint@8.57.1)(typescript@5.9.3))(typescript@5.9.3):
     dependencies:
       '@glimmer/syntax': 0.95.0
       '@typescript-eslint/tsconfig-utils': 8.62.0(typescript@5.9.3)
