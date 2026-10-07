@@ -91,6 +91,16 @@ ruleTester.run('template-no-positive-tabindex', rule, {
       output: null,
       errors: [{ message: 'Avoid positive integer values for tabindex.' }],
     },
+    {
+      code: '<template><button tabindex="{{-1}}5"></button></template>',
+      output: null,
+      errors: [{ messageId: 'mustBeNegativeNumeric' }],
+    },
+    {
+      code: '<template><button tabindex="{{0}}{{1}}"></button></template>',
+      output: null,
+      errors: [{ messageId: 'mustBeNegativeNumeric' }],
+    },
   ],
 });
 
@@ -174,6 +184,11 @@ hbsRuleTester.run('template-no-positive-tabindex', rule, {
       code: '<button tabindex="{{unless a -1 1}}"></button>',
       output: null,
       errors: [{ message: 'Avoid positive integer values for tabindex.' }],
+    },
+    {
+      code: '<button tabindex="{{-1}}5"></button>',
+      output: null,
+      errors: [{ messageId: 'mustBeNegativeNumeric' }],
     },
   ],
 });
@@ -318,6 +333,44 @@ export default class Foo extends ComponentBase<{ Args: { tabIndex: number } }> {
 }`,
       output: null,
       errors: [{ messageId: 'positive' }],
+    },
+    {
+      filename: FIXTURE,
+      code: `export default class Foo {
+  tabIndex = -1 as const;
+  <template><div tabindex={{this.tabIndex foo=1}}></div></template>
+}`,
+      output: null,
+      errors: [{ messageId: 'mustBeNegativeNumeric' }],
+    },
+    {
+      filename: FIXTURE,
+      code: `export default class Foo {
+  tabIndex = -1 as const;
+  <template><div tabindex="{{this.tabIndex}}5"></div></template>
+}`,
+      output: null,
+      errors: [{ messageId: 'mustBeNegativeNumeric' }],
+    },
+    {
+      // `this` in a nested template-only component is not the enclosing class
+      filename: FIXTURE,
+      code: `export default class Foo {
+  tabIndex = -1 as const;
+  get Inner() { return <template><div tabindex={{this.tabIndex}}></div></template>; }
+}`,
+      output: null,
+      errors: [{ messageId: 'mustBeNegativeNumeric' }],
+    },
+    {
+      // `@args` in a nested template-only component are not the enclosing class's args
+      filename: FIXTURE,
+      code: `import ComponentBase from './component-stub';
+export default class Foo extends ComponentBase<{ Args: { tabIndex: 0 | -1 } }> {
+  static Inner = <template><div tabindex={{@tabIndex}}></div></template>;
+}`,
+      output: null,
+      errors: [{ messageId: 'mustBeNegativeNumeric' }],
     },
   ],
 });
