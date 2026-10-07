@@ -1,5 +1,18 @@
 # Changelog
 
+## Release (2026-10-07)
+
+* eslint-plugin-ember 13.6.1 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2850](https://github.com/ember-cli/eslint-plugin-ember/pull/2850) fix(template-no-positive-tabindex): allow dynamic values whose type is provably safe ([@BoussonKarel](https://github.com/BoussonKarel))
+  * [#2851](https://github.com/ember-cli/eslint-plugin-ember/pull/2851) Require ember-eslint-parser ^0.14.7 ([@aklkv](https://github.com/aklkv))
+
+#### Committers: 2
+- Alexey Kulakov ([@aklkv](https://github.com/aklkv))
+- [@BoussonKarel](https://github.com/BoussonKarel)
+
 ## Release (2026-09-30)
 
 * eslint-plugin-ember 13.6.0 (minor)
