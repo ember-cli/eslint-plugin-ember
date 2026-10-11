@@ -1,5 +1,10 @@
 # Changelog
 
+
+
+
+
+
 ## Release (2026-10-07)
 
 * eslint-plugin-ember 13.6.1 (patch)
