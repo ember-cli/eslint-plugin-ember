@@ -1,6 +1,6 @@
 # ember/template-no-pointer-down-event-binding
 
-💼 This rule is enabled in the 📋 `template-lint-migration` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): ✅ `recommended`, 📋 `template-lint-migration`.
 
 <!-- end auto-generated rule header -->
 
