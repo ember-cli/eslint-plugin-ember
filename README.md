@@ -421,6 +421,7 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 | [new-module-imports](docs/rules/new-module-imports.md)                                           | enforce using "New Module Imports" from Ember RFC #176                                     | ✅  |    |    |
 | [no-array-prototype-extensions](docs/rules/no-array-prototype-extensions.md)                     | disallow usage of Ember's `Array` prototype extensions                                     |    | 🔧 |    |
 | [no-at-ember-render-modifiers](docs/rules/no-at-ember-render-modifiers.md)                       | disallow importing from @ember/render-modifiers                                            | ✅  |    |    |
+| [no-deprecated-imports](docs/rules/no-deprecated-imports.md)                                     | disallow imports of deprecated Ember APIs                                                  |    |    |    |
 | [no-deprecated-router-transition-methods](docs/rules/no-deprecated-router-transition-methods.md) | enforce usage of router service transition methods                                         | ✅  | 🔧 |    |
 | [no-function-prototype-extensions](docs/rules/no-function-prototype-extensions.md)               | disallow usage of Ember's `function` prototype extensions                                  | ✅  |    |    |
 | [no-implicit-injections](docs/rules/no-implicit-injections.md)                                   | enforce usage of implicit service injections                                               | ✅  | 🔧 |    |
