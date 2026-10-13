@@ -6,11 +6,9 @@ Ember deprecates APIs through RFCs. Each deprecation becomes available in a spec
 
 ## Rule Details
 
-The rule reads the installed `ember-source` version and reports each deprecated import once that version reaches the deprecation. It uses the version where ember-source enables the deprecation, or the version where it becomes available when it is not enabled yet.
+By default, the rule reports every deprecated import in the table below, including deprecations that ember-source has not shipped yet. These APIs have had better replacements for a long time, so new code should not use them, whatever your Ember version.
 
-To migrate ahead of time, opt in to deprecations from upcoming versions with the `reportAll` option, or per import path with the `imports` option.
-
-When the rule cannot find `ember-source`, it does nothing, unless you set `reportAll: true` or `report: true` for an import path.
+To only report deprecations that your installed `ember-source` version has reached, set `reportAll: false`. The rule then uses the version where ember-source enables the deprecation, or the version where it becomes available when it is not enabled yet. With `reportAll: false`, you can still opt in to single import paths early with the `imports` option. If the rule cannot find `ember-source`, it only reports those opt-ins.
 
 The rule checks `import` declarations (including `import type`), and `export ... from` re-exports. It does not check dynamic `import()`. A namespace import (`import * as x from '...'`) or `export * from '...'` is only reported when the whole module is deprecated.
 
@@ -46,12 +44,14 @@ Deprecations from open or draft PRs can still change before they ship. The versi
 
 ## Examples
 
-With `ember-source` 7.4 installed, examples of **incorrect** code for this rule:
+Examples of **incorrect** code for this rule:
 
 ```js
 import Mixin from '@ember/object/mixin';
 import Evented, { on } from '@ember/object/evented';
 import ArrayProxy from '@ember/array/proxy';
+import { A } from '@ember/array';
+import { isEmpty } from '@ember/utils';
 ```
 
 Examples of **correct** code for this rule:
@@ -61,8 +61,12 @@ Examples of **correct** code for this rule:
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 import { trackedArray } from '@ember/reactive/collections';
+```
 
-// Deprecated in 7.5, not reported on 7.4 unless you opt in
+With `reportAll: false` and `ember-source` 7.4 installed, examples of **correct** code for this rule:
+
+```js
+// Deprecated in 7.5, not reported on 7.4
 import { A } from '@ember/array';
 import { isEmpty } from '@ember/utils';
 ```
@@ -71,25 +75,25 @@ import { isEmpty } from '@ember/utils';
 
 <!-- begin auto-generated rule options list -->
 
-| Name        | Description                                                                                                      | Type    | Default | Required |
-| :---------- | :--------------------------------------------------------------------------------------------------------------- | :------ | :------ | :------- |
-| `imports`   | Per import path overrides. `report: true` opts in to that path early, `report: false` silences it.               | Object  |         |          |
-| `report`    |                                                                                                                  | Boolean |         | Yes      |
-| `reportAll` | Report every known deprecation, including ones that are not yet available in the installed ember-source version. | Boolean | `false` |          |
+| Name        | Description                                                                                                                                                                                                 | Type    | Default | Required |
+| :---------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ | :------ | :------- |
+| `imports`   | Per import path overrides. `report: true` opts in to that path early, `report: false` silences it.                                                                                                          | Object  |         |          |
+| `report`    |                                                                                                                                                                                                             | Boolean |         | Yes      |
+| `reportAll` | Report every known deprecation, including ones that are not yet available in the installed ember-source version. Set to `false` to only report deprecations the installed ember-source version has reached. | Boolean | `true`  |          |
 
 <!-- end auto-generated rule options list -->
 
-Report every known deprecation, including those from upcoming Ember versions:
+Only report deprecations that the installed ember-source version has reached:
 
 ```js
 module.exports = {
   rules: {
-    'ember/no-deprecated-imports': ['error', { reportAll: true }],
+    'ember/no-deprecated-imports': ['error', { reportAll: false }],
   },
 };
 ```
 
-Opt in early to some import paths, and silence others. A per-path `report` value takes precedence over `reportAll` and over the installed version:
+A per-path `report` value takes precedence over `reportAll` and over the installed version. Use it to silence an import path you can't migrate yet, or, with `reportAll: false`, to opt in to one early:
 
 ```js
 module.exports = {
@@ -97,6 +101,7 @@ module.exports = {
     'ember/no-deprecated-imports': [
       'error',
       {
+        reportAll: false,
         imports: {
           '@ember/array': { report: true },
           '@ember/object/computed': { report: false },
