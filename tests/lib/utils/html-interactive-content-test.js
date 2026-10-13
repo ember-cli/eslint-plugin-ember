@@ -111,6 +111,61 @@ describe('isHtmlInteractiveContent', () => {
     it('<video> without controls is NOT interactive', () => {
       expect(isHtmlInteractiveContent(makeNode('video'), getTextAttrValue)).toBe(false);
     });
+
+    // Bare-mustache falsy on `controls` (per cross-attribute observation in
+    // docs/glimmer-attribute-behavior.md) causes Glimmer to omit the attribute
+    // at runtime — so `<video controls={{false}}>` has NO controls and is not
+    // interactive. Was previously a false positive: AST-presence treated it
+    // as having controls.
+    it('<video controls={{false}}> is NOT interactive (Glimmer omits the attribute)', () => {
+      const node = {
+        tag: 'video',
+        attributes: [
+          {
+            name: 'controls',
+            value: {
+              type: 'GlimmerMustacheStatement',
+              path: { type: 'GlimmerBooleanLiteral', value: false },
+            },
+          },
+        ],
+      };
+      expect(isHtmlInteractiveContent(node, getTextAttrValue)).toBe(false);
+    });
+
+    it('<audio controls={{null}}> is NOT interactive', () => {
+      const node = {
+        tag: 'audio',
+        attributes: [
+          {
+            name: 'controls',
+            value: { type: 'GlimmerMustacheStatement', path: { type: 'GlimmerNullLiteral' } },
+          },
+        ],
+      };
+      expect(isHtmlInteractiveContent(node, getTextAttrValue)).toBe(false);
+    });
+
+    it('<video controls="{{false}}"> IS interactive (concat sets IDL true regardless)', () => {
+      const node = {
+        tag: 'video',
+        attributes: [
+          {
+            name: 'controls',
+            value: {
+              type: 'GlimmerConcatStatement',
+              parts: [
+                {
+                  type: 'GlimmerMustacheStatement',
+                  path: { type: 'GlimmerBooleanLiteral', value: false },
+                },
+              ],
+            },
+          },
+        ],
+      };
+      expect(isHtmlInteractiveContent(node, getTextAttrValue)).toBe(true);
+    });
   });
 
   describe('elements NOT in §3.2.5.2.7', () => {
