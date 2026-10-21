@@ -155,7 +155,19 @@ const valid = [
       </template>
     `,
   },
+];
+
+const invalid = [
   {
+    /**
+     * Each top-level template compiles to an `export default`,
+     * so two of them are a duplicate default export.
+     *
+     * The parser does not report it yet.
+     * The placeholder for a top-level template is a plain expression,
+     * and `@typescript-eslint/parser` does not check duplicate exports.
+     */
+    todo: true,
     filename: 'my-component.gjs',
     code: `
       import { on } from '@ember/modifier';
@@ -170,10 +182,12 @@ const valid = [
         <div {{on 'click' noop}} />
       </template>
     `,
+    errors: [
+      {
+        line: 10,
+      },
+    ],
   },
-];
-
-const invalid = [
   {
     parser: '@typescript-eslint/parser',
     filename: 'my-component.gjs',
@@ -497,7 +511,12 @@ describe('template-vars', () => {
 
   describe('invalid', () => {
     for (const scenario of invalid) {
-      const { code, filename, errors, parser } = scenario;
+      const { code, filename, errors, parser, todo } = scenario;
+
+      if (todo) {
+        it.todo(code);
+        continue;
+      }
 
       it(code, async () => {
         const eslint = initESLint(parser);
