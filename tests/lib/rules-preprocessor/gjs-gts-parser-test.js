@@ -92,7 +92,7 @@ const valid = [
 
       export default <template>
         <div {{on 'click' noop}} />
-      </template>
+      </template>;
     `,
   },
   {
@@ -155,6 +155,22 @@ const valid = [
       </template>
     `,
   },
+  {
+    filename: 'my-component.gjs',
+    code: `
+      import { on } from '@ember/modifier';
+
+      const noop = () => {};
+
+      <template>
+        <div {{on 'click' noop}} />
+      </template>
+
+      <template>
+        <div {{on 'click' noop}} />
+      </template>
+    `,
+  },
 ];
 
 const invalid = [
@@ -191,27 +207,6 @@ const invalid = [
    ·                             ───────────
  3 │       <template>Hello!</template>
    ╰────`,
-      },
-    ],
-  },
-  {
-    filename: 'my-component.gjs',
-    code: `
-      import { on } from '@ember/modifier';
-
-      const noop = () => {};
-
-      <template>
-        <div {{on 'click' noop}} />
-      </template>
-
-      <template>
-        <div {{on 'click' noop}} />
-      </template>
-    `,
-    errors: [
-      {
-        message: 'Missing semicolon.',
       },
     ],
   },
