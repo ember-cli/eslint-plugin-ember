@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-10-21)
+
+* eslint-plugin-ember 13.7.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2858](https://github.com/ember-cli/eslint-plugin-ember/pull/2858) Update ember-eslint-parser to 0.15.0 ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### Committers: 1
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
 ## Release (2026-10-07)
 
 * eslint-plugin-ember 13.6.1 (patch)
