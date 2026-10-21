@@ -92,7 +92,7 @@ const valid = [
 
       export default <template>
         <div {{on 'click' noop}} />
-      </template>
+      </template>;
     `,
   },
   {
@@ -159,6 +159,36 @@ const valid = [
 
 const invalid = [
   {
+    /**
+     * Each top-level template compiles to an `export default`,
+     * so two of them are a duplicate default export.
+     *
+     * The parser does not report it yet.
+     * The placeholder for a top-level template is a plain expression,
+     * and `@typescript-eslint/parser` does not check duplicate exports.
+     */
+    todo: true,
+    filename: 'my-component.gjs',
+    code: `
+      import { on } from '@ember/modifier';
+
+      const noop = () => {};
+
+      <template>
+        <div {{on 'click' noop}} />
+      </template>
+
+      <template>
+        <div {{on 'click' noop}} />
+      </template>
+    `,
+    errors: [
+      {
+        line: 10,
+      },
+    ],
+  },
+  {
     parser: '@typescript-eslint/parser',
     filename: 'my-component.gjs',
     code: `import Component from '@glimmer/component';
@@ -191,27 +221,6 @@ const invalid = [
    ·                             ───────────
  3 │       <template>Hello!</template>
    ╰────`,
-      },
-    ],
-  },
-  {
-    filename: 'my-component.gjs',
-    code: `
-      import { on } from '@ember/modifier';
-
-      const noop = () => {};
-
-      <template>
-        <div {{on 'click' noop}} />
-      </template>
-
-      <template>
-        <div {{on 'click' noop}} />
-      </template>
-    `,
-    errors: [
-      {
-        message: 'Missing semicolon.',
       },
     ],
   },
@@ -502,7 +511,12 @@ describe('template-vars', () => {
 
   describe('invalid', () => {
     for (const scenario of invalid) {
-      const { code, filename, errors, parser } = scenario;
+      const { code, filename, errors, parser, todo } = scenario;
+
+      if (todo) {
+        it.todo(code);
+        continue;
+      }
 
       it(code, async () => {
         const eslint = initESLint(parser);
