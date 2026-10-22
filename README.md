@@ -47,6 +47,21 @@ module.exports = {
 };
 ```
 
+### 3. Set your Ember version (optional)
+
+Some rules only report when your Ember version supports the fix, and the parser only treats the Ember 7.1 template keywords (such as `eq` and `on`) as defined on 7.1 or newer. Both read the version from the installed `ember-source`. If you lint without `ember-source` installed, set the version in your config. Rules read `settings`, but ESLint doesn't pass `settings` to parsers, so the parser needs its own option:
+
+```js
+// eslint.config.js (flat config)
+module.exports = [
+  ...eslintPluginEmberRecommended,
+  {
+    settings: { ember: { version: '7.3.0' } },
+    languageOptions: { parserOptions: { emberSourceVersion: '7.3.0' } },
+  },
+];
+```
+
 ## gts/gjs
 
 lint files having `First-Class Component Templates` (fcct)

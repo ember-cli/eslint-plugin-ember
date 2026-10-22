@@ -177,3 +177,27 @@ const map = trackedMap();`,
     ],
   });
 });
+
+describe('no-tracked-built-ins with settings.ember.version', () => {
+  const ruleTester = new RuleTester({
+    parserOptions,
+    parser: require.resolve('@babel/eslint-parser'),
+  });
+
+  ruleTester.run('no-tracked-built-ins', rule, {
+    valid: [
+      {
+        code: "import { TrackedArray } from 'tracked-built-ins';",
+        settings: { ember: { version: '6.7.0' } },
+      },
+    ],
+    invalid: [
+      {
+        code: "import { TrackedArray } from 'tracked-built-ins';",
+        output: "import { trackedArray } from '@ember/reactive/collections';",
+        errors: [{ message: ERROR_MESSAGE_IMPORT, type: 'ImportDeclaration' }],
+        settings: { ember: { version: '6.8.0' } },
+      },
+    ],
+  });
+});
