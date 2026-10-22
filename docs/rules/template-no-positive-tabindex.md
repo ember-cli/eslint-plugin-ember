@@ -12,6 +12,8 @@
 
 This rule prevents usage of any `tabindex` values other than `0` and `-1`. It does allow for dynamic values (choosing which value to show based on some condition / helper / etc), but only if that inline `if` condition has static `0`/`-1` as the value.
 
+In `.gts` files linted with type information (`parserOptions.project` or `parserOptions.projectService`), dynamic values such as `this.tabIndex`, `@tabIndex` or an in-scope variable are also allowed when their TypeScript type only contains numeric literals `<= 0` (and optionally `null`/`undefined`), e.g. `0 | -1`. Types like `number` are still reported, since they can't be proven safe.
+
 This rule takes no arguments.
 
 ## Examples
@@ -24,6 +26,16 @@ This rule **allows** the following:
 <span tabindex={{0}}>baz</span>
 <button tabindex={{if this.isHidden '-1'}}>baz</button>
 <div role='tab' tabindex={{if this.isHidden '-1' '0'}}>baz</div>
+```
+
+With type information:
+
+```gts
+import Component from '@glimmer/component';
+
+export default class Tab extends Component<{ Args: { tabIndex: 0 | -1 } }> {
+  <template><div role='tab' tabindex={{@tabIndex}}>baz</div></template>
+}
 ```
 
 This rule **forbids** the following:

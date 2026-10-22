@@ -13,15 +13,6 @@ ruleTester.run('template-no-class-bindings', rule, {
     '<template>{{true}}</template>',
     '<template>{{"hehe"}}</template>',
     '<template><div class="foo"></div></template>',
-    // Rule is HBS-only: @classBinding in GJS/GTS may be a legitimate component argument
-    {
-      filename: 'test.gjs',
-      code: '<template><SomeThing @classBinding="lol:wat" /></template>',
-    },
-    {
-      filename: 'test.gts',
-      code: '<template>{{some-thing classNameBindings="lol:foo:bar"}}</template>',
-    },
   ],
   invalid: [
     {
@@ -55,6 +46,30 @@ ruleTester.run('template-no-class-bindings', rule, {
       ],
     },
     {
+      code: '<template><SomeThing @classNameBindings="lol:foo:bar" /></template>',
+      output: null,
+      errors: [
+        {
+          messageId: 'noClassBindings',
+          data: { name: '@classNameBindings' },
+        },
+      ],
+    },
+    // `@ember/component` is still supported, so a classic component invoked from
+    // a strict-mode template still acts on these arguments.
+    {
+      filename: 'test.gjs',
+      code: '<template><SomeThing @classBinding="lol:wat" /></template>',
+      output: null,
+      errors: [
+        {
+          messageId: 'noClassBindings',
+          data: { name: '@classBinding' },
+        },
+      ],
+    },
+    {
+      filename: 'test.gts',
       code: '<template><SomeThing @classNameBindings="lol:foo:bar" /></template>',
       output: null,
       errors: [

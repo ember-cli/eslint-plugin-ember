@@ -11,6 +11,7 @@ coverage
 npm-debug.log
 *.swp
 .vscode
+.DS_Store
 
 # eslint-remote-tester
 eslint-remote-tester-results

@@ -1,5 +1,50 @@
 # Changelog
 
+## Release (2026-10-21)
+
+* eslint-plugin-ember 13.7.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2858](https://github.com/ember-cli/eslint-plugin-ember/pull/2858) Update ember-eslint-parser to 0.15.0 ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### Committers: 1
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+## Release (2026-10-07)
+
+* eslint-plugin-ember 13.6.1 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2850](https://github.com/ember-cli/eslint-plugin-ember/pull/2850) fix(template-no-positive-tabindex): allow dynamic values whose type is provably safe ([@BoussonKarel](https://github.com/BoussonKarel))
+  * [#2851](https://github.com/ember-cli/eslint-plugin-ember/pull/2851) Require ember-eslint-parser ^0.14.7 ([@aklkv](https://github.com/aklkv))
+
+#### Committers: 2
+- Alexey Kulakov ([@aklkv](https://github.com/aklkv))
+- [@BoussonKarel](https://github.com/BoussonKarel)
+
+## Release (2026-09-30)
+
+* eslint-plugin-ember 13.6.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2839](https://github.com/ember-cli/eslint-plugin-ember/pull/2839) Add no-modifier-without-element-usage rule ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2849](https://github.com/ember-cli/eslint-plugin-ember/pull/2849) fix: add type to array items and object properties in rule options schema ([@andreww2012](https://github.com/andreww2012))
+  * [#2844](https://github.com/ember-cli/eslint-plugin-ember/pull/2844) template-no-class-bindings applies to strict mode ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2837](https://github.com/ember-cli/eslint-plugin-ember/pull/2837) fix(no-array-prototype-extensions): handle Promise.withResolvers ([@Guflly](https://github.com/Guflly))
+  * [#2841](https://github.com/ember-cli/eslint-plugin-ember/pull/2841) template-no-extra-mut-helper-argument: applies to strict mode, and stop recommending (action) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#2842](https://github.com/ember-cli/eslint-plugin-ember/pull/2842) template-no-unnecessary-component-helper is not hbs-only ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 3
+- Andrew Kazakov ([@andreww2012](https://github.com/andreww2012))
+- Guflly ([@Guflly](https://github.com/Guflly))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-08-02)
 
 * eslint-plugin-ember 13.5.0 (minor)
