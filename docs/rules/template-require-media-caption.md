@@ -1,6 +1,6 @@
 # ember/template-require-media-caption
 
-💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): ✅ `recommended`, 📋 `template-lint-migration`.
+💼 This rule is enabled in the following [configs](https://github.com/ember-cli/eslint-plugin-ember#-configurations): 📋 `hbs`, ✅ `recommended`.
 
 <!-- end auto-generated rule header -->
 
