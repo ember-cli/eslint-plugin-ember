@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-10-22)
+
+* eslint-plugin-ember 13.8.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2859](https://github.com/ember-cli/eslint-plugin-ember/pull/2859) Allow overriding Ember version ([@davidtaylorhq](https://github.com/davidtaylorhq))
+
+#### Committers: 1
+- David Taylor ([@davidtaylorhq](https://github.com/davidtaylorhq))
+
 ## Release (2026-10-21)
 
 * eslint-plugin-ember 13.7.0 (minor)
