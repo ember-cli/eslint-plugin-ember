@@ -27,6 +27,8 @@ The following mappings are applied:
 
 Additionally, `new` expressions using these imports are automatically converted to direct function calls.
 
+This rule does nothing when your Ember version is below 6.8. The version comes from `settings.ember.version` when it is set, and from the installed `ember-source` otherwise.
+
 ## Examples
 
 Examples of **incorrect** code for this rule:

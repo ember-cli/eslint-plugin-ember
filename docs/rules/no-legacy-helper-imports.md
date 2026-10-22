@@ -19,7 +19,7 @@ This rule flags imports that are superseded by those keywords:
 
 Other exports of `@ember/helper` and `@ember/modifier` (such as `helper`, `concat`, `get`, `uniqueId`, `setModifierManager`) are not flagged.
 
-This rule does nothing when the installed `ember-source` version is below 7.1.
+This rule does nothing when your Ember version is below 7.1. The version comes from `settings.ember.version` when it is set, and from the installed `ember-source` otherwise.
 
 ## Rule Details
 
