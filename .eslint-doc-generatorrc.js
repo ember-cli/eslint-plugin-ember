@@ -7,7 +7,8 @@ const END_HEADER_MARKER = '<!-- end auto-generated rule header -->';
 
 /** @type {import('eslint-doc-generator').GenerateOptions} */
 module.exports = {
-  configEmoji: [['template-lint-migration', '📋']],
+  configEmoji: [['hbs', '📋']],
+  ignoreConfig: ['recommended-v13'],
   ruleDocSectionInclude: ['Examples'],
   ruleDocTitleFormat: 'prefix-name',
   ruleListSplit: 'meta.docs.category',

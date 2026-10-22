@@ -154,16 +154,16 @@ rules in templates can be disabled with eslint directives with mustache or html 
 
 If you are replacing `ember-template-lint` with this plugin, `recommended` already covers `.gjs`/`.gts` files: it enables every template rule from the `ember-template-lint` `recommended` preset that a strict-mode template can violate.
 
-For `.hbs` files, add the `template-lint-migration` config. It keeps the full parity set, including the loose-mode-only rules that `recommended` leaves out:
+For `.hbs` files, add the `hbs` config. It keeps the full parity set, including the loose-mode-only rules that `recommended` leaves out. It applies only to `**/*.hbs` and sets the Handlebars parser for those files:
 
 ```js
 // eslint.config.js (flat config)
 import eslintPluginEmberRecommended from 'eslint-plugin-ember/configs/recommended';
-import eslintPluginEmberTemplateLintMigration from 'eslint-plugin-ember/configs/template-lint-migration';
+import eslintPluginEmberHbs from 'eslint-plugin-ember/configs/hbs';
 
 export default [
   ...eslintPluginEmberRecommended,
-  ...eslintPluginEmberTemplateLintMigration,
+  ...eslintPluginEmberHbs,
   {
     rules: {
       // Migrate custom overrides from your .template-lintrc.*:
@@ -174,31 +174,13 @@ export default [
 ];
 ```
 
-`template-lint-migration` mirrors the ember-template-lint `recommended` preset. Applying it after `recommended` is harmless for `.gjs`/`.gts` files, since both set the same rules to `error`.
+`hbs` mirrors the ember-template-lint `recommended` preset. Before v14 it was named `template-lint-migration`.
 
 ### Linting `.hbs` files
 
-ESLint flat config only picks up `.hbs` files when a `files` glob names them. Add a dedicated block so they route to the Handlebars parser:
+ESLint flat config only picks up `.hbs` files when a `files` glob names them. The `hbs` config has that glob.
 
-```js
-// eslint.config.mjs
-import { hbsParser, plugin as emberPlugin } from 'eslint-plugin-ember/recommended';
-
-export default [
-  // ...other blocks...
-  {
-    files: ['app/**/*.hbs'],
-    languageOptions: { parser: hbsParser },
-    plugins: { ember: emberPlugin },
-    rules: {
-      'ember/template-no-bare-strings': 'error',
-      // ...other template rules...
-    },
-  },
-];
-```
-
-Make sure no earlier `@typescript-eslint/parser` block's `files` glob reaches `.hbs` — narrow it to `['**/*.{js,ts,gjs,gts}']` (or similar). Flat config merges rules across every matching block, so even if our HBS block overrides the parser, type-info rules from a matching TS block still layer on and fail with errors like:
+Make sure no `@typescript-eslint/parser` block's `files` glob reaches `.hbs`. Narrow it to `['**/*.{js,ts,gjs,gts}']` or similar. Flat config merges rules across every matching block, so even if the `hbs` config sets the parser, type-info rules from a matching TS block still layer on and fail with errors like:
 
 > Parsing error: `…` was not found by the project service because the extension for the file (`.hbs`) is non-standard.
 
@@ -220,7 +202,7 @@ with:
 {{!eslint-disable-next-line ember/template-no-invalid-role}}
 ```
 
-The [`template-no-template-lint-directives`](docs/rules/template-no-template-lint-directives.md) rule (enabled by the `template-lint-migration` config) does this rewrite for you: run `eslint --fix` once and it converts every `template-lint-disable` / `template-lint-enable` comment in your templates.
+The [`template-no-template-lint-directives`](docs/rules/template-no-template-lint-directives.md) rule (enabled by `recommended` and the `hbs` config) does this rewrite for you: run `eslint --fix` once and it converts every `template-lint-disable` / `template-lint-enable` comment in your templates.
 
 To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-level directive in the JS region — it applies to the `<template>` contents as well:
 
@@ -236,21 +218,32 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 
 <!-- begin auto-generated configs list -->
 
-|    | Name                      |
-| :- | :------------------------ |
-|    | `base`                    |
-| ✅  | `recommended`             |
-| 📋 | `template-lint-migration` |
+|    | Name          |
+| :- | :------------ |
+|    | `base`        |
+| 📋 | `hbs`         |
+| ✅  | `recommended` |
 
 <!-- end auto-generated configs list -->
+
+`recommended-v13` is the `recommended` rule set of v13, without changes. Use it to get v14 fixes and ESLint support before you adopt the v14 rule set:
+
+```js
+// eslint.config.js (flat config)
+import eslintPluginEmberRecommendedV13 from 'eslint-plugin-ember/configs/recommended-v13';
+
+export default [...eslintPluginEmberRecommendedV13];
+```
+
+Rules that only catch patterns from old versions of Ember are in the [Legacy](#legacy) category. They are not in `recommended`.
 
 ## 🍟 Rules
 
 <!-- begin auto-generated rules list -->
 
 💼 [Configurations](https://github.com/ember-cli/eslint-plugin-ember#-configurations) enabled in.\
+📋 Set in the `hbs` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
 ✅ Set in the `recommended` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
-📋 Set in the `template-lint-migration` [configuration](https://github.com/ember-cli/eslint-plugin-ember#-configurations).\
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).\
 💡 Manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
 
@@ -258,118 +251,118 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 
 | Name                                                                                                             | Description                                                                      | 💼   | 🔧 | 💡 |
 | :--------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- | :--- | :- | :- |
-| [template-link-href-attributes](docs/rules/template-link-href-attributes.md)                                     | require href attribute on link elements                                          | ✅ 📋 |    |    |
-| [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)                                           | disallow abstract ARIA roles                                                     | ✅ 📋 |    |    |
-| [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md)                                 | disallow accesskey attribute                                                     | ✅ 📋 | 🔧 |    |
-| [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)                                       | disallow aria-hidden on body element                                             | ✅ 📋 | 🔧 |    |
-| [template-no-aria-unsupported-elements](docs/rules/template-no-aria-unsupported-elements.md)                     | disallow ARIA roles, states, and properties on elements that do not support them | ✅ 📋 |    |    |
-| [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md)                                 | disallow autofocus attribute                                                     | ✅ 📋 | 🔧 |    |
-| [template-no-duplicate-landmark-elements](docs/rules/template-no-duplicate-landmark-elements.md)                 | disallow duplicate landmark elements without unique labels                       | ✅ 📋 |    |    |
-| [template-no-empty-headings](docs/rules/template-no-empty-headings.md)                                           | disallow empty heading elements                                                  | ✅ 📋 |    |    |
-| [template-no-heading-inside-button](docs/rules/template-no-heading-inside-button.md)                             | disallow heading elements inside button elements                                 | ✅ 📋 |    |    |
-| [template-no-invalid-aria-attributes](docs/rules/template-no-invalid-aria-attributes.md)                         | disallow invalid aria-* attributes                                               | ✅ 📋 |    |    |
-| [template-no-invalid-interactive](docs/rules/template-no-invalid-interactive.md)                                 | disallow non-interactive elements with interactive handlers                      | ✅ 📋 |    |    |
-| [template-no-invalid-link-text](docs/rules/template-no-invalid-link-text.md)                                     | disallow invalid or uninformative link text content                              | ✅ 📋 |    |    |
-| [template-no-invalid-link-title](docs/rules/template-no-invalid-link-title.md)                                   | disallow invalid title attributes on link elements                               | ✅ 📋 |    |    |
-| [template-no-invalid-role](docs/rules/template-no-invalid-role.md)                                               | disallow invalid ARIA roles                                                      | ✅ 📋 |    |    |
-| [template-no-nested-interactive](docs/rules/template-no-nested-interactive.md)                                   | disallow nested interactive elements                                             | ✅ 📋 |    |    |
-| [template-no-nested-landmark](docs/rules/template-no-nested-landmark.md)                                         | disallow nested landmark elements                                                | ✅ 📋 |    |    |
-| [template-no-pointer-down-event-binding](docs/rules/template-no-pointer-down-event-binding.md)                   | disallow pointer down event bindings                                             | ✅ 📋 |    |    |
-| [template-no-positive-tabindex](docs/rules/template-no-positive-tabindex.md)                                     | disallow positive tabindex values                                                | ✅ 📋 |    |    |
-| [template-no-redundant-role](docs/rules/template-no-redundant-role.md)                                           | disallow redundant role attributes                                               | ✅ 📋 | 🔧 |    |
-| [template-no-unsupported-role-attributes](docs/rules/template-no-unsupported-role-attributes.md)                 | disallow ARIA attributes that are not supported by the element role              | ✅ 📋 | 🔧 |    |
-| [template-no-whitespace-within-word](docs/rules/template-no-whitespace-within-word.md)                           | disallow excess whitespace within words (e.g. "W e l c o m e")                   | ✅ 📋 |    |    |
-| [template-require-aria-activedescendant-tabindex](docs/rules/template-require-aria-activedescendant-tabindex.md) | require non-interactive elements with aria-activedescendant to have tabindex     | ✅ 📋 | 🔧 |    |
-| [template-require-context-role](docs/rules/template-require-context-role.md)                                     | require ARIA roles to be used in appropriate context                             | ✅ 📋 |    |    |
-| [template-require-iframe-title](docs/rules/template-require-iframe-title.md)                                     | require iframe elements to have a title attribute                                | ✅ 📋 |    |    |
-| [template-require-input-label](docs/rules/template-require-input-label.md)                                       | require label for form input elements                                            | ✅ 📋 |    |    |
-| [template-require-lang-attribute](docs/rules/template-require-lang-attribute.md)                                 | require lang attribute on html element                                           | ✅ 📋 |    |    |
-| [template-require-mandatory-role-attributes](docs/rules/template-require-mandatory-role-attributes.md)           | require mandatory ARIA attributes for ARIA roles                                 | ✅ 📋 |    |    |
-| [template-require-media-caption](docs/rules/template-require-media-caption.md)                                   | require captions for audio and video elements                                    | ✅ 📋 |    |    |
-| [template-require-presentational-children](docs/rules/template-require-presentational-children.md)               | require presentational elements to only contain presentational children          | ✅ 📋 |    |    |
-| [template-require-valid-alt-text](docs/rules/template-require-valid-alt-text.md)                                 | require valid alt text for images and other elements                             | ✅ 📋 |    |    |
+| [template-link-href-attributes](docs/rules/template-link-href-attributes.md)                                     | require href attribute on link elements                                          | 📋 ✅ |    |    |
+| [template-no-abstract-roles](docs/rules/template-no-abstract-roles.md)                                           | disallow abstract ARIA roles                                                     | 📋 ✅ |    |    |
+| [template-no-accesskey-attribute](docs/rules/template-no-accesskey-attribute.md)                                 | disallow accesskey attribute                                                     | 📋 ✅ | 🔧 |    |
+| [template-no-aria-hidden-body](docs/rules/template-no-aria-hidden-body.md)                                       | disallow aria-hidden on body element                                             | 📋 ✅ | 🔧 |    |
+| [template-no-aria-unsupported-elements](docs/rules/template-no-aria-unsupported-elements.md)                     | disallow ARIA roles, states, and properties on elements that do not support them | 📋 ✅ |    |    |
+| [template-no-autofocus-attribute](docs/rules/template-no-autofocus-attribute.md)                                 | disallow autofocus attribute                                                     | 📋 ✅ | 🔧 |    |
+| [template-no-duplicate-landmark-elements](docs/rules/template-no-duplicate-landmark-elements.md)                 | disallow duplicate landmark elements without unique labels                       | 📋 ✅ |    |    |
+| [template-no-empty-headings](docs/rules/template-no-empty-headings.md)                                           | disallow empty heading elements                                                  | 📋 ✅ |    |    |
+| [template-no-heading-inside-button](docs/rules/template-no-heading-inside-button.md)                             | disallow heading elements inside button elements                                 | 📋 ✅ |    |    |
+| [template-no-invalid-aria-attributes](docs/rules/template-no-invalid-aria-attributes.md)                         | disallow invalid aria-* attributes                                               | 📋 ✅ |    |    |
+| [template-no-invalid-interactive](docs/rules/template-no-invalid-interactive.md)                                 | disallow non-interactive elements with interactive handlers                      | 📋 ✅ |    |    |
+| [template-no-invalid-link-text](docs/rules/template-no-invalid-link-text.md)                                     | disallow invalid or uninformative link text content                              | 📋 ✅ |    |    |
+| [template-no-invalid-link-title](docs/rules/template-no-invalid-link-title.md)                                   | disallow invalid title attributes on link elements                               | 📋 ✅ |    |    |
+| [template-no-invalid-role](docs/rules/template-no-invalid-role.md)                                               | disallow invalid ARIA roles                                                      | 📋 ✅ |    |    |
+| [template-no-nested-interactive](docs/rules/template-no-nested-interactive.md)                                   | disallow nested interactive elements                                             | 📋 ✅ |    |    |
+| [template-no-nested-landmark](docs/rules/template-no-nested-landmark.md)                                         | disallow nested landmark elements                                                | 📋 ✅ |    |    |
+| [template-no-pointer-down-event-binding](docs/rules/template-no-pointer-down-event-binding.md)                   | disallow pointer down event bindings                                             | 📋 ✅ |    |    |
+| [template-no-positive-tabindex](docs/rules/template-no-positive-tabindex.md)                                     | disallow positive tabindex values                                                | 📋 ✅ |    |    |
+| [template-no-redundant-role](docs/rules/template-no-redundant-role.md)                                           | disallow redundant role attributes                                               | 📋 ✅ | 🔧 |    |
+| [template-no-unsupported-role-attributes](docs/rules/template-no-unsupported-role-attributes.md)                 | disallow ARIA attributes that are not supported by the element role              | 📋 ✅ | 🔧 |    |
+| [template-no-whitespace-within-word](docs/rules/template-no-whitespace-within-word.md)                           | disallow excess whitespace within words (e.g. "W e l c o m e")                   | 📋 ✅ |    |    |
+| [template-require-aria-activedescendant-tabindex](docs/rules/template-require-aria-activedescendant-tabindex.md) | require non-interactive elements with aria-activedescendant to have tabindex     | 📋 ✅ | 🔧 |    |
+| [template-require-context-role](docs/rules/template-require-context-role.md)                                     | require ARIA roles to be used in appropriate context                             | 📋 ✅ |    |    |
+| [template-require-iframe-title](docs/rules/template-require-iframe-title.md)                                     | require iframe elements to have a title attribute                                | 📋 ✅ |    |    |
+| [template-require-input-label](docs/rules/template-require-input-label.md)                                       | require label for form input elements                                            | 📋 ✅ |    |    |
+| [template-require-lang-attribute](docs/rules/template-require-lang-attribute.md)                                 | require lang attribute on html element                                           | 📋 ✅ |    |    |
+| [template-require-mandatory-role-attributes](docs/rules/template-require-mandatory-role-attributes.md)           | require mandatory ARIA attributes for ARIA roles                                 | 📋 ✅ |    |    |
+| [template-require-media-caption](docs/rules/template-require-media-caption.md)                                   | require captions for audio and video elements                                    | 📋 ✅ |    |    |
+| [template-require-presentational-children](docs/rules/template-require-presentational-children.md)               | require presentational elements to only contain presentational children          | 📋 ✅ |    |    |
+| [template-require-valid-alt-text](docs/rules/template-require-valid-alt-text.md)                                 | require valid alt text for images and other elements                             | 📋 ✅ |    |    |
 | [template-require-valid-form-groups](docs/rules/template-require-valid-form-groups.md)                           | require grouped form controls to have fieldset/legend or WAI-ARIA group labeling |      |    |    |
-| [template-table-groups](docs/rules/template-table-groups.md)                                                     | require table elements to use table grouping elements                            | ✅ 📋 |    |    |
+| [template-table-groups](docs/rules/template-table-groups.md)                                                     | require table elements to use table grouping elements                            | 📋 ✅ |    |    |
 
 ### Best Practices
 
 | Name                                                                                                               | Description                                                                          | 💼   | 🔧 | 💡 |
 | :----------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------- | :--- | :- | :- |
 | [no-modifier-without-element-usage](docs/rules/no-modifier-without-element-usage.md)                               | disallow modifiers that never use their element                                      | ✅    |    |    |
-| [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md)                         | disallow setting certain attributes on builtin components                            | ✅ 📋 |    |    |
+| [template-builtin-component-arguments](docs/rules/template-builtin-component-arguments.md)                         | disallow setting certain attributes on builtin components                            | 📋 ✅ |    |    |
 | [template-no-action-modifiers](docs/rules/template-no-action-modifiers.md)                                         | disallow usage of {{action}} modifiers                                               |      | 🔧 |    |
-| [template-no-action-on-submit-button](docs/rules/template-no-action-on-submit-button.md)                           | disallow action attribute on submit buttons                                          | ✅ 📋 |    |    |
-| [template-no-args-paths](docs/rules/template-no-args-paths.md)                                                     | disallow args.foo paths in templates, use @foo instead                               | ✅ 📋 | 🔧 |    |
-| [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md)                   | disallow @arguments on HTML elements                                                 | ✅ 📋 |    |    |
-| [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)                     | disallow usage of Ember Array prototype extensions                                   | ✅ 📋 | 🔧 |    |
-| [template-no-at-ember-render-modifiers](docs/rules/template-no-at-ember-render-modifiers.md)                       | disallow usage of @ember/render-modifiers                                            | ✅ 📋 |    |    |
+| [template-no-action-on-submit-button](docs/rules/template-no-action-on-submit-button.md)                           | disallow action attribute on submit buttons                                          | 📋 ✅ |    |    |
+| [template-no-args-paths](docs/rules/template-no-args-paths.md)                                                     | disallow args.foo paths in templates, use @foo instead                               | 📋 ✅ | 🔧 |    |
+| [template-no-arguments-for-html-elements](docs/rules/template-no-arguments-for-html-elements.md)                   | disallow @arguments on HTML elements                                                 | 📋 ✅ |    |    |
+| [template-no-array-prototype-extensions](docs/rules/template-no-array-prototype-extensions.md)                     | disallow usage of Ember Array prototype extensions                                   | 📋 ✅ | 🔧 |    |
+| [template-no-at-ember-render-modifiers](docs/rules/template-no-at-ember-render-modifiers.md)                       | disallow usage of @ember/render-modifiers                                            | 📋 ✅ |    |    |
 | [template-no-bare-strings](docs/rules/template-no-bare-strings.md)                                                 | disallow bare strings in templates (require translation/localization)                |      |    |    |
 | [template-no-bare-yield](docs/rules/template-no-bare-yield.md)                                                     | disallow templates whose only meaningful content is a bare {{yield}}                 |      |    |    |
-| [template-no-block-params-for-html-elements](docs/rules/template-no-block-params-for-html-elements.md)             | disallow block params on HTML elements                                               | ✅ 📋 |    |    |
-| [template-no-builtin-form-components](docs/rules/template-no-builtin-form-components.md)                           | disallow usage of built-in form components                                           | ✅ 📋 |    |    |
-| [template-no-capital-arguments](docs/rules/template-no-capital-arguments.md)                                       | disallow capital arguments (use lowercase @arg instead of @Arg)                      | ✅ 📋 |    |    |
+| [template-no-block-params-for-html-elements](docs/rules/template-no-block-params-for-html-elements.md)             | disallow block params on HTML elements                                               | 📋 ✅ |    |    |
+| [template-no-builtin-form-components](docs/rules/template-no-builtin-form-components.md)                           | disallow usage of built-in form components                                           | 📋 ✅ |    |    |
+| [template-no-capital-arguments](docs/rules/template-no-capital-arguments.md)                                       | disallow capital arguments (use lowercase @arg instead of @Arg)                      | 📋 ✅ |    |    |
 | [template-no-chained-this](docs/rules/template-no-chained-this.md)                                                 | disallow redundant `this.this` in templates                                          |      | 🔧 |    |
-| [template-no-class-bindings](docs/rules/template-no-class-bindings.md)                                             | disallow passing classBinding or classNameBindings as arguments in templates         | ✅ 📋 |    |    |
+| [template-no-class-bindings](docs/rules/template-no-class-bindings.md)                                             | disallow passing classBinding or classNameBindings as arguments in templates         | 📋 ✅ |    |    |
 | [template-no-curly-component-invocation](docs/rules/template-no-curly-component-invocation.md)                     | disallow curly component invocation, use angle bracket syntax instead                | 📋   | 🔧 |    |
-| [template-no-debugger](docs/rules/template-no-debugger.md)                                                         | disallow {{debugger}} in templates                                                   | ✅ 📋 |    |    |
-| [template-no-duplicate-attributes](docs/rules/template-no-duplicate-attributes.md)                                 | disallow duplicate attribute names in templates                                      | ✅ 📋 | 🔧 |    |
-| [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                                                 | disallow duplicate id attributes                                                     | ✅ 📋 |    |    |
+| [template-no-debugger](docs/rules/template-no-debugger.md)                                                         | disallow {{debugger}} in templates                                                   | 📋 ✅ |    |    |
+| [template-no-duplicate-attributes](docs/rules/template-no-duplicate-attributes.md)                                 | disallow duplicate attribute names in templates                                      | 📋 ✅ | 🔧 |    |
+| [template-no-duplicate-id](docs/rules/template-no-duplicate-id.md)                                                 | disallow duplicate id attributes                                                     | 📋 ✅ |    |    |
 | [template-no-dynamic-subexpression-invocations](docs/rules/template-no-dynamic-subexpression-invocations.md)       | disallow dynamic subexpression invocations                                           |      |    |    |
 | [template-no-element-event-actions](docs/rules/template-no-element-event-actions.md)                               | disallow element event actions (use {{on}} modifier instead)                         |      |    |    |
-| [template-no-forbidden-elements](docs/rules/template-no-forbidden-elements.md)                                     | disallow specific HTML elements                                                      | ✅ 📋 |    |    |
-| [template-no-html-comments](docs/rules/template-no-html-comments.md)                                               | disallow HTML comments in templates                                                  | ✅ 📋 | 🔧 |    |
+| [template-no-forbidden-elements](docs/rules/template-no-forbidden-elements.md)                                     | disallow specific HTML elements                                                      | 📋 ✅ |    |    |
+| [template-no-html-comments](docs/rules/template-no-html-comments.md)                                               | disallow HTML comments in templates                                                  | 📋 ✅ | 🔧 |    |
 | [template-no-implicit-this](docs/rules/template-no-implicit-this.md)                                               | require explicit `this` in property access                                           | 📋   |    |    |
-| [template-no-index-component-invocation](docs/rules/template-no-index-component-invocation.md)                     | disallow index component invocations                                                 | ✅ 📋 |    |    |
+| [template-no-index-component-invocation](docs/rules/template-no-index-component-invocation.md)                     | disallow index component invocations                                                 | 📋 ✅ |    |    |
 | [template-no-inline-event-handlers](docs/rules/template-no-inline-event-handlers.md)                               | disallow DOM event handler attributes                                                |      |    |    |
 | [template-no-inline-linkto](docs/rules/template-no-inline-linkto.md)                                               | disallow inline form of LinkTo component                                             |      | 🔧 |    |
-| [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                               | disallow inline styles                                                               | ✅ 📋 |    |    |
+| [template-no-inline-styles](docs/rules/template-no-inline-styles.md)                                               | disallow inline styles                                                               | 📋 ✅ |    |    |
 | [template-no-input-block](docs/rules/template-no-input-block.md)                                                   | disallow block usage of {{input}} helper                                             | 📋   |    |    |
 | [template-no-input-tagname](docs/rules/template-no-input-tagname.md)                                               | disallow tagName attribute on {{input}} helper                                       | 📋   |    |    |
-| [template-no-invalid-meta](docs/rules/template-no-invalid-meta.md)                                                 | disallow invalid meta tags                                                           | ✅ 📋 |    |    |
-| [template-no-log](docs/rules/template-no-log.md)                                                                   | disallow {{log}} in templates                                                        | ✅ 📋 |    |    |
+| [template-no-invalid-meta](docs/rules/template-no-invalid-meta.md)                                                 | disallow invalid meta tags                                                           | 📋 ✅ |    |    |
+| [template-no-log](docs/rules/template-no-log.md)                                                                   | disallow {{log}} in templates                                                        | 📋 ✅ |    |    |
 | [template-no-model-argument-in-route-templates](docs/rules/template-no-model-argument-in-route-templates.md)       | disallow @model argument in route templates                                          |      | 🔧 |    |
 | [template-no-multiple-empty-lines](docs/rules/template-no-multiple-empty-lines.md)                                 | disallow multiple consecutive empty lines in templates                               |      | 🔧 |    |
 | [template-no-mut-helper](docs/rules/template-no-mut-helper.md)                                                     | disallow usage of (mut) helper                                                       |      |    |    |
-| [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                                       | disallow negated conditions in if/unless                                             | ✅ 📋 | 🔧 |    |
-| [template-no-nested-splattributes](docs/rules/template-no-nested-splattributes.md)                                 | disallow nested ...attributes usage                                                  | ✅ 📋 |    |    |
-| [template-no-obscure-array-access](docs/rules/template-no-obscure-array-access.md)                                 | disallow obscure array access patterns like `objectPath.@each.property`              | ✅ 📋 | 🔧 |    |
-| [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                                       | disallow obsolete HTML elements                                                      | ✅ 📋 |    |    |
-| [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                               | disallow {{outlet}} outside of route templates                                       | ✅ 📋 |    |    |
+| [template-no-negated-condition](docs/rules/template-no-negated-condition.md)                                       | disallow negated conditions in if/unless                                             | 📋 ✅ | 🔧 |    |
+| [template-no-nested-splattributes](docs/rules/template-no-nested-splattributes.md)                                 | disallow nested ...attributes usage                                                  | 📋 ✅ |    |    |
+| [template-no-obscure-array-access](docs/rules/template-no-obscure-array-access.md)                                 | disallow obscure array access patterns like `objectPath.@each.property`              | 📋 ✅ | 🔧 |    |
+| [template-no-obsolete-elements](docs/rules/template-no-obsolete-elements.md)                                       | disallow obsolete HTML elements                                                      | 📋 ✅ |    |    |
+| [template-no-outlet-outside-routes](docs/rules/template-no-outlet-outside-routes.md)                               | disallow {{outlet}} outside of route templates                                       | 📋 ✅ |    |    |
 | [template-no-page-title-component](docs/rules/template-no-page-title-component.md)                                 | disallow usage of ember-page-title component                                         |      |    |    |
-| [template-no-passed-in-event-handlers](docs/rules/template-no-passed-in-event-handlers.md)                         | disallow passing event handlers directly as component arguments                      | ✅ 📋 |    |    |
-| [template-no-positional-data-test-selectors](docs/rules/template-no-positional-data-test-selectors.md)             | disallow positional data-test-* params in curly invocations                          | ✅ 📋 | 🔧 |    |
-| [template-no-potential-path-strings](docs/rules/template-no-potential-path-strings.md)                             | disallow potential path strings in attribute values                                  | ✅ 📋 |    |    |
-| [template-no-redundant-fn](docs/rules/template-no-redundant-fn.md)                                                 | disallow unnecessary usage of (fn) helper                                            | ✅ 📋 | 🔧 |    |
+| [template-no-passed-in-event-handlers](docs/rules/template-no-passed-in-event-handlers.md)                         | disallow passing event handlers directly as component arguments                      | 📋 ✅ |    |    |
+| [template-no-positional-data-test-selectors](docs/rules/template-no-positional-data-test-selectors.md)             | disallow positional data-test-* params in curly invocations                          | 📋 ✅ | 🔧 |    |
+| [template-no-potential-path-strings](docs/rules/template-no-potential-path-strings.md)                             | disallow potential path strings in attribute values                                  | 📋 ✅ |    |    |
+| [template-no-redundant-fn](docs/rules/template-no-redundant-fn.md)                                                 | disallow unnecessary usage of (fn) helper                                            | 📋 ✅ | 🔧 |    |
 | [template-no-restricted-invocations](docs/rules/template-no-restricted-invocations.md)                             | disallow certain components, helpers or modifiers from being used                    |      |    |    |
 | [template-no-splattributes-with-class](docs/rules/template-no-splattributes-with-class.md)                         | disallow splattributes with class attribute                                          |      |    |    |
-| [template-no-template-lint-directives](docs/rules/template-no-template-lint-directives.md)                         | disallow `{{! template-lint-* }}` directives (use the `{{! eslint-* }}` equivalents) | ✅ 📋 | 🔧 |    |
+| [template-no-template-lint-directives](docs/rules/template-no-template-lint-directives.md)                         | disallow `{{! template-lint-* }}` directives (use the `{{! eslint-* }}` equivalents) | 📋 ✅ | 🔧 |    |
 | [template-no-this-in-template-only-components](docs/rules/template-no-this-in-template-only-components.md)         | disallow this in template-only components                                            |      | 🔧 |    |
 | [template-no-trailing-spaces](docs/rules/template-no-trailing-spaces.md)                                           | disallow trailing whitespace at the end of lines in templates                        |      | 🔧 |    |
 | [template-no-unavailable-this](docs/rules/template-no-unavailable-this.md)                                         | disallow `this` in templates that are not inside a class or function                 |      |    |    |
-| [template-no-unnecessary-component-helper](docs/rules/template-no-unnecessary-component-helper.md)                 | disallow unnecessary component helper                                                | ✅ 📋 | 🔧 |    |
+| [template-no-unnecessary-component-helper](docs/rules/template-no-unnecessary-component-helper.md)                 | disallow unnecessary component helper                                                | 📋 ✅ | 🔧 |    |
 | [template-no-unnecessary-concat](docs/rules/template-no-unnecessary-concat.md)                                     | disallow unnecessary string concatenation                                            |      | 🔧 |    |
-| [template-no-unnecessary-curly-parens](docs/rules/template-no-unnecessary-curly-parens.md)                         | disallow unnecessary parentheses enclosing statements in curlies                     | ✅ 📋 | 🔧 |    |
-| [template-no-unused-block-params](docs/rules/template-no-unused-block-params.md)                                   | disallow unused block parameters in templates                                        | ✅ 📋 |    |    |
-| [template-no-valueless-arguments](docs/rules/template-no-valueless-arguments.md)                                   | disallow valueless named arguments                                                   | ✅ 📋 |    |    |
-| [template-no-whitespace-for-layout](docs/rules/template-no-whitespace-for-layout.md)                               | disallow using whitespace for layout purposes                                        | ✅ 📋 |    |    |
+| [template-no-unnecessary-curly-parens](docs/rules/template-no-unnecessary-curly-parens.md)                         | disallow unnecessary parentheses enclosing statements in curlies                     | 📋 ✅ | 🔧 |    |
+| [template-no-unused-block-params](docs/rules/template-no-unused-block-params.md)                                   | disallow unused block parameters in templates                                        | 📋 ✅ |    |    |
+| [template-no-valueless-arguments](docs/rules/template-no-valueless-arguments.md)                                   | disallow valueless named arguments                                                   | 📋 ✅ |    |    |
+| [template-no-whitespace-for-layout](docs/rules/template-no-whitespace-for-layout.md)                               | disallow using whitespace for layout purposes                                        | 📋 ✅ |    |    |
 | [template-no-yield-block-params-to-else-inverse](docs/rules/template-no-yield-block-params-to-else-inverse.md)     | disallow yielding block params to else or inverse block                              |      |    |    |
-| [template-no-yield-only](docs/rules/template-no-yield-only.md)                                                     | disallow components that only yield                                                  | ✅ 📋 |    |    |
-| [template-no-yield-to-default](docs/rules/template-no-yield-to-default.md)                                         | disallow yield to default block                                                      | ✅ 📋 |    |    |
-| [template-require-button-type](docs/rules/template-require-button-type.md)                                         | require button elements to have a valid type attribute                               | ✅ 📋 | 🔧 |    |
+| [template-no-yield-only](docs/rules/template-no-yield-only.md)                                                     | disallow components that only yield                                                  | 📋 ✅ |    |    |
+| [template-no-yield-to-default](docs/rules/template-no-yield-to-default.md)                                         | disallow yield to default block                                                      | 📋 ✅ |    |    |
+| [template-require-button-type](docs/rules/template-require-button-type.md)                                         | require button elements to have a valid type attribute                               | 📋 ✅ | 🔧 |    |
 | [template-require-each-key](docs/rules/template-require-each-key.md)                                               | require key attribute in {{#each}} loops                                             |      | 🔧 |    |
 | [template-require-form-method](docs/rules/template-require-form-method.md)                                         | require form method attribute                                                        |      | 🔧 |    |
-| [template-require-has-block-helper](docs/rules/template-require-has-block-helper.md)                               | require (has-block) helper usage instead of hasBlock property                        | ✅ 📋 | 🔧 |    |
+| [template-require-has-block-helper](docs/rules/template-require-has-block-helper.md)                               | require (has-block) helper usage instead of hasBlock property                        | 📋 ✅ | 🔧 |    |
 | [template-require-iframe-src-attribute](docs/rules/template-require-iframe-src-attribute.md)                       | require iframe elements to have src attribute                                        |      | 🔧 |    |
 | [template-require-input-type](docs/rules/template-require-input-type.md)                                           | require input elements to have a valid type attribute                                |      | 🔧 |    |
 | [template-require-splattributes](docs/rules/template-require-splattributes.md)                                     | require splattributes usage in component templates                                   |      |    |    |
 | [template-require-strict-mode](docs/rules/template-require-strict-mode.md)                                         | require templates to be in strict mode                                               |      |    |    |
-| [template-require-valid-named-block-naming-format](docs/rules/template-require-valid-named-block-naming-format.md) | require valid named block naming format                                              | ✅ 📋 | 🔧 |    |
+| [template-require-valid-named-block-naming-format](docs/rules/template-require-valid-named-block-naming-format.md) | require valid named block naming format                                              | 📋 ✅ | 🔧 |    |
 | [template-self-closing-void-elements](docs/rules/template-self-closing-void-elements.md)                           | require self-closing on void elements                                                |      | 🔧 |    |
-| [template-simple-modifiers](docs/rules/template-simple-modifiers.md)                                               | require simple modifier syntax                                                       | ✅ 📋 |    |    |
-| [template-simple-unless](docs/rules/template-simple-unless.md)                                                     | require simple conditions in unless blocks                                           | ✅ 📋 | 🔧 |    |
+| [template-simple-modifiers](docs/rules/template-simple-modifiers.md)                                               | require simple modifier syntax                                                       | 📋 ✅ |    |    |
+| [template-simple-unless](docs/rules/template-simple-unless.md)                                                     | require simple conditions in unless blocks                                           | 📋 ✅ | 🔧 |    |
 | [template-sort-invocations](docs/rules/template-sort-invocations.md)                                               | require sorted attributes and modifiers                                              |      | 🔧 |    |
-| [template-splat-attributes-only](docs/rules/template-splat-attributes-only.md)                                     | disallow ...spread other than ...attributes                                          | ✅ 📋 |    |    |
-| [template-style-concatenation](docs/rules/template-style-concatenation.md)                                         | disallow string concatenation in inline styles                                       | ✅ 📋 |    |    |
+| [template-splat-attributes-only](docs/rules/template-splat-attributes-only.md)                                     | disallow ...spread other than ...attributes                                          | 📋 ✅ |    |    |
+| [template-style-concatenation](docs/rules/template-style-concatenation.md)                                         | disallow string concatenation in inline styles                                       | 📋 ✅ |    |    |
 
 ### Components
 
@@ -391,13 +384,11 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 | [no-arrow-function-computed-properties](docs/rules/no-arrow-function-computed-properties.md)                                                     | disallow arrow functions in computed properties                                             | ✅  |    |    |
 | [no-assignment-of-untracked-properties-used-in-tracking-contexts](docs/rules/no-assignment-of-untracked-properties-used-in-tracking-contexts.md) | disallow assignment of untracked properties that are used as computed property dependencies | ✅  | 🔧 |    |
 | [no-computed-properties-in-native-classes](docs/rules/no-computed-properties-in-native-classes.md)                                               | disallow using computed properties in native classes                                        | ✅  |    |    |
-| [no-deeply-nested-dependent-keys-with-each](docs/rules/no-deeply-nested-dependent-keys-with-each.md)                                             | disallow usage of deeply-nested computed property dependent keys with `@each`               |    |    |    |
 | [no-duplicate-dependent-keys](docs/rules/no-duplicate-dependent-keys.md)                                                                         | disallow repeating computed property dependent keys                                         | ✅  | 🔧 |    |
 | [no-incorrect-computed-macros](docs/rules/no-incorrect-computed-macros.md)                                                                       | disallow incorrect usage of computed property macros                                        | ✅  | 🔧 |    |
 | [no-invalid-dependent-keys](docs/rules/no-invalid-dependent-keys.md)                                                                             | disallow invalid dependent keys in computed properties                                      | ✅  | 🔧 |    |
 | [no-legacy-computed](docs/rules/no-legacy-computed.md)                                                                                           | disallow use of legacy computed properties and computed macros                              |    |    |    |
 | [no-side-effects](docs/rules/no-side-effects.md)                                                                                                 | disallow unexpected side effects in computed properties                                     | ✅  |    |    |
-| [no-volatile-computed-properties](docs/rules/no-volatile-computed-properties.md)                                                                 | disallow volatile computed properties                                                       |    |    |    |
 | [require-computed-macros](docs/rules/require-computed-macros.md)                                                                                 | require using computed property macros when possible                                        | ✅  | 🔧 |    |
 | [require-computed-property-dependencies](docs/rules/require-computed-property-dependencies.md)                                                   | require dependencies to be declared statically in computed properties                       | ✅  | 🔧 |    |
 | [require-return-from-computed](docs/rules/require-return-from-computed.md)                                                                       | disallow missing return statements in computed properties                                   | ✅  |    |    |
@@ -405,38 +396,31 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 
 ### Controllers
 
-| Name                                                                               | Description                           | 💼 | 🔧 | 💡 |
-| :--------------------------------------------------------------------------------- | :------------------------------------ | :- | :- | :- |
-| [alias-model-in-controller](docs/rules/alias-model-in-controller.md)               | enforce aliasing model in controllers |    |    |    |
-| [avoid-using-needs-in-controllers](docs/rules/avoid-using-needs-in-controllers.md) | disallow using `needs` in controllers |    |    |    |
-| [no-controllers](docs/rules/no-controllers.md)                                     | disallow non-essential controllers    |    |    |    |
+| Name                                                                 | Description                           | 💼 | 🔧 | 💡 |
+| :------------------------------------------------------------------- | :------------------------------------ | :- | :- | :- |
+| [alias-model-in-controller](docs/rules/alias-model-in-controller.md) | enforce aliasing model in controllers |    |    |    |
+| [no-controllers](docs/rules/no-controllers.md)                       | disallow non-essential controllers    |    |    |    |
 
 ### Deprecations
 
-| Name                                                                                             | Description                                                                                | 💼   | 🔧 | 💡 |
-| :----------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- | :--- | :- | :- |
-| [closure-actions](docs/rules/closure-actions.md)                                                 | enforce usage of closure actions                                                           |      |    |    |
-| [new-module-imports](docs/rules/new-module-imports.md)                                           | enforce using "New Module Imports" from Ember RFC #176                                     | ✅    |    |    |
-| [no-array-prototype-extensions](docs/rules/no-array-prototype-extensions.md)                     | disallow usage of Ember's `Array` prototype extensions                                     |      | 🔧 |    |
-| [no-at-ember-render-modifiers](docs/rules/no-at-ember-render-modifiers.md)                       | disallow importing from @ember/render-modifiers                                            | ✅    |    |    |
-| [no-deprecated-router-transition-methods](docs/rules/no-deprecated-router-transition-methods.md) | enforce usage of router service transition methods                                         |      | 🔧 |    |
-| [no-function-prototype-extensions](docs/rules/no-function-prototype-extensions.md)               | disallow usage of Ember's `function` prototype extensions                                  |      |    |    |
-| [no-implicit-injections](docs/rules/no-implicit-injections.md)                                   | enforce usage of implicit service injections                                               |      | 🔧 |    |
-| [no-legacy-helper-imports](docs/rules/no-legacy-helper-imports.md)                               | disallow importing helpers and modifiers that are built-in template keywords in Ember 7.1+ |      | 🔧 |    |
-| [no-mixins](docs/rules/no-mixins.md)                                                             | disallow the usage of mixins                                                               | ✅    |    |    |
-| [no-new-mixins](docs/rules/no-new-mixins.md)                                                     | disallow the creation of new mixins                                                        | ✅    |    |    |
-| [no-observers](docs/rules/no-observers.md)                                                       | disallow usage of observers                                                                | ✅    |    |    |
-| [no-old-shims](docs/rules/no-old-shims.md)                                                       | disallow usage of old shims for modules                                                    |      | 🔧 |    |
-| [no-string-prototype-extensions](docs/rules/no-string-prototype-extensions.md)                   | disallow usage of `String` prototype extensions                                            |      |    |    |
-| [template-deprecated-inline-view-helper](docs/rules/template-deprecated-inline-view-helper.md)   | disallow inline {{view}} helper                                                            | 📋   | 🔧 |    |
-| [template-deprecated-render-helper](docs/rules/template-deprecated-render-helper.md)             | disallow {{render}} helper                                                                 | 📋   | 🔧 |    |
-| [template-no-action](docs/rules/template-no-action.md)                                           | disallow {{action}} helper                                                                 | 📋   |    |    |
-| [template-no-attrs-in-components](docs/rules/template-no-attrs-in-components.md)                 | disallow attrs in component templates                                                      | ✅ 📋 |    |    |
-| [template-no-link-to-positional-params](docs/rules/template-no-link-to-positional-params.md)     | disallow positional params in LinkTo component                                             | ✅ 📋 |    |    |
-| [template-no-link-to-tagname](docs/rules/template-no-link-to-tagname.md)                         | disallow tagName attribute on LinkTo component                                             | ✅ 📋 |    |    |
-| [template-no-route-action](docs/rules/template-no-route-action.md)                               | disallow usage of route-action helper                                                      | 📋   |    |    |
-| [template-no-unbound](docs/rules/template-no-unbound.md)                                         | disallow {{unbound}} helper                                                                | ✅ 📋 |    |    |
-| [template-no-with](docs/rules/template-no-with.md)                                               | disallow {{with}} helper                                                                   | 📋   |    |    |
+| Name                                                                                           | Description                                                                                | 💼   | 🔧 | 💡 |
+| :--------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- | :--- | :- | :- |
+| [new-module-imports](docs/rules/new-module-imports.md)                                         | enforce using "New Module Imports" from Ember RFC #176                                     | ✅    |    |    |
+| [no-array-prototype-extensions](docs/rules/no-array-prototype-extensions.md)                   | disallow usage of Ember's `Array` prototype extensions                                     |      | 🔧 |    |
+| [no-at-ember-render-modifiers](docs/rules/no-at-ember-render-modifiers.md)                     | disallow importing from @ember/render-modifiers                                            | ✅    |    |    |
+| [no-legacy-helper-imports](docs/rules/no-legacy-helper-imports.md)                             | disallow importing helpers and modifiers that are built-in template keywords in Ember 7.1+ |      | 🔧 |    |
+| [no-mixins](docs/rules/no-mixins.md)                                                           | disallow the usage of mixins                                                               | ✅    |    |    |
+| [no-new-mixins](docs/rules/no-new-mixins.md)                                                   | disallow the creation of new mixins                                                        | ✅    |    |    |
+| [no-observers](docs/rules/no-observers.md)                                                     | disallow usage of observers                                                                | ✅    |    |    |
+| [template-deprecated-inline-view-helper](docs/rules/template-deprecated-inline-view-helper.md) | disallow inline {{view}} helper                                                            | 📋   | 🔧 |    |
+| [template-deprecated-render-helper](docs/rules/template-deprecated-render-helper.md)           | disallow {{render}} helper                                                                 | 📋   | 🔧 |    |
+| [template-no-action](docs/rules/template-no-action.md)                                         | disallow {{action}} helper                                                                 | 📋   |    |    |
+| [template-no-attrs-in-components](docs/rules/template-no-attrs-in-components.md)               | disallow attrs in component templates                                                      | 📋 ✅ |    |    |
+| [template-no-link-to-positional-params](docs/rules/template-no-link-to-positional-params.md)   | disallow positional params in LinkTo component                                             | 📋 ✅ |    |    |
+| [template-no-link-to-tagname](docs/rules/template-no-link-to-tagname.md)                       | disallow tagName attribute on LinkTo component                                             | 📋 ✅ |    |    |
+| [template-no-route-action](docs/rules/template-no-route-action.md)                             | disallow usage of route-action helper                                                      | 📋   |    |    |
+| [template-no-unbound](docs/rules/template-no-unbound.md)                                       | disallow {{unbound}} helper                                                                | 📋 ✅ |    |    |
+| [template-no-with](docs/rules/template-no-with.md)                                             | disallow {{with}} helper                                                                   | 📋   |    |    |
 
 ### Ember Data
 
@@ -452,10 +436,8 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 | :----------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- | :- | :- | :- |
 | [avoid-leaking-state-in-ember-objects](docs/rules/avoid-leaking-state-in-ember-objects.md) | disallow state leakage                                                                 | ✅  |    |    |
 | [no-get](docs/rules/no-get.md)                                                             | require using ES5 getters instead of Ember's `get` / `getProperties` functions         | ✅  | 🔧 |    |
-| [no-get-with-default](docs/rules/no-get-with-default.md)                                   | disallow usage of the Ember's `getWithDefault` function                                |    | 🔧 |    |
 | [no-modifier-argument-destructuring](docs/rules/no-modifier-argument-destructuring.md)     | disallow destructuring of modifier arguments to avoid consuming tracked data too early |    |    |    |
 | [no-proxies](docs/rules/no-proxies.md)                                                     | disallow using array or object proxies                                                 |    |    |    |
-| [no-try-invoke](docs/rules/no-try-invoke.md)                                               | disallow usage of the Ember's `tryInvoke` util                                         |    |    |    |
 | [require-super-in-lifecycle-hooks](docs/rules/require-super-in-lifecycle-hooks.md)         | require super to be called in lifecycle hooks                                          | ✅  | 🔧 |    |
 | [use-ember-get-and-set](docs/rules/use-ember-get-and-set.md)                               | enforce usage of `Ember.get` and `Ember.set`                                           |    | 🔧 |    |
 
@@ -474,13 +456,27 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 | [template-no-deprecated](docs/rules/template-no-deprecated.md)                             | disallow using deprecated Glimmer components, helpers, and modifiers in templates                              |    |    |    |
 | [template-no-let-reference](docs/rules/template-no-let-reference.md)                       | disallow referencing let variables in \<template\>                                                             | ✅  |    |    |
 
-### jQuery
+### Legacy
 
-| Name                                               | Description                                        | 💼 | 🔧 | 💡 |
-| :------------------------------------------------- | :------------------------------------------------- | :- | :- | :- |
-| [jquery-ember-run](docs/rules/jquery-ember-run.md) | disallow usage of jQuery without an Ember run loop | ✅  |    |    |
-| [no-global-jquery](docs/rules/no-global-jquery.md) | disallow usage of global jQuery object             | ✅  |    |    |
-| [no-jquery](docs/rules/no-jquery.md)               | disallow any usage of jQuery                       | ✅  |    |    |
+| Name                                                                                                 | Description                                                                   | 💼 | 🔧 | 💡 |
+| :--------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------- | :- | :- | :- |
+| [avoid-using-needs-in-controllers](docs/rules/avoid-using-needs-in-controllers.md)                   | disallow using `needs` in controllers                                         |    |    |    |
+| [closure-actions](docs/rules/closure-actions.md)                                                     | enforce usage of closure actions                                              |    |    |    |
+| [jquery-ember-run](docs/rules/jquery-ember-run.md)                                                   | disallow usage of jQuery without an Ember run loop                            |    |    |    |
+| [no-deeply-nested-dependent-keys-with-each](docs/rules/no-deeply-nested-dependent-keys-with-each.md) | disallow usage of deeply-nested computed property dependent keys with `@each` |    |    |    |
+| [no-deprecated-router-transition-methods](docs/rules/no-deprecated-router-transition-methods.md)     | enforce usage of router service transition methods                            |    | 🔧 |    |
+| [no-function-prototype-extensions](docs/rules/no-function-prototype-extensions.md)                   | disallow usage of Ember's `function` prototype extensions                     |    |    |    |
+| [no-get-with-default](docs/rules/no-get-with-default.md)                                             | disallow usage of the Ember's `getWithDefault` function                       |    | 🔧 |    |
+| [no-global-jquery](docs/rules/no-global-jquery.md)                                                   | disallow usage of global jQuery object                                        |    |    |    |
+| [no-implicit-injections](docs/rules/no-implicit-injections.md)                                       | enforce usage of implicit service injections                                  |    | 🔧 |    |
+| [no-jquery](docs/rules/no-jquery.md)                                                                 | disallow any usage of jQuery                                                  |    |    |    |
+| [no-old-shims](docs/rules/no-old-shims.md)                                                           | disallow usage of old shims for modules                                       |    | 🔧 |    |
+| [no-string-prototype-extensions](docs/rules/no-string-prototype-extensions.md)                       | disallow usage of `String` prototype extensions                               |    |    |    |
+| [no-test-module-for](docs/rules/no-test-module-for.md)                                               | disallow usage of `moduleFor`, `moduleForComponent`, etc                      |    |    |    |
+| [no-try-invoke](docs/rules/no-try-invoke.md)                                                         | disallow usage of the Ember's `tryInvoke` util                                |    |    |    |
+| [no-volatile-computed-properties](docs/rules/no-volatile-computed-properties.md)                     | disallow volatile computed properties                                         |    |    |    |
+| [require-fetch-import](docs/rules/require-fetch-import.md)                                           | enforce explicit import for `fetch()`                                         |    |    |    |
+| [routes-segments-snake-case](docs/rules/routes-segments-snake-case.md)                               | enforce usage of snake_cased dynamic segments in routes                       |    |    |    |
 
 ### Miscellaneous
 
@@ -492,18 +488,17 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 | [no-invalid-debug-function-arguments](docs/rules/no-invalid-debug-function-arguments.md)                               | disallow usages of Ember's `assert()` / `warn()` / `deprecate()` functions that have the arguments passed in the wrong order. | ✅  |    |    |
 | [no-restricted-property-modifications](docs/rules/no-restricted-property-modifications.md)                             | disallow modifying the specified properties                                                                                   |    | 🔧 |    |
 | [no-runloop](docs/rules/no-runloop.md)                                                                                 | disallow usage of `@ember/runloop` functions                                                                                  | ✅  |    |    |
-| [require-fetch-import](docs/rules/require-fetch-import.md)                                                             | enforce explicit import for `fetch()`                                                                                         |    |    |    |
 
 ### Possible Errors
 
 | Name                                                                                                                       | Description                                                       | 💼   | 🔧 | 💡 |
 | :------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------- | :--- | :- | :- |
-| [template-no-extra-mut-helper-argument](docs/rules/template-no-extra-mut-helper-argument.md)                               | disallow passing more than one argument to the mut helper         | ✅ 📋 |    |    |
+| [template-no-extra-mut-helper-argument](docs/rules/template-no-extra-mut-helper-argument.md)                               | disallow passing more than one argument to the mut helper         | 📋 ✅ |    |    |
 | [template-no-jsx-attributes](docs/rules/template-no-jsx-attributes.md)                                                     | disallow JSX-style camelCase attributes                           |      | 🔧 |    |
-| [template-no-scope-outside-table-headings](docs/rules/template-no-scope-outside-table-headings.md)                         | disallow scope attribute outside th elements                      | ✅ 📋 |    |    |
-| [template-no-shadowed-elements](docs/rules/template-no-shadowed-elements.md)                                               | disallow ambiguity with block param names shadowing HTML elements | ✅ 📋 |    |    |
-| [template-no-unbalanced-curlies](docs/rules/template-no-unbalanced-curlies.md)                                             | disallow unbalanced mustache curlies                              | ✅ 📋 |    |    |
-| [template-no-unknown-arguments-for-builtin-components](docs/rules/template-no-unknown-arguments-for-builtin-components.md) | disallow unknown arguments for built-in components                | ✅ 📋 | 🔧 |    |
+| [template-no-scope-outside-table-headings](docs/rules/template-no-scope-outside-table-headings.md)                         | disallow scope attribute outside th elements                      | 📋 ✅ |    |    |
+| [template-no-shadowed-elements](docs/rules/template-no-shadowed-elements.md)                                               | disallow ambiguity with block param names shadowing HTML elements | 📋 ✅ |    |    |
+| [template-no-unbalanced-curlies](docs/rules/template-no-unbalanced-curlies.md)                                             | disallow unbalanced mustache curlies                              | 📋 ✅ |    |    |
+| [template-no-unknown-arguments-for-builtin-components](docs/rules/template-no-unknown-arguments-for-builtin-components.md) | disallow unknown arguments for built-in components                | 📋 ✅ | 🔧 |    |
 
 ### Routes
 
@@ -516,14 +511,13 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 | [no-unnecessary-index-route](docs/rules/no-unnecessary-index-route.md)             | disallow unnecessary `index` route definition                                            |    |    |    |
 | [no-unnecessary-route-path-option](docs/rules/no-unnecessary-route-path-option.md) | disallow unnecessary usage of the route `path` option                                    | ✅  | 🔧 |    |
 | [route-path-style](docs/rules/route-path-style.md)                                 | enforce usage of kebab-case (instead of snake_case or camelCase) in route paths          |    |    | 💡 |
-| [routes-segments-snake-case](docs/rules/routes-segments-snake-case.md)             | enforce usage of snake_cased dynamic segments in routes                                  |    |    |    |
 
 ### Security
 
 | Name                                                                   | Description                                                     | 💼   | 🔧 | 💡 |
 | :--------------------------------------------------------------------- | :-------------------------------------------------------------- | :--- | :- | :- |
-| [template-link-rel-noopener](docs/rules/template-link-rel-noopener.md) | require rel="noopener noreferrer" on links with target="_blank" | ✅ 📋 | 🔧 |    |
-| [template-no-triple-curlies](docs/rules/template-no-triple-curlies.md) | disallow usage of triple curly brackets (unescaped variables)   | ✅ 📋 |    |    |
+| [template-link-rel-noopener](docs/rules/template-link-rel-noopener.md) | require rel="noopener noreferrer" on links with target="_blank" | 📋 ✅ | 🔧 |    |
+| [template-no-triple-curlies](docs/rules/template-no-triple-curlies.md) | disallow usage of triple curly brackets (unescaped variables)   | 📋 ✅ |    |    |
 
 ### Services
 
@@ -538,8 +532,8 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 
 | Name                                                                                         | Description                                                | 💼   | 🔧 | 💡 |
 | :------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :--- | :- | :- |
-| [template-no-quoteless-attributes](docs/rules/template-no-quoteless-attributes.md)           | require quotes on all attribute values                     | ✅ 📋 | 🔧 |    |
-| [template-no-unnecessary-curly-strings](docs/rules/template-no-unnecessary-curly-strings.md) | disallow unnecessary curly braces in string interpolations | ✅ 📋 | 🔧 |    |
+| [template-no-quoteless-attributes](docs/rules/template-no-quoteless-attributes.md)           | require quotes on all attribute values                     | 📋 ✅ | 🔧 |    |
+| [template-no-unnecessary-curly-strings](docs/rules/template-no-unnecessary-curly-strings.md) | disallow unnecessary curly braces in string interpolations | 📋 ✅ | 🔧 |    |
 
 ### Stylistic Issues
 
@@ -574,7 +568,6 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 | [no-settled-after-test-helper](docs/rules/no-settled-after-test-helper.md)                             | disallow usage of `await settled()` right after test helper that calls it internally                            | ✅  | 🔧 |    |
 | [no-test-and-then](docs/rules/no-test-and-then.md)                                                     | disallow usage of the `andThen` test wait helper                                                                | ✅  |    |    |
 | [no-test-import-export](docs/rules/no-test-import-export.md)                                           | disallow importing of "-test.js" in a test file and exporting from a test file                                  | ✅  |    |    |
-| [no-test-module-for](docs/rules/no-test-module-for.md)                                                 | disallow usage of `moduleFor`, `moduleForComponent`, etc                                                        |    |    |    |
 | [no-test-support-import](docs/rules/no-test-support-import.md)                                         | disallow importing of "test-support" files in production code.                                                  | ✅  |    |    |
 | [no-test-this-render](docs/rules/no-test-this-render.md)                                               | disallow usage of the `this.render` in tests, recommending to use @ember/test-helpers' `render` instead.        | ✅  |    |    |
 | [no-test-this-set-get](docs/rules/no-test-this-set-get.md)                                             | disallow usage of `this.set`, `this.get`, `this.setProperties`, and `this.getProperties` in `.gjs`/`.gts` tests |    |    |    |
