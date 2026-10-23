@@ -1,7 +1,5 @@
 # ember/no-global-jquery
 
-💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
-
 <!-- end auto-generated rule header -->
 
 Do not use global `$` or `jQuery`.

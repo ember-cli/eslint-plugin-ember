@@ -4,9 +4,8 @@ const plugin = require('../lib');
 const ember = require('../lib/utils/ember');
 const base = require('../lib/config-legacy/base');
 const recommended = require('../lib/config-legacy/recommended');
-const recommendedGjs = require('../lib/config-legacy/recommended-gjs');
-const recommendedGts = require('../lib/config-legacy/recommended-gts');
-const templateLintMigration = require('../lib/config-legacy/template-lint-migration');
+const hbs = require('../lib/config-legacy/hbs');
+const recommendedV13 = require('../lib/config-legacy/recommended-v13');
 
 describe('plugin exports', () => {
   describe('utils', () => {
@@ -19,10 +18,9 @@ describe('plugin exports', () => {
     it('has the right configurations', () => {
       expect(plugin.configs).toStrictEqual({
         base,
+        hbs,
         recommended,
-        'recommended-gjs': recommendedGjs,
-        'recommended-gts': recommendedGts,
-        'template-lint-migration': templateLintMigration,
+        'recommended-v13': recommendedV13,
       });
     });
   });

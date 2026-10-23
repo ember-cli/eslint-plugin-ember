@@ -1,7 +1,5 @@
 # ember/no-string-prototype-extensions
 
-💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
-
 <!-- end auto-generated rule header -->
 
 By default, Ember extends certain native JavaScript objects with additional methods. This can lead to problems in some situations. One example is relying on these methods in an addon that is used inside an app that has the extensions disabled.
