@@ -23,6 +23,7 @@ const OFF_FOR_FIXTURES = {
   'ember/template-no-html-comments': 'off',
   'ember/template-no-invalid-interactive': 'off',
   'ember/template-no-unused-block-params': 'off',
+  'ember/template-tag-spacing': 'off',
 };
 
 /**
@@ -145,7 +146,7 @@ const valid = [
     filename: 'my-component.gjs',
     code: `
       import Component from '@glimmer/component';
-      import { inject as service } from '@ember/service';
+      import { service } from '@ember/service';
 
       export default class MyComponent extends Component {
         @service foo;
@@ -473,7 +474,7 @@ const invalid = [
     filename: 'my-component.gjs',
     code: `
       import Component from '@glimmer/component';
-      import { inject as service } from '@ember/service';
+      import { service } from '@ember/service';
 
       export default class MyComponent extends Component {
         @service foo;

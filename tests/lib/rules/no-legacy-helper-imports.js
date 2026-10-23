@@ -180,3 +180,27 @@ describe('no-legacy-helper-imports with ember-source < 7.1', () => {
     invalid: [],
   });
 });
+
+describe('no-legacy-helper-imports with settings.ember.version', () => {
+  const ruleTester = new RuleTester({
+    parser: require.resolve('ember-eslint-parser'),
+    parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+  });
+
+  ruleTester.run('no-legacy-helper-imports', rule, {
+    valid: [
+      {
+        code: "import { eq } from 'ember-truth-helpers';\n<template>{{eq a b}}</template>",
+        settings: { ember: { version: '7.0.0' } },
+      },
+    ],
+    invalid: [
+      {
+        code: "import { eq } from 'ember-truth-helpers';\n<template>{{eq a b}}</template>",
+        output: '<template>{{eq a b}}</template>',
+        errors: [{ messageId: 'legacyImport', type: 'ImportDeclaration' }],
+        settings: { ember: { version: '7.1.0' } },
+      },
+    ],
+  });
+});

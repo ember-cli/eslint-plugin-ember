@@ -1,5 +1,41 @@
 # Changelog
 
+## Release (2026-10-23)
+
+* eslint-plugin-ember 13.9.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2862](https://github.com/ember-cli/eslint-plugin-ember/pull/2862) Add template tag position and spacing rules ([@kategengler](https://github.com/kategengler))
+  * [#2855](https://github.com/ember-cli/eslint-plugin-ember/pull/2855) Add `ember/no-deprecated-imports` rule ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- Katie Gengler ([@kategengler](https://github.com/kategengler))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
+## Release (2026-10-23)
+
+* eslint-plugin-ember 13.8.1 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2864](https://github.com/ember-cli/eslint-plugin-ember/pull/2864) fix(no-array-prototype-extensions): handle Iterator helpers' toArray ([@HawkForge](https://github.com/HawkForge))
+  * [#2863](https://github.com/ember-cli/eslint-plugin-ember/pull/2863) fix(no-array-prototype-extensions): ignore replace calls with a string second argument ([@HawkForge](https://github.com/HawkForge))
+
+#### Committers: 1
+- [@HawkForge](https://github.com/HawkForge)
+
+## Release (2026-10-22)
+
+* eslint-plugin-ember 13.8.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2859](https://github.com/ember-cli/eslint-plugin-ember/pull/2859) Allow overriding Ember version ([@davidtaylorhq](https://github.com/davidtaylorhq))
+
+#### Committers: 1
+- David Taylor ([@davidtaylorhq](https://github.com/davidtaylorhq))
+
 ## Release (2026-10-21)
 
 * eslint-plugin-ember 13.7.0 (minor)
