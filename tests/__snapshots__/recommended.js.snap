@@ -90,6 +90,8 @@ exports[`recommended rules > gjs config has the right list 1`] = `
   "template-splat-attributes-only",
   "template-style-concatenation",
   "template-table-groups",
+  "template-tag-position",
+  "template-tag-spacing",
 ]
 `;
 
@@ -183,6 +185,8 @@ exports[`recommended rules > gts config has the right list 1`] = `
   "template-splat-attributes-only",
   "template-style-concatenation",
   "template-table-groups",
+  "template-tag-position",
+  "template-tag-spacing",
 ]
 `;
 
@@ -205,6 +209,7 @@ exports[`recommended rules > has the right list 1`] = `
   "no-component-lifecycle-hooks",
   "no-computed-properties-in-native-classes",
   "no-controller-access-in-routes",
+  "no-deprecated-imports",
   "no-duplicate-dependent-keys",
   "no-ember-super-in-es-classes",
   "no-ember-testing-in-module-scope",
