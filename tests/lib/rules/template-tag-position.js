@@ -90,7 +90,6 @@ export default class ExampleComponent extends Component {
 
 export default class ExampleComponent extends Component {
   first = 'first';
-
   second = 'second';
 
   <template>
@@ -119,6 +118,35 @@ export default class ExampleComponent extends Component {
   greeting = 'hello';
 }`,
       options: ['before'],
+      errors: [{ messageId: 'wrongPosition' }],
+    },
+    {
+      filename: 'app/components/example.gjs',
+      code: `import Component from '@glimmer/component';
+
+export default class ExampleComponent extends Component {
+  first = 'first';
+
+  // keep this comment
+  <template>
+    <div>{{this.first}}</div>
+  </template>
+
+  second = 'second';
+}`,
+      output: `import Component from '@glimmer/component';
+
+export default class ExampleComponent extends Component {
+  first = 'first';
+
+  // keep this comment
+
+  second = 'second';
+
+  <template>
+    <div>{{this.first}}</div>
+  </template>
+}`,
       errors: [{ messageId: 'wrongPosition' }],
     },
   ],
