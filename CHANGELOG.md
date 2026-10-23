@@ -2,6 +2,19 @@
 
 ## Release (2026-10-23)
 
+* eslint-plugin-ember 13.9.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2862](https://github.com/ember-cli/eslint-plugin-ember/pull/2862) Add template tag position and spacing rules ([@kategengler](https://github.com/kategengler))
+  * [#2855](https://github.com/ember-cli/eslint-plugin-ember/pull/2855) Add `ember/no-deprecated-imports` rule ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- Katie Gengler ([@kategengler](https://github.com/kategengler))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
+## Release (2026-10-23)
+
 * eslint-plugin-ember 13.8.1 (patch)
 
 #### :bug: Bug Fix
