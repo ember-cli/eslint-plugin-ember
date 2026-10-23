@@ -181,4 +181,3 @@ const ready = true;`,
     },
   ],
 });
-
