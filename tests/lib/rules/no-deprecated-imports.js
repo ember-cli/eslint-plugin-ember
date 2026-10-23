@@ -62,7 +62,7 @@ describe('no-deprecated-imports', () => {
   let versionSpy;
 
   beforeAll(() => {
-    versionSpy = vi.spyOn(emberSourceVersionUtil, 'getEmberSourceVersion');
+    versionSpy = vi.spyOn(emberSourceVersionUtil, 'getEmberSourceVersionForContext');
   });
 
   afterAll(() => {
@@ -516,5 +516,26 @@ describe('no-deprecated-imports', () => {
         /should NOT have additional properties/
       );
     });
+  });
+});
+
+describe('no-deprecated-imports with settings.ember.version', () => {
+  ruleTester.run('no-deprecated-imports', rule, {
+    valid: [
+      {
+        code: "import { A } from '@ember/array';",
+        options: [{ reportAll: false }],
+        settings: { ember: { version: '7.4.0' } },
+      },
+    ],
+    invalid: [
+      {
+        code: "import { A } from '@ember/array';",
+        output: null,
+        options: [{ reportAll: false }],
+        errors: [{ message: ARRAY_A }],
+        settings: { ember: { version: '7.5.0' } },
+      },
+    ],
   });
 });
