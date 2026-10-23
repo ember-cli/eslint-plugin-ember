@@ -1,18 +1,18 @@
 {
   "solution": {
     "eslint-plugin-ember": {
-      "impact": "patch",
-      "oldVersion": "13.8.0",
-      "newVersion": "13.8.1",
+      "impact": "minor",
+      "oldVersion": "13.8.1",
+      "newVersion": "13.9.0",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-10-23)\n\n* eslint-plugin-ember 13.8.1 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2864](https://github.com/ember-cli/eslint-plugin-ember/pull/2864) fix(no-array-prototype-extensions): handle Iterator helpers' toArray ([@HawkForge](https://github.com/HawkForge))\n  * [#2863](https://github.com/ember-cli/eslint-plugin-ember/pull/2863) fix(no-array-prototype-extensions): ignore replace calls with a string second argument ([@HawkForge](https://github.com/HawkForge))\n\n#### Committers: 1\n- [@HawkForge](https://github.com/HawkForge)\n"
+  "description": "## Release (2026-10-23)\n\n* eslint-plugin-ember 13.9.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2862](https://github.com/ember-cli/eslint-plugin-ember/pull/2862) Add template tag position and spacing rules ([@kategengler](https://github.com/kategengler))\n  * [#2855](https://github.com/ember-cli/eslint-plugin-ember/pull/2855) Add `ember/no-deprecated-imports` rule ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 2\n- Katie Gengler ([@kategengler](https://github.com/kategengler))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
