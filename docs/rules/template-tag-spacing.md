@@ -1,5 +1,9 @@
 # ember/template-tag-spacing
 
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
+<!-- end auto-generated rule header -->
+
 > Require a blank line between class members and `<template>` in `.gjs`/`.gts` files.
 
 ## Rule Details
@@ -10,55 +14,23 @@ This applies both inside class bodies and at the file top level.
 
 When `<template>` is in the middle of class members, prefer `ember/template-tag-position` to move it first. This rule intentionally avoids autofixing middle-placement cases to prevent overlapping fixes.
 
+## Examples
+
+Examples of **incorrect** code for this rule:
+
 ```gjs
-// good
-export default class ExampleComponent extends Component {
+class Demo extends Component {
   message = 'hello';
-
-  <template>
-    {{this.message}}
-  </template>
+  <template>{{this.message}}</template>
 }
-
-// good
-export default class ExampleComponent extends Component {
-  <template>
-    {{this.message}}
-  </template>
-
-  message = 'hello';
-}
-
-// bad
-export default class ExampleComponent extends Component {
-  message = 'hello';
-  <template>
-    {{this.message}}
-  </template>
-}
-
-// bad
-export default class ExampleComponent extends Component {
-  <template>
-    {{this.message}}
-  </template>
-  message = 'hello';
-}
-
-// bad
-import Service from '@ember/service';
-<template>
-  <div>Hello</div>
-</template>
-const ready = true;
-
-// good
-import Service from '@ember/service';
-
-<template>
-  <div>Hello</div>
-</template>
-
-const ready = true;
 ```
 
+Examples of **correct** code for this rule:
+
+```gjs
+class Demo extends Component {
+  message = 'hello';
+
+  <template>{{this.message}}</template>
+}
+```
