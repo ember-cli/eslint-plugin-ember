@@ -575,6 +575,8 @@ To disable a rule for an entire `.gjs`/`.gts` file, use a regular ESLint file-le
 | [template-modifier-name-case](docs/rules/template-modifier-name-case.md)       | require dasherized names for modifiers                                         |    | 🔧 |    |
 | [template-no-only-default-slot](docs/rules/template-no-only-default-slot.md)   | disallow using only the default slot                                           |    | 🔧 |    |
 | [template-quotes](docs/rules/template-quotes.md)                               | enforce consistent quote style in templates                                    |    | 🔧 |    |
+| [template-tag-position](docs/rules/template-tag-position.md)                   | enforce where `<template>` appears in classes using template tags              |    | 🔧 |    |
+| [template-tag-spacing](docs/rules/template-tag-spacing.md)                     | require a blank line between class members and `<template>` tags               |    | 🔧 |    |
 | [template-template-length](docs/rules/template-template-length.md)             | enforce template size constraints                                              |    |    |    |
 
 ### Testing
