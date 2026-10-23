@@ -408,6 +408,7 @@ Rules that only catch patterns from old versions of Ember are in the [Legacy](#l
 | [new-module-imports](docs/rules/new-module-imports.md)                                         | enforce using "New Module Imports" from Ember RFC #176                                     | ✅    |    |    |
 | [no-array-prototype-extensions](docs/rules/no-array-prototype-extensions.md)                   | disallow usage of Ember's `Array` prototype extensions                                     |      | 🔧 |    |
 | [no-at-ember-render-modifiers](docs/rules/no-at-ember-render-modifiers.md)                     | disallow importing from @ember/render-modifiers                                            | ✅    |    |    |
+| [no-deprecated-imports](docs/rules/no-deprecated-imports.md)                                   | disallow imports of deprecated Ember APIs                                                  |      |    |    |
 | [no-legacy-helper-imports](docs/rules/no-legacy-helper-imports.md)                             | disallow importing helpers and modifiers that are built-in template keywords in Ember 7.1+ |      | 🔧 |    |
 | [no-mixins](docs/rules/no-mixins.md)                                                           | disallow the usage of mixins                                                               | ✅    |    |    |
 | [no-new-mixins](docs/rules/no-new-mixins.md)                                                   | disallow the creation of new mixins                                                        | ✅    |    |    |
@@ -551,6 +552,8 @@ Rules that only catch patterns from old versions of Ember are in the [Legacy](#l
 | [template-modifier-name-case](docs/rules/template-modifier-name-case.md)       | require dasherized names for modifiers                                         |    | 🔧 |    |
 | [template-no-only-default-slot](docs/rules/template-no-only-default-slot.md)   | disallow using only the default slot                                           |    | 🔧 |    |
 | [template-quotes](docs/rules/template-quotes.md)                               | enforce consistent quote style in templates                                    |    | 🔧 |    |
+| [template-tag-position](docs/rules/template-tag-position.md)                   | enforce where `<template>` appears in classes using template tags              |    | 🔧 |    |
+| [template-tag-spacing](docs/rules/template-tag-spacing.md)                     | require a blank line between class members and `<template>` tags               |    | 🔧 |    |
 | [template-template-length](docs/rules/template-template-length.md)             | enforce template size constraints                                              |    |    |    |
 
 ### Testing

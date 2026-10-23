@@ -2,8 +2,8 @@
   "solution": {
     "eslint-plugin-ember": {
       "impact": "minor",
-      "oldVersion": "13.6.1",
-      "newVersion": "13.7.0",
+      "oldVersion": "13.8.1",
+      "newVersion": "13.9.0",
       "tagName": "latest",
       "constraints": [
         {
@@ -14,5 +14,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-10-21)\n\n* eslint-plugin-ember 13.7.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2858](https://github.com/ember-cli/eslint-plugin-ember/pull/2858) Update ember-eslint-parser to 0.15.0 ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### Committers: 1\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n"
+  "description": "## Release (2026-10-23)\n\n* eslint-plugin-ember 13.9.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2862](https://github.com/ember-cli/eslint-plugin-ember/pull/2862) Add template tag position and spacing rules ([@kategengler](https://github.com/kategengler))\n  * [#2855](https://github.com/ember-cli/eslint-plugin-ember/pull/2855) Add `ember/no-deprecated-imports` rule ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 2\n- Katie Gengler ([@kategengler](https://github.com/kategengler))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }

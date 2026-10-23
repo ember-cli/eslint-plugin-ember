@@ -54,6 +54,12 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     'const resolvers = Promise.withResolvers(); resolvers.reject();',
     'const resolvers = window.Promise.withResolvers(); resolvers.reject();',
 
+    // Iterator helpers
+    'function* t() { yield 1; } t().take(2).toArray();',
+    'function* t() { yield 1; } t().drop(1).toArray();',
+    'function* t() { yield 1; } const it = t().take(2); it.toArray();',
+    'Iterator.from(foo).toArray();',
+
     // Promise.any()
     'Promise.any();',
     'window.Promise.any();',
@@ -105,6 +111,9 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     '_.uniq([2, 1, 2]);',
     '_.uniqBy([2.1, 1.2, 2.3], Math.floor);',
     "_.replace('Hi Fred', 'Fred', 'Barney');",
+    "sinon.replace(window, 'confirm', fakeConfirm);",
+    "sinon.replace(obj, 'method', stub);",
+    'sinon.replace(obj, `method`, stub);',
 
     // jQuery
     '$( "li" ).toArray();',
