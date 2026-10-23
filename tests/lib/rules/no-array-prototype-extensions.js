@@ -105,6 +105,9 @@ ruleTester.run('no-array-prototype-extensions', rule, {
     '_.uniq([2, 1, 2]);',
     '_.uniqBy([2.1, 1.2, 2.3], Math.floor);',
     "_.replace('Hi Fred', 'Fred', 'Barney');",
+    "sinon.replace(window, 'confirm', fakeConfirm);",
+    "sinon.replace(obj, 'method', stub);",
+    'sinon.replace(obj, `method`, stub);',
 
     // jQuery
     '$( "li" ).toArray();',
