@@ -1,18 +1,18 @@
 {
   "solution": {
     "eslint-plugin-ember": {
-      "impact": "minor",
-      "oldVersion": "13.7.0",
-      "newVersion": "13.8.0",
+      "impact": "patch",
+      "oldVersion": "13.8.0",
+      "newVersion": "13.8.1",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-10-22)\n\n* eslint-plugin-ember 13.8.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2859](https://github.com/ember-cli/eslint-plugin-ember/pull/2859) Allow overriding Ember version ([@davidtaylorhq](https://github.com/davidtaylorhq))\n\n#### Committers: 1\n- David Taylor ([@davidtaylorhq](https://github.com/davidtaylorhq))\n"
+  "description": "## Release (2026-10-23)\n\n* eslint-plugin-ember 13.8.1 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2864](https://github.com/ember-cli/eslint-plugin-ember/pull/2864) fix(no-array-prototype-extensions): handle Iterator helpers' toArray ([@HawkForge](https://github.com/HawkForge))\n  * [#2863](https://github.com/ember-cli/eslint-plugin-ember/pull/2863) fix(no-array-prototype-extensions): ignore replace calls with a string second argument ([@HawkForge](https://github.com/HawkForge))\n\n#### Committers: 1\n- [@HawkForge](https://github.com/HawkForge)\n"
 }

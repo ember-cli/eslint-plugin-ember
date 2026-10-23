@@ -1,5 +1,17 @@
 # Changelog
 
+## Release (2026-10-23)
+
+* eslint-plugin-ember 13.8.1 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2864](https://github.com/ember-cli/eslint-plugin-ember/pull/2864) fix(no-array-prototype-extensions): handle Iterator helpers' toArray ([@HawkForge](https://github.com/HawkForge))
+  * [#2863](https://github.com/ember-cli/eslint-plugin-ember/pull/2863) fix(no-array-prototype-extensions): ignore replace calls with a string second argument ([@HawkForge](https://github.com/HawkForge))
+
+#### Committers: 1
+- [@HawkForge](https://github.com/HawkForge)
+
 ## Release (2026-10-22)
 
 * eslint-plugin-ember 13.8.0 (minor)
