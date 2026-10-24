@@ -48,6 +48,13 @@ ruleTester.run('template-no-redundant-role', rule, {
       options: [{ checkAllHTMLElements: false }],
     },
     '<template><input role="combobox"></template>',
+    // <input>'s implicit role depends on `type`; roles differing from it are not redundant.
+    '<template><input type="text" role="spinbutton" aria-valuenow="2" aria-valuemin="0" aria-valuemax="9" /></template>',
+    '<template><input type="text" role="searchbox" /></template>',
+    '<template><input type="number" role="slider" /></template>',
+    '<template><input role="checkbox" /></template>',
+    '<template><input type={{this.type}} role="spinbutton" /></template>',
+    '<template><input type="text" list="opts" role="textbox" /></template>',
     // <select multiple> has implicit role listbox, so combobox is not redundant.
     '<template><select role="combobox" multiple></select></template>',
     // <select size="5"> (size > 1) has implicit role listbox.
@@ -209,6 +216,13 @@ hbsRuleTester.run('template-no-redundant-role', rule, {
     '<ol role="list"></ol>',
     '<ul role="list"></ul>',
     '<input role="combobox">',
+    // <input>'s implicit role depends on `type`; roles differing from it are not redundant.
+    '<input type="text" role="spinbutton" aria-valuenow="2" aria-valuemin="0" aria-valuemax="9" />',
+    '<input type="text" role="searchbox" />',
+    '<input type="number" role="slider" />',
+    '<input role="checkbox" />',
+    '<input type={{this.type}} role="spinbutton" />',
+    '<input type="text" list="opts" role="textbox" />',
     '<footer role={{this.bar}}></footer>',
     '<nav class="navigation" role="navigation"></nav>',
     '<button role="link"></button>',
@@ -314,6 +328,16 @@ hbsRuleTester.run('template-no-redundant-role', rule, {
       code: '<input type="checkbox" name="agree" value="checkbox1" role="checkbox" />',
       output: '<input type="checkbox" name="agree" value="checkbox1" />',
       errors: [{ message: 'Use of redundant or invalid role: checkbox on <input> detected.' }],
+    },
+    {
+      code: '<input type="number" role="spinbutton" />',
+      output: '<input type="number" />',
+      errors: [{ message: 'Use of redundant or invalid role: spinbutton on <input> detected.' }],
+    },
+    {
+      code: '<input role="textbox" />',
+      output: '<input />',
+      errors: [{ message: 'Use of redundant or invalid role: textbox on <input> detected.' }],
     },
     {
       code: '<table><th role="columnheader">Some heading</th><td>cell1</td></table>',
