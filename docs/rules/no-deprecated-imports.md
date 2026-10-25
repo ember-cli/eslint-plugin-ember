@@ -1,5 +1,7 @@
 # ember/no-deprecated-imports
 
+💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
+
 <!-- end auto-generated rule header -->
 
 Ember deprecates APIs through RFCs. Each deprecation becomes available in a specific `ember-source` version, and is removed in a later major. This rule flags imports of those APIs, so you can migrate before they are removed.
