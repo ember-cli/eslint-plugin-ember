@@ -273,5 +273,27 @@ eslintTester.run('avoid-leaking-state-in-ember-objects', rule, {
         },
       ],
     },
+    {
+      // myProp: A() creates a shared instance across all Ember object instances
+      code: 'export default Foo.extend({ someProp: A() });',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
+    {
+      // EmberObject.create() as a default property leaks shared state
+      code: 'export default Foo.extend({ someProp: EmberObject.create() });',
+      output: null,
+      errors: [
+        {
+          message:
+            'Only string, number, symbol, boolean, null, undefined, and function are allowed as default properties',
+        },
+      ],
+    },
   ],
 });
