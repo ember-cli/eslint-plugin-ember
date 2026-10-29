@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-10-29)
+
+* eslint-plugin-ember 13.9.1 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2873](https://github.com/ember-cli/eslint-plugin-ember/pull/2873) BUGFIX: template-no-redundant-role — use input type to determine implicit role ([@HawkForge](https://github.com/HawkForge))
+
+#### Committers: 1
+- [@HawkForge](https://github.com/HawkForge)
+
 ## Release (2026-10-23)
 
 * eslint-plugin-ember 13.9.0 (minor)
