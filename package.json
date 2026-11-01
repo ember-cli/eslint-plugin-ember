@@ -126,13 +126,13 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@10.34.7",
+  "packageManager": "pnpm@10.34.9",
   "engines": {
     "node": ">= 20.19"
   },
   "volta": {
     "node": "24.22.1",
-    "pnpm": "10.34.7"
+    "pnpm": "10.34.9"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
