@@ -1,7 +1,5 @@
 # ember/no-test-module-for
 
-💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
-
 <!-- end auto-generated rule header -->
 
 Use `module` instead of `moduleFor`.

@@ -1,7 +1,5 @@
 # ember/closure-actions
 
-💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
-
 <!-- end auto-generated rule header -->
 
 Always use closure actions (according to DDAU convention). Exception: only when you need bubbling.

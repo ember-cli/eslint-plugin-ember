@@ -1,7 +1,5 @@
 # ember/jquery-ember-run
 
-💼 This rule is enabled in the ✅ `recommended` [config](https://github.com/ember-cli/eslint-plugin-ember#-configurations).
-
 <!-- end auto-generated rule header -->
 
 Don’t use jQuery without the Ember Run Loop.

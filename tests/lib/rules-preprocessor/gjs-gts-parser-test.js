@@ -15,6 +15,18 @@ const { join } = require('node:path');
 const gjsGtsParser = require.resolve('ember-eslint-parser');
 
 /**
+ * These fixtures exercise the preprocessor, not the template rules that
+ * `recommended` enables for gjs/gts. The gts override re-extends
+ * `recommended`, so it needs the same rules turned off.
+ */
+const OFF_FOR_FIXTURES = {
+  'ember/template-no-html-comments': 'off',
+  'ember/template-no-invalid-interactive': 'off',
+  'ember/template-no-unused-block-params': 'off',
+  'ember/template-tag-spacing': 'off',
+};
+
+/**
  * Helper function which creates ESLint instance with enabled/disabled autofix feature.
  *
  * @param {String} parser The parser to use.
@@ -52,6 +64,7 @@ function initESLint(parser = gjsGtsParser) {
           ],
           rules: {
             'no-trailing-spaces': 'error',
+            ...OFF_FOR_FIXTURES,
           },
         },
       ],
@@ -65,6 +78,7 @@ function initESLint(parser = gjsGtsParser) {
         'ember/no-get': 'off',
         'ember/no-array-prototype-extensions': 'error',
         'ember/no-unused-services': 'error',
+        ...OFF_FOR_FIXTURES,
       },
     },
   });
@@ -132,7 +146,7 @@ const valid = [
     filename: 'my-component.gjs',
     code: `
       import Component from '@glimmer/component';
-      import { inject as service } from '@ember/service';
+      import { service } from '@ember/service';
 
       export default class MyComponent extends Component {
         @service foo;
@@ -460,7 +474,7 @@ const invalid = [
     filename: 'my-component.gjs',
     code: `
       import Component from '@glimmer/component';
-      import { inject as service } from '@ember/service';
+      import { service } from '@ember/service';
 
       export default class MyComponent extends Component {
         @service foo;
