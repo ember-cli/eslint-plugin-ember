@@ -6,7 +6,7 @@
 
 No importing of test files.
 
-**TL;DR** Do not import from a test file (a file ending in "-test.js") in another test file. Doing so will cause the module and tests from the imported file to be executed again. Similarly, test files should not have any exports.
+**TL;DR** Do not import from a test file (a file ending in "-test.js", "\_test.js" or ".test.js") in another test file. Doing so will cause the module and tests from the imported file to be executed again. Similarly, test files should not have any exports.
 
 Due to how qunit unloads a test module, importing a test file will cause any modules and tests within the file to be executed every time it gets loaded. If you want to import any helper functions or tests to be shared between multiple test files, please make it a test-helper that gets imported by the test file.
 
@@ -33,6 +33,14 @@ import testModule from '../../test-dir/another-test';
 import { module, test } from 'qunit';
 
 module('Acceptance | module', testModule());
+```
+
+```js
+// eslint-disable-next-line import/extensions
+import setupModule from './some-other.test';
+import { module, test } from 'qunit';
+
+module('Acceptance | module', setupModule());
 ```
 
 ```js
