@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-11-03)
+
+* eslint-plugin-ember 13.10.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2877](https://github.com/ember-cli/eslint-plugin-ember/pull/2877) Flag imports of .test and _test files in no-test-import-export ([@gitKrystan](https://github.com/gitKrystan))
+
+#### Committers: 1
+- Krystan HuffMenne ([@gitKrystan](https://github.com/gitKrystan))
+
 ## Release (2026-10-29)
 
 * eslint-plugin-ember 13.9.1 (patch)
