@@ -20,6 +20,7 @@ ruleTester.run('template-require-presentational-children', rule, {
     '<template><div></div></template>',
     '<template><li role="tab">Tab title</li></template>',
     '<template><li role="tab"><h3 role="presentation">Tab Title</h3></li></template>',
+    '<template><li role="tab"><h3 role="none">Tab Title</h3></li></template>',
     '<template><div role="button"><div><span></span></div></div></template>',
     '<template><span role="checkbox"/></template>',
     '<template><div role="article"><h2>Hello</h2></div></template>',
@@ -59,6 +60,15 @@ ruleTester.run('template-require-presentational-children', rule, {
       errors: [
         {
           message: '<div> has a role of button, it cannot have semantic descendants like <h2>',
+        },
+      ],
+    },
+    {
+      code: '<template><div role="button"><h2 role="none"><img /></h2></div></template>',
+      output: null,
+      errors: [
+        {
+          message: '<div> has a role of button, it cannot have semantic descendants like <img>',
         },
       ],
     },
@@ -122,6 +132,7 @@ hbsRuleTester.run('template-require-presentational-children', rule, {
     '<div></div>',
     '<li role="tab">Tab title</li>',
     '<li role="tab"><h3 role="presentation">Tab Title</h3></li>',
+    '<li role="tab"><h3 role="none">Tab Title</h3></li>',
     '<div role="button"><div><span></span></div></div>',
     '<span role="checkbox"/>',
     '<div role="article"><h2>Hello</h2></div>',
