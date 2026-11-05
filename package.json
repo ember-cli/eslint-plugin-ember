@@ -72,10 +72,12 @@
     "eslint-utils": "^3.0.0",
     "estraverse": "^5.3.0",
     "html-tags": "^3.3.1",
+    "html-void-elements": "^3.0.0",
     "language-tags": "^1.0.9",
     "lodash.camelcase": "^4.3.0",
     "lodash.kebabcase": "^4.1.1",
     "mathml-tag-names": "^4.0.0",
+    "property-information": "^7.1.0",
     "requireindex": "^1.2.0",
     "snake-case": "^3.0.3",
     "svg-tags": "^1.0.0"
