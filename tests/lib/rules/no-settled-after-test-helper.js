@@ -116,6 +116,63 @@ ruleTester.run('no-settled-after-test-helper', rule, {
     },
     {
       code: `
+        import { scrollTo, settled } from '@ember/test-helpers';
+
+        async () => {
+          await scrollTo('.foo', 0, 100);
+          await settled();
+        }
+      `,
+      output: `
+        import { scrollTo, settled } from '@ember/test-helpers';
+
+        async () => {
+          await scrollTo('.foo', 0, 100);
+\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        }
+      `,
+      errors: [{ message: ERROR_MESSAGE, line: 6, column: 11, endLine: 6, endColumn: 27 }],
+    },
+    {
+      code: `
+        import { select, settled } from '@ember/test-helpers';
+
+        async () => {
+          await select('.foo', 'bar');
+          await settled();
+        }
+      `,
+      output: `
+        import { select, settled } from '@ember/test-helpers';
+
+        async () => {
+          await select('.foo', 'bar');
+\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        }
+      `,
+      errors: [{ message: ERROR_MESSAGE, line: 6, column: 11, endLine: 6, endColumn: 27 }],
+    },
+    {
+      code: `
+        import { tab, settled } from '@ember/test-helpers';
+
+        async () => {
+          await tab();
+          await settled();
+        }
+      `,
+      output: `
+        import { tab, settled } from '@ember/test-helpers';
+
+        async () => {
+          await tab();
+\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020
+        }
+      `,
+      errors: [{ message: ERROR_MESSAGE, line: 6, column: 11, endLine: 6, endColumn: 27 }],
+    },
+    {
+      code: `
         import { settled } from '@ember/test-helpers';
 
         async () => {
