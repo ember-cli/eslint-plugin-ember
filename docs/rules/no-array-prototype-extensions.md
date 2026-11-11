@@ -129,6 +129,21 @@ const arr = A(['a', 'a', 'b', 'b']);
 arr.uniq();
 ```
 
+```js
+/** A `this` property that is only ever assigned with A() is OK too **/
+import { A } from '@ember/array';
+
+class MyClass {
+  constructor() {
+    this.items = A();
+  }
+
+  add(item) {
+    this.items.pushObject(item);
+  }
+}
+```
+
 ## References
 
 - [EmberArray](https://api.emberjs.com/ember/release/classes/EmberArray)
