@@ -69,6 +69,21 @@ class MyComponent extends Component {
 }
 ```
 
+```js
+import { computed } from '@ember/object';
+import Model, { attr } from '@ember-data/model';
+
+class MyModel extends Model {
+  @attr('number') x;
+  @computed('x') get myProp() {
+    return this.x;
+  }
+  myFunction() {
+    this.x = 123; // Okay because Ember Data attributes (`@attr`, `@belongsTo`, `@hasMany`) are tracked.
+  }
+}
+```
+
 ## Migration
 
 The autofixer for this rule will update assignments to use `set`. Alternatively, you can begin using tracked properties.
