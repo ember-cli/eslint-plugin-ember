@@ -81,6 +81,43 @@ ruleTester.run('no-assignment-of-untracked-properties-used-in-tracking-contexts'
       }`,
     },
     {
+      // Assignment of Ember Data attribute, which is tracked (#1660).
+      filename: '/models/foo.js',
+      code: `
+      import { computed } from '@ember/object';
+      import Model, { attr } from '@ember-data/model';
+      class MyClass extends Model {
+        @attr('number') x;
+        @computed('x') get prop() {}
+        myFunction() { this.x = 123; }
+      }`,
+    },
+    {
+      // Assignment of Ember Data attribute (decorator without arguments, aliased import).
+      filename: '/models/foo.js',
+      code: `
+      import { computed } from '@ember/object';
+      import Model, { attr as a } from '@ember-data/model';
+      class MyClass extends Model {
+        @a x;
+        @computed('x') get prop() {}
+        myFunction() { this.x = 123; }
+      }`,
+    },
+    {
+      // Assignment of Ember Data relationships, which are tracked.
+      filename: '/models/foo.js',
+      code: `
+      import { computed } from '@ember/object';
+      import Model, { belongsTo, hasMany } from '@ember-data/model';
+      class MyClass extends Model {
+        @belongsTo('user', { async: false, inverse: null }) owner;
+        @hasMany('tag', { async: false, inverse: null }) tags;
+        @computed('owner', 'tags') get prop() {}
+        myFunction(user, tags) { this.owner = user; this.tags = tags; }
+      }`,
+    },
+    {
       // Assignment of property in the Glimmer component args hash which is automatically tracked.
       filename: '/components/foo.js',
       code: `
@@ -220,6 +257,54 @@ import { computed } from '@ember/object';
       }
       class Class2 extends Component {
         @computed('x') get myProp() {}
+        myFunction() { set(this, 'x', 123); }
+      }`,
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
+    {
+      // Decorator named \`attr\` that is not imported from Ember Data.
+      filename: '/models/foo.js',
+      code: `
+      import { computed } from '@ember/object';
+      import { attr } from 'somewhere-else';
+      class MyClass {
+        @attr x;
+        @computed('x') get prop() {}
+        myFunction() { this.x = 123; }
+      }`,
+      output: `
+      import { set } from '@ember/object';
+import { computed } from '@ember/object';
+      import { attr } from 'somewhere-else';
+      class MyClass {
+        @attr x;
+        @computed('x') get prop() {}
+        myFunction() { set(this, 'x', 123); }
+      }`,
+      errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
+    },
+    {
+      // Ember Data attribute of another class.
+      filename: '/models/foo.js',
+      code: `
+      import { computed } from '@ember/object';
+      import Model, { attr } from '@ember-data/model';
+      class Class1 extends Model {
+        @attr x;
+      }
+      class Class2 extends Model {
+        @computed('x') get prop() {}
+        myFunction() { this.x = 123; }
+      }`,
+      output: `
+      import { set } from '@ember/object';
+import { computed } from '@ember/object';
+      import Model, { attr } from '@ember-data/model';
+      class Class1 extends Model {
+        @attr x;
+      }
+      class Class2 extends Model {
+        @computed('x') get prop() {}
         myFunction() { set(this, 'x', 123); }
       }`,
       errors: [{ message: ERROR_MESSAGE, type: 'AssignmentExpression' }],
