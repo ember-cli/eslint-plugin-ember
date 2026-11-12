@@ -425,7 +425,7 @@ ruleTester.run('no-deprecated-router-transition-methods', rule, {
 
       export default Route.extend({
         router: service('router'),
-session: service(),
+        session: service(),
 
         beforeModel() {
           if (!this.session.isAuthenticated) {
@@ -464,7 +464,7 @@ session: service(),
 
       export default Route.extend(MyMixin, {
         router: service('router'),
-session: service(),
+        session: service(),
 
         beforeModel() {
           if (!this.session.isAuthenticated) {
@@ -503,7 +503,7 @@ session: service(),
 
       export default class SettingsRoute extends Route {
         @service('router') router;
-@service session;
+        @service session;
 
         beforeModel() {
           if (!this.session.isAuthenticated) {
@@ -539,7 +539,7 @@ session: service(),
 
       export default class SettingsRoute extends Route {
         @service('router') router;
-@service session;
+        @service session;
 
         beforeModel() {
           if (!this.session.isAuthenticated) {
@@ -576,7 +576,7 @@ import Controller from '@ember/controller';
 
       export default class NewPostController1 extends Controller {
         @service('router') router;
-@action
+        @action
         async save({ title, text }) {
           let post = this.store.createRecord('post', { title, text });
           await post.save();
@@ -611,7 +611,7 @@ import Controller from '@ember/controller';
 
       export default class NewPostController1 extends Controller {
         @service('router') router;
-@action
+        @action
         async save({ title, text }) {
           let post = this.store.createRecord('post', { title, text });
           await post.save();
@@ -728,7 +728,7 @@ import Controller from '@ember/controller';
 
       export default class SettingsRoute extends Route {
         @injectService('router') router;
-@injectService session;
+        @injectService session;
 
         beforeModel() {
           if (!this.session.isAuthenticated) {
@@ -765,7 +765,7 @@ import Controller from '@ember/controller';
 
       export default class SettingsRoute extends Route {
         @service('router') router;
-@service session;
+        @service session;
 
         beforeModel() {
           if (!this.session.isAuthenticated) {
@@ -911,6 +911,44 @@ import Controller from '@ember/controller';
           type: 'MemberExpression',
         },
       ],
+    },
+
+    // Inserted import uses `service` when ember-source is 4.1 or newer (#2154)
+    {
+      filename: 'controllers/new-post.js',
+      code: `
+      import Controller from '@ember/controller';
+      import { action } from '@ember/object';
+
+      export default class NewPostController1 extends Controller {
+        @action
+        async save({ title, text }) {
+          let post = this.store.createRecord('post', { title, text });
+          await post.save();
+          return this.transitionToRoute('post', post.id);
+        }
+      }`,
+      output: `
+      import { service } from '@ember/service';
+import Controller from '@ember/controller';
+      import { action } from '@ember/object';
+
+      export default class NewPostController1 extends Controller {
+        @service('router') router;
+        @action
+        async save({ title, text }) {
+          let post = this.store.createRecord('post', { title, text });
+          await post.save();
+          return this.router.transitionTo('post', post.id);
+        }
+      }`,
+      errors: [
+        {
+          messageId: 'main',
+          type: 'MemberExpression',
+        },
+      ],
+      settings: { ember: { version: '6.4.0' } },
     },
   ],
 });

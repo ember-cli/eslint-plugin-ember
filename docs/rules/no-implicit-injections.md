@@ -80,6 +80,8 @@ export default class IndexController extends Controller {
 
 The autofixer for this rule will update classes and add injections for the configured services.
 
+When the file does not import `@ember/service` yet, the autofixer adds `import { service } from '@ember/service';` for Ember 4.1 and newer, and `import { inject as service } from '@ember/service';` for older versions. The version comes from `settings.ember.version` when it is set, and from the installed `ember-source` otherwise.
+
 ## Configuration
 
 This lint rule will search for instances of `store` used in routes or controllers by default. If you have other services that you would like to check for uses of, the configuration can be overridden.
