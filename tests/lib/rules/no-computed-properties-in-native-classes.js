@@ -135,87 +135,193 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
         fullName: computed('firstName', 'lastName', function() {})
       });
     `,
+
+    // Imported but not used in a class body (no-unused-vars covers this)
+    `
+      import { computed } from '@ember/object';
+      import Component from '@ember/component';
+
+      export default class MyComponent extends Component {}
+    `,
+
+    // Used in the class's extends clause, not its body
+    `
+      import { computed } from '@ember/object';
+      import Component from '@ember/component';
+
+      export default class MyComponent extends Component.extend({
+        fullName: computed('firstName', 'lastName', function() {})
+      }) {}
+    `,
+
+    // Used outside of any class
+    `
+      import { computed } from '@ember/object';
+
+      export const fullName = computed('first', 'last', function () {});
+      export class Helper {}
+    `,
+
+    // Same name but not the import: property keys, member names, shadowed locals
+    `
+      import { computed, alias } from '@ember/object/computed';
+      import Component from '@ember/component';
+
+      export default class MyComponent extends Component {
+        computed = { alias: 1 };
+        get value() {
+          const alias = (x) => x;
+          return alias(this.computed.alias);
+        }
+      }
+    `,
+
+    // Computed only used inside the @classic class; another native class has none (#1267)
+    `
+      import classic from 'ember-classic-decorator';
+      import { readOnly } from '@ember/object/computed';
+      import Component from '@ember/component';
+      import { get, computed } from '@ember/object';
+
+      class Tooltip {
+        constructor(valueFormatter) {
+          this.valueFormatter = ({ y }) => get(y, 'value');
+        }
+      }
+
+      @classic
+      export default class Graph extends Component {
+        @readOnly('tabName') label;
+
+        @computed('tabName')
+        get title() {
+          return this.tabName;
+        }
+      }
+    `,
   ],
   invalid: [
     {
       code: `
-      import { computed } from '@ember/object';
+        import { computed } from '@ember/object';
 
-      export default class MyComponent extends Component {
-
-      }
+        export default class MyComponent extends Component {
+          @computed('a') get b() { return this.a; }
+        }
       `,
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'Identifier', line: 5 }],
     },
     {
       code: `
-      import { computed as thinking } from '@ember/object';
+        import { computed as thinking } from '@ember/object';
 
-      export default class MyComponent extends Component {
-
-      }
+        export default class MyComponent extends Component {
+          @thinking('a') get b() { return this.a; }
+        }
       `,
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'Identifier', line: 5 }],
     },
     {
       code: `
-      import { and, or, alias } from '@ember/object/computed';
+        import { and, or, alias } from '@ember/object/computed';
 
-      export default class MyComponent extends Component {
-
-      }
+        export default class MyComponent extends Component {
+          @alias('x') a;
+          @and('x', 'y') b;
+          c = or('x', 'y');
+        }
       `,
       output: null,
-      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
+      errors: [
+        { message: ERROR_MESSAGE, type: 'Identifier', line: 5 },
+        { message: ERROR_MESSAGE, type: 'Identifier', line: 6 },
+        { message: ERROR_MESSAGE, type: 'Identifier', line: 7 },
+      ],
     },
     {
+      // Class expression
       code: `
         import { computed } from '@ember/object';
-        import Component from '@ember/component';
 
-        export default class MyComponent extends Component {}
+        export const MyComponent = class extends Component {
+          @computed('a') get b() { return this.a; }
+        };
       `,
       output: null,
-      options: [
-        {
-          ignoreClassic: true,
-        },
-      ],
-      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
+      errors: [{ message: ERROR_MESSAGE, type: 'Identifier', line: 5 }],
     },
     {
-      code: `
-        import { computed } from '@ember/object';
-        import Component from '@ember/component';
-
-        export default class MyComponent extends Component {}
-      `,
-      output: null,
-      options: [
-        {
-          ignoreClassic: false,
-        },
-      ],
-      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
-    },
-    {
+      // ignoreClassic: false still reports computed inside @classic classes
       code: `
         import { computed } from '@ember/object';
         import Component from '@ember/component';
         import classic from 'ember-classic-decorator';
 
         @classic
-        export default class MyComponent extends Component {}
+        export default class MyComponent extends Component {
+          @computed('a') get b() { return this.a; }
+        }
       `,
       output: null,
-      options: [
-        {
-          ignoreClassic: false,
-        },
-      ],
-      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
+      options: [{ ignoreClassic: false }],
+      errors: [{ message: ERROR_MESSAGE, type: 'Identifier', line: 8 }],
+    },
+    {
+      // Only the native class is reported, not the @classic one
+      code: `
+        import classic from 'ember-classic-decorator';
+        import { computed } from '@ember/object';
+        import Component from '@ember/component';
+
+        @classic
+        class Legacy extends Component {
+          @computed('a') get b() { return this.a; }
+        }
+
+        export default class Modern extends Component {
+          @computed('a') get b() { return this.a; }
+        }
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'Identifier', line: 12 }],
+    },
+    {
+      // A native class nested in a @classic class is still checked
+      code: `
+        import classic from 'ember-classic-decorator';
+        import { alias } from '@ember/object/computed';
+        import Component from '@ember/component';
+
+        @classic
+        export default class Legacy extends Component {
+          make() {
+            return class Inner {
+              @alias('x') y;
+            };
+          }
+        }
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'Identifier', line: 10 }],
+    },
+    {
+      // Used next to a classic .extend() in the same file
+      code: `
+        import { computed } from '@ember/object';
+        import Component from '@ember/component';
+
+        export const Old = Component.extend({
+          a: computed('b', function () {}),
+        });
+
+        export default class Modern extends Component {
+          @computed('a') get b() { return this.a; }
+        }
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'Identifier', line: 10 }],
     },
   ],
 });
