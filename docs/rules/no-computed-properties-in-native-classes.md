@@ -8,7 +8,7 @@ Since the beginning of Ember's existence, Computed Properties (CPs) have been us
 
 ## Rule Details
 
-This rule disallows using computed properties with native classes.
+This rule disallows using computed properties inside the body of a native class.
 
 ## Examples
 
@@ -16,10 +16,10 @@ Examples of **incorrect** code for this rule:
 
 ```js
 import Component from '@ember/component';
-import { and, or, alias } from '@ember/object/computed';
+import { alias } from '@ember/object/computed';
 
 export default class MyComponent extends Component {
-  // ...
+  @alias('model.name') name;
 }
 ```
 
@@ -28,7 +28,10 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 
 export default class MyComponent extends Component {
-  // ...
+  @computed('firstName', 'lastName')
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
 }
 ```
 
@@ -56,23 +59,8 @@ import Component from '@ember/component';
 import classic from 'ember-classic-decorator';
 
 @classic
-export default class MyComponent extends Component {}
-```
-
-```js
-// Allowed if `ignoreClassic` option is enabled: computed properties are only used in the `@classic` class.
-import { computed } from '@ember/object';
-import Component from '@ember/component';
-import classic from 'ember-classic-decorator';
-
-class Helper {}
-
-@classic
 export default class MyComponent extends Component {
-  @computed('name')
-  get title() {
-    return this.name;
-  }
+  @alias('model.name') name;
 }
 ```
 
