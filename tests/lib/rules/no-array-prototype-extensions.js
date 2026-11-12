@@ -237,6 +237,118 @@ ruleTester.run('no-array-prototype-extensions', rule, {
       array.without(2)
     `,
 
+    // `this` property assigned to an EmberArray (#1807).
+    `
+      import { A } from '@ember/array';
+
+      this.foo = A();
+      this.foo.toArray();
+    `,
+    `
+      import { A } from '@ember/array';
+
+      class MyClass {
+        constructor() {
+          this.foo = A();
+        }
+        myFunc() {
+          return this.foo.toArray();
+        }
+      }
+    `,
+    `
+      import { A } from '@ember/array';
+
+      class MyClass {
+        #foo;
+        myFunc() {
+          this.#foo.pushObject(1);
+        }
+        init() {
+          this.#foo = A([1, 2]);
+        }
+      }
+    `,
+    `
+      import { A } from '@ember/array';
+
+      class MyClass {
+        foo = A();
+        myFunc() {
+          this.foo.addObject(1);
+        }
+      }
+    `,
+    `
+      import { A } from '@ember/array';
+      import Component from '@ember/component';
+
+      export default Component.extend({
+        init() {
+          this._super(...arguments);
+          this.items = A();
+        },
+        add(item) {
+          this.items.pushObject(item);
+        },
+      });
+    `,
+    // Several calls on `this` properties in the same class.
+    `
+      import { A } from '@ember/array';
+
+      class MyClass {
+        foo = A();
+        bar = new Map();
+        myFunc() {
+          this.foo.uniq();
+          this.bar.clear();
+        }
+      }
+    `,
+    // String keys name the same `this` property.
+    `
+      import { A } from '@ember/array';
+
+      class MyClass {
+        'foo' = A();
+        myFunc() {
+          this.foo.clear();
+          this['foo'].clear();
+        }
+      }
+    `,
+    `
+      import { A } from '@ember/array';
+      import { set } from '@ember/object';
+
+      class MyClass {
+        constructor() {
+          set(this, 'foo', A());
+          this.set('bar', A());
+          this.setProperties({ baz: A() });
+          Object.assign(this, { qux: A() });
+        }
+        myFunc() {
+          this.foo.uniq();
+          this.bar.uniq();
+          this.baz.uniq();
+          this.qux.uniq();
+        }
+      }
+    `,
+    // `this` property assigned to a non-array class.
+    `
+      class MyClass {
+        constructor() {
+          this.foo = new Set();
+        }
+        myFunc() {
+          this.foo.clear();
+        }
+      }
+    `,
+
     // Ember Data call with await.
     `
     class MyClass {
@@ -1429,6 +1541,152 @@ import { get as g } from '@custom/object';
           this.foo.clear();
         }
       }`,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // `this` property assigned to an EmberArray, but also to something else.
+      code: `
+      import { A } from '@ember/array';
+
+      class MyClass {
+        constructor() {
+          this.foo = A();
+        }
+        reset(items) {
+          this.foo = items;
+        }
+        myFunc() {
+          this.foo.clear();
+        }
+      }`,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // A class field with a dynamic key could be \`foo\`.
+      code: `
+      import { A } from '@ember/array';
+
+      class MyClass {
+        foo = A();
+        [key] = [];
+        myFunc() {
+          this.foo.clear();
+        }
+      }`,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    // `this` property also written in ways other than `this.foo = x`.
+    ...[
+      "this.set('foo', items);",
+      "set(this, 'foo', items);",
+      'this.setProperties({ foo: items });',
+      'setProperties(this, { foo: items });',
+      'Object.assign(this, { foo: items });',
+      '[this.foo] = items;',
+      '({ list: this.foo } = items);',
+      'for (this.foo of items) {}',
+      "this['foo'] = items;",
+      'this[key] = items;',
+      '[this.foo = A()] = items;',
+      '[...this.foo] = items;',
+      'for (this.foo in items) {}',
+      'this.setProperties({ ...items });',
+      'Object.assign(this, items);',
+      'Ember.set(this, key, items);',
+    ].map((write) => ({
+      code: `
+      import { A } from '@ember/array';
+      import { set, setProperties } from '@ember/object';
+
+      class MyClass {
+        constructor() {
+          this.foo = A();
+        }
+        reset(items, key) {
+          ${write}
+        }
+        myFunc() {
+          this.foo.clear();
+        }
+      }`,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    })),
+    {
+      // `this` property assigned with `A()` but `A` is not imported from `@ember/array`.
+      code: `
+      this.foo = A();
+      this.foo.clear();
+      `,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // EmberArray assigned to a property of another class.
+      code: `
+      import { A } from '@ember/array';
+
+      class MyClass1 {
+        constructor() {
+          this.foo = A();
+        }
+      }
+      class MyClass2 {
+        myFunc() {
+          this.foo.clear();
+        }
+      }`,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Static class property is not an instance property.
+      code: `
+      import { A } from '@ember/array';
+
+      class MyClass {
+        static foo = A();
+        myFunc() {
+          this.foo.clear();
+        }
+      }`,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Computed \`this\` property.
+      code: `
+      import { A } from '@ember/array';
+
+      this[foo] = A();
+      this[foo].clear();
+      `,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // Compound assignment to the \`this\` property.
+      code: `
+      import { A } from '@ember/array';
+
+      this.foo = A();
+      this.foo ||= [];
+      this.foo.clear();
+      `,
+      output: null,
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      // EmberArray assigned to a different \`this\` property.
+      code: `
+      import { A } from '@ember/array';
+
+      this.bar = A();
+      this.foo.clear();
+      `,
       output: null,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
