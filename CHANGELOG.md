@@ -1,5 +1,24 @@
 # Changelog
 
+## Release (2026-11-12)
+
+* eslint-plugin-ember 13.10.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2877](https://github.com/ember-cli/eslint-plugin-ember/pull/2877) Flag imports of .test and _test files in no-test-import-export ([@gitKrystan](https://github.com/gitKrystan))
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2881](https://github.com/ember-cli/eslint-plugin-ember/pull/2881) Treat Ember Data `@attr` / `@belongsTo` / `@hasMany` as tracked in `no-assignment-of-untracked-properties-used-in-tracking-contexts` ([@bardrop](https://github.com/bardrop))
+  * [#2880](https://github.com/ember-cli/eslint-plugin-ember/pull/2880) Fix `no-array-prototype-extensions` false positive on `this` properties assigned with `A()` ([@bardrop](https://github.com/bardrop))
+  * [#2879](https://github.com/ember-cli/eslint-plugin-ember/pull/2879) Flag settled() after select, tab and scrollTo in no-settled-after-test-helper ([@emattias](https://github.com/emattias))
+
+#### Committers: 3
+- Krystan HuffMenne ([@gitKrystan](https://github.com/gitKrystan))
+- Mattias Hällkvist ([@emattias](https://github.com/emattias))
+- bardrop ([@bardrop](https://github.com/bardrop))
+
 ## Release (2026-10-29)
 
 * eslint-plugin-ember 13.9.1 (patch)
