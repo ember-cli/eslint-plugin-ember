@@ -135,6 +135,44 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
         fullName: computed('firstName', 'lastName', function() {})
       });
     `,
+
+    // Computed only used inside the @classic class; another native class has none (#1267)
+    `
+      import classic from 'ember-classic-decorator';
+      import { readOnly } from '@ember/object/computed';
+      import Component from '@ember/component';
+      import { get, computed } from '@ember/object';
+
+      class Tooltip {
+        constructor(valueFormatter) {
+          this.valueFormatter = ({ y }) => get(y, 'value');
+        }
+      }
+
+      @classic
+      export default class Graph extends Component {
+        @readOnly('tabName') label;
+
+        @computed('tabName')
+        get title() {
+          return this.tabName;
+        }
+      }
+    `,
+    `
+      import classic from 'ember-classic-decorator';
+      import { alias } from '@ember/object/computed';
+      import Component from '@ember/component';
+
+      class Helper {}
+
+      @classic
+      class Graph extends Component {
+        @alias('model.name') name;
+      }
+
+      export { Helper, Graph };
+    `,
   ],
   invalid: [
     {
@@ -215,6 +253,79 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
           ignoreClassic: false,
         },
       ],
+      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
+    },
+    {
+      // Computed used inside the native class, next to a @classic class
+      code: `
+        import classic from 'ember-classic-decorator';
+        import { computed } from '@ember/object';
+        import Component from '@ember/component';
+
+        @classic
+        class Legacy extends Component {
+          @computed('a') get b() { return this.a; }
+        }
+
+        export default class Modern extends Component {
+          @computed('a') get b() { return this.a; }
+        }
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
+    },
+    {
+      // Only the native class uses the macro
+      code: `
+        import classic from 'ember-classic-decorator';
+        import { alias } from '@ember/object/computed';
+        import Component from '@ember/component';
+
+        @classic
+        class Legacy extends Component {}
+
+        export default class Modern extends Component {
+          @alias('model.name') name;
+        }
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
+    },
+    {
+      // Used outside of any class
+      code: `
+        import classic from 'ember-classic-decorator';
+        import { computed } from '@ember/object';
+        import Component from '@ember/component';
+
+        const fullName = computed('first', 'last', function () {});
+
+        @classic
+        class Legacy extends Component {
+          @computed('a') get b() { return this.a; }
+        }
+
+        export default class Modern extends Component {}
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
+    },
+    {
+      // ignoreClassic: false still reports computed inside @classic classes
+      code: `
+        import classic from 'ember-classic-decorator';
+        import { computed } from '@ember/object';
+        import Component from '@ember/component';
+
+        class Helper {}
+
+        @classic
+        class Legacy extends Component {
+          @computed('a') get b() { return this.a; }
+        }
+      `,
+      output: null,
+      options: [{ ignoreClassic: false }],
       errors: [{ message: ERROR_MESSAGE, type: 'ImportDeclaration' }],
     },
   ],

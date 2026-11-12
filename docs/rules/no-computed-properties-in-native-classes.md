@@ -60,6 +60,23 @@ export default class MyComponent extends Component {}
 ```
 
 ```js
+// Allowed if `ignoreClassic` option is enabled: computed properties are only used in the `@classic` class.
+import { computed } from '@ember/object';
+import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+
+class Helper {}
+
+@classic
+export default class MyComponent extends Component {
+  @computed('name')
+  get title() {
+    return this.name;
+  }
+}
+```
+
+```js
 import { tracked } from '@glimmer/tracking';
 import Component from '@ember/component';
 
