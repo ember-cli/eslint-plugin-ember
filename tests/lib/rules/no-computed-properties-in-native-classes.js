@@ -162,6 +162,20 @@ ruleTester.run('no-computed-properties-in-native-classes', rule, {
       export class Helper {}
     `,
 
+    // Same name but not the import: property keys, member names, shadowed locals
+    `
+      import { computed, alias } from '@ember/object/computed';
+      import Component from '@ember/component';
+
+      export default class MyComponent extends Component {
+        computed = { alias: 1 };
+        get value() {
+          const alias = (x) => x;
+          return alias(this.computed.alias);
+        }
+      }
+    `,
+
     // Computed only used inside the @classic class; another native class has none (#1267)
     `
       import classic from 'ember-classic-decorator';
