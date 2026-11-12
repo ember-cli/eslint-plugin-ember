@@ -188,8 +188,76 @@ ruleTester.run('no-unused-services', rule, {
     `${SERVICE_IMPORT} Component.extend({});`,
     'const foo = service();',
     "import ComputedProperty from '@ember/object/computed';",
+    // `this` passed to a function declared in the same file that reads the service
+    `${SERVICE_IMPORT} const util = (component) => component.${SERVICE_NAME}.someMethod(); class MyClass { @service() ${SERVICE_NAME}; get foo() { return util(this); } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; get foo() { return util(this); } } function util(component) { return component.${SERVICE_NAME}; }`,
+    `${SERVICE_IMPORT} const util = function (c) { return c['${SERVICE_NAME}']; }; class MyClass { @service() ${SERVICE_NAME}; foo() { util(this); } }`,
+    `${SERVICE_IMPORT} const util = ({ ${SERVICE_NAME} }) => ${SERVICE_NAME}; class MyClass { @service() ${SERVICE_NAME}; foo() { util(this); } }`,
+    `${SERVICE_IMPORT} const util = (c) => { const { ${SERVICE_NAME}: s } = c; return s; }; class MyClass { @service() ${SERVICE_NAME}; foo() { util(this); } }`,
+    `${SERVICE_IMPORT} const util = (a, c = {}) => c.${SERVICE_NAME}; class MyClass { @service() ${SERVICE_NAME}; foo() { util(1, this); } }`,
+    `${SERVICE_IMPORT} const util = (c) => c.${SERVICE_NAME}; Component.extend({ ${SERVICE_NAME}: service(), foo: computed(function () { return util(this); }) });`,
   ],
   invalid: [
+    {
+      code: `${SERVICE_IMPORT} const util = (c) => c.other; class MyClass { @service() ${SERVICE_NAME}; foo() { util(this); } }`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${SERVICE_IMPORT} const util = (c) => c.other; class MyClass {  foo() { util(this); } }`,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      code: `${SERVICE_IMPORT} const util = (a, c) => c.${SERVICE_NAME}; class MyClass { @service() ${SERVICE_NAME}; foo() { util(this, {}); } }`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${SERVICE_IMPORT} const util = (a, c) => c.${SERVICE_NAME}; class MyClass {  foo() { util(this, {}); } }`,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      code: `${SERVICE_IMPORT} let util = (c) => c.${SERVICE_NAME}; util = () => {}; class MyClass { @service() ${SERVICE_NAME}; foo() { util(this); } }`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${SERVICE_IMPORT} let util = (c) => c.${SERVICE_NAME}; util = () => {}; class MyClass {  foo() { util(this); } }`,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      code: `${SERVICE_IMPORT} import util from 'util'; class MyClass { @service() ${SERVICE_NAME}; foo() { util(this); } }`,
+      output: null,
+      errors: [
+        {
+          messageId: 'main',
+          suggestions: [
+            {
+              messageId: 'removeServiceInjection',
+              output: `${SERVICE_IMPORT} import util from 'util'; class MyClass {  foo() { util(this); } }`,
+            },
+          ],
+        },
+      ],
+    },
     {
       code: `${SERVICE_IMPORT} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${nonUses}} }`,
       output: null,
