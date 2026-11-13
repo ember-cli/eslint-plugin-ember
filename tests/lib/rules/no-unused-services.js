@@ -188,8 +188,47 @@ ruleTester.run('no-unused-services', rule, {
     `${SERVICE_IMPORT} Component.extend({});`,
     'const foo = service();',
     "import ComputedProperty from '@ember/object/computed';",
+    /* Service used through a helper in the same file that receives `this` */
+    `${SERVICE_IMPORT} const helper = (component) => component.${SERVICE_NAME}.someMethod(); class MyClass { @service() ${SERVICE_NAME}; get foo() { return helper(this); } }`,
+    `${SERVICE_IMPORT} function helper(component) { return component.${SERVICE_NAME}; } class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(this); } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(this); } } function helper(component) { return component.${SERVICE_NAME}; }`,
+    `${SERVICE_IMPORT} const helper = function (a, component) { return component['${SERVICE_NAME}']; }; class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(1, this); } }`,
+    `${SERVICE_IMPORT} const helper = ({ ${SERVICE_NAME} }) => ${SERVICE_NAME}; class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(this); } }`,
+    `${SERVICE_IMPORT} const helper = (component = {}) => { const { ${SERVICE_NAME}: s } = component; return s; }; class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(this); } }`,
+    `${SERVICE_IMPORT} const inner = (c) => c.${SERVICE_NAME}; const outer = (component) => inner(component); class MyClass { @service() ${SERVICE_NAME}; foo() { return outer(this); } }`,
+    `${SERVICE_IMPORT} function helper(component, depth) { return depth ? helper(component, depth - 1) : component.${SERVICE_NAME}; } class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(this, 2); } }`,
+    `${SERVICE_IMPORT} const helper = (component) => component.${SERVICE_NAME}; Component.extend({ ${SERVICE_NAME}: service(), foo() { return helper(this); } });`,
   ],
   invalid: [
+    /* `this` passed to a helper that does not read the service */
+    {
+      code: `${SERVICE_IMPORT} const helper = (component) => component.unrelatedProp; class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(this); } }`,
+      output: null,
+      errors: [{ messageId: 'main' }],
+    },
+    {
+      code: `${SERVICE_IMPORT} const helper = (component, other) => other.${SERVICE_NAME}; class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(this, {}); } }`,
+      output: null,
+      errors: [{ messageId: 'main' }],
+    },
+    {
+      // Helper defined in another file: unknown, so still reported
+      code: `${SERVICE_IMPORT} import helper from './helper'; class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(this); } }`,
+      output: null,
+      errors: [{ messageId: 'main' }],
+    },
+    {
+      // `let` binding may be reassigned, so it is not followed
+      code: `${SERVICE_IMPORT} let helper = (component) => component.${SERVICE_NAME}; helper = () => {}; class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(this); } }`,
+      output: null,
+      errors: [{ messageId: 'main' }],
+    },
+    {
+      // The helper is called on a different object, not on `this`
+      code: `${SERVICE_IMPORT} const helper = (component) => component.${SERVICE_NAME}; class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(this.other); } }`,
+      output: null,
+      errors: [{ messageId: 'main' }],
+    },
     {
       code: `${SERVICE_IMPORT} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${nonUses}} }`,
       output: null,
