@@ -430,7 +430,7 @@ import Route from '@ember/routing/route';
 
       export default class IndexRoute extends Route {
         @service('store') store;
-message = 'hello';
+        message = 'hello';
         async model() {
           return this.store.findAll('rental');
         }
@@ -456,7 +456,7 @@ import Controller from '@ember/controller';
 
       export default class IndexController extends Controller {
         @service('store') store;
-@action
+        @action
         async loadUsers() {
           return this.store.findAll('user');
         }
@@ -500,7 +500,7 @@ import Controller from '@ember/controller';
 
       export default class IndexRoute extends Route {
         @service('store') store;
-@service('router') router;
+        @service('router') router;
         message = 'hello';
         async model() {
           return this.store.findAll('rental');
@@ -543,7 +543,7 @@ import Controller from '@ember/controller';
 
       export default class IndexRoute extends Route {
         @inject('store') store;
-@inject('router') router;
+        @inject('router') router;
         message = 'hello';
         async model() {
           return this.store.findAll('rental');
@@ -569,7 +569,7 @@ import Component from '@ember/component';
 
       export default class FoobarTestError extends Component {
         @service('media') media;
-get isSmallScreen() {
+        get isSmallScreen() {
           return this.media.isXs;
         }
       }`,
@@ -594,7 +594,7 @@ import Component from '@ember/component';
 
       export default class FoobarTestError extends Component {
         @service('flash-messages') flashMessages;
-@action
+        @action
         save() {
           return this.flashMessages.warn('some message');
         }
@@ -629,14 +629,14 @@ import Component from '@ember/component';
 
       export class IndexController extends Controller {
         @service('store') store;
-async loadData() {
+        async loadData() {
           return this.store.findAll('rental');
         }
       }
 
       export default class IndexRoute extends Route {
         @service('store') store;
-async model() {
+        async model() {
           return this.store.findAll('rental');
         }
       }`,
@@ -683,7 +683,7 @@ async model() {
 
       export class UserController extends Controller {
         @service('media') media;
-get isSmallScreen() {
+        get isSmallScreen() {
           return this.media.isXs;
         }
       }
@@ -723,7 +723,7 @@ get isSmallScreen() {
 
       export class RegisterController extends Controller {
         @service('store') store;
-async loadData() {
+        async loadData() {
           return this.store.findAll('rental');
         }
 
@@ -759,7 +759,7 @@ async loadData() {
       export function mediaAwareRoute() {
         return class UserController extends Controller {
           @service('store') store;
-async loadData() {
+          async loadData() {
             return this.store.findAll('rental');
           }
         }
@@ -784,7 +784,7 @@ async loadData() {
 
       export default class FoobarTestError extends Component {
         @service('flash-messages') flashMessages;
-@action
+        @action
         save() {
           return this.flashMessages.warn('some message');
         }
@@ -812,7 +812,7 @@ async loadData() {
 
       export default class CheckoutRoute extends Route {
         @service('feature') featureChecker;
-get canVisitCheckout() {
+        get canVisitCheckout() {
           return this.featureChecker.isEnabled('checkout');
         }
       }`,
@@ -838,7 +838,7 @@ get canVisitCheckout() {
 
       export default class IndexRoute extends Route {
         @service('cart/checkout') checkout;
-model() {
+        model() {
           return this.checkout.viewCart();
         }
       }`,
@@ -868,7 +868,7 @@ model() {
 
         export default Component.extend({
           flashMessages: service('flash-messages'),
-actions: {
+          actions: {
             save() {
               return this.flashMessages.warn('some message');
             }
@@ -897,11 +897,123 @@ import Route from '@ember/routing/route';
 
       export default Route.extend(SomeMixin, {
         store: service('store'),
-model() {
+        model() {
           return this.store.findAll('rental');
         }
       });`,
       errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
+    },
+
+    // Inserted injection keeps the indentation of the member it is inserted before (#2154)
+    {
+      filename: 'routes/index.js',
+      code: `
+        import Route from '@ember/routing/route';
+        import { service } from '@ember/service';
+
+        export default class IndexRoute extends Route {
+            @service intl;
+
+            model() {
+                return this.store.findAll('rental');
+            }
+        }`,
+      output: `
+        import Route from '@ember/routing/route';
+        import { service } from '@ember/service';
+
+        export default class IndexRoute extends Route {
+            @service('store') store;
+            @service intl;
+
+            model() {
+                return this.store.findAll('rental');
+            }
+        }`,
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
+    },
+    {
+      filename: 'routes/index.js',
+      code: `
+\timport Route from '@ember/routing/route';
+\timport { service } from '@ember/service';
+
+\texport default Route.extend({
+\t\tmodel() {
+\t\t\treturn this.store.findAll('rental');
+\t\t}
+\t});`,
+      output: `
+\timport Route from '@ember/routing/route';
+\timport { service } from '@ember/service';
+
+\texport default Route.extend({
+\t\tstore: service('store'),
+\t\tmodel() {
+\t\t\treturn this.store.findAll('rental');
+\t\t}
+\t});`,
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
+    },
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+      import { service } from '@ember/service';
+      export default class IndexRoute extends Route { model() { return this.store.findAll('rental'); } }`,
+      output: `
+      import Route from '@ember/routing/route';
+      import { service } from '@ember/service';
+      export default class IndexRoute extends Route { @service('store') store; model() { return this.store.findAll('rental'); } }`,
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
+    },
+
+    // Inserted import uses `service` when ember-source is 4.1 or newer (#2154)
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+
+      export default class IndexRoute extends Route {
+        model() {
+          return this.store.findAll('rental');
+        }
+      }`,
+      output: `
+      import { service } from '@ember/service';
+import Route from '@ember/routing/route';
+
+      export default class IndexRoute extends Route {
+        @service('store') store;
+        model() {
+          return this.store.findAll('rental');
+        }
+      }`,
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
+      settings: { ember: { version: '4.1.0' } },
+    },
+    {
+      filename: 'routes/index.js',
+      code: `
+      import Route from '@ember/routing/route';
+
+      export default class IndexRoute extends Route {
+        model() {
+          return this.store.findAll('rental');
+        }
+      }`,
+      output: `
+      import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
+
+      export default class IndexRoute extends Route {
+        @service('store') store;
+        model() {
+          return this.store.findAll('rental');
+        }
+      }`,
+      errors: [{ messageId: 'main', data: { serviceName: 'store' }, type: 'MemberExpression' }],
+      settings: { ember: { version: '4.0.1' } },
     },
   ],
 });

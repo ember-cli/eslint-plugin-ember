@@ -88,6 +88,8 @@ export default class NewPostController extends Controller {
 
 The autofixer for this rule will update method calls to use the router service, and will inject the router service as needed.
 
+When the file does not import `@ember/service` yet, the autofixer adds `import { service } from '@ember/service';` for Ember 4.1 and newer, and `import { inject as service } from '@ember/service';` for older versions. The version comes from `settings.ember.version` when it is set, and from the installed `ember-source` otherwise.
+
 ## References
 
 - [Deprecation](https://deprecations.emberjs.com/v3.x/#toc_routing-transition-methods)
