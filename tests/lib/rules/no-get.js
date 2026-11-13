@@ -305,7 +305,7 @@ ruleTester.run('no-get', rule, {
     {
       // With invalid JS variable name:
       code: "this.get('foo-bar');",
-      output: null,
+      output: "this['foo-bar'];",
       errors: [
         {
           message: ERROR_MESSAGE_GET,
@@ -316,13 +316,74 @@ ruleTester.run('no-get', rule, {
     {
       // With invalid JS variable name:
       code: "import { get } from '@ember/object'; get(this, 'foo-bar');",
-      output: null,
+      output: "import { get } from '@ember/object'; this['foo-bar'];",
       errors: [
         {
           message: ERROR_MESSAGE_GET,
           type: 'CallExpression',
         },
       ],
+    },
+    {
+      code: "this.foo.get('bar-baz');",
+      output: "this.foo['bar-baz'];",
+      options: [{ catchUnsafeObjects: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      // Quotes in the name are escaped.
+      code: 'this.get("it\'s");',
+      output: "this['it\\'s'];",
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      // `lastObject` inside a name is not an array access.
+      code: "this.get('x-lastObject');",
+      output: "this['x-lastObject'];",
+      options: [{ useAt: false }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      // Nested paths with invalid JS variable names:
+      code: "this.get('foo.bar-baz');",
+      output: "this.foo?.['bar-baz'];",
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get('bar-baz.foo');",
+      output: "this['bar-baz']?.foo;",
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get('0.bar-baz.firstObject');",
+      output: "this[0]?.['bar-baz']?.[0];",
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get('foo.bar-baz').qux;",
+      output: "this.foo['bar-baz'].qux;",
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get('foo-bar.lastObject');",
+      output: "this['foo-bar']?.[this['foo-bar'].length - 1];",
+      options: [{ useOptionalChaining: true, useAt: false }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get(condition ? 'foo-bar' : 'baz');",
+      output: "condition ? this['foo-bar'] : this.baz;",
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      // Empty path segments can't be fixed:
+      code: "this.get('foo..bar');",
+      output: null,
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
     },
 
     // **************************
