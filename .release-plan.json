@@ -1,15 +1,11 @@
 {
   "solution": {
     "eslint-plugin-ember": {
-      "impact": "minor",
-      "oldVersion": "13.9.1",
-      "newVersion": "13.10.0",
+      "impact": "patch",
+      "oldVersion": "13.10.0",
+      "newVersion": "13.10.1",
       "tagName": "latest",
       "constraints": [
-        {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        },
         {
           "impact": "patch",
           "reason": "Appears in changelog section :bug: Bug Fix"
@@ -18,5 +14,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-11-12)\n\n* eslint-plugin-ember 13.10.0 (minor)\n\n#### :rocket: Enhancement\n* `eslint-plugin-ember`\n  * [#2877](https://github.com/ember-cli/eslint-plugin-ember/pull/2877) Flag imports of .test and _test files in no-test-import-export ([@gitKrystan](https://github.com/gitKrystan))\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2881](https://github.com/ember-cli/eslint-plugin-ember/pull/2881) Treat Ember Data `@attr` / `@belongsTo` / `@hasMany` as tracked in `no-assignment-of-untracked-properties-used-in-tracking-contexts` ([@bardrop](https://github.com/bardrop))\n  * [#2880](https://github.com/ember-cli/eslint-plugin-ember/pull/2880) Fix `no-array-prototype-extensions` false positive on `this` properties assigned with `A()` ([@bardrop](https://github.com/bardrop))\n  * [#2879](https://github.com/ember-cli/eslint-plugin-ember/pull/2879) Flag settled() after select, tab and scrollTo in no-settled-after-test-helper ([@emattias](https://github.com/emattias))\n\n#### Committers: 3\n- Krystan HuffMenne ([@gitKrystan](https://github.com/gitKrystan))\n- Mattias Hällkvist ([@emattias](https://github.com/emattias))\n- bardrop ([@bardrop](https://github.com/bardrop))\n"
+  "description": "## Release (2026-11-13)\n\n* eslint-plugin-ember 13.10.1 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2885](https://github.com/ember-cli/eslint-plugin-ember/pull/2885) Keep indentation and use the modern service import in service injection autofixes ([@bardrop](https://github.com/bardrop))\n  * [#2886](https://github.com/ember-cli/eslint-plugin-ember/pull/2886) Autofix `no-get` paths with invalid JS names using bracket access ([@bardrop](https://github.com/bardrop))\n  * [#2882](https://github.com/ember-cli/eslint-plugin-ember/pull/2882) Ignore computed properties used only in `@classic` classes in `no-computed-properties-in-native-classes` ([@bardrop](https://github.com/bardrop))\n\n#### Committers: 1\n- bardrop ([@bardrop](https://github.com/bardrop))\n"
 }
