@@ -44,6 +44,21 @@ export default class MyComponent extends Component {
 }
 ```
 
+```js
+import Component from '@glimmer/component';
+
+// A function defined in the same file that receives the component counts too
+const getSomething = (component) => component.myService.getSomething();
+
+export default class MyComponent extends Component {
+  @service() myService;
+
+  get someProperty() {
+    return getSomething(this);
+  }
+}
+```
+
 ## References
 
 - Ember [Services](https://guides.emberjs.com/release/applications/services/) guide
