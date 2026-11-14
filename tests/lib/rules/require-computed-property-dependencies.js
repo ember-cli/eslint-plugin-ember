@@ -74,6 +74,24 @@ ruleTester.run('require-computed-property-dependencies', rule, {
     "import Ember from 'ember'; Ember.computed(dynamic, function() {});",
     // Dynamic key:
     "import Ember from 'ember'; Ember.computed(...PROPERTIES, function() {});",
+    // Dynamic keys whose value is known statically (https://github.com/ember-cli/eslint-plugin-ember/issues/1317):
+    "import Ember from 'ember'; const keys = ['prop']; Ember.computed(...keys, function() { return this.prop; });",
+    "import Ember from 'ember'; const keys = Object.freeze(['prop']); Ember.computed(...keys, function() { return this.prop; });",
+    `
+      import { computed } from '@ember/object';
+      import Component from '@ember/component';
+      const keys = ['prop'];
+      const frozenKeys = Object.freeze(keys);
+      export default Component.extend({
+        prop: 10,
+        frozenDecl: computed(...frozenKeys, function () {
+          return this.prop * 10 > 100;
+        }),
+      });
+    `,
+    "import Ember from 'ember'; const KEY = 'prop'; Ember.computed(KEY, function() { return this.prop; });",
+    "import Ember from 'ember'; const keys = ['a.{b,c}', 'd']; Ember.computed(...keys, function() { return this.a.b + this.a.c + this.get('d'); });",
+    "import Ember from 'ember'; const keys = ['a']; Ember.computed(...keys, 'b', function() { return this.a + this.b; });",
     // Incorrect usage that should be ignored:
     "import Ember from 'ember'; Ember.computed(123)",
     // Should ignore injected service names:
@@ -170,6 +188,53 @@ ruleTester.run('require-computed-property-dependencies', rule, {
         {
           message: ERROR_MESSAGE_NON_STRING_VALUE,
           type: 'SpreadElement',
+        },
+      ],
+    },
+    // Statically known dynamic keys with a missing dependency:
+    {
+      code: "import Ember from 'ember'; const keys = ['prop']; Ember.computed(...keys, function() { return this.prop + this.undeclared; });",
+      output:
+        "import Ember from 'ember'; const keys = ['prop']; Ember.computed(...keys, 'undeclared', function() { return this.prop + this.undeclared; });",
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: undeclared',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: "import Ember from 'ember'; const KEY = 'prop'; Ember.computed(KEY, 'other', function() { return this.prop + this.other + this.undeclared; });",
+      output:
+        "import Ember from 'ember'; const KEY = 'prop'; Ember.computed(KEY, 'other', 'undeclared', function() { return this.prop + this.other + this.undeclared; });",
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: undeclared',
+          type: 'CallExpression',
+        },
+      ],
+    },
+    // Still a non-string value when dynamic keys are not allowed:
+    {
+      code: "import Ember from 'ember'; const keys = ['prop']; Ember.computed(...keys, function() { return this.prop; });",
+      output: null,
+      options: [{ allowDynamicKeys: false }],
+      errors: [
+        {
+          message: ERROR_MESSAGE_NON_STRING_VALUE,
+          type: 'SpreadElement',
+        },
+      ],
+    },
+    // Not statically known (reassigned):
+    {
+      code: "import Ember from 'ember'; let keys = ['prop']; keys = ['other']; Ember.computed(...keys, function() { return this.prop; });",
+      output:
+        "import Ember from 'ember'; let keys = ['prop']; keys = ['other']; Ember.computed(...keys, 'prop', function() { return this.prop; });",
+      errors: [
+        {
+          message: 'Use of undeclared dependencies in computed property: prop',
+          type: 'CallExpression',
         },
       ],
     },
