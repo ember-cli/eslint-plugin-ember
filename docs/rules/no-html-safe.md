@@ -52,11 +52,6 @@ import { htmlSafe } from '@ember/template';
 <template>{{htmlSafe @userContent}}</template>
 ```
 
-```gjs
-import * as template from '@ember/template';
-
-<template>{{template.trustHTML @userContent}}</template>
-```
 
 Examples of **correct** code for this rule:
 
