@@ -52,7 +52,6 @@ import { htmlSafe } from '@ember/template';
 <template>{{htmlSafe @userContent}}</template>
 ```
 
-
 Examples of **correct** code for this rule:
 
 ```gjs
@@ -66,7 +65,7 @@ import { isHTMLSafe, isTrustedHTML } from '@ember/template';
 const alreadyTrustedOlder = isHTMLSafe(content);
 const alreadyTrusted = isTrustedHTML(content);
 
-console.log(alreadyTrustedOlder === alreadyTrusted) // true
+console.log(alreadyTrustedOlder === alreadyTrusted); // true
 ```
 
 ## Alternatives
