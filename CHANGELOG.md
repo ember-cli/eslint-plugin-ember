@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2026-11-16)
+
+* eslint-plugin-ember 13.11.0 (minor)
+
+#### :rocket: Enhancement
+* `eslint-plugin-ember`
+  * [#2888](https://github.com/ember-cli/eslint-plugin-ember/pull/2888) Use statically known variable keys in `require-computed-property-dependencies` ([@bardrop](https://github.com/bardrop))
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2890](https://github.com/ember-cli/eslint-plugin-ember/pull/2890) Report `trustHTML`, template uses and indirect uses in `no-html-safe` ([@BoussonKarel](https://github.com/BoussonKarel))
+
+#### Committers: 2
+- [@BoussonKarel](https://github.com/BoussonKarel)
+- bardrop ([@bardrop](https://github.com/bardrop))
+
 ## Release (2026-11-13)
 
 * eslint-plugin-ember 13.10.1 (patch)
