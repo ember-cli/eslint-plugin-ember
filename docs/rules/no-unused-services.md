@@ -14,6 +14,8 @@ By removing unused service injections, we can reduce the amount of code we have 
 - A mixin or parent class that the current class extends from
 - A child class that extends from the current class
 
+The rule also skips any class that passes its `this` to a function or `new` call (for example `helper(this)`, `obj.method(this)`, `new Foo(this)` or `helper({ owner: this })`). The called code could use any service, so the rule cannot tell which ones are unused. `this` inside a nested regular `function` or nested class is a different `this` and does not count. Neither does `get`, `set`, `getProperties` or `setProperties` from `@ember/object`.
+
 Given these significant limitations, the rule is not currently recommended for production usage, but some may find it useful to experiment with. The rule will not be added to the `recommended` configuration unless the limitations can be addressed.
 
 ## Examples
