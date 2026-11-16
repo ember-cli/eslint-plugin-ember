@@ -22,9 +22,6 @@ Importing the function on its own is not reported, nor are `typeof htmlSafe` and
 
 The rule follows static imports only. It does not report:
 
-- destructuring a namespace import: `const { htmlSafe } = t`
-- `export * from '@ember/template'` and `export * as t from '@ember/template'`
-- `require('@ember/template')` and `import('@ember/template')`
 - `.hbs` templates, which cannot import `htmlSafe` or `trustHTML`. A helper you write that calls `htmlSafe` is reported in that helper's JS file.
 
 ## Examples
