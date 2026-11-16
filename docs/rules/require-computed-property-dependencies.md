@@ -19,6 +19,8 @@ This rule requires dependencies to be declared statically in computed properties
 
 This rule has an autofixer that will automatically add missing dependencies to computed properties.
 
+Dependent keys passed in a variable, like `computed(KEY, ...)` or `computed(...KEYS, ...)`, are used when their value is known statically, such as a `const` string or array of strings (also through `Object.freeze()`). Other variables are treated as unknown keys.
+
 ## Examples
 
 Examples of **incorrect** code for this rule:
