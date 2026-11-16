@@ -2,7 +2,7 @@
 
 <!-- end auto-generated rule header -->
 
-`htmlSafe` and its newer name `trustHTML` mark a string as safe for unescaped output with Ember templates so you can render it as HTML. Neither performs input sanitization. While useful this can inadvertently open you up to Cross-site Scripting (XSS) vulnerabilities, especially if the string was generated from user input or some other untrusted source. **You should only ever use `htmlSafe` or `trustHTML` with trusted or sanitized input**.
+`htmlSafe` and its newer name `trustHTML` mark a string as trusted for unescaped output with Ember templates so you can render it as HTML. Neither performs input sanitization. While useful this can inadvertently open you up to Cross-site Scripting (XSS) vulnerabilities, especially if the string was generated from user input or some other untrusted source. **You should only ever use `htmlSafe` or `trustHTML` with trusted or sanitized input**.
 
 Note: this rule is not in the `recommended` configuration because there are legitimate usages of `htmlSafe` and `trustHTML`.
 
