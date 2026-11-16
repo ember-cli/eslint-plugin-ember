@@ -2,13 +2,27 @@
 
 <!-- end auto-generated rule header -->
 
-`htmlSafe` marks a string as safe for unescaped output with Ember templates so you can render it as HTML. `htmlSafe` does **not** perform input sanitization. While useful this can inadvertently open you up to Cross-site Scripting (XSS) vulnerabilities, especially if the string was generated from user input or some other untrusted source. **You should only ever use `htmlSafe` with trusted or sanitized input**.
+`htmlSafe` and its newer name `trustHTML` mark a string as trusted for unescaped output with Ember templates so you can render it as HTML. Neither performs input sanitization. While useful this can inadvertently open you up to Cross-site Scripting (XSS) vulnerabilities, especially if the string was generated from user input or some other untrusted source. **You should only ever use `htmlSafe` or `trustHTML` with trusted or sanitized input**.
 
-Note: this rule is not in the `recommended` configuration because there are legitimate usages of `htmlSafe`.
+Note: this rule is not in the `recommended` configuration because there are legitimate usages of `htmlSafe` and `trustHTML`.
 
 ## Rule Details
 
-This rule prevents importing the `htmlSafe` utillity from `@ember/template` (or `@ember/string` for older Ember versions);
+This rule reports uses of `htmlSafe` and `trustHTML` from `@ember/template`, and of `htmlSafe` from `@ember/string` for older Ember versions:
+
+- calls in JavaScript, such as `htmlSafe(content)`
+- other uses that pass the function on, such as `items.map(htmlSafe)` or `export { htmlSafe }`
+- helper uses in `<template>` tags in `.gjs`/`.gts` files, such as `{{htmlSafe @content}}`
+- uses through a namespace import, such as `t.htmlSafe(content)` or `{{t.htmlSafe @content}}`
+- re-exports, such as `export { htmlSafe } from '@ember/template'`
+
+Importing the function on its own is not reported, nor are `typeof htmlSafe` and type-only exports, since they do not mark anything safe. Each use is reported separately, so where one use is legitimate you can disable the rule for just that line.
+
+### Limitations
+
+The rule follows static imports only. It does not report:
+
+- `.hbs` templates, which cannot import `htmlSafe` or `trustHTML`. A helper you write that calls `htmlSafe` is reported in that helper's JS file.
 
 ## Examples
 
@@ -16,10 +30,42 @@ Examples of **incorrect** code for this rule:
 
 ```js
 import { htmlSafe } from '@ember/template';
+
+const content = htmlSafe(userContent);
+```
+
+```js
+import { trustHTML } from '@ember/template';
+
+const content = trustHTML(userContent);
 ```
 
 ```js
 import { htmlSafe } from '@ember/string';
+
+const content = htmlSafe(userContent);
+```
+
+```gjs
+import { htmlSafe } from '@ember/template';
+
+<template>{{htmlSafe @userContent}}</template>
+```
+
+Examples of **correct** code for this rule:
+
+```gjs
+// Render the content as text: Ember escapes it.
+<template>{{@userContent}}</template>
+```
+
+```js
+import { isHTMLSafe, isTrustedHTML } from '@ember/template';
+
+const alreadyTrustedOlder = isHTMLSafe(content);
+const alreadyTrusted = isTrustedHTML(content);
+
+console.log(alreadyTrustedOlder === alreadyTrusted); // true
 ```
 
 ## Alternatives
@@ -109,9 +155,10 @@ export default helper(substring);
 
 ## Related Rules
 
-- ember-template-lint has a [no-triple-curlies](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-triple-curlies.md) rule for the template equivalent of this rule.
+- [template-no-triple-curlies](template-no-triple-curlies.md) disallows `{{{triple curlies}}}`, the template equivalent of this rule.
 
 ## References
 
 - [Ember's `htmlSafe` API documentation](https://api.emberjs.com/ember/release/functions/@ember%2Ftemplate/htmlSafe)
+- [Ember's `trustHTML` API documentation](https://api.emberjs.com/ember/release/functions/@ember%2Ftemplate/trustHTML)
 - [MDN's Cross-site Scripting (XSS) documentation](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting)
