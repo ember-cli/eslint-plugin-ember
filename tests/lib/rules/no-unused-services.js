@@ -197,6 +197,7 @@ ruleTester.run('no-unused-services', rule, {
     `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(...[this]); } }`,
     `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return [1].map(() => helper(this)); } }`,
     `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; constructor() { super(); register(this); } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo = helper(this); }`,
     `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), foo() { return helper(this); } });`,
     // `get` is not from @ember/object here, so it is an unknown function that gets `this`
     `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${emberObjectUses1}} }`,
@@ -232,6 +233,16 @@ ruleTester.run('no-unused-services', rule, {
     },
     {
       code: `${SERVICE_IMPORT} helper(this); class MyClass { @service() ${SERVICE_NAME}; }`,
+      output: null,
+      errors: [{ messageId: 'main' }],
+    },
+    {
+      code: `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), foo: helper(this) });`,
+      output: null,
+      errors: [{ messageId: 'main' }],
+    },
+    {
+      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; static foo = helper(this); }`,
       output: null,
       errors: [{ messageId: 'main' }],
     },
