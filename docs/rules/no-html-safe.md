@@ -66,9 +66,12 @@ Examples of **correct** code for this rule:
 ```
 
 ```js
-import { isHTMLSafe } from '@ember/template';
+import { isHTMLSafe, isTrustedHTML } from '@ember/template';
 
-const alreadySafe = isHTMLSafe(content);
+const alreadyTrustedOlder = isHTMLSafe(content);
+const alreadyTrusted = isTrustedHTML(content);
+
+console.log(alreadyTrustedOlder === alreadyTrusted) // true
 ```
 
 ## Alternatives
