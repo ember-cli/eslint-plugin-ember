@@ -203,21 +203,19 @@ ruleTester.run('no-unused-services', rule, {
     `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${emberObjectUses1}} }`,
     `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${emberObjectUses1}} });`,
     `${SERVICE_IMPORT}${EO_IMPORTS} Component.extend({ ${SERVICE_NAME}: service(), foo: computed(function () { return helper(this); }) });`,
+    // Any `this` passed inside the class body counts, like any `this.foo` counts as a use.
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return function () { return helper(this); }; } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return class { bar() { return helper(this); } }; } }`,
+    `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), foo: helper(this) });`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; static foo = helper(this); }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; static foo() { return helper(this); } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; static { helper(this); } }`,
+    `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), foo() { return [1].map(function () { return helper(this); }); } });`,
   ],
   invalid: [
-    /* `this` is not passed anywhere, or the `this` that is passed is not the class instance */
+    /* `this` is not passed anywhere */
     {
       code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(this.other); } }`,
-      output: null,
-      errors: [{ messageId: 'main' }],
-    },
-    {
-      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return function () { return helper(this); }; } }`,
-      output: null,
-      errors: [{ messageId: 'main' }],
-    },
-    {
-      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return class { bar() { return helper(this); } }; } }`,
       output: null,
       errors: [{ messageId: 'main' }],
     },
@@ -238,31 +236,6 @@ ruleTester.run('no-unused-services', rule, {
     },
     {
       code: `${SERVICE_IMPORT} helper(this); class MyClass { @service() ${SERVICE_NAME}; }`,
-      output: null,
-      errors: [{ messageId: 'main' }],
-    },
-    {
-      code: `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), foo: helper(this) });`,
-      output: null,
-      errors: [{ messageId: 'main' }],
-    },
-    {
-      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; static foo = helper(this); }`,
-      output: null,
-      errors: [{ messageId: 'main' }],
-    },
-    {
-      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; static foo() { return helper(this); } }`,
-      output: null,
-      errors: [{ messageId: 'main' }],
-    },
-    {
-      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; static { helper(this); } }`,
-      output: null,
-      errors: [{ messageId: 'main' }],
-    },
-    {
-      code: `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), foo() { return [1].map(function () { return helper(this); }); } });`,
       output: null,
       errors: [{ messageId: 'main' }],
     },
