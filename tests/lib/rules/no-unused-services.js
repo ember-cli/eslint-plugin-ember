@@ -195,6 +195,8 @@ ruleTester.run('no-unused-services', rule, {
     `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return new Foo(this); } }`,
     `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo = () => helper({ owner: this }); }`,
     `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(...[this]); } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { const self = this; return helper(self); } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { this.items = [this]; } }`,
     `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return [1].map(() => helper(this)); } }`,
     `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; constructor() { super(); register(this); } }`,
     `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo = helper(this); }`,
@@ -228,6 +230,11 @@ ruleTester.run('no-unused-services', rule, {
     },
     {
       code: `${SERVICE_IMPORT} import {set} from '@ember/object'; class MyClass { @service() ${SERVICE_NAME}; foo() { set(this, 'unrelatedProp', 1); } }`,
+      output: null,
+      errors: [{ messageId: 'main' }],
+    },
+    {
+      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { const { other } = this; return other === this; } }`,
       output: null,
       errors: [{ messageId: 'main' }],
     },
