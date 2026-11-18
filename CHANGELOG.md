@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-11-18)
+
+* eslint-plugin-ember 13.11.1 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2887](https://github.com/ember-cli/eslint-plugin-ember/pull/2887) Skip classes that pass `this` to a call in no-unused-services ([@bardrop](https://github.com/bardrop))
+
+#### Committers: 1
+- bardrop ([@bardrop](https://github.com/bardrop))
+
 ## Release (2026-11-16)
 
 * eslint-plugin-ember 13.11.0 (minor)
