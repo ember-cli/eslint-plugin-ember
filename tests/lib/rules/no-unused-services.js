@@ -188,8 +188,57 @@ ruleTester.run('no-unused-services', rule, {
     `${SERVICE_IMPORT} Component.extend({});`,
     'const foo = service();',
     "import ComputedProperty from '@ember/object/computed';",
+    /* `this` is passed somewhere, so the rule is turned off for the class */
+    `${SERVICE_IMPORT} const helper = (c) => c.${SERVICE_NAME}; class MyClass { @service() ${SERVICE_NAME}; get foo() { return helper(this); } }`,
+    `${SERVICE_IMPORT} import helper from './helper'; class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(1, this); } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return this.other.method(this); } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return new Foo(this); } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return [1].map(() => helper(this)); } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; constructor() { super(); register(this); } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo = helper(this); }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo = () => helper(this); }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return helper?.(this); } }`,
+    `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), foo() { return helper(this); } });`,
+    // `get` is not from @ember/object here, so it is an unknown function that gets `this`
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${emberObjectUses1}} }`,
+    `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${emberObjectUses1}} });`,
+    `${SERVICE_IMPORT}${EO_IMPORTS} Component.extend({ ${SERVICE_NAME}: service(), foo: computed(function () { return helper(this); }) });`,
+    // Any `this` passed inside the class body counts, like any `this.foo` counts as a use.
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return function () { return helper(this); }; } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return class { bar() { return helper(this); } }; } }`,
+    `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), foo: helper(this) });`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; static foo = helper(this); }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; static foo() { return helper(this); } }`,
+    `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; static { helper(this); } }`,
+    `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), foo() { return [1].map(function () { return helper(this); }); } });`,
   ],
   invalid: [
+    /* `this` is not passed anywhere */
+    {
+      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { return helper(this.other); } }`,
+      output: null,
+      errors: [{ messageId: 'main' }],
+    },
+    {
+      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { class Inner { bar() { return helper(this); } } return Inner; } }`,
+      output: null,
+      errors: [{ messageId: 'main' }],
+    },
+    {
+      code: `${SERVICE_IMPORT} import {set} from '@ember/object'; class MyClass { @service() ${SERVICE_NAME}; foo() { set(this, 'unrelatedProp', 1); } }`,
+      output: null,
+      errors: [{ messageId: 'main' }],
+    },
+    {
+      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; foo() { const { other } = this; return other === this; } }`,
+      output: null,
+      errors: [{ messageId: 'main' }],
+    },
+    {
+      code: `${SERVICE_IMPORT} helper(this); class MyClass { @service() ${SERVICE_NAME}; }`,
+      output: null,
+      errors: [{ messageId: 'main' }],
+    },
     {
       code: `${SERVICE_IMPORT} class MyClass { @service('foo') ${SERVICE_NAME}; fooFunc() {${nonUses}} }`,
       output: null,
@@ -297,39 +346,6 @@ ruleTester.run('no-unused-services', rule, {
             {
               messageId: 'removeServiceInjection',
               output: `${SERVICE_IMPORT} Component.extend({  });`,
-            },
-          ],
-          type: 'Property',
-        },
-      ],
-    },
-    /* Using get/getProperties without @ember/object import */
-    {
-      code: `${SERVICE_IMPORT} class MyClass { @service() ${SERVICE_NAME}; fooFunc() {${emberObjectUses1}} }`,
-      output: null,
-      errors: [
-        {
-          messageId: 'main',
-          suggestions: [
-            {
-              messageId: 'removeServiceInjection',
-              output: `${SERVICE_IMPORT} class MyClass {  fooFunc() {${emberObjectUses1}} }`,
-            },
-          ],
-          // type could be ClassProperty (ESLint v7) or PropertyDefinition (ESLint v8)
-        },
-      ],
-    },
-    {
-      code: `${SERVICE_IMPORT} Component.extend({ ${SERVICE_NAME}: service(), fooFunc() {${emberObjectUses1}} });`,
-      output: null,
-      errors: [
-        {
-          messageId: 'main',
-          suggestions: [
-            {
-              messageId: 'removeServiceInjection',
-              output: `${SERVICE_IMPORT} Component.extend({  fooFunc() {${emberObjectUses1}} });`,
             },
           ],
           type: 'Property',
