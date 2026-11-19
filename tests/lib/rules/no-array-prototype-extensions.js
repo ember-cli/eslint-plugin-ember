@@ -691,15 +691,19 @@ import { get as g } from 'dummy';
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
+      // The method is called on each item, so `this` is the item.
       code: 'something.invoke("abc")',
-      output: `import { get } from '@ember/object';
-something.map(item => get(item, "abc")?.())`,
+      output: 'something.map(item => item["abc"]?.())',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
       code: 'something.invoke("abc", "def")',
-      output: `import { get } from '@ember/object';
-something.map(item => get(item, "abc")?.("def"))`,
+      output: 'something.map(item => item["abc"]?.("def"))',
+      errors: [{ messageId: 'main', type: 'CallExpression' }],
+    },
+    {
+      code: 'something.invoke(methodName, 1)',
+      output: 'something.map(item => item[methodName]?.(1))',
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -707,7 +711,7 @@ something.map(item => get(item, "abc")?.("def"))`,
       code: `import { get } from '@ember/object';
       something.invoke('abc', {})`,
       output: `import { get } from '@ember/object';
-      something.map(item => get(item, 'abc')?.({}))`,
+      something.map(item => item['abc']?.({}))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
@@ -715,16 +719,15 @@ something.map(item => get(item, "abc")?.("def"))`,
       code: `import { get as g } from '@ember/object';
       something.invoke('abc', {})`,
       output: `import { get as g } from '@ember/object';
-      something.map(item => g(item, 'abc')?.({}))`,
+      something.map(item => item['abc']?.({}))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
       // When `get` method is already imported from a package other than '@ember/object'
       code: `import { get as g } from '@custom/object';
       something.invoke('abc', {}, 'test', true)`,
-      output: `import { get } from '@ember/object';
-import { get as g } from '@custom/object';
-      something.map(item => get(item, 'abc')?.({}, 'test', true))`,
+      output: `import { get as g } from '@custom/object';
+      something.map(item => item['abc']?.({}, 'test', true))`,
       errors: [{ messageId: 'main', type: 'CallExpression' }],
     },
     {
