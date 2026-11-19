@@ -10,6 +10,7 @@ const validHbs = [
   '<button type="reset" />',
   '<button type="{{buttonType}}" />',
   '<button type={{buttonType}} />',
+  '<button class="a" type="button" />',
   '<div/>',
   '<div></div>',
   '<div type="randomType"></div>',
@@ -44,6 +45,32 @@ const invalidHbs = [
   {
     code: '<form><button></button></form>',
     output: '<form><button type="submit"></button></form>',
+    errors: [{ message: ERROR_MESSAGE }],
+  },
+  // self-closing with attributes: insert before `/>`, not after `/`
+  {
+    code: '<button class="a" />',
+    output: '<button class="a" type="button" />',
+    errors: [{ message: ERROR_MESSAGE }],
+  },
+  {
+    code: '<button class="a"/>',
+    output: '<button class="a" type="button"/>',
+    errors: [{ message: ERROR_MESSAGE }],
+  },
+  {
+    code: '<button {{on "click" this.go}} />',
+    output: '<button {{on "click" this.go}} type="button" />',
+    errors: [{ message: ERROR_MESSAGE }],
+  },
+  {
+    code: '<button\n  class="a"\n/>',
+    output: '<button\n  class="a" type="button"\n/>',
+    errors: [{ message: ERROR_MESSAGE }],
+  },
+  {
+    code: '<form><button class="a" /></form>',
+    output: '<form><button class="a" type="submit" /></form>',
     errors: [{ message: ERROR_MESSAGE }],
   },
 ];
@@ -84,6 +111,11 @@ const gjsInvalid = [
   {
     code: '<template><form><button></button></form></template>',
     output: '<template><form><button type="submit"></button></form></template>',
+    errors: [{ message: ERROR_MESSAGE }],
+  },
+  {
+    code: '<template><button class="a" /></template>',
+    output: '<template><button class="a" type="button" /></template>',
     errors: [{ message: ERROR_MESSAGE }],
   },
   {

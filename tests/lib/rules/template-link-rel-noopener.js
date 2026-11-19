@@ -16,6 +16,8 @@ ruleTester.run('template-link-rel-noopener', rule, {
     '<template><a href="/">Link</a></template>',
     // target="_self" does not require rel
     '<template><a href="/some/where" target="_self"></a></template>',
+    // self-closing
+    '<template><a href="/" target="_blank" rel="noopener noreferrer" /></template>',
   ],
   invalid: [
     // no rel attribute at all
@@ -43,6 +45,18 @@ ruleTester.run('template-link-rel-noopener', rule, {
         '<template><a href="/" target="_blank" rel="nofollow noopener noreferrer">Link</a></template>',
       errors: [{ messageId: 'missingRel' }],
     },
+    // self-closing — insert before `/>`, not after `/`
+    {
+      code: '<template><a href="/" target="_blank" /></template>',
+      output: '<template><a href="/" target="_blank" rel="noopener noreferrer" /></template>',
+      errors: [{ messageId: 'missingRel' }],
+    },
+    // dynamic rel — reported, but not autofixed
+    {
+      code: '<template><a href="/" target="_blank" rel={{this.rel}}>Link</a></template>',
+      output: null,
+      errors: [{ messageId: 'missingRel' }],
+    },
   ],
 });
 
@@ -61,6 +75,7 @@ hbsRuleTester.run('template-link-rel-noopener (hbs)', rule, {
     '<a href="/some/where" target="_blank" rel="noopener noreferrer"></a>',
     '<a href="/some/where" target="_blank" rel="noreferrer noopener"></a>',
     '<a href="/some/where" target="_blank" rel="nofollow noreferrer noopener"></a>',
+    '<a href="/some/where" target="_blank" rel="noopener noreferrer" />',
   ],
   invalid: [
     {
@@ -81,6 +96,26 @@ hbsRuleTester.run('template-link-rel-noopener (hbs)', rule, {
     {
       code: '<a href="/some/where" target="_blank" rel="noreferrer"></a>',
       output: '<a href="/some/where" target="_blank" rel="noopener noreferrer"></a>',
+      errors: [{ messageId: 'missingRel' }],
+    },
+    {
+      code: '<a href="/some/where" target="_blank" />',
+      output: '<a href="/some/where" target="_blank" rel="noopener noreferrer" />',
+      errors: [{ messageId: 'missingRel' }],
+    },
+    {
+      code: '<a href="/some/where" target="_blank"/>',
+      output: '<a href="/some/where" target="_blank" rel="noopener noreferrer"/>',
+      errors: [{ messageId: 'missingRel' }],
+    },
+    {
+      code: '<a href="/some/where" target="_blank" rel={{this.rel}}></a>',
+      output: null,
+      errors: [{ messageId: 'missingRel' }],
+    },
+    {
+      code: '<a href="/some/where" target="_blank" rel="nofollow {{this.rel}}"></a>',
+      output: null,
       errors: [{ messageId: 'missingRel' }],
     },
   ],
