@@ -2,8 +2,8 @@
   "solution": {
     "eslint-plugin-ember": {
       "impact": "patch",
-      "oldVersion": "13.11.0",
-      "newVersion": "13.11.1",
+      "oldVersion": "13.11.1",
+      "newVersion": "13.11.2",
       "tagName": "latest",
       "constraints": [
         {
@@ -14,5 +14,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-11-18)\n\n* eslint-plugin-ember 13.11.1 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2887](https://github.com/ember-cli/eslint-plugin-ember/pull/2887) Skip classes that pass `this` to a call in no-unused-services ([@bardrop](https://github.com/bardrop))\n\n#### Committers: 1\n- bardrop ([@bardrop](https://github.com/bardrop))\n"
+  "description": "## Release (2026-11-19)\n\n* eslint-plugin-ember 13.11.2 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2893](https://github.com/ember-cli/eslint-plugin-ember/pull/2893) Do not crash on namespace and side-effect imports ([@bardrop](https://github.com/bardrop))\n\n#### Committers: 1\n- bardrop ([@bardrop](https://github.com/bardrop))\n"
 }
