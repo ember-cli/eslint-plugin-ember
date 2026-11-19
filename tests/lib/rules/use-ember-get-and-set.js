@@ -14,6 +14,10 @@ const RuleTester = require('eslint').RuleTester;
 const eslintTester = new RuleTester();
 eslintTester.run('use-ember-get-and-set', rule, {
   valid: [
+    {
+      code: "import 'ember';\nthis.foo = 1;",
+      parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+    },
     'get(this, "test")',
     'get(controller, "test")',
     'set(this, "test", someValue)',

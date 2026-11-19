@@ -1855,6 +1855,20 @@ describe('getEmberImportAliasName', () => {
     const node = babelESLintParse("import foo from 'ember'").body[0];
     expect(emberUtils.getEmberImportAliasName(node)).toBe('foo');
   });
+
+  it('should get the default import name when named imports come first', () => {
+    const node = babelESLintParse("import foo, { run } from 'ember'").body[0];
+    expect(emberUtils.getEmberImportAliasName(node)).toBe('foo');
+  });
+
+  it('should return null without a default import', () => {
+    expect(emberUtils.getEmberImportAliasName(babelESLintParse("import 'ember'").body[0])).toBe(
+      null
+    );
+    expect(
+      emberUtils.getEmberImportAliasName(babelESLintParse("import { run } from 'ember'").body[0])
+    ).toBe(null);
+  });
 });
 
 describe('isEmberObjectImplementingUnknownProperty', () => {

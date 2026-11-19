@@ -49,6 +49,12 @@ ruleTester.run('use-ember-data-rfc-395-imports', rule, {
 
   invalid: [
     {
+      // A namespace import has no single new module to point to, so no autofix.
+      code: "import * as DSModel from 'ember-data/model';",
+      output: null,
+      errors: [{ type: 'ImportDeclaration' }],
+    },
+    {
       code: `import DS from 'ember-data';
 
         export default DS.Model.extend({
