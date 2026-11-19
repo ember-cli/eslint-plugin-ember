@@ -998,6 +998,48 @@ ruleTester.run('no-get', rule, {
       ],
     },
     {
+      // `firstObject` / `lastObject` are only replaced as whole path segments.
+      code: "this.get('items.firstObjectId').x;",
+      output: 'this.items.firstObjectId.x;',
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get('items.lastObjectId').x;",
+      output: 'this.items.lastObjectId.x;',
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get('items.lastObjectId');",
+      output: 'this.items?.lastObjectId;',
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get('x_lastObject');",
+      output: 'this.x_lastObject;',
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      code: "this.get('lastObjectId.lastObject');",
+      output: 'this.lastObjectId?.[this.lastObjectId.length - 1];',
+      options: [{ useOptionalChaining: true, useAt: false }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      // Numeric segments with a leading zero are string keys, not octal literals.
+      code: "this.get('a.01').x;",
+      output: "this.a['01'].x;",
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
+      // Optional chaining is not allowed in the tag of a tagged template.
+      code: "this.get('a.b')`tpl`;",
+      output: '(this.a?.b)`tpl`;',
+      options: [{ useOptionalChaining: true }],
+      errors: [{ message: ERROR_MESSAGE_GET, type: 'CallExpression' }],
+    },
+    {
       // Reports violation after (classic) proxy class.
       code: `
       import ArrayProxy from '@ember/array/proxy';
