@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-11-19)
+
+* eslint-plugin-ember 13.11.2 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2893](https://github.com/ember-cli/eslint-plugin-ember/pull/2893) Do not crash on namespace and side-effect imports ([@bardrop](https://github.com/bardrop))
+
+#### Committers: 1
+- bardrop ([@bardrop](https://github.com/bardrop))
+
 ## Release (2026-11-18)
 
 * eslint-plugin-ember 13.11.1 (patch)
