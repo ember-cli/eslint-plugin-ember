@@ -43,6 +43,12 @@ ruleTester.run('template-link-rel-noopener', rule, {
         '<template><a href="/" target="_blank" rel="nofollow noopener noreferrer">Link</a></template>',
       errors: [{ messageId: 'missingRel' }],
     },
+    // dynamic rel — reported, but not autofixed
+    {
+      code: '<template><a href="/" target="_blank" rel={{this.rel}}>Link</a></template>',
+      output: null,
+      errors: [{ messageId: 'missingRel' }],
+    },
   ],
 });
 
@@ -81,6 +87,16 @@ hbsRuleTester.run('template-link-rel-noopener (hbs)', rule, {
     {
       code: '<a href="/some/where" target="_blank" rel="noreferrer"></a>',
       output: '<a href="/some/where" target="_blank" rel="noopener noreferrer"></a>',
+      errors: [{ messageId: 'missingRel' }],
+    },
+    {
+      code: '<a href="/some/where" target="_blank" rel={{this.rel}}></a>',
+      output: null,
+      errors: [{ messageId: 'missingRel' }],
+    },
+    {
+      code: '<a href="/some/where" target="_blank" rel="nofollow {{this.rel}}"></a>',
+      output: null,
       errors: [{ messageId: 'missingRel' }],
     },
   ],
