@@ -18,6 +18,10 @@ ruleTester.run('template-attribute-order', rule, {
     '<template><div aria-label="x" aria-hidden="true"></div></template>',
     // Correct full order
     '<template><input class="x" id="y" role="r" aria-label="l" data-test-foo="1" type="text" name="n" value="v" placeholder="p" disabled></template>',
+    // `...attributes` stays in place, and attributes are not moved across it
+    '<template><div ...attributes class={{this.cls}}>x</div></template>',
+    '<template><input ...attributes type="text" /></template>',
+    '<template><div id="b" ...attributes class="a"></div></template>',
   ],
 
   invalid: [
@@ -58,6 +62,28 @@ ruleTester.run('template-attribute-order', rule, {
     {
       code: '<template><div\n  name="x"\n  class="y"\n></div></template>',
       output: '<template><div\n  class="y"\n  name="x"\n></div></template>',
+      errors: [{ messageId: 'wrongOrder' }],
+    },
+    // Attributes on each side of `...attributes` are still ordered
+    {
+      code: '<template><div ...attributes id="b" class="a"></div></template>',
+      output: '<template><div ...attributes class="a" id="b"></div></template>',
+      errors: [{ messageId: 'wrongOrder' }],
+    },
+    {
+      code: '<template><div id="b" class="a" ...attributes></div></template>',
+      output: '<template><div class="a" id="b" ...attributes></div></template>',
+      errors: [{ messageId: 'wrongOrder' }],
+    },
+    // Valueless attributes keep the whitespace after them
+    {
+      code: '<template><input disabled class="a"></template>',
+      output: '<template><input class="a" disabled></template>',
+      errors: [{ messageId: 'wrongOrder' }],
+    },
+    {
+      code: '<template><div data-test-foo class={{this.cls}}></div></template>',
+      output: '<template><div class={{this.cls}} data-test-foo></div></template>',
       errors: [{ messageId: 'wrongOrder' }],
     },
   ],
