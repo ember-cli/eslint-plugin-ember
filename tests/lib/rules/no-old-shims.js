@@ -17,6 +17,12 @@ eslintTester.run('no-old-shims', rule, {
   valid: ["import Ember from 'ember';", "import RSVP from 'rsvp';"],
   invalid: [
     {
+      // A namespace import has no single new module to point to, so no autofix.
+      code: "import * as Application from 'ember-application';",
+      output: null,
+      errors: [{ message: "Don't use import paths from ember-cli-shims" }],
+    },
+    {
       code: "import Component from 'ember-component';",
       output: "import Component from '@ember/component';",
       errors: [{ message: "Don't use import paths from ember-cli-shims" }],

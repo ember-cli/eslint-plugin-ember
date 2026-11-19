@@ -13,6 +13,7 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-ember-testing-in-module-scope', rule, {
   valid: [
+    "import 'ember';",
     `
         import Ember from 'ember';
 
@@ -41,6 +42,17 @@ ruleTester.run('no-ember-testing-in-module-scope', rule, {
     'const testing = true;',
   ],
   invalid: [
+    {
+      // The alias comes from the default import, not from a named one.
+      code: `
+        import { run } from 'ember';
+        import Ember from 'ember';
+
+        if (Ember.testing) {}
+      `,
+      output: null,
+      errors: [{ message: ERROR_MESSAGES[0], type: 'MemberExpression' }],
+    },
     {
       code: `
         import Random1 from 'random1';

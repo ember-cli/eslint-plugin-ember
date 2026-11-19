@@ -173,6 +173,7 @@ const emberObjectUses2 = generateEmberObjectUseCasesFor('unrelatedProp').join(''
 
 ruleTester.run('no-unused-services', rule, {
   valid: [
+    `${SERVICE_IMPORT} import * as macros from '@ember/object/computed'; class MyClass { @service ${SERVICE_NAME}; foo() { this.${SERVICE_NAME}.bar(); } }`,
     ...generateValid(),
     ...generateValid(NEW_SERVICE_IMPORT),
     ...generateMacroUseCasesFor(SERVICE_NAME),
