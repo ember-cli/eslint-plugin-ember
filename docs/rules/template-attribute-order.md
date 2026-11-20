@@ -21,6 +21,8 @@ This rule enforces a consistent order for attributes on template elements. By de
 9. `placeholder`
 10. `disabled`
 
+`...attributes` is left in place, and attributes are only ordered on each side of it, because attributes before `...attributes` can be overridden by it and attributes after it can't.
+
 ## Examples
 
 Examples of **incorrect** code for this rule:
