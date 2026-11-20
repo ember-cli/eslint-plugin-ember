@@ -1,5 +1,19 @@
 # Changelog
 
+## Release (2026-11-20)
+
+* eslint-plugin-ember 13.11.3 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2897](https://github.com/ember-cli/eslint-plugin-ember/pull/2897) Fix `no-get` autofixes for `firstObject`/`lastObject`-like names, leading-zero segments and template tags ([@jjohnnystwsss](https://github.com/jjohnnystwsss))
+  * [#2898](https://github.com/ember-cli/eslint-plugin-ember/pull/2898) Call the method on each item in the `invoke` autofix of `no-array-prototype-extensions` ([@jjohnnystwsss](https://github.com/jjohnnystwsss))
+  * [#2899](https://github.com/ember-cli/eslint-plugin-ember/pull/2899) Keep `...attributes` in place and keep whitespace in `template-attribute-order` autofix ([@jjohnnystwsss](https://github.com/jjohnnystwsss))
+  * [#2895](https://github.com/ember-cli/eslint-plugin-ember/pull/2895) Fix self-closing and dynamic `rel` autofixes in `template-require-button-type` and `template-link-rel-noopener` ([@jjohnnystwsss](https://github.com/jjohnnystwsss))
+
+#### Committers: 1
+- 奶昔大哥 ([@jjohnnystwsss](https://github.com/jjohnnystwsss))
+
 ## Release (2026-11-19)
 
 * eslint-plugin-ember 13.11.2 (patch)
