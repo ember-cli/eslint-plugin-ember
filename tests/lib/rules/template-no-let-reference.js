@@ -43,6 +43,25 @@ ruleTester.run('template-no-let-reference', rule, {
       <ab></ab>
       </template>
     `,
+    // Test cases for '/tests/' path, to allow let or var  in tests directory
+    {
+      filename: '/tests/integration/components/simulate-test.js',
+      code: `
+      let a = '';
+      <template>
+      {{a}}
+      </template>
+      `,
+    },
+    {
+      filename: '/tests/integration/components/simulate-test.js',
+      code: `
+      var a = '';
+      <template>
+      {{a}}
+      </template>
+      `,
+    },
   ],
 
   invalid: [
