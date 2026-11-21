@@ -8,6 +8,10 @@ const validHbs = [
   '<CustomComponent role="banner" />',
   '<div role="textbox" aria-required={{this.required}} aria-errormessage={{this.error}}></div>',
   '<div role="heading" foo="true" />',
+  '<svg role="presentation" aria-hidden="true"></svg>',
+  // `none` is a synonym of `presentation`, so it supports the same attributes.
+  '<svg role="none" aria-hidden="true"></svg>',
+  '{{some-component role="none" aria-hidden="true"}}',
   '<dialog />',
   '<a href="#" aria-describedby=""></a>',
   '<menu type="toolbar" aria-hidden="true" />',
@@ -50,6 +54,11 @@ const validHbs = [
 ];
 
 const invalidHbs = [
+  {
+    code: '<div role="none" aria-checked="true"></div>',
+    output: '<div role="none"></div>',
+    errors: [{ message: 'The attribute aria-checked is not supported by the role none' }],
+  },
   {
     code: '<div role="link" href="#" aria-checked />',
     output: '<div role="link" href="#" />',
