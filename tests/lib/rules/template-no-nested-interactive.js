@@ -16,6 +16,16 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('template-no-nested-interactive', rule, {
   valid: [
+    // A component is not the native element its name lowercases to.
+    `import Button from './button';
+    <template>
+      <button><Button /></button>
+      <div role="toolbar"><Button /><Button /></div>
+    </template>`,
+    `const button = <template>x</template>;
+    <template>
+      <a href="#"><button /></a>
+    </template>`,
     `<template>
       <button>Click me</button>
     </template>`,
