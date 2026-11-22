@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-11-22)
+
+* eslint-plugin-ember 13.11.4 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2900](https://github.com/ember-cli/eslint-plugin-ember/pull/2900) fix(template-no-nested-interactive): skip components named like interactive elements ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### Committers: 1
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
 ## Release (2026-11-20)
 
 * eslint-plugin-ember 13.11.3 (patch)
