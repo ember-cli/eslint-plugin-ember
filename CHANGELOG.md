@@ -1,5 +1,18 @@
 # Changelog
 
+## Release (2026-11-24)
+
+* eslint-plugin-ember 13.11.5 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2905](https://github.com/ember-cli/eslint-plugin-ember/pull/2905) Apply typescript-eslint's eslint-recommended overrides in the flat gts config ([@aklkv](https://github.com/aklkv))
+  * [#2906](https://github.com/ember-cli/eslint-plugin-ember/pull/2906) fix(template-no-nested-interactive): report the built-in <Input> and <Textarea> ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### Committers: 2
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+- Alexey Kulakov ([@aklkv](https://github.com/aklkv))
+
 ## Release (2026-11-22)
 
 * eslint-plugin-ember 13.11.4 (patch)
