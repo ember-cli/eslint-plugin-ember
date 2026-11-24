@@ -26,6 +26,27 @@ ruleTester.run('template-no-nested-interactive', rule, {
     <template>
       <a href="#"><button /></a>
     </template>`,
+    // <Input> and <Textarea> are the built-ins only when imported from '@ember/component'.
+    {
+      filename: 'test.gjs',
+      code: `import Input from './input';
+      <template>
+        <button><Input /></button>
+      </template>`,
+    },
+    {
+      filename: 'test.gjs',
+      code: `<template>
+        <button><Input /><Textarea /></button>
+      </template>`,
+    },
+    {
+      filename: 'test.gjs',
+      code: `import { Input } from '@ember/component';
+      <template>
+        <button><Input @type="hidden" /></button>
+      </template>`,
+    },
     `<template>
       <button>Click me</button>
     </template>`,
@@ -148,6 +169,28 @@ ruleTester.run('template-no-nested-interactive', rule, {
   ],
 
   invalid: [
+    {
+      filename: 'test.gjs',
+      code: `import { Input, Textarea } from '@ember/component';
+      <template>
+        <button><Input @value={{this.value}} /></button>
+        <a href="#"><Textarea /></a>
+      </template>`,
+      output: null,
+      errors: [
+        { message: 'Do not nest interactive element <Input> inside <button>.' },
+        { message: 'Do not nest interactive element <Textarea> inside <a>.' },
+      ],
+    },
+    {
+      filename: 'test.gts',
+      code: `import { Input as EmberInput } from '@ember/component';
+      <template>
+        <label><EmberInput /><EmberInput /></label>
+      </template>`,
+      output: null,
+      errors: [{ message: 'Do not nest interactive element <EmberInput> inside <label>.' }],
+    },
     {
       code: `<template>
         <button>
@@ -400,8 +443,19 @@ hbsRuleTester.run('template-no-nested-interactive', rule, {
     '<div role="grid"><div role="row"><div role="columnheader">Header</div></div></div>',
     '<div role="treegrid"><div role="row"><div role="gridcell">Cell</div></div></div>',
     '<div role="radiogroup"><div role="radio">Opt 1</div></div>',
+    '<button><Input @type="hidden" /></button>',
   ],
   invalid: [
+    {
+      code: '<button><Input @value={{this.value}} /></button>',
+      output: null,
+      errors: [{ message: 'Do not nest interactive element <Input> inside <button>.' }],
+    },
+    {
+      code: '<a href="/"><Textarea /></a>',
+      output: null,
+      errors: [{ message: 'Do not nest interactive element <Textarea> inside <a>.' }],
+    },
     {
       code: '<details>Something small enough to escape casual notice.<summary>Details</summary></details>',
       output: null,
