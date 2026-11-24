@@ -2,8 +2,8 @@
   "solution": {
     "eslint-plugin-ember": {
       "impact": "patch",
-      "oldVersion": "13.11.3",
-      "newVersion": "13.11.4",
+      "oldVersion": "13.11.4",
+      "newVersion": "13.11.5",
       "tagName": "latest",
       "constraints": [
         {
@@ -14,5 +14,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-11-22)\n\n* eslint-plugin-ember 13.11.4 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2900](https://github.com/ember-cli/eslint-plugin-ember/pull/2900) fix(template-no-nested-interactive): skip components named like interactive elements ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### Committers: 1\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n"
+  "description": "## Release (2026-11-24)\n\n* eslint-plugin-ember 13.11.5 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2905](https://github.com/ember-cli/eslint-plugin-ember/pull/2905) Apply typescript-eslint's eslint-recommended overrides in the flat gts config ([@aklkv](https://github.com/aklkv))\n  * [#2906](https://github.com/ember-cli/eslint-plugin-ember/pull/2906) fix(template-no-nested-interactive): report the built-in <Input> and <Textarea> ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### Committers: 2\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n- Alexey Kulakov ([@aklkv](https://github.com/aklkv))\n"
 }
