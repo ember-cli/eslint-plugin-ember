@@ -36,9 +36,9 @@ ruleTester.run('template-no-redundant-fn', rule, {
     '<template>{{foo bar=this.handleClick}}></template>',
     '<template>{{foo bar=(fn this.handleClick "foo")}}></template>',
 
-    // A sub-expression is not the same without `fn`.
+    // `(mut @value)` without `fn` is the value itself.
     '<template><SomeComponent @onChange={{fn (mut @value)}} /></template>',
-    '<template><button {{on "click" (fn (perform this.task))}}>Click Me</button></template>',
+    '<template><input {{on "input" (pick "target.value" (fn (mut this.value)))}} /></template>',
 
     // `fn` is imported from a local module — not Ember's built-in helper.
     // Should NOT be flagged even with a single argument.
@@ -98,6 +98,17 @@ ruleTester.run('template-no-redundant-fn', rule, {
         {
           message:
             'Unnecessary use of (fn) helper. Pass the function directly instead: this.handleClick',
+        },
+      ],
+    },
+    // Other sub-expressions are redundant.
+    {
+      code: '<template><button {{on "click" (fn (perform this.task))}}>Click Me</button></template>',
+      output: '<template><button {{on "click" (perform this.task)}}>Click Me</button></template>',
+      errors: [
+        {
+          message:
+            'Unnecessary use of (fn) helper. Pass the function directly instead: (perform this.task)',
         },
       ],
     },
