@@ -36,6 +36,10 @@ ruleTester.run('template-no-redundant-fn', rule, {
     '<template>{{foo bar=this.handleClick}}></template>',
     '<template>{{foo bar=(fn this.handleClick "foo")}}></template>',
 
+    // `(mut @value)` without `fn` is the value itself.
+    '<template><SomeComponent @onChange={{fn (mut @value)}} /></template>',
+    '<template><input {{on "input" (pick "target.value" (fn (mut this.value)))}} /></template>',
+
     // `fn` is imported from a local module — not Ember's built-in helper.
     // Should NOT be flagged even with a single argument.
     `
@@ -97,6 +101,17 @@ ruleTester.run('template-no-redundant-fn', rule, {
         },
       ],
     },
+    // Other sub-expressions are redundant.
+    {
+      code: '<template><button {{on "click" (fn (perform this.task))}}>Click Me</button></template>',
+      output: '<template><button {{on "click" (perform this.task)}}>Click Me</button></template>',
+      errors: [
+        {
+          message:
+            'Unnecessary use of (fn) helper. Pass the function directly instead: (perform this.task)',
+        },
+      ],
+    },
     {
       code: '<template>{{foo bar=(fn this.handleClick)}}></template>',
       output: '<template>{{foo bar=this.handleClick}}></template>',
@@ -120,6 +135,7 @@ const hbsRuleTester = new RuleTester({
 
 hbsRuleTester.run('template-no-redundant-fn', rule, {
   valid: [
+    '<SomeComponent @onChange={{fn (mut @value)}} />',
     '<button {{on "click" this.handleClick}}>Click Me</button>',
     '<button {{on "click" (fn this.handleClick "foo")}}>Click Me</button>',
     '<SomeComponent @onClick={{this.handleClick}} />',
