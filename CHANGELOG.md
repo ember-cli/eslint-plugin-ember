@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-11-25)
+
+* eslint-plugin-ember 13.11.6 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2908](https://github.com/ember-cli/eslint-plugin-ember/pull/2908) fix(template-no-redundant-fn): don't flag fn with mut ([@bardrop](https://github.com/bardrop))
+
+#### Committers: 1
+- bardrop ([@bardrop](https://github.com/bardrop))
+
 ## Release (2026-11-24)
 
 * eslint-plugin-ember 13.11.5 (patch)
