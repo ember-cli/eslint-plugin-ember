@@ -2,8 +2,8 @@
   "solution": {
     "eslint-plugin-ember": {
       "impact": "patch",
-      "oldVersion": "13.11.5",
-      "newVersion": "13.11.6",
+      "oldVersion": "13.11.6",
+      "newVersion": "13.11.7",
       "tagName": "latest",
       "constraints": [
         {
@@ -14,5 +14,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-11-25)\n\n* eslint-plugin-ember 13.11.6 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2908](https://github.com/ember-cli/eslint-plugin-ember/pull/2908) fix(template-no-redundant-fn): don't flag fn with mut ([@bardrop](https://github.com/bardrop))\n\n#### Committers: 1\n- bardrop ([@bardrop](https://github.com/bardrop))\n"
+  "description": "## Release (2026-11-28)\n\n* eslint-plugin-ember 13.11.7 (patch)\n\n#### :bug: Bug Fix\n* `eslint-plugin-ember`\n  * [#2911](https://github.com/ember-cli/eslint-plugin-ember/pull/2911) fix(template-no-unused-block-params): count element modifiers as used ([@aklkv](https://github.com/aklkv))\n\n#### Committers: 1\n- Alexey Kulakov ([@aklkv](https://github.com/aklkv))\n"
 }

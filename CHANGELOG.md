@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-11-28)
+
+* eslint-plugin-ember 13.11.7 (patch)
+
+#### :bug: Bug Fix
+* `eslint-plugin-ember`
+  * [#2911](https://github.com/ember-cli/eslint-plugin-ember/pull/2911) fix(template-no-unused-block-params): count element modifiers as used ([@aklkv](https://github.com/aklkv))
+
+#### Committers: 1
+- Alexey Kulakov ([@aklkv](https://github.com/aklkv))
+
 ## Release (2026-11-25)
 
 * eslint-plugin-ember 13.11.6 (patch)
