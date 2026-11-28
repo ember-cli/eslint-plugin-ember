@@ -4,6 +4,11 @@ const rule = require('../../../lib/rules/template-no-unused-block-params');
 const { RuleTester } = eslint;
 
 const validHbs = [
+  '{{#each items as |item index|}}<Field {{on "input" (fn update index)}} as |F|><F.Label>{{item}}</F.Label></Field>{{/each}}',
+  '{{#each items as |item index|}}<Field {{on "input" (fn update index)}}><F.Label>{{item}}</F.Label></Field>{{/each}}',
+  '{{#each items as |item index|}}<Field {{on "input" (fn update item index)}} as |item|>{{item}}</Field>{{/each}}',
+  '{{#each items as |item index|}}<Field {{on "input" (fn update index)}} as |index|>{{index}}{{item}}</Field>{{/each}}',
+  '{{#each items as |item index|}}<div {{on "input" (fn update item index)}}></div>{{/each}}',
   '{{cat}}',
   '{{#each cats as |cat|}}{{cat}}{{/each}}',
   '{{#each cats as |cat|}}{{partial "cat"}}{{/each}}',
@@ -99,6 +104,16 @@ const validHbs = [
 ];
 
 const invalidHbs = [
+  {
+    code: '{{#each items as |item index|}}<Field {{on "input" (fn update item)}} as |F|><F.Label>{{item}}</F.Label></Field>{{/each}}',
+    output: null,
+    errors: [{ messageId: 'unusedBlockParam', data: { param: 'index' } }],
+  },
+  {
+    code: '{{#each items as |item index|}}<Field as |index|>{{index}}{{item}}</Field>{{/each}}',
+    output: null,
+    errors: [{ messageId: 'unusedBlockParam', data: { param: 'index' } }],
+  },
   {
     code: '{{#each cats as |cat|}}Dogs{{/each}}',
     output: null,
